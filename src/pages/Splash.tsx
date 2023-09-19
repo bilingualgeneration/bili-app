@@ -1,6 +1,5 @@
 import React from 'react'
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
 // import './Splash.css';
 
 const Splash: React.FC = () => {
