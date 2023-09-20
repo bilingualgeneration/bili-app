@@ -48,7 +48,7 @@ const Login: React.FC = () => {
         </IonButton>
 
         {/* Add a link to the password reset page */}
-        <IonRouterLink routerLink="/reset-password">Forgot Password?  </IonRouterLink>
+        <IonRouterLink id="reset-password-link" routerLink="/reset-password">Forgot Password?  </IonRouterLink>
 
         {/* OPTION 1: Have teacher login link displayed from the beginning next to 'Forgot Password?' */}
         <IonRouterLink routerLink="/teacher-login">I'm a teacher</IonRouterLink>

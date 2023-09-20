@@ -1,6 +1,8 @@
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
-    cy.visit('/')
-    cy.contains('#container', 'Ready to create an app?')
-  })
+describe('Login Workflow', () => {
+    it('Visits the reset password page', () => {
+	cy.visit('/login');
+	cy.get('#reset-password-link').click();
+	cy.url().should('include', '/reset-password');
+	cy.get('ion-title').should('be.visible');
+    })
 })
