@@ -1,7 +1,11 @@
 import { IonPage } from "@ionic/react";
 
 const SignUp: React.FC = () => {
-    return <IonPage>sign up page</IonPage>
+    return (
+	<>
+	    sign up page
+	</>
+    );
 }
 
 export default SignUp;
