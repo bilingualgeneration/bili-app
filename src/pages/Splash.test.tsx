@@ -16,7 +16,7 @@ describe('<Splash />', () => {
   });
 
 
-  // Uncomment the following test when the Sign In button enabled:
+  // Uncomment when the Sign In button enabled:
   // it('should render the Sign In button', () => {
   //   render(<Splash />);
   //   const signInButton = screen.getByText('Sign In');
