@@ -1,3 +1,4 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -5,6 +6,13 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
+
+// chin-layouts below:
+// import Splash from './pages/Splash';
+// import SignUp from './pages/SignUp';
+// import StudentDashboard from './pages/StudentDashboard';
+
+// import UnauthedLayout from './layouts/Unauthed';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,9 +48,28 @@ const App: React.FC = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route exact path="/teacher-login" component={TeacherLogin} />
+
+        {/* chin-layouts merge below: */}
+	
+        {/* <Route
+      exact
+      path="/splash"
+      render={(props) => (<UnauthedLayout component={<Splash />} />)}
+        />
+        <Route
+        exact
+      path="/sign-up"
+      render={(props) => (<UnauthedLayout component={<SignUp />} />)} /> */}
+
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );
+
+/*
+	    <Route exact path="/" component={Home} />
+	    <Route exact path="/student-dashboard" component={StudentDashboard}/>
+
+*/
 
 export default App;
