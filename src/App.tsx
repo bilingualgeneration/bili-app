@@ -40,18 +40,23 @@ const App: React.FC = () => (
 	    <Route
 		exact
 		path="/splash"
-		render={(props) => (<UnauthedLayout component={<Splash />} />)}
+		render={(props) => (<UnauthedLayout><Splash /></UnauthedLayout>)}
 	    />
 	    <Route
 	    exact
 		path="/sign-up"
-		render={(props) => (<UnauthedLayout component={<SignUp />} />)} 
+		render={(props) => (<UnauthedLayout><SignUp /></UnauthedLayout>)} 
 		/>
 		<Route
 	    exact
 		path="/login"
-		render={(props) => (<UnauthedLayout component={<Login />} />)} 
+		render={(props) => (<UnauthedLayout><Login /></UnauthedLayout>)} 
 		/>
+		<Route
+		exact
+		path="/student-dashboard"
+		render={(props) => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)}
+	    />
 
 
       </IonRouterOutlet>
@@ -59,10 +64,6 @@ const App: React.FC = () => (
   </IonApp>
 );
 
-/*
-	    <Route exact path="/" component={Home} />
-	    <Route exact path="/student-dashboard" component={StudentDashboard}/>
 
-*/
 
 export default App;
