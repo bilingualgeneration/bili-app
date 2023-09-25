@@ -10,7 +10,8 @@ import {
 } from '@ionic/react';
 
 const UnauthedLayout = ({
-    component
+    // other props
+    children
 }) => {
     return (
 	<IonPage>
@@ -20,7 +21,7 @@ const UnauthedLayout = ({
 		</IonToolbar>
 	    </IonHeader>
 	    <IonContent fullscreen>
-		{component}
+		{children}
 	    </IonContent>
 	</IonPage>
     );

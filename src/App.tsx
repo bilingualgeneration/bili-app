@@ -7,12 +7,9 @@ import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
 
-// chin-layouts below:
-// import Splash from './pages/Splash';
-// import SignUp from './pages/SignUp';
-// import StudentDashboard from './pages/StudentDashboard';
-
-// import UnauthedLayout from './layouts/Unauthed';
+import UnauthedLayout from './layouts/Unauthed'; // Import the UnauthedLayout component
+import Splash from './pages/Splash'; // Import the Splash component
+import SignUp from './pages/SignUp'; // Import the SignUp component
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,27 +46,13 @@ const App: React.FC = () => (
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route exact path="/teacher-login" component={TeacherLogin} />
 
-        {/* chin-layouts merge below: */}
-	
-        {/* <Route
-      exact
-      path="/splash"
-      render={(props) => (<UnauthedLayout component={<Splash />} />)}
-        />
-        <Route
-        exact
-      path="/sign-up"
-      render={(props) => (<UnauthedLayout component={<SignUp />} />)} /> */}
+        {/* Routes using UnauthedLayout */}
+        <Route exact path="/splash" render={(props) => (<UnauthedLayout component={<Splash />} />)} />
+        <Route exact path="/sign-up" render={(props) => (<UnauthedLayout component={<SignUp />} />)} />
 
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );
-
-/*
-	    <Route exact path="/" component={Home} />
-	    <Route exact path="/student-dashboard" component={StudentDashboard}/>
-
-*/
 
 export default App;
