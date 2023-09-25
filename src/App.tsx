@@ -1,7 +1,13 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
+import Splash from './pages/Splash';
+import SignUp from './pages/SignUp';
+import StudentDashboard from './pages/StudentDashboard';
+
+import UnauthedLayout from './layouts/Unauthed';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,16 +33,26 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+	<IonRouterOutlet>
+	    <Route
+		exact
+		path="/splash"
+		render={(props) => (<UnauthedLayout><Splash /></UnauthedLayout>)}
+	    />
+	    <Route
+	    exact
+		path="/sign-up"
+		render={(props) => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );
+
+/*
+	    <Route exact path="/" component={Home} />
+	    <Route exact path="/student-dashboard" component={StudentDashboard}/>
+
+*/
 
 export default App;
