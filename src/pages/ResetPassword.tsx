@@ -1,10 +1,7 @@
 import React from 'react';
+import UnauthedLayout from '../layouts/Unauthed';
 import {
   IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonButton,
 } from '@ionic/react';
@@ -12,13 +9,12 @@ import {
 const ResetPassword: React.FC = () => {
   // Add password reset logic here
 
+  const handleResetPassword = () => {
+    // Implement the password reset logic here
+  };
+
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Reset Password</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <UnauthedLayout>
       <IonContent className="ion-padding">
         <p>Enter your email address to reset your password:</p>
         <IonInput placeholder="Email" />
@@ -26,12 +22,8 @@ const ResetPassword: React.FC = () => {
           Reset Password
         </IonButton>
       </IonContent>
-    </IonPage>
+    </UnauthedLayout>
   );
-};
-
-const handleResetPassword = () => {
-  // Implement the password reset logic here
 };
 
 export default ResetPassword;

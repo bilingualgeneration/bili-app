@@ -1,7 +1,7 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
@@ -35,22 +35,18 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/reset-password" component={ResetPassword} />
-        <Route exact path="/teacher-login" component={TeacherLogin} />
-
-        {/* Routes using UnauthedLayout */}
-        <Route exact path="/splash" render={(props) => (<UnauthedLayout component={<Splash />} />)} />
-        <Route exact path="/sign-up" render={(props) => (<UnauthedLayout component={<SignUp />} />)} />
-
-      </IonRouterOutlet>
+      <UnauthedLayout>
+        {/* All routes within UnauthedLayout */}
+        <Switch>
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/reset-password" component={ResetPassword} />
+          <Route exact path="/teacher-login" component={TeacherLogin} />
+          <Route exact path="/splash" component={Splash} />
+          <Route exact path="/sign-up" component={SignUp} />
+          <Redirect exact from="/" to="/home" />
+        </Switch>
+      </UnauthedLayout>
     </IonReactRouter>
   </IonApp>
 );

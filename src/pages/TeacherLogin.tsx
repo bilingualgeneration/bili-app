@@ -1,12 +1,7 @@
-// page for teachers to login separately
-
 import React from 'react';
+import UnauthedLayout from '../layouts/Unauthed';
 import {
   IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonButton,
 } from '@ionic/react';
@@ -18,12 +13,7 @@ const TeacherLogin: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Teacher Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <UnauthedLayout>
       <IonContent className="ion-padding">
         <IonInput placeholder="Username" />
         <IonInput placeholder="Password" type="password" />
@@ -31,7 +21,7 @@ const TeacherLogin: React.FC = () => {
           Login as Teacher
         </IonButton>
       </IonContent>
-    </IonPage>
+    </UnauthedLayout>
   );
 };
 
