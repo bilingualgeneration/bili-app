@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
+import StudentDashboard from './pages/StudentDashboard';
 
 import UnauthedLayout from './layouts/Unauthed'; // Import the UnauthedLayout component
 import Splash from './pages/Splash'; // Import the Splash component
@@ -35,18 +36,16 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <UnauthedLayout>
-        {/* All routes within UnauthedLayout */}
-        <Switch>
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/reset-password" component={ResetPassword} />
-          <Route exact path="/teacher-login" component={TeacherLogin} />
-          <Route exact path="/splash" component={Splash} />
-          <Route exact path="/sign-up" component={SignUp} />
-          <Redirect exact from="/" to="/home" />
-        </Switch>
-      </UnauthedLayout>
+      <Switch>
+        <Route exact path="/home" render={() => (<UnauthedLayout><Home /></UnauthedLayout>)} />
+        <Route exact path="/login" render={() => (<UnauthedLayout><Login /></UnauthedLayout>)} />
+        <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
+        <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
+        <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
+        <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
+        <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+        <Redirect exact from="/" to="/home" />
+      </Switch>
     </IonReactRouter>
   </IonApp>
 );

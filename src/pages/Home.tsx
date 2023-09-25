@@ -1,25 +1,19 @@
-import React from 'react'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
+import { IonContent, IonPage, IonToolbar, IonTitle } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
+import UnauthedLayout from '../layouts/Unauthed'; // Import the Unauthed layout component
 
 const Home: React.FC = () => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Test Page</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
+    <UnauthedLayout>
+      <IonPage>
+        <IonContent fullscreen>
+          {/* Your page content */}
+          <ExploreContainer />
+        </IonContent>
+      </IonPage>
+    </UnauthedLayout>
   );
 };
 

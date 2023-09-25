@@ -5,8 +5,7 @@ import {
   IonRouterLink,
 } from '@ionic/react';
 import './Login.css'; // For future CSS
-import UserTypePopover from './UserTypePopover'; // Import the UserTypePopover component (may not need later dep. on style choices)
-import UnauthedLayout from '../layouts/Unauthed'; 
+import UserTypePopover from './UserTypePopover'; // Import UserTypePopover component
 
 const handleLogin = () => {
   // Add login logic here
@@ -30,7 +29,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <UnauthedLayout>
+    <>
+      {/* Content of the login page */}
       <IonInput placeholder="Username" onFocus={openPopover} />
       <IonInput placeholder="Password" type="password" />
       <IonButton expand="block" onClick={handleLogin}>
@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         onDismiss={closePopover}
         onTeacherSelected={handleTeacherSelected}
       />
-    </UnauthedLayout>
+    </>
   );
 };
 
