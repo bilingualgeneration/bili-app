@@ -30,6 +30,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Stories from './pages/Stories';
 
 setupIonicReact();
 
@@ -38,13 +39,14 @@ const App: React.FC = () => (
     <IonReactRouter>
       <Switch>
         <Route exact path="/home" render={() => (<UnauthedLayout><Home /></UnauthedLayout>)} />
+        <Redirect exact from="/" to="/home" />
         <Route exact path="/login" render={() => (<UnauthedLayout><Login /></UnauthedLayout>)} />
         <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
         <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
         <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
         <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
         <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
-        <Redirect exact from="/" to="/home" />
+        <Route exact path="/stories" render={() => (<UnauthedLayout><Stories /></UnauthedLayout>)} />
       </Switch>
     </IonReactRouter>
   </IonApp>

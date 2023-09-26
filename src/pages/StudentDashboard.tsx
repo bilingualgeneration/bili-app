@@ -77,7 +77,7 @@ const StudentDashboard: React.FC = () => {
                 <IonItem>
                   <IonButton
                     expand="block"
-                    onClick={() => navigateToRoute('/story')}
+                    onClick={() => navigateToRoute('/stories')}
                   >
                     Go to Stories
                   </IonButton>
