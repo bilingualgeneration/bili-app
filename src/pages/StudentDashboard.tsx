@@ -12,6 +12,8 @@ import { useHistory } from 'react-router-dom';
 const StudentDashboard: React.FC = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
+  const [showCarouselOptions, setShowCarouselOptions] = useState(false);
+  const [showGoToStoriesButton, setShowGoToStoriesButton] = useState(false);
   const history = useHistory();
 
   const handleStartClick = () => {
@@ -19,12 +21,27 @@ const StudentDashboard: React.FC = () => {
   };
 
   const handleOptionChange = (event: CustomEvent) => {
-    setSelectedOption(event.detail.value);
-  };
+    const value = event.detail.value as string;
+    setSelectedOption(value);
+
+    // Check if the user selected "explore"
+    if (value === 'explore') {
+        setShowCarouselOptions(true);
+        } else {
+        setShowCarouselOptions(false);
+        // Hide the "Go to Stories" button when another option is selected
+        setShowGoToStoriesButton(false);
+        }
+    };
 
   const navigateToRoute = (route: string) => {
     history.push(route);
     setDropdownOpen(false);
+  };
+
+  // Function to show the "Go to Stories" button
+  const showGoToStories = () => {
+    setShowGoToStoriesButton(true);
   };
 
   return (
@@ -42,18 +59,30 @@ const StudentDashboard: React.FC = () => {
             >
               <IonSelectOption value="journeys">Journeys</IonSelectOption>
               <IonSelectOption value="explore">Explore</IonSelectOption>
+              {/* Add more options if needed here */}
             </IonSelect>
           </IonItem>
-          {selectedOption === 'explore' && (
+          {showCarouselOptions && selectedOption === 'explore' && (
             <>
               <IonItem>
                 <IonButton
                   expand="block"
-                  onClick={() => navigateToRoute('/stories-carousel')}
+                  onClick={() => showGoToStories()}
                 >
                   Stories Carousel
-                </IonButton>
+                  </IonButton>
               </IonItem>
+              {/* Display the "Go to Stories" button */}
+              {showGoToStoriesButton && (
+                <IonItem>
+                  <IonButton
+                    expand="block"
+                    onClick={() => navigateToRoute('/story')}
+                  >
+                    Go to Stories
+                  </IonButton>
+                </IonItem>
+              )}
               <IonItem>
                 <IonButton
                   expand="block"
@@ -68,6 +97,14 @@ const StudentDashboard: React.FC = () => {
                   onClick={() => navigateToRoute('/play-carousel')}
                 >
                   Play Carousel
+                </IonButton>
+              </IonItem>
+              <IonItem>
+                <IonButton
+                  expand="block"
+                  onClick={() => navigateToRoute('/community-carousel')}
+                >
+                  Community Carousel
                 </IonButton>
               </IonItem>
             </>
