@@ -1,12 +1,12 @@
 import React from 'react';
 import { IonPage } from "@ionic/react";
 
-const Stories: React.FC = () => {
+const Intruder: React.FC = () => {
     return (
 	<>
-	    Stories
+	    Intruder
 	</>
     );
 }
 
-export default Stories;
+export default Intruder;

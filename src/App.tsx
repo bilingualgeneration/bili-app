@@ -31,6 +31,9 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Stories from './pages/Stories';
+import Memory from './pages/Memory';
+import Intruder from './pages/Intruder';
+import StoryFactory from './pages/StoryFactory';
 
 setupIonicReact();
 
@@ -47,6 +50,9 @@ const App: React.FC = () => (
         <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
         <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
         <Route exact path="/stories" render={() => (<UnauthedLayout><Stories /></UnauthedLayout>)} />
+        <Route exact path="/memory" render={() => (<UnauthedLayout><Memory /></UnauthedLayout>)} />
+        <Route exact path="/intruder" render={() => (<UnauthedLayout><Intruder /></UnauthedLayout>)} />
+        <Route exact path="/story-factory" render={() => (<UnauthedLayout><StoryFactory /></UnauthedLayout>)} />
       </Switch>
     </IonReactRouter>
   </IonApp>

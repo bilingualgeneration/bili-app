@@ -1,12 +1,12 @@
 import React from 'react';
 import { IonPage } from "@ionic/react";
 
-const Stories: React.FC = () => {
+const Memory: React.FC = () => {
     return (
 	<>
-	    Stories
+	    Memory
 	</>
     );
 }
 
-export default Stories;
+export default Memory;
