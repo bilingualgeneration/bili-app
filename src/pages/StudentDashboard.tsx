@@ -34,11 +34,6 @@ const StudentDashboard: React.FC = () => {
         }
     };
 
-  const navigateToRoute = (route: string) => {
-    history.push(route);
-    setDropdownOpen(false);
-  };
-
   // Function to show the "Go to Stories" button
   const showGoToStories = () => {
     setShowGoToStoriesButton(true);
@@ -67,7 +62,7 @@ const StudentDashboard: React.FC = () => {
               <IonItem>
                 <IonButton
                   expand="block"
-                  onClick={() => showGoToStories()}
+                  onClick={() => showGoToStories()} 
                 >
                   Stories Carousel
                   </IonButton>
@@ -77,7 +72,7 @@ const StudentDashboard: React.FC = () => {
                 <IonItem>
                   <IonButton
                     expand="block"
-                    onClick={() => navigateToRoute('/stories')}
+                    routerLink="/stories" className="stories-button"
                   >
                     Go to Stories
                   </IonButton>
@@ -86,7 +81,7 @@ const StudentDashboard: React.FC = () => {
               <IonItem>
                 <IonButton
                   expand="block"
-                  onClick={() => navigateToRoute('/wellness-carousel')}
+                  routerLink="/wellness-carousel" className="wellness-carousel-button"
                 >
                   Wellness Carousel
                 </IonButton>
@@ -94,7 +89,7 @@ const StudentDashboard: React.FC = () => {
               <IonItem>
                 <IonButton
                   expand="block"
-                  onClick={() => navigateToRoute('/play-carousel')}
+                  routerLink="/play-carousel" className="play-carousel-button"
                 >
                   Play Carousel
                 </IonButton>
@@ -102,7 +97,7 @@ const StudentDashboard: React.FC = () => {
               <IonItem>
                 <IonButton
                   expand="block"
-                  onClick={() => navigateToRoute('/community-carousel')}
+                  routerLink="/community-carousel" className="community-carousel-button"
                 >
                   Community Carousel
                 </IonButton>
