@@ -33,7 +33,7 @@ const Login: React.FC = () => {
       {/* Content of the login page */}
       <IonInput placeholder="Username" onFocus={openPopover} />
       <IonInput placeholder="Password" type="password" />
-      <IonButton expand="block" onClick={handleLogin}>
+      <IonButton expand="block" routerLink="/student-dashboard" className="login-button">
         Login
       </IonButton>
 
