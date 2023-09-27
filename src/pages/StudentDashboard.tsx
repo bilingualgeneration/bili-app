@@ -71,8 +71,10 @@ const StudentDashboard: React.FC = () => {
               {showGoToStoriesButton && (
                 <IonItem>
                   <IonButton
-                    expand="block"
-                    routerLink="/stories" className="stories-button"
+                      expand="block"
+                      routerLink="/stories"
+		      className="stories-button"
+		      data-cy="stories-button"
                   >
                     Go to Stories
                   </IonButton>
