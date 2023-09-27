@@ -6,15 +6,25 @@ import {
 } from '@ionic/react';
 import './Login.css'; // For future CSS
 import UserTypePopover from './UserTypePopover'; // Import UserTypePopover component
+import {useAuth} from '../contexts/useAuth';
+import {useHistory} from 'react-router-dom';
 
-const handleLogin = () => {
-  // Add login logic here
-  // Can use state management or API calls to handle the login process
-};
 
 const Login: React.FC = () => {
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
+    const {setIsAuthed} = useAuth();
+    const history = useHistory();
 
+    const handleLogin = () => {
+	// Add login logic here
+	// Can use state management or API calls to handle the login process
+
+	setIsAuthed(true);
+	history.push('/student-dashboard'); // this is a programmatic redirect
+	// not always best to use, but sometimes necessary
+    };
+
+    
   const openPopover = () => {
     setPopoverIsOpen(true);
   };

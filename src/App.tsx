@@ -9,6 +9,7 @@ import TeacherLogin from './pages/TeacherLogin';
 import StudentDashboard from './pages/StudentDashboard';
 
 import UnauthedLayout from './layouts/Unauthed'; // Import the UnauthedLayout component
+import AuthedLayout from './layouts/Authed';
 import Splash from './pages/Splash'; // Import the Splash component
 import SignUp from './pages/SignUp'; // Import the SignUp component
 
@@ -43,7 +44,16 @@ const App: React.FC = () => (
       <Switch>
         <Route exact path="/home" render={() => (<UnauthedLayout><Home /></UnauthedLayout>)} />
         <Redirect exact from="/" to="/home" />
-        <Route exact path="/login" render={() => (<UnauthedLayout><Login /></UnauthedLayout>)} />
+
+	<Route exact
+	       path="/login"
+	       render={() => (
+		   <UnauthedLayout>
+		       <Login />
+		   </UnauthedLayout>
+	       )} />
+
+	
         <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
         <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
         <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
@@ -60,7 +70,7 @@ const App: React.FC = () => (
 
 
 	
-        <Route exact path="/memory" render={() => (<UnauthedLayout><Memory /></UnauthedLayout>)} />
+        <Route exact path="/memory" render={() => (<AuthedLayout><Memory /></AuthedLayout>)} />
         <Route exact path="/intruder" render={() => (<UnauthedLayout><Intruder /></UnauthedLayout>)} />
         <Route exact path="/story-factory" render={() => (<UnauthedLayout><StoryFactory /></UnauthedLayout>)} />
       </Switch>

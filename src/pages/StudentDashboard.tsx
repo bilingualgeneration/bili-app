@@ -8,14 +8,19 @@ import {
   IonSelectOption,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
+import {useAuth} from '../contexts/useAuth';
 
 const StudentDashboard: React.FC = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [showCarouselOptions, setShowCarouselOptions] = useState(false);
   const [showGoToStoriesButton, setShowGoToStoriesButton] = useState(false);
-  const history = useHistory();
+    const history = useHistory();
+    
+    const {isAuthed} = useAuth();
+    console.log(isAuthed);
 
+    
   const handleStartClick = () => {
     setDropdownOpen(!isDropdownOpen);
   };
