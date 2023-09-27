@@ -102,6 +102,30 @@ const StudentDashboard: React.FC = () => {
                   Community Carousel
                 </IonButton>
               </IonItem>
+              <IonItem>
+                <IonButton
+                  expand="block"
+                  routerLink="/story-factory" className="story-factory-button"
+                >
+                  Story Factory
+                </IonButton>
+              </IonItem>
+              <IonItem>
+                <IonButton
+                  expand="block"
+                  routerLink="/memory" className="memory-button"
+                >
+                  Memory
+                </IonButton>
+              </IonItem>
+              <IonItem>
+                <IonButton
+                  expand="block"
+                  routerLink="/intruder" className="intruder-button"
+                >
+                  Intruder
+                </IonButton>
+              </IonItem>
             </>
           )}
         </IonList>
