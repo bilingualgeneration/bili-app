@@ -2,15 +2,20 @@ import React from 'react';
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import UnauthedLayout from './layouts/Unauthed';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
 import StudentDashboard from './pages/StudentDashboard';
-
-import UnauthedLayout from './layouts/Unauthed'; // Import the UnauthedLayout component
-import Splash from './pages/Splash'; // Import the Splash component
-import SignUp from './pages/SignUp'; // Import the SignUp component
+import Splash from './pages/Splash';
+import SignUp from './pages/SignUp';
+import Stories from './pages/Stories';
+import Journeys from './pages/Journeys';
+import Explore from './pages/Explore';
+import Memory from './pages/Memory';
+import Intruder from './pages/Intruder';
+import StoryFactory from './pages/StoryFactory';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -30,10 +35,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Stories from './pages/Stories';
-import Memory from './pages/Memory';
-import Intruder from './pages/Intruder';
-import StoryFactory from './pages/StoryFactory';
 
 setupIonicReact();
 
@@ -41,28 +42,79 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <Switch>
-        <Route exact path="/home" render={() => (<UnauthedLayout><Home /></UnauthedLayout>)} />
+        <Route exact path="/home" render={() => (
+          <UnauthedLayout>
+            <Home />
+          </UnauthedLayout>
+        )} />
         <Redirect exact from="/" to="/home" />
-        <Route exact path="/login" render={() => (<UnauthedLayout><Login /></UnauthedLayout>)} />
-        <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
-        <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
-        <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
-        <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
-        <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+        <Route exact path="/login" render={() => (
+          <UnauthedLayout>
+            <Login />
+          </UnauthedLayout>
+        )} />
+        <Route exact path="/reset-password" render={() => (
+          <UnauthedLayout>
+            <ResetPassword />
+          </UnauthedLayout>
+        )} />
+        <Route exact path="/teacher-login" render={() => (
+          <UnauthedLayout>
+            <TeacherLogin />
+          </UnauthedLayout>
+        )} />
+        <Route exact path="/student-dashboard" render={() => (
+          <UnauthedLayout>
+            <StudentDashboard />
+          </UnauthedLayout>
+        )} />
+        <Route exact path="/splash" render={() => (
+          <UnauthedLayout>
+            <Splash />
+          </UnauthedLayout>
+        )} />
+        <Route exact path="/sign-up" render={() => (
+          <UnauthedLayout>
+            <SignUp />
+          </UnauthedLayout>
+        )} />
 	
-        <Route exact
-	       path="/stories/:uuid"
-	       render={(props) => (
-		   <UnauthedLayout>
-		       <Stories id={props.match.params.uuid}/>
-		   </UnauthedLayout>
-	       )} />
+        <Route exact path="/stories/:uuid" render={(props) => (
+          <UnauthedLayout>
+            <Stories id={props.match.params.uuid} />
+          </UnauthedLayout>
+        )} />
 
+        <Route exact path="/journeys" render={() => (
+          <UnauthedLayout>
+            <Journeys />
+          </UnauthedLayout>
+        )} />
 
-	
-        <Route exact path="/memory" render={() => (<UnauthedLayout><Memory /></UnauthedLayout>)} />
-        <Route exact path="/intruder" render={() => (<UnauthedLayout><Intruder /></UnauthedLayout>)} />
-        <Route exact path="/story-factory" render={() => (<UnauthedLayout><StoryFactory /></UnauthedLayout>)} />
+        <Route exact path="/explorer" render={() => (
+          <UnauthedLayout>
+            <Explore />
+          </UnauthedLayout>
+        )} />
+
+        {/* Update the layout for the following routes */}
+        <Route exact path="/memory" render={() => (
+          <UnauthedLayout>
+            <Memory />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/intruder" render={() => (
+          <UnauthedLayout>
+            <Intruder />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/story-factory" render={() => (
+          <UnauthedLayout>
+            <StoryFactory />
+          </UnauthedLayout>
+        )} />
       </Switch>
     </IonReactRouter>
   </IonApp>
