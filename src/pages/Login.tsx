@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonButton,
   IonRouterLink,
 } from '@ionic/react';
 import './Login.css'; // For future CSS
-import UserTypePopover from './UserTypePopover'; // Import the UserTypePopover component
+import UserTypePopover from './UserTypePopover'; // Import UserTypePopover component
 
 const handleLogin = () => {
   // Add login logic here
@@ -34,35 +29,31 @@ const Login: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonInput placeholder="Username" onFocus={openPopover} />
-        <IonInput placeholder="Password" type="password" />
-        <IonButton expand="block" onClick={handleLogin}>
-          Login
-        </IonButton>
+    <>
+      {/* Content of the login page */}
+      <IonInput placeholder="Username" onFocus={openPopover} />
+      <IonInput placeholder="Password" type="password" />
+      <IonButton expand="block" onClick={handleLogin}>
+        Login
+      </IonButton>
 
-        {/* Add a link to the password reset page */}
-        <IonRouterLink id="reset-password-link" routerLink="/reset-password">Forgot Password?  </IonRouterLink>
+      {/* Add a link to the password reset page */}
+      <IonRouterLink id="reset-password-link" routerLink="/reset-password">
+        Forgot Password?
+      </IonRouterLink>
 
-        {/* OPTION 1: Have teacher login link displayed from the beginning next to 'Forgot Password?' */}
-        <IonRouterLink routerLink="/teacher-login">I'm a teacher</IonRouterLink>
+      {/* OPTION 1: Have teacher login link displayed from the beginning next to 'Forgot Password?' */}
+      <IonRouterLink routerLink="/teacher-login">I'm a teacher</IonRouterLink>
 
-        {/* OPTION 2: Prompt user to confirm or deny they are a teacher via popup */}
-        {/* Render the UserTypePopover component */}
-        {/* Passing functions from UserTypePopover.tsx as props */}
-        <UserTypePopover                    
-          isOpen={popoverIsOpen}
-          onDismiss={closePopover}
-          onTeacherSelected={handleTeacherSelected}
-        />
-      </IonContent>
-    </IonPage>
+      {/* OPTION 2: Prompt user to confirm or deny they are a teacher via popup */}
+      {/* Render the UserTypePopover component */}
+      {/* Passing functions from UserTypePopover.tsx as props */}
+      <UserTypePopover
+        isOpen={popoverIsOpen}
+        onDismiss={closePopover}
+        onTeacherSelected={handleTeacherSelected}
+      />
+    </>
   );
 };
 

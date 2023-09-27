@@ -16,12 +16,12 @@ const UnauthedLayout = ({
     return (
 	<IonPage>
 	    <IonHeader>
-		<IonToolbar>
-		    <IonTitle>Welcome to Bili</IonTitle>
-		</IonToolbar>
+            <IonToolbar>
+                <IonTitle>Welcome to Bili</IonTitle>
+            </IonToolbar>
 	    </IonHeader>
 	    <IonContent fullscreen>
-		{children}
+		    {children}
 	    </IonContent>
 	</IonPage>
     );

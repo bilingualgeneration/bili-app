@@ -1,8 +1,8 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { Redirect, Route} from 'react-router-dom';
+
 
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
@@ -36,27 +36,27 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-	<IonRouterOutlet>
-	    <Route
-		exact
-		path="/splash"
-		render={(props) => (<UnauthedLayout><Splash /></UnauthedLayout>)}
-	    />
-	    <Route
-	    exact
-		path="/sign-up"
-		render={(props) => (<UnauthedLayout><SignUp /></UnauthedLayout>)} 
-		/>
-		<Route
-	    exact
-		path="/login"
-		render={(props) => (<UnauthedLayout><Login /></UnauthedLayout>)} 
-		/>
-		<Route
-		exact
-		path="/student-dashboard"
-		render={(props) => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)}
-	    />
+		<IonRouterOutlet>
+			<Route
+			exact
+			path="/splash"
+			render={(props) => (<UnauthedLayout><Splash /></UnauthedLayout>)}
+			/>
+			<Route
+			exact
+			path="/sign-up"
+			render={(props) => (<UnauthedLayout><SignUp /></UnauthedLayout>)} 
+			/>
+			<Route
+			exact
+			path="/login"
+			render={(props) => (<UnauthedLayout><Login /></UnauthedLayout>)} 
+			/>
+			<Route
+			exact
+			path="/student-dashboard"
+			render={(props) => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)}
+			/>
 
 
       </IonRouterOutlet>
