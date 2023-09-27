@@ -96,8 +96,7 @@ const App: React.FC = () => (
             <Explore />
           </UnauthedLayout>
         )} />
-
-        {/* Update the layout for the following routes */}
+        
         <Route exact path="/memory" render={() => (
           <UnauthedLayout>
             <Memory />
