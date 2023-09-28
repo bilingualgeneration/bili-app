@@ -4,27 +4,27 @@ import {
     IonHeader,
     IonTitle,
     IonToolbar
-    /*
-    IonButton,
-    */
-} from '@ionic/react';
-
-const UnauthedLayout = ({
-    // other props
+  } from '@ionic/react';
+  
+  interface UnauthedLayoutProps {
+    children?: React.ReactNode; // Define children as an optional ReactNode
+  }
+  
+  const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     children
-}) => {
+  }) => {
     return (
-	<IonPage>
-	    <IonHeader>
-            <IonToolbar>
-                <IonTitle>Welcome to Bili</IonTitle>
-            </IonToolbar>
-	    </IonHeader>
-	    <IonContent fullscreen>
-		    {children}
-	    </IonContent>
-	</IonPage>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Welcome to Bili</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent fullscreen className="ion-padding">
+          {children}
+        </IonContent>
+      </IonPage>
     );
-}
-
-export default UnauthedLayout;
+  }
+  
+  export default UnauthedLayout;  
