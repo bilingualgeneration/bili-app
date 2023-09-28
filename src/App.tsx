@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonApp, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UnauthedLayout from './layouts/Unauthed';
@@ -7,9 +7,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
-import StudentDashboard from './pages/StudentDashboard';
 import Splash from './pages/Splash';
 import SignUp from './pages/SignUp';
+import StudentDashboard from './pages/StudentDashboard';
 import Stories from './pages/Stories';
 import Journeys from './pages/Journeys';
 import Explore from './pages/Explore';
@@ -118,5 +118,7 @@ const App: React.FC = () => (
     </IonReactRouter>
   </IonApp>
 );
+
+
 
 export default App;

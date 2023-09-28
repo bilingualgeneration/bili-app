@@ -5237,6 +5237,10 @@
     "prop-types" "^15.7.2"
     "react-fast-compare" "^3.2.0"
     "shallowequal" "^1.1.0"
+"react-hook-form@^7.46.2":
+  "integrity" "sha512-x1DWmHQchV7x2Rq9l99M/cQHC8JGchAnw9Z0uTz5KrPa0bTl/Inm1NR7ceOARfIrkNuQNAhuSuZPYa6k7QYn3Q=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.46.2.tgz"
+  "version" "7.46.2"
 
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
