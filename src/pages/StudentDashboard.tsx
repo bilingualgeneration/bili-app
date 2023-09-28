@@ -6,28 +6,28 @@ const StudentDashboard: React.FC = () => {
     <>
       <h1>Welcome to Student Dashboard Page</h1>
 
-      <IonButton expand="block" routerLink="/journeys">
+      <IonButton expand="block" routerLink="/journeys" data-cy="journeys-button">
         Journeys
       </IonButton>
-      <IonButton expand="block" routerLink="/explore">
+      <IonButton expand="block" routerLink="/explore" data-cy="explore-button">
         Explore
       </IonButton>
-      <IonButton expand="block" routerLink="/wellness-carousel" className="wellness-carousel-button">
+      <IonButton expand="block" routerLink="/wellness-carousel" data-cy="wellness-carousel-button">
         Wellness Carousel
       </IonButton>
-      <IonButton expand="block" routerLink="/play-carousel" className="play-carousel-button">
+      <IonButton expand="block" routerLink="/play-carousel" data-cy="play-carousel-button">
         Play Carousel
       </IonButton>
-      <IonButton expand="block" routerLink="/community-carousel" className="community-carousel-button">
+      <IonButton expand="block" routerLink="/community-carousel" data-cy="community-carousel-button">
         Community Carousel
       </IonButton>
-      <IonButton expand="block" routerLink="/story-factory" className="story-factory-button">
+      <IonButton expand="block" routerLink="/story-factory" data-cy="story-factory-button">
         Story Factory
       </IonButton>
-      <IonButton expand="block" routerLink="/memory" className="memory-button">
+      <IonButton expand="block" routerLink="/memory" data-cy="memory-button">
         Memory
       </IonButton>
-      <IonButton expand="block" routerLink="/intruder" className="intruder-button">
+      <IonButton expand="block" routerLink="/intruder" data-cy="intruder-button">
         Intruder
       </IonButton>
     </>
