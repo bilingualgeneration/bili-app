@@ -7,8 +7,9 @@ const Splash: React.FC = () => {
   console.log('Rendering Splash component');
     return (
 	<>
-	<IonButton routerLink="/sign-up" className="sign-up-button">Sign Up</IonButton>
-	{/* <IonButton expand="full" routerLink="/sign-in" className="sign-in-button">Sign In</IonButton> */}
+		<h1>Welcome to Splash Page</h1>
+		<IonButton routerLink="/sign-up" className="sign-up-button">Sign Up</IonButton>
+		{/* <IonButton expand="full" routerLink="/sign-in" className="sign-in-button">Sign In</IonButton> */}
 	</>
   );
 };

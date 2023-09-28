@@ -91,12 +91,12 @@ const App: React.FC = () => (
           </UnauthedLayout>
         )} />
 
-        <Route exact path="/explorer" render={() => (
+        <Route exact path="/explore" render={() => (
           <UnauthedLayout>
             <Explore />
           </UnauthedLayout>
         )} />
-        
+
         <Route exact path="/memory" render={() => (
           <UnauthedLayout>
             <Memory />

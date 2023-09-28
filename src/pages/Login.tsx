@@ -4,8 +4,6 @@ import {
   IonButton,
   IonRouterLink,
 } from '@ionic/react';
-import './Login.css'; // For future CSS
-import UserTypePopover from './UserTypePopover'; // Import UserTypePopover component
 
 const handleLogin = () => {
   // Add login logic here
@@ -13,15 +11,6 @@ const handleLogin = () => {
 };
 
 const Login: React.FC = () => {
-  const [popoverIsOpen, setPopoverIsOpen] = useState(false);
-
-  const openPopover = () => {
-    setPopoverIsOpen(true);
-  };
-
-  const closePopover = () => {
-    setPopoverIsOpen(false);
-  };
 
   const handleTeacherSelected = () => {
     // Handle teacher selection here
@@ -31,7 +20,7 @@ const Login: React.FC = () => {
   return (
     <>
       {/* Content of the login page */}
-      <IonInput placeholder="Username" onFocus={openPopover} />
+      <IonInput placeholder="Username"/>
       <IonInput placeholder="Password" type="password" />
       <IonButton expand="block" routerLink="/student-dashboard" className="login-button">
         Login
@@ -48,11 +37,6 @@ const Login: React.FC = () => {
       {/* OPTION 2: Prompt user to confirm or deny they are a teacher via popup */}
       {/* Render the UserTypePopover component */}
       {/* Passing functions from UserTypePopover.tsx as props */}
-      <UserTypePopover
-        isOpen={popoverIsOpen}
-        onDismiss={closePopover}
-        onTeacherSelected={handleTeacherSelected}
-      />
     </>
   );
 };

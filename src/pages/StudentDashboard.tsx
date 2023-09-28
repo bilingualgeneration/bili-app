@@ -1,10 +1,11 @@
 import React from 'react';
 import { IonButton, IonItem } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
 
 const StudentDashboard: React.FC = () => {
   return (
     <>
+      <h1>Welcome to Student Dashboard Page</h1>
+
       <IonButton expand="block" routerLink="/journeys">
         Journeys
       </IonButton>

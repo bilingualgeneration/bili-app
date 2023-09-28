@@ -3,7 +3,8 @@ import { IonPage } from "@ionic/react";
 const SignUp: React.FC = () => {
     return (
 	<>
-	    sign up page
+	    <h1>Welcome to Sign Up Page</h1>
+        {/* Add content here */} 
 	</>
     );
 }
