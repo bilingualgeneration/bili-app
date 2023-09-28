@@ -1,79 +1,34 @@
-import React, { useState } from 'react';
-import {
-  IonButton,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonSelect,
-  IonSelectOption,
-} from '@ionic/react';
+import React from 'react';
+import { IonButton, IonItem } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 
 const StudentDashboard: React.FC = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>('');
-  const history = useHistory();
-
-  const handleStartClick = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleOptionChange = (event: CustomEvent) => {
-    setSelectedOption(event.detail.value);
-  };
-
-  const navigateToRoute = (route: string) => {
-    history.push(route);
-    setDropdownOpen(false);
-  };
-
   return (
     <>
-      <IonButton expand="block" onClick={handleStartClick}>
-        Start
+      <IonButton expand="block" routerLink="/journeys">
+        Journeys
       </IonButton>
-      {isDropdownOpen && (
-        <IonList>
-          <IonItem>
-            <IonLabel>Select an Option:</IonLabel>
-            <IonSelect
-              value={selectedOption}
-              onIonChange={handleOptionChange}
-            >
-              <IonSelectOption value="journeys">Journeys</IonSelectOption>
-              <IonSelectOption value="explore">Explore</IonSelectOption>
-            </IonSelect>
-          </IonItem>
-          {selectedOption === 'explore' && (
-            <>
-              <IonItem>
-                <IonButton
-                  expand="block"
-                  onClick={() => navigateToRoute('/stories-carousel')}
-                >
-                  Stories Carousel
-                </IonButton>
-              </IonItem>
-              <IonItem>
-                <IonButton
-                  expand="block"
-                  onClick={() => navigateToRoute('/wellness-carousel')}
-                >
-                  Wellness Carousel
-                </IonButton>
-              </IonItem>
-              <IonItem>
-                <IonButton
-                  expand="block"
-                  onClick={() => navigateToRoute('/play-carousel')}
-                >
-                  Play Carousel
-                </IonButton>
-              </IonItem>
-            </>
-          )}
-        </IonList>
-      )}
+      <IonButton expand="block" routerLink="/explore">
+        Explore
+      </IonButton>
+      <IonButton expand="block" routerLink="/wellness-carousel" className="wellness-carousel-button">
+        Wellness Carousel
+      </IonButton>
+      <IonButton expand="block" routerLink="/play-carousel" className="play-carousel-button">
+        Play Carousel
+      </IonButton>
+      <IonButton expand="block" routerLink="/community-carousel" className="community-carousel-button">
+        Community Carousel
+      </IonButton>
+      <IonButton expand="block" routerLink="/story-factory" className="story-factory-button">
+        Story Factory
+      </IonButton>
+      <IonButton expand="block" routerLink="/memory" className="memory-button">
+        Memory
+      </IonButton>
+      <IonButton expand="block" routerLink="/intruder" className="intruder-button">
+        Intruder
+      </IonButton>
     </>
   );
 };
