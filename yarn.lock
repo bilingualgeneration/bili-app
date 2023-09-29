@@ -2555,10 +2555,10 @@
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   "version" "3.1.2"
 
-"cypress@^13.2.0":
-  "integrity" "sha512-AvDQxBydE771GTq0TR4ZUBvv9m9ffXuB/ueEtpDF/6gOcvFR96amgwSJP16Yhqw6VhmwqspT5nAGzoxxB+D89g=="
-  "resolved" "https://registry.npmjs.org/cypress/-/cypress-13.2.0.tgz"
-  "version" "13.2.0"
+"cypress@^13.3.0":
+  "integrity" "sha512-mpI8qcTwLGiA4zEQvTC/U1xGUezVV4V8HQCOYjlEOrVmU1etVvxOjkCXHGwrlYdZU/EPmUiWfsO3yt1o+Q2bgw=="
+  "resolved" "https://registry.npmjs.org/cypress/-/cypress-13.3.0.tgz"
+  "version" "13.3.0"
   dependencies:
     "@cypress/request" "^3.0.0"
     "@cypress/xvfb" "^1.2.4"
