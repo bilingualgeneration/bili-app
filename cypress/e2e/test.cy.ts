@@ -1,11 +1,3 @@
-// describe('Login Workflow', () => {
-//     it('Visits the reset password page', () => {
-// 	cy.visit('/login');
-// 	cy.get('#reset-password-link').click();
-// 	cy.url().should('include', '/reset-password');
-// 	cy.get('ion-title').should('be.visible');
-//     })
-// })
 
 // ****************************
 // Splash page tests
@@ -27,6 +19,20 @@ describe('Splash page workflow', () => {
 	cy.visit('/splash');
 	cy.get('[data-cy="sign_in"]').click();
 	cy.url().should('include', '/login');
+	
+    })
+})
+
+// ****************************
+// Sign Up page tests
+// ****************************
+
+// Verifys navigation to the student dashboard page from the sign up page
+describe('Sign up page workflow', () => {
+    it('Visits the student dashboard page', () => {
+	cy.visit('/sign-up');
+	cy.get('[data-cy="sign_up_auth"]').click();
+	cy.url().should('include', '/student-dashboard');
 	
     })
 })

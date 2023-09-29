@@ -1,8 +1,42 @@
 import React from 'react';
 import { IonButton, IonItem } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
+import {useAuth} from '../contexts/useAuth';
 
 const StudentDashboard: React.FC = () => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [showCarouselOptions, setShowCarouselOptions] = useState(false);
+  const [showGoToStoriesButton, setShowGoToStoriesButton] = useState(false);
+    const history = useHistory();
+    
+    const {isAuthed} = useAuth();
+    console.log(isAuthed);
+
+    
+  const handleStartClick = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionChange = (event: CustomEvent) => {
+    const value = event.detail.value as string;
+    setSelectedOption(value);
+
+    // Check if the user selected "explore"
+    if (value === 'explore') {
+        setShowCarouselOptions(true);
+        } else {
+        setShowCarouselOptions(false);
+        // Hide the "Go to Stories" button when another option is selected
+        setShowGoToStoriesButton(false);
+        }
+    };
+
+  // Function to show the "Go to Stories" button
+  const showGoToStories = () => {
+    setShowGoToStoriesButton(true);
+  };
+
   return (
     <>
       <IonButton expand="block" routerLink="/journeys">
