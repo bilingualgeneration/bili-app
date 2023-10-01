@@ -1,9 +1,4 @@
 import {
-    IonPage,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonButton,
     IonLabel,
     IonItem,
@@ -68,7 +63,7 @@ import {
           </IonItem>
           {errors.password && <p>{errors.password.message}</p>}
   
-          <IonButton expand="block" type="submit">
+          <IonButton expand="block" type="submit" routerLink="/student-dashboard" data-cy="sign_up_auth">
             Sign Up
           </IonButton>
         </form>

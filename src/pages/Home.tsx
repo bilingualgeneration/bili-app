@@ -6,14 +6,9 @@ import UnauthedLayout from '../layouts/Unauthed'; // Import the Unauthed layout 
 
 const Home: React.FC = () => {
   return (
-    <UnauthedLayout>
-      <IonPage>
-        <IonContent fullscreen>
-          {/* Your page content */}
-          <ExploreContainer />
-        </IonContent>
-      </IonPage>
-    </UnauthedLayout>
+   <>
+   Home
+   </>
   );
 };
 

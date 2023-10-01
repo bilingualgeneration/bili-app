@@ -11,7 +11,11 @@ import {
     useAuth
 } from '../contexts/useAuth';
 
-const AuthedLayout = ({
+interface AuthedLayoutProps {
+    children: React.ReactNode
+}
+
+const AuthedLayout:React.FC<AuthedLayoutProps> = ({
     children
 }) => {
     const {isAuthed} = useAuth();
@@ -38,7 +42,9 @@ const AuthedLayout = ({
             </IonToolbar>
 	    </IonHeader>
 	    <IonContent fullscreen>
-		    {children}
+            <div className='container'>
+                {children}
+            </div>
 	    </IonContent>
 	</IonPage>
     );
