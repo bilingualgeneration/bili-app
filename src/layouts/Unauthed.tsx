@@ -4,15 +4,15 @@ import {
     IonHeader,
     IonTitle,
     IonToolbar
-    /*
-    IonButton,
-    */
 } from '@ionic/react';
+import {
+    JSX,
+    PropsWithChildren
+} from 'react';
 
 const UnauthedLayout = ({
-    // other props
     children
-}) => {
+}: PropsWithChildren): JSX.Element => {
     return (
 	<IonPage>
 	    <IonHeader>
