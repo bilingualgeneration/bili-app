@@ -3,10 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
-    'plugin:react/recommended',
-    'eslint:recommended'
-  ],
+  'extends': ['plugin:react/recommended', 'eslint:recommended', 'plugin:storybook/recommended'],
   parserOptions: {
     ecmaVersion: 2020
   },
