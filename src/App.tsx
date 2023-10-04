@@ -1,13 +1,24 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { Redirect, Route, Switch} from 'react-router-dom';
+
+
+import Login from './pages/Login';
+import ResetPassword from './pages/ResetPassword';
+import TeacherLogin from './pages/TeacherLogin';
 import Splash from './pages/Splash';
 import SignUp from './pages/SignUp';
 import StudentDashboard from './pages/StudentDashboard';
-
+import Stories from './pages/Stories';
+import Journeys from './pages/Journeys';
+import AuthedLayout from './layouts/Authed';
+import Explore from './pages/Explore';
+import Memory from './pages/Memory';
+import Intruder from './pages/Intruder';
+import StoryFactory from './pages/StoryFactory';
 import UnauthedLayout from './layouts/Unauthed';
+import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,26 +44,69 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-	<IonRouterOutlet>
-	    <Route
-		exact
-		path="/splash"
-		render={(props) => (<UnauthedLayout><Splash /></UnauthedLayout>)}
-	    />
-	    <Route
-	    exact
-		path="/sign-up"
-		render={(props) => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+      <Switch>
+        <Route exact path="/home" render={() => (
+          <UnauthedLayout>
+            <Home />
+          </UnauthedLayout>
+        )} />
+        <Redirect exact from="/" to="/home" />
 
-      </IonRouterOutlet>
+	<Route exact
+	       path="/login"
+	       render={() => (
+		   <UnauthedLayout>
+		       <Login />
+		   </UnauthedLayout>
+	       )} />
+
+	
+        <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
+        <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
+        <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
+        <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
+        <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+	
+        <Route exact path="/stories/:uuid" render={(props) => (
+          <UnauthedLayout>
+            <Stories id={props.match.params.uuid} />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/journeys" render={() => (
+          <UnauthedLayout>
+            <Journeys />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/explorer" render={() => (
+          <UnauthedLayout>
+            <Explore />
+          </UnauthedLayout>
+        )} />
+        
+        <Route exact path="/memory" render={() => (
+          <UnauthedLayout>
+            <Memory />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/intruder" render={() => (
+          <UnauthedLayout>
+            <Intruder />
+          </UnauthedLayout>
+        )} />
+
+        <Route exact path="/story-factory" render={() => (
+          <UnauthedLayout>
+            <StoryFactory />
+          </UnauthedLayout>
+        )} />
+      </Switch>
     </IonReactRouter>
   </IonApp>
 );
 
-/*
-	    <Route exact path="/" component={Home} />
-	    <Route exact path="/student-dashboard" component={StudentDashboard}/>
 
-*/
 
 export default App;
