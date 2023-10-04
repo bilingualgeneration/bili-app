@@ -13,6 +13,9 @@
 	"noEmit": true,
 	"noImplicitAny": true,
 	"noImplicitReturns": true,
+	"paths": {
+	    "@/components/*": ["./src/components/*"]
+	},
 	"resolveJsonModule": true,
 	"skipLibCheck": true,
 	"strict": true,
@@ -21,5 +24,8 @@
 	"target": "ESNext"
     },
     "include": ["src"],
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
+    },
     "references": [{ "path": "./tsconfig.node.json" }]
 }
