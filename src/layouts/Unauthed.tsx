@@ -15,7 +15,7 @@ interface UnauthedLayoutProps {
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     // other props
     children
-}: PropsWithChildren): React.JSX.Element => {
+}) => {
     return (
 	<IonPage>
 	    <IonHeader>
