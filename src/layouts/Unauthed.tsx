@@ -4,12 +4,9 @@ import {
     IonHeader,
     IonTitle,
     IonToolbar
-    /*
-    IonButton,
-    */
 } from '@ionic/react';
-import React from 'react';
 import './Container.css';
+import React from 'react';
 
 interface UnauthedLayoutProps {
     children: React.ReactNode
@@ -18,7 +15,7 @@ interface UnauthedLayoutProps {
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     // other props
     children
-}) => {
+}: PropsWithChildren): React.JSX.Element => {
     return (
 	<IonPage>
 	    <IonHeader>
