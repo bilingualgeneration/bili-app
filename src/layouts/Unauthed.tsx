@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     IonContent,
     IonPage,
@@ -15,7 +16,7 @@ interface UnauthedLayoutProps {
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     // other props
     children
-}) => {
+  }) => {
     return (
 	<IonPage>
 	    <IonHeader>
@@ -31,6 +32,6 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
 	    </IonContent>
 	</IonPage>
     );
-}
-
-export default UnauthedLayout;
+  }
+  
+  export default UnauthedLayout;  

@@ -1,9 +1,9 @@
 import React from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route, Switch} from 'react-router-dom';
-
-
+import { Redirect, Route, Switch } from 'react-router-dom';
+import UnauthedLayout from './layouts/Unauthed';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
@@ -17,8 +17,6 @@ import Explore from './pages/Explore';
 import Memory from './pages/Memory';
 import Intruder from './pages/Intruder';
 import StoryFactory from './pages/StoryFactory';
-import UnauthedLayout from './layouts/Unauthed';
-import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -79,12 +77,12 @@ const App: React.FC = () => (
           </UnauthedLayout>
         )} />
 
-        <Route exact path="/explorer" render={() => (
+        <Route exact path="/explore" render={() => (
           <UnauthedLayout>
             <Explore />
           </UnauthedLayout>
         )} />
-        
+
         <Route exact path="/memory" render={() => (
           <UnauthedLayout>
             <Memory />
