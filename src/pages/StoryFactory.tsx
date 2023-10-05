@@ -1,11 +1,11 @@
 import React from 'react';
-import { IonPage } from "@ionic/react";
 
 const StoryFactory: React.FC = () => {
     return (
-	<>
-	    Story Factory
-	</>
+		<>
+			<h1>Welcome to Story Factory Page</h1>
+			{/* Add content here */} 
+		</>
     );
 }
 

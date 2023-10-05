@@ -6,18 +6,23 @@ import {
     IonInput,
   } from "@ionic/react";
   import React, { useState } from "react";
-  import {useForm} from "react-hook-form"
+  import {useForm, SubmitHandler} from "react-hook-form"
   
-  const SignUp: React.FC = () => {
+  interface FormInputs {
+    email: string;
+    password: string;
+  }
 
+  const SignUp: React.FC = () => {
+    
     const {
       control,
       handleSubmit,
       formState: { errors },
-    } = useForm<{email: string; password: string;}>();
-
+    } = useForm<FormInputs>(); // Provide type information for useForm
   
-    const onSubmit = (data: { email: string; password: string }) => {
+
+    const onSubmit: SubmitHandler<FormInputs> = (data) =>  {
       console.log("Email: ", data.email);
       console.log("Password: ", data.password);
       // signup logic here
@@ -25,6 +30,7 @@ import {
   
     return (
       <>
+        <h1>Welcome to Sign Up Page</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
               name="email"
@@ -33,13 +39,13 @@ import {
               helperText="Enter a valid email"
             />
           {errors.email && <p>{errors.email.message}</p>}
+
           <Input
               name="password"
               control={control}
               label="Password"
               helperText="Create a password"
             />
-          
           {errors.password && <p>{errors.password.message}</p>}
   
           <IonButton expand="block" type="submit" routerLink="/student-dashboard" data-cy="sign_up_auth">
@@ -49,5 +55,5 @@ import {
       </>
     );
   };
-  
-  export default SignUp;
+
+export default SignUp;

@@ -4,7 +4,8 @@ import { IonPage } from "@ionic/react";
 const Memory: React.FC = () => {
     return (
 	<>
-	    Memory
+	   <h1>Welcome to Memory Page</h1>
+        {/* Add content here */} 
 	</>
     );
 }

@@ -4,7 +4,8 @@ import { IonPage } from "@ionic/react";
 const Intruder: React.FC = () => {
     return (
 	<>
-	    Intruder
+		<h1>Welcome to Intruder Page</h1>
+        {/* Add content here */} 
 	</>
     );
 }

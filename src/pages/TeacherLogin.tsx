@@ -7,11 +7,11 @@ import {
 const TeacherLogin: React.FC = () => {
   const handleTeacherLogin = () => {
     // Handle teacher login logic here
-    // You can use state management or API calls to handle the login process for teachers
   };
 
   return (
     <>
+      <h1>Welcome to Teacher Login Page</h1>
       <IonInput placeholder="Username" />
       <IonInput placeholder="Password" type="password" />
       <IonButton expand="block" onClick={handleTeacherLogin}>
