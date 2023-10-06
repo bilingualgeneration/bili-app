@@ -66,6 +66,7 @@ describe('Input Component', () => {
 	    <Input
 		control={control}
 		name='field'
+		testId='ion-input-component'
 	    />);
 	const element = screen.getByTestId('ion-input-component');
 	expect(element).toBeDefined();

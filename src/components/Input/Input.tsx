@@ -4,7 +4,7 @@ import {
     Controller
 } from 'react-hook-form';
 import {
-    IonInput
+    IonInput, IonLabel
 } from '@ionic/react';
 
 
@@ -13,17 +13,20 @@ export type Input = {
     control: Control,
     helperText: string,
     label: string,
-    name: string
+    name: string,
+	testId?: string
 };
 
 export const Input = ({
     control,
     helperText,
     label,
-    name
+    name,
+	testId
 }: Input): JSX.Element => {
     return (
 	<>
+	<IonLabel position="stacked">{label}</IonLabel>
 	    <Controller
 		name={name}
 		control={control}
@@ -35,7 +38,7 @@ export const Input = ({
 		    }
 		}: any): JSX.Element => (
 		    <IonInput
-		    data-testid='ion-input-component'
+		    data-testid={testId}
 		    helperText={helperText}
 		    label={label}
 		    onIonInput={onChange}

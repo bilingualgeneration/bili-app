@@ -37,6 +37,7 @@ import {
               control={control}
               label="Email"
               helperText="Enter a valid email"
+              testId="email-signup-test"
             />
           {errors.email && <p>{errors.email.message}</p>}
 
@@ -45,6 +46,7 @@ import {
               control={control}
               label="Password"
               helperText="Create a password"
+              testId="password-signup-test"
             />
           {errors.password && <p>{errors.password.message}</p>}
   
