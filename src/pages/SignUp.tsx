@@ -47,6 +47,7 @@ import {
               label="Password"
               helperText="Create a password"
               testId="password-signup-test"
+	      type="password"
             />
           {errors.password && <p>{errors.password.message}</p>}
   
