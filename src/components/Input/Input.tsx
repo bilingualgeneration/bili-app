@@ -14,7 +14,8 @@ export type Input = {
     helperText: string,
     label: string,
     name: string,
-	testId?: string
+    testId?: string,
+    type?: 'date' | 'datetime-local' | 'email' | 'month' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week'
 };
 
 export const Input = ({
@@ -22,7 +23,8 @@ export const Input = ({
     helperText,
     label,
     name,
-	testId
+    testId,
+    type = 'text'
 }: Input): JSX.Element => {
     return (
 	<>
@@ -37,11 +39,12 @@ export const Input = ({
 		    }
 		}: any): JSX.Element => (
 		    <IonInput
-		    data-testid={testId}
-		    helperText={helperText}
-		    label={label}
-		    onIonInput={onChange}
-		    onIonBlur={onBlur}
+			data-testid={testId}
+			helperText={helperText}
+			label={label}
+			onIonInput={onChange}
+			onIonBlur={onBlur}
+			type={type}
 		    {...fields}
 		    />
 		)}
