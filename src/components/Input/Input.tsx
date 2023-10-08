@@ -26,7 +26,6 @@ export const Input = ({
 }: Input): JSX.Element => {
     return (
 	<>
-	<IonLabel position="stacked">{label}</IonLabel>
 	    <Controller
 		name={name}
 		control={control}
