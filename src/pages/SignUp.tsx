@@ -38,6 +38,7 @@ import {
               label="Email"
               helperText="Enter a valid email"
               testId="email-signup-test"
+              type="email"
             />
           {errors.email && <p>{errors.email.message}</p>}
 
@@ -47,7 +48,7 @@ import {
               label="Password"
               helperText="Create a password"
               testId="password-signup-test"
-	      type="password"
+	            type="password"
             />
           {errors.password && <p>{errors.password.message}</p>}
   
