@@ -91,6 +91,27 @@ describe('Input Component', () => {
 	    />);
 	expect(container.querySelector('.helper-text')).toBeDefined();
     });
+
+
+	const types: Array<Input["type"]> = 
+	['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 
+	'tel', 'text', 'time', 'url', 'week'];
+    types.forEach(type => {
+        test.only(`should render input with type ${type}`, () => {
+            const { container, getByTestId } = render(
+                <Input
+                    control={control}
+                    name='field'
+                    type={type} 
+					testId={`input-${type}`}
+                />
+            );
+
+            const inputElement = getByTestId(`input-${type}`)
+            expect(inputElement.getAttribute('type')).toBe(type);
+        });
+    });
+
 })
 
 

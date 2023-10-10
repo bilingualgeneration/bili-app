@@ -3,7 +3,7 @@ import { cleanup, render, screen, fireEvent, renderHook, waitFor } from '@testin
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import Login from './Login'; // Update the path accordingly
+import Login from './Login'; 
 
 afterEach(() => {
     cleanup();
