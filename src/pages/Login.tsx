@@ -20,8 +20,8 @@ interface FormInputs {
 const Login: React.FC = () => {
   
   const loginSchema = z.object({
-    email: z.string().email('Enter a valid email').nonempty('Email is required'),
-    password: z.string().nonempty('Password is required')
+    email: z.string().email('ENTER a valid email'),
+    password: z.string().min(5,'Password must be 5 or more characters long')
   });
 
     const {setIsAuthed} = useAuth();
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
 
   const handleTeacherSelected = () => {
     // Handle teacher selection here
-    // You can navigate to the teacher login page or perform any other action
+    
   };
 
   return (
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
               testId="password-login-test"
 	            type="password"
             />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p id="pw-err">{errors.password.message}</p>}
   
           <IonButton expand="block" type="submit" data-cy="login_auth">
             Login
