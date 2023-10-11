@@ -23,11 +23,13 @@ const signOut = (auth: { isAuthed?: boolean; user?: null; signOut?: any; }) => {
     auth.signOut();
 };
 
+//Google SignIn
 const signInWithGoogle = async (auth: Auth) => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
 };
 
+//SignIn with Email and Password
 const handleEmailPasswordSignIn = async (auth: Auth, email: string, password: string) => {
   try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -44,7 +46,6 @@ interface FormInputs {
 
 const Login: React.FC = () => {
     const auth = useAuth();
-    const autH = getAuth();
     const {status, data: signinResult} = useSigninCheck();
     const loginSchema = z.object({
       email: z.string().email('ENTER a valid email'),
@@ -73,7 +74,7 @@ const Login: React.FC = () => {
 		signedIn && "hello " + user.displayName
 	    }
 
-      <form onSubmit={handleSubmit(data => handleEmailPasswordSignIn(auth, data.email, data.password))}>
+      <form onSubmit={handleSubmit(data => handleEmailPasswordSignIn(auth, data.email, data.password))} novalidate>
           <Input
               name="email"
               control={control}
@@ -93,6 +94,7 @@ const Login: React.FC = () => {
 	            type="password"
             />
           {errors.password && <p id="pw-err">{errors.password.message}</p>}
+
           <IonButton expand="block" type="submit" data-cy="login_auth" disabled={signedIn}>
             Login
           </IonButton>
