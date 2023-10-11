@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Login from './Login'; 
+import {FirebaseWrapper} from '@/components/FirebaseWrapper';
+import {AuthProvider} from '@/contexts/useAuth';
 
 afterEach(() => {
     cleanup();
@@ -29,7 +31,13 @@ describe('Login Component', () => {
     });
 
     test('should render an email input', () => {
-        render(<Login />);
+        render(
+	    <AuthProvider>
+		<FirebaseWrapper>
+		    <Login />
+		</FirebaseWrapper>
+	    </AuthProvider>
+	);
         const element = screen.getByTestId('email-login-test');
         expect(element).toBeDefined();
     });
