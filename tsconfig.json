@@ -14,7 +14,9 @@
 	"noImplicitAny": true,
 	"noImplicitReturns": true,
 	"paths": {
-	    "@/components/*": ["./src/components/*"]
+	    "@/*": ["./src/*"],
+	    "@/components/*": ["./src/components/*"],
+	    "@/contexts/*": ["./src/contexts/*"]
 	},
 	"resolveJsonModule": true,
 	"skipLibCheck": true,
