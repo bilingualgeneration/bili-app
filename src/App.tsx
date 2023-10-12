@@ -44,6 +44,10 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* SwiperJS */
+import 'swiper/scss';
+import '@ionic/react/css/ionic-swiper.css';
+
 setupIonicReact();
 
 const App: React.FC = () => {
