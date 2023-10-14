@@ -15,7 +15,7 @@ import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
 import Splash from './pages/Splash';
-import SignUp from './pages/SignUp';
+import {SignUp} from './pages/SignUp';
 import StudentDashboard from './pages/StudentDashboard';
 import Stories from './pages/Stories';
 import Journeys from './pages/Journeys';
