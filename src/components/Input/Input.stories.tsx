@@ -5,43 +5,41 @@ import type {
 
 import {
     IonApp,
+    IonButton,
     IonContent,
     IonItem,
-    IonPage
+    IonPage,
 } from '@ionic/react';
 import {Input} from './Input';
-
-/* Core CSS required for Ionic components to work properly */
-import "@ionic/react/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
-import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/typography.css";
-
-/* Optional CSS utils that can be commented out */
-import "@ionic/react/css/padding.css";
-import "@ionic/react/css/float-elements.css";
-import "@ionic/react/css/text-alignment.css";
-import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
+import {useForm} from 'react-hook-form';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 const meta: Meta<typeof Input> = {
     component: Input,
-    render: (props: Input) => ({
-	props
-    }),
     decorators: [
-	(Story) => (
-	    <IonApp>
-		<IonPage>
-		    <IonContent className='ion-padding'>
-			<Story />
-		    </IonContent>
-		</IonPage>
-	    </IonApp>
-	)
+	(Story, component) => {
+	    const schema = z.object({
+		field: z.string()
+	    });
+	    type schemaType = z.infer<typeof schema>;
+	    const {control} = useForm<schemaType>({
+		resolver: zodResolver(schema)
+	    });
+	    const newArgs: Input = {
+		control,
+		name: 'field',
+		...component.args,
+	    }; // todo: type
+	    return <IonPage>
+		<IonContent className='ion-padding'>
+		    <Story args={newArgs} />
+		    <IonButton type='submit'>
+			Submit
+		    </IonButton>
+		</IonContent>
+	    </IonPage>
+	}
     ]
 };
 
@@ -50,13 +48,18 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-    props: {}
+    args: {
+    }
 }
 
 export const WithLabel: Story = {
-    render: () => <Input label='label' />
+    args: {
+	label: 'field'
+    }
 }
 
 export const WithHelperText: Story = {
-    render: () => <Input helperText='helper text' />
+    args: {
+	helperText: 'helper text'
+    }
 }

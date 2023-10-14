@@ -7,7 +7,6 @@ import {
     IonToolbar
 } from '@ionic/react';
 import './Container.css';
-import React from 'react';
 
 interface UnauthedLayoutProps {
     children: React.ReactNode

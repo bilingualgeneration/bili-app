@@ -19,6 +19,7 @@ import {
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
+    Control,
     SubmitHandler,
     useForm
 } from 'react-hook-form';
@@ -105,9 +106,9 @@ describe('Input Component', () => {
     } = renderHook(() => useForm<schemaType>({
 	resolver: zodResolver(schema)
     }));
-    const control: Control = result.current.control;
+    const control: Control<schemaType> = result.current.control;
     
-    beforeEach(async (): void => {
+    beforeEach(async (): Promise<void> => {
 	// reset the form values for each test
 	// need to wrap in act() because reset() alters react state
 	await act(
@@ -132,12 +133,22 @@ describe('Input Component', () => {
 		<button type='submit'></button>
 	    </form>
 	);
-	fireEvent.change(
-	    container.querySelector('input'),
-	    {target: {value: 'abc'}}
-	);
-	fireEvent.click(
-	    container.querySelector(`[type='submit']`)
-	);
+
+	const inputElement: JSX. Element | null = container.querySelector('input');
+	if(inputElement !== null){
+	    fireEvent.change(
+		inputElement!,
+		{target: {value: 'abc'}}
+	    );
+	}else{
+	    // todo: error handling
+	}
+
+	const submitElement: JSX.Element | null = container.querySelector(`[type='submit']`);
+	if(submitElement !== null){
+	    fireEvent.click(submitElement as JSX.Element);
+	}else{
+	    // todo: error handling
+	}
     });
 });

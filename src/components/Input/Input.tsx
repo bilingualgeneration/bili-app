@@ -11,8 +11,8 @@ import {
 // todo: find a way for props to be required?
 export type Input = {
     control: Control,
-    helperText: string,
-    label: string,
+    helperText?: string,
+    label?: string,
     name: string
 };
 
