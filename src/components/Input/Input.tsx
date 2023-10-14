@@ -4,23 +4,26 @@ import {
     Controller
 } from 'react-hook-form';
 import {
-    IonInput
+    IonInput, IonLabel
 } from '@ionic/react';
 
 
 // todo: find a way for props to be required?
 export type Input = {
     control: Control,
-    helperText?: string,
-    label?: string,
-    name: string
-};
+    helperText: string,
+    label: string,
+    name: string,
+    testId?: string,
+    type?: 'date' | 'datetime-local' | 'email' | 'month' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week'
 
 export const Input = ({
     control,
     helperText,
     label,
-    name
+    name,
+    testId,
+    type = 'text'
 }: Input): JSX.Element => {
     return (
 	<>
@@ -35,11 +38,12 @@ export const Input = ({
 		    }
 		}: any): JSX.Element => (
 		    <IonInput
-		    data-testid='ion-input-component'
-		    helperText={helperText}
-		    label={label}
-		    onIonInput={onChange}
-		    onIonBlur={onBlur}
+			data-testid={testId}
+			helperText={helperText}
+			label={label}
+			onIonInput={onChange}
+			onIonBlur={onBlur}
+			type={type}
 		    {...fields}
 		    />
 		)}
