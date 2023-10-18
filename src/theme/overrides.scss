@@ -1,0 +1,49 @@
+/* 
+  .swiper-slides apply text-align: center
+  reset it, since it affects pages we render in slides
+*/
+.swiper-slide > * {
+  text-align: initial;
+}
+
+
+ion-progress-bar{
+    $ionProgressBarHeight: 12px;
+    height: $ionProgressBarHeight;
+    border-radius: $ionProgressBarHeight / 2;
+}
+
+
+ion-button {
+    --border-radius: 100px;
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+    --padding: 18px 16px;
+
+    &[disabled]{
+	--background: var(--ion-color-secondary);
+	--color: var(--ion-color-secondary-contrast);
+    }
+}
+
+
+
+ion-label {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.ion-page ion-input.input-fill-outline {
+  --border-radius: 16px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --background: rgba(136, 147, 145, 0.20);
+  --border-style: solid;
+}
+
+.ion-page ion-input.input-fill-outline.has-focus {
+  --background: var(--Cielo-Highest);
+  --border-color: var(--Base-Selva);
+  --border-width: 3px;
+}
