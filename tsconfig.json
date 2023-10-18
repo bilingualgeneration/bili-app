@@ -16,7 +16,8 @@
 	"paths": {
 	    "@/*": ["./src/*"],
 	    "@/components/*": ["./src/components/*"],
-	    "@/contexts/*": ["./src/contexts/*"]
+	    "@/contexts/*": ["./src/contexts/*"],
+	    "@/pages/*": ["./src/pages/*"]
 	},
 	"resolveJsonModule": true,
 	"skipLibCheck": true,
