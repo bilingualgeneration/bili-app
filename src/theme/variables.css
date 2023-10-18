@@ -265,3 +265,11 @@ ion-input div.label-text {
   letter-spacing: 0.48px;
   padding-bottom: 20px;
 }
+
+/* 
+  .swiper-slides apply text-align: center
+  reset it, since it affects pages we render in slides
+*/
+.swiper-slide > * {
+  text-align: initial;
+}

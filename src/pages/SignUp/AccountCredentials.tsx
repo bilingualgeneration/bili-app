@@ -1,15 +1,6 @@
 import {
     IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonLabel,
-    IonItem,
-    IonInput,
-    IonRadioGroup,
-    IonRadio,
-    IonAlert,
+    IonCheckbox,
 } from '@ionic/react';
 
 import {Input} from '@/components/Input';
@@ -36,6 +27,8 @@ import {
     useSigninCheck
 } from 'reactfire';
 import { useState } from 'react';
+
+import "./AccountCredentials.css"
 
 interface FormInputs {
     name: string;
@@ -90,7 +83,7 @@ export const AccountCredentials: React.FC = () => {
 
     return (
 	<>
-        <form onSubmit={handleSubmit(data => handleEmailPasswordSignUp(auth, data.name, data.email, data.password, swiper))}>
+        <form className="account-credentials" onSubmit={handleSubmit(data => handleEmailPasswordSignUp(auth, data.name, data.email, data.password, swiper))}>
             <Input
                 name="name" 
                 control={control}
@@ -122,26 +115,13 @@ export const AccountCredentials: React.FC = () => {
             />
             {errors.email && <p>{errors.email.message}</p>}
 
-            <IonRadioGroup>
-                <IonItem>
-                    <IonRadio value="option1">Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy</IonRadio>
-                </IonItem>
-            </IonRadioGroup>
+            <IonCheckbox labelPlacement="end" alignment="start" justify="start">
+                <span className="checkbox-label">Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy</span>
+            </IonCheckbox>
 
-            <IonRadioGroup>
-                <IonItem>
-                    <IonRadio value="option2">I want to receive marketing updates</IonRadio>
-                </IonItem>
-            </IonRadioGroup>
-
-            {/* Alert UI component to show error */}
-            <IonAlert
-                isOpen={showAlert}
-                onDidDismiss={() => setShowAlert(false)}
-                header={'Alert'}
-                message={'You must agree to the Terms of Service to continue.'}
-                buttons={['OK']}
-            />
+            <IonCheckbox labelPlacement="end" alignment="start" justify="start">
+                <span className="checkbox-label">I want to receive marketing updates</span>
+            </IonCheckbox>
 
             <IonButton expand="block" type="submit" data-testid="account-credentials-continue-button">
                 Continue
