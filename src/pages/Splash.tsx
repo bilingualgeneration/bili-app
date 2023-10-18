@@ -1,15 +1,40 @@
 import React from 'react';
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+    IonSpinner
+} from '@ionic/react';
+import {
+    Redirect
+} from 'react-router';
+
+import {
+    useSigninCheck
+} from 'reactfire';
+
 
 const Splash: React.FC = () => {
-  console.log('Rendering Splash component');
-    return (
-	<>
-		<h1>Welcome to Splash Page</h1>
-		<IonButton routerLink="/sign-up" className="sign-up-button" data-cy="sign_up">Sign Up</IonButton>
-		<IonButton routerLink="/login" className="sign-in-button" data-cy="sign_in">Sign In</IonButton>
-	</>
-  );
+    const {status, data: signinResult} = useSigninCheck();
+
+    if(status === 'loading'){
+	// still trying to communicate with Firebase
+	// todo: make spinner larger
+	// todo: center spinner on page
+	return (
+	    <>
+		<IonSpinner name='circular'></IonSpinner>
+	    </>
+	);
+    }
+
+    const {signedIn, user} = signinResult;
+
+    // todo: grab full user profile from firestore
+    
+    if(signedIn){
+	// todo: redirect based on user account type
+	return <Redirect to='/student-dashboard' />;
+    }else{
+	return <Redirect to='/login' />;
+    }
 };
 
 export default Splash;

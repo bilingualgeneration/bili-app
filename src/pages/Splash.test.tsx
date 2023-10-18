@@ -3,22 +3,26 @@ import { render, screen } from '@testing-library/react';
 import Splash from './Splash';
 
 describe('<Splash />', () => {
-  it('should render the title', () => {
-      const {baseElement} = render(<Splash />);
-      expect(baseElement).toBeDefined();
-  });
+    it('should render', () => {
+	const {baseElement} = render(<Splash />);
+	expect(baseElement).toBeDefined();
+    });
+    
+    it('should push user to /login if the user is not authed', () => {
+	// todo: implement
+    });
 
-  it('should render the Sign Up button', () => {
-    render(<Splash />);
-    const signUpButton = screen.getByText('Sign Up');
-    expect(signUpButton).toBeVisible();
-  });
+    it('should push user to student dashboard if user is authed as student', () => {
+	// todo: implement
+    });
 
+    it('should push user to teacher dashboard if user is authed as teacher', () => {
+	// todo: implement
+    });
 
-  // Uncomment when the Sign In button enabled:
-  // it('should render the Sign In button', () => {
-  //   render(<Splash />);
-  //   const signInButton = screen.getByText('Sign In');
-  //   expect(signInButton).toBeVisible();
-  // });
+    it('should push user to parent dashboard if user is authed as parent', () => {
+	// todo: implement
+    });
+
+    
 });

@@ -59,7 +59,7 @@ const App: React.FC = () => {
 				<Home />
 			    </UnauthedLayout>
 			)} />
-			<Redirect exact from="/" to="/home" />
+			<Route exact path="/" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
 			
 			<Route exact
 			       path="/login"
@@ -73,7 +73,6 @@ const App: React.FC = () => {
 		    <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
 		    <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
 		    <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
-		    <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
 		    <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
 		    
 		    <Route exact path="/stories/:uuid" render={(props) => (
