@@ -29,7 +29,7 @@ export const RoleSelect: React.FC = () => {
 	    <IonCard>
 		<IonCardHeader>
 		    <IonCardTitle>
-			I am a teacher
+			I am a parent/caregiver
 		    </IonCardTitle>
 		</IonCardHeader>
 		<IonCardContent>

@@ -13,8 +13,10 @@ export type Input = {
     control: Control,
     helperText: string,
     label: string,
+	labelPlacement?: string;
     name: string,
     testId?: string,
+	className?: string,
     type?: 'date' | 'datetime-local' | 'email' | 'month' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week'
 };
 
@@ -22,8 +24,10 @@ export const Input = ({
     control,
     helperText,
     label,
+	labelPlacement="stacked",
     name,
     testId,
+	className,
     type = 'text'
 }: Input): JSX.Element => {
     return (
@@ -40,8 +44,10 @@ export const Input = ({
 		}: any): JSX.Element => (
 		    <IonInput
 			data-testid={testId}
+			className={className}
 			helperText={helperText}
 			label={label}
+			labelPlacement={labelPlacement}
 			onIonInput={onChange}
 			onIonBlur={onBlur}
 			type={type}

@@ -234,3 +234,34 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: #1e1e1e;
   }
 }
+
+ion-button {
+  --background: #D3EAE8;
+  --background-hover: #D3EAE8;
+  --background-activated: #D3EAE8;
+  --background-focused: #D3EAE8;
+
+  --color: #003735;
+
+  --border-radius: 100px;
+
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+  --padding: 18px 16px;
+}
+
+ion-input div.native-wrapper {
+  background: rgba(136, 147, 145, 0.20);
+  border-radius: 16px;
+}
+
+ion-input div.label-text {
+  color: #A1A4B2;
+  font-family: Outfit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%; /* 20px */
+  letter-spacing: 0.48px;
+  padding-bottom: 20px;
+}
