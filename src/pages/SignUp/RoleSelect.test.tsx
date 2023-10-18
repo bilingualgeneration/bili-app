@@ -1,0 +1,27 @@
+import {
+    render,
+    screen,
+    fireEvent,
+    waitFor
+} from '@testing-library/react';
+import {RoleSelect} from '@/pages/SignUp/RoleSelect';
+
+describe('SignUp Page Role Select Slide', () => {
+    render(<RoleSelect />);
+    test('should render', () => {
+	expect(screen.getByTestId('role-select-slide')).toHaveClass('swiper-slide-active');
+    });
+    
+    // todo: add tests to ensure Teacher or Parent roles were clicked
+    test('should slide to Account Credentials', () => {
+	fireEvent.click(screen.getByTestId('role-select-continue-button'));
+	
+	// since SwiperJS uses animation and only applies .swiper-slide-active after animation is done
+	// we need to use waitFor and a sufficiently long enough timeout
+	expect(screen.getByTestId('account-credentials-slide')).toHaveClass('swiper-slide-active');
+    });
+    
+    test('should prevent sliding if no role was selected', () => {
+	// todo: implement
+    });
+});

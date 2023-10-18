@@ -34,6 +34,7 @@
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
     "reactfire": "^4.2.3",
+    "swiper": "^10.3.1",
     "zod": "^3.22.2"
   },
   "devDependencies": {
@@ -58,6 +59,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.14",
     "jsdom": "^22.1.0",
+    "sass": "^1.69.2",
     "storybook": "^7.4.5",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
