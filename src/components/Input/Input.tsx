@@ -12,7 +12,8 @@ import {
 export type Input = {
     control: Control,
     helperText: string,
-    label: string,
+	fill: 'outline' | 'solid',
+    label?: string,
 	labelPlacement?: string;
     name: string,
     testId?: string,
@@ -23,6 +24,7 @@ export type Input = {
 export const Input = ({
     control,
     helperText,
+	fill,
     label,
 	labelPlacement="stacked",
     name,
@@ -46,6 +48,7 @@ export const Input = ({
 			data-testid={testId}
 			className={className}
 			helperText={helperText}
+			fill={fill}
 			label={label}
 			labelPlacement={labelPlacement}
 			onIonInput={onChange}

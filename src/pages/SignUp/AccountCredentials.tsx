@@ -1,6 +1,7 @@
 import {
     IonButton,
     IonCheckbox,
+    IonLabel,
 } from '@ionic/react';
 
 import {Input} from '@/components/Input';
@@ -84,31 +85,33 @@ export const AccountCredentials: React.FC = () => {
     return (
 	<>
         <form className="account-credentials" onSubmit={handleSubmit(data => handleEmailPasswordSignUp(auth, data.name, data.email, data.password, swiper))}>
+            <IonLabel>You name</IonLabel>
             <Input
-                name="name" 
+                name="name"
+                fill="outline"
                 control={control}
-                label="Your name"
-                labelPlacement="stacked"
                 helperText=""
                 testId="account-credentials-name-input"
                 type="text"
             />
             {errors.name && <p>{errors.name.message}</p>}
+
+            <IonLabel>Your email address*</IonLabel>
             <Input
                 name="email"
                 control={control}
-                label="Your email address*"
-                labelPlacement="stacked"
+                fill="outline"
                 helperText=""
                 testId="account-credentials-email-input"
                 type="email"
             />
             {errors.email && <p>{errors.email.message}</p>}
+
+            <IonLabel>Password* (8+ characters)</IonLabel>
             <Input
                 name="password"
                 control={control}
-                label="Password* (8+ characters)"
-                labelPlacement="stacked"
+                fill="outline"
                 helperText=""
                 testId="account-credentials-password-input"
                 type="password"
