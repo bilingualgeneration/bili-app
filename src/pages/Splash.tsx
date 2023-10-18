@@ -1,41 +1,39 @@
 import React from 'react';
 import {
-    IonSpinner
+    IonButton,
+    IonCard,
+    IonCardContent
 } from '@ionic/react';
-import {
-    Redirect
-} from 'react-router';
-
-import {
-    useSigninCheck
-} from 'reactfire';
 
 
-const Splash: React.FC = () => {
-    const {status, data: signinResult} = useSigninCheck();
+export const Splash: React.FC = () => {
 
-    if(status === 'loading'){
-	// still trying to communicate with Firebase
-	// todo: make spinner larger
-	// todo: center spinner on page
-	return (
-	    <>
-		<IonSpinner name='circular'></IonSpinner>
-	    </>
-	);
-    }
-
-    const {signedIn, user} = signinResult;
-
-    // todo: grab full user profile from firestore
-    
-    if(signedIn){
-	// todo: redirect based on user account type
-	return <Redirect to='/student-dashboard' />;
-    }else{
-	return <Redirect to='/login' />;
-    }
-};
-
-export default Splash;
-
+    return(
+	<>
+	    <IonCard>
+		<IonCardContent>
+		    Already have a Bili account?
+		    <IonButton href='/login'>
+			Login
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
+	    <IonCard>
+		<IonCardContent>
+		    New to Bili?
+		    <IonButton href='/sign-up'>
+			Create an account
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
+	    <IonCard>
+		<IonCardContent>
+		    Do you have a classroom code?
+		    <IonButton disabled href='/classroom-code'>
+			Student login
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
+	</>
+    );
+}
