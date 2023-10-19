@@ -22,6 +22,7 @@ describe('SignUp Page Role Select Slide', () => {
     });
     
     test('should prevent sliding if no role was selected', () => {
+	// the continue button should be disabled
 	// todo: implement
     });
 });

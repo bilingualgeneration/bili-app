@@ -9,17 +9,18 @@ import {
 } from 'reactfire';
 
 
+import AuthedLayout from './layouts/Authed';
 import UnauthedLayout from './layouts/Unauthed';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import TeacherLogin from './pages/TeacherLogin';
-import Splash from './pages/Splash';
+import {Preload} from './pages/Preload';
+import {Splash} from './pages/Splash';
 import {SignUp} from './pages/SignUp';
 import StudentDashboard from './pages/StudentDashboard';
 import Stories from './pages/Stories';
 import Journeys from './pages/Journeys';
-import AuthedLayout from './layouts/Authed';
 import Explore from './pages/Explore';
 import Memory from './pages/Memory';
 import Intruder from './pages/Intruder';
@@ -43,6 +44,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/overrides.scss';
 
 /* SwiperJS */
 import 'swiper/scss';
@@ -63,7 +65,12 @@ const App: React.FC = () => {
 				<Home />
 			    </UnauthedLayout>
 			)} />
-			<Redirect exact from="/" to="/home" />
+			<Route exact path="/splash" render={() => (
+			    <UnauthedLayout>
+				<Splash />
+			    </UnauthedLayout>
+			)} />
+			<Route exact path="/" render={() => (<UnauthedLayout><Preload /></UnauthedLayout>)} />
 			
 			<Route exact
 			       path="/login"
@@ -77,7 +84,6 @@ const App: React.FC = () => {
 		    <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
 		    <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
 		    <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
-		    <Route exact path="/splash" render={() => (<UnauthedLayout><Splash /></UnauthedLayout>)} />
 		    <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
 		    
 		    <Route exact path="/stories/:uuid" render={(props) => (
