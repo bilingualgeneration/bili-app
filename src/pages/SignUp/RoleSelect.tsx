@@ -7,6 +7,9 @@ import {
     IonLabel,
     IonItem,
     IonInput,
+	IonCheckbox,
+	IonRadioGroup,
+	IonRadio,
 } from '@ionic/react';
 
 import {
@@ -19,22 +22,31 @@ export const RoleSelect: React.FC = () => {
 	<>
 	    <IonCard>
 		<IonCardHeader>
-		    <IonCardTitle>
-			I am a teacher
-		    </IonCardTitle>
-		</IonCardHeader>
+		    <IonCardTitle>Which best descibes you?</IonCardTitle>
+		</IonCardHeader> 
 		<IonCardContent>
+			<IonRadioGroup value="">
+				<IonRadio value="teacher">I am a teacher</IonRadio>
+				<br />
+				<IonRadio value="parent">I am a parent/caregiver</IonRadio>
+					<br />
+			</IonRadioGroup>
 		</IonCardContent>
 	    </IonCard>
-	    <IonCard>
+
+	    {/* <IonCard>
 		<IonCardHeader>
 		    <IonCardTitle>
-			I am a parent/caregiver
+				<IonRadioGroup value="">
+					<IonRadio value="parent">I am a parent/caregiver</IonRadio>
+					<br />
+				</IonRadioGroup>
 		    </IonCardTitle>
 		</IonCardHeader>
 		<IonCardContent>
 		</IonCardContent>
-	    </IonCard>
+	    </IonCard> */}
+
 	    <IonButton
 		onClick={() => {swiper.slideNext();}}
 		data-testid='role-select-continue-button'
