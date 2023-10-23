@@ -19,6 +19,7 @@ import {useForm, FormProvider} from 'react-hook-form';
 
 const RoleCard: React.FC<{title: string, content: string}> = ({title, content}) => {
 	return <IonCard>
+	<div className='oval-element'></div>
 	<IonCardHeader>
 		<IonCardTitle>
 			{title}
