@@ -58,8 +58,8 @@ export const AccountCredentials: React.FC = () => {
     const {status, data: signinResult} = useSigninCheck();
     const loginSchema = z.object({
         name: z.string().min(1, 'Name is required'),
-	email: z.string().email('ENTER a valid email'),
-	password: z.string().min(5,'Password must be 5 or more characters long')
+        email: z.string().email('ENTER a valid email'),
+        password: z.string().min(5,'Password must be 5 or more characters long')
     });
     const {
       control,
@@ -70,7 +70,6 @@ export const AccountCredentials: React.FC = () => {
     }); 
 
     const swiper = useSwiper();
-    const [showAlert, setShowAlert] = useState(false);
 
     if(status === 'loading'){
         return 
