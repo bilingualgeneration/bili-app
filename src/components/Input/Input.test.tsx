@@ -92,7 +92,7 @@ describe('Input Component', () => {
     });
 
 
-	const types: Array<Input["type"]> = 
+    const types: Array<Input["type"]> = 
 	['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 
 	'tel', 'text', 'time', 'url', 'week'];
     types.forEach(type => {
@@ -110,10 +110,8 @@ describe('Input Component', () => {
             expect(inputElement.getAttribute('type')).toBe(type);
         });
     });
-
+    
 })
-
-
 
 describe('Input Component', () => {
     const schema = z.object({

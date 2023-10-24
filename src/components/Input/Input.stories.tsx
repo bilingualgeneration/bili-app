@@ -4,59 +4,79 @@ import type {
 } from '@storybook/react';
 
 import {
-    IonApp,
-    IonContent,
-    IonItem,
-    IonPage
+    IonItem
 } from '@ionic/react';
+import {
+    SubmitHandler,
+    useForm,
+    useWatch
+} from 'react-hook-form';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+
 import {Input} from './Input';
 
-/* Core CSS required for Ionic components to work properly */
-import "@ionic/react/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
-import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/typography.css";
-
-/* Optional CSS utils that can be commented out */
-import "@ionic/react/css/padding.css";
-import "@ionic/react/css/float-elements.css";
-import "@ionic/react/css/text-alignment.css";
-import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
-
 const meta: Meta<typeof Input> = {
+    argTypes: {
+	control: {
+	    table: {
+		disable: true
+	    }
+	},
+	testId: {
+	    table: {
+		disable: true
+	    }
+	}
+    },
     component: Input,
-    render: (props: Input) => ({
-	props
-    }),
-    decorators: [
-	(Story) => (
-	    <IonApp>
-		<IonPage>
-		    <IonContent className='ion-padding'>
-			<Story />
-		    </IonContent>
-		</IonPage>
-	    </IonApp>
-	)
-    ]
+    render: (props) => {
+	const schema = z.object({
+	    field: z.string()
+		    .min(3)
+		    .max(100)
+	});
+	type schemaType = z.infer<typeof schema>;
+	const {
+	    control,
+	    handleSubmit
+	} = useForm<schemaType>({
+	    mode: 'onChange',
+	    resolver: zodResolver(schema)
+	});
+	const field: string = useWatch({
+	    control,
+	    name: 'field'
+	});
+	return (
+	    <>
+		<Input
+		{...props}
+		    control={control}
+		    name='field'
+		/>
+	    </>
+	);
+    }
 };
 
 export default meta;
-
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-    props: {}
+    args: {
+	counter: true,
+	label: 'label',
+	maxlength: 200,
+	minlength: 10,
+	helperText: 'helper text'
+    }
 }
 
-export const WithLabel: Story = {
-    render: () => <Input label='label' />
-}
-
-export const WithHelperText: Story = {
-    render: () => <Input helperText='helper text' />
+export const AsPassword: Story = {
+    args: {
+	type: 'password',
+	label: 'password',
+	helperText: 'must contain a number and symbol'
+    }
 }
