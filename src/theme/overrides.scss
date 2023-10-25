@@ -34,16 +34,17 @@ ion-button {
 }
 
 
-
+/*
 ion-label {
     color: var(--text-secondary);
     font-size: 16px;
     font-family: Outfit;
     font-weight: 500;
-    line-height: 125%; /* 20px */
+    line-height: 125%;
     letter-spacing: 0.48px;
 }
-
+*/
+ 
 ion-card-title {
   color: var(--Base-Selva);
   font-family: Outfit;
@@ -64,19 +65,21 @@ ion-card-content {
   line-height: 20px; /* 142.857% */
 }
 
+
+
 //styles for input fields
-.ion-page ion-input.input-fill-outline {
+ion-input.input-fill-outline {
   --border-radius: 16px;
   --padding-start: 20px;
   --padding-end: 20px;
-  --padding-top: 14px;
+//  --padding-top: 14px;
   --padding-bottom: 14px;
   --background: rgba(136, 147, 145, 0.20);
   --border-style: solid;
 }
 
 //styles for input fields
-.ion-page ion-input.input-fill-outline.has-focus {
+ion-input.input-fill-outline.has-focus {
   --background: var(--Cielo-Highest);
   --border-color: var(--Base-Selva);
   --border-width: 3px;

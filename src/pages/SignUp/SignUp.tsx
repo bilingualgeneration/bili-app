@@ -37,32 +37,40 @@ export const SignUp: React.FC = () => {
 		<h1>Welcome to Sign Up Page</h1>
 		<IonCard>
 		    <IonCardContent>
-			<IonProgressBar
-			value={progressPercent}
-			color='primary' />
+			<div className='ion-padding'>
+			    <IonProgressBar
+				value={progressPercent}
+				color='primary' />
+			</div>
 			<Swiper
 			    allowTouchMove={false}
 			    onSlideChange={handleSlideChange}>
 			    <SwiperSlide
+				className='ion-padding-top'
 				data-testid='role-select-slide'
 				data-progress-percent='0.1'>
 				<RoleSelect />
 			    </SwiperSlide>
 			    <SwiperSlide
+				className='ion-padding-top'
 				data-testid='account-credentials-slide'
 				data-progress-percent='0.2'>
 				<AccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
+				className='ion-padding-top'
 				data-testid='language-mode-slide'
 				data-progress-percent='0.25'>
 				<LanguageModeSelect />
 			    </SwiperSlide>
-			    <SwiperSlide data-testid='language-inclusivity-slide'
-					 data-progress-percent='0.5'>
+			    <SwiperSlide
+				className='ion-padding-top'
+				data-testid='language-inclusivity-slide'
+				data-progress-percent='0.5'>
 				<LanguageInclusivitySelect />
 			    </SwiperSlide>
 			    <SwiperSlide
+				className='ion-padding-top'
 				data-testid='complete-slide'
 				data-progress-percent='1'>
 				<Complete />
