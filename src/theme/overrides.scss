@@ -91,6 +91,8 @@ ion-card-content {
   line-height: 110%;
 }
 
+// JC: temporarily disabled this since it was interfering with swiperjs
+/*
 ion-card {
   display: flex;
   flex-direction: column;
@@ -100,6 +102,7 @@ ion-card {
   gap: 24px;
   align-self: stretch;
 }
+*/
 
 //styles for the radio-button
 .active ion-card{
