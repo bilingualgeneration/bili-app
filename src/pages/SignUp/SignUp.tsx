@@ -49,6 +49,11 @@ export const SignUp: React.FC = () => {
 				<RoleSelect />
 			    </SwiperSlide>
 			    <SwiperSlide
+				data-testid='account-credentials-slide'
+				data-progress-percent='0.2'>
+				<AccountCredentials />
+			    </SwiperSlide>
+			    <SwiperSlide
 				data-testid='language-mode-slide'
 				data-progress-percent='0.25'>
 				<LanguageModeSelect />
@@ -61,11 +66,6 @@ export const SignUp: React.FC = () => {
 				data-testid='complete-slide'
 				data-progress-percent='1'>
 				<Complete />
-			    </SwiperSlide>
-			    <SwiperSlide
-				data-testid='account-credentials-slide'
-				data-progress-percent='0.2'>
-				<AccountCredentials />
 			    </SwiperSlide>
 			</Swiper>
 		    </IonCardContent>
