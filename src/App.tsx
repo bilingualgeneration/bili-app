@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { IntlProvider, FormattedMessage, FormattedNumber } from 'react-intl';
+import { IntlProvider, FormattedMessage, FormattedNumber, useIntl } from 'react-intl';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import {getAuth} from 'firebase/auth';
 import {
@@ -56,6 +56,8 @@ setupIonicReact();
 const App: React.FC = () => {
     const app = useFirebaseApp();
     const auth = getAuth(app);
+	const { locale } = useIntl();
+
     return (
 	<AuthProvider sdk={auth}>
 		<IntlProvider
