@@ -14,7 +14,7 @@ import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Intruder from './pages/games/Intruder';
 import Journeys from './pages/Journeys';
-import { locales, defaultLocale, flatMessages } from '../i18n';
+import { locales, defaultLocale, intl } from '../i18n';
 import Login from './pages/Login';
 import Memory from './pages/games/Memory';
 import {Preload} from './pages/Preload';
@@ -60,7 +60,7 @@ const App: React.FC = () => {
 	<AuthProvider sdk={auth}>
 		<IntlProvider
 			locale={defaultLocale}
-			messages={flatMessages}
+			messages={intl.messages}
 		>
 			<IonApp>
 				<IonReactRouter>

@@ -1,42 +1,25 @@
+import { createIntl, createIntlCache, IntlShape } from 'react-intl';
+
 // Define the supported locales
-const locales = ['en', 'es', 'es-inc'];
+const locales: string[] = ['en', 'es', 'es-inc'];
 
 // Set the default locale
-const defaultLocale = 'en';
+const defaultLocale: string = 'en';
 
-// Define message translations for each locale
-const messages = {
-  en: {
-    intruderWelcome: 'Welcome to Intruder Page',
-    explore: 'Explore',
-    home: 'Home',
-    // Add more translations for English...
-  },
-  es: {
-    intruderWelcome: 'Bienvenidos a la página de Intruso',
-    explore: 'Explorar',
-    home: 'Inicio',
-    // Add more translations for Spanish...
-  },
-  es_inc: {
-    intruderWelcome: 'Bienvenid@s a la página de Intruso',
-    explore: 'Explorar',
-    home: 'Inicio',
-    // Add more translations for Spanish Inclusive...
-  },
-};
-
-// Function to flatten the nested messages
-const flattenMessages = (nestedMessages: Record<string, string>) => {
-  const flatMessages: Record<string, string> = {};
-  for (const key in nestedMessages) {
-    flatMessages[key] = nestedMessages[key];
+// Function to read JSON translations for a specific locale
+function readTranslations(locale: string) {
+  try {
+    return require(`./lang/${locale}.json`);
+  } catch (error) {
+    console.error(`Translations for ${locale} not found.`);
   }
-  return flatMessages;
-};
+  return {};
+}
 
-// Transform the nested messages to a flat structure
-const flatMessages = flattenMessages(messages[defaultLocale]);
+// Create a cache and an intl object
+const cache = createIntlCache();
+const intl: IntlShape = createIntl({ locale: defaultLocale, messages: readTranslations(defaultLocale) }, cache);
 
-export { locales, defaultLocale, flatMessages };
+export { locales, defaultLocale, intl };
+
 
