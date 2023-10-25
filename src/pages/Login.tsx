@@ -44,7 +44,6 @@ interface FormInputs {
 
 const Login: React.FC = () => {
     const auth = useAuth();
-    const autH = getAuth();
     const {status, data: signinResult} = useSigninCheck();
     const loginSchema = z.object({
       email: z.string().email('ENTER a valid email'),
@@ -78,6 +77,7 @@ const Login: React.FC = () => {
               name="email"
               control={control}
               label="Email"
+              labelPlacement="stacked"
               helperText="Enter a valid email"
               testId="email-login-test"
               type="email"
@@ -88,6 +88,7 @@ const Login: React.FC = () => {
               name="password"
               control={control}
               label="Password"
+              labelPlacement="stacked"
               helperText="Create a password"
               testId="password-login-test"
 	            type="password"

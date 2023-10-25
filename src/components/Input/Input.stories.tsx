@@ -10,6 +10,14 @@ import {
     IonItem,
     IonPage,
 } from '@ionic/react';
+import {
+    SubmitHandler,
+    useForm,
+    useWatch
+} from 'react-hook-form';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+
 import {Input} from './Input';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
@@ -44,7 +52,6 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
-
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
@@ -54,7 +61,7 @@ export const Default: Story = {
 
 export const WithLabel: Story = {
     args: {
-	label: 'field'
+	label: 'label'
     }
 }
 
