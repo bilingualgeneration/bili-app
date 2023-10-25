@@ -14,6 +14,9 @@ import {
 import {
     useSwiper
 } from 'swiper/react';
+import {
+    useSignUpData
+} from '@/pages/SignUp/SignUpContext';
 
 import {useForm, FormProvider} from 'react-hook-form';
 
@@ -45,12 +48,11 @@ const RoleCard: React.FC<{title: string, content: string, icon: React.ReactNode}
 }
 
 export const RoleSelect: React.FC = () => {
-	const form = useForm<{role: string}>(); 
+    const form = useForm<{role: string}>();
+    const {data, setData} = useSignUpData();
     const { control, handleSubmit, formState } = form;
-	
+    
     const swiper = useSwiper();
-
-	
 	const teacherOption: ExtendedRadioOption = {
 			component: <div><RoleCard
 			title='Teacher'
@@ -71,9 +73,13 @@ export const RoleSelect: React.FC = () => {
 		
 	};
 
-	const onSubmit = handleSubmit((data) => { //add logic where to store user's choice
+    const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
+	setData({
+	    ...data,
+	    ...responses
+	});
         swiper.slideNext();
-	})
+    })
 
 	// TODO: how do we validate it with the form hook?
 	const isValid = !!form.watch('role');

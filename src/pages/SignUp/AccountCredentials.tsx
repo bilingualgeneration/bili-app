@@ -1,3 +1,6 @@
+// JC: removing account creation related code
+// JC: this will be implemented elsewhere
+
 import {
     IonButton,
     IonCheckbox,
@@ -13,21 +16,7 @@ import {
 
 import { date, z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-    Auth,
-    GoogleAuthProvider,
-    createUserWithEmailAndPassword,
-} from 'firebase/auth';
-import {
-    getFirestore,
-    collection,
-    addDoc
-} from 'firebase/firestore';
-import {
-    useAuth,
-    useSigninCheck
-} from 'reactfire';
-import { useState } from 'react';
+import {useSignUpData} from '@/pages/SignUp/SignUpContext';
 
 import "./AccountCredentials.css"
 
@@ -37,93 +26,114 @@ interface FormInputs {
     password: string;
 }
 
-const handleEmailPasswordSignUp = async (
-    auth: Auth, 
-    name: string,
-    email: string, 
-    password: string, 
-    swiper: any) => {
-    try {        
-        await createUserWithEmailAndPassword(auth, email, password);
-        console.log("User signed up successfully: " , email)
+
+// JC: cleaned up, will delete this block
+/*
+   const handleEmailPasswordSignUp = async (
+   auth: Auth, 
+   name: string,
+   email: string, 
+   password: string, 
+   swiper: any) => {
+
+   swiper.slideNext();
+
+   try {        
+   await createUserWithEmailAndPassword(auth, email, password);
+   console.log("User signed up successfully: " , email)
    
-        swiper.slideNext();
-    } catch (error) {
-        console.error("Error signing in with email and password:", error);
-    }
-  };
+   swiper.slideNext();
+   } catch (error) {
+   console.error("Error signing in with email and password:", error);
+   }
+   };
+ */
+
+// todo: expand Input to include checkbox
 
 export const AccountCredentials: React.FC = () => {
-    const auth = useAuth();
-    const {status, data: signinResult} = useSigninCheck();
-    const loginSchema = z.object({
+    const {data, setData} = useSignUpData();
+    const swiper = useSwiper();
+    const credentialsSchema = z.object({
         name: z.string().min(1, 'Name is required'),
         email: z.string().email('ENTER a valid email'),
-        password: z.string().min(5,'Password must be 5 or more characters long')
+        password: z.string().min(5,'Password must be 5 or more characters long'),
+	//tos: z.boolean(), // todo: make this required to be true
+	//marketingUpdates: z.boolean()
     });
 
-    const form = useForm<FormInputs>({
-        mode: 'onChange',
-        resolver: zodResolver(loginSchema)
-    }); 
     const {
       control,
       handleSubmit,
       formState: { errors, isValid},
-    } = form
-
+    } = useForm<FormInputs>({
+        mode: 'onChange',
+        resolver: zodResolver(credentialsSchema)
+    });
+    
     const swiper = useSwiper();
 
-    if(status === 'loading'){
-        return 
-          <div>
-            Loading...
-          </div>;
-      }
+    const onSubmit = handleSubmit((response) => {
+	setData({
+	    ...data,
+	    ...response
+	});
+	swiper.slideNext();
+    });
 
     return (
 	<>
-        <form className="account-credentials" onSubmit={handleSubmit(data => handleEmailPasswordSignUp(auth, data.name, data.email, data.password, swiper))}>
-            <IonLabel>You name</IonLabel>
-            <Input
-                name="name"
-                fill="outline"
-                control={control}
-                helperText=""
-                testId="account-credentials-name-input"
-                type="text"
-            />
-            {errors.name && <p>{errors.name.message}</p>}
+            <form
+		className="account-credentials"
+		onSubmit={onSubmit}>
+		<Input
+                    name="name"
+		label='Your Name'
+		labelPlacement='stacked'
+                    fill="outline"
+                    control={control}
+                    helperText=""
+                    testId="account-credentials-name-input"
+                    type="text"
+		/>
 
-            <IonLabel>Your email address*</IonLabel>
-            <Input
-                name="email"
-                control={control}
-                fill="outline"
-                helperText=""
-                testId="account-credentials-email-input"
-                type="email"
-            />
-            {errors.email && <p>{errors.email.message}</p>}
+		<Input
+		label='Your email address'
+		labelPlacement='stacked'
+		required={true}
+                    name="email"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="account-credentials-email-input"
+                    type="email"
+		/>
 
-            <IonLabel>Password* (8+ characters)</IonLabel>
-            <Input
-                name="password"
-                control={control}
-                fill="outline"
-                helperText=""
-                testId="account-credentials-password-input"
-                type="password"
-            />
-            {errors.email && <p>{errors.email.message}</p>}
+		<Input
+		label='Password* (8+ characters)'
+		labelPlacement='stacked'
+		required={true}
+                    name="password"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="account-credentials-password-input"
+                    type="password"
+		/>
 
-            <IonCheckbox labelPlacement="end" alignment="start" justify="start">
-                <span className="checkbox-label">Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy</span>
-            </IonCheckbox>
+		<IonCheckbox
+		    labelPlacement="end"
+		    alignment="start"
+		    justify="start">
+                    <span className="checkbox-label">Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy</span>
+		</IonCheckbox>
 
-            <IonCheckbox labelPlacement="end" alignment="start" justify="start">
-                <span className="checkbox-label">I want to receive marketing updates</span>
-            </IonCheckbox>
+		<IonCheckbox
+		    labelPlacement="end"
+		    alignment="start"
+		    justify="start">
+                    <span className="checkbox-label">I want to receive marketing updates</span>
+		</IonCheckbox>
 
             <IonButton 
                 expand="block" 
