@@ -26,6 +26,8 @@ import Memory from './pages/Memory';
 import Intruder from './pages/Intruder';
 import StoryFactory from './pages/StoryFactory';
 
+import {SignUpDataProvider} from '@/pages/SignUp/SignUpContext';
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -84,7 +86,11 @@ const App: React.FC = () => {
 		    <Route exact path="/reset-password" render={() => (<UnauthedLayout><ResetPassword /></UnauthedLayout>)} />
 		    <Route exact path="/teacher-login" render={() => (<UnauthedLayout><TeacherLogin /></UnauthedLayout>)} />
 		    <Route exact path="/student-dashboard" render={() => (<UnauthedLayout><StudentDashboard /></UnauthedLayout>)} />
-		    <Route exact path="/sign-up" render={() => (<UnauthedLayout><SignUp /></UnauthedLayout>)} />
+		    <Route exact path="/sign-up" render={() => (<UnauthedLayout>
+			<SignUpDataProvider>
+			    <SignUp />
+			</SignUpDataProvider>
+		    </UnauthedLayout>)} />
 		    
 		    <Route exact path="/stories/:uuid" render={(props) => (
 			<UnauthedLayout>
