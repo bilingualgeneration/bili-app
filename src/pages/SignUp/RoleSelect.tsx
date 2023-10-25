@@ -17,17 +17,30 @@ import {
 
 import {useForm, FormProvider} from 'react-hook-form';
 
-const RoleCard: React.FC<{title: string, content: string}> = ({title, content}) => {
+import HouseIcon from '../../assets/icons/house.svg';
+import SchoolIcon from '../../assets/icons/school.svg';
+
+
+import "./RoleSelect.css";
+
+const RoleCard: React.FC<{title: string, content: string, icon: React.ReactNode}> = ({title, content, icon}) => {
 	return <IonCard>
-	<div className='oval-element'></div>
-	<IonCardHeader>
-		<IonCardTitle>
-			{title}
-		</IonCardTitle>
-	</IonCardHeader>
-	<IonCardContent>
-		{content}
-	</IonCardContent>
+	<div className='card-inner'>
+		<div className='oval-element'>
+			{icon}
+		</div>
+		<div className='title-content'>
+			<IonCardHeader class='custom-ion-header'>
+				<IonCardTitle>
+					{title}
+				</IonCardTitle>
+			</IonCardHeader>
+			<IonCardContent>
+				{content}
+			</IonCardContent>
+		</div>
+		
+	</div>
 </IonCard>
 }
 
@@ -42,6 +55,7 @@ export const RoleSelect: React.FC = () => {
 			component: <div><RoleCard
 			title='Teacher'
 			content='I want to use this app with my students'
+			icon={<SchoolIcon/>}
 		/></div>,
 			value: 'teacher',
 		
@@ -51,6 +65,7 @@ export const RoleSelect: React.FC = () => {
 		component: <div><RoleCard
 				title='Parent/Caregiver'
 				content='I want to use this app with my child(ren)'
+				icon={<HouseIcon/>}
 			/></div>,
 			value: 'parent',
 		
@@ -65,7 +80,7 @@ export const RoleSelect: React.FC = () => {
         
     return (
 	<>
-		<form onSubmit={onSubmit}>
+		<form onSubmit={onSubmit} className='role-select'>
 			<h1>
 				Which best describes you?
 			</h1>

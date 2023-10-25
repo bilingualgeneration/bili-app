@@ -61,24 +61,25 @@ export const AccountCredentials: React.FC = () => {
         email: z.string().email('ENTER a valid email'),
         password: z.string().min(5,'Password must be 5 or more characters long')
     });
+
+    const form = useForm<FormInputs>({
+        mode: 'onChange',
+        resolver: zodResolver(loginSchema)
+    }); 
     const {
       control,
       handleSubmit,
-      formState: { errors },
-    } = useForm<FormInputs>({
-        resolver: zodResolver(loginSchema)
-    }); 
+      formState: { errors, isValid},
+    } = form
 
     const swiper = useSwiper();
 
     if(status === 'loading'){
         return 
-          <>
-            loading
-          </>;
+          <div>
+            Loading...
+          </div>;
       }
-
-   
 
     return (
 	<>
@@ -124,7 +125,12 @@ export const AccountCredentials: React.FC = () => {
                 <span className="checkbox-label">I want to receive marketing updates</span>
             </IonCheckbox>
 
-            <IonButton expand="block" type="submit" data-testid="account-credentials-continue-button">
+            <IonButton 
+                expand="block" 
+                type="submit" 
+                data-testid="account-credentials-continue-button"
+                disabled={!isValid}
+            >
                 Continue
             </IonButton>
         </form>
