@@ -70,8 +70,6 @@ export const AccountCredentials: React.FC = () => {
         mode: 'onChange',
         resolver: zodResolver(credentialsSchema)
     });
-    
-    const swiper = useSwiper();
 
     const onSubmit = handleSubmit((response) => {
 	setData({
