@@ -18,7 +18,6 @@ import {
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
-    Control,
     SubmitHandler,
     useForm
 } from 'react-hook-form';
@@ -93,7 +92,7 @@ describe('Input Component', () => {
     });
 
 
-	const types: Array<Input["type"]> = 
+    const types: Array<Input["type"]> = 
 	['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 
 	'tel', 'text', 'time', 'url', 'week'];
     types.forEach(type => {
@@ -111,10 +110,8 @@ describe('Input Component', () => {
             expect(inputElement.getAttribute('type')).toBe(type);
         });
     });
-
+    
 })
-
-
 
 describe('Input Component', () => {
     const schema = z.object({
@@ -127,9 +124,9 @@ describe('Input Component', () => {
     } = renderHook(() => useForm<schemaType>({
 	resolver: zodResolver(schema)
     }));
-    const control: Control<schemaType> = result.current.control;
+    const control: Control = result.current.control;
     
-    beforeEach(async (): Promise<void> => {
+    beforeEach(async (): void => {
 	// reset the form values for each test
 	// need to wrap in act() because reset() alters react state
 	await act(
@@ -154,22 +151,12 @@ describe('Input Component', () => {
 		<button type='submit'></button>
 	    </form>
 	);
-
-	const inputElement: JSX. Element | null = container.querySelector('input');
-	if(inputElement !== null){
-	    fireEvent.change(
-		inputElement!,
-		{target: {value: 'abc'}}
-	    );
-	}else{
-	    // todo: error handling
-	}
-
-	const submitElement: JSX.Element | null = container.querySelector(`[type='submit']`);
-	if(submitElement !== null){
-	    fireEvent.click(submitElement as JSX.Element);
-	}else{
-	    // todo: error handling
-	}
+	fireEvent.change(
+	    container.querySelector('input'),
+	    {target: {value: 'abc'}}
+	);
+	fireEvent.click(
+	    container.querySelector(`[type='submit']`)
+	);
     });
 });

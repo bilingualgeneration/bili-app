@@ -110,7 +110,10 @@ const Login: React.FC = () => {
             Sign Out
           </IonButton>
 
-        </form>
+      </form>
+      <IonButton href='/sign-up'>
+	  Don't have an account yet? Sign Up!
+      </IonButton>
 	</>
     );
 };

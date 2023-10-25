@@ -1,16 +1,39 @@
 import React from 'react';
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+    IonButton,
+    IonCard,
+    IonCardContent
+} from '@ionic/react';
 
-const Splash: React.FC = () => {
-  console.log('Rendering Splash component');
-    return (
+
+export const Splash: React.FC = () => {
+
+    return(
 	<>
-		<h1>Welcome to Splash Page</h1>
-		<IonButton routerLink="/sign-up" className="sign-up-button" data-cy="sign_up">Sign Up</IonButton>
-		<IonButton routerLink="/login" className="sign-in-button" data-cy="sign_in">Sign In</IonButton>
+	    <IonCard>
+		<IonCardContent>
+		    Already have a Bili account?
+		    <IonButton href='/login'>
+			Login
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
+	    <IonCard>
+		<IonCardContent>
+		    New to Bili?
+		    <IonButton href='/sign-up'>
+			Create an account
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
+	    <IonCard>
+		<IonCardContent>
+		    Do you have a classroom code?
+		    <IonButton disabled href='/classroom-code'>
+			Student login
+		    </IonButton>
+		</IonCardContent>
+	    </IonCard>
 	</>
-  );
-};
-
-export default Splash;
-
+    );
+}

@@ -2,28 +2,41 @@
 http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
+
+
+
+
 :root {
-  /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+    /** color names **/
+    --Base-Barro: #889391;
+    --Base-Selva: #006A67;
+    
+    --Cielo-Cielo: #D3EAE8;
+    --Cielo-Highest: #F2FFFD;
+    --Cielo-Lowest: #003735;
 
-  /** secondary **/
-  --ion-color-secondary: #3dc2ff;
-  --ion-color-secondary-rgb: 61, 194, 255;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
-
-  /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    
+    /** primary **/
+    --ion-color-primary: var(--Base-Selva);
+    --ion-color-primary-rgb: 0,106,103;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255,255,255;
+    --ion-color-primary-shade: #005d5b;
+    --ion-color-primary-tint: #1a7976;
+    
+    /** secondary **/
+    --ion-color-secondary: #D3EAE8;
+    --ion-color-secondary-rgb: 211,234,232;
+    --ion-color-secondary-contrast: #003735;
+    --ion-color-secondary-contrast-rgb: 0,55,53;
+    --ion-color-secondary-shade: #bacecc;
+    --ion-color-secondary-tint: #d7ecea;
+    
+    /** tertiary **/
+    --ion-color-tertiary: #5260ff;
+    --ion-color-tertiary-rgb: 82, 96, 255;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
   --ion-color-tertiary-shade: #4854e0;
   --ion-color-tertiary-tint: #6370ff;
 
@@ -74,9 +87,11 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --text-secondary: #A1A4B2;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: darkx) {
   /*
    * Dark Colors
    * -------------------------------------------
@@ -233,48 +248,4 @@ http://ionicframework.com/docs/theming/ */
 
     --ion-card-background: #1e1e1e;
   }
-}
-
-ion-button {
-  --background: #D3EAE8;
-  --background-hover: #D3EAE8;
-  --background-activated: #D3EAE8;
-  --background-focused: #D3EAE8;
-
-  --color: #003735;
-
-  --border-radius: 100px;
-
-  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
-
-  --padding: 18px 16px;
-}
-
-ion-label {
-  color: #A1A4B2;
-  font-size: 16px;
-}
-
-.ion-page ion-input.input-fill-outline {
-  --border-radius: 16px;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
-  --background: rgba(136, 147, 145, 0.20);
-  --border-style: solid;
-}
-
-.ion-page ion-input.input-fill-outline.has-focus {
-  --background: #F2FFFD;
-  --border-color: #006A67;
-  --border-width: 3px;
-}
-
-/* 
-  .swiper-slides apply text-align: center
-  reset it, since it affects pages we render in slides
-*/
-.swiper-slide > * {
-  text-align: initial;
 }
