@@ -26,7 +26,7 @@ async function readTranslations(locale: string) {
   return {};
 }
 
-// Create a cache and an intl object
+// Create a cache and an intl object to handle formatting of dates, numbers, and messages based on locale (caches results of formatting options)
 const cache = createIntlCache();
 const intl: IntlShape = createIntl(
   { locale: defaultLocale, messages: await readTranslations(defaultLocale) },
