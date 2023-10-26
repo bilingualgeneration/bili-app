@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { IntlProvider, FormattedMessage, FormattedNumber, useIntl } from 'react-intl';
@@ -14,7 +14,8 @@ import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Intruder from './pages/games/Intruder';
 import Journeys from './pages/Journeys';
-import { locales, defaultLocale, intl } from '../i18n';
+import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
+import { locales, defaultLocale, intl, readTranslations} from '../i18n';
 import Login from './pages/Login';
 import Memory from './pages/games/Memory';
 import {Preload} from './pages/Preload';
@@ -57,11 +58,27 @@ const App: React.FC = () => {
     const app = useFirebaseApp();
     const auth = getAuth(app);
 
+	const [locale, setLocale] = useState(defaultLocale);
+	const [translations, setTranslations] = useState(intl.messages);
+
+	useEffect(() => {
+		readTranslations(locale).then((newTranslations) => {
+			setTranslations(newTranslations);
+		});
+	}, [locale]);
+
+	const handleLocaleChange = (newLocale: string) => {
+		console.log(`Changing language to ${newLocale}`)
+	  setLocale(newLocale);
+	  console.log(`new Locale: ${locale}`);
+	//   console.log(newLocale);
+	};  
+
     return (
 	<AuthProvider sdk={auth}>
 		<IntlProvider
-			locale={defaultLocale}
-			messages={intl.messages}
+			locale={locale}
+			messages={translations}
 		>
 			<IonApp>
 				<IonReactRouter>
@@ -86,6 +103,7 @@ const App: React.FC = () => {
 
 						<Route exact path="/intruder" render={() => (
 							<UnauthedLayout>
+								<LanguageSwitcher onLocaleChange={handleLocaleChange} />
 								<Intruder />
 							</UnauthedLayout>
 						)} />

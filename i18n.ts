@@ -4,7 +4,7 @@ import { createIntl, createIntlCache, IntlShape } from 'react-intl';
 const locales: string[] = ['en', 'es', 'es-inc'];
 
 // Set the default locale
-const defaultLocale: string = 'es';
+const defaultLocale: string = 'en';
 
 // Create a cache object for translations
 const translationsCache: { [locale: string]: Promise<Record<string, string>> } = {};
@@ -33,6 +33,6 @@ const intl: IntlShape = createIntl(
    cache
 );
 
-export { locales, defaultLocale, intl };
+export { locales, defaultLocale, intl, readTranslations};
 
 
