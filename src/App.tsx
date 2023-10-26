@@ -56,7 +56,6 @@ setupIonicReact();
 const App: React.FC = () => {
     const app = useFirebaseApp();
     const auth = getAuth(app);
-	const { locale } = useIntl();
 
     return (
 	<AuthProvider sdk={auth}>

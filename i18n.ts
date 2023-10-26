@@ -7,18 +7,18 @@ const locales: string[] = ['en', 'es', 'es-inc'];
 const defaultLocale: string = 'en';
 
 // Function to read JSON translations for a specific locale
-function readTranslations(locale: string) {
+async function readTranslations(locale: string) {
   try {
-    return require(`./lang/${locale}.json`);
+    return await import(`./lang/${locale}.json`);
   } catch (error) {
-    console.error(`Translations for ${locale} not found.`);
+    console.error(`Translations for ${locale} not found. ${error}`);
   }
   return {};
 }
 
 // Create a cache and an intl object
 const cache = createIntlCache();
-const intl: IntlShape = createIntl({ locale: defaultLocale, messages: readTranslations(defaultLocale) }, cache);
+const intl: IntlShape = createIntl({ locale: defaultLocale, messages: await readTranslations(defaultLocale) }, cache);
 
 export { locales, defaultLocale, intl };
 
