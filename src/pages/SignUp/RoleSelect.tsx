@@ -24,11 +24,14 @@ import HouseIcon from '@/assets/icons/house.svg?react';
 import SchoolIcon from '@/assets/icons/school.svg?react';
 
 import "./RoleSelect.css";
+import { string } from 'zod';
+import { CollectionReference } from 'firebase/firestore';
 
-const RoleCard: React.FC<{title: string, content: string, icon: React.ReactNode}> = ({title, content, icon}) => {
+const RoleCard: React.FC<{title: string, content: string, icon: React.ReactNode, iconBackgroundColor: string}
+> = ({title, content, icon, iconBackgroundColor}) => {
     return <IonCard>
 	<div className='card-inner'>
-	    <div className='oval-element'>
+	    <div className='oval-element' style={{backgroundColor: iconBackgroundColor}}>
 			{icon}
 	    </div>
 	    <div className='title-content'>
@@ -58,7 +61,8 @@ export const RoleSelect: React.FC = () => {
 		<RoleCard
 			title='Teacher'
 			content='I want to use this app with my students'
-			icon={<SchoolIcon/>}	
+			icon={<SchoolIcon/>}
+			iconBackgroundColor='var(--Cielo-Cielo)'	
 	    />
 	</div>,
 	value: 'teacher',
@@ -72,6 +76,7 @@ export const RoleSelect: React.FC = () => {
 			title='Parent/Caregiver'
 			content='I want to use this app with my child(ren)'
 			icon={<HouseIcon/>}
+			iconBackgroundColor='var(--Desierto-Highest)'
 	    />
 	</div>,
 	value: 'parent',
