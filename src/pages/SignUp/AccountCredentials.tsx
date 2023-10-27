@@ -81,66 +81,71 @@ export const AccountCredentials: React.FC = () => {
 
     return (
 	<>
-            <form
-		className="account-credentials"
-		onSubmit={onSubmit}>
-		<Input
-                    name="name"
-		label='Your Name'
-		labelPlacement='stacked'
-                    fill="outline"
-                    control={control}
-                    helperText=""
-                    testId="account-credentials-name-input"
-                    type="text"
-		/>
+        <form
+            className="account-credentials"
+            onSubmit={onSubmit}
+        >
+            <Input
+                name="name"
+                label='Your Name'
+                labelPlacement='stacked'
+                fill="outline"
+                control={control}
+                helperText=""
+                testId="account-credentials-name-input"
+                type="text"
+            />
 
-		<Input
-		label='Your email address'
-		labelPlacement='stacked'
-		required={true}
-                    name="email"
-                    control={control}
-                    fill="outline"
-                    helperText=""
-                    testId="account-credentials-email-input"
-                    type="email"
-		/>
+            <Input
+                label='Your email address'
+                labelPlacement='stacked'
+                required={true}
+                name="email"
+                control={control}
+                fill="outline"
+                helperText=""
+                testId="account-credentials-email-input"
+                type="email"
+            />
 
-		<Input
-		label='Password* (8+ characters)'
-		labelPlacement='stacked'
-		required={true}
-                    name="password"
-                    control={control}
-                    fill="outline"
-                    helperText=""
-                    testId="account-credentials-password-input"
-                    type="password"
-		/>
+            <Input
+                label='Password* (8+ characters)'
+                labelPlacement='stacked'
+                required={true}
+                name="password"
+                control={control}
+                fill="outline"
+                helperText=""
+                testId="account-credentials-password-input"
+                type="password"
+            />
 
-		<IonCheckbox
-		    labelPlacement="end"
-		    alignment="start"
-		    justify="start">
-                    <span className="checkbox-label">Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy</span>
-		</IonCheckbox>
+            <IonCheckbox
+                labelPlacement="end"
+                alignment="start"
+                justify="start">
+                <span className="checkbox-label">
+                    Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy
+                </span>
+            </IonCheckbox>
 
-		<IonCheckbox
-		    labelPlacement="end"
-		    alignment="start"
-		    justify="start">
-                    <span className="checkbox-label">I want to receive marketing updates</span>
-		</IonCheckbox>
+            <IonCheckbox
+                labelPlacement="end"
+                alignment="start"
+                justify="start">
+                <span className="checkbox-label">
+                    I want to receive marketing updates
+                </span>
+            </IonCheckbox>
 
-            <IonButton 
-                expand="block" 
-                type="submit" 
-                data-testid="account-credentials-continue-button"
-                disabled={!isValid}
-            >
-                Continue
-            </IonButton>
+                <IonButton 
+                    expand="block" 
+                    type="submit" 
+                    data-testid="account-credentials-continue-button"
+                    disabled={!isValid}
+                >
+                    Continue
+                </IonButton>
         </form>
 	</>
     );

@@ -33,7 +33,7 @@ ion-button {
 }
 
 
-/*
+
 ion-label {
     color: var(--text-secondary);
     font-size: 16px;
@@ -42,7 +42,7 @@ ion-label {
     line-height: 125%;
     letter-spacing: 0.48px;
 }
-*/
+
  
 ion-card-title {
   color: var(--Base-Selva);
@@ -95,7 +95,7 @@ ion-input.input-fill-outline.has-focus {
 }
 
 // JC: temporarily disabled this since it was interfering with swiperjs
-/*
+
 ion-card {
   display: flex;
   flex-direction: column;
@@ -105,7 +105,7 @@ ion-card {
   gap: 24px;
   margin-bottom: 16px;
 }
-*/
+
 
 //styles for the radio-button
 
@@ -117,13 +117,18 @@ ion-card {
   box-shadow: 0 0 0 3px var(--Base-Selva);
 }
 
+//styles for the circle with svg icon
 .oval-element {
   width: 75px;
   height: 75px;
   flex-shrink: 0;
   border-radius: 50%; 
-  display: inline-block;
+  display: flex;
   background-color: var(--Cielo-Cielo);
+
+  svg {
+    margin: auto;
+  }
 }
 
 .card-inner {
