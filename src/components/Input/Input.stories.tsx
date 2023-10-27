@@ -67,8 +67,7 @@ export const Default: Story = {
     args: {
 	counter: true,
 	label: 'label',
-	maxlength: 200,
-	minlength: 10,
+	maxlength: 20,
 	helperText: 'helper text'
     }
 }
