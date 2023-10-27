@@ -52,7 +52,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import './theme/overrides.scss';
 
 /* SwiperJS */
 import 'swiper/scss';
@@ -130,7 +129,6 @@ const App: React.FC = () => {
 				<Splash />
 			    </UnauthedLayout>
 			)} />
-
 			<Route exact path="/stories/:uuid" render={(props) => (
 			    <UnauthedLayout>
 				<Stories id={props.match.params.uuid} />

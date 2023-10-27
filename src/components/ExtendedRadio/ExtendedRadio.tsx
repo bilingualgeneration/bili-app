@@ -1,6 +1,5 @@
 import {
     createElement,
-    FC,
     Fragment,
     JSX,
     useState
@@ -19,21 +18,21 @@ export type ExtendedRadioOption = {
 
 // todo: add clear button?
 export type ExtendedRadioProps = {
-    activeClass?: string,
-    control: Control,
+    activeClassName?: string,
+    control: Control<any>,
     disabledClass?: string,
     name: string,
     options: ExtendedRadioOption[]
 }
 
-export const ExtendedRadio: FC = ({
+export const ExtendedRadio = ({
     activeClassName = 'active',
     control,
     disabledClass = 'disabled',
     name,
     options
-}: ExtendedRadioProps) => {
-    const [activeIndex, setActiveIndex] = useState(null);
+}: ExtendedRadioProps): JSX.Element => {
+    const [activeIndex, setActiveIndex] = useState(-1);
     const handleClick = (index: number): void => {
 	setActiveIndex(index);
     };
