@@ -11,11 +11,11 @@ const root = createRoot(container!);
 root.render(
     <React.StrictMode>
 	<FirebaseWrapper>
-	    <I18nWrapper>
-		<ProfileContextProvider>
+	    <ProfileContextProvider> {/* profile needs to be loaded first because of dependencies*/}
+		<I18nWrapper>
 		    <App />
-		</ProfileContextProvider>
-	    </I18nWrapper>
+		</I18nWrapper>
+	    </ProfileContextProvider>
 	</FirebaseWrapper>
     </React.StrictMode>
 );
