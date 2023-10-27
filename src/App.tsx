@@ -1,21 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { IntlProvider, FormattedMessage, FormattedNumber, useIntl } from 'react-intl';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import {
+    IonApp,
+    IonRouterOutlet,
+    setupIonicReact
+} from '@ionic/react';
+import {IonReactRouter} from '@ionic/react-router';
+import {
+    Redirect,
+    Route,
+    Switch
+} from 'react-router-dom';
+import {useProfile} from '@/contexts/ProfileContext';
 import {getAuth} from 'firebase/auth';
 import {
     AuthProvider,
     useFirebaseApp
 } from 'reactfire';
-
+import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 import AuthedLayout from './layouts/Authed';
 import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Intruder from './pages/games/Intruder';
 import Journeys from './pages/Journeys';
-import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
-import { locales, defaultLocale, intl, readTranslations} from '../i18n';
 import Login from './pages/Login';
 import Memory from './pages/games/Memory';
 import {Preload} from './pages/Preload';
@@ -58,119 +64,99 @@ const App: React.FC = () => {
     const app = useFirebaseApp();
     const auth = getAuth(app);
 
-	const [locale, setLocale] = useState(defaultLocale);
-	const [translations, setTranslations] = useState(intl.messages);
-
-	useEffect(() => {
-		readTranslations(locale).then((newTranslations) => {
-			setTranslations(newTranslations);
-		});
-	}, [locale]);
-
-	const handleLocaleChange = (newLocale: string) => {
-		console.log(`Changing language to ${newLocale}`)
-	  setLocale(newLocale);
-	  console.log(`new Locale: ${locale}`);
-	//   console.log(newLocale);
-	};  
-
+    
     return (
 	<AuthProvider sdk={auth}>
-		<IntlProvider
-			locale={locale}
-			messages={translations}
-		>
-			<IonApp>
-				<IonReactRouter>
-					<Switch>
-						<Route exact path="/explore" render={() => (
-							<UnauthedLayout>
-								<Explore />
-							</UnauthedLayout>
-						)} />
+	    <IonApp>
+		<IonReactRouter>
+		    <Switch>
+			<Route exact path="/explore" render={() => (
+			    <UnauthedLayout>
+				<Explore />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/home" render={() => (
-							<UnauthedLayout>
-								<Home />
-							</UnauthedLayout>
-						)} />
-						
-						<Route exact path="/" render={() => (
-							<UnauthedLayout>
-								<Preload />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/home" render={() => (
+			    <UnauthedLayout>
+				<Home />
+			    </UnauthedLayout>
+			)} />
+			
+			<Route exact path="/" render={() => (
+			    <UnauthedLayout>
+				<Preload />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/intruder" render={() => (
-							<UnauthedLayout>
-								<LanguageSwitcher onLocaleChange={handleLocaleChange} />
-								<Intruder />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/intruder" render={() => (
+			    <UnauthedLayout>
+				<LanguageSwitcher />
+				<Intruder />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/journeys" render={() => (
-							<UnauthedLayout>
-								<Journeys />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/journeys" render={() => (
+			    <UnauthedLayout>
+				<Journeys />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/login" render={() => (
-							<UnauthedLayout>
-								<Login />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/login" render={() => (
+			    <UnauthedLayout>
+				<Login />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/memory" render={() => (
-							<UnauthedLayout>
-								<Memory />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/memory" render={() => (
+			    <UnauthedLayout>
+				<Memory />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/reset-password" render={() => (
-							<UnauthedLayout>
-								<ResetPassword />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/reset-password" render={() => (
+			    <UnauthedLayout>
+				<ResetPassword />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/sign-up" render={() => (
-							<UnauthedLayout>
-								<SignUp />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/sign-up" render={() => (
+			    <UnauthedLayout>
+				<SignUp />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/splash" render={() => (
-							<UnauthedLayout>
-								<Splash />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/splash" render={() => (
+			    <UnauthedLayout>
+				<Splash />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/stories/:uuid" render={(props) => (
-							<UnauthedLayout>
-								<Stories id={props.match.params.uuid} />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/stories/:uuid" render={(props) => (
+			    <UnauthedLayout>
+				<Stories id={props.match.params.uuid} />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/story-factory" render={() => (
-							<UnauthedLayout>
-								<StoryFactory />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/story-factory" render={() => (
+			    <UnauthedLayout>
+				<StoryFactory />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/student-dashboard" render={() => (
-							<UnauthedLayout>
-								<StudentDashboard />
-							</UnauthedLayout>
-						)} />
+			<Route exact path="/student-dashboard" render={() => (
+			    <UnauthedLayout>
+				<StudentDashboard />
+			    </UnauthedLayout>
+			)} />
 
-						<Route exact path="/teacher-login" render={() => (
-							<UnauthedLayout>
-								<TeacherLogin />
-							</UnauthedLayout>
-						)} />
-					</Switch>
-				</IonReactRouter>
-			</IonApp>
-		</IntlProvider>
+			<Route exact path="/teacher-login" render={() => (
+			    <UnauthedLayout>
+				<TeacherLogin />
+			    </UnauthedLayout>
+			)} />
+		    </Switch>
+		</IonReactRouter>
+	    </IonApp>
 	</AuthProvider>
     );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import { IonButton, IonItem } from '@ionic/react';
-import {useAuth} from '../contexts/useAuth';
 
 const StudentDashboard: React.FC = () => {
   return (
