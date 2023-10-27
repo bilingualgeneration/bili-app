@@ -18,7 +18,7 @@ import Login from './pages/Login';
 import Memory from './pages/games/Memory';
 import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
-import Splash from './pages/Splash';
+import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
 import StoryFactory from './pages/games/StoryFactory';
 import StudentDashboard from './pages/StudentDashboard';
