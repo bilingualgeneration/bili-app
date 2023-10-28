@@ -1,4 +1,10 @@
 import {
+    beforeEach,
+    describe,
+    it
+} from 'vitest';
+
+import {
     render,
     screen,
     fireEvent,
@@ -11,11 +17,11 @@ describe('Language Inclusivity Slide', () => {
 	render(<LanguageInclusivitySelect />);
     });
     
-    test('should render', () => {
+    it('should render', () => {
 	//expect(screen.getByTestId('language-inclusivity-slide')).toBeDefined();	    
     });
     
-    test('should slide to Success', async () => {
+    it('should slide to Success', async () => {
 	//fireEvent.click(screen.getByTestId('language-inclusivity-continue-button'));
     });
 });

@@ -1,6 +1,5 @@
 import {IntlProvider} from 'react-intl';
 import {
-    FC,
     PropsWithChildren,
     useEffect,
     useState,
@@ -27,11 +26,11 @@ export const locales = [
 export type locale = typeof locales[number];
 
 // needed to trick react-intl to trick it into supporting inclusive versions of languages
-const localeMap: {[key: locale]: locale} = {
+const localeMap: {[key in locale]?: locale} = {
     'es-inc': 'es'
 }
 
-export const I18nWrapper: React.FC = ({children}): PropsWithChildren<{}> => {
+export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
     const {locale} = useProfile();
 
     const cache = createIntlCache();

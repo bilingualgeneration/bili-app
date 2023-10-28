@@ -1,5 +1,7 @@
 import {
-    beforeEach
+    beforeEach,
+    describe,
+    test,
 } from 'vitest';
 import {
     fireEvent,
@@ -13,10 +15,6 @@ import {RoleSelect} from '@/pages/SignUp/RoleSelect';
 describe('SignUp Page Role Select Slide', () => {
     beforeEach(() => {
 	render(<RoleSelect />);
-    });
-    
-    afterEach(() => {
-	// cleanup?
     });
 
     test('should render', () => {

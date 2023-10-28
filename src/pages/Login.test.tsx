@@ -1,9 +1,14 @@
 import Login from './Login'; 
 import {render} from '@testing-library/react';
 import {FirebaseWrapper} from '@/components/FirebaseWrapper';
+import {
+    describe,
+    expect,
+    it
+} from 'vitest';
 
 describe('Login Component', () => {
-    test('should render', () => {
+    it('should render', () => {
         expect(1).toBe(1);
     });
 });

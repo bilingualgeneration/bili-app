@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { locales, defaultLocale, intl } from '../../../i18n';
 import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 
 const Intruder: React.FC = () => {
