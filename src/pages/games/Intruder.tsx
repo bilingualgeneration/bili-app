@@ -1,12 +1,15 @@
 import React from 'react';
-import { IonPage } from "@ionic/react";
+import { FormattedMessage } from 'react-intl';
+import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 
 const Intruder: React.FC = () => {
     return (
-	<>
-		<h1>Welcome to Intruder Page</h1>
-        {/* Add content here */} 
-	</>
+        <>
+            <h1>
+                <FormattedMessage id="intruderWelcome" defaultMessage="Welcome to Intruder Page" />
+            </h1>
+            {/* Additional content here */} 
+        </>
     );
 }
 
