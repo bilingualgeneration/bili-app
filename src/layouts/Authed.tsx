@@ -7,10 +7,6 @@ import {
 } from '@ionic/react';
 import {Redirect} from 'react-router-dom';
 
-import {
-    useAuth
-} from '../contexts/useAuth';
-
 interface AuthedLayoutProps {
     children: React.ReactNode
 }
@@ -18,7 +14,9 @@ interface AuthedLayoutProps {
 const AuthedLayout:React.FC<AuthedLayoutProps> = ({
     children
 }) => {
-    const {isAuthed} = useAuth();
+    // todo: implement reactfire useAuth
+	/*
+    const isAuthed: boolean = true;
     if(isAuthed === false){
 	// not logged in
 	return (
@@ -28,10 +26,9 @@ const AuthedLayout:React.FC<AuthedLayoutProps> = ({
 
     if(isAuthed === null){
 	// still loading
-	/*
 	   return <Loading />
-	*/
     }
+	*/
 
     // implied else
     return (
