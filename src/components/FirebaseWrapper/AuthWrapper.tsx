@@ -1,11 +1,14 @@
-import React from 'react';
+import {
+    FC,
+    ReactNode
+} from 'react';
 import {
     AuthProvider,
     useFirebaseApp
 } from 'reactfire';
 import {getAuth} from 'firebase/auth';
 
-export const AuthWrapper: React.FC = ({
+export const AuthWrapper: FC<{children: ReactNode}> = ({
     children
 }) => {
     const app = useFirebaseApp();

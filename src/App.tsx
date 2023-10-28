@@ -160,7 +160,7 @@ const Router: React.FC = () => {
 
 const App: React.FC = () => {
     return (
-	<SuspenseWithPerf traceId='user-load'>
+	<SuspenseWithPerf fallback={<Loading />} traceId='user-load'>
 	    <ErrorBoundary fallback={<Loading />}>
 		<IonApp>
 		    <Router />
