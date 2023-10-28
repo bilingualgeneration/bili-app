@@ -16,7 +16,9 @@ import {
 
 import {useForm, FormProvider} from 'react-hook-form';
 
+// @ts-ignore todo: cannot find module or its corresponding type declarations
 import HouseIcon from '@/assets/icons/house.svg?react';
+// @ts-ignore todo: cannot find module or its corresponding type declarations
 import SchoolIcon from '@/assets/icons/school.svg?react';
 
 import "./RoleSelect.css";
@@ -41,7 +43,6 @@ export const RoleSelect: React.FC = () => {
 	    />
 	</div>,
 	value: 'teacher',
-	
     };
 
     const parentOption: ExtendedRadioOption = {

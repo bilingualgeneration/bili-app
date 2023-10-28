@@ -11,13 +11,17 @@ import {
     renderHook,
     screen
 } from '@testing-library/react';
-import {Input} from '@/components/Input';
+import {
+    Input,
+    InputProps
+} from '@/components/Input';
 import {
     IonInput
 } from '@ionic/react';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
+    Control,
     SubmitHandler,
     useForm
 } from 'react-hook-form';
@@ -39,7 +43,7 @@ describe('Input Component', () => {
 	resolver: zodResolver(schema)
     }));
 
-    const control: Control = result.current.control;
+    const control: Control<schemaType> = result.current.control;
     
     beforeEach(async () => {
 	// reset the form values for each test
@@ -92,7 +96,7 @@ describe('Input Component', () => {
     });
 
 
-    const types: Array<Input["type"]> = 
+    const types: Array<InputProps['type']> = 
 	['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 
 	'tel', 'text', 'time', 'url', 'week'];
     types.forEach(type => {
@@ -124,9 +128,9 @@ describe('Input Component', () => {
     } = renderHook(() => useForm<schemaType>({
 	resolver: zodResolver(schema)
     }));
-    const control: Control = result.current.control;
+    const control: Control<any> = result.current.control;
     
-    beforeEach(async (): void => {
+    beforeEach(async (): Promise<void> => {
 	// reset the form values for each test
 	// need to wrap in act() because reset() alters react state
 	await act(
@@ -151,12 +155,16 @@ describe('Input Component', () => {
 		<button type='submit'></button>
 	    </form>
 	);
+	const input: Element | null = container.querySelector('input');
+	expect(input).not.toBe(null);
 	fireEvent.change(
-	    container.querySelector('input'),
+	    input!,
 	    {target: {value: 'abc'}}
 	);
+	const submitButton: Element | null = container.querySelector(`[type='submit']`);
+	expect(submitButton).not.toBe(null);
 	fireEvent.click(
-	    container.querySelector(`[type='submit']`)
+	    submitButton!
 	);
     });
 });

@@ -1,6 +1,5 @@
 import {
     createElement,
-    FC,
     Fragment,
     JSX,
     useState
@@ -20,7 +19,7 @@ export type ExtendedRadioOption = {
 // todo: add clear button?
 export type ExtendedRadioProps = {
     activeClassName?: string,
-    control: Control,
+    control: Control<any>,
     disabledClass?: string,
     name: string,
     options: ExtendedRadioOption[]
