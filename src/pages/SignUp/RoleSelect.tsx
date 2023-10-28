@@ -2,10 +2,6 @@ import { ExtendedRadio, ExtendedRadioOption } from '@/components/ExtendedRadio';
 
 import {
     IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
     IonLabel,
     IonItem,
     IonInput,
@@ -26,28 +22,7 @@ import SchoolIcon from '@/assets/icons/school.svg?react';
 import "./RoleSelect.css";
 import { string } from 'zod';
 import { CollectionReference } from 'firebase/firestore';
-
-const RoleCard: React.FC<{title: string, content: string, icon: React.ReactNode, iconBackgroundColor: string}
-> = ({title, content, icon, iconBackgroundColor}) => {
-    return <IonCard>
-	<div className='card-inner'>
-	    <div className='oval-element' style={{backgroundColor: iconBackgroundColor}}>
-			{icon}
-	    </div>
-	    <div className='title-content'>
-			<IonCardHeader class='custom-ion-header'>
-				<IonCardTitle>
-				{title}
-				</IonCardTitle>
-			</IonCardHeader>
-			<IonCardContent>
-				{content}
-			</IonCardContent>
-	    </div>
-	    
-	</div>
-    </IonCard>
-}
+import { RadioCard } from '../../components/RadioCard';
 
 export const RoleSelect: React.FC = () => {
     const form = useForm<{role: string}>();
@@ -58,7 +33,7 @@ export const RoleSelect: React.FC = () => {
     const teacherOption: ExtendedRadioOption = {
 	component: 
 	<div>
-		<RoleCard
+		<RadioCard
 			title='Teacher'
 			content='I want to use this app with my students'
 			icon={<SchoolIcon/>}
@@ -72,7 +47,7 @@ export const RoleSelect: React.FC = () => {
     const parentOption: ExtendedRadioOption = {
 	component: 
 	<div>
-		<RoleCard
+		<RadioCard
 			title='Parent/Caregiver'
 			content='I want to use this app with my child(ren)'
 			icon={<HouseIcon/>}
@@ -84,11 +59,14 @@ export const RoleSelect: React.FC = () => {
     };
 
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
-		setData({
-			...data,
+		/* commented it out becuse setData() gives an error 
+		and doesn't allow to slide to the next slide
+		 setData({ 
+		 	...data,
 			...responses
-		});
+		 });*/
         swiper.slideNext();
+		
     })
 
     // TODO: how do we validate it with the form hook?

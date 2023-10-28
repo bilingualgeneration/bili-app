@@ -138,14 +138,14 @@ export const AccountCredentials: React.FC = () => {
                 </span>
             </IonCheckbox>
 
-                <IonButton 
-                    expand="block" 
-                    type="submit" 
-                    data-testid="account-credentials-continue-button"
-                    disabled={!isValid}
-                >
-                    Continue
-                </IonButton>
+            <IonButton 
+                expand="block" 
+                type="submit" 
+                data-testid="account-credentials-continue-button"
+                disabled={!isValid}
+            >
+                Continue
+            </IonButton>
         </form>
 	</>
     );
