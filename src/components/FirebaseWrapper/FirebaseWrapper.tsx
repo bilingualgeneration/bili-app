@@ -1,5 +1,6 @@
-import {JSX} from 'react';
+import {AuthWrapper} from './AuthWrapper';
 import {FirebaseAppProvider} from 'reactfire';
+import React from 'react';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -11,14 +12,14 @@ const firebaseConfig = {
 }
 
 // todo: better typing?
-export const FirebaseWrapper = ({
+export const FirebaseWrapper: React.FC = ({
     children
-}: {
-    children: JSX.Element
-}): JSX.Element => {
+}) => {
     return (
 	<FirebaseAppProvider firebaseConfig={firebaseConfig}>
-	    {children}
+	    <AuthWrapper>
+		{children}
+	    </AuthWrapper>
 	</FirebaseAppProvider>
     );
 };

@@ -1,3 +1,5 @@
+@use 'sass:math'; // for division
+
 /* 
   .swiper-slides apply text-align: center
   reset it, since it affects pages we render in slides
@@ -5,9 +7,17 @@
 
 @font-face {
   font-family: 'Outfit';
-  src: url('../assets/fonts/Outfit-VariableFont_wght.ttf') format('ttf');
-  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
-  font-style: normal;  // Specify 'italic' if it's an italic font style
+  src: url('/assets/fonts/Outfit-VariableFont_wght.ttf') format('ttf');
+//  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
+//  font-style: normal;  // Specify 'italic' if it's an italic font style
+}
+
+:root{
+    --ion-font-family: 'Outfit';
+}
+
+ion-content {
+    --background: url('/assets/img/background.png') no-repeat center center / cover;
 }
 
 .swiper-slide > * {
@@ -17,19 +27,24 @@
 ion-progress-bar{
     $ionProgressBarHeight: 12px;
     height: $ionProgressBarHeight;
-    border-radius: calc($ionProgressBarHeight / 2);
+    border-radius: math.div($ionProgressBarHeight, 2);
 }
 
 
 ion-button {
-    --border-radius: 100px;
-    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
-    --padding: 18px 16px;
-
+    --box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    $paddingY: 23px;
+    --padding-bottom: #{$paddingY};
+    --padding-top: #{$paddingY};
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: none;
+    /*
     &:disabled{
 	--background: var(--ion-color-secondary);
 	--color: var(--ion-color-secondary-contrast);
     }
+    */
 }
 
 
@@ -45,12 +60,12 @@ ion-label {
 
  
 ion-card-title {
-  color: var(--Base-Selva);
-  font-family: Outfit;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 120%; /* 28.8px */
-  letter-spacing: 0.2px;
+    color: var(--Base-Suelo);
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 120%; /* 28.8px */
+    letter-spacing: 0.2px;
 }
 
 ion-card-content {
@@ -68,13 +83,14 @@ ion-card-content {
 
 //styles for input fields
 ion-input.input-fill-outline {
-  --border-radius: 16px;
+    border-radius: 200px;
+  --border-radius: 1rem;
   --padding-start: 20px;
   --padding-end: 20px;
 //  --padding-top: 14px;
   --padding-bottom: 14px;
   --background: rgba(136, 147, 145, 0.20);
-  --border-style: solid;
+  --border-style: rgba(136, 147, 145, 0.20) solid;
 }
 
 //styles for input fields
@@ -97,21 +113,23 @@ ion-input.input-fill-outline.has-focus {
 // JC: temporarily disabled this since it was interfering with swiperjs
 
 ion-card {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  justify-content: center;
-  align-items: stretch;
-  gap: 24px;
-  margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+    margin-bottom: 16px;
+    box-shadow: none;
+    border-radius: 1rem;
 }
-
 
 //styles for the radio-button
 
 .undefined ion-card {
   box-shadow: 0 0 0 3px var(--base-agua, rgba(0, 106, 103, 0.12));
 }
+
 .active ion-card{
   --background: var(--Cielo-Highest);
   box-shadow: 0 0 0 3px var(--Base-Selva);

@@ -2,7 +2,9 @@ import React from 'react';
 import {
     IonButton,
     IonCard,
-    IonCardContent
+    IonCardContent,
+    IonCardTitle,
+    IonText
 } from '@ionic/react';
 
 
@@ -10,26 +12,52 @@ export const Splash: React.FC = () => {
 
     return(
 	<>
+	    <IonText>
+		<h1 className='ion-text-center'>
+		    Login
+		</h1>
+	    </IonText>
 	    <IonCard>
 		<IonCardContent>
-		    Already have a Bili account?
-		    <IonButton href='/login'>
+		    <IonCardTitle className='ion-padding-bottom'>
+			Already have a Bili account?
+		    </IonCardTitle>
+		    <IonButton
+			className='ion-margin-top'
+			expand='block'
+			href='/login'
+			shape='round'>
 			Login
 		    </IonButton>
 		</IonCardContent>
 	    </IonCard>
 	    <IonCard>
 		<IonCardContent>
-		    New to Bili?
-		    <IonButton href='/sign-up'>
+		    <IonCardTitle className='ion-padding-bottom'>
+			New to Bili?
+		    </IonCardTitle>
+		    <IonButton
+			className='ion-margin-top'
+			expand='block'
+			fill='outline'
+			href='/sign-up'
+			shape='round'>
 			Create an account
 		    </IonButton>
 		</IonCardContent>
 	    </IonCard>
 	    <IonCard>
 		<IonCardContent>
-		    Do you have a classroom code?
-		    <IonButton disabled href='/classroom-code'>
+		    <IonCardTitle className='ion-padding-bottom'>
+			Do you have a classroom code?
+		    </IonCardTitle>
+		    <IonButton
+			className='ion-margin-top'
+			disabled
+			expand='block'
+			fill='outline'
+			href='/classroom-code'
+			shape='round'>
 			Student login
 		    </IonButton>
 		</IonCardContent>
