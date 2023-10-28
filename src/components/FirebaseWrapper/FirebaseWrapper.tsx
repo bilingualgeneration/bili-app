@@ -1,6 +1,9 @@
+import {
+    FC,
+    ReactNode
+} from 'react';
 import {AuthWrapper} from './AuthWrapper';
 import {FirebaseAppProvider} from 'reactfire';
-import React from 'react';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -12,7 +15,7 @@ const firebaseConfig = {
 }
 
 // todo: better typing?
-export const FirebaseWrapper: React.FC = ({
+export const FirebaseWrapper: React.FC<{children: ReactNode}> = ({
     children
 }) => {
     return (
