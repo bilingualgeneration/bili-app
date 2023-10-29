@@ -6,7 +6,7 @@ import {
 } from '@ionic/react';
 import React from 'react';
 
-export const RadioCard: React.FC<{ title: string; content: string; icon: React.ReactNode; iconBackgroundColor: string; badge?: React.ReactNode}
+export const RadioCard: React.FC<{ title: string; content: string; icon?: React.ReactNode; iconBackgroundColor: string; badge?: React.ReactNode}
 > = ({ title, content, icon, iconBackgroundColor, badge}) => {
 	return <IonCard>
 		<div className='card-inner'>

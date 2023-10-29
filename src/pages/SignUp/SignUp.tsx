@@ -55,13 +55,13 @@ export const SignUp: React.FC = () => {
 				className='ion-padding-top'
 				data-testid='account-credentials-slide'
 				data-progress-percent='0.2'>
-				<AccountCredentials />
+				<LanguageModeSelect />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='language-mode-slide'
 				data-progress-percent='0.25'>
-				<LanguageModeSelect />
+				<AccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
