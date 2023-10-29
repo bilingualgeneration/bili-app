@@ -38,6 +38,7 @@ ion-button {
     --padding-top: #{$paddingY};
     font-weight: bold;
     font-size: 1rem;
+    margin: 24px;
     text-transform: none;
     /*
     &:disabled{
@@ -78,7 +79,6 @@ ion-card-content {
   font-weight: 400;
   line-height: 20px; /* 142.857% */
 }
-
 
 
 //styles for input fields
@@ -135,6 +135,13 @@ ion-card {
   box-shadow: 0 0 0 3px var(--Base-Selva);
 }
 
+.radio-button-select {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
 //styles for the circle with svg icon
 .oval-element {
   width: 75px;
@@ -142,10 +149,9 @@ ion-card {
   flex-shrink: 0;
   border-radius: 50%; 
   display: flex;
+  align-items: center;
+  justify-content: center;
 
-  svg {
-    margin: auto;
-  }
 }
 
 .card-inner {
@@ -157,6 +163,7 @@ ion-card {
   display: flex;
   flex-direction: column;
   align-items: start;
+  margin-left: 8px;
 }
 
 .custom-ion-header {

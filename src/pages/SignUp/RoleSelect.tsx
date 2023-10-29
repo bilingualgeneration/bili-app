@@ -14,7 +14,7 @@ import {
     useSignUpData
 } from '@/pages/SignUp/SignUpContext';
 
-import {useForm, FormProvider} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import HouseIcon from '@/assets/icons/house.svg?react';
@@ -60,12 +60,11 @@ export const RoleSelect: React.FC = () => {
     };
 
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
-		/* commented it out becuse setData() gives an error 
-		and doesn't allow to slide to the next slide
-		 setData({ 
-		 	...data,
-			...responses
-		 });*/
+		
+		//  setData({ 
+		//  	...data,
+		// 	...responses
+		//  });
         swiper.slideNext();
 		
     })
@@ -75,7 +74,7 @@ export const RoleSelect: React.FC = () => {
     
     return (
 	<>
-	    <form onSubmit={onSubmit} className='role-select'>
+	    <form onSubmit={onSubmit} className='radio-button-select'>
 			<h1>
 				Which best describes you?
 			</h1>

@@ -72,10 +72,10 @@ export const AccountCredentials: React.FC = () => {
     });
 
     const onSubmit = handleSubmit((response) => {
-	setData({
-	    ...data,
-	    ...response
-	});
+	// setData({
+	//     ...data,
+	//     ...response
+	// });
 	swiper.slideNext();
     });
 
