@@ -1,4 +1,5 @@
 import {
+    describe,
     expect,
     it,
 } from 'vitest';
@@ -10,7 +11,7 @@ import {
 import {FirebaseWrapper} from '@/components/FirebaseWrapper';
 
 describe('FirebaseWrapper Component', () => {
-    test('should render with children', () => {
+    it('should render with children', () => {
 	const element = render(
 	    <FirebaseWrapper>
 		<div data-testid='child'>

@@ -1,8 +1,10 @@
 import {act} from 'react-dom/test-utils';
 import {
     afterEach,
+    beforeEach,
     describe,
     expect,
+    it,
 } from 'vitest';
 import {
     cleanup,
@@ -55,7 +57,7 @@ describe('Input Component', () => {
 	);
     });
     
-    test('should render', () => {
+    it('should render', () => {
 	const {baseElement} = render(
 	    <Input
 		control={control}
@@ -64,7 +66,7 @@ describe('Input Component', () => {
 	expect(baseElement).toBeDefined();
     });
 
-    test('should render an IonInput by default', () => {
+    it('should render an IonInput by default', () => {
 	render(
 	    <Input
 		control={control}
@@ -75,7 +77,7 @@ describe('Input Component', () => {
 	expect(element).toBeDefined();
     });
 
-    test('should render a label', () => {
+    it('should render a label', () => {
 	const {container} = render(
 	    <Input
 		control={control}
@@ -85,7 +87,7 @@ describe('Input Component', () => {
 	expect(container.querySelector('ion-label')).toBeDefined();
     });
 
-    test('should render helper text', () => {
+    it('should render helper text', () => {
 	const {container} = render(
 	    <Input
 		control={control}
@@ -100,13 +102,13 @@ describe('Input Component', () => {
 	['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 
 	'tel', 'text', 'time', 'url', 'week'];
     types.forEach(type => {
-        test.only(`should render input with type ${type}`, () => {
+        it.only(`should render input with type ${type}`, () => {
             const { container, getByTestId } = render(
                 <Input
                     control={control}
                     name='field'
                     type={type} 
-					testId={`input-${type}`}
+		    testId={`input-${type}`}
                 />
             );
 
@@ -140,7 +142,7 @@ describe('Input Component', () => {
 	);
     });
     
-    test('should integrate react hook forms', () => {
+    it('should integrate react hook forms', () => {
 	// JC: test failing, suspect because of input in shadow dom
 	const onSubmit: SubmitHandler<schemaType> = (data) => {
 	    expect(schema.parse(data)).toBe('abc');

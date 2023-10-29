@@ -81,7 +81,7 @@ describe('Extended Radio', () => {
 	const target: Element | null = container.querySelector('[data-testId=extended-radio-component] *:nth-child(2)');
 	expect(target).not.toBe(null);
 	fireEvent.click(target!);
-	expect(target!).toHaveClass('active');
+	expect(target!.getAttribute('class')).toMatch(/$.*active.*^/g);
     });
 
     /*

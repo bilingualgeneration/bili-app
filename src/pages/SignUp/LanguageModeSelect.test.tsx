@@ -1,4 +1,9 @@
 import {
+    beforeEach,
+    describe,
+    it
+} from 'vitest';
+import {
     render,
     screen,
     fireEvent,
@@ -10,12 +15,12 @@ describe('SignUp Page Language Mode Slide', () => {
     beforeEach(() => {
 	render(<LanguageModeSelect />);
     });
-    test('should render', () => {
+    it('should render', () => {
 	//expect(screen.getByTestId('language-mode-slide')).toBeDefined();    
     });
 
     // todo: add tests to ensure one was selected
-    test('should slide to Language Inclusivity', async () => {
+    it('should slide to Language Inclusivity', async () => {
 
 	//fireEvent.click(screen.getByTestId('language-mode-continue-button'));
 	
