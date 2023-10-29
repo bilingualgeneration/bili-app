@@ -43,7 +43,10 @@ const meta: Meta<typeof Select> = {
 	}
     },
     component: Select,
-    render: (props) => {
+    render: ({
+	defaultValue,
+	...props
+    }) => {
 	const schema = z.object({
 	    field: z.string()
 	});
@@ -51,6 +54,9 @@ const meta: Meta<typeof Select> = {
 	const {
 	    control
 	} = useForm<schemaType>({
+	    defaultValues: {
+		field: defaultValue
+	    },
 	    mode: 'onChange',
 	    resolver: zodResolver(schema)
 	});
@@ -87,5 +93,12 @@ export const AsPopover: Story = {
     args: {
 	label: 'label',
 	interface: 'popover'
+    }
+}
+
+export const WithDefaultValue: Story = {
+    args: {
+	label: 'label',
+	defaultValue: 'churros'
     }
 }

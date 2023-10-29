@@ -22,16 +22,10 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   }) => {
     return (
 	<IonPage>
-	    <IonHeader>
+	    <IonHeader
+		className='ion-no-border'
+		id='header'>
 		<IonToolbar>
-		    <IonImg
-			src='/assets/img/logo_small.png'
-			style={{
-			    height: '3rem',
-			    marginTop: '1rem',
-			    marginBottom: '1rem'
-			}}
-		    alt='Bili Logo'/>
 		    <IonButtons slot='end'>
 			<LanguageSwitcher />
 		    </IonButtons>

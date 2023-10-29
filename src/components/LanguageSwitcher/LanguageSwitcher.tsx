@@ -19,6 +19,9 @@ export const LanguageSwitcher: React.FC<{}> = (props) => {
     const {
 	control
     } = useForm<schemaType>({
+	defaultValues: {
+	    locale
+	},
 	mode: 'onChange',
 	resolver: zodResolver(schema)
     });
@@ -26,9 +29,11 @@ export const LanguageSwitcher: React.FC<{}> = (props) => {
     return (
 	<>
 	    <Select
-	control={control}
-	name='locale'
-	options={Object.keys(locales).map((l: string) => ({
+		control={control}
+		interface='popover'
+		label='mode'
+		name='locale'
+		options={Object.keys(locales).map((l: string) => ({
 		    value: l,
 		    label: locales[l as keyof typeof locales]
 		}))} />

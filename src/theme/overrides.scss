@@ -24,6 +24,14 @@ ion-content {
   text-align: initial;
 }
 
+#header{
+    ion-toolbar{
+	--background: transparent url('/assets/img/logo_small.png') center/auto 70% no-repeat;
+	padding-left: 1rem;
+	padding-right: 1rem;
+    }
+}
+
 ion-progress-bar{
     $ionProgressBarHeight: 12px;
     height: $ionProgressBarHeight;
