@@ -8,7 +8,6 @@ import {
 } from '@ionic/react';
 import './Container.css';
 
-
 interface UnauthedLayoutProps {
     children: React.ReactNode
 }

@@ -1,4 +1,6 @@
-import React from 'react';
+import {
+    JSX
+} from 'react';
 import {
     Control,
     Controller
@@ -115,7 +117,7 @@ export type IonInputProps = {
 };
 
 export type InputAdditionalProps = {
-    control: Control,
+    control: Control<any>,
     className: string,
     testId: string
 }
@@ -134,7 +136,7 @@ export const Input = ({
     name,
     testId,
     ...props
-}: InputProps): React.FC => {
+}: InputProps): JSX.Element => {
     return (
 	<>
 	    <Controller

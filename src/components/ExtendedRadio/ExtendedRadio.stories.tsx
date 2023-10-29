@@ -3,15 +3,16 @@ import type {
     StoryObj
 } from '@storybook/react';
 import {
+    JSX,
+    PropsWithChildren
+} from 'react';
+import {
     SubmitHandler,
     useForm,
     useWatch
 } from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {
-    FC
-} from 'react';
 import {
     IonCard,
     IonCardContent,
@@ -66,7 +67,8 @@ const meta: Meta<typeof ExtendedRadio> = {
 export default meta;
 type Story = StoryObj<typeof ExtendedRadio>;
 
-const Card = ({children, ...props}): FC => {
+// todo: better typing to use props from IonCard
+const Card = ({children, ...props}: PropsWithChildren<any>): JSX.Element => {
     return (
 	<IonCard {...props}>
 	    <IonCardHeader>
