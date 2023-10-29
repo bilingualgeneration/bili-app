@@ -2,27 +2,41 @@ import React from 'react';
 import {locales} from '@/components/I18nWrapper';
 import type {locale} from '@/components/I18nWrapper';
 import {useProfile} from '@/contexts/ProfileContext';
+import {Select} from '@/components/Select';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+import type {SelectOption} from '@/components/Select';
+import {
+    useForm
+} from 'react-hook-form';
 
 export const LanguageSwitcher: React.FC<{}> = (props) => {
     const {locale, setLocale} = useProfile();
-    const handleChangeLocale = (newLocale: locale) => {
-	setLocale(newLocale);
-    };
+    const schema = z.object({
+	locale: z.string()
+    });
+    type schemaType = z.infer<typeof schema>;
+    const {
+	control
+    } = useForm<schemaType>({
+	defaultValues: {
+	    locale
+	},
+	mode: 'onChange',
+	resolver: zodResolver(schema)
+    });
     
     return (
-	<div>
-	    <label htmlFor="language-select">Select a language:</label>
-	    <select
-		id="language-select"
-		onChange={(e) => handleChangeLocale(e.target.value as locale)}
-		value={locale} // Set the current locale as the selected value
-	    >
-		{locales.map((locale) => ( 
-		    <option key={locale} value={locale}>
-			{locale}
-		    </option>
-		))}
-	    </select>
-	</div>
+	<>
+	    <Select
+		control={control}
+		interface='popover'
+		label='mode'
+		name='locale'
+		options={Object.keys(locales).map((l: string) => ({
+		    value: l,
+		    label: locales[l as keyof typeof locales]
+		}))} />
+	</>
     );
 };

@@ -81,24 +81,21 @@ export const Select = ({
 		onBlur,
 		...fields
 	    },
-	    fieldState
 	}: any): JSX.Element => {
 
 	    return (
 		<IonSelect
 		    {...props}
-		    onIonChange={
-		    (event) => {
-			console.log(event.detail.value);
+		    {...fields}
+		    onIonChange={(event) => {
 			onChange(event.detail.value);
-		    }
-		    }>
+		    }}>
 		    {options.map((option: SelectOption) => <IonSelectOption value={option.value} key={option.value}>
-		    {option.label}
+			{option.label}
 		    </IonSelectOption>)
 		    }
 		</IonSelect>
-		);
+	    );
 	}}
 	/>
 	</>
