@@ -95,7 +95,7 @@ export type IonInputProps = {
     helperText: string,
     inputmode: 'decimal' | 'email' | 'none' | 'numeric' | 'search' | 'tel' | 'text' | undefined | 'url',
     label: string,
-    labelPlacement: 'fixed' | 'floating' | 'stacked', // undefined is default state
+    labelPlacement: 'fixed' | 'floating' | 'stacked' | undefined,
     legacy: boolean | undefined,
     max: number | string | undefined,
     maxlength: number | undefined,
