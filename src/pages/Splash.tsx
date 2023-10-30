@@ -53,6 +53,7 @@ export const Splash: React.FC = () => {
 		    </IonCardTitle>
 		    <IonButton
 			className='ion-margin-top'
+			color='secondary'
 			disabled
 			expand='block'
 			fill='outline'

@@ -24,7 +24,7 @@ import {
 } from '@/pages/SignUp/SignUpContext';
 
 export const SignUp: React.FC = () => {
-    const [progressPercent, setProgressPercent] = useState<number>(0);
+    const [progressPercent, setProgressPercent] = useState<number>(0.2);
     const {data} = useSignUpData();
     const handleSlideChange = (swiper: SwiperCore): void => {
 	setProgressPercent(
@@ -36,13 +36,14 @@ export const SignUp: React.FC = () => {
     };
     return (
 	<>
-		<h1>Welcome to Sign Up Page</h1>
 		<IonCard>
 		    <IonCardContent>
 			<div className='ion-padding'>
 			    <IonProgressBar
+				color='primary'
+				style={{width: '60%', margin: 'auto'}}
 				value={progressPercent}
-				color='primary' />
+			    />
 			</div>
 			<Swiper
 			    allowTouchMove={false}
@@ -50,25 +51,25 @@ export const SignUp: React.FC = () => {
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='role-select-slide'
-				data-progress-percent={0.1}>
+				data-progress-percent={0.2}>
 				<RoleSelect />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='account-credentials-slide'
-				data-progress-percent={0.2}>
+				data-progress-percent={0.4}>
 				<AccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='language-mode-slide'
-				data-progress-percent={0.25}>
+				data-progress-percent={0.6}>
 				<LanguageModeSelect />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='language-inclusivity-slide'
-				data-progress-percent={0.5}>
+				data-progress-percent={0.8}>
 				<LanguageInclusivitySelect />
 			    </SwiperSlide>
 			    <SwiperSlide

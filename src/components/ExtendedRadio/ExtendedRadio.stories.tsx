@@ -37,11 +37,9 @@ const meta: Meta<typeof ExtendedRadio> = {
 	const schema = z.object({
 	    field: z.string()
 	});
-	type schemaType = z.infer<typeof schema>;
-    
 	const {
 	    control
-	} = useForm<schemaType>({
+	} = useForm<z.infer<typeof schema>>({
 	    resolver: zodResolver(schema)
 	});
 

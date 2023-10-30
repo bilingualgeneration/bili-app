@@ -18,9 +18,8 @@ export const SignUpDataProvider = ({children}: PropsWithChildren<{}>) => {
 	    value={{
 		data,
 		setData
-	    }}
-	>
-	{children}
+	    }}>
+	    {children}
 	</SignUpDataContext.Provider>
     );
 }
