@@ -43,6 +43,7 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
 
     useEffect(() => {
 	readTranslations(locale).then((newTranslations) => {
+        console.log('New Translations:', newTranslations)
 	    setTranslations(newTranslations);
 	});
     }, [locale]);
