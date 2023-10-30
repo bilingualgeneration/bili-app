@@ -9,10 +9,32 @@ import {
 } from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {
+    IonItem
+} from '@ionic/react';
 
-import {Input} from './Input';
 
-const meta: Meta<typeof Input> = {
+import {
+    MultipleCheckbox,
+    MultipleCheckboxOption
+} from './MultipleCheckbox';
+
+const options: MultipleCheckboxOption[] = [
+    {
+	value: 'dr who',
+	label: 'Dr. Who'
+    },
+    {
+	value: 'star trek',
+	label: 'Star Trek'
+    },
+    {
+	value: 'warehouse 13',
+	label: 'Warehouse 13'
+    },
+]
+
+const meta: Meta<typeof MultipleCheckbox> = {
     argTypes: {
 	control: {
 	    table: {
@@ -25,34 +47,37 @@ const meta: Meta<typeof Input> = {
 	    }
 	}
     },
-    component: Input,
+    component: MultipleCheckbox,
     render: (props) => {
 	const schema = z.object({
-	    field: z.string()
-		    .min(3)
-		    .max(100)
+	    field: z.string() // todo: allow numbers? other values?
+		    .array()
 	});
 	type schemaType = z.infer<typeof schema>;
 	const {
 	    control,
 	    handleSubmit
 	} = useForm<schemaType>({
+	    defaultValues: {
+		field: []
+	    },
 	    mode: 'onChange',
 	    resolver: zodResolver(schema)
 	});
-	const field: string = useWatch({
+	const field: string[] = useWatch({
 	    control,
 	    name: 'field'
 	});
 	return (
 	    <>
-		<Input
+		<MultipleCheckbox
 		{...props}
 		    control={control}
 		    name='field'
+		    options={options}
 		/>
 		<div class='ion-margin-top'>
-		    value of field: {field}
+		    value of field: {field.join(', ')}
 		</div>
 	    </>
 	);
@@ -60,28 +85,14 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof MultipleCheckbox>;
 
 export const Default: Story = {
-    args: {
-	counter: true,
-	label: 'label',
-	maxlength: 20,
-	helperText: 'helper text'
-    }
+    args: {}
 }
 
-export const AsPassword: Story = {
+export const WithWrapper: Story = {
     args: {
-	type: 'password',
-	label: 'password',
-	helperText: 'must contain a number and symbol'
-    }
-}
-
-export const LabelAbove: Story = {
-    args: {
-	label: 'label goes above',
-	labelPlacement: 'above'
+	wrapper: ({children}) => <IonItem>{children}</IonItem>
     }
 }
