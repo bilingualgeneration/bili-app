@@ -1,4 +1,4 @@
-@use 'sass:math'; // for division
+@use 'sass:math';
 
 /* 
   .swiper-slides apply text-align: center
@@ -7,12 +7,13 @@
 
 @font-face {
   font-family: 'Outfit';
-  src: url('/assets/fonts/Outfit-VariableFont_wght.ttf') format('ttf');
-//  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
-//  font-style: normal;  // Specify 'italic' if it's an italic font style
+  src: url('/assets/fonts/Outfit-VariableFont_wght.ttf');
+  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
+  font-style: normal;  // Specify 'italic' if it's an italic font style
 }
 
-:root{
+html{
+    background-color: #D3EAE8;
     --ion-font-family: 'Outfit';
 }
 
@@ -40,20 +41,23 @@ ion-progress-bar{
 
 
 ion-button {
-    --box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    //--box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
     $paddingY: 23px;
     --padding-bottom: #{$paddingY};
     --padding-top: #{$paddingY};
     font-weight: bold;
     font-size: 1rem;
-    margin: 24px;
+//    margin: 24px;
     text-transform: none;
-    /*
-    &:disabled{
+
+    &:not([shape=round]){
+	--border-radius: 0.75rem;
+    }
+    
+    &.button-disabled{
 	--background: var(--ion-color-secondary);
 	--color: var(--ion-color-secondary-contrast);
     }
-    */
 }
 
 
@@ -91,22 +95,24 @@ ion-card-content {
 
 //styles for input fields
 ion-input.input-fill-outline {
-    border-radius: 200px;
-  --border-radius: 1rem;
+    font-weight: bold;
   --padding-start: 20px;
   --padding-end: 20px;
-//  --padding-top: 14px;
-  --padding-bottom: 14px;
-  --background: rgba(136, 147, 145, 0.20);
-  --border-style: rgba(136, 147, 145, 0.20) solid;
+  // todo: convert #E7E9E9 into color system
+  // problem arises when trying to stack with border-color
+  --background: #E7E9E9;
+  --border-width: 0.25rem !important;
+  --border-color: #E7E9E9 !important;
+  --border-radius: 0.75rem !important;
+  // todo: highlight-color-focused gives a different color than expected
+  // --highlight-color-focused: var(--Base-Selva);
 }
 
 //styles for input fields
 ion-input.input-fill-outline.has-focus {
-  --background: var(--Cielo-Highest);
-  --border-color: var(--Base-Selva);
-  --border-width: 3px;
-  --highlight-color: var(--Base-Selva);
+    --background: var(--Cielo-Highest);
+    // todo: cannot use --highlight-color-focused because of issue above
+    --border-color: var(--Base-Selva)  !important;
 }
 
 .swiper-slide h1 {

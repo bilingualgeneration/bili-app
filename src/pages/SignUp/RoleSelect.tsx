@@ -1,4 +1,7 @@
-import { ExtendedRadio, ExtendedRadioOption } from '@/components/ExtendedRadio';
+import {
+    ExtendedRadio,
+    ExtendedRadioOption
+} from '@/components/ExtendedRadio';
 
 import {
     IonButton,
@@ -24,7 +27,7 @@ import SchoolIcon from '@/assets/icons/school.svg?react';
 import "./RoleSelect.css";
 import { string } from 'zod';
 import { CollectionReference } from 'firebase/firestore';
-import { RadioCard } from '../../components/RadioCard';
+import { RadioCard } from '@/components/RadioCard';
 
 export const RoleSelect: React.FC = () => {
     const form = useForm<{role: string}>();
@@ -35,11 +38,11 @@ export const RoleSelect: React.FC = () => {
     const teacherOption: ExtendedRadioOption = {
 	component: 
 	<div>
-		<RadioCard
-			title='Teacher'
-			content='I want to use this app with my students'
-			icon={<SchoolIcon/>}
-			iconBackgroundColor='var(--Cielo-Cielo)'	
+	    <RadioCard
+		title='Teacher'
+		content='I want to use this app with my students'
+		icon={<SchoolIcon/>}
+		iconBackgroundColor='var(--Cielo-Cielo)'	
 	    />
 	</div>,
 	value: 'teacher',
@@ -48,11 +51,11 @@ export const RoleSelect: React.FC = () => {
     const parentOption: ExtendedRadioOption = {
 	component: 
 	<div>
-		<RadioCard
-			title='Parent/Caregiver'
-			content='I want to use this app with my child(ren)'
-			icon={<HouseIcon/>}
-			iconBackgroundColor='var(--Desierto-Highest)'
+	    <RadioCard
+		title='Parent/Caregiver'
+		content='I want to use this app with my child(ren)'
+		icon={<HouseIcon/>}
+		iconBackgroundColor='var(--Desierto-Highest)'
 	    />
 	</div>,
 	value: 'parent',
@@ -60,13 +63,12 @@ export const RoleSelect: React.FC = () => {
     };
 
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
-		
-		//  setData({ 
-		//  	...data,
-		// 	...responses
-		//  });
+	//  setData({ 
+	//  	...data,
+	// 	...responses
+	//  });
         swiper.slideNext();
-		
+	
     })
 
     // TODO: how do we validate it with the form hook?
@@ -75,21 +77,21 @@ export const RoleSelect: React.FC = () => {
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-			<h1>
-				Which best describes you?
-			</h1>
-			<ExtendedRadio
-			control = {control}
-			name = "role"
-			options={[teacherOption, parentOption]}
-			/>
-			<IonButton
-				type='submit'
-				data-testid='role-select-continue-button'
-				disabled={!isValid}
-			>
-				Continue
-			</IonButton>
+		<h1>
+		    Which best describes you?
+		</h1>
+		<ExtendedRadio
+		control = {control}
+		name = "role"
+		options={[teacherOption, parentOption]}
+		/>
+		<IonButton
+		    shape='round'
+		    type='submit'
+		    data-testid='role-select-continue-button'
+		    disabled={!isValid}>
+		    Continue
+		</IonButton>
 	    </form>
 	    
 	</>

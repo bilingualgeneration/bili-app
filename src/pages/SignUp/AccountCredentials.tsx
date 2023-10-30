@@ -5,6 +5,7 @@ import {
     IonButton,
     IonCheckbox,
     IonLabel,
+    IonText,
 } from '@ionic/react';
 
 import {Input} from '@/components/Input';
@@ -14,11 +15,17 @@ import {
     useSwiper
 } from 'swiper/react';
 
-import { date, z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useSignUpData} from '@/pages/SignUp/SignUpContext';
 
-import "./AccountCredentials.css"
+// @ts-ignore todo: cannot find module or its corresponding type declarations
+import AppleIcon from '@/assets/icons/apple.svg?react';
+// @ts-ignore todo: cannot find module or its corresponding type declarations
+import GoogleIcon from '@/assets/icons/google.svg?react';
+
+
+import './AccountCredentials.css';
 
 interface FormInputs {
     name: string;
@@ -27,27 +34,6 @@ interface FormInputs {
 }
 
 
-// JC: cleaned up, will delete this block
-/*
-   const handleEmailPasswordSignUp = async (
-   auth: Auth, 
-   name: string,
-   email: string, 
-   password: string, 
-   swiper: any) => {
-
-   swiper.slideNext();
-
-   try {        
-   await createUserWithEmailAndPassword(auth, email, password);
-   console.log("User signed up successfully: " , email)
-   
-   swiper.slideNext();
-   } catch (error) {
-   console.error("Error signing in with email and password:", error);
-   }
-   };
- */
 
 // todo: expand Input to include checkbox
 
@@ -58,20 +44,26 @@ export const AccountCredentials: React.FC = () => {
         name: z.string().min(1, 'Name is required'),
         email: z.string().email('ENTER a valid email'),
         password: z.string().min(5,'Password must be 5 or more characters long'),
-	//tos: z.boolean(), // todo: make this required to be true
+	//tos: z.literal<boolean>(true),
 	//marketingUpdates: z.boolean()
     });
 
     const {
-      control,
-      handleSubmit,
-      formState: { errors, isValid},
+	control,
+	handleSubmit,
+	formState: { errors, isValid},
     } = useForm<FormInputs>({
+	defaultValues: {
+	    name: 'Jon Chin',
+	    email: 'jon@sharemeals.org',
+	    password: '12345678'
+	},
         mode: 'onChange',
         resolver: zodResolver(credentialsSchema)
     });
 
     const onSubmit = handleSubmit((response) => {
+	console.log(response);
 	// setData({
 	//     ...data,
 	//     ...response
@@ -81,72 +73,111 @@ export const AccountCredentials: React.FC = () => {
 
     return (
 	<>
-        <form
-            className="account-credentials"
-            onSubmit={onSubmit}
-        >
-            <Input
-                name="name"
-                label='Your Name'
-                labelPlacement='stacked'
-                fill="outline"
-                control={control}
-                helperText=""
-                testId="account-credentials-name-input"
-                type="text"
-            />
+            <form
+		onSubmit={onSubmit}>
+		<IonText color='medium'>
+		    Your full name*
+		</IonText>
+		<Input
+                    name="name"
+                    fill="outline"
+                    control={control}
+                    helperText=""
+                    testId="account-credentials-name-input"
+                    type="text"
+		/>
 
-            <Input
-                label='Your email address'
-                labelPlacement='stacked'
-                required={true}
-                name="email"
-                control={control}
-                fill="outline"
-                helperText=""
-                testId="account-credentials-email-input"
-                type="email"
-            />
+		<div className='ion-margin-top'>
+		    <IonText
+			color='medium'>
+			Your email address*
+		    </IonText>
+		    <Input
+			required={true}
+			name="email"
+			control={control}
+			fill="outline"
+			helperText=""
+			testId="account-credentials-email-input"
+			type="email"
+		    />
+		</div>
 
-            <Input
-                label='Password* (8+ characters)'
-                labelPlacement='stacked'
-                required={true}
-                name="password"
-                control={control}
-                fill="outline"
-                helperText=""
-                testId="account-credentials-password-input"
-                type="password"
-            />
+		<div className='ion-margin-top'>
+		    <IonText color='medium'>
+			Password* (8+ characters)
+		    </IonText>
+		    <Input
+			required={true}
+			name="password"
+			control={control}
+			fill="outline"
+			helperText=""
+			testId="account-credentials-password-input"
+			type="password"
+		    />
+		</div>
 
-            <IonCheckbox
-                labelPlacement="end"
-                alignment="start"
-                justify="start">
-                <span className="checkbox-label">
-                    Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy
-                </span>
-            </IonCheckbox>
+		<div>
+		    divider goes here
+		</div>
+		
+		<IonButton
+		    color='medium'
+		    className='ion-margin-top'
+		    disabled
+		    expand='block'
+		    fill='outline'>
+		    <GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
+		</IonButton>
 
-            <IonCheckbox
-                labelPlacement="end"
-                alignment="start"
-                justify="start">
-                <span className="checkbox-label">
-                    I want to receive marketing updates
-                </span>
-            </IonCheckbox>
+		<IonButton
+		    color='medium'
+		    className='ion-margin-top'
+		    disabled
+		    expand='block'
+		    fill='outline'>
+		    <AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
+		</IonButton>
 
-            <IonButton 
-                expand="block" 
-                type="submit" 
-                data-testid="account-credentials-continue-button"
-                disabled={!isValid}
-            >
-                Continue
-            </IonButton>
-        </form>
+		<div className='ion-margin-top'>
+		    <IonCheckbox
+			labelPlacement='end'
+			justify='start'>
+			<IonText class='ion-text-wrap'>
+			    <IonText color='primary' style={{fontWeight: 'bold'}}>
+				Terms of Service.
+			    </IonText> I agree to the Terms of Service. I have read and understand the Privacy Policy
+			</IonText>
+		    </IonCheckbox>
+		</div>
+
+		<div className='ion-margin-top'>
+		    <IonCheckbox
+			justify='start'
+			labelPlacement='end'>
+			I want to receive marketing updates
+		    </IonCheckbox>
+		</div>
+
+
+		<div className='ion-margin-top'>
+		    <IonButton 
+			data-testid='account-credentials-continue-button'
+			disabled={!isValid}
+			expand='block' 
+			shape='round'
+			type='submit'>
+			Continue
+		    </IonButton>
+		</div>
+
+		<div className='ion-text-center ion-margin-top'>
+		    <IonText color='medium'>
+			Already have an account? <IonText>Log in (make me a link)</IonText>
+		    </IonText>
+		</div>
+            </form>
 	</>
     );
 }

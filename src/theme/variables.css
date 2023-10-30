@@ -8,16 +8,18 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
     /** color names **/
+    --Arena-High: #EEE8DE;
     --Base-Barro: #889391;
     --Base-Selva: #006A67;
     --Base-Suelo: #000000;
-    --Desierto-Highest: #FFDBCA;
     --Cielo-Cielo: #D3EAE8;
     --Cielo-Highest: #F2FFFD;
     --Cielo-Lowest: #003735;
+    --Desierto-Highest: #FFDBCA;
     --Habanero-High: #FF8B70;
-    --Sol-Low: #E3C029;
     --Habanero-Low: #8B1A00;
+    --Flamenco-Highest: #FFD8EB;
+    --Sol-Low: #E3C029;
 
     
     /** primary **/

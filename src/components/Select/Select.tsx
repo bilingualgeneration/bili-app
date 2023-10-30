@@ -54,6 +54,7 @@ export type IonSelect = {
 
 export type SelectAdditionalProps = {
     control: Control<any>,
+    defaultValue: string,
     options: SelectOption[],
     testId: string | undefined
 }

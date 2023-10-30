@@ -1,29 +1,45 @@
 import {
-	IonCard,
-	IonCardContent,
-	IonCardHeader,
-	IonCardTitle
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonText
 } from '@ionic/react';
 import React from 'react';
 
-export const RadioCard: React.FC<{ title: string; content: string; icon?: React.ReactNode; iconBackgroundColor: string; badge?: React.ReactNode}
-> = ({ title, content, icon, iconBackgroundColor, badge}) => {
-	return <IonCard>
-		<div className='card-inner'>
-			<div className='oval-element' style={{ backgroundColor: iconBackgroundColor }}>
-				{icon}
-			</div>
-			<div className='title-content'>
-				<IonCardHeader class='custom-ion-header'>
-					<IonCardTitle>
-						{title}
-					</IonCardTitle>
-				</IonCardHeader>
-				<IonCardContent>
-					{content}
-				</IonCardContent>
-			</div>
+type RadioCardProps = {
+    title: string;
+    content: string;
+    icon?: React.ReactNode;
+    iconBackgroundColor: string;
+    badge?: React.ReactNode
+};
 
-		</div>
-	</IonCard>;
+export const RadioCard: React.FC<RadioCardProps> = ({
+    badge,
+    content,
+    icon,
+    iconBackgroundColor,
+    title,
+}) => {
+    return <IonCard style={{cursor: 'pointer'}}>
+	<div className='card-inner'>
+	    <div className='oval-element' style={{ backgroundColor: iconBackgroundColor }}>
+		{icon}
+	    </div>
+	    <div className='title-content'>
+		<IonCardHeader class='custom-ion-header'>
+		    <IonCardTitle>
+			<IonText color='primary'>
+			    {title}
+			</IonText>
+		    </IonCardTitle>
+		</IonCardHeader>
+		<IonCardContent>
+		    {content}
+		</IonCardContent>
+	    </div>
+
+	</div>
+    </IonCard>;
 };
