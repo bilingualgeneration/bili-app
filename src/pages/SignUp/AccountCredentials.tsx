@@ -75,10 +75,9 @@ export const AccountCredentials: React.FC = () => {
 	<>
             <form
 		onSubmit={onSubmit}>
-		<IonText color='medium'>
-		    Your full name*
-		</IonText>
 		<Input
+		    label='Your full name*'
+		    labelPlacement='above'
                     name="name"
                     fill="outline"
                     control={control}
@@ -88,11 +87,9 @@ export const AccountCredentials: React.FC = () => {
 		/>
 
 		<div className='ion-margin-top'>
-		    <IonText
-			color='medium'>
-			Your email address*
-		    </IonText>
 		    <Input
+			label='Your email address*'
+			labelPlacement='above'
 			required={true}
 			name="email"
 			control={control}
@@ -104,10 +101,9 @@ export const AccountCredentials: React.FC = () => {
 		</div>
 
 		<div className='ion-margin-top'>
-		    <IonText color='medium'>
-			Password* (8+ characters)
-		    </IonText>
 		    <Input
+			label='Password* (8+ characters)'
+			labelPlacement='above'
 			required={true}
 			name="password"
 			control={control}

@@ -95,7 +95,7 @@ export type IonInputProps = {
     helperText: string,
     inputmode: 'decimal' | 'email' | 'none' | 'numeric' | 'search' | 'tel' | 'text' | undefined | 'url',
     label: string,
-    labelPlacement: 'fixed' | 'floating' | 'stacked' | undefined,
+    labelPlacement: 'above' | 'fixed' | 'floating' | 'stacked' | undefined,
     legacy: boolean | undefined,
     max: number | string | undefined,
     maxlength: number | undefined,
@@ -132,6 +132,7 @@ export const Input = ({
     className,
     control,
     fill = 'outline',
+    label,
     labelPlacement = 'floating',
     name,
     testId,
@@ -162,20 +163,29 @@ export const Input = ({
 		    if(fieldState.isTouched){
 			classes.push('ion-touched');
 		    }
-		return (
+		    // todo: label accessibility
+		    return (
+			<>
+			{labelPlacement === 'above' &&
+			 <label className='input-label-placement-above'>
+			     {label}
+			 </label>
+			}
 		    <IonInput
 			className={classes.join(' ')}
 			data-testid={testId}
 			errorText={fieldState.error?.message}
 			onIonInput={onChange}
 			onIonBlur={onBlur}
+			label={labelPlacement === 'above' ? undefined : label}
+			labelPlacement={labelPlacement === 'above' ? undefined : labelPlacement}
 		    {...{
 			fill,
-			labelPlacement
 		    }}
 		    {...props}
 		    {...fields}
 		    />
+			</>
 		);
 		}}
 	    />
