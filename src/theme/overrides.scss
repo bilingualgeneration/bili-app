@@ -57,6 +57,7 @@ ion-button {
     &.button-disabled{
 	--background: var(--ion-color-secondary);
 	--color: var(--ion-color-secondary-contrast);
+	opacity: 1;
     }
 }
 
@@ -94,25 +95,26 @@ ion-card-content {
 
 
 //styles for input fields
-ion-input.input-fill-outline {
-    font-weight: bold;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  // todo: convert #E7E9E9 into color system
-  // problem arises when trying to stack with border-color
-  --background: #E7E9E9;
-  --border-width: 0.25rem !important;
-  --border-color: #E7E9E9 !important;
-  --border-radius: 0.75rem !important;
-  // todo: highlight-color-focused gives a different color than expected
-  // --highlight-color-focused: var(--Base-Selva);
-}
+ion-input{
+    &.input-fill-outline {
+	font-weight: bold;
+	--padding-start: 20px;
+	--padding-end: 20px;
+	// todo: convert #E7E9E9 into color system
+	// problem arises when trying to stack with border-color
+	--background: #E7E9E9;
+	--border-width: 0.25rem !important;
+	--border-color: #E7E9E9 !important;
+	--border-radius: 0.75rem !important;
+	// todo: highlight-color-focused gives a different color than expected
+	// --highlight-color-focused: var(--Base-Selva);
 
-//styles for input fields
-ion-input.input-fill-outline.has-focus {
-    --background: var(--Cielo-Highest);
-    // todo: cannot use --highlight-color-focused because of issue above
-    --border-color: var(--Base-Selva)  !important;
+	&.has-focus {
+	    --background: var(--Cielo-Highest);
+	    // todo: cannot use --highlight-color-focused because of issue above
+	    --border-color: var(--Base-Selva)  !important;
+	}
+    }
 }
 
 .swiper-slide h1 {

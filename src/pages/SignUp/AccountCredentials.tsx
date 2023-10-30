@@ -127,7 +127,8 @@ export const AccountCredentials: React.FC = () => {
 		    className='ion-margin-top'
 		    disabled
 		    expand='block'
-		    fill='outline'>
+		    fill='outline'
+		    style={{opacity: 0.2}}>
 		    <GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
 		</IonButton>
 
@@ -136,7 +137,8 @@ export const AccountCredentials: React.FC = () => {
 		    className='ion-margin-top'
 		    disabled
 		    expand='block'
-		    fill='outline'>
+		    fill='outline'
+		    style={{opacity: 0.2}}>
 		    <AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
 		</IonButton>
 

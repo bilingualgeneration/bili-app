@@ -1,11 +1,26 @@
+import {
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonText
+} from '@ionic/react';
+
+
+// @ts-ignore todo: cannot find module or its corresponding type declarations
+import AppleIcon from '@/assets/icons/apple.svg?react';
+// @ts-ignore todo: cannot find module or its corresponding type declarations
+import GoogleIcon from '@/assets/icons/google.svg?react';
+
+
+
+
+
+
 import React from 'react';
 import {
     useAuth,
     useSigninCheck
 } from 'reactfire';
-import {
-    IonButton
-} from '@ionic/react';
 import {useForm, SubmitHandler} from "react-hook-form"
 import { Input } from '@/components/Input';
 import { z } from 'zod';
@@ -29,91 +44,114 @@ const signInWithGoogle = async (auth: Auth) => {
 };
 
 const handleEmailPasswordSignIn = async (auth: Auth, email: string, password: string) => {
-  try {
-      await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-      console.error("Error signing in with email and password:", error);
-  }
+    try {
+	await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+	console.error("Error signing in with email and password:", error);
+    }
 };
 
 
 interface FormInputs {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 const Login: React.FC = () => {
     const auth = useAuth();
     const {status, data: signinResult} = useSigninCheck();
-    const loginSchema = z.object({
-      email: z.string().email('ENTER a valid email'),
-      password: z.string().min(5,'Password must be 5 or more characters long')
+    const schema = z.object({
+	email: z.string()
+		.email('ENTER a valid email'),
+	password: z.string()
+		   .min(5)
     });
     const {
-      control,
-      handleSubmit,
-      formState: { errors },
+	control,
+	handleSubmit,
+	formState: {isValid},
     } = useForm<FormInputs>({
-      resolver: zodResolver(loginSchema)
+	resolver: zodResolver(schema)
     });
 
-    if(status === 'loading'){
-      return 
-        <>
-          loading
-        </>;
-    }
-    
-    const {signedIn, user} = signinResult;
+
 
     return (
 	<>
-	    {
-		signedIn && "hello " + user.displayName
-	    }
+	    <IonCard>
+		<IonCardContent>
+		    <div className='ion-margin-top'>
+			<IonText
+			    color='medium'>
+			    Email address
+			</IonText>
+			<Input
+			required={true}
+			name="email"
+			control={control}
+			fill="outline"
+			helperText=""
+			testId="account-credentials-email-input"
+			type="email"
+			/>
+		    </div>
 
-      <form onSubmit={handleSubmit(data => handleEmailPasswordSignIn(auth, data.email, data.password))}>
-          <Input
-              name="email"
-              control={control}
-              label="Email"
-              labelPlacement="stacked"
-              helperText="Enter a valid email"
-              testId="email-login-test"
-              type="email"
-            />
-          {errors.email && <p>{errors.email.message}</p>}
+		    <div className='ion-margin-top'>
+			<IonText color='medium'>
+			    Password
+			</IonText>
+			<Input
+			required={true}
+			name="password"
+			control={control}
+			fill="outline"
+			helperText=""
+			testId="account-credentials-password-input"
+			type="password"
+			/>
+		    </div>
 
-          <Input
-              name="password"
-              control={control}
-              label="Password"
-              labelPlacement="stacked"
-              helperText="Create a password"
-              testId="password-login-test"
-	            type="password"
-            />
-          {errors.password && <p id="pw-err">{errors.password.message}</p>}
-          <IonButton expand="block" type="submit" data-cy="login_auth" disabled={signedIn}>
-            Login
-          </IonButton>
-          
-          <IonButton
-            onClick={() => {signInWithGoogle(auth);}}
-            disabled={signedIn}
-              >
-            Sign In with Google
-          </IonButton>
-          <IonButton onClick={() => {signOut(auth);}}
-            disabled={!signedIn}
-              >
-            Sign Out
-          </IonButton>
+		    <div>
+			divider component goes here
+		    </div>
+		    
+		    <IonButton
+			color='medium'
+			className='ion-margin-top'
+			disabled
+			expand='block'
+			fill='outline'
+			style={{opacity: 0.2}}>
+			<GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
+		    </IonButton>
 
-      </form>
-      <IonButton href='/sign-up'>
-	  Don't have an account yet? Sign Up!
-      </IonButton>
+		    <IonButton
+			color='medium'
+			className='ion-margin-top'
+			disabled
+			expand='block'
+			fill='outline'
+			style={{opacity: 0.2}}>
+			<AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
+		    </IonButton>
+		    <div className='ion-margin-top'>
+			<IonButton 
+			    data-testid='account-credentials-continue-button'
+			    disabled={!isValid}
+			    expand='block' 
+			    shape='round'
+			    type='submit'>
+			    Continue
+			</IonButton>
+		    </div>
+
+		    <div className='ion-text-center ion-margin-top'>
+			<IonText color='medium'>
+			    Don't have an account? <IonText>Sign up (make me a link)</IonText>
+			</IonText>
+		    </div>
+		</IonCardContent>
+	    </IonCard>
 	</>
     );
 };
