@@ -81,11 +81,9 @@ const Login: React.FC = () => {
 	    <IonCard>
 		<IonCardContent>
 		    <div className='ion-margin-top'>
-			<IonText
-			    color='medium'>
-			    Email address
-			</IonText>
 			<Input
+			label='Email address'
+			labelPlacement='above'
 			required={true}
 			name="email"
 			control={control}
@@ -97,10 +95,9 @@ const Login: React.FC = () => {
 		    </div>
 
 		    <div className='ion-margin-top'>
-			<IonText color='medium'>
-			    Password
-			</IonText>
 			<Input
+			label='Password'
+			labelPlacement='above'
 			required={true}
 			name="password"
 			control={control}

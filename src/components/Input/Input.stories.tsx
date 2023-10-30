@@ -79,3 +79,10 @@ export const AsPassword: Story = {
 	helperText: 'must contain a number and symbol'
     }
 }
+
+export const LabelAbove: Story = {
+    args: {
+	label: 'label goes above',
+	labelPlacement: 'above'
+    }
+}
