@@ -16,7 +16,8 @@ import {
 import {
     useSignUpData
 } from '@/pages/SignUp/SignUpContext';
-
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
 // @ts-ignore todo: cannot find module or its corresponding type declarations
@@ -30,10 +31,18 @@ import { CollectionReference } from 'firebase/firestore';
 import { RadioCard } from '@/components/RadioCard';
 
 export const RoleSelect: React.FC = () => {
-    const form = useForm<{role: string}>();
+    const schema = z.object({
+		role: z.string().min(1)//nonempty was deprecated
+		});
+		const {
+		control,
+		handleSubmit,
+		formState: {isValid}
+		} = useForm<z.infer<typeof schema>>({
+		mode: 'onChange',
+		resolver: zodResolver(schema)
+		});
     const {data, setData} = useSignUpData();
-    const { control, handleSubmit, formState } = form;
-    
     const swiper = useSwiper();
     const teacherOption: ExtendedRadioOption = {
 	component: 
@@ -63,16 +72,14 @@ export const RoleSelect: React.FC = () => {
     };
 
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
-	//  setData({ 
-	//  	...data,
-	// 	...responses
-	//  });
+	 setData({ 
+	 	...data,
+		...responses
+	 });
         swiper.slideNext();
 	
     })
 
-    // TODO: how do we validate it with the form hook?
-    const isValid = !!form.watch('role');
     
     return (
 	<>

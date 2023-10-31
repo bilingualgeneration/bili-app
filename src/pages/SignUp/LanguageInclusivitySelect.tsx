@@ -31,7 +31,7 @@ import SmileyIcon from '@/assets/icons/smiley.svg?react';
 
 export const LanguageInclusivitySelect: React.FC = () => {
     const schema = z.object({
-	inclusivity: z.string().nonempty()
+	inclusivity: z.string().min(1)//nonempty was deprecated
     });
     const {
 	control,
