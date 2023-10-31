@@ -1,80 +1,69 @@
 {
-    "splash": {
-        "account": "¿Tiene una cuenta en Bili?",
-        "newAccount": "¿Es un recién llegado a Bili?",
-        "classroom": "¿Tiene un codigo escolar?",
-        "loginButton": "Iniciar sesión",
-        "createAccountButton": "Crear una cuenta",
-        "studentLoginButton": "Iniciar sesión de estudiante"
-    },
-    "login": {
-        "email": "Correo electrónico",
-        "password": "Contraseña",
-        "google": "Continuar con Google",
-        "apple": "Continue con Apple",
-        "continue": "Continuar",
-        "noAccount": "¿No tiene una cuenta? Inscríbase ahora"
-    },
-    "signUp": {
-        "describe": "¿Qué opción te describe mejor?",
-        "teacher": "Maestra/Maestro",
-        "teacher2": "Quiero usar esta aplicación con mis estudiantes.",
-        "parent": "Padre/Cuidador",
-        "parent2": "Quiero usar esta aplicación con mi(s) niño(s).",
-        "continue": "Continuar"
-    },
-    "signUpTeacher": {
-        "name": "Nombre y apellido(s)",
-        "email": "Correo electrónico",
-        "password": "Contraseña (8+ caracteres)",
-        "google": "Continuar con Google",
-        "apple": "Continue con Apple",
-        "terms": "Términos de servicio. Estoy de acuerdo con los términos de servicio. He leído y entendido la política de privacidad",
-        "marketing": "Quiero suscribirme a correos electrónicos de marketing.",
-        "continue": "Continuar",
-        "haveAccount": "Ya tiene una cuenta en Bili? Inicia su sesión ahora"
-    },
-    "signUpParent": {
-        "name": "Nombre y apellido(s)",
-        "email": "Correo electrónico",
-        "password": "Contraseña (8+ caracteres)",
-        "google": "Continuar con Google",
-        "apple": "Continue con Apple",
-        "terms": "Términos de servicio. Estoy de acuerdo con los términos de servicio. He leído y entendido la política de privacidad",
-        "marketing": "Quiero suscribirme a correos electrónicos de marketing.",
-        "continue": "Continuar",
-        "haveAccount": "Ya tiene una cuenta en Bili? Inicia su sesión ahora"
-    },
-    "languageMode": {
-        "settings": "Elija su configuración",
-        "immersion": "Elija esta configuración si desea que su hijo aprenda todos los contenidos y actividades en español.",
-        "bilingual": "Elija esta configuración si desea que su hijo aprenda español con apoyo y traducción en inglés.",
-        "continue": "Continuar"
-    },
-    "languageInclusivity": {
-        "settings": "Elija su configuración",
-        "excludeGenderNeutral": "Elija esta opción si no desea ver el uso de pronombres neutrales de género en el contenido (es decir, se excluirán el singular \"they\" en inglés y \"elle\" en español). Por ejemplo, solo verás las palabras \"amigo\" y \"amiga\" en actividades y contenido. La palabra \"amigue\" no aparecerá.",
-        "includeGenderNeutral": "Elija esta opción si desea ver el uso de lenguaje inclusivo de género en el contenido. Por ejemplo, los pronombres utilizados incluirán \"he, she, they\" en inglés y \"el, ella, elle\" en español.",
-        "recommended": "Recomendado",
-        "continue": "Continuar"
-    },
-    "successScreen": {
-        "success": "¡Éxito! ¡Lo hiciste!",
-        "continue": "Continuar"
-    },
-    "intruder": {
-        "intruderWelcome": "Bienvenidos a la página de Intruso",
-        "explore": "Explorar",
-        "home": "Inicio"
-    },
-    "memory": {
-        "memoryWelcome": "Bienvenidos a la página de Memoria"
-    },
-    "stories": {
-        "storyId": "ID de historia:"
-    },
-    "storyFactory": {
-        "storyFactoryWelcome": "Bienvenidos a la página Fábrica de historias"
-    }
+
+    "splash.account": "¿Tiene una cuenta en Bili?",
+    "splash.newAccount": "¿Es un recién llegado a Bili?",
+    "splash.classroom": "¿Tiene un codigo escolar?",
+    "splash.loginButton": "Iniciar sesión",
+    "splash.createAccountButton": "Crear una cuenta",
+    "splash.studentLoginButton": "Iniciar sesión de estudiante",
+
+    "login.email": "Correo electrónico",
+    "login.password": "Contraseña",
+    "login.google": "Continuar con Google",
+    "login.apple": "Continue con Apple",
+    "login.continue": "Continuar",
+    "login.noAccount": "¿No tiene una cuenta? Inscríbase ahora",
+
+    "signUp.describe": "¿Qué opción te describe mejor?",
+    "signUp.teacher": "Maestra/Maestro",
+    "signUp.teacher2": "Quiero usar esta aplicación con mis estudiantes.",
+    "signUp.parent": "Padre/Cuidador",
+    "signUp.parent2": "Quiero usar esta aplicación con mi(s) niño(s).",
+    "signUp.continue": "Continuar",
+
+    "signUpTeacher.name": "Nombre y apellido(s)",
+    "signUpTeacher.email": "Correo electrónico",
+    "signUpTeacher.password": "Contraseña (8+ caracteres)",
+    "signUpTeacher.google": "Continuar con Google",
+    "signUpTeacher.apple": "Continue con Apple",
+    "signUpTeacher.erms": "Términos de servicio. Estoy de acuerdo con los términos de servicio. He leído y entendido la política de privacidad",
+    "signUpTeacher.marketing": "Quiero suscribirme a correos electrónicos de marketing.",
+    "signUpTeacher.continue": "Continuar",
+    "signUpTeacher.haveAccount": "Ya tiene una cuenta en Bili? Inicia su sesión ahora",
+
+    "signUpParent.name": "Nombre y apellido(s)",
+    "signUpParent.email": "Correo electrónico",
+    "signUpParent.password": "Contraseña (8+ caracteres)",
+    "signUpParent.google": "Continuar con Google",
+    "signUpParent.apple": "Continue con Apple",
+    "signUpParent.terms": "Términos de servicio. Estoy de acuerdo con los términos de servicio. He leído y entendido la política de privacidad",
+    "signUpParent.marketing": "Quiero suscribirme a correos electrónicos de marketing.",
+    "signUpParent.continue": "Continuar",
+    "signUpParent.haveAccount": "Ya tiene una cuenta en Bili? Inicia su sesión ahora",
+
+    "languageMode.settings": "Elija su configuración",
+    "languageMode.immersion": "Elija esta configuración si desea que su hijo aprenda todos los contenidos y actividades en español.",
+    "languageMode.bilingual": "Elija esta configuración si desea que su hijo aprenda español con apoyo y traducción en inglés.",
+    "languageMode.continue": "Continuar",
+
+    "languageInclusivity.settings": "Elija su configuración",
+    "languageInclusivity.excludeGenderNeutral": "Elija esta opción si no desea ver el uso de pronombres neutrales de género en el contenido (es decir, se excluirán el singular \"they\" en inglés y \"elle\" en español). Por ejemplo, solo verás las palabras \"amigo\" y \"amiga\" en actividades y contenido. La palabra \"amigue\" no aparecerá.",
+    "languageInclusivity.includeGenderNeutral": "Elija esta opción si desea ver el uso de lenguaje inclusivo de género en el contenido. Por ejemplo, los pronombres utilizados incluirán \"he, she, they\" en inglés y \"el, ella, elle\" en español.",
+    "languageInclusivity.recommended": "Recomendado",
+    "languageInclusivity.continue": "Continuar",
+
+    "successScreen.success": "¡Éxito! ¡Lo hiciste!",
+    "successScreen.continue": "Continuar",
+
+    "intruder.intruderWelcome": "Bienvenidos a la página de Intruso",
+    "intruder.explore": "Explorar",
+    "intruder.home": "Inicio",
+
+    "memory.memoryWelcome": "Bienvenidos a la página de Memoria",
+
+    "stories.storyId": "ID de historia:",
+
+    "storyFactory.Welcome": "Bienvenidos a la página Fábrica de historias"
+  
 }
   
