@@ -1,6 +1,80 @@
 {
-    "intruderWelcome": "Welcome to Intruder Page",
-    "explore": "Explore",
-    "home": "Home"
+    "splash": {
+        "account": "Already have a Bili account?",
+        "newAccount": "New to Bili?",
+        "classroom": "Do you have a classroom code?",
+        "loginButton": "login",
+        "createAccountButton": "Create an account",
+        "studentLoginButton": "Student login"
+    },
+    "login": {
+        "email": "Email address",
+        "password": "Password",
+        "google": "Continue with Google",
+        "apple": "continue with Apple",
+        "continue": "Continue",
+        "noAccount": "Don't have an account? Sign up"
+    },
+    "signUp": {
+        "describe": "Which best describes you?",
+        "teacher": "Teacher",
+        "teacher2": "I want to use this app with my students.",
+        "parent": "Parent/Caregiver",
+        "parent2": "I want to use this app with my child(ren).",
+        "continue": "Continue"
+    },
+    "signUpTeacher": {
+        "name": "Your full name",
+        "email": "Your email address",
+        "password": "Password (8+ characters)",
+        "google": "Continue with Google",
+        "apple": "continue with Apple",
+        "terms": "Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy",
+        "marketing": "I want to receive marketing updates",
+        "continue": "Continue",
+        "haveAccount": "Already have an account? Log in"
+    },
+    "signUpParent": {
+        "name": "Your full name",
+        "email": "your email address",
+        "password": "Password (8+ characters)",
+        "google": "Continue with Google",
+        "apple": "continue with Apple",
+        "terms": "Terms of Service. I agree to the Terms of Service. I have read and understand the Privacy Policy",
+        "marketing": "I want to receive marketing updates",
+        "continue": "Continue",
+        "haveAccount": "Already have an account? Log in"
+    },
+    "languageMode": {
+        "settings": "Choose your settings",
+        "immersion": "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
+        "bilingual": "Choose this setting if you want your child to learn Spanish with English supports and translations.",
+        "continue": "Continue"
+    },
+    "languageInclusivity": {
+        "settings": "Choose your settings",
+        "excludeGenderNeutral": "Choose this option if you do not want to see the use of gender neutral pronouns in the content (i.e. singular \"they\" in English and \"elle\" in Spanish will be excluded). For example, you will only see the words \"amigo\" and \"amiga\" in activities and content. The word \"amigue\" will not appear.",
+        "includeGenderNeutral": "Choose this option if you want to see the use of gender inclusive language in the content/ For example, the pronouns used will include \"he, she, they\" in English and \"el, ella, elle\" in Spanish.",
+        "recommended": "recommended",
+        "continue": "Continue"
+    },
+    "successScreen": {
+        "success": "Success! You did it!",
+        "continue": "Continue"
+    },
+    "intruder": {
+        "intruderWelcome": "Welcome to Intruder Page",
+        "explore": "Explore",
+        "home": "Home"
+    },
+    "memory": {
+        "memoryWelcome": "Welcome to Memory Page"
+    },
+    "stories": {
+        "storyId": "Story ID:"
+    },
+    "storyFactory": {
+        "storyFactoryWelcome": "Welcome to Story Factory Page"
+    }
 }
   

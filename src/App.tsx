@@ -22,12 +22,12 @@ import {
     AuthProvider,
     useFirebaseApp
 } from 'reactfire';
-import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 import AuthedLayout from './layouts/Authed';
 import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Intruder from './pages/games/Intruder';
 import Journeys from './pages/Journeys';
+import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 import Login from './pages/Login';
 import Memory from './pages/games/Memory';
 import {Preload} from './pages/Preload';
@@ -90,7 +90,6 @@ const Router: React.FC = () => {
 
 		<Route exact path="/intruder" render={() => (
 		    <UnauthedLayout>
-			<LanguageSwitcher />
 			<Intruder />
 		    </UnauthedLayout>
 		)} />
