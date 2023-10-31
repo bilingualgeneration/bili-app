@@ -61,6 +61,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 		<div>
 		    <RadioCard
 		    icon={<SmileyIcon />}
+			badge='RECOMMENDED'
 		    title='Inclusive language'
 		    content='lorem ipsum'
 		    iconBackgroundColor='var(--Flamenco-Highest)'
@@ -71,10 +72,10 @@ export const LanguageInclusivitySelect: React.FC = () => {
     
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
 	
-	//  setData({ 
-	//  	...data,
-	// 	...responses
-	//  });
+	 setData({ 
+	 	...data,
+		...responses
+	 });
 
         swiper.slideNext();
     })

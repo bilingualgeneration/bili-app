@@ -18,6 +18,11 @@ export const Complete: React.FC = () => {
 				shape='round'
 				type='submit'
 				data-testid='complete-continue-button'
+				disabled
+				style={{
+					opacity: '0.2',
+					marginTop: '24px',
+				}}
 			>
 			Continue
 			</IonButton>

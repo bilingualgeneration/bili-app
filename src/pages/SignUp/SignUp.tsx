@@ -54,12 +54,12 @@ export const SignUp: React.FC = () => {
 				data-progress-percent={0.2}>
 				<RoleSelect />
 			    </SwiperSlide>
-			    <SwiperSlide
+			    {/* <SwiperSlide
 				className='ion-padding-top'
 				data-testid='account-credentials-slide'
 				data-progress-percent={0.4}>
 				<AccountCredentials />
-			    </SwiperSlide>
+			    </SwiperSlide> */}
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='language-mode-slide'
@@ -71,6 +71,12 @@ export const SignUp: React.FC = () => {
 				data-testid='language-inclusivity-slide'
 				data-progress-percent={0.8}>
 				<LanguageInclusivitySelect />
+			    </SwiperSlide>
+				<SwiperSlide
+				className='ion-padding-top'
+				data-testid='account-credentials-slide'
+				data-progress-percent={0.4}>
+				<AccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
