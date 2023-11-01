@@ -12,6 +12,7 @@ import {
     RoleSelect,
     LanguageInclusivitySelect,
     LanguageModeSelect,
+    TeacherAbout,
 } from '@/pages/SignUp';
 import {
     Swiper,
@@ -48,6 +49,12 @@ export const SignUp: React.FC = () => {
 			<Swiper
 			    allowTouchMove={false}
 			    onSlideChange={handleSlideChange}>
+			    <SwiperSlide
+				className='ion-padding-top'
+				data-testid='role-select-slide'
+				data-progress-percent={0.2}>
+				<TeacherAbout />
+			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='role-select-slide'
