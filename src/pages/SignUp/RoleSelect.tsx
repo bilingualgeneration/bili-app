@@ -9,7 +9,10 @@ import {
     IonItem,
     IonInput,
 } from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
+import {
+    useIntl,
+    FormattedMessage
+} from 'react-intl';
 
 import {
     useSwiper
@@ -31,6 +34,8 @@ import { CollectionReference } from 'firebase/firestore';
 import { RadioCard } from '@/components/RadioCard';
 
 export const RoleSelect: React.FC = () => {
+    const intl = useIntl();
+    console.log(intl);
     const form = useForm<{role: string}>();
     const {data, setData} = useSignUpData();
     const { control, handleSubmit, formState } = form;
@@ -53,10 +58,10 @@ export const RoleSelect: React.FC = () => {
 	component: 
 	<div>
 	    <RadioCard
-			title='Parent/Caregiver' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="signUp.parent" defaultMessage="Parent/Caregiver"/>
-			content='I want to use this app with my child(ren)' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="signUp.parent2" defaultMessage="I want to use this app with my child(ren)"/>
-			icon={<HouseIcon/>}
-			iconBackgroundColor='var(--Desierto-Highest)'
+		title={intl.messages['signUp.parent']}
+		content={intl.messages['signUp.parent2']}
+		icon={<HouseIcon/>}
+		iconBackgroundColor='var(--Desierto-Highest)'
 	    />
 	</div>,
 	value: 'parent',
