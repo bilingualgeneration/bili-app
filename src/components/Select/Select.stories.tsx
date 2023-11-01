@@ -73,7 +73,7 @@ const meta: Meta<typeof Select> = {
 		options={options}
 		/>
 		<br />
-		value from form: {field}
+		value of field: {field}
 	    </>
 	);
 

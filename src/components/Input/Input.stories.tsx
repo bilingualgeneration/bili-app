@@ -2,10 +2,6 @@ import type {
     Meta,
     StoryObj
 } from '@storybook/react';
-
-import {
-    IonItem
-} from '@ionic/react';
 import {
     SubmitHandler,
     useForm,
@@ -55,6 +51,9 @@ const meta: Meta<typeof Input> = {
 		    control={control}
 		    name='field'
 		/>
+		<div className='ion-margin-top'>
+		    value of field: {field}
+		</div>
 	    </>
 	);
     }

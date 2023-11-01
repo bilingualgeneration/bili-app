@@ -22,7 +22,8 @@ export type ExtendedRadioProps = {
     control: Control<any>,
     disabledClass?: string,
     name: string,
-    options: ExtendedRadioOption[]
+    options: ExtendedRadioOption[],
+    testId?: string
 }
 
 export const ExtendedRadio = ({
@@ -30,7 +31,8 @@ export const ExtendedRadio = ({
     control,
     disabledClass = 'disabled',
     name,
-    options
+    options,
+    testId = 'extended-radio-component'
 }: ExtendedRadioProps): JSX.Element => {
     const [activeIndex, setActiveIndex] = useState(-1);
     const handleClick = (index: number): void => {
@@ -39,7 +41,6 @@ export const ExtendedRadio = ({
     return (
 	<Controller
 	control={control}
-	data-testid='extended-radio-component'
 	name={name}
 	render={
 	    ({
@@ -47,7 +48,7 @@ export const ExtendedRadio = ({
 		    onChange
 		}
 	    }): JSX.Element => (
-		<span data-testid='extended-radio-component'>
+		<span data-testid={testId}>
 		    {options.map((option, index) =>
 			{
 			    const props = {

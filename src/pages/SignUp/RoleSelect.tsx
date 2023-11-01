@@ -8,6 +8,7 @@ import {
     IonLabel,
     IonItem,
     IonInput,
+    IonText,
 } from '@ionic/react';
 import {
     useIntl,
@@ -20,7 +21,8 @@ import {
 import {
     useSignUpData
 } from '@/pages/SignUp/SignUpContext';
-
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
 // @ts-ignore todo: cannot find module or its corresponding type declarations
@@ -33,35 +35,51 @@ import { string } from 'zod';
 import { CollectionReference } from 'firebase/firestore';
 import { RadioCard } from '@/components/RadioCard';
 
-export const RoleSelect: React.FC = () => {
+export type RoleSelectProps = {
+    teacherSlide: number,
+    parentSlide: number
+}
+
+export const RoleSelect: React.FC<RoleSelectProps> = ({
+    teacherSlide,
+    parentSlide
+}) => {
     const intl = useIntl();
-    console.log(intl);
     const form = useForm<{role: string}>();
+    const schema = z.object({
+	role: z.string().min(1)//nonempty was deprecated
+    });
+    const {
+	control,
+	handleSubmit,
+	formState: {isValid}
+    } = useForm<z.infer<typeof schema>>({
+	mode: 'onChange',
+	resolver: zodResolver(schema)
+    });
     const {data, setData} = useSignUpData();
-    const { control, handleSubmit, formState } = form;
-    
     const swiper = useSwiper();
     const teacherOption: ExtendedRadioOption = {
-		component: 
+	component: 
 			<div>
-				<RadioCard
-					title='Teacher'
-					content='I want to use this app with my students'
-					icon={<SchoolIcon/>}
-					iconBackgroundColor='var(--Cielo-Cielo)'	
-				/>
+			    <RadioCard
+			    title='Teacher'
+			    content='I want to use this app with my students'
+			    icon={<SchoolIcon/>}
+			    iconBackgroundColor='var(--Cielo-Cielo)'	
+			    />
 			</div>,
-		value: 'teacher',
+	value: 'teacher',
     };
 
     const parentOption: ExtendedRadioOption = {
 	component: 
 	<div>
 	    <RadioCard
-		title={intl.messages['signUp.parent']}
-		content={intl.messages['signUp.parent2']}
-		icon={<HouseIcon/>}
-		iconBackgroundColor='var(--Desierto-Highest)'
+	    title={intl.messages['signUp.parent']}
+	    content={intl.messages['signUp.parent2']}
+	    icon={<HouseIcon/>}
+	    iconBackgroundColor='var(--Desierto-Highest)'
 	    />
 	</div>,
 	value: 'parent',
@@ -69,37 +87,42 @@ export const RoleSelect: React.FC = () => {
     };
 
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
-	//  setData({ 
-	//  	...data,
-	// 	...responses
-	//  });
-        swiper.slideNext();
-	
+	setData({ 
+	    ...data,
+	    ...responses
+	});
+	// @ts-ignore todo: better typing
+	if(responses.role === 'teacher'){
+	    swiper.slideTo(teacherSlide);
+	}
+	// @ts-ignore todo: better typing
+	if(responses.role === 'parent'){
+	    swiper.slideTo(parentSlide);
+	}
     })
 
-    // TODO: how do we validate it with the form hook?
-    const isValid = !!form.watch('role');
     
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-			<h1>
-				<FormattedMessage id="signUp.describe" defaultMessage="Which best describes you?" />
-			</h1>
-			<ExtendedRadio
-				control = {control}
-				name = "role"
-				options={[teacherOption, parentOption]}
-			/>
-			<IonButton
-				shape='round'
-				type='submit'
-				data-testid='role-select-continue-button'
-				disabled={!isValid}>
-				<FormattedMessage id="signUp.continue" defaultMessage="Continue" /> 
-			</IonButton>
-	    </form>
-	    
+		<IonText className='ion-text-center'>
+		    <h1>
+			<FormattedMessage id="signUp.describe" defaultMessage="Which best describes you?" />
+		    </h1>
+		</IonText>
+		<ExtendedRadio
+		control = {control}
+		name = "role"
+		options={[teacherOption, parentOption]}
+		/>
+		<IonButton
+		    shape='round'
+		    type='submit'
+		    data-testid='role-select-continue-button'
+		    disabled={!isValid}>
+		    <FormattedMessage id="signUp.continue" defaultMessage="Continue" /> 
+		</IonButton>
+	    </form>	    
 	</>
     );
 }

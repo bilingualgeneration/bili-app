@@ -1,3 +1,4 @@
+import {DividerText} from '@/components/DividerText';
 import {
     IonButton,
     IonCard,
@@ -11,11 +12,6 @@ import { FormattedMessage } from 'react-intl';
 import AppleIcon from '@/assets/icons/apple.svg?react';
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import GoogleIcon from '@/assets/icons/google.svg?react';
-
-
-
-
-
 
 import React from 'react';
 import {
@@ -80,76 +76,76 @@ const Login: React.FC = () => {
     return (
 	<>
 	    <IonCard>
-			<IonCardContent>
-				<div className='ion-margin-top'>
-					<Input
-						label='Email address' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.email" defaultMessage="Email address"/>
-						labelPlacement='above'
-						required={true}
-						name="email" 
-						control={control}
-						fill="outline"
-						helperText=""
-						testId="account-credentials-email-input"
-						type="email"
-					/>
-				</div>
+		<IonCardContent>
+		    <div className='ion-margin-top'>
+			<Input
+			    label='Email address' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.email" defaultMessage="Email address"/>
+			    labelPlacement='above'
+			    required={true}
+			    name="email" 
+			    control={control}
+			    fill="outline"
+			    helperText=""
+			    testId="account-credentials-email-input"
+			    type="email"
+			    />
+		    </div>
 
-				<div className='ion-margin-top'>
-					<Input
-						label='Password' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.password" defaultMessage="Password"/>
-						labelPlacement='above'
-						required={true}
-						name="password"
-						control={control}
-						fill="outline"
-						helperText=""
-						testId="account-credentials-password-input"
-						type="password"
-					/>
-				</div>
+		    <div className='ion-margin-top'>
+			<Input
+			    label='Password' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.password" defaultMessage="Password"/>
+			    labelPlacement='above'
+			    required={true}
+			    name="password"
+			    control={control}
+			    fill="outline"
+			    helperText=""
+			    testId="account-credentials-password-input"
+			    type="password"
+			    />
+		    </div>
 
-				<div>
-					divider component goes here
-				</div>
-				
-				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-					<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
-				</IonButton>
+		    <DividerText
+			className='ion-margin-top'
+		    text='or'
+		    />
+		    
+		    <IonButton
+			color='medium'
+			className='ion-margin-top'
+			disabled
+			expand='block'
+			fill='outline'
+			style={{opacity: 0.2}}>
+			<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
+		    </IonButton>
+		    <IonButton
+			color='medium'
+			className='ion-margin-top'
+			disabled
+			expand='block'
+			fill='outline'
+			style={{opacity: 0.2}}>
+			<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
+		    </IonButton>
 
-				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-					<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
-				</IonButton>
+		    <div className='ion-margin-top'>
+			<IonButton 
+			    data-testid='account-credentials-continue-button'
+			    disabled={!isValid}
+			    expand='block' 
+			    shape='round'
+			    type='submit'>
+			    <FormattedMessage id="login.continue" defaultMessage="Continue" />
+			</IonButton>
+		    </div>
 
-				<div className='ion-margin-top'>
-					<IonButton 
-						data-testid='account-credentials-continue-button'
-						disabled={!isValid}
-						expand='block' 
-						shape='round'
-						type='submit'>
-						<FormattedMessage id="login.continue" defaultMessage="Continue" />
-					</IonButton>
-				</div>
-
-				<div className='ion-text-center ion-margin-top'>
-					<IonText color='medium'>
-						<FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <FormattedMessage id="login.signUp" defaultMessage="Sign Up" /> (make me a link) </IonText>
-					</IonText>
-				</div>
-			</IonCardContent>
+		    <div className='ion-text-center ion-margin-top'>
+			<IonText color='medium'>
+			    <FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <a href='/sign-up'><FormattedMessage id="login.signUp" defaultMessage="Sign Up" /></a></IonText>
+			</IonText>
+		    </div>
+		</IonCardContent>
 	    </IonCard>
 	</>
     );

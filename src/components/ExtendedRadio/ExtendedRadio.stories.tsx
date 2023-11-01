@@ -18,7 +18,6 @@ import {
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonText,
 } from '@ionic/react';
 
 import {
@@ -54,9 +53,9 @@ const meta: Meta<typeof ExtendedRadio> = {
 		{...props}
 		    control={control}
 		    name='field' />
-		<IonText>
-		    Selected Value: {field || 'none'}
-		</IonText>
+		<div className='ion-padding-top'>
+		    value of field: {field || 'none'}
+		</div>
 	    </>
 	);
     }
