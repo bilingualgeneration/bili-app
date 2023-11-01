@@ -26,11 +26,19 @@ export const LanguageSwitcher: React.FC<{}> = (props) => {
 	mode: 'onChange',
 	resolver: zodResolver(schema)
     });
+
+    const changeLanguage = (newLocale: locale) => {
+        // Update the locale in the context
+        setLocale(newLocale);
+    
+        // Persist the user's language choice to storage
+        localStorage.setItem('userLocale', newLocale);
+      };
     
     return (
 		<>
             <Select
-				changeLanguage ={setLocale}
+				changeLanguage ={changeLanguage}
                 control={control}
                 interface='popover'
                 label='mode'
