@@ -25,14 +25,14 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileContextProvider = ({children}: PropsWithChildren<{}>) => {
     const [locale, setLocale] = useState<locale>(defaultState.locale);
     return (
-	<>
-	    <ProfileContext.Provider
-		value={{
-		    locale,
-		    setLocale
-		}}>
-		{children}
-	    </ProfileContext.Provider>
-	</>
+        <>
+            <ProfileContext.Provider
+                value={{
+                    locale,
+                    setLocale
+                }}>
+                {children}
+            </ProfileContext.Provider>
+        </>
     );
 }

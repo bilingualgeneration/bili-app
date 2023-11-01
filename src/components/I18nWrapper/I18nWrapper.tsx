@@ -42,10 +42,10 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
     // console.log('This is the initial lang:', intl.messages)
 
     useEffect(() => {
-        console.log("Now you should be switching to: ", locale);  //debug stmt
+        // console.log("Now you should be switching to: ", locale);  //debug stmt
 	    readTranslations(locale).then((newTranslations) => {
-	        setTranslations(newTranslations);
-            // console.log('This would be the new translations:', newTranslations);
+            setTranslations(newTranslations);
+            // console.log('Translations loaded for locale:', locale);
 	    });
     }, [locale]);
 
@@ -59,7 +59,9 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
 	}
 	
 	try {
-	    const translations = await import(`./lang/${locale}.json`);
+	    const module = await import(`./lang/${locale}.json`);
+        const translations = module.default; // Access the default export
+
 	    translationsCache[locale] = translations;
         // console.log('The translations should be for:', locale);
         return translations;
