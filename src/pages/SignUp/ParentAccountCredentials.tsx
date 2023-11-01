@@ -6,9 +6,13 @@ import {
     IonText,
 } from '@ionic/react';
 
+
 import {Input} from '@/components/Input';
-import {useForm} from 'react-hook-form'
-import {useSwiper} from 'swiper/react';
+import {useForm, SubmitHandler} from 'react-hook-form'
+
+import {
+    useSwiper
+} from 'swiper/react';
 
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -19,16 +23,15 @@ import AppleIcon from '@/assets/icons/apple.svg?react';
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import GoogleIcon from '@/assets/icons/google.svg?react';
 
-
-//import './AccountCredentials.css';
-
 // todo: expand Input to include checkbox
 
-export type TeacherAccountCredentialsProps = {
+export type ParentAccountCredentialsProps = {
+    nextSlide: number,
     previousSlide: number
 }
 
-export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps> = ({
+export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> = ({
+    nextSlide,
     previousSlide
 }) => {
     const {data, setData} = useSignUpData();
@@ -36,7 +39,6 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
     const schema = z.object({
         name: z.string().min(1),
         email: z.string().email(),
-	school: z.string().min(1),
         password: z.string().min(8),
 	//tos: z.literal<boolean>(true),
 	//marketingUpdates: z.boolean()
@@ -57,7 +59,7 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 	    ...data,
 	    ...response
 	});
-	swiper.slideNext();
+	swiper.slideTo(nextSlide);
     });
 
     return (
@@ -70,7 +72,7 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 		fill="outline"
 		control={control}
 		helperText=""
-		testId="teacher-account-credentials-name-input"
+		testId="parent-account-credentials-name-input"
 		type="text"
 		/>
 
@@ -83,22 +85,8 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 		    control={control}
 		    fill="outline"
 		    helperText=""
-		    testId="teacher-account-credentials-email-input"
+		    testId="parent-account-credentials-email-input"
 		    type="email"
-		    />
-		</div>
-
-		<div className='ion-margin-top'>
-		    <Input
-		    label='Your school name*'
-		    labelPlacement='above'
-		    required={true}
-		    name="school"
-		    control={control}
-		    fill="outline"
-		    helperText=""
-		    testId="teacher-account-credentials-email-input"
-		    type="text"
 		    />
 		</div>
 
@@ -111,11 +99,11 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 		    control={control}
 		    fill="outline"
 		    helperText=""
-		    testId="teacher-account-credentials-password-input"
+		    testId="parent-account-credentials-password-input"
 		    type="password"
 		    />
 		</div>
-		
+
 		<DividerText
 		className='ion-margin-top'
 		    text='or'
@@ -164,7 +152,7 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 
 		<div className='ion-margin-top'>
 		    <IonButton 
-			data-testid='teacher-account-credentials-continue-button'
+			data-testid='parent-account-credentials-continue-button'
 			disabled={!isValid}
 			expand='block' 
 			shape='round'

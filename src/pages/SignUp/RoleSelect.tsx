@@ -8,6 +8,7 @@ import {
     IonLabel,
     IonItem,
     IonInput,
+    IonText,
 } from '@ionic/react';
 
 import {
@@ -30,18 +31,26 @@ import { string } from 'zod';
 import { CollectionReference } from 'firebase/firestore';
 import { RadioCard } from '@/components/RadioCard';
 
-export const RoleSelect: React.FC = () => {
+export type RoleSelectProps = {
+    teacherSlide: number,
+    parentSlide: number
+}
+
+export const RoleSelect: React.FC<RoleSelectProps> = ({
+    teacherSlide,
+    parentSlide
+}) => {
     const schema = z.object({
-		role: z.string().min(1)//nonempty was deprecated
-		});
-		const {
-		control,
-		handleSubmit,
-		formState: {isValid}
-		} = useForm<z.infer<typeof schema>>({
-		mode: 'onChange',
-		resolver: zodResolver(schema)
-		});
+	role: z.string().min(1)//nonempty was deprecated
+    });
+    const {
+	control,
+	handleSubmit,
+	formState: {isValid}
+    } = useForm<z.infer<typeof schema>>({
+	mode: 'onChange',
+	resolver: zodResolver(schema)
+    });
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
     const teacherOption: ExtendedRadioOption = {
@@ -76,17 +85,25 @@ export const RoleSelect: React.FC = () => {
 	 	...data,
 		...responses
 	 });
-        swiper.slideNext();
-	
+	// @ts-ignore todo: better typing
+	if(responses.role === 'teacher'){
+	    swiper.slideTo(teacherSlide);
+	}
+	// @ts-ignore todo: better typing
+	if(responses.role === 'parent'){
+	    swiper.slideTo(parentSlide);
+	}
     })
 
     
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Which best describes you?
-		</h1>
+		<IonText className='ion-text-center'>
+		    <h1>
+			Which best describes you?
+		    </h1>
+		</IonText>
 		<ExtendedRadio
 		control = {control}
 		name = "role"

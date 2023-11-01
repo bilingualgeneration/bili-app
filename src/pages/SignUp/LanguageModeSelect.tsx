@@ -7,6 +7,7 @@ import {
     IonLabel,
     IonItem,
     IonInput,
+    IonText,
 } from '@ionic/react';
 import {
     useSwiper
@@ -110,9 +111,11 @@ export const LanguageModeSelect: React.FC = () => {
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Choose your settings
-		</h1>
+		<IonText className='ion-text-center'>
+		    <h1>
+			Choose your settings
+		    </h1>
+		</IonText>
 		<ExtendedRadio
 		control = {control}
 		name = "language"

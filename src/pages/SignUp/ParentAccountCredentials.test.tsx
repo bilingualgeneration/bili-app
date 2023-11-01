@@ -11,7 +11,7 @@ import {
     fireEvent,
     waitFor
 } from '@testing-library/react';
-import {AccountCredentials} from '@/pages/SignUp/AccountCredentials';
+import {ParentAccountCredentials} from '@/pages/SignUp/ParentAccountCredentials';
 
 describe('SignUp Page', () => {
     describe('Account Credentials Slide', () => {

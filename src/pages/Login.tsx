@@ -1,3 +1,4 @@
+import {DividerText} from '@/components/DividerText';
 import {
     IonButton,
     IonCard,
@@ -108,9 +109,10 @@ const Login: React.FC = () => {
 			/>
 		    </div>
 
-		    <div>
-			divider component goes here
-		    </div>
+		    <DividerText
+		    className='ion-margin-top'
+			text='or'
+		    />
 		    
 		    <IonButton
 			color='medium'
@@ -144,7 +146,7 @@ const Login: React.FC = () => {
 
 		    <div className='ion-text-center ion-margin-top'>
 			<IonText color='medium'>
-			    Don't have an account? <IonText>Sign up (make me a link)</IonText>
+			    Don't have an account? <a href='/sign-up'>Sign up</a>
 			</IonText>
 		    </div>
 		</IonCardContent>
