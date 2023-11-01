@@ -62,7 +62,8 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
 	    const translations = await import(`./lang/${locale}.json`);
 	    translationsCache[locale] = translations;
         // console.log('The translations should be for:', locale);
-	    return console.log('These are the translations:', translations);
+        return translations;
+	    // return console.log('These are the translations:', translations);
 	} catch (error) {
 	    console.error(`Translations for ${locale} not found.`);
 	}
