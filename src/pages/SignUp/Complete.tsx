@@ -13,9 +13,11 @@ export const Complete: React.FC = () => {
 				display: 'flex',
 				flexDirection: 'column',
 			}}>
+		<IonText className='ion-text-center'>
 			<h1>
 				<FormattedMessage id="successScreen.success" defaultMessage="Success! You did it!" />
 			</h1>
+		</IonText>
 			<IonImg src="/assets/img/happy_cactus.png" />
 			<IonButton
 				shape='round'
