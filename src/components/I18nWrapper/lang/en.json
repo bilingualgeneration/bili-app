@@ -14,6 +14,13 @@
     "login.continue": "Continue",
     "login.noAccount": "Don't have an account?",
     "login.signUp": "Sign up",
+    "login.teacherWelcome": "Welcome to Teacher Login Page",
+    "login.teacher": "Login as Teacher",
+    "login.teacherUsername": "Username",
+    "login.teacherPassword": "Password",
+
+    "reset.email": "Enter your email address to reset your password:",
+    "reset.password": "Reset Password",
 
     "signUp.describe": "Which best describes you?",
     "signUp.teacher": "Teacher",
