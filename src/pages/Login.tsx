@@ -1,3 +1,4 @@
+import {DividerText} from '@/components/DividerText';
 import {
     IonButton,
     IonCard,

@@ -1,12 +1,11 @@
-// JC: removing account creation related code
-// JC: this will be implemented elsewhere
-
+import {DividerText} from '@/components/DividerText';
 import {
     IonButton,
     IonCheckbox,
     IonLabel,
     IonText,
 } from '@ionic/react';
+
 
 import {Input} from '@/components/Input';
 import {useForm, SubmitHandler} from 'react-hook-form'
@@ -38,13 +37,21 @@ interface FormInputs {
 
 // todo: expand Input to include checkbox
 
-export const AccountCredentials: React.FC = () => {
+export type ParentAccountCredentialsProps = {
+    nextSlide: number,
+    previousSlide: number
+}
+
+export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> = ({
+    nextSlide,
+    previousSlide
+}) => {
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
-    const credentialsSchema = z.object({
-        name: z.string().min(1, 'Name is required'),
-        email: z.string().email('ENTER a valid email'),
-        password: z.string().min(5,'Password must be 5 or more characters long'),
+    const schema = z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+        password: z.string().min(8),
 	//tos: z.literal<boolean>(true),
 	//marketingUpdates: z.boolean()
     });
@@ -53,23 +60,18 @@ export const AccountCredentials: React.FC = () => {
 	control,
 	handleSubmit,
 	formState: { errors, isValid},
-    } = useForm<FormInputs>({
-	defaultValues: {
-	    name: 'Jon Chin',
-	    email: 'jon@sharemeals.org',
-	    password: '12345678'
-	},
+    } = useForm<z.infer<typeof schema>>({
         mode: 'onChange',
-        resolver: zodResolver(credentialsSchema)
+        resolver: zodResolver(schema)
     });
 
     const onSubmit = handleSubmit((response) => {
 	console.log(response);
-	// setData({
-	//     ...data,
-	//     ...response
-	// });
-	swiper.slideNext();
+	setData({
+	    ...data,
+	    ...response
+	});
+	swiper.slideTo(nextSlide);
     });
 
     return (
@@ -125,7 +127,7 @@ export const AccountCredentials: React.FC = () => {
 					expand='block'
 					fill='outline'
 					style={{opacity: 0.2}}>
-					<GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
+					<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" description="Continue the login process with Google"/>
 				</IonButton>
 
 				<IonButton
@@ -135,7 +137,7 @@ export const AccountCredentials: React.FC = () => {
 					expand='block'
 					fill='outline'
 					style={{opacity: 0.2}}>
-					<AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
+					<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" description="Continue the login process with Apple"/>
 				</IonButton>
 
 				<div className='ion-margin-top'>
@@ -144,10 +146,10 @@ export const AccountCredentials: React.FC = () => {
 						justify='start'>
 						<IonText class='ion-text-wrap'>
 							<IonText color='primary' style={{fontWeight: 'bold'}}>
-								Terms of Service.
+								<FormattedMessage id="signUpParent.terms" defaultMessage="Terms of Service." description="Terms of Service for parents to agree to in sign up process."/>
 							</IonText> 
-								I agree to the Terms of Service. I have read and understand the Privacy Policy
-							</IonText>
+								<FormattedMessage id="signUpParent.termsAgree" defaultMessage="I agree to the Terms of Service. I have read and understand the Privacy Policy" description="Terms of Service for parents to agree to in sign up process."/>
+						</IonText>
 					</IonCheckbox>
 				</div>
 
@@ -155,7 +157,7 @@ export const AccountCredentials: React.FC = () => {
 					<IonCheckbox
 						justify='start'
 						labelPlacement='end'>
-						I want to receive marketing updates
+						<FormattedMessage id="signUpParent.marketing" defaultMessage="I want to receive marketing updates" description="Area for parents to check off if they wish to receive marketing emails during sign up process"/>
 					</IonCheckbox>
 				</div>
 
@@ -167,13 +169,13 @@ export const AccountCredentials: React.FC = () => {
 						expand='block' 
 						shape='round'
 						type='submit'>
-						Continue
+						<FormattedMessage id="signUpParent.continue" defaultMessage="Continue" description="Continue button after parents have filled out all required info"/>
 					</IonButton>
 				</div>
 
 				<div className='ion-text-center ion-margin-top'>
 					<IonText color='medium'>
-						Already have an account? <IonText>Log in (make me a link)</IonText>
+						<FormattedMessage id="signUpParent.haveAccount" defaultMessage="Already have an account?" description="Asking parents if they have an account so that they don't need to create a new one"/> <IonText> <a><FormattedMessage id="signUpParent.haveAccountLogin" defaultMessage="Log in" description="Log in link for parents in case they have an account so that they don't need to create a new one"/></a> </IonText>
 					</IonText>
 				</div>
 			</form>
