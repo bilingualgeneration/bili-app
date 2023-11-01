@@ -1,12 +1,11 @@
-// JC: removing account creation related code
-// JC: this will be implemented elsewhere
-
+import {DividerText} from '@/components/DividerText';
 import {
     IonButton,
     IonCheckbox,
     IonLabel,
     IonText,
 } from '@ionic/react';
+
 
 import {Input} from '@/components/Input';
 import {useForm, SubmitHandler} from 'react-hook-form'
@@ -24,26 +23,23 @@ import AppleIcon from '@/assets/icons/apple.svg?react';
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import GoogleIcon from '@/assets/icons/google.svg?react';
 
-
-import './AccountCredentials.css';
-
-interface FormInputs {
-    name: string;
-    email: string;
-    password: string;
-}
-
-
-
 // todo: expand Input to include checkbox
 
-export const AccountCredentials: React.FC = () => {
+export type ParentAccountCredentialsProps = {
+    nextSlide: number,
+    previousSlide: number
+}
+
+export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> = ({
+    nextSlide,
+    previousSlide
+}) => {
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
-    const credentialsSchema = z.object({
-        name: z.string().min(1, 'Name is required'),
-        email: z.string().email('ENTER a valid email'),
-        password: z.string().min(5,'Password must be 5 or more characters long'),
+    const schema = z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+        password: z.string().min(8),
 	//tos: z.literal<boolean>(true),
 	//marketingUpdates: z.boolean()
     });
@@ -52,71 +48,66 @@ export const AccountCredentials: React.FC = () => {
 	control,
 	handleSubmit,
 	formState: { errors, isValid},
-    } = useForm<FormInputs>({
-	defaultValues: {
-	    name: 'Jon Chin',
-	    email: 'jon@sharemeals.org',
-	    password: '12345678'
-	},
+    } = useForm<z.infer<typeof schema>>({
         mode: 'onChange',
-        resolver: zodResolver(credentialsSchema)
+        resolver: zodResolver(schema)
     });
 
     const onSubmit = handleSubmit((response) => {
 	console.log(response);
-	// setData({
-	//     ...data,
-	//     ...response
-	// });
-	swiper.slideNext();
+	setData({
+	    ...data,
+	    ...response
+	});
+	swiper.slideTo(nextSlide);
     });
 
     return (
 	<>
-            <form
-		onSubmit={onSubmit}>
+            <form onSubmit={onSubmit}>
 		<Input
-		    label='Your full name*'
-		    labelPlacement='above'
-                    name="name"
-                    fill="outline"
-                    control={control}
-                    helperText=""
-                    testId="account-credentials-name-input"
-                    type="text"
+		label='Your full name*'
+		labelPlacement='above'
+		name="name"
+		fill="outline"
+		control={control}
+		helperText=""
+		testId="parent-account-credentials-name-input"
+		type="text"
 		/>
 
 		<div className='ion-margin-top'>
 		    <Input
-			label='Your email address*'
-			labelPlacement='above'
-			required={true}
-			name="email"
-			control={control}
-			fill="outline"
-			helperText=""
-			testId="account-credentials-email-input"
-			type="email"
+		    label='Your email address*'
+		    labelPlacement='above'
+		    required={true}
+		    name="email"
+		    control={control}
+		    fill="outline"
+		    helperText=""
+		    testId="parent-account-credentials-email-input"
+		    type="email"
 		    />
 		</div>
 
 		<div className='ion-margin-top'>
 		    <Input
-			label='Password* (8+ characters)'
-			labelPlacement='above'
-			required={true}
-			name="password"
-			control={control}
-			fill="outline"
-			helperText=""
-			testId="account-credentials-password-input"
-			type="password"
+		    label='Password* (8+ characters)'
+		    labelPlacement='above'
+		    required={true}
+		    name="password"
+		    control={control}
+		    fill="outline"
+		    helperText=""
+		    testId="parent-account-credentials-password-input"
+		    type="password"
 		    />
 		</div>
 
-		<div>
-		    divider goes here
-		</div>
+		<DividerText
+		className='ion-margin-top'
+		    text='or'
+		/>
 		
 		<IonButton
 		    color='medium'
@@ -161,7 +152,7 @@ export const AccountCredentials: React.FC = () => {
 
 		<div className='ion-margin-top'>
 		    <IonButton 
-			data-testid='account-credentials-continue-button'
+			data-testid='parent-account-credentials-continue-button'
 			disabled={!isValid}
 			expand='block' 
 			shape='round'

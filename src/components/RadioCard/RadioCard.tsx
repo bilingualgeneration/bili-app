@@ -28,6 +28,16 @@ export const RadioCard: React.FC<RadioCardProps> = ({
 		{icon}
 	    </div>
 	    <div className='title-content'>
+            <div className='badge-content' 
+                style={{
+                backgroundColor: 'var(--Flamenco-High)',
+                marginLeft: '18px',
+                paddingLeft: '8px',
+                paddingRight: '8px',
+                borderRadius: '4px',
+                }}>
+                {badge}
+            </div>
 		<IonCardHeader class='custom-ion-header'>
 		    <IonCardTitle>
 			<IonText color='primary'>

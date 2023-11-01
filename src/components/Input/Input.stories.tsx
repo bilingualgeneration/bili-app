@@ -51,7 +51,7 @@ const meta: Meta<typeof Input> = {
 		    control={control}
 		    name='field'
 		/>
-		<div class='ion-margin-top'>
+		<div className='ion-margin-top'>
 		    value of field: {field}
 		</div>
 	    </>

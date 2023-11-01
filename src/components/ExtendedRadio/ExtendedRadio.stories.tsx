@@ -53,7 +53,7 @@ const meta: Meta<typeof ExtendedRadio> = {
 		{...props}
 		    control={control}
 		    name='field' />
-		<div class='ion-padding-top'>
+		<div className='ion-padding-top'>
 		    value of field: {field || 'none'}
 		</div>
 	    </>

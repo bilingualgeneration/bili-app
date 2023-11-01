@@ -11,16 +11,17 @@ import {
 } from '@ionic/react';
 import {useForm} from 'react-hook-form';
 import {useSignUpData} from '@/pages/SignUp/SignUpContext';
+import {useSwiper} from 'swiper/react';
 import {MultipleCheckbox} from '@/components/MultipleCheckbox';
 import type {
-    MultipleCheckboxAdditionalProps,
+    MultipleCheckboxProps,
     MultipleCheckboxOption
 } from '@/components/MultipleCheckbox';
 
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 
-const OptionWrapper: Pick<MultipleCheckboxAdditionalProps, 'wrapper'> = ({children}) => {
+const OptionWrapper = ({children}: {children: JSX.Element}) => {
     return (
 	<IonCol size="4">
 	    {children}
@@ -28,7 +29,15 @@ const OptionWrapper: Pick<MultipleCheckboxAdditionalProps, 'wrapper'> = ({childr
     );
 }
 
-export const TeacherAbout: FC = () => {
+export type TeacherAboutProps = {
+    nextSlide: number
+};
+
+export const TeacherAbout: FC<TeacherAboutProps> = ({
+    nextSlide
+}) => {
+    const {data, setData} = useSignUpData();
+    const swiper = useSwiper();
     // todo: these zod schemas are wrong
     const schema = z.object({
         grades: z.string().array().optional(),
@@ -38,7 +47,7 @@ export const TeacherAbout: FC = () => {
 	control,
 	handleSubmit,
 	formState: {isValid},
-    } = useForm<FormInputs>({
+    } = useForm<z.infer<typeof schema>>({
 	defaultValues: {
 	    grades: [],
 	},
@@ -94,20 +103,21 @@ export const TeacherAbout: FC = () => {
 
     const onSubmit = handleSubmit((response) => {
 	console.log(response);
+	swiper.slideTo(nextSlide);
     });
 
     return (
 	<>
             <form
 		onSubmit={onSubmit}>
-		<div>
-		    <IonText>
+		<div className='ion-padding-bottom'>
+		    <IonText className='ion-text-center'>
 			<h1>
 			    Tell us about yourself
 			</h1>
 		    </IonText>
 		</div>
-		<div>
+		<div className='ion-margin-top'>
 		    <IonText>
 			<h2>
 			    What grade(s) do you work with?
@@ -127,7 +137,7 @@ export const TeacherAbout: FC = () => {
 			</IonRow>
 		    </IonGrid>
 		</div>
-		<div>
+		<div className='ion-margin-top'>
 		    <IonText>
 			<h2>
 			    What is your role?
@@ -149,6 +159,7 @@ export const TeacherAbout: FC = () => {
 		</div>
 
 		<IonButton
+		    className='ion-margin-top'
 		    expand='block'
 		    shape='round'
 		    type='submit'

@@ -62,7 +62,7 @@ export const MultipleCheckbox = ({
     wrapper = ({children}) => children,
     ...props
 }: MultipleCheckboxProps): JSX.Element => {
-    const [values, setValues] = useState([]);
+    const [values, setValues] = useState<string[]>([]);
     return (
 	<Controller
 	control={control}

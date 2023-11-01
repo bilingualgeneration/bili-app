@@ -121,14 +121,27 @@ ion-input{
     }
 }
 
-.swiper-slide h1 {
-  color: var(--greyscale-900, #212121);
-  text-align: center;
-  font-family: Outfit;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 110%;
+ion-text{
+    h1{
+	font-size: 2rem !important;
+	font-weight: bold !important;
+    }
+
+    h2{
+	font-weight: bold !important;
+	font-size: 1.25rem !important;
+    }
 }
+
+/*
+ion-text h1{
+    color: var(--greyscale-900, #212121) !important;
+    font-family: Outfit !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    line-height: 110% !important;
+}
+*/
 
 // JC: temporarily disabled this since it was interfering with swiperjs
 
@@ -189,3 +202,4 @@ ion-card {
 .custom-ion-header {
   padding-bottom: 0;
 }
+

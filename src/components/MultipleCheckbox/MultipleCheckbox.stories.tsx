@@ -53,11 +53,10 @@ const meta: Meta<typeof MultipleCheckbox> = {
 	    field: z.string() // todo: allow numbers? other values?
 		    .array()
 	});
-	type schemaType = z.infer<typeof schema>;
 	const {
 	    control,
 	    handleSubmit
-	} = useForm<schemaType>({
+	} = useForm<z.infer<typeof schema>>({
 	    defaultValues: {
 		field: []
 	    },
@@ -76,7 +75,7 @@ const meta: Meta<typeof MultipleCheckbox> = {
 		    name='field'
 		    options={options}
 		/>
-		<div class='ion-margin-top'>
+		<div className='ion-margin-top'>
 		    value of field: {field.join(', ')}
 		</div>
 	    </>

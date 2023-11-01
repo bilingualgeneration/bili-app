@@ -7,11 +7,13 @@ import {
     IonLabel,
     IonItem,
     IonInput,
+    IonText,
 } from '@ionic/react';
 import {
     useSwiper
 } from 'swiper/react';
-
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {
     useSignUpData
 } from '@/pages/SignUp/SignUpContext';
@@ -22,9 +24,18 @@ import { RadioCard } from '../../components/RadioCard';
 import { ExtendedRadioOption, ExtendedRadio } from '@/components/ExtendedRadio';
 
 export const LanguageModeSelect: React.FC = () => {
-    const form = useForm<{language: string}>();
+	const schema = z.object({
+		language: z.string().min(1)//nonempty was deprecated
+		});
+		const {
+		control,
+		handleSubmit,
+		formState: {isValid}
+		} = useForm<z.infer<typeof schema>>({
+		mode: 'onChange',
+		resolver: zodResolver(schema)
+		});
     const {data, setData} = useSignUpData();
-    const { control, handleSubmit, formState } = form;
     const swiper = useSwiper();
 
     const spanishOption: ExtendedRadioOption = {
@@ -88,24 +99,23 @@ export const LanguageModeSelect: React.FC = () => {
     
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
 	
-	//  setData({ 
-	//  	...data,
-	// 	...responses
-	//  });
+	 setData({ 
+	 	...data,
+		...responses
+	 });
 
         swiper.slideNext();
 	
     })
 
-    // TODO: how do we validate it with the form hook?
-    const isValid = !!form.watch('language');
-
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Choose your settings
-		</h1>
+		<IonText className='ion-text-center'>
+		    <h1>
+			Choose your settings
+		    </h1>
+		</IonText>
 		<ExtendedRadio
 		control = {control}
 		name = "language"
