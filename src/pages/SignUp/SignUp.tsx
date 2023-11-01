@@ -12,6 +12,7 @@ import {
     RoleSelect,
     LanguageInclusivitySelect,
     LanguageModeSelect,
+	TeacherAccountCredentials,
 } from '@/pages/SignUp';
 import {
     Swiper,
@@ -58,7 +59,7 @@ export const SignUp: React.FC = () => {
 				className='ion-padding-top'
 				data-testid='account-credentials-slide'
 				data-progress-percent={0.4}>
-				<AccountCredentials />
+				<TeacherAccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
@@ -71,6 +72,12 @@ export const SignUp: React.FC = () => {
 				data-testid='language-inclusivity-slide'
 				data-progress-percent={0.8}>
 				<LanguageInclusivitySelect />
+			    </SwiperSlide>
+				<SwiperSlide
+				className='ion-padding-top'
+				data-testid='account-credentials-slide'
+				data-progress-percent={0.4}>
+				<AccountCredentials />
 			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'

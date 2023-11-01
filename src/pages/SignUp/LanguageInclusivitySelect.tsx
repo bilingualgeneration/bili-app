@@ -31,7 +31,7 @@ import SmileyIcon from '@/assets/icons/smiley.svg?react';
 
 export const LanguageInclusivitySelect: React.FC = () => {
     const schema = z.object({
-	inclusivity: z.string().nonempty()
+	inclusivity: z.string().min(1)//nonempty was deprecated
     });
     const {
 	control,
@@ -61,6 +61,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 		<div>
 		    <RadioCard
 		    icon={<SmileyIcon />}
+			badge='RECOMMENDED'
 		    title='Inclusive language'
 		    content='lorem ipsum'
 		    iconBackgroundColor='var(--Flamenco-Highest)'
@@ -71,10 +72,10 @@ export const LanguageInclusivitySelect: React.FC = () => {
     
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice
 	
-	//  setData({ 
-	//  	...data,
-	// 	...responses
-	//  });
+	 setData({ 
+	 	...data,
+		...responses
+	 });
 
         swiper.slideNext();
     })

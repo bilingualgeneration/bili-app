@@ -30,17 +30,19 @@ import './AccountCredentials.css';
 interface FormInputs {
     name: string;
     email: string;
+	school: string,
     password: string;
 }
 
 // todo: expand Input to include checkbox
 
-export const AccountCredentials: React.FC = () => {
+export const TeacherAccountCredentials: React.FC = () => {
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
     const credentialsSchema = z.object({
         name: z.string().min(1, 'Name is required'),
         email: z.string().email('ENTER a valid email'),
+		school: z.string().min(1, 'School name is required'),
         password: z.string().min(8,'Password must be 8 or more characters long'),
 	//tos: z.literal<boolean>(true),
 	//marketingUpdates: z.boolean()
@@ -54,6 +56,7 @@ export const AccountCredentials: React.FC = () => {
 	defaultValues: {
 	    name: 'Jon Chin',
 	    email: 'jon@sharemeals.org',
+		school: 'ABC',
 	    password: '12345678'
 	},
         mode: 'onChange',
@@ -94,6 +97,20 @@ export const AccountCredentials: React.FC = () => {
 				helperText=""
 				testId="account-credentials-email-input"
 				type="email"
+				/>
+			</div>
+
+			<div className='ion-margin-top'>
+				<Input
+				label='Your school name*'
+				labelPlacement='above'
+				required={true}
+				name="school"
+				control={control}
+				fill="outline"
+				helperText=""
+				testId="account-credentials-email-input"
+				type="text"
 				/>
 			</div>
 
