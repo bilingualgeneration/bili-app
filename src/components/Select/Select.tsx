@@ -60,7 +60,7 @@ export type SelectAdditionalProps = {
     testId: string | undefined
 }
 
-export type Select = Pick<SelectAdditionalProps, 'changeLanguage'> 
+export type Select = /* Pick<SelectAdditionalProps, 'changeLanguage'> */ /* <-- Added this line, but it works without, so don't know if we NEED it?*/
 		   & Partial<IonSelect>
 		   & Partial <SelectAdditionalProps>
 		   & Pick<IonSelect, 'name'>
