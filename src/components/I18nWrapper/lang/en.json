@@ -12,7 +12,7 @@
     "login.google": "Continue with Google",
     "login.apple": "continue with Apple",
     "login.continue": "Continue",
-    "login.noAccount": "Don't have an account? Sign up",
+    "login.noAccount": "Don't have an account?",
     "login.signUp": "Sign up",
 
     "signUp.describe": "Which best describes you?",

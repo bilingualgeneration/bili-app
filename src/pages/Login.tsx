@@ -146,7 +146,7 @@ const Login: React.FC = () => {
 
 				<div className='ion-text-center ion-margin-top'>
 					<IonText color='medium'>
-						<FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <FormattedMessage id="login.signUp" defaultMessage="Sign Up" /> (make me a link)</IonText>
+						<FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <FormattedMessage id="login.signUp" defaultMessage="Sign Up" /> (make me a link) </IonText>
 					</IonText>
 				</div>
 			</IonCardContent>
