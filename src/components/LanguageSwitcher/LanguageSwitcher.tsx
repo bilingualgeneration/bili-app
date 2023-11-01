@@ -12,6 +12,7 @@ import {
 
 export const LanguageSwitcher: React.FC<{}> = (props) => {
     const {locale, setLocale} = useProfile();
+	// console.log('Current Locale:', locale); // Debug statement
     const schema = z.object({
 	locale: z.string()
     });
@@ -27,16 +28,18 @@ export const LanguageSwitcher: React.FC<{}> = (props) => {
     });
     
     return (
-	<>
-	    <Select
-		control={control}
-		interface='popover'
-		label='mode'
-		name='locale'
-		options={Object.keys(locales).map((l: string) => ({
-		    value: l,
-		    label: locales[l as keyof typeof locales]
-		}))} />
-	</>
+		<>
+            <Select
+				changeLanguage ={setLocale}
+                control={control}
+                interface='popover'
+                label='mode'
+                name='locale'
+                options={Object.keys(locales).map((l: string) => ({
+                    value: l,
+                    label: locales[l as keyof typeof locales]
+                }))}
+            />
+        </>
     );
 };
