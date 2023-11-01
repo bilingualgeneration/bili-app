@@ -26,6 +26,7 @@ import GoogleIcon from '@/assets/icons/google.svg?react';
 
 
 import './AccountCredentials.css';
+import { FormattedMessage } from 'react-intl';
 
 interface FormInputs {
     name: string;
@@ -72,110 +73,110 @@ export const AccountCredentials: React.FC = () => {
     });
 
     return (
-	<>
-            <form
-		onSubmit={onSubmit}>
-		<Input
-		    label='Your full name*'
-		    labelPlacement='above'
-                    name="name"
-                    fill="outline"
-                    control={control}
-                    helperText=""
-                    testId="account-credentials-name-input"
-                    type="text"
-		/>
+		<>
+			<form onSubmit={onSubmit}>
+				<Input
+					label="Your full name*"
+					labelPlacement='above'
+					name="name"
+					fill="outline"
+					control={control}
+					helperText=""
+					testId="account-credentials-name-input"
+					type="text"
+				/>
 
-		<div className='ion-margin-top'>
-		    <Input
-			label='Your email address*'
-			labelPlacement='above'
-			required={true}
-			name="email"
-			control={control}
-			fill="outline"
-			helperText=""
-			testId="account-credentials-email-input"
-			type="email"
-		    />
-		</div>
+				<div className='ion-margin-top'>
+					<Input
+						label='Your email address*'
+						labelPlacement='above'
+						required={true}
+						name="email"
+						control={control}
+						fill="outline"
+						helperText=""
+						testId="account-credentials-email-input"
+						type="email"
+					/>
+				</div>
 
-		<div className='ion-margin-top'>
-		    <Input
-			label='Password* (8+ characters)'
-			labelPlacement='above'
-			required={true}
-			name="password"
-			control={control}
-			fill="outline"
-			helperText=""
-			testId="account-credentials-password-input"
-			type="password"
-		    />
-		</div>
+				<div className='ion-margin-top'>
+					<Input
+						label='Password* (8+ characters)'
+						labelPlacement='above'
+						required={true}
+						name="password"
+						control={control}
+						fill="outline"
+						helperText=""
+						testId="account-credentials-password-input"
+						type="password"
+					/>
+				</div>
 
-		<div>
-		    divider goes here
-		</div>
-		
-		<IonButton
-		    color='medium'
-		    className='ion-margin-top'
-		    disabled
-		    expand='block'
-		    fill='outline'
-		    style={{opacity: 0.2}}>
-		    <GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
-		</IonButton>
+				<div>
+					divider goes here
+				</div>
+				
+				<IonButton
+					color='medium'
+					className='ion-margin-top'
+					disabled
+					expand='block'
+					fill='outline'
+					style={{opacity: 0.2}}>
+					<GoogleIcon style={{marginRight: '1rem'}} /> Continue with Google
+				</IonButton>
 
-		<IonButton
-		    color='medium'
-		    className='ion-margin-top'
-		    disabled
-		    expand='block'
-		    fill='outline'
-		    style={{opacity: 0.2}}>
-		    <AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
-		</IonButton>
+				<IonButton
+					color='medium'
+					className='ion-margin-top'
+					disabled
+					expand='block'
+					fill='outline'
+					style={{opacity: 0.2}}>
+					<AppleIcon style={{marginRight: '1rem'}} /> Continue with Apple
+				</IonButton>
 
-		<div className='ion-margin-top'>
-		    <IonCheckbox
-			labelPlacement='end'
-			justify='start'>
-			<IonText class='ion-text-wrap'>
-			    <IonText color='primary' style={{fontWeight: 'bold'}}>
-				Terms of Service.
-			    </IonText> I agree to the Terms of Service. I have read and understand the Privacy Policy
-			</IonText>
-		    </IonCheckbox>
-		</div>
+				<div className='ion-margin-top'>
+					<IonCheckbox
+						labelPlacement='end'
+						justify='start'>
+						<IonText class='ion-text-wrap'>
+							<IonText color='primary' style={{fontWeight: 'bold'}}>
+								Terms of Service.
+							</IonText> 
+								I agree to the Terms of Service. I have read and understand the Privacy Policy
+							</IonText>
+					</IonCheckbox>
+				</div>
 
-		<div className='ion-margin-top'>
-		    <IonCheckbox
-			justify='start'
-			labelPlacement='end'>
-			I want to receive marketing updates
-		    </IonCheckbox>
-		</div>
+				<div className='ion-margin-top'>
+					<IonCheckbox
+						justify='start'
+						labelPlacement='end'>
+						I want to receive marketing updates
+					</IonCheckbox>
+				</div>
 
 
-		<div className='ion-margin-top'>
-		    <IonButton 
-			data-testid='account-credentials-continue-button'
-			disabled={!isValid}
-			expand='block' 
-			shape='round'
-			type='submit'>
-			Continue
-		    </IonButton>
-		</div>
+				<div className='ion-margin-top'>
+					<IonButton 
+						data-testid='account-credentials-continue-button'
+						disabled={!isValid}
+						expand='block' 
+						shape='round'
+						type='submit'>
+						Continue
+					</IonButton>
+				</div>
 
-		<div className='ion-text-center ion-margin-top'>
-		    <IonText color='medium'>
-			Already have an account? <IonText>Log in (make me a link)</IonText>
-		    </IonText>
-		</div>
-            </form>
-	</>
+				<div className='ion-text-center ion-margin-top'>
+					<IonText color='medium'>
+						Already have an account? <IonText>Log in (make me a link)</IonText>
+					</IonText>
+				</div>
+			</form>
+		</>
     );
 }

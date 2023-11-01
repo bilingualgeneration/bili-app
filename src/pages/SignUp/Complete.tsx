@@ -1,4 +1,5 @@
 import { IonButton, IonImg } from "@ionic/react"
+import { FormattedMessage } from 'react-intl';
 
 export const Complete: React.FC = () => {
     return (
@@ -9,7 +10,9 @@ export const Complete: React.FC = () => {
 				flexDirection: 'column',
 			}}
 		>
-			<h1>Success! You did it!</h1>
+			<h1>
+				<FormattedMessage id="successScreen.success" defaultMessage="Success! You did it!" />
+			</h1>
 			<IonImg
 				src="/assets/img/happy_cactus.png"
     		>
@@ -19,7 +22,7 @@ export const Complete: React.FC = () => {
 				type='submit'
 				data-testid='complete-continue-button'
 			>
-			Continue
+				<FormattedMessage id="successScreen.continue" defaultMessage="Continue" />
 			</IonButton>
 		</div>
 

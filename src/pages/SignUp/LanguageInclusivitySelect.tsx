@@ -8,6 +8,8 @@ import {
     IonItem,
     IonInput,
 } from '@ionic/react';
+import { FormattedMessage } from 'react-intl';
+
 import {
     useSwiper
 } from 'swiper/react';
@@ -80,24 +82,24 @@ export const LanguageInclusivitySelect: React.FC = () => {
     })
 
     return (
-	<>
-	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Choose your settings
-		</h1>
-		<ExtendedRadio
-		control={control}
-		name='inclusivity'
-		options={[nonInclusiveOption, inclusiveOption]}
-		/>
-		<IonButton
-		    data-testid='language-select-continue-button'
-		    disabled={!isValid}
-		    shape='round'
-		    type='submit'>
-		    Continue
-		</IonButton>
-	    </form>
-	</>
+		<>
+			<form onSubmit={onSubmit} className='radio-button-select'>
+				<h1>
+					<FormattedMessage id="languageInclusivity.settings" defaultMessage="Choose your settings"/>
+				</h1>
+				<ExtendedRadio
+					control={control}
+					name='inclusivity'
+					options={[nonInclusiveOption, inclusiveOption]}
+				/>
+				<IonButton
+					data-testid='language-select-continue-button'
+					disabled={!isValid}
+					shape='round'
+					type='submit'>
+					<FormattedMessage id="languageInclusivity.continue" defaultMessage="Continue"/>
+				</IonButton>
+			</form>
+		</>
     );
 }

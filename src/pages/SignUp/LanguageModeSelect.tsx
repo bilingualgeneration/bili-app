@@ -11,6 +11,7 @@ import {
 import {
     useSwiper
 } from 'swiper/react';
+import { FormattedMessage } from 'react-intl';
 
 import {
     useSignUpData
@@ -103,21 +104,21 @@ export const LanguageModeSelect: React.FC = () => {
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Choose your settings
-		</h1>
-		<ExtendedRadio
-		control = {control}
-		name = "language"
-		options={[spanishOption, billingualOption]}
-		/>
-		<IonButton
-		    data-testid='language-select-continue-button'
-		    disabled={!isValid}
-		    shape='round'
-		    type='submit'>
-		    Continue
-		</IonButton>
+			<h1>
+				<FormattedMessage id="languageMode.settings" defaultMessage="Choose your settings"/>
+			</h1>
+			<ExtendedRadio
+				control = {control}
+				name = "language"
+				options={[spanishOption, billingualOption]}
+			/>
+			<IonButton
+				data-testid='language-select-continue-button'
+				disabled={!isValid}
+				shape='round'
+				type='submit'>
+				<FormattedMessage id="languageMode.continue" defaultMessage="Continue"/>
+			</IonButton>
 	    </form>
 	</>
     );

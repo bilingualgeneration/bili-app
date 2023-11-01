@@ -25,7 +25,12 @@
 		"strictNullChecks": true,
 		"useDefineForClassFields": true,
 		"target": "ESNext",
-		"types": ["@babel/core"]
+		"types": [
+			"@babel/core", 
+			"react",
+			"react-dom",
+			"react-intl"
+		]
     },
     "include": ["src", "i18n.ts"],
     "ts-node": {

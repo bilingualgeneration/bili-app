@@ -9,6 +9,7 @@ import {
     IonItem,
     IonInput,
 } from '@ionic/react';
+import { FormattedMessage } from 'react-intl';
 
 import {
     useSwiper
@@ -36,26 +37,26 @@ export const RoleSelect: React.FC = () => {
     
     const swiper = useSwiper();
     const teacherOption: ExtendedRadioOption = {
-	component: 
-	<div>
-	    <RadioCard
-		title='Teacher'
-		content='I want to use this app with my students'
-		icon={<SchoolIcon/>}
-		iconBackgroundColor='var(--Cielo-Cielo)'	
-	    />
-	</div>,
-	value: 'teacher',
+		component: 
+			<div>
+				<RadioCard
+					title='Teacher'
+					content='I want to use this app with my students'
+					icon={<SchoolIcon/>}
+					iconBackgroundColor='var(--Cielo-Cielo)'	
+				/>
+			</div>,
+		value: 'teacher',
     };
 
     const parentOption: ExtendedRadioOption = {
 	component: 
 	<div>
 	    <RadioCard
-		title='Parent/Caregiver'
-		content='I want to use this app with my child(ren)'
-		icon={<HouseIcon/>}
-		iconBackgroundColor='var(--Desierto-Highest)'
+			title='Parent/Caregiver' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="signUp.parent" defaultMessage="Parent/Caregiver"/>
+			content='I want to use this app with my child(ren)' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="signUp.parent2" defaultMessage="I want to use this app with my child(ren)"/>
+			icon={<HouseIcon/>}
+			iconBackgroundColor='var(--Desierto-Highest)'
 	    />
 	</div>,
 	value: 'parent',
@@ -77,21 +78,21 @@ export const RoleSelect: React.FC = () => {
     return (
 	<>
 	    <form onSubmit={onSubmit} className='radio-button-select'>
-		<h1>
-		    Which best describes you?
-		</h1>
-		<ExtendedRadio
-		control = {control}
-		name = "role"
-		options={[teacherOption, parentOption]}
-		/>
-		<IonButton
-		    shape='round'
-		    type='submit'
-		    data-testid='role-select-continue-button'
-		    disabled={!isValid}>
-		    Continue
-		</IonButton>
+			<h1>
+				<FormattedMessage id="signUp.describe" defaultMessage="Which best describes you?" />
+			</h1>
+			<ExtendedRadio
+				control = {control}
+				name = "role"
+				options={[teacherOption, parentOption]}
+			/>
+			<IonButton
+				shape='round'
+				type='submit'
+				data-testid='role-select-continue-button'
+				disabled={!isValid}>
+				<FormattedMessage id="signUp.continue" defaultMessage="Continue" /> 
+			</IonButton>
 	    </form>
 	    
 	</>

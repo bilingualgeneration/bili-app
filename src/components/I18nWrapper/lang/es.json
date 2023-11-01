@@ -12,7 +12,8 @@
     "login.google": "Continuar con Google",
     "login.apple": "Continue con Apple",
     "login.continue": "Continuar",
-    "login.noAccount": "¿No tiene una cuenta? Inscríbase ahora",
+    "login.noAccount": "¿No tiene una cuenta?",
+    "login.signUp": "Inscríbase ahora",
 
     "signUp.describe": "¿Qué opción te describe mejor?",
     "signUp.teacher": "Maestra/Maestro",

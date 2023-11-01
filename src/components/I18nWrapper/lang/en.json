@@ -13,6 +13,7 @@
     "login.apple": "continue with Apple",
     "login.continue": "Continue",
     "login.noAccount": "Don't have an account? Sign up",
+    "login.signUp": "Sign up",
 
     "signUp.describe": "Which best describes you?",
     "signUp.teacher": "Teacher",
