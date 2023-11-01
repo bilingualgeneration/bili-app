@@ -12,6 +12,7 @@ import {
     RoleSelect,
     LanguageInclusivitySelect,
     LanguageModeSelect,
+	TeacherAccountCredentials,
 } from '@/pages/SignUp';
 import {
     Swiper,
@@ -54,12 +55,12 @@ export const SignUp: React.FC = () => {
 				data-progress-percent={0.2}>
 				<RoleSelect />
 			    </SwiperSlide>
-			    {/* <SwiperSlide
+			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='account-credentials-slide'
 				data-progress-percent={0.4}>
-				<AccountCredentials />
-			    </SwiperSlide> */}
+				<TeacherAccountCredentials />
+			    </SwiperSlide>
 			    <SwiperSlide
 				className='ion-padding-top'
 				data-testid='language-mode-slide'
