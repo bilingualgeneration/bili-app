@@ -1,52 +1,50 @@
-import React from 'react';
+import {
+    FC,
+    useEffect
+} from 'react';
 import {locales} from '@/components/I18nWrapper';
 import type {locale} from '@/components/I18nWrapper';
 import {useProfile} from '@/contexts/ProfileContext';
 import {Select} from '@/components/Select';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import type {SelectOption} from '@/components/Select';
+import {Toggle} from '@/components/Toggle';
 import {
-    useForm
+    useForm,
+    useWatch
 } from 'react-hook-form';
 
-export const LanguageSwitcher: React.FC<{}> = (props) => {
+export const LanguageSwitcher: FC = () => {
     const {locale, setLocale} = useProfile();
 	// console.log('Current Locale:', locale); // Debug statement
     const schema = z.object({
-	locale: z.string()
+	    isSpanish: z.boolean()
     });
     type schemaType = z.infer<typeof schema>;
     const {
-	control
+	    control
     } = useForm<schemaType>({
-	defaultValues: {
-	    locale
+        defaultValues: {
+            isSpanish: locale === 'es'
 	},
 	mode: 'onChange',
-	resolver: zodResolver(schema)
+	    resolver: zodResolver(schema)
+    });
+    const isSpanish: boolean = useWatch({
+        control,
+        name: 'isSpanish'
     });
 
-    const changeLanguage = (newLocale: locale) => {
-        // Update the locale in the context
-        setLocale(newLocale);
-    
-        // Persist the user's language choice to storage
-        localStorage.setItem('userLocale', newLocale);
-      };
-    
+    useEffect(() => {
+	    setLocale(isSpanish ? 'es' : 'en');
+    }, [isSpanish]);
+
     return (
-		<>
-            <Select
-				changeLanguage ={changeLanguage}
-                control={control}
-                interface='popover'
-                label='mode'
-                name='locale'
-                options={Object.keys(locales).map((l: string) => ({
-                    value: l,
-                    label: locales[l as keyof typeof locales]
-                }))}
+        <>
+            <Toggle
+            control={control}
+            label='English Mode'
+            name='isSpanish'
             />
         </>
     );
