@@ -13,11 +13,6 @@ import AppleIcon from '@/assets/icons/apple.svg?react';
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import GoogleIcon from '@/assets/icons/google.svg?react';
 
-
-
-
-
-
 import React from 'react';
 import {
     useAuth,
@@ -79,10 +74,10 @@ const Login: React.FC = () => {
 
 
     return (
-	<>
-	    <IonCard>
-			<IonCardContent>
-				<div className='ion-margin-top'>
+		<>
+			<IonCard>
+				<IonCardContent>
+					<div className='ion-margin-top'>
 					<Input
 						label='Email address' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.email" defaultMessage="Email address"/>
 						labelPlacement='above'
@@ -93,10 +88,10 @@ const Login: React.FC = () => {
 						helperText=""
 						testId="account-credentials-email-input"
 						type="email"
-					/>
-				</div>
+						/>
+					</div>
 
-				<div className='ion-margin-top'>
+					<div className='ion-margin-top'>
 					<Input
 						label='Password' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.password" defaultMessage="Password"/>
 						labelPlacement='above'
@@ -107,34 +102,34 @@ const Login: React.FC = () => {
 						helperText=""
 						testId="account-credentials-password-input"
 						type="password"
+						/>
+					</div>
+
+					<DividerText
+						className='ion-margin-top'
+						text='or'
 					/>
-				</div>
+					
+					<IonButton
+						color='medium'
+						className='ion-margin-top'
+						disabled
+						expand='block'
+						fill='outline'
+						style={{opacity: 0.2}}>
+							<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
+					</IonButton>
+					<IonButton
+						color='medium'
+						className='ion-margin-top'
+						disabled
+						expand='block'
+						fill='outline'
+						style={{opacity: 0.2}}>
+							<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
+					</IonButton>
 
-				<div>
-					divider component goes here
-				</div>
-				
-				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-					<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
-				</IonButton>
-
-				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-					<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
-				</IonButton>
-
-				<div className='ion-margin-top'>
+					<div className='ion-margin-top'>
 					<IonButton 
 						data-testid='account-credentials-continue-button'
 						disabled={!isValid}
@@ -143,16 +138,16 @@ const Login: React.FC = () => {
 						type='submit'>
 						<FormattedMessage id="login.continue" defaultMessage="Continue" />
 					</IonButton>
-				</div>
+					</div>
 
-				<div className='ion-text-center ion-margin-top'>
-					<IonText color='medium'>
-						<FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <FormattedMessage id="login.signUp" defaultMessage="Sign Up" /> (make me a link) </IonText>
-					</IonText>
-				</div>
-			</IonCardContent>
-	    </IonCard>
-	</>
+					<div className='ion-text-center ion-margin-top'>
+						<IonText color='medium'>
+							<FormattedMessage id="login.noAccount" defaultMessage="Don't have an account?" /> <IonText> <a href='/sign-up'><FormattedMessage id="login.signUp" defaultMessage="Sign Up" /></a></IonText>
+						</IonText>
+					</div>
+				</IonCardContent>
+			</IonCard>
+		</>
     );
 };
 

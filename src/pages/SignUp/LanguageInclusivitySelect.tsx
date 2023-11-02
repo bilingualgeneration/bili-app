@@ -86,12 +86,12 @@ export const LanguageInclusivitySelect: React.FC = () => {
     return (
 		<>
 			<form onSubmit={onSubmit} className='radio-button-select'>
-				<IonText className='ion-text-center'>	
+				<IonText className='ion-text-center'>
 					<h1>
-						<FormattedMessage id="languageInclusivity.settings" defaultMessage="Choose your settings"/>
+						<FormattedMessage id="languageInclusivity.settings" defaultMessage="Choose your settings" description="The user can choose whether they want language inclusive or not in settings"/>
 					</h1>
 				</IonText>
-
+				
 				<ExtendedRadio
 					control={control}
 					name='inclusivity'

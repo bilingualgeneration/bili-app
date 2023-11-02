@@ -1,10 +1,10 @@
+import { FormattedMessage } from 'react-intl';
 import {
     IonButton,
     IonImg,
     IonText
 } from "@ionic/react"
 import React from "react";
-import { FormattedMessage } from 'react-intl';
 
 export const Complete: React.FC = () => {
     return (
@@ -21,10 +21,8 @@ export const Complete: React.FC = () => {
 					</h1>
 				</IonText>
 				
-				<IonImg
-					src="/assets/img/happy_cactus.png"
-					>
-				</IonImg>
+				
+				<IonImg src="/assets/img/happy_cactus.png" />
 				<IonButton
 					shape='round'
 					type='submit'

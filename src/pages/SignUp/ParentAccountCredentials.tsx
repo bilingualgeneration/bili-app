@@ -78,72 +78,73 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 		<>
 			<form onSubmit={onSubmit}>
 				<Input
-					label="Your full name*"
-					labelPlacement='above'
-					name="name"
-					fill="outline"
-					control={control}
-					helperText=""
-					testId="account-credentials-name-input"
-					type="text"
+				label="Your full name*"
+				labelPlacement='above'
+				name="name"
+				fill="outline"
+				control={control}
+				helperText=""
+				testId="account-credentials-name-input"
+				type="text"
 				/>
 
-				<div className='ion-margin-top'>
-					<Input
-						label='Your email address*'
-						labelPlacement='above'
-						required={true}
-						name="email"
-						control={control}
-						fill="outline"
-						helperText=""
-						testId="account-credentials-email-input"
-						type="email"
-					/>
-				</div>
+			<div className='ion-margin-top'>
+				<Input
+				label='Your email address*'
+				labelPlacement='above'
+				required={true}
+				name="email"
+				control={control}
+				fill="outline"
+				helperText=""
+				testId="account-credentials-email-input"
+				type="email"
+				/>
+			</div>
 
-				<div className='ion-margin-top'>
-					<Input
-						label='Password* (8+ characters)'
-						labelPlacement='above'
-						required={true}
-						name="password"
-						control={control}
-						fill="outline"
-						helperText=""
-						testId="account-credentials-password-input"
-						type="password"
-					/>
-				</div>
+			<div className='ion-margin-top'>
+				<Input
+				label='Password* (8+ characters)'
+				labelPlacement='above'
+				required={true}
+				name="password"
+				control={control}
+				fill="outline"
+				helperText=""
+				testId="account-credentials-password-input"
+				type="password"
+				/>
+			</div>
 
-				<div>
-					divider goes here
-				</div>
+			<DividerText
+			className='ion-margin-top'
+				text='or'
+			/>
 				
 				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
+				color='medium'
+				className='ion-margin-top'
+				disabled
+				expand='block'
+				fill='outline'
+				style={{opacity: 0.2}}>
 					<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" description="Continue the login process with Google"/>
 				</IonButton>
 
 				<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
+				color='medium'
+				className='ion-margin-top'
+				disabled
+				expand='block'
+				fill='outline'
+				style={{opacity: 0.2}}>
 					<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" description="Continue the login process with Apple"/>
 				</IonButton>
 
 				<div className='ion-margin-top'>
 					<IonCheckbox
-						labelPlacement='end'
-						justify='start'>
+					labelPlacement='end'
+					justify='start'>
 						<IonText class='ion-text-wrap'>
 							<IonText color='primary' style={{fontWeight: 'bold'}}>
 								<FormattedMessage id="signUpParent.terms" defaultMessage="Terms of Service." description="Terms of Service for parents to agree to in sign up process."/>
@@ -155,8 +156,8 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 
 				<div className='ion-margin-top'>
 					<IonCheckbox
-						justify='start'
-						labelPlacement='end'>
+					justify='start'
+					labelPlacement='end'>
 						<FormattedMessage id="signUpParent.marketing" defaultMessage="I want to receive marketing updates" description="Area for parents to check off if they wish to receive marketing emails during sign up process"/>
 					</IonCheckbox>
 				</div>
@@ -164,11 +165,11 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 
 				<div className='ion-margin-top'>
 					<IonButton 
-						data-testid='account-credentials-continue-button'
-						disabled={!isValid}
-						expand='block' 
-						shape='round'
-						type='submit'>
+					data-testid='account-credentials-continue-button'
+					disabled={!isValid}
+					expand='block' 
+					shape='round'
+					type='submit'>
 						<FormattedMessage id="signUpParent.continue" defaultMessage="Continue" description="Continue button after parents have filled out all required info"/>
 					</IonButton>
 				</div>
