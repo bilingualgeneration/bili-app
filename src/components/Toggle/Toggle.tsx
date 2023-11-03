@@ -1,6 +1,4 @@
-import {
-    JSX
-} from 'react';
+import {JSX} from 'react';
 import {
     Control,
     Controller
@@ -40,7 +38,7 @@ export type ToggleAdditionalProps = {
 export type ToggleProps = Partial<IonToggleProps>
 			& Partial<ToggleAdditionalProps>
 			& Pick<IonToggleProps, 'name'>
-			& Pick<IonAdditionalProps, 'control'>;
+			& Pick<ToggleAdditionalProps, 'control'>;
 
 export const Toggle = ({
     control,

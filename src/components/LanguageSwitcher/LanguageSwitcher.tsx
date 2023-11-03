@@ -18,19 +18,19 @@ import {
 export const LanguageSwitcher: FC = () => {
     const intl = useIntl();
     const {locale, setLocale} = useProfile();
-	// console.log('Current Locale:', locale); // Debug statement
+    // console.log('Current Locale:', locale); // Debug statement
     const schema = z.object({
-	    isSpanish: z.boolean()
+	isSpanish: z.boolean()
     });
     type schemaType = z.infer<typeof schema>;
     const {
-	    control
+	control
     } = useForm<schemaType>({
         defaultValues: {
             isSpanish: locale === 'es'
 	},
 	mode: 'onChange',
-	    resolver: zodResolver(schema)
+	resolver: zodResolver(schema)
     });
     const isSpanish: boolean = useWatch({
         control,
@@ -38,16 +38,16 @@ export const LanguageSwitcher: FC = () => {
     });
 
     useEffect(() => {
-	    setLocale(isSpanish ? 'es' : 'en');
+	setLocale(isSpanish ? 'es' : 'en');
     }, [isSpanish]);
 
     return (
         <>
-            {/* Currently, this does not actually work to change the toggle label language */}
-            <Toggle 
+            <Toggle
+		checked={isSpanish}
                 control={control}
                 label={intl.formatMessage({ 
-                    id: 'LanguageMode', 
+                    id: 'languageMode', 
                     defaultMessage: 'Mode', 
                     description: 'Label for language mode toggle' })}
                 name="isSpanish"
