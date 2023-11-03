@@ -83,7 +83,7 @@ export const RoleSelect: React.FC = () => {
     
     return (
 	<>
-	    <form onSubmit={onSubmit} className='radio-button-select'>
+	    <form className='radio-button-select'>
 		<h1>
 		    Which best describes you?
 		</h1>
@@ -94,7 +94,8 @@ export const RoleSelect: React.FC = () => {
 		/>
 		<IonButton
 		    shape='round'
-		    type='submit'
+		    type='button'
+			onClick={onSubmit}
 		    data-testid='role-select-continue-button'
 		    disabled={!isValid}>
 		    Continue

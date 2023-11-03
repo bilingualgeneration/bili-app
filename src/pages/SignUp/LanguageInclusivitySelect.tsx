@@ -82,7 +82,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 
     return (
 	<>
-	    <form onSubmit={onSubmit} className='radio-button-select'>
+	    <form className='radio-button-select'>
 		<h1>
 		    Choose your settings
 		</h1>
@@ -95,7 +95,8 @@ export const LanguageInclusivitySelect: React.FC = () => {
 		    data-testid='language-select-continue-button'
 		    disabled={!isValid}
 		    shape='round'
-		    type='submit'>
+		    type='button'
+			onClick={onSubmit}>
 		    Continue
 		</IonButton>
 	    </form>
