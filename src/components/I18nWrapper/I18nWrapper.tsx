@@ -37,7 +37,6 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
     // todo: move translation cache to localstorage?
     const intl: IntlShape = createIntl(
 	{ locale: 'en', messages: en },
-	{ locale: 'es', messages: es },
 	cache
     );
     const [translations, setTranslations] = useState(intl.messages);
@@ -52,7 +51,8 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
     }, [locale]);
 
     const translationsCache: any = {
-	'en': en // default lang
+	'en': en, // default lang
+	'es': es
     };
 
     const readTranslations = async (locale: string) => {

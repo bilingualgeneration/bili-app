@@ -12,7 +12,8 @@ import type {locale} from '@/components/I18nWrapper';
 
 export type profile = {
     locale: locale,
-    setLocale: Dispatch<SetStateAction<locale>>
+    //setLocale: Dispatch<SetStateAction<locale>>
+    setLocale: any
 }
 
 const defaultState: profile = {
@@ -27,17 +28,22 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileContextProvider = ({children}: PropsWithChildren<{}>) => {
     const storedLocale = localStorage.getItem('userLocale');
     // @ts-ignore: todo fix
-    const [locale, setLocale] = useState<locale>(storedLocale || defaultState.locale);
+    const [locale, setLocaleState] = useState<locale>(storedLocale || defaultState.locale);
 
+    const setLocale = (newLocale: locale) => {
+	localStorage.setItem('userLocale', newLocale);
+    // @ts-ignore: todo fix
+	setLocaleState(newLocale);	
+    }
+	
     return (
         <>
             <ProfileContext.Provider
-                value={{
+                value={
+		// @ts-ignore: todo fix
+		{
                     locale,
-                    setLocale: (newLocale) => {
-			localStorage.setItem('userLocale', newLocale);
-			setLocale(newLocale);
-		    }
+                    setLocale
                 }}>
                 {children}
             </ProfileContext.Provider>
