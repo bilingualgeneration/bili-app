@@ -59,7 +59,7 @@ export const MultipleCheckbox = ({
     name,
     options = [],
     testId,
-    wrapper = ({children}) => children,
+    wrapper: Wrapper = ({children}) => children,
     ...props
 }: MultipleCheckboxProps): JSX.Element => {
     const [values, setValues] = useState<string[]>([]);
@@ -75,27 +75,27 @@ export const MultipleCheckbox = ({
 		}
 	    }): JSX.Element => (
 		<>
-		    {options.map((option) => wrapper({children:
-				<IonCheckbox
-				key={option.value}
+		    {options.map((option) =>
+			<Wrapper key={option.value}>
+			    <IonCheckbox
 				onIonChange={(event) => {
-					let newValues: string[];
-					if(event.detail.checked){
-						newValues = [
-							...values,
-							option.value
+				    let newValues: string[];
+				    if(event.detail.checked){
+					newValues = [
+					    ...values,
+					    option.value
 					];
-					} else {
-						newValues = values.filter(v => v !== option.value);
-					}
-					setValues(newValues);
-					onChange(newValues);
+				    } else {
+					newValues = values.filter(v => v !== option.value);
+				    }
+				    setValues(newValues);
+				    onChange(newValues);
 				}}
 				value={option.value}			
 				{...props}>
 				{option.label}
-				</IonCheckbox>
-		    	})
+			    </IonCheckbox>
+			</Wrapper>
 		    )}
 		</>
 	)}

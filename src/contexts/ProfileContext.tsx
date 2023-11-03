@@ -25,15 +25,10 @@ const ProfileContext = createContext<profile>(defaultState);
 export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileContextProvider = ({children}: PropsWithChildren<{}>) => {
-    const [locale, setLocale] = useState<locale>(defaultState.locale);
+    const storedLocale = localStorage.getItem('userLocale');
+    // @ts-ignore: todo fix
+    const [locale, setLocale] = useState<locale>(storedLocale || defaultState.locale);
 
-    useEffect(() => {
-        const storedLocale = localStorage.getItem('userLocale');
-        if (storedLocale) {
-            setLocale(storedLocale as locale);
-        }
-    }, []);
-    
     return (
         <>
             <ProfileContext.Provider

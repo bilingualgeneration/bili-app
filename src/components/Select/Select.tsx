@@ -74,7 +74,6 @@ export const Select = ({
     testId,
     ...props
 }: Select): JSX.Element => {
-	// console.log('This should be called when dropdown changes.');
     return (
 	<>
 	<Controller
@@ -93,8 +92,6 @@ export const Select = ({
 		    {...props}
 		    {...fields}
 		    onIonChange={(event) => {
-				console.log('Change dropdown');
-				console.log(event);
 				changeLanguage(event.detail.value);
 				onChange(event.detail.value);
 		    }}>

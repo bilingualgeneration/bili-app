@@ -28,7 +28,7 @@ const meta: Meta<typeof Toggle> = {
     },
     component: Toggle,
     render: ({
-	defaultValue,
+	//defaultValue, // todo: implement default checked
 	...props
     }) => {
 	const schema = z.object({
@@ -38,13 +38,16 @@ const meta: Meta<typeof Toggle> = {
 	const {
 	    control
 	} = useForm<schemaType>({
+	    // todo: implement default checked
+	    /*
 	    defaultValues: {
 		field: defaultValue
 	    },
+	    */
 	    mode: 'onChange',
 	    resolver: zodResolver(schema)
 	});
-	const field: string = useWatch({
+	const field: boolean = useWatch({
 	    control,
 	    name: 'field'
 	});
