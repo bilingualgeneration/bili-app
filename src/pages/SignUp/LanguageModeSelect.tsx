@@ -110,7 +110,7 @@ export const LanguageModeSelect: React.FC = () => {
 
     return (
 		<>
-			<form onSubmit={onSubmit} className='radio-button-select'>
+			<form className='radio-button-select'>
 				<IonText className='ion-text-center'>
 					<h1>
 						<FormattedMessage id="languageMode.settings" defaultMessage="Choose your settings" description="User can choose if they want bilingual settings or English assisted settings"/>
@@ -125,7 +125,8 @@ export const LanguageModeSelect: React.FC = () => {
 					data-testid='language-select-continue-button'
 					disabled={!isValid}
 					shape='round'
-					type='submit'>
+					type='button'
+          onClick={onSubmit}>
 					<FormattedMessage id="languageMode.continue" defaultMessage="Continue" description="Continue button after user chooses language mode"/>
 				</IonButton>
 			</form>

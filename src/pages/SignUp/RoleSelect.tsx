@@ -117,7 +117,8 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
 				/>
 				<IonButton
 				shape='round'
-				type='submit'
+				type='button'
+        onClick={onSubmit}
 				data-testid='role-select-continue-button'
 				disabled={!isValid}>
 					<FormattedMessage id="signUp.continue" defaultMessage="Continue" description="After user chooses teacher or parent/caregiver they can click continue."/>

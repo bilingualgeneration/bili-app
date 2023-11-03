@@ -86,7 +86,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 
     return (
 		<>
-			<form onSubmit={onSubmit} className='radio-button-select'>
+			<form className='radio-button-select'>
 				<IonText className='ion-text-center'>
 					<h1>
 						<FormattedMessage id="languageInclusivity.settings" defaultMessage="Choose your settings" description="The user can choose whether they want language inclusive or not in settings"/>
@@ -103,7 +103,8 @@ export const LanguageInclusivitySelect: React.FC = () => {
 					data-testid='language-select-continue-button'
 					disabled={!isValid}
 					shape='round'
-					type='submit'>
+          onClick={onSubmit}
+					type='button'>
 					<FormattedMessage id="languageInclusivity.continue" defaultMessage="Continue" description="Continue button after choosing language inclusivity options" />
 				</IonButton>
 			</form>
