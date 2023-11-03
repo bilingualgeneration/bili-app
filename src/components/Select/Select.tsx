@@ -53,24 +53,28 @@ export type IonSelect = {
 }
 
 export type SelectAdditionalProps = {
+	changeLanguage: any,
     control: Control<any>,
     defaultValue: string,
     options: SelectOption[],
     testId: string | undefined
 }
 
-export type Select = Partial<IonSelect>
+export type Select = /* Pick<SelectAdditionalProps, 'changeLanguage'> */ /* <-- Added this line, but it works without, so don't know if we NEED it?*/
+		   & Partial<IonSelect>
 		   & Partial <SelectAdditionalProps>
 		   & Pick<IonSelect, 'name'>
 		   & Pick<SelectAdditionalProps, 'control'>
 		   & Pick<SelectAdditionalProps, 'options'>;
 
 export const Select = ({
+	changeLanguage,
     control,
     options,
     testId,
     ...props
 }: Select): JSX.Element => {
+	// console.log('This should be called when dropdown changes.');
     return (
 	<>
 	<Controller
@@ -89,10 +93,14 @@ export const Select = ({
 		    {...props}
 		    {...fields}
 		    onIonChange={(event) => {
-			onChange(event.detail.value);
+				console.log('Change dropdown');
+				console.log(event);
+				changeLanguage(event.detail.value);
+				onChange(event.detail.value);
 		    }}>
-		    {options.map((option: SelectOption) => <IonSelectOption value={option.value} key={option.value}>
-			{option.label}
+		    {options.map((option: SelectOption) => 
+			<IonSelectOption value={option.value} key={option.value}>
+				{option.label}
 		    </IonSelectOption>)
 		    }
 		</IonSelect>

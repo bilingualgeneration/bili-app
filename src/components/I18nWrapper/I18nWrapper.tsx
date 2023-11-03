@@ -38,13 +38,15 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
 	{ locale: 'en', messages: en },
 	cache
     );
-
     const [translations, setTranslations] = useState(intl.messages);
+    // console.log('This is the initial lang:', intl.messages)
 
     useEffect(() => {
-	readTranslations(locale).then((newTranslations) => {
-	    setTranslations(newTranslations);
-	});
+        // console.log("Now you should be switching to: ", locale);  //debug stmt
+	    readTranslations(locale).then((newTranslations) => {
+            setTranslations(newTranslations);
+            // console.log('Translations loaded for locale:', locale);
+	    });
     }, [locale]);
 
     const translationsCache: any = {
@@ -57,21 +59,25 @@ export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
 	}
 	
 	try {
-	    const translations = await import(`./lang/${locale}.json`);
+	    const module = await import(`./lang/${locale}.json`);
+        const translations = module.default; // Access the default export
+
 	    translationsCache[locale] = translations;
-	    return translations;
+        // console.log('The translations should be for:', locale);
+        return translations;
+	    // return console.log('These are the translations:', translations);
 	} catch (error) {
 	    console.error(`Translations for ${locale} not found.`);
 	}
     }
     
     return (
-	<>
-	    <IntlProvider
-		locale={localeMap[locale] || locale}
-		messages={translations}>
-		{children}
-	    </IntlProvider>
-	</>
+        <>
+            <IntlProvider
+                locale={localeMap[locale] || locale}
+                messages={translations}>
+                {children}
+            </IntlProvider>
+        </>
     );
 }

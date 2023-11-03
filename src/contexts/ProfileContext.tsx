@@ -4,6 +4,7 @@ import {
     PropsWithChildren,
     SetStateAction,
     useContext,
+    useEffect,
     useState
 } from 'react';
 
@@ -15,24 +16,33 @@ export type profile = {
 }
 
 const defaultState: profile = {
-    locale: 'en',
+    locale: (localStorage.getItem('userLocale') as locale) || 'en', // Read from local storage or use a default value
     setLocale: () => {}
 };
 
 const ProfileContext = createContext<profile>(defaultState);
+
 export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileContextProvider = ({children}: PropsWithChildren<{}>) => {
     const [locale, setLocale] = useState<locale>(defaultState.locale);
+
+    useEffect(() => {
+        const storedLocale = localStorage.getItem('userLocale');
+        if (storedLocale) {
+            setLocale(storedLocale as locale);
+        }
+    }, []);
+    
     return (
-	<>
-	    <ProfileContext.Provider
-		value={{
-		    locale,
-		    setLocale
-		}}>
-		{children}
-	    </ProfileContext.Provider>
-	</>
+        <>
+            <ProfileContext.Provider
+                value={{
+                    locale,
+                    setLocale
+                }}>
+                {children}
+            </ProfileContext.Provider>
+        </>
     );
 }

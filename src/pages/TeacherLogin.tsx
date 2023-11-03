@@ -3,6 +3,7 @@ import {
   IonInput,
   IonButton,
 } from '@ionic/react';
+import { FormattedMessage } from 'react-intl';
 
 const TeacherLogin: React.FC = () => {
   const handleTeacherLogin = () => {
@@ -11,11 +12,11 @@ const TeacherLogin: React.FC = () => {
 
   return (
     <>
-      <h1>Welcome to Teacher Login Page</h1>
-      <IonInput placeholder="Username" />
-      <IonInput placeholder="Password" type="password" />
+      <h1><FormattedMessage id="login.teacherWelcome" defaultMessage="Welcome to Teacher Login Page" description="Welcome message for teacher login" /></h1>
+      <IonInput placeholder="Username" /> {/* Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.teacherUsername" defaultMessage="Username" /> */}
+      <IonInput placeholder="Password" type="password" /> {/* Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.teacherPassword" defaultMessage="Password" /> */}
       <IonButton expand="block" onClick={handleTeacherLogin}>
-        Login as Teacher
+        <FormattedMessage id="login.teacher" defaultMessage="Login as Teacher" description="Login spot for teachers" />
       </IonButton>
     </>
   );
