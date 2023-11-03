@@ -18,7 +18,6 @@ import {
 export const LanguageSwitcher: FC = () => {
     const intl = useIntl();
     const {locale, setLocale} = useProfile();
-    // console.log('Current Locale:', locale); // Debug statement
     const schema = z.object({
 	isSpanish: z.boolean()
     });

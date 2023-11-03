@@ -16,6 +16,7 @@ import {
 // import default from start
 // instead of waiting for it to load
 import en from './lang/en.json';
+import es from './lang/es.json';
 
 export const locales = {
     'en': 'English',
@@ -32,10 +33,11 @@ const localeMap: {[key in locale]?: locale} = {
 
 export const I18nWrapper = ({children}: PropsWithChildren<{}>) => {
     const {locale} = useProfile();
-
     const cache = createIntlCache();
+    // todo: move translation cache to localstorage?
     const intl: IntlShape = createIntl(
 	{ locale: 'en', messages: en },
+	{ locale: 'es', messages: es },
 	cache
     );
     const [translations, setTranslations] = useState(intl.messages);

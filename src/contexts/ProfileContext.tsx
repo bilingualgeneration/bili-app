@@ -34,7 +34,10 @@ export const ProfileContextProvider = ({children}: PropsWithChildren<{}>) => {
             <ProfileContext.Provider
                 value={{
                     locale,
-                    setLocale
+                    setLocale: (newLocale) => {
+			localStorage.setItem('userLocale', newLocale);
+			setLocale(newLocale);
+		    }
                 }}>
                 {children}
             </ProfileContext.Provider>
