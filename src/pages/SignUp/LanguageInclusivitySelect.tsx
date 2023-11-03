@@ -9,7 +9,7 @@ import {
     IonInput,
     IonText,
 } from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 import {
     useSwiper
@@ -33,6 +33,7 @@ import SmileyIcon from '@/assets/icons/smiley.svg?react';
 
 
 export const LanguageInclusivitySelect: React.FC = () => {
+	const intl = useIntl();
     const schema = z.object({
 	inclusivity: z.string().min(1)//nonempty was deprecated
     });
@@ -51,8 +52,8 @@ export const LanguageInclusivitySelect: React.FC = () => {
 		<div>
 		    <RadioCard
 		    icon={<NoIcon />}
-		    title='Exclude'
-		    content='Lorem Ipsum'
+		    title={intl.formatMessage({ id: 'languageInclusivity.excludeGenderNeutralTitle', defaultMessage: 'Exclude gender neutral pronouns', description: 'Title of the exclusive language option description' })}
+		    content={intl.formatMessage({ id: 'languageInclusivity.excludeGenderNeutral', defaultMessage: 'Choose this option if you do not want to see the use of gender neutral pronouns in the content (i.e. singular \"they\" in English and \"elle\" in Spanish will be excluded). For example, you will only see the words \"amigo\" and \"amiga\" in activities and content. The word \"amigue\" will not appear.', description: 'Description of the language option that does NOT inlude gender neutral pronouns' })}
 		    iconBackgroundColor='var(--Arena-High)'	
 		    />
 		</div>,
@@ -64,9 +65,9 @@ export const LanguageInclusivitySelect: React.FC = () => {
 		<div>
 		    <RadioCard
 		    icon={<SmileyIcon />}
-			badge='RECOMMENDED'
-		    title='Inclusive language'
-		    content='lorem ipsum'
+			badge={intl.formatMessage({ id: 'languageInclusivity.recommended', defaultMessage: 'RECOMMENDED', description: 'Text that sits above the Inclusive language option showing that it is a highly recommended option' })}
+		    title={intl.formatMessage({ id: 'languageInclusivity.includeGenderNeutralTitle', defaultMessage: 'Inclusive language', description: 'Title of the inclusive language option description WITH gender neutral pronouns' })}
+		    content={intl.formatMessage({ id: 'languageInclusivity.includeGenderNeutral', defaultMessage: 'Choose this option if you want to see the use of gender inclusive language in the content/ For example, the pronouns used will include \"he, she, they\" in English and \"el, ella, elle\" in Spanish.', description: 'Description of the inclusive language option WITH gender neutral pronouns' })}
 		    iconBackgroundColor='var(--Flamenco-Highest)'
 		    />
 		</div>,
@@ -103,7 +104,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 					disabled={!isValid}
 					shape='round'
 					type='submit'>
-					<FormattedMessage id="languageInclusivity.continue" defaultMessage="Continue"/>
+					<FormattedMessage id="languageInclusivity.continue" defaultMessage="Continue" description="Continue button after choosing language inclusivity options" />
 				</IonButton>
 			</form>
 		</>

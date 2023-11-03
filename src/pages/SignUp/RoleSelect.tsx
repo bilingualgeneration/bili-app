@@ -63,8 +63,8 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
 		component: 
 				<div>
 					<RadioCard
-					title='Teacher'
-					content='I want to use this app with my students'
+					title={intl.messages['signUp.teacher']}
+					content={intl.messages['signUp.teacher2']}
 					icon={<SchoolIcon/>}
 					iconBackgroundColor='var(--Cielo-Cielo)'	
 					/>

@@ -5,7 +5,7 @@ import {
     IonCardContent,
     IonText
 } from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 
 // @ts-ignore todo: cannot find module or its corresponding type declarations
@@ -56,12 +56,11 @@ interface FormInputs {
 
 const Login: React.FC = () => {
     const auth = useAuth();
+	const intl = useIntl();
     const {status, data: signinResult} = useSigninCheck();
     const schema = z.object({
-	email: z.string()
-		.email('ENTER a valid email'),
-	password: z.string()
-		   .min(5)
+		email: z.string().email('ENTER a valid email'),
+		password: z.string().min(5)
     });
     const {
 	control,
@@ -78,8 +77,8 @@ const Login: React.FC = () => {
 			<IonCard>
 				<IonCardContent>
 					<div className='ion-margin-top'>
-					<Input
-						label='Email address' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.email" defaultMessage="Email address"/>
+						<Input
+						label={intl.formatMessage({ id: 'login.email', defaultMessage: 'Email address', description: 'User must enter their email on login screen' })}
 						labelPlacement='above'
 						required={true}
 						name="email" 
@@ -92,8 +91,8 @@ const Login: React.FC = () => {
 					</div>
 
 					<div className='ion-margin-top'>
-					<Input
-						label='Password' // Cannot add react-intl bc it is expecting string. Line to be added --> <FormattedMessage id="login.password" defaultMessage="Password"/>
+						<Input
+						label={intl.formatMessage({ id: 'login.password', defaultMessage: 'Password', description: 'User must enter their password on login screen' })}
 						labelPlacement='above'
 						required={true}
 						name="password"
@@ -106,38 +105,39 @@ const Login: React.FC = () => {
 					</div>
 
 					<DividerText
-						className='ion-margin-top'
-						text='or'
+					className='ion-margin-top'
+					text={intl.formatMessage({ id: 'login.divider', defaultMessage: 'or login using', description: 'User who is teacher has option to login using Google or Apple' })}
 					/>
 					
 					<IonButton
-						color='medium'
-						className='ion-margin-top'
-						disabled
-						expand='block'
-						fill='outline'
-						style={{opacity: 0.2}}>
+					color='medium'
+					className='ion-margin-top'
+					disabled
+					expand='block'
+					fill='outline'
+					style={{opacity: 0.2}}>
 							<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
 					</IonButton>
+
 					<IonButton
-						color='medium'
-						className='ion-margin-top'
-						disabled
-						expand='block'
-						fill='outline'
-						style={{opacity: 0.2}}>
+					color='medium'
+					className='ion-margin-top'
+					disabled
+					expand='block'
+					fill='outline'
+					style={{opacity: 0.2}}>
 							<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
 					</IonButton>
 
 					<div className='ion-margin-top'>
-					<IonButton 
+						<IonButton 
 						data-testid='account-credentials-continue-button'
 						disabled={!isValid}
 						expand='block' 
 						shape='round'
 						type='submit'>
-						<FormattedMessage id="login.continue" defaultMessage="Continue" />
-					</IonButton>
+							<FormattedMessage id="login.continue" defaultMessage="Continue" />
+						</IonButton>
 					</div>
 
 					<div className='ion-text-center ion-margin-top'>

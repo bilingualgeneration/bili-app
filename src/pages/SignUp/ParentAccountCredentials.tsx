@@ -25,7 +25,7 @@ import GoogleIcon from '@/assets/icons/google.svg?react';
 
 
 import './AccountCredentials.css';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 interface FormInputs {
     name: string;
@@ -46,6 +46,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
     nextSlide,
     previousSlide
 }) => {
+	const intl = useIntl();
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
     const schema = z.object({
@@ -78,7 +79,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 		<>
 			<form onSubmit={onSubmit}>
 				<Input
-				label="Your full name*"
+				label={intl.formatMessage({ id: 'signUpParent.name', defaultMessage: 'Your full name*', description: 'Users who choose parent must enter their name as requirement' })}
 				labelPlacement='above'
 				name="name"
 				fill="outline"
@@ -90,7 +91,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 
 			<div className='ion-margin-top'>
 				<Input
-				label='Your email address*'
+				label={intl.formatMessage({ id: 'signUpParent.email', defaultMessage: 'Your email*', description: 'Users who choose parent must enter their email as requirement' })}
 				labelPlacement='above'
 				required={true}
 				name="email"
@@ -104,7 +105,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 
 			<div className='ion-margin-top'>
 				<Input
-				label='Password* (8+ characters)'
+				label={intl.formatMessage({ id: 'signUpParent.password', defaultMessage: 'Password*', description: 'Users who choose parent must enter a password as a requirement' })}
 				labelPlacement='above'
 				required={true}
 				name="password"
@@ -117,8 +118,8 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 			</div>
 
 			<DividerText
-			className='ion-margin-top'
-				text='or'
+				className='ion-margin-top'
+				text={intl.formatMessage({ id: 'login.divider', defaultMessage: 'or login using', description: 'Divider that gives user option to login using Google or Apple below' })}
 			/>
 				
 				<IonButton
@@ -147,7 +148,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 					justify='start'>
 						<IonText class='ion-text-wrap'>
 							<IonText color='primary' style={{fontWeight: 'bold'}}>
-								<FormattedMessage id="signUpParent.terms" defaultMessage="Terms of Service." description="Terms of Service for parents to agree to in sign up process."/>
+								<FormattedMessage id="signUpParent.terms" defaultMessage="Terms of Service. " description="Terms of Service for parents to agree to in sign up process."/>
 							</IonText> 
 								<FormattedMessage id="signUpParent.termsAgree" defaultMessage="I agree to the Terms of Service. I have read and understand the Privacy Policy" description="Terms of Service for parents to agree to in sign up process."/>
 						</IonText>
@@ -176,7 +177,7 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 
 				<div className='ion-text-center ion-margin-top'>
 					<IonText color='medium'>
-						<FormattedMessage id="signUpParent.haveAccount" defaultMessage="Already have an account?" description="Asking parents if they have an account so that they don't need to create a new one"/> <IonText> <a><FormattedMessage id="signUpParent.haveAccountLogin" defaultMessage="Log in" description="Log in link for parents in case they have an account so that they don't need to create a new one"/></a> </IonText>
+						<FormattedMessage id="signUpTeacher.haveAccount" defaultMessage="Already have an account?" description="Asking parents if they have an account so that they don't need to create a new one"/> <IonText> <a href="/login"><FormattedMessage id="signUpParent.haveAccountLogin" defaultMessage="Log in" description="Log in link for parents in case they have an account so that they don't need to create a new one"/></a> </IonText>
 					</IonText>
 				</div>
 			</form>

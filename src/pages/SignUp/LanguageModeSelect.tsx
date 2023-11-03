@@ -12,7 +12,7 @@ import {
 import {
     useSwiper
 } from 'swiper/react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -26,6 +26,7 @@ import { RadioCard } from '../../components/RadioCard';
 import { ExtendedRadioOption, ExtendedRadio } from '@/components/ExtendedRadio';
 
 export const LanguageModeSelect: React.FC = () => {
+	const intl = useIntl();
 	const schema = z.object({
 		language: z.string().min(1)//nonempty was deprecated
 		});
@@ -58,9 +59,8 @@ export const LanguageModeSelect: React.FC = () => {
 			>
 			    EN
 			</div>}
-		    title='Spanish immersion'
-		    content='Choose this setting if you want your child to learn all content 
-		    and activities in the Spanish language.'
+		    title={intl.formatMessage({ id: 'languageMode.immersionTitle', defaultMessage: 'Spanish immersion', description: 'Title of the Spanish immersion mode option' })}
+		    content={intl.formatMessage({ id: 'languageMode.immersion', defaultMessage: 'Choose this setting if you want your child to learn all content and activities in the Spanish language.', description: 'Description of the Spanish immersion option' })}
 		    iconBackgroundColor='var(--Habanero-High)'	
 		    />
 		</div>,
@@ -89,9 +89,8 @@ export const LanguageModeSelect: React.FC = () => {
 			    <br/>
 			    ES
 			</div>}
-		    title='Bilingual'
-		    content='Choose this setting if you want your child to learn 
-		    Spanish with English supports and translations. '
+		    title={intl.formatMessage({ id: 'languageMode.bilingualTitle', defaultMessage: 'Bilingual', description: 'Title of the Bilingual mode option' })}
+		    content={intl.formatMessage({ id: 'languageMode.bilingual', defaultMessage: 'Choose this setting if you want your child to learn Spanish with English supports and translations.', description: 'Description of the Bilingual mode option' })}
 		    iconBackgroundColor='var(--Sol-Low)'
 		    />
 		</div>,
@@ -128,7 +127,7 @@ export const LanguageModeSelect: React.FC = () => {
 					disabled={!isValid}
 					shape='round'
 					type='submit'>
-					<FormattedMessage id="languageMode.continue" defaultMessage="Continue"/>
+					<FormattedMessage id="languageMode.continue" defaultMessage="Continue" description="Continue button after user chooses language mode"/>
 				</IonButton>
 			</form>
 		</>
