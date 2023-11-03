@@ -9,6 +9,7 @@ import {
     IonRow,
     IonText
 } from '@ionic/react';
+import { useIntl, FormattedMessage } from 'react-intl';
 import {useForm} from 'react-hook-form';
 import {useSignUpData} from '@/pages/SignUp/SignUpContext';
 import {useSwiper} from 'swiper/react';
@@ -36,6 +37,7 @@ export type TeacherAboutProps = {
 export const TeacherAbout: FC<TeacherAboutProps> = ({
     nextSlide
 }) => {
+	const intl = useIntl();
     const {data, setData} = useSignUpData();
     const swiper = useSwiper();
     // todo: these zod schemas are wrong
@@ -57,46 +59,86 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({
 
     const gradesOptions: MultipleCheckboxOption[] = [
 	{
-	    label: 'Pre-K',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutGradePre',
+            defaultMessage: 'Pre-K',
+			description: "Checkbox label for pre-kindergarten"
+        }),
 	    value: 'prek'
 	},
 	{
-	    label: '1st Grade',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutGrade1',
+            defaultMessage: '1st Grade',
+			description: "Checkbox label for 1st grade"
+        }),
 	    value: '1st'
 	},
 	{
-	    label: '2nd Grade',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutGrade2',
+            defaultMessage: '2nd Grade',
+			description: "Checkbox label for 2nd grade"
+        }),
 	    value: '2nd'
 	},
 	{
-	    label: '3rd Grade',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutGrade3',
+            defaultMessage: '3rd Grade',
+			description: "Checkbox label for 3rd grade"
+        }),
 	    value: '3rd'
 	},
 	{
-	    label: '4th Grade',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutGrade4',
+            defaultMessage: '4th Grade',
+			description: "Checkbox label for 4th grade"
+        }),
 	    value: '4th'
 	},
 	{
-	    label: 'Other',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.aboutOther',
+            defaultMessage: 'Other',
+			description: "Checkbox label for any other grades taught"
+        }),
 	    value: 'other'
 	},
     ];
 
     const rolesOptions: MultipleCheckboxOption[] = [
 	{
-	    label: 'Administrator',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.roleAdmin',
+            defaultMessage: 'Administrator',
+			description: "Checkbox label for Admin role option"
+        }),
 	    value: 'administrator'
 	},
 	{
-	    label: 'Teacher',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.roleTeacher',
+            defaultMessage: 'Teacher',
+			description: "Checkbox label for teacher role option"
+        }),
 	    value: 'teacher'
 	},
 	{
-	    label: 'Counselor',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.roleCounselor',
+            defaultMessage: 'Counselor',
+			description: "Checkbox label for Counselor role option"
+        }),
 	    value: 'counselor'
 	},
 	{
-	    label: 'Facilitator',
+	    label: intl.formatMessage({
+            id: 'signUpTeacher.roleFacilitator',
+            defaultMessage: 'Facilitator',
+			description: "Checkbox label for Facilitator role option"
+        }),
 	    value: 'facilitator'
 	}
     ];
@@ -113,14 +155,14 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({
 		<div className='ion-padding-bottom'>
 		    <IonText className='ion-text-center'>
 			<h1>
-			    Tell us about yourself
+				<FormattedMessage id="signUpTeacher.aboutTitle" defaultMessage="Tell us about yourself" description="Title for page where teachers share more info about what grades they teach and their role"/>
 			</h1>
 		    </IonText>
 		</div>
 		<div className='ion-margin-top'>
 		    <IonText>
 			<h2>
-			    What grade(s) do you work with?
+				<FormattedMessage id="signUpTeacher.aboutGrades" defaultMessage="WHat grade(s) do you work with?" description="Title above area where teachers can check off what grades they teach"/>
 			</h2>
 		    </IonText>
 		</div>
@@ -140,7 +182,7 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({
 		<div className='ion-margin-top'>
 		    <IonText>
 			<h2>
-			    What is your role?
+				<FormattedMessage id="signUpTeacher.role" defaultMessage="WHat is your role?" description="Title above where teacher can select what role(s) they have"/>
 			</h2>
 		    </IonText>
 		</div>

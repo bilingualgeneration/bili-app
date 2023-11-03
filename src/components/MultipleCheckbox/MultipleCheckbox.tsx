@@ -14,7 +14,7 @@ import {
 
 export type MultipleCheckboxOption = {
     value: any,
-    label: string
+    label: string 
 }
 
 type IonCheckboxProps = {
@@ -76,26 +76,26 @@ export const MultipleCheckbox = ({
 	    }): JSX.Element => (
 		<>
 		    {options.map((option) => wrapper({children:
-		    <IonCheckbox
-			key={option.value}
-			onIonChange={(event) => {
-			    let newValues: string[];
-			    if(event.detail.checked){
-				newValues = [
-				    ...values,
-				    option.value
-				];
-			    }else{
-				newValues = values.filter(v => v !== option.value);
-			    }
-			    setValues(newValues);
-			    onChange(newValues);
-			}}
-			value={option.value}			
-			{...props}>
-			{option.label}
-		    </IonCheckbox>
-		    })
+				<IonCheckbox
+				key={option.value}
+				onIonChange={(event) => {
+					let newValues: string[];
+					if(event.detail.checked){
+						newValues = [
+							...values,
+							option.value
+					];
+					} else {
+						newValues = values.filter(v => v !== option.value);
+					}
+					setValues(newValues);
+					onChange(newValues);
+				}}
+				value={option.value}			
+				{...props}>
+				{option.label}
+				</IonCheckbox>
+		    	})
 		    )}
 		</>
 	)}
