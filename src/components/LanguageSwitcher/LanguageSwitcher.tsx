@@ -2,6 +2,7 @@ import {
     FC,
     useEffect
 } from 'react';
+import { useIntl, FormattedMessage } from 'react-intl';
 import {locales} from '@/components/I18nWrapper';
 import type {locale} from '@/components/I18nWrapper';
 import {useProfile} from '@/contexts/ProfileContext';
@@ -15,6 +16,7 @@ import {
 } from 'react-hook-form';
 
 export const LanguageSwitcher: FC = () => {
+    const intl = useIntl();
     const {locale, setLocale} = useProfile();
 	// console.log('Current Locale:', locale); // Debug statement
     const schema = z.object({
@@ -41,10 +43,14 @@ export const LanguageSwitcher: FC = () => {
 
     return (
         <>
-            <Toggle
-            control={control}
-            label='English Mode'
-            name='isSpanish'
+            {/* Currently, this does not actually work to change the toggle label language */}
+            <Toggle 
+                control={control}
+                label={intl.formatMessage({ 
+                    id: 'LanguageMode', 
+                    defaultMessage: 'Mode', 
+                    description: 'Label for language mode toggle' })}
+                name="isSpanish"
             />
         </>
     );

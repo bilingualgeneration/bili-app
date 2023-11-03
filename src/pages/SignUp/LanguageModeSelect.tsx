@@ -59,43 +59,42 @@ export const LanguageModeSelect: React.FC = () => {
 			>
 			    EN
 			</div>}
-		    title={intl.formatMessage({ id: 'languageMode.immersionTitle', defaultMessage: 'Spanish immersion', description: 'Title of the Spanish immersion mode option' })}
-		    content={intl.formatMessage({ id: 'languageMode.immersion', defaultMessage: 'Choose this setting if you want your child to learn all content and activities in the Spanish language.', description: 'Description of the Spanish immersion option' })}
-		    iconBackgroundColor='var(--Habanero-High)'	
+				title={intl.formatMessage({ id: 'languageMode.immersionTitle', defaultMessage: 'Spanish immersion', description: 'Title of the Spanish immersion mode option' })}
+				content={intl.formatMessage({ id: 'languageMode.immersion', defaultMessage: 'Choose this setting if you want your child to learn all content and activities in the Spanish language.', description: 'Description of the Spanish immersion option' })}
+				iconBackgroundColor='var(--Habanero-High)'	
 		    />
-		</div>,
+			</div>,
 	value: 'spanish',
 	
     };
     
     const billingualOption: ExtendedRadioOption = {
-	component: 
-		<div>
-		    <RadioCard
-		    icon={
-			<div
-			    style={{
-				color: 'rgba(0, 0, 0, 0.56)',
-				textAlign: 'center',
-				fontFamily: 'Outfit',
-				fontSize: '20px',
-				fontStyle: 'normal',
-				fontWeight: '700',
-				lineHeight: '100%', 
-				letterSpacing: '0.2px'
-			    }}
-			>
-			    EN
-			    <br/>
-			    ES
-			</div>}
-		    title={intl.formatMessage({ id: 'languageMode.bilingualTitle', defaultMessage: 'Bilingual', description: 'Title of the Bilingual mode option' })}
-		    content={intl.formatMessage({ id: 'languageMode.bilingual', defaultMessage: 'Choose this setting if you want your child to learn Spanish with English supports and translations.', description: 'Description of the Bilingual mode option' })}
-		    iconBackgroundColor='var(--Sol-Low)'
-		    />
-		</div>,
-	value: 'bilingual',
-	
+		component: 
+			<div>
+				<RadioCard
+				icon={
+				<div
+					style={{
+					color: 'rgba(0, 0, 0, 0.56)',
+					textAlign: 'center',
+					fontFamily: 'Outfit',
+					fontSize: '20px',
+					fontStyle: 'normal',
+					fontWeight: '700',
+					lineHeight: '100%', 
+					letterSpacing: '0.2px'
+					}}
+				>
+					EN
+					<br/>
+					ES
+				</div>}
+					title={intl.formatMessage({ id: 'languageMode.bilingualTitle', defaultMessage: 'Bilingual', description: 'Title of the Bilingual mode option' })}
+					content={intl.formatMessage({ id: 'languageMode.bilingual', defaultMessage: 'Choose this setting if you want your child to learn Spanish with English supports and translations.', description: 'Description of the Bilingual mode option' })}
+					iconBackgroundColor='var(--Sol-Low)'
+				/>
+				</div>,
+		value: 'bilingual',
     };
     
     const onSubmit = handleSubmit((responses) => { //add logic where to store user's choice

@@ -1,5 +1,6 @@
 {
    
+    "languageMode": "Mode",
     "splash.account": "Already have a Bili account?",
     "splash.newAccount": "New to Bili?",
     "splash.loginButton": "Login",
