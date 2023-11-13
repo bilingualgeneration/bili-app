@@ -82,6 +82,7 @@
     "react-intl-translations-manager": "^5.0.3",
     "sass": "^1.69.2",
     "storybook": "^7.4.5",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
     "vite": "^4.3.9",
     "vite-plugin-svgr": "^4.1.0",

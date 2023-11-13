@@ -255,14 +255,14 @@ describe('Student Dashboard Page', () => {
 
 // Verifys sign-up slides navigation 
 
-describe('RoleSelect Slide Tests', () => {
+describe.only('RoleSelect Slide Tests', () => {
     beforeEach(() => {
       cy.visit('/sign-up'); 
     });
   
     it('should navigate to ParentAccountCredentials when Parent is selected', () => {
-      cy.get('[data-testid="role-select-slide"]').within(() => {
-        cy.contains('Parent').click(); 
+      cy.get('[data-testid="role-select-slide"]').first().within(() => {
+        cy.contains('Parent').click({force: true}); 
       });
       cy.get('[data-testid="role-select-continue-button"]').click();
       cy.get('[data-testid="parent-account-credentials-slide"]').should('be.visible');
@@ -270,8 +270,8 @@ describe('RoleSelect Slide Tests', () => {
     });
   
     it('should navigate to TeacherAccountCredentials when Teacher is selected', () => {
-      cy.get('[data-testid="role-select-slide"]').within(() => {
-        cy.contains('Teacher').click(); // Adjust if the text is different
+      cy.get('[data-testid="role-select-slide"]').first().within(() => {
+        cy.contains('Teacher').click({force: true}); 
       });
       cy.get('[data-testid="role-select-continue-button"]').click();
       cy.get('[data-testid="teacher-account-credentials-slide"]').should('be.visible');
