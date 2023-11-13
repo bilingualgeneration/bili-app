@@ -253,13 +253,29 @@ describe('Student Dashboard Page', () => {
 // Sign Up page tests
 // ****************************
 
+// Verifys sign-up slides navigation 
 
-// Verifys navigation to the student dashboard page from the sign up page
-describe('Sign up page workflow', () => {
-    it('Visits the student dashboard page', () => {
-	cy.visit('/sign-up');
-	cy.get('[data-cy="sign_up_auth"]').click();
-	cy.url().should('include', '/student-dashboard');
-	
-    })
-})
+describe('RoleSelect Slide Tests', () => {
+    beforeEach(() => {
+      cy.visit('/sign-up'); 
+    });
+  
+    it('should navigate to ParentAccountCredentials when Parent is selected', () => {
+      cy.get('[data-testid="role-select-slide"]').within(() => {
+        cy.contains('Parent').click(); 
+      });
+      cy.get('[data-testid="role-select-continue-button"]').click();
+      cy.get('[data-testid="parent-account-credentials-slide"]').should('be.visible');
+      
+    });
+  
+    it('should navigate to TeacherAccountCredentials when Teacher is selected', () => {
+      cy.get('[data-testid="role-select-slide"]').within(() => {
+        cy.contains('Teacher').click(); // Adjust if the text is different
+      });
+      cy.get('[data-testid="role-select-continue-button"]').click();
+      cy.get('[data-testid="teacher-account-credentials-slide"]').should('be.visible');
+      
+    });
+  });
+

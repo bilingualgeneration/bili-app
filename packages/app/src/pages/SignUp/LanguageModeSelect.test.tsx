@@ -1,7 +1,8 @@
 import {
     beforeEach,
     describe,
-    it
+    it,
+    expect
 } from 'vitest';
 import {
     render,
@@ -10,20 +11,43 @@ import {
     waitFor
 } from '@testing-library/react';
 import {LanguageModeSelect} from '@/pages/SignUp/LanguageModeSelect';
+import { IntlProvider } from 'react-intl';
 
 describe('SignUp Page Language Mode Slide', () => {
+
+    const messages = {
+        'languageMode.immersionTitle': 'Spanish immersion',
+        'languageMode.bilingualTitle': 'Bilingual',
+        
+      };
+
     beforeEach(() => {
-	render(<LanguageModeSelect />);
+    render(
+        <IntlProvider locale="en" messages={messages}>
+              <LanguageModeSelect />
+        </IntlProvider>
+        );
     });
     it('should render', () => {
-	//expect(screen.getByTestId('language-mode-slide')).toBeDefined();    
+        expect(screen.getByTestId('language-select-continue-button')).toBeDefined();
+        expect(screen.getByText('Spanish immersion')).toBeDefined();
+        expect(screen.getByText('Bilingual')).toBeDefined();    
     });
 
     // todo: add tests to ensure one was selected
-    it('should slide to Language Inclusivity', async () => {
-
-	//fireEvent.click(screen.getByTestId('language-mode-continue-button'));
-	
-	//expect(screen.getByTestId('language-inclusivity-slide')).toHaveClass('swiper-slide-active');
+    it('should enable the continue button when a Language mode is selected', async () => {
+    
+    
+        // Initially, the continue button should be disabled
+        expect(screen.getByTestId('language-select-continue-button')).toHaveAttribute('disabled','true')
+    
+        // Simulate the user clicking the Bilingual option
+        fireEvent.click(screen.getByText('Bilingual')); 
+    
+        // After clicking, the continue button should be enabled
+        await waitFor(() => {
+            expect(screen.getByTestId('language-select-continue-button')).toHaveAttribute('disabled','false')
+        })
     });
-});
+}); 
+
