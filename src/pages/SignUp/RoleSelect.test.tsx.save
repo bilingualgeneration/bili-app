@@ -1,0 +1,77 @@
+xximport {
+    beforeEach,
+    describe,
+    expect,
+    it,
+    test,
+} from 'vitest';
+import {
+    fireEvent,
+    render,
+    screen,
+    waitFor
+} from '@testing-library/react';
+
+import '@testing-library/jest-dom'; 
+import { IntlProvider } from 'react-intl';
+
+import {RoleSelect} from '@/pages/SignUp/RoleSelect';
+import { useSwiper } from 'swiper/react';
+
+describe('SignUp Page Role Select Slide', () => {
+    /*
+    
+    // todo: add tests to ensure Teacher or Parent roles were clicked
+    test('should slide to Account Credentials', () => {
+	fireEvent.click(screen.getByTestId('role-select-continue-button'));
+	
+	// since SwiperJS uses animation and only applies .swiper-slide-active after animation is done
+	// we need to use waitFor and a sufficiently long enough timeout
+	//expect(screen.getByTestId('account-credentials-slide')).toHaveClass('swiper-slide-active');
+    });
+    
+    test('should prevent sliding if no role was selected', () => {
+	// the continue button should be disabled
+	// todo: implement
+    });
+    */
+
+    const messages = {
+        'signUp.teacher': 'Teacher',
+        'signUp.parent': 'Parent',
+        
+      };
+
+    beforeEach(() => {
+       
+        render(
+            <IntlProvider locale="en" messages={messages}>
+              <RoleSelect teacherSlide={2} parentSlide={1} />
+            </IntlProvider>
+          );
+    });
+
+    it('should render', () => {
+        // Check if the component rendered with all necessary parts
+        expect(screen.getByTestId('role-select-continue-button')).toBeDefined();
+        expect(screen.getByText('Teacher')).toBeDefined();
+        expect(screen.getByText('Parent')).toBeDefined();
+    });
+
+    it('should enable the continue button when a role is selected', async () => {
+    
+    
+        // Initially, the continue button should be disabled
+        expect(screen.getByTestId('role-select-continue-button')).toHaveAttribute('disabled','true')
+    
+        // Simulate the user clicking the Parent option
+        fireEvent.click(screen.getByText('Parent')); 
+    
+        // After clicking, the continue button should be enabled
+        await waitFor(() => {
+            expect(screen.getByTestId('role-select-continue-button')).toHaveAttribute('disabled','false')
+        })
+    });
+
+});
+
