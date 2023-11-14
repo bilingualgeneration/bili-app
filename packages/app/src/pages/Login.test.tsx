@@ -1,27 +1,27 @@
 import Login from './Login'; 
-import {render} from '@testing-library/react';
 import {FirebaseWrapper} from '@/components/FirebaseWrapper';
 import {
+    afterEach,
+    beforeEach,
     describe,
     expect,
     it
 } from 'vitest';
+import { act } from 'react-dom/test-utils';
+import { cleanup, render, screen, fireEvent, renderHook, waitFor } from '@testing-library/react';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { AuthProvider } from 'reactfire';
+import { getAuth } from 'firebase/auth';
+import { IntlProvider, useIntl } from 'react-intl';
+
 
 describe('Login Component', () => {
     it('should render', () => {
         expect(1).toBe(1);
     });
 });
-
-/*
-
-import { act } from 'react-dom/test-utils';
-import { cleanup, render, screen, fireEvent, renderHook, waitFor } from '@testing-library/react';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import {FirebaseWrapper} from '@/components/FirebaseWrapper';
-import {AuthProvider} from '@/contexts/useAuth';
 
 afterEach(() => {
     cleanup();
@@ -40,60 +40,142 @@ describe('Login Component', () => {
 
     const control = result.current.control;
 
+    const messages = {
+        "login.email": "Email address",
+        "login.password": "Password",
+        "login.google": "Continue with Google",
+        "login.apple": "Continue with Apple",
+        "login.continue": "Continue",
+        "login.noAccount": "Don't have an account?",
+        "login.signUp": "Sign up",
+        "login.teacherWelcome": "Welcome to Teacher Login Page",
+        "login.teacher": "Login as Teacher",
+        "login.teacherUsername": "Username",
+        "login.teacherPassword": "Password",
+        "login.emailValidation": "Please enter a valid email address",
+        "login.passwordValidation": "Please enter your password",
+        "login.divider": "or login using",
+        
+      };
+
     beforeEach(async () => {
         await act(async () => {
             result.current.reset();
         });
     });
 
-    test('should render an email input', () => {
+    it('should render an email input', () => {
         render(
-	    <AuthProvider>
-		<FirebaseWrapper>
-		    <Login />
-		</FirebaseWrapper>
-	    </AuthProvider>
-	);
-        const element = screen.getByTestId('email-login-test');
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+        const element = screen.getByTestId('login-email-input');
         expect(element).toBeDefined();
     });
 
-    test('should render a password input', () => {
-        render(<Login />);
-        const element = screen.getByTestId('password-login-test');
+    it('should render a password input', () => {
+        render(
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+        const element = screen.getByTestId('login-password-input');
         expect(element).toBeDefined();
     });
 
-    test('should display error message for missing email', async () => {
-        render(<Login />);
-        fireEvent.input(screen.getByTestId('email-login-test'), { target: { value: '' } });
-        fireEvent.click(screen.getByText('Login'));
+    it('should display error message for invalid email', async () => {
+        render(
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+    
+        const input = await waitFor(() => {
+            const input = screen.getByTestId('login-email-input')!.querySelector('input')
+            expect(input).toBeTruthy();
+            return input!
+        });
+        fireEvent.focus(input)
+        fireEvent.input(input, { target: { value: '1' } });
+        fireEvent.blur(input);
+     
         await waitFor(() => {
-            expect(screen.getByText('Email is required')).toBeInTheDocument();
+            expect(screen.getByText('Invalid email')).toBeInTheDocument(); 
         });
     });
     
-    test('should display error message for missing password', async () => {
-        render(<Login />);
-        fireEvent.input(screen.getByTestId('password-login-test'), { target: { value: '' } });
-        fireEvent.click(screen.getByText('Login'));
+    it('should display error message for invalid password', async () => {
+        render(
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+     
+        const input = await waitFor(() => {
+            const input = screen.getByTestId('login-password-input')!.querySelector('input')
+            expect(input).toBeTruthy();
+            return input!
+        });
+        fireEvent.focus(input)
+        fireEvent.input(input, { target: { value: '1' } });
+        fireEvent.blur(input);
+     
         await waitFor(() => {
-            expect(screen.getByText('Password is required')).toBeInTheDocument();
+            expect(screen.getByText('String must contain at least 8 character(s)')).toBeInTheDocument(); 
         });
     });
 
-    test('should display error message for invalid email', async () => {
-        render(<Login />);
-        fireEvent.input(screen.getByTestId('email-login-test'), { target: { value: 'invalidEmail' } });
-        fireEvent.input(screen.getByTestId('password-login-test'), { target: { value: 'password123' } });
-        fireEvent.click(screen.getByText('Login'));
-        
-        // Assuming your validation logic displays this message for invalid emails
+    it('should display error message for missing email', async () => {
+        render(
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+    
+        const input = await waitFor(() => {
+            const input = screen.getByTestId('login-email-input')!.querySelector('input')
+            expect(input).toBeTruthy();
+            return input!
+        });
+        fireEvent.focus(input)
+        fireEvent.blur(input);
+     
         await waitFor(() => {
-            expect(screen.getByText('Enter a valid email')).toBeInTheDocument();
+            expect(screen.getByText('Required')).toBeInTheDocument(); 
+        });
+    });
+
+    it('should display error message for missing password', async () => {
+        render(
+            <IntlProvider locale="en" messages={messages}>
+                <Login />
+            </IntlProvider>
+	    );
+     
+        const input = await waitFor(() => {
+            const input = screen.getByTestId('login-password-input')!.querySelector('input')
+            expect(input).toBeTruthy();
+            return input!
+        });
+        fireEvent.focus(input)
+        fireEvent.blur(input);
+     
+        await waitFor(() => {
+            expect(screen.getByText('Required')).toBeInTheDocument(); 
         });
     });
 
 });
 
-*/
+
+// example:
+// render(
+//     <AuthProvider>
+//         <FirebaseWrapper>
+//             <Login />
+//         </FirebaseWrapper>
+//     </AuthProvider>
+//     );
+
+

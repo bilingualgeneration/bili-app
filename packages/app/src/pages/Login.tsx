@@ -55,9 +55,10 @@ interface FormInputs {
 }
 
 const Login: React.FC = () => {
-    const auth = useAuth();
+	//uncomment when will be implementing Firebase Auth
+    // const auth = useAuth();
+    // const {status, data: signinResult} = useSigninCheck();
 	const intl = useIntl();
-    const {status, data: signinResult} = useSigninCheck();
     const {
 	control,
 	handleSubmit,
@@ -82,7 +83,7 @@ const Login: React.FC = () => {
 						control={control}
 						fill="outline"
 						helperText=""
-						testId="account-credentials-email-input"
+						testId="login-email-input"
 						type="email"
 						/>
 					</div>
@@ -96,7 +97,7 @@ const Login: React.FC = () => {
 						control={control}
 						fill="outline"
 						helperText=""
-						testId="account-credentials-password-input"
+						testId="login-password-input"
 						type="password"
 						/>
 					</div>
@@ -107,32 +108,32 @@ const Login: React.FC = () => {
 					/>
 					
 					<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-							<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
+						color='medium'
+						className='ion-margin-top'
+						disabled
+						expand='block'
+						fill='outline'
+						style={{opacity: 0.2}}>
+						<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
 					</IonButton>
 
 					<IonButton
-					color='medium'
-					className='ion-margin-top'
-					disabled
-					expand='block'
-					fill='outline'
-					style={{opacity: 0.2}}>
-							<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
+						color='medium'
+						className='ion-margin-top'
+						disabled
+						expand='block'
+						fill='outline'
+						style={{opacity: 0.2}}>
+						<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
 					</IonButton>
 
 					<div className='ion-margin-top'>
 						<IonButton 
-						data-testid='account-credentials-continue-button'
-						disabled={!isValid}
-						expand='block' 
-						shape='round'
-						type='submit'>
+							data-testid='account-credentials-continue-button'
+							disabled={!isValid}
+							expand='block' 
+							shape='round'
+							type='submit'>
 							<FormattedMessage id="login.continue" defaultMessage="Continue" />
 						</IonButton>
 					</div>
