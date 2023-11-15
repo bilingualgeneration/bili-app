@@ -255,7 +255,7 @@ describe('Student Dashboard Page', () => {
 
 // Verifys sign-up slides navigation 
 
-describe.only('RoleSelect Slide Tests', () => {
+describe('RoleSelect Slide Tests', () => {
     beforeEach(() => {
       cy.visit('/sign-up'); 
     });
@@ -278,4 +278,32 @@ describe.only('RoleSelect Slide Tests', () => {
       
     });
   });
+
+  describe('ParentAccountCredentials Slide Tests', () => {
+    beforeEach(() => {
+    	cy.visit('/sign-up'); 
+    });
+  
+    it('ParentAccountCredentials form test', () => {
+		//Go to ParentAccountCredential slide from RoleSelect slide
+		cy.get('[data-testid="role-select-slide"]').contains('Parent').click({force: true})
+		cy.get('[data-testid="role-select-continue-button"]').click();
+		cy.get('[data-testid="parent-account-credentials-slide"]').should('be.visible');
+
+		cy.get('[data-testid="account-credentials-name-input"] input').type('John Doe',{force: true});
+		cy.get('[data-testid="account-credentials-email-input"] input').type('john@example.com',{force: true});
+		cy.get('[data-testid="account-credentials-password-input"] input').type('password123',{force: true});
+
+		// Submit the form
+		cy.get('[data-testid="account-credentials-continue-button"]').click();
+
+		// Check if the slide has changed to LanguageModeSelect
+		cy.get('[data-testid="language-select-continue-button"]').should('be.visible');
+      
+    });
+
+   
+  });
+
+
 
