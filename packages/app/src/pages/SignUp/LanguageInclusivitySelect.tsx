@@ -100,7 +100,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 				/>
 				
 				<IonButton
-					data-testid='language-select-continue-button'
+					data-testid='language-inclusivity-continue-button'
 					disabled={!isValid}
 					shape='round'
           onClick={onSubmit}

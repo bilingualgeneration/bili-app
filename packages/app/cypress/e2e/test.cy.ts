@@ -253,13 +253,57 @@ describe('Student Dashboard Page', () => {
 // Sign Up page tests
 // ****************************
 
+// Verifys sign-up slides navigation 
 
-// Verifys navigation to the student dashboard page from the sign up page
-describe('Sign up page workflow', () => {
-    it('Visits the student dashboard page', () => {
-	cy.visit('/sign-up');
-	cy.get('[data-cy="sign_up_auth"]').click();
-	cy.url().should('include', '/student-dashboard');
-	
-    })
-})
+describe('RoleSelect Slide Tests', () => {
+    beforeEach(() => {
+      cy.visit('/sign-up'); 
+    });
+  
+    it('should navigate to ParentAccountCredentials when Parent is selected', () => {
+      cy.get('[data-testid="role-select-slide"]').first().within(() => {
+        cy.contains('Parent').click({force: true}); 
+      });
+      cy.get('[data-testid="role-select-continue-button"]').click();
+      cy.get('[data-testid="parent-account-credentials-slide"]').should('be.visible');
+      
+    });
+  
+    it('should navigate to TeacherAccountCredentials when Teacher is selected', () => {
+      cy.get('[data-testid="role-select-slide"]').first().within(() => {
+        cy.contains('Teacher').click({force: true}); 
+      });
+      cy.get('[data-testid="role-select-continue-button"]').click();
+      cy.get('[data-testid="teacher-account-credentials-slide"]').should('be.visible');
+      
+    });
+  });
+
+  describe('ParentAccountCredentials Slide Tests', () => {
+    beforeEach(() => {
+    	cy.visit('/sign-up'); 
+    });
+  
+    it('ParentAccountCredentials form test', () => {
+		//Go to ParentAccountCredential slide from RoleSelect slide
+		cy.get('[data-testid="role-select-slide"]').contains('Parent').click({force: true})
+		cy.get('[data-testid="role-select-continue-button"]').click();
+		cy.get('[data-testid="parent-account-credentials-slide"]').should('be.visible');
+
+		cy.get('[data-testid="account-credentials-name-input"] input').type('John Doe',{force: true});
+		cy.get('[data-testid="account-credentials-email-input"] input').type('john@example.com',{force: true});
+		cy.get('[data-testid="account-credentials-password-input"] input').type('password123',{force: true});
+
+		// Submit the form
+		cy.get('[data-testid="account-credentials-continue-button"]').click();
+
+		// Check if the slide has changed to LanguageModeSelect
+		cy.get('[data-testid="language-select-continue-button"]').should('be.visible');
+      
+    });
+
+   
+  });
+
+
+
