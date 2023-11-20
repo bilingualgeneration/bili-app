@@ -29,7 +29,7 @@ const StoryFactoryIntro: React.FC<StoryFactoryIntroProps> = ({ page }) => {
                 <>
                     <div className='ion-margin-top'>
                         {/* <FormattedMessage id="translationKey1" defaultMessage="Default Text 1" /> */}
-                        Hola
+                        Page 1
                     </div>
                     <div className='ion-margin-top'>
                         {/* <FormattedMessage id="translationKey2" defaultMessage="Default Text 2" /> */}
