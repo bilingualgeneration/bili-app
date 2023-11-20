@@ -242,7 +242,10 @@ ion-button.story-button {
 }
 
 .card-content-md .story-button-bold {
+  /* Layout properties */
   align-self: stretch;
+
+  /* Style properties */
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;
@@ -253,7 +256,10 @@ ion-button.story-button {
 }
 
 .card-content-md .story-button-reg {
+  /* Layout properties */
   align-self: stretch;
+
+  /* Style properties */
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;

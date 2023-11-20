@@ -29,7 +29,16 @@ const StoryFactoryIntro: React.FC<StoryFactoryIntroProps> = ({ page }) => {
                 <>
                     <div className='ion-margin-top'>
                         {/* <FormattedMessage id="translationKey1" defaultMessage="Default Text 1" /> */}
-                        Page 1
+                        <div>
+                            <div>
+                                <h1>
+                                    ¡Bienvenidos a la fábrica de cuentos!
+                                </h1>
+                            </div>
+                            <div>
+                                ¡Un lugar para lecturas silábicas graciosas!
+                            </div>
+                        </div>
                     </div>
                     <div className='ion-margin-top'>
                         {/* <FormattedMessage id="translationKey2" defaultMessage="Default Text 2" /> */}
