@@ -86,7 +86,7 @@ const StoryFactoryIntro: React.FC<StoryFactoryIntroProps> = ({ page }) => {
                 <IonCardContent>
                     {getPageContent(currentPage)}
 
-                    <div className='story-intro-button'>
+                    <div className='story-intro-button-container'>
                         <IonButton 
                         color='var(--Flamenco-High)'
                         className="story-button"
