@@ -14,6 +14,7 @@ import {IonReactRouter} from '@ionic/react-router';
 import {
     Redirect,
     Route,
+    RouteComponentProps,
     Switch
 } from 'react-router-dom';
 import {useProfile} from '@/contexts/ProfileContext';
@@ -37,7 +38,7 @@ import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
-import StoryFactory from './pages/games/StoryFactory';
+import StoryFactoryIntro from '@/components/StoryFactoryIntro/StoryFactoryIntro';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
@@ -137,9 +138,9 @@ const Router: React.FC = () => {
 				</UnauthedLayout>
 			)} />
 
-			<Route exact path="/story-factory" render={() => (
+			<Route exact path="/story-factory/intro/:page" render={(props) => (
 				<UnauthedLayout>
-				<StoryFactory />
+				<StoryFactoryIntro page={parseInt(props.match.params.page)} />
 				</UnauthedLayout>
 			)} />
 
