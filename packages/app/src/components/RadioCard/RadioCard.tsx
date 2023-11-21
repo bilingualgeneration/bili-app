@@ -26,34 +26,34 @@ export const RadioCard: React.FC<RadioCardProps> = ({
     title,
 }) => {
     return <IonCard style={{cursor: 'pointer'}}>
-	<div className='card-inner'>
-	    <div className='oval-element' style={{ backgroundColor: iconBackgroundColor }}>
-		{icon}
-	    </div>
-	    <div className='title-content'>
-            <div className='badge-content' 
-                style={{
-                backgroundColor: 'var(--Flamenco-High)',
-                marginLeft: '18px',
-                paddingLeft: '8px',
-                paddingRight: '8px',
-                borderRadius: '4px',
-                }}>
-                {badge}
+        <div className='card-inner'>
+            <div className='oval-element' style={{ backgroundColor: iconBackgroundColor }}>
+            {icon}
             </div>
-		<IonCardHeader class='custom-ion-header'>
-		    <IonCardTitle>
-			<IonText color='primary'>
-			    {/* todo: don't force type cast */}
-			    {title as string}
-			</IonText>
-		    </IonCardTitle>
-		</IonCardHeader>
-		<IonCardContent>
-		    {/* todo: don't force type cast */}
-		    {content as string}
-		</IonCardContent>
-	    </div>
-	</div>
+                <div className='title-content'>
+                    <div className='badge-content' 
+                        style={{
+                        backgroundColor: 'var(--Flamenco-High)',
+                        marginLeft: '18px',
+                        paddingLeft: '8px',
+                        paddingRight: '8px',
+                        borderRadius: '4px',
+                        }}>
+                        {badge}
+                    </div>
+                <IonCardHeader class='custom-ion-header'>
+                    <IonCardTitle>
+                    <IonText color='primary'>
+                        {/* todo: don't force type cast */}
+                        {title as string}
+                    </IonText>
+                    </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                    {/* todo: don't force type cast */}
+                    {content as string}
+                </IonCardContent>
+            </div>
+        </div>
     </IonCard>;
 };

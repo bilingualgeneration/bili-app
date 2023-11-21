@@ -99,9 +99,7 @@
 
     "stories.storyId": "ID de historia:",
 
-    "storyFactory.Welcome": "Bienvenidos a la página Fábrica de cuentos",
-    "sf.key1": "¡Bienvenidos a la fábrica de cuentos!",
-    "sf.key2": "¡Un lugar para lecturas silábicas graciosas!"
+    "storyFactory.Welcome": "Bienvenidos a la página Fábrica de cuentos"
   
 }
   

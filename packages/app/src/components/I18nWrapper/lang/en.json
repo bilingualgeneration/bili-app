@@ -99,9 +99,7 @@
 
     "stories.storyId": "Story ID:",
 
-    "storyFactory.Welcome": "Welcome to Story Factory Page",
-    "sf.key1": "Welcome to the Story Factory!",
-    "sf.key2": "A place for silly syllabic reading!"
+    "storyFactory.Welcome": "Welcome to Story Factory Page"
     
 }
   

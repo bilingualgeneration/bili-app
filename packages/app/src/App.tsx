@@ -38,7 +38,7 @@ import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
-import StoryFactoryIntro from '@/components/StoryFactoryIntro/StoryFactoryIntro';
+// import StoryFactory from '@/components/StoryFactory/StoryFactory';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
@@ -138,9 +138,9 @@ const Router: React.FC = () => {
 				</UnauthedLayout>
 			)} />
 
-			<Route exact path="/story-factory/intro/:page" render={(props) => (
+			<Route exact path="/story-factory/:page" render={(props) => (
 				<UnauthedLayout>
-				<StoryFactoryIntro page={parseInt(props.match.params.page)} />
+				{/* <StoryFactory page={parseInt(props.match.params.page)} /> */}
 				</UnauthedLayout>
 			)} />
 
