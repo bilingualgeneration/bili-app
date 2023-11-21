@@ -1,7 +1,7 @@
 import App from './App';
 import { createRoot } from 'react-dom/client';
 import {FirebaseWrapper} from './components/FirebaseWrapper';
-import {I18nWrapper} from '@/components/I18nWrapper';
+import {I18nWrapper} from './components/I18nWrapper';
 import {ProfileContextProvider} from './contexts/ProfileContext';
 import React from 'react';
 
