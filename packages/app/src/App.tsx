@@ -36,11 +36,13 @@ import { ProfileContextProvider } from '@/contexts/ProfileContext';
 import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
+import {LandingPage} from './pages/LandingPage';
 import Stories from './pages/games/Stories';
 import StoryFactory from './pages/games/StoryFactory';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -80,7 +82,7 @@ const Router: React.FC = () => {
 
 			<Route exact path="/home" render={() => (
 				<UnauthedLayout>
-				<Home />
+				<LandingPage />
 				</UnauthedLayout>
 			)} />
 			
