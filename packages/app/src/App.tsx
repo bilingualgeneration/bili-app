@@ -167,6 +167,12 @@ const Router: React.FC = () => {
 				</UnauthedLayout>
 			)} />
 
+			<Route exact path="/story-factory/6" render={() => (
+				<UnauthedLayout>
+				<StoryFactoryPage6 />
+				</UnauthedLayout>
+			)} />
+
 			<Route exact path="/student-dashboard" render={() => (
 				<UnauthedLayout>
 				<StudentDashboard />

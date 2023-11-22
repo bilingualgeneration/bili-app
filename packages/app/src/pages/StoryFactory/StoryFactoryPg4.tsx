@@ -17,8 +17,10 @@ const StoryFactoryPage4: React.FC = () => (
             <IonRow className='rectangle-header'>
                 {/* <IonCol size="1"></IonCol> */}
                 <IonCol size="1" offset="1" className="juego-column"> 
-                    <div id='story-juego-title'>Juego</div>
-                    <div id='story-juego-title2'>Play</div>
+                    <IonText>
+                        <div id='story-juego-title'>Juego</div>
+                        <div id='story-juego-title2'>Play</div>
+                    </IonText>
                 </IonCol>
                 {/* <IonCol></IonCol> */}
             </IonRow>

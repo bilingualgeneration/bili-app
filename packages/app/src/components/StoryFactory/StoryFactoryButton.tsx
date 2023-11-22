@@ -23,16 +23,14 @@ const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
       onClick={onClick}
     >
       <div>
-        <IonText>
-          <h1 className='story-button-bold'>Siguiente</h1>
-        </IonText>
-        <IonText className='story-button-reg'>
-          <FormattedMessage
-            id='storyFactory.button'
-            defaultMessage='Next'
-            description='Button to move to the next page in intro pages'
-          />
-        </IonText>
+          <div className='story-button-bold'>Siguiente</div>
+          <div className='story-button-reg'> 
+            <FormattedMessage
+              id='storyFactory.nextButton'
+              defaultMessage='Next'
+              description='Button to move to the next page in intro pages'
+            />
+          </div>
       </div>
     </IonButton>
   </div>

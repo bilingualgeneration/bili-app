@@ -439,10 +439,85 @@ ion-button.story-button {
   box-shadow: 0px 4px 60px 0px rgba(4, 6, 15, 0.05);
 }
 
-.story-juego-fabrica-colorful-container {
+.fabrica-de-cuentos-card {
+  display: flex;
+  width: 1147px;
+  padding: 24px 24px 79px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 35.942px;
+  background: var(--base-nube, #FFF);
+  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+}
+
+#story-juego-fabrica-colorful-text-container {
   display: flex;
   height: 79.97px;
   justify-content: center;
   align-items: center;
   gap: 35.942px;
+}
+
+#story-juego-fabrica-colorful-text {
+  width: 995.582px;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Outfit;
+  font-size: 86.26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28.753px; /* 33.333% */
+  letter-spacing: -0.899px;
+}
+
+.felicitaciones-card {
+  position: relative;
+  display: flex;
+  width: 1147px;
+  height: 494.5px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  border-radius: 35.942px;
+  background: var(--base-selva, #006A67);
+  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+}
+
+.sigue-adelante-button {
+  display: flex;
+  width: 362.566px;
+  --padding-top: 14.377px;
+  --padding-bottom: 14.377px;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center; commented these out bc they weren't doing anything
+  // --border-radius: 94.913px;
+  --background: var(--cielo-cielo, #D3EAE8);
+  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.20);
+}
+
+.sigue-button-es {
+  align-self: stretch;
+  color: var(--cielo-lowest, #003735);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 35.2px */
+}
+
+.sigue-button-en {
+  align-self: stretch;
+  color: var(--cielo-lowest, #003735);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 12.58px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 17.611px */
+  letter-spacing: 0.19px;
 }
