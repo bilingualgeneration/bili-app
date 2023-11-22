@@ -16,8 +16,9 @@ type StoriesCardProps = {
     subtitle: string | MessageFormatElement[];
     icon?: React.ReactNode;
     cover: URL;
-    rating?: string;
-    heart?: string
+    rating?: React.ReactNode;
+    heart?: React.ReactNode[];
+    iconBackroungColor? : string;
 };
 
 export const StoriesCard: React.FC<StoriesCardProps> = ({
@@ -25,21 +26,46 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     icon,
     cover,
     title,
-    rating = "★★★★★",
-    heart 
+    rating,
+    heart,
+    iconBackroungColor 
 }) => {
     return <>
         <div className='stories-card'>
-            <div className='stories-card-header'>
-            {icon}
-            {rating}
-            </div>
-            <div stories-card-image>
+           
+            <div className='stories-card-image'>
                 <img src={cover.toString()} alt="" />
+                <div className='stories-card-header'>
+                    <div className='oval-element-small' 
+                        style={{ 
+                            backgroundColor: iconBackroungColor 
+                            }}
+                    >
+                        {icon}
+                    </div>
+                    <div className='stories-card-rating'>
+                        {rating && rating.map((star, index) => (
+                                <span key={index}>{star}</span>
+                            ))}
+                    </div>
+                    
+                </div>
+                <div className='stories-card-footer'>
+                    <div>
+                        <h4>
+                            {title as string}
+                        </h4>
+                        <p>
+                            {subtitle as string}
+                        </p>
+                    </div>
+                    <div>
+                        {heart}
+                    </div>
+                    
+                </div>
             </div>
-            <div>
-                {heart}
-            </div>
+            
         </div>
     </>;
 };

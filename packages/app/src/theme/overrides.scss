@@ -224,4 +224,57 @@ ion-card {
   top: 10px;
 }
 
+.stories-card {
+  margin-left: 8px;
+  margin-right: 8px;
+  position: relative;
+  
+  
+}
 
+.stories-card-image img{
+  border-radius: 12px;
+  width: 242px;
+  max-width: none; /* overrides the max-width: 100% rule */
+}
+
+.stories-card-header {
+  position: absolute;
+  top: 0;
+}
+
+.stories-card-footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.stories-card-footer p {
+  color: #FFF;
+  /* Body */
+  font-family: Work Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.26px;
+}
+
+.stories-card-footer h4 {
+  color: #FFF;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.oval-element-small {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

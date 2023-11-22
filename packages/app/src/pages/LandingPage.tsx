@@ -23,8 +23,9 @@ import BieneStarIcon from '@/assets/icons/bienestar.svg?react';
 import ComunidadIcon from '@/assets/icons/comunidad.svg?react';
 import StemIcon from '@/assets/icons/stem.svg?react';
 import { StoriesCard } from '@/components/StoriesCard';
-import Image from '/assets/img/boot_image.png';
-
+import SmallBook from '@/assets/icons/small_book.svg?react';
+import Heart from '@/assets/icons/heart.svg?react';
+import Star from '@/assets/icons/star.svg?react';
 
 export const LandingPage: React.FC = () => {
 
@@ -114,30 +115,50 @@ export const LandingPage: React.FC = () => {
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        rating={[<Star/>, <Star/>, <Star/>]}
                     />
 
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        rating={[<Star/>, <Star/>, <Star/>]}
                     />
 
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        rating={[<Star/>, <Star/>, <Star/>]}
                     />
 
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        rating={[<Star/>, <Star/>, <Star/>]}
                     /> 
 
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        rating={[<Star/>, <Star/>, <Star/>]}
                     />         
                 </div>
 
