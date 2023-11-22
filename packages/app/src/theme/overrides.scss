@@ -384,7 +384,7 @@ ion-button.story-button {
 }
 
 .rectangle-header {
-  width: 1366px;
+  width: 100%;
   height: 156px;
   flex-shrink: 0;
   background: var(--habanero-habanero, #FF5708);
@@ -427,7 +427,15 @@ ion-button.story-button {
   line-height: 110%; /* 26.4px */
 }
 
-.story-card-1, .story-card-2, .story-card-3  {
+.juego-content-container {
+  display: flex;
+  width: 992px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.story-card  {
   display: flex;
   width: 320px;
   height: 274px;
@@ -451,7 +459,7 @@ ion-button.story-button {
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
 }
 
-#story-juego-fabrica-colorful-text-container {
+.story-juego-fabrica-text-container {
   display: flex;
   height: 79.97px;
   justify-content: center;
@@ -459,7 +467,7 @@ ion-button.story-button {
   gap: 35.942px;
 }
 
-#story-juego-fabrica-colorful-text {
+.story-juego-fabrica-text {
   width: 995.582px;
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
@@ -469,6 +477,7 @@ ion-button.story-button {
   font-weight: 700;
   line-height: 28.753px; /* 33.333% */
   letter-spacing: -0.899px;
+  color: var(--greyscale-900, #212121)
 }
 
 .felicitaciones-card {
@@ -521,3 +530,59 @@ ion-button.story-button {
   line-height: 140%; /* 17.611px */
   letter-spacing: 0.19px;
 }
+
+/* JuegoCard Component */
+
+.story-card {
+  position: relative;
+  overflow: hidden; /* To ensure the overlay covers the entire card, even if content exceeds boundaries */
+}
+
+.story-card.locked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black/grey overlay */
+}
+
+.lock-icon-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lock-icon {
+  font-size: 3rem;
+  color: white;
+}
+
+.juego-card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  transform: translate(-25%, 250%); // TODO: check if this is correct
+}
+
+.juego-card p.subtitle {
+  font-size: 13px;
+  color: white;
+  text-align: left;
+  transform: translate(-25%, 450%); // TODO: check if this is correct
+}
+
+.juego-card.locked p.title {
+  text-align: end;
+}
+
+// TODO: check if this is correct
+/* Adjustments for smaller screens  */
+@media (max-width: 576px) {
+  .lock-icon {
+    font-size: 1.5rem;
+  }
+}
+
