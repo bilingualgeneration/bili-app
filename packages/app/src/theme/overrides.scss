@@ -41,13 +41,13 @@ ion-progress-bar{
 
 
 ion-button {
-    //--box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    // --box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
     $paddingY: 23px;
     --padding-bottom: #{$paddingY};
     --padding-top: #{$paddingY};
     font-weight: bold;
     font-size: 1rem;
-//    margin: 24px;
+  //  margin: 24px;
     text-transform: none;
 
     &:not([shape=round]){
@@ -241,7 +241,7 @@ ion-button.story-button {
   gap: 16px;
 }
 
-.card-content-md .story-button-bold {
+.story-button-bold {
   /* Layout properties */
   align-self: stretch;
 
@@ -256,7 +256,7 @@ ion-button.story-button {
   letter-spacing: 0.211px;
 }
 
-.card-content-md .story-button-reg {
+.story-button-reg {
   /* Layout properties */
   align-self: stretch;
 
@@ -278,4 +278,171 @@ ion-button.story-button {
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
+}
+
+.story-page-1-text-container {
+  display: inline-flex;
+  height: 433px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+  flex-shrink: 0;
+}
+
+#story-bienvenidos {
+  width: 600px;
+  color: var(--base-suelo, #000);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Outfit;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 70.4px */
+  letter-spacing: -2px;
+}
+
+#story-fabrica {
+  width: 600px;
+  color: var(--habanero-habanero, #FF5708);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Outfit;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: -2px;
+}
+
+#story-welcome {
+  align-self: stretch;
+  color: var(--base-suelo, #000);
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 35.2px */
+}
+
+#story-fact {
+  align-self: stretch;
+  color: var(--habanero-habanero, #FF5708);
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+#story-un-lugar {
+  align-self: stretch;
+  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  font-family: Outfit;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 44px */
+}
+
+#story-graciosas {
+  align-self: stretch;
+  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  font-family: Outfit;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 44px */
+}
+
+#story-a-place {
+  align-self: stretch;
+  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 26.4px */
+}
+
+#story-juego-fabrica-es {
+  width: 1093px;
+  color: var(--greyscale-900, #212121);
+  font-family: Outfit;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 44px */
+}
+
+#story-factory-en {
+  width: 367px;
+  color: #1C1C17;
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 22px */
+}
+
+.rectangle-header {
+  width: 1366px;
+  height: 156px;
+  flex-shrink: 0;
+  background: var(--habanero-habanero, #FF5708);
+  mix-blend-mode: multiply;
+}
+
+.juego-divider{
+  height: 50px;
+}
+
+.juego-card {
+  display: flex;
+  width: 1147px;
+  padding: 60px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 35.942px;
+  background: var(--base-nube, #FFF);
+  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+}
+
+#story-juego-title {
+  width: 381px;
+  color: #FFF;
+  font-family: Outfit;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 52.8px */
+}
+
+#story-juego-title2 {
+  width: 367px;
+  color: #FFF;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 26.4px */
+}
+
+.story-card-1, .story-card-2, .story-card-3  {
+  display: flex;
+  width: 320px;
+  height: 274px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #FDCB04;
+  box-shadow: 0px 4px 60px 0px rgba(4, 6, 15, 0.05);
+}
+
+.story-juego-fabrica-colorful-container {
+  display: flex;
+  height: 79.97px;
+  justify-content: center;
+  align-items: center;
+  gap: 35.942px;
 }

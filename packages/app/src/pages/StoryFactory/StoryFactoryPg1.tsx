@@ -1,33 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonText
-} from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
-import { useProfile } from '@/contexts/ProfileContext';
+import React from 'react';
+import { IonCard, IonCol, IonGrid, IonImg, IonRow, IonText } from '@ionic/react';
+import StoryFactoryButton from '@/components/StoryFactory/StoryFactoryButton';
+import bili_character from 'packages/app/public/assets/img/bili_character.svg';
 
-const IntroPage1: React.FC = () => (
-    <>
-        <div className='ion-margin-top'>
-            <IonText>
-                <h1>¡Bienvenidos a la </h1>
-                <IonText>
-                    <h1
-                    style={{
-                    color: 'var(--Habanero-Habanero)'
-                    }}
-                    >fábrica de cuentos!</h1>
-                </IonText>
-            </IonText>
-        </div>
-        <div className='ion-margin-top'>
-            <IonText color='medium'>
-                <h3>¡Un lugar para lecturas silábicas graciosas!</h3>
-            </IonText>
-        </div>
-    </>
+interface IntroPage1Props {
+  handleNext: () => void;
+  isNewUser: boolean;
+  currentPage: number;
+}
+
+const IntroPage1: React.FC<IntroPage1Props> = ({ handleNext, isNewUser, currentPage }) => (
+  <>
+    <IonGrid>
+        <IonCard className='story-intro'>
+            <div className='story-page-1-text-container'>
+                <IonRow>
+                    <IonCol>
+                        <IonText>
+                            <div id='story-bienvenidos'> ¡Bienvenidos a la </div>
+                            <div id='story-fabrica'> fábrica de cuentos! </div>
+                            <div id='story-un-lugar'>¡Un lugar para lecturas silábicas</div> 
+                            <div id='story-graciosas'> graciosas! </div>
+                        </IonText>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonText>
+                            <div id='story-welcome'>Welcome to the <span id='story-fact'>story factory!</span></div>
+                            <div id='story-a-place'>A place for silly syllabic reading! </div>
+                        </IonText>
+                    </IonCol>
+                </IonRow>
+            </div>
+            <div>
+                <IonRow>
+                    <IonCol></IonCol>
+                    <IonCol>
+                        <StoryFactoryButton onClick={handleNext} isNewUser={isNewUser} currentPage={currentPage} />
+                    </IonCol>
+                    <IonCol></IonCol>
+                </IonRow>
+            </div>
+        </IonCard>
+    </IonGrid>
+    <IonGrid>
+        <IonRow>
+            <IonCol> </IonCol>
+            <IonCol size="auto">
+                <div style={{ width: '411px', height: '733px' }}>*Bili Img Goes Here*</div>
+                {/* <img src={bili_character} alt="Bili character" width="411" height="733"/> */}
+            </IonCol>
+        </IonRow>
+    </IonGrid>
+  </>
 );
-  
+
 export default IntroPage1;

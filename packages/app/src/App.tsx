@@ -27,6 +27,9 @@ import AuthedLayout from './layouts/Authed';
 import Explore from './pages/Explore';
 import Home from './pages/Home';
 import {I18nWrapper} from '@/components/I18nWrapper';
+import IntroPage1 from './pages/StoryFactory/StoryFactoryPg1';
+import IntroPage2 from './pages/StoryFactory/StoryFactoryPg2';
+import IntroPage3 from './pages/StoryFactory/StoryFactoryPg3';
 import Intruder from './pages/games/Intruder';
 import Journeys from './pages/Journeys';
 import {LanguageSwitcher} from '@/components/LanguageSwitcher';
@@ -39,6 +42,9 @@ import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
 import StoryFactory from '@/components/StoryFactory/StoryFactory';
+import StoryFactoryPage4 from './pages/StoryFactory/StoryFactoryPg4';
+import StoryFactoryPage5 from './pages/StoryFactory/StoryFactoryPg5';
+import StoryFactoryPage6 from './pages/StoryFactory/StoryFactoryPg6';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
@@ -138,9 +144,26 @@ const Router: React.FC = () => {
 				</UnauthedLayout>
 			)} />
 
-			<Route exact path="/story-factory/:page" render={(props) => (
+			{/* This is just temporary while creating pages */}
+
+			<Route exact path="/story-factory/1" render={() => (
 				<UnauthedLayout>
-				<StoryFactory page={parseInt(props.match.params.page)} />
+				<IntroPage1 handleNext={function (): void
+						{
+							throw new Error('Function not implemented.');
+						} } isNewUser={false} currentPage={0} />
+				</UnauthedLayout>
+			)} />
+
+			<Route exact path="/story-factory/4" render={() => (
+				<UnauthedLayout>
+				<StoryFactoryPage4 />
+				</UnauthedLayout>
+			)} />
+
+			<Route exact path="/story-factory/5" render={() => (
+				<UnauthedLayout>
+				<StoryFactoryPage5 />
 				</UnauthedLayout>
 			)} />
 
