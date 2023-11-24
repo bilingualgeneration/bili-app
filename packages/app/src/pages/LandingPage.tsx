@@ -31,22 +31,19 @@ export const LandingPage: React.FC = () => {
 
     return(
 	<>
-        <IonText>
+        <div className='cards-title'>
             <h1>
                 Hola Vanessa!
             </h1>
-            <h6>
+            <p>
                 Hello Vanessa!
-            </h6>
-        </IonText>
+            </p>
+        </div>
 
         <div className=''>
-            <div>
-                <IonText>
+            <div className='cards-title'>
                     <h2>Las tareas de esta semana</h2>
                     <p>This week’s assignments</p>
-                </IonText>
-                
             </div>
             {/* icons */}
             <div className='wave-icons'>
@@ -97,10 +94,10 @@ export const LandingPage: React.FC = () => {
             </div>
             
             {/* stories */}
-            <div>
-                <div>
-                    <h2>Cuentos</h2>
-                    <p>Stories</p>
+            <div className='stories-story-cards'>
+                <div className='cards-title'>
+                        <h2>Cuentos</h2>
+                        <p>Stories</p>
                 </div>
                     
                 <div 
@@ -119,6 +116,7 @@ export const LandingPage: React.FC = () => {
                         iconBackroungColor='#006A67'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
+                        className='stories-card-image'
                     />
 
                     <StoriesCard 
@@ -129,6 +127,7 @@ export const LandingPage: React.FC = () => {
                         iconBackroungColor='#006A67'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
+                        className='stories-card-image'
                     />
 
                     <StoriesCard 
@@ -139,6 +138,7 @@ export const LandingPage: React.FC = () => {
                         iconBackroungColor='#006A67'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
+                        className='stories-card-image'
                     />
 
                     <StoriesCard 
@@ -149,9 +149,10 @@ export const LandingPage: React.FC = () => {
                         iconBackroungColor='#006A67'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
+                        className='stories-card-image'
                     /> 
 
-                    <StoriesCard 
+                    {/* <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
                         cover={'/assets/img/boot_image.png'}
@@ -159,10 +160,60 @@ export const LandingPage: React.FC = () => {
                         iconBackroungColor='#006A67'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
-                    />         
+                        className='stories-card-image'
+                    />          */}
                 </div>
 
             </div>
+
+            {/* wellnes */}
+            <div className='other-story-cards'>
+                <div className='cards-title'>
+                        <h2>Bienestar</h2>
+                        <p>Welness</p>
+                </div>
+
+                <div 
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+
+                    }}
+                >
+                    
+                    <StoriesCard 
+                        title={'¡Me gusta como soy!'} 
+                        subtitle={'I like myself'} 
+                        cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        className='other-card-image'
+                    />
+
+                    <StoriesCard 
+                        title={'¡Me gusta como soy!'} 
+                        subtitle={'I like myself'} 
+                        cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        className='other-card-image'
+                    />
+
+                    <StoriesCard 
+                        title={'¡Me gusta como soy!'} 
+                        subtitle={'I like myself'} 
+                        cover={'/assets/img/boot_image.png'}
+                        icon={<SmallBook/>}
+                        iconBackroungColor='#006A67'
+                        heart={<Heart/>}
+                        className='other-card-image'
+                    />
+                </div>
+
+            </div>
+           
 
             
         </div>

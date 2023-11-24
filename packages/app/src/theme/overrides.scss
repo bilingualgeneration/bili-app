@@ -133,6 +133,15 @@ ion-text{
     }
 }
 
+h4 {
+  color: #FFF;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
 /*
 ion-text h1{
     color: var(--greyscale-900, #212121) !important;
@@ -234,8 +243,14 @@ ion-card {
 
 .stories-card-image img{
   border-radius: 12px;
-  width: 242px;
+  width: 168px;
   max-width: none; /* overrides the max-width: 100% rule */
+}
+
+.other-card-image img {
+  border-radius: 12px;
+  width: 320px;
+  max-width: none;
 }
 
 .stories-card-header {
@@ -246,6 +261,7 @@ ion-card {
 .stories-card-footer {
   position: absolute;
   bottom: 0;
+  max-width: 145px;
 }
 
 .stories-card-footer p {
@@ -259,14 +275,7 @@ ion-card {
   letter-spacing: -0.26px;
 }
 
-.stories-card-footer h4 {
-  color: #FFF;
-  font-family: Outfit;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
-}
+
 
 .oval-element-small {
   width: 28px;
@@ -277,4 +286,32 @@ ion-card {
   align-items: center;
   justify-content: center;
 
+}
+
+.cards-title h2 {
+  color: #1C1C17;
+  font-family: Outfit;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.cards-title p {
+  color: #1C1C17;
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  margin-top: auto;
+}
+
+.cards-title h1 {
+  color: #1C1C17;
+  font-family: Outfit;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 52.8px */
 }

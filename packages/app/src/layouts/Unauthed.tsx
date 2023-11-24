@@ -13,13 +13,18 @@ import './Container.css';
 import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 
 interface UnauthedLayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode,
+    whiteBackground?: false // Default to false
 }
 
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     // other props
-    children
+    children,
+    whiteBackground
   }) => {
+
+    const contentStyle = whiteBackground ? { '--background': 'none', 'background-color': 'white' } : {};
+
     return (
 	<IonPage>
 	    <IonHeader
@@ -31,7 +36,7 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
 		    </IonButtons>
 		</IonToolbar>
 	    </IonHeader>
-	    <IonContent fullscreen className="ion-padding">
+	    <IonContent fullscreen className="ion-padding" style={contentStyle}>
 		<div className='container'>
                     {children}
 		</div>

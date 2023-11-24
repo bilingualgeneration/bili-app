@@ -81,7 +81,7 @@ const Router: React.FC = () => {
 			)} />
 
 			<Route exact path="/home" render={() => (
-				<UnauthedLayout>
+				<UnauthedLayout whiteBackground={true}>
 				<LandingPage />
 				</UnauthedLayout>
 			)} />

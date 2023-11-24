@@ -19,6 +19,7 @@ type StoriesCardProps = {
     rating?: React.ReactNode;
     heart?: React.ReactNode[];
     iconBackroungColor? : string;
+    className: string;
 };
 
 export const StoriesCard: React.FC<StoriesCardProps> = ({
@@ -28,12 +29,13 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     title,
     rating,
     heart,
-    iconBackroungColor 
+    iconBackroungColor,
+    className 
 }) => {
     return <>
         <div className='stories-card'>
            
-            <div className='stories-card-image'>
+            <div className={className}>
                 <img src={cover.toString()} alt="" />
                 <div className='stories-card-header'>
                     <div className='oval-element-small' 
@@ -52,6 +54,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
                 </div>
                 <div className='stories-card-footer'>
                     <div>
+                        
                         <h4>
                             {title as string}
                         </h4>
