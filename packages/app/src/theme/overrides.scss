@@ -214,7 +214,7 @@ ion-card {
 
 //styles for the home-landing-page
 .wave-icons {
-  background-image: url('/assets/img/Vector_17.png');
+  background-image: url('/assets/img/wave_100.png');
   background-repeat: no-repeat;
   text-align: -webkit-center;
 }
@@ -226,11 +226,21 @@ ion-card {
 
 .col-custom-position-5 {
   position: relative;
-  bottom: 20px;
+  top: 10px;
 }
 .col-custom-position-4 {
   position: relative;
+  top: 40px;
+}
+
+.col-custom-position-1 {
+  position: relative;
   top: 10px;
+}
+
+.col-custom-position-3 {
+  position: relative;
+  top: 20px;
 }
 
 .stories-card {
@@ -256,12 +266,23 @@ ion-card {
 .stories-card-header {
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
 }
 
 .stories-card-footer {
   position: absolute;
-  bottom: 0;
-  max-width: 145px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin: 10px;
 }
 
 .stories-card-footer p {
@@ -314,4 +335,18 @@ ion-card {
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 52.8px */
+}
+
+.stories-card.locked {
+  position: relative;
+  filter: brightness(50%);
+}
+
+.stories-card .lock-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  /* Adjust size as needed */
 }

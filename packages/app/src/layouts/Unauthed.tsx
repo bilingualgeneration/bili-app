@@ -15,16 +15,19 @@ import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 interface UnauthedLayoutProps {
     children: React.ReactNode,
     whiteBackground?: false // Default to false
+    customWidth?: false
 }
 
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
     // other props
     children,
-    whiteBackground
+    whiteBackground,
+    customWidth
   }) => {
 
-    const contentStyle = whiteBackground ? { '--background': 'none', 'background-color': 'white' } : {};
-
+    const contentStyle = whiteBackground ? { '--background': 'none', 'backgroundColor': 'white' } : {};
+    
+    
     return (
 	<IonPage>
 	    <IonHeader

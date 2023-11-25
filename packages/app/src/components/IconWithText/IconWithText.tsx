@@ -35,6 +35,7 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
                     style={{
                         fontSize: '18px', 
                         fontWeight: '700',
+                        maxWidth: '120px',
                         }}>
                     {/* todo: don't force type cast */}
                     {title as string}

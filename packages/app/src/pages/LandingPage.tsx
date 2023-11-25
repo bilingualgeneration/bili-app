@@ -24,6 +24,9 @@ import ComunidadIcon from '@/assets/icons/comunidad.svg?react';
 import StemIcon from '@/assets/icons/stem.svg?react';
 import { StoriesCard } from '@/components/StoriesCard';
 import SmallBook from '@/assets/icons/small_book.svg?react';
+import SmallArt from '@/assets/icons/small_art.svg?react';
+import SmallCommunity from '@/assets/icons/small_community.svg?react';
+import SmallFlower from '@/assets/icons/small_flower.svg?react';
 import Heart from '@/assets/icons/heart.svg?react';
 import Star from '@/assets/icons/star.svg?react';
 
@@ -117,51 +120,56 @@ export const LandingPage: React.FC = () => {
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
                         className='stories-card-image'
+                        isLocked = {false}
                     />
 
                     <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
+                        title={'Auto retrato'} 
+                        subtitle={'Self-portrait'} 
                         cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        icon={<SmallArt/>}
+                        iconBackroungColor='#0045A1'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
                         className='stories-card-image'
+                        isLocked = {false}
                     />
 
                     <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
+                        title={'Auto retrato'} 
+                        subtitle={'Self-portrait'} 
                         cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        icon={<SmallCommunity/>}
+                        iconBackroungColor='#F0091B'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
                         className='stories-card-image'
+                        isLocked = {false}
                     />
 
                     <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
+                        title={'Auto retrato'} 
+                        subtitle={'Self-portrait'} 
                         cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        icon={<SmallArt/>}
+                        iconBackroungColor='#0045A1'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
                         className='stories-card-image'
+                        isLocked = {true}
                     /> 
 
-                    {/* <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
+                    <StoriesCard 
+                        title={'Auto retrato'} 
+                        subtitle={'Self-portrait'} 
                         cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        icon={<SmallArt/>}
+                        iconBackroungColor='#0045A1'
                         heart={<Heart/>}
                         rating={[<Star/>, <Star/>, <Star/>]}
                         className='stories-card-image'
-                    />          */}
+                        isLocked = {true}
+                    />         
                 </div>
 
             </div>
@@ -184,9 +192,9 @@ export const LandingPage: React.FC = () => {
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        cover={'/assets/img/wellness_1.png'}
+                        icon={<SmallFlower/>}
+                        iconBackroungColor='#AC217B'
                         heart={<Heart/>}
                         className='other-card-image'
                     />
@@ -194,9 +202,9 @@ export const LandingPage: React.FC = () => {
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        cover={'/assets/img/wellness_1.png'}
+                        icon={<SmallFlower/>}
+                        iconBackroungColor='#AC217B'
                         heart={<Heart/>}
                         className='other-card-image'
                     />
@@ -204,9 +212,9 @@ export const LandingPage: React.FC = () => {
                     <StoriesCard 
                         title={'¡Me gusta como soy!'} 
                         subtitle={'I like myself'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
+                        cover={'/assets/img/wellness_1.png'}
+                        icon={<SmallFlower/>}
+                        iconBackroungColor='#AC217B'
                         heart={<Heart/>}
                         className='other-card-image'
                     />

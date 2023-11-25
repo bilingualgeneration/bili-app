@@ -10,6 +10,7 @@ import type {
     MessageFormatElement
 } from 'react-intl';
 import React from 'react';
+import Lock from '@/assets/icons/lock.svg?react';
 
 type StoriesCardProps = {
     title: string | MessageFormatElement[];
@@ -20,6 +21,8 @@ type StoriesCardProps = {
     heart?: React.ReactNode[];
     iconBackroungColor? : string;
     className: string;
+    isLocked: boolean;
+    lock?: React.ReactNode;
 };
 
 export const StoriesCard: React.FC<StoriesCardProps> = ({
@@ -30,11 +33,14 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     rating,
     heart,
     iconBackroungColor,
-    className 
+    className,
+    isLocked,
+    lock
 }) => {
     return <>
-        <div className='stories-card'>
-           
+        <div className={`stories-card ${isLocked ? 'locked' : ''}`}> 
+            {/* check if the card is locked */}
+            {isLocked && <Lock className="lock-icon"/>}
             <div className={className}>
                 <img src={cover.toString()} alt="" />
                 <div className='stories-card-header'>
@@ -52,6 +58,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
                     </div>
                     
                 </div>
+                
                 <div className='stories-card-footer'>
                     <div>
                         
