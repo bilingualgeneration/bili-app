@@ -38,9 +38,10 @@ import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
 import StoryFactory from './pages/games/StoryFactory';
-import StudentDashboard from './pages/StudentDashboard';
+import {StudentDashboard} from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -79,8 +80,7 @@ const Router: React.FC = () => {
 			)} />
 
 			<Route exact path="/home" render={() => (
-				<UnauthedLayout>
-				<Home />
+				<UnauthedLayout customBackground='white' wide={true}>
 				</UnauthedLayout>
 			)} />
 			
@@ -144,8 +144,8 @@ const Router: React.FC = () => {
 			)} />
 
 			<Route exact path="/student-dashboard" render={() => (
-				<UnauthedLayout>
-				<StudentDashboard />
+				<UnauthedLayout customBackground='white' wide={true}>
+				    <StudentDashboard />
 				</UnauthedLayout>
 			)} />
 
