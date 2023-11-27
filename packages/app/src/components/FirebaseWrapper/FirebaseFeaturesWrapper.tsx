@@ -1,26 +1,9 @@
-import {
-    FC,
-    ReactNode
-} from 'react';
-import {
-    AuthProvider,
-    FirestoreProvider,
-    useFirebaseApp
-} from 'reactfire';
-import {getAuth} from 'firebase/auth';
-import {getFirestore} from 'firebase/firestore';
+import { FC, ReactNode } from "react";
+import { AuthProvider, useFirebaseApp } from "reactfire";
+import { getAuth } from "firebase/auth";
 
-export const FirebaseFeaturesWrapper: FC<{children: ReactNode}> = ({
-    children
-}) => {
-    const app = useFirebaseApp();
-    const auth = getAuth(app);
-    const firestore = getFirestore(app);
-    return(
-	<AuthProvider sdk={auth}>
-	    <FirestoreProvider sdk={firestore}>
-		{children}
-	    </FirestoreProvider>
-	</AuthProvider>
-    );
+export const AuthWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const app = useFirebaseApp();
+  const auth = getAuth(app);
+  return <AuthProvider sdk={auth}>{children}</AuthProvider>;
 };

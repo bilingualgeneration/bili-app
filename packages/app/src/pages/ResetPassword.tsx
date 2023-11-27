@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-  IonInput,
-  IonButton,
-} from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
+import React from "react";
+import { IonInput, IonButton } from "@ionic/react";
+import { FormattedMessage } from "react-intl";
 
 const ResetPassword: React.FC = () => {
   // Add password reset logic here
@@ -14,7 +11,12 @@ const ResetPassword: React.FC = () => {
 
   return (
     <>
-      <p><FormattedMessage id="reset.email" defaultMessage="Enter your email address to reset your password:" /></p>
+      <p>
+        <FormattedMessage
+          id="reset.email"
+          defaultMessage="Enter your email address to reset your password:"
+        />
+      </p>
       <IonInput placeholder="Email" />
       <IonButton expand="block" onClick={handleResetPassword}>
         <FormattedMessage id="reset.password" defaultMessage="Reset Password" />
