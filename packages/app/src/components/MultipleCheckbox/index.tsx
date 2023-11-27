@@ -1,1 +1,1 @@
-export * from './MultipleCheckbox';
+export * from "./MultipleCheckbox";

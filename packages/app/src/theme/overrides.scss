@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use "sass:math";
 
 /* 
   .swiper-slides apply text-align: center
@@ -6,85 +6,85 @@
 */
 
 @font-face {
-  font-family: 'Outfit';
-  src: url('/assets/fonts/Outfit-VariableFont_wght.ttf');
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit-VariableFont_wght.ttf");
   // font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
   // font-style: normal;  // Specify 'italic' if it's an italic font style
 }
 
-html{
-    background-color: #D3EAE8;
-    --ion-font-family: 'Outfit';
+html {
+  background-color: #d3eae8;
+  --ion-font-family: "Outfit";
 }
 
 ion-content {
-    --background: url('/assets/img/background.png') no-repeat center center / cover;
+  --background: url("/assets/img/background.png") no-repeat center center /
+    cover;
 }
 
 .swiper-slide > * {
   text-align: initial;
 }
 
-#header{
-    ion-toolbar{
-	--background: transparent url('/assets/img/logo_small.png') center/auto 70% no-repeat;
-	padding-left: 1rem;
-	padding-right: 1rem;
-    }
+#header {
+  ion-toolbar {
+    --background: transparent url("/assets/img/logo_small.png") center/auto 70%
+      no-repeat;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
-ion-progress-bar{
-    $ionProgressBarHeight: 12px;
-    height: $ionProgressBarHeight;
-    border-radius: math.div($ionProgressBarHeight, 2);
+ion-progress-bar {
+  $ionProgressBarHeight: 12px;
+  height: $ionProgressBarHeight;
+  border-radius: math.div($ionProgressBarHeight, 2);
 }
-
 
 ion-button {
-    //--box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
-    $paddingY: 23px;
-    --padding-bottom: #{$paddingY};
-    --padding-top: #{$paddingY};
-    font-weight: bold;
-    font-size: 1rem;
-//    margin: 24px;
-    text-transform: none;
+  //--box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+  $paddingY: 23px;
+  --padding-bottom: #{$paddingY};
+  --padding-top: #{$paddingY};
+  font-weight: bold;
+  font-size: 1rem;
+  //    margin: 24px;
+  text-transform: none;
 
-    &:not([shape=round]){
-	--border-radius: 0.75rem;
-    }
-    
-    &.button-disabled{
-	--background: var(--ion-color-secondary);
-	--color: var(--ion-color-secondary-contrast);
-	opacity: 1;
-    }
+  &:not([shape="round"]) {
+    --border-radius: 0.75rem;
+  }
+
+  &.button-disabled {
+    --background: var(--ion-color-secondary);
+    --color: var(--ion-color-secondary-contrast);
+    opacity: 1;
+  }
 }
-
-
 
 ion-label {
-    color: var(--text-secondary);
-    font-size: 16px;
-    font-family: Outfit;
-    font-weight: 500;
-    line-height: 125%;
-    letter-spacing: 0.48px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-family: Outfit;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: 0.48px;
 }
 
- 
 ion-card-title {
-    color: var(--Base-Suelo);
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 120%; /* 28.8px */
-    letter-spacing: 0.2px;
+  color: var(--Base-Suelo);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 120%; /* 28.8px */
+  letter-spacing: 0.2px;
 }
 
 ion-card-content {
   color: var(--greyscale-900, #212121);
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   /* Paragraph/text-sm/[R] */
   font-family: Outfit;
   font-size: 14px;
@@ -93,48 +93,47 @@ ion-card-content {
   line-height: 20px; /* 142.857% */
 }
 
-
 //styles for input fields
-.input-label-placement-above{
-    color: var(--ion-color-medium);
+.input-label-placement-above {
+  color: var(--ion-color-medium);
 }
 
-ion-input{
-    &.input-fill-outline {
-	font-weight: bold;
-	--padding-start: 20px;
-	--padding-end: 20px;
-	// todo: convert #E7E9E9 into color system
-	// problem arises when trying to stack with border-color
-	--background: #E7E9E9;
-	--border-width: 0.25rem !important;
-	--border-color: #E7E9E9 !important;
-	--border-radius: 0.75rem !important;
-	// todo: highlight-color-focused gives a different color than expected
-	// --highlight-color-focused: var(--Base-Selva);
+ion-input {
+  &.input-fill-outline {
+    font-weight: bold;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    // todo: convert #E7E9E9 into color system
+    // problem arises when trying to stack with border-color
+    --background: #e7e9e9;
+    --border-width: 0.25rem !important;
+    --border-color: #e7e9e9 !important;
+    --border-radius: 0.75rem !important;
+    // todo: highlight-color-focused gives a different color than expected
+    // --highlight-color-focused: var(--Base-Selva);
 
-	&.has-focus {
-	    --background: var(--Cielo-Highest);
-	    // todo: cannot use --highlight-color-focused because of issue above
-	    --border-color: var(--Base-Selva)  !important;
-	}
+    &.has-focus {
+      --background: var(--Cielo-Highest);
+      // todo: cannot use --highlight-color-focused because of issue above
+      --border-color: var(--Base-Selva) !important;
     }
+  }
 }
 
-ion-text{
-    h1{
-	font-size: 2rem !important;
-	font-weight: bold !important;
-    }
+ion-text {
+  h1 {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+  }
 
-    h2{
-	font-weight: bold !important;
-	font-size: 1.25rem !important;
-    }
+  h2 {
+    font-weight: bold !important;
+    font-size: 1.25rem !important;
+  }
 }
 
 h4 {
-  color: #FFF;
+  color: #fff;
   font-family: Outfit;
   font-size: 24px;
   font-style: normal;
@@ -155,15 +154,15 @@ ion-text h1{
 // JC: temporarily disabled this since it was interfering with swiperjs
 
 ion-card {
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    justify-content: center;
-    align-items: stretch;
-    gap: 24px;
-    margin-bottom: 16px;
-    box-shadow: none;
-    border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  margin-bottom: 16px;
+  box-shadow: none;
+  border-radius: 1rem;
 }
 
 //styles for the radio-button
@@ -172,7 +171,7 @@ ion-card {
   box-shadow: 0 0 0 3px var(--base-agua, rgba(0, 106, 103, 0.12));
 }
 
-.active ion-card{
+.active ion-card {
   --background: var(--Cielo-Highest);
   box-shadow: 0 0 0 3px var(--Base-Selva);
 }
@@ -189,11 +188,10 @@ ion-card {
   width: 75px;
   height: 75px;
   flex-shrink: 0;
-  border-radius: 50%; 
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .card-inner {
@@ -215,43 +213,43 @@ ion-card {
 //styles for the home-landing-page
 
 .background-pattern {
-  background-image: url('/assets/img/background_pattern_lp.png');
-  background-color: #FFF8F0;
+  background-image: url("/assets/img/background_pattern_lp.png");
+  background-color: #fff8f0;
   padding: 20px;
 }
 
 .wave-icons {
-  background-image: url('/assets/img/wave_100.png');
+  background-image: url("/assets/img/wave_100.png");
   background-repeat: no-repeat;
   text-align: -webkit-center;
   margin-bottom: 108px;
 }
 
 #student-landing-page {
-    .col-custom-position-1 {
-	position: relative;
-	top: 10px;
-    }
-    
-    .col-custom-position-2 {
-	position: relative;
-	bottom: 20px;
-    }
-    
-    .col-custom-position-3 {
-	position: relative;
-	top: 20px;
-    }
-    
-    .col-custom-position-4 {
-	position: relative;
-	top: 40px;
-    }
-    
-    .col-custom-position-5 {
-	position: relative;
-	top: 10px;
-    }
+  .col-custom-position-1 {
+    position: relative;
+    top: 10px;
+  }
+
+  .col-custom-position-2 {
+    position: relative;
+    bottom: 20px;
+  }
+
+  .col-custom-position-3 {
+    position: relative;
+    top: 20px;
+  }
+
+  .col-custom-position-4 {
+    position: relative;
+    top: 40px;
+  }
+
+  .col-custom-position-5 {
+    position: relative;
+    top: 10px;
+  }
 }
 
 .stories-card {
@@ -285,17 +283,17 @@ ion-card {
 
 .stories-card-footer {
   position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    margin: 10px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin: 10px;
 }
 
 .stories-card-footer p {
-  color: #FFF;
+  color: #fff;
   /* Body */
   font-family: Work Sans;
   font-size: 13px;
@@ -306,21 +304,18 @@ ion-card {
   margin-top: 0;
 }
 
-
-
 .oval-element-small {
   width: 28px;
   height: 28px;
   flex-shrink: 0;
-  border-radius: 50%; 
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .cards-title h2 {
-  color: #1C1C17;
+  color: #1c1c17;
   font-family: Outfit;
   font-size: 40px;
   font-style: normal;
@@ -329,7 +324,7 @@ ion-card {
 }
 
 .cards-title p {
-  color: #1C1C17;
+  color: #1c1c17;
   font-family: Outfit;
   font-size: 20px;
   font-style: normal;
@@ -339,7 +334,7 @@ ion-card {
 }
 
 .cards-title h1 {
-  color: #1C1C17;
+  color: #1c1c17;
   font-family: Outfit;
   font-size: 48px;
   font-style: normal;

@@ -1,7 +1,7 @@
-ion-card:hover{
-    cursor: pointer;
+ion-card:hover {
+  cursor: pointer;
 }
 
-.active{
-    --background: rgba(16, 101, 53, 0.2);
+.active {
+  --background: rgba(16, 101, 53, 0.2);
 }
