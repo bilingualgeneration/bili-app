@@ -2,7 +2,7 @@ import {
     FC,
     ReactNode
 } from 'react';
-import {AuthWrapper} from './AuthWrapper';
+import {FirebaseFeaturesWrapper} from './FirebaseFeaturesWrapper';
 import {FirebaseAppProvider} from 'reactfire';
 
 const firebaseConfig = {
@@ -20,9 +20,9 @@ export const FirebaseWrapper: React.FC<{children: ReactNode}> = ({
 }) => {
     return (
 	<FirebaseAppProvider firebaseConfig={firebaseConfig}>
-	    <AuthWrapper>
+	    <FirebaseFeaturesWrapper>
 		{children}
-	    </AuthWrapper>
+	    </FirebaseFeaturesWrapper>
 	</FirebaseAppProvider>
     );
 };

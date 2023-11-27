@@ -1,0 +1,451 @@
+[debug] [2023-11-20T17:21:54.739Z] ----------------------------------------------------------------------
+[debug] [2023-11-20T17:21:54.741Z] Command:       /usr/local/bin/firebase /Users/streaming/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase init --debug
+[debug] [2023-11-20T17:21:54.741Z] CLI Version:   11.10.0
+[debug] [2023-11-20T17:21:54.741Z] Platform:      darwin
+[debug] [2023-11-20T17:21:54.741Z] Node Version:  v16.16.0
+[debug] [2023-11-20T17:21:54.742Z] Time:          Mon Nov 20 2023 12:21:54 GMT-0500 (Eastern Standard Time)
+[debug] [2023-11-20T17:21:54.743Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-11-20T17:21:54.753Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-20T17:21:54.756Z] > authorizing via signed-in user (jon@sharemeals.org)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/streaming/projects/bili-app/packages/server
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-11-20T17:21:57.590Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2023-11-20T17:21:58.047Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2023-11-20T17:21:58.049Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project bilingual-generation-dev (Bilingual Generation Dev) 
+[info] 
+=== Database Setup
+[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
+[debug] [2023-11-20T17:21:58.954Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com [none]
+[debug] [2023-11-20T17:21:58.954Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-20T17:21:59.345Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com 200
+[debug] [2023-11-20T17:21:59.346Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com [omitted]
+[info] ✔  database: required API firebasedatabase.googleapis.com is enabled 
+[info] 
+[debug] [2023-11-20T17:21:59.347Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb [none]
+[debug] [2023-11-20T17:21:59.748Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb 200
+[debug] [2023-11-20T17:21:59.749Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb {"name":"projects/875883515921/locations/us-central1/instances/bilingual-generation-dev-default-rtdb","project":"projects/875883515921","databaseUrl":"https://bilingual-generation-dev-default-rtdb.firebaseio.com","type":"DEFAULT_DATABASE","state":"ACTIVE"}
+[info] 
+[info] Firebase Realtime Database Security Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[debug] [2023-11-20T17:22:02.098Z] >>> [apiv2][query] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json [none]
+[debug] [2023-11-20T17:22:02.252Z] <<< [apiv2][status] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json 200
+[debug] [2023-11-20T17:22:02.254Z] <<< [apiv2][body] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json [stream]
+[info] ✔  Database Rules for bilingual-generation-dev-default-rtdb have been written to database.rules.json. 
+[info] Future modifications to database.rules.json will update Realtime Database Security Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[debug] [2023-11-20T17:22:02.272Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com [none]
+[debug] [2023-11-20T17:22:02.272Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-20T17:22:02.667Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com 200
+[debug] [2023-11-20T17:22:02.668Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com [omitted]
+[debug] [2023-11-20T17:22:02.669Z] >>> [apiv2][query] GET https://appengine.googleapis.com/v1/apps/bilingual-generation-dev [none]
+[debug] [2023-11-20T17:22:02.827Z] <<< [apiv2][status] GET https://appengine.googleapis.com/v1/apps/bilingual-generation-dev 403
+[debug] [2023-11-20T17:22:02.828Z] <<< [apiv2][body] GET https://appengine.googleapis.com/v1/apps/bilingual-generation-dev {"error":{"code":403,"message":"Read access to project 'bilingual-generation-dev' was denied: please check billing account associated and retry","status":"PERMISSION_DENIED"}}
+[debug] [2023-11-20T17:22:02.829Z] error getting database typeHTTP Error: 403, Read access to project 'bilingual-generation-dev' was denied: please check billing account associated and retry {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Read access to project 'bilingual-generation-dev' was denied: please check billing account associated and retry","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"HTTP Error: 403, Read access to project 'bilingual-generation-dev' was denied: please check billing account associated and retry","status":403}
+[debug] [2023-11-20T17:22:02.831Z] database_type: undefined
+[error] 
+[error] Error: It looks like you haven't used Cloud Firestore in this project before. Go to https://console.firebase.google.com/project/bilingual-generation-dev/firestore to create your Cloud Firestore database.
+[debug] [2023-11-22T13:09:28.841Z] ----------------------------------------------------------------------
+[debug] [2023-11-22T13:09:28.842Z] Command:       /Users/streaming/.nvm/versions/node/v18.17.1/bin/node /Users/streaming/.nvm/versions/node/v18.17.1/bin/firebase init
+[debug] [2023-11-22T13:09:28.842Z] CLI Version:   12.9.1
+[debug] [2023-11-22T13:09:28.842Z] Platform:      darwin
+[debug] [2023-11-22T13:09:28.842Z] Node Version:  v18.17.1
+[debug] [2023-11-22T13:09:28.843Z] Time:          Wed Nov 22 2023 08:09:28 GMT-0500 (Eastern Standard Time)
+[debug] [2023-11-22T13:09:28.843Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-11-22T13:09:28.844Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-11-22T13:09:28.865Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-22T13:09:28.865Z] > authorizing via signed-in user (jon@sharemeals.org)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/streaming/projects/bili-app/packages/server
+
+[debug] [2023-11-22T13:09:29.006Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-11-22T13:09:29.006Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-11-22T13:09:31.807Z] > refreshing access token with scopes: []
+[debug] [2023-11-22T13:09:31.808Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-11-22T13:09:31.808Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-11-22T13:09:31.978Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-11-22T13:09:31.978Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-11-22T13:09:32.024Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2023-11-22T13:09:32.582Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2023-11-22T13:09:32.582Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project bilingual-generation-dev (Bilingual Generation Dev) 
+[info] 
+=== Database Setup
+[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
+[debug] [2023-11-22T13:09:33.611Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com [none]
+[debug] [2023-11-22T13:09:33.611Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:34.047Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com 200
+[debug] [2023-11-22T13:09:34.047Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebasedatabase.googleapis.com [omitted]
+[info] ✔  database: required API firebasedatabase.googleapis.com is enabled 
+[info] 
+[debug] [2023-11-22T13:09:34.049Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb [none]
+[debug] [2023-11-22T13:09:34.455Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb 200
+[debug] [2023-11-22T13:09:34.455Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/bilingual-generation-dev/locations/-/instances/bilingual-generation-dev-default-rtdb {"name":"projects/875883515921/locations/us-central1/instances/bilingual-generation-dev-default-rtdb","project":"projects/875883515921","databaseUrl":"https://bilingual-generation-dev-default-rtdb.firebaseio.com","type":"DEFAULT_DATABASE","state":"ACTIVE"}
+[info] 
+[info] Firebase Realtime Database Security Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[debug] [2023-11-22T13:09:40.115Z] >>> [apiv2][query] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json [none]
+[debug] [2023-11-22T13:09:40.304Z] <<< [apiv2][status] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json 200
+[debug] [2023-11-22T13:09:40.304Z] <<< [apiv2][body] GET https://bilingual-generation-dev-default-rtdb.firebaseio.com/.settings/rules.json [stream]
+[info] ✔  Database Rules for bilingual-generation-dev-default-rtdb have been written to database.rules.json. 
+[info] Future modifications to database.rules.json will update Realtime Database Security Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[debug] [2023-11-22T13:09:40.309Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com [none]
+[debug] [2023-11-22T13:09:40.309Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:40.703Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com 200
+[debug] [2023-11-22T13:09:40.703Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firestore.googleapis.com [omitted]
+[debug] [2023-11-22T13:09:40.704Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default) [none]
+[debug] [2023-11-22T13:09:40.902Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default) 200
+[debug] [2023-11-22T13:09:40.902Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default) {"name":"projects/bilingual-generation-dev/databases/(default)","uid":"f374a751-4009-4c63-b377-5201f7ad59a5","createTime":"2023-11-15T19:11:06.876529Z","updateTime":"2023-11-15T19:11:06.876529Z","locationId":"us-east4","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2023-11-22T12:09:40.917569Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"d","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","etag":"IPWW5vTW14IDMLuforDfxoID"}
+[debug] [2023-11-22T13:09:40.902Z] database_type: FIRESTORE_NATIVE
+[debug] [2023-11-22T13:09:40.903Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-22T13:09:40.903Z] > authorizing via signed-in user (jon@sharemeals.org)
+[debug] [2023-11-22T13:09:40.903Z] [iam] checking project bilingual-generation-dev for permissions ["firebase.projects.get"]
+[debug] [2023-11-22T13:09:40.904Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions [none]
+[debug] [2023-11-22T13:09:40.904Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:40.904Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-22T13:09:41.133Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions 200
+[debug] [2023-11-22T13:09:41.133Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2023-11-22T13:09:42.545Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/releases pageSize=10&pageToken=
+[debug] [2023-11-22T13:09:42.870Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/releases 200
+[debug] [2023-11-22T13:09:42.871Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/releases {"releases":[{"name":"projects/bilingual-generation-dev/releases/cloud.firestore","rulesetName":"projects/bilingual-generation-dev/rulesets/67a5ae9d-6d94-4715-9937-54b63cf244b6","createTime":"2023-11-15T19:11:14.273870Z","updateTime":"2023-11-15T19:11:14.273870Z"}]}
+[debug] [2023-11-22T13:09:42.871Z] Found ruleset: projects/bilingual-generation-dev/rulesets/67a5ae9d-6d94-4715-9937-54b63cf244b6
+[debug] [2023-11-22T13:09:42.872Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/rulesets/67a5ae9d-6d94-4715-9937-54b63cf244b6 [none]
+[debug] [2023-11-22T13:09:43.084Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/rulesets/67a5ae9d-6d94-4715-9937-54b63cf244b6 200
+[debug] [2023-11-22T13:09:43.085Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/bilingual-generation-dev/rulesets/67a5ae9d-6d94-4715-9937-54b63cf244b6 [omitted]
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2023-11-22T13:09:44.305Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2023-11-22T13:09:44.307Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2023-11-22T13:09:44.450Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2023-11-22T13:09:44.450Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/bilingual-generation-dev/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[debug] [2023-11-22T13:09:44.498Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2023-11-22T13:09:44.499Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/bilingual-generation-dev/databases/(default)/collectionGroups/-/indexes {}
+[info] 
+=== Functions Setup
+[debug] [2023-11-22T13:09:44.499Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-22T13:09:44.499Z] > authorizing via signed-in user (jon@sharemeals.org)
+[debug] [2023-11-22T13:09:44.499Z] [iam] checking project bilingual-generation-dev for permissions ["firebase.projects.get"]
+[debug] [2023-11-22T13:09:44.500Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions [none]
+[debug] [2023-11-22T13:09:44.500Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:44.500Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-22T13:09:44.696Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions 200
+[debug] [2023-11-22T13:09:44.696Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-22T13:09:44.697Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-11-22T13:09:44.697Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:44.698Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-11-22T13:09:44.698Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:45.071Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com 200
+[debug] [2023-11-22T13:09:45.071Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2023-11-22T13:09:45.071Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com:enable [none]
+[debug] [2023-11-22T13:09:45.071Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com:enable x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:45.106Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/runtimeconfig.googleapis.com 200
+[debug] [2023-11-22T13:09:45.107Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-11-22T13:09:46.227Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com:enable 200
+[debug] [2023-11-22T13:09:46.228Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com:enable [omitted]
+[debug] [2023-11-22T13:09:56.231Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-11-22T13:09:56.231Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:09:56.599Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com 200
+[debug] [2023-11-22T13:09:56.600Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/cloudfunctions.googleapis.com [omitted]
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
+[info] ✔  Wrote functions/package.json 
+[info] ✔  Wrote functions/.eslintrc.js 
+[info] ✔  Wrote functions/tsconfig.json 
+[info] ✔  Wrote functions/tsconfig.dev.json 
+[info] ✔  Wrote functions/src/index.ts 
+[info] ✔  Wrote functions/.gitignore 
+[info] 
+=== Hosting Setup
+[debug] [2023-11-22T13:10:35.471Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bilingual-generation-dev [none]
+[debug] [2023-11-22T13:10:35.752Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bilingual-generation-dev 200
+[debug] [2023-11-22T13:10:35.752Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bilingual-generation-dev {"projectId":"bilingual-generation-dev","projectNumber":"875883515921","displayName":"Bilingual Generation Dev","name":"projects/bilingual-generation-dev","resources":{"hostingSite":"bilingual-generation-dev","realtimeDatabaseInstance":"bilingual-generation-dev-default-rtdb","storageBucket":"bilingual-generation-dev.appspot.com","locationId":"us-east4"},"state":"ACTIVE","etag":"1_b17f6781-f7e7-4833-b414-fc0c388bc8bd"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2023-11-22T13:10:45.054Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2023-11-22T13:10:45.150Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2023-11-22T13:10:45.151Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"10.6.0","browserURL":"https://www.gstatic.com/firebasejs/10.6.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/10.6.0/firebase.tgz"},"live":{"version":"10.6","browserURL":"https://www.gstatic.com/firebasejs/live/10.6/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/10.6/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/10.6.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/10.6.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/10.6.0/firebase-auth/cordova.js","functions":"https://www.gstatic.com/firebasejs/10.6.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/10.6.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/10.6.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/10.6.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/10.6.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/10.6.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.memory.js"}}
+[info] ✔  Wrote public/index.html 
+[info] 
+=== Storage Setup
+[info] 
+[info] Firebase Storage Security Rules allow you to define how and when to allow
+[info] uploads and downloads. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] ✔  Wrote storage.rules 
+[info] 
+=== Emulators Setup
+[info] i  firestore: downloading cloud-firestore-emulator-v1.18.2.jar... {"metadata":{"emulator":{"name":"firestore"},"message":"downloading cloud-firestore-emulator-v1.18.2.jar..."}}
+[debug] [2023-11-22T13:10:59.360Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.18.2.jar 
+[debug] [2023-11-22T13:10:59.534Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.18.2.jar 200
+[debug] [2023-11-22T13:10:59.534Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.18.2.jar [stream]
+[info] i  firestore: Removing outdated emulator files: cloud-firestore-emulator-v1.14.4.jar {"metadata":{"emulator":{"name":"firestore"},"message":"Removing outdated emulator files: cloud-firestore-emulator-v1.14.4.jar"}}
+[info] i  database: downloading firebase-database-emulator-v4.11.2.jar... {"metadata":{"emulator":{"name":"database"},"message":"downloading firebase-database-emulator-v4.11.2.jar..."}}
+[debug] [2023-11-22T13:11:02.114Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.2.jar 
+[debug] [2023-11-22T13:11:02.234Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.2.jar 200
+[debug] [2023-11-22T13:11:02.235Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.2.jar [stream]
+[info] i  database: Removing outdated emulator files: firebase-database-emulator-v4.9.0.jar {"metadata":{"emulator":{"name":"database"},"message":"Removing outdated emulator files: firebase-database-emulator-v4.9.0.jar"}}
+[info] i  pubsub: downloading pubsub-emulator-0.7.1.zip... {"metadata":{"emulator":{"name":"pubsub"},"message":"downloading pubsub-emulator-0.7.1.zip..."}}
+[debug] [2023-11-22T13:11:03.663Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.7.1.zip 
+[debug] [2023-11-22T13:11:03.831Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.7.1.zip 200
+[debug] [2023-11-22T13:11:03.831Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.7.1.zip [stream]
+[debug] [2023-11-22T13:11:06.441Z] Data is 65137179
+[debug] [2023-11-22T13:11:06.442Z] [unzip] Entry: pubsub-emulator/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:06.442Z] [unzip] Processing entry: pubsub-emulator/
+[debug] [2023-11-22T13:11:06.442Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/
+[debug] [2023-11-22T13:11:06.442Z] [unzip] Entry: pubsub-emulator/lib/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:06.442Z] [unzip] Processing entry: pubsub-emulator/lib/
+[debug] [2023-11-22T13:11:06.442Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/lib/
+[debug] [2023-11-22T13:11:06.443Z] [unzip] Entry: pubsub-emulator/lib/cloud-pubsub-emulator-0.7.1.jar (compressed_size=65133164 bytes, uncompressed_size=70597065 bytes)
+[debug] [2023-11-22T13:11:06.443Z] [unzip] Processing entry: pubsub-emulator/lib/cloud-pubsub-emulator-0.7.1.jar
+[debug] [2023-11-22T13:11:06.443Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/lib
+[debug] [2023-11-22T13:11:06.443Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/lib/cloud-pubsub-emulator-0.7.1.jar
+[debug] [2023-11-22T13:11:06.758Z] [unzip] Entry: pubsub-emulator/bin/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:06.758Z] [unzip] Processing entry: pubsub-emulator/bin/
+[debug] [2023-11-22T13:11:06.758Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin/
+[debug] [2023-11-22T13:11:06.758Z] [unzip] Entry: pubsub-emulator/bin/cloud-pubsub-emulator.bat (compressed_size=885 bytes, uncompressed_size=2271 bytes)
+[debug] [2023-11-22T13:11:06.758Z] [unzip] Processing entry: pubsub-emulator/bin/cloud-pubsub-emulator.bat
+[debug] [2023-11-22T13:11:06.758Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin
+[debug] [2023-11-22T13:11:06.759Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin/cloud-pubsub-emulator.bat
+[debug] [2023-11-22T13:11:06.760Z] [unzip] Entry: pubsub-emulator/bin/cloud-pubsub-emulator (compressed_size=1954 bytes, uncompressed_size=5142 bytes)
+[debug] [2023-11-22T13:11:06.761Z] [unzip] Processing entry: pubsub-emulator/bin/cloud-pubsub-emulator
+[debug] [2023-11-22T13:11:06.761Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin
+[debug] [2023-11-22T13:11:06.761Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin/cloud-pubsub-emulator
+[info] i  pubsub: Removing outdated emulator files: pubsub-emulator-0.1.0 {"metadata":{"emulator":{"name":"pubsub"},"message":"Removing outdated emulator files: pubsub-emulator-0.1.0"}}
+[info] i  pubsub: Removing outdated emulator files: pubsub-emulator-0.1.0.zip {"metadata":{"emulator":{"name":"pubsub"},"message":"Removing outdated emulator files: pubsub-emulator-0.1.0.zip"}}
+[info] i  storage: downloading cloud-storage-rules-runtime-v1.1.3.jar... {"metadata":{"emulator":{"name":"storage"},"message":"downloading cloud-storage-rules-runtime-v1.1.3.jar..."}}
+[debug] [2023-11-22T13:11:06.788Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-storage-rules-runtime-v1.1.3.jar 
+[debug] [2023-11-22T13:11:06.931Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-storage-rules-runtime-v1.1.3.jar 200
+[debug] [2023-11-22T13:11:06.931Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-storage-rules-runtime-v1.1.3.jar [stream]
+[info] i  ui: downloading ui-v1.11.7.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.11.7.zip..."}}
+[debug] [2023-11-22T13:11:09.009Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip 
+[info] 
+=== Remoteconfig Setup
+[debug] [2023-11-22T13:11:09.111Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip 200
+[debug] [2023-11-22T13:11:09.111Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip [stream]
+[debug] [2023-11-22T13:11:09.276Z] Data is 3064105
+[debug] [2023-11-22T13:11:09.276Z] [unzip] Entry: client/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.276Z] [unzip] Processing entry: client/
+[debug] [2023-11-22T13:11:09.276Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/
+[debug] [2023-11-22T13:11:09.277Z] [unzip] Entry: client/favicon.ico (compressed_size=2497 bytes, uncompressed_size=7406 bytes)
+[debug] [2023-11-22T13:11:09.277Z] [unzip] Processing entry: client/favicon.ico
+[debug] [2023-11-22T13:11:09.277Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.277Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/favicon.ico
+[debug] [2023-11-22T13:11:09.278Z] [unzip] Entry: client/apple-touch-icon.png (compressed_size=7231 bytes, uncompressed_size=7367 bytes)
+[debug] [2023-11-22T13:11:09.278Z] [unzip] Processing entry: client/apple-touch-icon.png
+[debug] [2023-11-22T13:11:09.278Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.279Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/apple-touch-icon.png
+[debug] [2023-11-22T13:11:09.279Z] [unzip] Entry: client/android-chrome-512x512.png (compressed_size=16987 bytes, uncompressed_size=18186 bytes)
+[debug] [2023-11-22T13:11:09.279Z] [unzip] Processing entry: client/android-chrome-512x512.png
+[debug] [2023-11-22T13:11:09.279Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.279Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/android-chrome-512x512.png
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Entry: client/assets/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Processing entry: client/assets/
+[debug] [2023-11-22T13:11:09.280Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Entry: client/assets/extensions/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Processing entry: client/assets/extensions/
+[debug] [2023-11-22T13:11:09.280Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions/
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Entry: client/assets/extensions/default-extension.png (compressed_size=1646 bytes, uncompressed_size=1657 bytes)
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Processing entry: client/assets/extensions/default-extension.png
+[debug] [2023-11-22T13:11:09.280Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions
+[debug] [2023-11-22T13:11:09.280Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions/default-extension.png
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Entry: client/assets/index.58ca09f7.css (compressed_size=37601 bytes, uncompressed_size=321252 bytes)
+[debug] [2023-11-22T13:11:09.280Z] [unzip] Processing entry: client/assets/index.58ca09f7.css
+[debug] [2023-11-22T13:11:09.280Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-11-22T13:11:09.280Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.58ca09f7.css
+[debug] [2023-11-22T13:11:09.281Z] [unzip] Entry: client/assets/index.c2583d42.js (compressed_size=526232 bytes, uncompressed_size=1860152 bytes)
+[debug] [2023-11-22T13:11:09.281Z] [unzip] Processing entry: client/assets/index.c2583d42.js
+[debug] [2023-11-22T13:11:09.281Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-11-22T13:11:09.281Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.c2583d42.js
+[debug] [2023-11-22T13:11:09.286Z] [unzip] Entry: client/assets/provider-icons/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.286Z] [unzip] Processing entry: client/assets/provider-icons/
+[debug] [2023-11-22T13:11:09.286Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/
+[debug] [2023-11-22T13:11:09.286Z] [unzip] Entry: client/assets/provider-icons/auth_service_oidc.svg (compressed_size=414 bytes, uncompressed_size=858 bytes)
+[debug] [2023-11-22T13:11:09.286Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2023-11-22T13:11:09.286Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.286Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2023-11-22T13:11:09.287Z] [unzip] Entry: client/assets/provider-icons/auth_service_yahoo.svg (compressed_size=577 bytes, uncompressed_size=1182 bytes)
+[debug] [2023-11-22T13:11:09.287Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2023-11-22T13:11:09.287Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.288Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2023-11-22T13:11:09.288Z] [unzip] Entry: client/assets/provider-icons/auth_service_phone.svg (compressed_size=261 bytes, uncompressed_size=414 bytes)
+[debug] [2023-11-22T13:11:09.288Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_phone.svg
+[debug] [2023-11-22T13:11:09.288Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.288Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_phone.svg
+[debug] [2023-11-22T13:11:09.289Z] [unzip] Entry: client/assets/provider-icons/auth_service_saml.svg (compressed_size=575 bytes, uncompressed_size=1226 bytes)
+[debug] [2023-11-22T13:11:09.289Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_saml.svg
+[debug] [2023-11-22T13:11:09.289Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.290Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_saml.svg
+[debug] [2023-11-22T13:11:09.291Z] [unzip] Entry: client/assets/provider-icons/auth_service_mslive.svg (compressed_size=203 bytes, uncompressed_size=378 bytes)
+[debug] [2023-11-22T13:11:09.291Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2023-11-22T13:11:09.291Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.291Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2023-11-22T13:11:09.292Z] [unzip] Entry: client/assets/provider-icons/auth_service_facebook.svg (compressed_size=289 bytes, uncompressed_size=457 bytes)
+[debug] [2023-11-22T13:11:09.292Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2023-11-22T13:11:09.292Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.292Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2023-11-22T13:11:09.293Z] [unzip] Entry: client/assets/provider-icons/auth_service_play_games.svg (compressed_size=565 bytes, uncompressed_size=1173 bytes)
+[debug] [2023-11-22T13:11:09.293Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2023-11-22T13:11:09.293Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.293Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2023-11-22T13:11:09.293Z] [unzip] Entry: client/assets/provider-icons/auth_service_github.svg (compressed_size=466 bytes, uncompressed_size=838 bytes)
+[debug] [2023-11-22T13:11:09.293Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_github.svg
+[debug] [2023-11-22T13:11:09.293Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.294Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_github.svg
+[debug] [2023-11-22T13:11:09.294Z] [unzip] Entry: client/assets/provider-icons/auth_service_apple.svg (compressed_size=230 bytes, uncompressed_size=334 bytes)
+[debug] [2023-11-22T13:11:09.294Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_apple.svg
+[debug] [2023-11-22T13:11:09.294Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.295Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_apple.svg
+[debug] [2023-11-22T13:11:09.295Z] [unzip] Entry: client/assets/provider-icons/auth_service_google.svg (compressed_size=409 bytes, uncompressed_size=720 bytes)
+[debug] [2023-11-22T13:11:09.295Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_google.svg
+[debug] [2023-11-22T13:11:09.295Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.295Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_google.svg
+[debug] [2023-11-22T13:11:09.296Z] [unzip] Entry: client/assets/provider-icons/auth_service_email.svg (compressed_size=228 bytes, uncompressed_size=326 bytes)
+[debug] [2023-11-22T13:11:09.296Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_email.svg
+[debug] [2023-11-22T13:11:09.296Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.296Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_email.svg
+[debug] [2023-11-22T13:11:09.297Z] [unzip] Entry: client/assets/provider-icons/auth_service_twitter.svg (compressed_size=444 bytes, uncompressed_size=751 bytes)
+[debug] [2023-11-22T13:11:09.297Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2023-11-22T13:11:09.297Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.297Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2023-11-22T13:11:09.297Z] [unzip] Entry: client/assets/provider-icons/auth_service_game_center.svg (compressed_size=991 bytes, uncompressed_size=3921 bytes)
+[debug] [2023-11-22T13:11:09.297Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2023-11-22T13:11:09.297Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-11-22T13:11:09.298Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2023-11-22T13:11:09.298Z] [unzip] Entry: client/assets/index.c2583d42.js.map (compressed_size=1778557 bytes, uncompressed_size=7961927 bytes)
+[debug] [2023-11-22T13:11:09.298Z] [unzip] Processing entry: client/assets/index.c2583d42.js.map
+[debug] [2023-11-22T13:11:09.298Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-11-22T13:11:09.298Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.c2583d42.js.map
+[debug] [2023-11-22T13:11:09.321Z] [unzip] Entry: client/assets/img/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.321Z] [unzip] Processing entry: client/assets/img/
+[debug] [2023-11-22T13:11:09.321Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/img/
+[debug] [2023-11-22T13:11:09.321Z] [unzip] Entry: client/assets/img/database.png (compressed_size=29449 bytes, uncompressed_size=29988 bytes)
+[debug] [2023-11-22T13:11:09.321Z] [unzip] Processing entry: client/assets/img/database.png
+[debug] [2023-11-22T13:11:09.321Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/img
+[debug] [2023-11-22T13:11:09.321Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/assets/img/database.png
+[debug] [2023-11-22T13:11:09.322Z] [unzip] Entry: client/safari-pinned-tab.svg (compressed_size=838 bytes, uncompressed_size=1504 bytes)
+[debug] [2023-11-22T13:11:09.322Z] [unzip] Processing entry: client/safari-pinned-tab.svg
+[debug] [2023-11-22T13:11:09.322Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.322Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/safari-pinned-tab.svg
+[debug] [2023-11-22T13:11:09.322Z] [unzip] Entry: client/mstile-150x150.png (compressed_size=5406 bytes, uncompressed_size=5723 bytes)
+[debug] [2023-11-22T13:11:09.322Z] [unzip] Processing entry: client/mstile-150x150.png
+[debug] [2023-11-22T13:11:09.322Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.322Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/mstile-150x150.png
+[debug] [2023-11-22T13:11:09.323Z] [unzip] Entry: client/browserconfig.xml (compressed_size=491 bytes, uncompressed_size=822 bytes)
+[debug] [2023-11-22T13:11:09.323Z] [unzip] Processing entry: client/browserconfig.xml
+[debug] [2023-11-22T13:11:09.323Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.323Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/browserconfig.xml
+[debug] [2023-11-22T13:11:09.323Z] [unzip] Entry: client/robots.txt (compressed_size=26 bytes, uncompressed_size=26 bytes)
+[debug] [2023-11-22T13:11:09.323Z] [unzip] Processing entry: client/robots.txt
+[debug] [2023-11-22T13:11:09.323Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.323Z] [unzip] Writing file: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/robots.txt
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Entry: client/index.html (compressed_size=1363 bytes, uncompressed_size=3064 bytes)
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Processing entry: client/index.html
+[debug] [2023-11-22T13:11:09.324Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.324Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/index.html
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Entry: client/favicon-16x16.png (compressed_size=757 bytes, uncompressed_size=777 bytes)
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Processing entry: client/favicon-16x16.png
+[debug] [2023-11-22T13:11:09.324Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.324Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/favicon-16x16.png
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Entry: client/manifest.json (compressed_size=246 bytes, uncompressed_size=551 bytes)
+[debug] [2023-11-22T13:11:09.324Z] [unzip] Processing entry: client/manifest.json
+[debug] [2023-11-22T13:11:09.324Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.324Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/manifest.json
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Entry: client/favicon-32x32.png (compressed_size=1175 bytes, uncompressed_size=1175 bytes)
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Processing entry: client/favicon-32x32.png
+[debug] [2023-11-22T13:11:09.325Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Writing file: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/favicon-32x32.png
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Entry: client/android-chrome-192x192.png (compressed_size=7602 bytes, uncompressed_size=7834 bytes)
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Processing entry: client/android-chrome-192x192.png
+[debug] [2023-11-22T13:11:09.325Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-11-22T13:11:09.325Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/client/android-chrome-192x192.png
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Entry: server/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Processing entry: server/
+[debug] [2023-11-22T13:11:09.325Z] [unzip] mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/server/
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Entry: server/server.js (compressed_size=343746 bytes, uncompressed_size=1346374 bytes)
+[debug] [2023-11-22T13:11:09.325Z] [unzip] Processing entry: server/server.js
+[debug] [2023-11-22T13:11:09.325Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/server
+[debug] [2023-11-22T13:11:09.325Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/server/server.js
+[debug] [2023-11-22T13:11:09.329Z] [unzip] Entry: server/server.js.map (compressed_size=289157 bytes, uncompressed_size=1325651 bytes)
+[debug] [2023-11-22T13:11:09.329Z] [unzip] Processing entry: server/server.js.map
+[debug] [2023-11-22T13:11:09.329Z] [unzip] else mkdir: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/server
+[debug] [2023-11-22T13:11:09.329Z] [unzip] deflating: /Users/streaming/.cache/firebase/emulators/ui-v1.11.7/server/server.js.map
+[info] i  ui: Removing outdated emulator files: ui-v1.9.0 {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.9.0"}}
+[info] i  ui: Removing outdated emulator files: ui-v1.9.0.zip {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.9.0.zip"}}
+[info] 
+=== Extensions Setup
+[debug] [2023-11-22T13:16:15.393Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-22T13:16:15.393Z] > authorizing via signed-in user (jon@sharemeals.org)
+[debug] [2023-11-22T13:16:15.393Z] [iam] checking project bilingual-generation-dev for permissions ["firebase.projects.get"]
+[debug] [2023-11-22T13:16:15.394Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions [none]
+[debug] [2023-11-22T13:16:15.394Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:16:15.394Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-22T13:16:15.633Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions 200
+[debug] [2023-11-22T13:16:15.633Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bilingual-generation-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-22T13:16:15.634Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com [none]
+[debug] [2023-11-22T13:16:15.634Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:16:16.076Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com 200
+[debug] [2023-11-22T13:16:16.077Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com [omitted]
+[debug] [2023-11-22T13:16:16.078Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com:enable [none]
+[debug] [2023-11-22T13:16:16.078Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com:enable x-goog-quota-user=projects/bilingual-generation-dev
+[debug] [2023-11-22T13:16:17.376Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com:enable 200
+[debug] [2023-11-22T13:16:17.376Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/bilingual-generation-dev/services/firebaseextensions.googleapis.com:enable [omitted]

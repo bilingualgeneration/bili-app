@@ -37,7 +37,7 @@ export const SignUp: React.FC = () => {
 	);
     };
     return (
-	<>
+	<SignUpDataProvider>
 	    <IonCard>
 		<IonCardContent>
 		    <div className='ion-padding'>
@@ -64,8 +64,8 @@ export const SignUp: React.FC = () => {
 			    data-testid='parent-account-credentials-slide'
 			    data-progress-percent={0.4}>
 			    <ParentAccountCredentials
-			    nextSlide={4}
-			    previousSlide={0}
+				nextSlide={4}
+				previousSlide={0}
 			    />
 			</SwiperSlide>
 			<SwiperSlide
@@ -106,6 +106,6 @@ export const SignUp: React.FC = () => {
 		    </Swiper>
 		</IonCardContent>
 	    </IonCard>
-	</>
+	</SignUpDataProvider>
     )
 };

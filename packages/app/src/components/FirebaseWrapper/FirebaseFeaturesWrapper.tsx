@@ -4,18 +4,23 @@ import {
 } from 'react';
 import {
     AuthProvider,
+    FirestoreProvider,
     useFirebaseApp
 } from 'reactfire';
 import {getAuth} from 'firebase/auth';
+import {getFirestore} from 'firebase/firestore';
 
-export const AuthWrapper: FC<{children: ReactNode}> = ({
+export const FirebaseFeaturesWrapper: FC<{children: ReactNode}> = ({
     children
 }) => {
     const app = useFirebaseApp();
     const auth = getAuth(app);
+    const firestore = getFirestore(app);
     return(
 	<AuthProvider sdk={auth}>
-	    {children}
+	    <FirestoreProvider sdk={firestore}>
+		{children}
+	    </FirestoreProvider>
 	</AuthProvider>
     );
 };

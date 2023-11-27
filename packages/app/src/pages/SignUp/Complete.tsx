@@ -2,11 +2,54 @@ import { FormattedMessage } from 'react-intl';
 import {
     IonButton,
     IonImg,
+    IonSpinner,
     IonText
 } from "@ionic/react"
-import React from "react";
+import
+React,
+{
+    useEffect,
+    useState
+} from "react";
+import {
+    useSignUpData
+} from '@/pages/SignUp/SignUpContext';
+import {useSwiperSlide} from 'swiper/react';
+import {
+    createUserWithEmailAndPassword
+} from 'firebase/auth';
+import {
+    useAuth
+} from 'reactfire';
+
+/*
+   0. display a loading message (need designs)
+   1. create account on firebase
+   2. log in as that account
+   3. send info to firebase function to create the profile
+   4. display the complete message
+*/
 
 export const Complete: React.FC = () => {
+    const [loading, setLoading] = useState(true);
+    const swiperSlide = useSwiperSlide();
+    const {data} = useSignUpData();
+    const auth = useAuth();
+
+    useEffect(async () => {
+	if(swiperSlide.isActive){
+	    await createUserWithEmailAndPassword(auth, data.email, data.password);
+	}
+    }, [swiperSlide]);
+
+    if(loading){
+	return (
+	    <>
+		<IonSpinner />
+	    </>
+	);
+    }else{
+	
     return (
 		<>
 			<div 
@@ -39,4 +82,5 @@ export const Complete: React.FC = () => {
 
 		</>
     );
+	}
 }

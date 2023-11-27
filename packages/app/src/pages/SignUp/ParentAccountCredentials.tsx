@@ -63,11 +63,16 @@ export const ParentAccountCredentials: React.FC<ParentAccountCredentialsProps> =
 	formState: { errors, isValid},
     } = useForm<z.infer<typeof schema>>({
         mode: 'onChange',
-        resolver: zodResolver(schema)
+        resolver: zodResolver(schema),
+	// todo: don't forget to take out when pushing to production
+	defaultValues: {
+	    name: 'Jon Chin',
+	    email: 'jon@jonathanchin.com',
+	    password: '1234567890'
+	}
     });
 
     const onSubmit = handleSubmit((response) => {
-	console.log(response);
 	setData({
 	    ...data,
 	    ...response
