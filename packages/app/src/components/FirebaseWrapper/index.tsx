@@ -1,1 +1,1 @@
-export * from './FirebaseWrapper';
+export * from "./FirebaseWrapper";

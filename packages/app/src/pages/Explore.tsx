@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Explore: React.FC = () => {
   return (
@@ -7,6 +7,6 @@ const Explore: React.FC = () => {
       {/* Add your content here */}
     </>
   );
-}
+};
 
 export default Explore;

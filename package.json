@@ -1,8 +1,21 @@
 {
-    "name": "bili",
-    "packageManager": "yarn@4.0.1",
-    "private": true,
-    "workspaces": [
-        "./packages/*"
-    ]
+  "dependencies": {
+    "lint-staged": "^15.1.0"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "packageManager": "yarn@4.0.1",
+  "private": true,
+  "name": "bili",
+  "workspaces": [
+    "./packages/*"
+  ]
 }

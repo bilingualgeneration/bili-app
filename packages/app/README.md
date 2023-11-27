@@ -1,7 +1,7 @@
 # bili-app
 
-
 ## Design Philosophy
+
 Since we're a small team with limited resources, our guiding principle is to do the most with the least changes. To accomplish that, we should follow these guidelines
 
 1. Where possible, use an existing component, whether from a framework (eg Ionic) or an already built custom component (eg Input)
