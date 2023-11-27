@@ -227,28 +227,31 @@ ion-card {
   margin-bottom: 108px;
 }
 
-.col-custom-position-2 {
-  position: relative;
-  bottom: 20px;
-}
-
-.col-custom-position-5 {
-  position: relative;
-  top: 10px;
-}
-.col-custom-position-4 {
-  position: relative;
-  top: 40px;
-}
-
-.col-custom-position-1 {
-  position: relative;
-  top: 10px;
-}
-
-.col-custom-position-3 {
-  position: relative;
-  top: 20px;
+#student-landing-page {
+    .col-custom-position-1 {
+	position: relative;
+	top: 10px;
+    }
+    
+    .col-custom-position-2 {
+	position: relative;
+	bottom: 20px;
+    }
+    
+    .col-custom-position-3 {
+	position: relative;
+	top: 20px;
+    }
+    
+    .col-custom-position-4 {
+	position: relative;
+	top: 40px;
+    }
+    
+    .col-custom-position-5 {
+	position: relative;
+	top: 10px;
+    }
 }
 
 .stories-card {

@@ -21,7 +21,7 @@ type StoriesCardProps = {
     heart?: React.ReactNode;
     iconBackroungColor?: string;
     className: string;
-    isLocked: boolean;
+    isLocked?: boolean;
     lock?: React.ReactNode;
 };
 
@@ -34,7 +34,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     heart,
     iconBackroungColor,
     className,
-    isLocked,
+    isLocked = false,
     lock
 }) => {
     const cardStyles = {
@@ -43,7 +43,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     return <>
         <div style={cardStyles} className={`stories-card ${isLocked ? 'locked' : ''} ${className}`}>
             {/* check if the card is locked */}
-            {isLocked && <Lock className="lock-icon" />}
+            {isLocked && <span className="lock-icon"><Lock /></span>}
             <div className='stories-card-header'>
                 <div className='oval-element-small'
                     style={{

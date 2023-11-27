@@ -36,10 +36,9 @@ import { ProfileContextProvider } from '@/contexts/ProfileContext';
 import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
-import {LandingPage} from './pages/LandingPage';
 import Stories from './pages/games/Stories';
 import StoryFactory from './pages/games/StoryFactory';
-import StudentDashboard from './pages/StudentDashboard';
+import {StudentDashboard} from './pages/StudentDashboard';
 import TeacherLogin from './pages/TeacherLogin';
 import UnauthedLayout from './layouts/Unauthed';
 
@@ -82,7 +81,6 @@ const Router: React.FC = () => {
 
 			<Route exact path="/home" render={() => (
 				<UnauthedLayout customBackground='white' wide={true}>
-				<LandingPage />
 				</UnauthedLayout>
 			)} />
 			
@@ -146,8 +144,8 @@ const Router: React.FC = () => {
 			)} />
 
 			<Route exact path="/student-dashboard" render={() => (
-				<UnauthedLayout>
-				<StudentDashboard />
+				<UnauthedLayout customBackground='white' wide={true}>
+				    <StudentDashboard />
 				</UnauthedLayout>
 			)} />
 
