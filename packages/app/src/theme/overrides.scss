@@ -8,8 +8,8 @@
 @font-face {
   font-family: 'Outfit';
   src: url('/assets/fonts/Outfit-VariableFont_wght.ttf');
-  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
-  font-style: normal;  // Specify 'italic' if it's an italic font style
+  // font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
+  // font-style: normal;  // Specify 'italic' if it's an italic font style
 }
 
 html{
@@ -213,10 +213,18 @@ ion-card {
 }
 
 //styles for the home-landing-page
+
+.background-pattern {
+  background-image: url('/assets/img/background_pattern_lp.png');
+  background-color: #FFF8F0;
+  padding: 20px;
+}
+
 .wave-icons {
   background-image: url('/assets/img/wave_100.png');
   background-repeat: no-repeat;
   text-align: -webkit-center;
+  margin-bottom: 108px;
 }
 
 .col-custom-position-2 {
@@ -247,20 +255,18 @@ ion-card {
   margin-left: 8px;
   margin-right: 8px;
   position: relative;
-  
-  
+  border-radius: 12px;
+  flex: 0 0 auto;
 }
 
-.stories-card-image img{
-  border-radius: 12px;
-  width: 168px;
-  max-width: none; /* overrides the max-width: 100% rule */
+.stories-card-image {
+  width: 200px;
+  height: 274px;
 }
 
-.other-card-image img {
-  border-radius: 12px;
+.other-card-image {
   width: 320px;
-  max-width: none;
+  height: 274px;
 }
 
 .stories-card-header {
@@ -294,6 +300,7 @@ ion-card {
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.26px;
+  margin-top: 0;
 }
 
 
@@ -335,6 +342,11 @@ ion-card {
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 52.8px */
+}
+
+.cards-title {
+  margin-top: 48px;
+  margin-bottom: 46px;
 }
 
 .stories-card.locked {

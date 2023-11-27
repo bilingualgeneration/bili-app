@@ -14,7 +14,10 @@ import {
     IonText,
     IonThumbnail
 } from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
+import {
+    useIntl,
+    FormattedMessage
+} from 'react-intl';
 import { IconWithText } from '@/components/IconWithText';
 // @ts-ignore todo: cannot find module or its corresponding type declarations
 import MeGustaIcon from '@/assets/icons/me_gusta.svg?react';
@@ -29,203 +32,329 @@ import SmallCommunity from '@/assets/icons/small_community.svg?react';
 import SmallFlower from '@/assets/icons/small_flower.svg?react';
 import Heart from '@/assets/icons/heart.svg?react';
 import Star from '@/assets/icons/star.svg?react';
+import { string } from 'zod';
+
 
 export const LandingPage: React.FC = () => {
 
-    return(
-	<>
-        <div className='cards-title'>
-            <h1>
-                Hola Vanessa!
-            </h1>
-            <p>
-                Hello Vanessa!
-            </p>
-        </div>
+    const intl = useIntl();
+    const userName = "Vanessa";
 
-        <div className=''>
-            <div className='cards-title'>
-                    <h2>Las tareas de esta semana</h2>
+    return (
+        <>
+            <div className='cards-title background-pattern'>
+                <h1>
+                    <FormattedMessage id="landingPage.welcome" values={{ userName }} />
+                </h1>
+                <p>
+                    Hello {userName}!
+                </p>
+            </div>
+
+            <div className=''>
+                <div className='cards-title'>
+                    <h2><FormattedMessage id="landingPage.assignments" /></h2>
                     <p>This week’s assignments</p>
-            </div>
-            {/* icons */}
-            <div className='wave-icons'>
-                <IonGrid>
-                    <IonRow>
-                        <IonCol className="col-custom-position-1">
-                        <IconWithText 
-                            title={'¡Me gusta como soy!'}
-                            subtitle={'I like myself!'}
-                            icon={<MeGustaIcon/>}
-                            iconBackgroundColor='#006A67'	
-                        />
-                        </IonCol>
-                        <IonCol className="col-custom-position-2">
-                            <IconWithText 
-                                title={'¡Me gusta como soy!'}
-                                subtitle={'I like myself!'}
-                                icon={<BieneStarIcon/>}
-                                iconBackgroundColor='#AC217B'	
-                            />
-                        </IonCol>
-                        <IonCol className="col-custom-position-3">
-                            <IconWithText 
-                                title={'¡Me gusta como soy!'}
-                                subtitle={'I like myself!'}
-                                icon={<ArteIcon/>}
-                                iconBackgroundColor='#0045A1'	
-                            />
-                        </IonCol>
-                        <IonCol className="col-custom-position-4">
-                            <IconWithText 
-                                title={'¡Me gusta como soy!'}
-                                subtitle={'I like myself!'}
-                                icon={<ComunidadIcon/>}
-                                iconBackgroundColor='#F0091B'	
-                            />
-                        </IonCol>
-                        <IonCol className="col-custom-position-5">
-                        <IconWithText 
-                            title={'¡Me gusta como soy!'}
-                            subtitle={'I like myself!'}
-                            icon={<StemIcon/>}
-                            iconBackgroundColor='#8FB8FA'
-                        /> 
-                        </IonCol>
-                    </IonRow>
-                </IonGrid>
-            </div>
-            
-            {/* stories */}
-            <div className='stories-story-cards'>
-                <div className='cards-title'>
-                        <h2>Cuentos</h2>
+                </div>
+                {/* icons */}
+                <div className='wave-icons'>
+                    <IonGrid>
+                        <IonRow>
+                            <IonCol className="col-custom-position-1">
+                                <IconWithText
+                                    title={'¡Me gusta como soy!'}
+                                    subtitle={'I like myself!'}
+                                    icon={<MeGustaIcon />}
+                                    iconBackgroundColor='#006A67'
+                                />
+                            </IonCol>
+                            <IonCol className="col-custom-position-2">
+                                <IconWithText
+                                    title={'Bienestar'}
+                                    subtitle={'Wellness'}
+                                    icon={<BieneStarIcon />}
+                                    iconBackgroundColor='#AC217B'
+                                />
+                            </IonCol>
+                            <IonCol className="col-custom-position-3">
+                                <IconWithText
+                                    title={'Arte'}
+                                    subtitle={'Art'}
+                                    icon={<ArteIcon />}
+                                    iconBackgroundColor='#0045A1'
+                                />
+                            </IonCol>
+                            <IonCol className="col-custom-position-4">
+                                <IconWithText
+                                    title={'Comunidad'}
+                                    subtitle={'Community'}
+                                    icon={<ComunidadIcon />}
+                                    iconBackgroundColor='#F0091B'
+                                />
+                            </IonCol>
+                            <IonCol className="col-custom-position-5">
+                                <IconWithText
+                                    title={'STEM'}
+                                    subtitle={'STEM'}
+                                    icon={<StemIcon />}
+                                    iconBackgroundColor='#8FB8FA'
+                                />
+                            </IonCol>
+                        </IonRow>
+                    </IonGrid>
+                </div>
+
+                {/* stories */}
+                <div className='stories-story-cards'>
+                    <div className='cards-title'>
+                        <h2><FormattedMessage id="landingPage.stories" /></h2>
                         <p>Stories</p>
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            overflowX: 'auto'
+                        }}
+                    >
+
+                        <StoriesCard
+                            title={'¡Me gusta como soy!'}
+                            subtitle={'I like myself'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallBook />}
+                            iconBackroungColor='#006A67'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={false}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallArt />}
+                            iconBackroungColor='#0045A1'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={false}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallCommunity />}
+                            iconBackroungColor='#F0091B'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={false}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallCommunity />}
+                            iconBackroungColor='#F0091B'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={false}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallCommunity />}
+                            iconBackroungColor='#F0091B'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={false}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallArt />}
+                            iconBackroungColor='#0045A1'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={true}
+                        />
+
+                        <StoriesCard
+                            title={'Auto retrato'}
+                            subtitle={'Self-portrait'}
+                            cover={'/assets/img/boot_image.png'}
+                            icon={<SmallArt />}
+                            iconBackroungColor='#0045A1'
+                            heart={<Heart />}
+                            rating={[<Star />, <Star />, <Star />]}
+                            className='stories-card-image'
+                            isLocked={true}
+                        />
+                    </div>
+
                 </div>
-                    
-                <div 
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
 
-                    }}
-                >
-                    
-                    <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallBook/>}
-                        iconBackroungColor='#006A67'
-                        heart={<Heart/>}
-                        rating={[<Star/>, <Star/>, <Star/>]}
-                        className='stories-card-image'
-                        isLocked = {false}
-                    />
-
-                    <StoriesCard 
-                        title={'Auto retrato'} 
-                        subtitle={'Self-portrait'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallArt/>}
-                        iconBackroungColor='#0045A1'
-                        heart={<Heart/>}
-                        rating={[<Star/>, <Star/>, <Star/>]}
-                        className='stories-card-image'
-                        isLocked = {false}
-                    />
-
-                    <StoriesCard 
-                        title={'Auto retrato'} 
-                        subtitle={'Self-portrait'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallCommunity/>}
-                        iconBackroungColor='#F0091B'
-                        heart={<Heart/>}
-                        rating={[<Star/>, <Star/>, <Star/>]}
-                        className='stories-card-image'
-                        isLocked = {false}
-                    />
-
-                    <StoriesCard 
-                        title={'Auto retrato'} 
-                        subtitle={'Self-portrait'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallArt/>}
-                        iconBackroungColor='#0045A1'
-                        heart={<Heart/>}
-                        rating={[<Star/>, <Star/>, <Star/>]}
-                        className='stories-card-image'
-                        isLocked = {true}
-                    /> 
-
-                    <StoriesCard 
-                        title={'Auto retrato'} 
-                        subtitle={'Self-portrait'} 
-                        cover={'/assets/img/boot_image.png'}
-                        icon={<SmallArt/>}
-                        iconBackroungColor='#0045A1'
-                        heart={<Heart/>}
-                        rating={[<Star/>, <Star/>, <Star/>]}
-                        className='stories-card-image'
-                        isLocked = {true}
-                    />         
-                </div>
-
-            </div>
-
-            {/* wellnes */}
-            <div className='other-story-cards'>
-                <div className='cards-title'>
-                        <h2>Bienestar</h2>
+                {/* wellnes */}
+                <div className='other-story-cards'>
+                    <div className='cards-title'>
+                        <h2><FormattedMessage id="landingPage.wellness" /></h2>
                         <p>Welness</p>
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+
+                        }}
+                    >
+
+                        <StoriesCard
+                            title={'¡Me gusta como soy!'}
+                            subtitle={'I like myself'}
+                            cover={'/assets/img/wellness_1.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'¡Me gusta como soy!'}
+                            subtitle={'I like myself'}
+                            cover={'/assets/img/wellness_1.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'¡Me gusta como soy!'}
+                            subtitle={'I like myself'}
+                            cover={'/assets/img/wellness_1.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+                    </div>
+
                 </div>
 
-                <div 
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
 
-                    }}
-                >
-                    
-                    <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
-                        cover={'/assets/img/wellness_1.png'}
-                        icon={<SmallFlower/>}
-                        iconBackroungColor='#AC217B'
-                        heart={<Heart/>}
-                        className='other-card-image'
-                    />
+                {/* play */}
+                <div className='other-story-cards'>
+                    <div className='cards-title'>
+                        <h2><FormattedMessage id="landingPage.play" /></h2>
+                        <p>Play</p>
+                    </div>
 
-                    <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
-                        cover={'/assets/img/wellness_1.png'}
-                        icon={<SmallFlower/>}
-                        iconBackroungColor='#AC217B'
-                        heart={<Heart/>}
-                        className='other-card-image'
-                    />
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
 
-                    <StoriesCard 
-                        title={'¡Me gusta como soy!'} 
-                        subtitle={'I like myself'} 
-                        cover={'/assets/img/wellness_1.png'}
-                        icon={<SmallFlower/>}
-                        iconBackroungColor='#AC217B'
-                        heart={<Heart/>}
-                        className='other-card-image'
-                    />
+                        }}
+                    >
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_play_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_play_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_play_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+                    </div>
+
                 </div>
+
+
+                {/* Comunidad */}
+                <div className='other-story-cards'>
+                    <div className='cards-title'>
+                        <h2><FormattedMessage id="landingPage.community" /></h2>
+                        <p>Community</p>
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+
+                        }}
+                    >
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_community_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_community_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+
+                        <StoriesCard
+                            title={'Afirmaciones'}
+                            subtitle={'Affirmations'}
+                            cover={'/assets/img/card_community_image.png'}
+                            icon={<SmallFlower />}
+                            iconBackroungColor='#AC217B'
+                            heart={<Heart />}
+                            className='other-card-image'
+                        />
+                    </div>
+
+                </div>
+
 
             </div>
-           
 
-            
-        </div>
-	   
-	</>
+        </>
     );
 };

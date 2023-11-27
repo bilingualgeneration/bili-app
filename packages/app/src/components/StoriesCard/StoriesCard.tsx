@@ -16,10 +16,10 @@ type StoriesCardProps = {
     title: string | MessageFormatElement[];
     subtitle: string | MessageFormatElement[];
     icon?: React.ReactNode;
-    cover: URL;
-    rating?: React.ReactNode;
-    heart?: React.ReactNode[];
-    iconBackroungColor? : string;
+    cover: string;
+    rating?: React.ReactNode[];
+    heart?: React.ReactNode;
+    iconBackroungColor?: string;
     className: string;
     isLocked: boolean;
     lock?: React.ReactNode;
@@ -37,45 +37,45 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
     isLocked,
     lock
 }) => {
+    const cardStyles = {
+        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.60) 100%), url(${cover})`
+    }
     return <>
-        <div className={`stories-card ${isLocked ? 'locked' : ''}`}> 
+        <div style={cardStyles} className={`stories-card ${isLocked ? 'locked' : ''} ${className}`}>
             {/* check if the card is locked */}
-            {isLocked && <Lock className="lock-icon"/>}
-            <div className={className}>
-                <img src={cover.toString()} alt="" />
-                <div className='stories-card-header'>
-                    <div className='oval-element-small' 
-                        style={{ 
-                            backgroundColor: iconBackroungColor 
-                            }}
-                    >
-                        {icon}
-                    </div>
-                    <div className='stories-card-rating'>
-                        {rating && rating.map((star, index) => (
-                                <span key={index}>{star}</span>
-                            ))}
-                    </div>
-                    
+            {isLocked && <Lock className="lock-icon" />}
+            <div className='stories-card-header'>
+                <div className='oval-element-small'
+                    style={{
+                        backgroundColor: iconBackroungColor
+                    }}
+                >
+                    {icon}
                 </div>
-                
-                <div className='stories-card-footer'>
-                    <div>
-                        
-                        <h4>
-                            {title as string}
-                        </h4>
-                        <p>
-                            {subtitle as string}
-                        </p>
-                    </div>
-                    <div>
-                        {heart}
-                    </div>
-                    
+                <div className='stories-card-rating'>
+                    {rating?.map((star, index) => (
+                        <span key={index}>{star}</span>
+                    ))}
                 </div>
+
             </div>
-            
+
+            <div className='stories-card-footer'>
+                <div>
+
+                    <h4>
+                        {title as string}
+                    </h4>
+                    <p>
+                        {subtitle as string}
+                    </p>
+                </div>
+                <div>
+                    {heart}
+                </div>
+
+            </div>
+
         </div>
     </>;
 };
