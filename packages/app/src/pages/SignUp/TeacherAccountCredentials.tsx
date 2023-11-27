@@ -15,9 +15,7 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useSignUpData} from '@/pages/SignUp/SignUpContext';
 
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import AppleIcon from '@/assets/icons/apple.svg?react';
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import GoogleIcon from '@/assets/icons/google.svg?react';
 
 
@@ -130,7 +128,10 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 					expand='block'
 					fill='outline'
 					style={{opacity: 0.2}}>
-					<GoogleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
+				    <span style={{marginRight: '1rem'}}>
+					<GoogleIcon />
+				    </span>
+				    <FormattedMessage id="login.google" defaultMessage="Continue with Google" />
 				</IonButton>
 
 				<IonButton
@@ -139,8 +140,11 @@ export const TeacherAccountCredentials: React.FC<TeacherAccountCredentialsProps>
 					disabled
 					expand='block'
 					fill='outline'
-					style={{opacity: 0.2}}>
-					<AppleIcon style={{marginRight: '1rem'}} /> <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
+				    style={{opacity: 0.2}}>
+				    <span style={{marginRight: '1rem'}}>
+					<AppleIcon />
+				    </span>
+				    <FormattedMessage id="login.apple" defaultMessage="Continue with Apple" />
 				</IonButton>
 
 				<div className='ion-margin-top'>

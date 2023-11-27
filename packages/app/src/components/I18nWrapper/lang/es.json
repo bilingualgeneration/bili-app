@@ -99,7 +99,15 @@
 
     "stories.storyId": "ID de historia:",
 
-    "storyFactory.Welcome": "Bienvenidos a la página Fábrica de historias"
+    "storyFactory.Welcome": "Bienvenidos a la página Fábrica de historias",
+
+
+    "landingPage.welcome": "¡Hola {userName}!",
+    "landingPage.assignments": "Las tareas de esta semana",
+    "landingPage.stories": "Cuentos",
+    "landingPage.wellness": "Bienestar",
+    "landingPage.play": "Juego",
+    "landingPage.community": "Comunidad"
   
 }
   

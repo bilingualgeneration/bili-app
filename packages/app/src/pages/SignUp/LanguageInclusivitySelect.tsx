@@ -26,9 +26,7 @@ import {useForm} from 'react-hook-form';
 import { RadioCard } from '@/components/RadioCard';
 import { ExtendedRadioOption, ExtendedRadio } from '@/components/ExtendedRadio';
 
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import NoIcon from '@/assets/icons/no.svg?react';
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import SmileyIcon from '@/assets/icons/smiley.svg?react';
 
 

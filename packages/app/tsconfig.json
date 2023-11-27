@@ -26,10 +26,11 @@
 		"useDefineForClassFields": true,
 		"target": "ESNext",
 		"types": [
-			"@babel/core", 
-			"react",
-			"react-dom",
-			"react-intl"
+		    "@babel/core",
+		    "@testing-library/jest-dom",
+		    "react",
+		    "react-dom",
+		    "react-intl"
 		]
     },
     "include": ["src", "i18n.ts"],

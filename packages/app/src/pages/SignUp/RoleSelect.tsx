@@ -25,9 +25,7 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import HouseIcon from '@/assets/icons/house.svg?react';
-// @ts-ignore todo: cannot find module or its corresponding type declarations
 import SchoolIcon from '@/assets/icons/school.svg?react';
 
 import "./RoleSelect.css";
