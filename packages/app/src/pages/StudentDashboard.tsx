@@ -16,6 +16,7 @@ import {
 } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { IconWithText } from "@/components/IconWithText";
+import { useProfile } from "@/contexts/ProfileContext";
 import MeGustaIcon from "@/assets/icons/me_gusta.svg?react";
 import ArteIcon from "@/assets/icons/arte.svg?react";
 import BieneStarIcon from "@/assets/icons/bienestar.svg?react";
@@ -33,15 +34,15 @@ import { FooterMenu } from "@/components/FooterMenu";
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
-  const userName = "Vanessa";
+  const { name, isImmersive } = useProfile();
 
   return (
     <div id="student-landing-page">
       <div className="cards-title background-pattern">
         <h1>
-          <FormattedMessage id="landingPage.welcome" values={{ userName }} />
+          <FormattedMessage id="landingPage.welcome" values={{ name }} />
         </h1>
-        <p>Hello {userName}!</p>
+        <p>Hello {name}!</p>
       </div>
 
       <div className="">
@@ -49,7 +50,7 @@ export const StudentDashboard: React.FC = () => {
           <h2>
             <FormattedMessage id="landingPage.assignments" />
           </h2>
-          <p>This week's assignments</p>
+          {!isImmersive && <p>This week's assignments</p>}
         </div>
         {/* icons */}
         <div className="wave-icons">
@@ -105,7 +106,7 @@ export const StudentDashboard: React.FC = () => {
             <h2>
               <FormattedMessage id="landingPage.stories" />
             </h2>
-            <p>Stories</p>
+            {!isImmersive && <p>Stories</p>}
           </div>
 
           <div
@@ -202,13 +203,13 @@ export const StudentDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* wellnes */}
+        {/* wellness */}
         <div className="other-story-cards">
           <div className="cards-title">
             <h2>
               <FormattedMessage id="landingPage.wellness" />
             </h2>
-            <p>Wellness</p>
+            {!isImmersive && <p>Wellness</p>}
           </div>
 
           <div
@@ -255,7 +256,7 @@ export const StudentDashboard: React.FC = () => {
             <h2>
               <FormattedMessage id="landingPage.play" />
             </h2>
-            <p>Play</p>
+            {!isImmersive && <p>Play</p>}
           </div>
 
           <div
@@ -302,7 +303,7 @@ export const StudentDashboard: React.FC = () => {
             <h2>
               <FormattedMessage id="landingPage.community" />
             </h2>
-            <p>Community</p>
+            {!isImmersive && <p>Community</p>}
           </div>
 
           <div

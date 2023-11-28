@@ -100,7 +100,7 @@
 
   "storyFactory.Welcome": "Bienvenidos a la página Fábrica de historias",
 
-  "landingPage.welcome": "¡Hola {userName}!",
+  "landingPage.welcome": "¡Hola {name}!",
   "landingPage.assignments": "Las tareas de esta semana",
   "landingPage.stories": "Cuentos",
   "landingPage.wellness": "Bienestar",

@@ -59,10 +59,10 @@
   "signUpTeacher.roleFacilitator": "Facilitator",
 
   "signUpParent.name": "Your full name",
-  "signUpParent.email": "your email address",
+  "signUpParent.email": "Your email address",
   "signUpParent.password": "Password (8+ characters)",
   "signUpParent.google": "Continue with Google",
-  "signUpParent.apple": "continue with Apple",
+  "signUpParent.apple": "Continue with Apple",
   "signUpParent.terms": "Terms of Service. ",
   "signUpParent.termsAgree": "I agree to the Terms of Service. I have read and understand the Privacy Policy",
   "signUpParent.marketing": "I want to receive marketing updates",

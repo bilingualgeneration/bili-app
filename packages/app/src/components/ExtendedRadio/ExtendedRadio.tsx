@@ -4,7 +4,7 @@ import { Control, Controller } from "react-hook-form";
 
 export type ExtendedRadioOption = {
   component: JSX.Element;
-  value: string | number;
+  value: any;
   disabled?: boolean;
 };
 
