@@ -2,6 +2,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonFooter,
   IonPage,
   IonHeader,
   IonTitle,
@@ -10,6 +11,7 @@ import {
 import { Redirect } from "react-router-dom";
 import { useAuth, useUser, useSigninCheck } from "reactfire";
 import { ProfileContextProvider } from "@/contexts/ProfileContext";
+import { FooterMenu } from "@/components/FooterMenu";
 
 interface AuthedLayoutProps {
   children: React.ReactNode;
@@ -62,6 +64,9 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
         <IonContent fullscreen className="ion-padding" style={contentStyle}>
           <div className="container">{children}</div>
         </IonContent>
+        <IonFooter className="ion-no-border">
+          <FooterMenu />
+        </IonFooter>
       </IonPage>
     </ProfileContextProvider>
   );
