@@ -183,16 +183,6 @@ export const ParentAccountCredentials: React.FC<
         </div>
 
         <div className="ion-margin-top">
-          <IonCheckbox justify="start" labelPlacement="end">
-            <FormattedMessage
-              id="signUpParent.marketing"
-              defaultMessage="I want to receive marketing updates"
-              description="Area for parents to check off if they wish to receive marketing emails during sign up process"
-            />
-          </IonCheckbox>
-        </div>
-
-        <div className="ion-margin-top">
           <IonButton
             data-testid="account-credentials-continue-button"
             disabled={!isValid}

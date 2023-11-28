@@ -46,7 +46,7 @@ export const FooterMenu: React.FC = ({}) => {
         >
           <IonRow className="ion-align-items-center">
             <IonCol>
-              <a href="http://localhost:5173/student-dashboard">
+              <a href="/student-dashboard">
                 <Home />
               </a>
             </IonCol>

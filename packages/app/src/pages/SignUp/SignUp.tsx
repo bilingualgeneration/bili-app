@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import {
   Complete,
   RoleSelect,
-  LanguageInclusivitySelect,
   LanguageModeSelect,
   ParentAccountCredentials,
   Pricing,
@@ -75,26 +74,20 @@ export const SignUp: React.FC = () => {
 
             <SwiperSlide
               className="ion-padding-top"
-              data-testid="role-select-slide"
+              data-testid="language-mode-slide"
               data-progress-percent={0.6}
             >
-              <Pricing />
+              <LanguageModeSelect />
             </SwiperSlide>
 
             <SwiperSlide
               className="ion-padding-top"
-              data-testid="language-mode-slide"
-              data-progress-percent={0.7}
-            >
-              <LanguageModeSelect />
-            </SwiperSlide>
-            <SwiperSlide
-              className="ion-padding-top"
-              data-testid="language-inclusivity-slide"
+              data-testid="role-select-slide"
               data-progress-percent={0.8}
             >
-              <LanguageInclusivitySelect />
+              <Pricing />
             </SwiperSlide>
+
             <SwiperSlide
               className="ion-padding-top"
               data-testid="complete-slide"

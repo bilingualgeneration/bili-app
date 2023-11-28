@@ -193,16 +193,6 @@ export const TeacherAccountCredentials: React.FC<
         </div>
 
         <div className="ion-margin-top">
-          <IonCheckbox justify="start" labelPlacement="end">
-            <FormattedMessage
-              id="signUpTeacher.marketing"
-              defaultMessage="I want to receive marketing updates"
-              description="Area for teachers to check off if they wish to receive marketing emails during sign up process"
-            />
-          </IonCheckbox>
-        </div>
-
-        <div className="ion-margin-top">
           <IonButton
             data-testid="teacher-account-credentials-continue-button"
             disabled={!isValid}
