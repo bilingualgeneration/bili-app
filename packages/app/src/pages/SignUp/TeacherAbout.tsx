@@ -28,7 +28,7 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
   // todo: these zod schemas are wrong
   const schema = z.object({
     grades: z.string().array().optional(),
-    roles: z.string().array().optional(),
+    schoolRoles: z.string().array().optional(),
   });
   const {
     control,
@@ -37,8 +37,9 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
   } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       grades: [],
+      schoolRoles: [],
     },
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
 
@@ -129,7 +130,10 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
   ];
 
   const onSubmit = handleSubmit((response) => {
-    console.log(response);
+    setData({
+      ...data,
+      ...response,
+    });
     swiper.slideTo(nextSlide);
   });
 
@@ -189,7 +193,7 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
                 control={control}
                 labelPlacement="end"
                 options={rolesOptions}
-                name="roles"
+                name="schoolRoles"
                 wrapper={OptionWrapper}
               />
             </IonRow>

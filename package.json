@@ -16,6 +16,7 @@
   "private": true,
   "name": "bili",
   "workspaces": [
-    "./packages/*"
+    "./packages/*",
+    "./packages/server/functions"
   ]
 }

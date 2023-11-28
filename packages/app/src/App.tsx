@@ -8,12 +8,9 @@ import React, { useEffect, useState } from "react";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useProfile } from "@/contexts/ProfileContext";
 import { getAuth } from "firebase/auth";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "./layouts/Authed";
-import Explore from "./pages/Explore";
-import Home from "./pages/Home";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "./pages/games/Intruder";
 import Journeys from "./pages/Journeys";
@@ -21,7 +18,6 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "./pages/Login";
 import Memory from "./pages/games/Memory";
 import { Preload } from "./pages/Preload";
-import { ProfileContextProvider } from "@/contexts/ProfileContext";
 import ResetPassword from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
@@ -61,27 +57,6 @@ const Router: React.FC = () => {
   return (
     <IonReactRouter>
       <Switch>
-        <Route
-          exact
-          path="/explore"
-          render={() => (
-            <UnauthedLayout>
-              <Explore />
-            </UnauthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/home"
-          render={() => (
-            <UnauthedLayout
-              customBackground="white"
-              wide={true}
-            ></UnauthedLayout>
-          )}
-        />
-
         <Route
           exact
           path="/"
@@ -185,9 +160,9 @@ const Router: React.FC = () => {
           exact
           path="/student-dashboard"
           render={() => (
-            <UnauthedLayout customBackground="white" wide={true}>
+            <AuthedLayout customBackground="white" wide={true}>
               <StudentDashboard />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 

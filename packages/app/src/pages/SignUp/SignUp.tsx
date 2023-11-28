@@ -1,4 +1,9 @@
-import { IonCard, IonCardContent, IonProgressBar } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonProgressBar,
+} from "@ionic/react";
 import React, { useState } from "react";
 import {
   Complete,
@@ -9,16 +14,14 @@ import {
   TeacherAbout,
   TeacherAccountCredentials,
 } from "@/pages/SignUp";
+//import {Test} from './Test';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import {
-  useSignUpData,
-  SignUpDataProvider,
-} from "@/pages/SignUp/SignUpContext";
+import { SignUpDataProvider } from "@/pages/SignUp/SignUpContext";
 
+// todo: on page visit, clear form and reset swiper
 export const SignUp: React.FC = () => {
   const [progressPercent, setProgressPercent] = useState<number>(0.2);
-  const { data } = useSignUpData();
   const handleSlideChange = (swiper: SwiperCore): void => {
     setProgressPercent(
       Number(
@@ -29,7 +32,7 @@ export const SignUp: React.FC = () => {
     );
   };
   return (
-    <>
+    <SignUpDataProvider>
       <IonCard>
         <IonCardContent>
           <div className="ion-padding">
@@ -93,6 +96,6 @@ export const SignUp: React.FC = () => {
           </Swiper>
         </IonCardContent>
       </IonCard>
-    </>
+    </SignUpDataProvider>
   );
 };

@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { locales } from "@/components/I18nWrapper";
 import type { locale } from "@/components/I18nWrapper";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Select } from "@/components/Select";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,7 @@ import { useForm, useWatch } from "react-hook-form";
 
 export const LanguageSwitcher: FC = () => {
   const intl = useIntl();
-  const { locale, setLocale } = useProfile();
+  const { locale, setLocale } = useLanguage();
   const schema = z.object({
     isSpanish: z.boolean(),
   });

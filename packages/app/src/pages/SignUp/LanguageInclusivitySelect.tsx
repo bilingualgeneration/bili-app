@@ -28,14 +28,14 @@ import SmileyIcon from "@/assets/icons/smiley.svg?react";
 export const LanguageInclusivitySelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
-    inclusivity: z.string().min(1), //nonempty was deprecated
+    isInclusive: z.boolean(), //nonempty was deprecated
   });
   const {
     control,
     handleSubmit,
     formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
   const { data, setData } = useSignUpData();
@@ -61,7 +61,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
         />
       </div>
     ),
-    value: "noninclusive",
+    value: false,
   };
 
   const inclusiveOption: ExtendedRadioOption = {
@@ -92,7 +92,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
         />
       </div>
     ),
-    value: "inclusive",
+    value: true,
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -121,7 +121,7 @@ export const LanguageInclusivitySelect: React.FC = () => {
 
         <ExtendedRadio
           control={control}
-          name="inclusivity"
+          name="isInclusive"
           options={[nonInclusiveOption, inclusiveOption]}
         />
 
