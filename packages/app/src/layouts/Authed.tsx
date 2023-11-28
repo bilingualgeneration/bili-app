@@ -10,7 +10,7 @@ import {
 } from "@ionic/react";
 import { Redirect } from "react-router-dom";
 import { useAuth, useUser, useSigninCheck } from "reactfire";
-import { ProfileContextProvider } from "@/contexts/ProfileContext";
+import { useProfile, ProfileContextProvider } from "@/contexts/ProfileContext";
 import { FooterMenu } from "@/components/FooterMenu";
 
 interface AuthedLayoutProps {

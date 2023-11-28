@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   IonButton,
   IonCard,
@@ -10,162 +10,103 @@ import {
   IonGrid,
   IonPage,
   IonRow,
-  IonText
-} from '@ionic/react';
-import { FormattedMessage } from 'react-intl';
-import { useProfile } from '@/contexts/ProfileContext';
-import FabricaCard from '@/components/StoryFactory/FabricaCard';
-import fabricaRectangle from '@/assets/icons/fabrica_swirl_rectangle.svg';
-import fabricaHalfCircle from '@/assets/icons/fabrica_swirl_half_circle.svg';
+  IonText,
+} from "@ionic/react";
+import { FormattedMessage } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
+import FabricaCard from "@/components/StoryFactory/FabricaCard";
+import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
+import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
 
 // EVERYTHING THAT IS COMMENTED OUT CAN BE READDED ONCE USER PROFILE IS COMPLETE
 
-const StoryFactoryPage5: React.FC = () => (
+const words = [
+  [
+    { es: "La vaca", en: "The cow" },
+    { es: "Mi mamá", en: "My Mom" },
+    { es: "El sapo", en: "The frog" },
+    { es: "Doña María", en: "Doña María" },
+  ],
+  [
+    { es: "nos da", en: "gives" },
+    { es: "puso", en: "put" },
+    { es: "come", en: "eats" },
+    { es: "dibuja", en: "draws" },
+  ],
+  [
+    { es: "leche", en: "milk" },
+    { es: "pan dulce", en: "sweet bread" },
+    { es: "insectos", en: "insects" },
+    { es: "las nubes", en: "the clouds" },
+  ],
+  [
+    { es: "los sábados.", en: "Saturdays" },
+    { es: "en la mesa.", en: "on the table." },
+    { es: "en el bosque.", en: "in the forest." },
+    { es: "en el cielo.", en: "in the sky." },
+  ],
+];
+
+const FactoryButton: React.FC = () => {
+  return (
+    <div className="fabrica-swirl-rectangle">
+      <img src={fabricaHalfCircle} alt="grey half circle piece" />
+    </div>
+  );
+};
+
+const StoryFactoryPage5: React.FC = () => {
+  const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
+  return (
     <>
-        <IonGrid class="ion-no-padding">
-            <IonRow class="ion-justify-content-center">
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-swirl-rectangle'>
-                        <img src={fabricaHalfCircle} alt='grey half circle piece'/>
-                    </div>
-                </IonCol>
+      <IonGrid class="ion-no-padding">
+        <IonRow class="ion-justify-content-center">
+          {[1, 2, 3, 4].map((number) => (
+            <IonCol size="2" class="ion-text-center" key={number}>
+              <div
+                className={`fabrica-swirl-rectangle ${
+                  number % 2 == 0 ? "" : "fabrica-flipped-swirl"
+                }`}
+              >
+                <img src={fabricaHalfCircle} alt="grey half circle piece" />
+              </div>
+              <div className="fabrica-rectangle">
+                <img src={fabricaRectangle} alt="grey rectangle piece" />
+              </div>
+            </IonCol>
+          ))}
+        </IonRow>
+      </IonGrid>
 
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-swirl-rectangle fabrica-flipped-swirl'>
-                        <img src={fabricaHalfCircle} alt='grey half circle piece'/>
+      <IonCard className="fabrica-de-cuentos-large-card">
+        <IonCardContent className="fabrica-card-content">
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonCardHeader class="ion-align-items-center">
+                  <IonCardTitle>
+                    <div className="fabrica-text-container">
+                      <div id="fabrica-header-text">¡Fábrica de cuentos!</div>
                     </div>
-                </IonCol>
-
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-swirl-rectangle'>
-                        <img src={fabricaHalfCircle} alt='grey half circle piece'/>
-                    </div>
-                </IonCol>
-
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-swirl-rectangle fabrica-flipped-swirl'>
-                        <img src={fabricaHalfCircle} alt='grey half circle piece'/>
-                    </div>
-                </IonCol>
+                  </IonCardTitle>
+                </IonCardHeader>
+              </IonCol>
             </IonRow>
-
-            <IonRow class="ion-justify-content-center">
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-rectangle'>
-                        <img src={fabricaRectangle} alt='grey rectangle piece'/>
-                    </div>
-                </IonCol> 
-
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-rectangle'>
-                        <img src={fabricaRectangle} alt='grey rectangle piece'/>
-                    </div>
-                </IonCol>  
-
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-rectangle'>
-                        <img src={fabricaRectangle} alt='grey rectangle piece'/>
-                    </div>
-                </IonCol>  
-
-                <IonCol size="2" class="ion-text-center">
-                    <div className='fabrica-rectangle'>
-                        <img src={fabricaRectangle} alt='grey rectangle piece'/>
-                    </div>
-                </IonCol>    
+            <IonRow>
+              {wordIndices.map((index, position) => (
+                <IonCol key={position} size="3">
+                  <FabricaCard
+                    es={words[position][index].es}
+                    en={words[position][index].en}
+                    {...{ setWordIndices, wordIndices, index, position }}
+                  />
+                </IonCol>
+              ))}
             </IonRow>
-        </IonGrid>
-        
-        <IonCard className='fabrica-de-cuentos-large-card'>
-            <IonCardContent className='fabrica-card-content'>
-                <IonGrid>
-                    <IonRow>
-                        <IonCol>
-                            <IonCardHeader class="ion-align-items-center">
-                                <IonCardTitle>
-                                    <div className='fabrica-text-container'>
-                                        <div id='fabrica-header-text'>
-                                            ¡Fábrica de cuentos!
-                                        </div> 
-                                    </div>
-                                </IonCardTitle>
-                            </IonCardHeader>
-                        </IonCol>
-                    </IonRow>
-
-                    <IonRow>
-                        <IonCol>
-                            <FabricaCard
-                                // isSpanishBilingual={true} 
-                                // id={'fabrica.innerCard1'} 
-                                // defaultMessage={'The frog'} 
-                                // description={'Text for the first card in \'¡Fabrica de cuentos!\' page'}
-                            >
-                                <p className='fabrica-text1-spanish'>
-                                    El sapo
-                                </p>
-
-                                <p className='fabrica-text2-english'>
-                                    The frog
-                                </p>
-                            </FabricaCard>
-                        </IonCol>
-
-                        <IonCol>
-                            <FabricaCard 
-                                // isSpanishBilingual={true} 
-                                // id={'fabrica.innerCard2'} 
-                                // defaultMessage={'food'} 
-                                // description={'Text for the second card in \'¡Fabrica de cuentos!\' page'}
-                            >
-                                <p className='fabrica-text1-spanish'>
-                                    comida
-                                </p>
-
-                                <p className='fabrica-text2-english'>
-                                    eats
-                                </p> 
-                            </FabricaCard>
-                        </IonCol>
-
-                        <IonCol>
-                            <FabricaCard 
-                                // isSpanishBilingual={true} 
-                                // id={'fabrica.innerCard3'} 
-                                // defaultMessage={'insects'} 
-                                // description={'Text for the third card in \'¡Fabrica de cuentos!\' page'}
-                            >
-                                <p className='fabrica-text1-spanish'>
-                                    insectos
-                                </p>
-
-                                <p className='fabrica-text2-english'>
-                                    insects
-                                </p>
-                            </FabricaCard>
-                        </IonCol>
-
-                        <IonCol>
-                            <FabricaCard 
-                                // isSpanishBilingual={true} 
-                                // id={'fabrica.innerCard4'} 
-                                // defaultMessage={'in the forest'} 
-                                // description={'Text for the fourth card in \'¡Fabrica de cuentos!\' page'}
-                            >
-                                <p className='fabrica-text1-spanish'>
-                                    en el bosque.
-                                </p>
-
-                                <p className='fabrica-text2-english'>
-                                    in the forest.
-                                </p>
-                            </FabricaCard>
-                        </IonCol>
-                    </IonRow>
-                </IonGrid>
-            </IonCardContent>
-        </IonCard>
+          </IonGrid>
+        </IonCardContent>
+      </IonCard>
     </>
-);
-  
+  );
+};
 export default StoryFactoryPage5;

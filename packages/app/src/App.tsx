@@ -28,7 +28,6 @@ import ResetPassword from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
 import Stories from "./pages/games/Stories";
-import StoryFactory from "./pages/games/StoryFactory";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
@@ -152,25 +151,15 @@ const Router: React.FC = () => {
           )}
         />
 
-        <Route
-          exact
-          path="/story-factory"
-          render={() => (
-            <UnauthedLayout>
-              <StoryFactory />
-            </UnauthedLayout>
-          )}
-        />
-
         {/* This is just temporary while creating pages */}
 
         <Route
           exact
           path="/story-factory/1"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <IntroPage1 currentPage={1} />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 
@@ -178,9 +167,9 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/2"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <IntroPage2 currentPage={2} />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 
@@ -188,9 +177,9 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/3"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <IntroPage3 currentPage={3} />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 
@@ -198,9 +187,9 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/4"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <StoryFactoryPage4 />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 
@@ -208,9 +197,9 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/5"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <StoryFactoryPage5 />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 
@@ -218,9 +207,9 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/6"
           render={() => (
-            <UnauthedLayout>
+            <AuthedLayout>
               <StoryFactoryPage6 />
-            </UnauthedLayout>
+            </AuthedLayout>
           )}
         />
 

@@ -1,8 +1,13 @@
-import React from 'react';
-import { IonCard } from '@ionic/react';
-import { IonIcon } from '@ionic/react';
-import { gameControllerOutline, heartOutline, lockClosedOutline } from 'ionicons/icons';
-import { MessageFormatElement } from 'react-intl';
+import React from "react";
+import { IonCard } from "@ionic/react";
+import { IonIcon } from "@ionic/react";
+import {
+  gameControllerOutline,
+  heartOutline,
+  lockClosedOutline,
+} from "ionicons/icons";
+import { MessageFormatElement } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
 
 interface JuegoCardProps {
   backgroundImage: string;
@@ -14,51 +19,55 @@ interface JuegoCardProps {
 }
 
 const JuegoCard: React.FC<JuegoCardProps> = ({
-    backgroundImage, 
-    isLocked = false, 
-    isSpanishBilingual = false, 
-    packNumber = 1, 
-    showOverlay = true,
-    storyId }) => {
-    
-      return (
-            <IonCard href={`/story-factory/${storyId}`} className={`individual-juego-card ${isLocked ? 'locked' : ''}`} 
-                    style={{
-                    backgroundImage: `url("${backgroundImage}")`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                }}>
+  backgroundImage,
+  isLocked = false,
+  isSpanishBilingual = false,
+  packNumber = 1,
+  showOverlay = true,
+  storyId,
+}) => {
+  const { isImmersive } = useProfile();
 
-                {/* Overlay for Unlocked Cards */}
-                {!isLocked && showOverlay && (
-                    <div className="overlay">
-                        <div className="gradient-overlay"/>
-                    </div>
-                )}
+  // conditionally make card clickable
+  let props: { [key: string]: any } = {};
+  if (!isLocked) {
+    props.href = `/story-factory/${storyId}`;
+  }
 
-                {/* Locked Icon */}
-                {isLocked && (
-                    <div className="lock-icon-container">
-                        <IonIcon icon={lockClosedOutline} className="lock-icon"/>
-                    </div>
-                )}
+  return (
+    <IonCard
+      {...props}
+      className={`individual-juego-card ${isLocked ? "locked" : ""}`}
+      style={{
+        backgroundImage: `url("${backgroundImage}")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay for Unlocked Cards */}
+      {!isLocked && showOverlay && (
+        <div className="overlay">
+          <div className="gradient-overlay" />
+        </div>
+      )}
 
-                {isSpanishBilingual ? (
-                    <>
-                        <p className="es-pack-title">Paquete {packNumber}</p>
-                        <p className="en-pack-title2">Pack {packNumber}</p>
-                    </>
-                ) : (
-                        <p className="es-pack-title">Paquete {packNumber}</p>
-                )}
+      {/* Locked Icon */}
+      {isLocked && (
+        <div className="lock-icon-container">
+          <IonIcon icon={lockClosedOutline} className="lock-icon" />
+        </div>
+      )}
 
-                {/* Game container with outline in top left corner */}
-                <IonIcon className='game-icon-container' icon={gameControllerOutline}/>
-                
-                {/* Heart outline in the lower right corner */} 
-                <IonIcon className='heart-icon-container' icon={heartOutline}/>
-            </IonCard>
-      );
+      <p className="es-pack-title">Paquete {packNumber}</p>
+      {!isImmersive && <p className="en-pack-title2">Pack {packNumber}</p>}
+
+      {/* Game container with outline in top left corner */}
+      <IonIcon className="game-icon-container" icon={gameControllerOutline} />
+
+      {/* Heart outline in the lower right corner */}
+      <IonIcon className="heart-icon-container" icon={heartOutline} />
+    </IonCard>
+  );
 };
 
 export default JuegoCard;

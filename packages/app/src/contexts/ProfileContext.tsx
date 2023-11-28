@@ -13,7 +13,9 @@ import { useFirestore, useFirestoreDocData, useUser } from "reactfire";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export type profile = {};
+export type profile = {
+  [key: string]: any;
+};
 
 const defaultState: profile = {};
 
