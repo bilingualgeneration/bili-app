@@ -12,7 +12,7 @@ type RadioCardProps = {
   title: string | MessageFormatElement[];
   content: string | MessageFormatElement[];
   icon?: React.ReactNode;
-  iconBackgroundColor: string;
+  iconBackgroundColor?: string;
   badge?: React.ReactNode;
 };
 
@@ -26,12 +26,14 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   return (
     <IonCard style={{ cursor: "pointer" }}>
       <div className="card-inner">
-        <div
-          className="oval-element"
-          style={{ backgroundColor: iconBackgroundColor }}
-        >
-          {icon}
-        </div>
+        {icon && (
+          <div
+            className="oval-element"
+            style={{ backgroundColor: iconBackgroundColor }}
+          >
+            {icon}
+          </div>
+        )}
         <div className="title-content">
           <div
             className="badge-content"

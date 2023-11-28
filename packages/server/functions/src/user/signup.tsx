@@ -19,6 +19,7 @@ export const signup = onCall(async (request) => {
     isInclusive: data.isInclusive,
     isImmersive: data.isImmersive,
     name: data.name,
+    pricing: data.pricing,
     role: data.role,
     school: data.school,
     schoolRoles: data.schoolRoles,

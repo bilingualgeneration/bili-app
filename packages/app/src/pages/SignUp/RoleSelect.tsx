@@ -27,7 +27,6 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
   parentSlide,
 }) => {
   const intl = useIntl();
-  const form = useForm<{ role: string }>();
   const schema = z.object({
     role: z.string().min(1), //nonempty was deprecated
   });

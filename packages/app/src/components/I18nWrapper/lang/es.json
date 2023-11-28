@@ -32,6 +32,16 @@
   "signUp.parent2": "Quiero usar esta aplicación con mi(s) niño(s).",
   "signUp.continue": "Continuar",
 
+  "signUp.pricing_monthly_title": "1 mes ilimitada",
+  "signUp.pricing_monthly_pricing": "$4.99/mes",
+  "signUp.pricing_annual_title": "12 meses ilimitadas",
+  "signUp.pricing_annual_pricing": "$44.99/año",
+
+  "signUp.choose_plan": "Elige tu plan",
+  "signUp.trial_title": "Prueba gratuita de 3 semanas",
+  "signUp.trial_description": "Por tiempo limitado solamente",
+  "signUp.no_commitment": "Sin compromisos, cancela en cualquier momento.",
+
   "signUpTeacher.name": "Nombre y apellido(s)*",
   "signUpTeacher.email": "Correo electrónico*",
   "signUpTeacher.school": "Nombre de escuela*",
