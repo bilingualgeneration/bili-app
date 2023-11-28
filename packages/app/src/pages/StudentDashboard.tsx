@@ -29,6 +29,7 @@ import SmallFlower from "@/assets/icons/small_flower.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { string } from "zod";
+import { FooterMenu } from "@/components/FooterMenu";
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
@@ -342,6 +343,7 @@ export const StudentDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      <FooterMenu />
     </div>
   );
 };
