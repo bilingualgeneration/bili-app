@@ -24,14 +24,14 @@ import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 export const LanguageModeSelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
-    language: z.string().min(1), //nonempty was deprecated
+    isImmersive: z.boolean(),
   });
   const {
     control,
     handleSubmit,
     formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
   const { data, setData } = useSignUpData();
@@ -72,7 +72,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: "spanish",
+    value: true,
   };
 
   const billingualOption: ExtendedRadioOption = {
@@ -112,7 +112,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: "bilingual",
+    value: false,
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -140,7 +140,7 @@ export const LanguageModeSelect: React.FC = () => {
         </IonText>
         <ExtendedRadio
           control={control}
-          name="language"
+          name="isImmersive"
           options={[spanishOption, billingualOption]}
         />
         <IonButton

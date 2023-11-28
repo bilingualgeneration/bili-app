@@ -1,7 +1,6 @@
 import { IntlProvider } from "react-intl";
 import { PropsWithChildren, useEffect, useState } from "react";
-
-import { useProfile } from "@/contexts/ProfileContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import { createIntl, createIntlCache, IntlShape } from "react-intl";
 
@@ -19,12 +18,12 @@ export const locales = {
 export type locale = "en" | "es" | "es-inc";
 
 // needed to trick react-intl to trick it into supporting inclusive versions of languages
-const localeMap: { [key in locale]?: locale } = {
+const localeMap: { [key: string]: locale } = {
   "es-inc": "es",
 };
 
 export const I18nWrapper = ({ children }: PropsWithChildren<{}>) => {
-  const { locale } = useProfile();
+  const { locale } = useLanguage();
   const cache = createIntlCache();
   // todo: move translation cache to localstorage?
   const intl: IntlShape = createIntl({ locale: "en", messages: en }, cache);

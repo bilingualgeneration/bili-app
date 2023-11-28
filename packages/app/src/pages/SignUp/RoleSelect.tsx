@@ -36,7 +36,7 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
     handleSubmit,
     formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
   const { data, setData } = useSignUpData();

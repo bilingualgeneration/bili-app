@@ -41,12 +41,11 @@ export const TeacherAccountCredentials: React.FC<
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<z.infer<typeof schema>>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
 
   const onSubmit = handleSubmit((response) => {
-    console.log(response);
     setData({
       ...data,
       ...response,
