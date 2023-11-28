@@ -41,7 +41,6 @@ import ResetPassword from './pages/ResetPassword';
 import {SignUp} from './pages/SignUp';
 import {Splash} from './pages/Splash';
 import Stories from './pages/games/Stories';
-import StoryFactory from '@/components/StoryFactory/StoryFactory';
 import StoryFactoryPage4 from './pages/StoryFactory/StoryFactoryPg4';
 import StoryFactoryPage5 from './pages/StoryFactory/StoryFactoryPg5';
 import StoryFactoryPage6 from './pages/StoryFactory/StoryFactoryPg6';
@@ -148,13 +147,22 @@ const Router: React.FC = () => {
 
 			<Route exact path="/story-factory/1" render={() => (
 				<UnauthedLayout>
-				<IntroPage1 handleNext={function (): void
-						{
-							throw new Error('Function not implemented.');
-						} } isNewUser={false} currentPage={0} />
+				<IntroPage1 currentPage={1} />
 				</UnauthedLayout>
 			)} />
 
+			<Route exact path="/story-factory/2" render={() => (
+				<UnauthedLayout>
+				<IntroPage2 currentPage={2} />
+				</UnauthedLayout>
+			)} />
+
+			<Route exact path="/story-factory/3" render={() => (
+				<UnauthedLayout>
+				<IntroPage3 currentPage={3} />
+				</UnauthedLayout>
+			)} />
+			
 			<Route exact path="/story-factory/4" render={() => (
 				<UnauthedLayout>
 				<StoryFactoryPage4 />

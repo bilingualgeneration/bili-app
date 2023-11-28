@@ -1,35 +1,22 @@
-// StoryFactoryButtonLogic.ts
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const useStoryFactoryButton = (isNewUser: boolean, currentPage: number) => {
-  const [redirectTo, setRedirectTo] = useState<string | null>(null);
+const useStoryFactoryButton = (currentPage: number) => {
   const history = useHistory();
 
   const handleNext = () => {
-    // Logic to determine when to switch to the next page
+    // Continue with the normal logic for the first two pages
     if (currentPage < 3) {
-      // Continue with the normal logic
-      setRedirectTo(null);
+      history.push(`/story-factory/${currentPage + 1}`);
+      console.log(currentPage);
     } else {
-      // Redirect to other pages if the user is not new
-      if (!isNewUser) {
-        setRedirectTo(`/story-factory/${currentPage + 1}`);
-      }
-    }
-  };
-
-  const redirect = () => {
-    if (redirectTo) {
-      history.push(redirectTo);
+      // Redirect to the next page
+      history.push('/story-factory/4');
     }
   };
 
   return {
-    isNewUser,
     currentPage,
     handleNext,
-    redirect,
   };
 };
 

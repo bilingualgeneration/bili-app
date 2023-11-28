@@ -205,22 +205,46 @@ ion-card {
 
 // styles for story factory cards
 
-ion-card.story-intro {
+.juego-fabrica-de-cuentos-main-card {
   /* Layout properties */
-  width: 995px;
-  height: 740px;
+  justify-content: flex-start;
+  height: auto; //740px; 
   flex-shrink: 0;
+  // margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  
+  // display: flex;
+  // max-width: 100%;
+  // width: 60%; //60vw;
+  padding: 60px 24px;
+  flex-direction: column;
+  // align-items: center;
+  gap: 24px;
 
   /* Style properties */
-  border-radius: 2.5rem;
+  border-radius: 36px;
   background: var(--base-nube, #FFF);
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
+.juego-fabrica-de-cuentos-card-content {
+  display: flex;
+  // max-width: 100%;
+  // width: 100%;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+}
+
+.story-header {
+  padding: 5%;
 }
 
 ion-button.story-button {
   /* Layout properties */
   display: flex;
-  width: 403.506px;
+  width: 40vh; //403.506px;
   // padding: 16px;
   flex-direction: column;
   justify-content: center;
@@ -234,9 +258,8 @@ ion-button.story-button {
 
 .story-intro-button-container {
   display: inline-flex;
-  padding: 16px;
+  // padding: 16px; //1rem
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
   gap: 16px;
 }
@@ -249,7 +272,7 @@ ion-button.story-button {
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem; //3vh; //32px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 35.2px */
@@ -264,37 +287,19 @@ ion-button.story-button {
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;
-  font-size: 14px;
+  font-size: 1rem; //14px;
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 19.6px */
   letter-spacing: 0.211px;
 }
 
-::after {
-  display: inline-flex;
-  padding: 16px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 16px;
-}
-
-.story-page-1-text-container {
-  display: inline-flex;
-  height: 433px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 60px;
-  flex-shrink: 0;
-}
-
 #story-bienvenidos {
-  width: 600px;
+  width: auto;
   color: var(--base-suelo, #000);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Outfit;
-  font-size: 64px;
+  font-size: 4rem; //64px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 70.4px */
@@ -302,11 +307,11 @@ ion-button.story-button {
 }
 
 #story-fabrica {
-  width: 600px;
+  width: 600px; //37.5rem
   color: var(--habanero-habanero, #FF5708);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Outfit;
-  font-size: 64px;
+  font-size: 4rem; //64px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
@@ -317,7 +322,7 @@ ion-button.story-button {
   align-self: stretch;
   color: var(--base-suelo, #000);
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem; //32px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 35.2px */
@@ -327,7 +332,7 @@ ion-button.story-button {
   align-self: stretch;
   color: var(--habanero-habanero, #FF5708);
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem; //32px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
@@ -337,7 +342,7 @@ ion-button.story-button {
   align-self: stretch;
   color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
   font-family: Outfit;
-  font-size: 40px;
+  font-size: 2.5rem; //40px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 44px */
@@ -347,110 +352,194 @@ ion-button.story-button {
   align-self: stretch;
   color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
   font-family: Outfit;
-  font-size: 40px;
+  font-size: 2.5rem; //40px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 44px */
+  margin-bottom: 6%;
+}
+
+#story-page-2-title {
+  color: var(--base-suelo, #000);
+  font-family: Outfit;
+  font-size: 2.5rem; //4vh; //39.97px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 43.967px */
+  // width: 55%;
+  margin-bottom: 1%;
+}
+
+@media only screen and (max-width: 600px) {
+  #story-page-2-title {
+    font-size: 1.5rem; //2.5vh; /* Adjust as needed for smaller screens */
+    width: 100%; /* Full width on smaller screens */ //                           TODO: CHECK IF MOBILE VALUES ARE CORRECT
+  }
+}
+
+#story-page-2-subtitle {
+  color: var(--base-suelo, #000);
+  font-family: Outfit;
+  font-size: 2rem; //3vh; //29.978px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 43.967px */
+  // width: 55%;
+}
+
+@media only screen and (max-width: 600px) {
+  #story-page-2-subtitle {
+    font-size: 1.5rem; //1.5vh; /* Adjust as needed for smaller screens */
+    width: 100%; /* Full width on smaller screens */
+  }
 }
 
 #story-a-place {
   align-self: stretch;
   color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
   font-family: Outfit;
-  font-size: 24px;
+  font-size: 1.5rem; //24px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 26.4px */
 }
 
 #story-juego-fabrica-es {
-  width: 1093px;
+  width: 55vw; //1093px; //68.313rem
   color: var(--greyscale-900, #212121);
   font-family: Outfit;
-  font-size: 40px;
+  font-size: 2.5rem; // 4vh; //40px; 
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 44px */
+  padding-inline: 2%;
 }
 
 #story-factory-en {
-  width: 367px;
+  width: 37vw; //367px; //22.938rem
   color: #1C1C17;
   font-family: Outfit;
-  font-size: 20px;
+  font-size: 1.25rem; //2vh; //20px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 22px */
+  padding-inline: 2%;
 }
 
+.container {
+  padding: 0px;
+  margin: 0px;
+  max-width: none;
+}
+
+// TODO: This is what is affecting the padding on both sides of orange rectangle, but I can't change it for only the orange rectangle header
+// .inner-scroll {
+//   padding-inline-start: var(--padding-start);
+//   padding-inline-end: var(--padding-end);
+
+// }
+
 .rectangle-header {
+  position: relative;
   width: 100%;
-  height: 156px;
+  height: 16vh; //156px;
   flex-shrink: 0;
   background: var(--habanero-habanero, #FF5708);
+  align-items: center;
+  justify-content: left;
+  display: flex;
   mix-blend-mode: multiply;
 }
 
-.juego-divider{
-  height: 50px;
+.rectangle-header-semi-transparent-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  background: url('./src/assets/icons/orange_rectangle_header_overlay.svg'), lightgray -2012.453px 0px / 668.067% 100% no-repeat;
 }
 
-.juego-card {
-  display: flex;
-  width: 1147px;
-  padding: 60px 24px;
+.rectangle-header-text {
+  z-index: 2;
+  margin-left: 7%;
+}
+
+.juego-divider{
+  height: 5vh; //50px;
+}
+
+.container .juego-card {
+  display: inline-block;
+  white-space: nowrap;
+  width: 115vw; //1147px;
+  padding: 60px 24px; //6vh 2.5vh; //
+  margin: 5% auto;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 2.5vh; //24px;
   border-radius: 35.942px;
   background: var(--base-nube, #FFF);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
 }
 
+/* Media query for mobile juego card view (TODO: Fix this to make stackable on phone view?) */
+@media (max-width: 600px) {
+  .juego-card-content {
+    white-space: normal; /* Allow cards to stack vertically */
+  }
+
+  juego-card {
+    display: block;
+    margin-bottom: 10px;
+    white-space: normal;
+  }
+}
+
 #story-juego-title {
-  width: 381px;
+  margin: 0px;
+  padding: 2%;
+  width: 38vw; //381px;
   color: #FFF;
   font-family: Outfit;
-  font-size: 48px;
+  font-size: 3rem; //4.5vh; //48px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 52.8px */
 }
 
 #story-juego-title2 {
-  width: 367px;
+  margin: 0px;
+  padding: 2%;
+  width: 36vw; //367px;
   color: #FFF;
   font-family: Outfit;
-  font-size: 24px;
+  font-size: 1.5rem; //2.5vh; //24px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 26.4px */
 }
 
-.juego-content-container {
+.individual-juego-card {
   display: flex;
-  width: 992px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 36px;
-}
-
-.story-card  {
-  display: flex;
+  // max-width: 100%;
+  // width: 20rem; //
+  // height: 17rem; //274px;
   width: 320px;
   height: 274px;
   flex-direction: column;
-  align-items: flex-start;
+  // align-items: flex-start;
   flex-shrink: 0;
   border-radius: 12px;
   background: #FDCB04;
   box-shadow: 0px 4px 60px 0px rgba(4, 6, 15, 0.05);
 }
 
-.fabrica-de-cuentos-card {
+.fabrica-de-cuentos-large-card {
   display: flex;
-  width: 1147px;
+  max-width: 70vw; //1147px;
   padding: 24px 24px 79px 24px;
+  margin: auto;
+  // margin-top: 8%;
   flex-direction: column;
   align-items: center;
   gap: 24px;
@@ -459,32 +548,51 @@ ion-button.story-button {
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
 }
 
-.story-juego-fabrica-text-container {
-  display: flex;
-  height: 79.97px;
-  justify-content: center;
-  align-items: center;
-  gap: 35.942px;
+/* Media query for mobile juego card view (TODO: Fix this to make stackable on phone view?) */
+@media (max-width: 768px) {
+  .fabrica-card-content {
+    white-space: normal; /* Allow cards to stack vertically */
+    #fabrica-header-text {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+  }
+
+  fabrica-card {
+    display: block;
+    margin-bottom: 10px;
+    white-space: normal;
+  }
 }
 
-.story-juego-fabrica-text {
-  width: 995.582px;
+.fabrica-text-container {
+  // width: 50vw; //995.582px;
+  display: flex;
+  height: 8vh; //79.97px;
+  justify-content: center;
+  align-items: center;
+  gap: 3.6vh; //35.942px;
+  margin-bottom: 5%;
+}
+
+#fabrica-header-text {
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Outfit;
-  font-size: 86.26px;
+  font-size: 5rem; //8.6vh; //86.26px;
   font-style: normal;
   font-weight: 700;
-  line-height: 28.753px; /* 33.333% */
-  letter-spacing: -0.899px;
+  line-height: 5rem; //3vh; //28.753px; /* 33.333% */
+  letter-spacing: -.1vh; //-0.899px;
   color: var(--greyscale-900, #212121)
 }
 
+// felicitaciones page
+
 .felicitaciones-card {
-  position: relative;
   display: flex;
-  width: 1147px;
-  height: 494.5px;
+  width:  57vw; //1147px;
+  height: 50vh; //494.5px;
   padding: 24px;
   flex-direction: column;
   align-items: center;
@@ -493,11 +601,54 @@ ion-button.story-button {
   border-radius: 35.942px;
   background: var(--base-selva, #006A67);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  margin: auto;  
+}
+
+.felicitaciones-title {
+  width: 30vw; //600px;
+  color: var(--base-nube, #FFF);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Outfit;
+  font-size: 4rem; //64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 70.4px */
+  letter-spacing: -.125rem; //-2px;
+}
+
+.felicitaciones-subtitle {
+  align-self: stretch;
+  color: var(--cielo-cielo, #D3EAE8);
+  font-family: Outfit;
+  font-size: 2.5rem; //40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 44px */
+}
+
+#congrats-text-bold {
+  align-self: stretch;
+  color: var(--base-nube, #FFF);
+  font-family: Outfit;
+  font-size: 2rem; //32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 35.2px */
+}
+
+#congrats-text-reg {
+  align-self: stretch;
+  color: var(--cielo-cielo, #D3EAE8);
+  font-family: Outfit;
+  font-size: 1.5rem; //24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 26.4px */
 }
 
 .sigue-adelante-button {
   display: flex;
-  width: 362.566px;
+  width: 23rem; //362.566px;
   --padding-top: 14.377px;
   --padding-bottom: 14.377px;
   flex-direction: column;
@@ -513,7 +664,7 @@ ion-button.story-button {
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem; //32px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 35.2px */
@@ -524,7 +675,7 @@ ion-button.story-button {
   color: var(--cielo-lowest, #003735);
   text-align: center;
   font-family: Outfit;
-  font-size: 12.58px;
+  font-size: 1rem; // 12.58px;
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 17.611px */
@@ -533,12 +684,47 @@ ion-button.story-button {
 
 /* JuegoCard Component */
 
-.story-card {
-  position: relative;
-  overflow: hidden; /* To ensure the overlay covers the entire card, even if content exceeds boundaries */
+.kovu2{
+  font-size: 1.5rem; //24px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  bottom: 0%;
+  left: 5%;
+  text-align: left;
 }
 
-.story-card.locked::before {
+.kovu{
+  font-size: 1rem; //24px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  text-align: left;
+}
+
+.individual-juego-card .game-icon-container{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  background-position: center;
+  background-color: #F17130;
+  border-radius: 100%;
+  padding: .5vh;
+  font-size: 1rem;
+  color: white;
+}
+
+.individual-juego-card .heart-icon-container{
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.individual-juego-card.locked::before {
   content: '';
   position: absolute;
   top: 0;
@@ -560,23 +746,32 @@ ion-button.story-button {
   color: white;
 }
 
-.juego-card p {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  transform: translate(-25%, 250%); // TODO: check if this is correct
+.juego-card-content-component {
+  position: relative;
+  
+  p.title {
+    font-size: 1.5rem; //2.5vh; //24px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    bottom: -205px;
+    left: 0;
+    text-align: left;
+  }
+
+  p.subtitle {
+    font-size: 1rem; //1.5vh; //13px;
+    color: white;
+    position: absolute;
+    text-align: left;
+    bottom: -230px;
+    left: 0;
+  }
 }
 
-.juego-card p.subtitle {
-  font-size: 13px;
-  color: white;
-  text-align: left;
-  transform: translate(-25%, 450%); // TODO: check if this is correct
-}
-
-.juego-card.locked p.title {
-  text-align: end;
-}
+// .juego-card-content-component.locked p.title {
+//   text-align: end;
+// }
 
 // TODO: check if this is correct
 /* Adjustments for smaller screens  */
@@ -586,3 +781,114 @@ ion-button.story-button {
   }
 }
 
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Linear gradient starts from bottom with 80% black opacity and goes up 30% of
+   * content while decreasing it's opacity to 0% AKA fading away 
+   */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 30%);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* individual fabrica word cards */
+
+.mini-fabrica-card {
+  // display: flex;
+  width: 14.5rem; //234px;
+  height: 14.5rem; //23.5vh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--base-humo, #ECEEED);
+}
+
+.fabrica-swirl-rectangle{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.fabrica-rectangle{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.fabrica-flipped-swirl {
+  transform: scaleX(-1);
+}
+
+.polygon-up{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.40)) drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
+}
+
+.volume-icon-container {
+  position: relative;
+  width: 1.5rem; //25px
+  height: 1.5rem; //25px
+  background: var(--base-lluvia, #F7FAF9);
+  border-radius: 9px;
+  // text-align: center;
+  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.20);
+}
+
+.volume-icon-container-greyed-out {
+  position: relative;
+  width: 1.5rem; //25px
+  height: 1.5rem; //25px
+  border-radius: 9px;
+  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.20);
+  background: var(--base-hover-highlight, rgba(255, 255, 255, 0.12));
+}
+
+.volume-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  size: 10rem;
+}
+
+.card-content-md p.fabrica-text1-spanish {
+  color: var(--base-suelo, #000);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 1.5rem; // 25.159px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 27.675px */
+}
+
+.card-content-md p.fabrica-text2-english {
+  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  text-align: center;
+  font-family: Outfit;
+  font-size: 1.5rem; //25.159px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 27.675px */
+}
+
+
+// story page 2
+
+.story-page-2-main-card {
+  width: 70%; //995px;
+  // height: 40%; //px;
+  border-radius: 40px;
+  background: var(--base-nube, #FFF);
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}

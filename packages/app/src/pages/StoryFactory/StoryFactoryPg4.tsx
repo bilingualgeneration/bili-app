@@ -3,8 +3,12 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonCol,
   IonGrid,
+  IonHeader,
   IonRow,
   IonText,
 } from '@ionic/react';
@@ -14,64 +18,56 @@ import JuegoCard from '@/components/StoryFactory/JuegoCard';
 
 const StoryFactoryPage4: React.FC = () => (
     <>
-        <IonGrid>
-            <IonRow className='rectangle-header'>
-                <IonCol size="1" offset="2.5" class="ion-no-padding"> 
-                   <IonText>
-                        <h1 id='story-juego-title'>Juego</h1>
-                        <p id='story-juego-title2'>Play</p>
-                    </IonText>
+        <IonGrid class="ion-no-padding">
+            <IonRow>
+                <IonCol>
+                    <div className="rectangle-header">
+                        {/* Semi-Transparent Overlay for Rectangle Header */}
+                        <div className='rectangle-header-text'>
+                            <h1 id='story-juego-title'>Juego</h1>
+                            <p id='story-juego-title2'>Play</p>
+                        </div>
+                        <div className="rectangle-header-semi-transparent-overlay"></div>    
+                    </div>
                 </IonCol>
             </IonRow>
-               
-            <IonRow className='juego-divider'></IonRow>
-            <IonRow className="ion-justify-content-center ion-align-items-center">
-                <IonCard className='juego-card'>
-                    <div className='juego-content-container'>
+        </IonGrid>
+
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <IonCard className='juego-fabrica-de-cuentos-main-card'>
+                <IonCardContent className='juego-fabrica-de-cuentos-card-content'>
+                    <IonGrid class="ion-no-padding">
                         <IonRow>
                             <IonCol>
-                                <IonText>
-                                    <h1 id='story-juego-fabrica-es'> ¡Fábrica de cuentos! </h1>
-                                    <h3 id='story-factory-en'> Story factory </h3>
-                                </IonText>
+                                <IonCardHeader className='fabrica-de-cuentos-header'>
+                                    <IonCardTitle style={{  textAlign: 'left' }}>
+                                        <div id='story-juego-fabrica-es'> ¡Fábrica de cuentos! </div>
+                                    </IonCardTitle>
+
+                                    <IonCardSubtitle>
+                                        <div id='story-factory-en'> Story factory </div>
+                                    </IonCardSubtitle>       
+                                </IonCardHeader>
                             </IonCol>
                         </IonRow>
-                        <IonRow>
-                            <IonCol class="ion-no-padding" size="4">
-                                <JuegoCard backgroundImage='/assets/img/card_image.png' isLocked={false}>
-                                    <IonText>
-                                        <p className="title">Paquete 1</p>
-                                    </IonText>
-                                    <IonText>
-                                        <p className="subtitle">Pack 1</p>
-                                    </IonText>
-                                </JuegoCard>
+                    
+                        <IonRow class="ion-justify-content-center">
+                            <IonCol>
+                                <JuegoCard storyId='5' backgroundImage='./assets/img/card_image.png' isLocked={false} isSpanishBilingual={true} packNumber={1}/>
                             </IonCol>
-                            <IonCol class="ion-no-padding" size="4">
-                                <JuegoCard backgroundImage='/assets/img/card_image2.png' isLocked={true}>
-                                    <IonText>
-                                        <p className="title">Paquete 2</p>
-                                    </IonText>
-                                    <IonText>
-                                        <p className="subtitle">Pack 1</p>
-                                    </IonText>
-                                </JuegoCard>
+                                
+                            <IonCol>
+                                <JuegoCard backgroundImage='/assets/img/card_image2.png' isLocked={true} isSpanishBilingual={true} packNumber={2}/>
                             </IonCol>
-                            <IonCol class="ion-no-padding" size="4">
-                                <JuegoCard backgroundImage='/assets/img/card_image3.png' isLocked={true}>
-                                    <IonText>
-                                        <p className="title">Paquete 3</p>
-                                    </IonText>
-                                    <IonText>
-                                        <p className="subtitle">Pack 1</p>
-                                    </IonText>
-                                </JuegoCard>
+
+                            <IonCol>
+                                <JuegoCard backgroundImage='/assets/img/card_image3.png' isLocked={true} isSpanishBilingual={true} packNumber={3}/>  
                             </IonCol>
                         </IonRow>
-                    </div>
-                </IonCard>
-            </IonRow>
-        </IonGrid>
+                    </IonGrid>
+                </IonCardContent>
+            </IonCard>
+        </div>
     </>
 );
   
