@@ -32,6 +32,16 @@
   "signUp.parent2": "I want to use this app with my child(ren).",
   "signUp.continue": "Continue",
 
+  "signUp.pricing_monthly_title": "1 month unlimited",
+  "signUp.pricing_monthly_pricing": "$4.99/month",
+  "signUp.pricing_annual_title": "12 months unlimited",
+  "signUp.pricing_annual_pricing": "$44.99/year",
+
+  "signUp.choose_plan": "Choose your plan",
+  "signUp.trial_title": "3 week free trial",
+  "signUp.trial_description": "For a limited time only",
+  "signUp.no_commitment": "No commitments, cancel anytime.",
+
   "signUpTeacher.name": "Your full name*",
   "signUpTeacher.email": "Your email address*",
   "signUpTeacher.school": "Your school name*",

@@ -11,6 +11,7 @@ import {
   LanguageInclusivitySelect,
   LanguageModeSelect,
   ParentAccountCredentials,
+  Pricing,
   TeacherAbout,
   TeacherAccountCredentials,
 } from "@/pages/SignUp";
@@ -74,8 +75,16 @@ export const SignUp: React.FC = () => {
 
             <SwiperSlide
               className="ion-padding-top"
-              data-testid="language-mode-slide"
+              data-testid="role-select-slide"
               data-progress-percent={0.6}
+            >
+              <Pricing />
+            </SwiperSlide>
+
+            <SwiperSlide
+              className="ion-padding-top"
+              data-testid="language-mode-slide"
+              data-progress-percent={0.7}
             >
               <LanguageModeSelect />
             </SwiperSlide>

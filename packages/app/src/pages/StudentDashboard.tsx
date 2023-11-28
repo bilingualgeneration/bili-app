@@ -57,7 +57,7 @@ export const StudentDashboard: React.FC = () => {
             <IonRow>
               <IonCol className="col-custom-position-1">
                 <IconWithText
-                  title={"¡fábrica de cuentos!"}
+                  title={"¡Fábrica de cuentos!"}
                   subtitle={"Story Factory"}
                   url="/story-factory/1"
                   icon={<MeGustaIcon />}
@@ -66,31 +66,31 @@ export const StudentDashboard: React.FC = () => {
               </IonCol>
               <IonCol className="col-custom-position-2">
                 <IconWithText
-                  title={"Bienestar"}
-                  subtitle={"Wellness"}
+                  title={"Afirmaciones de uno mismo"}
+                  subtitle={"Affirmations of self"}
                   icon={<BieneStarIcon />}
                   iconBackgroundColor="#AC217B"
                 />
               </IonCol>
               <IonCol className="col-custom-position-3">
                 <IconWithText
-                  title={"Arte"}
-                  subtitle={"Art"}
-                  icon={<ArteIcon />}
-                  iconBackgroundColor="#0045A1"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-4">
-                <IconWithText
-                  title={"Comunidad"}
-                  subtitle={"Community"}
+                  title={"¿Qué harías?"}
+                  subtitle={"What would you do?"}
                   icon={<ComunidadIcon />}
                   iconBackgroundColor="#F0091B"
                 />
               </IonCol>
+              <IonCol className="col-custom-position-4">
+                <IconWithText
+                  title={"Auto retrato"}
+                  subtitle={"Self-portrait"}
+                  icon={<ArteIcon />}
+                  iconBackgroundColor="#0045A1"
+                />
+              </IonCol>
               <IonCol className="col-custom-position-5">
                 <IconWithText
-                  title={"STEM"}
+                  title={"CTIM"}
                   subtitle={"STEM"}
                   icon={<StemIcon />}
                   iconBackgroundColor="#8FB8FA"
