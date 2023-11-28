@@ -1,8 +1,19 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const userSchema = z.object({
-    email: z.string().email(),
-    password: z.string()
-	       .max(32)
-	       .min(8)
+  email: z.string().email(),
+  password: z.string().max(32).min(8),
+});
+
+export const profileSchema = z.object({
+  name: z.string(),
+  language: z.enum(["es"]),
+  role: z.enum(["parent", "student", "teacher"]),
+  schoolName: z.string(),
+  grades: z.string(),
+  schoolRole: z.string(),
+  plan: z.string(),
+  planExpiration: z.date(),
+  isInclusive: z.boolean(),
+  isImmersive: z.boolean(),
 });

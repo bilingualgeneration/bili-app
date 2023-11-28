@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use "sass:math";
 
 /* 
   .swiper-slides apply text-align: center
@@ -6,85 +6,85 @@
 */
 
 @font-face {
-  font-family: 'Outfit';
-  src: url('/assets/fonts/Outfit-VariableFont_wght.ttf');
-  font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
-  font-style: normal;  // Specify 'italic' if it's an italic font style
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit-VariableFont_wght.ttf");
+  // font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
+  // font-style: normal;  // Specify 'italic' if it's an italic font style
 }
 
-html{
-    background-color: #D3EAE8;
-    --ion-font-family: 'Outfit';
+html {
+  background-color: #d3eae8;
+  --ion-font-family: "Outfit";
 }
 
 ion-content {
-    --background: url('/assets/img/background.png') no-repeat center center / cover;
+  --background: url("/assets/img/background.png") no-repeat center center /
+    cover;
 }
 
 .swiper-slide > * {
   text-align: initial;
 }
 
-#header{
-    ion-toolbar{
-	--background: transparent url('/assets/img/logo_small.png') center/auto 70% no-repeat;
-	padding-left: 1rem;
-	padding-right: 1rem;
-    }
+#header {
+  ion-toolbar {
+    --background: #ffffff url("/assets/img/logo_small.png") center/auto 70%
+      no-repeat;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
-ion-progress-bar{
-    $ionProgressBarHeight: 12px;
-    height: $ionProgressBarHeight;
-    border-radius: math.div($ionProgressBarHeight, 2);
+ion-progress-bar {
+  $ionProgressBarHeight: 12px;
+  height: $ionProgressBarHeight;
+  border-radius: math.div($ionProgressBarHeight, 2);
 }
-
 
 ion-button {
-    // --box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
-    $paddingY: 23px;
-    --padding-bottom: #{$paddingY};
-    --padding-top: #{$paddingY};
-    font-weight: bold;
-    font-size: 1rem;
-  //  margin: 24px;
-    text-transform: none;
+  //--box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+  $paddingY: 23px;
+  --padding-bottom: #{$paddingY};
+  --padding-top: #{$paddingY};
+  font-weight: bold;
+  font-size: 1rem;
+  //    margin: 24px;
+  text-transform: none;
 
-    &:not([shape=round]){
-	--border-radius: 0.75rem;
-    }
-    
-    &.button-disabled{
-	--background: var(--ion-color-secondary);
-	--color: var(--ion-color-secondary-contrast);
-	opacity: 1;
-    }
+  &:not([shape="round"]) {
+    --border-radius: 0.75rem;
+  }
+
+  &.button-disabled {
+    --background: var(--ion-color-secondary);
+    --color: var(--ion-color-secondary-contrast);
+    opacity: 1;
+  }
 }
-
-
 
 ion-label {
-    color: var(--text-secondary);
-    font-size: 16px;
-    font-family: Outfit;
-    font-weight: 500;
-    line-height: 125%;
-    letter-spacing: 0.48px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-family: Outfit;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: 0.48px;
 }
 
- 
 ion-card-title {
-    color: var(--Base-Suelo);
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 120%; /* 28.8px */
-    letter-spacing: 0.2px;
+  color: var(--Base-Suelo);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 120%; /* 28.8px */
+  letter-spacing: 0.2px;
 }
 
 ion-card-content {
   color: var(--greyscale-900, #212121);
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   /* Paragraph/text-sm/[R] */
   font-family: Outfit;
   font-size: 14px;
@@ -93,44 +93,52 @@ ion-card-content {
   line-height: 20px; /* 142.857% */
 }
 
-
 //styles for input fields
-.input-label-placement-above{
-    color: var(--ion-color-medium);
+.input-label-placement-above {
+  color: var(--ion-color-medium);
 }
 
-ion-input{
-    &.input-fill-outline {
-	font-weight: bold;
-	--padding-start: 20px;
-	--padding-end: 20px;
-	// todo: convert #E7E9E9 into color system
-	// problem arises when trying to stack with border-color
-	--background: #E7E9E9;
-	--border-width: 0.25rem !important;
-	--border-color: #E7E9E9 !important;
-	--border-radius: 0.75rem !important;
-	// todo: highlight-color-focused gives a different color than expected
-	// --highlight-color-focused: var(--Base-Selva);
+ion-input {
+  &.input-fill-outline {
+    font-weight: bold;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    // todo: convert #E7E9E9 into color system
+    // problem arises when trying to stack with border-color
+    --background: #e7e9e9;
+    --border-width: 0.25rem !important;
+    --border-color: #e7e9e9 !important;
+    --border-radius: 0.75rem !important;
+    // todo: highlight-color-focused gives a different color than expected
+    // --highlight-color-focused: var(--Base-Selva);
 
-	&.has-focus {
-	    --background: var(--Cielo-Highest);
-	    // todo: cannot use --highlight-color-focused because of issue above
-	    --border-color: var(--Base-Selva)  !important;
-	}
+    &.has-focus {
+      --background: var(--Cielo-Highest);
+      // todo: cannot use --highlight-color-focused because of issue above
+      --border-color: var(--Base-Selva) !important;
     }
+  }
 }
 
-ion-text{
-    h1{
-	font-size: 2rem !important;
-	font-weight: bold !important;
-    }
+ion-text {
+  h1 {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+  }
 
-    h2{
-	font-weight: bold !important;
-	font-size: 1.25rem !important;
-    }
+  h2 {
+    font-weight: bold !important;
+    font-size: 1.25rem !important;
+  }
+}
+
+h4 {
+  color: #fff;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 }
 
 /*
@@ -146,15 +154,15 @@ ion-text h1{
 // JC: temporarily disabled this since it was interfering with swiperjs
 
 ion-card {
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    justify-content: center;
-    align-items: stretch;
-    gap: 24px;
-    margin-bottom: 16px;
-    box-shadow: none;
-    border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  margin-bottom: 16px;
+  box-shadow: none;
+  border-radius: 1rem;
 }
 
 //styles for the radio-button
@@ -163,7 +171,7 @@ ion-card {
   box-shadow: 0 0 0 3px var(--base-agua, rgba(0, 106, 103, 0.12));
 }
 
-.active ion-card{
+.active ion-card {
   --background: var(--Cielo-Highest);
   box-shadow: 0 0 0 3px var(--Base-Selva);
 }
@@ -180,11 +188,10 @@ ion-card {
   width: 75px;
   height: 75px;
   flex-shrink: 0;
-  border-radius: 50%; 
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .card-inner {
@@ -209,12 +216,12 @@ ion-card {
   /* Layout properties */
   // align-items: center;
   // justify-content: flex-start;
-  height: auto; //740px; 
+  height: auto; //740px;
   flex-shrink: 0;
   // margin: auto;
   margin-top: 5%;
   margin-bottom: 5%;
-  
+
   // display: flex;
   // max-width: 100%;
   width: 60%; //60vw;
@@ -225,7 +232,7 @@ ion-card {
 
   /* Style properties */
   border-radius: 36px;
-  background: var(--base-nube, #FFF);
+  background: var(--base-nube, #fff);
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -253,8 +260,8 @@ ion-button.story-button {
 
   /* Style properties */
   border-radius: 105.63px;
-  background: var(--cielo-cielo, #D3EAE8);
-  box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.20);
+  background: var(--cielo-cielo, #d3eae8);
+  box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
 }
 
 .story-intro-button-container {
@@ -298,7 +305,9 @@ ion-button.story-button {
 #story-bienvenidos {
   width: auto;
   color: var(--base-suelo, #000);
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   font-family: Outfit;
   font-size: 4rem; //64px;
   font-style: normal;
@@ -309,8 +318,10 @@ ion-button.story-button {
 
 #story-fabrica {
   width: 600px; //37.5rem
-  color: var(--habanero-habanero, #FF5708);
-  font-feature-settings: 'clig' off, 'liga' off;
+  color: var(--habanero-habanero, #ff5708);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   font-family: Outfit;
   font-size: 4rem; //64px;
   font-style: normal;
@@ -331,7 +342,7 @@ ion-button.story-button {
 
 #story-fact {
   align-self: stretch;
-  color: var(--habanero-habanero, #FF5708);
+  color: var(--habanero-habanero, #ff5708);
   font-family: Outfit;
   font-size: 2rem; //32px;
   font-style: normal;
@@ -409,7 +420,7 @@ ion-button.story-button {
   width: 55vw; //1093px; //68.313rem
   color: var(--greyscale-900, #212121);
   font-family: Outfit;
-  font-size: 2.5rem; // 4vh; //40px; 
+  font-size: 2.5rem; // 4vh; //40px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 44px */
@@ -418,7 +429,7 @@ ion-button.story-button {
 
 #story-factory-en {
   width: 37vw; //367px; //22.938rem
-  color: #1C1C17;
+  color: #1c1c17;
   font-family: Outfit;
   font-size: 1.25rem; //2vh; //20px;
   font-style: normal;
@@ -445,7 +456,7 @@ ion-button.story-button {
   width: 100%;
   height: 16vh; //156px;
   flex-shrink: 0;
-  background: var(--habanero-habanero, #FF5708);
+  background: var(--habanero-habanero, #ff5708);
   align-items: center;
   justify-content: left;
   display: flex;
@@ -457,7 +468,9 @@ ion-button.story-button {
   width: 100%;
   height: 100%;
   mix-blend-mode: multiply;
-  background: url('./src/assets/icons/orange_rectangle_header_overlay.svg'), lightgray -2012.453px 0px / 668.067% 100% no-repeat;
+  background:
+    url("./src/assets/icons/orange_rectangle_header_overlay.svg"),
+    lightgray -2012.453px 0px / 668.067% 100% no-repeat;
 }
 
 .rectangle-header-text {
@@ -465,7 +478,7 @@ ion-button.story-button {
   margin-left: 7%;
 }
 
-.juego-divider{
+.juego-divider {
   height: 5vh; //50px;
 }
 
@@ -479,7 +492,7 @@ ion-button.story-button {
   align-items: center;
   gap: 2.5vh; //24px;
   border-radius: 35.942px;
-  background: var(--base-nube, #FFF);
+  background: var(--base-nube, #fff);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -496,13 +509,145 @@ ion-button.story-button {
   }
 }
 
+//styles for the home-landing-page
+
+.background-pattern {
+  background-image: url("/assets/img/background_pattern_lp.png");
+  background-color: #fff8f0;
+  padding: 20px;
+}
+
+.wave-icons {
+  background-image: url("/assets/img/wave_100.png");
+  background-repeat: no-repeat;
+  text-align: -webkit-center;
+  margin-bottom: 108px;
+}
+
+#student-landing-page {
+  .col-custom-position-1 {
+    position: relative;
+    top: 10px;
+  }
+
+  .col-custom-position-2 {
+    position: relative;
+    bottom: 20px;
+  }
+
+  .col-custom-position-3 {
+    position: relative;
+    top: 20px;
+  }
+
+  .col-custom-position-4 {
+    position: relative;
+    top: 40px;
+  }
+
+  .col-custom-position-5 {
+    position: relative;
+    top: 10px;
+  }
+}
+
+.stories-card {
+  margin-left: 8px;
+  margin-right: 8px;
+  position: relative;
+  border-radius: 12px;
+  flex: 0 0 auto;
+}
+
+.stories-card-image {
+  width: 200px;
+  height: 274px;
+}
+
+.other-card-image {
+  width: 320px;
+  height: 274px;
+}
+
+.stories-card-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.stories-card-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.stories-card-footer p {
+  color: #fff;
+  /* Body */
+  font-family: Work Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.26px;
+  margin-top: 0;
+}
+
+.oval-element-small {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-title h2 {
+  color: #1c1c17;
+  font-family: Outfit;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.cards-title p {
+  color: #1c1c17;
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  margin-top: auto;
+}
+
 #story-juego-title {
   margin: 0px;
   padding: 2%;
   width: 38vw; //381px;
-  color: #FFF;
+  color: #fff;
   font-family: Outfit;
   font-size: 3rem; //4.5vh; //48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 52.8px */
+}
+
+.cards-title h1 {
+  color: #1c1c17;
+  font-family: Outfit;
+  font-size: 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 52.8px */
@@ -512,7 +657,7 @@ ion-button.story-button {
   margin: 0px;
   padding: 2%;
   width: 36vw; //367px;
-  color: #FFF;
+  color: #fff;
   font-family: Outfit;
   font-size: 1.5rem; //2.5vh; //24px;
   font-style: normal;
@@ -531,7 +676,7 @@ ion-button.story-button {
   // align-items: flex-start;
   flex-shrink: 0;
   border-radius: 12px;
-  background: #FDCB04;
+  background: #fdcb04;
   box-shadow: 0px 4px 60px 0px rgba(4, 6, 15, 0.05);
 }
 
@@ -545,7 +690,7 @@ ion-button.story-button {
   align-items: center;
   gap: 24px;
   border-radius: 35.942px;
-  background: var(--base-nube, #FFF);
+  background: var(--base-nube, #fff);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -578,21 +723,23 @@ ion-button.story-button {
 
 #fabrica-header-text {
   text-align: center;
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   font-family: Outfit;
   font-size: 5rem; //8.6vh; //86.26px;
   font-style: normal;
   font-weight: 700;
   line-height: 5rem; //3vh; //28.753px; /* 33.333% */
-  letter-spacing: -.1vh; //-0.899px;
-  color: var(--greyscale-900, #212121)
+  letter-spacing: -0.1vh; //-0.899px;
+  color: var(--greyscale-900, #212121);
 }
 
 // felicitaciones page
 
 .felicitaciones-card {
   display: flex;
-  width:  57vw; //1147px;
+  width: 57vw; //1147px;
   height: 50vh; //494.5px;
   padding: 24px;
   flex-direction: column;
@@ -600,26 +747,28 @@ ion-button.story-button {
   gap: 24px;
   flex-shrink: 0;
   border-radius: 35.942px;
-  background: var(--base-selva, #006A67);
+  background: var(--base-selva, #006a67);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
-  margin: auto;  
+  margin: auto;
 }
 
 .felicitaciones-title {
   width: 30vw; //600px;
-  color: var(--base-nube, #FFF);
-  font-feature-settings: 'clig' off, 'liga' off;
+  color: var(--base-nube, #fff);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
   font-family: Outfit;
   font-size: 4rem; //64px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 70.4px */
-  letter-spacing: -.125rem; //-2px;
+  letter-spacing: -0.125rem; //-2px;
 }
 
 .felicitaciones-subtitle {
   align-self: stretch;
-  color: var(--cielo-cielo, #D3EAE8);
+  color: var(--cielo-cielo, #d3eae8);
   font-family: Outfit;
   font-size: 2.5rem; //40px;
   font-style: normal;
@@ -629,7 +778,7 @@ ion-button.story-button {
 
 #congrats-text-bold {
   align-self: stretch;
-  color: var(--base-nube, #FFF);
+  color: var(--base-nube, #fff);
   font-family: Outfit;
   font-size: 2rem; //32px;
   font-style: normal;
@@ -639,7 +788,7 @@ ion-button.story-button {
 
 #congrats-text-reg {
   align-self: stretch;
-  color: var(--cielo-cielo, #D3EAE8);
+  color: var(--cielo-cielo, #d3eae8);
   font-family: Outfit;
   font-size: 1.5rem; //24px;
   font-style: normal;
@@ -656,8 +805,8 @@ ion-button.story-button {
   justify-content: center;
   // align-items: center; commented these out bc they weren't doing anything
   // --border-radius: 94.913px;
-  --background: var(--cielo-cielo, #D3EAE8);
-  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.20);
+  --background: var(--cielo-cielo, #d3eae8);
+  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
 }
 
 .sigue-button-es {
@@ -705,19 +854,19 @@ ion-button.story-button {
   text-align: left;
 }
 
-.individual-juego-card .game-icon-container{
+.individual-juego-card .game-icon-container {
   position: absolute;
   top: 5%;
   left: 5%;
   background-position: center;
-  background-color: #F17130;
+  background-color: #f17130;
   border-radius: 100%;
-  padding: .5vh;
+  padding: 0.5vh;
   font-size: 1rem;
   color: white;
 }
 
-.individual-juego-card .heart-icon-container{
+.individual-juego-card .heart-icon-container {
   position: absolute;
   bottom: 5%;
   right: 5%;
@@ -726,7 +875,7 @@ ion-button.story-button {
 }
 
 .individual-juego-card.locked::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -742,6 +891,25 @@ ion-button.story-button {
   transform: translate(-50%, -50%);
 }
 
+.stories-card .lock-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  /* Adjust size as needed */
+}
+
+.cards-title {
+  margin-top: 48px;
+  margin-bottom: 46px;
+}
+
+.stories-card.locked {
+  position: relative;
+  filter: brightness(50%);
+}
+
 .lock-icon {
   font-size: 3rem;
   color: white;
@@ -749,7 +917,7 @@ ion-button.story-button {
 
 .juego-card-content-component {
   position: relative;
-  
+
   p.title {
     font-size: 1.5rem; //2.5vh; //24px;
     font-weight: bold;
@@ -810,16 +978,16 @@ ion-button.story-button {
   height: 14.5rem; //23.5vh;
   justify-content: center;
   align-items: center;
-  background-color: var(--base-humo, #ECEEED);
+  background-color: var(--base-humo, #eceeed);
 }
 
-.fabrica-swirl-rectangle{
+.fabrica-swirl-rectangle {
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
-.fabrica-rectangle{
+.fabrica-rectangle {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -829,21 +997,22 @@ ion-button.story-button {
   transform: scaleX(-1);
 }
 
-.polygon-up{
+.polygon-up {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.40)) drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
+    drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
 }
 
 .volume-icon-container {
   position: relative;
   width: 1.5rem; //25px
   height: 1.5rem; //25px
-  background: var(--base-lluvia, #F7FAF9);
+  background: var(--base-lluvia, #f7faf9);
   border-radius: 9px;
   // text-align: center;
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.20);
+  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
 }
 
 .volume-icon-container-greyed-out {
@@ -851,7 +1020,7 @@ ion-button.story-button {
   width: 1.5rem; //25px
   height: 1.5rem; //25px
   border-radius: 9px;
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.20);
+  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
   background: var(--base-hover-highlight, rgba(255, 255, 255, 0.12));
 }
 
@@ -883,13 +1052,12 @@ ion-button.story-button {
   line-height: 110%; /* 27.675px */
 }
 
-
 // story page 2
 
 .story-page-2-main-card {
   width: 70%; //995px;
   // height: 40%; //px;
   border-radius: 40px;
-  background: var(--base-nube, #FFF);
+  background: var(--base-nube, #fff);
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
 }

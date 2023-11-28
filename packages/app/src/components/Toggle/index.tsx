@@ -1,2 +1,2 @@
-export * from './Toggle';
-export type * from './Toggle';
+export * from "./Toggle";
+export type * from "./Toggle";

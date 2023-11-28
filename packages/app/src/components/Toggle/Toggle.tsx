@@ -1,71 +1,67 @@
-import {JSX} from 'react';
-import {
-    Control,
-    Controller
-} from 'react-hook-form';
-import {IonToggle} from '@ionic/react';
+import { JSX } from "react";
+import { Control, Controller } from "react-hook-form";
+import { IonToggle } from "@ionic/react";
 
 export type IonToggleProps = {
-    alignment: 'center' | 'start',
-    checked: boolean,
-    color: 'danger'
-	 | 'dark'
-	 | 'light'
-	 | 'medium'
-	 | 'primary'
-	 | 'secondary'
-	 | 'success'
-	 | 'tertiary'
-	 | 'warning'
-	 | string
-	 | undefined,
-    disabled: boolean,
-    enableOnOffLabels: boolean | undefined,
-    justify: 'end' | 'space-between' | 'start',
-    labelPlacement: 'fixed' | 'floating' | 'stacked' | undefined,
-    legacy: boolean | undefined,
-    mode: 'ios' | 'md',
-    name: string,
-    value: null | string | undefined
+  alignment: "center" | "start";
+  checked: boolean;
+  color:
+    | "danger"
+    | "dark"
+    | "light"
+    | "medium"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "tertiary"
+    | "warning"
+    | string
+    | undefined;
+  disabled: boolean;
+  enableOnOffLabels: boolean | undefined;
+  justify: "end" | "space-between" | "start";
+  labelPlacement: "fixed" | "floating" | "stacked" | undefined;
+  legacy: boolean | undefined;
+  mode: "ios" | "md";
+  name: string;
+  value: null | string | undefined;
 };
 
 export type ToggleAdditionalProps = {
-    control: Control<any>,
-    label: string,
-    testId: string | undefined
-}
+  control: Control<any>;
+  label: string;
+  testId: string | undefined;
+};
 
-export type ToggleProps = Partial<IonToggleProps>
-			& Partial<ToggleAdditionalProps>
-			& Pick<IonToggleProps, 'name'>
-			& Pick<ToggleAdditionalProps, 'control'>;
+export type ToggleProps = Partial<IonToggleProps> &
+  Partial<ToggleAdditionalProps> &
+  Pick<IonToggleProps, "name"> &
+  Pick<ToggleAdditionalProps, "control">;
 
 export const Toggle = ({
-    control,
-    label,
-    ...props
+  control,
+  label,
+  ...props
 }: ToggleProps): JSX.Element => {
-    return (
-	<>
-	    <Controller
-	    	name={props.name}
-		control={control}
-		render={({
-		field: {
-		onChange,
-		onBlur,
-		...fields
-		},
-		}: any): JSX.Element => (
-		    <IonToggle
-		    {...fields}
-		    {...props}
-		    	onIonChange={(event) => {
-			    onChange(event.detail.checked);
-			}}>
-			{label}
-		    </IonToggle>
-		)} />
-	</>
-    );
+  return (
+    <>
+      <Controller
+        name={props.name}
+        control={control}
+        render={({
+          field: { onChange, onBlur, ...fields },
+        }: any): JSX.Element => (
+          <IonToggle
+            {...fields}
+            {...props}
+            onIonChange={(event) => {
+              onChange(event.detail.checked);
+            }}
+          >
+            {label}
+          </IonToggle>
+        )}
+      />
+    </>
+  );
 };
