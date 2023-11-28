@@ -207,7 +207,8 @@ ion-card {
 
 .juego-fabrica-de-cuentos-main-card {
   /* Layout properties */
-  justify-content: flex-start;
+  // align-items: center;
+  // justify-content: flex-start;
   height: auto; //740px; 
   flex-shrink: 0;
   // margin: auto;
@@ -216,7 +217,7 @@ ion-card {
   
   // display: flex;
   // max-width: 100%;
-  // width: 60%; //60vw;
+  width: 60%; //60vw;
   padding: 60px 24px;
   flex-direction: column;
   // align-items: center;
@@ -684,7 +685,7 @@ ion-button.story-button {
 
 /* JuegoCard Component */
 
-.kovu2{
+.individual-juego-card .en-pack-title2 {
   font-size: 1.5rem; //24px;
   font-weight: bold;
   color: white;
@@ -694,8 +695,8 @@ ion-button.story-button {
   text-align: left;
 }
 
-.kovu{
-  font-size: 1rem; //24px;
+.individual-juego-card .es-pack-title {
+  font-size: 2rem; //24px;
   font-weight: bold;
   color: white;
   position: absolute;
@@ -731,7 +732,7 @@ ion-button.story-button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black/grey overlay */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black/grey overlay */
 }
 
 .lock-icon-container {

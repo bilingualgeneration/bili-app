@@ -22,11 +22,11 @@ const StoryFactoryPage4: React.FC = () => (
             <IonRow>
                 <IonCol>
                     <div className="rectangle-header">
-                        {/* Semi-Transparent Overlay for Rectangle Header */}
                         <div className='rectangle-header-text'>
                             <h1 id='story-juego-title'>Juego</h1>
                             <p id='story-juego-title2'>Play</p>
                         </div>
+                        {/* Semi-Transparent Overlay for Rectangle Header */}
                         <div className="rectangle-header-semi-transparent-overlay"></div>    
                     </div>
                 </IonCol>
@@ -51,7 +51,7 @@ const StoryFactoryPage4: React.FC = () => (
                             </IonCol>
                         </IonRow>
                     
-                        <IonRow class="ion-justify-content-center">
+                        <IonRow class="ion-justify-content-center justify-content-between">
                             <IonCol>
                                 <JuegoCard storyId='5' backgroundImage='./assets/img/card_image.png' isLocked={false} isSpanishBilingual={true} packNumber={1}/>
                             </IonCol>

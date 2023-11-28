@@ -32,30 +32,24 @@ const JuegoCard: React.FC<JuegoCardProps> = ({
                 {/* Overlay for Unlocked Cards */}
                 {!isLocked && showOverlay && (
                     <div className="overlay">
-                    <div className="gradient-overlay"/>
+                        <div className="gradient-overlay"/>
                     </div>
                 )}
 
                 {/* Locked Icon */}
                 {isLocked && (
                     <div className="lock-icon-container">
-                    <IonIcon icon={lockClosedOutline} className="lock-icon"/>
+                        <IonIcon icon={lockClosedOutline} className="lock-icon"/>
                     </div>
                 )}
 
-                {/* Game controller outline in the upper left corner */}
                 {isSpanishBilingual ? (
                     <>
-                        
-                        <p className="kovu">Paquete {packNumber}</p>
-                        
-                        <p className="kovu2">Pack {packNumber}</p>
-                        
+                        <p className="es-pack-title">Paquete {packNumber}</p>
+                        <p className="en-pack-title2">Pack {packNumber}</p>
                     </>
                 ) : (
-                    
-                        <p className="title">Paquete {packNumber}</p>
-                    
+                        <p className="es-pack-title">Paquete {packNumber}</p>
                 )}
 
                 {/* Game container with outline in top left corner */}
