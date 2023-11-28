@@ -9304,7 +9304,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "functions@workspace:packages/server/functions"
   dependencies:
-    "@bili/schema": "workspace:^"
     "@typescript-eslint/eslint-plugin": "npm:^5.12.0"
     "@typescript-eslint/parser": "npm:^5.12.0"
     eslint: "npm:^8.9.0"
