@@ -14,6 +14,7 @@ type IconWithTextProps = {
   icon?: React.ReactNode;
   iconBackgroundColor: string;
   margin_bottom?: string;
+  url?: string;
 };
 
 export const IconWithText: React.FC<IconWithTextProps> = ({
@@ -22,6 +23,7 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
   iconBackgroundColor,
   title,
   margin_bottom,
+  url,
 }) => {
   return (
     <>
@@ -30,7 +32,7 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
           className="oval-element"
           style={{ backgroundColor: iconBackgroundColor }}
         >
-          {icon}
+          {url ? <a href={url}>{icon}</a> : icon}
         </div>
         <div className="">
           <div

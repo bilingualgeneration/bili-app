@@ -7,12 +7,18 @@ import { Loading } from "@/pages/Loading";
 import React, { useEffect, useState } from "react";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "./layouts/Authed";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "./pages/games/Intruder";
+import IntroPage1 from "./pages/StoryFactory/StoryFactoryPg1";
+import IntroPage2 from "./pages/StoryFactory/StoryFactoryPg2";
+import IntroPage3 from "./pages/StoryFactory/StoryFactoryPg3";
+import StoryFactoryPage4 from "./pages/StoryFactory/StoryFactoryPg4";
+import StoryFactoryPage5 from "./pages/StoryFactory/StoryFactoryPg5";
+import StoryFactoryPage6 from "./pages/StoryFactory/StoryFactoryPg6";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "./pages/Login";
@@ -22,7 +28,6 @@ import ResetPassword from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
 import Stories from "./pages/games/Stories";
-import StoryFactory from "./pages/games/StoryFactory";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
@@ -146,13 +151,65 @@ const Router: React.FC = () => {
           )}
         />
 
+        {/* This is just temporary while creating pages */}
+
         <Route
           exact
-          path="/story-factory"
+          path="/story-factory/1"
           render={() => (
-            <UnauthedLayout>
-              <StoryFactory />
-            </UnauthedLayout>
+            <AuthedLayout>
+              <IntroPage1 currentPage={1} />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/2"
+          render={() => (
+            <AuthedLayout>
+              <IntroPage2 currentPage={2} />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/3"
+          render={() => (
+            <AuthedLayout>
+              <IntroPage3 currentPage={3} />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/4"
+          render={() => (
+            <AuthedLayout>
+              <StoryFactoryPage4 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/5"
+          render={() => (
+            <AuthedLayout>
+              <StoryFactoryPage5 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/6"
+          render={() => (
+            <AuthedLayout>
+              <StoryFactoryPage6 />
+            </AuthedLayout>
           )}
         />
 

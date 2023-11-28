@@ -57,8 +57,9 @@ export const StudentDashboard: React.FC = () => {
             <IonRow>
               <IonCol className="col-custom-position-1">
                 <IconWithText
-                  title={"¡Me gusta como soy!"}
-                  subtitle={"I like myself!"}
+                  title={"¡fábrica de cuentos!"}
+                  subtitle={"Story Factory"}
+                  url="/story-factory/1"
                   icon={<MeGustaIcon />}
                   iconBackgroundColor="#006A67"
                 />

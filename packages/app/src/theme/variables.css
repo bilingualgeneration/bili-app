@@ -4,6 +4,9 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 
 :root {
+  /** color names - FP **/
+  --Arena-Arena: #fbf2e2;
+  --Habanero-Habanero: #ff5708;
   /** color names **/
   --Arena-High: #eee8de;
   --Base-Barro: #889391;

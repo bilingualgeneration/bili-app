@@ -166,7 +166,6 @@ const Login: React.FC = () => {
                 />
               </IonButton>
             </div>
-
             <div className="ion-text-center ion-margin-top">
               <IonText color="medium">
                 <FormattedMessage
