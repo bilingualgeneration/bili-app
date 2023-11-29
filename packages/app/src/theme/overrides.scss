@@ -214,6 +214,7 @@ ion-card {
 
 .juego-fabrica-de-cuentos-main-card {
   margin-top: 4rem;
+  border-radius: 35.942px;
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -386,7 +387,6 @@ ion-button.story-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 44px */
-  padding-inline: 2%;
 }
 
 #story-factory-en {
@@ -397,7 +397,6 @@ ion-button.story-intro-button {
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 22px */
-  padding-inline: 2%;
 }
 
 /*
@@ -417,7 +416,7 @@ ion-button.story-intro-button {
 
 .rectangle-header {
   position: relative;
-  width: 100%;
+  max-width: 100%;
   height: 16vh; //156px;
   flex-shrink: 0;
   background: var(--habanero-habanero, #ff5708);
@@ -925,10 +924,12 @@ ion-button.story-intro-button {
 
 /* individual fabrica word cards */
 
-.mini-fabrica-card {
-  width: 100%;
-  height: 14.5rem; //23.5vh;
-  background-color: var(--base-humo, #eceeed);
+.mini-fabrica-card-page-3 {
+  // width: 100%;
+  // height: 14.5rem; //23.5vh;
+  margin-left: 3%;
+  margin-bottom: 3%;
+  // background-color: var(--base-humo, #eceeed);
 }
 
 .fabrica-swirl-rectangle {
@@ -1006,8 +1007,19 @@ ion-button.story-intro-button {
 
 .story-page-2-main-card {
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
 }
 
 .story-page-2-main-card.story-page-3-main-card {
-  height: 978px;
+  height: 100%; //98vh; //978px;
+  position: relative;
+}
+
+.bili-character {
+  max-width: 50%;
+  height: auto;
+  position: absolute;
+  top: 29%; /* Moves the character DOWN */
+  left: 64%; /* Moves the character RIGHT (neg # moves character left) */
+  z-index: 1; /* Ensures Bili Character is on top of card */
 }

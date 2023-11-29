@@ -34,10 +34,10 @@ const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
       >
         <IonCard className="story-page-2-main-card story-page-3-main-card">
           <IonGrid>
-            <IonRow class="ion-justify-content-center">
-              <IonCol>
+            <IonRow class="ion-justify-content-left">
+              <IonCol size="8.5">
                 <IonCardHeader className="story-header">
-                  <IonCardTitle style={{ textAlign: "left" }}>
+                  <IonCardTitle class="ion-text-left">
                     <div id="story-page-2-title">
                       {" "}
                       Esta es tu fábrica de cuentos. Puedes crear un cuento
@@ -58,7 +58,7 @@ const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
 
                 {/* mini Fabrica de cuentos card */}
 
-                <IonCol class="ion-text-center">
+                <IonCol>
                   <div className="mini-fabrica-card-page-3">
                     <img
                       src={miniFabricaCard}
@@ -70,17 +70,24 @@ const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
                 {/* end mini Fabrica de cuentos card */}
               </IonCol>
 
-              <IonCol size="4">
-                <img src={biliCharacter} alt="Bili character" />
-              </IonCol>
+              {/* <IonCol size="4">
+                <img className='bili-character' src={biliCharacter} alt="Bili character" />
+              </IonCol> */}
             </IonRow>
 
             <IonRow class="ion-justify-content-center">
-              <StoryFactoryButton currentPage={currentPage} />
+              <IonCol class="ion-text-center">
+                <StoryFactoryButton currentPage={currentPage} />
+              </IonCol>
             </IonRow>
           </IonGrid>
         </IonCard>
       </div>
+      <img
+        className="bili-character"
+        src={biliCharacter}
+        alt="Bili character"
+      />
     </>
   );
 };
