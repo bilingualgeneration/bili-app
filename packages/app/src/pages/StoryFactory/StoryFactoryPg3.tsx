@@ -15,6 +15,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import StoryFactoryButton from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import miniFabricaCard from "@/assets/icons/mini_fabrica_card.svg";
+import "./StoryFactory.css";
 
 interface IntroPage3Props {
   currentPage: number;
@@ -36,7 +37,7 @@ const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
           <IonGrid>
             <IonRow class="ion-justify-content-left">
               <IonCol size="8.5">
-                <IonCardHeader className="story-header">
+                <IonCardHeader style={{ padding: "5%" }}>
                   <IonCardTitle class="ion-text-left">
                     <div id="story-page-2-title">
                       {" "}

@@ -15,6 +15,7 @@ import {
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import JuegoCard from "@/components/StoryFactory/JuegoCard";
+import "./StoryFactory.css";
 
 const StoryFactoryPage4: React.FC = () => {
   const { isImmersive } = useProfile();

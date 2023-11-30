@@ -17,6 +17,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import FabricaCard from "@/components/StoryFactory/FabricaCard";
 import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
+import "./StoryFactory.css";
 
 // EVERYTHING THAT IS COMMENTED OUT CAN BE READDED ONCE USER PROFILE IS COMPLETE
 
