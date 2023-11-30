@@ -6,9 +6,10 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import {
+  ChildProfile,
   Complete,
-  RoleSelect,
   LanguageModeSelect,
+  RoleSelect,
   ParentAccountCredentials,
   Pricing,
   TeacherAbout,
@@ -43,51 +44,70 @@ export const SignUp: React.FC = () => {
             />
           </div>
           <Swiper allowTouchMove={false} onSlideChange={handleSlideChange}>
+            {/* 0 */}
             <SwiperSlide
               className="ion-padding-top"
               data-testid="role-select-slide"
               data-progress-percent={0.2}
             >
-              <RoleSelect teacherSlide={2} parentSlide={1} />
+              <RoleSelect teacherSlide={1} parentSlide={2} />
             </SwiperSlide>
-            <SwiperSlide
-              className="ion-padding-top"
-              data-testid="parent-account-credentials-slide"
-              data-progress-percent={0.4}
-            >
-              <ParentAccountCredentials nextSlide={4} previousSlide={0} />
-            </SwiperSlide>
-            <SwiperSlide
-              className="ion-padding-top"
-              data-testid="teacher-account-credentials-slide"
-              data-progress-percent={0.4}
-            >
-              <TeacherAccountCredentials previousSlide={0} />
-            </SwiperSlide>
+
+            {/* 1 */}
             <SwiperSlide
               className="ion-padding-top"
               data-testid="role-select-slide"
-              data-progress-percent={0.5}
+              data-progress-percent={0.4}
             >
-              <TeacherAbout nextSlide={4} />
+              <TeacherAbout nextSlide={3} />
             </SwiperSlide>
 
+            {/* 2 */}
+            <SwiperSlide
+              className="ion-padding-top"
+              data-testid="child-profile-slide"
+              data-progress-percent={0.4}
+            >
+              <ChildProfile nextSlide={3} />
+            </SwiperSlide>
+
+            {/* 3 */}
             <SwiperSlide
               className="ion-padding-top"
               data-testid="language-mode-slide"
               data-progress-percent={0.6}
             >
-              <LanguageModeSelect />
+              <LanguageModeSelect teacherSlide={5} parentSlide={4} />
             </SwiperSlide>
 
+            {/* 4 */}
+            <SwiperSlide
+              className="ion-padding-top"
+              data-testid="parent-account-credentials-slide"
+              data-progress-percent={0.8}
+            >
+              <ParentAccountCredentials nextSlide={6} previousSlide={0} />
+            </SwiperSlide>
+
+            {/* 5 */}
+            <SwiperSlide
+              className="ion-padding-top"
+              data-testid="teacher-account-credentials-slide"
+              data-progress-percent={0.8}
+            >
+              <TeacherAccountCredentials previousSlide={0} />
+            </SwiperSlide>
+
+            {/* 6 */}
             <SwiperSlide
               className="ion-padding-top"
               data-testid="role-select-slide"
-              data-progress-percent={0.8}
+              data-progress-percent={0.9}
             >
               <Pricing />
             </SwiperSlide>
 
+            {/* 7 */}
             <SwiperSlide
               className="ion-padding-top"
               data-testid="complete-slide"

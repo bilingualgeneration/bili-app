@@ -25,11 +25,21 @@ interface FabricaCardProps {
   position: number;
 }
 
-const speak = (text: string, lang: string) => {
-  const msg = new SpeechSynthesisUtterance();
-  msg.text = text;
-  msg.lang = lang;
-  window.speechSynthesis.speak(msg);
+const speak = (normalized_key: string, lang: string) => {
+  const path: string = `/assets/audio/${normalized_key}_${lang}.mp3`;
+  console.log(path);
+  const audio = new Audio(path);
+  audio.play();
+  /*
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = text;
+    msg.lang = lang;
+    window.speechSynthesis.speak(msg);
+    */
+};
+
+const normalize = (s: string): string => {
+  return s.toLowerCase().replace(/\s+/g, "_").replace(/\./g, "");
 };
 
 const FabricaCard: React.FC<FabricaCardProps> = ({
@@ -86,7 +96,7 @@ const FabricaCard: React.FC<FabricaCardProps> = ({
                   <IonCol class="ion-text-center">
                     <span
                       onClick={() => {
-                        speak(es, "es");
+                        speak(normalize(en), "es");
                       }}
                     >
                       <VolumeCard />
@@ -107,7 +117,7 @@ const FabricaCard: React.FC<FabricaCardProps> = ({
                     <IonCol class="ion-text-center">
                       <span
                         onClick={() => {
-                          speak(en, "en");
+                          speak(normalize(en), "en");
                         }}
                       >
                         <VolumeCard iconClass="volume-icon-container-greyed-out" />
