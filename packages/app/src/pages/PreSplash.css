@@ -1,0 +1,42 @@
+.start-page {
+  background: #003735;
+  height: 100%;
+  width: 100%;
+}
+
+.inner-start-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: 420px;
+  margin: auto;
+  padding: 48px 0;
+}
+
+.inner-start-page p {
+  color: var(--cielo-highest, #f2fffd);
+  text-align: center;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  /* UI Type/text-lg/[S] */
+  font-family: Outfit;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.start-page ion-button {
+  align-self: stretch;
+  margin: 0 24px;
+}
+
+.bigger-size-paragraph {
+  color: var(--base-nube, #fff);
+  font-size: 1.5rem;
+  line-height: 32px;
+}

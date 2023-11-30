@@ -26,6 +26,6 @@ export const Preload: React.FC = () => {
     // todo: redirect based on user account type
     return <Redirect to="/student-dashboard" />;
   } else {
-    return <Redirect to="/splash" />;
+    return <Redirect to="/presplash" />;
   }
 };
