@@ -29,32 +29,14 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
 
   const schema = z.object({
     childName: z.string().min(1).max(50).optional(),
-    childAge: z
-      .string()
-      .refine(
-        (val) =>
-          [
-            "Below years",
-            "3-5 years old",
-            "5-7 years old",
-            "Above 7 years",
-          ].includes(val),
-        {
-          message: "Invalid child age range",
-        },
-      )
-      .optional(),
+    childAge: z.string(),
   });
 
   const {
     control,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm({
-    defaultValues: {
-      childName: "",
-      childAge: "",
-    },
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
@@ -62,27 +44,35 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
   const ageOptions: ExtendedRadioOption[] = [
     {
       component: (
-        <>
-          <IonRadioGroup allowEmptySelection={true}>
-            <IonItem>
-              <IonRadio labelPlacement="end">Below 3 years old</IonRadio>
-            </IonItem>
-
-            <IonItem>
-              <IonRadio labelPlacement="end">3-5 years old</IonRadio>
-            </IonItem>
-
-            <IonItem>
-              <IonRadio labelPlacement="end">5-7 years old</IonRadio>
-            </IonItem>
-
-            <IonItem>
-              <IonRadio labelPlacement="end">Above 7 years old</IonRadio>
-            </IonItem>
-          </IonRadioGroup>
-        </>
+        <div>
+          <IonRadio labelPlacement="end">Below 3 years old</IonRadio>
+        </div>
       ),
-      value: "",
+      value: "<3",
+    },
+    {
+      component: (
+        <div>
+          <IonRadio labelPlacement="end">3-5 years old</IonRadio>
+        </div>
+      ),
+      value: "3-5",
+    },
+    {
+      component: (
+        <div>
+          <IonRadio labelPlacement="end">5-7 years old</IonRadio>
+        </div>
+      ),
+      value: "5-7",
+    },
+    {
+      component: (
+        <div>
+          <IonRadio labelPlacement="end">Above 7 years old</IonRadio>
+        </div>
+      ),
+      value: ">7",
     },
   ];
 
@@ -99,23 +89,23 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
       <form onSubmit={onSubmit}>
         <div className="ion-padding-bottom">
           <IonText className="ion-text-center">
-            <h1 style={{ marginBottom: "1%", marginTop: "5%" }}>
+            <h1>
               <FormattedMessage
                 id="childProfile.title"
                 defaultMessage="Make a profile for your child"
                 description="Title for page where parents share information about their child"
               />
             </h1>
-            <p style={{ maxWidth: "100%", marginBottom: "8%" }}>
+            <p>
               This helps us personalize your child's learning experience. You
               can add more profiles in settings.
             </p>
           </IonText>
         </div>
-
+        <br />
         <div>
           <IonText>
-            <h2 style={{ marginBottom: "5%", marginTop: "5%" }}>
+            <h2>
               <FormattedMessage
                 id="childProfile.nameTitle"
                 defaultMessage="Enter your child's name or nickname:"
@@ -127,15 +117,14 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
             control={control}
             name="childName"
             type="text"
-            // label=""
             labelPlacement="floating"
-            // placeholder="Name"
           />
         </div>
 
+        <br />
         <div className="ion-margin-top">
           <IonText>
-            <h2 style={{ marginTop: "10%", marginBottom: "3%" }}>
+            <h2>
               <FormattedMessage
                 id="childProfile.ageTitle"
                 defaultMessage="Select your child's age range:"
@@ -145,12 +134,14 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
           </IonText>
         </div>
 
-        <ExtendedRadio
-          control={control}
-          name="childAge"
-          options={ageOptions}
-          testId="child-age-radio-group"
-        />
+        <IonRadioGroup>
+          <ExtendedRadio
+            control={control}
+            name="childAge"
+            options={ageOptions}
+            testId="child-age-radio-group"
+          />
+        </IonRadioGroup>
 
         <IonButton
           className="ion-margin-top"
