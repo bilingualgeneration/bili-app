@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import FabricaCard from "@/components/StoryFactory/FabricaCard";
+import { FabricaCard } from "@/components/StoryFactory/FabricaCard";
 import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
 import "./StoryFactory.css";

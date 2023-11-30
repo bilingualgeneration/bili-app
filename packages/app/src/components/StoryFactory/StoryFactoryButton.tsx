@@ -1,4 +1,3 @@
-// StoryFactoryButton.tsx
 import React from "react";
 import { IonButton } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
@@ -9,7 +8,7 @@ interface StoryFactoryButtonProps {
   currentPage: number;
 }
 
-const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
+export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
   currentPage,
 }) => {
   const { handleNext } = useStoryFactoryButton(currentPage);
@@ -40,5 +39,3 @@ const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
     </div>
   );
 };
-
-export default StoryFactoryButton;

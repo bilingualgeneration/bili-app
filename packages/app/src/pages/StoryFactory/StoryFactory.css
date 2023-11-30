@@ -635,33 +635,6 @@ ion-button.story-intro-button {
     drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
 }
 
-.volume-icon-container {
-  position: relative;
-  width: 1.5rem; /* 25px */
-  height: 1.5rem; /* 25px */
-  background: var(--base-lluvia, #f7faf9);
-  border-radius: 9px;
-  /* text-align: center; */
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
-}
-
-.volume-icon-container-greyed-out {
-  position: relative;
-  width: 1.5rem; /* 25px */
-  height: 1.5rem; /* 25px */
-  border-radius: 9px;
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
-  background: var(--base-hover-highlight, rgba(255, 255, 255, 0.12));
-}
-
-.volume-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  size: 10rem;
-}
-
 .card-content-md p.fabrica-text1-spanish {
   color: var(--base-suelo, #000);
   text-align: center;

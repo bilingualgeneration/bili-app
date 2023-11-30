@@ -18,7 +18,7 @@ interface JuegoCardProps {
   storyId?: string;
 }
 
-const JuegoCard: React.FC<JuegoCardProps> = ({
+export const JuegoCard: React.FC<JuegoCardProps> = ({
   backgroundImage,
   isLocked = false,
   isSpanishBilingual = false,
@@ -69,5 +69,3 @@ const JuegoCard: React.FC<JuegoCardProps> = ({
     </IonCard>
   );
 };
-
-export default JuegoCard;

@@ -12,7 +12,7 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import StoryFactoryButton from "@/components/StoryFactory/StoryFactoryButton";
+import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import miniFabricaCard from "@/assets/icons/mini_fabrica_card.svg";
 import "./StoryFactory.css";

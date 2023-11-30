@@ -11,7 +11,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import StoryFactoryButton from "@/components/StoryFactory/StoryFactoryButton";
+import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import { useProfile } from "@/contexts/ProfileContext";
 import "./StoryFactory.css";
