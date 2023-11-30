@@ -20,7 +20,7 @@ export const PreSplash: React.FC = () => {
           <IonText>
             <p>Try it all for FREE</p>
           </IonText>
-          <IonButton routerLink="/sign-up" expand="full" shape="round">
+          <IonButton routerLink="/splash" expand="full" shape="round">
             <span className="button-text">Let's get started</span>
           </IonButton>
           <IonText>
