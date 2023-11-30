@@ -221,11 +221,12 @@ ion-card {
   padding: 5%;
 }
 
-ion-button.story-button {
-  /* Layout properties */
-  display: flex;
-  width: 40vh; //403.506px;
-  // padding: 16px;
+ion-button.story-intro-button {
+  display: inline-flex;
+  --background: : var(--Flamenco-High, #d3eae8);
+  width: 25rem; //403.506px;
+  --padding-bottom: 16px;
+  --padding-top: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1005,4 +1006,8 @@ ion-button.story-button {
 
 .story-page-2-main-card {
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
+.story-page-2-main-card.story-page-3-main-card {
+  height: 978px;
 }
