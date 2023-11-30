@@ -55,6 +55,7 @@ import "./theme/overrides.scss";
 /* SwiperJS */
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
+import { PreSplash } from "./pages/PreSplash";
 
 setupIonicReact();
 
@@ -71,6 +72,8 @@ const Router: React.FC = () => {
             </UnauthedLayout>
           )}
         />
+
+        <Route exact path="/presplash" render={() => <PreSplash />} />
 
         <Route
           exact
