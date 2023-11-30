@@ -19,7 +19,7 @@ import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
 import "./StoryFactory.css";
 
-const StoryFactoryPage6: React.FC = () => (
+export const StoryFactoryPage6: React.FC = () => (
   <>
     <IonGrid class="ion-no-padding">
       <IonRow class="ion-justify-content-center">
@@ -128,5 +128,3 @@ const StoryFactoryPage6: React.FC = () => (
     </IonGrid>
   </>
 );
-
-export default StoryFactoryPage6;

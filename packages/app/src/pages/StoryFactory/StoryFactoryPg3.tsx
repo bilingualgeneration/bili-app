@@ -21,7 +21,7 @@ interface IntroPage3Props {
   currentPage: number;
 }
 
-const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
+export const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
 
   return (
@@ -92,5 +92,3 @@ const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
     </>
   );
 };
-
-export default IntroPage3;

@@ -56,7 +56,7 @@ const FactoryButton: React.FC = () => {
   );
 };
 
-const StoryFactoryPage5: React.FC = () => {
+export const StoryFactoryPage5: React.FC = () => {
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
   return (
     <>
@@ -110,4 +110,3 @@ const StoryFactoryPage5: React.FC = () => {
     </>
   );
 };
-export default StoryFactoryPage5;

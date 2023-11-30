@@ -20,12 +20,12 @@ interface IntroPage1Props {
   currentPage: number;
 }
 
-const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
+export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
   return (
     <>
       <IonCard className="story-page-2-main-card">
-        <IonGrid>
+        <IonGrid className="ion-no-padding">
           <IonRow class="ion-justify-content-left">
             <IonCol size="">
               <IonCardHeader>
@@ -66,5 +66,3 @@ const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
     </>
   );
 };
-
-export default IntroPage1;
