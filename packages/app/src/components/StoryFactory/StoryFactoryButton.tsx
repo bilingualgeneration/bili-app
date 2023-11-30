@@ -18,8 +18,7 @@ const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
   return (
     <div className="story-intro-button-container">
       <IonButton
-        color="var(--Flamenco-High)"
-        className="story-button"
+        className="story-intro-button"
         expand="block"
         shape="round"
         type="button"
