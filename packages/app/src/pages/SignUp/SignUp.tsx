@@ -6,9 +6,10 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import {
+  ChildProfile,
   Complete,
-  RoleSelect,
   LanguageModeSelect,
+  RoleSelect,
   ParentAccountCredentials,
   Pricing,
   TeacherAbout,
@@ -70,6 +71,13 @@ export const SignUp: React.FC = () => {
               data-progress-percent={0.5}
             >
               <TeacherAbout nextSlide={4} />
+            </SwiperSlide>
+            <SwiperSlide
+              className="ion-padding-top"
+              data-testid="child-profile-slide"
+              data-progress-percent={0.9}
+            >
+              <ChildProfile nextSlide={5} />
             </SwiperSlide>
 
             <SwiperSlide
