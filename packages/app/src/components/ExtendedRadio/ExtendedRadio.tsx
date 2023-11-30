@@ -40,6 +40,7 @@ export const ExtendedRadio = ({
             const props = {
               ...option.component.props,
               key: index,
+              // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
               className:
                 option.component.props.className +
                 (activeIndex === index ? " " + activeClassName : ""),

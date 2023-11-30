@@ -1,3 +1,4 @@
+export * from "./ChildProfile";
 export * from "./Complete";
 export * from "./RoleSelect";
 export * from "./LanguageInclusivitySelect";

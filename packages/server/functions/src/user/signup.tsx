@@ -15,6 +15,8 @@ export const signup = onCall(async (request) => {
   });
   const uid: string = userRecord.uid;
   await admin.firestore().collection("users").doc(uid).set({
+    childName: data.childName,
+    childAge: data.childAge,
     grades: data.grades,
     isInclusive: data.isInclusive,
     isImmersive: data.isImmersive,

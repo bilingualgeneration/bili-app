@@ -11,17 +11,22 @@ import {
 } from "@ionic/react";
 import { useSwiper } from "swiper/react";
 import { useIntl, FormattedMessage } from "react-intl";
-
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-
 import { useForm } from "react-hook-form";
-
 import { RadioCard } from "../../components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 
-export const LanguageModeSelect: React.FC = () => {
+export type LanguageModeSelectProps = {
+  teacherSlide: number;
+  parentSlide: number;
+};
+
+export const LanguageModeSelect: React.FC<LanguageModeSelectProps> = ({
+  teacherSlide,
+  parentSlide,
+}) => {
   const intl = useIntl();
   const schema = z.object({
     isImmersive: z.boolean(),
@@ -122,8 +127,14 @@ export const LanguageModeSelect: React.FC = () => {
       ...data,
       ...responses,
     });
-
-    swiper.slideNext();
+    // @ts-ignore todo: better typing
+    if (data.role === "teacher") {
+      swiper.slideTo(teacherSlide);
+    }
+    // @ts-ignore todo: better typing
+    if (data.role === "parent") {
+      swiper.slideTo(parentSlide);
+    }
   });
 
   return (
