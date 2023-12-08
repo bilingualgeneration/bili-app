@@ -24,53 +24,45 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <IonCard className="story-page-2-main-card">
-          <IonGrid>
-            <IonRow class="ion-justify-content-left">
-              <IonCol size="9.5">
-                <IonCardHeader>
-                  <IonCardTitle style={{ textAlign: "left" }}>
-                    <div id="story-bienvenidos">¡Bienvenidos a la</div>
-                    <div id="story-bienvenidos">fábrica de cuentos!</div>
-                  </IonCardTitle>
-                  <IonCardSubtitle>
-                    <div id="story-un-lugar">
-                      ¡Un lugar para lecturas silábicas graciosas!
+      <IonCard className="story-page-2-main-card">
+        <IonGrid class="ion-no-margin">
+          <IonRow class="ion-justify-content-left">
+            <IonCol size="auto" size-md="9">
+              <IonCardHeader>
+                <IonCardTitle style={{ textAlign: "left" }}>
+                  <div id="story-bienvenidos">¡Bienvenidos a la</div>
+                  <div id="story-bienvenidos">fábrica de cuentos!</div>
+                </IonCardTitle>
+                <IonCardSubtitle>
+                  <div id="story-un-lugar">
+                    ¡Un lugar para lecturas silábicas graciosas!
+                  </div>
+                </IonCardSubtitle>
+                {!isImmersive && (
+                  <>
+                    <br />
+                    <br />
+                    <br />
+                    <div id="story-welcome">Welcome to the story factory!</div>
+                    <div id="story-a-place">
+                      A place for silly syllabic reading!
                     </div>
-                  </IonCardSubtitle>
-                  {!isImmersive && (
-                    <>
-                      <br />
-                      <br />
-                      <br />
-                      <div id="story-welcome">
-                        Welcome to the story factory!
-                      </div>
-                      <div id="story-a-place">
-                        A place for silly syllabic reading!
-                      </div>
-                      <br />
-                      <br />
-                      <br />
-                    </>
-                  )}
-                </IonCardHeader>
-              </IonCol>
-            </IonRow>
+                    <br />
+                    <br />
+                    <br />
+                  </>
+                )}
+              </IonCardHeader>
+            </IonCol>
+          </IonRow>
 
-            <IonRow class="ion-justify-content-center">
+          <IonRow class="ion-align-items-end ion-justify-content-center">
+            <IonCol size="auto">
               <StoryFactoryButton currentPage={currentPage} />
-            </IonRow>
-          </IonGrid>
-        </IonCard>
-      </div>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonCard>
       <img
         className="bili-character"
         src={biliCharacter}
