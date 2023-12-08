@@ -22,6 +22,15 @@ ion-button.story-intro-button {
   box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
 }
 
+.story-factory-button-container {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
 .story-button-bold {
   /* Layout properties */
   align-self: stretch;
@@ -656,6 +665,9 @@ ion-button.story-intro-button {
   width: 100%; /* 70vw; */
   height: 80vh;
   padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .story-page-2-main-card .story-page-3-main-card {

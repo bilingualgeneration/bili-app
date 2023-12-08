@@ -55,14 +55,13 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
               </IonCardHeader>
             </IonCol>
           </IonRow>
-
-          <IonRow class="ion-align-items-end ion-justify-content-center">
-            <IonCol size="auto">
-              <StoryFactoryButton currentPage={currentPage} />
-            </IonCol>
-          </IonRow>
         </IonGrid>
+
+        <div className="story-factory-button-container">
+          <StoryFactoryButton currentPage={currentPage} />
+        </div>
       </IonCard>
+
       <img
         className="bili-character"
         src={biliCharacter}

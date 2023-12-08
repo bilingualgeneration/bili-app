@@ -49,15 +49,11 @@ export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
               </IonCardHeader>
             </IonCol>
           </IonRow>
-
-          <IonCardContent class="story-button-container">
-            <IonRow class="ion-justify-content-center">
-              {/* <IonCol size="auto"> */}
-              <StoryFactoryButton currentPage={currentPage} />
-              {/* </IonCol> */}
-            </IonRow>
-          </IonCardContent>
         </IonGrid>
+
+        <div className="story-factory-button-container">
+          <StoryFactoryButton currentPage={currentPage} />
+        </div>
       </IonCard>
 
       <img

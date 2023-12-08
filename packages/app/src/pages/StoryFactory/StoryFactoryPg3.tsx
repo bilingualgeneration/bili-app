@@ -26,64 +26,42 @@ export const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <IonCard className="story-page-2-main-card story-page-3-main-card">
-          <IonGrid>
-            <IonRow class="ion-justify-content-left">
-              <IonCol size="8.5">
-                <IonCardHeader style={{ padding: "5%" }}>
-                  <IonCardTitle class="ion-text-left">
-                    <div id="story-page-2-title">
-                      {" "}
-                      Esta es tu fábrica de cuentos. Puedes crear un cuento
-                      presionando el botón Actualizar o deslizando o haciendo
-                      clic en cada sección de la historia.
-                    </div>
-                  </IonCardTitle>
-                  {!isImmersive && (
-                    <IonCardSubtitle>
-                      <div id="story-page-2-subtitle">
-                        This is your story factory. You can create a story by
-                        either hitting the Refresh button, or by swiping or
-                        clicking each section of the story.
-                      </div>
-                    </IonCardSubtitle>
-                  )}
-                </IonCardHeader>
-
-                {/* mini Fabrica de cuentos card */}
-
-                <IonCol>
-                  <div className="mini-fabrica-card-page-3">
-                    <img
-                      src={miniFabricaCard}
-                      alt="Miniature display of the fabrica card slot game"
-                    />
+      <IonCard className="story-page-2-main-card story-page-3-main-card">
+        <IonGrid>
+          <IonRow class="ion-justify-content-left">
+            <IonCol size="8.5">
+              <IonCardHeader style={{ padding: "5%" }}>
+                <IonCardTitle class="ion-text-left">
+                  <div id="story-page-2-title">
+                    {" "}
+                    Esta es tu fábrica de cuentos. Puedes crear un cuento
+                    presionando el botón Actualizar o deslizando o haciendo clic
+                    en cada sección de la historia.
                   </div>
-                </IonCol>
+                </IonCardTitle>
+                {!isImmersive && (
+                  <IonCardSubtitle>
+                    <div id="story-page-2-subtitle">
+                      This is your story factory. You can create a story by
+                      either hitting the Refresh button, or by swiping or
+                      clicking each section of the story.
+                    </div>
+                  </IonCardSubtitle>
+                )}
+              </IonCardHeader>
+            </IonCol>
 
-                {/* end mini Fabrica de cuentos card */}
-              </IonCol>
+            {/* <IonCol size="4">
+              <img className='bili-character' src={biliCharacter} alt="Bili character" />
+            </IonCol> */}
+          </IonRow>
+        </IonGrid>
 
-              {/* <IonCol size="4">
-                <img className='bili-character' src={biliCharacter} alt="Bili character" />
-              </IonCol> */}
-            </IonRow>
+        <div className="story-factory-button-container">
+          <StoryFactoryButton currentPage={currentPage} />
+        </div>
+      </IonCard>
 
-            <IonRow class="ion-justify-content-center">
-              <IonCol class="ion-text-center">
-                <StoryFactoryButton currentPage={currentPage} />
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonCard>
-      </div>
       <img
         className="bili-character"
         src={biliCharacter}
