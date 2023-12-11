@@ -14,7 +14,7 @@ export const SettingsHeader: React.FC = ({}) => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Hello</IonTitle>
+          <IonTitle>Helloooooooooooooooo</IonTitle>
         </IonToolbar>
       </IonHeader>
     </>

@@ -190,7 +190,11 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/4"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout
+              customBackground="#FBF2E2"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
               <StoryFactoryPage4 />
             </AuthedLayout>
           )}

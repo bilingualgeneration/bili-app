@@ -17,12 +17,14 @@ interface AuthedLayoutProps {
   children: React.ReactNode;
   customBackground?: string; // Default to false
   wide?: boolean;
+  showOgAuthedHeader?: boolean; // Control visibility of OG header since there are so many headers ~ F
 }
 
 const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   children,
   customBackground,
   wide,
+  showOgAuthedHeader = true, // Default value is true, meaning header is visible
 }) => {
   const auth = useAuth();
   const { status: userStatus } = useUser();
@@ -48,19 +50,21 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   return (
     <ProfileContextProvider>
       <IonPage>
-        <IonHeader className="ion-no-border" id="header">
-          <IonToolbar>
-            <IonButtons slot="end">
-              <IonButton
-                onClick={() => {
-                  auth.signOut();
-                }}
-              >
-                logout
-              </IonButton>
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
+        {showOgAuthedHeader && ( // Conditionally render IonHeader
+          <IonHeader className="ion-no-border" id="header">
+            <IonToolbar>
+              <IonButtons slot="end">
+                <IonButton
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  logout
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+        )}
         <IonContent fullscreen className="ion-padding" style={contentStyle}>
           <div className="container">{children}</div>
         </IonContent>
