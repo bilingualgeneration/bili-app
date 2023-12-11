@@ -14,12 +14,15 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
+import "./StoryFactory.css";
+import { SettingsHeader } from "@/components/SettingsHeader";
 import JuegoCard from "@/components/StoryFactory/JuegoCard";
 
 const StoryFactoryPage4: React.FC = () => {
   const { isImmersive } = useProfile();
   return (
     <>
+      <SettingsHeader></SettingsHeader>
       <IonGrid class="ion-no-padding">
         <IonRow>
           <IonCol>
