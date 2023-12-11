@@ -8,6 +8,7 @@ import {
 } from "ionicons/icons";
 import { MessageFormatElement } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
+import "./sf_SlotMachineGame.css";
 
 interface JuegoCardProps {
   backgroundImage: string;

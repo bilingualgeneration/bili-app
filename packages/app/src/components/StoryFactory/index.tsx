@@ -1,5 +1,5 @@
 //export * from "./StoryFactory";
 export * from "./VolumeCard";
 export * from "./FabricaCard";
-export * from "./JuegoCard";
+export * from "./SF_SlotMachineGame";
 export * from "./StoryFactoryButton";

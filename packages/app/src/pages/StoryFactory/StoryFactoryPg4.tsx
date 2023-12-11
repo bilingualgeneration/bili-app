@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import { JuegoCard } from "@/components/StoryFactory/JuegoCard";
+import { JuegoCard } from "@/components/StoryFactory/SF_SlotMachineGame";
 import "./StoryFactory.css";
 
 export const StoryFactoryPage4: React.FC = () => {

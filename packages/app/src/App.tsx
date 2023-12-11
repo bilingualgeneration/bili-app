@@ -160,7 +160,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/1"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage1 currentPage={1} />
             </AuthedLayout>
           )}
@@ -170,7 +170,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/2"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage2 currentPage={2} />
             </AuthedLayout>
           )}
@@ -180,7 +180,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/3"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage3 currentPage={3} />
             </AuthedLayout>
           )}
@@ -190,7 +190,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/4"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <StoryFactoryPage4 />
             </AuthedLayout>
           )}
@@ -200,8 +200,18 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/5"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <StoryFactoryPage5 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/6"
+          render={() => (
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+              <StoryFactoryPage6 />
             </AuthedLayout>
           )}
         />
