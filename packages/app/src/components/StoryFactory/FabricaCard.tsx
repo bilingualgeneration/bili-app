@@ -9,10 +9,11 @@ import {
 } from "@ionic/react";
 import { IonIcon } from "@ionic/react";
 import { volumeMedium } from "ionicons/icons";
-import VolumeCard from "./VolumeCard";
+import { VolumeCard } from "@/components/StoryFactory/VolumeCard";
 import polygonUp from "@/assets/icons/polygon_up.svg";
 import polygonDown from "@/assets/icons/polygon_down.svg";
 import { FormattedMessage } from "react-intl";
+import "../../pages/StoryFactory/StoryFactory.css";
 
 import { useProfile } from "@/contexts/ProfileContext";
 
@@ -42,7 +43,7 @@ const normalize = (s: string): string => {
   return s.toLowerCase().replace(/\s+/g, "_").replace(/\./g, "");
 };
 
-const FabricaCard: React.FC<FabricaCardProps> = ({
+export const FabricaCard: React.FC<FabricaCardProps> = ({
   es,
   en,
   wordIndices,
@@ -155,5 +156,3 @@ const FabricaCard: React.FC<FabricaCardProps> = ({
     </>
   );
 };
-
-export default FabricaCard;

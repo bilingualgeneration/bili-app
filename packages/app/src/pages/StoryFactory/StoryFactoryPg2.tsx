@@ -12,62 +12,55 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import StoryFactoryButton from "@/components/StoryFactory/StoryFactoryButton";
+import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
+import "./StoryFactory.css";
 
 interface IntroPage2Props {
   currentPage: number;
 }
 
-const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
+export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <IonCard className="story-page-2-main-card">
-          <IonGrid>
-            <IonRow class="ion-justify-content-center">
-              <IonCol>
-                <IonCardHeader className="story-header">
-                  <IonCardTitle style={{ textAlign: "left" }}>
-                    <div id="story-page-2-title">
-                      En este juego, podrás crear más de 90.000 historias
-                      diferentes con solo deslizar el dedo o hacer clic en un
-                      botón. Haz clic en "Siguiente" para ver cómo.
+      <IonCard className="story-page-2-main-card">
+        <IonGrid>
+          <IonRow class="ion-justify-content-left">
+            <IonCol size="12" size-md="9">
+              <IonCardHeader className="story-header">
+                <IonCardTitle style={{ textAlign: "left" }}>
+                  <div id="story-page-2-title">
+                    En este juego, podrás crear más de 90.000 historias
+                    diferentes con solo deslizar el dedo o hacer clic en un
+                    botón. Haz clic en "Siguiente" para ver cómo.
+                  </div>
+                </IonCardTitle>
+                {!isImmersive && (
+                  <IonCardSubtitle>
+                    <div id="story-page-2-subtitle">
+                      In this game, you can create over 90,000 different stories
+                      with the swipe of your finger or click of a button. Click
+                      “Next” to see how.
                     </div>
-                  </IonCardTitle>
-                  {!isImmersive && (
-                    <IonCardSubtitle>
-                      <div id="story-page-2-subtitle">
-                        In this game, you can create over 90,000 different
-                        stories with the swipe of your finger or click of a
-                        button. Click “Next” to see how.
-                      </div>
-                    </IonCardSubtitle>
-                  )}
-                </IonCardHeader>
-              </IonCol>
+                  </IonCardSubtitle>
+                )}
+              </IonCardHeader>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
 
-              <IonCol size="4">
-                <img src={biliCharacter} alt="Bili character" />
-              </IonCol>
-            </IonRow>
+        <div className="story-factory-button-container">
+          <StoryFactoryButton currentPage={currentPage} />
+        </div>
+      </IonCard>
 
-            <IonRow class="ion-justify-content-center">
-              <StoryFactoryButton currentPage={currentPage} />
-            </IonRow>
-          </IonGrid>
-        </IonCard>
-      </div>
+      <img
+        className="bili-character"
+        src={biliCharacter}
+        alt="Bili character"
+      />
     </>
   );
 };
-
-export default IntroPage2;
