@@ -18,14 +18,11 @@ import biliLogo from "../../assets/icons/bili.svg";
 export const SettingsHeader: React.FC = ({}) => {
   return (
     <>
-      <IonHeader className="ion-no-border settings-header">
+      <IonHeader className="settings-header">
         <IonToolbar className="settings-toolbar">
-          <IonButtons>
-            <IonButton className="bili-logo-settings-page">
-              <img src={biliLogo} />
-            </IonButton>
-          </IonButtons>
-
+          <IonTitle>
+            <img src={biliLogo} className="bili-logo-settings-page" />
+          </IonTitle>
           <IonButtons slot="end">
             <IonButton
               onClick={() => {
