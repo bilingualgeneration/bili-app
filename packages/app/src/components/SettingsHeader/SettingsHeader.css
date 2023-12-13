@@ -1,0 +1,25 @@
+.settings-header {
+  display: flex;
+  height: 100px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  background-color: #f7faf9;
+  border-bottom: 1px solid var(--base-agua, rgba(0, 106, 103, 0.12));
+}
+
+ion-toolbar.settings-toolbar {
+  --background: #f7faf9;
+}
+
+.bili-logo-settings-page {
+  display: flex;
+  padding-left: 50%;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  max-width: 100%;
+}

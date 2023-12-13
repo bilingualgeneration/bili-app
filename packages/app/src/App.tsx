@@ -25,6 +25,7 @@ import Login from "./pages/Login";
 import Memory from "./pages/games/Memory";
 import { Preload } from "./pages/Preload";
 import ResetPassword from "./pages/ResetPassword";
+import { SettingsPage1 } from "./pages/Settings/SettingsPage1";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
 import Stories from "./pages/games/Stories";
@@ -127,6 +128,16 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/settings1"
+          render={() => (
+            <AuthedLayout showOgAuthedHeader={false}>
+              <SettingsPage1 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/sign-up"
           render={() => (
             <UnauthedLayout>
@@ -190,7 +201,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/4"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout customBackground="#FBF2E2" wide={true}>
               <StoryFactoryPage4 />
             </AuthedLayout>
           )}
