@@ -1,0 +1,50 @@
+.label-style {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.label-style h4 {
+  color: var(--light-suelo, #000);
+  margin: 16px;
+}
+
+.question-button {
+  background: none;
+}
+
+ion-select::part(placeholder) {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  opacity: unset;
+}
+
+.align-line-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+ion-select::part(text) {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  opacity: unset;
+}
+
+ion-select::part(icon) {
+  color: #006a67;
+  opacity: 0.5;
+}

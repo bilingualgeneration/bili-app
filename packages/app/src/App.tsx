@@ -31,6 +31,8 @@ import Stories from "./pages/games/Stories";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
+import { PreSplash } from "./pages/PreSplash";
+import { Preferences } from "./pages/Settings/Preferences";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -55,7 +57,6 @@ import "./theme/overrides.scss";
 /* SwiperJS */
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
-import { PreSplash } from "./pages/PreSplash";
 
 setupIonicReact();
 
@@ -233,6 +234,16 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <TeacherLogin />
             </UnauthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/preferences"
+          render={() => (
+            <AuthedLayout customBackground="white" wide={true}>
+              <Preferences />
+            </AuthedLayout>
           )}
         />
       </Switch>
