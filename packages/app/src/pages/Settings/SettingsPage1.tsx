@@ -21,6 +21,8 @@ import {
 import { SettingsHeader } from "@/components/SettingsHeader";
 import {
   addOutline,
+  chevronForwardCircle,
+  chevronForwardCircleOutline,
   ellipse,
   ellipsisHorizontal,
   sparkles,
@@ -69,28 +71,27 @@ export const SettingsPage1: React.FC = ({}) => {
           <div className="child-profile-content">
             <IonRow>
               <IonCol>
-                <IonCard>
-                  <IonGrid className="ion-no-margin">
-                    <IonRow class="">
+                <IonCard className="child-profile-card">
+                  <IonGrid className="ion-no-margin ion-no-padding">
+                    <IonRow>
                       <IonCol size="sm">
                         <IonIcon
                           icon={ellipse}
                           size="large"
-                          className="circle-icon"
+                          className="circle-icon circle-icon-blue"
                         />
+                        <div className="circle-icon-overlay circle-icon-blue-overlay">
+                          V
+                        </div>
                       </IonCol>
 
-                      <IonCol>
+                      <IonCol className="child-name-age-col">
                         <h1 className="child-name">Vanessa</h1>
                         <p>3-5 years old</p>
                       </IonCol>
 
-                      <IonCol size="1.5" class="ion-text-center">
-                        <IonIcon
-                          icon={ellipsisHorizontal}
-                          size="large"
-                          className="more"
-                        />
+                      <IonCol size="1.5" class="ion-text-end">
+                        <IonIcon icon={ellipsisHorizontal} className="more" />
                       </IonCol>
                     </IonRow>
                   </IonGrid>
@@ -98,28 +99,27 @@ export const SettingsPage1: React.FC = ({}) => {
               </IonCol>
 
               <IonCol>
-                <IonCard>
-                  <IonGrid className="ion-no-margin">
-                    <IonRow class="">
-                      <IonCol size="sm">
+                <IonCard className="child-profile-card">
+                  <IonGrid className="ion-no-margin ion-no-padding">
+                    <IonRow>
+                      <IonCol size="auto">
                         <IonIcon
                           icon={ellipse}
                           size="large"
-                          className="circle-icon-2"
+                          className="circle-icon circle-icon-pink"
                         />
+                        <div className="circle-icon-overlay circle-icon-pink-overlay">
+                          M
+                        </div>
                       </IonCol>
 
-                      <IonCol>
+                      <IonCol className="child-name-age-col">
                         <h1 className="child-name">Mateo</h1>
                         <p>5-7 years old</p>
                       </IonCol>
 
                       <IonCol size="1.5" class="ion-text-end">
-                        <IonIcon
-                          icon={ellipsisHorizontal}
-                          size="large"
-                          className="more"
-                        />
+                        <IonIcon icon={ellipsisHorizontal} className="more" />
                       </IonCol>
                     </IonRow>
                   </IonGrid>
@@ -131,7 +131,7 @@ export const SettingsPage1: React.FC = ({}) => {
           <IonRow class="ion-align-items-end ion-justify-content-between row">
             <IonCol size="auto">
               <div className="explore-bili-heading-subheading-container">
-                <h1 className="child-profile-heading">Explore Bili</h1>
+                <h1 className="explore-bili-heading">Explore Bili</h1>
                 <p className="explore-bili-subheading">
                   Learn how to use Bili to meet language goals
                   <IonIcon
@@ -180,14 +180,12 @@ export const SettingsPage1: React.FC = ({}) => {
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
-
-                  <IonRow></IonRow>
                 </SettingsExploreCard>
               </IonCol>
 
               <IonCol size="md">
                 <SettingsExploreCard
-                  backgroundImage={settingsCardDesign1}
+                  backgroundImage={settingsCardDesign2}
                   backgroundColor={"#22BEB9"}
                   title={"Inclusive Spanish"}
                   subtitle={
@@ -209,14 +207,12 @@ export const SettingsPage1: React.FC = ({}) => {
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
-
-                  <IonRow></IonRow>
                 </SettingsExploreCard>
               </IonCol>
 
               <IonCol size="md">
                 <SettingsExploreCard
-                  backgroundImage={settingsCardDesign1}
+                  backgroundImage={settingsCardDesign3}
                   backgroundColor={"#FFB68F"}
                   title={"Get your child speaking Spanish with Bili"}
                   subtitle={
@@ -240,8 +236,6 @@ export const SettingsPage1: React.FC = ({}) => {
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
-
-                  <IonRow></IonRow>
                 </SettingsExploreCard>
               </IonCol>
 
@@ -269,9 +263,17 @@ export const SettingsPage1: React.FC = ({}) => {
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
-
-                  <IonRow></IonRow>
                 </SettingsExploreCard>
+              </IonCol>
+
+              <IonCol className="child-name-age-col ion-align-items-end">
+                <IonIcon
+                  aria-label="Scroll Right"
+                  // size="large"
+                  // slot="end"
+                  icon={chevronForwardCircleOutline}
+                  className="scroll-right-button"
+                />
               </IonCol>
             </IonRow>
           </div>

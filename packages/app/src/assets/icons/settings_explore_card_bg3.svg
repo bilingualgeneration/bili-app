@@ -1,6 +1,6 @@
 <svg width="332" height="340" viewBox="0 0 332 340" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g style="mix-blend-mode:multiply">
-<rect width="332" height="340" rx="10" fill="url(#pattern0)" fill-opacity="0.1"/>
+<g style="mix-blend-mode:soft-light">
+<rect width="332" height="340" rx="10" fill="url(#pattern0)" fill-opacity="1"/>
 </g>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
