@@ -130,7 +130,11 @@ const Router: React.FC = () => {
           exact
           path="/settings1"
           render={() => (
-            <AuthedLayout showOgAuthedHeader={false}>
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
               <SettingsPage1 />
             </AuthedLayout>
           )}

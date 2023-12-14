@@ -1,0 +1,169 @@
+.settings-pg1-container {
+  margin: 3% 2%;
+  max-width: 100%;
+  height: auto;
+}
+
+ion-card.child-profile-card {
+  position: relative;
+  padding: 2%;
+}
+
+.child-profile-heading,
+.explore-bili-heading {
+  color: var(--light-suelo, #000);
+  font-size: 2em; /* 32px; */
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25; /* 40px; 125% */
+  letter-spacing: -0.5px;
+  margin-top: 0;
+}
+
+.explore-bili-heading {
+  margin-top: 10%;
+}
+
+.child-profile-content {
+  margin-top: 1em; /* 24px; */
+}
+
+.child-name {
+  display: flex;
+  margin-bottom: 0;
+  color: var(--base-suelo, #000);
+
+  /* UI Type/text-2xl/[S] */
+  font-size: 1.5em; /* 24px; */
+  font-weight: 600;
+  line-height: 1.33; /* 32px; 133.333% */
+}
+
+p {
+  margin-top: 0px;
+  color: #889391;
+
+  /* Paragraph/text-lg/[S] */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5556; /* 28px; 155.556% */
+}
+
+.explore-bili-subheading {
+  color: var(--base-barro, #889391);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.a-tag {
+  display: flex;
+  width: 5em; /* 72px; */
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  color: #889391;
+  text-align: right;
+  font-size: 1em; /* 14px; */
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.714; /* 24px; 171.429% */
+  margin: 1.5em 0 1em; /* margin-top: 24px; margin-bottom: 16px; */
+  /* text-decoration-line: underline; */
+}
+
+ion-row.row {
+  border-bottom: 1px solid var(--base-hover-shadow, rgba(0, 0, 0, 0.08));
+}
+
+ion-col.child-name-age-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ion-button.add-child-btn {
+  --padding-top: 5%;
+  --padding-bottom: 5%;
+  box-shadow:
+    0px 0px 1px 0px rgba(0, 0, 0, 0.4),
+    0px 12px 12px -6px rgba(0, 0, 0, 0.16);
+}
+
+/******* circle icon + first-name letter overlay styles *******/
+
+.circle-icon {
+  width: 4em;
+  height: 4em;
+}
+
+.circle-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.circle-icon-blue {
+  color: #22beb9;
+}
+
+.circle-icon-blue-overlay {
+  color: white;
+}
+
+.circle-icon-pink {
+  color: #f28ac9;
+}
+
+.circle-icon-pink-overlay {
+  color: #973d78;
+}
+
+.sparkle-icon {
+  margin-left: 0.3125em; /* 5px; */
+}
+
+/* Responsive styles for tablets */
+@media only screen and (max-width: 1024px) {
+  .settings-pg1-container {
+    margin: 3% 2%;
+  }
+  .child-profile-heading {
+    font-size: 1.75em;
+    line-height: 1.29;
+  }
+  /* Add more styles as needed */
+}
+
+/* Responsive styles for smaller screens, e.g., mobile */
+@media only screen and (max-width: 768px) {
+  .settings-pg1-container {
+    margin: 3% 2%;
+  }
+  h1.child-profile-heading {
+    font-size: 1.5em;
+    line-height: 1.33;
+  }
+  /* Add more styles as needed */
+}
+
+.more {
+  opacity: 0.4;
+  font-size: 2em;
+  padding: 0 10%;
+}
+
+ion-icon.scroll-right-button {
+  font-size: 3em;
+  --ionicon-stroke-width: 16px;
+}
