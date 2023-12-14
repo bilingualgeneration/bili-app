@@ -162,12 +162,14 @@ export const SettingsPage1: React.FC = ({}) => {
                   subtitle={
                     "When you enter into any new area of science, you almost always find."
                   }
+                  // can also change text color of SettingsExploreCard using 'textColor' prop if necessary
                 >
                   <IonRow>
                     <IonCol>
                       <SettingsExploreMiniCard
-                        customColor={"#FFAEDC"}
-                        cardText={"Guide"}
+                        customColor={"#FFAEDC"} // enter a background color for the mini card
+                        cardText={"Guide"} // enter a custom text for the mini card
+                        // can also change color of text for SettingsExploreMiniCard using 'textColor' prop if necessary
                       ></SettingsExploreMiniCard>
                     </IonCol>
 
@@ -186,24 +188,24 @@ export const SettingsPage1: React.FC = ({}) => {
               <IonCol size="md">
                 <SettingsExploreCard
                   backgroundImage={settingsCardDesign1}
-                  backgroundColor={"#973D78"}
-                  title={"Getting started"}
+                  backgroundColor={"#22BEB9"}
+                  title={"Inclusive Spanish"}
                   subtitle={
-                    "When you enter into any new area of science, you almost always find."
+                    "Learn about what Inclusive Spanish is and why it exists."
                   }
                 >
                   <IonRow>
-                    <IonCol>
+                    <IonCol size="auto">
                       <SettingsExploreMiniCard
-                        customColor={"#FFAEDC"}
-                        cardText={"Guide"}
+                        customColor={"#D3EAE8"}
+                        cardText={"Social Justice"}
                       ></SettingsExploreMiniCard>
                     </IonCol>
 
-                    <IonCol>
+                    <IonCol size="auto">
                       <SettingsExploreMiniCard
                         customColor={"#F1D100"}
-                        cardText={"Recommended"}
+                        cardText={"Resources"}
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
@@ -215,24 +217,26 @@ export const SettingsPage1: React.FC = ({}) => {
               <IonCol size="md">
                 <SettingsExploreCard
                   backgroundImage={settingsCardDesign1}
-                  backgroundColor={"#973D78"}
-                  title={"Getting started"}
+                  backgroundColor={"#FFB68F"}
+                  title={"Get your child speaking Spanish with Bili"}
                   subtitle={
-                    "When you enter into any new area of science, you almost always find."
+                    "Explore special features that promote authentic language production."
                   }
+                  textColor="black"
                 >
                   <IonRow>
                     <IonCol>
                       <SettingsExploreMiniCard
-                        customColor={"#FFAEDC"}
-                        cardText={"Guide"}
+                        customColor={"#973D78"}
+                        cardText={"Parents"}
+                        textColor="white"
                       ></SettingsExploreMiniCard>
                     </IonCol>
 
                     <IonCol>
                       <SettingsExploreMiniCard
                         customColor={"#F1D100"}
-                        cardText={"Recommended"}
+                        cardText={"Resources"}
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
