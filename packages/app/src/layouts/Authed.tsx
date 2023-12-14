@@ -44,7 +44,7 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
     contentStyle["--background"] = customBackground; // Set background color only if provided
   }
   if (wide) {
-    contentStyle["--container-width"] = "1200px"; //set width to 1200px only if wide is true (changed to 1200 bc I have a page that 1147px ~ FP)
+    contentStyle["--container-width"] = "100%"; //set width to 1200px only if wide is true (changed to 1200 bc I have a page that 1147px ~ FP)
   }
 
   return (
