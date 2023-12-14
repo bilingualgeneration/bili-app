@@ -57,6 +57,7 @@ import "./theme/overrides.scss";
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
 import { PreSplash } from "./pages/PreSplash";
+import { SettingsPage2 } from "./pages/Settings";
 
 setupIonicReact();
 
@@ -136,6 +137,20 @@ const Router: React.FC = () => {
               showOgAuthedHeader={false}
             >
               <SettingsPage1 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings2"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsPage2 />
             </AuthedLayout>
           )}
         />

@@ -40,7 +40,7 @@ export const SettingsPage1: React.FC = ({}) => {
       <SettingsHeader></SettingsHeader>
 
       <div className="settings-pg1-container">
-        <IonGrid>
+        <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
             <IonCol size="auto">
               <h1 className="child-profile-heading">Child Profile</h1>
