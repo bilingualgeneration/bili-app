@@ -162,9 +162,9 @@ export const LanguageModeSelect: React.FC<LanguageModeSelectProps> = ({
           onClick={onSubmit}
         >
           <FormattedMessage
-            id="languageMode.continue"
+            id="common.continue"
             defaultMessage="Continue"
-            description="Continue button after user chooses language mode"
+            description="Button for users to continue on to the next page"
           />
         </IonButton>
       </form>
