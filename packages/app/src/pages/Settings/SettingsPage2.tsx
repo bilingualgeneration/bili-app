@@ -22,12 +22,37 @@ import {
   ellipsisHorizontal,
   sparkles,
 } from "ionicons/icons";
+import { useMaskito } from "@maskito/react";
 import { SettingsHeader } from "@/components/SettingsHeader";
 import "./SettingsPage1.css";
 import "./SettingsPage2.css";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const SettingsPage2: React.FC = () => {
+  const phoneMask = useMaskito({
+    options: {
+      mask: [
+        "+",
+        "1",
+        " ",
+        "(",
+        /\d/,
+        /\d/,
+        /\d/,
+        ")",
+        " ",
+        /\d/,
+        /\d/,
+        /\d/,
+        "-",
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+      ],
+    },
+  });
+
   return (
     <>
       <SettingsHeader></SettingsHeader>
@@ -57,11 +82,17 @@ export const SettingsPage2: React.FC = () => {
               <IonCol>
                 <IonLabel className="input-label">Phone number</IonLabel>
                 <IonInput
+                  ref={async (phoneInput) => {
+                    if (phoneInput) {
+                      const input = await phoneInput.getInputElement();
+                      phoneMask(input);
+                    }
+                  }}
                   className="input"
                   type="tel"
                   shape="round"
                   fill="outline"
-                  placeholder="000 000 0000"
+                  placeholder="+1 (xxx) xxx-xxxx"
                 ></IonInput>
               </IonCol>
             </IonRow>
