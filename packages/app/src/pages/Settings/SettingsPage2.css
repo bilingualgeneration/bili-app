@@ -18,9 +18,16 @@ ion-input.input-fill-outline {
 }
 
 ion-input.input {
-  color: rgb(167, 166, 166);
+  --placeholder-color: rgb(167, 166, 166);
   --placeholder-opacity: 1;
+  --color: black;
 }
+
+/* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regualr text*/
+
+/* ion-input.input[type="date" i] {
+
+} */
 
 ion-col.col-save-changes-button {
   text-align: center;

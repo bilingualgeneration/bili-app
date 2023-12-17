@@ -114,7 +114,7 @@ export const SettingsPage2: React.FC = () => {
               <IonCol>
                 <IonLabel>Date of birth</IonLabel>
                 <IonInput
-                  className="input input-date"
+                  className="input"
                   type="date"
                   shape="round"
                   fill="outline"
