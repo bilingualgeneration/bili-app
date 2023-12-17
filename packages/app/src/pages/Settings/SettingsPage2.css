@@ -17,6 +17,11 @@ ion-input.input-fill-outline {
   --border-radius: 1rem !important;
 }
 
+ion-input.input {
+  color: rgb(167, 166, 166);
+  --placeholder-opacity: 1;
+}
+
 ion-col.col-save-changes-button {
   text-align: center;
 }

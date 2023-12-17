@@ -68,19 +68,19 @@ export const SettingsPage2: React.FC = () => {
           <div className="adult-profile-content">
             <IonRow>
               <IonCol>
-                <IonLabel className="input-label">Full name</IonLabel>
+                <IonLabel>Full name</IonLabel>
                 <IonInput
                   className="input"
                   shape="round"
                   fill="outline"
-                  placeholder="Anna Maria Olivo"
+                  placeholder="Bilingual Generation"
                 ></IonInput>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
-                <IonLabel className="input-label">Phone number</IonLabel>
+                <IonLabel>Phone number</IonLabel>
                 <IonInput
                   ref={async (phoneInput) => {
                     if (phoneInput) {
@@ -99,22 +99,22 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel className="input-label">Email address</IonLabel>
+                <IonLabel>Email address</IonLabel>
                 <IonInput
                   className="input"
                   type="email"
                   shape="round"
                   fill="outline"
-                  placeholder="anna@bili.com"
+                  placeholder="bilingual.generation@bili.com"
                 ></IonInput>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
-                <IonLabel className="input-label">Date of birth</IonLabel>
+                <IonLabel>Date of birth</IonLabel>
                 <IonInput
-                  className="input"
+                  className="input input-date"
                   type="date"
                   shape="round"
                   fill="outline"
@@ -124,7 +124,7 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel className="input-label">Country</IonLabel>
+                <IonLabel>Country</IonLabel>
                 <IonInput
                   className="input"
                   shape="round"
