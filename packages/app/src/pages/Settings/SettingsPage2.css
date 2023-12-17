@@ -23,10 +23,10 @@ ion-input.input {
   --color: black;
 }
 
-/* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regualr text*/
+/* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regular text*/
 
-/* ion-input.input[type="date" i] {
-
+/* ion-input[type="date" i] {
+  --placeholder-color: blue;
 } */
 
 ion-col.col-save-changes-button {
