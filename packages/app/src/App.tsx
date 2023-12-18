@@ -33,6 +33,7 @@ import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
 import { PreSplash } from "./pages/PreSplash";
 import { Preferences } from "./pages/Settings/Preferences";
+import { Progress } from "./pages/Settings/Progress";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -243,6 +244,16 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout customBackground="white" wide={true}>
               <Preferences />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/progress"
+          render={() => (
+            <AuthedLayout customBackground="#f7faf9" wide={true}>
+              <Progress />
             </AuthedLayout>
           )}
         />

@@ -1,3 +1,17 @@
+.title-style h1 {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  /* UI Type/text-3xl/[S] */
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px; /* 125% */
+  letter-spacing: -0.5px;
+}
+
 .label-style {
   display: flex;
   align-items: center;
@@ -13,7 +27,7 @@
   background: none;
 }
 
-ion-select::part(placeholder) {
+.preferences-style ion-select::part(placeholder) {
   color: var(--light-suelo, #000);
   font-feature-settings:
     "clig" off,
@@ -32,7 +46,7 @@ ion-select::part(placeholder) {
   justify-content: space-between;
 }
 
-ion-select::part(text) {
+.preferences-style ion-select::part(text) {
   color: var(--light-suelo, #000);
   font-feature-settings:
     "clig" off,
@@ -44,7 +58,7 @@ ion-select::part(text) {
   opacity: unset;
 }
 
-ion-select::part(icon) {
+.preferences-style ion-select::part(icon) {
   color: #006a67;
   opacity: 0.5;
 }

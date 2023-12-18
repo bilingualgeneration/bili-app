@@ -64,9 +64,7 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
         <IonContent fullscreen className="ion-padding" style={contentStyle}>
           <div className="container">{children}</div>
         </IonContent>
-        <IonFooter className="ion-no-border">
-          <FooterMenu />
-        </IonFooter>
+        <IonFooter className="ion-no-border">{/* <FooterMenu /> */}</IonFooter>
       </IonPage>
     </ProfileContextProvider>
   );

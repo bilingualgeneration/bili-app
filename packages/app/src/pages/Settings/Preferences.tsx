@@ -1,9 +1,11 @@
 import {
   IonButton,
+  IonContent,
   IonIcon,
   IonItem,
   IonLabel,
   IonList,
+  IonPopover,
   IonSelect,
   IonSelectOption,
   IonToggle,
@@ -15,7 +17,7 @@ import "./Preferences.css";
 export const Preferences: React.FC = () => {
   return (
     <>
-      <IonList>
+      <IonList className="preferences-style">
         <IonItem>
           <div className="title-style">
             <h1>Preferences</h1>
@@ -34,8 +36,8 @@ export const Preferences: React.FC = () => {
                 <Question />
               </button>
             </div>
-            <IonSelectOption value="apple">English</IonSelectOption>
-            <IonSelectOption value="banana">Spanish</IonSelectOption>
+            <IonSelectOption value="english">English</IonSelectOption>
+            <IonSelectOption value="spanish">Spanish</IonSelectOption>
           </IonSelect>
         </IonItem>
 
@@ -80,7 +82,14 @@ export const Preferences: React.FC = () => {
               </button>
             </div>
             <IonSelectOption value="unlimited">Unlimited</IonSelectOption>
-            <IonSelectOption value="limited">Limited</IonSelectOption>
+            <IonSelectOption value="30">30mins</IonSelectOption>
+            <IonSelectOption value="1">1 hour</IonSelectOption>
+            <IonSelectOption value="1.30">1 hour 30 mins</IonSelectOption>
+            <IonSelectOption value="2">2 hours</IonSelectOption>
+            <IonSelectOption value="2.30">2 hours 30 mins</IonSelectOption>
+            <IonSelectOption value="3">3 hours</IonSelectOption>
+            <IonSelectOption value="3.30">3 hours 30 mins</IonSelectOption>
+            <IonSelectOption value="4">4 hours</IonSelectOption>
           </IonSelect>
         </IonItem>
 
