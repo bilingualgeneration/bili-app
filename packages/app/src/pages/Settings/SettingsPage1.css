@@ -62,20 +62,39 @@ p {
   line-height: 24px; /* 150% */
 }
 
-.a-tag {
-  display: flex;
+ion-button.see-all {
   width: 5em; /* 72px; */
-  flex-direction: column;
-  justify-content: center;
-  align-self: stretch;
   color: #889391;
-  text-align: right;
   font-size: 1em; /* 14px; */
-  font-style: normal;
   font-weight: 600;
-  line-height: 1.714; /* 24px; 171.429% */
-  margin: 1.5em 0 1em; /* margin-top: 24px; margin-bottom: 16px; */
-  /* text-decoration-line: underline; */
+  text-decoration-line: underline;
+  --background-hover: none;
+  --border-radius: 0;
+  --padding-top: 20%;
+  --padding-bottom: 20%;
+}
+
+ion-button.see-all.button-disabled {
+  --background: none;
+}
+
+ion-button.scroll-right-button {
+  --color: black;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --box-shadow: none;
+  --background-hover: none;
+}
+
+ion-button.scroll-right-button.button-disabled {
+  --background: none;
+}
+
+ion-icon.scroll-right-icon {
+  font-size: 3em;
+  --ionicon-stroke-width: 16px;
 }
 
 ion-row.row {
@@ -91,9 +110,8 @@ ion-col.child-name-age-col {
 ion-button.add-child-btn {
   --padding-top: 5%;
   --padding-bottom: 5%;
-  box-shadow:
-    0px 0px 1px 0px rgba(0, 0, 0, 0.4),
-    0px 12px 12px -6px rgba(0, 0, 0, 0.16);
+  border-width: 0;
+  box-shadow: 0px 12px 12px -6px rgba(0, 0, 0, 0.16);
 }
 
 /******* circle icon + first-name letter overlay styles *******/
@@ -161,9 +179,4 @@ ion-button.add-child-btn {
   opacity: 0.4;
   font-size: 2em;
   padding: 0 10%;
-}
-
-ion-icon.scroll-right-button {
-  font-size: 3em;
-  --ionicon-stroke-width: 16px;
 }

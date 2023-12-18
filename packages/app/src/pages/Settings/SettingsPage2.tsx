@@ -27,6 +27,7 @@ import { SettingsHeader } from "@/components/SettingsHeader";
 import "./SettingsPage1.css";
 import "./SettingsPage2.css";
 import { useEffect, useRef } from "react";
+import { FormattedMessage } from "react-intl";
 
 export const SettingsPage2: React.FC = () => {
   const phoneMask = useMaskito({
@@ -61,14 +62,26 @@ export const SettingsPage2: React.FC = () => {
         <IonGrid>
           <IonRow className="ion-justify-content-between row">
             <IonCol size="auto">
-              <h1 className="child-profile-heading">Adult Profile</h1>
+              <h1 className="child-profile-heading">
+                <FormattedMessage
+                  id="settings.adult"
+                  defaultMessage="Adult Profile"
+                  description="Adult Profile page title in settings"
+                />
+              </h1>
             </IonCol>
           </IonRow>
 
           <div className="adult-profile-content">
             <IonRow>
               <IonCol>
-                <IonLabel>Full name</IonLabel>
+                <IonLabel>
+                  <FormattedMessage
+                    id="settings.fullName"
+                    defaultMessage="Full name"
+                    description="Full name label WITHOUT required asterix in settings"
+                  />
+                </IonLabel>
                 <IonInput
                   className="input"
                   shape="round"
@@ -80,7 +93,13 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel>Phone number</IonLabel>
+                <IonLabel>
+                  <FormattedMessage
+                    id="settings.phone"
+                    defaultMessage="Phone number"
+                    description="Phone number label in settings"
+                  />
+                </IonLabel>
                 <IonInput
                   ref={async (phoneInput) => {
                     if (phoneInput) {
@@ -99,7 +118,13 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel>Email address</IonLabel>
+                <IonLabel>
+                  <FormattedMessage
+                    id="settings.email"
+                    defaultMessage="Email address"
+                    description="Email address label WITHOUT required asterix in settings"
+                  />
+                </IonLabel>
                 <IonInput
                   className="input"
                   type="email"
@@ -112,7 +137,13 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel>Date of birth</IonLabel>
+                <IonLabel>
+                  <FormattedMessage
+                    id="settings.dob"
+                    defaultMessage="Date of birth"
+                    description="Date of birth input label in settings"
+                  />
+                </IonLabel>
                 <IonInput
                   className="input date-type"
                   type="date"
@@ -124,7 +155,13 @@ export const SettingsPage2: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel>Country</IonLabel>
+                <IonLabel>
+                  <FormattedMessage
+                    id="settings.country"
+                    defaultMessage="Country"
+                    description="Country input label in settings"
+                  />
+                </IonLabel>
                 <IonInput
                   className="input"
                   shape="round"
@@ -137,7 +174,11 @@ export const SettingsPage2: React.FC = () => {
             <IonRow>
               <IonCol class="col-save-changes-button">
                 <IonButton shape="round" className="save-changes-button">
-                  Save changes
+                  <FormattedMessage
+                    id="settings.saveChangeBtn"
+                    defaultMessage="Save changes"
+                    description="Save changes button label for Adult Profile within settings page"
+                  />
                 </IonButton>
               </IonCol>
             </IonRow>

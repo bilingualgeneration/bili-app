@@ -33,6 +33,7 @@ import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/SettingsExplore/SettingsExploreMiniCard";
+import { FormattedMessage } from "react-intl";
 
 export const SettingsPage1: React.FC = ({}) => {
   return (
@@ -43,11 +44,18 @@ export const SettingsPage1: React.FC = ({}) => {
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
             <IonCol size="auto">
-              <h1 className="child-profile-heading">Child Profile</h1>
+              <h1 className="child-profile-heading">
+                <FormattedMessage
+                  id="settings.child"
+                  defaultMessage="Child Profile"
+                  description="Child Profile page heading in settings"
+                />
+              </h1>
             </IonCol>
 
             <IonCol size="auto">
               <IonButton
+                disabled={true}
                 size="small"
                 className="add-child-btn"
                 onClick={() => {
@@ -60,9 +68,12 @@ export const SettingsPage1: React.FC = ({}) => {
                   icon={addOutline}
                   size="small"
                 />
-
                 <IonLabel style={{ color: "var(--Base-Nube)" }}>
-                  Add child
+                  <FormattedMessage
+                    id="settings.addChildBtn"
+                    defaultMessage="Add child"
+                    description="Add child button label for Child Profile within settings page"
+                  />
                 </IonLabel>
               </IonButton>
             </IonCol>
@@ -131,9 +142,19 @@ export const SettingsPage1: React.FC = ({}) => {
           <IonRow class="ion-align-items-end ion-justify-content-between row">
             <IonCol size="auto">
               <div className="explore-bili-heading-subheading-container">
-                <h1 className="explore-bili-heading">Explore Bili</h1>
+                <h1 className="explore-bili-heading">
+                  <FormattedMessage
+                    id="settings.explore"
+                    defaultMessage="Explore Bili"
+                    description="Explore Bili heading in settings"
+                  />
+                </h1>
                 <p className="explore-bili-subheading">
-                  Learn how to use Bili to meet language goals
+                  <FormattedMessage
+                    id="settings.exploreSubheading"
+                    defaultMessage="Learn how to use Bili to meet language goals"
+                    description="Explore Bili subheading in settings"
+                  />
                   <IonIcon
                     aria-hidden="true"
                     slot="end"
@@ -146,9 +167,13 @@ export const SettingsPage1: React.FC = ({}) => {
             </IonCol>
 
             <IonCol size="auto">
-              <a className="a-tag" href="URL">
-                See all &#40;9&#41;
-              </a>
+              <IonButton disabled={true} fill="clear" className="see-all">
+                <FormattedMessage
+                  id="settings.seeAll"
+                  defaultMessage="See all &#40;9&#41;"
+                  description="See all link in settings"
+                />
+              </IonButton>
             </IonCol>
           </IonRow>
 
@@ -267,13 +292,19 @@ export const SettingsPage1: React.FC = ({}) => {
               </IonCol>
 
               <IonCol className="child-name-age-col ion-align-items-end">
-                <IonIcon
-                  aria-label="Scroll Right"
-                  // size="large"
-                  // slot="end"
-                  icon={chevronForwardCircleOutline}
+                <IonButton
                   className="scroll-right-button"
-                />
+                  disabled={true}
+                  fill="clear"
+                >
+                  <IonIcon
+                    aria-label="Scroll Right"
+                    // size="large"
+                    // slot="end"
+                    icon={chevronForwardCircleOutline}
+                    className="scroll-right-icon"
+                  />
+                </IonButton>
               </IonCol>
             </IonRow>
           </div>
