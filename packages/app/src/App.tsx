@@ -58,6 +58,7 @@ import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
 import { PreSplash } from "./pages/PreSplash";
 import { SettingsPage2 } from "./pages/Settings";
+import { SideMenu } from "./components/Settings/SideMenu";
 
 setupIonicReact();
 

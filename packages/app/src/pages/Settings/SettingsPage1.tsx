@@ -18,7 +18,7 @@ import {
   IonCard,
   IonThumbnail,
 } from "@ionic/react";
-import { SettingsHeader } from "@/components/SettingsHeader";
+import { SettingsHeader } from "@/components/Settings/SettingsHeader";
 import {
   addOutline,
   chevronForwardCircle,
@@ -28,11 +28,11 @@ import {
   sparkles,
 } from "ionicons/icons";
 import "./SettingsPage1.css";
-import { SettingsExploreCard } from "@/components/SettingsExplore";
+import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
-import SettingsExploreMiniCard from "@/components/SettingsExplore/SettingsExploreMiniCard";
+import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage } from "react-intl";
 
 export const SettingsPage1: React.FC = ({}) => {
