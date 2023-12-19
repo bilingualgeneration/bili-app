@@ -486,32 +486,27 @@ ion-button.story-intro-button {
   background-repeat: no-repeat;
   text-align: -webkit-center;
   margin-bottom: 108px;
+  background-size: 100% 65%;
 }
 
 #student-landing-page {
   .col-custom-position-1 {
     position: relative;
-    top: 10px;
+    bottom: 5px;
   }
 
   .col-custom-position-2 {
     position: relative;
-    bottom: 20px;
   }
 
   .col-custom-position-3 {
     position: relative;
-    top: 20px;
+    top: 30px;
   }
 
   .col-custom-position-4 {
     position: relative;
-    top: 40px;
-  }
-
-  .col-custom-position-5 {
-    position: relative;
-    top: 10px;
+    bottom: 20px;
   }
 }
 
@@ -577,8 +572,12 @@ ion-button.story-intro-button {
   justify-content: center;
 }
 
+.cards-title a {
+  text-decoration: none;
+}
+
 .cards-title h2 {
-  color: #1c1c17;
+  color: var(--Base-Selva, #006a67);
   font-family: Outfit;
   font-size: 40px;
   font-style: normal;

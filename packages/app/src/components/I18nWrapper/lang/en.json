@@ -111,7 +111,7 @@
   "storyFactory.Welcome": "Welcome to Story Factory Page",
 
   "landingPage.welcome": "Hello {userName}!",
-  "landingPage.assignments": "This week’s assignments",
+  "landingPage.assignments": "Categories",
   "landingPage.stories": "Stories",
   "landingPage.wellness": "Wellness",
   "landingPage.play": "Play",
