@@ -25,6 +25,8 @@ import "./Progress.css";
 import { useState } from "react";
 
 export const Progress: React.FC = () => {
+  const [period, setPeriod] = useState("week" as "week" | "all");
+
   const kidsName = "Vanessa";
   const firstLetter = kidsName[0];
   return (
@@ -39,30 +41,42 @@ export const Progress: React.FC = () => {
         <IonItem lines="none">
           <div className="segment-style">
             <h4>Activity insights</h4>
-            <IonSegment value="week">
-              <IonSegmentButton value="week">
-                <IonLabel>Week</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="all-time">
-                <IonLabel>All time</IonLabel>
-              </IonSegmentButton>
-            </IonSegment>
+            <div className="segment-control">
+              <button
+                onClick={() => setPeriod("week")}
+                className={`segment-control-button ${
+                  period === "week" ? "checked" : ""
+                }`}
+              >
+                Week
+              </button>
+              <button
+                onClick={() => setPeriod("all")}
+                className={`segment-control-button ${
+                  period === "all" ? "checked" : ""
+                }`}
+              >
+                All time
+              </button>
+            </div>
           </div>
         </IonItem>
 
-        <IonSelect interface="popover" toggleIcon={chevronDown}>
-          <div className="label-style" slot="label">
-            <span className="name-avatar small-oval-element">
-              {firstLetter}
-            </span>
-            <h4>{kidsName}</h4>
-          </div>
-          <IonSelectOption value="1">{kidsName}</IonSelectOption>
-          {/* <IonSelectOption value="2">{kidsName}</IonSelectOption>
-                    <IonSelectOption value="3">{kidsName}</IonSelectOption>
-                    <IonSelectOption value="4">{kidsName}</IonSelectOption>
-                    <IonSelectOption value="5">{kidsName}</IonSelectOption> */}
-        </IonSelect>
+        <IonItem lines="none" className="kids-name-select">
+          <IonSelect interface="popover" toggleIcon={chevronDown}>
+            <div className="label-style" slot="label">
+              <span className="name-avatar small-oval-element">
+                {firstLetter}
+              </span>
+              <h4>{kidsName}</h4>
+            </div>
+            <IonSelectOption value="1">{kidsName}</IonSelectOption>
+            {/* <IonSelectOption value="2">{kidsName}</IonSelectOption>
+                        <IonSelectOption value="3">{kidsName}</IonSelectOption>
+                        <IonSelectOption value="4">{kidsName}</IonSelectOption>
+                        <IonSelectOption value="5">{kidsName}</IonSelectOption> */}
+          </IonSelect>
+        </IonItem>
       </IonList>
 
       <IonGrid className="whole-grid-style">
@@ -173,7 +187,7 @@ export const Progress: React.FC = () => {
                           fontFamily: "Outfit",
                           fontSize: "36px",
                           fontStyle: "normal",
-                          fontWeight: "800",
+                          fontWeight: "600",
                           lineHeight: "800",
                           letterSpacing: "0.2px",
                         }}

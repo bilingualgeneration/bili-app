@@ -18,36 +18,32 @@
   overflow: visible;
   justify-content: space-between;
   width: 100%;
+  margin: 10px 0;
 }
 
 .segment-style h4 {
   color: var(--light-suelo, #000);
-  margin: 16px;
 }
 
-.segment-style ion-segment {
+.segment-control {
   display: flex;
   padding: 4px;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
   background: var(--base-agua, rgba(0, 106, 103, 0.12));
-  width: 20%;
 }
 
-.segment-style .segment-button-checked {
+.segment-control-button {
   border-radius: 1000px;
-  background: var(--base-selva, #006a67);
-  color: #fff;
-  padding: 8px;
-}
-
-.segment-style ion-segment-button {
-  border-radius: 8px;
   color: #000;
   padding: 8px;
-  --color-checked: none;
   font-size: 14px;
+  background: none;
+}
+.segment-control-button.checked {
+  background: var(--base-selva, #006a67);
+  color: #fff;
 }
 
 .name-avatar {
@@ -166,10 +162,30 @@
   color: #000;
 }
 
+.activities-card ion-card {
+  --background: var(--Cielo-Cielo, #d3eae8);
+  background-image: url("/assets/img/design_pattern_progress.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 .progress-data ion-row {
   padding: 10px;
 }
 
 .second-column {
   padding: 0;
+}
+
+ion-item.kids-name-select {
+  --background-hover: none;
+}
+
+.grid-card ion-text {
+  color: var(--Base-Suelo, #000);
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%; /* 22px */
 }

@@ -62,3 +62,11 @@
   color: #006a67;
   opacity: 0.5;
 }
+
+.popover-text {
+  padding: 10px;
+}
+
+.preferences-style ion-item {
+  --background-hover: none;
+}
