@@ -11,23 +11,11 @@ import {
 } from "ionicons/icons";
 import "./SideMenu.css";
 import { SideMenuOption } from "./SideMenuOption";
-import { useHistory } from "react-router-dom";
 
 export const SideMenu: React.FC = () => {
-  const history = useHistory();
   return (
     <>
       <IonList lines="none" style={{ height: "100vh", padding: "1rem" }}>
-        <IonButton
-          className="arrow-back-btn"
-          expand="block"
-          onClick={() => {
-            history.go(-1);
-          }}
-        >
-          <IonIcon className="arrow-back-icon" icon={arrowBackOutline} />
-        </IonButton>
-
         <SideMenuOption
           icon={gridOutline}
           id={"sideMenu.overview"}
