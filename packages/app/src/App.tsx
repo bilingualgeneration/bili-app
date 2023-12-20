@@ -22,6 +22,7 @@ import { StoryFactoryPage6 } from "./pages/StoryFactory/StoryFactoryPg6";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "./pages/Login";
+import { Play } from "./pages/Play";
 import Memory from "./pages/games/Memory";
 import { Preload } from "./pages/Preload";
 import ResetPassword from "./pages/ResetPassword";
@@ -114,6 +115,20 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <Memory />
             </UnauthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/play"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <Play />
+            </AuthedLayout>
           )}
         />
 
