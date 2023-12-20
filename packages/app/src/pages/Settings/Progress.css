@@ -1,0 +1,191 @@
+.title-style h1 {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  /* UI Type/text-3xl/[S] */
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px; /* 125% */
+  letter-spacing: -0.5px;
+}
+
+.segment-style {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.segment-style h4 {
+  color: var(--light-suelo, #000);
+}
+
+.segment-control {
+  display: flex;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1000px;
+  background: var(--base-agua, rgba(0, 106, 103, 0.12));
+}
+
+.segment-control-button {
+  border-radius: 1000px;
+  color: #000;
+  padding: 8px;
+  font-size: 14px;
+  background: none;
+}
+.segment-control-button.checked {
+  background: var(--base-selva, #006a67);
+  color: #fff;
+}
+
+.name-avatar {
+  background: var(--Cielo-Low, #22beb9);
+  color: #fff;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 14.566px;
+}
+
+.small-oval-element {
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-style ion-select {
+  background: #eceeed;
+  border-radius: 8px;
+  padding: 0 16px 0;
+}
+
+.progress-style {
+  background: #f7faf9;
+}
+
+.progress-style ion-select .select-highlight {
+  --background: none;
+}
+.progress-style ion-item {
+  --background: #f7faf9;
+}
+.grid-graph-style {
+  margin-inline: 0;
+}
+
+.grid-card ion-card {
+  margin: 0;
+}
+
+.grid-card ion-card-title {
+  color: #000;
+  font-size: 20px;
+  text-align: start;
+}
+
+.whole-grid-style {
+  padding: 24px 0 0;
+}
+.whole-grid-style ion-card {
+  margin-inline: 0;
+  height: 100%;
+  margin: 0;
+}
+
+.grid-text-style-big {
+  color: var(--Neutral-Colors-Black, #1e1b39);
+  font-family: Outfit;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.grid-text-style-small {
+  color: var(--Base-Suelo, #000);
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+}
+
+.progress-data p {
+  margin: 0;
+}
+
+.color-1 {
+  width: 20px;
+  height: 20px;
+  background: var(--Cielo-Low, #22beb9);
+}
+.color-2 {
+  width: 20px;
+  height: 20px;
+  background: var(--Base-Selva, #006a67);
+}
+.color-3 {
+  width: 20px;
+  height: 20px;
+  background: var(--Cielo-Lowest, #003735);
+}
+.color-4 {
+  width: 20px;
+  height: 20px;
+  background: var(--Cielo-Cielo, #d3eae8);
+}
+
+.activities-card span {
+  color: var(--Base-Suelo, #000);
+  font-family: Outfit;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 56px; /* 116.667% */
+  letter-spacing: -1px;
+}
+
+.activities-card div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+
+.activities-card ion-card {
+  --background: var(--Cielo-Cielo, #d3eae8);
+  background-image: url("/assets/img/design_pattern_progress.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.progress-data ion-row {
+  padding: 10px;
+}
+
+.second-column {
+  padding: 0;
+}
+
+ion-item.kids-name-select {
+  --background-hover: none;
+}
+
+.grid-card ion-text {
+  color: var(--Base-Suelo, #000);
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%; /* 22px */
+}

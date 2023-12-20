@@ -98,5 +98,11 @@
   "landingPage.stories": "Cuentos",
   "landingPage.wellness": "Bienestar",
   "landingPage.play": "Juego",
-  "landingPage.community": "Comunidad"
+  "landingPage.community": "Comunidad",
+
+  "settingsProgress.popover1": "",
+  "settingsProgress.popover2": "",
+  "settingsProgress.popover3": "",
+  "settingsProgress.popover4": "",
+  "settingsProgress.popover5": ""
 }
