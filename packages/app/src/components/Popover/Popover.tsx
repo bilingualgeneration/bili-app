@@ -1,6 +1,6 @@
-import { IonPopover } from "@ionic/react";
+import { IonContent, IonPopover } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { string } from "zod";
 
 type PopoverProps = {
@@ -10,8 +10,10 @@ type PopoverProps = {
 
 export const Popover: React.FC<PopoverProps> = ({ content, trigger }) => {
   return (
-    <IonPopover trigger={trigger} triggerAction="hover" showBackdrop={false}>
-      <p style={{ padding: "10px" }}>{content as string}</p>
-    </IonPopover>
+    <>
+      <IonPopover trigger={trigger} triggerAction="hover" showBackdrop={false}>
+        <p style={{ padding: "10px" }}>{content as string}</p>
+      </IonPopover>
+    </>
   );
 };
