@@ -94,15 +94,9 @@
   "storyFactory.Welcome": "Bienvenidos a la página Fábrica de cuentos",
 
   "landingPage.welcome": "¡Hola {name}!",
-  "landingPage.assignments": "Las tareas de esta semana",
+  "landingPage.assignments": "Categorias",
   "landingPage.stories": "Cuentos",
   "landingPage.wellness": "Bienestar",
   "landingPage.play": "Juego",
-  "landingPage.community": "Comunidad",
-
-  "settingsProgress.popover1": "",
-  "settingsProgress.popover2": "",
-  "settingsProgress.popover3": "",
-  "settingsProgress.popover4": "",
-  "settingsProgress.popover5": ""
+  "landingPage.community": "Comunidad"
 }

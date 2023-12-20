@@ -30,7 +30,11 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
       <div className="home-wave-icons">
         <div
           className="oval-element"
-          style={{ backgroundColor: iconBackgroundColor }}
+          style={{
+            backgroundColor: iconBackgroundColor,
+            width: "126px",
+            height: "126px",
+          }}
         >
           {url ? <a href={url}>{icon}</a> : icon}
         </div>

@@ -18,7 +18,7 @@ import { useIntl, FormattedMessage } from "react-intl";
 import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
 import MeGustaIcon from "@/assets/icons/me_gusta.svg?react";
-import ArteIcon from "@/assets/icons/arte.svg?react";
+import PlayIcon from "@/assets/icons/play.svg?react";
 import BieneStarIcon from "@/assets/icons/bienestar.svg?react";
 import ComunidadIcon from "@/assets/icons/comunidad.svg?react";
 import StemIcon from "@/assets/icons/stem.svg?react";
@@ -30,6 +30,8 @@ import SmallFlower from "@/assets/icons/small_flower.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { string } from "zod";
+import { Link } from "react-router-dom";
+import "./StudentDashboard.css";
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
@@ -45,11 +47,11 @@ export const StudentDashboard: React.FC = () => {
       </div>
 
       <div className="">
-        <div className="cards-title">
+        <div className="icons-title">
           <h2>
             <FormattedMessage id="landingPage.assignments" />
           </h2>
-          {!isImmersive && <p>This week's assignments</p>}
+          {!isImmersive && <p>Categories</p>}
         </div>
         {/* icons */}
         <div className="wave-icons">
@@ -57,43 +59,35 @@ export const StudentDashboard: React.FC = () => {
             <IonRow>
               <IonCol className="col-custom-position-1">
                 <IconWithText
-                  title={"¡Fábrica de cuentos!"}
-                  subtitle={"Story Factory"}
-                  url="/story-factory/1"
+                  title={"Cuentos!"}
+                  subtitle={"Stories"}
                   icon={<MeGustaIcon />}
                   iconBackgroundColor="#006A67"
                 />
               </IonCol>
               <IonCol className="col-custom-position-2">
                 <IconWithText
-                  title={"Afirmaciones de uno mismo"}
-                  subtitle={"Affirmations of self"}
+                  title={"Bienestar"}
+                  subtitle={"Welness"}
                   icon={<BieneStarIcon />}
                   iconBackgroundColor="#AC217B"
                 />
               </IonCol>
               <IonCol className="col-custom-position-3">
                 <IconWithText
-                  title={"¿Qué harías?"}
-                  subtitle={"What would you do?"}
-                  icon={<ComunidadIcon />}
-                  iconBackgroundColor="#F0091B"
+                  title={"Juego"}
+                  subtitle={"Play"}
+                  url="/story-factory/4"
+                  icon={<PlayIcon />}
+                  iconBackgroundColor="#FF5708"
                 />
               </IonCol>
               <IonCol className="col-custom-position-4">
                 <IconWithText
-                  title={"Auto retrato"}
-                  subtitle={"Self-portrait"}
-                  icon={<ArteIcon />}
-                  iconBackgroundColor="#0045A1"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-5">
-                <IconWithText
-                  title={"CTIM"}
-                  subtitle={"STEM"}
-                  icon={<StemIcon />}
-                  iconBackgroundColor="#8FB8FA"
+                  title={"Comunidad"}
+                  subtitle={"Community"}
+                  icon={<ComunidadIcon />}
+                  iconBackgroundColor="#22BEB9"
                 />
               </IonCol>
             </IonRow>
@@ -253,10 +247,12 @@ export const StudentDashboard: React.FC = () => {
         {/* play */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.play" />
-            </h2>
-            {!isImmersive && <p>Play</p>}
+            <a href="/story-factory/4">
+              <h2>
+                <FormattedMessage id="landingPage.play" />
+              </h2>
+              {!isImmersive && <p>Play</p>}
+            </a>
           </div>
 
           <div
