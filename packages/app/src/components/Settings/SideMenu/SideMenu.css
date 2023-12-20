@@ -1,11 +1,13 @@
+/*
 ion-button.side-menu-btns {
   --background: white;
   width: 100%;
   --box-shadow: none;
   margin: 5% 5%;
 }
+*/
 
-ion-button.hover:hover {
+.hover-highlight:hover {
   --background: var(--base-agua, rgba(0, 106, 103, 0.12));
 }
 
@@ -13,23 +15,25 @@ ion-button.hover:hover {
   color: #00ff00; 
 } */
 
+/*
 ion-icon.side-menu-icon {
   color: #a1a4b2;
   font-size: 1.5em;
 }
+*/
 
+/*
 .item.sc-ion-label-md-h,
 .item .sc-ion-label-md-h.overview-label {
   --color: #a1a4b2;
   font-size: 1.5em;
   font-family: Outfit;
 }
+*/
 
 ion-button.arrow-back-btn {
   --background: var(--flamenco-highest, #ffd8eb);
-  width: 100%;
   --box-shadow: none;
-  height: 100%;
 }
 
 ion-icon.arrow-back-icon {
@@ -37,8 +41,10 @@ ion-icon.arrow-back-icon {
   font-size: 2.5em;
 }
 
+/*
 ion-row.side-menu-options-row {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+*/

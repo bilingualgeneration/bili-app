@@ -1,2 +1,4 @@
-export * from "./SettingsPage1";
-export * from "./SettingsPage2";
+export * from "./Overview";
+export * from "./Profile";
+export * from "./Preferences";
+export * from "./Progress";
