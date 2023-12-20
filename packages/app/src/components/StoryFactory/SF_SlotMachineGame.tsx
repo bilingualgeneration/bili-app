@@ -9,6 +9,7 @@ import {
 import { MessageFormatElement } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import "./sf_SlotMachineGame.css";
+import { useHistory } from "react-router-dom";
 
 interface JuegoCardProps {
   backgroundImage: string;
@@ -28,16 +29,19 @@ export const JuegoCard: React.FC<JuegoCardProps> = ({
   storyId,
 }) => {
   const { isImmersive } = useProfile();
+  const history = useHistory();
 
   // conditionally make card clickable
-  let props: { [key: string]: any } = {};
-  if (!isLocked) {
-    props.href = `/story-factory/${storyId}`;
-  }
 
   return (
     <IonCard
-      {...props}
+      onClick={() => {
+        // todo: better
+        if (!isLocked) {
+          //props.href = `/story-factory/${storyId}`;
+          history.push(`/story-factory/${storyId}`);
+        }
+      }}
       className={`individual-juego-card ${isLocked ? "locked" : ""}`}
       style={{
         backgroundImage: `url("${backgroundImage}")`,

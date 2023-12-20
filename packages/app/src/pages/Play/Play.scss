@@ -1,0 +1,34 @@
+$colors: #973d78, #1fb7b1, #ff5708;
+
+.playCard {
+  @for $index from 1 through 3 {
+    &:nth-child(#{$index}) {
+      ion-card {
+        background-color: nth($colors, $index);
+        h1 {
+          color: white;
+          //color: nth($colors, $index);
+        }
+      }
+    }
+  }
+  * {
+    // removes underline from linked cards
+    text-decoration: none !important;
+  }
+  ion-card {
+    height: 30rem;
+    /*
+	h1{
+	    text-shadow: 
+		-2px -2px 0 white,  
+		2px -2px 0 white,
+		-2px 2px 0 white,
+		2px 2px 0 white;
+	}
+	*/
+    p {
+      color: #ffffff;
+    }
+  }
+}

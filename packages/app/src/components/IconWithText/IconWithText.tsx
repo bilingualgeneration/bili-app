@@ -6,6 +6,7 @@ import {
   IonText,
 } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
+import { Link } from "react-router-dom";
 import React from "react";
 
 type IconWithTextProps = {
@@ -36,7 +37,7 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
             height: "126px",
           }}
         >
-          {url ? <a href={url}>{icon}</a> : icon}
+          {url ? <Link to={url}>{icon}</Link> : icon}
         </div>
         <div className="">
           <div

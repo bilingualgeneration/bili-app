@@ -48,7 +48,7 @@ export const StudentDashboard: React.FC = () => {
 
       <div className="">
         <div className="icons-title">
-          <h2>
+          <h2 style={{ marginBottom: 10 }}>
             <FormattedMessage id="landingPage.assignments" />
           </h2>
           {!isImmersive && <p>Categories</p>}
@@ -77,7 +77,7 @@ export const StudentDashboard: React.FC = () => {
                 <IconWithText
                   title={"Juego"}
                   subtitle={"Play"}
-                  url="/story-factory/4"
+                  url="/play"
                   icon={<PlayIcon />}
                   iconBackgroundColor="#FF5708"
                 />
@@ -247,12 +247,12 @@ export const StudentDashboard: React.FC = () => {
         {/* play */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <a href="/story-factory/4">
+            <Link to="/play">
               <h2>
                 <FormattedMessage id="landingPage.play" />
               </h2>
               {!isImmersive && <p>Play</p>}
-            </a>
+            </Link>
           </div>
 
           <div
