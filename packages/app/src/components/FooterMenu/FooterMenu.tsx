@@ -23,16 +23,6 @@ export const FooterMenu: React.FC = ({}) => {
   return (
     <>
       <div>
-        {/* <IonGrid fixed={true} style={{ 
-            maxWidth: '691px',
-        }}>
-            <IonRow>
-                <IonCol offset="5" className="col-custom-position-4">
-                    <Eclipse/>
-                </IonCol>
-            </IonRow>
-        </IonGrid> */}
-
         <IonGrid
           fixed={true}
           style={{

@@ -1,0 +1,72 @@
+.title-style h1 {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  /* UI Type/text-3xl/[S] */
+  font-family: Outfit;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px; /* 125% */
+  letter-spacing: -0.5px;
+}
+
+.label-style {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.label-style h4 {
+  color: var(--light-suelo, #000);
+  margin: 16px;
+}
+
+.question-button {
+  background: none;
+}
+
+.preferences-style ion-select::part(placeholder) {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  opacity: unset;
+}
+
+.align-line-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.preferences-style ion-select::part(text) {
+  color: var(--light-suelo, #000);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  opacity: unset;
+}
+
+.preferences-style ion-select::part(icon) {
+  color: #006a67;
+  opacity: 0.5;
+}
+
+.popover-text {
+  padding: 10px;
+}
+
+.preferences-style ion-item {
+  --background-hover: none;
+}
