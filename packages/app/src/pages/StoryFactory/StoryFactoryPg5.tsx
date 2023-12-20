@@ -110,7 +110,7 @@ export const StoryFactoryPage5: React.FC = () => {
       </IonCard>
 
       <img
-        className="refresh-button"
+        className="refresh-button ion-hide"
         src={refreshButton}
         alt="Refresh button icon"
       />
