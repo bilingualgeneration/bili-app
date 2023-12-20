@@ -18,7 +18,7 @@ import {
   IonCard,
   IonThumbnail,
 } from "@ionic/react";
-import { SettingsHeader } from "@/components/Settings/SettingsHeader";
+import Joyride from "react-joyride";
 import {
   addOutline,
   chevronForwardCircle,
@@ -27,7 +27,7 @@ import {
   ellipsisHorizontal,
   sparkles,
 } from "ionicons/icons";
-import "./SettingsPage1.css";
+import "./Overview.css";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
@@ -35,11 +35,64 @@ import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage } from "react-intl";
 
-export const SettingsPage1: React.FC = ({}) => {
+export const Overview: React.FC = ({}) => {
+  const steps = [
+    {
+      target: "#side-menu-button-sideMenu-profile",
+      disableBeacon: true,
+      content: (
+        <FormattedMessage
+          id="settings.onboarding.profile"
+          defaultMessage="Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.'"
+          description="Onboarding message for the Profiles button on the side menu"
+        />
+      ),
+    },
+    {
+      target: "#inclusive-spanish-card",
+      disableBeacon: true,
+      content: (
+        <FormattedMessage
+          id="settings.onboarding.inclusive-spanish"
+          defaultMessage="Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
+          description="Onboarding message for the Profiles button on the side menu"
+        />
+      ),
+    },
+    {
+      target: "#side-menu-button-sideMenu-preferences",
+      disableBeacon: true,
+      content: (
+        <FormattedMessage
+          id="settings.onboarding.preferences"
+          defaultMessage="Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits."
+          description="Onboarding message for the Preferences button on the side menu"
+        />
+      ),
+    },
+    {
+      target: "#side-menu-button-sideMenu-progress",
+      disableBeacon: true,
+      content: (
+        <FormattedMessage
+          id="settings.onboarding.progress"
+          defaultMessage="Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities."
+          description="Onboarding message for the Progress button on the side menu"
+        />
+      ),
+    },
+  ];
   return (
     <>
-      <SettingsHeader></SettingsHeader>
-
+      <Joyride
+        steps={steps}
+        continuous={true}
+        styles={{
+          tooltipContainer: {
+            textAlign: "left",
+          },
+        }}
+      />
       <div className="settings-pg1-container">
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
@@ -209,30 +262,32 @@ export const SettingsPage1: React.FC = ({}) => {
               </IonCol>
 
               <IonCol size="md">
-                <SettingsExploreCard
-                  backgroundImage={settingsCardDesign2}
-                  backgroundColor={"#22BEB9"}
-                  title={"Inclusive Spanish"}
-                  subtitle={
-                    "Learn about what Inclusive Spanish is and why it exists."
-                  }
-                >
-                  <IonRow>
-                    <IonCol size="auto">
-                      <SettingsExploreMiniCard
-                        customColor={"#D3EAE8"}
-                        cardText={"Social Justice"}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
+                <span id="inclusive-spanish-card">
+                  <SettingsExploreCard
+                    backgroundImage={settingsCardDesign2}
+                    backgroundColor={"#22BEB9"}
+                    title={"Inclusive Spanish"}
+                    subtitle={
+                      "Learn about what Inclusive Spanish is and why it exists."
+                    }
+                  >
+                    <IonRow>
+                      <IonCol size="auto">
+                        <SettingsExploreMiniCard
+                          customColor={"#D3EAE8"}
+                          cardText={"Social Justice"}
+                        ></SettingsExploreMiniCard>
+                      </IonCol>
 
-                    <IonCol size="auto">
-                      <SettingsExploreMiniCard
-                        customColor={"#F1D100"}
-                        cardText={"Resources"}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-                  </IonRow>
-                </SettingsExploreCard>
+                      <IonCol size="auto">
+                        <SettingsExploreMiniCard
+                          customColor={"#F1D100"}
+                          cardText={"Resources"}
+                        ></SettingsExploreMiniCard>
+                      </IonCol>
+                    </IonRow>
+                  </SettingsExploreCard>
+                </span>
               </IonCol>
 
               <IonCol size="md">

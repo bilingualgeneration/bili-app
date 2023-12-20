@@ -21,7 +21,7 @@ export const Preferences: React.FC = () => {
   return (
     <>
       <IonList className="preferences-style">
-        <IonItem>
+        <IonItem style={{ marginBottom: "2rem" }}>
           <div className="title-style">
             <h1>Preferences</h1>
           </div>
@@ -89,7 +89,7 @@ export const Preferences: React.FC = () => {
             trigger="click-trigger3"
           />
           <Question id="click-trigger3" />
-          <IonToggle justify="space-between" checked={true}>
+          <IonToggle justify="space-between" checked={true} mode="ios">
             <div className="label-style">
               <h4>Inclusive Spanish</h4>
             </div>
@@ -138,7 +138,7 @@ export const Preferences: React.FC = () => {
             trigger="click-trigger5"
           />
           <Question id="click-trigger5" />
-          <IonToggle justify="space-between" checked={true}>
+          <IonToggle justify="space-between" checked={true} mode="ios">
             <div className="label-style">
               <h4>Sound effects</h4>
             </div>

@@ -11,72 +11,68 @@ import {
 } from "ionicons/icons";
 import "./SideMenu.css";
 import { SideMenuOption } from "./SideMenuOption";
+import { useHistory } from "react-router-dom";
 
 export const SideMenu: React.FC = () => {
+  const history = useHistory();
   return (
     <>
-      <IonList lines="none">
-        <IonItem>
-          <IonButton className="arrow-back-btn">
-            <IonIcon className="arrow-back-icon" icon={arrowBackOutline} />
-          </IonButton>
-        </IonItem>
+      <IonList lines="none" style={{ height: "100vh", padding: "1rem" }}>
+        <IonButton
+          className="arrow-back-btn"
+          expand="block"
+          onClick={() => {
+            history.go(-1);
+          }}
+        >
+          <IonIcon className="arrow-back-icon" icon={arrowBackOutline} />
+        </IonButton>
 
-        <div className="side-menu-options">
-          <IonItem>
-            <SideMenuOption
-              icon={gridOutline}
-              id={"sideMenu.overview"}
-              defaultMessage={"Overview"}
-              description={"Overview label for side menu on settings page"}
-            />
-          </IonItem>
+        <SideMenuOption
+          icon={gridOutline}
+          id={"sideMenu.overview"}
+          defaultMessage={"Overview"}
+          description={"Overview label for side menu on settings page"}
+          to="/settings/overview"
+        />
 
-          <IonItem>
-            <SideMenuOption
-              icon={personOutline}
-              id={"sideMenu.profile"}
-              defaultMessage={"Profile"}
-              description={"Profile label for side menu on settings page"}
-            />
-          </IonItem>
+        <SideMenuOption
+          icon={personOutline}
+          id={"sideMenu.profile"}
+          defaultMessage={"Profile"}
+          description={"Profile label for side menu on settings page"}
+          to="/settings/profile"
+        />
 
-          <IonItem>
-            <SideMenuOption
-              icon={optionsOutline}
-              id={"sideMenu.preferences"}
-              defaultMessage={"Preferences"}
-              description={"Preferences label for side menu on settings page"}
-            />
-          </IonItem>
+        <SideMenuOption
+          icon={optionsOutline}
+          id={"sideMenu.preferences"}
+          defaultMessage={"Preferences"}
+          description={"Preferences label for side menu on settings page"}
+          to="/settings/preferences"
+        />
 
-          <IonItem>
-            <SideMenuOption
-              icon={statsChartOutline}
-              id={"sideMenu.progress"}
-              defaultMessage={"Progress"}
-              description={"Progress label for side menu on settings page"}
-            />
-          </IonItem>
+        <SideMenuOption
+          icon={statsChartOutline}
+          id={"sideMenu.progress"}
+          defaultMessage={"Progress"}
+          description={"Progress label for side menu on settings page"}
+          to="/settings/progress"
+        />
 
-          <IonItem>
-            <SideMenuOption
-              icon={informationCircleOutline}
-              id={"sideMenu.about"}
-              defaultMessage={"About"}
-              description={"About label for side menu on settings page"}
-            />
-          </IonItem>
+        <SideMenuOption
+          icon={informationCircleOutline}
+          id={"sideMenu.about"}
+          defaultMessage={"About"}
+          description={"About label for side menu on settings page"}
+        />
 
-          <IonItem>
-            <SideMenuOption
-              icon={logOutOutline}
-              id={"common.logOut"}
-              defaultMessage={"Log out"}
-              description={"Log out label for side menu on settings page"}
-            />
-          </IonItem>
-        </div>
+        <SideMenuOption
+          icon={logOutOutline}
+          id={"common.logOut"}
+          defaultMessage={"Log out"}
+          description={"Log out label for side menu on settings page"}
+        />
       </IonList>
     </>
   );

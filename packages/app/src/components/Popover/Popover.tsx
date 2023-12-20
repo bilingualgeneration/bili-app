@@ -10,7 +10,7 @@ type PopoverProps = {
 
 export const Popover: React.FC<PopoverProps> = ({ content, trigger }) => {
   return (
-    <IonPopover trigger={trigger} triggerAction="hover" showBackdrop={false}>
+    <IonPopover trigger={trigger} triggerAction="click" showBackdrop={false}>
       <p style={{ padding: "10px" }}>{content as string}</p>
     </IonPopover>
   );

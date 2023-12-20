@@ -19,16 +19,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import {
-  arrowBackOutline,
-  gridOutline,
-  informationCircleOutline,
-  logOutOutline,
-  optionsOutline,
-  personOutline,
-  statsChartOutline,
-} from "ionicons/icons";
-import "./SideMenu.css";
 import { FormattedMessage } from "react-intl";
 
 interface SideMenuOptionProps {
@@ -36,6 +26,7 @@ interface SideMenuOptionProps {
   id: string;
   defaultMessage: string;
   description: string;
+  to?: string;
 }
 
 export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
@@ -43,28 +34,23 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   id,
   defaultMessage,
   description,
+  to,
 }) => {
+  // TODO: remove hover-highlight class and replace with theme
   return (
-    <>
-      <IonButton className="side-menu-btns hover">
-        <IonGrid>
-          <IonRow class="options-row">
-            <IonCol size="auto">
-              <IonIcon className="side-menu-icon" icon={icon} />
-            </IonCol>
-
-            <IonCol>
-              <IonLabel className="overview-label">
-                <FormattedMessage
-                  id={id}
-                  defaultMessage={defaultMessage}
-                  description={description}
-                />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonButton>
-    </>
+    <IonItem
+      className="hover-highlight"
+      id={`side-menu-button-${id.replace(".", "-")}`}
+      routerLink={to}
+    >
+      <IonIcon slot="start" icon={icon} />
+      <IonLabel>
+        <FormattedMessage
+          id={id}
+          defaultMessage={defaultMessage}
+          description={description}
+        />
+      </IonLabel>
+    </IonItem>
   );
 };
