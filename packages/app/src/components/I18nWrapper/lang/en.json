@@ -13,6 +13,7 @@
   "common.noAccount": "Don't have an account?",
   "common.haveAccount": "Already have an account? ",
   "common.logIn": "Log in",
+  "common.logOut": "Log out",
   "common.emailValidation": "Please enter a valid email address",
   "common.passwordValidation": "Please enter your password",
 

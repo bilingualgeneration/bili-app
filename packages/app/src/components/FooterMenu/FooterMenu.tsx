@@ -10,12 +10,11 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import { Link } from "react-router-dom";
 
 import React from "react";
 import Home from "@/assets/icons/menu_home.svg?react";
 import Discovery from "@/assets/icons/menu_discovery.svg?react";
-import Category from "@/assets/icons/menu_category.svg?react";
-import Heart from "@/assets/icons/menu_heart.svg?react";
 import Profile from "@/assets/icons/menu_profile.svg?react";
 import Eclipse from "@/assets/icons/menu_eclipse.svg?react";
 
@@ -26,7 +25,7 @@ export const FooterMenu: React.FC = ({}) => {
         <IonGrid
           fixed={true}
           style={{
-            maxWidth: "691px",
+            maxWidth: "400px",
             marginTop: "50px",
             background: "white",
             borderRadius: "38.563px 38.563px 0px 0px",
@@ -36,12 +35,9 @@ export const FooterMenu: React.FC = ({}) => {
         >
           <IonRow className="ion-align-items-center">
             <IonCol>
-              <a href="/student-dashboard">
+              <Link to="/student-dashboard">
                 <Home />
-              </a>
-            </IonCol>
-            <IonCol>
-              <Category />
+              </Link>
             </IonCol>
             <IonCol style={{ height: "55px" }}>
               <Discovery
@@ -57,10 +53,9 @@ export const FooterMenu: React.FC = ({}) => {
               />
             </IonCol>
             <IonCol>
-              <Heart />
-            </IonCol>
-            <IonCol>
-              <Profile />
+              <Link to="/settings/overview">
+                <Profile />
+              </Link>
             </IonCol>
           </IonRow>
         </IonGrid>

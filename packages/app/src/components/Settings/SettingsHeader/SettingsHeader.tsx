@@ -13,7 +13,8 @@ import {
 } from "@ionic/react";
 import { starOutline } from "ionicons/icons";
 import "./SettingsHeader.css";
-import biliLogo from "../../assets/icons/bili.svg";
+import biliLogo from "../../../assets/icons/bili.svg";
+import { FormattedMessage } from "react-intl";
 
 export const SettingsHeader: React.FC = ({}) => {
   return (
@@ -28,6 +29,7 @@ export const SettingsHeader: React.FC = ({}) => {
               onClick={() => {
                 // route and logic for user to rate app
               }}
+              disabled={true}
             >
               <IonGrid>
                 <IonRow>
@@ -39,8 +41,14 @@ export const SettingsHeader: React.FC = ({}) => {
                     />
                   </IonCol>
                   <IonCol>
-                    <IonLabel style={{ color: "var(--Base-Selva)" }}>
-                      Rate this app
+                    <IonLabel
+                      style={{ color: "var(--Base-Selva)", marginLeft: "10%" }}
+                    >
+                      <FormattedMessage
+                        id="header.rate"
+                        defaultMessage="Rate this app"
+                        description="Clickable text that takes user to rate the Bili app"
+                      />
                     </IonLabel>
                   </IonCol>
                 </IonRow>

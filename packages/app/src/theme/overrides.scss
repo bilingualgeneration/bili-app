@@ -1,5 +1,23 @@
 @use "sass:math";
 
+// calendar icon in input needs color to be fixed
+ion-input[type="date"] {
+  &:not(.has-value) {
+    .native-input[type="date"] {
+      color: #a7a6a6;
+    }
+  }
+  &.has-value {
+    .native-input[type="date"] {
+      color: #000000;
+    }
+  }
+}
+
+.native-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 /* 
   .swiper-slides apply text-align: center
   reset it, since it affects pages we render in slides

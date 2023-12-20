@@ -25,7 +25,8 @@ import Login from "./pages/Login";
 import Memory from "./pages/games/Memory";
 import { Preload } from "./pages/Preload";
 import ResetPassword from "./pages/ResetPassword";
-import { SettingsPage1 } from "./pages/Settings/SettingsPage1";
+import { Overview, Preferences, Progress, Profile } from "./pages/Settings";
+import { SettingsLayout } from "./layouts/Settings";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
 import Stories from "./pages/games/Stories";
@@ -33,8 +34,6 @@ import { StudentDashboard } from "./pages/StudentDashboard";
 import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
 import { PreSplash } from "./pages/PreSplash";
-import { Preferences } from "./pages/Settings/Preferences";
-import { Progress } from "./pages/Settings/Progress";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -59,8 +58,6 @@ import "./theme/overrides.scss";
 /* SwiperJS */
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
-import { PreSplash } from "./pages/PreSplash";
-import { SettingsPage2 } from "./pages/Settings";
 
 setupIonicReact();
 
@@ -132,28 +129,32 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/settings1"
+          path="/settings/overview"
           render={() => (
             <AuthedLayout
               customBackground="#f7faf9"
               wide={true}
               showOgAuthedHeader={false}
             >
-              <SettingsPage1 />
+              <SettingsLayout>
+                <Overview />
+              </SettingsLayout>
             </AuthedLayout>
           )}
         />
 
         <Route
           exact
-          path="/settings2"
+          path="/settings/profile"
           render={() => (
             <AuthedLayout
               customBackground="#f7faf9"
               wide={true}
               showOgAuthedHeader={false}
             >
-              <SettingsPage2 />
+              <SettingsLayout>
+                <Profile />
+              </SettingsLayout>
             </AuthedLayout>
           )}
         />
@@ -281,20 +282,32 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/preferences"
+          path="/settings/preferences"
           render={() => (
-            <AuthedLayout customBackground="white" wide={true}>
-              <Preferences />
+            <AuthedLayout
+              customBackground="white"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsLayout>
+                <Preferences />
+              </SettingsLayout>
             </AuthedLayout>
           )}
         />
 
         <Route
           exact
-          path="/progress"
+          path="/settings/progress"
           render={() => (
-            <AuthedLayout customBackground="#f7faf9" wide={true}>
-              <Progress />
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsLayout>
+                <Progress />
+              </SettingsLayout>
             </AuthedLayout>
           )}
         />
