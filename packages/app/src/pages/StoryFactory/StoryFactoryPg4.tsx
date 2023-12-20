@@ -14,9 +14,10 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import JuegoCard from "@/components/StoryFactory/JuegoCard";
+import "./StoryFactory.css";
+import { JuegoCard } from "@/components/StoryFactory/SF_SlotMachineGame";
 
-const StoryFactoryPage4: React.FC = () => {
+export const StoryFactoryPage4: React.FC = () => {
   const { isImmersive } = useProfile();
   return (
     <>
@@ -91,5 +92,3 @@ const StoryFactoryPage4: React.FC = () => {
     </>
   );
 };
-
-export default StoryFactoryPage4;
