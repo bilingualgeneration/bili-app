@@ -1557,6 +1557,10 @@ __metadata:
     "@ionic/react": "npm:^7.0.0"
     "@ionic/react-router": "npm:^7.0.0"
     "@ionic/react-test-utils": "npm:^0.4.0"
+    "@maskito/angular": "npm:^1.9.0"
+    "@maskito/core": "npm:^1.9.0"
+    "@maskito/react": "npm:^1.9.0"
+    "@maskito/vue": "npm:^1.9.0"
     "@storybook/addon-essentials": "npm:^7.4.5"
     "@storybook/addon-interactions": "npm:^7.4.5"
     "@storybook/addon-links": "npm:^7.4.5"
@@ -3213,6 +3217,49 @@ __metadata:
   version: 3.4.0
   resolution: "@juggle/resize-observer@npm:3.4.0"
   checksum: 12930242357298c6f2ad5d4ec7cf631dfb344ca7c8c830ab7f64e6ac11eb1aae486901d8d880fd08fb1b257800c160a0da3aee1e7ed9adac0ccbb9b7c5d93347
+  languageName: node
+  linkType: hard
+
+"@maskito/angular@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@maskito/angular@npm:1.9.0"
+  dependencies:
+    tslib: "npm:2.6.2"
+  peerDependencies:
+    "@angular/common": ">=12.0.0"
+    "@angular/core": ">=12.0.0"
+    "@angular/forms": ">=12.0.0"
+    "@maskito/core": ^1.9.0
+    rxjs: ">=6.0.0"
+  checksum: 24dca9ea184ab206e8f6e01243cf6726a97d70d04a2bd5229b5712b135ba6c3fd0f730beea4bc447af5d25986072220ed4986616d360aaef66632d4a5d8646c1
+  languageName: node
+  linkType: hard
+
+"@maskito/core@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@maskito/core@npm:1.9.0"
+  checksum: 83d639c6c77bfae14872cb250e6b88510ac2cc61bd56974b46fbcd3a2294ed21b38928c06b131d71319c246be8839c35a2714f987e2d745b359994119160c36a
+  languageName: node
+  linkType: hard
+
+"@maskito/react@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@maskito/react@npm:1.9.0"
+  peerDependencies:
+    "@maskito/core": ^1.9.0
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 7d00543105ced47a06a26422833cf58ef53259533398b45481aa04e309689d2dbded4a482ccc665883438604cd582742715d7e7a31af432ec9c446135a44514e
+  languageName: node
+  linkType: hard
+
+"@maskito/vue@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@maskito/vue@npm:1.9.0"
+  peerDependencies:
+    "@maskito/core": ^1.9.0
+    vue: ">=3.0.0"
+  checksum: 4167aa0dc148915089b3151c7736c0fbb774825e36076c60682a2c6498ee69bd0bdf1a49d2c6465c390a82dee111e723c47ac477e4b052b4873e860c86b4f822
   languageName: node
   linkType: hard
 
@@ -15147,7 +15194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:*, tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.4.0":
+"tslib@npm:*, tslib@npm:2.6.2, tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.4.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
