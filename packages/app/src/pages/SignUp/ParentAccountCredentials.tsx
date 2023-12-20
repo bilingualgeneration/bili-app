@@ -65,10 +65,10 @@ export const ParentAccountCredentials: React.FC<
       <form onSubmit={onSubmit}>
         <Input
           label={intl.formatMessage({
-            id: "signUpParent.name",
-            defaultMessage: "Your full name*",
+            id: "common.fullName",
+            defaultMessage: "Full name*",
             description:
-              "Users who choose parent must enter their name as requirement",
+              "Input area label where users must enter their name as requirement",
           })}
           labelPlacement="above"
           name="name"
@@ -82,10 +82,10 @@ export const ParentAccountCredentials: React.FC<
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "signUpParent.email",
-              defaultMessage: "Your email*",
+              id: "common.email",
+              defaultMessage: "Email address*",
               description:
-                "Users who choose parent must enter their email as requirement",
+                "Input area label where users must enter their email as requirement",
             })}
             labelPlacement="above"
             required={true}
@@ -101,10 +101,10 @@ export const ParentAccountCredentials: React.FC<
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "signUpParent.password",
+              id: "common.password",
               defaultMessage: "Password*",
               description:
-                "Users who choose parent must enter a password as a requirement",
+                "Text above input area showing users that they must enter a password as a requirement",
             })}
             labelPlacement="above"
             required={true}
@@ -121,9 +121,11 @@ export const ParentAccountCredentials: React.FC<
           className="ion-margin-top"
           text={intl.formatMessage({
             id: "login.divider",
-            defaultMessage: "or login using",
+            defaultMessage: "or",
             description:
-              "Divider that gives user option to login using Google or Apple below",
+              "Divider text that separates the login page into two sections: \
+            1) for users to log in using credentials and \
+            2) for users to login using Google or Apple",
           })}
         />
 
@@ -139,7 +141,7 @@ export const ParentAccountCredentials: React.FC<
             <GoogleIcon />
           </span>{" "}
           <FormattedMessage
-            id="login.google"
+            id="common.google"
             defaultMessage="Continue with Google"
             description="Continue the login process with Google"
           />
@@ -157,9 +159,9 @@ export const ParentAccountCredentials: React.FC<
             <AppleIcon />
           </span>
           <FormattedMessage
-            id="login.apple"
+            id="common.apple"
             defaultMessage="Continue with Apple"
-            description="Continue the login process with Apple"
+            description="Button for users to continue the login/registration process using Apple"
           />
         </IonButton>
 
@@ -168,15 +170,15 @@ export const ParentAccountCredentials: React.FC<
             <IonText class="ion-text-wrap">
               <IonText color="primary" style={{ fontWeight: "bold" }}>
                 <FormattedMessage
-                  id="signUpParent.terms"
+                  id="common.terms"
                   defaultMessage="Terms of Service. "
-                  description="Terms of Service for parents to agree to in sign up process."
+                  description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
                 />
               </IonText>
               <FormattedMessage
-                id="signUpParent.termsAgree"
+                id="common.termsAgree"
                 defaultMessage="I agree to the Terms of Service. I have read and understand the Privacy Policy"
-                description="Terms of Service for parents to agree to in sign up process."
+                description="Terms of Service where users can check off if they agree while in sign up process."
               />
             </IonText>
           </IonCheckbox>
@@ -191,9 +193,9 @@ export const ParentAccountCredentials: React.FC<
             type="submit"
           >
             <FormattedMessage
-              id="signUpParent.continue"
+              id="common.continue"
               defaultMessage="Continue"
-              description="Continue button after parents have filled out all required info"
+              description="Button for users to continue on to the next page"
             />
           </IonButton>
         </div>
@@ -201,17 +203,17 @@ export const ParentAccountCredentials: React.FC<
         <div className="ion-text-center ion-margin-top">
           <IonText color="medium">
             <FormattedMessage
-              id="signUpTeacher.haveAccount"
+              id="common.haveAccount"
               defaultMessage="Already have an account?"
-              description="Asking parents if they have an account so that they don't need to create a new one"
+              description="Asking users if they have an account so that they don't need to create a new one"
             />{" "}
             <IonText>
               {" "}
               <a href="/login">
                 <FormattedMessage
-                  id="signUpParent.haveAccountLogin"
+                  id="common.logIn"
                   defaultMessage="Log in"
-                  description="Log in link for parents in case they have an account so that they don't need to create a new one"
+                  description="Log in link provided after the text 'Already have an account?' for users in case they have an account so that they don't need to create a new one"
                 />
               </a>{" "}
             </IonText>

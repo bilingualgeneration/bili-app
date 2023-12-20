@@ -75,9 +75,10 @@ const Login: React.FC = () => {
             <div className="ion-margin-top">
               <Input
                 label={intl.formatMessage({
-                  id: "login.email",
+                  id: "common.email",
                   defaultMessage: "Email address",
-                  description: "User must enter their email on login screen",
+                  description:
+                    "Prompt for user to enter their email on login screen",
                 })}
                 labelPlacement="above"
                 required={true}
@@ -93,9 +94,10 @@ const Login: React.FC = () => {
             <div className="ion-margin-top">
               <Input
                 label={intl.formatMessage({
-                  id: "login.password",
+                  id: "common.password",
                   defaultMessage: "Password",
-                  description: "User must enter their password on login screen",
+                  description:
+                    "Prompt for user to enter their password on login screen",
                 })}
                 labelPlacement="above"
                 required={true}
@@ -112,9 +114,11 @@ const Login: React.FC = () => {
               className="ion-margin-top"
               text={intl.formatMessage({
                 id: "login.divider",
-                defaultMessage: "or login using",
+                defaultMessage: "or",
                 description:
-                  "User who is teacher has option to login using Google or Apple",
+                  "Divider text that separates the login page into two sections: \
+                1) for users to log in using credentials and \
+                2) for users to login using Google or Apple",
               })}
             />
 
@@ -130,8 +134,9 @@ const Login: React.FC = () => {
                 <GoogleIcon />
               </span>{" "}
               <FormattedMessage
-                id="login.google"
+                id="common.google"
                 defaultMessage="Continue with Google"
+                description="Button for users to continue the login/registration process using Google"
               />
             </IonButton>
 
@@ -147,8 +152,9 @@ const Login: React.FC = () => {
                 <AppleIcon />
               </span>
               <FormattedMessage
-                id="login.apple"
+                id="common.apple"
                 defaultMessage="Continue with Apple"
+                description="Button for users to continue the login/registration process using Apple"
               />
             </IonButton>
 
@@ -161,23 +167,26 @@ const Login: React.FC = () => {
                 type="submit"
               >
                 <FormattedMessage
-                  id="login.continue"
+                  id="common.continue"
                   defaultMessage="Continue"
+                  description="Button for users to continue on to the next page"
                 />
               </IonButton>
             </div>
             <div className="ion-text-center ion-margin-top">
               <IonText color="medium">
                 <FormattedMessage
-                  id="login.noAccount"
+                  id="common.noAccount"
                   defaultMessage="Don't have an account?"
+                  description="Text at bottom of page that comes before the 'Sign up' link prompting users to sign up using the link if they don't have an account"
                 />{" "}
                 <IonText>
                   {" "}
                   <a href="/sign-up">
                     <FormattedMessage
-                      id="login.signUp"
+                      id="common.signUp"
                       defaultMessage="Sign Up"
+                      description="Text that is also a link that prompts users to sign up using the 'Sign up' link if they don't have an account"
                     />
                   </a>
                 </IonText>

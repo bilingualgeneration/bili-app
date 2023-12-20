@@ -47,8 +47,9 @@ export const Complete: React.FC = () => {
           type="submit"
         >
           <FormattedMessage
-            id="successScreen.continue"
+            id="common.continue"
             defaultMessage="Continue"
+            description="Button for users to continue on to the next page"
           />
         </IonButton>
       </div>

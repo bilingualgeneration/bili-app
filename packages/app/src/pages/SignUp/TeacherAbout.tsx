@@ -208,7 +208,11 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
           data-testid="teacher-about-continue-button"
           disabled={!isValid}
         >
-          Continue
+          <FormattedMessage
+            id="common.continue"
+            defaultMessage="Continue"
+            description="Button for users to continue on to the next page"
+          />
         </IonButton>
       </form>
     </>
