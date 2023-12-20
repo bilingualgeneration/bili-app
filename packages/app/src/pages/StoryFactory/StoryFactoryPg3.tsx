@@ -26,7 +26,7 @@ export const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
 
   return (
     <>
-      <IonCard className="story-page-2-main-card story-page-3-main-card">
+      <IonCard className="story-page-2-main-card">
         <IonGrid>
           <IonRow class="ion-justify-content-left">
             <IonCol size="8.5">

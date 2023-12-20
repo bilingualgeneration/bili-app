@@ -656,14 +656,10 @@ ion-button.story-intro-button {
   justify-content: space-between;
 }
 
-.story-page-2-main-card .story-page-3-main-card {
-  max-height: 100%; /* 98vh; 978px; */
-}
-
 .bili-character {
   position: absolute;
   height: auto;
-  top: 29%; /* Moves the character DOWN */
-  left: 64%; /* Moves the character RIGHT (neg # moves character left) */
+  top: 20%; /* Moves the character DOWN */
+  left: 70%; /* Moves the character RIGHT (neg # moves character left) */
   z-index: 1; /* Ensures Bili Character is on top of card */
 }
