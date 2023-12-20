@@ -133,9 +133,9 @@ export const LanguageInclusivitySelect: React.FC = () => {
           type="button"
         >
           <FormattedMessage
-            id="languageInclusivity.continue"
+            id="common.continue"
             defaultMessage="Continue"
-            description="Continue button after choosing language inclusivity options"
+            description="Button for users to continue on to the next page"
           />
         </IonButton>
       </form>

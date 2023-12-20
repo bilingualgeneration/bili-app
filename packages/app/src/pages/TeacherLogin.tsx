@@ -13,7 +13,7 @@ const TeacherLogin: React.FC = () => {
         <FormattedMessage
           id="login.teacherWelcome"
           defaultMessage="Welcome to Teacher Login Page"
-          description="Welcome message for teacher login"
+          description="Welcome message for teacher login page"
         />
       </h1>
       <IonInput placeholder="Username" />{" "}
@@ -24,7 +24,7 @@ const TeacherLogin: React.FC = () => {
         <FormattedMessage
           id="login.teacher"
           defaultMessage="Login as Teacher"
-          description="Login spot for teachers"
+          description="Login button specifically for teachers"
         />
       </IonButton>
     </>
