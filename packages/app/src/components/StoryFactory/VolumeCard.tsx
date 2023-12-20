@@ -1,35 +1,46 @@
-import React, { Children } from 'react';
-import { IonCard, IonCardContent, IonCol, IonGrid, IonRow, IonText } from '@ionic/react';
-import { IonIcon } from '@ionic/react';
-import { volumeMedium } from 'ionicons/icons';
-import { FormattedMessage } from 'react-intl';
+import React, { Children } from "react";
+import {
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonGrid,
+  IonRow,
+  IonText,
+} from "@ionic/react";
+import { IonIcon } from "@ionic/react";
+import { volumeMedium } from "ionicons/icons";
+import { FormattedMessage } from "react-intl";
+import "./VolumeCard.css";
 
 // EVERYTHING THAT IS COMMENTED OUT CAN BE READDED ONCE USER PROFILE IS COMPLETE AND
 // OTHER CODE CAN BE REMOVED
 
 interface VolumeCardProps {
-    // isSpanishBilingual?: boolean;
-    children?: React.ReactNode;
-    iconClass?: string;
-  }
+  // isSpanishBilingual?: boolean;
+  children?: React.ReactNode;
+  iconClass?: string;
+}
 
-const VolumeCard: React.FC<VolumeCardProps> = ({ /* isSpanishBilingual = false,*/ children, iconClass }) => {
-    // const volumeIconContainerClass = isSpanishBilingual
-    //   ? 'volume-icon-container-greyed-out'
-    //   : 'volume-icon-container';
+export const VolumeCard: React.FC<VolumeCardProps> = ({
+  /* isSpanishBilingual = false,*/ children,
+  iconClass,
+}) => {
+  // const volumeIconContainerClass = isSpanishBilingual
+  //   ? 'volume-icon-container-greyed-out'
+  //   : 'volume-icon-container';
 
-    return (
-        <>
-            <IonGrid>
-                <IonRow>
-                    <IonCol class="ion-text-center" >
-                        <div className={`volume-icon-container ${iconClass}`}>
-                            <IonIcon icon={volumeMedium} className="volume-icon" />
-                        </div>
-                    </IonCol>
-                </IonRow>
-            </IonGrid>    
-        </>
+  return (
+    <>
+      <IonGrid>
+        <IonRow>
+          <IonCol class="ion-text-center">
+            <div className={`volume-icon-container ${iconClass}`}>
+              <IonIcon icon={volumeMedium} className="volume-icon" />
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </>
 
     //  <IonCard className="mini-fabrica-card">
     //   <IonCardContent>
@@ -69,7 +80,5 @@ const VolumeCard: React.FC<VolumeCardProps> = ({ /* isSpanishBilingual = false,*
     //     </IonGrid>
     //   </IonCardContent>
     // </IonCard>
-    );
+  );
 };
-
-export default VolumeCard;

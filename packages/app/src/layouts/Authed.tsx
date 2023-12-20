@@ -17,12 +17,14 @@ interface AuthedLayoutProps {
   children: React.ReactNode;
   customBackground?: string; // Default to false
   wide?: boolean;
+  showOgAuthedHeader?: boolean; // Control visibility of OG header since there are so many headers ~ F
 }
 
 const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   children,
   customBackground,
   wide,
+  showOgAuthedHeader = true, // Default value is true, meaning header is visible
 }) => {
   const auth = useAuth();
   const { status: userStatus } = useUser();
@@ -42,25 +44,27 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
     contentStyle["--background"] = customBackground; // Set background color only if provided
   }
   if (wide) {
-    contentStyle["--container-width"] = "1200px"; //set width to 1200px only if wide is true (changed to 1200 bc I have a page that 1147px ~ FP)
+    contentStyle["--container-width"] = "100%"; //set width to 1200px only if wide is true (changed to 1200 bc I have a page that 1147px ~ FP)
   }
 
   return (
     <ProfileContextProvider>
       <IonPage>
-        <IonHeader className="ion-no-border" id="header">
-          <IonToolbar>
-            <IonButtons slot="end">
-              <IonButton
-                onClick={() => {
-                  auth.signOut();
-                }}
-              >
-                logout
-              </IonButton>
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
+        {showOgAuthedHeader && ( // Conditionally render IonHeader
+          <IonHeader className="ion-no-border" id="header">
+            <IonToolbar>
+              <IonButtons slot="end">
+                <IonButton
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  logout
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+        )}
         <IonContent fullscreen className="ion-padding" style={contentStyle}>
           <div className="container">{children}</div>
         </IonContent>

@@ -92,7 +92,7 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
             <FormattedMessage
               id="signUp.describe"
               defaultMessage="Which best describes you?"
-              description="User can choose if they are a teacher or parent/caregiver."
+              description="Title of page where user is presented with button options where they can choose if they are a teacher or parent/caregiver."
             />
           </h1>
         </IonText>
@@ -109,9 +109,9 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
           disabled={!isValid}
         >
           <FormattedMessage
-            id="signUp.continue"
+            id="common.continue"
             defaultMessage="Continue"
-            description="After user chooses teacher or parent/caregiver they can click continue."
+            description="Button for users to continue on to the next page"
           />
         </IonButton>
       </form>

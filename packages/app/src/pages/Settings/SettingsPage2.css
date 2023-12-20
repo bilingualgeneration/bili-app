@@ -1,0 +1,42 @@
+ion-input.input {
+  --background: rgba(136, 147, 145, 0.2);
+  font-size: 24px;
+}
+
+.adult-profile-content {
+  margin: 2% 3% 5%;
+}
+
+ion-input.input-fill-outline {
+  font-weight: bold;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --background: rgba(136, 147, 145, 0.2);
+  --border-width: 0.25rem !important;
+  --border-color: rgba(136, 147, 145, 0.01) !important;
+  --border-radius: 1rem !important;
+}
+
+ion-input.input {
+  --placeholder-color: rgb(167, 166, 166);
+  --placeholder-opacity: 1;
+  --color: black;
+}
+
+/* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regular text*/
+
+/* ion-input[type="date" i] {
+  --placeholder-color: blue;
+} */
+
+ion-col.col-save-changes-button {
+  text-align: center;
+}
+
+ion-button.save-changes-button {
+  width: 442px;
+  height: auto;
+  margin: 5% 5%;
+  box-shadow: 4px 12px 16px 0px rgba(58, 42, 17, 0.2);
+  border-radius: 100px;
+}

@@ -13,18 +13,19 @@ import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "./layouts/Authed";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "./pages/games/Intruder";
-import IntroPage1 from "./pages/StoryFactory/StoryFactoryPg1";
-import IntroPage2 from "./pages/StoryFactory/StoryFactoryPg2";
-import IntroPage3 from "./pages/StoryFactory/StoryFactoryPg3";
-import StoryFactoryPage4 from "./pages/StoryFactory/StoryFactoryPg4";
-import StoryFactoryPage5 from "./pages/StoryFactory/StoryFactoryPg5";
-import StoryFactoryPage6 from "./pages/StoryFactory/StoryFactoryPg6";
+import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
+import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
+import { IntroPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
+import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
+import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
+import { StoryFactoryPage6 } from "./pages/StoryFactory/StoryFactoryPg6";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "./pages/Login";
 import Memory from "./pages/games/Memory";
 import { Preload } from "./pages/Preload";
 import ResetPassword from "./pages/ResetPassword";
+import { SettingsPage1 } from "./pages/Settings/SettingsPage1";
 import { SignUp } from "./pages/SignUp";
 import { Splash } from "./pages/Splash";
 import Stories from "./pages/games/Stories";
@@ -58,6 +59,8 @@ import "./theme/overrides.scss";
 /* SwiperJS */
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
+import { PreSplash } from "./pages/PreSplash";
+import { SettingsPage2 } from "./pages/Settings";
 
 setupIonicReact();
 
@@ -129,6 +132,34 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/settings1"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsPage1 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings2"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsPage2 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/sign-up"
           render={() => (
             <UnauthedLayout>
@@ -162,7 +193,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/1"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage1 currentPage={1} />
             </AuthedLayout>
           )}
@@ -172,7 +203,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/2"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage2 currentPage={2} />
             </AuthedLayout>
           )}
@@ -182,7 +213,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/3"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <IntroPage3 currentPage={3} />
             </AuthedLayout>
           )}
@@ -202,8 +233,18 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/5"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
               <StoryFactoryPage5 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/6"
+          render={() => (
+            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+              <StoryFactoryPage6 />
             </AuthedLayout>
           )}
         />

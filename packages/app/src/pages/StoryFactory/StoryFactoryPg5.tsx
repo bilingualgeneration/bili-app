@@ -14,9 +14,11 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import FabricaCard from "@/components/StoryFactory/FabricaCard";
+import { FabricaCard } from "@/components/StoryFactory/FabricaCard";
 import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
+import refreshButton from "@/assets/icons/refresh_button.svg";
+import "./StoryFactory.css";
 
 // EVERYTHING THAT IS COMMENTED OUT CAN BE READDED ONCE USER PROFILE IS COMPLETE
 
@@ -55,7 +57,7 @@ const FactoryButton: React.FC = () => {
   );
 };
 
-const StoryFactoryPage5: React.FC = () => {
+export const StoryFactoryPage5: React.FC = () => {
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
   return (
     <>
@@ -106,7 +108,12 @@ const StoryFactoryPage5: React.FC = () => {
           </IonGrid>
         </IonCardContent>
       </IonCard>
+
+      <img
+        className="refresh-button"
+        src={refreshButton}
+        alt="Refresh button icon"
+      />
     </>
   );
 };
-export default StoryFactoryPage5;
