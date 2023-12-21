@@ -45,7 +45,7 @@ export const SettingsHeader: React.FC = ({}) => {
                       style={{ color: "var(--Base-Selva)", marginLeft: "10%" }}
                     >
                       <FormattedMessage
-                        id="header.rate"
+                        id="settingsHeader.rate"
                         defaultMessage="Rate this app"
                         description="Clickable text that takes user to rate the Bili app"
                       />

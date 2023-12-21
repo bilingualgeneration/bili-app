@@ -43,10 +43,10 @@
   "signUp.pricing_annual_title": "12 months unlimited",
   "signUp.pricing_annual_pricing": "$44.99/year",
 
-  "signUp.choose_plan": "Choose your plan",
-  "signUp.trial_title": "3 week free trial",
-  "signUp.trial_description": "For a limited time only",
-  "signUp.no_commitment": "No commitments, cancel anytime.",
+  "signUp.choosePlan": "Choose your plan",
+  "signUp.trialTitle": "3 week free trial",
+  "signUp.trialDescription": "For a limited time only",
+  "signUp.noCommitment": "No commitments, cancel anytime.",
 
   "signUpTeacher.school": "Your school name*",
   "signUpTeacher.marketing": "I want to receive marketing updates",
@@ -103,5 +103,18 @@
   "settingsProgress.popover2": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
   "settingsProgress.popover3": "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
   "settingsProgress.popover4": "Determine how long your child plays on the app each day.",
-  "settingsProgress.popover5": " Enable this feature to hear sound effects associated with the app."
+  "settingsProgress.popover5": " Enable this feature to hear sound effects associated with the app.",
+
+  "settingsHeader.rate": "Rate this app",
+
+  "settings.onboarding.profile": "Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.",
+  "settings.onboarding.inclusive-spanish": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters.",
+  "settings.onboarding.preferences": "Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits.",
+  "settings.onboarding.progress": "Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities.",
+
+  "settings.child": "Child Profile",
+  "settings.addChildBtn": "Add child",
+  "settings.explore": "Explore Bili",
+  "settings.exploreSubheading": "Learn how to use Bili to meet language goals",
+  "settings.seeAll": "See all &#40;9&#41;"
 }

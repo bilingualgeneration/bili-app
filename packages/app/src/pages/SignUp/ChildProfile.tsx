@@ -97,8 +97,12 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
               />
             </h1>
             <p>
-              This helps us personalize your child's learning experience. You
-              can add more profiles in settings.
+              <FormattedMessage
+                id="childProfile.subtitle"
+                defaultMessage="This helps us personalize your child's learning experience. You
+                can add more profiles in settings."
+                description="Text at bottom of page that comes before the 'Sign up' link prompting users to sign up using the link if they don't have an account"
+              />
             </p>
           </IonText>
         </div>
@@ -107,9 +111,9 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
           <IonText>
             <h2>
               <FormattedMessage
-                id="childProfile.nameTitle"
+                id="childProfile.nameLabel"
                 defaultMessage="Enter your child's name or nickname:"
-                description="Title for area where parents can select their child's age range"
+                description="Label for text input where parents can enter their child's name"
               />
             </h2>
           </IonText>
@@ -126,9 +130,9 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
           <IonText>
             <h2>
               <FormattedMessage
-                id="childProfile.ageTitle"
+                id="childProfile.ageLabel"
                 defaultMessage="Select your child's age range:"
-                description="Title for area where parents can select their child's age range"
+                description="Label for radio input where parents can select their child's age range"
               />
             </h2>
           </IonText>
@@ -145,13 +149,17 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
 
         <IonButton
           className="ion-margin-top"
+          data-testid="account-credentials-continue-button"
+          disabled={!isValid}
           expand="block"
           shape="round"
           type="submit"
-          data-testid="child-profile-continue-button"
-          disabled={!isValid}
         >
-          Continue
+          <FormattedMessage
+            id="common.continue"
+            defaultMessage="Continue"
+            description="Button for users to continue on to the next page"
+          />
         </IonButton>
       </form>
     </>
