@@ -14,7 +14,7 @@ import Question from "@/assets/icons/question.svg?react";
 import { chevronForward } from "ionicons/icons";
 import { Popover } from "@/components/Popover";
 import "./Preferences.css";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
@@ -30,7 +30,7 @@ export const Preferences: React.FC = () => {
         <IonItem>
           <Popover
             content={intl.formatMessage({
-              id: "settingsProgress.popover1",
+              id: "settingsProgress.preferences.popover1",
               defaultMessage:
                 "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
               description:
@@ -45,7 +45,13 @@ export const Preferences: React.FC = () => {
             toggleIcon={chevronForward}
           >
             <div className="label-style" slot="label">
-              <h4>Settings language</h4>
+              <h4>
+                <FormattedMessage
+                  id="settingsProgress.preferences.settingsLanguage"
+                  defaultMessage="Settings language"
+                  description="Preferences page 'settings language' text"
+                />
+              </h4>
             </div>
             <IonSelectOption value="english">English</IonSelectOption>
             <IonSelectOption value="spanish">Spanish</IonSelectOption>
@@ -55,7 +61,7 @@ export const Preferences: React.FC = () => {
         <IonItem>
           <Popover
             content={intl.formatMessage({
-              id: "settingsProgress.popover2",
+              id: "settingsProgress.preferences.popover2",
               defaultMessage:
                 "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
               description:
@@ -70,7 +76,13 @@ export const Preferences: React.FC = () => {
             toggleIcon={chevronForward}
           >
             <div className="label-style" slot="label">
-              <h4>Bilingual vs. Immersion Mode</h4>
+              <h4>
+                <FormattedMessage
+                  id="settingsProgress.preferences.bilingual"
+                  defaultMessage="Bilingual vs. Immersion Mode"
+                  description="Preferences page 'Bilingual vs. Immersion Mode' text"
+                />
+              </h4>
             </div>
             <IonSelectOption value="bilingual">Bilingual</IonSelectOption>
             <IonSelectOption value="immersion">Immersion</IonSelectOption>
@@ -80,7 +92,7 @@ export const Preferences: React.FC = () => {
         <IonItem>
           <Popover
             content={intl.formatMessage({
-              id: "settingsProgress.popover3",
+              id: "settingsProgress.preferences.popover3",
               defaultMessage:
                 "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
               description:
@@ -91,7 +103,13 @@ export const Preferences: React.FC = () => {
           <Question id="click-trigger3" />
           <IonToggle justify="space-between" checked={true} mode="ios">
             <div className="label-style">
-              <h4>Inclusive Spanish</h4>
+              <h4>
+                <FormattedMessage
+                  id="settingsProgress.preferences.inclusive"
+                  defaultMessage="Inclusive Spanish"
+                  description="Preferences page 'Inclusive Spanish' text"
+                />
+              </h4>
             </div>
           </IonToggle>
         </IonItem>
@@ -99,7 +117,7 @@ export const Preferences: React.FC = () => {
         <IonItem>
           <Popover
             content={intl.formatMessage({
-              id: "settingsProgress.popover4",
+              id: "settingsProgress.preferences.popover4",
               defaultMessage:
                 "Determine how long your child plays on the app each day.",
               description: "Daily playtime limit",
@@ -113,7 +131,13 @@ export const Preferences: React.FC = () => {
             toggleIcon={chevronForward}
           >
             <div className="label-style" slot="label">
-              <h4>Daily playtime limit</h4>
+              <h4>
+                <FormattedMessage
+                  id="settingsProgress.preferences.limit"
+                  defaultMessage="Daily playtime limit"
+                  description="Preferences page 'Daily playtime limit' text"
+                />
+              </h4>
             </div>
             <IonSelectOption value="unlimited">Unlimited</IonSelectOption>
             <IonSelectOption value="30">30mins</IonSelectOption>
@@ -130,7 +154,7 @@ export const Preferences: React.FC = () => {
         <IonItem>
           <Popover
             content={intl.formatMessage({
-              id: "settingsProgress.popover5",
+              id: "settingsProgress.preferences.popover5",
               defaultMessage:
                 "Enable this feature to hear sound effects associated with the app.",
               description: "Sound effects mode",
@@ -140,7 +164,13 @@ export const Preferences: React.FC = () => {
           <Question id="click-trigger5" />
           <IonToggle justify="space-between" checked={true} mode="ios">
             <div className="label-style">
-              <h4>Sound effects</h4>
+              <h4>
+                <FormattedMessage
+                  id="settingsProgress.preferences.sound"
+                  defaultMessage="Sound effects"
+                  description="Preferences page 'Sound effects' text"
+                />
+              </h4>
             </div>
           </IonToggle>
         </IonItem>

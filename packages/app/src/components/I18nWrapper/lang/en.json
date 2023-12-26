@@ -99,11 +99,15 @@
   "landingPage.play": "Play",
   "landingPage.community": "Community",
 
-  "settingsProgress.popover1": "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
-  "settingsProgress.popover2": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
-  "settingsProgress.popover3": "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
-  "settingsProgress.popover4": "Determine how long your child plays on the app each day.",
-  "settingsProgress.popover5": " Enable this feature to hear sound effects associated with the app.",
+  "settingsProgress.preferences.popover1": "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
+  "settingsProgress.preferences.popover2": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
+  "settingsProgress.preferences.popover3": "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
+  "settingsProgress.preferences.popover4": "Determine how long your child plays on the app each day.",
+  "settingsProgress.preferences.popover5": " Enable this feature to hear sound effects associated with the app.",
+  "settingsProgress.preferences.settingsLanguage": "Settings language",
+  "settingsProgress.preferences.bilingual": "Bilingual vs. Immersion Mode",
+  "settingsProgress.preferences.limit": "Daily playtime limit",
+  "settingsProgress.preferences.sound": "Sound effects",
 
   "settingsHeader.rate": "Rate this app",
 
