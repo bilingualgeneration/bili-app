@@ -112,9 +112,21 @@
   "settings.onboarding.preferences": "Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits.",
   "settings.onboarding.progress": "Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities.",
 
-  "settings.child": "Child Profile",
-  "settings.addChildBtn": "Add child",
-  "settings.explore": "Explore Bili",
-  "settings.exploreSubheading": "Learn how to use Bili to meet language goals",
-  "settings.seeAll": "See all &#40;9&#41;"
+  "settings.overview.child": "Child Profile",
+  "settings.overview.addChildBtn": "Add child",
+  "settings.overview.explore": "Explore Bili",
+  "settings.overview.exploreSubheading": "Learn how to use Bili to meet language goals",
+  "settings.overview.seeAll": "See all &#40;9&#41;",
+  "settings.overview.gettingStartedTitle": "Getting started",
+  "settings.overview.gettingStartedContent": "When you enter into any new area of science, you almost always find.",
+  "settings.overview.gettingStartedMiniCard1": "Guide",
+  "settings.overview.gettingStartedMiniCard2": "Recommended",
+  "settings.overview.inclusiveSpanishTitle": "Inclusive Spanish",
+  "settings.overview.InclusiveSpanishContent": "Learn about what Inclusive Spanish is and why it exists.",
+  "settings.overview.InclusiveSpanishMiniCard1": "Social Justice",
+  "settings.overview.InclusiveSpanishMiniCard2": "Resources",
+  "settings.overview.getChildTitle": "Get your child speaking Spanish with Bili",
+  "settings.overview.getChildContent": "Explore special features that promote authentic language production.",
+  "settings.overview.getChildMiniCard1": "Parents",
+  "settings.overview.getChildMiniCard2": "Resources"
 }

@@ -33,7 +33,7 @@ import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export const Overview: React.FC = ({}) => {
   const steps = [
@@ -82,9 +82,15 @@ export const Overview: React.FC = ({}) => {
       ),
     },
   ];
+
+  const intl = useIntl();
+
   return (
     <>
       <Joyride
+        hideCloseButton
+        showSkipButton
+        showProgress
         steps={steps}
         continuous={true}
         styles={{
@@ -99,7 +105,7 @@ export const Overview: React.FC = ({}) => {
             <IonCol size="auto">
               <h1 className="child-profile-heading">
                 <FormattedMessage
-                  id="settings.child"
+                  id="settings.overview.child"
                   defaultMessage="Child Profile"
                   description="Child Profile page heading in settings"
                 />
@@ -123,7 +129,7 @@ export const Overview: React.FC = ({}) => {
                 />
                 <IonLabel style={{ color: "var(--Base-Nube)" }}>
                   <FormattedMessage
-                    id="settings.addChildBtn"
+                    id="settings.overview.addChildBtn"
                     defaultMessage="Add child"
                     description="Add child button label for Child Profile within settings page"
                   />
@@ -197,14 +203,14 @@ export const Overview: React.FC = ({}) => {
               <div className="explore-bili-heading-subheading-container">
                 <h1 className="explore-bili-heading">
                   <FormattedMessage
-                    id="settings.explore"
+                    id="settings.overview.explore"
                     defaultMessage="Explore Bili"
                     description="Explore Bili heading in settings"
                   />
                 </h1>
                 <p className="explore-bili-subheading">
                   <FormattedMessage
-                    id="settings.exploreSubheading"
+                    id="settings.overview.exploreSubheading"
                     defaultMessage="Learn how to use Bili to meet language goals"
                     description="Explore Bili subheading in settings"
                   />
@@ -222,7 +228,7 @@ export const Overview: React.FC = ({}) => {
             <IonCol size="auto">
               <IonButton disabled={true} fill="clear" className="see-all">
                 <FormattedMessage
-                  id="settings.seeAll"
+                  id="settings.overview.seeAll"
                   defaultMessage="See all &#40;9&#41;"
                   description="See all link in settings"
                 />
@@ -236,17 +242,29 @@ export const Overview: React.FC = ({}) => {
                 <SettingsExploreCard
                   backgroundImage={settingsCardDesign1}
                   backgroundColor={"#973D78"}
-                  title={"Getting started"}
-                  subtitle={
-                    "When you enter into any new area of science, you almost always find."
-                  }
+                  title={intl.formatMessage({
+                    id: "settings.overview.gettingStartedTitle",
+                    defaultMessage: "Getting started",
+                    description: "Explore card #1 title",
+                  })}
+                  subtitle={intl.formatMessage({
+                    id: "settings.overview.gettingStartedContent",
+                    defaultMessage:
+                      "When you enter into any new area of science, you almost always find.",
+                    description: "Explore card #1 content",
+                  })}
                   // can also change text color of SettingsExploreCard using 'textColor' prop if necessary
                 >
                   <IonRow>
                     <IonCol>
                       <SettingsExploreMiniCard
                         customColor={"#FFAEDC"} // enter a background color for the mini card
-                        cardText={"Guide"} // enter a custom text for the mini card
+                        cardText={intl.formatMessage({
+                          id: "settings.overview.gettingStartedMiniCard1",
+                          defaultMessage: "Guide",
+                          description:
+                            "Explore card #1 mini card #1 found at the top, which describes the content type of the main card",
+                        })} // enter custom text for the mini card
                         // can also change color of text for SettingsExploreMiniCard using 'textColor' prop if necessary
                       ></SettingsExploreMiniCard>
                     </IonCol>
@@ -254,7 +272,12 @@ export const Overview: React.FC = ({}) => {
                     <IonCol>
                       <SettingsExploreMiniCard
                         customColor={"#F1D100"}
-                        cardText={"Recommended"}
+                        cardText={intl.formatMessage({
+                          id: "settings.overview.gettingStartedMiniCard2",
+                          defaultMessage: "Recommended",
+                          description:
+                            "Explore card #1 mini card #2 found at the top, which describes the content type of the main card",
+                        })}
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
@@ -266,23 +289,40 @@ export const Overview: React.FC = ({}) => {
                   <SettingsExploreCard
                     backgroundImage={settingsCardDesign2}
                     backgroundColor={"#22BEB9"}
-                    title={"Inclusive Spanish"}
-                    subtitle={
-                      "Learn about what Inclusive Spanish is and why it exists."
-                    }
+                    title={intl.formatMessage({
+                      id: "settings.overview.inclusiveSpanishTitle",
+                      defaultMessage: "Inclusive Spanish",
+                      description: "Explore card #2 title",
+                    })}
+                    subtitle={intl.formatMessage({
+                      id: "settings.overview.InclusiveSpanishContent",
+                      defaultMessage:
+                        "Learn about what Inclusive Spanish is and why it exists.",
+                      description: "Explore card #2 content",
+                    })}
                   >
                     <IonRow>
                       <IonCol size="auto">
                         <SettingsExploreMiniCard
                           customColor={"#D3EAE8"}
-                          cardText={"Social Justice"}
+                          cardText={intl.formatMessage({
+                            id: "settings.overview.InclusiveSpanishMiniCard1",
+                            defaultMessage: "Social Justice",
+                            description:
+                              "Explore card #2 mini card #1 found at the top, which describes the content type of the main card",
+                          })}
                         ></SettingsExploreMiniCard>
                       </IonCol>
 
                       <IonCol size="auto">
                         <SettingsExploreMiniCard
                           customColor={"#F1D100"}
-                          cardText={"Resources"}
+                          cardText={intl.formatMessage({
+                            id: "settings.overview.InclusiveSpanishMiniCard2",
+                            defaultMessage: "Resources",
+                            description:
+                              "Explore card #2 mini card #2 found at the top, which describes the content type of the main card",
+                          })}
                         ></SettingsExploreMiniCard>
                       </IonCol>
                     </IonRow>
@@ -294,17 +334,29 @@ export const Overview: React.FC = ({}) => {
                 <SettingsExploreCard
                   backgroundImage={settingsCardDesign3}
                   backgroundColor={"#FFB68F"}
-                  title={"Get your child speaking Spanish with Bili"}
-                  subtitle={
-                    "Explore special features that promote authentic language production."
-                  }
+                  title={intl.formatMessage({
+                    id: "settings.overview.getChildTitle",
+                    defaultMessage: "Get your child speaking Spanish with Bili",
+                    description: "Explore card #3 title",
+                  })}
+                  subtitle={intl.formatMessage({
+                    id: "settings.overview.getChildContent",
+                    defaultMessage:
+                      "Explore special features that promote authentic language production.",
+                    description: "Explore card #3 content",
+                  })}
                   textColor="black"
                 >
                   <IonRow>
                     <IonCol>
                       <SettingsExploreMiniCard
                         customColor={"#973D78"}
-                        cardText={"Parents"}
+                        cardText={intl.formatMessage({
+                          id: "settings.overview.getChildMiniCard1",
+                          defaultMessage: "Parents",
+                          description:
+                            "Explore card #3 mini card #1 found at the top, which describes the content type of the main card",
+                        })}
                         textColor="white"
                       ></SettingsExploreMiniCard>
                     </IonCol>
@@ -312,14 +364,19 @@ export const Overview: React.FC = ({}) => {
                     <IonCol>
                       <SettingsExploreMiniCard
                         customColor={"#F1D100"}
-                        cardText={"Resources"}
+                        cardText={intl.formatMessage({
+                          id: "settings.overview.getChildMiniCard2",
+                          defaultMessage: "Resources",
+                          description:
+                            "Explore card #3 mini card #2 found at the top, which describes the content type of the main card",
+                        })}
                       ></SettingsExploreMiniCard>
                     </IonCol>
                   </IonRow>
                 </SettingsExploreCard>
               </IonCol>
 
-              <IonCol size="md">
+              {/* <IonCol size="md">
                 <SettingsExploreCard
                   backgroundImage={settingsCardDesign1}
                   backgroundColor={"#973D78"}
@@ -344,7 +401,7 @@ export const Overview: React.FC = ({}) => {
                     </IonCol>
                   </IonRow>
                 </SettingsExploreCard>
-              </IonCol>
+              </IonCol> */}
 
               <IonCol className="child-name-age-col ion-align-items-end">
                 <IonButton
