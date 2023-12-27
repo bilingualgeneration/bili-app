@@ -15,7 +15,11 @@ import { SideMenuOption } from "./SideMenuOption";
 export const SideMenu: React.FC = () => {
   return (
     <>
-      <IonList lines="none" style={{ height: "100vh", padding: "1rem" }}>
+      <IonList
+        lines="none"
+        style={{ height: "100vh", padding: "1rem" }}
+        className="side-menu-styles"
+      >
         <SideMenuOption
           icon={gridOutline}
           id={"sideMenu.overview"}

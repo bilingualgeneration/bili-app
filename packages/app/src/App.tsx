@@ -163,7 +163,7 @@ const Router: React.FC = () => {
           path="/settings/preferences"
           render={() => (
             <AuthedLayout
-              customBackground="white"
+              customBackground="#f7faf9"
               wide={true}
               showOgAuthedHeader={false}
             >

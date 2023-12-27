@@ -81,10 +81,11 @@
 }
 .grid-graph-style {
   margin-inline: 0;
+  padding: 48px;
 }
 
-.grid-card ion-card {
-  margin: 0;
+.grid-card {
+  margin-bottom: 12px;
 }
 
 .grid-card ion-card-title {
@@ -109,6 +110,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 28px;
+  margin: 0 0 48px;
 }
 
 .grid-text-style-small {
@@ -122,6 +124,10 @@
 
 .progress-data p {
   margin: 0;
+}
+
+ion-col.progress-data {
+  margin-left: 32px;
 }
 
 .color-1 {
@@ -166,15 +172,16 @@
   --background: var(--Cielo-Cielo, #d3eae8);
   background-image: url("/assets/img/design_pattern_progress.png");
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center;
+  margin: 0;
 }
 
 .progress-data ion-row {
-  padding: 10px;
+  margin-bottom: 24px;
 }
 
 .second-column {
-  padding: 0;
+  padding: 0 24px;
 }
 
 ion-item.kids-name-select {
@@ -188,4 +195,8 @@ ion-item.kids-name-select {
   font-style: normal;
   font-weight: 600;
   line-height: 110%; /* 22px */
+}
+
+.progress-content-container {
+  padding: 16px 72px;
 }
