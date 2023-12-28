@@ -23,6 +23,7 @@ import { chevronDown } from "ionicons/icons";
 import { bookOutline } from "ionicons/icons";
 import "./Progress.css";
 import { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 export const Progress: React.FC = () => {
   const [period, setPeriod] = useState("week" as "week" | "all");
@@ -35,13 +36,25 @@ export const Progress: React.FC = () => {
         <IonList className="progress-style">
           <IonItem>
             <div className="title-style">
-              <h1>Progress</h1>
+              <h1>
+                <FormattedMessage
+                  id="settings.progress.pageTitle"
+                  defaultMessage="Progress"
+                  description="Title at the top of 'Progress' settings page"
+                />
+              </h1>
             </div>
           </IonItem>
 
           <IonItem lines="none">
             <div className="segment-style">
-              <h4>Activity insights</h4>
+              <h4>
+                <FormattedMessage
+                  id="settings.progress.activity"
+                  defaultMessage="Activity insights"
+                  description="Subtitle of 'Progress' settings page"
+                />
+              </h4>
               <div className="segment-control">
                 <button
                   onClick={() => setPeriod("week")}
@@ -49,7 +62,11 @@ export const Progress: React.FC = () => {
                     period === "week" ? "checked" : ""
                   }`}
                 >
-                  Week
+                  <FormattedMessage
+                    id="settings.progress.toggleWeek"
+                    defaultMessage="Week"
+                    description="Side 1 of toggle button on 'Progress' settings page"
+                  />
                 </button>
                 <button
                   onClick={() => setPeriod("all")}
@@ -57,7 +74,11 @@ export const Progress: React.FC = () => {
                     period === "all" ? "checked" : ""
                   }`}
                 >
-                  All time
+                  <FormattedMessage
+                    id="settings.progress.toggleAll"
+                    defaultMessage="All time"
+                    description="Side 2 of toggle button on 'Progress' settings page"
+                  />
                 </button>
               </div>
             </div>
@@ -232,15 +253,30 @@ export const Progress: React.FC = () => {
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <div className="activities-card">
-                    <IonCard>
-                      <div>
-                        <span>25</span>
-                        <IonIcon icon={bookOutline} size="large"></IonIcon>
-                      </div>
-                      <IonCardTitle>Activities</IonCardTitle>
-                    </IonCard>
-                  </div>
+                  <IonCard className="activities-card">
+                    <div className="activities-card-overlay"></div>
+                    <IonGrid>
+                      <IonRow class="ion-align-items-center ion-justify-content-center">
+                        <IonCol>
+                          <span>25</span>
+                        </IonCol>
+
+                        <IonCol class="ion-text-center">
+                          <IonIcon
+                            className="book-icon"
+                            icon={bookOutline}
+                            aria-hidden="true"
+                          />
+                        </IonCol>
+                      </IonRow>
+
+                      <IonRow>
+                        <IonCol>
+                          <IonCardTitle>Activities</IonCardTitle>
+                        </IonCol>
+                      </IonRow>
+                    </IonGrid>
+                  </IonCard>
                 </IonCol>
               </IonRow>
             </IonCol>

@@ -411,8 +411,6 @@ export const Overview: React.FC = ({}) => {
                 >
                   <IonIcon
                     aria-label="Scroll Right"
-                    // size="large"
-                    // slot="end"
                     icon={chevronForwardCircleOutline}
                     className="scroll-right-icon"
                   />
