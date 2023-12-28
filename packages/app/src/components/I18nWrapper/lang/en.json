@@ -108,6 +108,18 @@
   "settingsProgress.preferences.bilingual": "Bilingual vs. Immersion Mode",
   "settingsProgress.preferences.limit": "Daily playtime limit",
   "settingsProgress.preferences.sound": "Sound effects",
+  "settings.progress.pageTitle": "Progress",
+  "settings.progress.activity": "Activity insights",
+  "settings.progress.toggleWeek": "Week",
+  "settings.progress.toggleAll": "All time",
+  "settings.progress.breakdown": "Learning breakdown",
+  "settings.progress.community": "Community",
+  "settings.progress.wellness": "Wellness",
+  "settings.progress.play": "Play",
+  "settings.progress.activities": "Activities",
+  "settings.progress.activity1": "20 minutes in total",
+  "settings.progress.activity2": "12 minutes in total",
+  "settings.progress.activity3": "9 minutes in total",
 
   "settingsHeader.rate": "Rate this app",
 

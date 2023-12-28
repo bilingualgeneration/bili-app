@@ -23,10 +23,11 @@ import { chevronDown } from "ionicons/icons";
 import { bookOutline } from "ionicons/icons";
 import "./Progress.css";
 import { useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export const Progress: React.FC = () => {
   const [period, setPeriod] = useState("week" as "week" | "all");
+  const intl = useIntl();
 
   const kidsName = "Vanessa";
   const firstLetter = kidsName[0];
@@ -108,7 +109,13 @@ export const Progress: React.FC = () => {
                 <IonGrid className="grid-graph-style">
                   <IonRow>
                     <IonCol>
-                      <p className="grid-text-style-big">Learning breakdown</p>
+                      <p className="grid-text-style-big">
+                        <FormattedMessage
+                          id="settings.progress.breakdown"
+                          defaultMessage="Learning breakdown"
+                          description="Title of 'learning breakdown' chart"
+                        />
+                      </p>
                     </IonCol>
                   </IonRow>
                   <IonRow class="ion-align-items-center progress-graph-row">
@@ -123,7 +130,13 @@ export const Progress: React.FC = () => {
                         </IonCol>
                         <IonCol size="7">
                           <p className="grid-text-style-small">Communidad</p>
-                          <p>Community</p>
+                          <p>
+                            <FormattedMessage
+                              id="settings.progress.community"
+                              defaultMessage="Community"
+                              description="'Community' label for the learning breakdown chart"
+                            />
+                          </p>
                         </IonCol>
                         <IonCol size="4">24%</IonCol>
                       </IonRow>
@@ -135,7 +148,13 @@ export const Progress: React.FC = () => {
                         </IonCol>
                         <IonCol size="7">
                           <p className="grid-text-style-small">Cuentos</p>
-                          <p>Stories</p>
+                          <p>
+                            <FormattedMessage
+                              id="settings.progress.stories"
+                              defaultMessage="Stories"
+                              description="'Stories' label for the learning breakdown chart"
+                            />
+                          </p>
                         </IonCol>
                         <IonCol size="4">26%</IonCol>
                       </IonRow>
@@ -147,7 +166,13 @@ export const Progress: React.FC = () => {
                         </IonCol>
                         <IonCol size="7">
                           <p className="grid-text-style-small">Bienestar</p>
-                          <p>Wellness</p>
+                          <p>
+                            <FormattedMessage
+                              id="settings.progress.wellness"
+                              defaultMessage="Wellness"
+                              description="'Wellness' label for the learning breakdown chart"
+                            />
+                          </p>
                         </IonCol>
                         <IonCol size="4">39%</IonCol>
                       </IonRow>
@@ -159,7 +184,13 @@ export const Progress: React.FC = () => {
                         </IonCol>
                         <IonCol size="7">
                           <p className="grid-text-style-small">Juego</p>
-                          <p>Play</p>
+                          <p>
+                            <FormattedMessage
+                              id="settings.progress.play"
+                              defaultMessage="Play"
+                              description="'Play' label for the learning breakdown chart"
+                            />
+                          </p>
                         </IonCol>
                         <IonCol size="4">11%</IonCol>
                       </IonRow>
@@ -191,12 +222,18 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Fabrica de cuentos"}
-                      content={"20 minutes in total"}
+                      content={intl.formatMessage({
+                        id: "settings.progress.activity1",
+                        defaultMessage: "20 minutes in total",
+                        description:
+                          "Time spent on activity1 (displayed on activity1 card on progress settings page)",
+                      })}
                       iconBackgroundColor="#22BEB9"
                     />
                   </div>
                 </IonCol>
               </IonRow>
+
               <IonRow>
                 <IonCol>
                   <div className="grid-card">
@@ -218,12 +255,18 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Afirmaciones"}
-                      content={"12 minutes in total"}
+                      content={intl.formatMessage({
+                        id: "settings.progress.activity2",
+                        defaultMessage: "12 minutes in total",
+                        description:
+                          "Time spent on activity2 (displayed on activity2 card on progress settings page)",
+                      })}
                       iconBackgroundColor="#FFE24F"
                     />
                   </div>
                 </IonCol>
               </IonRow>
+
               <IonRow>
                 <IonCol>
                   <div className="grid-card">
@@ -245,18 +288,24 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Cuento: Cara de Catrina"}
-                      content={"9 minutes in total"}
+                      content={intl.formatMessage({
+                        id: "settings.progress.activity3",
+                        defaultMessage: "9 minutes in total",
+                        description:
+                          "Time spent on activity3 (displayed on activity3 card on progress settings page)",
+                      })}
                       iconBackgroundColor="#FFAEDC"
                     />
                   </div>
                 </IonCol>
               </IonRow>
+
               <IonRow>
-                <IonCol>
+                <IonCol class="ion-text-center">
                   <IonCard className="activities-card">
                     <div className="activities-card-overlay"></div>
                     <IonGrid>
-                      <IonRow class="ion-align-items-center ion-justify-content-center">
+                      <IonRow class="ion-align-items-center">
                         <IonCol>
                           <span>25</span>
                         </IonCol>
@@ -272,7 +321,13 @@ export const Progress: React.FC = () => {
 
                       <IonRow>
                         <IonCol>
-                          <IonCardTitle>Activities</IonCardTitle>
+                          <IonCardTitle>
+                            <FormattedMessage
+                              id="settings.progress.activities"
+                              defaultMessage="Activities"
+                              description="'Activities' card on Progress page detailing number of activities"
+                            />
+                          </IonCardTitle>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
