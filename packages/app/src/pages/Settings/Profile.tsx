@@ -25,7 +25,6 @@ import {
   sparkles,
 } from "ionicons/icons";
 import { useMaskito } from "@maskito/react";
-//import "./SettingsPage1.css";
 import "./Profile.css";
 import { useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -54,6 +53,15 @@ export const Profile: React.FC = () => {
       ],
     },
   });
+
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>(
+    undefined,
+  );
+
+  const handleCountryChange = (event: CustomEvent) => {
+    // The selected value is available in event.detail.value
+    setSelectedCountry(event.detail.value);
+  };
 
   return (
     <>
@@ -154,7 +162,7 @@ export const Profile: React.FC = () => {
 
             <IonRow>
               <IonCol>
-                <IonLabel>
+                <IonLabel className="country-label">
                   <FormattedMessage
                     id="settings.country"
                     defaultMessage="Country"
@@ -164,9 +172,13 @@ export const Profile: React.FC = () => {
                 <IonSelect
                   className="country-dropdown"
                   interface="popover"
-                  placeholder="Select one"
-                  // shape="round"
-                  // fill="outline"
+                  value={selectedCountry}
+                  onIonChange={handleCountryChange}
+                  // placeholder="United States"
+                  justify="space-between"
+                  label={selectedCountry ? undefined : "Select one"}
+                  // label="Select one"
+                  label-placement="floating"
                 >
                   <IonSelectOption className="country-dropdown-options">
                     United States
