@@ -1,6 +1,7 @@
 ion-input.input {
   --background: rgba(136, 147, 145, 0.2);
   font-size: 24px;
+  margin: 5px 0 18px 0;
 }
 
 .adult-profile-content {
@@ -26,7 +27,7 @@ ion-input.input {
 /* countrydropdown  */
 
 ion-select.country-dropdown {
-  background: rgba(136, 147, 145, 0.2);
+  background: rgba(136, 147, 145, 0.17);
   font-family: "Outfit";
   font-weight: bold;
   font-size: 24px;
@@ -35,7 +36,7 @@ ion-select.country-dropdown {
   --padding-top: 14px;
   --padding-bottom: 14px;
   border-radius: 1rem;
-  --placeholder-color: rgb(167, 166, 166);
+  --placeholder-color: rgb(121, 120, 120);
 }
 
 /* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regular text*/

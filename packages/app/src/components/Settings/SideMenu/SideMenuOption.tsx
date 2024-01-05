@@ -20,6 +20,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
+import "./SideMenu.css";
 
 interface SideMenuOptionProps {
   icon: any; //TODO: need to figure out better type
@@ -27,6 +28,7 @@ interface SideMenuOptionProps {
   defaultMessage: string;
   description: string;
   to?: string;
+  isActive?: boolean;
 }
 
 export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
@@ -35,16 +37,17 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   defaultMessage,
   description,
   to,
+  isActive,
 }) => {
   // TODO: remove hover-highlight class and replace with theme
   return (
     <IonItem
-      className="hover-highlight"
+      className={isActive ? "hover-highlight-active" : "hover-highlight"}
       id={`side-menu-button-${id.replace(".", "-")}`}
       routerLink={to}
     >
       <IonIcon slot="start" icon={icon} />
-      <IonLabel>
+      <IonLabel className="menu-label">
         <FormattedMessage
           id={id}
           defaultMessage={defaultMessage}

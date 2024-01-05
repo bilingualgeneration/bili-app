@@ -11,8 +11,11 @@ import {
 } from "ionicons/icons";
 import "./SideMenu.css";
 import { SideMenuOption } from "./SideMenuOption";
+import { useLocation } from "react-router-dom";
 
 export const SideMenu: React.FC = () => {
+  const location = useLocation();
+
   return (
     <>
       <IonList
@@ -26,6 +29,7 @@ export const SideMenu: React.FC = () => {
           defaultMessage={"Overview"}
           description={"Overview label for side menu on settings page"}
           to="/settings/overview"
+          isActive={location.pathname === "/settings/overview"}
         />
 
         <SideMenuOption
@@ -34,6 +38,7 @@ export const SideMenu: React.FC = () => {
           defaultMessage={"Profile"}
           description={"Profile label for side menu on settings page"}
           to="/settings/profile"
+          isActive={location.pathname === "/settings/profile"}
         />
 
         <SideMenuOption
@@ -42,6 +47,7 @@ export const SideMenu: React.FC = () => {
           defaultMessage={"Preferences"}
           description={"Preferences label for side menu on settings page"}
           to="/settings/preferences"
+          isActive={location.pathname === "/settings/preferences"}
         />
 
         <SideMenuOption
@@ -50,6 +56,7 @@ export const SideMenu: React.FC = () => {
           defaultMessage={"Progress"}
           description={"Progress label for side menu on settings page"}
           to="/settings/progress"
+          isActive={location.pathname === "/settings/progress"}
         />
 
         <SideMenuOption
