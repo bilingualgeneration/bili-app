@@ -1,3 +1,7 @@
 .hover-highlight:hover {
   --background: var(--base-agua, rgba(0, 106, 103, 0.12));
 }
+
+ion-list.side-menu-styles {
+  box-shadow: 2px 0 16px 0 rgba(0, 106, 103, 0.2);
+}

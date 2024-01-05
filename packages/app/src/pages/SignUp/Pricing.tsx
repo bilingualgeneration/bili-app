@@ -62,24 +62,24 @@ export const Pricing: React.FC = () => {
         <IonText className="ion-text-center">
           <h1>
             <FormattedMessage
-              id="signUp.choose_plan"
+              id="signUp.choosePlan"
               defaultMessage="Choose your plan"
-              description="title instruction"
+              description="Title of page where user can choose plan"
             />
           </h1>
           <br />
           <h2>
             <FormattedMessage
-              id="signUp.trial_title"
+              id="signUp.trialTitle"
               defaultMessage="3 week free trial"
-              description="trial title"
+              description="Subtitle of page mentioning the 3 week free trial promo"
             />
           </h2>
           <p>
             <FormattedMessage
-              id="signUp.trial_description"
+              id="signUp.trialDescription"
               defaultMessage="For a limited time only"
-              description="trial description"
+              description="Text under subtitle mentioning the trial period time limitation"
             />
           </p>
         </IonText>
@@ -94,16 +94,16 @@ export const Pricing: React.FC = () => {
           data-testid="role-select-continue-button"
         >
           <FormattedMessage
-            id="signUp.continue"
+            id="common.continue"
             defaultMessage="Continue"
-            description="continue button"
+            description="Button for users to continue on to the next page"
           />
         </IonButton>
         <span className="ion-text-center">
           <FormattedMessage
-            id="signUp.no_commitment"
+            id="signUp.noCommitment"
             defaultMessage="No commitments, cancel anytime."
-            description="disclaimer"
+            description="Text at the bottom of 'Choose your plan' page, assuring new clients of cancelation flexibility"
           />
         </span>
       </form>

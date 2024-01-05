@@ -160,6 +160,38 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/settings/preferences"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsLayout>
+                <Preferences />
+              </SettingsLayout>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/progress"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsLayout>
+                <Progress />
+              </SettingsLayout>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/settings/profile"
           render={() => (
             <AuthedLayout
@@ -202,8 +234,6 @@ const Router: React.FC = () => {
             </UnauthedLayout>
           )}
         />
-
-        {/* This is just temporary while creating pages */}
 
         <Route
           exact
@@ -292,38 +322,6 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <TeacherLogin />
             </UnauthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/settings/preferences"
-          render={() => (
-            <AuthedLayout
-              customBackground="white"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
-              <SettingsLayout>
-                <Preferences />
-              </SettingsLayout>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/settings/progress"
-          render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
-              <SettingsLayout>
-                <Progress />
-              </SettingsLayout>
-            </AuthedLayout>
           )}
         />
       </Switch>

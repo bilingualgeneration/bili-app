@@ -32,6 +32,7 @@ export const Complete: React.FC = () => {
             <FormattedMessage
               id="successScreen.success"
               defaultMessage="Success! You did it!"
+              description="Message that appears once user has completed registration process"
             />
           </h1>
         </IonText>
