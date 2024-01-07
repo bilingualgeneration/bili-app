@@ -46,7 +46,7 @@ export const StudentDashboard: React.FC = () => {
         <p>Hello {name}!</p>
       </div>
 
-      <div className="">
+      <div className="main-block">
         <div className="icons-title">
           <h2 style={{ marginBottom: 10 }}>
             <FormattedMessage id="landingPage.assignments" />
@@ -108,7 +108,7 @@ export const StudentDashboard: React.FC = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              overflowX: "hidden",
+              overflowX: "scroll",
             }}
           >
             <StoriesCard
@@ -119,7 +119,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#006A67"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={false}
             />
 
@@ -131,7 +131,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#0045A1"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={false}
             />
 
@@ -143,7 +143,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#F0091B"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={false}
             />
 
@@ -155,7 +155,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#F0091B"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={false}
             />
 
@@ -167,7 +167,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#F0091B"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={false}
             />
 
@@ -179,7 +179,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#0045A1"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={true}
             />
 
@@ -191,7 +191,7 @@ export const StudentDashboard: React.FC = () => {
               iconBackroungColor="#0045A1"
               heart={<Heart />}
               rating={[<Star />, <Star />, <Star />]}
-              className="stories-card-image"
+              className="other-card-image"
               isLocked={true}
             />
           </div>
@@ -210,8 +210,19 @@ export const StudentDashboard: React.FC = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              overflowX: "scroll",
             }}
           >
+            <StoriesCard
+              title={"¡Me gusta como soy!"}
+              subtitle={"I like myself"}
+              cover={"/assets/img/wellness_1.png"}
+              icon={<SmallFlower />}
+              iconBackroungColor="#AC217B"
+              heart={<Heart />}
+              className="other-card-image"
+            />
+
             <StoriesCard
               title={"¡Me gusta como soy!"}
               subtitle={"I like myself"}
@@ -259,8 +270,19 @@ export const StudentDashboard: React.FC = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              overflowX: "scroll",
             }}
           >
+            <StoriesCard
+              title={"Afirmaciones"}
+              subtitle={"Affirmations"}
+              cover={"/assets/img/card_play_image.png"}
+              icon={<SmallFlower />}
+              iconBackroungColor="#AC217B"
+              heart={<Heart />}
+              className="other-card-image"
+            />
+
             <StoriesCard
               title={"Afirmaciones"}
               subtitle={"Affirmations"}
@@ -306,8 +328,19 @@ export const StudentDashboard: React.FC = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              overflowX: "scroll",
             }}
           >
+            <StoriesCard
+              title={"Afirmaciones"}
+              subtitle={"Affirmations"}
+              cover={"/assets/img/card_community_image.png"}
+              icon={<SmallFlower />}
+              iconBackroungColor="#AC217B"
+              heart={<Heart />}
+              className="other-card-image"
+            />
+
             <StoriesCard
               title={"Afirmaciones"}
               subtitle={"Affirmations"}
