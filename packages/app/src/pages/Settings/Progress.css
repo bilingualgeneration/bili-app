@@ -10,6 +10,15 @@
   font-weight: 600;
   line-height: 40px; /* 125% */
   letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+
+ion-item.activity-insights {
+  margin: 8px 0 14px;
+}
+
+ion-item.progress-item {
+  margin: 0 0;
 }
 
 .segment-style {
@@ -18,7 +27,6 @@
   overflow: visible;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0;
 }
 
 .segment-style h4 {
@@ -94,9 +102,6 @@
   text-align: start;
 }
 
-.whole-grid-style {
-  padding: 24px 0 0;
-}
 .whole-grid-style ion-card {
   margin-inline: 0;
   height: 100%;
@@ -110,7 +115,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 28px;
-  margin: 0 0 48px;
+  /* margin: 0 0 48px; */
 }
 
 .grid-text-style-small {
@@ -171,7 +176,6 @@ ion-icon.book-icon {
 
 ion-card.activities-card {
   --background: var(--Cielo-Cielo, #d3eae8);
-  padding: 16px 32px;
   width: 100%;
   height: 178px;
 }
@@ -200,6 +204,7 @@ ion-card.activities-card {
 
 ion-item.kids-name-select {
   --background-hover: none;
+  margin-bottom: 24px;
 }
 
 .grid-card ion-text {

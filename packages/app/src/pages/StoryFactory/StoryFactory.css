@@ -6,9 +6,8 @@
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
 }
 
-ion-button.story-intro-button {
+ion-button.sf-intro-button {
   display: inline-flex;
-  --background: : var(--Flamenco-High, #d3eae8);
   width: 25rem; /* 403.506px; */
   --padding-bottom: 3%; /* 16px; */
   --padding-top: 3%; /* 16px; */
@@ -18,17 +17,13 @@ ion-button.story-intro-button {
 
   /* Style properties */
   border-radius: 105.63px;
-  background: var(--cielo-cielo, #d3eae8);
+  background: var(--base-selva, #006a67);
   box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
 }
 
 .story-factory-button-container {
-  display: inline-flex;
-  padding: 16px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
   gap: 16px;
+  margin-top: 32px;
 }
 
 .story-button-bold {
@@ -36,7 +31,7 @@ ion-button.story-intro-button {
   align-self: stretch;
 
   /* Style properties */
-  color: var(--cielo-lowest, #003735);
+  color: var(--Base-Nube, #fff);
   text-align: center;
   font-family: Outfit;
   font-size: 2rem; /*//3vh; //32px;*/
@@ -51,7 +46,7 @@ ion-button.story-intro-button {
   align-self: stretch;
 
   /* Style properties */
-  color: var(--cielo-lowest, #003735);
+  color: var(--Base-Nube, #fff);
   text-align: center;
   font-family: Outfit;
   font-size: 1rem; /* 14px; */
@@ -61,7 +56,7 @@ ion-button.story-intro-button {
   letter-spacing: 0.211px;
 }
 
-#story-bienvenidos {
+#story-spanish-title {
   width: auto;
   color: var(--base-selva, #006a67);
   font-feature-settings:
@@ -88,11 +83,11 @@ ion-button.story-intro-button {
   letter-spacing: -2px;
 }
 
-#story-welcome {
+#story-english-subtitle {
   align-self: stretch;
   color: var(--base-suelo, #000);
   font-family: Outfit;
-  font-size: 2rem; /* 32px; */
+  font-size: 3rem; /* 32px; */
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 35.2px */
@@ -108,14 +103,15 @@ ion-button.story-intro-button {
   line-height: 110%;
 }
 
-#story-un-lugar {
+#story-spanish-title-pt2 {
   align-self: stretch;
-  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  color: var(--base-selva, #006a67);
   font-family: Outfit;
   font-size: 2.5rem; /* 40px; */
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 44px */
+  margin-bottom: 40px;
 }
 
 #story-page-2-title {
@@ -129,7 +125,7 @@ ion-button.story-intro-button {
   margin-bottom: 1%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
   #story-page-2-title {
     font-size: 1.5rem; /* //2.5vh; */ /* Adjust as needed for smaller screens */
     width: 100%; /* Full width on smaller screens */ /* TODO: CHECK IF MOBILE VALUES ARE CORRECT */
@@ -148,19 +144,20 @@ ion-button.story-intro-button {
 
 @media only screen and (max-width: 600px) {
   #story-page-2-subtitle {
-    font-size: 1.5rem; /* //1.5vh;  Adjust as needed for smaller screens */
+    font-size: 1rem; /* //1.5vh;  Adjust as needed for smaller screens */
     width: 100%; /* Full width on smaller screens */
   }
 }
 
-#story-a-place {
+#story-english-subtitle-pt2 {
   align-self: stretch;
-  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
+  color: var(--base-suelo, #000);
   font-family: Outfit;
-  font-size: 1.5rem; /* 24px; */
+  font-size: 2rem; /* 24px; */
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 26.4px */
+  margin-top: 8px;
 }
 
 #story-juego-fabrica-es {
@@ -182,21 +179,6 @@ ion-button.story-intro-button {
   font-weight: 400;
   line-height: 110%; /* 22px */
 }
-
-/*
-.container {
-  padding: 0px;
-  margin: 0px;
-  max-width: none;
-}
-*/
-
-/* TODO: This is what is affecting the padding on both sides of orange rectangle, but I can't change it for only the orange rectangle header */
-/* .inner-scroll {
-   padding-inline-start: var(--padding-start);
-   padding-inline-end: var(--padding-end);
-
-} */
 
 .rectangle-header {
   position: relative;
@@ -641,29 +623,95 @@ ion-button.story-intro-button {
   line-height: 110%; /* 27.675px */
 }
 
+ion-card.story-page-1-main-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 8px;
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+  max-width: 100%;
+  width: 50vw; /* 1002px */
+  height: 74vh;
+  padding: 6vh 5vw;
+  position: relative;
+  z-index: 1;
+  border-radius: 2.5rem;
+}
+
 /* story page 2 */
 
-.story-page-2-main-card {
-  position: relative;
+ion-card.story-page-2-main-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 8px;
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
   border-radius: 40px;
   max-width: 100%;
-  width: 100%; /* 70vw; */
-  height: 80vh;
-  padding: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.story-page-2-main-card .story-page-3-main-card {
-  max-height: 100%; /* 98vh; 978px; */
+  width: 50vw; /* 1002px */
+  height: 74vh;
+  padding: 0vh 5vw 6vh 5vw;
+  position: relative;
+  z-index: 1;
+  border-radius: 2.5rem;
 }
 
 .bili-character {
   position: absolute;
-  height: auto;
-  top: 29%; /* Moves the character DOWN */
-  left: 64%; /* Moves the character RIGHT (neg # moves character left) */
-  z-index: 1; /* Ensures Bili Character is on top of card */
+  height: 73vh;
+  width: 41vw;
+  top: 23vh; /* Bigger # = Moves the character DOWN */
+  left: 54vw; /* Smaller # = Moves the character LEFT */
+  z-index: 2; /* Ensures Bili Character is on top of card */
+}
+
+@media only screen and (min-device-width: 768px) /* iPad Mini and iPad Air */ and (max-device-width: 1024px) /* iPad Mini,
+  iPad Air,
+  and iPad Pro */ and (-webkit-min-device-pixel-ratio: 1) {
+  ion-card.story-page-1-main-card {
+    width: 65vw; /* 1002px */
+    height: 78vh;
+  }
+
+  .bili-character {
+    height: 73vh;
+    width: 41vw;
+    top: 23vh;
+    left: 60vw;
+    z-index: 2;
+  }
+
+  /* Add any other styles or adjustments specific to iPads here */
+}
+
+/* .sf-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 51px 183px;
+} */
+
+.sf-header-container {
+  display: inline-flex;
+  max-width: 100%;
+  width: 55vh;
+  /* height: 456px; */
+  flex-direction: column;
+  align-items: flex-start;
+  /* gap: 40px; */
+  flex-shrink: 0;
+}
+
+.sf-card-grid {
+  display: flex;
+  justify-content: center;
+  margin: 4% 11% 0px 10%;
+}
+
+.story-factory-button-container-pg-2 {
+  margin-top: 8rem;
 }

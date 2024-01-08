@@ -15,6 +15,7 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "./pages/games/Intruder";
 import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
 import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
+import { IntroPage2a } from "./pages/StoryFactory/StoryFactoryPage2a";
 import { IntroPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
 import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
@@ -176,22 +177,6 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/settings/progress"
-          render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
-              <SettingsLayout>
-                <Progress />
-              </SettingsLayout>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
           path="/settings/profile"
           render={() => (
             <AuthedLayout
@@ -201,6 +186,22 @@ const Router: React.FC = () => {
             >
               <SettingsLayout>
                 <Profile />
+              </SettingsLayout>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/progress"
+          render={() => (
+            <AuthedLayout
+              customBackground="#f7faf9"
+              wide={true}
+              showOgAuthedHeader={false}
+            >
+              <SettingsLayout>
+                <Progress />
               </SettingsLayout>
             </AuthedLayout>
           )}
@@ -250,7 +251,7 @@ const Router: React.FC = () => {
           path="/story-factory/2"
           render={() => (
             <AuthedLayout customBackground="#F7FAF9" wide={true}>
-              <IntroPage2 currentPage={2} />
+              <IntroPage2a currentPage={2} />
             </AuthedLayout>
           )}
         />

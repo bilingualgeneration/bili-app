@@ -55,6 +55,15 @@ export const Profile: React.FC = () => {
     },
   });
 
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>(
+    undefined,
+  );
+
+  const handleCountryChange = (event: CustomEvent) => {
+    // The selected value is available in event.detail.value
+    setSelectedCountry(event.detail.value);
+  };
+
   return (
     <>
       <div className="settings-pg1-container">
@@ -164,9 +173,11 @@ export const Profile: React.FC = () => {
                 <IonSelect
                   className="country-dropdown"
                   interface="popover"
-                  placeholder="Select one"
-                  // shape="round"
-                  // fill="outline"
+                  value={selectedCountry}
+                  onIonChange={handleCountryChange}
+                  justify="space-between"
+                  label={selectedCountry ? undefined : "Select one"}
+                  label-placement="floating"
                 >
                   <IonSelectOption className="country-dropdown-options">
                     United States

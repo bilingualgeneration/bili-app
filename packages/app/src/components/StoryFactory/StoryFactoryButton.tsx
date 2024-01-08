@@ -17,7 +17,7 @@ export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
   return (
     // <div className="story-intro-button-container">
     <IonButton
-      className="story-intro-button"
+      className="sf-intro-button"
       expand="block"
       shape="round"
       type="button"

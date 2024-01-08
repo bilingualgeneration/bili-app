@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -7,53 +8,47 @@ import {
   IonCardTitle,
   IonCol,
   IonGrid,
-  IonImg,
   IonRow,
-  IonText,
 } from "@ionic/react";
+import { FormattedMessage } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
 import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
-import { useProfile } from "@/contexts/ProfileContext";
 import "./StoryFactory.css";
 
-interface IntroPage1Props {
+interface IntroPage2aProps {
   currentPage: number;
 }
 
-export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
+export const IntroPage2a: React.FC<IntroPage2aProps> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
+
   return (
     <>
       <IonGrid className="ion-no-padding sf-card-grid">
         <IonRow>
           <IonCol size="auto">
-            <IonCard className="ion-no-margin story-page-1-main-card">
-              <IonCardHeader className="ion-no-padding sf-header-container">
+            <IonCard className="ion-no-margin story-page-2-main-card">
+              <IonCardHeader className="ion-no-padding sf-card-header">
                 <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-spanish-title">
-                    ¡Bienvenidos a la fábrica de cuentos!
+                  <div id="story-page-2-title">
+                    Crea más de 90.000 historias diferentes con solo deslizar el
+                    dedo o hacer clic en un botón.
                   </div>
                 </IonCardTitle>
-                <IonCardSubtitle>
-                  <div id="story-spanish-title-pt2">
-                    ¡Un lugar para lecturas silábicas graciosas!
-                  </div>
-                </IonCardSubtitle>
                 {!isImmersive && (
-                  <>
-                    <div id="story-english-subtitle">Welcome to the</div>
-                    <div id="story-english-subtitle">story factory!</div>
-                    <div id="story-english-subtitle-pt2">
-                      A place for silly syllabic reading!
+                  <IonCardSubtitle>
+                    <div id="story-page-2-subtitle">
+                      Create over 90,000 different stories with the swipe of
+                      your finger or click of a button.
                     </div>
-                  </>
+                  </IonCardSubtitle>
                 )}
               </IonCardHeader>
-
               <IonCardContent>
                 <IonRow className="ion-text-center">
                   <IonCol>
-                    <div className="story-factory-button-container">
+                    <div className="story-factory-button-container-pg-2">
                       <StoryFactoryButton currentPage={currentPage} />
                     </div>
                   </IonCol>

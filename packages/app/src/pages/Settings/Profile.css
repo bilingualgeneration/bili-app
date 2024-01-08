@@ -1,11 +1,11 @@
 ion-input.input {
   --background: rgba(136, 147, 145, 0.2);
   font-size: 24px;
-  margin: 5px 0 18px 0;
+  margin: 5px 0 12px 0;
 }
 
 .adult-profile-content {
-  margin: 2% 3% 5%;
+  margin: 2% 3% 2%;
 }
 
 ion-input.input-fill-outline {
@@ -27,23 +27,27 @@ ion-input.input {
 /* countrydropdown  */
 
 ion-select.country-dropdown {
-  background: rgba(136, 147, 145, 0.17);
+  background: rgba(156, 165, 163, 0.2);
   font-family: "Outfit";
   font-weight: bold;
   font-size: 24px;
   --padding-start: 30px;
   --padding-end: 30px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
+  /* --padding-top: 14px; */
+  /* --padding-bottom: 14px; */
   border-radius: 1rem;
-  --placeholder-color: rgb(121, 120, 120);
+  /* --placeholder-color: rgb(121, 120, 120); */
+  color: rgb(167, 166, 166);
+  margin-top: 5px;
 }
 
-/* Was trying to use this selector to change the color of the placeholder text for date, but this only changes regular text*/
+ion-select.country-dropdown::part(text) {
+  color: black;
+}
 
-/* ion-input[type="date" i] {
-  --placeholder-color: blue;
-} */
+ion-select.country-dropdown::part(label) {
+  transform: translateY(40%) scale(1);
+}
 
 ion-col.col-save-changes-button {
   text-align: center;
