@@ -61,21 +61,12 @@ const texts4 = [
   "cada tarde",
 ];
 
-/*
-let texts = [
-    ...texts1,
-    ...texts2,
-    ...texts3,
-    ...texts4,
-];
-*/
+let texts = [...texts1, ...texts2, ...texts3, ...texts4];
 
-let texts = [];
-
-for (const one of texts1.slice(0, 2)) {
-  for (const two of texts2.slice(0, 2)) {
-    for (const three of texts3.slice(0, 2)) {
-      for (const four of texts4.slice(0, 2)) {
+for (const one of texts1) {
+  for (const two of texts2) {
+    for (const three of texts3) {
+      for (const four of texts4) {
         texts = texts.concat([one, two, three, four].join(" "));
       }
     }
@@ -85,5 +76,3 @@ for (const one of texts1.slice(0, 2)) {
 for (const t of texts) {
   await generateSpeech(buildRequest({ text: t }));
 }
-
-console.log(texts.length);
