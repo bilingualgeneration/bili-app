@@ -5,15 +5,18 @@ import { httpsCallable } from "firebase/functions";
 
 const SignUpDataContext = createContext({
   data: {},
+  page: "roleSelect",
   signUp: () => {},
   signUpStatus: "idle",
   setData: (value: any): void => {},
+  setPage: (value: any): void => {},
   setSignUpStatus: (value: any): void => {},
 });
 export const useSignUpData = () => useContext(SignUpDataContext);
 
 export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
   const [data, setData] = useState({});
+  const [page, setPage] = useState("roleSelect");
   const [signUpStatus, setSignUpStatus] = useState("idle");
   const auth = useAuth();
   const functions = useFunctions();
@@ -29,10 +32,12 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
     <SignUpDataContext.Provider
       value={{
         data,
+        page,
+        setData,
+        setPage,
+        setSignUpStatus,
         signUp,
         signUpStatus,
-        setData,
-        setSignUpStatus,
       }}
     >
       {children}
