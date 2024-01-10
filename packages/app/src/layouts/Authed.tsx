@@ -9,7 +9,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { Redirect } from "react-router-dom";
-import { useAuth, useUser, useSigninCheck } from "reactfire";
+import { useUser, useSigninCheck } from "reactfire";
 import { useProfile, ProfileContextProvider } from "@/contexts/ProfileContext";
 import { FooterMenu } from "@/components/FooterMenu";
 
@@ -23,7 +23,6 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   children,
   background = "",
 }) => {
-  const auth = useAuth();
   const { status: userStatus } = useUser();
   const { status, data: signInCheckResult } = useSigninCheck();
   if (status === "loading" || userStatus === "loading") {
@@ -40,15 +39,7 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
       <IonPage>
         <IonHeader className="ion-no-border">
           <IonToolbar>
-            <IonButtons slot="end">
-              <IonButton
-                onClick={() => {
-                  auth.signOut();
-                }}
-              >
-                logout
-              </IonButton>
-            </IonButtons>
+            <IonButtons slot="end"></IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen className="ion-padding">

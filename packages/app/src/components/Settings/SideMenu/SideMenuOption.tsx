@@ -1,3 +1,4 @@
+import { Browser } from "@capacitor/browser";
 import React from "react";
 import {
   IonBackButton,
@@ -20,7 +21,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import "./SideMenu.css";
+import "./SideMenu.scss";
 
 interface SideMenuOptionProps {
   icon: any; //TODO: need to figure out better type
@@ -31,6 +32,12 @@ interface SideMenuOptionProps {
   isActive?: boolean;
 }
 
+interface IonItemProps {
+  [key: string]: any;
+}
+
+const urlRegex = /^(https?):\/\/.*$/i;
+
 export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   icon,
   id,
@@ -39,12 +46,28 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   to,
   isActive,
 }) => {
+  // conditionally build props
+  // so that an external url can be passed to the to prop
+  let props: IonItemProps = {};
+  if (to) {
+    console.log(to, urlRegex.test(to));
+    if (urlRegex.test(to)) {
+      // is an external url
+      props.onClick = () => {
+        Browser.open({ url: to });
+      };
+    } else {
+      // is an internal link
+      props.routerLink = to;
+    }
+  }
+
   // TODO: remove hover-highlight class and replace with theme
   return (
     <IonItem
       className={isActive ? "hover-highlight-active" : "hover-highlight"}
       id={`side-menu-button-${id.replace(".", "-")}`}
-      routerLink={to}
+      {...props}
     >
       <IonIcon slot="start" icon={icon} />
       <IonLabel className="menu-label">

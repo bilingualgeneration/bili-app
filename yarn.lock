@@ -2057,6 +2057,7 @@ __metadata:
     "@babel/core": "npm:^7.23.2"
     "@bili/schema": "workspace:^"
     "@capacitor/app": "npm:5.0.6"
+    "@capacitor/browser": "npm:^5.1.0"
     "@capacitor/cli": "npm:5.4.0"
     "@capacitor/core": "npm:5.4.0"
     "@capacitor/haptics": "npm:5.0.6"
@@ -2146,6 +2147,15 @@ __metadata:
   peerDependencies:
     "@capacitor/core": ^5.0.0
   checksum: 8fc14b81701e9bc55cbda9da92209c817cf50be947d34b4118320b206099764b422846be23a45eef738800ec123a07427266f89cda984a587e6f8593f7084991
+  languageName: node
+  linkType: hard
+
+"@capacitor/browser@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@capacitor/browser@npm:5.1.0"
+  peerDependencies:
+    "@capacitor/core": ^5.0.0
+  checksum: ecb032c217deabed7258cc42edec08b23aaf031c637427cf72a41c3c67c23425cd0c25665ff87341e344526f8d997300bf2dc3371a3b53ce8d35d65f30ea5968
   languageName: node
   linkType: hard
 
