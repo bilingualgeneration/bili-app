@@ -7,11 +7,12 @@ import {
   IonText,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
+import "./SignUp/SignUp.css";
 
 export const Splash: React.FC = () => {
   return (
-    <>
-      <div className="page-wrapper">
+    <div className="page-wrapper">
+      <div className="signup-wrapper">
         <IonText>
           <h1 className="ion-text-center">
             <FormattedMessage
@@ -89,6 +90,6 @@ export const Splash: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </div>
-    </>
+    </div>
   );
 };

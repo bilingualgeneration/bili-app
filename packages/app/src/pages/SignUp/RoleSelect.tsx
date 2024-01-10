@@ -3,7 +3,6 @@ import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { IonButton, IonLabel, IonItem, IonInput, IonText } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 
-import { useSwiper } from "swiper/react";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,15 +16,7 @@ import { string } from "zod";
 import { CollectionReference } from "firebase/firestore";
 import { RadioCard } from "@/components/RadioCard";
 
-export type RoleSelectProps = {
-  teacherSlide: number;
-  parentSlide: number;
-};
-
-export const RoleSelect: React.FC<RoleSelectProps> = ({
-  teacherSlide,
-  parentSlide,
-}) => {
+export const RoleSelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
     role: z.string().min(1), //nonempty was deprecated
@@ -38,8 +29,7 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
   const teacherOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -76,11 +66,13 @@ export const RoleSelect: React.FC<RoleSelectProps> = ({
     });
     // @ts-ignore todo: better typing
     if (responses.role === "teacher") {
-      swiper.slideTo(teacherSlide);
+      setPage("teacherAbout");
+      //swiper.slideTo(teacherSlide);
     }
     // @ts-ignore todo: better typing
     if (responses.role === "parent") {
-      swiper.slideTo(parentSlide);
+      setPage("childProfile");
+      //swiper.slideTo(parentSlide);
     }
   });
 

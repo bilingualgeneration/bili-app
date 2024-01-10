@@ -3,7 +3,6 @@ import { IonButton, IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-import { useSwiper } from "swiper/react";
 import { MultipleCheckbox } from "@/components/MultipleCheckbox";
 import type {
   MultipleCheckboxProps,
@@ -17,14 +16,9 @@ const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
 };
 
-export type TeacherAboutProps = {
-  nextSlide: number;
-};
-
-export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
+export const TeacherAbout: FC = () => {
   const intl = useIntl();
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
   // todo: these zod schemas are wrong
   const schema = z.object({
     grades: z.string().array().optional(),
@@ -134,7 +128,7 @@ export const TeacherAbout: FC<TeacherAboutProps> = ({ nextSlide }) => {
       ...data,
       ...response,
     });
-    swiper.slideTo(nextSlide);
+    setPage("languageModeSelect");
   });
 
   return (
