@@ -4,8 +4,6 @@ import { IonButton, IonCheckbox, IonLabel, IonText } from "@ionic/react";
 import { Input } from "@/components/Input";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { useSwiper } from "swiper/react";
-
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
@@ -24,17 +22,9 @@ interface FormInputs {
 
 // todo: expand Input to include checkbox
 
-export type ParentAccountCredentialsProps = {
-  nextSlide: number;
-  previousSlide: number;
-};
-
-export const ParentAccountCredentials: React.FC<
-  ParentAccountCredentialsProps
-> = ({ nextSlide, previousSlide }) => {
+export const ParentAccountCredentials: React.FC = () => {
   const intl = useIntl();
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -57,7 +47,7 @@ export const ParentAccountCredentials: React.FC<
       ...data,
       ...response,
     });
-    swiper.slideTo(nextSlide);
+    setPage("pricing");
   });
 
   return (

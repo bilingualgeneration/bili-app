@@ -17,32 +17,19 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
   backgroundColor,
   title,
   subtitle,
-  textColor = "white", // Default to black if textColor is not provided
+  textColor = "white", // Default to white if textColor is not provided
 }) => {
-  const cardStyle = {
-    backgroundColor: backgroundColor,
-  };
-
-  const beforeStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-  };
-
-  const titleStyle = {
-    color: textColor,
-  };
-
-  const subtitleStyle = {
-    color: textColor,
-  };
-
   return (
-    <IonCard className="explore-card" style={cardStyle}>
-      <div className="explore-card-overlay" style={beforeStyle}></div>
+    <IonCard className="explore-card" style={{ backgroundColor }}>
+      <div
+        className="explore-card-overlay"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      ></div>
       <div className="explore-card-content">{children}</div>
-      <div className="explore-card-title" style={titleStyle}>
+      <div className="explore-card-title" style={{ color: textColor }}>
         {title}
       </div>
-      <div className="explore-card-subtitle" style={subtitleStyle}>
+      <div className="explore-card-subtitle" style={{ color: textColor }}>
         {subtitle}
       </div>
     </IonCard>

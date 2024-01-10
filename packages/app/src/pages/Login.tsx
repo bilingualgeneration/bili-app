@@ -68,7 +68,7 @@ const Login: React.FC = () => {
   });
 
   return (
-    <>
+    <div className="page-wrapper">
       <IonCard>
         <IonCardContent>
           <form onSubmit={onSubmit}>
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                   id: "common.email",
                   defaultMessage: "Email address",
                   description:
-                    "Prompt for user to enter their email on login screen",
+                    "Input area label where users must enter their email as requirement",
                 })}
                 labelPlacement="above"
                 required={true}
@@ -97,7 +97,7 @@ const Login: React.FC = () => {
                   id: "common.password",
                   defaultMessage: "Password",
                   description:
-                    "Prompt for user to enter their password on login screen",
+                    "Text above input area showing users that they must enter a password as a requirement",
                 })}
                 labelPlacement="above"
                 required={true}
@@ -195,7 +195,7 @@ const Login: React.FC = () => {
           </form>
         </IonCardContent>
       </IonCard>
-    </>
+    </div>
   );
 };
 

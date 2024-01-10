@@ -1,3 +1,30 @@
-.hover-highlight:hover {
+.hover-highlight:hover,
+.hover-highlight-active {
   --background: var(--base-agua, rgba(0, 106, 103, 0.12));
+  --border-radius: 8px;
+  --color: #006a67;
+}
+
+.hover-highlight-active ion-icon,
+.hover-highlight:hover ion-icon,
+.hover-highlight-active .menu-label,
+.hover-highlight:hover .menu-label {
+  color: #006a67;
+}
+
+ion-item {
+  margin: 30px 0;
+  padding: 8px 12px;
+}
+
+ion-icon {
+  color: #a1a4b2;
+}
+
+.hover-highlight .menu-label {
+  color: #a1a4b2;
+}
+
+ion-list.side-menu-styles {
+  box-shadow: 2px 0 16px 0 rgba(0, 106, 103, 0.2);
 }

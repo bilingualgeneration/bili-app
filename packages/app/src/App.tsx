@@ -122,11 +122,7 @@ const Router: React.FC = () => {
           exact
           path="/play"
           render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
+            <AuthedLayout background="#f7faf9">
               <Play />
             </AuthedLayout>
           )}
@@ -146,11 +142,7 @@ const Router: React.FC = () => {
           exact
           path="/settings/overview"
           render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
+            <AuthedLayout background="#f7faf9">
               <SettingsLayout>
                 <Overview />
               </SettingsLayout>
@@ -160,13 +152,33 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/settings/preferences"
+          render={() => (
+            <AuthedLayout background="#f7faf9">
+              <SettingsLayout>
+                <Preferences />
+              </SettingsLayout>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/progress"
+          render={() => (
+            <AuthedLayout background="#f7faf9">
+              <SettingsLayout>
+                <Progress />
+              </SettingsLayout>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/settings/profile"
           render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
+            <AuthedLayout background="#f7faf9">
               <SettingsLayout>
                 <Profile />
               </SettingsLayout>
@@ -203,13 +215,11 @@ const Router: React.FC = () => {
           )}
         />
 
-        {/* This is just temporary while creating pages */}
-
         <Route
           exact
           path="/story-factory/1"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout background="#F7FAF9">
               <IntroPage1 currentPage={1} />
             </AuthedLayout>
           )}
@@ -219,7 +229,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/2"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout background="#F7FAF9">
               <IntroPage2 currentPage={2} />
             </AuthedLayout>
           )}
@@ -229,7 +239,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/3"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout background="#F7FAF9">
               <IntroPage3 currentPage={3} />
             </AuthedLayout>
           )}
@@ -239,7 +249,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/4"
           render={() => (
-            <AuthedLayout customBackground="#FBF2E2" wide={true}>
+            <AuthedLayout background="#FBF2E2">
               <StoryFactoryPage4 />
             </AuthedLayout>
           )}
@@ -249,7 +259,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/5"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout background="#F7FAF9">
               <StoryFactoryPage5 />
             </AuthedLayout>
           )}
@@ -259,7 +269,7 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/6"
           render={() => (
-            <AuthedLayout customBackground="#F7FAF9" wide={true}>
+            <AuthedLayout background="#F7FAF9">
               <StoryFactoryPage6 />
             </AuthedLayout>
           )}
@@ -279,7 +289,7 @@ const Router: React.FC = () => {
           exact
           path="/student-dashboard"
           render={() => (
-            <AuthedLayout customBackground="white" wide={true}>
+            <AuthedLayout background="white">
               <StudentDashboard />
             </AuthedLayout>
           )}
@@ -292,38 +302,6 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <TeacherLogin />
             </UnauthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/settings/preferences"
-          render={() => (
-            <AuthedLayout
-              customBackground="white"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
-              <SettingsLayout>
-                <Preferences />
-              </SettingsLayout>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/settings/progress"
-          render={() => (
-            <AuthedLayout
-              customBackground="#f7faf9"
-              wide={true}
-              showOgAuthedHeader={false}
-            >
-              <SettingsLayout>
-                <Progress />
-              </SettingsLayout>
-            </AuthedLayout>
           )}
         />
       </Switch>

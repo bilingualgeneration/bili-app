@@ -7,7 +7,7 @@ export const SettingsLayout: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   return (
-    <IonGrid>
+    <IonGrid className="ion-no-padding inner-scroll">
       <IonRow>
         <IonCol size="auto">
           <SideMenu />

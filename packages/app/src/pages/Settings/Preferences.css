@@ -70,3 +70,12 @@
 .preferences-style ion-item {
   --background-hover: none;
 }
+
+ion-list.preferences-style {
+  background: none;
+  padding: 16px 72px;
+}
+
+ion-item {
+  --background: none;
+}

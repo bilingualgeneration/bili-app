@@ -2,23 +2,17 @@ import { FormattedMessage } from "react-intl";
 import { IonButton, IonImg, IonSpinner, IonText } from "@ionic/react";
 import React, { useEffect } from "react";
 import { useSignUpData } from "./SignUpContext";
-import { useSwiper } from "swiper/react";
 
 export const Complete: React.FC = () => {
-  const swiper = useSwiper();
   const { data, signUp, signUpStatus } = useSignUpData();
   useEffect(() => {
-    if (
-      signUpStatus === "idle" &&
-      swiper.activeIndex === swiper.slides?.length - 1
-    ) {
+    if (signUpStatus === "idle") {
       signUp();
     }
-  }, [signUpStatus, swiper.activeIndex, swiper.slides?.length]);
+  }, [signUpStatus]);
   if (signUpStatus === "idle" || signUpStatus === "busy") {
     return <IonSpinner />;
   }
-  console.log(data);
   return (
     <>
       <div
@@ -32,6 +26,7 @@ export const Complete: React.FC = () => {
             <FormattedMessage
               id="successScreen.success"
               defaultMessage="Success! You did it!"
+              description="Message that appears once user has completed registration process"
             />
           </h1>
         </IonText>
