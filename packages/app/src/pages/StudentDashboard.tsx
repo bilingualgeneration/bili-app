@@ -29,6 +29,7 @@ import SmallCommunity from "@/assets/icons/small_community.svg?react";
 import SmallFlower from "@/assets/icons/small_flower.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
+import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
 import { Link } from "react-router-dom";
 import "./StudentDashboard.css";
@@ -93,7 +94,7 @@ export const StudentDashboard: React.FC = () => {
             </IonRow>
           </IonGrid>
         </div>
-
+        {/* <div className="cards-block"> */}
         {/* stories */}
         <div className="stories-story-cards">
           <div className="cards-title">
@@ -112,87 +113,99 @@ export const StudentDashboard: React.FC = () => {
             }}
           >
             <StoriesCard
-              title={"¡Me gusta como soy!"}
-              subtitle={"I like myself"}
-              cover={"/assets/img/boot_image.png"}
+              title={"Qué es lo que te gusta de ti mismo?"}
+              subtitle={"What do you like about yourself?"}
+              cover={"/assets/img/drum_image.png"}
               icon={<SmallBook />}
               iconBackroungColor="#006A67"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
               isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallArt />}
+              title={"Cara de Catrina"}
+              subtitle={"Catrina for a Day"}
+              cover={"/assets/img/dance_image.png"}
+              icon={<SmallBook />}
               iconBackroungColor="#0045A1"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
               isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallCommunity />}
+              title={"Soy de..."}
+              subtitle={"I'm From..."}
+              cover={"/assets/img/band_image.png"}
+              icon={<SmallBook />}
               iconBackroungColor="#F0091B"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
               isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallCommunity />}
+              title={"El esqueleto travieso"}
+              subtitle={"The Mischievous Skeleton"}
+              cover={"/assets/img/mountain_image.png"}
+              icon={<SmallBook />}
               iconBackroungColor="#F0091B"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
               isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroungColor="#F0091B"
+              title={"Qué es lo que te gusta de ti mismo?"}
+              subtitle={"What do you like about yourself?"}
+              cover={"/assets/img/drum_image.png"}
+              icon={<SmallBook />}
+              iconBackroungColor="#006A67"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
               isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallArt />}
+              title={"Cara de Catrina"}
+              subtitle={"Catrina for a Day"}
+              cover={"/assets/img/dance_image.png"}
+              icon={<SmallBook />}
               iconBackroungColor="#0045A1"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
-              isLocked={true}
+              isLocked={false}
             />
 
             <StoriesCard
-              title={"Auto retrato"}
-              subtitle={"Self-portrait"}
-              cover={"/assets/img/boot_image.png"}
-              icon={<SmallArt />}
-              iconBackroungColor="#0045A1"
+              title={"Soy de..."}
+              subtitle={"I'm From..."}
+              cover={"/assets/img/band_image.png"}
+              icon={<SmallBook />}
+              iconBackroungColor="#F0091B"
               heart={<Heart />}
-              rating={[<Star />, <Star />, <Star />]}
+              //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
-              isLocked={true}
+              isLocked={false}
+            />
+
+            <StoriesCard
+              title={"El esqueleto travieso"}
+              subtitle={"The Mischievous Skeleton"}
+              cover={"/assets/img/mountain_image.png"}
+              icon={<SmallBook />}
+              iconBackroungColor="#F0091B"
+              heart={<Heart />}
+              //rating={[<Star />, <Star />, <Star />]}
+              className="other-card-image"
+              isLocked={false}
             />
           </div>
         </div>
@@ -214,9 +227,9 @@ export const StudentDashboard: React.FC = () => {
             }}
           >
             <StoriesCard
-              title={"¡Me gusta como soy!"}
-              subtitle={"I like myself"}
-              cover={"/assets/img/wellness_1.png"}
+              title={"Afirmaciones"}
+              subtitle={"Affirmations"}
+              cover={"/assets/img/drum_image.png"}
               icon={<SmallFlower />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
@@ -224,9 +237,9 @@ export const StudentDashboard: React.FC = () => {
             />
 
             <StoriesCard
-              title={"¡Me gusta como soy!"}
-              subtitle={"I like myself"}
-              cover={"/assets/img/wellness_1.png"}
+              title={"Respirando hondo"}
+              subtitle={"Breathing deeply"}
+              cover={"/assets/img/dance_image.png"}
               icon={<SmallFlower />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
@@ -234,23 +247,36 @@ export const StudentDashboard: React.FC = () => {
             />
 
             <StoriesCard
-              title={"¡Me gusta como soy!"}
-              subtitle={"I like myself"}
-              cover={"/assets/img/wellness_1.png"}
+              title={"Pausa de yoga"}
+              subtitle={"Yoga break"}
+              cover={"/assets/img/band_image.png"}
               icon={<SmallFlower />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
+              isLocked={true}
             />
 
             <StoriesCard
-              title={"¡Me gusta como soy!"}
-              subtitle={"I like myself"}
-              cover={"/assets/img/wellness_1.png"}
+              title={"Mantras musicales"}
+              subtitle={"Musical mantras"}
+              cover={"/assets/img/mountain_image.png"}
               icon={<SmallFlower />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
+              isLocked={true}
+            />
+
+            <StoriesCard
+              title={"Pausa de yoga"}
+              subtitle={"Yoga break"}
+              cover={"/assets/img/mountain_image.png"}
+              icon={<SmallFlower />}
+              iconBackroungColor="#AC217B"
+              heart={<Heart />}
+              className="other-card-image"
+              isLocked={true}
             />
           </div>
         </div>
@@ -274,43 +300,55 @@ export const StudentDashboard: React.FC = () => {
             }}
           >
             <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
+              title={"Fábrica de cuentos"}
+              subtitle={"Story Factory"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              icon={<PlayIcon />}
+              iconBackroungColor="#F48722"
+              heart={<Heart />}
+              className="other-card-image small"
+            />
+
+            <StoriesCard
+              title={"El intruso"}
+              subtitle={"The intruder"}
+              cover={"/assets/img/mountain_image.png"}
+              icon={<PlayIcon />}
+              iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
+            />
+
+            <StoriesCard
+              title={"Cuenta conmigo"}
+              subtitle={"Count with me"}
+              cover={"/assets/img/dance_image.png"}
+              icon={<PlayIcon />}
+              iconBackroungColor="#F48722"
+              heart={<Heart />}
+              className="other-card-image"
+            />
+
+            <StoriesCard
+              title={"Las Cestas"}
+              subtitle={"The baskets"}
+              cover={"/assets/img/band_image.png"}
+              icon={<PlayIcon />}
+              iconBackroungColor="#F48722"
+              heart={<Heart />}
+              className="other-card-image"
+              isLocked={true}
             />
 
             <StoriesCard
               title={"Afirmaciones"}
               subtitle={"Affirmations"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              icon={<PlayIcon />}
+              iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_play_image.png"}
-              icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_play_image.png"}
-              icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
+              isLocked={true}
             />
           </div>
         </div>
@@ -332,46 +370,60 @@ export const StudentDashboard: React.FC = () => {
             }}
           >
             <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_community_image.png"}
-              icon={<SmallFlower />}
+              title={"¿Qué harías?"}
+              subtitle={"What would you do?"}
+              cover={"/assets/img/horse_image.png"}
+              icon={<SmallCommunity />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
 
             <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
+              title={"Cuéntame sobre..."}
+              subtitle={"Tell me about..."}
               cover={"/assets/img/card_community_image.png"}
-              icon={<SmallFlower />}
+              icon={<SmallCommunity />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
 
             <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_community_image.png"}
-              icon={<SmallFlower />}
+              title={"Cuentos y dichos"}
+              subtitle={"Stories and sayings"}
+              cover={"/assets/img/star_image.png"}
+              icon={<SmallCommunity />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
+              isLocked={true}
             />
 
             <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_community_image.png"}
-              icon={<SmallFlower />}
+              title={"Veo Veo"}
+              subtitle={"I Spy"}
+              cover={"/assets/img/flowers_image.png"}
+              icon={<SmallCommunity />}
               iconBackroungColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
+              isLocked={true}
+            />
+
+            <StoriesCard
+              title={"Veo Veo"}
+              subtitle={"I Spy"}
+              cover={"/assets/img/flowers_image.png"}
+              icon={<SmallCommunity />}
+              iconBackroungColor="#AC217B"
+              heart={<Heart />}
+              className="other-card-image"
+              isLocked={true}
             />
           </div>
         </div>
+        {/* </div> */}
       </div>
     </div>
   );
