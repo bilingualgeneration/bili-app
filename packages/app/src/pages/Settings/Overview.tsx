@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   IonButton,
   IonButtons,
@@ -34,8 +35,25 @@ import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage, useIntl } from "react-intl";
+import { Preferences } from "@capacitor/preferences";
 
 export const Overview: React.FC = ({}) => {
+  const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
+
+  useEffect(() => {
+    Preferences.get({
+      key: "shouldShowSettingsTutorial",
+    }).then((response) => {
+      if (response.value === null) {
+        // have never seen it before
+        setShouldShowTutorial(true);
+        Preferences.set({
+          key: "shouldShowSettingsTutorial",
+          value: false,
+        });
+      }
+    });
+  }, []);
   const steps = [
     {
       target: "#side-menu-button-sideMenu-profile",
@@ -87,18 +105,20 @@ export const Overview: React.FC = ({}) => {
 
   return (
     <>
-      <Joyride
-        hideCloseButton
-        showSkipButton
-        showProgress
-        steps={steps}
-        continuous={true}
-        styles={{
-          tooltipContainer: {
-            textAlign: "left",
-          },
-        }}
-      />
+      {shouldShowTutorial && (
+        <Joyride
+          hideCloseButton
+          showSkipButton
+          showProgress
+          steps={steps}
+          continuous={true}
+          styles={{
+            tooltipContainer: {
+              textAlign: "left",
+            },
+          }}
+        />
+      )}
       <div className="settings-pg1-container">
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">

@@ -1,5 +1,5 @@
 import React from "react";
-import { IonButton, IonIcon, IonItem, IonList } from "@ionic/react";
+import { IonButton, IonIcon, IonItem, IonLabel, IonList } from "@ionic/react";
 import {
   arrowBackOutline,
   gridOutline,
@@ -12,15 +12,21 @@ import {
 import "./SideMenu.css";
 import { SideMenuOption } from "./SideMenuOption";
 import { useLocation } from "react-router-dom";
+import { Preferences } from "@capacitor/preferences";
 
 export const SideMenu: React.FC = () => {
   const location = useLocation();
+
+  // todo: remove this button and functionality; it's only here for dev purposes
+  const resetTutorial = async () => {
+    Preferences.remove({ key: "shouldShowSettingsTutorial" });
+  };
 
   return (
     <>
       <IonList
         lines="none"
-        style={{ height: "100vh", padding: "1rem" }}
+        style={{ height: "100%", padding: "1rem" }}
         className="side-menu-styles"
       >
         <SideMenuOption
@@ -72,6 +78,13 @@ export const SideMenu: React.FC = () => {
           defaultMessage={"Log out"}
           description={"Log out label for side menu on settings page"}
         />
+        <IonItem
+          className="hover-highlight"
+          style={{ position: "absolute", bottom: 0 }}
+          onClick={resetTutorial}
+        >
+          <IonLabel className="menu-label">reset tutorial</IonLabel>
+        </IonItem>
       </IonList>
     </>
   );
