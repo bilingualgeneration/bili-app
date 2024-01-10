@@ -2,9 +2,10 @@ import { generateSpeech } from "./generate.js";
 
 const buildRequest = ({ text }) => {
   return {
-    text,
-    textType: "text",
+    text: `<speak><prosody rate="66%">${text}</prosody></speak>`,
+    textType: "ssml",
     voiceId: "Mia",
+    //voiceId: 'Lucia',
     outputFile: `data/${text.replace(/\s/g, "_").toLowerCase()}.mp3`,
   };
 };
