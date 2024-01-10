@@ -1,6 +1,5 @@
 import { SettingsHeader } from "@/components/Settings/SettingsHeader";
 import { SideMenu } from "@/components/Settings/SideMenu";
-import "./Container.css";
 
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 
@@ -15,7 +14,7 @@ export const SettingsLayout: React.FC<React.PropsWithChildren<{}>> = ({
         </IonCol>
         <IonCol>
           <SettingsHeader></SettingsHeader>
-          <div className="container">{children}</div>
+          {children}
         </IonCol>
       </IonRow>
     </IonGrid>

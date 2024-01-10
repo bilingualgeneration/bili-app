@@ -68,7 +68,7 @@ const Login: React.FC = () => {
   });
 
   return (
-    <>
+    <div className="page-wrapper">
       <IonCard>
         <IonCardContent>
           <form onSubmit={onSubmit}>
@@ -195,7 +195,7 @@ const Login: React.FC = () => {
           </form>
         </IonCardContent>
       </IonCard>
-    </>
+    </div>
   );
 };
 
