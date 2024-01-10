@@ -40,33 +40,26 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
                 </IonCardSubtitle>
                 {!isImmersive && (
                   <>
-                    <br />
-                    <br />
-                    <br />
-                    <div id="story-welcome">Welcome to the story factory!</div>
+                    <div id="story-welcome" style={{ marginTop: "4rem" }}>
+                      Welcome to the story factory!
+                    </div>
                     <div id="story-a-place">
                       A place for silly syllabic reading!
                     </div>
-                    <br />
-                    <br />
-                    <br />
                   </>
                 )}
               </IonCardHeader>
             </IonCol>
+            <IonCol>
+              <img
+                className="bili-character"
+                src={biliCharacter}
+                alt="Bili character"
+              />
+            </IonCol>
           </IonRow>
         </IonGrid>
-
-        <div className="story-factory-button-container">
-          <StoryFactoryButton currentPage={currentPage} />
-        </div>
       </IonCard>
-
-      <img
-        className="bili-character"
-        src={biliCharacter}
-        alt="Bili character"
-      />
     </>
   );
 };

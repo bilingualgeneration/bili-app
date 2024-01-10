@@ -1,5 +1,20 @@
 @use "sass:math";
 
+.page-wrapper {
+  border-left: 10px solid red;
+  border-right: 10px solid red;
+  max-width: 1366px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+ion-content::part(scroll) {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 // calendar icon in input needs color to be fixed
 ion-input[type="date"] {
   &:not(.has-value) {
@@ -46,8 +61,9 @@ ion-content {
 
 #header {
   ion-toolbar {
-    --background: #ffffff url("/assets/img/logo_small.png") center/auto 70%
+    --background: transparent url("/assets/img/logo_small.png") center/auto 70%
       no-repeat;
+    margin-bottom: 4rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
