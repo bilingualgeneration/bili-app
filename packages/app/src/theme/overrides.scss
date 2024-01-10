@@ -5,7 +5,6 @@
   border-right: 10px solid red;
   max-width: 1366px;
   margin: auto;
-  min-height: 100vh;
 }
 
 ion-content::part(scroll) {
@@ -258,6 +257,7 @@ ion-card {
   text-align: -webkit-center;
   margin-bottom: 108px;
   background-size: 100% 65%;
+  margin-right: 100px;
 }
 
 #student-landing-page {

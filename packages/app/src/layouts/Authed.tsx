@@ -21,7 +21,7 @@ interface AuthedLayoutProps {
 
 const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   children,
-  background = "#fff",
+  background = "",
 }) => {
   const auth = useAuth();
   const { status: userStatus } = useUser();
@@ -38,21 +38,24 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   return (
     <ProfileContextProvider>
       <IonPage>
-        <IonContent fullscreen className="ion-padding" style={{ background }}>
-          <div>
-            <IonToolbar>
-              <IonButtons slot="end">
-                <IonButton
-                  onClick={() => {
-                    auth.signOut();
-                  }}
-                >
-                  logout
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </div>
-          <div className="page-wrapper" style={{ paddingBottom: "2rem" }}>
+        <IonHeader className="ion-no-border">
+          <IonToolbar>
+            <IonButtons slot="end">
+              <IonButton
+                onClick={() => {
+                  auth.signOut();
+                }}
+              >
+                logout
+              </IonButton>
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent fullscreen className="ion-padding">
+          <div
+            className="page-wrapper"
+            style={{ paddingBottom: "2rem", background }}
+          >
             {children}
           </div>
         </IonContent>
