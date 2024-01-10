@@ -289,7 +289,7 @@ const Router: React.FC = () => {
           exact
           path="/student-dashboard"
           render={() => (
-            <AuthedLayout background="white">
+            <AuthedLayout background="#fff">
               <StudentDashboard />
             </AuthedLayout>
           )}

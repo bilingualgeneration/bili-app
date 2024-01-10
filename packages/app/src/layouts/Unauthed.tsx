@@ -18,21 +18,23 @@ interface UnauthedLayoutProps {
 
 const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   children,
-  background = "#fff",
+  background = "",
 }) => {
   const contentStyle: Record<string, string> = {};
 
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding" style={{ background }}>
-        <div style={{ marginBottom: "4rem" }}>
-          <IonToolbar style={{ padding: "0 2rem" }}>
-            <IonButtons slot="end">
-              <LanguageSwitcher />
-            </IonButtons>
-          </IonToolbar>
+      <IonHeader className="ion-no-border">
+        <IonToolbar>
+          <IonButtons slot="end">
+            <LanguageSwitcher />
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen className="ion-padding">
+        <div style={{ background, marginTop: 56, paddingTop: "4rem" }}>
+          {children}
         </div>
-        {children}
       </IonContent>
     </IonPage>
   );
