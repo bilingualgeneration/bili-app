@@ -4,7 +4,6 @@ import { useIntl, FormattedMessage } from "react-intl";
 
 import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
-import { useSwiper } from "swiper/react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,16 +16,9 @@ import GoogleIcon from "@/assets/icons/google.svg?react";
 
 // todo: expand Input to include checkbox
 
-export type TeacherAccountCredentialsProps = {
-  previousSlide: number;
-};
-
-export const TeacherAccountCredentials: React.FC<
-  TeacherAccountCredentialsProps
-> = ({ previousSlide }) => {
+export const TeacherAccountCredentials: React.FC = () => {
   const intl = useIntl();
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -50,7 +42,7 @@ export const TeacherAccountCredentials: React.FC<
       ...data,
       ...response,
     });
-    swiper.slideNext();
+    setPage("pricing");
   });
 
   return (

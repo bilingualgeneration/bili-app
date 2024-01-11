@@ -4,18 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-import { useSwiper } from "swiper/react";
 import { IonButton, IonText } from "@ionic/react";
 
 import { RadioCard } from "@/components/RadioCard";
 
 export const Pricing: React.FC = () => {
-  const { data, setData } = useSignUpData();
+  const { data, setData, setPage } = useSignUpData();
   const intl = useIntl();
   const schema = z.object({
     pricing: z.string(),
   });
-  const swiper = useSwiper();
   const {
     control,
     handleSubmit,
@@ -30,7 +28,7 @@ export const Pricing: React.FC = () => {
       ...data,
       ...responses,
     });
-    swiper.slideNext();
+    setPage("complete");
   });
 
   const monthlyOption: ExtendedRadioOption = {

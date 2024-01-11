@@ -9,7 +9,6 @@ import {
   IonInput,
   IonText,
 } from "@ionic/react";
-import { useSwiper } from "swiper/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,15 +17,7 @@ import { useForm } from "react-hook-form";
 import { RadioCard } from "../../components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 
-export type LanguageModeSelectProps = {
-  teacherSlide: number;
-  parentSlide: number;
-};
-
-export const LanguageModeSelect: React.FC<LanguageModeSelectProps> = ({
-  teacherSlide,
-  parentSlide,
-}) => {
+export const LanguageModeSelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
     isImmersive: z.boolean(),
@@ -39,8 +30,7 @@ export const LanguageModeSelect: React.FC<LanguageModeSelectProps> = ({
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
 
   const spanishOption: ExtendedRadioOption = {
     component: (
@@ -129,11 +119,11 @@ export const LanguageModeSelect: React.FC<LanguageModeSelectProps> = ({
     });
     // @ts-ignore todo: better typing
     if (data.role === "teacher") {
-      swiper.slideTo(teacherSlide);
+      setPage("teacherAccountCredentials");
     }
     // @ts-ignore todo: better typing
     if (data.role === "parent") {
-      swiper.slideTo(parentSlide);
+      setPage("parentAccountCredentials");
     }
   });
 

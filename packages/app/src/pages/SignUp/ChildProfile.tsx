@@ -12,20 +12,14 @@ import {
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-import { useSwiper } from "swiper/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/Input";
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 
-export type ChildProfileProps = {
-  nextSlide: number;
-};
-
-export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
+export const ChildProfile: FC = () => {
   const intl = useIntl();
-  const { data, setData } = useSignUpData();
-  const swiper = useSwiper();
+  const { data, setData, setPage } = useSignUpData();
 
   const schema = z.object({
     childName: z.string().min(1).max(50).optional(),
@@ -81,7 +75,7 @@ export const ChildProfile: FC<ChildProfileProps> = ({ nextSlide }) => {
       ...data,
       ...response,
     });
-    swiper.slideTo(nextSlide);
+    setPage("languageModeSelect");
   });
 
   return (

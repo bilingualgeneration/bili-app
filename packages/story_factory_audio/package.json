@@ -1,0 +1,10 @@
+{
+  "name": "voices",
+  "packageManager": "yarn@4.0.1",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-polly": "^3.477.0",
+    "@aws-sdk/polly-request-presigner": "^3.477.0",
+    "dotenv": "^16.3.1"
+  }
+}
