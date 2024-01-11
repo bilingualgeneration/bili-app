@@ -25,36 +25,33 @@ export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
 
   return (
     <>
-      <IonCard className="story-page-2-main-card">
-        <IonGrid>
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="12" size-md="9">
-              <IonCardHeader className="story-header">
-                <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-page-2-title">
-                    En este juego, podrás crear más de 90.000 historias
-                    diferentes con solo deslizar el dedo o hacer clic en un
-                    botón. Haz clic en "Siguiente" para ver cómo.
-                  </div>
-                </IonCardTitle>
-                {!isImmersive && (
-                  <IonCardSubtitle>
-                    <div id="story-page-2-subtitle">
-                      In this game, you can create over 90,000 different stories
-                      with the swipe of your finger or click of a button. Click
-                      “Next” to see how.
-                    </div>
-                  </IonCardSubtitle>
-                )}
-              </IonCardHeader>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-
-        <div className="story-factory-button-container">
-          <StoryFactoryButton currentPage={currentPage} />
-        </div>
-      </IonCard>
+      <div className="sf-card-grid">
+        <IonCard className="ion-no-margin story-page-2-main-card">
+          <IonCardHeader className="ion-no-padding sf-card-header">
+            <IonCardTitle style={{ textAlign: "left" }}>
+              <div id="story-page-2-title">
+                Crea más de 90.000 historias diferentes con solo deslizar el
+                dedo o hacer clic en un botón.
+              </div>
+            </IonCardTitle>
+            {!isImmersive && (
+              <IonCardSubtitle>
+                <div id="story-page-2-subtitle">
+                  Create over 90,000 different stories with the swipe of your
+                  finger or click of a button.
+                </div>
+              </IonCardSubtitle>
+            )}
+          </IonCardHeader>
+          <IonCardContent>
+            <div className="ion-text-center">
+              <div className="story-factory-button-container-pg-2">
+                <StoryFactoryButton currentPage={currentPage} />
+              </div>
+            </div>
+          </IonCardContent>
+        </IonCard>
+      </div>
 
       <img
         className="bili-character"

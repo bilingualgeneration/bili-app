@@ -8,65 +8,93 @@ import {
   IonCardTitle,
   IonCol,
   IonGrid,
+  IonHeader,
   IonRow,
+  IonText,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
-import biliCharacter from "@/assets/icons/bili_character.svg";
-import miniFabricaCard from "@/assets/icons/mini_fabrica_card.svg";
 import "./StoryFactory.css";
+import { JuegoCard } from "@/components/StoryFactory/SF_SlotMachineGame";
 
-interface IntroPage3Props {
+interface StoryFactoryPage3Props {
   currentPage: number;
 }
 
-export const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
+export const StoryFactoryPage3: React.FC<StoryFactoryPage3Props> = ({
+  currentPage,
+}) => {
   const { isImmersive } = useProfile();
-
   return (
     <>
-      <IonCard className="story-page-2-main-card story-page-3-main-card">
-        <IonGrid>
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="8.5">
-              <IonCardHeader style={{ padding: "5%" }}>
-                <IonCardTitle class="ion-text-left">
-                  <div id="story-page-2-title">
-                    {" "}
-                    Esta es tu fábrica de cuentos. Puedes crear un cuento
-                    presionando el botón Actualizar o deslizando o haciendo clic
-                    en cada sección de la historia.
-                  </div>
-                </IonCardTitle>
-                {!isImmersive && (
-                  <IonCardSubtitle>
-                    <div id="story-page-2-subtitle">
-                      This is your story factory. You can create a story by
-                      either hitting the Refresh button, or by swiping or
-                      clicking each section of the story.
+      <IonGrid class="ion-no-padding">
+        <IonRow>
+          <IonCol>
+            <div className="rectangle-header">
+              <div className="rectangle-header-text">
+                <h1 id="story-juego-title">Juego</h1>
+                {!isImmersive && <p id="story-juego-title2">Play</p>}
+              </div>
+              {/* Semi-Transparent Overlay for Rectangle Header */}
+              <div className="rectangle-header-semi-transparent-overlay"></div>
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+
+      <IonCard className="juego-fabrica-de-cuentos-main-card">
+        <IonCardContent>
+          <IonGrid class="ion-no-padding">
+            <IonRow>
+              <IonCol>
+                <IonCardHeader className="fabrica-de-cuentos-header">
+                  <IonCardTitle style={{ textAlign: "left" }}>
+                    <div id="story-juego-fabrica-es">
+                      {" "}
+                      ¡Fábrica de cuentos!{" "}
                     </div>
-                  </IonCardSubtitle>
-                )}
-              </IonCardHeader>
-            </IonCol>
+                  </IonCardTitle>
+                  {!isImmersive && (
+                    <IonCardSubtitle>
+                      <div id="story-factory-en"> Story factory </div>
+                    </IonCardSubtitle>
+                  )}
+                </IonCardHeader>
+              </IonCol>
+            </IonRow>
 
-            {/* <IonCol size="4">
-              <img className='bili-character' src={biliCharacter} alt="Bili character" />
-            </IonCol> */}
-          </IonRow>
-        </IonGrid>
+            <IonRow class="ion-justify-content-center justify-content-between">
+              <IonCol>
+                <JuegoCard
+                  storyId="5"
+                  backgroundImage="./assets/img/card_image.png"
+                  isLocked={false}
+                  isSpanishBilingual={true}
+                  packNumber={1}
+                />
+              </IonCol>
 
-        <div className="story-factory-button-container">
-          <StoryFactoryButton currentPage={currentPage} />
-        </div>
+              <IonCol>
+                <JuegoCard
+                  backgroundImage="/assets/img/card_image2.png"
+                  isLocked={true}
+                  isSpanishBilingual={true}
+                  packNumber={2}
+                />
+              </IonCol>
+
+              <IonCol>
+                <JuegoCard
+                  backgroundImage="/assets/img/card_image3.png"
+                  isLocked={true}
+                  isSpanishBilingual={true}
+                  packNumber={3}
+                />
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonCardContent>
       </IonCard>
-
-      <img
-        className="bili-character"
-        src={biliCharacter}
-        alt="Bili character"
-      />
     </>
   );
 };

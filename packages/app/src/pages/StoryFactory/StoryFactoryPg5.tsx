@@ -4,6 +4,7 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardSubtitle,
   IonCardTitle,
   IonCol,
   IonContent,
@@ -14,106 +15,116 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import { FabricaCard } from "@/components/StoryFactory/FabricaCard";
 import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
-import refreshButton from "@/assets/icons/refresh_button.svg";
 import "./StoryFactory.css";
 
-// EVERYTHING THAT IS COMMENTED OUT CAN BE READDED ONCE USER PROFILE IS COMPLETE
+export const StoryFactoryPage5: React.FC = () => (
+  <>
+    <IonGrid class="ion-no-padding">
+      <IonRow class="ion-justify-content-center">
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaHalfCircle} alt="grey half circle piece" />
+          </div>
+        </IonCol>
 
-const words = [
-  [
-    { es: "La vaca", en: "The cow" },
-    { es: "Mi mamá", en: "My Mom" },
-    { es: "El sapo", en: "The frog" },
-    { es: "Doña María", en: "Doña María" },
-  ],
-  [
-    { es: "nos da", en: "gives" },
-    { es: "puso", en: "put" },
-    { es: "come", en: "eats" },
-    { es: "dibuja", en: "draws" },
-  ],
-  [
-    { es: "leche", en: "milk" },
-    { es: "pan dulce", en: "sweet bread" },
-    { es: "insectos", en: "insects" },
-    { es: "las nubes", en: "the clouds" },
-  ],
-  [
-    { es: "los sábados.", en: "Saturdays" },
-    { es: "en la mesa.", en: "on the table." },
-    { es: "en el bosque.", en: "in the forest." },
-    { es: "en el cielo.", en: "in the sky." },
-  ],
-];
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle fabrica-flipped-swirl">
+            <img src={fabricaHalfCircle} alt="grey half circle piece" />
+          </div>
+        </IonCol>
 
-const FactoryButton: React.FC = () => {
-  return (
-    <div className="fabrica-swirl-rectangle">
-      <img src={fabricaHalfCircle} alt="grey half circle piece" />
-    </div>
-  );
-};
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaHalfCircle} alt="grey half circle piece" />
+          </div>
+        </IonCol>
 
-export const StoryFactoryPage5: React.FC = () => {
-  const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
-  return (
-    <>
-      <IonGrid class="ion-no-padding">
-        <IonRow class="ion-justify-content-center">
-          {[1, 2, 3, 4].map((number) => (
-            <IonCol size="2" class="ion-text-center" key={number}>
-              <div
-                className={`fabrica-swirl-rectangle ${
-                  number % 2 == 0 ? "" : "fabrica-flipped-swirl"
-                }`}
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle fabrica-flipped-swirl">
+            <img src={fabricaHalfCircle} alt="grey half circle piece" />
+          </div>
+        </IonCol>
+      </IonRow>
+
+      <IonRow class="ion-justify-content-center">
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaRectangle} alt="grey rectangle piece" />
+          </div>
+        </IonCol>
+
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaRectangle} alt="grey rectangle piece" />
+          </div>
+        </IonCol>
+
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaRectangle} alt="grey rectangle piece" />
+          </div>
+        </IonCol>
+
+        <IonCol size="2" class="ion-text-center">
+          <div className="fabrica-swirl-rectangle">
+            <img src={fabricaRectangle} alt="grey rectangle piece" />
+          </div>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
+
+    <IonCard className="felicitaciones-card">
+      <IonGrid>
+        <IonRow>
+          <IonCol size="10">
+            <IonCardHeader className="felicitaciones-header">
+              <IonCardTitle
+                className="felicitaciones-title"
+                style={{ textAlign: "left" }}
               >
-                <img src={fabricaHalfCircle} alt="grey half circle piece" />
+                ¡Felicitaciones!
+              </IonCardTitle>
+
+              <IonCardSubtitle className="felicitaciones-subtitle">
+                Has creado y leído cinco cuentos. ¿Puedes seguir?
+              </IonCardSubtitle>
+
+              <IonRow style={{ height: "6vh" }}></IonRow>
+
+              <div id="congrats-text-bold">Congrats!</div>
+              <div id="congrats-text-reg">
+                You've created and read five stories. Can you keep going?
               </div>
-              <div className="fabrica-rectangle">
-                <img src={fabricaRectangle} alt="grey rectangle piece" />
-              </div>
-            </IonCol>
-          ))}
+            </IonCardHeader>
+          </IonCol>
         </IonRow>
       </IonGrid>
+    </IonCard>
 
-      <IonCard className="fabrica-de-cuentos-large-card">
-        <IonCardContent className="fabrica-card-content">
-          <IonGrid>
-            <IonRow>
-              <IonCol>
-                <IonCardHeader class="ion-align-items-center">
-                  <IonCardTitle>
-                    <div className="fabrica-text-container">
-                      <div id="fabrica-header-text">¡Fábrica de cuentos!</div>
-                    </div>
-                  </IonCardTitle>
-                </IonCardHeader>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              {wordIndices.map((index, position) => (
-                <IonCol key={position} size="3">
-                  <FabricaCard
-                    es={words[position][index].es}
-                    en={words[position][index].en}
-                    {...{ setWordIndices, wordIndices, index, position }}
-                  />
-                </IonCol>
-              ))}
-            </IonRow>
-          </IonGrid>
-        </IonCardContent>
-      </IonCard>
-
-      <img
-        className="refresh-button ion-hide"
-        src={refreshButton}
-        alt="Refresh button icon"
-      />
-    </>
-  );
-};
+    <IonGrid>
+      <IonRow class="ion-justify-content-center">
+        <IonCol class="ion-text-center">
+          <div style={{ position: "relative" }}>
+            <IonButton
+              className="sigue-adelante-button"
+              shape="round"
+              style={{
+                position: "absolute",
+                bottom: "-4vh",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              <div>
+                <div className="sigue-button-es">¡Sigue adelante!</div>
+                <div className="sigue-button-en">Keep going!</div>
+              </div>
+            </IonButton>
+          </div>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
+  </>
+);
