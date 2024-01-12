@@ -486,11 +486,6 @@ ion-button.sf-intro-button {
   /* Adjust size as needed */
 }
 
-.cards-title {
-  margin-top: 48px;
-  margin-bottom: 46px;
-}
-
 .stories-card.locked {
   position: relative;
   filter: brightness(50%);

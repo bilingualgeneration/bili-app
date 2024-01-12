@@ -1,9 +1,14 @@
 @use "sass:math";
 
 .page-wrapper {
-  border-left: 10px solid red;
-  border-right: 10px solid red;
   max-width: 1366px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: 20px; // clearance for footer
+}
+
+.content-wrapper {
+  max-width: 540px;
   margin: auto;
 }
 
@@ -251,14 +256,16 @@ ion-card {
   padding: 20px;
 }
 
-.wave-icons {
-  background-image: url("/assets/img/wave_100.png");
-  background-repeat: no-repeat;
-  text-align: -webkit-center;
-  margin-bottom: 108px;
-  background-size: 100% 65%;
-  margin-right: 100px;
-}
+// .wave-icons {
+//   // background-image: url("/assets/img/wave_frame.png");
+//   background-repeat: no-repeat;
+//   text-align: -webkit-center;
+//   margin-bottom: 108px;
+//   background-size: 100% 65%;
+//   margin-right: 100px;
+//   width: 100%;
+//   height: 400px;
+// }
 
 #student-landing-page {
   .col-custom-position-1 {
@@ -621,11 +628,6 @@ ion-card {
   transform: translate(-50%, -50%);
   z-index: 2;
   /* Adjust size as needed */
-}
-
-.cards-title {
-  margin-top: 48px;
-  margin-bottom: 46px;
 }
 
 .stories-card.locked {
