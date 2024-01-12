@@ -1,9 +1,21 @@
 /* styles for story factory cards */
 
-.juego-fabrica-de-cuentos-main-card {
-  margin-top: 5%;
+.story-factory-pg3-main-card {
+  /* margin-top: 5%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 57.35vw; /* 1147px; */
+  padding: 60px;
   border-radius: 35.942px;
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 ion-button.sf-intro-button {
@@ -19,6 +31,10 @@ ion-button.sf-intro-button {
   border-radius: 105.63px;
   background: var(--base-selva, #006a67);
   box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+}
+
+.controller-icon {
+  color: white;
 }
 
 .story-factory-button-container {
@@ -160,18 +176,20 @@ ion-button.sf-intro-button {
   margin-top: 8px;
 }
 
-#story-juego-fabrica-es {
-  width: 55vw; /* 1093px; 68.313rem */
+#sf-es {
+  /* width: 68.313rem; 1093px; 68.313rem */
   color: var(--greyscale-900, #212121);
   font-family: Outfit;
-  font-size: 2.5rem; /*  4vh; 40px; */
+  font-size: 3rem; /*  48px; */
   font-style: normal;
   font-weight: 700;
-  line-height: 110%; /* 44px */
+  line-height: 116%; /* 56px */
+  letter-spacing: -1px;
+  margin: 0px;
 }
 
-#story-factory-en {
-  width: 37vw; /* 367px; 22.938rem */
+#sf-en {
+  width: 22.938rem; /* 367px; 22.938rem */
   color: #1c1c17;
   font-family: Outfit;
   font-size: 1.25rem; /* 2vh; 20px; */
@@ -205,38 +223,9 @@ ion-button.sf-intro-button {
 .rectangle-header-text {
   z-index: 2;
   margin-left: 7%;
+  /* margin-top: 1%; */
 }
 
-.juego-divider {
-  height: 5vh; /*50px; */
-}
-
-.container .juego-card {
-  display: inline-block;
-  white-space: nowrap;
-  width: 115vw; /* 1147px; */
-  padding: 60px 24px; /*6vh 2.5vh; */
-  margin: 5% auto;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5vh; /*24px; */
-  border-radius: 35.942px;
-  background: var(--base-nube, #fff);
-  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
-}
-
-/* Media query for mobile juego card view (TODO: Fix this to make stackable on phone view?) */
-@media (max-width: 600px) {
-  .juego-card-content {
-    white-space: normal; /* Allow cards to stack vertically */
-  }
-
-  juego-card {
-    display: block;
-    margin-bottom: 10px;
-    white-space: normal;
-  }
-}
 .cards-title h2 {
   color: #1c1c17;
   font-family: Outfit;
@@ -256,7 +245,7 @@ ion-button.sf-intro-button {
   margin-top: auto;
 }
 
-#story-juego-title {
+#rectangle-header-title {
   margin: 0px;
   padding: 2%;
   width: 38vw; /* 381px; */

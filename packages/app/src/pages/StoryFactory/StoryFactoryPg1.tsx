@@ -24,7 +24,7 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
   return (
     <>
-      <IonGrid className="ion-no-padding sf-card-grid">
+      <div className="ion-no-padding sf-card-grid">
         <IonRow>
           <IonCol size="auto">
             <IonCard className="ion-no-margin story-page-1-main-card">
@@ -62,7 +62,7 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
             </IonCard>
           </IonCol>
         </IonRow>
-      </IonGrid>
+      </div>
 
       <img
         className="bili-character"

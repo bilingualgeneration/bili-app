@@ -19,7 +19,7 @@ import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
 import MeGustaIcon from "@/assets/icons/me_gusta.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
-import BieneStarIcon from "@/assets/icons/bienestar.svg?react";
+import BienestarIcon from "@/assets/icons/bienestar.svg?react";
 import ComunidadIcon from "@/assets/icons/comunidad.svg?react";
 import StemIcon from "@/assets/icons/stem.svg?react";
 import { StoriesCard } from "@/components/StoriesCard";
@@ -70,7 +70,7 @@ export const StudentDashboard: React.FC = () => {
                 <IconWithText
                   title={"Bienestar"}
                   subtitle={"Welness"}
-                  icon={<BieneStarIcon />}
+                  icon={<BienestarIcon />}
                   iconBackgroundColor="#AC217B"
                 />
               </IonCol>
