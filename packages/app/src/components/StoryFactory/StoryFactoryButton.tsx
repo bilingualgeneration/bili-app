@@ -24,16 +24,14 @@ export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
       onClick={handleNext}
     >
       <div>
-        <div className="story-button-bold">Siguiente</div>
-        {!isImmersive && (
-          <div className="story-button-reg">
-            <FormattedMessage
-              id="storyFactory.nextButton"
-              defaultMessage="Next"
-              description="Button to move to the next page in intro pages"
-            />
-          </div>
-        )}
+        <div className="story-button-bold">
+          <FormattedMessage
+            id="storyFactory.nextButton"
+            defaultMessage="Next"
+            description="Button to move to the next page in intro pages"
+          />
+        </div>
+        {!isImmersive && <div className="story-button-reg">Next</div>}
       </div>
     </IonButton>
     // </div>

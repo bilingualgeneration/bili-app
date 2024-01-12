@@ -92,6 +92,7 @@
 
   "storyFactory.Welcome": "Welcome to Story Factory Page",
   "storyFactory.title": "Story Factory!",
+  "storyFactory.nextButton": "Next",
 
   "landingPage.welcome": "Hello {userName}!",
   "landingPage.assignments": "Categories",

@@ -93,6 +93,7 @@
 
   "storyFactory.Welcome": "Bienvenidos a la página Fábrica de cuentos",
   "storyFactory.title": "¡Fabrica de cuentos!",
+  "storyFactory.nextButton": "Siguiente",
 
   "landingPage.welcome": "¡Hola {name}!",
   "landingPage.assignments": "Categorias",
