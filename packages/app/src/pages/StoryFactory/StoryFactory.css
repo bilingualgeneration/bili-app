@@ -704,19 +704,17 @@ ion-card.story-page-2-main-card {
   position: relative;
 }
 
-.new-felicitaciones-card {
+ion-card.new-felicitaciones-card {
   display: flex;
-  width: 57vw; /* 1147px;*/
-  height: 50vh; /* 494.5px; */
-  padding: 24px;
+  width: 58vw; /* 1147px;*/
+  height: 60vh; /* 608; */
+  padding: 60px;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
   flex-shrink: 0;
   border-radius: 35.942px;
   background: var(--Base-Nube, #ffffff);
   box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
-  margin: auto;
   position: relative;
   z-index: 1;
 }
@@ -725,18 +723,24 @@ ion-card.story-page-2-main-card {
   content: "";
   flex-shrink: 0;
   position: absolute;
-  top: 30px;
-  left: 0;
+  width: 100vw;
+  top: 0;
+  left: 75px;
   right: 0;
-  bottom: 0;
+  bottom: -60px;
   background: url("../../assets/icons/sf_stars_overlay.svg");
-  border-radius: 35.942px;
   position: absolute;
   z-index: 2;
 }
 
+.felicitaciones-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
 .congrats-text-title-es {
-  width: 30vw; /* 600px; */
   color: var(--Base-Selva, #006a67);
   font-feature-settings:
     "clig" off,
@@ -757,11 +761,14 @@ ion-card.story-page-2-main-card {
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 44px */
+  .congrats-text-subtitle-es2 {
+    margin-bottom: 5%;
+  }
 }
 
 #congrats-text-title-en {
   align-self: stretch;
-  color: var(--Base-Selva, #006a67);
+  color: var(--Base-Suelo, #000);
   font-family: Outfit;
   font-size: 2rem; /* 32px; */
   font-style: normal;
@@ -771,7 +778,7 @@ ion-card.story-page-2-main-card {
 
 #congrats-text-subtitle-en {
   align-self: stretch;
-  color: var(--Base-Selva, #006a67);
+  color: var(--Base-Suelo, #000);
   font-family: Outfit;
   font-size: 1.5rem; /* 24px; */
   font-style: normal;
@@ -779,11 +786,16 @@ ion-card.story-page-2-main-card {
   line-height: 110%; /* 26.4px */
 }
 
+.keep-going-button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .keep-going-button {
   display: flex;
   width: 23rem; /* 362.566px; */
-  --padding-top: 3%;
-  --padding-bottom: 3%;
+  --padding-top: 4%;
+  --padding-bottom: 4%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -813,4 +825,14 @@ ion-card.story-page-2-main-card {
   font-weight: 700;
   line-height: 140%; /* 17.611px */
   letter-spacing: 0.19px;
+}
+
+.bili-character-congrats {
+  position: absolute;
+  height: 72vh;
+  width: 41vw;
+  top: 5%; /* Bigger # = Moves the character DOWN */
+  left: 47%; /* Smaller # = Moves the character LEFT */
+  z-index: 2; /* Ensures Bili Character is on top of card */
+  flex-shrink: 0;
 }

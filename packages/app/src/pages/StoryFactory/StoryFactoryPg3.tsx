@@ -19,7 +19,6 @@ import { StoriesCardNoRating } from "@/components/StoryFactory/StoriesCardNoRati
 import { gameControllerOutline } from "ionicons/icons";
 import GameIcon from "@/assets/icons/game_icon.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
-
 import "./StoryFactory.css";
 
 export const StoryFactoryPage3: React.FC = () => {

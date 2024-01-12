@@ -17,114 +17,79 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import fabricaRectangle from "@/assets/icons/fabrica_swirl_rectangle.svg";
 import fabricaHalfCircle from "@/assets/icons/fabrica_swirl_half_circle.svg";
+import biliCharacter from "@/assets/icons/bili_character.svg";
 import "./StoryFactory.css";
 
-export const StoryFactoryPage5: React.FC = () => (
-  <>
-    <IonGrid class="ion-no-padding">
-      <IonRow class="ion-justify-content-center">
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaHalfCircle} alt="grey half circle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle fabrica-flipped-swirl">
-            <img src={fabricaHalfCircle} alt="grey half circle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaHalfCircle} alt="grey half circle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle fabrica-flipped-swirl">
-            <img src={fabricaHalfCircle} alt="grey half circle piece" />
-          </div>
-        </IonCol>
-      </IonRow>
-
-      <IonRow class="ion-justify-content-center">
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaRectangle} alt="grey rectangle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaRectangle} alt="grey rectangle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaRectangle} alt="grey rectangle piece" />
-          </div>
-        </IonCol>
-
-        <IonCol size="2" class="ion-text-center">
-          <div className="fabrica-swirl-rectangle">
-            <img src={fabricaRectangle} alt="grey rectangle piece" />
-          </div>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-
-    <IonCard className="felicitaciones-card">
-      <IonGrid>
-        <IonRow>
-          <IonCol size="10">
-            <IonCardHeader className="felicitaciones-header">
-              <IonCardTitle
-                className="felicitaciones-title"
-                style={{ textAlign: "left" }}
-              >
-                ¡Felicitaciones!
-              </IonCardTitle>
-
-              <IonCardSubtitle className="felicitaciones-subtitle">
-                Has creado y leído cinco cuentos. ¿Puedes seguir?
-              </IonCardSubtitle>
-
-              <IonRow style={{ height: "6vh" }}></IonRow>
-
-              <div id="congrats-text-bold">Congrats!</div>
-              <div id="congrats-text-reg">
-                You've created and read five stories. Can you keep going?
-              </div>
-            </IonCardHeader>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </IonCard>
-
-    <IonGrid>
-      <IonRow class="ion-justify-content-center">
-        <IonCol class="ion-text-center">
-          <div style={{ position: "relative" }}>
-            <IonButton
-              className="sigue-adelante-button"
-              shape="round"
-              style={{
-                position: "absolute",
-                bottom: "-4vh",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
+export const StoryFactoryPage5: React.FC = () => {
+  const { isImmersive } = useProfile();
+  return (
+    <>
+      <div
+        className="new-felicitaciones-container"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "60px 110px",
+        }}
+      >
+        <div className="stars-overlay"></div>
+        <IonCard className="ion-no-padding ion-no-margin new-felicitaciones-card">
+          <IonCardHeader className="felicitaciones-header">
+            <IonCardTitle
+              className="congrats-text-title-es"
+              style={{ marginBottom: "5px" }}
             >
+              ¡Felicitaciones!
+            </IonCardTitle>
+
+            <IonCardSubtitle className="congrats-text-subtitle-es">
+              <div
+                className="congrats-text-subtitle-es"
+                style={{ marginBottom: "4px" }}
+              >
+                Has creado y leído cinco cuentos.
+              </div>
+              <div className="congrats-text-subtitle-es2">¿Puedes seguir?</div>
+
+              {!isImmersive && (
+                <>
+                  <div
+                    id="congrats-text-title-en"
+                    style={{ marginBottom: "5px" }}
+                  >
+                    Congrats!
+                  </div>
+                  <div
+                    id="congrats-text-subtitle-en"
+                    style={{ marginBottom: "4px" }}
+                  >
+                    You've created and read five stories.
+                  </div>
+                  <div id="congrats-text-subtitle-en">Can you keep going?</div>
+                </>
+              )}
+            </IonCardSubtitle>
+          </IonCardHeader>
+
+          <div className="keep-going-button-container">
+            <IonButton className="keep-going-button" shape="round">
               <div>
-                <div className="sigue-button-es">¡Sigue adelante!</div>
-                <div className="sigue-button-en">Keep going!</div>
+                <div className="keep-going-button-es">¡Sigue adelante!</div>
+                {!isImmersive && (
+                  <div className="keep-going-button-en">Keep going!</div>
+                )}
               </div>
             </IonButton>
           </div>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </>
-);
+        </IonCard>
+
+        <img
+          className="bili-character-congrats"
+          src={biliCharacter}
+          alt="Bili character"
+        />
+      </div>
+    </>
+  );
+};
