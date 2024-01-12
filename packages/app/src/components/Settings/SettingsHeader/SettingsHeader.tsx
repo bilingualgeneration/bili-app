@@ -15,6 +15,7 @@ import { starOutline } from "ionicons/icons";
 import "./SettingsHeader.css";
 import biliLogo from "@/assets/icons/bili.svg";
 import { FormattedMessage } from "react-intl";
+import React from "react";
 
 export const SettingsHeader: React.FC = ({}) => {
   return (
