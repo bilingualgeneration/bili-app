@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "allowUnusedLabels": false,
     "alwaysStrict": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
