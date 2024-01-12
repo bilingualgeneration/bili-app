@@ -15,9 +15,6 @@ import {
   TeacherAbout,
   TeacherAccountCredentials,
 } from "@/pages/SignUp";
-//import {Test} from './Test';
-//import { Swiper, SwiperSlide } from "swiper/react";
-//import SwiperCore from "swiper";
 import {
   SignUpDataProvider,
   useSignUpData,
@@ -45,32 +42,28 @@ export const SignUpComponent: React.FC = () => {
   const { page } = useSignUpData();
 
   return (
-    <div className="page-wrapper">
-      <div className="signup-wrapper">
-        <IonCard>
-          <IonCardContent>
-            <div className="ion-padding">
-              <IonProgressBar
-                color="primary"
-                style={{ width: "60%", margin: "auto" }}
-                value={progressLookup[page]}
-              />
-            </div>
-            {page === "roleSelect" && <RoleSelect />}
-            {page === "teacherAbout" && <TeacherAbout />}
-            {page === "childProfile" && <ChildProfile />}
-            {page === "languageModeSelect" && <LanguageModeSelect />}
-            {page === "parentAccountCredentials" && (
-              <ParentAccountCredentials />
-            )}
-            {page === "teacherAccountCredentials" && (
-              <TeacherAccountCredentials />
-            )}
-            {page === "pricing" && <Pricing />}
-            {page === "complete" && <Complete />}
-          </IonCardContent>
-        </IonCard>
-      </div>
+    <div style={{ maxWidth: 540, margin: "auto" }}>
+      <IonCard>
+        <IonCardContent>
+          <div className="ion-padding">
+            <IonProgressBar
+              color="primary"
+              style={{ width: "60%", margin: "auto" }}
+              value={progressLookup[page]}
+            />
+          </div>
+          {page === "roleSelect" && <RoleSelect />}
+          {page === "teacherAbout" && <TeacherAbout />}
+          {page === "childProfile" && <ChildProfile />}
+          {page === "languageModeSelect" && <LanguageModeSelect />}
+          {page === "parentAccountCredentials" && <ParentAccountCredentials />}
+          {page === "teacherAccountCredentials" && (
+            <TeacherAccountCredentials />
+          )}
+          {page === "pricing" && <Pricing />}
+          {page === "complete" && <Complete />}
+        </IonCardContent>
+      </IonCard>
     </div>
   );
 };

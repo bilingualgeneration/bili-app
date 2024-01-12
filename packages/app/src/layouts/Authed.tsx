@@ -45,7 +45,7 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
         <IonContent fullscreen className="ion-padding">
           <div
             className="page-wrapper"
-            style={{ paddingBottom: "2rem", background }}
+            style={{ paddingBottom: "2rem", background, paddingTop: 56 }}
           >
             {children}
           </div>

@@ -1,10 +1,9 @@
 @use "sass:math";
 
 .page-wrapper {
-  border-left: 10px solid red;
-  border-right: 10px solid red;
   max-width: 1366px;
   margin: auto;
+  min-height: 100vh;
 }
 
 ion-content::part(scroll) {
