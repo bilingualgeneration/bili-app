@@ -17,7 +17,7 @@ import "./UnauthedHeader.scss";
 
 export const UnauthedHeader: FC<
   PropsWithChildren<{
-    backButtonOnClick?: () => {};
+    backButtonOnClick?: () => void;
     showBackButton?: boolean;
   }>
 > = ({ backButtonOnClick = () => {}, children, showBackButton = true }) => {
