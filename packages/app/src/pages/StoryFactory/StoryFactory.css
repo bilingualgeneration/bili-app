@@ -1,10 +1,8 @@
 /* styles for story factory cards */
 
 .story-factory-pg3-main-card {
-  /* margin-top: 5%; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   /* width: 57.35vw; 1147px; */
   padding: 60px;
   border-radius: 35.942px;

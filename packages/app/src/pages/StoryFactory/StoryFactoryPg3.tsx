@@ -40,6 +40,7 @@ export const StoryFactoryPage3: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: "60px 110px",
         }}
       >
         <IonCard className="story-factory-pg3-main-card">

@@ -25,43 +25,31 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
   return (
     <>
       <div className="ion-no-padding sf-card-grid">
-        <IonRow>
-          <IonCol size="auto">
-            <IonCard className="ion-no-margin story-page-1-main-card">
-              <IonCardHeader className="ion-no-padding sf-header-container">
-                <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-spanish-title">
-                    ¡Bienvenidos a la fábrica de cuentos!
-                  </div>
-                </IonCardTitle>
-                <IonCardSubtitle>
-                  <div id="story-spanish-title-pt2">
-                    ¡Un lugar para lecturas silábicas graciosas!
-                  </div>
-                </IonCardSubtitle>
-                {!isImmersive && (
-                  <>
-                    <div id="story-english-subtitle">Welcome to the</div>
-                    <div id="story-english-subtitle">story factory!</div>
-                    <div id="story-english-subtitle-pt2">
-                      A place for silly syllabic reading!
-                    </div>
-                  </>
-                )}
-              </IonCardHeader>
+        <IonCard className="ion-no-margin story-page-1-main-card">
+          <div id="story-spanish-title">
+            ¡Bienvenidos a la fábrica de cuentos!
+          </div>
 
-              <IonCardContent>
-                <IonRow className="ion-text-center">
-                  <IonCol>
-                    <div className="story-factory-button-container">
-                      <StoryFactoryButton currentPage={currentPage} />
-                    </div>
-                  </IonCol>
-                </IonRow>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        </IonRow>
+          <div id="story-spanish-title-pt2">
+            ¡Un lugar para lecturas silábicas graciosas!
+          </div>
+
+          {!isImmersive && (
+            <>
+              <div id="story-english-subtitle">Welcome to the</div>
+              <div id="story-english-subtitle">story factory!</div>
+              <div id="story-english-subtitle-pt2">
+                A place for silly syllabic reading!
+              </div>
+            </>
+          )}
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div className="story-factory-button-container">
+              <StoryFactoryButton currentPage={currentPage} />
+            </div>
+          </div>
+        </IonCard>
       </div>
 
       <img
