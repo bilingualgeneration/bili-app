@@ -19,6 +19,7 @@ import {
   SignUpDataProvider,
   useSignUpData,
 } from "@/pages/SignUp/SignUpContext";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
 
 export const SignUp: React.FC = () => (
   <SignUpDataProvider>
@@ -37,33 +38,40 @@ const progressLookup: { [key: string]: number } = {
   complete: 1,
 };
 
-// todo: on page visit, clear form and reset swiper
 export const SignUpComponent: React.FC = () => {
   const { page } = useSignUpData();
 
+  // todo: on revisit, clear old values
+  // todo: back button logic
+
   return (
-    <div className="content-wrapper">
-      <IonCard>
-        <IonCardContent>
-          <div className="ion-padding">
-            <IonProgressBar
-              color="primary"
-              style={{ width: "60%", margin: "auto" }}
-              value={progressLookup[page]}
-            />
-          </div>
-          {page === "roleSelect" && <RoleSelect />}
-          {page === "teacherAbout" && <TeacherAbout />}
-          {page === "childProfile" && <ChildProfile />}
-          {page === "languageModeSelect" && <LanguageModeSelect />}
-          {page === "parentAccountCredentials" && <ParentAccountCredentials />}
-          {page === "teacherAccountCredentials" && (
-            <TeacherAccountCredentials />
-          )}
-          {page === "pricing" && <Pricing />}
-          {page === "complete" && <Complete />}
-        </IonCardContent>
-      </IonCard>
-    </div>
+    <>
+      <UnauthedHeader />
+      <div className="content-wrapper">
+        <IonCard>
+          <IonCardContent>
+            <div className="ion-padding">
+              <IonProgressBar
+                color="primary"
+                style={{ width: "60%", margin: "auto" }}
+                value={progressLookup[page]}
+              />
+            </div>
+            {page === "roleSelect" && <RoleSelect />}
+            {page === "teacherAbout" && <TeacherAbout />}
+            {page === "childProfile" && <ChildProfile />}
+            {page === "languageModeSelect" && <LanguageModeSelect />}
+            {page === "parentAccountCredentials" && (
+              <ParentAccountCredentials />
+            )}
+            {page === "teacherAccountCredentials" && (
+              <TeacherAccountCredentials />
+            )}
+            {page === "pricing" && <Pricing />}
+            {page === "complete" && <Complete />}
+          </IonCardContent>
+        </IonCard>
+      </div>
+    </>
   );
 };
