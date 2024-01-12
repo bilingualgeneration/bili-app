@@ -35,82 +35,90 @@ export const StoryFactoryPage3: React.FC = () => {
         <div className="rectangle-header-semi-transparent-overlay"></div>
       </div>
 
-      <IonCard className="story-factory-pg3-main-card">
-        <div className="card-title">
-          <h2 id="sf-es">
-            <FormattedMessage id="storyFactory.title" />
-          </h2>
-          {!isImmersive && (
-            <p
-              style={{
-                fontFamily: "Outfit",
-                fontSize: "2rem",
-                fontWeight: "400",
-                lineHeight: "125%",
-                color: "black",
-                letterSpacing: "-0.5px",
-              }}
-            >
-              Story Factory
-            </p>
-          )}
-        </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <IonCard className="story-factory-pg3-main-card">
+          <div className="card-title">
+            <h2 id="sf-es">
+              <FormattedMessage id="storyFactory.title" />
+            </h2>
+            {!isImmersive && (
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontSize: "2rem",
+                  fontWeight: "400",
+                  lineHeight: "125%",
+                  color: "black",
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                Story Factory
+              </p>
+            )}
+          </div>
 
-        {/* <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            overflowX: "scroll",
-          }}
-        > */}
-        <StoriesCardNoRating
-          packNumber={1}
-          cover={"/assets/img/drum_image.png"}
-          icon={
-            <IonIcon
-              className="controller-icon"
-              icon={gameControllerOutline}
-              aria-hidden="true"
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              overflowX: "scroll",
+            }}
+          >
+            <StoriesCardNoRating
+              packNumber={1}
+              cover={"/assets/img/drum_image.png"}
+              icon={
+                <IonIcon
+                  className="controller-icon"
+                  icon={gameControllerOutline}
+                  aria-hidden="true"
+                />
+              }
+              iconBackroungColor="var(--Desierto-Desierto)"
+              heart={<Heart />}
+              className="other-card-image"
             />
-          }
-          iconBackroungColor="var(--Desierto-Desierto)"
-          heart={<Heart />}
-          className="other-card-image"
-        />
 
-        <StoriesCardNoRating
-          packNumber={1}
-          cover={"/assets/img/dance_image.png"}
-          icon={
-            <IonIcon
-              className="controller-icon"
-              icon={gameControllerOutline}
-              aria-hidden="true"
+            <StoriesCardNoRating
+              packNumber={1}
+              cover={"/assets/img/dance_image.png"}
+              icon={
+                <IonIcon
+                  className="controller-icon"
+                  icon={gameControllerOutline}
+                  aria-hidden="true"
+                />
+              }
+              iconBackroungColor="var(--Desierto-Desierto)"
+              heart={<Heart />}
+              className="other-card-image"
+              isLocked={true}
             />
-          }
-          iconBackroungColor="var(--Desierto-Desierto)"
-          heart={<Heart />}
-          className="other-card-image"
-          isLocked={true}
-        />
 
-        <StoriesCardNoRating
-          packNumber={1}
-          cover={"/assets/img/band_image.png"}
-          icon={
-            <IonIcon
-              className="controller-icon"
-              icon={gameControllerOutline}
-              aria-hidden="true"
+            <StoriesCardNoRating
+              packNumber={1}
+              cover={"/assets/img/band_image.png"}
+              icon={
+                <IonIcon
+                  className="controller-icon"
+                  icon={gameControllerOutline}
+                  aria-hidden="true"
+                />
+              }
+              iconBackroungColor="var(--Desierto-Desierto)"
+              heart={<Heart />}
+              className="other-card-image"
+              isLocked={true}
             />
-          }
-          iconBackroungColor="var(--Desierto-Desierto)"
-          heart={<Heart />}
-          className="other-card-image"
-          isLocked={true}
-        />
-        {/* </div> */}
-      </IonCard>
+          </div>
+        </IonCard>
+      </div>
     </>
   );
 };
