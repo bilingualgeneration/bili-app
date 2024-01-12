@@ -48,6 +48,13 @@ export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
                 )}
               </IonCardHeader>
             </IonCol>
+            <IonCol>
+              <img
+                className="bili-character"
+                src={biliCharacter}
+                alt="Bili character"
+              />
+            </IonCol>
           </IonRow>
         </IonGrid>
 
@@ -55,12 +62,6 @@ export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
           <StoryFactoryButton currentPage={currentPage} />
         </div>
       </IonCard>
-
-      <img
-        className="bili-character"
-        src={biliCharacter}
-        alt="Bili character"
-      />
     </>
   );
 };

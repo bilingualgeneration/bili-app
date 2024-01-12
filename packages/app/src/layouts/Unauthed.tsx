@@ -32,7 +32,10 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <div style={{ background, marginTop: 56, paddingTop: "4rem" }}>
+        <div
+          className="page-wrapper"
+          style={{ background, marginTop: 56, paddingTop: "4rem" }}
+        >
           {children}
         </div>
       </IonContent>

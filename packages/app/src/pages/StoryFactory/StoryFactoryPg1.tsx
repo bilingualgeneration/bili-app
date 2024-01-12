@@ -49,6 +49,9 @@ export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
                   </>
                 )}
               </IonCardHeader>
+              <div className="story-factory-button-container">
+                <StoryFactoryButton currentPage={currentPage} />
+              </div>
             </IonCol>
             <IonCol>
               <img

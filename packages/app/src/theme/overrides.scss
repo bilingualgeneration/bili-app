@@ -1,9 +1,14 @@
 @use "sass:math";
 
 .page-wrapper {
-  border-left: 10px solid red;
-  border-right: 10px solid red;
   max-width: 1366px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: 20px; // clearance for footer
+}
+
+.content-wrapper {
+  max-width: 540;
   margin: auto;
 }
 
@@ -623,11 +628,6 @@ ion-card {
   transform: translate(-50%, -50%);
   z-index: 2;
   /* Adjust size as needed */
-}
-
-.cards-title {
-  margin-top: 48px;
-  margin-bottom: 46px;
 }
 
 .stories-card.locked {

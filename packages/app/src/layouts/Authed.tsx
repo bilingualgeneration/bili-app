@@ -42,17 +42,12 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
             <IonButtons slot="end"></IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen className="ion-padding">
-          <div
-            className="page-wrapper"
-            style={{ paddingBottom: "2rem", background }}
-          >
+        <IonContent fullscreen={true} className="ion-padding">
+          <div className="page-wrapper" style={{ background, paddingTop: 56 }}>
             {children}
           </div>
-        </IonContent>
-        <IonFooter className="ion-no-border">
           <FooterMenu />
-        </IonFooter>
+        </IonContent>
       </IonPage>
     </ProfileContextProvider>
   );

@@ -68,7 +68,7 @@ const Login: React.FC = () => {
   });
 
   return (
-    <div className="page-wrapper">
+    <div className="content-wrapper">
       <IonCard>
         <IonCardContent>
           <form onSubmit={onSubmit}>
