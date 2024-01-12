@@ -27,6 +27,7 @@ import SmallBook from "@/assets/icons/small_book.svg?react";
 import SmallArt from "@/assets/icons/small_art.svg?react";
 import SmallCommunity from "@/assets/icons/small_community.svg?react";
 import SmallFlower from "@/assets/icons/small_flower.svg?react";
+import SmallPlay from "@/assets/icons/small_play.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { gameControllerOutline } from "ionicons/icons";
@@ -56,7 +57,12 @@ export const StudentDashboard: React.FC = () => {
         </div>
         {/* icons */}
         <div className="wave-icons">
-          <IonGrid>
+          <img
+            src="/assets/img/wave_frame.png"
+            alt=""
+            style={{ width: "100%", height: "auto" }}
+          />
+          {/* <IonGrid>
             <IonRow>
               <IonCol className="col-custom-position-1">
                 <IconWithText
@@ -92,9 +98,9 @@ export const StudentDashboard: React.FC = () => {
                 />
               </IonCol>
             </IonRow>
-          </IonGrid>
+          </IonGrid> */}
         </div>
-        {/* <div className="cards-block"> */}
+
         {/* stories */}
         <div className="stories-story-cards">
           <div className="cards-title">
@@ -303,7 +309,7 @@ export const StudentDashboard: React.FC = () => {
               title={"Fábrica de cuentos"}
               subtitle={"Story Factory"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<PlayIcon />}
+              icon={<SmallPlay />}
               iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image small"
@@ -313,7 +319,7 @@ export const StudentDashboard: React.FC = () => {
               title={"El intruso"}
               subtitle={"The intruder"}
               cover={"/assets/img/mountain_image.png"}
-              icon={<PlayIcon />}
+              icon={<SmallPlay />}
               iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
@@ -323,7 +329,7 @@ export const StudentDashboard: React.FC = () => {
               title={"Cuenta conmigo"}
               subtitle={"Count with me"}
               cover={"/assets/img/dance_image.png"}
-              icon={<PlayIcon />}
+              icon={<SmallPlay />}
               iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
@@ -333,7 +339,7 @@ export const StudentDashboard: React.FC = () => {
               title={"Las Cestas"}
               subtitle={"The baskets"}
               cover={"/assets/img/band_image.png"}
-              icon={<PlayIcon />}
+              icon={<SmallPlay />}
               iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
@@ -344,7 +350,7 @@ export const StudentDashboard: React.FC = () => {
               title={"Afirmaciones"}
               subtitle={"Affirmations"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<PlayIcon />}
+              icon={<SmallPlay />}
               iconBackroungColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
@@ -423,7 +429,6 @@ export const StudentDashboard: React.FC = () => {
             />
           </div>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );
