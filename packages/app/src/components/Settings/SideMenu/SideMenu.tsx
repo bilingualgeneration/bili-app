@@ -25,7 +25,7 @@ export const SideMenu: React.FC = () => {
   };
 
   return (
-    <div id="settings-side-menu">
+    <div id="settings-side-menu" style={{ height: "100%" }}>
       <IonList
         lines="none"
         style={{ height: "100%", padding: "1rem" }}

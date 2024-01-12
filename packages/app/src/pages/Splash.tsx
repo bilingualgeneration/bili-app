@@ -10,7 +10,7 @@ import { FormattedMessage } from "react-intl";
 
 export const Splash: React.FC = () => {
   return (
-    <div style={{ maxWidth: 540, margin: "auto" }}>
+    <div className="content-wrapper">
       <IonText>
         <h1 className="ion-text-center">
           <FormattedMessage

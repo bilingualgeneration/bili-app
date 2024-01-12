@@ -4,6 +4,12 @@
   max-width: 1366px;
   margin: auto;
   min-height: 100vh;
+  padding-bottom: 20px; // clearance for footer
+}
+
+.content-wrapper {
+  max-width: 540;
+  margin: auto;
 }
 
 ion-content::part(scroll) {
@@ -622,11 +628,6 @@ ion-card {
   transform: translate(-50%, -50%);
   z-index: 2;
   /* Adjust size as needed */
-}
-
-.cards-title {
-  margin-top: 48px;
-  margin-bottom: 46px;
 }
 
 .stories-card.locked {

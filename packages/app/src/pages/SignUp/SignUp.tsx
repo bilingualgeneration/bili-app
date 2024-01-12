@@ -42,7 +42,7 @@ export const SignUpComponent: React.FC = () => {
   const { page } = useSignUpData();
 
   return (
-    <div style={{ maxWidth: 540, margin: "auto" }}>
+    <div className="content-wrapper">
       <IonCard>
         <IonCardContent>
           <div className="ion-padding">
