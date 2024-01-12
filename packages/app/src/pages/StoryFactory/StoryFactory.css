@@ -702,3 +702,120 @@ ion-card.story-page-2-main-card {
 .story-factory-button-container-pg-2 {
   margin-top: 8rem;
 }
+
+/* new felicitaciones page */
+
+.new-felicitaciones-container {
+  position: relative;
+}
+
+.new-felicitaciones-card {
+  display: flex;
+  width: 57vw; /* 1147px;*/
+  height: 50vh; /* 494.5px; */
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  border-radius: 35.942px;
+  background: var(--Base-Nube, #ffffff);
+  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.stars-overlay {
+  content: "";
+  flex-shrink: 0;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../../assets/icons/sf_stars_overlay.svg");
+  border-radius: 35.942px;
+  position: absolute;
+  z-index: 2;
+}
+
+.congrats-text-title-es {
+  width: 30vw; /* 600px; */
+  color: var(--Base-Selva, #006a67);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 4rem; /* 64px; */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 70.4px */
+  letter-spacing: -0.125rem; /* -2px; */
+}
+
+.congrats-text-subtitle-es {
+  align-self: stretch;
+  color: var(--Base-Selva, #006a67);
+  font-family: Outfit;
+  font-size: 2.5rem; /* 40px; */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 44px */
+}
+
+#congrats-text-title-en {
+  align-self: stretch;
+  color: var(--Base-Selva, #006a67);
+  font-family: Outfit;
+  font-size: 2rem; /* 32px; */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 35.2px */
+}
+
+#congrats-text-subtitle-en {
+  align-self: stretch;
+  color: var(--Base-Selva, #006a67);
+  font-family: Outfit;
+  font-size: 1.5rem; /* 24px; */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 26.4px */
+}
+
+.keep-going-button {
+  display: flex;
+  width: 23rem; /* 362.566px; */
+  --padding-top: 3%;
+  --padding-bottom: 3%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* --border-radius: 94.913px; */
+  --background: var(--Base-Selva, #006a67);
+  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+}
+
+.keep-going-button-es {
+  align-self: stretch;
+  color: var(--Base-Nube, #fff);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 2rem; /* 32px; */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 35.2px */
+}
+
+.keep-going-button-en {
+  align-self: stretch;
+  color: var(--Base-Nube, #fff);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 1rem; /* 12.58px; */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 17.611px */
+  letter-spacing: 0.19px;
+}

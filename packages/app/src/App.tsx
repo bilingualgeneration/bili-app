@@ -17,7 +17,9 @@ import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
 import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
+import { StoryFactoryPage4a } from "./pages/StoryFactory/StoryFactoryPg4a";
 import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
+import { StoryFactoryPage5a } from "./pages/StoryFactory/StoryFactoryPg5a";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "./pages/Login";
@@ -239,7 +241,7 @@ const Router: React.FC = () => {
           path="/story-factory/3"
           render={() => (
             <AuthedLayout background="#F7FAF9" wide={true}>
-              <StoryFactoryPage3 currentPage={3} />
+              <StoryFactoryPage3 />
             </AuthedLayout>
           )}
         />
@@ -260,6 +262,16 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout background="#F7FAF9">
               <StoryFactoryPage5 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/story-factory/51"
+          render={() => (
+            <AuthedLayout background="#F7FAF9">
+              <StoryFactoryPage5a />
             </AuthedLayout>
           )}
         />

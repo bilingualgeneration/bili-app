@@ -72,6 +72,7 @@ export const StoryFactoryPage3: React.FC = () => {
             }}
           >
             <StoriesCardNoRating
+              storyId="3"
               packNumber={1}
               cover={"/assets/img/drum_image.png"}
               icon={
@@ -87,7 +88,7 @@ export const StoryFactoryPage3: React.FC = () => {
             />
 
             <StoriesCardNoRating
-              packNumber={1}
+              packNumber={2}
               cover={"/assets/img/dance_image.png"}
               icon={
                 <IonIcon
@@ -103,7 +104,7 @@ export const StoryFactoryPage3: React.FC = () => {
             />
 
             <StoriesCardNoRating
-              packNumber={1}
+              packNumber={3}
               cover={"/assets/img/band_image.png"}
               icon={
                 <IonIcon
