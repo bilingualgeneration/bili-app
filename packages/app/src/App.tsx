@@ -35,6 +35,8 @@ import { StudentDashboard } from "./pages/StudentDashboard";
 import TeacherLogin from "./pages/TeacherLogin";
 import UnauthedLayout from "./layouts/Unauthed";
 import { PreSplash } from "./pages/PreSplash";
+import { Intruder1 } from "./pages/Intruder/Intruder1";
+import { Intruder2 } from "./pages/Intruder/Intruder2";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -281,6 +283,26 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout>
               <StoryFactoryPage6 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/intruder/1"
+          render={() => (
+            <AuthedLayout>
+              <Intruder1 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/intruder/2"
+          render={() => (
+            <AuthedLayout background="#F7FAF9">
+              <Intruder2 />
             </AuthedLayout>
           )}
         />
