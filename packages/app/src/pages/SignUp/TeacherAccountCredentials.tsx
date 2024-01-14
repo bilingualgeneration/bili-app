@@ -18,7 +18,7 @@ import GoogleIcon from "@/assets/icons/google.svg?react";
 
 export const TeacherAccountCredentials: React.FC = () => {
   const intl = useIntl();
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -42,7 +42,7 @@ export const TeacherAccountCredentials: React.FC = () => {
       ...data,
       ...response,
     });
-    setPage("pricing");
+    pushPage("pricing");
   });
 
   return (
