@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonRow,
-  IonText,
-} from "@ionic/react";
+import { IonCard, IonIcon } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { StoriesCardNoRating } from "@/components/StoryFactory/StoriesCardNoRating";
 import { gameControllerOutline } from "ionicons/icons";
-import GameIcon from "@/assets/icons/game_icon.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import "./StoryFactory.css";
 

@@ -254,13 +254,25 @@ const Router: React.FC = () => {
           )}
         />
 
-        <Route
+        {/* <Route
           exact
           path="/story-factory/4"
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#F7FAF9">
                 <StoryFactoryPage4 currentPage={4} />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        /> */}
+
+        <Route
+          exact
+          path="/story-factory/4"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <StoryFactoryPage4a currentPage={4} />
               </HeaderFooter>
             </AuthedLayout>
           )}

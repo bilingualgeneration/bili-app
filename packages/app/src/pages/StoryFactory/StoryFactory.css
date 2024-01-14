@@ -836,3 +836,80 @@ ion-card.new-felicitaciones-card {
   z-index: 2; /* Ensures Bili Character is on top of card */
   flex-shrink: 0;
 }
+
+/* fabrica de cuentos game page */
+
+.sf-background-pattern {
+  background: url("@/assets/icons/.sf-background-pattern.svg");
+  /* background-color:#f17130; */
+}
+
+.sf-colorful-text-heading {
+  font-size: 6.5rem;
+  /* text-align: center; */
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-style: normal;
+  font-weight: 700;
+  /* line-height: 33.333%; */
+  letter-spacing: -1.057px;
+  /* z-index: 2; */
+  padding: 5px 0 5px;
+  margin: 5% 0 7%;
+}
+
+.sf-game-options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  /* position: relative; */
+}
+
+.sf-game-option-1 {
+  width: 15vw;
+  height: 20vh;
+  gap: 7.17px;
+  flex-shrink: 0;
+  border-radius: 200px;
+  margin: 0px 1% 0px;
+}
+
+#sf-game-page ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-orange {
+  background: var(--Desierto-Desierto, #f48722);
+}
+
+.option-blue {
+  border: 7.98px solid var(--Cielo-Low, #22beb9);
+  background: var(--Cielo-Low, #22beb9);
+}
+
+.option-yellow {
+  background: var(--Sol-Sol, #f1d100);
+}
+
+.option-purple {
+  background: var(--Bili-Purple, #d6d3f0);
+}
+
+.volume-button-background {
+  display: flex;
+  background-color: var(--Flamenco-High, #ffaedc);
+  border-radius: 37.8px;
+  width: 5vw;
+  height: 10vh;
+}
+
+.volume-icon {
+  flex-shrink: 0;
+  width: 3vw;
+  height: 6vh;
+}
