@@ -20,6 +20,7 @@ import {
   useSignUpData,
 } from "@/pages/SignUp/SignUpContext";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
+import { useHistory } from "react-router-dom";
 
 export const SignUp: React.FC = () => (
   <SignUpDataProvider>
@@ -39,14 +40,22 @@ const progressLookup: { [key: string]: number } = {
 };
 
 export const SignUpComponent: React.FC = () => {
-  const { page } = useSignUpData();
+  const { page: pages, setPage } = useSignUpData();
+  const page: string = pages[pages.length - 1];
+  const history = useHistory();
 
   // todo: on revisit, clear old values
-  // todo: back button logic
+  const backButtonOnClick = (): void => {
+    if (pages.length > 1) {
+      setPage(pages.slice(0, -1));
+    } else {
+      history.goBack();
+    }
+  };
 
   return (
     <>
-      <UnauthedHeader />
+      <UnauthedHeader backButtonOnClick={backButtonOnClick} />
       <div className="content-wrapper">
         <IonCard>
           <IonCardContent>

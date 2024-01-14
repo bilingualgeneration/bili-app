@@ -9,7 +9,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import backButton from "@/assets/icons/back_button.svg";
+import backButton from "@/assets/icons/back_button_green.svg";
 import biliLogo from "@/assets/icons/bili.svg";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 

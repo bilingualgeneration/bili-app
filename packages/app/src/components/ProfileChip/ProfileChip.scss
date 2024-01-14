@@ -1,0 +1,27 @@
+#profileChip {
+  background-color: #c3ece2;
+  border-radius: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  > ion-text {
+    margin: 0 1rem;
+    * {
+      margin: 0;
+    }
+  }
+
+  #profilePoints {
+    align-items: center;
+    background-color: #ac217b;
+    color: #fff;
+    display: inline-flex;
+    padding: 0.5rem 0.75rem;
+    margin-left: 1rem;
+    border-radius: 1rem;
+    ion-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
