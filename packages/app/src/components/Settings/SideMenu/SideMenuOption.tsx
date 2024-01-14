@@ -50,7 +50,6 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   // so that an external url can be passed to the to prop
   let props: IonItemProps = {};
   if (to) {
-    console.log(to, urlRegex.test(to));
     if (urlRegex.test(to)) {
       // is an external url
       props.onClick = () => {

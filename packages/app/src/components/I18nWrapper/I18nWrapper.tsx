@@ -66,6 +66,7 @@ export const I18nWrapper = ({ children }: PropsWithChildren<{}>) => {
       <IntlProvider
         locale={localeMap[locale] || locale}
         messages={translations}
+        onError={() => {}}
       >
         {children}
       </IntlProvider>
