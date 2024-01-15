@@ -25,9 +25,7 @@ const ReqdActionsContext = createContext<reqdActions>(defaultState);
 export const useReqdActions = () => useContext(ReqdActionsContext);
 
 export const ReqdActionsProvider = ({ children }: PropsWithChildren<{}>) => {
-  const [reqdActions, setReqdActions] = useState<reqdActionObject>({
-    redirectToSettings: true,
-  });
+  const [reqdActions, setReqdActions] = useState<reqdActionObject>({});
   return (
     <ReqdActionsContext.Provider
       value={{

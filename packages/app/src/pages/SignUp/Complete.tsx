@@ -40,7 +40,7 @@ export const Complete: React.FC = () => {
           data-testid="complete-continue-button"
           onClick={() => {
             setReqdActions({
-              redirectToSettings: true,
+              showSettingsMessage: true,
               ...reqdActions,
             });
             history.push("/student-dashboard");

@@ -10,11 +10,11 @@ import {
   IonGrid,
   IonItem,
   IonLabel,
-  IonModal,
   IonRow,
   IonText,
   IonThumbnail,
 } from "@ionic/react";
+import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
 import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -38,44 +38,6 @@ import { useReqdActions } from "@/contexts/ReqdActionsContext";
 
 import "./StudentDashboard.css";
 
-const SettingsModal: FC = () => {
-  const { reqdActions, setReqdActions } = useReqdActions();
-  const history = useHistory();
-  const clearReqdAction = () => {
-    const { redirectToSettings, ...remainingReqdActions } = reqdActions;
-    setReqdActions(remainingReqdActions);
-  };
-  return (
-    <>
-      <IonModal isOpen={true} onWillDismiss={clearReqdAction}>
-        <div className="ion-padding ion-text-center">
-          <IonText>
-            <h2>
-              <FormattedMessage
-                defaultMessage="To complete your profile, go to the settings page!"
-                description="Message informing user that they need to go to the settings page to complete their profile"
-                id="reqdActions.goto_settings.message"
-              />
-            </h2>
-          </IonText>
-          <IonButton
-            onClick={() => {
-              clearReqdAction();
-              history.push("/settings/overview");
-            }}
-          >
-            <FormattedMessage
-              defaultMessage="Go to Settings"
-              description="Button label to redirect user to settings page"
-              id="reqdActions.goto_settings.button"
-            />
-          </IonButton>
-        </div>
-      </IonModal>
-    </>
-  );
-};
-
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { name, isImmersive } = useProfile();
@@ -83,7 +45,30 @@ export const StudentDashboard: FC = () => {
 
   return (
     <div id="student-landing-page">
-      {reqdActions.redirectToSettings && <SettingsModal />}
+      {reqdActions.showSettingsMessage && (
+        <Joyride
+          callback={(data) => {
+            if (data.action === "close") {
+              const { showSettingsMessage, ...remainingReqdActions } =
+                reqdActions;
+              setReqdActions(remainingReqdActions);
+            }
+          }}
+          steps={[
+            {
+              target: "#footer_settings_button",
+              disableBeacon: true,
+              content: (
+                <FormattedMessage
+                  defaultMessage="Click here to customize your child's learning experience"
+                  description="Message informing user that they need to go to the settings page to complete their profile"
+                  id="reqdActions.goto_settings.message"
+                />
+              ),
+            },
+          ]}
+        />
+      )}
       <div className="cards-title background-pattern">
         <h1>
           <FormattedMessage id="landingPage.welcome" values={{ name }} />
