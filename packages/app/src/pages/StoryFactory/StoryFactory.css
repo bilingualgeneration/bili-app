@@ -561,7 +561,7 @@ ion-button.sf-intro-button {
   /* background-color: var(--base-humo, #eceeed); */
 }
 
-.fabrica-swirl-rectangle {
+/* .fabrica-swirl-rectangle {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -583,9 +583,9 @@ ion-button.sf-intro-button {
   justify-content: center;
   filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
     drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
-}
+} */
 
-.card-content-md p.fabrica-text1-spanish {
+h1.sf-text1-spanish {
   color: var(--base-suelo, #000);
   text-align: center;
   font-family: Outfit;
@@ -595,7 +595,7 @@ ion-button.sf-intro-button {
   line-height: 110%; /* 27.675px */
 }
 
-.card-content-md p.fabrica-text2-english {
+p.sf-text2-english {
   color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
   text-align: center;
   font-family: Outfit;
@@ -874,12 +874,11 @@ ion-card.new-felicitaciones-card {
 }
 
 .sf-game-option-1 {
-  width: 100%;
-  height: 20vh;
-  gap: 7.17px;
+  width: 18.7rem;
+  height: 12.47rem;
   flex-shrink: 0;
   border-radius: 200px;
-  margin: 0px 1% 0px;
+  margin: 10px 1% 10px;
 }
 
 #sf-game-page ion-col {
@@ -905,10 +904,9 @@ ion-card.new-felicitaciones-card {
   background: var(--Bili-Purple, #d6d3f0);
 }
 
-.volume-button-background {
-  display: flex;
-  background-color: var(--Flamenco-High, #ffaedc);
-  border-radius: 37.8px;
+ion-button.volume-button-background {
+  --background: var(--Flamenco-High, #ffaedc);
+  --border-radius: 37.8px;
   width: 6.25rem;
   height: 6.25rem;
 }

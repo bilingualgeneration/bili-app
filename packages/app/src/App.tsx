@@ -18,7 +18,6 @@ import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
 import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
-import { StoryFactoryPage4a } from "./pages/StoryFactory/StoryFactoryPg4a";
 import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -272,7 +271,7 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage4a currentPage={4} />
+                <StoryFactoryPage4 currentPage={4} es={""} />
               </HeaderFooter>
             </AuthedLayout>
           )}
