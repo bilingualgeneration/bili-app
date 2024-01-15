@@ -33,11 +33,13 @@ const words = [
 ];
 
 interface StoryFactoryPage4aProps {
+  es: string;
   currentPage: number;
 }
 
 export const StoryFactoryPage4a: React.FC<StoryFactoryPage4aProps> = ({
   currentPage,
+  es,
 }) => {
   const { isImmersive } = useProfile();
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
@@ -59,6 +61,23 @@ export const StoryFactoryPage4a: React.FC<StoryFactoryPage4aProps> = ({
     newWordIndices[position] =
       (newWordIndices[position] + 1) % words[position].length;
     setWordIndices(newWordIndices);
+  };
+
+  const speak = (normalized_key: string, lang: string) => {
+    const path: string = `/assets/audio/${normalized_key}_${lang}.mp3`;
+    console.log(path);
+    const audio = new Audio(path);
+    audio.play();
+    /*
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.lang = lang;
+        window.speechSynthesis.speak(msg);
+        */
+  };
+
+  const normalize = (s: string): string => {
+    return s.toLowerCase().replace(/\s+/g, "_").replace(/\./g, "");
   };
 
   return (
@@ -259,6 +278,11 @@ export const StoryFactoryPage4a: React.FC<StoryFactoryPage4aProps> = ({
           {/* Row for volume/speaker text */}
           <IonRow>
             <IonCol className="ion-no-padding">
+              <span
+                onClick={() => {
+                  speak(normalize(es), "es");
+                }}
+              ></span>
               <div>
                 <h2>
                   <FormattedMessage
