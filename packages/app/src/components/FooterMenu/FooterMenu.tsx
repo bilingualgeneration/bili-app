@@ -52,7 +52,7 @@ export const FooterMenu: React.FC = ({}) => {
                 />
               </Link>
             </IonCol>
-            <IonCol>
+            <IonCol id="footer_settings_button">
               <Link to="/settings/overview">
                 <Profile />
               </Link>
