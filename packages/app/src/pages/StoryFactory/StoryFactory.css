@@ -839,12 +839,15 @@ ion-card.new-felicitaciones-card {
 
 /* fabrica de cuentos game page */
 
-.sf-background-pattern {
-  background: url("@/assets/icons/.sf-background-pattern.svg");
-  /* background-color:#f17130; */
-}
+/* .sf-backgroud-pattern {
+  width: 100%;
+  height: 100%;
+  background: url("@/assets/icons/sf_background_pattern.svg");
+  z-index: 1;
+} */
 
 .sf-colorful-text-heading {
+  /* display: flex; */
   font-size: 6.5rem;
   /* text-align: center; */
   font-feature-settings:
@@ -857,7 +860,7 @@ ion-card.new-felicitaciones-card {
   letter-spacing: -1.057px;
   /* z-index: 2; */
   padding: 5px 0 5px;
-  margin: 5% 0 7%;
+  margin: 5% 5% 7%;
 }
 
 .sf-game-options-container {

@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
   IonCol,
-  IonContent,
   IonGrid,
-  IonPage,
   IonRow,
-  IonText,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";

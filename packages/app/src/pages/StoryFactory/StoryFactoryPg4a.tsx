@@ -56,11 +56,11 @@ export const StoryFactoryPage4a: React.FC<StoryFactoryPage4aProps> = ({
 
   return (
     <>
-      {/* <div className="sf-background-pattern"> */}
       <div id="sf-game-page">
+        <div className="sf-background-pattern"></div>
         <IonGrid>
           <IonRow className="ion-justify-content-center">
-            <IonCol size="auto">
+            <IonCol>
               <div className="sf-colorful-text-heading">
                 <span style={{ color: "#006A67" } as any}>¡</span>
                 <span style={{ color: "#FF5708" } as any}>F</span>
