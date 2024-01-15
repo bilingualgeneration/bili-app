@@ -17,7 +17,7 @@ type StoriesCardProps = {
   cover: string;
   rating?: React.ReactNode[];
   heart?: React.ReactNode;
-  iconBackroungColor?: string;
+  iconBackroundColor?: string;
   className: string;
   isLocked?: boolean;
   lock?: React.ReactNode;
@@ -30,7 +30,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
   title,
   rating,
   heart,
-  iconBackroungColor,
+  iconBackroundColor,
   className,
   isLocked = false,
   lock,
@@ -54,7 +54,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
           <div
             className="oval-element-small"
             style={{
-              backgroundColor: iconBackroungColor,
+              backgroundColor: iconBackroundColor,
             }}
           >
             {icon}
