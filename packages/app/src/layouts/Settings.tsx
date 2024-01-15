@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { FooterMenu } from "@/components/FooterMenu";
 import { useHistory } from "react-router-dom";
 import {
   IonButton,
@@ -36,7 +37,7 @@ const AdultCheckModal: FC = () => {
     handleSubmit,
     formState: { isValid },
     setError,
-  } = useForm<FormInputs>({
+  } = useForm({
     mode: "onBlur",
     resolver: zodResolver(
       z.object({
@@ -137,6 +138,7 @@ export const SettingsLayout: FC<
             </IonRow>
           </IonGrid>
         </div>
+        <FooterMenu />
       </IonContent>
     </IonPage>
   );
