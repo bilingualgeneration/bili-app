@@ -1,34 +1,61 @@
-$colors: #973d78, #1fb7b1, #ff5708;
+$card-margin: 2rem;
 
-.playCard {
-  @for $index from 1 through 3 {
-    &:nth-child(#{$index}) {
-      ion-card {
-        background-color: nth($colors, $index);
-        h1 {
-          color: white;
-          //color: nth($colors, $index);
-        }
-      }
-    }
+#playPage {
+  h1 {
+    font-size: 56px;
   }
-  * {
-    // removes underline from linked cards
-    text-decoration: none !important;
+
+  h2 {
+    font-size: 44px;
   }
-  ion-card {
-    height: 30rem;
-    /*
-	h1{
-	    text-shadow: 
-		-2px -2px 0 white,  
-		2px -2px 0 white,
-		-2px 2px 0 white,
-		2px 2px 0 white;
-	}
-	*/
-    p {
-      color: #ffffff;
+
+  h1 + h2 {
+    margin-top: 0;
+  }
+  #banner {
+    background-image: url(/assets/img/background_pattern_lp.png);
+    background-size: cover;
+    background-color: #ff5709;
+    color: #fff;
+    padding: 1rem 0 1rem 100px;
+    margin-bottom: 4rem;
+  }
+
+  #playCardWrapper {
+    display: flex;
+    overflow-x: hidden;
+    width: calc(100% - 100px);
+    height: 540px;
+    margin-left: 100px;
+  }
+
+  #storyFactoryCard {
+    background-image: url("/assets/img/background_purple.png");
+    cursor: pointer;
+    margin-right: $card-margin;
+  }
+
+  #intruderCard {
+    background-image: url("/assets/img/background_teal.png");
+    margin-right: $card-margin;
+  }
+
+  #countCard {
+    background: url("/assets/img/background_orange.png");
+  }
+
+  .card {
+    background-position: center center;
+    background-size: cover;
+    border-radius: 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .spreader {
+      height: 0px;
+      width: 440px;
     }
   }
 }
