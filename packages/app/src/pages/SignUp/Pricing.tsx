@@ -9,7 +9,7 @@ import { IonButton, IonText } from "@ionic/react";
 import { RadioCard } from "@/components/RadioCard";
 
 export const Pricing: React.FC = () => {
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
   const intl = useIntl();
   const schema = z.object({
     pricing: z.string(),
@@ -28,7 +28,7 @@ export const Pricing: React.FC = () => {
       ...data,
       ...responses,
     });
-    setPage("complete");
+    pushPage("complete");
   });
 
   const monthlyOption: ExtendedRadioOption = {

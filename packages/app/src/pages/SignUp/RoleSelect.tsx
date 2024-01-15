@@ -29,7 +29,7 @@ export const RoleSelect: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
   const teacherOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -66,12 +66,12 @@ export const RoleSelect: React.FC = () => {
     });
     // @ts-ignore todo: better typing
     if (responses.role === "teacher") {
-      setPage("teacherAbout");
+      pushPage("teacherAbout");
       //swiper.slideTo(teacherSlide);
     }
     // @ts-ignore todo: better typing
     if (responses.role === "parent") {
-      setPage("childProfile");
+      pushPage("childProfile");
       //swiper.slideTo(parentSlide);
     }
   });

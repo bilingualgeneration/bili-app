@@ -13,12 +13,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
-  return <IonCol size="4">{children}</IonCol>;
+  return <IonCol size="6">{children}</IonCol>;
 };
 
 export const TeacherAbout: FC = () => {
   const intl = useIntl();
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
   // todo: these zod schemas are wrong
   const schema = z.object({
     grades: z.string().array().optional(),
@@ -128,7 +128,7 @@ export const TeacherAbout: FC = () => {
       ...data,
       ...response,
     });
-    setPage("languageModeSelect");
+    pushPage("languageModeSelect");
   });
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   IonButton,
   IonCard,
@@ -14,6 +14,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
+import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
 import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -32,15 +33,42 @@ import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useReqdActions } from "@/contexts/ReqdActionsContext";
+
 import "./StudentDashboard.css";
 
-export const StudentDashboard: React.FC = () => {
+export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { name, isImmersive } = useProfile();
+  const { reqdActions, setReqdActions } = useReqdActions();
 
   return (
     <div id="student-landing-page">
+      {reqdActions.showSettingsMessage && (
+        <Joyride
+          callback={(data) => {
+            if (data.action === "close") {
+              const { showSettingsMessage, ...remainingReqdActions } =
+                reqdActions;
+              setReqdActions(remainingReqdActions);
+            }
+          }}
+          steps={[
+            {
+              target: "#footer_settings_button",
+              disableBeacon: true,
+              content: (
+                <FormattedMessage
+                  defaultMessage="Click here to customize your child's learning experience"
+                  description="Message informing user that they need to go to the settings page to complete their profile"
+                  id="reqdActions.goto_settings.message"
+                />
+              ),
+            },
+          ]}
+        />
+      )}
       <div className="cards-title background-pattern">
         <h1>
           <FormattedMessage id="landingPage.welcome" values={{ name }} />
