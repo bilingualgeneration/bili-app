@@ -42,16 +42,23 @@ export const StoryFactoryPage4a: React.FC<StoryFactoryPage4aProps> = ({
   const { isImmersive } = useProfile();
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
 
-  const moveArrows = (direction: number) => {
-    const newIndices = wordIndices.map((index, i) => {
-      const newIndex = index + direction;
-      const maxIndex = words[i].length - 1;
+  // Function to handle the up arrow click
+  const handleUpArrowClick = (position: number) => {
+    const newWordIndices = [...wordIndices];
+    // Decrement the index for the specified position
+    newWordIndices[position] =
+      (newWordIndices[position] - 1 + words[position].length) %
+      words[position].length;
+    setWordIndices(newWordIndices);
+  };
 
-      // Ensure the index stays within bounds
-      return newIndex < 0 ? 0 : newIndex > maxIndex ? maxIndex : newIndex;
-    });
-
-    setWordIndices(newIndices);
+  // Function to handle the down arrow click
+  const handleDownArrowClick = (position: number) => {
+    const newWordIndices = [...wordIndices];
+    // Increment the index for the specified position
+    newWordIndices[position] =
+      (newWordIndices[position] + 1) % words[position].length;
+    setWordIndices(newWordIndices);
   };
 
   return (

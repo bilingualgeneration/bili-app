@@ -829,8 +829,8 @@ ion-card.new-felicitaciones-card {
 
 .bili-character-congrats {
   position: absolute;
-  height: 72vh;
-  width: 41vw;
+  height: 12.5rem;
+  width: 18.75rem;
   top: 5%; /* Bigger # = Moves the character DOWN */
   left: 47%; /* Smaller # = Moves the character LEFT */
   z-index: 2; /* Ensures Bili Character is on top of card */
@@ -861,6 +861,8 @@ ion-card.new-felicitaciones-card {
   /* z-index: 2; */
   padding: 5px 0 5px;
   margin: 5% 5% 7%;
+  @media screen {
+  }
 }
 
 .sf-game-options-container {
@@ -872,7 +874,7 @@ ion-card.new-felicitaciones-card {
 }
 
 .sf-game-option-1 {
-  width: 15vw;
+  width: 100%;
   height: 20vh;
   gap: 7.17px;
   flex-shrink: 0;
@@ -907,12 +909,12 @@ ion-card.new-felicitaciones-card {
   display: flex;
   background-color: var(--Flamenco-High, #ffaedc);
   border-radius: 37.8px;
-  width: 5vw;
-  height: 10vh;
+  width: 6.25rem;
+  height: 6.25rem;
 }
 
 .volume-icon {
   flex-shrink: 0;
-  width: 3vw;
-  height: 6vh;
+  width: 3.75rem;
+  height: 3.75rem;
 }
