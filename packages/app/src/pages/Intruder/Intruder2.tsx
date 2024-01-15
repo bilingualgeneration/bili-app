@@ -50,62 +50,71 @@ export const Intruder2: React.FC = () => {
 
   // Function to handle card click
   const handleCardClick = (cardNumber: string, isCorrect: boolean) => {
-    setCardColors((prevColors) => ({
-      ...prevColors,
-      [cardNumber]: isCorrect ? correctStyle : incorrectStyle,
-    }));
+    // setCardColors((prevColors) => ({
+    //     ...prevColors,
+    //     [cardNumber]: isCorrect ? correctStyle : incorrectStyle,
+    // }));
+
+    if (!isCorrect) {
+      setCardColors((prevColors) => ({
+        ...prevColors,
+        [cardNumber]: { ...incorrectStyle, animation: "shake 1s" },
+      }));
+
+      setTimeout(() => {
+        setCardColors((prevColors) => ({
+          ...prevColors,
+          [cardNumber]: incorrectStyle,
+        }));
+      }, 1000);
+    } else {
+      setCardColors((prevColors) => ({
+        ...prevColors,
+        [cardNumber]: correctStyle,
+      }));
+    }
   };
 
   return (
     <>
-      <div className="intruder-game-title">
-        <h2>¿Qué palabra no rima?</h2>
-        {!isImmersive && (
-          <>
-            <p>Which word does not rhyme?</p>
-          </>
-        )}
+      <div id="intruder-styles">
+        <div className="intruder-game-title">
+          <h2>¿Qué palabra no rima?</h2>
+          {!isImmersive && (
+            <>
+              <p>Which word does not rhyme?</p>
+            </>
+          )}
+        </div>
+        <div className="intruder-cards-container">
+          <IonCard
+            className="intruder-card-style"
+            style={cardColors[1]}
+            onClick={() => handleCardClick("1", false)}
+          >
+            <img src={almohada1} />
+            <p className="intruder-card-title">almohada</p>
+          </IonCard>
+
+          <IonCard
+            className="intruder-card-style"
+            style={cardColors[2]}
+            onClick={() => handleCardClick("2", false)}
+          >
+            <img src={empanada} />
+            <p className="intruder-card-title">empanada</p>
+          </IonCard>
+
+          <IonCard
+            className="intruder-card-style"
+            style={cardColors[3]}
+            onClick={() => handleCardClick("3", true)}
+          >
+            <img src="/assets/img/intruder_boca.png" />
+            <p className="intruder-card-title">boca</p>
+          </IonCard>
+        </div>
       </div>
-      <IonGrid id="intruder-styles" class="">
-        <IonRow class="">
-          <IonCol size="auto" size-md="4">
-            <IonCard
-              className="intruder-card-style"
-              style={cardColors[1]}
-              onClick={() => handleCardClick("1", false)}
-            >
-              <img src={almohada1} />
-              <IonCardHeader>
-                <IonCardTitle>almohada</IonCardTitle>
-              </IonCardHeader>
-            </IonCard>
-          </IonCol>
-          <IonCol size="auto" size-md="4">
-            <IonCard
-              className="intruder-card-style"
-              style={cardColors[2]}
-              onClick={() => handleCardClick("2", false)}
-            >
-              <img src={empanada} />
-              <IonCardHeader>
-                <IonCardTitle>empanada</IonCardTitle>
-              </IonCardHeader>
-            </IonCard>
-          </IonCol>
-          <IonCol size="auto" size-md="4">
-            <IonCard
-              className="intruder-card-style"
-              style={cardColors[3]}
-              onClick={() => handleCardClick("3", true)}
-            >
-              <img src="/assets/img/intruder_boca.png" />
-              <IonCardHeader>
-                <IonCardTitle>boca</IonCardTitle>
-              </IonCardHeader>
-            </IonCard>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
     </>
   );
 };
