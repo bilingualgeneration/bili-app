@@ -85,17 +85,7 @@ export const SF_Slot: React.FC<SF_SlotProps> = ({
           {/* Row for ovals w/ words */}
           <IonRow class="ion-justify-content-center">
             <IonCol>
-              <div
-                // style={{
-                //     width: '100%',
-                //     height: '20vh',
-                //     gap: '7.17px',
-                //     flexShrink: '0',
-                //     borderRadius: '200px',
-                //     margin: '0px 1% 0px',
-                // }}
-                className={`sf-game-option-1 ${ovalColor}`}
-              >
+              <div className={`sf-game-option-1 ${ovalColor}`}>
                 <h1 className="sf-text1-spanish">{es}</h1>
                 {!isImmersive && <p className="sf-text2-english">{en}</p>}
               </div>

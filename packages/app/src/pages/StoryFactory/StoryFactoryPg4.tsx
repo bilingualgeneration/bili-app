@@ -104,7 +104,7 @@ export const StoryFactoryPage4: React.FC<StoryFactoryPage4Props> = ({
           {/* <div className="bubble-background" id='sf-colorful-text-container'></div> */}
 
           {/* Row for slots/words */}
-          <IonRow>
+          <IonRow className="slots">
             {wordIndices.map((index, position) => (
               <IonCol>
                 <SF_Slot
