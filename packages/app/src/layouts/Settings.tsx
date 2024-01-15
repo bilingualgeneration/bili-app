@@ -1,9 +1,122 @@
+import { FC, useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { FooterMenu } from "@/components/FooterMenu";
+import { useHistory } from "react-router-dom";
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonText,
+} from "@ionic/react";
+import { Input } from "@/components/Input";
 import { SettingsHeader } from "@/components/Settings/SettingsHeader";
 import { SideMenu } from "@/components/Settings/SideMenu";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { IonCol, IonContent, IonGrid, IonPage, IonRow } from "@ionic/react";
+const AdultCheckModal: FC = () => {
+  const [isAdultCheckOpen, setIsAdultCheckOpen] = useState<boolean>(true);
+  const [equation, setEquation] = useState<number[]>([1, 2, 3]);
+  useEffect(() => {
+    setIsAdultCheckOpen(true);
+    // generate 2 digit numbers
+    const number_1 = Math.floor(Math.random() * 90) + 10;
+    const number_2 = Math.floor(Math.random() * 90) + 10;
+    const answer = number_1 + number_2;
+    setEquation([number_1, number_2, answer]);
+  }, []);
+  const history = useHistory();
+  const intl = useIntl();
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+    setError,
+  } = useForm({
+    mode: "onBlur",
+    resolver: zodResolver(
+      z.object({
+        answer: z.string(), // should be number but ion input returns string
+      }),
+    ),
+  });
+  const onSubmit = handleSubmit(async (data) => {
+    if (parseInt(data.answer) === equation[2]) {
+      console.log(123);
+      setIsAdultCheckOpen(false);
+    } else {
+      setError("answer", {
+        type: "custom",
+        message: intl.formatMessage({
+          id: "settings.adult_check.wrong_answer",
+          defaultMessage: "Incorrect. Try again!",
+          description:
+            "Message to display when user has not entered the correct answer to an addition problem",
+        }),
+      });
+    }
+  });
+  return (
+    <IonModal canDismiss={!isAdultCheckOpen} isOpen={isAdultCheckOpen}>
+      <div className="ion-padding">
+        <form onSubmit={onSubmit}>
+          <IonText class="ion-text-center">
+            <h1>
+              <FormattedMessage
+                id="settings.adult_check.prompt"
+                defaultMessage="Please solve this equation before continuing"
+                description="Prompt for user to solve an equation before proceeding"
+              />
+            </h1>
+            <h1>
+              {equation[0]} + {equation[1]} = ?
+            </h1>
+          </IonText>
+          <Input
+            label={intl.formatMessage({
+              id: "settings.adult_check.answer",
+              defaultMessage: "Answer",
+              description:
+                "Input area label where users must solve a quick math question",
+            })}
+            labelPlacement="above"
+            required={true}
+            name="answer"
+            control={control}
+            fill="outline"
+            helperText=""
+            testId="settings-adult-check-input"
+            type="text"
+          />
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonButton
+                  color="secondary"
+                  onClick={() => {
+                    history.goBack();
+                  }}
+                >
+                  Go Back
+                </IonButton>
+              </IonCol>
+              <IonCol className="ion-text-right">
+                <IonButton type="submit">Continue</IonButton>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </form>
+      </div>
+    </IonModal>
+  );
+};
 
-export const SettingsLayout: React.FC<
+export const SettingsLayout: FC<
   React.PropsWithChildren<{
     background?: string;
   }>
@@ -11,6 +124,7 @@ export const SettingsLayout: React.FC<
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
+        <AdultCheckModal />
         <div className="page-wrapper" style={{ background }}>
           <IonGrid className="ion-no-padding inner-scroll">
             <IonRow>
@@ -24,6 +138,7 @@ export const SettingsLayout: React.FC<
             </IonRow>
           </IonGrid>
         </div>
+        <FooterMenu />
       </IonContent>
     </IonPage>
   );
