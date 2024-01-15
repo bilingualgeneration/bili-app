@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   IonButton,
   IonCard,
@@ -10,6 +10,7 @@ import {
   IonGrid,
   IonItem,
   IonLabel,
+  IonModal,
   IonRow,
   IonText,
   IonThumbnail,
@@ -32,15 +33,57 @@ import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useReqdActions } from "@/contexts/ReqdActionsContext";
+
 import "./StudentDashboard.css";
 
-export const StudentDashboard: React.FC = () => {
+const SettingsModal: FC = () => {
+  const { reqdActions, setReqdActions } = useReqdActions();
+  const history = useHistory();
+  const clearReqdAction = () => {
+    const { redirectToSettings, ...remainingReqdActions } = reqdActions;
+    setReqdActions(remainingReqdActions);
+  };
+  return (
+    <>
+      <IonModal isOpen={true} onWillDismiss={clearReqdAction}>
+        <div className="ion-padding ion-text-center">
+          <IonText>
+            <h2>
+              <FormattedMessage
+                defaultMessage="To complete your profile, go to the settings page!"
+                description="Message informing user that they need to go to the settings page to complete their profile"
+                id="reqdActions.goto_settings.message"
+              />
+            </h2>
+          </IonText>
+          <IonButton
+            onClick={() => {
+              clearReqdAction();
+              history.push("/settings/overview");
+            }}
+          >
+            <FormattedMessage
+              defaultMessage="Go to Settings"
+              description="Button label to redirect user to settings page"
+              id="reqdActions.goto_settings.button"
+            />
+          </IonButton>
+        </div>
+      </IonModal>
+    </>
+  );
+};
+
+export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { name, isImmersive } = useProfile();
+  const { reqdActions, setReqdActions } = useReqdActions();
 
   return (
     <div id="student-landing-page">
+      {reqdActions.redirectToSettings && <SettingsModal />}
       <div className="cards-title background-pattern">
         <h1>
           <FormattedMessage id="landingPage.welcome" values={{ name }} />

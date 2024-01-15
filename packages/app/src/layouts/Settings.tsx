@@ -38,7 +38,7 @@ const AdultCheckModal: FC = () => {
     formState: { isValid },
     setError,
   } = useForm({
-    mode: "onBlur",
+    mode: "onSubmit",
     resolver: zodResolver(
       z.object({
         answer: z.string(), // should be number but ion input returns string
@@ -47,7 +47,6 @@ const AdultCheckModal: FC = () => {
   });
   const onSubmit = handleSubmit(async (data) => {
     if (parseInt(data.answer) === equation[2]) {
-      console.log(123);
       setIsAdultCheckOpen(false);
     } else {
       setError("answer", {
@@ -64,7 +63,11 @@ const AdultCheckModal: FC = () => {
   return (
     <IonModal canDismiss={!isAdultCheckOpen} isOpen={isAdultCheckOpen}>
       <div className="ion-padding">
-        <form onSubmit={onSubmit}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
           <IonText class="ion-text-center">
             <h1>
               <FormattedMessage
@@ -102,11 +105,21 @@ const AdultCheckModal: FC = () => {
                     history.goBack();
                   }}
                 >
-                  Go Back
+                  <FormattedMessage
+                    id="common.go_back"
+                    defaultMessage="Go Back"
+                    description="Button label to go back"
+                  />
                 </IonButton>
               </IonCol>
               <IonCol className="ion-text-right">
-                <IonButton type="submit">Continue</IonButton>
+                <IonButton onClick={onSubmit}>
+                  <FormattedMessage
+                    id="common.continue"
+                    defaultMessage="Continue"
+                    description="Button label to continue"
+                  />
+                </IonButton>
               </IonCol>
             </IonRow>
           </IonGrid>

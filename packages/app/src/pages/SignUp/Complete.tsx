@@ -2,9 +2,13 @@ import { FormattedMessage } from "react-intl";
 import { IonButton, IonImg, IonSpinner, IonText } from "@ionic/react";
 import React, { useEffect } from "react";
 import { useSignUpData } from "./SignUpContext";
+import { useHistory } from "react-router-dom";
+import { useReqdActions } from "@/contexts/ReqdActionsContext";
 
 export const Complete: React.FC = () => {
   const { data, signUp, signUpStatus } = useSignUpData();
+  const history = useHistory();
+  const { reqdActions, setReqdActions } = useReqdActions();
   useEffect(() => {
     if (signUpStatus === "idle") {
       signUp();
@@ -34,12 +38,17 @@ export const Complete: React.FC = () => {
         <IonImg src="/assets/img/happy_cactus.png" />
         <IonButton
           data-testid="complete-continue-button"
-          href="/student-dashboard"
+          onClick={() => {
+            setReqdActions({
+              redirectToSettings: true,
+              ...reqdActions,
+            });
+            history.push("/student-dashboard");
+          }}
           shape="round"
           style={{
             marginTop: "24px",
           }}
-          type="submit"
         >
           <FormattedMessage
             id="common.continue"
