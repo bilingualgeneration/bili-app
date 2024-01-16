@@ -1,7 +1,7 @@
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
-import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
@@ -263,7 +263,7 @@ export const StoryFactoryPage4: FC = () => {
           {/* Row for volume/speaker */}
           <IonRow className="ion-justify-content-center">
             <IonCol className="ion-no-padding">
-              <div
+              <IonButton
                 className="volume-button-background"
                 onClick={() => {
                   const sentence: string = normalizeAWS(
@@ -286,11 +286,10 @@ export const StoryFactoryPage4: FC = () => {
                 }}
               >
                 <img className="volume-icon" src={volumeButton} />
-              </div>
+              </IonButton>
             </IonCol>
           </IonRow>
 
-          {/* Row for volume/speaker text */}
           <IonRow>
             <IonCol className="ion-no-padding">
               <div>

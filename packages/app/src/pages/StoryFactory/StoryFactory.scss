@@ -742,7 +742,7 @@ ion-row.slots {
 
 ion-button.volume-button-background {
   --background: var(--Flamenco-High, #ffaedc);
-  --border-radius: 37.8px;
+  --border-radius: 2rem !important;
   width: 6.25rem;
   height: 6.25rem;
 

@@ -13,11 +13,23 @@ import {
 import Question from "@/assets/icons/question.svg?react";
 import { chevronForward } from "ionicons/icons";
 import { Popover } from "@/components/Popover";
-import "./Preferences.css";
+import { useFirestore } from "reactfire";
+import { doc, updateDoc } from "firebase/firestore";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
+
+import "./Preferences.css";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
+  const { isImmersive, isInclusive, language = "en", uid } = useProfile();
+  const firestore = useFirestore();
+  const ref = doc(firestore, "users", uid);
+  const updateProfile = (key: string, value: any) => {
+    updateDoc(ref, {
+      [key]: value,
+    });
+  };
   return (
     <>
       <IonList className="preferences-style">
@@ -43,6 +55,10 @@ export const Preferences: React.FC = () => {
             placeholder="English"
             interface="popover"
             toggleIcon={chevronForward}
+            value={language}
+            onIonChange={(event) => {
+              updateProfile("language", event.target.value);
+            }}
           >
             <div className="label-style" slot="label">
               <h4>
@@ -53,8 +69,8 @@ export const Preferences: React.FC = () => {
                 />
               </h4>
             </div>
-            <IonSelectOption value="english">English</IonSelectOption>
-            <IonSelectOption value="spanish">Spanish</IonSelectOption>
+            <IonSelectOption value="es">Spanish</IonSelectOption>
+            <IonSelectOption value="en">English</IonSelectOption>
           </IonSelect>
         </IonItem>
 
@@ -74,6 +90,10 @@ export const Preferences: React.FC = () => {
             placeholder="Immersion"
             interface="popover"
             toggleIcon={chevronForward}
+            value={isImmersive}
+            onIonChange={(event) => {
+              updateProfile("isImmersive", event.target.value);
+            }}
           >
             <div className="label-style" slot="label">
               <h4>
@@ -84,8 +104,8 @@ export const Preferences: React.FC = () => {
                 />
               </h4>
             </div>
-            <IonSelectOption value="bilingual">Bilingual</IonSelectOption>
-            <IonSelectOption value="immersion">Immersion</IonSelectOption>
+            <IonSelectOption value={false}>Bilingual</IonSelectOption>
+            <IonSelectOption value={true}>Immersion</IonSelectOption>
           </IonSelect>
         </IonItem>
 
@@ -101,7 +121,14 @@ export const Preferences: React.FC = () => {
             trigger="click-trigger3"
           />
           <Question id="click-trigger3" />
-          <IonToggle justify="space-between" checked={true} mode="ios">
+          <IonToggle
+            justify="space-between"
+            onIonChange={(event) => {
+              updateProfile("isInclusive", event.target.value);
+            }}
+            checked={isInclusive}
+            mode="ios"
+          >
             <div className="label-style">
               <h4>
                 <FormattedMessage
