@@ -16,12 +16,11 @@ import {
 } from "@ionic/react";
 import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
-import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
-import MeGustaIcon from "@/assets/icons/me_gusta.svg?react";
+import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
-import BienestarIcon from "@/assets/icons/bienestar.svg?react";
-import ComunidadIcon from "@/assets/icons/comunidad.svg?react";
+import WellnessIcon from "@/assets/icons/wellness.svg?react";
+import CommunityIcon from "@/assets/icons/community.svg?react";
 import StemIcon from "@/assets/icons/stem.svg?react";
 import { StoriesCard } from "@/components/StoriesCard";
 import SmallBook from "@/assets/icons/small_book.svg?react";
@@ -36,13 +35,83 @@ import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 import { useReqdActions } from "@/contexts/ReqdActionsContext";
 
-import "./StudentDashboard.css";
+import "./StudentDashboard.scss";
+
+interface WaveIcon {
+  backgroundColor: string;
+  englishLabel: string;
+  link?: string;
+  icon: any; // todo: better typing
+  reactintlId: string;
+}
+
+const WaveIcon: FC<WaveIcon> = ({
+  backgroundColor,
+  englishLabel,
+  icon,
+  link,
+  reactintlId,
+}) => {
+  const { isImmersive } = useProfile();
+  const history = useHistory();
+  return (
+    <span className="wave-icon">
+      <div
+        onClick={() => {
+          if (link) {
+            history.push(link);
+          }
+        }}
+        className={`icon${link ? " has-link" : ""}`}
+        style={{ backgroundColor }}
+      >
+        {icon}
+      </div>
+      <IonText>
+        <p>
+          <FormattedMessage
+            defaultMessage={reactintlId}
+            description="icon label"
+            id={reactintlId}
+          />
+        </p>
+        {!isImmersive && <p>{englishLabel}</p>}
+      </IonText>
+    </span>
+  );
+};
 
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { name, isImmersive } = useProfile();
   const { reqdActions, setReqdActions } = useReqdActions();
-
+  const icons: WaveIcon[] = [
+    {
+      reactintlId: "common.stories",
+      englishLabel: "stories",
+      backgroundColor: "#0045a1",
+      icon: <StoriesIcon />,
+    },
+    {
+      reactintlId: "common.wellness",
+      englishLabel: "wellness",
+      backgroundColor: "#ac217b",
+      icon: <WellnessIcon />,
+    },
+    {
+      reactintlId: "common.play",
+      englishLabel: "play",
+      link: "/play",
+      backgroundColor: "#ff5709",
+      icon: <PlayIcon />,
+    },
+    {
+      reactintlId: "common.community",
+      englishLabel: "community",
+      backgroundColor: "#23beb9",
+      icon: <CommunityIcon />,
+    },
+  ];
   return (
     <div id="student-landing-page">
       {reqdActions.showSettingsMessage && (
@@ -69,11 +138,18 @@ export const StudentDashboard: FC = () => {
           ]}
         />
       )}
-      <div className="cards-title background-pattern">
+      <div
+        className="cards-title background-pattern"
+        style={{
+          paddingBottom: "2rem",
+          paddingTop: "2rem",
+          paddingLeft: 100,
+        }}
+      >
         <h1>
           <FormattedMessage id="landingPage.welcome" values={{ name }} />
         </h1>
-        <p>Hello {name}!</p>
+        {!isImmersive && <p>Hello {name}!</p>}
       </div>
 
       <div className="main-block">
@@ -84,49 +160,16 @@ export const StudentDashboard: FC = () => {
           {!isImmersive && <p>Categories</p>}
         </div>
         {/* icons */}
-        <div className="wave-icons">
-          <img
-            src="/assets/img/wave_frame.png"
-            alt=""
-            style={{ width: "100%", height: "auto" }}
-          />
-          {/* <IonGrid>
+        <div id="wave-icons">
+          <IonGrid>
             <IonRow>
-              <IonCol className="col-custom-position-1">
-                <IconWithText
-                  title={"Cuentos!"}
-                  subtitle={"Stories"}
-                  icon={<MeGustaIcon />}
-                  iconBackgroundColor="#006A67"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-2">
-                <IconWithText
-                  title={"Bienestar"}
-                  subtitle={"Welness"}
-                  icon={<BienestarIcon />}
-                  iconBackgroundColor="#AC217B"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-3">
-                <IconWithText
-                  title={"Juego"}
-                  subtitle={"Play"}
-                  url="/play"
-                  icon={<PlayIcon />}
-                  iconBackgroundColor="#FF5708"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-4">
-                <IconWithText
-                  title={"Comunidad"}
-                  subtitle={"Community"}
-                  icon={<ComunidadIcon />}
-                  iconBackgroundColor="#22BEB9"
-                />
-              </IonCol>
+              {icons.map((icon) => (
+                <IonCol key={icon.reactintlId} className="ion-text-center">
+                  <WaveIcon {...icon} />
+                </IonCol>
+              ))}
             </IonRow>
-          </IonGrid> */}
+          </IonGrid>
         </div>
 
         {/* stories */}
@@ -151,7 +194,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"What do you like about yourself?"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#006A67"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -163,7 +206,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Catrina for a Day"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#0045A1"
+              iconBackroundColor="#0045A1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -175,7 +218,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"I'm From..."}
               cover={"/assets/img/band_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -187,7 +230,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"The Mischievous Skeleton"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -199,7 +242,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"What do you like about yourself?"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#006A67"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -211,7 +254,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Catrina for a Day"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#0045A1"
+              iconBackroundColor="#0045A1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -223,7 +266,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"I'm From..."}
               cover={"/assets/img/band_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -235,7 +278,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"The Mischievous Skeleton"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -254,6 +297,7 @@ export const StudentDashboard: FC = () => {
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -265,7 +309,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Affirmations"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -275,7 +319,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Breathing deeply"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -285,7 +329,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Yoga break"}
               cover={"/assets/img/band_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -296,7 +340,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Musical mantras"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -307,7 +351,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Yoga break"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -327,6 +371,7 @@ export const StudentDashboard: FC = () => {
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -338,7 +383,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Story Factory"}
               cover={"/assets/img/card_play_image.png"}
               icon={<SmallPlay />}
-              iconBackroungColor="#F48722"
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image small"
             />
@@ -348,7 +393,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"The intruder"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallPlay />}
-              iconBackroungColor="#F48722"
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -358,7 +403,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Count with me"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallPlay />}
-              iconBackroungColor="#F48722"
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -368,7 +413,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"The baskets"}
               cover={"/assets/img/band_image.png"}
               icon={<SmallPlay />}
-              iconBackroungColor="#F48722"
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -379,7 +424,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Affirmations"}
               cover={"/assets/img/card_play_image.png"}
               icon={<SmallPlay />}
-              iconBackroungColor="#F48722"
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -397,6 +442,7 @@ export const StudentDashboard: FC = () => {
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -408,7 +454,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"What would you do?"}
               cover={"/assets/img/horse_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -418,7 +464,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Tell me about..."}
               cover={"/assets/img/card_community_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -428,7 +474,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"Stories and sayings"}
               cover={"/assets/img/star_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -439,7 +485,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"I Spy"}
               cover={"/assets/img/flowers_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -450,7 +496,7 @@ export const StudentDashboard: FC = () => {
               subtitle={"I Spy"}
               cover={"/assets/img/flowers_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}

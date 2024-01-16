@@ -9,13 +9,11 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-  <React.StrictMode>
-    <FirebaseWrapper>
-      <LanguageContextProvider>
-        <I18nWrapper>
-          <App />
-        </I18nWrapper>
-      </LanguageContextProvider>
-    </FirebaseWrapper>
-  </React.StrictMode>,
+  <FirebaseWrapper>
+    <LanguageContextProvider>
+      <I18nWrapper>
+        <App />
+      </I18nWrapper>
+    </LanguageContextProvider>
+  </FirebaseWrapper>,
 );

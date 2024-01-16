@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
+import { useHistory } from "react-router-dom";
 import React from "react";
 import Lock from "@/assets/icons/lock.svg?react";
 
@@ -36,15 +37,10 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
   storyId,
 }) => {
   const { isImmersive } = useProfile();
-
-  // conditionally make card clickable
-  let props: { [key: string]: any } = {};
-  if (!isLocked) {
-    props.href = `/story-factory/${storyId}`;
-  }
-
+  const history = useHistory();
   const cardStyles = {
     background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.60) 100%), url(${cover})`,
+    cursor: "pointer",
   };
 
   return (
@@ -52,6 +48,11 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
       <div
         style={cardStyles}
         className={`stories-card ${isLocked ? "locked" : ""} ${className}`}
+        onClick={() => {
+          if (!isLocked && storyId) {
+            history.push(`/story-factory/play/${storyId}`);
+          }
+        }}
       >
         {/* check if the card is locked */}
         {isLocked && (

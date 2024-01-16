@@ -6,10 +6,12 @@ import { useProfile } from "@/contexts/ProfileContext";
 
 interface StoryFactoryButtonProps {
   currentPage: number;
+  disabled: boolean;
 }
 
 export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
   currentPage,
+  disabled,
 }) => {
   const { handleNext } = useStoryFactoryButton(currentPage);
   const { isImmersive } = useProfile();
@@ -18,6 +20,7 @@ export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
     // <div className="story-intro-button-container">
     <IonButton
       className="sf-intro-button"
+      disabled={disabled}
       expand="block"
       shape="round"
       type="button"
@@ -31,7 +34,7 @@ export const StoryFactoryButton: React.FC<StoryFactoryButtonProps> = ({
             description="Button to move to the next page in intro pages"
           />
         </div>
-        {!isImmersive && <div className="story-button-reg">Next</div>}
+        {!isImmersive && <div className="story-button-reg">Let's Play</div>}
       </div>
     </IonButton>
     // </div>

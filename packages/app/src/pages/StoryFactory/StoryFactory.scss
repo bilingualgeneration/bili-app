@@ -1,14 +1,5 @@
 /* styles for story factory cards */
 
-.story-factory-pg3-main-card {
-  display: flex;
-  flex-direction: column;
-  /* width: 57.35vw; 1147px; */
-  padding: 60px;
-  border-radius: 35.942px;
-  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
-}
-
 .card-title {
   display: flex;
   flex-direction: column;
@@ -70,17 +61,8 @@ ion-button.sf-intro-button {
   letter-spacing: 0.211px;
 }
 
-#story-spanish-title {
-  width: auto;
-  color: var(--base-selva, #006a67);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
-  font-size: 4rem; /* 64px;*/
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 70.4px */
-  letter-spacing: -2px;
+.color-selva {
+  color: var(--base-selva, #006a67) !important;
 }
 
 #story-fabrica {
@@ -97,16 +79,6 @@ ion-button.sf-intro-button {
   letter-spacing: -2px;
 }
 
-#story-english-subtitle {
-  align-self: stretch;
-  color: var(--base-suelo, #000);
-  font-family: Outfit;
-  font-size: 3rem; /* 32px; */
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 35.2px */
-}
-
 #story-fact {
   align-self: stretch;
   color: var(--habanero-habanero, #ff5708);
@@ -115,113 +87,6 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
-}
-
-#story-spanish-title-pt2 {
-  align-self: stretch;
-  color: var(--base-selva, #006a67);
-  font-family: Outfit;
-  font-size: 2.5rem; /* 40px; */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 44px */
-  margin-bottom: 40px;
-}
-
-#story-page-2-title {
-  color: var(--base-selva, #006a67);
-  font-family: Outfit;
-  font-size: 2.5rem; /* 4vh; 39.97px; */
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 43.967px */
-  /* width: 55%; */
-  margin-bottom: 1%;
-}
-
-@media only screen and (max-width: 1000px) {
-  #story-page-2-title {
-    font-size: 1.5rem; /* //2.5vh; */ /* Adjust as needed for smaller screens */
-    width: 100%; /* Full width on smaller screens */ /* TODO: CHECK IF MOBILE VALUES ARE CORRECT */
-  }
-}
-
-#story-page-2-subtitle {
-  color: var(--base-suelo, #000);
-  font-family: Outfit;
-  font-size: 2rem; /* 3vh; 29.978px;*/
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 43.967px */
-  /*  width: 55%; */
-}
-
-@media only screen and (max-width: 600px) {
-  #story-page-2-subtitle {
-    font-size: 1rem; /* //1.5vh;  Adjust as needed for smaller screens */
-    width: 100%; /* Full width on smaller screens */
-  }
-}
-
-#story-english-subtitle-pt2 {
-  align-self: stretch;
-  color: var(--base-suelo, #000);
-  font-family: Outfit;
-  font-size: 2rem; /* 24px; */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 26.4px */
-  margin-top: 8px;
-}
-
-#sf-es {
-  /* width: 68.313rem; 1093px; 68.313rem */
-  color: var(--greyscale-900, #212121);
-  font-family: Outfit;
-  font-size: 3rem; /*  48px; */
-  font-style: normal;
-  font-weight: 700;
-  line-height: 116%; /* 56px */
-  letter-spacing: -1px;
-  margin: 0px;
-}
-
-#sf-en {
-  width: 22.938rem; /* 367px; 22.938rem */
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 1.25rem; /* 2vh; 20px; */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 22px */
-}
-
-.rectangle-header {
-  position: relative;
-  max-width: 100%;
-  height: 16vh; /* 156px; */
-  flex-shrink: 0;
-  background: var(--habanero-habanero, #ff5708);
-  align-items: center;
-  justify-content: left;
-  display: flex;
-  mix-blend-mode: multiply;
-}
-
-.rectangle-header-semi-transparent-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: multiply;
-  background:
-    url("./src/assets/icons/orange_rectangle_header_overlay.svg"),
-    lightgray -2012.453px 0px / 668.067% 100% no-repeat;
-}
-
-.rectangle-header-text {
-  z-index: 2;
-  margin-left: 7%;
-  /* margin-top: 1%; */
 }
 
 .cards-title h2 {
@@ -241,18 +106,6 @@ ion-button.sf-intro-button {
   font-weight: 400;
   line-height: 110%;
   margin-top: auto;
-}
-
-#rectangle-header-title {
-  margin: 0px;
-  padding: 2%;
-  width: 38vw; /* 381px; */
-  color: #fff;
-  font-family: Outfit;
-  font-size: 3rem; /* 4.5vh; 48px; */
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 52.8px */
 }
 
 .cards-title h1 {
@@ -585,67 +438,11 @@ ion-button.sf-intro-button {
     drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
 }
 
-.card-content-md p.fabrica-text1-spanish {
-  color: var(--base-suelo, #000);
-  text-align: center;
-  font-family: Outfit;
-  font-size: 1.5rem; /* 25.159px; */
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 27.675px */
-}
-
-.card-content-md p.fabrica-text2-english {
-  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
-  text-align: center;
-  font-family: Outfit;
-  font-size: 1.5rem; /* 25.159px; */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 27.675px */
-}
-
-ion-card.story-page-1-main-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  gap: 8px;
-  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
-  max-width: 100%;
-  width: 50vw; /* 1002px */
-  height: 74vh;
-  padding: 6vh 5vw;
-  position: relative;
-  z-index: 1;
-  border-radius: 2.5rem;
-}
-
-/* story page 2 */
-
-ion-card.story-page-2-main-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  gap: 8px;
-  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 40px;
-  max-width: 100%;
-  width: 50vw; /* 1002px */
-  height: 74vh;
-  padding: 0vh 5vw 6vh 5vw;
-  position: relative;
-  z-index: 1;
-  border-radius: 2.5rem;
-}
-
 .bili-character {
   position: absolute;
-  height: 73vh;
-  width: 41vw;
-  top: 23vh; /* Bigger # = Moves the character DOWN */
-  left: 54vw; /* Smaller # = Moves the character LEFT */
+  top: 100px;
+  right: 1.5rem;
+  width: 400px;
   z-index: 2; /* Ensures Bili Character is on top of card */
 }
 
@@ -668,15 +465,6 @@ ion-card.story-page-2-main-card {
   /* Add any other styles or adjustments specific to iPads here */
 }
 
-/* .sf-card-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 51px 183px;
-} */
-
 .sf-header-container {
   display: inline-flex;
   max-width: 100%;
@@ -688,10 +476,49 @@ ion-card.story-page-2-main-card {
   flex-shrink: 0;
 }
 
-.sf-card-grid {
-  display: flex;
-  justify-content: center;
-  margin: 4% 11% 0px 10%;
+.sf-card {
+  max-width: 900px;
+  margin: auto;
+
+  ion-card {
+    gap: 8px;
+    box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+    padding: 4rem 0 4rem 4rem;
+    border-radius: 2.5rem;
+  }
+
+  .right-margin {
+    margin-right: 150px;
+  }
+
+  h1 {
+    color: var(--base-suelo, #000);
+    font-family: Outfit;
+    font-size: 3rem; /* 32px; */
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 35.2px */
+  }
+
+  h2 {
+    color: var(--base-suelo, #000);
+    font-size: 2rem; /* 24px; */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 26.4px */
+    margin-top: 8px;
+  }
+}
+
+#story-spanish-title-pt2 {
+  align-self: stretch;
+  color: var(--base-selva, #006a67);
+  font-family: Outfit;
+  font-size: 2.5rem; /* 40px; */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%; /* 44px */
+  margin-bottom: 40px;
 }
 
 .story-factory-button-container-pg-2 {
@@ -720,10 +547,8 @@ ion-card.new-felicitaciones-card {
 }
 
 .stars-overlay {
-  content: "";
-  flex-shrink: 0;
   position: absolute;
-  width: 100vw;
+  width: 100%;
   top: 0;
   left: 75px;
   right: 0;
@@ -731,6 +556,7 @@ ion-card.new-felicitaciones-card {
   background: url("../../assets/icons/sf_stars_overlay.svg");
   position: absolute;
   z-index: 2;
+  pointer-events: none;
 }
 
 .felicitaciones-header {
@@ -839,13 +665,6 @@ ion-card.new-felicitaciones-card {
 
 /* fabrica de cuentos game page */
 
-/* .sf-backgroud-pattern {
-  width: 100%;
-  height: 100%;
-  background: url("@/assets/icons/sf_background_pattern.svg");
-  z-index: 1;
-} */
-
 .sf-colorful-text-heading {
   /* display: flex; */
   font-size: 6.5rem;
@@ -873,13 +692,21 @@ ion-card.new-felicitaciones-card {
   /* position: relative; */
 }
 
-.sf-game-option-1 {
+.sf-game-option {
   width: 100%;
-  height: 20vh;
-  gap: 7.17px;
-  flex-shrink: 0;
   border-radius: 200px;
-  margin: 0px 1% 0px;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  text-align: center;
+  color: #000;
+  h1 {
+    font-size: 56px;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: normal;
+  }
 }
 
 #sf-game-page ion-col {
