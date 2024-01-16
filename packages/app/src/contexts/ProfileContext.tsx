@@ -36,6 +36,7 @@ export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
           // @ts-ignore: todo fix
           {
             ...profileData,
+            uid: user.data!.uid,
           }
         }
       >
