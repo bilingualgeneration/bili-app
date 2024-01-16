@@ -1,5 +1,12 @@
 @use "sass:math";
 
+.hide-scrollbar {
+  &::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+}
+
 .page-wrapper {
   max-width: 1366px;
   margin: auto;
@@ -741,34 +748,4 @@ ion-card {
   left: 50%;
   transform: translate(-50%, -50%);
   size: 10rem;
-}
-
-.card-content-md p.fabrica-text1-spanish {
-  color: var(--base-suelo, #000);
-  text-align: center;
-  font-family: Outfit;
-  font-size: 1.5rem; // 25.159px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 27.675px */
-}
-
-.card-content-md p.fabrica-text2-english {
-  color: var(--base-backdrop, rgba(0, 0, 0, 0.56));
-  text-align: center;
-  font-family: Outfit;
-  font-size: 1.5rem; //25.159px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 27.675px */
-}
-
-// story page 2
-
-.story-page-2-main-card {
-  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
-}
-
-.story-page-2-main-card.story-page-3-main-card {
-  height: 978px;
 }

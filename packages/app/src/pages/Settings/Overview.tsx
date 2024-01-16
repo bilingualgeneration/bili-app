@@ -36,6 +36,7 @@ import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
+import React from "react";
 
 export const Overview: React.FC = ({}) => {
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);

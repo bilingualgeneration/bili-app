@@ -1,72 +1,92 @@
 import React, { useState, useEffect } from "react";
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
-  IonGrid,
-  IonRow,
-} from "@ionic/react";
+import { IonCard, IonIcon } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
-import biliCharacter from "@/assets/icons/bili_character.svg";
-import miniFabricaCard from "@/assets/icons/mini_fabrica_card.svg";
-import "./StoryFactory.css";
+import { StoriesCardNoRating } from "@/components/StoryFactory/StoriesCardNoRating";
+import { gameControllerOutline } from "ionicons/icons";
+import { PlayHeader } from "@/components/PlayHeader";
+import Heart from "@/assets/icons/heart.svg?react";
+import "./StoryFactory.scss";
 
-interface IntroPage3Props {
-  currentPage: number;
-}
-
-export const IntroPage3: React.FC<IntroPage3Props> = ({ currentPage }) => {
+export const StoryFactoryPage3: React.FC = () => {
   const { isImmersive } = useProfile();
-
   return (
     <>
-      <IonCard className="story-page-2-main-card story-page-3-main-card">
-        <IonGrid>
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="8.5">
-              <IonCardHeader style={{ padding: "5%" }}>
-                <IonCardTitle class="ion-text-left">
-                  <div id="story-page-2-title">
-                    {" "}
-                    Esta es tu fábrica de cuentos. Puedes crear un cuento
-                    presionando el botón Actualizar o deslizando o haciendo clic
-                    en cada sección de la historia.
-                  </div>
-                </IonCardTitle>
-                {!isImmersive && (
-                  <IonCardSubtitle>
-                    <div id="story-page-2-subtitle">
-                      This is your story factory. You can create a story by
-                      either hitting the Refresh button, or by swiping or
-                      clicking each section of the story.
-                    </div>
-                  </IonCardSubtitle>
-                )}
-              </IonCardHeader>
-            </IonCol>
-            <IonCol>
-              <img
-                className="bili-character"
-                src={biliCharacter}
-                alt="Bili character"
-              />
-            </IonCol>
-            {/* <IonCol size="4">
-              <img className='bili-character' src={biliCharacter} alt="Bili character" />
-            </IonCol> */}
-          </IonRow>
-        </IonGrid>
+      <PlayHeader />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "60px 110px",
+        }}
+      >
+        <div className="sf-card">
+          <IonCard>
+            <h1 style={{ marginTop: 0 }}>
+              <FormattedMessage id="storyFactory.title" />
+            </h1>
+            {!isImmersive && <h2 style={{ marginTop: 0 }}>Story Factory</h2>}
 
-        <div className="story-factory-button-container">
-          <StoryFactoryButton currentPage={currentPage} />
+            <div
+              className="hide-scrollbar"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                overflowX: "scroll",
+              }}
+            >
+              <StoriesCardNoRating
+                storyId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
+                packNumber={1}
+                cover={"/assets/img/drum_image.png"}
+                icon={
+                  <IonIcon
+                    className="controller-icon"
+                    icon={gameControllerOutline}
+                    aria-hidden="true"
+                  />
+                }
+                iconBackroungColor="var(--Desierto-Desierto)"
+                heart={<Heart />}
+                className="other-card-image"
+              />
+
+              <StoriesCardNoRating
+                packNumber={2}
+                cover={"/assets/img/dance_image.png"}
+                icon={
+                  <IonIcon
+                    className="controller-icon"
+                    icon={gameControllerOutline}
+                    aria-hidden="true"
+                  />
+                }
+                iconBackroungColor="var(--Desierto-Desierto)"
+                heart={<Heart />}
+                className="other-card-image"
+                isLocked={true}
+              />
+
+              <StoriesCardNoRating
+                packNumber={3}
+                cover={"/assets/img/band_image.png"}
+                icon={
+                  <IonIcon
+                    className="controller-icon"
+                    icon={gameControllerOutline}
+                    aria-hidden="true"
+                  />
+                }
+                iconBackroungColor="var(--Desierto-Desierto)"
+                heart={<Heart />}
+                className="other-card-image"
+                isLocked={true}
+              />
+            </div>
+          </IonCard>
         </div>
-      </IonCard>
+      </div>
     </>
   );
 };

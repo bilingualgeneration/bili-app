@@ -34,8 +34,8 @@ export const Progress: React.FC = () => {
   return (
     <>
       <div className="progress-content-container">
-        <IonList className="progress-style">
-          <IonItem>
+        <IonList className="ion-no-padding progress-style">
+          <IonItem className="ion-no-margin ion-no-padding">
             <div className="title-style">
               <h1>
                 <FormattedMessage
@@ -47,7 +47,10 @@ export const Progress: React.FC = () => {
             </div>
           </IonItem>
 
-          <IonItem lines="none">
+          <IonItem
+            className="ion-no-margin ion-no-padding activity-insights"
+            lines="none"
+          >
             <div className="segment-style">
               <h4>
                 <FormattedMessage
@@ -85,7 +88,10 @@ export const Progress: React.FC = () => {
             </div>
           </IonItem>
 
-          <IonItem lines="none" className="kids-name-select">
+          <IonItem
+            lines="none"
+            className="ion-no-margin ion-no-padding kids-name-select"
+          >
             <IonSelect interface="popover" toggleIcon={chevronDown}>
               <div className="label-style" slot="label">
                 <span className="name-avatar small-oval-element">

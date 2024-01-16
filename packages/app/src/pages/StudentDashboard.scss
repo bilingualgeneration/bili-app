@@ -14,13 +14,6 @@
     margin: 0 0 100px 100px;
   }
 
-  .hide-scrollbar {
-    &::-webkit-scrollbar {
-      width: 0; /* Remove scrollbar space */
-      background: transparent; /* Optional: just make scrollbar invisible */
-    }
-  }
-
   #wave-icons {
     .wave-icon {
       display: inline-block;

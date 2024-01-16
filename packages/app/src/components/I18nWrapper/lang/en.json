@@ -91,6 +91,9 @@
   "stories.storyId": "Story ID:",
 
   "storyFactory.Welcome": "Welcome to Story Factory Page",
+  "storyFactory.title": "Story Factory!",
+  "storyFactory.nextButton": "Next",
+  "storyFactory.read": "Read",
 
   "landingPage.welcome": "Hello {userName}!",
   "landingPage.assignments": "Categories",

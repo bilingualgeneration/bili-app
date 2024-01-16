@@ -7,6 +7,7 @@ import { useIntl } from "react-intl";
 import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
 import FabricaWordmark from "@/assets/icons/fabrica_wordmark.png";
 import { FormattedMessage } from "react-intl";
+import { PlayHeader } from "@/components/PlayHeader";
 
 import "./Play.scss";
 
@@ -68,16 +69,7 @@ export const Play: FC = () => {
   const { isImmersive } = useProfile();
   return (
     <div id="playPage">
-      <div id="banner">
-        <h1>
-          <FormattedMessage
-            id="common.play"
-            defaultMessage="Play"
-            description="Standalone label for Play"
-          />
-        </h1>
-        {!isImmersive && <h2>Play</h2>}
-      </div>
+      <PlayHeader />
       <div id="playCardWrapper">
         <StoryFactoryCard />
         <IntruderCard />

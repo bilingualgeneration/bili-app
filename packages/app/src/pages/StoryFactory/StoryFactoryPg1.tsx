@@ -1,68 +1,107 @@
-import React from "react";
+import { FC, useEffect } from "react";
 import {
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonCol,
   IonGrid,
   IonImg,
   IonRow,
   IonText,
 } from "@ionic/react";
-import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
+import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import "./StoryFactory.css";
+import { useHistory } from "react-router-dom";
+import audio_en_file from "@/assets/audio/story_factory_first_en.mp3";
+import audio_es_file from "@/assets/audio/story_factory_first_es.mp3";
+import audio_es_inc_file from "@/assets/audio/story_factory_first_es-inc.mp3";
+import "./StoryFactory.scss";
 
 interface IntroPage1Props {
   currentPage: number;
 }
 
-export const IntroPage1: React.FC<IntroPage1Props> = ({ currentPage }) => {
-  const { isImmersive } = useProfile();
+export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
+  const { isInclusive, isImmersive } = useProfile();
+  const history = useHistory();
+  const audio_en = new Audio(audio_en_file);
+  const audio_es = new Audio(audio_es_file);
+  const audio_es_inc = new Audio(audio_es_inc_file);
+  useEffect(() => {
+    return () => {
+      audio_en.pause();
+      audio_es.pause();
+      audio_es_inc.pause();
+    };
+  });
+  useEffect(() => {
+    if (isImmersive) {
+      if (isInclusive) {
+        audio_es_inc.onended = () => {
+          history.push("/story-factory/2");
+        };
+        audio_es_inc.play();
+      } else {
+        audio_es.onended = () => {
+          history.push("/story-factory/2");
+        };
+        audio_es.play();
+      }
+    } else {
+      audio_en.onended = () => {
+        history.push("/story-factory/2");
+      };
+      if (isInclusive) {
+        audio_es_inc.onended = () => {
+          audio_en.play();
+        };
+        audio_es_inc.play();
+      } else {
+        audio_es.onended = () => {
+          audio_en.play();
+        };
+        audio_es.play();
+      }
+    }
+  }, []);
   return (
-    <>
-      <IonCard className="story-page-2-main-card">
-        <IonGrid class="ion-no-margin">
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="auto" size-md="9">
-              <IonCardHeader>
-                <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-bienvenidos">¡Bienvenidos a la</div>
-                  <div id="story-bienvenidos">fábrica de cuentos!</div>
-                </IonCardTitle>
-                <IonCardSubtitle>
-                  <div id="story-un-lugar">
-                    ¡Un lugar para lecturas silábicas graciosas!
-                  </div>
-                </IonCardSubtitle>
-                {!isImmersive && (
-                  <>
-                    <div id="story-welcome" style={{ marginTop: "4rem" }}>
-                      Welcome to the story factory!
-                    </div>
-                    <div id="story-a-place">
-                      A place for silly syllabic reading!
-                    </div>
-                  </>
-                )}
-              </IonCardHeader>
-              <div className="story-factory-button-container">
-                <StoryFactoryButton currentPage={currentPage} />
-              </div>
-            </IonCol>
-            <IonCol>
-              <img
-                className="bili-character"
-                src={biliCharacter}
-                alt="Bili character"
+    <div style={{ position: "relative" }}>
+      <div className="ion-no-padding sf-card">
+        <IonCard className="ion-no-margin">
+          <IonCardContent className="margin-right">
+            <h1 className="color-selva">
+              <FormattedMessage
+                id={`storyFactory.welcome${isInclusive ? "_inc" : ""}`}
+                defaultMessage="Welcome to the Story Factory!"
+                description="Main welcome message on Story Factory"
               />
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonCard>
-    </>
+            </h1>
+
+            <h2 className="color-selva">
+              <FormattedMessage
+                id={`storyFactory.subwelcome${isInclusive ? "_inc" : ""}`}
+                defaultMessage="A place for silly syllabic reading!"
+                description="Sub welcome message on Story Factory"
+              />
+            </h2>
+
+            {!isImmersive && (
+              <>
+                <h1>
+                  <br />
+                  Welcome to the story factory!
+                </h1>
+                <h2>A place for silly syllabic reading!</h2>
+              </>
+            )}
+          </IonCardContent>
+        </IonCard>
+      </div>
+      <img
+        className="bili-character"
+        src={biliCharacter}
+        alt="Bili character"
+      />
+    </div>
   );
 };

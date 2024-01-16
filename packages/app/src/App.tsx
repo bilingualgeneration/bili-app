@@ -10,32 +10,30 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { AuthProvider, useFirebaseApp } from "reactfire";
-import AuthedLayout from "./layouts/Authed";
+import AuthedLayout from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { I18nWrapper } from "@/components/I18nWrapper";
-import Intruder from "./pages/games/Intruder";
-import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
-import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
-import { IntroPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
-import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
-import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
-import { StoryFactoryPage6 } from "./pages/StoryFactory/StoryFactoryPg6";
+import Intruder from "@/pages/games/Intruder";
+import { IntroPage1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+import { IntroPage2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
+import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import Login from "./pages/Login";
-import { Play } from "./pages/Play";
-import Memory from "./pages/games/Memory";
-import { Preload } from "./pages/Preload";
-import ResetPassword from "./pages/ResetPassword";
-import { Overview, Preferences, Progress, Profile } from "./pages/Settings";
-import { SettingsLayout } from "./layouts/Settings";
-import { SignUp } from "./pages/SignUp";
-import { Splash } from "./pages/Splash";
-import Stories from "./pages/games/Stories";
-import { StudentDashboard } from "./pages/StudentDashboard";
-import TeacherLogin from "./pages/TeacherLogin";
+import Login from "@/pages/Login";
+import { Play } from "@/pages/Play";
+import Memory from "@/pages/games/Memory";
+import { Preload } from "@/pages/Preload";
+import ResetPassword from "@/pages/ResetPassword";
+import { Overview, Preferences, Progress, Profile } from "@/pages/Settings";
+import { SettingsLayout } from "@/layouts/Settings";
+import { SignUp } from "@/pages/SignUp";
+import { Splash } from "@/pages/Splash";
+import Stories from "@/pages/games/Stories";
+import { StudentDashboard } from "@/pages/StudentDashboard";
+import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { PreSplash } from "./pages/PreSplash";
+import { PreSplash } from "@/pages/PreSplash";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -167,11 +165,11 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/settings/progress"
+          path="/settings/profile"
           render={() => (
             <AuthedLayout>
               <SettingsLayout background="#f7faf9">
-                <Progress />
+                <Profile />
               </SettingsLayout>
             </AuthedLayout>
           )}
@@ -179,11 +177,11 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/settings/profile"
+          path="/settings/progress"
           render={() => (
             <AuthedLayout>
               <SettingsLayout background="#f7faf9">
-                <Profile />
+                <Progress />
               </SettingsLayout>
             </AuthedLayout>
           )}
@@ -248,7 +246,7 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#F7FAF9">
-                <IntroPage3 currentPage={3} />
+                <StoryFactoryPage3 />
               </HeaderFooter>
             </AuthedLayout>
           )}
@@ -256,35 +254,11 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/story-factory/4"
+          path="/story-factory/play/:pack_id"
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#F7FAF9">
                 <StoryFactoryPage4 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/story-factory/5"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage5 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/story-factory/6"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage6 />
               </HeaderFooter>
             </AuthedLayout>
           )}
