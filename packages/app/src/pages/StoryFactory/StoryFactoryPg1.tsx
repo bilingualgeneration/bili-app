@@ -70,19 +70,37 @@ export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
         <IonCard className="ion-no-margin">
           <IonCardContent className="margin-right">
             <h1 className="color-selva">
-              <FormattedMessage
-                id={`storyFactory.welcome${isInclusive ? "_inc" : ""}`}
-                defaultMessage="Welcome to the Story Factory!"
-                description="Main welcome message on Story Factory"
-              />
+              {isInclusive && (
+                <FormattedMessage
+                  id="storyFactory.welcome_inc"
+                  defaultMessage="Welcome to the Story Factory!"
+                  description="Main welcome message on Story Factory"
+                />
+              )}
+              {!isInclusive && (
+                <FormattedMessage
+                  id="storyFactory.welcome"
+                  defaultMessage="Welcome to the Story Factory!"
+                  description="Main welcome message on Story Factory"
+                />
+              )}
             </h1>
 
             <h2 className="color-selva">
-              <FormattedMessage
-                id={`storyFactory.subwelcome${isInclusive ? "_inc" : ""}`}
-                defaultMessage="A place for silly syllabic reading!"
-                description="Sub welcome message on Story Factory"
-              />
+              {isInclusive && (
+                <FormattedMessage
+                  id={`storyFactory.subwelcome_inc`}
+                  defaultMessage="A place for silly syllabic reading!"
+                  description="Sub welcome message on Story Factory"
+                />
+              )}
+              {!isInclusive && (
+                <FormattedMessage
+                  id={`storyFactory.subwelcome`}
+                  defaultMessage="A place for silly syllabic reading!"
+                  description="Sub welcome message on Story Factory"
+                />
+              )}
             </h2>
 
             {!isImmersive && (

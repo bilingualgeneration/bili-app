@@ -4,14 +4,22 @@ import React, { useEffect } from "react";
 import { useSignUpData } from "./SignUpContext";
 import { useHistory } from "react-router-dom";
 import { useReqdActions } from "@/contexts/ReqdActionsContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Complete: React.FC = () => {
   const { data, signUp, signUpStatus } = useSignUpData();
   const history = useHistory();
+  const { setLocale } = useLanguage();
   const { reqdActions, setReqdActions } = useReqdActions();
   useEffect(() => {
     if (signUpStatus === "idle") {
       signUp();
+    }
+    if (signUpStatus === "done") {
+      setReqdActions({
+        showSettingsMessage: true,
+        ...reqdActions,
+      });
     }
   }, [signUpStatus]);
   if (signUpStatus === "idle" || signUpStatus === "busy") {
@@ -39,10 +47,6 @@ export const Complete: React.FC = () => {
         <IonButton
           data-testid="complete-continue-button"
           onClick={() => {
-            setReqdActions({
-              showSettingsMessage: true,
-              ...reqdActions,
-            });
             history.push("/student-dashboard");
           }}
           shape="round"

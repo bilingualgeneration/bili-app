@@ -22,7 +22,7 @@ import "./Preferences.css";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
-  const { isImmersive, isInclusive, language = "en", uid } = useProfile();
+  const { isImmersive, isInclusive, language = "es", uid } = useProfile();
   const firestore = useFirestore();
   const ref = doc(firestore, "users", uid);
   const updateProfile = (key: string, value: any) => {
@@ -123,8 +123,8 @@ export const Preferences: React.FC = () => {
           <Question id="click-trigger3" />
           <IonToggle
             justify="space-between"
-            onIonChange={(event) => {
-              updateProfile("isInclusive", event.target.value);
+            onClick={() => {
+              updateProfile("isInclusive", !isInclusive);
             }}
             checked={isInclusive}
             mode="ios"

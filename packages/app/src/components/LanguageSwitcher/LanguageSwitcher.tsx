@@ -39,7 +39,7 @@ export const LanguageSwitcher: FC = () => {
         control={control}
         label={intl.formatMessage({
           id: "languageMode",
-          defaultMessage: "Mode",
+          defaultMessage: "English Mode",
           description: "Label for language mode toggle",
         })}
         name="isSpanish"

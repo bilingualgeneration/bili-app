@@ -9,6 +9,7 @@ import {
 import type { MessageFormatElement } from "react-intl";
 import React from "react";
 import Lock from "@/assets/icons/lock.svg?react";
+import { useProfile } from "@/contexts/ProfileContext";
 
 type StoriesCardProps = {
   title: string | MessageFormatElement[];
@@ -35,6 +36,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
   isLocked = false,
   lock,
 }) => {
+  const { isImmersive } = useProfile();
   const cardStyles = {
     background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.60) 100%), url(${cover})`,
   };
@@ -67,7 +69,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
         <div className="stories-card-footer">
           <div>
             <h4>{title as string}</h4>
-            <p>{subtitle as string}</p>
+            {!isImmersive && <p>{subtitle as string}</p>}
           </div>
           <div>{heart}</div>
         </div>

@@ -24,7 +24,10 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
   const signupFunction = httpsCallable(functions, "user-signup");
   const signUp = async () => {
     setSignUpStatus("busy");
-    await signupFunction(data);
+    await signupFunction({
+      ...data,
+      language: "es",
+    });
     // @ts-ignore
     await signInWithEmailAndPassword(auth, data.email, data.password);
     setSignUpStatus("done");

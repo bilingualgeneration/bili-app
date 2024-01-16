@@ -68,14 +68,14 @@ const WaveIcon: FC<WaveIcon> = ({
         {icon}
       </div>
       <IonText>
-        <p>
+        <h1 className="color-selva">
           <FormattedMessage
             defaultMessage={reactintlId}
             description="icon label"
             id={reactintlId}
           />
-        </p>
-        {!isImmersive && <p>{englishLabel}</p>}
+        </h1>
+        {!isImmersive && <h2>{englishLabel}</h2>}
       </IonText>
     </span>
   );
@@ -147,20 +147,29 @@ export const StudentDashboard: FC = () => {
         }}
       >
         <h1>
-          <FormattedMessage id="landingPage.welcome" values={{ name }} />
+          <FormattedMessage
+            id="landingPage.welcome"
+            defaultMessage="Welcome {name}!"
+            values={{ name }}
+          />
         </h1>
         {!isImmersive && <p>Hello {name}!</p>}
       </div>
 
       <div className="main-block">
         <div className="icons-title">
-          <h2 style={{ marginBottom: 10 }}>
-            <FormattedMessage id="landingPage.assignments" />
-          </h2>
-          {!isImmersive && <p>Categories</p>}
+          <h1 style={{ marginBottom: 10 }}>
+            <FormattedMessage
+              id="landingPage.assignments"
+              defaultMessage="Assignments"
+            />
+          </h1>
+          {!isImmersive && (
+            <h2 style={{ fontSize: 40, fontWeight: "normal" }}>Categories</h2>
+          )}
         </div>
         {/* icons */}
-        <div id="wave-icons">
+        <div id="wave-icons" style={{ marginTop: "4rem", paddingRight: 100 }}>
           <IonGrid>
             <IonRow>
               {icons.map((icon) => (
@@ -175,10 +184,10 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.stories" />
-            </h2>
-            {!isImmersive && <p>Stories</p>}
+            <h1 className="color-selva">
+              <FormattedMessage id="common.stories" defaultMessage="Stories" />
+            </h1>
+            {!isImmersive && <h2>Stories</h2>}
           </div>
 
           <div
@@ -286,14 +295,18 @@ export const StudentDashboard: FC = () => {
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* wellness */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.wellness" />
-            </h2>
-            {!isImmersive && <p>Wellness</p>}
+            <h1 className="color-selva">
+              <FormattedMessage
+                id="common.wellness"
+                defaultMessage="Wellness"
+              />
+            </h1>
+            {!isImmersive && <h2>Wellness</h2>}
           </div>
 
           <div
@@ -358,15 +371,16 @@ export const StudentDashboard: FC = () => {
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* play */}
         <div className="other-story-cards">
           <div className="cards-title">
             <Link to="/play">
-              <h2>
-                <FormattedMessage id="landingPage.play" />
-              </h2>
-              {!isImmersive && <p>Play</p>}
+              <h1 className="color-selva">
+                <FormattedMessage id="common.play" defaultMessage="Play" />
+              </h1>
+              {!isImmersive && <h2>Play</h2>}
             </Link>
           </div>
 
@@ -431,14 +445,18 @@ export const StudentDashboard: FC = () => {
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* Comunidad */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.community" />
-            </h2>
-            {!isImmersive && <p>Community</p>}
+            <h1 className="color-selva">
+              <FormattedMessage
+                id="common.community"
+                defaultMessage="Community"
+              />
+            </h1>
+            {!isImmersive && <h2>Community</h2>}
           </div>
 
           <div
