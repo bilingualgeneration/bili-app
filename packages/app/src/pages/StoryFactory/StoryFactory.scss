@@ -414,7 +414,7 @@ ion-button.sf-intro-button {
   /* background-color: var(--base-humo, #eceeed); */
 }
 
-.fabrica-swirl-rectangle {
+/* .fabrica-swirl-rectangle {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -436,7 +436,7 @@ ion-button.sf-intro-button {
   justify-content: center;
   filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
     drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
-}
+} */
 
 .bili-character {
   position: absolute;
@@ -666,30 +666,38 @@ ion-card.new-felicitaciones-card {
 /* fabrica de cuentos game page */
 
 .sf-colorful-text-heading {
-  /* display: flex; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
   font-size: 6.5rem;
-  /* text-align: center; */
   font-feature-settings:
     "clig" off,
     "liga" off;
   font-family: Outfit;
   font-style: normal;
   font-weight: 700;
-  /* line-height: 33.333%; */
   letter-spacing: -1.057px;
-  /* z-index: 2; */
   padding: 5px 0 5px;
   margin: 5% 5% 7%;
-  @media screen {
+  white-space: pre;
+
+  @media screen and (max-width: 768px) {
+    font-size: 4.5rem;
+    margin-bottom: 5%;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    font-size: 2.5rem;
   }
 }
 
-.sf-game-options-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  /* position: relative; */
+ion-row.slots {
+  margin-bottom: 3%;
 }
 
 .sf-game-option {
@@ -732,16 +740,45 @@ ion-card.new-felicitaciones-card {
   background: var(--Bili-Purple, #d6d3f0);
 }
 
-.volume-button-background {
-  display: flex;
-  background-color: var(--Flamenco-High, #ffaedc);
-  border-radius: 37.8px;
+ion-button.volume-button-background {
+  --background: var(--Flamenco-High, #ffaedc);
+  --border-radius: 37.8px;
   width: 6.25rem;
   height: 6.25rem;
+
+  @media screen and (max-width: 768px) {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 5rem;
+    height: 4rem;
+  }
 }
 
 .volume-icon {
   flex-shrink: 0;
   width: 3.75rem;
   height: 3.75rem;
+
+  @media screen and (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 2rem;
+    height: 2rem;
+  }
 }

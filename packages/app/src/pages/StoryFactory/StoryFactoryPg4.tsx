@@ -293,7 +293,6 @@ export const StoryFactoryPage4: FC = () => {
           {/* Row for volume/speaker text */}
           <IonRow>
             <IonCol className="ion-no-padding">
-              <span></span>
               <div>
                 <h2>
                   <FormattedMessage
