@@ -15,12 +15,13 @@ import {
 import { Input } from "@/components/Input";
 import { SettingsHeader } from "@/components/Settings/SettingsHeader";
 import { SideMenu } from "@/components/Settings/SideMenu";
+import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const AdultCheckModal: FC = () => {
-  const [isAdultCheckOpen, setIsAdultCheckOpen] = useState<boolean>(true);
+  const { isAdultCheckOpen, setIsAdultCheckOpen } = useAdultCheck();
   const [equation, setEquation] = useState<number[]>([1, 2, 3]);
   useEffect(() => {
     setIsAdultCheckOpen(true);

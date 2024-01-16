@@ -90,7 +90,7 @@ export const SideMenu: React.FC = () => {
 
         <IonItem
           className="hover-highlight"
-          style={{ position: "absolute", bottom: 0, display: "none" }}
+          style={{ position: "absolute", bottom: 0 }}
           onClick={resetTutorial}
         >
           <IonLabel className="menu-label">reset tutorial</IonLabel>

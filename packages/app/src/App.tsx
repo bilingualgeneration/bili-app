@@ -5,6 +5,7 @@ import { SuspenseWithPerf } from "reactfire";
 import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
+import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
@@ -144,9 +145,11 @@ const Router: React.FC = () => {
           path="/settings/overview"
           render={() => (
             <AuthedLayout>
-              <SettingsLayout background="#f7faf9">
-                <Overview />
-              </SettingsLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Overview />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -156,9 +159,11 @@ const Router: React.FC = () => {
           path="/settings/preferences"
           render={() => (
             <AuthedLayout>
-              <SettingsLayout background="#f7faf9">
-                <Preferences />
-              </SettingsLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Preferences />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -168,9 +173,11 @@ const Router: React.FC = () => {
           path="/settings/profile"
           render={() => (
             <AuthedLayout>
-              <SettingsLayout background="#f7faf9">
-                <Profile />
-              </SettingsLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Profile />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -180,9 +187,11 @@ const Router: React.FC = () => {
           path="/settings/progress"
           render={() => (
             <AuthedLayout>
-              <SettingsLayout background="#f7faf9">
-                <Progress />
-              </SettingsLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Progress />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />

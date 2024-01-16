@@ -36,25 +36,28 @@ import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
+import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 
 export const Overview: React.FC = ({}) => {
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-
+  const { isAdultCheckOpen } = useAdultCheck();
   useEffect(() => {
-    Preferences.get({
-      key: "shouldShowSettingsTutorial",
-    }).then((response) => {
-      if (response.value === null) {
-        // have never seen it before
-        setShouldShowTutorial(true);
-        Preferences.set({
-          key: "shouldShowSettingsTutorial",
-          value: "false",
-        });
-      }
-    });
-  }, []);
+    if (!isAdultCheckOpen) {
+      Preferences.get({
+        key: "shouldShowSettingsTutorial",
+      }).then((response) => {
+        if (response.value === null) {
+          // have never seen it before
+          setShouldShowTutorial(true);
+          Preferences.set({
+            key: "shouldShowSettingsTutorial",
+            value: "false",
+          });
+        }
+      });
+    }
+  }, [isAdultCheckOpen]);
   const steps = [
     {
       target: "#side-menu-button-sideMenu-profile",
@@ -106,7 +109,7 @@ export const Overview: React.FC = ({}) => {
 
   return (
     <>
-      {shouldShowTutorial && (
+      {shouldShowTutorial && !isAdultCheckOpen && (
         <Joyride
           hideCloseButton
           showSkipButton
