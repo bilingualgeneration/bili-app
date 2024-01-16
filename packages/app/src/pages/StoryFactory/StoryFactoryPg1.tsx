@@ -35,11 +35,10 @@ export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
     };
   });
   useEffect(() => {
-    return;
     if (isImmersive) {
       if (isInclusive) {
         audio_es_inc.onended = () => {
-          //history.push("/story-factory/2");
+          history.push("/story-factory/2");
         };
         audio_es_inc.play();
       } else {
