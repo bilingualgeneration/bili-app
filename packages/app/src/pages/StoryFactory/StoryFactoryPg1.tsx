@@ -35,10 +35,11 @@ export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
     };
   });
   useEffect(() => {
+    return;
     if (isImmersive) {
       if (isInclusive) {
         audio_es_inc.onended = () => {
-          history.push("/story-factory/2");
+          //history.push("/story-factory/2");
         };
         audio_es_inc.play();
       } else {
@@ -68,50 +69,52 @@ export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
     <div style={{ position: "relative" }}>
       <div className="ion-no-padding sf-card">
         <IonCard className="ion-no-margin">
-          <IonCardContent className="margin-right">
-            <h1 className="color-selva">
-              {isInclusive && (
-                <FormattedMessage
-                  id="storyFactory.welcome_inc"
-                  defaultMessage="Welcome to the Story Factory!"
-                  description="Main welcome message on Story Factory"
-                />
-              )}
-              {!isInclusive && (
-                <FormattedMessage
-                  id="storyFactory.welcome"
-                  defaultMessage="Welcome to the Story Factory!"
-                  description="Main welcome message on Story Factory"
-                />
-              )}
-            </h1>
+          <IonCardContent>
+            <div style={{ paddingRight: 100 }}>
+              <h1 className="color-selva">
+                {isInclusive && (
+                  <FormattedMessage
+                    id="storyFactory.welcome_inc"
+                    defaultMessage="Welcome to the Story Factory!"
+                    description="Main welcome message on Story Factory"
+                  />
+                )}
+                {!isInclusive && (
+                  <FormattedMessage
+                    id="storyFactory.welcome"
+                    defaultMessage="Welcome to the Story Factory!"
+                    description="Main welcome message on Story Factory"
+                  />
+                )}
+              </h1>
 
-            <h2 className="color-selva">
-              {isInclusive && (
-                <FormattedMessage
-                  id={`storyFactory.subwelcome_inc`}
-                  defaultMessage="A place for silly syllabic reading!"
-                  description="Sub welcome message on Story Factory"
-                />
-              )}
-              {!isInclusive && (
-                <FormattedMessage
-                  id={`storyFactory.subwelcome`}
-                  defaultMessage="A place for silly syllabic reading!"
-                  description="Sub welcome message on Story Factory"
-                />
-              )}
-            </h2>
+              <h2 className="color-selva">
+                {isInclusive && (
+                  <FormattedMessage
+                    id={`storyFactory.subwelcome_inc`}
+                    defaultMessage="A place for silly syllabic reading!"
+                    description="Sub welcome message on Story Factory"
+                  />
+                )}
+                {!isInclusive && (
+                  <FormattedMessage
+                    id={`storyFactory.subwelcome`}
+                    defaultMessage="A place for silly syllabic reading!"
+                    description="Sub welcome message on Story Factory"
+                  />
+                )}
+              </h2>
 
-            {!isImmersive && (
-              <>
-                <h1>
-                  <br />
-                  Welcome to the story factory!
-                </h1>
-                <h2>A place for silly syllabic reading!</h2>
-              </>
-            )}
+              {!isImmersive && (
+                <>
+                  <h1>
+                    <br />
+                    Welcome to the story factory!
+                  </h1>
+                  <h2>A place for silly syllabic reading!</h2>
+                </>
+              )}
+            </div>
           </IonCardContent>
         </IonCard>
       </div>
