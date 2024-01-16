@@ -62,7 +62,7 @@ const AdultCheckModal: FC = () => {
     }
   });
   return (
-    <IonModal canDismiss={!isAdultCheckOpen} isOpen={isAdultCheckOpen && false}>
+    <IonModal canDismiss={!isAdultCheckOpen} isOpen={isAdultCheckOpen}>
       <div className="ion-padding">
         <form
           onSubmit={(event) => {
