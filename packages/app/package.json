@@ -13,9 +13,9 @@
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "extract-translations": "react-intl-translations-manager extract",
-    "manage-translations": "react-intl-translations-manager manage",
-    "extract": "formatjs extract"
+    "extract-translations": "formatjs extract 'src/**/*.ts*' --ignore '**/*.d.ts' --out-file lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]' --format=simple",
+    "compile-translations:en": "formatjs compile lang/en.json --ast --out-file compiled-lang/en.json --format=simple",
+    "compile-translations:es": "formatjs compile lang/es.json --ast --out-file compiled-lang/es.json --format=simple"
   },
   "dependencies": {
     "@babel/cli": "^7.23.0",
@@ -88,7 +88,6 @@
     "eslint-plugin-storybook": "^0.6.14",
     "jsdom": "^22.1.0",
     "prettier": "3.1.0",
-    "react-intl-translations-manager": "^5.0.3",
     "sass": "^1.69.2",
     "storybook": "^7.4.5",
     "tsconfig-paths": "^4.2.0",

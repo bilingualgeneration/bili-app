@@ -24,7 +24,10 @@ export const StoryFactoryPage3: React.FC = () => {
         <div className="sf-card">
           <IonCard>
             <h1 style={{ marginTop: 0 }}>
-              <FormattedMessage id="storyFactory.title" />
+              <FormattedMessage
+                id="common.storyFactory"
+                defaultMessage="Story Factory"
+              />
             </h1>
             {!isImmersive && <h2 style={{ marginTop: 0 }}>Story Factory</h2>}
 

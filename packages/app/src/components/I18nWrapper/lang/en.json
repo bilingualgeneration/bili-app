@@ -1,151 +1,865 @@
 {
-  "common.continue": "Continue",
-  "common.email": "Email address*",
-  "common.fullName": "Full name*",
-  "common.username": "Username",
-  "common.password": "Password* (8+ characters)",
-  "common.login": "Login",
-  "common.google": "Continue with Google",
-  "common.apple": "Continue with Apple",
-  "common.signUp": "Sign up",
-  "common.terms": "Terms of Service. ",
-  "common.termsAgree": "I agree to the Terms of Service. I have read and understand the Privacy Policy",
-  "common.noAccount": "Don't have an account?",
-  "common.haveAccount": "Already have an account? ",
-  "common.logIn": "Log in",
-  "common.logOut": "Log out",
-  "common.emailValidation": "Please enter a valid email address",
-  "common.passwordValidation": "Please enter your password",
-
-  "languageMode": "Spanish Mode",
-  "splash.account": "Already have a Bili account?",
-  "splash.newAccount": "New to Bili?",
-  "splash.loginTitle": "Login",
-  "splash.classroom": "Do you have a classroom code?",
-  "splash.createAccountButton": "Create an account",
-  "splash.studentLoginButton": "Student login",
-
-  "login.teacherWelcome": "Welcome to Teacher Login Page",
-  "login.teacher": "Login as Teacher",
-  "login.divider": "or",
-
-  "reset.email": "Enter your email address to reset your password:",
-  "reset.password": "Reset Password",
-
   "signUp.describe": "Which best describes you?",
   "signUp.teacher": "Teacher",
   "signUp.teacher2": "I want to use this app with my students.",
   "signUp.parent": "Parent/Caregiver",
   "signUp.parent2": "I want to use this app with my child(ren).",
-
   "signUp.pricing_monthly_title": "1 month unlimited",
   "signUp.pricing_monthly_pricing": "$4.99/month",
   "signUp.pricing_annual_title": "12 months unlimited",
   "signUp.pricing_annual_pricing": "$44.99/year",
-
-  "signUp.choosePlan": "Choose your plan",
-  "signUp.trialTitle": "3 week free trial",
-  "signUp.trialDescription": "For a limited time only",
-  "signUp.noCommitment": "No commitments, cancel anytime.",
-
-  "signUpTeacher.school": "Your school name*",
-  "signUpTeacher.marketing": "I want to receive marketing updates",
-  "signUpTeacher.aboutTitle": "Tell us about yourself",
-  "signUpTeacher.aboutGrades": "What grade(s) do you work with?",
-  "signUpTeacher.aboutGradePre": "Pre-K",
-  "signUpTeacher.aboutGrade1": "1st Grade",
-  "signUpTeacher.aboutGrade2": "2nd Grade",
-  "signUpTeacher.aboutGrade3": "3rd Grade",
-  "signUpTeacher.aboutGrade4": "4th Grade",
-  "signUpTeacher.aboutOther": "Other",
-  "signUpTeacher.role": "What is your role?",
-  "signUpTeacher.roleAdmin": "Administrator",
-  "signUpTeacher.roleTeacher": "Teacher",
-  "signUpTeacher.roleCounselor": "Counselor",
-  "signUpTeacher.roleFacilitator": "Facilitator",
-
-  "languageMode.settings": "Choose your settings",
-  "languageMode.immersionTitle": "Spanish immersion",
-  "languageMode.bilingualTitle": "Bilingual",
-  "languageMode.immersion": "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
-  "languageMode.bilingual": "Choose this setting if you want your child to learn Spanish with English supports and translations.",
-  "languageMode.continue": "Continue",
-
-  "languageInclusivity.settings": "Choose your settings",
-  "languageInclusivity.excudeTitle": "Exclude",
-  "languageInclusivity.includeTitle": "Include",
-  "languageInclusivity.excludeGenderNeutralTitle": "Exclude gender neutral pronouns",
-  "languageInclusivity.includeGenderNeutralTitle": "Inclusive language",
-  "languageInclusivity.excludeGenderNeutral": "Choose this option if you do not want to see the use of gender neutral pronouns in the content (i.e. singular \"they\" in English and \"elle\" in Spanish will be excluded). For example, you will only see the words \"amigo\" and \"amiga\" in activities and content. The word \"amigue\" will not appear.",
-  "languageInclusivity.includeGenderNeutral": "Choose this option if you want to see the use of gender inclusive language in the content/ For example, the pronouns used will include \"he, she, they\" in English and \"el, ella, elle\" in Spanish.",
-  "languageInclusivity.recommended": "RECOMMENDED",
-
-  "successScreen.success": "Success! You did it!",
-
-  "intruder.intruderWelcome": "Welcome to Intruder Page",
-  "intruder.explore": "Explore",
-  "intruder.home": "Home",
-
-  "memory.memoryWelcome": "Welcome to Memory Page",
-
-  "stories.storyId": "Story ID:",
-
-  "storyFactory.Welcome": "Welcome to Story Factory Page",
-  "storyFactory.title": "Story Factory!",
-  "storyFactory.nextButton": "Next",
-  "storyFactory.read": "Read",
-
-  "landingPage.welcome": "Hello {userName}!",
-  "landingPage.assignments": "Categories",
-  "landingPage.stories": "Stories",
-  "landingPage.wellness": "Wellness",
-  "landingPage.play": "Play",
-  "landingPage.community": "Community",
-
-  "settingsProgress.preferences.popover1": "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
-  "settingsProgress.preferences.popover2": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
-  "settingsProgress.preferences.popover3": "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
-  "settingsProgress.preferences.popover4": "Determine how long your child plays on the app each day.",
-  "settingsProgress.preferences.popover5": " Enable this feature to hear sound effects associated with the app.",
-  "settingsProgress.preferences.settingsLanguage": "Settings language",
-  "settingsProgress.preferences.bilingual": "Bilingual vs. Immersion Mode",
-  "settingsProgress.preferences.limit": "Daily playtime limit",
-  "settingsProgress.preferences.sound": "Sound effects",
-  "settings.progress.pageTitle": "Progress",
-  "settings.progress.activity": "Activity insights",
-  "settings.progress.toggleWeek": "Week",
-  "settings.progress.toggleAll": "All time",
-  "settings.progress.breakdown": "Learning breakdown",
-  "settings.progress.community": "Community",
-  "settings.progress.wellness": "Wellness",
-  "settings.progress.play": "Play",
-  "settings.progress.activities": "Activities",
-  "settings.progress.activity1": "20 minutes in total",
-  "settings.progress.activity2": "12 minutes in total",
-  "settings.progress.activity3": "9 minutes in total",
-
-  "settingsHeader.rate": "Rate this app",
-
-  "settings.onboarding.profile": "Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.",
-  "settings.onboarding.inclusive-spanish": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters.",
-  "settings.onboarding.preferences": "Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits.",
-  "settings.onboarding.progress": "Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities.",
-
-  "settings.overview.child": "Child Profile",
-  "settings.overview.addChildBtn": "Add child",
-  "settings.overview.explore": "Explore Bili",
-  "settings.overview.exploreSubheading": "Learn how to use Bili to meet language goals",
-  "settings.overview.seeAll": "See all &#40;9&#41;",
-  "settings.overview.gettingStartedTitle": "Getting started",
-  "settings.overview.gettingStartedContent": "When you enter into any new area of science, you almost always find.",
-  "settings.overview.gettingStartedMiniCard1": "Guide",
-  "settings.overview.gettingStartedMiniCard2": "Recommended",
-  "settings.overview.inclusiveSpanishTitle": "Inclusive Spanish",
-  "settings.overview.InclusiveSpanishContent": "Learn about what Inclusive Spanish is and why it exists.",
-  "settings.overview.InclusiveSpanishMiniCard1": "Social Justice",
-  "settings.overview.InclusiveSpanishMiniCard2": "Resources",
-  "settings.overview.getChildTitle": "Get your child speaking Spanish with Bili",
-  "settings.overview.getChildContent": "Explore special features that promote authentic language production.",
-  "settings.overview.getChildMiniCard1": "Parents",
-  "settings.overview.getChildMiniCard2": "Resources"
+  "5olauM": [
+    {
+      "type": 0,
+      "value": "Default Text 4 for Bilingual Mode"
+    }
+  ],
+  "9fs/J5": [
+    {
+      "type": 0,
+      "value": "Default Text 1"
+    }
+  ],
+  "childProfile.ageLabel": [
+    {
+      "type": 0,
+      "value": "Select your child's age range:"
+    }
+  ],
+  "childProfile.nameLabel": [
+    {
+      "type": 0,
+      "value": "Enter your child's name or nickname:"
+    }
+  ],
+  "childProfile.subtitle": [
+    {
+      "type": 0,
+      "value": "This helps us personalize your child's learning experience. You can add more profiles in settings."
+    }
+  ],
+  "childProfile.title": [
+    {
+      "type": 0,
+      "value": "Make a profile for your child"
+    }
+  ],
+  "common.apple": [
+    {
+      "type": 0,
+      "value": "Continue with Apple"
+    }
+  ],
+  "common.community": [
+    {
+      "type": 0,
+      "value": "Community"
+    }
+  ],
+  "common.continue": [
+    {
+      "type": 0,
+      "value": "Continue"
+    }
+  ],
+  "common.countWithMe": [
+    {
+      "type": 0,
+      "value": "Count with Me"
+    }
+  ],
+  "common.email": [
+    {
+      "type": 0,
+      "value": "Your email*"
+    }
+  ],
+  "common.fullName": [
+    {
+      "type": 0,
+      "value": "Your full name*"
+    }
+  ],
+  "common.go_back": [
+    {
+      "type": 0,
+      "value": "Go Back"
+    }
+  ],
+  "common.google": [
+    {
+      "type": 0,
+      "value": "Continue with Google"
+    }
+  ],
+  "common.haveAccount": [
+    {
+      "type": 0,
+      "value": "Already have an account?"
+    }
+  ],
+  "common.logIn": [
+    {
+      "type": 0,
+      "value": "Log in"
+    }
+  ],
+  "common.login": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "common.noAccount": [
+    {
+      "type": 0,
+      "value": "Don't have an account?"
+    }
+  ],
+  "common.password": [
+    {
+      "type": 0,
+      "value": "Password*"
+    }
+  ],
+  "common.play": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "common.signUp": [
+    {
+      "type": 0,
+      "value": "Sign Up"
+    }
+  ],
+  "common.stories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "common.storyFactory": [
+    {
+      "type": 0,
+      "value": "Story Factory"
+    }
+  ],
+  "common.terms": [
+    {
+      "type": 0,
+      "value": "Terms of Service."
+    }
+  ],
+  "common.termsAgree": [
+    {
+      "type": 0,
+      "value": "I agree to the Terms of Service. I have read and understand the Privacy Policy"
+    }
+  ],
+  "common.theIntruder": [
+    {
+      "type": 0,
+      "value": "The Intruder"
+    }
+  ],
+  "common.wellness": [
+    {
+      "type": 0,
+      "value": "Wellness"
+    }
+  ],
+  "intruder.intruderWelcome": [
+    {
+      "type": 0,
+      "value": "Welcome to the Intruder Page"
+    }
+  ],
+  "landingPage.assignments": [
+    {
+      "type": 0,
+      "value": "Assignments"
+    }
+  ],
+  "landingPage.welcome": [
+    {
+      "type": 0,
+      "value": "Welcome "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "!"
+    }
+  ],
+  "languageInclusivity.excludeGenderNeutral": [
+    {
+      "type": 0,
+      "value": "Choose this option if you do not want to see the use of gender neutral pronouns in the content (i.e. singular \"they\" in English and \"elle\" in Spanish will be excluded). For example, you will only see the words \"amigo\" and \"amiga\" in activities and content. The word \"amigue\" will not appear."
+    }
+  ],
+  "languageInclusivity.excludeGenderNeutralTitle": [
+    {
+      "type": 0,
+      "value": "Exclude gender neutral pronouns"
+    }
+  ],
+  "languageInclusivity.includeGenderNeutral": [
+    {
+      "type": 0,
+      "value": "Choose this option if you want to see the use of gender inclusive language in the content/ For example, the pronouns used will include \"he, she, they\" in English and \"el, ella, elle\" in Spanish."
+    }
+  ],
+  "languageInclusivity.includeGenderNeutralTitle": [
+    {
+      "type": 0,
+      "value": "Inclusive language"
+    }
+  ],
+  "languageInclusivity.recommended": [
+    {
+      "type": 0,
+      "value": "RECOMMENDED"
+    }
+  ],
+  "languageInclusivity.settings": [
+    {
+      "type": 0,
+      "value": "Choose your settings"
+    }
+  ],
+  "languageMode": [
+    {
+      "type": 0,
+      "value": "English Mode"
+    }
+  ],
+  "languageMode.bilingual": [
+    {
+      "type": 0,
+      "value": "Choose this setting if you want your child to learn Spanish with English supports and translations."
+    }
+  ],
+  "languageMode.bilingualTitle": [
+    {
+      "type": 0,
+      "value": "Bilingual"
+    }
+  ],
+  "languageMode.immersion": [
+    {
+      "type": 0,
+      "value": "Choose this setting if you want your child to learn all content and activities in the Spanish language."
+    }
+  ],
+  "languageMode.immersionTitle": [
+    {
+      "type": 0,
+      "value": "Spanish immersion"
+    }
+  ],
+  "languageMode.settings": [
+    {
+      "type": 0,
+      "value": "Choose your settings"
+    }
+  ],
+  "login.divider": [
+    {
+      "type": 0,
+      "value": "or"
+    }
+  ],
+  "login.teacher": [
+    {
+      "type": 0,
+      "value": "Login as Teacher"
+    }
+  ],
+  "login.teacherWelcome": [
+    {
+      "type": 0,
+      "value": "Welcome to Teacher Login Page"
+    }
+  ],
+  "oA8ovM": [
+    {
+      "type": 0,
+      "value": "Default Text 2"
+    }
+  ],
+  "reqdActions.goto_settings.message": [
+    {
+      "type": 0,
+      "value": "Click here to customize your child's learning experience"
+    }
+  ],
+  "reset.email": [
+    {
+      "type": 0,
+      "value": "Enter your email address to reset your password:"
+    }
+  ],
+  "reset.password": [
+    {
+      "type": 0,
+      "value": "Reset Password"
+    }
+  ],
+  "settings.adult": [
+    {
+      "type": 0,
+      "value": "Adult Profile"
+    }
+  ],
+  "settings.adult_check.answer": [
+    {
+      "type": 0,
+      "value": "Answer"
+    }
+  ],
+  "settings.adult_check.prompt": [
+    {
+      "type": 0,
+      "value": "Please solve this equation before continuing"
+    }
+  ],
+  "settings.adult_check.wrong_answer": [
+    {
+      "type": 0,
+      "value": "Incorrect. Try again!"
+    }
+  ],
+  "settings.country": [
+    {
+      "type": 0,
+      "value": "Country"
+    }
+  ],
+  "settings.dob": [
+    {
+      "type": 0,
+      "value": "Date of birth"
+    }
+  ],
+  "settings.email": [
+    {
+      "type": 0,
+      "value": "Email address"
+    }
+  ],
+  "settings.fullName": [
+    {
+      "type": 0,
+      "value": "Full name"
+    }
+  ],
+  "settings.onboarding.inclusive-spanish": [
+    {
+      "type": 0,
+      "value": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
+    }
+  ],
+  "settings.onboarding.preferences": [
+    {
+      "type": 0,
+      "value": "Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits."
+    }
+  ],
+  "settings.onboarding.profile": [
+    {
+      "type": 0,
+      "value": "Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.'"
+    }
+  ],
+  "settings.onboarding.progress": [
+    {
+      "type": 0,
+      "value": "Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities."
+    }
+  ],
+  "settings.overview.InclusiveSpanishContent": [
+    {
+      "type": 0,
+      "value": "Learn about what Inclusive Spanish is and why it exists."
+    }
+  ],
+  "settings.overview.InclusiveSpanishMiniCard1": [
+    {
+      "type": 0,
+      "value": "Social Justice"
+    }
+  ],
+  "settings.overview.InclusiveSpanishMiniCard2": [
+    {
+      "type": 0,
+      "value": "Resources"
+    }
+  ],
+  "settings.overview.addChildBtn": [
+    {
+      "type": 0,
+      "value": "Add child"
+    }
+  ],
+  "settings.overview.child": [
+    {
+      "type": 0,
+      "value": "Child Profile"
+    }
+  ],
+  "settings.overview.explore": [
+    {
+      "type": 0,
+      "value": "Explore Bili"
+    }
+  ],
+  "settings.overview.exploreSubheading": [
+    {
+      "type": 0,
+      "value": "Learn how to use Bili to meet language goals"
+    }
+  ],
+  "settings.overview.getChildContent": [
+    {
+      "type": 0,
+      "value": "Explore special features that promote authentic language production."
+    }
+  ],
+  "settings.overview.getChildMiniCard1": [
+    {
+      "type": 0,
+      "value": "Parents"
+    }
+  ],
+  "settings.overview.getChildMiniCard2": [
+    {
+      "type": 0,
+      "value": "Resources"
+    }
+  ],
+  "settings.overview.getChildTitle": [
+    {
+      "type": 0,
+      "value": "Get your child speaking Spanish with Bili"
+    }
+  ],
+  "settings.overview.gettingStartedContent": [
+    {
+      "type": 0,
+      "value": "When you enter into any new area of science, you almost always find."
+    }
+  ],
+  "settings.overview.gettingStartedMiniCard1": [
+    {
+      "type": 0,
+      "value": "Guide"
+    }
+  ],
+  "settings.overview.gettingStartedMiniCard2": [
+    {
+      "type": 0,
+      "value": "Recommended"
+    }
+  ],
+  "settings.overview.gettingStartedTitle": [
+    {
+      "type": 0,
+      "value": "Getting started"
+    }
+  ],
+  "settings.overview.inclusiveSpanishTitle": [
+    {
+      "type": 0,
+      "value": "Inclusive Spanish"
+    }
+  ],
+  "settings.overview.seeAll": [
+    {
+      "type": 0,
+      "value": "See all &#40;9&#41;"
+    }
+  ],
+  "settings.phone": [
+    {
+      "type": 0,
+      "value": "Phone number"
+    }
+  ],
+  "settings.progress.activities": [
+    {
+      "type": 0,
+      "value": "Activities"
+    }
+  ],
+  "settings.progress.activity": [
+    {
+      "type": 0,
+      "value": "Activity insights"
+    }
+  ],
+  "settings.progress.activity1": [
+    {
+      "type": 0,
+      "value": "20 minutes in total"
+    }
+  ],
+  "settings.progress.activity2": [
+    {
+      "type": 0,
+      "value": "12 minutes in total"
+    }
+  ],
+  "settings.progress.activity3": [
+    {
+      "type": 0,
+      "value": "9 minutes in total"
+    }
+  ],
+  "settings.progress.breakdown": [
+    {
+      "type": 0,
+      "value": "Learning breakdown"
+    }
+  ],
+  "settings.progress.community": [
+    {
+      "type": 0,
+      "value": "Community"
+    }
+  ],
+  "settings.progress.pageTitle": [
+    {
+      "type": 0,
+      "value": "Progress"
+    }
+  ],
+  "settings.progress.play": [
+    {
+      "type": 0,
+      "value": "Play"
+    }
+  ],
+  "settings.progress.stories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "settings.progress.toggleAll": [
+    {
+      "type": 0,
+      "value": "All time"
+    }
+  ],
+  "settings.progress.toggleWeek": [
+    {
+      "type": 0,
+      "value": "Week"
+    }
+  ],
+  "settings.progress.wellness": [
+    {
+      "type": 0,
+      "value": "Wellness"
+    }
+  ],
+  "settings.saveChangeBtn": [
+    {
+      "type": 0,
+      "value": "Save changes"
+    }
+  ],
+  "settingsHeader.rate": [
+    {
+      "type": 0,
+      "value": "Rate this app"
+    }
+  ],
+  "settingsProgress.preferences.bilingual": [
+    {
+      "type": 0,
+      "value": "Bilingual vs. Immersion Mode"
+    }
+  ],
+  "settingsProgress.preferences.inclusive": [
+    {
+      "type": 0,
+      "value": "Inclusive Spanish"
+    }
+  ],
+  "settingsProgress.preferences.limit": [
+    {
+      "type": 0,
+      "value": "Daily playtime limit"
+    }
+  ],
+  "settingsProgress.preferences.popover1": [
+    {
+      "type": 0,
+      "value": "Choose the language you will see in settings. This should be based on your language preferences as an adult."
+    }
+  ],
+  "settingsProgress.preferences.popover2": [
+    {
+      "type": 0,
+      "value": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish."
+    }
+  ],
+  "settingsProgress.preferences.popover3": [
+    {
+      "type": 0,
+      "value": "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms."
+    }
+  ],
+  "settingsProgress.preferences.popover4": [
+    {
+      "type": 0,
+      "value": "Determine how long your child plays on the app each day."
+    }
+  ],
+  "settingsProgress.preferences.popover5": [
+    {
+      "type": 0,
+      "value": "Enable this feature to hear sound effects associated with the app."
+    }
+  ],
+  "settingsProgress.preferences.settingsLanguage": [
+    {
+      "type": 0,
+      "value": "Settings language"
+    }
+  ],
+  "settingsProgress.preferences.sound": [
+    {
+      "type": 0,
+      "value": "Sound effects"
+    }
+  ],
+  "signUp.choosePlan": [
+    {
+      "type": 0,
+      "value": "Choose your plan"
+    }
+  ],
+  "signUp.describe": [
+    {
+      "type": 0,
+      "value": "Which best describes you?"
+    }
+  ],
+  "signUp.noCommitment": [
+    {
+      "type": 0,
+      "value": "No commitments, cancel anytime."
+    }
+  ],
+  "signUp.trialDescription": [
+    {
+      "type": 0,
+      "value": "For a limited time only"
+    }
+  ],
+  "signUp.trialTitle": [
+    {
+      "type": 0,
+      "value": "3 week free trial"
+    }
+  ],
+  "signUpTeacher.aboutGrade1": [
+    {
+      "type": 0,
+      "value": "1st Grade"
+    }
+  ],
+  "signUpTeacher.aboutGrade2": [
+    {
+      "type": 0,
+      "value": "2nd Grade"
+    }
+  ],
+  "signUpTeacher.aboutGrade3": [
+    {
+      "type": 0,
+      "value": "3rd Grade"
+    }
+  ],
+  "signUpTeacher.aboutGrade4": [
+    {
+      "type": 0,
+      "value": "4th Grade"
+    }
+  ],
+  "signUpTeacher.aboutGradePre": [
+    {
+      "type": 0,
+      "value": "Pre-K"
+    }
+  ],
+  "signUpTeacher.aboutGrades": [
+    {
+      "type": 0,
+      "value": "WHat grade(s) do you work with?"
+    }
+  ],
+  "signUpTeacher.aboutOther": [
+    {
+      "type": 0,
+      "value": "Other"
+    }
+  ],
+  "signUpTeacher.aboutTitle": [
+    {
+      "type": 0,
+      "value": "Tell us about yourself"
+    }
+  ],
+  "signUpTeacher.role": [
+    {
+      "type": 0,
+      "value": "WHat is your role?"
+    }
+  ],
+  "signUpTeacher.roleAdmin": [
+    {
+      "type": 0,
+      "value": "Administrator"
+    }
+  ],
+  "signUpTeacher.roleCounselor": [
+    {
+      "type": 0,
+      "value": "Counselor"
+    }
+  ],
+  "signUpTeacher.roleFacilitator": [
+    {
+      "type": 0,
+      "value": "Facilitator"
+    }
+  ],
+  "signUpTeacher.roleTeacher": [
+    {
+      "type": 0,
+      "value": "Teacher"
+    }
+  ],
+  "signUpTeacher.school": [
+    {
+      "type": 0,
+      "value": "Your school name*"
+    }
+  ],
+  "splash.classroom": [
+    {
+      "type": 0,
+      "value": "Do you have a classroom code?"
+    }
+  ],
+  "splash.createAccountButton": [
+    {
+      "type": 0,
+      "value": "Create an account"
+    }
+  ],
+  "splash.loginTitle": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "splash.newAccount": [
+    {
+      "type": 0,
+      "value": "New to Bili?"
+    }
+  ],
+  "splash.studentLoginButton": [
+    {
+      "type": 0,
+      "value": "Student login"
+    }
+  ],
+  "storyFactory.congrats.description1": [
+    {
+      "type": 0,
+      "value": "You've created and read five stories"
+    }
+  ],
+  "storyFactory.congrats.description2": [
+    {
+      "type": 0,
+      "value": "Can you keep going?"
+    }
+  ],
+  "storyFactory.congrats.title": [
+    {
+      "type": 0,
+      "value": "Congrats"
+    }
+  ],
+  "storyFactory.create_message": [
+    {
+      "type": 0,
+      "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
+    }
+  ],
+  "storyFactory.next": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "storyFactory.nextButton": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "storyFactory.read": [
+    {
+      "type": 0,
+      "value": "Read"
+    }
+  ],
+  "storyFactory.subwelcome": [
+    {
+      "type": 0,
+      "value": "A place for silly syllabic reading!"
+    }
+  ],
+  "storyFactory.subwelcome_inc": [
+    {
+      "type": 0,
+      "value": "A place for silly syllabic reading!"
+    }
+  ],
+  "storyFactory.welcome": [
+    {
+      "type": 0,
+      "value": "Welcome to the Story Factory!"
+    }
+  ],
+  "storyFactory.welcome_inc": [
+    {
+      "type": 0,
+      "value": "Welcome to the Story Factory!"
+    }
+  ],
+  "successScreen.success": [
+    {
+      "type": 0,
+      "value": "Success! You did it!"
+    }
+  ],
+  "sxQNl3": [
+    {
+      "type": 0,
+      "value": "Default Text 3 for Bilingual Mode"
+    }
+  ]
 }

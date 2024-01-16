@@ -49,7 +49,7 @@ export const LanguageModeSelect: React.FC = () => {
                 letterSpacing: "0.2px",
               }}
             >
-              EN
+              ES
             </div>
           }
           title={intl.formatMessage({
