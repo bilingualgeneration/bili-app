@@ -17,24 +17,25 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "@/pages/games/Intruder";
 import { IntroPage1 } from "@/pages/StoryFactory/StoryFactoryPg1";
 import { IntroPage2 } from "@/pages/StoryFactory/StoryFactoryPg2";
-import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
-import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "@/pages/Login";
-import { Play } from "@/pages/Play";
 import Memory from "@/pages/games/Memory";
-import { Preload } from "@/pages/Preload";
-import ResetPassword from "@/pages/ResetPassword";
 import { Overview, Preferences, Progress, Profile } from "@/pages/Settings";
+import { Play } from "@/pages/Play";
+import { Preload } from "@/pages/Preload";
+import { PreSplash } from "@/pages/PreSplash";
+import { Pricing } from "@/pages/SignUp/Pricing";
+import ResetPassword from "@/pages/ResetPassword";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 import Stories from "@/pages/games/Stories";
+import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
+import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { PreSplash } from "@/pages/PreSplash";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -127,6 +128,17 @@ const Router: React.FC = () => {
                 <Play />
               </HeaderFooter>
             </AuthedLayout>
+          )}
+        />
+
+        {/* temp route for development */}
+        <Route
+          exact
+          path="/pricing"
+          render={() => (
+            <UnauthedLayout>
+              <Pricing />
+            </UnauthedLayout>
           )}
         />
 
