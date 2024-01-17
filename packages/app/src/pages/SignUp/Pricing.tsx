@@ -1,15 +1,14 @@
+import { Control, Controller } from "react-hook-form";
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-import { IonButton, IonText } from "@ionic/react";
+import { IonButton, IonCard, IonText, IonTitle } from "@ionic/react";
 import { PricingRadioCard } from "@/components/Pricing/PricingRadioCard";
-import { CombinedPricingOption } from "@/components/Pricing/CombinedPricingOption";
 import pricingBanner from "@/assets/icons/pricing_banner.svg";
 import "@/pages/SignUp/Pricing.css";
-import { useState } from "react";
 
 export const Pricing: React.FC = () => {
   const { data, setData, pushPage } = useSignUpData();
@@ -26,11 +25,6 @@ export const Pricing: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const handleClick = (index: number): void => {
-    setActiveIndex(index);
-  };
-
   const onSubmit = handleSubmit((responses) => {
     setData({
       ...data,
@@ -38,6 +32,29 @@ export const Pricing: React.FC = () => {
     });
     pushPage("complete");
   });
+
+  const monthlyOption: ExtendedRadioOption = {
+    component: (
+      <div>
+        <PricingRadioCard
+          title={intl.messages["signUp.pricing_monthly_title"]}
+          content={intl.messages["signUp.pricing_monthly_pricing"]}
+        />
+      </div>
+    ),
+    value: "monthly",
+  };
+  const annualOption: ExtendedRadioOption = {
+    component: (
+      <div>
+        <PricingRadioCard
+          title={intl.messages["signUp.pricing_annual_title"]}
+          content={intl.messages["signUp.pricing_annual_pricing"]}
+        />
+      </div>
+    ),
+    value: "annual",
+  };
 
   return (
     <>
@@ -85,21 +102,30 @@ export const Pricing: React.FC = () => {
                 options={[
                   {
                     component: (
-                      <CombinedPricingOption
-                        optionType="monthly"
-                        activeIndex={activeIndex}
-                        handleClick={handleClick}
-                      />
+                      <div id="pricing-month">
+                        <PricingRadioCard
+                          title={intl.messages["signUp.pricing_monthly_title"]}
+                          content={
+                            intl.messages["signUp.pricing_monthly_pricing"]
+                          }
+                        />
+                      </div>
                     ),
                     value: "monthly",
                   },
                   {
                     component: (
-                      <CombinedPricingOption
-                        optionType="annual"
-                        activeIndex={activeIndex}
-                        handleClick={handleClick}
-                      />
+                      <div id="pricing-annual">
+                        <div className="best-value-block">
+                          <p className="best-value-text">best value</p>
+                        </div>
+                        <PricingRadioCard
+                          title={intl.messages["signUp.pricing_annual_title"]}
+                          content={
+                            intl.messages["signUp.pricing_annual_pricing"]
+                          }
+                        />
+                      </div>
                     ),
                     value: "annual",
                   },
