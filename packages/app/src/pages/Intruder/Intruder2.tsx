@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonCard,
   IonCardContent,
@@ -42,20 +42,67 @@ export const Intruder2: React.FC = () => {
     border: "8.4px solid var(--Categories-Error, #F0091B)",
     boxShadow: "0px 8.4px 25.2px 0px #F0091B",
   };
+
+  const temporaryBackgroundStyle = {
+    backgroundImage: "url('/assets/img/back_of_card.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    zIndex: "2",
+  };
+
+  //hardcodee set of cards untill we pull over from Db
+  const cardSet1 = [
+    { id: 1, isCorrect: false, imgSrc: almohada1, text: "almohada" },
+    { id: 2, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
+    {
+      id: 3,
+      isCorrect: true,
+      imgSrc: "/assets/img/intruder_boca.png",
+      text: "boca",
+    },
+  ];
+
+  const cardSet2 = [
+    {
+      id: 1,
+      isCorrect: true,
+      imgSrc: "/assets/img/intruder_boca.png",
+      text: "boca",
+    },
+    { id: 2, isCorrect: false, imgSrc: almohada1, text: "almohada" },
+    { id: 3, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
+  ];
+
   const [cardColors, setCardColors] = useState({
     1: initialStyle,
     2: initialStyle,
     3: initialStyle,
   });
+  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
+  const [showBackside, setShowBackside] = useState(false);
+  const [currentCardSet, setCurrentCardSet] = useState(cardSet1);
+
+  useEffect(() => {
+    if (isCorrectSelected) {
+      setShowBackside(true);
+
+      setTimeout(() => {
+        setShowBackside(false);
+        setCurrentCardSet(cardSet2); // Update to new set of cards
+        setIsCorrectSelected(false); // Reset the state
+        setCardColors({
+          1: initialStyle,
+          2: initialStyle,
+          3: initialStyle,
+        });
+      }, 3000);
+    }
+  }, [isCorrectSelected]);
 
   // Function to handle card click
-  const handleCardClick = (cardNumber: string, isCorrect: boolean) => {
-    // setCardColors((prevColors) => ({
-    //     ...prevColors,
-    //     [cardNumber]: isCorrect ? correctStyle : incorrectStyle,
-    // }));
-
+  const handleCardClick = (cardNumber: number, isCorrect: boolean) => {
     if (!isCorrect) {
+      //logic for the incorrect cards
       setCardColors((prevColors) => ({
         ...prevColors,
         [cardNumber]: { ...incorrectStyle, animation: "shake 1s" },
@@ -64,14 +111,19 @@ export const Intruder2: React.FC = () => {
       setTimeout(() => {
         setCardColors((prevColors) => ({
           ...prevColors,
-          [cardNumber]: incorrectStyle,
+          [cardNumber]: initialStyle,
         }));
       }, 1000);
     } else {
+      //logic when the correct card is choosen
       setCardColors((prevColors) => ({
         ...prevColors,
         [cardNumber]: correctStyle,
       }));
+
+      setTimeout(() => {
+        setIsCorrectSelected(true);
+      }, 2000);
     }
   };
 
@@ -87,32 +139,21 @@ export const Intruder2: React.FC = () => {
           )}
         </div>
         <div className="intruder-cards-container">
-          <IonCard
-            className="intruder-card-style"
-            style={cardColors[1]}
-            onClick={() => handleCardClick("1", false)}
-          >
-            <img src={almohada1} />
-            <p className="intruder-card-title">almohada</p>
-          </IonCard>
-
-          <IonCard
-            className="intruder-card-style"
-            style={cardColors[2]}
-            onClick={() => handleCardClick("2", false)}
-          >
-            <img src={empanada} />
-            <p className="intruder-card-title">empanada</p>
-          </IonCard>
-
-          <IonCard
-            className="intruder-card-style"
-            style={cardColors[3]}
-            onClick={() => handleCardClick("3", true)}
-          >
-            <img src="/assets/img/intruder_boca.png" />
-            <p className="intruder-card-title">boca</p>
-          </IonCard>
+          {currentCardSet.map((card) => (
+            <IonCard
+              key={card.id}
+              className="intruder-card-style"
+              style={
+                showBackside ? temporaryBackgroundStyle : cardColors[card.id]
+              }
+              onClick={() => handleCardClick(card.id, card.isCorrect)}
+            >
+              {!showBackside && <img src={card.imgSrc} />}
+              {!showBackside && (
+                <p className="intruder-card-title">{card.text}</p>
+              )}
+            </IonCard>
+          ))}
         </div>
       </div>
     </>
