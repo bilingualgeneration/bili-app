@@ -6,8 +6,10 @@ import {
   IonText,
 } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
+import { ExtendedRadioOption } from "@/components/ExtendedRadio";
 import React from "react";
 import "./PricingRadioCard.css";
+import { useIntl } from "react-intl";
 
 type PricingRadioCardProps = {
   title: string | MessageFormatElement[];
@@ -24,6 +26,8 @@ export const PricingRadioCard: React.FC<PricingRadioCardProps> = ({
   iconBackgroundColor,
   title,
 }) => {
+  const intl = useIntl();
+
   return (
     <IonCard className="main-pricing-card">
       <div>
@@ -36,7 +40,7 @@ export const PricingRadioCard: React.FC<PricingRadioCardProps> = ({
           </div>
         )}
         <IonCardHeader class="pricing-header">
-          <IonCardTitle>
+          <IonCardTitle className="ion-no-padding ion-text-start">
             <IonText color="primary">
               {/* todo: don't force type cast */}
               {title as string}

@@ -3,7 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15%;
+  /* margin-top: 15%; */
+  padding: 40px 120px 96px;
 }
 
 .plan-card {
@@ -92,12 +93,9 @@
 
 .best-value-block {
   position: absolute;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* right: 150px;
-    top: -12px; */
-  display: flex;
+  right: 78px;
+  top: -12px;
+  /* display: flex; */
   padding: 4px 8px;
   border-radius: 4px;
   background: var(--Desierto-Desierto, #f48722);

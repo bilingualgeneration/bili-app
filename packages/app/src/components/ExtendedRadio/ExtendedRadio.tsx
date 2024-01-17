@@ -17,6 +17,7 @@ export type ExtendedRadioProps = {
   name: string;
   options: ExtendedRadioOption[];
   testId?: string;
+  useModifiedBehavior?: boolean;
 };
 
 export const ExtendedRadio = ({
@@ -26,6 +27,7 @@ export const ExtendedRadio = ({
   name,
   options,
   testId = "extended-radio-component",
+  useModifiedBehavior = false,
 }: ExtendedRadioProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -39,13 +41,16 @@ export const ExtendedRadio = ({
       name={name}
       render={({ field: { onChange } }): JSX.Element => (
         <span data-testid={testId}>
-          <div className="price-cards">
+          <div className={useModifiedBehavior ? "price-cards" : ""}>
             {" "}
-            {/* Wrapped the cards in a container */}
+            {/* Wrapped the cards in a container if using modified behavior */}
             {options.map((option, index) => (
-              <div key={index} className="price-card-item">
+              <div
+                key={index}
+                className={useModifiedBehavior ? "price-card-item" : ""}
+              >
                 {" "}
-                {/* Set a class for each card */}
+                {/* Set a class for each card if using modified behavior */}
                 {React.cloneElement(option.component, {
                   onClick: () => {
                     if (!option.disabled) {
@@ -55,7 +60,9 @@ export const ExtendedRadio = ({
                   },
                   className:
                     option.component.props.className + // Original className
-                    (activeIndex === index ? " " + activeClassName : ""), // Add active class conditionally
+                    (useModifiedBehavior && activeIndex === index
+                      ? " " + activeClassName
+                      : ""), // Add active class conditionally if using modified behavior
                 })}
               </div>
             ))}

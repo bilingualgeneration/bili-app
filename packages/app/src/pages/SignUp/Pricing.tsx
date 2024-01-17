@@ -16,6 +16,8 @@ export const Pricing: React.FC = () => {
   const schema = z.object({
     pricing: z.string(),
   });
+
+  // Set up useForm with zodResolver
   const {
     control,
     handleSubmit,
@@ -25,6 +27,7 @@ export const Pricing: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
+  // Handle form submission
   const onSubmit = handleSubmit((responses) => {
     setData({
       ...data,
@@ -33,9 +36,10 @@ export const Pricing: React.FC = () => {
     pushPage("complete");
   });
 
+  // Define radio options for ExtendedRadio
   const monthlyOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <div id="pricing-month">
         <PricingRadioCard
           title={intl.messages["signUp.pricing_monthly_title"]}
           content={intl.messages["signUp.pricing_monthly_pricing"]}
@@ -46,7 +50,10 @@ export const Pricing: React.FC = () => {
   };
   const annualOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <div id="pricing-annual">
+        <div className="best-value-block">
+          <p className="best-value-text">best value</p>
+        </div>
         <PricingRadioCard
           title={intl.messages["signUp.pricing_annual_title"]}
           content={intl.messages["signUp.pricing_annual_pricing"]}
@@ -94,45 +101,18 @@ export const Pricing: React.FC = () => {
             </IonText>
           </div>
 
+          {/* Render the form with ExtendedRadio using modified behavior */}
           <form onSubmit={onSubmit} className="radio-button-select">
             <div className="price-cards">
               <ExtendedRadio
                 control={control}
                 name="pricing"
-                options={[
-                  {
-                    component: (
-                      <div id="pricing-month">
-                        <PricingRadioCard
-                          title={intl.messages["signUp.pricing_monthly_title"]}
-                          content={
-                            intl.messages["signUp.pricing_monthly_pricing"]
-                          }
-                        />
-                      </div>
-                    ),
-                    value: "monthly",
-                  },
-                  {
-                    component: (
-                      <div id="pricing-annual">
-                        <div className="best-value-block">
-                          <p className="best-value-text">best value</p>
-                        </div>
-                        <PricingRadioCard
-                          title={intl.messages["signUp.pricing_annual_title"]}
-                          content={
-                            intl.messages["signUp.pricing_annual_pricing"]
-                          }
-                        />
-                      </div>
-                    ),
-                    value: "annual",
-                  },
-                ]}
+                options={[monthlyOption, annualOption]}
+                useModifiedBehavior={true} // Set to true for modified behavior
               />
             </div>
 
+            {/* Continue button */}
             <IonButton
               shape="round"
               type="submit"
@@ -145,6 +125,7 @@ export const Pricing: React.FC = () => {
               />
             </IonButton>
 
+            {/* No commitment text */}
             <IonText className="ion-text-center">
               <FormattedMessage
                 id="signUp.noCommitment"

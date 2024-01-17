@@ -14,15 +14,11 @@ ion-card-header.pricing-header {
 }
 
 .pricing-card ion-card-title {
-  text-align: start;
-}
-
-.price {
   display: flex;
-  justify-content: center;
+  text-align: start;
 }
 
 .price-cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
