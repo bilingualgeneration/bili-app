@@ -108,7 +108,8 @@ export const Pricing: React.FC = () => {
                 control={control}
                 name="pricing"
                 options={[monthlyOption, annualOption]}
-                useModifiedBehavior={true} // Set to true for modified behavior
+                useModifiedBehavior={true}
+                defaultOption={annualOption}
               />
             </div>
 
@@ -126,7 +127,7 @@ export const Pricing: React.FC = () => {
             </IonButton>
 
             {/* No commitment text */}
-            <IonText className="ion-text-center">
+            <IonText className="ion-text-center no-commitments-text">
               <FormattedMessage
                 id="signUp.noCommitment"
                 defaultMessage="No commitments, cancel anytime."

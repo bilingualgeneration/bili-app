@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createElement, Fragment, JSX, useState } from "react";
 
 import { Control, Controller } from "react-hook-form";
@@ -18,6 +18,7 @@ export type ExtendedRadioProps = {
   options: ExtendedRadioOption[];
   testId?: string;
   useModifiedBehavior?: boolean;
+  defaultOption?: ExtendedRadioOption | undefined;
 };
 
 export const ExtendedRadio = ({
@@ -28,8 +29,22 @@ export const ExtendedRadio = ({
   options,
   testId = "extended-radio-component",
   useModifiedBehavior = false,
+  defaultOption,
 }: ExtendedRadioProps): JSX.Element => {
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(
+    defaultOption
+      ? options.findIndex((option) => option.value === defaultOption.value)
+      : -1,
+  );
+
+  useEffect(() => {
+    if (defaultOption) {
+      const index = options.findIndex(
+        (option) => option.value === defaultOption.value,
+      );
+      setActiveIndex(index !== -1 ? index : -1);
+    }
+  }, [defaultOption, options]);
 
   const handleClick = (index: number): void => {
     setActiveIndex(index);
@@ -42,30 +57,23 @@ export const ExtendedRadio = ({
       render={({ field: { onChange } }): JSX.Element => (
         <span data-testid={testId}>
           <div className={useModifiedBehavior ? "price-cards" : ""}>
-            {" "}
-            {/* Wrapped the cards in a container if using modified behavior */}
-            {options.map((option, index) => (
-              <div
-                key={index}
-                className={useModifiedBehavior ? "price-card-item" : ""}
-              >
-                {" "}
-                {/* Set a class for each card if using modified behavior */}
-                {React.cloneElement(option.component, {
-                  onClick: () => {
-                    if (!option.disabled) {
-                      setActiveIndex(index);
-                      onChange(option.value);
-                    }
-                  },
-                  className:
-                    option.component.props.className + // Original className
-                    (useModifiedBehavior && activeIndex === index
-                      ? " " + activeClassName
-                      : ""), // Add active class conditionally if using modified behavior
-                })}
-              </div>
-            ))}
+            {options.map((option, index) => {
+              const props = {
+                ...option.component.props,
+                key: index,
+                // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
+                className:
+                  option.component.props.className +
+                  (activeIndex === index ? " " + activeClassName : ""),
+                onClick: () => {
+                  if (!option.disabled) {
+                    setActiveIndex(index);
+                    onChange(option.value);
+                  }
+                },
+              };
+              return <option.component.type {...props} key={index} />;
+            })}
           </div>
         </span>
       )}

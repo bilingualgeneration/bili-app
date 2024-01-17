@@ -93,8 +93,8 @@
 
 .best-value-block {
   position: absolute;
-  right: 78px;
-  top: -12px;
+  right: 77px;
+  top: -4px;
   /* display: flex; */
   padding: 4px 8px;
   border-radius: 4px;
@@ -116,4 +116,16 @@ p.best-value-text {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin: 0;
+}
+
+.no-commitments-text {
+  color: var(--Base-Barro, #889391);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 16.8px */
 }
