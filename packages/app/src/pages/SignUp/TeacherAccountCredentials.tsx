@@ -127,9 +127,7 @@ export const TeacherAccountCredentials: React.FC = () => {
             id: "login.divider",
             defaultMessage: "or",
             description:
-              "Divider text that separates the login page into two sections: \
-            1) for users to log in using credentials and \
-            2) for users to login using Google or Apple",
+              "Divider text that separates the login page into two sections: 1) for users to log in using credentials 2) for users to login using Google or Apple",
           })}
         />
 
