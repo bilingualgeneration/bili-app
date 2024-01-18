@@ -12,20 +12,15 @@ import es from "./lang/es.json";
 export const locales = {
   en: "English",
   es: "Spanish",
-  "es-inc": "Spanish Inclusive",
 };
 
-export type locale = "en" | "es" | "es-inc";
-
-// needed to trick react-intl to trick it into supporting inclusive versions of languages
-const localeMap: { [key: string]: locale } = {
-  "es-inc": "es",
-};
+export type locale = "en" | "es";
 
 export const I18nWrapper = ({ children }: PropsWithChildren<{}>) => {
   const { locale } = useLanguage();
   const cache = createIntlCache();
   // todo: move translation cache to localstorage?
+  // @ts-ignore
   const intl: IntlShape = createIntl({ locale: "en", messages: en }, cache);
   const [translations, setTranslations] = useState(intl.messages);
   // console.log('This is the initial lang:', intl.messages)
@@ -63,10 +58,7 @@ export const I18nWrapper = ({ children }: PropsWithChildren<{}>) => {
 
   return (
     <>
-      <IntlProvider
-        locale={localeMap[locale] || locale}
-        messages={translations}
-      >
+      <IntlProvider locale={locale} messages={translations} onError={() => {}}>
         {children}
       </IntlProvider>
     </>

@@ -1,30 +1,17 @@
-import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonFooter,
-  IonPage,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { FC, useEffect, PropsWithChildren } from "react";
 import { Redirect } from "react-router-dom";
 import { useUser, useSigninCheck } from "reactfire";
 import { useProfile, ProfileContextProvider } from "@/contexts/ProfileContext";
-import { FooterMenu } from "@/components/FooterMenu";
+import { ReqdActionsProvider } from "@/contexts/ReqdActionsContext";
+import { useHistory } from "react-router-dom";
 
-interface AuthedLayoutProps {
-  children: React.ReactNode;
-  background?: string; // Default to false
-  wide?: boolean;
-}
-
-const AuthedLayout: React.FC<AuthedLayoutProps> = ({
-  children,
-  background = "",
-}) => {
+const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { status: userStatus } = useUser();
+  const history = useHistory();
   const { status, data: signInCheckResult } = useSigninCheck();
+  useEffect(() => {
+    // clear history so that the back button can operate correctly
+  }, []);
   if (status === "loading" || userStatus === "loading") {
     // unsure what the sign in status is
     return <>loading</>;
@@ -36,24 +23,7 @@ const AuthedLayout: React.FC<AuthedLayoutProps> = ({
   // implied else
   return (
     <ProfileContextProvider>
-      <IonPage>
-        <IonHeader className="ion-no-border">
-          <IonToolbar>
-            <IonButtons slot="end"></IonButtons>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen className="ion-padding">
-          <div
-            className="page-wrapper"
-            style={{ paddingBottom: "2rem", background }}
-          >
-            {children}
-          </div>
-        </IonContent>
-        <IonFooter className="ion-no-border">
-          <FooterMenu />
-        </IonFooter>
-      </IonPage>
+      <ReqdActionsProvider>{children}</ReqdActionsProvider>
     </ProfileContextProvider>
   );
 };

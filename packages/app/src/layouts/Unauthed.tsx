@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonImg,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { IonContent, IonPage } from "@ionic/react";
 
 interface UnauthedLayoutProps {
   children: React.ReactNode;
@@ -24,15 +14,8 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
 
   return (
     <IonPage>
-      <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonButtons slot="end">
-            <LanguageSwitcher />
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <div style={{ background, marginTop: 56, paddingTop: "4rem" }}>
+        <div className="page-wrapper" style={{ background }}>
           {children}
         </div>
       </IonContent>

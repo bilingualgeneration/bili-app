@@ -2,12 +2,24 @@ import { FormattedMessage } from "react-intl";
 import { IonButton, IonImg, IonSpinner, IonText } from "@ionic/react";
 import React, { useEffect } from "react";
 import { useSignUpData } from "./SignUpContext";
+import { useHistory } from "react-router-dom";
+import { useReqdActions } from "@/contexts/ReqdActionsContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Complete: React.FC = () => {
   const { data, signUp, signUpStatus } = useSignUpData();
+  const history = useHistory();
+  const { setLocale } = useLanguage();
+  const { reqdActions, setReqdActions } = useReqdActions();
   useEffect(() => {
     if (signUpStatus === "idle") {
       signUp();
+    }
+    if (signUpStatus === "done") {
+      setReqdActions({
+        showSettingsMessage: true,
+        ...reqdActions,
+      });
     }
   }, [signUpStatus]);
   if (signUpStatus === "idle" || signUpStatus === "busy") {
@@ -34,12 +46,13 @@ export const Complete: React.FC = () => {
         <IonImg src="/assets/img/happy_cactus.png" />
         <IonButton
           data-testid="complete-continue-button"
-          href="/student-dashboard"
+          onClick={() => {
+            history.push("/student-dashboard");
+          }}
           shape="round"
           style={{
             marginTop: "24px",
           }}
-          type="submit"
         >
           <FormattedMessage
             id="common.continue"

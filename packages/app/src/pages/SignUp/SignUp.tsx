@@ -15,13 +15,12 @@ import {
   TeacherAbout,
   TeacherAccountCredentials,
 } from "@/pages/SignUp";
-//import {Test} from './Test';
-//import { Swiper, SwiperSlide } from "swiper/react";
-//import SwiperCore from "swiper";
 import {
   SignUpDataProvider,
   useSignUpData,
 } from "@/pages/SignUp/SignUpContext";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
+import { useHistory } from "react-router-dom";
 
 export const SignUp: React.FC = () => (
   <SignUpDataProvider>
@@ -40,13 +39,24 @@ const progressLookup: { [key: string]: number } = {
   complete: 1,
 };
 
-// todo: on page visit, clear form and reset swiper
 export const SignUpComponent: React.FC = () => {
-  const { page } = useSignUpData();
+  const { page: pages, setPage } = useSignUpData();
+  const page: string = pages[pages.length - 1];
+  const history = useHistory();
+
+  // todo: on revisit, clear old values
+  const backButtonOnClick = (): void => {
+    if (pages.length > 1) {
+      setPage(pages.slice(0, -1));
+    } else {
+      history.goBack();
+    }
+  };
 
   return (
-    <div className="page-wrapper">
-      <div className="signup-wrapper">
+    <>
+      <UnauthedHeader backButtonOnClick={backButtonOnClick} />
+      <div className="content-wrapper">
         <IonCard>
           <IonCardContent>
             <div className="ion-padding">
@@ -71,6 +81,6 @@ export const SignUpComponent: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </div>
-    </div>
+    </>
   );
 };

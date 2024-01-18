@@ -3,9 +3,6 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonCol,
   IonGrid,
   IonRow,
@@ -14,7 +11,11 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
-import "./StoryFactory.css";
+import audio_en_file from "@/assets/audio/story_factory_second_en.mp3";
+import audio_es_file from "@/assets/audio/story_factory_second_es.mp3";
+import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
+
+import "./StoryFactory.scss";
 
 interface IntroPage2Props {
   currentPage: number;
@@ -22,45 +23,87 @@ interface IntroPage2Props {
 
 export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
   const { isImmersive } = useProfile();
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const audio_en = new Audio(audio_en_file);
+  const audio_es = new Audio(audio_es_file);
 
+  useEffect(() => {
+    return () => {
+      audio_en.pause();
+      audio_es.pause();
+    };
+  });
+
+  useEffect(() => {
+    if (isImmersive) {
+      audio_es.onended = () => {
+        setAudioPlayed(true);
+      };
+      audio_es.play();
+    } else {
+      audio_es.onended = () => {
+        audio_en.play();
+      };
+      audio_en.onended = () => {
+        setAudioPlayed(true);
+      };
+    }
+    audio_es.play();
+    setAudioPlayed(false);
+  }, []);
   return (
-    <>
-      <IonCard className="story-page-2-main-card">
-        <IonGrid>
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="12" size-md="9">
-              <IonCardHeader className="story-header">
-                <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-page-2-title">
-                    En este juego, podrás crear más de 90.000 historias
-                    diferentes con solo deslizar el dedo o hacer clic en un
-                    botón. Haz clic en "Siguiente" para ver cómo.
-                  </div>
-                </IonCardTitle>
-                {!isImmersive && (
-                  <IonCardSubtitle>
-                    <div id="story-page-2-subtitle">
-                      In this game, you can create over 90,000 different stories
-                      with the swipe of your finger or click of a button. Click
-                      “Next” to see how.
-                    </div>
-                  </IonCardSubtitle>
-                )}
-              </IonCardHeader>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+    <div style={{ position: "relative" }}>
+      <div className="sf-card">
+        <IonCard className="ion-no-margin" style={{ paddingBottom: "14rem" }}>
+          <IonCardContent>
+            <div className="right-margin">
+              <h1 className="color-selva">
+                <FormattedMessage
+                  id="storyFactory.create_message"
+                  defaultMessage="Create over 4,000 different stories with the swipe of your finger or click of a button"
+                  description="Message informing user how many possible stories are available in Story Factory"
+                />
+              </h1>
+              {!isImmersive && (
+                <h2>
+                  <br />
+                  Create over 4,000 different stories with the swipe of your
+                  finger or click of a button
+                </h2>
+              )}
+            </div>
 
-        <div className="story-factory-button-container">
-          <StoryFactoryButton currentPage={currentPage} />
-        </div>
-      </IonCard>
-
+            <div
+              style={{
+                position: "relative",
+                textAlign: "center",
+                marginTop: "10rem",
+              }}
+            >
+              {audioPlayed && (
+                <img
+                  src={StoryFactoryArrow}
+                  alt="indicator arrow to next button"
+                  style={{
+                    left: 0,
+                    top: 3,
+                    position: "absolute",
+                  }}
+                />
+              )}
+              <StoryFactoryButton
+                disabled={!audioPlayed}
+                currentPage={currentPage}
+              />
+            </div>
+          </IonCardContent>
+        </IonCard>
+      </div>
       <img
         className="bili-character"
         src={biliCharacter}
         alt="Bili character"
       />
-    </>
+    </div>
   );
 };

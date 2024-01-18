@@ -1,0 +1,46 @@
+#student-landing-page {
+  h1 {
+    font-size: 56px;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 40px;
+    margin-top: 0;
+    color: #000;
+  }
+
+  .main-block {
+    margin: 0 0 100px 100px;
+  }
+
+  #wave-icons {
+    .wave-icon {
+      display: inline-block;
+      text-align: center;
+      p {
+        margin: 0;
+        &:nth-child(1) {
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          font-size: smaller;
+        }
+      }
+      .icon {
+        display: inline-block;
+        padding: 1rem;
+        border-radius: 50%;
+
+        &.has-link {
+          cursor: pointer;
+        }
+      }
+      svg {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+}

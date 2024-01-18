@@ -5,36 +5,36 @@ import { SuspenseWithPerf } from "reactfire";
 import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
+import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { AuthProvider, useFirebaseApp } from "reactfire";
-import AuthedLayout from "./layouts/Authed";
+import AuthedLayout from "@/layouts/Authed";
+import { HeaderFooter } from "@/components/HeaderFooter";
 import { I18nWrapper } from "@/components/I18nWrapper";
-import Intruder from "./pages/games/Intruder";
-import { IntroPage1 } from "./pages/StoryFactory/StoryFactoryPg1";
-import { IntroPage2 } from "./pages/StoryFactory/StoryFactoryPg2";
-import { IntroPage3 } from "./pages/StoryFactory/StoryFactoryPg3";
-import { StoryFactoryPage4 } from "./pages/StoryFactory/StoryFactoryPg4";
-import { StoryFactoryPage5 } from "./pages/StoryFactory/StoryFactoryPg5";
-import { StoryFactoryPage6 } from "./pages/StoryFactory/StoryFactoryPg6";
+import Intruder from "@/pages/games/Intruder";
+import { IntroPage1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+import { IntroPage2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
+import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import Login from "./pages/Login";
-import { Play } from "./pages/Play";
-import Memory from "./pages/games/Memory";
-import { Preload } from "./pages/Preload";
-import ResetPassword from "./pages/ResetPassword";
-import { Overview, Preferences, Progress, Profile } from "./pages/Settings";
-import { SettingsLayout } from "./layouts/Settings";
-import { SignUp } from "./pages/SignUp";
-import { Splash } from "./pages/Splash";
-import Stories from "./pages/games/Stories";
-import { StudentDashboard } from "./pages/StudentDashboard";
-import TeacherLogin from "./pages/TeacherLogin";
-import UnauthedLayout from "./layouts/Unauthed";
-import { PreSplash } from "./pages/PreSplash";
+import Login from "@/pages/Login";
+import { Play } from "@/pages/Play";
+import Memory from "@/pages/games/Memory";
+import { Preload } from "@/pages/Preload";
+import ResetPassword from "@/pages/ResetPassword";
+import { Overview, Preferences, Progress, Profile } from "@/pages/Settings";
+import { SettingsLayout } from "@/layouts/Settings";
+import { SignUp } from "@/pages/SignUp";
+import { Splash } from "@/pages/Splash";
+import Stories from "@/pages/games/Stories";
+import { StudentDashboard } from "@/pages/StudentDashboard";
+import TeacherLogin from "@/pages/TeacherLogin";
+import UnauthedLayout from "@/layouts/Unauthed";
+import { PreSplash } from "@/pages/PreSplash";
 import { Intruder1 } from "./pages/Intruder/Intruder1";
 import { Intruder2 } from "./pages/Intruder/Intruder2";
 
@@ -124,8 +124,10 @@ const Router: React.FC = () => {
           exact
           path="/play"
           render={() => (
-            <AuthedLayout background="#f7faf9">
-              <Play />
+            <AuthedLayout>
+              <HeaderFooter background="#f7faf9">
+                <Play />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
@@ -144,10 +146,12 @@ const Router: React.FC = () => {
           exact
           path="/settings/overview"
           render={() => (
-            <AuthedLayout background="#f7faf9">
-              <SettingsLayout>
-                <Overview />
-              </SettingsLayout>
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Overview />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -156,22 +160,12 @@ const Router: React.FC = () => {
           exact
           path="/settings/preferences"
           render={() => (
-            <AuthedLayout background="#f7faf9">
-              <SettingsLayout>
-                <Preferences />
-              </SettingsLayout>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/settings/progress"
-          render={() => (
-            <AuthedLayout background="#f7faf9">
-              <SettingsLayout>
-                <Progress />
-              </SettingsLayout>
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Preferences />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -180,10 +174,26 @@ const Router: React.FC = () => {
           exact
           path="/settings/profile"
           render={() => (
-            <AuthedLayout background="#f7faf9">
-              <SettingsLayout>
-                <Profile />
-              </SettingsLayout>
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Profile />
+                </SettingsLayout>
+              </AdultCheckProvider>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/progress"
+          render={() => (
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <Progress />
+                </SettingsLayout>
+              </AdultCheckProvider>
             </AuthedLayout>
           )}
         />
@@ -221,8 +231,10 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/1"
           render={() => (
-            <AuthedLayout background="#F7FAF9">
-              <IntroPage1 currentPage={1} />
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <IntroPage1 currentPage={1} />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
@@ -231,8 +243,10 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/2"
           render={() => (
-            <AuthedLayout background="#F7FAF9">
-              <IntroPage2 currentPage={2} />
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <IntroPage2 currentPage={2} />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
@@ -241,35 +255,39 @@ const Router: React.FC = () => {
           exact
           path="/story-factory/3"
           render={() => (
-            <AuthedLayout background="#F7FAF9">
-              <IntroPage3 currentPage={3} />
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <StoryFactoryPage3 />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
 
         <Route
           exact
-          path="/story-factory/4"
+          path="/story-factory/play/:pack_id"
           render={() => (
-            <AuthedLayout background="#FBF2E2">
-              <StoryFactoryPage4 />
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <StoryFactoryPage4 />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
 
         <Route
           exact
-          path="/story-factory/5"
+          path="/intruder/1"
           render={() => (
-            <AuthedLayout background="#F7FAF9">
-              <StoryFactoryPage5 />
+            <AuthedLayout>
+              <Intruder1 />
             </AuthedLayout>
           )}
         />
 
         <Route
           exact
-          path="/story-factory/6"
+          path="/intruder/2"
           render={() => (
             <AuthedLayout background="#F7FAF9">
               <StoryFactoryPage6 />
@@ -282,7 +300,9 @@ const Router: React.FC = () => {
           path="/story-factory/6"
           render={() => (
             <AuthedLayout>
-              <StoryFactoryPage6 />
+              <HeaderFooter background="#F7FAF9">
+                <StoryFactoryPage4 />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />
@@ -311,8 +331,10 @@ const Router: React.FC = () => {
           exact
           path="/student-dashboard"
           render={() => (
-            <AuthedLayout background="#fff">
-              <StudentDashboard />
+            <AuthedLayout>
+              <HeaderFooter background="#fff">
+                <StudentDashboard />
+              </HeaderFooter>
             </AuthedLayout>
           )}
         />

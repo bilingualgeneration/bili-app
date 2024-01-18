@@ -5,7 +5,8 @@ import { httpsCallable } from "firebase/functions";
 
 const SignUpDataContext = createContext({
   data: {},
-  page: "roleSelect",
+  page: ["roleSelect"],
+  pushPage: (value: string): void => {},
   signUp: () => {},
   signUpStatus: "idle",
   setData: (value: any): void => {},
@@ -16,23 +17,30 @@ export const useSignUpData = () => useContext(SignUpDataContext);
 
 export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
   const [data, setData] = useState({});
-  const [page, setPage] = useState("roleSelect");
+  const [page, setPage] = useState<string[]>(["roleSelect"]);
   const [signUpStatus, setSignUpStatus] = useState("idle");
   const auth = useAuth();
   const functions = useFunctions();
   const signupFunction = httpsCallable(functions, "user-signup");
   const signUp = async () => {
     setSignUpStatus("busy");
-    await signupFunction(data);
+    await signupFunction({
+      ...data,
+      language: "es",
+    });
     // @ts-ignore
     await signInWithEmailAndPassword(auth, data.email, data.password);
     setSignUpStatus("done");
+  };
+  const pushPage = (newPage: string): void => {
+    setPage(page.concat(newPage));
   };
   return (
     <SignUpDataContext.Provider
       value={{
         data,
         page,
+        pushPage: pushPage,
         setData,
         setPage,
         setSignUpStatus,

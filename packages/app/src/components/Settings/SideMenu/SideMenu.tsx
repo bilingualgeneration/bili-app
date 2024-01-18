@@ -25,9 +25,8 @@ export const SideMenu: React.FC = () => {
   };
 
   return (
-    <>
+    <div id="settings-side-menu" style={{ height: "100%" }}>
       <IonList
-        id="settings-side-menu"
         lines="none"
         style={{ height: "100%", padding: "1rem" }}
         className="side-menu-styles"
@@ -97,6 +96,6 @@ export const SideMenu: React.FC = () => {
           <IonLabel className="menu-label">reset tutorial</IonLabel>
         </IonItem>
       </IonList>
-    </>
+    </div>
   );
 };

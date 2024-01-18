@@ -22,12 +22,11 @@ import Eclipse from "@/assets/icons/menu_eclipse.svg?react";
 export const FooterMenu: React.FC = ({}) => {
   return (
     <>
-      <div>
+      <div style={{ position: "fixed", left: "calc(50% - 175px)", bottom: 0 }}>
         <IonGrid
           fixed={true}
           style={{
             maxWidth: "350px",
-            marginTop: "50px",
             background: "white",
             borderRadius: "38.563px 38.563px 0px 0px",
             filter: "drop-shadow(0 0px 32px rgba(101, 44, 12, 0.1))",
@@ -53,7 +52,7 @@ export const FooterMenu: React.FC = ({}) => {
                 />
               </Link>
             </IonCol>
-            <IonCol>
+            <IonCol id="footer_settings_button">
               <Link to="/settings/overview">
                 <Profile />
               </Link>

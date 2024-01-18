@@ -30,7 +30,7 @@ export const LanguageModeSelect: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
 
   const spanishOption: ExtendedRadioOption = {
     component: (
@@ -49,7 +49,7 @@ export const LanguageModeSelect: React.FC = () => {
                 letterSpacing: "0.2px",
               }}
             >
-              EN
+              ES
             </div>
           }
           title={intl.formatMessage({
@@ -119,11 +119,11 @@ export const LanguageModeSelect: React.FC = () => {
     });
     // @ts-ignore todo: better typing
     if (data.role === "teacher") {
-      setPage("teacherAccountCredentials");
+      pushPage("teacherAccountCredentials");
     }
     // @ts-ignore todo: better typing
     if (data.role === "parent") {
-      setPage("parentAccountCredentials");
+      pushPage("parentAccountCredentials");
     }
   });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   IonButton,
   IonCard,
@@ -14,94 +14,180 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
+import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
-import { IconWithText } from "@/components/IconWithText";
 import { useProfile } from "@/contexts/ProfileContext";
-import MeGustaIcon from "@/assets/icons/me_gusta.svg?react";
+import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
-import BieneStarIcon from "@/assets/icons/bienestar.svg?react";
-import ComunidadIcon from "@/assets/icons/comunidad.svg?react";
+import WellnessIcon from "@/assets/icons/wellness.svg?react";
+import CommunityIcon from "@/assets/icons/community.svg?react";
 import StemIcon from "@/assets/icons/stem.svg?react";
 import { StoriesCard } from "@/components/StoriesCard";
 import SmallBook from "@/assets/icons/small_book.svg?react";
 import SmallArt from "@/assets/icons/small_art.svg?react";
 import SmallCommunity from "@/assets/icons/small_community.svg?react";
 import SmallFlower from "@/assets/icons/small_flower.svg?react";
+import SmallPlay from "@/assets/icons/small_play.svg?react";
 import Heart from "@/assets/icons/heart.svg?react";
 import Star from "@/assets/icons/star.svg?react";
 import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
-import { Link } from "react-router-dom";
-import "./StudentDashboard.css";
+import { Link, useHistory } from "react-router-dom";
+import { useReqdActions } from "@/contexts/ReqdActionsContext";
 
-export const StudentDashboard: React.FC = () => {
+import "./StudentDashboard.scss";
+
+interface WaveIcon {
+  backgroundColor: string;
+  englishLabel: string;
+  link?: string;
+  icon: any; // todo: better typing
+  reactintlId: string;
+}
+
+const WaveIcon: FC<WaveIcon> = ({
+  backgroundColor,
+  englishLabel,
+  icon,
+  link,
+  reactintlId,
+}) => {
+  const { isImmersive } = useProfile();
+  const history = useHistory();
+  return (
+    <span className="wave-icon">
+      <div
+        onClick={() => {
+          if (link) {
+            history.push(link);
+          }
+        }}
+        className={`icon${link ? " has-link" : ""}`}
+        style={{ backgroundColor }}
+      >
+        {icon}
+      </div>
+      <IonText>
+        <h1 className="color-selva">
+          <FormattedMessage
+            defaultMessage={reactintlId}
+            description="icon label"
+            id={reactintlId}
+          />
+        </h1>
+        {!isImmersive && <h2>{englishLabel}</h2>}
+      </IonText>
+    </span>
+  );
+};
+
+export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { name, isImmersive } = useProfile();
-
+  const { reqdActions, setReqdActions } = useReqdActions();
+  const icons: WaveIcon[] = [
+    {
+      reactintlId: "common.stories",
+      englishLabel: "stories",
+      backgroundColor: "#0045a1",
+      icon: <StoriesIcon />,
+    },
+    {
+      reactintlId: "common.wellness",
+      englishLabel: "wellness",
+      backgroundColor: "#ac217b",
+      icon: <WellnessIcon />,
+    },
+    {
+      reactintlId: "common.play",
+      englishLabel: "play",
+      link: "/play",
+      backgroundColor: "#ff5709",
+      icon: <PlayIcon />,
+    },
+    {
+      reactintlId: "common.community",
+      englishLabel: "community",
+      backgroundColor: "#23beb9",
+      icon: <CommunityIcon />,
+    },
+  ];
   return (
     <div id="student-landing-page">
-      <div className="cards-title background-pattern">
+      {reqdActions.showSettingsMessage && (
+        <Joyride
+          callback={(data) => {
+            if (data.action === "close") {
+              const { showSettingsMessage, ...remainingReqdActions } =
+                reqdActions;
+              setReqdActions(remainingReqdActions);
+            }
+          }}
+          steps={[
+            {
+              target: "#footer_settings_button",
+              disableBeacon: true,
+              content: (
+                <FormattedMessage
+                  defaultMessage="Click here to customize your child's learning experience"
+                  description="Message informing user that they need to go to the settings page to complete their profile"
+                  id="reqdActions.goto_settings.message"
+                />
+              ),
+            },
+          ]}
+        />
+      )}
+      <div
+        className="cards-title background-pattern"
+        style={{
+          paddingBottom: "2rem",
+          paddingTop: "2rem",
+          paddingLeft: 100,
+        }}
+      >
         <h1>
-          <FormattedMessage id="landingPage.welcome" values={{ name }} />
+          <FormattedMessage
+            id="landingPage.welcome"
+            defaultMessage="Welcome {name}!"
+            values={{ name }}
+          />
         </h1>
-        <p>Hello {name}!</p>
+        {!isImmersive && <p>Hello {name}!</p>}
       </div>
 
       <div className="main-block">
         <div className="icons-title">
-          <h2 style={{ marginBottom: 10 }}>
-            <FormattedMessage id="landingPage.assignments" />
-          </h2>
-          {!isImmersive && <p>Categories</p>}
+          <h1 style={{ marginBottom: 10 }}>
+            <FormattedMessage
+              id="landingPage.assignments"
+              defaultMessage="Assignments"
+            />
+          </h1>
+          {!isImmersive && (
+            <h2 style={{ fontSize: 40, fontWeight: "normal" }}>Categories</h2>
+          )}
         </div>
         {/* icons */}
-        <div className="wave-icons">
+        <div id="wave-icons" style={{ marginTop: "4rem", paddingRight: 100 }}>
           <IonGrid>
             <IonRow>
-              <IonCol className="col-custom-position-1">
-                <IconWithText
-                  title={"Cuentos!"}
-                  subtitle={"Stories"}
-                  icon={<MeGustaIcon />}
-                  iconBackgroundColor="#006A67"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-2">
-                <IconWithText
-                  title={"Bienestar"}
-                  subtitle={"Welness"}
-                  icon={<BieneStarIcon />}
-                  iconBackgroundColor="#AC217B"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-3">
-                <IconWithText
-                  title={"Juego"}
-                  subtitle={"Play"}
-                  url="/play"
-                  icon={<PlayIcon />}
-                  iconBackgroundColor="#FF5708"
-                />
-              </IonCol>
-              <IonCol className="col-custom-position-4">
-                <IconWithText
-                  title={"Comunidad"}
-                  subtitle={"Community"}
-                  icon={<ComunidadIcon />}
-                  iconBackgroundColor="#22BEB9"
-                />
-              </IonCol>
+              {icons.map((icon) => (
+                <IonCol key={icon.reactintlId} className="ion-text-center">
+                  <WaveIcon {...icon} />
+                </IonCol>
+              ))}
             </IonRow>
           </IonGrid>
         </div>
-        {/* <div className="cards-block"> */}
+
         {/* stories */}
         <div className="stories-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.stories" />
-            </h2>
-            {!isImmersive && <p>Stories</p>}
+            <h1 className="color-selva">
+              <FormattedMessage id="common.stories" defaultMessage="Stories" />
+            </h1>
+            {!isImmersive && <h2>Stories</h2>}
           </div>
 
           <div
@@ -117,7 +203,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"What do you like about yourself?"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#006A67"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -129,7 +215,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Catrina for a Day"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#0045A1"
+              iconBackroundColor="#0045A1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -141,7 +227,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"I'm From..."}
               cover={"/assets/img/band_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -153,7 +239,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"The Mischievous Skeleton"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -165,7 +251,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"What do you like about yourself?"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#006A67"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -177,7 +263,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Catrina for a Day"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#0045A1"
+              iconBackroundColor="#0045A1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -189,7 +275,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"I'm From..."}
               cover={"/assets/img/band_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -201,7 +287,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"The Mischievous Skeleton"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallBook />}
-              iconBackroungColor="#F0091B"
+              iconBackroundColor="#0045a1"
               heart={<Heart />}
               //rating={[<Star />, <Star />, <Star />]}
               className="other-card-image"
@@ -209,17 +295,22 @@ export const StudentDashboard: React.FC = () => {
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* wellness */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.wellness" />
-            </h2>
-            {!isImmersive && <p>Wellness</p>}
+            <h1 className="color-selva">
+              <FormattedMessage
+                id="common.wellness"
+                defaultMessage="Wellness"
+              />
+            </h1>
+            {!isImmersive && <h2>Wellness</h2>}
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -231,7 +322,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Affirmations"}
               cover={"/assets/img/drum_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -241,7 +332,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Breathing deeply"}
               cover={"/assets/img/dance_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -251,7 +342,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Yoga break"}
               cover={"/assets/img/band_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -262,7 +353,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Musical mantras"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -273,26 +364,28 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Yoga break"}
               cover={"/assets/img/mountain_image.png"}
               icon={<SmallFlower />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#AC217B"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* play */}
         <div className="other-story-cards">
           <div className="cards-title">
             <Link to="/play">
-              <h2>
-                <FormattedMessage id="landingPage.play" />
-              </h2>
-              {!isImmersive && <p>Play</p>}
+              <h1 className="color-selva">
+                <FormattedMessage id="common.play" defaultMessage="Play" />
+              </h1>
+              {!isImmersive && <h2>Play</h2>}
             </Link>
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -303,8 +396,8 @@ export const StudentDashboard: React.FC = () => {
               title={"Fábrica de cuentos"}
               subtitle={"Story Factory"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<PlayIcon />}
-              iconBackroungColor="#F48722"
+              icon={<SmallPlay />}
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image small"
             />
@@ -313,8 +406,8 @@ export const StudentDashboard: React.FC = () => {
               title={"El intruso"}
               subtitle={"The intruder"}
               cover={"/assets/img/mountain_image.png"}
-              icon={<PlayIcon />}
-              iconBackroungColor="#F48722"
+              icon={<SmallPlay />}
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -323,8 +416,8 @@ export const StudentDashboard: React.FC = () => {
               title={"Cuenta conmigo"}
               subtitle={"Count with me"}
               cover={"/assets/img/dance_image.png"}
-              icon={<PlayIcon />}
-              iconBackroungColor="#F48722"
+              icon={<SmallPlay />}
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -333,8 +426,8 @@ export const StudentDashboard: React.FC = () => {
               title={"Las Cestas"}
               subtitle={"The baskets"}
               cover={"/assets/img/band_image.png"}
-              icon={<PlayIcon />}
-              iconBackroungColor="#F48722"
+              icon={<SmallPlay />}
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -344,25 +437,30 @@ export const StudentDashboard: React.FC = () => {
               title={"Afirmaciones"}
               subtitle={"Affirmations"}
               cover={"/assets/img/card_play_image.png"}
-              icon={<PlayIcon />}
-              iconBackroungColor="#F48722"
+              icon={<SmallPlay />}
+              iconBackroundColor="#F48722"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
             />
           </div>
         </div>
-
+        <br />
+        <br />
         {/* Comunidad */}
         <div className="other-story-cards">
           <div className="cards-title">
-            <h2>
-              <FormattedMessage id="landingPage.community" />
-            </h2>
-            {!isImmersive && <p>Community</p>}
+            <h1 className="color-selva">
+              <FormattedMessage
+                id="common.community"
+                defaultMessage="Community"
+              />
+            </h1>
+            {!isImmersive && <h2>Community</h2>}
           </div>
 
           <div
+            className="hide-scrollbar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -374,7 +472,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"What would you do?"}
               cover={"/assets/img/horse_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -384,7 +482,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Tell me about..."}
               cover={"/assets/img/card_community_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
             />
@@ -394,7 +492,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"Stories and sayings"}
               cover={"/assets/img/star_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -405,7 +503,7 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"I Spy"}
               cover={"/assets/img/flowers_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
@@ -416,14 +514,13 @@ export const StudentDashboard: React.FC = () => {
               subtitle={"I Spy"}
               cover={"/assets/img/flowers_image.png"}
               icon={<SmallCommunity />}
-              iconBackroungColor="#AC217B"
+              iconBackroundColor="#23beb9"
               heart={<Heart />}
               className="other-card-image"
               isLocked={true}
             />
           </div>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );

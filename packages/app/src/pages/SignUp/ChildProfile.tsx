@@ -19,7 +19,7 @@ import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 
 export const ChildProfile: FC = () => {
   const intl = useIntl();
-  const { data, setData, setPage } = useSignUpData();
+  const { data, setData, pushPage } = useSignUpData();
 
   const schema = z.object({
     childName: z.string().min(1).max(50).optional(),
@@ -75,7 +75,7 @@ export const ChildProfile: FC = () => {
       ...data,
       ...response,
     });
-    setPage("languageModeSelect");
+    pushPage("languageModeSelect");
   });
 
   return (
