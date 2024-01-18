@@ -72,7 +72,7 @@ export const ParentAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "common.email",
+              id: "common.emailAsterix",
               defaultMessage: "Email address*",
               description:
                 "Input area label where users must enter their email as requirement",

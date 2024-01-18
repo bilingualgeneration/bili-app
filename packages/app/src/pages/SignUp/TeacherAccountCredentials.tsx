@@ -68,7 +68,7 @@ export const TeacherAccountCredentials: React.FC = () => {
           <Input
             label={intl.formatMessage({
               id: "common.email",
-              defaultMessage: "Your email*",
+              defaultMessage: "Email address*",
               description:
                 "Input area label where users must enter their email as requirement",
             })}

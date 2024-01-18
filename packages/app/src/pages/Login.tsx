@@ -85,7 +85,7 @@ const Login: React.FC = () => {
                     id: "common.email",
                     defaultMessage: "Email address",
                     description:
-                      "Input area label where users must enter their email as requirement",
+                      "Input area label where users must enter their email",
                   })}
                   labelPlacement="above"
                   required={true}
