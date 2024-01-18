@@ -1,3 +1,4 @@
+//AM
 import React, { useState, useEffect } from "react";
 import {
   IonCard,
@@ -17,11 +18,23 @@ import {
 import { useProfile } from "@/contexts/ProfileContext";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
+import cover from "@/assets/icons/back_of_card.svg";
+import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
+import correct_card_audio from "@/assets/audio/intruder_correct.wav";
 import "./Intruder.scss";
-import "../StoryFactory/StoryFactory.css";
+import { useParams } from "react-router";
+import { useFirestore, useFirestoreDocData } from "reactfire";
+import { doc } from "firebase/firestore";
 
 export const Intruder2: React.FC = () => {
   const { isImmersive } = useProfile();
+  const audio_correct = new Audio(correct_card_audio);
+  const audio_incorrect = new Audio(incorrect_card_audio);
+  //@ts-ignore
+  const { pack_id } = useParams();
+  const firestore = useFirestore();
+  const ref = doc(firestore, "intruder-game", pack_id);
+  const { status, data } = useFirestoreDocData(ref);
 
   const initialStyle = {
     cursor: "pointer",
@@ -44,13 +57,13 @@ export const Intruder2: React.FC = () => {
   };
 
   const temporaryBackgroundStyle = {
-    backgroundImage: "url('/assets/img/back_of_card.png')",
+    backgroundImage: `url(${cover})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     zIndex: "2",
   };
 
-  //hardcodee set of cards untill we pull over from Db
+  //hardcoded set of cards untill we pull over from Db
   const cardSet1 = [
     { id: 1, isCorrect: false, imgSrc: almohada1, text: "almohada" },
     { id: 2, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
@@ -95,7 +108,7 @@ export const Intruder2: React.FC = () => {
           2: initialStyle,
           3: initialStyle,
         });
-      }, 2000);
+      }, 1000000);
     }
   }, [isCorrectSelected]);
 
@@ -103,6 +116,8 @@ export const Intruder2: React.FC = () => {
   const handleCardClick = (cardNumber: number, isCorrect: boolean) => {
     if (!isCorrect) {
       //logic for the incorrect cards
+
+      audio_incorrect.play(); //plays audio for incorrect choice
       setCardColors((prevColors) => ({
         ...prevColors,
         [cardNumber]: { ...incorrectStyle, animation: "shake 1s" },
@@ -116,6 +131,8 @@ export const Intruder2: React.FC = () => {
       }, 1000);
     } else {
       //logic when the correct card is choosen
+
+      audio_correct.play(); //plays audio for correct choice
       setCardColors((prevColors) => ({
         ...prevColors,
         [cardNumber]: correctStyle,
@@ -123,7 +140,7 @@ export const Intruder2: React.FC = () => {
 
       setTimeout(() => {
         setIsCorrectSelected(true);
-      }, 2000);
+      }, 1000);
     }
   };
 

@@ -277,26 +277,6 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/intruder/1"
-          render={() => (
-            <AuthedLayout>
-              <Intruder1 />
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/intruder/2"
-          render={() => (
-            <AuthedLayout background="#F7FAF9">
-              <StoryFactoryPage6 />
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
           path="/story-factory/6"
           render={() => (
             <AuthedLayout>
@@ -321,7 +301,7 @@ const Router: React.FC = () => {
           exact
           path="/intruder/2"
           render={() => (
-            <AuthedLayout background="#F7FAF9">
+            <AuthedLayout>
               <Intruder2 />
             </AuthedLayout>
           )}

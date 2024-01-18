@@ -15,7 +15,6 @@ import {
 import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import { useProfile } from "@/contexts/ProfileContext";
 import "./Intruder.scss";
-import "../StoryFactory/StoryFactory.css";
 
 export const Intruder1: React.FC = () => {
   const { isImmersive } = useProfile();
