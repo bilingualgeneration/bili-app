@@ -17,7 +17,7 @@ export type ExtendedRadioProps = {
   name: string;
   options: ExtendedRadioOption[];
   testId?: string;
-  useModifiedBehavior?: boolean;
+  displayCardsInRow?: boolean;
   defaultOption?: ExtendedRadioOption | undefined;
 };
 
@@ -28,7 +28,7 @@ export const ExtendedRadio = ({
   name,
   options,
   testId = "extended-radio-component",
-  useModifiedBehavior = false,
+  displayCardsInRow = false,
   defaultOption,
 }: ExtendedRadioProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(
@@ -56,7 +56,7 @@ export const ExtendedRadio = ({
       name={name}
       render={({ field: { onChange } }): JSX.Element => (
         <span data-testid={testId}>
-          <div className={useModifiedBehavior ? "price-cards" : ""}>
+          <div className={displayCardsInRow ? "price-cards" : ""}>
             {options.map((option, index) => {
               const props = {
                 ...option.component.props,

@@ -10,19 +10,23 @@ import React from "react";
 import "./PricingRadioCard.css";
 
 type PricingRadioCardProps = {
-  title: string | MessageFormatElement[];
-  content: string | MessageFormatElement[];
+  title: string;
+  cost: string;
+  frequency: string;
+  discount?: string;
   icon?: React.ReactNode;
   iconBackgroundColor?: string;
   badge?: React.ReactNode;
 };
 
 export const PricingRadioCard: React.FC<PricingRadioCardProps> = ({
-  badge,
-  content,
+  title,
+  cost,
+  frequency,
+  discount,
   icon,
   iconBackgroundColor,
-  title,
+  badge,
 }) => {
   return (
     <IonCard className="main-pricing-card">
@@ -37,15 +41,19 @@ export const PricingRadioCard: React.FC<PricingRadioCardProps> = ({
         )}
         <IonCardHeader class="pricing-header">
           <IonCardTitle className="ion-no-padding ion-text-start">
-            <IonText color="primary">
-              {/* todo: don't force type cast */}
-              {title as string}
+            <IonText color="primary" className="bolded-inner-card-heading">
+              {title}
             </IonText>
           </IonCardTitle>
         </IonCardHeader>
         <IonCardContent className="ion-no-padding ion-text-start">
-          {/* todo: don't force type cast */}
-          {content as string}
+          <div>
+            <span className="cost">{cost}</span>
+
+            <span className="frequency">{frequency}</span>
+          </div>
+
+          <div className="discount">{discount}</div>
         </IonCardContent>
       </div>
     </IonCard>

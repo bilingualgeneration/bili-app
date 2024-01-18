@@ -41,8 +41,22 @@ export const Pricing: React.FC = () => {
     component: (
       <div id="pricing-month">
         <PricingRadioCard
-          title={intl.messages["signUp.pricing_monthly_title"]}
-          content={intl.messages["signUp.pricing_monthly_pricing"]}
+          title={intl.formatMessage({
+            id: "signUp.pricing_monthly_title",
+            defaultMessage: "1 month unlimited",
+            description:
+              "larger title for smaller/inner cards within pricing page that shows subscription length",
+          })}
+          cost={intl.formatMessage({
+            id: "signUp.montlyCost",
+            defaultMessage: "$4.99",
+            description: "cost of a monthly subscription",
+          })}
+          frequency={intl.formatMessage({
+            id: "signUp.monthlyFrequency",
+            defaultMessage: "/month",
+            description: "length of time for the particular package",
+          })}
         />
       </div>
     ),
@@ -55,8 +69,27 @@ export const Pricing: React.FC = () => {
           <p className="best-value-text">best value</p>
         </div>
         <PricingRadioCard
-          title={intl.messages["signUp.pricing_annual_title"]}
-          content={intl.messages["signUp.pricing_annual_pricing"]}
+          title={intl.formatMessage({
+            id: "signUp.pricing_annual_title",
+            defaultMessage: "12 months unlimited",
+            description:
+              "larger title for smaller/inner cards within pricing page that shows subscription length",
+          })}
+          cost={intl.formatMessage({
+            id: "signUp.annualCost",
+            defaultMessage: "$44.99",
+            description: "cost of an annual subscription",
+          })}
+          frequency={intl.formatMessage({
+            id: "signUp.annualFrequency",
+            defaultMessage: "/year",
+            description: "length of time for the particular package",
+          })}
+          discount={intl.formatMessage({
+            id: "signUp.annualDiscount",
+            defaultMessage: "3 month discount!",
+            description: "text that describes savings of package",
+          })}
         />
       </div>
     ),
@@ -101,14 +134,14 @@ export const Pricing: React.FC = () => {
             </IonText>
           </div>
 
-          {/* Render the form with ExtendedRadio using modified behavior */}
+          {/* Render the form with ExtendedRadio using modified behavior specific for pricing page (to display cards in a row as opposed to column) */}
           <form onSubmit={onSubmit} className="radio-button-select">
             <div className="price-cards">
               <ExtendedRadio
                 control={control}
                 name="pricing"
                 options={[monthlyOption, annualOption]}
-                useModifiedBehavior={true}
+                displayCardsInRow={true}
                 defaultOption={annualOption}
               />
             </div>

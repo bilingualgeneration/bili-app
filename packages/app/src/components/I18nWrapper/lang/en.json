@@ -5,13 +5,41 @@
   "signUp.parent": "Parent/Caregiver",
   "signUp.parent2": "I want to use this app with my child(ren).",
   "signUp.pricing_monthly_title": "1 month unlimited",
-  "signUp.pricing_monthly_pricing": "$4.99/month",
   "signUp.pricing_annual_title": "12 months unlimited",
-  "signUp.pricing_annual_pricing": "$44.99/year",
   "5olauM": [
     {
       "type": 0,
       "value": "Default Text 4 for Bilingual Mode"
+    }
+  ],
+  "signUp.monthlyCost": [
+    {
+      "type": 0,
+      "value": "$4.99"
+    }
+  ],
+  "signUp.monthlyFrequency": [
+    {
+      "type": 0,
+      "value": "/month"
+    }
+  ],
+  "signUp.annualCost": [
+    {
+      "type": 0,
+      "value": "$44.99"
+    }
+  ],
+  "signUp.annualFrequency": [
+    {
+      "type": 0,
+      "value": "/year"
+    }
+  ],
+  "signUp.annualDiscount": [
+    {
+      "type": 0,
+      "value": "3 month discount!"
     }
   ],
   "9fs/J5": [
