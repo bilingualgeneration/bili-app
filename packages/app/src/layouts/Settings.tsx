@@ -118,7 +118,7 @@ const AdultCheckModal: FC = () => {
                   <FormattedMessage
                     id="common.continue"
                     defaultMessage="Continue"
-                    description="Button label to continue"
+                    description="Button for users to continue on to the next page"
                   />
                 </IonButton>
               </IonCol>
