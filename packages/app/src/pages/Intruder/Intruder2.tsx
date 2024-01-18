@@ -95,7 +95,7 @@ export const Intruder2: React.FC = () => {
           2: initialStyle,
           3: initialStyle,
         });
-      }, 3000);
+      }, 2000);
     }
   }, [isCorrectSelected]);
 
