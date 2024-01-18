@@ -27,8 +27,9 @@ export const Splash: React.FC = () => {
           <IonCardContent>
             <IonCardTitle className="ion-padding-bottom">
               <FormattedMessage
-                id="common.haveAccount"
+                id="common.haveBiliAccount"
                 defaultMessage="Already have a Bili account?"
+                description="Asking users if they have a BILI account vs just 'have an account'"
               />
             </IonCardTitle>
             <IonButton
