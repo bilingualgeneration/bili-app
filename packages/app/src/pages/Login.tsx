@@ -104,7 +104,7 @@ const Login: React.FC = () => {
                     id: "common.password",
                     defaultMessage: "Password",
                     description:
-                      "Text above input area showing users that they must enter a password as a requirement",
+                      "Text above input area showing users that they must enter a password",
                   })}
                   labelPlacement="above"
                   required={true}

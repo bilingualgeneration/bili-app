@@ -91,7 +91,7 @@ export const ParentAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "common.password",
+              id: "common.passwordAsterix",
               defaultMessage: "Password*",
               description:
                 "Text above input area showing users that they must enter a password as a requirement",
