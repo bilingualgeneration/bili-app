@@ -131,7 +131,7 @@ export const ParentAccountCredentials: React.FC = () => {
           <FormattedMessage
             id="common.google"
             defaultMessage="Continue with Google"
-            description="Continue the login process with Google"
+            description="Button for users to continue the login/registration process using Google"
           />
         </IonButton>
 
