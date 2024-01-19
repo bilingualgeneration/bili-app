@@ -35,7 +35,13 @@ export const Preferences: React.FC = () => {
       <IonList className="preferences-style">
         <IonItem style={{ marginBottom: "2rem" }}>
           <div className="title-style">
-            <h1>Preferences</h1>
+            <h1>
+              <FormattedMessage
+                id="settings.preferences.title"
+                defaultMessage="Preferences"
+                description="Title at the top of 'preferences' page"
+              />
+            </h1>
           </div>
         </IonItem>
 
