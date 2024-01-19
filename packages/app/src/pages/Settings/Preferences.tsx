@@ -37,7 +37,7 @@ export const Preferences: React.FC = () => {
           <div className="title-style">
             <h1>
               <FormattedMessage
-                id="settings.preferences.title"
+                id="sideMenu.preferences"
                 defaultMessage="Preferences"
                 description="Title at the top of 'preferences' page"
               />

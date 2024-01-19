@@ -110,6 +110,12 @@
       "value": "Login"
     }
   ],
+  "common.logOut": [
+    {
+      "type": 0,
+      "value": "Log out"
+    }
+  ],
   "common.noAccount": [
     {
       "type": 0,
