@@ -37,7 +37,7 @@ import UnauthedLayout from "@/layouts/Unauthed";
 import { PreSplash } from "@/pages/PreSplash";
 import { Intruder1 } from "./pages/Intruder/Intruder1";
 import { Intruder2 } from "./pages/Intruder/Intruder2";
-import { WouldDo } from "@/pages/WouldDo";
+import { WouldDo } from "@/pages/WouldDo/WouldDo";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
