@@ -18,7 +18,7 @@ import {
 import { useProfile } from "@/contexts/ProfileContext";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
-import cover from "@/assets/icons/back_of_card.svg";
+import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/intruder_correct.wav";
 import "./Intruder.scss";
@@ -26,15 +26,14 @@ import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 
-export const Intruder2: React.FC = () => {
+interface IntruderGameProps {
+  game: any;
+}
+
+export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
-  //@ts-ignore
-  const { pack_id } = useParams();
-  const firestore = useFirestore();
-  const ref = doc(firestore, "intruder-game", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
 
   const initialStyle = {
     cursor: "pointer",
@@ -64,27 +63,27 @@ export const Intruder2: React.FC = () => {
   };
 
   //hardcoded set of cards untill we pull over from Db
-  const cardSet1 = [
-    { id: 1, isCorrect: false, imgSrc: almohada1, text: "almohada" },
-    { id: 2, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
-    {
-      id: 3,
-      isCorrect: true,
-      imgSrc: "/assets/img/intruder_boca.png",
-      text: "boca",
-    },
-  ];
+  //   const cardSet1 = [
+  //     { id: 1, isCorrect: false, imgSrc: almohada1, text: "almohada" },
+  //     { id: 2, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
+  //     {
+  //       id: 3,
+  //       isCorrect: true,
+  //       imgSrc: "/assets/img/intruder_boca.png",
+  //       text: "boca",
+  //     },
+  //   ];
 
-  const cardSet2 = [
-    {
-      id: 1,
-      isCorrect: true,
-      imgSrc: "/assets/img/intruder_boca.png",
-      text: "boca",
-    },
-    { id: 2, isCorrect: false, imgSrc: almohada1, text: "almohada" },
-    { id: 3, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
-  ];
+  //   const cardSet2 = [
+  //     {
+  //       id: 1,
+  //       isCorrect: true,
+  //       imgSrc: "/assets/img/intruder_boca.png",
+  //       text: "boca",
+  //     },
+  //     { id: 2, isCorrect: false, imgSrc: almohada1, text: "almohada" },
+  //     { id: 3, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
+  //   ];
 
   const [cardColors, setCardColors] = useState({
     1: initialStyle,
@@ -93,7 +92,21 @@ export const Intruder2: React.FC = () => {
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
-  const [currentCardSet, setCurrentCardSet] = useState(cardSet1);
+  //   const [currentCardSet, setCurrentCardSet] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [data]);
+
+  const wordGroup = data[currentIndex];
+  const incorrectWord = wordGroup.intruder_text;
+
+  const cards = [
+    { word: wordGroup.intruder_text, image: wordGroup.intruder_image },
+    { word: wordGroup.word_2_text, image: wordGroup.word_2_image },
+    //{...}
+  ];
 
   useEffect(() => {
     if (isCorrectSelected) {
@@ -101,14 +114,14 @@ export const Intruder2: React.FC = () => {
 
       setTimeout(() => {
         setShowBackside(false);
-        setCurrentCardSet(cardSet2); // Update to new set of cards
+        setCurrentIndex(currentIndex + 1); // Update to new set of cards
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           1: initialStyle,
           2: initialStyle,
           3: initialStyle,
         });
-      }, 1000000);
+      }, 2000);
     }
   }, [isCorrectSelected]);
 

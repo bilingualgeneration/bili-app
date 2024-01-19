@@ -61,6 +61,7 @@ import "./theme/overrides.scss";
 /* SwiperJS */
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
+import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
 
 setupIonicReact();
 
@@ -299,10 +300,10 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/intruder/2"
+          path="/intruder/play/:pack_id"
           render={() => (
             <AuthedLayout>
-              <Intruder2 />
+              <IntruderGameLoader />
             </AuthedLayout>
           )}
         />
