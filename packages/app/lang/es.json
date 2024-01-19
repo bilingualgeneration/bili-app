@@ -28,7 +28,7 @@
   "common.theIntruder": "El intruso",
   "intruder.intruderWelcome": "Bienvenidos a la página de Intrusos",
   "landingPage.assignments": "Asignaciones",
-  "landingPage.welcome": "¡Bienvenido {nombre}!",
+  "landingPage.welcome": "¡Hola {nombre}!",
   "landingPage.wellness": "Bienestar",
   "languageInclusivity.excludeGenderNeutral": "Elija esta opción si no desea ver el uso de pronombres neutrales de género en el contenido (es decir, se excluirán \"ellos\" en singular en inglés y \"elle\" en español). Por ejemplo, sólo verás las palabras \"amigo\" y \"amiga\" en actividades y contenidos. La palabra \"amigue\" no aparecerá.",
   "languageInclusivity.excludeGenderNeutralTitle": "Excluir pronombres neutrales de género",
