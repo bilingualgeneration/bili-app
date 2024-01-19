@@ -173,7 +173,7 @@ export const Preferences: React.FC = () => {
               </h4>
             </div>
             <IonSelectOption value="unlimited">Unlimited</IonSelectOption>
-            <IonSelectOption value="30">30mins</IonSelectOption>
+            <IonSelectOption value="30">30 mins</IonSelectOption>
             <IonSelectOption value="1">1 hour</IonSelectOption>
             <IonSelectOption value="1.30">1 hour 30 mins</IonSelectOption>
             <IonSelectOption value="2">2 hours</IonSelectOption>
