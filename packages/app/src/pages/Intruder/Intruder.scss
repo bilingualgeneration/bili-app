@@ -1,14 +1,21 @@
 #intruder-styles {
   padding: 0 107px;
+  margin: 0 auto;
 
-  .intruder-game-title {
+  .intruder-game-title h2 {
     padding: 0 0 0 30px;
+    color: #1c1c17;
+    font-family: Outfit;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 56px; /* 116.667% */
+    letter-spacing: -1px;
   }
   .intruder-cards-container {
     display: flex;
     //height: 612px;
     padding: 0px 40px;
-    justify-content: center;
     align-items: center;
     gap: 44px;
     align-self: stretch;

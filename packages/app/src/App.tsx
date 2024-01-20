@@ -300,6 +300,16 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/intruder/2"
+          render={() => (
+            <AuthedLayout>
+              <Intruder2 />
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/intruder/play/:pack_id"
           render={() => (
             <AuthedLayout>

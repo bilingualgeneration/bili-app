@@ -26,6 +26,7 @@ import "./Intruder.scss";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
+import { Intruder3 } from "./Intruder3";
 
 interface BiliImage {
   url: string;
@@ -94,8 +95,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
-  //   const [currentCardSet, setCurrentCardSet] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -129,7 +130,15 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     if (isCorrectSelected) {
       setShowBackside(true);
       card_flip.play(); //sound for flipping cards
+
       setTimeout(() => {
+        if (
+          (currentIndex + 1) % 5 === 0 ||
+          currentIndex === data.word_group.length - 1
+        ) {
+          setShowCongrats(true); //go to the Intruder3 page
+        }
+
         setShowBackside(false);
         goToNextWordGroup(); //check for the current index
         setIsCorrectSelected(false); // Reset the state
@@ -171,6 +180,10 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       }, 1000);
     }
   };
+
+  if (showCongrats) {
+    return <Intruder3 setShowCongrats={setShowCongrats} />;
+  }
 
   return (
     <>
