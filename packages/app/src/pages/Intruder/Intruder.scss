@@ -88,4 +88,14 @@
   .shake-animation {
     animation: shake 1s;
   }
+
+  .intruder-button-bold h3 {
+    color: var(--Base-Nube, #fff);
+    text-align: center;
+    font-family: Outfit;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 35.2px */
+  }
 }

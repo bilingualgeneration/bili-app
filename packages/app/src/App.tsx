@@ -62,6 +62,7 @@ import "./theme/overrides.scss";
 import "swiper/scss";
 import "@ionic/react/css/ionic-swiper.css";
 import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+import { Intruder2 } from "./pages/Intruder/Intruder2";
 
 setupIonicReact();
 

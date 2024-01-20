@@ -23,6 +23,7 @@ type StoriesCardNoRatingProps = {
   isLocked?: boolean;
   lock?: React.ReactNode;
   storyId?: string;
+  isIntruder?: boolean;
 };
 
 export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
@@ -35,6 +36,7 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
   isLocked = false,
   lock,
   storyId,
+  isIntruder,
 }) => {
   const { isImmersive } = useProfile();
   const history = useHistory();
@@ -49,8 +51,11 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
         style={cardStyles}
         className={`stories-card ${isLocked ? "locked" : ""} ${className}`}
         onClick={() => {
-          if (!isLocked && storyId) {
+          if (!isLocked && storyId && !isIntruder) {
             history.push(`/story-factory/play/${storyId}`);
+          }
+          if (!isLocked && storyId && isIntruder) {
+            history.push(`/intruder/play/${storyId}`);
           }
         }}
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -12,54 +12,67 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
+
 import { useProfile } from "@/contexts/ProfileContext";
 import "./Intruder.scss";
+import "../StoryFactory/StoryFactory.scss";
+import { FormattedMessage } from "react-intl";
 
 export const Intruder1: React.FC = () => {
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+
   return (
-    <>
-      <IonCard className="story-page-2-main-card">
-        <IonGrid class="ion-no-margin">
-          <IonRow class="ion-justify-content-left">
-            <IonCol size="auto" size-md="9">
-              <IonCardHeader>
-                <IonCardTitle style={{ textAlign: "left" }}>
-                  <div id="story-bienvenidos">El intruso</div>
-                </IonCardTitle>
-                <IonCardSubtitle>
-                  <div id="story-un-lugar">
+    <div style={{ position: "relative" }}>
+      <div className="ion-no-padding sf-card">
+        <IonCard className="">
+          <IonCardContent>
+            <div style={{ paddingRight: 100 }}>
+              <h1 className="color-selva">El intruso</h1>
+              <p>
+                El objetivo de este juego es identificar la palabra que no rima
+                con el resto.
+              </p>
+
+              {!isImmersive && (
+                <>
+                  <h1 className="color-selva">El intruso</h1>
+                  <p>
                     El objetivo de este juego es identificar la palabra que no
                     rima con el resto.
+                  </p>
+                </>
+              )}
+
+              {!isImmersive && (
+                <>
+                  <h1>
+                    <br />
+                    Welcome to the story factory!
+                  </h1>
+                  <h2>A place for silly syllabic reading!</h2>
+                </>
+              )}
+
+              <div className="ion-text-center" style={{ paddingTop: "4rem" }}>
+                <IonButton shape="round" onClick={() => {}}>
+                  <div style={{ padding: "0 3rem" }}>
+                    <div className="keep-going-button-es">Siguiente</div>
+                    {!isImmersive && (
+                      <div className="keep-going-button-en">Next</div>
+                    )}
                   </div>
-                </IonCardSubtitle>
-                {!isImmersive && (
-                  <>
-                    <div id="story-welcome" style={{ marginTop: "4rem" }}>
-                      The Intruder
-                    </div>
-                    <div id="story-a-place">
-                      The goal of this game is to identify the word that does
-                      not rhyme with the rest.
-                    </div>
-                  </>
-                )}
-              </IonCardHeader>
-              <div className="story-factory-button-container">
-                <IonButton />
+                </IonButton>
               </div>
-            </IonCol>
-            <IonCol>
-              <img
-                className="bili-character"
-                src={"/assets/img/bili_in_coat.png"}
-                alt="Bili character"
-              />
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonCard>
-    </>
+            </div>
+          </IonCardContent>
+        </IonCard>
+      </div>
+      <img
+        className="bili-character"
+        src="/assets/img/bili_in_coat.png"
+        alt="Bili character"
+      />
+    </div>
   );
 };
