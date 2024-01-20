@@ -1,5 +1,5 @@
 //AM
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   IonCard,
   IonCardContent,
@@ -26,11 +26,34 @@ import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 
+interface BiliImage {
+  url: string;
+}
+
+interface Game {
+  word_group: Array<{
+    intruder_text: string;
+    intruder_image: BiliImage;
+    word_2_text: string;
+    word_2_image: BiliImage;
+    word_3_text: string;
+    word_3_image: BiliImage;
+  }>;
+}
+
 interface IntruderGameProps {
-  game: any;
+  game: Game;
 }
 
 export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
+  function shuffleArray<T>(array: T[]): T[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap array[i] and array[j]
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
   const { isImmersive } = useProfile();
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
@@ -62,29 +85,6 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
     zIndex: "2",
   };
 
-  //hardcoded set of cards untill we pull over from Db
-  //   const cardSet1 = [
-  //     { id: 1, isCorrect: false, imgSrc: almohada1, text: "almohada" },
-  //     { id: 2, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
-  //     {
-  //       id: 3,
-  //       isCorrect: true,
-  //       imgSrc: "/assets/img/intruder_boca.png",
-  //       text: "boca",
-  //     },
-  //   ];
-
-  //   const cardSet2 = [
-  //     {
-  //       id: 1,
-  //       isCorrect: true,
-  //       imgSrc: "/assets/img/intruder_boca.png",
-  //       text: "boca",
-  //     },
-  //     { id: 2, isCorrect: false, imgSrc: almohada1, text: "almohada" },
-  //     { id: 3, isCorrect: false, imgSrc: empanada, text: "empanada" }, // Assuming this is the correct card
-  //   ];
-
   const [cardColors, setCardColors] = useState({
     1: initialStyle,
     2: initialStyle,
@@ -92,21 +92,27 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
-  //   const [currentCardSet, setCurrentCardSet] = useState();
+  const [currentCardSet, setCurrentCardSet] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
 
-  const wordGroup = data[currentIndex];
-  const incorrectWord = wordGroup.intruder_text;
-
-  const cards = [
-    { word: wordGroup.intruder_text, image: wordGroup.intruder_image },
-    { word: wordGroup.word_2_text, image: wordGroup.word_2_image },
-    //{...}
-  ];
+  const shuffledCards = useMemo(() => {
+    const wordGroup = data.word_group[currentIndex];
+    const cards = [
+      {
+        word: wordGroup.intruder_text,
+        image: wordGroup.intruder_image,
+        isIntruder: true,
+        id: 1,
+      },
+      { word: wordGroup.word_2_text, image: wordGroup.word_2_image, id: 2 },
+      { word: wordGroup.word_3_text, image: wordGroup.word_3_image, id: 3 },
+    ];
+    return shuffleArray(cards);
+  }, [data, currentIndex]);
 
   useEffect(() => {
     if (isCorrectSelected) {
@@ -126,29 +132,27 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   }, [isCorrectSelected]);
 
   // Function to handle card click
-  const handleCardClick = (cardNumber: number, isCorrect: boolean) => {
-    if (!isCorrect) {
+  const handleCardClick = (card: any) => {
+    if (!card.isIntruder) {
       //logic for the incorrect cards
-
       audio_incorrect.play(); //plays audio for incorrect choice
       setCardColors((prevColors) => ({
         ...prevColors,
-        [cardNumber]: { ...incorrectStyle, animation: "shake 1s" },
+        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
       }));
 
       setTimeout(() => {
         setCardColors((prevColors) => ({
           ...prevColors,
-          [cardNumber]: initialStyle,
+          [card.id]: initialStyle,
         }));
       }, 1000);
     } else {
       //logic when the correct card is choosen
-
       audio_correct.play(); //plays audio for correct choice
       setCardColors((prevColors) => ({
         ...prevColors,
-        [cardNumber]: correctStyle,
+        [card.id]: correctStyle,
       }));
 
       setTimeout(() => {
@@ -169,18 +173,15 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
           )}
         </div>
         <div className="intruder-cards-container">
-          {currentCardSet.map((card) => (
+          {shuffledCards.map((card) => (
             <IonCard
-              key={card.id}
               className="intruder-card-style"
-              style={
-                showBackside ? temporaryBackgroundStyle : cardColors[card.id]
-              }
-              onClick={() => handleCardClick(card.id, card.isCorrect)}
+              style={showBackside ? temporaryBackgroundStyle : initialStyle}
+              onClick={() => handleCardClick(card)}
             >
-              {!showBackside && <img src={card.imgSrc} />}
+              {!showBackside && <img src={card.image.url} />}
               {!showBackside && (
-                <p className="intruder-card-title">{card.text}</p>
+                <p className="intruder-card-title">{card.word}</p>
               )}
             </IonCard>
           ))}
