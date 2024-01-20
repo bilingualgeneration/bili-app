@@ -149,7 +149,7 @@ export const StudentDashboard: FC = () => {
         <h1>
           <FormattedMessage
             id="landingPage.welcome"
-            defaultMessage="Welcome {name}!"
+            defaultMessage="Hello {name}!"
             values={{ name }}
           />
         </h1>

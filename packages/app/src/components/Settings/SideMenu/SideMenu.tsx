@@ -14,6 +14,7 @@ import "./SideMenu.scss";
 import { SideMenuOption } from "./SideMenuOption";
 import { useLocation } from "react-router-dom";
 import { Preferences } from "@capacitor/preferences";
+import { useIntl } from "react-intl";
 
 export const SideMenu: React.FC = () => {
   const auth = useAuth();
@@ -24,6 +25,8 @@ export const SideMenu: React.FC = () => {
     Preferences.remove({ key: "shouldShowSettingsTutorial" });
   };
 
+  const intl = useIntl();
+
   return (
     <div id="settings-side-menu" style={{ height: "100%" }}>
       <IonList
@@ -33,45 +36,55 @@ export const SideMenu: React.FC = () => {
       >
         <SideMenuOption
           icon={gridOutline}
-          id={"sideMenu.overview"}
-          defaultMessage={"Overview"}
-          description={"Overview label for side menu on settings page"}
+          content={intl.formatMessage({
+            id: "sideMenu.overview",
+            defaultMessage: "Overview",
+            description: "Overview label for side menu on settings page",
+          })}
           to="/settings/overview"
           isActive={location.pathname === "/settings/overview"}
         />
 
         <SideMenuOption
           icon={personOutline}
-          id={"sideMenu.profile"}
-          defaultMessage={"Profile"}
-          description={"Profile label for side menu on settings page"}
+          content={intl.formatMessage({
+            id: "sideMenu.profile",
+            defaultMessage: "Profile",
+            description: "Profile label for side menu on settings page",
+          })}
           to="/settings/profile"
           isActive={location.pathname === "/settings/profile"}
         />
 
         <SideMenuOption
           icon={optionsOutline}
-          id={"sideMenu.preferences"}
-          defaultMessage={"Preferences"}
-          description={"Preferences label for side menu on settings page"}
+          content={intl.formatMessage({
+            id: "sideMenu.preferences",
+            defaultMessage: "Preferences",
+            description: "Preferences label for side menu on settings page",
+          })}
           to="/settings/preferences"
           isActive={location.pathname === "/settings/preferences"}
         />
 
         <SideMenuOption
           icon={statsChartOutline}
-          id={"sideMenu.progress"}
-          defaultMessage={"Progress"}
-          description={"Progress label for side menu on settings page"}
+          content={intl.formatMessage({
+            id: "sideMenu.progress",
+            defaultMessage: "Progress",
+            description: "Progress label for side menu on settings page",
+          })}
           to="/settings/progress"
           isActive={location.pathname === "/settings/progress"}
         />
 
         <SideMenuOption
           icon={informationCircleOutline}
-          id={"sideMenu.about"}
-          defaultMessage={"About"}
-          description={"About label for side menu on settings page"}
+          content={intl.formatMessage({
+            id: "sideMenu.about",
+            defaultMessage: "About",
+            description: "About label for side menu on settings page",
+          })}
           to={"https://bilingualgeneration.com/bili/"}
         />
 
@@ -82,9 +95,12 @@ export const SideMenu: React.FC = () => {
         >
           <SideMenuOption
             icon={logOutOutline}
-            id={"common.logOut"}
-            defaultMessage={"Log out"}
-            description={"Log out label for side menu on settings page"}
+            content={intl.formatMessage({
+              id: "common.logOut",
+              defaultMessage: "Log out",
+              description: "Log out label for side menu on settings page",
+            })}
+            to="/splash"
           />
         </div>
 

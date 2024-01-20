@@ -123,6 +123,12 @@
       "value": "Acceso"
     }
   ],
+  "common.logOut": [
+    {
+      "type": 0,
+      "value": "Cerrar sesión"
+    }
+  ],
   "common.noAccount": [
     {
       "type": 0,
@@ -644,7 +650,7 @@
   "sideMenu.about": [
     {
       "type": 0,
-      "value": "Acerca de"
+      "value": "Sobre Bili"
     }
   ],
   "sideMenu.logOut": [
