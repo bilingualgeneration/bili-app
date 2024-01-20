@@ -21,6 +21,7 @@ import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
 import "./Intruder.scss";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -45,7 +46,7 @@ interface IntruderGameProps {
   game: Game;
 }
 
-export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
+export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   function shuffleArray<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -57,6 +58,7 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
+  const card_flip = new Audio(card_flip_audio);
 
   const initialStyle = {
     cursor: "pointer",
@@ -92,12 +94,21 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
-  const [currentCardSet, setCurrentCardSet] = useState();
+  //   const [currentCardSet, setCurrentCardSet] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
+
+  const goToNextWordGroup = () => {
+    // Check if the current index is at the last element of the word_group array
+    if (currentIndex >= data.word_group.length - 1) {
+      setCurrentIndex(0); // Reset to the first element
+    } else {
+      setCurrentIndex(currentIndex + 1); // Move to the next element
+    }
+  };
 
   const shuffledCards = useMemo(() => {
     const wordGroup = data.word_group[currentIndex];
@@ -117,10 +128,10 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
-
+      card_flip.play(); //sound for flipping cards
       setTimeout(() => {
         setShowBackside(false);
-        setCurrentIndex(currentIndex + 1); // Update to new set of cards
+        goToNextWordGroup(); //check for the current index
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           1: initialStyle,
@@ -175,8 +186,11 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
         <div className="intruder-cards-container">
           {shuffledCards.map((card) => (
             <IonCard
+              key={card.id}
               className="intruder-card-style"
-              style={showBackside ? temporaryBackgroundStyle : initialStyle}
+              style={
+                showBackside ? temporaryBackgroundStyle : cardColors[card.id]
+              }
               onClick={() => handleCardClick(card)}
             >
               {!showBackside && <img src={card.image.url} />}

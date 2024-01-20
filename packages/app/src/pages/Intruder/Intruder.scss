@@ -28,6 +28,11 @@
     border-radius: 32px;
   }
 
+  .intruder-card-style img {
+    max-height: 70%;
+    max-width: 70%;
+  }
+
   .intruder-card-title {
     color: var(--Base-Suelo, #000);
     text-align: center;
