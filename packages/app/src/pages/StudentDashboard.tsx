@@ -378,7 +378,11 @@ export const StudentDashboard: FC = () => {
           <div className="cards-title">
             <Link to="/play">
               <h1 className="color-selva">
-                <FormattedMessage id="common.play" defaultMessage="Play" />
+                <FormattedMessage
+                  id="common.play"
+                  defaultMessage="Play"
+                  description="Standalone label for Play"
+                />
               </h1>
               {!isImmersive && <h2>Play</h2>}
             </Link>

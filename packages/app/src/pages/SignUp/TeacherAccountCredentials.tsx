@@ -51,7 +51,7 @@ export const TeacherAccountCredentials: React.FC = () => {
         <Input
           label={intl.formatMessage({
             id: "common.fullName",
-            defaultMessage: "Your full name*",
+            defaultMessage: "Full name*",
             description:
               "Input area label where users must enter their name as requirement",
           })}
@@ -67,8 +67,8 @@ export const TeacherAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "common.email",
-              defaultMessage: "Your email*",
+              id: "common.emailAsterix",
+              defaultMessage: "Email address*",
               description:
                 "Input area label where users must enter their email as requirement",
             })}
@@ -105,7 +105,7 @@ export const TeacherAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <Input
             label={intl.formatMessage({
-              id: "common.password",
+              id: "common.passwordAsterix",
               defaultMessage: "Password*",
               description:
                 "Text above input area showing users that they must enter a password as a requirement",
@@ -127,9 +127,7 @@ export const TeacherAccountCredentials: React.FC = () => {
             id: "login.divider",
             defaultMessage: "or",
             description:
-              "Divider text that separates the login page into two sections: \
-            1) for users to log in using credentials and \
-            2) for users to login using Google or Apple",
+              "Divider text that separates the login page into two sections: 1) for users to log in using credentials 2) for users to login using Google or Apple",
           })}
         />
 

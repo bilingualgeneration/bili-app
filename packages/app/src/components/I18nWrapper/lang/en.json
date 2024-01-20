@@ -1,5 +1,4 @@
 {
-  "signUp.describe": "Which best describes you?",
   "signUp.teacher": "Teacher",
   "signUp.teacher2": "I want to use this app with my students.",
   "signUp.parent": "Parent/Caregiver",
@@ -400,6 +399,30 @@
       "value": "Social Justice"
     }
   ],
+  "settings.overview.joyrideBack": [
+    {
+      "type": 0,
+      "value": "Back"
+    }
+  ],
+  "settings.overview.joyrideLast": [
+    {
+      "type": 0,
+      "value": "Last"
+    }
+  ],
+  "settings.overview.joyrideNext": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "settings.overview.joyrideSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
+    }
+  ],
   "settings.overview.InclusiveSpanishMiniCard2": [
     {
       "type": 0,
@@ -487,7 +510,7 @@
   "settings.overview.seeAll": [
     {
       "type": 0,
-      "value": "See all &#40;9&#41;"
+      "value": "See all(9);"
     }
   ],
   "settings.phone": [

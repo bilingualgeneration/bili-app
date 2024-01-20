@@ -85,7 +85,7 @@ const Login: React.FC = () => {
                     id: "common.email",
                     defaultMessage: "Email address",
                     description:
-                      "Input area label where users must enter their email as requirement",
+                      "Input area label where users must enter their email",
                   })}
                   labelPlacement="above"
                   required={true}
@@ -104,7 +104,7 @@ const Login: React.FC = () => {
                     id: "common.password",
                     defaultMessage: "Password",
                     description:
-                      "Text above input area showing users that they must enter a password as a requirement",
+                      "Text above input area showing users that they must enter a password",
                   })}
                   labelPlacement="above"
                   required={true}
@@ -123,9 +123,7 @@ const Login: React.FC = () => {
                   id: "login.divider",
                   defaultMessage: "or",
                   description:
-                    "Divider text that separates the login page into two sections: \
-                1) for users to log in using credentials and \
-                2) for users to login using Google or Apple",
+                    "Divider text that separates the login page into two sections: 1) for users to log in using credentials 2) for users to login using Google or Apple",
                 })}
               />
 
