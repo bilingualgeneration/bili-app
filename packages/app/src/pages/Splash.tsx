@@ -38,7 +38,11 @@ export const Splash: React.FC = () => {
               href="/login"
               shape="round"
             >
-              <FormattedMessage id="common.login" defaultMessage="Login" />
+              <FormattedMessage
+                id="common.logIn"
+                defaultMessage="Log In"
+                description="label to log in"
+              />
             </IonButton>
           </IonCardContent>
         </IonCard>

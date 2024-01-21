@@ -197,7 +197,7 @@ export const ParentAccountCredentials: React.FC = () => {
                 <FormattedMessage
                   id="common.logIn"
                   defaultMessage="Log in"
-                  description="Log in link provided after the text 'Already have an account?' for users in case they have an account so that they don't need to create a new one"
+                  description="label to log in"
                 />
               </a>{" "}
             </IonText>
