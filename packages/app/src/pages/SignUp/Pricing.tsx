@@ -52,11 +52,14 @@ export const Pricing: React.FC = () => {
             defaultMessage: "$4.99",
             description: "cost of a monthly subscription",
           })}
-          frequency={intl.formatMessage({
-            id: "signUp.monthlyFrequency",
-            defaultMessage: "/month",
-            description: "length of time for the particular package",
-          })}
+          frequency={
+            "/" +
+            intl.formatMessage({
+              id: "signUp.monthlyFrequency",
+              defaultMessage: "month",
+              description: "length of time for the particular package",
+            })
+          }
         />
       </div>
     ),
@@ -80,11 +83,14 @@ export const Pricing: React.FC = () => {
             defaultMessage: "$44.99",
             description: "cost of an annual subscription",
           })}
-          frequency={intl.formatMessage({
-            id: "signUp.annualFrequency",
-            defaultMessage: "/year",
-            description: "length of time for the particular package",
-          })}
+          frequency={
+            "/" +
+            intl.formatMessage({
+              id: "signUp.annualFrequency",
+              defaultMessage: "year",
+              description: "length of time for the particular package",
+            })
+          }
           discount={intl.formatMessage({
             id: "signUp.annualDiscount",
             defaultMessage: "3 month discount!",
