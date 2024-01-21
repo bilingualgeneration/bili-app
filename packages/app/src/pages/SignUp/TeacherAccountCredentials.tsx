@@ -51,9 +51,8 @@ export const TeacherAccountCredentials: React.FC = () => {
         <Input
           label={intl.formatMessage({
             id: "common.fullName",
-            defaultMessage: "Your full name*",
-            description:
-              "Input area label where users must enter their name as requirement",
+            defaultMessage: "Your full name",
+            description: "Input label for user's full name",
           })}
           labelPlacement="above"
           name="name"
@@ -68,9 +67,8 @@ export const TeacherAccountCredentials: React.FC = () => {
           <Input
             label={intl.formatMessage({
               id: "common.email",
-              defaultMessage: "Your email*",
-              description:
-                "Input area label where users must enter their email as requirement",
+              defaultMessage: "Your email",
+              description: "Input label for email",
             })}
             labelPlacement="above"
             required={true}
@@ -87,7 +85,7 @@ export const TeacherAccountCredentials: React.FC = () => {
           <Input
             label={intl.formatMessage({
               id: "signUpTeacher.school",
-              defaultMessage: "Your school name*",
+              defaultMessage: "Your school name",
               description:
                 "Input area label where users who choose teacher must enter the name of their school as requirement",
             })}
@@ -106,9 +104,8 @@ export const TeacherAccountCredentials: React.FC = () => {
           <Input
             label={intl.formatMessage({
               id: "common.password",
-              defaultMessage: "Password*",
-              description:
-                "Text above input area showing users that they must enter a password as a requirement",
+              defaultMessage: "Password",
+              description: "Input label for user's password",
             })}
             labelPlacement="above"
             required={true}
@@ -126,10 +123,7 @@ export const TeacherAccountCredentials: React.FC = () => {
           text={intl.formatMessage({
             id: "login.divider",
             defaultMessage: "or",
-            description:
-              "Divider text that separates the login page into two sections: \
-            1) for users to log in using credentials and \
-            2) for users to login using Google or Apple",
+            description: "text to show between options",
           })}
         />
 
@@ -147,7 +141,7 @@ export const TeacherAccountCredentials: React.FC = () => {
           <FormattedMessage
             id="common.google"
             defaultMessage="Continue with Google"
-            description="Button for users to continue the login/registration process using Google"
+            description="Button label to use Google"
           />
         </IonButton>
 
@@ -165,7 +159,7 @@ export const TeacherAccountCredentials: React.FC = () => {
           <FormattedMessage
             id="common.apple"
             defaultMessage="Continue with Apple"
-            description="Button for users to continue the login/registration process using Apple"
+            description="Button label to use Apple"
           />
         </IonButton>
 
@@ -199,7 +193,7 @@ export const TeacherAccountCredentials: React.FC = () => {
             <FormattedMessage
               id="common.continue"
               defaultMessage="Continue"
-              description="Button for users to continue on to the next page"
+              description="Button label to continue"
             />
           </IonButton>
         </div>
@@ -209,7 +203,7 @@ export const TeacherAccountCredentials: React.FC = () => {
             <FormattedMessage
               id="common.haveAccount"
               defaultMessage="Already have an account?"
-              description="Asking users if they have an account so that they don't need to create a new one"
+              description="link text if user already has an account"
             />{" "}
             <IonText>
               {" "}
