@@ -20,14 +20,11 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { FormattedMessage } from "react-intl";
 import "./SideMenu.scss";
 
 interface SideMenuOptionProps {
   icon: any; //TODO: need to figure out better type
-  id: string;
-  defaultMessage: string;
-  description: string;
+  label: any;
   to?: string;
   isActive?: boolean;
 }
@@ -40,9 +37,7 @@ const urlRegex = /^(https?):\/\/.*$/i;
 
 export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   icon,
-  id,
-  defaultMessage,
-  description,
+  label,
   to,
   isActive,
 }) => {
@@ -65,17 +60,10 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
   return (
     <IonItem
       className={isActive ? "hover-highlight-active" : "hover-highlight"}
-      id={`side-menu-button-${id.replace(".", "-")}`}
       {...props}
     >
       <IonIcon slot="start" icon={icon} />
-      <IonLabel className="menu-label">
-        <FormattedMessage
-          id={id}
-          defaultMessage={defaultMessage}
-          description={description}
-        />
-      </IonLabel>
+      <IonLabel className="menu-label">{label}</IonLabel>
     </IonItem>
   );
 };
