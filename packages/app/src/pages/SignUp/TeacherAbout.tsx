@@ -174,7 +174,7 @@ export const TeacherAbout: FC = () => {
             <h2>
               <FormattedMessage
                 id="signUpTeacher.role"
-                defaultMessage="WHat is your role?"
+                defaultMessage="What is your role?"
                 description="Title above where teacher can select what role(s) they have"
               />
             </h2>

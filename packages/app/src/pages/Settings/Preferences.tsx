@@ -35,7 +35,13 @@ export const Preferences: React.FC = () => {
       <IonList className="preferences-style">
         <IonItem style={{ marginBottom: "2rem" }}>
           <div className="title-style">
-            <h1>Preferences</h1>
+            <h1>
+              <FormattedMessage
+                id="sideMenu.preferences"
+                defaultMessage="Preferences"
+                description="Title at the top of 'preferences' page"
+              />
+            </h1>
           </div>
         </IonItem>
 
@@ -167,7 +173,7 @@ export const Preferences: React.FC = () => {
               </h4>
             </div>
             <IonSelectOption value="unlimited">Unlimited</IonSelectOption>
-            <IonSelectOption value="30">30mins</IonSelectOption>
+            <IonSelectOption value="30">30 mins</IonSelectOption>
             <IonSelectOption value="1">1 hour</IonSelectOption>
             <IonSelectOption value="1.30">1 hour 30 mins</IonSelectOption>
             <IonSelectOption value="2">2 hours</IonSelectOption>

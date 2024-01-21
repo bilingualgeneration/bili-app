@@ -15,6 +15,7 @@ import "./SideMenu.scss";
 import { SideMenuOption } from "./SideMenuOption";
 import { useLocation } from "react-router-dom";
 import { Preferences } from "@capacitor/preferences";
+import { useIntl } from "react-intl";
 
 interface Option {
   icon: any;
