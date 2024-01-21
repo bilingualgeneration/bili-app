@@ -1,38 +1,4 @@
 {
-  "signUp.describe": "¿Qué opción te describe mejor?",
-  "signUp.teacher": "Maestro",
-  "signUp.teacher2": "Quiero usar esta aplicación con mis estudiantes.",
-  "signUp.parent": "Padre/Cuidador",
-  "signUp.parent2": "Quiero usar esta aplicación con mi(s) niño(s).",
-  "signUp.continue": "Continuar",
-  "signUp.pricing_monthly_title": "1 mes ilimitado",
-  "signUp.pricing_monthly_pricing": "$4.99/mes",
-  "signUp.pricing_annual_title": "12 meses ilimitados",
-  "signUp.pricing_annual_pricing": "$44.99/año",
-  "3WHbRH": [
-    {
-      "type": 0,
-      "value": "¡Bienvenidos a la Fábrica de Cuentos!"
-    }
-  ],
-  "5olauM": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 4 para el modo bilingüe"
-    }
-  ],
-  "9fs/J5": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 1"
-    }
-  ],
-  "Uuer1n": [
-    {
-      "type": 0,
-      "value": "¡Un lugar para lecturas tontas de sílabas!"
-    }
-  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -84,13 +50,13 @@
   "common.email": [
     {
       "type": 0,
-      "value": "Tu correo electrónico*"
+      "value": "Tu correo electrónico"
     }
   ],
   "common.fullName": [
     {
       "type": 0,
-      "value": "Tu nombre completo*"
+      "value": "Tu nombre completo"
     }
   ],
   "common.go_back": [
@@ -117,6 +83,12 @@
       "value": "Acceso"
     }
   ],
+  "common.logOut": [
+    {
+      "type": 0,
+      "value": "Cerrar sesión"
+    }
+  ],
   "common.login": [
     {
       "type": 0,
@@ -138,7 +110,7 @@
   "common.password": [
     {
       "type": 0,
-      "value": "Contraseña*"
+      "value": "Contraseña"
     }
   ],
   "common.play": [
@@ -183,7 +155,12 @@
       "value": "El intruso"
     }
   ],
-  "common.wellness": "Bienestar",
+  "common.wellness": [
+    {
+      "type": 0,
+      "value": "Bienestar"
+    }
+  ],
   "intruder.intruderWelcome": [
     {
       "type": 0,
@@ -193,16 +170,10 @@
   "landingPage.assignments": [
     {
       "type": 0,
-      "value": "Categorias"
+      "value": "Asignaciones"
     }
   ],
-  "landingPage.welcome": "!Bienvenido {name}!",
-  "landingPage.wellness": [
-    {
-      "type": 0,
-      "value": "Bienestar"
-    }
-  ],
+  "landingPage.welcome": "¡Hola {name}!",
   "languageInclusivity.excludeGenderNeutral": [
     {
       "type": 0,
@@ -242,7 +213,7 @@
   "languageMode": [
     {
       "type": 0,
-      "value": "Modo español"
+      "value": "Modo"
     }
   ],
   "languageMode.bilingual": [
@@ -266,7 +237,7 @@
   "languageMode.immersionTitle": [
     {
       "type": 0,
-      "value": "inmersión en español"
+      "value": "Inmersión en español"
     }
   ],
   "languageMode.settings": [
@@ -707,16 +678,88 @@
       "value": "Progreso"
     }
   ],
+  "signUp.annualCost": [
+    {
+      "type": 0,
+      "value": "$44.99"
+    }
+  ],
+  "signUp.annualDiscount": [
+    {
+      "type": 0,
+      "value": "¡3 meses de descuento!"
+    }
+  ],
+  "signUp.annualFrequency": [
+    {
+      "type": 0,
+      "value": "año"
+    }
+  ],
   "signUp.choosePlan": [
     {
       "type": 0,
       "value": "Elige tu plan"
     }
   ],
+  "signUp.describe": [
+    {
+      "type": 0,
+      "value": "¿Lo que te describe mejor?"
+    }
+  ],
+  "signUp.monthlyFrequency": [
+    {
+      "type": 0,
+      "value": "mes"
+    }
+  ],
+  "signUp.montlyCost": [
+    {
+      "type": 0,
+      "value": "$4.99"
+    }
+  ],
   "signUp.noCommitment": [
     {
       "type": 0,
       "value": "Sin compromisos, cancela en cualquier momento."
+    }
+  ],
+  "signUp.parent": [
+    {
+      "type": 0,
+      "value": "Padre"
+    }
+  ],
+  "signUp.parent2": [
+    {
+      "type": 0,
+      "value": "Quiero usar esta aplicación con mi(s) hijo(s)"
+    }
+  ],
+  "signUp.pricing_annual_title": [
+    {
+      "type": 0,
+      "value": "12 meses ilimitados"
+    }
+  ],
+  "signUp.pricing_monthly_title": [
+    {
+      "type": 0,
+      "value": "1 mes ilimitado"
+    }
+  ],
+  "signUp.teacher": [
+    {
+      "type": 0,
+      "value": "Maestro"
+    }
+  ],
+  "signUp.teacher2": [
+    {
+      "type": 0,
+      "value": "Quiero usar esta aplicación con mis alumnos."
     }
   ],
   "signUp.trialDescription": [
@@ -734,19 +777,19 @@
   "signUpTeacher.aboutGrade1": [
     {
       "type": 0,
-      "value": "1er grado"
+      "value": "Primer grado"
     }
   ],
   "signUpTeacher.aboutGrade2": [
     {
       "type": 0,
-      "value": "2do. grado"
+      "value": "Segundo grado"
     }
   ],
   "signUpTeacher.aboutGrade3": [
     {
       "type": 0,
-      "value": "3er grado"
+      "value": "Tercer grado"
     }
   ],
   "signUpTeacher.aboutGrade4": [
@@ -812,7 +855,7 @@
   "signUpTeacher.school": [
     {
       "type": 0,
-      "value": "Nombre de tu escuela*"
+      "value": "Nombre de tu escuela"
     }
   ],
   "splash.classroom": [
@@ -915,12 +958,6 @@
     {
       "type": 0,
       "value": "¡Éxito! ¡Lo hiciste!"
-    }
-  ],
-  "sxQNl3": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 3 para el modo bilingüe"
     }
   ]
 }

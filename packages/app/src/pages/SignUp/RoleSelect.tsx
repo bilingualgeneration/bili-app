@@ -34,8 +34,16 @@ export const RoleSelect: React.FC = () => {
     component: (
       <div>
         <RadioCard
-          title={intl.messages["signUp.teacher"]}
-          content={intl.messages["signUp.teacher2"]}
+          title={intl.formatMessage({
+            id: "signUp.teacher",
+            defaultMessage: "Teacher",
+            description: "title for Teacher select card",
+          })}
+          content={intl.formatMessage({
+            id: "signUp.teacher2",
+            defaultMessage: "I want to use this app with my students",
+            description: "description for Teacher select card",
+          })}
           icon={<SchoolIcon />}
           iconBackgroundColor="var(--Cielo-Cielo)"
         />
@@ -48,8 +56,16 @@ export const RoleSelect: React.FC = () => {
     component: (
       <div>
         <RadioCard
-          title={intl.messages["signUp.parent"]}
-          content={intl.messages["signUp.parent2"]}
+          title={intl.formatMessage({
+            id: "signUp.parent",
+            defaultMessage: "Parent",
+            description: "title for Parent select card",
+          })}
+          content={intl.formatMessage({
+            id: "signUp.parent2",
+            defaultMessage: "I want to use this app with my child(ren)",
+            description: "description for Parent select card",
+          })}
           icon={<HouseIcon />}
           iconBackgroundColor="var(--Desierto-Highest)"
         />
@@ -103,7 +119,7 @@ export const RoleSelect: React.FC = () => {
           <FormattedMessage
             id="common.continue"
             defaultMessage="Continue"
-            description="Button for users to continue on to the next page"
+            description="Button label to continue"
           />
         </IonButton>
       </form>

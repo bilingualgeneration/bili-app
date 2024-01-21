@@ -27,9 +27,9 @@ export const Splash: React.FC = () => {
           <IonCardContent>
             <IonCardTitle className="ion-padding-bottom">
               <FormattedMessage
-                id="common.haveBiliAccount"
-                defaultMessage="Already have a Bili account?"
-                description="Asking users if they have a BILI account vs just 'have an account'"
+                id="common.haveAccount"
+                defaultMessage="Already have an account?"
+                description="link text if user already has an account"
               />
             </IonCardTitle>
             <IonButton
@@ -38,7 +38,11 @@ export const Splash: React.FC = () => {
               href="/login"
               shape="round"
             >
-              <FormattedMessage id="common.login" defaultMessage="Login" />
+              <FormattedMessage
+                id="common.logIn"
+                defaultMessage="Log In"
+                description="label to log in"
+              />
             </IonButton>
           </IonCardContent>
         </IonCard>

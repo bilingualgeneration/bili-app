@@ -1,0 +1,143 @@
+#pricing-page-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 15%; */
+  padding: 40px 120px 96px;
+}
+
+.plan-card {
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 19.421px;
+  background: var(--Base-Nube, #fff);
+  width: auto;
+  height: auto;
+  margin: 13% 27%;
+  /* gap: 36px; */
+
+  @media screen and (max-width: 768px) {
+    width: 20rem;
+  }
+}
+
+.banner-content-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.pricing-banner {
+  position: absolute;
+  bottom: 20px;
+  z-index: 1;
+  width: 28rem;
+  height: 3.75rem;
+  z-index: 1;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-text1 {
+  align-self: stretch;
+  color: var(--Base-Suelo, #000);
+  text-align: center;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+
+  /* Paragraph/text-xl/[S] */
+  font-family: Outfit;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%; /* 22px */
+  margin: 0;
+  @media screen and (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+.banner-text2 {
+  color: var(--Base-Suelo, #000);
+  text-align: center;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+
+  /* Paragraph/text-sm/[R] */
+  font-family: Outfit;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+}
+
+#pricing-annual {
+  position: relative;
+}
+
+.best-value-block {
+  position: absolute;
+  right: 77px;
+  top: -4px;
+  /* display: flex; */
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--Desierto-Desierto, #f48722);
+  z-index: 1;
+
+  @media screen and (max-width: 768px) {
+    width: 5rem;
+    right: 35px;
+    top: -4px;
+  }
+}
+
+p.best-value-text {
+  color: var(--Base-Suelo, #000);
+  text-align: center;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px; /* 160% */
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.no-commitments-text {
+  color: var(--Base-Barro, #889391);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Outfit;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 16.8px */
+}
+
+.price-cards {
+  display: flex;
+  justify-content: center;
+  /* margin-bottom: 20px; */
+}

@@ -1,24 +1,4 @@
 {
-  "signUp.teacher": "Teacher",
-  "signUp.teacher2": "I want to use this app with my students.",
-  "signUp.parent": "Parent/Caregiver",
-  "signUp.parent2": "I want to use this app with my child(ren).",
-  "signUp.pricing_monthly_title": "1 month unlimited",
-  "signUp.pricing_monthly_pricing": "$4.99/month",
-  "signUp.pricing_annual_title": "12 months unlimited",
-  "signUp.pricing_annual_pricing": "$44.99/year",
-  "5olauM": [
-    {
-      "type": 0,
-      "value": "Default Text 4 for Bilingual Mode"
-    }
-  ],
-  "9fs/J5": [
-    {
-      "type": 0,
-      "value": "Default Text 1"
-    }
-  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -70,13 +50,13 @@
   "common.email": [
     {
       "type": 0,
-      "value": "Your email*"
+      "value": "Your email"
     }
   ],
   "common.fullName": [
     {
       "type": 0,
-      "value": "Your full name*"
+      "value": "Your full name"
     }
   ],
   "common.go_back": [
@@ -103,10 +83,10 @@
       "value": "Log in"
     }
   ],
-  "common.login": [
+  "common.logOut": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "Log out"
     }
   ],
   "common.logOut": [
@@ -124,7 +104,7 @@
   "common.password": [
     {
       "type": 0,
-      "value": "Password*"
+      "value": "Password"
     }
   ],
   "common.play": [
@@ -289,12 +269,6 @@
     {
       "type": 0,
       "value": "Welcome to Teacher Login Page"
-    }
-  ],
-  "oA8ovM": [
-    {
-      "type": 0,
-      "value": "Default Text 2"
     }
   ],
   "reqdActions.goto_settings.message": [
@@ -669,6 +643,54 @@
       "value": "Sound effects"
     }
   ],
+  "sideMenu.about": [
+    {
+      "type": 0,
+      "value": "About Bili"
+    }
+  ],
+  "sideMenu.overview": [
+    {
+      "type": 0,
+      "value": "Overview"
+    }
+  ],
+  "sideMenu.preferences": [
+    {
+      "type": 0,
+      "value": "Preferences"
+    }
+  ],
+  "sideMenu.profile": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "sideMenu.progress": [
+    {
+      "type": 0,
+      "value": "Progress"
+    }
+  ],
+  "signUp.annualCost": [
+    {
+      "type": 0,
+      "value": "$44.99"
+    }
+  ],
+  "signUp.annualDiscount": [
+    {
+      "type": 0,
+      "value": "3 month discount!"
+    }
+  ],
+  "signUp.annualFrequency": [
+    {
+      "type": 0,
+      "value": "year"
+    }
+  ],
   "signUp.choosePlan": [
     {
       "type": 0,
@@ -681,10 +703,58 @@
       "value": "Which best describes you?"
     }
   ],
+  "signUp.monthlyFrequency": [
+    {
+      "type": 0,
+      "value": "month"
+    }
+  ],
+  "signUp.montlyCost": [
+    {
+      "type": 0,
+      "value": "$4.99"
+    }
+  ],
   "signUp.noCommitment": [
     {
       "type": 0,
       "value": "No commitments, cancel anytime."
+    }
+  ],
+  "signUp.parent": [
+    {
+      "type": 0,
+      "value": "Parent"
+    }
+  ],
+  "signUp.parent2": [
+    {
+      "type": 0,
+      "value": "I want to use this app with my child(ren)"
+    }
+  ],
+  "signUp.pricing_annual_title": [
+    {
+      "type": 0,
+      "value": "12 months unlimited"
+    }
+  ],
+  "signUp.pricing_monthly_title": [
+    {
+      "type": 0,
+      "value": "1 month unlimited"
+    }
+  ],
+  "signUp.teacher": [
+    {
+      "type": 0,
+      "value": "Teacher"
+    }
+  ],
+  "signUp.teacher2": [
+    {
+      "type": 0,
+      "value": "I want to use this app with my students"
     }
   ],
   "signUp.trialDescription": [
@@ -780,7 +850,7 @@
   "signUpTeacher.school": [
     {
       "type": 0,
-      "value": "Your school name*"
+      "value": "Your school name"
     }
   ],
   "splash.classroom": [
@@ -837,12 +907,6 @@
       "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
     }
   ],
-  "storyFactory.next": [
-    {
-      "type": 0,
-      "value": "Next"
-    }
-  ],
   "storyFactory.nextButton": [
     {
       "type": 0,
@@ -883,12 +947,6 @@
     {
       "type": 0,
       "value": "Success! You did it!"
-    }
-  ],
-  "sxQNl3": [
-    {
-      "type": 0,
-      "value": "Default Text 3 for Bilingual Mode"
     }
   ]
 }

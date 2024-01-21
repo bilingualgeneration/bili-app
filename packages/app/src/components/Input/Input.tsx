@@ -157,6 +157,7 @@ export const Input = ({
   label,
   labelPlacement = "floating",
   name,
+  required,
   testId,
   ...props
 }: InputProps): JSX.Element => {
@@ -185,7 +186,10 @@ export const Input = ({
           return (
             <>
               {labelPlacement === "above" && (
-                <label className="input-label-placement-above">{label}</label>
+                <label className="input-label-placement-above">
+                  {label}
+                  {required && " *"}
+                </label>
               )}
               <IonInput
                 className={classes.join(" ")}
@@ -199,6 +203,7 @@ export const Input = ({
                 }
                 {...{
                   fill,
+                  required,
                 }}
                 {...props}
                 {...fields}
