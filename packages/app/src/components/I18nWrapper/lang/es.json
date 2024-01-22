@@ -77,19 +77,13 @@
       "value": "¿Ya tienes una cuenta?"
     }
   ],
+  "common.intruder": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
   "common.logIn": [
-    {
-      "type": 0,
-      "value": "Acceso"
-    }
-  ],
-  "common.logOut": [
-    {
-      "type": 0,
-      "value": "Cerrar sesión"
-    }
-  ],
-  "common.login": [
     {
       "type": 0,
       "value": "Acceso"
@@ -161,10 +155,100 @@
       "value": "Bienestar"
     }
   ],
+  "intruder.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "Has encontrado diez intrusos de rima. ¿Cuántos más puedes encontrar?"
+    }
+  ],
+  "intruder.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "Has encontrado veinte intrusos de rima. ¡Eres un superrimador!"
+    }
+  ],
+  "intruder.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "Has encontrado cinco intrusos de rima. ¿Puedes seguir?"
+    }
+  ],
+  "intruder.congrats.description.all": [
+    {
+      "type": 0,
+      "value": "¡has encontrado a todos los intrusos de rima!"
+    }
+  ],
+  "intruder.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "¡Gran trabajo!"
+    }
+  ],
+  "intruder.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "¡Asombroso!"
+    }
+  ],
+  "intruder.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "¡Felicitaciones!"
+    }
+  ],
+  "intruder.congrats.title.all": [
+    {
+      "type": 0,
+      "value": "¡Sabía que podrías hacerlo!"
+    }
+  ],
   "intruder.intruderWelcome": [
     {
       "type": 0,
       "value": "Bienvenidos a la página de Intrusos"
+    }
+  ],
+  "intruder.keepGoing": [
+    {
+      "type": 0,
+      "value": "¡Sigue adelante!"
+    }
+  ],
+  "intruder.nextButton": [
+    {
+      "type": 0,
+      "value": "Siguiente"
+    }
+  ],
+  "intruder.subwelcome": [
+    {
+      "type": 0,
+      "value": "¡Bienvenidos al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto."
+    }
+  ],
+  "intruder.subwelcome_inc": [
+    {
+      "type": 0,
+      "value": "¡Bienvenides al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto."
+    }
+  ],
+  "intruder.welcome": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
+  "intruder.welcome_inc": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
+  "joyride.close": [
+    {
+      "type": 0,
+      "value": "Cerrar"
     }
   ],
   "landingPage.assignments": [
@@ -173,7 +257,26 @@
       "value": "Asignaciones"
     }
   ],
-  "landingPage.welcome": "¡Hola {name}!",
+  "landingPage.catgories": [
+    {
+      "type": 0,
+      "value": "Categorías"
+    }
+  ],
+  "landingPage.welcome": [
+    {
+      "type": 0,
+      "value": "¡Hola "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "!"
+    }
+  ],
   "languageInclusivity.excludeGenderNeutral": [
     {
       "type": 0,
@@ -264,12 +367,6 @@
       "value": "Bienvenido a la página de inicio de sesión del profesor"
     }
   ],
-  "oA8ovM": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 2"
-    }
-  ],
   "reqdActions.goto_settings.message": [
     {
       "type": 0,
@@ -342,6 +439,12 @@
       "value": "¿Sabías que puedes elegir español inclusivo en Bili? Opte por términos como 'amigues', 'niñes' y 'Latine' para personalizar su experiencia al referirse a grupos o personajes no binarios."
     }
   ],
+  "settings.onboarding.inclusiveSpanish": [
+    {
+      "type": 0,
+      "value": "¿Sabías que puedes elegir español inclusivo en Bili? Opte por términos como 'amigues', 'niñes' y 'Latine' para personalizar su experiencia al referirse a grupos o personajes no binarios."
+    }
+  ],
   "settings.onboarding.preferences": [
     {
       "type": 0,
@@ -357,7 +460,7 @@
   "settings.onboarding.progress": [
     {
       "type": 0,
-      "value": "Obtenga más información sobre el aprendizaje de idiomas de su hijo consultando la sección \"Progreso\". Utilice esta sección para obtener información sobre la actividad de su hijo, incluyendo cuánto tiempo pasa en cada categoría y sus actividades favoritas de Bili."
+      "value": "Obtenga más información sobre el aprendizaje de idiomas de su hijo consultando la sección \"Progreso\". Utilice esta sección para obtener información sobre la actividad de su hijo, incluido cuánto tiempo pasa en cada categoría y sus actividades Bili favoritas."
     }
   ],
   "settings.overview.InclusiveSpanishContent": [
@@ -370,30 +473,6 @@
     {
       "type": 0,
       "value": "Justicia social"
-    }
-  ],
-  "settings.overview.joyrideBack": [
-    {
-      "type": 0,
-      "value": "Atrás"
-    }
-  ],
-  "settings.overview.joyrideLast": [
-    {
-      "type": 0,
-      "value": "Terminar"
-    }
-  ],
-  "settings.overview.joyrideNext": [
-    {
-      "type": 0,
-      "value": "Siguiente"
-    }
-  ],
-  "settings.overview.joyrideSkip": [
-    {
-      "type": 0,
-      "value": "Omitir"
     }
   ],
   "settings.overview.InclusiveSpanishMiniCard2": [
@@ -478,6 +557,30 @@
     {
       "type": 0,
       "value": "Español inclusivo"
+    }
+  ],
+  "settings.overview.joyrideBack": [
+    {
+      "type": 0,
+      "value": "Atrás"
+    }
+  ],
+  "settings.overview.joyrideLast": [
+    {
+      "type": 0,
+      "value": "Último"
+    }
+  ],
+  "settings.overview.joyrideNext": [
+    {
+      "type": 0,
+      "value": "Próximo"
+    }
+  ],
+  "settings.overview.joyrideSkip": [
+    {
+      "type": 0,
+      "value": "Saltar"
     }
   ],
   "settings.overview.seeAll": [
@@ -952,6 +1055,60 @@
     {
       "type": 0,
       "value": "¡Bienvenides a la fábrica de cuentos!"
+    }
+  ],
+  "story_factory.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "Has creado y leído diez cuentos. ¿Cuántos más puedes leer?"
+    }
+  ],
+  "story_factory.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "Has llegado a veinte cuentos. ¡Eres un superlector!"
+    }
+  ],
+  "story_factory.congrats.description.30": [
+    {
+      "type": 0,
+      "value": "Así se hace: ¡has creado y leído treinta cuentos!"
+    }
+  ],
+  "story_factory.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "Has creado y leído cinco cuentos. ¿Puedes seguir?"
+    }
+  ],
+  "story_factory.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "¡Gran trabajo!"
+    }
+  ],
+  "story_factory.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "¡Asombroso!"
+    }
+  ],
+  "story_factory.congrats.title.30": [
+    {
+      "type": 0,
+      "value": "¡Sabía que podrías hacerlo!"
+    }
+  ],
+  "story_factory.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "¡Felicitaciones!"
+    }
+  ],
+  "story_factory.keepGoing": [
+    {
+      "type": 0,
+      "value": "¡Sigue adelante!"
     }
   ],
   "successScreen.success": [

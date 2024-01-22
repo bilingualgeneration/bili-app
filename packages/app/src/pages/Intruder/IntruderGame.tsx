@@ -22,6 +22,8 @@ import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
+import instruction_en_audio from "@/assets/audio/intruder_game_instruction_en.mp3";
+import instruction_es_audio from "@/assets/audio/intruder_game_instruction_es.mp3";
 import "./Intruder.scss";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -61,6 +63,18 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
   const card_flip = new Audio(card_flip_audio);
+
+  const instruction_es = new Audio(instruction_es_audio);
+  const instruction_en = new Audio(instruction_en_audio);
+
+  useEffect(() => {
+    if (!isImmersive) {
+      instruction_es.onended = () => {
+        instruction_en.play();
+      };
+    }
+    instruction_es.play();
+  }, []);
 
   const initialStyle = {
     cursor: "pointer",
