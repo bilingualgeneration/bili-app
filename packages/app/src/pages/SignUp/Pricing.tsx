@@ -107,13 +107,13 @@ export const Pricing: React.FC = () => {
       <div id="pricing-page-container">
         <div className="plan-card">
           <IonText className="ion-text-center">
-            <h1>
+            <h2>
               <FormattedMessage
                 id="signUp.choosePlan"
                 defaultMessage="Choose your plan"
                 description="Title of page where user can choose plan"
               />
-            </h1>
+            </h2>
           </IonText>
           <br />
           <div className="banner-content-container">

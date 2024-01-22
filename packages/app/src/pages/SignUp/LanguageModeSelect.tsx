@@ -131,13 +131,13 @@ export const LanguageModeSelect: React.FC = () => {
     <>
       <form className="radio-button-select">
         <IonText className="ion-text-center">
-          <h1>
+          <h2>
             <FormattedMessage
               id="languageMode.settings"
               defaultMessage="Choose your settings"
               description="User can choose if they want bilingual settings or English assisted settings"
             />
-          </h1>
+          </h2>
         </IonText>
         <ExtendedRadio
           control={control}

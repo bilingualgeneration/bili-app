@@ -60,6 +60,7 @@ export const ParentAccountCredentials: React.FC = () => {
             description: "Input label for user's full name",
           })}
           labelPlacement="above"
+          required={true}
           name="name"
           fill="outline"
           control={control}
@@ -152,7 +153,10 @@ export const ParentAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <IonCheckbox labelPlacement="end" justify="start">
             <IonText class="ion-text-wrap">
-              <IonText color="primary" style={{ fontWeight: "bold" }}>
+              <IonText
+                color="primary"
+                style={{ fontWeight: "bold", marginRight: 8 }}
+              >
                 <FormattedMessage
                   id="common.terms"
                   defaultMessage="Terms of Service. "

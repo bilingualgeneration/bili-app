@@ -15,13 +15,13 @@ export const Splash: React.FC = () => {
       <UnauthedHeader showBackButton={false} />
       <div className="content-wrapper">
         <IonText>
-          <h1 className="ion-text-center">
+          <h2 className="ion-text-center">
             <FormattedMessage
               id="splash.loginTitle"
               defaultMessage="Login"
               description="Title that says 'Login' on Splash page where user can either log in if they have a Bili account or create an account if they are new users"
             />
-          </h1>
+          </h2>
         </IonText>
         <IonCard>
           <IonCardContent>

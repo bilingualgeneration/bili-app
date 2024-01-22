@@ -441,8 +441,8 @@ ion-button.sf-intro-button {
 .bili-character {
   position: absolute;
   top: 100px;
-  right: 1.5rem;
-  width: 400px;
+  right: -1.5rem;
+  max-width: 400px;
   z-index: 2; /* Ensures Bili Character is on top of card */
 }
 
@@ -477,7 +477,7 @@ ion-button.sf-intro-button {
 }
 
 .sf-card {
-  max-width: 900px;
+  max-width: 995px;
   margin: auto;
 
   ion-card {

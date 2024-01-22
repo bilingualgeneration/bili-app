@@ -31,8 +31,15 @@ const StoryFactoryCard: FC = () => {
 
 const IntruderCard: FC = () => {
   const { isImmersive } = useProfile();
+  const history = useHistory();
   return (
-    <div id="intruderCard" className="card">
+    <div
+      id="intruderCard"
+      className="card"
+      onClick={() => {
+        history.push("/intruder/intro");
+      }}
+    >
       <div className="spreader"></div>
       <img src={MagnifyingGlass} />
       <h1>

@@ -14,7 +14,7 @@ export const ProfileChip: FC = () => {
         <IonText>73</IonText>
       </div>
       <IonText>
-        <h2>{name}</h2>
+        <p>{name}</p>
       </IonText>
       <img src={Avatar} />
     </div>

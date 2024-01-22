@@ -96,13 +96,13 @@ export const RoleSelect: React.FC = () => {
     <>
       <form onSubmit={onSubmit} className="radio-button-select">
         <IonText className="ion-text-center">
-          <h1>
+          <h2>
             <FormattedMessage
               id="signUp.describe"
               defaultMessage="Which best describes you?"
               description="Title of page where user is presented with button options where they can choose if they are a teacher or parent/caregiver."
             />
-          </h1>
+          </h2>
         </IonText>
         <ExtendedRadio
           control={control}

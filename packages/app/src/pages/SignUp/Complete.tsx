@@ -34,13 +34,13 @@ export const Complete: React.FC = () => {
         }}
       >
         <IonText className="ion-text-center">
-          <h1>
+          <h2>
             <FormattedMessage
               id="successScreen.success"
               defaultMessage="Success! You did it!"
               description="Message that appears once user has completed registration process"
             />
-          </h1>
+          </h2>
         </IonText>
 
         <IonImg src="/assets/img/happy_cactus.png" />
