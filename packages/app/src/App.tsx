@@ -12,6 +12,7 @@ import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
+import { CountWithMe } from "@/pages/CountWithMe";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import Intruder from "@/pages/games/Intruder";
@@ -126,6 +127,18 @@ const Router: React.FC = () => {
             <AuthedLayout>
               <HeaderFooter background="#f7faf9">
                 <Play />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/count-with-me"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#f7faf9">
+                <CountWithMe />
               </HeaderFooter>
             </AuthedLayout>
           )}
