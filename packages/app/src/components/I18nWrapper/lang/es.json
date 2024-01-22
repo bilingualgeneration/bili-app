@@ -1,38 +1,4 @@
 {
-  "signUp.describe": "¿Qué opción te describe mejor?",
-  "signUp.teacher": "Maestro",
-  "signUp.teacher2": "Quiero usar esta aplicación con mis estudiantes.",
-  "signUp.parent": "Padre/Cuidador",
-  "signUp.parent2": "Quiero usar esta aplicación con mi(s) niño(s).",
-  "signUp.continue": "Continuar",
-  "signUp.pricing_monthly_title": "1 mes ilimitado",
-  "signUp.pricing_monthly_pricing": "$4.99/mes",
-  "signUp.pricing_annual_title": "12 meses ilimitados",
-  "signUp.pricing_annual_pricing": "$44.99/año",
-  "3WHbRH": [
-    {
-      "type": 0,
-      "value": "¡Bienvenidos a la Fábrica de Cuentos!"
-    }
-  ],
-  "5olauM": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 4 para el modo bilingüe"
-    }
-  ],
-  "9fs/J5": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 1"
-    }
-  ],
-  "Uuer1n": [
-    {
-      "type": 0,
-      "value": "¡Un lugar para lecturas tontas de sílabas!"
-    }
-  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -84,13 +50,13 @@
   "common.email": [
     {
       "type": 0,
-      "value": "Tu correo electrónico*"
+      "value": "Tu correo electrónico"
     }
   ],
   "common.fullName": [
     {
       "type": 0,
-      "value": "Tu nombre completo*"
+      "value": "Tu nombre completo"
     }
   ],
   "common.go_back": [
@@ -111,16 +77,22 @@
       "value": "¿Ya tienes una cuenta?"
     }
   ],
+  "common.intruder": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
   "common.logIn": [
     {
       "type": 0,
       "value": "Acceso"
     }
   ],
-  "common.login": [
+  "common.logOut": [
     {
       "type": 0,
-      "value": "Acceso"
+      "value": "Cerrar sesión"
     }
   ],
   "common.noAccount": [
@@ -132,7 +104,7 @@
   "common.password": [
     {
       "type": 0,
-      "value": "Contraseña*"
+      "value": "Contraseña"
     }
   ],
   "common.play": [
@@ -177,24 +149,132 @@
       "value": "El intruso"
     }
   ],
-  "common.wellness": "Bienestar",
+  "common.wellness": [
+    {
+      "type": 0,
+      "value": "Bienestar"
+    }
+  ],
+  "intruder.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "Has encontrado diez intrusos de rima. ¿Cuántos más puedes encontrar?"
+    }
+  ],
+  "intruder.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "Has encontrado veinte intrusos de rima. ¡Eres un superrimador!"
+    }
+  ],
+  "intruder.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "Has encontrado cinco intrusos de rima. ¿Puedes seguir?"
+    }
+  ],
+  "intruder.congrats.description.all": [
+    {
+      "type": 0,
+      "value": "¡has encontrado a todos los intrusos de rima!"
+    }
+  ],
+  "intruder.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "¡Gran trabajo!"
+    }
+  ],
+  "intruder.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "¡Asombroso!"
+    }
+  ],
+  "intruder.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "¡Felicitaciones!"
+    }
+  ],
+  "intruder.congrats.title.all": [
+    {
+      "type": 0,
+      "value": "¡Sabía que podrías hacerlo!"
+    }
+  ],
   "intruder.intruderWelcome": [
     {
       "type": 0,
       "value": "Bienvenidos a la página de Intrusos"
     }
   ],
+  "intruder.keepGoing": [
+    {
+      "type": 0,
+      "value": "¡Sigue adelante!"
+    }
+  ],
+  "intruder.nextButton": [
+    {
+      "type": 0,
+      "value": "Siguiente"
+    }
+  ],
+  "intruder.subwelcome": [
+    {
+      "type": 0,
+      "value": "¡Bienvenidos al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto."
+    }
+  ],
+  "intruder.subwelcome_inc": [
+    {
+      "type": 0,
+      "value": "¡Bienvenides al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto."
+    }
+  ],
+  "intruder.welcome": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
+  "intruder.welcome_inc": [
+    {
+      "type": 0,
+      "value": "El intruso"
+    }
+  ],
+  "joyride.close": [
+    {
+      "type": 0,
+      "value": "Cerrar"
+    }
+  ],
   "landingPage.assignments": [
     {
       "type": 0,
-      "value": "Categorias"
+      "value": "Asignaciones"
     }
   ],
-  "landingPage.welcome": "!Bienvenido {name}!",
-  "landingPage.wellness": [
+  "landingPage.catgories": [
     {
       "type": 0,
-      "value": "Bienestar"
+      "value": "Categorías"
+    }
+  ],
+  "landingPage.welcome": [
+    {
+      "type": 0,
+      "value": "¡Hola "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "!"
     }
   ],
   "languageInclusivity.excludeGenderNeutral": [
@@ -236,7 +316,7 @@
   "languageMode": [
     {
       "type": 0,
-      "value": "Modo español"
+      "value": "Modo"
     }
   ],
   "languageMode.bilingual": [
@@ -260,7 +340,7 @@
   "languageMode.immersionTitle": [
     {
       "type": 0,
-      "value": "inmersión en español"
+      "value": "Inmersión en español"
     }
   ],
   "languageMode.settings": [
@@ -285,12 +365,6 @@
     {
       "type": 0,
       "value": "Bienvenido a la página de inicio de sesión del profesor"
-    }
-  ],
-  "oA8ovM": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 2"
     }
   ],
   "reqdActions.goto_settings.message": [
@@ -360,6 +434,12 @@
     }
   ],
   "settings.onboarding.inclusive-spanish": [
+    {
+      "type": 0,
+      "value": "¿Sabías que puedes elegir español inclusivo en Bili? Opte por términos como 'amigues', 'niñes' y 'Latine' para personalizar su experiencia al referirse a grupos o personajes no binarios."
+    }
+  ],
+  "settings.onboarding.inclusiveSpanish": [
     {
       "type": 0,
       "value": "¿Sabías que puedes elegir español inclusivo en Bili? Opte por términos como 'amigues', 'niñes' y 'Latine' para personalizar su experiencia al referirse a grupos o personajes no binarios."
@@ -477,6 +557,30 @@
     {
       "type": 0,
       "value": "Español inclusivo"
+    }
+  ],
+  "settings.overview.joyrideBack": [
+    {
+      "type": 0,
+      "value": "Atrás"
+    }
+  ],
+  "settings.overview.joyrideLast": [
+    {
+      "type": 0,
+      "value": "Último"
+    }
+  ],
+  "settings.overview.joyrideNext": [
+    {
+      "type": 0,
+      "value": "Próximo"
+    }
+  ],
+  "settings.overview.joyrideSkip": [
+    {
+      "type": 0,
+      "value": "Saltar"
     }
   ],
   "settings.overview.seeAll": [
@@ -644,7 +748,7 @@
   "sideMenu.about": [
     {
       "type": 0,
-      "value": "Acerca de"
+      "value": "Sobre Bili"
     }
   ],
   "sideMenu.logOut": [
@@ -677,6 +781,24 @@
       "value": "Progreso"
     }
   ],
+  "signUp.annualCost": [
+    {
+      "type": 0,
+      "value": "$44.99"
+    }
+  ],
+  "signUp.annualDiscount": [
+    {
+      "type": 0,
+      "value": "¡3 meses de descuento!"
+    }
+  ],
+  "signUp.annualFrequency": [
+    {
+      "type": 0,
+      "value": "año"
+    }
+  ],
   "signUp.choosePlan": [
     {
       "type": 0,
@@ -689,10 +811,58 @@
       "value": "¿Lo que te describe mejor?"
     }
   ],
+  "signUp.monthlyFrequency": [
+    {
+      "type": 0,
+      "value": "mes"
+    }
+  ],
+  "signUp.montlyCost": [
+    {
+      "type": 0,
+      "value": "$4.99"
+    }
+  ],
   "signUp.noCommitment": [
     {
       "type": 0,
       "value": "Sin compromisos, cancela en cualquier momento."
+    }
+  ],
+  "signUp.parent": [
+    {
+      "type": 0,
+      "value": "Padre"
+    }
+  ],
+  "signUp.parent2": [
+    {
+      "type": 0,
+      "value": "Quiero usar esta aplicación con mi(s) hijo(s)"
+    }
+  ],
+  "signUp.pricing_annual_title": [
+    {
+      "type": 0,
+      "value": "12 meses ilimitados"
+    }
+  ],
+  "signUp.pricing_monthly_title": [
+    {
+      "type": 0,
+      "value": "1 mes ilimitado"
+    }
+  ],
+  "signUp.teacher": [
+    {
+      "type": 0,
+      "value": "Maestro"
+    }
+  ],
+  "signUp.teacher2": [
+    {
+      "type": 0,
+      "value": "Quiero usar esta aplicación con mis alumnos."
     }
   ],
   "signUp.trialDescription": [
@@ -710,19 +880,19 @@
   "signUpTeacher.aboutGrade1": [
     {
       "type": 0,
-      "value": "1er grado"
+      "value": "Primer grado"
     }
   ],
   "signUpTeacher.aboutGrade2": [
     {
       "type": 0,
-      "value": "2do. grado"
+      "value": "Segundo grado"
     }
   ],
   "signUpTeacher.aboutGrade3": [
     {
       "type": 0,
-      "value": "3er grado"
+      "value": "Tercer grado"
     }
   ],
   "signUpTeacher.aboutGrade4": [
@@ -788,7 +958,7 @@
   "signUpTeacher.school": [
     {
       "type": 0,
-      "value": "Nombre de tu escuela*"
+      "value": "Nombre de tu escuela"
     }
   ],
   "splash.classroom": [
@@ -887,16 +1057,64 @@
       "value": "¡Bienvenides a la fábrica de cuentos!"
     }
   ],
+  "story_factory.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "Has creado y leído diez cuentos. ¿Cuántos más puedes leer?"
+    }
+  ],
+  "story_factory.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "Has llegado a veinte cuentos. ¡Eres un superlector!"
+    }
+  ],
+  "story_factory.congrats.description.30": [
+    {
+      "type": 0,
+      "value": "Así se hace: ¡has creado y leído treinta cuentos!"
+    }
+  ],
+  "story_factory.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "Has creado y leído cinco cuentos. ¿Puedes seguir?"
+    }
+  ],
+  "story_factory.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "¡Gran trabajo!"
+    }
+  ],
+  "story_factory.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "¡Asombroso!"
+    }
+  ],
+  "story_factory.congrats.title.30": [
+    {
+      "type": 0,
+      "value": "¡Sabía que podrías hacerlo!"
+    }
+  ],
+  "story_factory.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "¡Felicitaciones!"
+    }
+  ],
+  "story_factory.keepGoing": [
+    {
+      "type": 0,
+      "value": "¡Sigue adelante!"
+    }
+  ],
   "successScreen.success": [
     {
       "type": 0,
       "value": "¡Éxito! ¡Lo hiciste!"
-    }
-  ],
-  "sxQNl3": [
-    {
-      "type": 0,
-      "value": "Texto predeterminado 3 para el modo bilingüe"
     }
   ]
 }

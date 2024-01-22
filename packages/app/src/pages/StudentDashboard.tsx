@@ -68,13 +68,13 @@ const WaveIcon: FC<WaveIcon> = ({
         {icon}
       </div>
       <IonText>
-        <h1 className="color-selva">
+        <h2 className="color-selva">
           <FormattedMessage
             defaultMessage={reactintlId}
             description="icon label"
             id={reactintlId}
           />
-        </h1>
+        </h2>
         {!isImmersive && <h2>{englishLabel}</h2>}
       </IonText>
     </span>
@@ -112,10 +112,20 @@ export const StudentDashboard: FC = () => {
       icon: <CommunityIcon />,
     },
   ];
+
   return (
     <div id="student-landing-page">
       {reqdActions.showSettingsMessage && (
         <Joyride
+          locale={{
+            close: (
+              <FormattedMessage
+                id="joyride.close"
+                defaultMessage="Close"
+                description="Button label to close Joyride"
+              />
+            ),
+          }}
           callback={(data) => {
             if (data.action === "close") {
               const { showSettingsMessage, ...remainingReqdActions } =
@@ -125,8 +135,9 @@ export const StudentDashboard: FC = () => {
           }}
           steps={[
             {
-              target: "#footer_settings_button",
+              target: "body",
               disableBeacon: true,
+              placement: "center",
               content: (
                 <FormattedMessage
                   defaultMessage="Click here to customize your child's learning experience"
@@ -149,7 +160,7 @@ export const StudentDashboard: FC = () => {
         <h1>
           <FormattedMessage
             id="landingPage.welcome"
-            defaultMessage="Welcome {name}!"
+            defaultMessage="Hello {name}!"
             values={{ name }}
           />
         </h1>
@@ -158,15 +169,15 @@ export const StudentDashboard: FC = () => {
 
       <div className="main-block">
         <div className="icons-title">
-          <h1 style={{ marginBottom: 10 }}>
-            <FormattedMessage
-              id="landingPage.assignments"
-              defaultMessage="Assignments"
-            />
-          </h1>
-          {!isImmersive && (
-            <h2 style={{ fontSize: 40, fontWeight: "normal" }}>Categories</h2>
-          )}
+          <IonText>
+            <h1>
+              <FormattedMessage
+                id="landingPage.catgories"
+                defaultMessage="Categories"
+              />
+            </h1>
+            {!isImmersive && <h2>Categories</h2>}
+          </IonText>
         </div>
         {/* icons */}
         <div id="wave-icons" style={{ marginTop: "4rem", paddingRight: 100 }}>
@@ -180,15 +191,17 @@ export const StudentDashboard: FC = () => {
             </IonRow>
           </IonGrid>
         </div>
+        <br />
+        <br />
 
         {/* stories */}
         <div className="stories-story-cards">
-          <div className="cards-title">
+          <IonText>
             <h1 className="color-selva">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
             {!isImmersive && <h2>Stories</h2>}
-          </div>
+          </IonText>
 
           <div
             className="hide-scrollbar"
@@ -299,7 +312,7 @@ export const StudentDashboard: FC = () => {
         <br />
         {/* wellness */}
         <div className="other-story-cards">
-          <div className="cards-title">
+          <IonText>
             <h1 className="color-selva">
               <FormattedMessage
                 id="common.wellness"
@@ -307,7 +320,7 @@ export const StudentDashboard: FC = () => {
               />
             </h1>
             {!isImmersive && <h2>Wellness</h2>}
-          </div>
+          </IonText>
 
           <div
             className="hide-scrollbar"
@@ -375,14 +388,18 @@ export const StudentDashboard: FC = () => {
         <br />
         {/* play */}
         <div className="other-story-cards">
-          <div className="cards-title">
-            <Link to="/play">
+          <IonText>
+            <Link to="/play" className="no-text-decoration">
               <h1 className="color-selva">
-                <FormattedMessage id="common.play" defaultMessage="Play" />
+                <FormattedMessage
+                  id="common.play"
+                  defaultMessage="Play"
+                  description="Standalone label for Play"
+                />
               </h1>
               {!isImmersive && <h2>Play</h2>}
             </Link>
-          </div>
+          </IonText>
 
           <div
             className="hide-scrollbar"
@@ -449,7 +466,7 @@ export const StudentDashboard: FC = () => {
         <br />
         {/* Comunidad */}
         <div className="other-story-cards">
-          <div className="cards-title">
+          <IonText>
             <h1 className="color-selva">
               <FormattedMessage
                 id="common.community"
@@ -457,7 +474,7 @@ export const StudentDashboard: FC = () => {
               />
             </h1>
             {!isImmersive && <h2>Community</h2>}
-          </div>
+          </IonText>
 
           <div
             className="hide-scrollbar"

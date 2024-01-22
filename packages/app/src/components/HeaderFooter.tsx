@@ -18,6 +18,9 @@ import backButton from "@/assets/icons/back_button_orange.svg";
 import biliLogo from "@/assets/icons/bili.svg";
 import { ProfileChip } from "@/components/ProfileChip";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import "./HeaderFooter.scss";
 
 export const HeaderFooter: FC<
   PropsWithChildren<{
@@ -30,7 +33,7 @@ export const HeaderFooter: FC<
     <IonPage>
       <IonContent fullscreen={true} className="ion-padding">
         <div className="page-wrapper" style={{ background }}>
-          <IonGrid style={{ margin: "0 2rem 1rem 2rem", paddingTop: "1rem" }}>
+          <IonGrid id="authedHeader">
             <IonRow class="ion-align-items-center">
               <IonCol>
                 {showBackButton && (
@@ -44,7 +47,9 @@ export const HeaderFooter: FC<
                 )}
               </IonCol>
               <IonCol className="ion-text-center">
-                <img src={biliLogo} />
+                <Link to="/">
+                  <img src={biliLogo} />
+                </Link>
               </IonCol>
               <IonCol className="ion-text-right">
                 <ProfileChip />

@@ -1,25 +1,4 @@
 {
-  "signUp.describe": "Which best describes you?",
-  "signUp.teacher": "Teacher",
-  "signUp.teacher2": "I want to use this app with my students.",
-  "signUp.parent": "Parent/Caregiver",
-  "signUp.parent2": "I want to use this app with my child(ren).",
-  "signUp.pricing_monthly_title": "1 month unlimited",
-  "signUp.pricing_monthly_pricing": "$4.99/month",
-  "signUp.pricing_annual_title": "12 months unlimited",
-  "signUp.pricing_annual_pricing": "$44.99/year",
-  "5olauM": [
-    {
-      "type": 0,
-      "value": "Default Text 4 for Bilingual Mode"
-    }
-  ],
-  "9fs/J5": [
-    {
-      "type": 0,
-      "value": "Default Text 1"
-    }
-  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -71,13 +50,13 @@
   "common.email": [
     {
       "type": 0,
-      "value": "Your email*"
+      "value": "Your email"
     }
   ],
   "common.fullName": [
     {
       "type": 0,
-      "value": "Your full name*"
+      "value": "Your full name"
     }
   ],
   "common.go_back": [
@@ -98,16 +77,22 @@
       "value": "Already have an account?"
     }
   ],
+  "common.intruder": [
+    {
+      "type": 0,
+      "value": "The Intruder"
+    }
+  ],
   "common.logIn": [
     {
       "type": 0,
       "value": "Log in"
     }
   ],
-  "common.login": [
+  "common.logOut": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "Log out"
     }
   ],
   "common.noAccount": [
@@ -119,7 +104,7 @@
   "common.password": [
     {
       "type": 0,
-      "value": "Password*"
+      "value": "Password"
     }
   ],
   "common.play": [
@@ -170,22 +155,112 @@
       "value": "Wellness"
     }
   ],
+  "intruder.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "You've found ten rhyme intruders. How many more can you find?"
+    }
+  ],
+  "intruder.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "You've found twenty rhyme intruders. You are a super-rhymer!"
+    }
+  ],
+  "intruder.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "You've found five rhyme intruders. Can you keep going?"
+    }
+  ],
+  "intruder.congrats.description.all": [
+    {
+      "type": 0,
+      "value": "Way to go - you've found all of the rhyme intruders!"
+    }
+  ],
+  "intruder.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "Great Job!"
+    }
+  ],
+  "intruder.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "Amazing!"
+    }
+  ],
+  "intruder.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "Congrats!"
+    }
+  ],
+  "intruder.congrats.title.all": [
+    {
+      "type": 0,
+      "value": "I knew you could do it!"
+    }
+  ],
   "intruder.intruderWelcome": [
     {
       "type": 0,
       "value": "Welcome to the Intruder Page"
     }
   ],
-  "landingPage.assignments": [
+  "intruder.keepGoing": [
     {
       "type": 0,
-      "value": "Assignments"
+      "value": "Keep Going!"
+    }
+  ],
+  "intruder.nextButton": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "intruder.subwelcome": [
+    {
+      "type": 0,
+      "value": "Welcome to \"The Intruder\" game! The goal of this game is to identify the word that does not rhyme with the rest."
+    }
+  ],
+  "intruder.subwelcome_inc": [
+    {
+      "type": 0,
+      "value": "Welcome to \"The Intruder\" game! The goal of this game is to identify the word that does not rhyme with the rest."
+    }
+  ],
+  "intruder.welcome": [
+    {
+      "type": 0,
+      "value": "The Intruder"
+    }
+  ],
+  "intruder.welcome_inc": [
+    {
+      "type": 0,
+      "value": "The Intruder"
+    }
+  ],
+  "joyride.close": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "landingPage.catgories": [
+    {
+      "type": 0,
+      "value": "Categories"
     }
   ],
   "landingPage.welcome": [
     {
       "type": 0,
-      "value": "Welcome "
+      "value": "Hello "
     },
     {
       "type": 1,
@@ -286,12 +361,6 @@
       "value": "Welcome to Teacher Login Page"
     }
   ],
-  "oA8ovM": [
-    {
-      "type": 0,
-      "value": "Default Text 2"
-    }
-  ],
   "reqdActions.goto_settings.message": [
     {
       "type": 0,
@@ -358,7 +427,7 @@
       "value": "Full name"
     }
   ],
-  "settings.onboarding.inclusive-spanish": [
+  "settings.onboarding.inclusiveSpanish": [
     {
       "type": 0,
       "value": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
@@ -476,6 +545,30 @@
     {
       "type": 0,
       "value": "Inclusive Spanish"
+    }
+  ],
+  "settings.overview.joyrideBack": [
+    {
+      "type": 0,
+      "value": "Back"
+    }
+  ],
+  "settings.overview.joyrideLast": [
+    {
+      "type": 0,
+      "value": "Last"
+    }
+  ],
+  "settings.overview.joyrideNext": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "settings.overview.joyrideSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
     }
   ],
   "settings.overview.seeAll": [
@@ -640,6 +733,54 @@
       "value": "Sound effects"
     }
   ],
+  "sideMenu.about": [
+    {
+      "type": 0,
+      "value": "About Bili"
+    }
+  ],
+  "sideMenu.overview": [
+    {
+      "type": 0,
+      "value": "Overview"
+    }
+  ],
+  "sideMenu.preferences": [
+    {
+      "type": 0,
+      "value": "Preferences"
+    }
+  ],
+  "sideMenu.profile": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "sideMenu.progress": [
+    {
+      "type": 0,
+      "value": "Progress"
+    }
+  ],
+  "signUp.annualCost": [
+    {
+      "type": 0,
+      "value": "$44.99"
+    }
+  ],
+  "signUp.annualDiscount": [
+    {
+      "type": 0,
+      "value": "3 month discount!"
+    }
+  ],
+  "signUp.annualFrequency": [
+    {
+      "type": 0,
+      "value": "year"
+    }
+  ],
   "signUp.choosePlan": [
     {
       "type": 0,
@@ -652,10 +793,58 @@
       "value": "Which best describes you?"
     }
   ],
+  "signUp.monthlyFrequency": [
+    {
+      "type": 0,
+      "value": "month"
+    }
+  ],
+  "signUp.montlyCost": [
+    {
+      "type": 0,
+      "value": "$4.99"
+    }
+  ],
   "signUp.noCommitment": [
     {
       "type": 0,
       "value": "No commitments, cancel anytime."
+    }
+  ],
+  "signUp.parent": [
+    {
+      "type": 0,
+      "value": "Parent"
+    }
+  ],
+  "signUp.parent2": [
+    {
+      "type": 0,
+      "value": "I want to use this app with my child(ren)"
+    }
+  ],
+  "signUp.pricing_annual_title": [
+    {
+      "type": 0,
+      "value": "12 months unlimited"
+    }
+  ],
+  "signUp.pricing_monthly_title": [
+    {
+      "type": 0,
+      "value": "1 month unlimited"
+    }
+  ],
+  "signUp.teacher": [
+    {
+      "type": 0,
+      "value": "Teacher"
+    }
+  ],
+  "signUp.teacher2": [
+    {
+      "type": 0,
+      "value": "I want to use this app with my students"
     }
   ],
   "signUp.trialDescription": [
@@ -721,7 +910,7 @@
   "signUpTeacher.role": [
     {
       "type": 0,
-      "value": "WHat is your role?"
+      "value": "What is your role?"
     }
   ],
   "signUpTeacher.roleAdmin": [
@@ -751,7 +940,7 @@
   "signUpTeacher.school": [
     {
       "type": 0,
-      "value": "Your school name*"
+      "value": "Your school name"
     }
   ],
   "splash.classroom": [
@@ -784,34 +973,10 @@
       "value": "Student login"
     }
   ],
-  "storyFactory.congrats.description1": [
-    {
-      "type": 0,
-      "value": "You've created and read five stories"
-    }
-  ],
-  "storyFactory.congrats.description2": [
-    {
-      "type": 0,
-      "value": "Can you keep going?"
-    }
-  ],
-  "storyFactory.congrats.title": [
-    {
-      "type": 0,
-      "value": "Congrats"
-    }
-  ],
   "storyFactory.create_message": [
     {
       "type": 0,
       "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
-    }
-  ],
-  "storyFactory.next": [
-    {
-      "type": 0,
-      "value": "Next"
     }
   ],
   "storyFactory.nextButton": [
@@ -850,16 +1015,64 @@
       "value": "Welcome to the Story Factory!"
     }
   ],
+  "story_factory.congrats.description.10": [
+    {
+      "type": 0,
+      "value": "You've created and read ten stories. How many more can you read?"
+    }
+  ],
+  "story_factory.congrats.description.20": [
+    {
+      "type": 0,
+      "value": "You've reached twenty stories. You are a super-reader!"
+    }
+  ],
+  "story_factory.congrats.description.30": [
+    {
+      "type": 0,
+      "value": "Way to go - you've created and read thirty stories"
+    }
+  ],
+  "story_factory.congrats.description.5": [
+    {
+      "type": 0,
+      "value": "You've created and read five stories. Can you keep going?"
+    }
+  ],
+  "story_factory.congrats.title.10": [
+    {
+      "type": 0,
+      "value": "Great Job!"
+    }
+  ],
+  "story_factory.congrats.title.20": [
+    {
+      "type": 0,
+      "value": "Amazing!"
+    }
+  ],
+  "story_factory.congrats.title.30": [
+    {
+      "type": 0,
+      "value": "I knew you could do it!"
+    }
+  ],
+  "story_factory.congrats.title.5": [
+    {
+      "type": 0,
+      "value": "Congrats!"
+    }
+  ],
+  "story_factory.keepGoing": [
+    {
+      "type": 0,
+      "value": "Keep Going!"
+    }
+  ],
   "successScreen.success": [
     {
       "type": 0,
       "value": "Success! You did it!"
-    }
-  ],
-  "sxQNl3": [
-    {
-      "type": 0,
-      "value": "Default Text 3 for Bilingual Mode"
     }
   ]
 }

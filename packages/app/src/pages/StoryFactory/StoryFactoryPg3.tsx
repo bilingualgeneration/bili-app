@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IonCard, IonIcon } from "@ionic/react";
+import { IonCard, IonIcon, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { StoriesCardNoRating } from "@/components/StoryFactory/StoriesCardNoRating";
@@ -23,19 +23,21 @@ export const StoryFactoryPage3: React.FC = () => {
       >
         <div className="sf-card">
           <IonCard>
-            <h1 style={{ marginTop: 0 }}>
-              <FormattedMessage
-                id="common.storyFactory"
-                defaultMessage="Story Factory"
-              />
-            </h1>
-            {!isImmersive && <h2 style={{ marginTop: 0 }}>Story Factory</h2>}
-
+            <IonText>
+              <h1>
+                <FormattedMessage
+                  id="common.storyFactory"
+                  defaultMessage="Story Factory"
+                />
+              </h1>
+              {!isImmersive && <h2>Story Factory</h2>}
+            </IonText>
             <div
               className="hide-scrollbar"
               style={{
-                display: "flex",
                 alignItems: "center",
+                display: "flex",
+                marginTop: "2rem",
                 overflowX: "scroll",
               }}
             >

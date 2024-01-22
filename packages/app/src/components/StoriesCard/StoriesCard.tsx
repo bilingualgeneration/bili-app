@@ -3,6 +3,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
+  IonChip,
   IonIcon,
   IonText,
 } from "@ionic/react";
@@ -68,7 +69,18 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
 
         <div className="stories-card-footer">
           <div>
-            <h4>{title as string}</h4>
+            {isLocked && (
+              <IonChip
+                style={{
+                  backgroundColor: "#fff",
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
+                Proximante{!isImmersive && " | Coming Soon"}
+              </IonChip>
+            )}
+            <h4 style={{ marginTop: 8 }}>{title as string}</h4>
             {!isImmersive && <p>{subtitle as string}</p>}
           </div>
           <div>{heart}</div>

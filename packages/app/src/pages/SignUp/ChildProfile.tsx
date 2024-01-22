@@ -83,13 +83,13 @@ export const ChildProfile: FC = () => {
       <form onSubmit={onSubmit}>
         <div className="ion-padding-bottom">
           <IonText className="ion-text-center">
-            <h1>
+            <h2>
               <FormattedMessage
                 id="childProfile.title"
                 defaultMessage="Make a profile for your child"
                 description="Title for page where parents share information about their child"
               />
-            </h1>
+            </h2>
             <p>
               <FormattedMessage
                 id="childProfile.subtitle"
@@ -103,13 +103,13 @@ export const ChildProfile: FC = () => {
         <br />
         <div>
           <IonText>
-            <h2>
+            <p>
               <FormattedMessage
                 id="childProfile.nameLabel"
                 defaultMessage="Enter your child's name or nickname:"
                 description="Label for text input where parents can enter their child's name"
               />
-            </h2>
+            </p>
           </IonText>
           <Input
             control={control}
@@ -122,13 +122,13 @@ export const ChildProfile: FC = () => {
         <br />
         <div className="ion-margin-top">
           <IonText>
-            <h2>
+            <p>
               <FormattedMessage
                 id="childProfile.ageLabel"
                 defaultMessage="Select your child's age range:"
                 description="Label for radio input where parents can select their child's age range"
               />
-            </h2>
+            </p>
           </IonText>
         </div>
 
@@ -152,7 +152,7 @@ export const ChildProfile: FC = () => {
           <FormattedMessage
             id="common.continue"
             defaultMessage="Continue"
-            description="Button for users to continue on to the next page"
+            description="Button label to continue"
           />
         </IonButton>
       </form>

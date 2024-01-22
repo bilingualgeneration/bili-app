@@ -9,7 +9,6 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import { StoryFactoryButton } from "@/components/StoryFactory/StoryFactoryButton";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import audio_en_file from "@/assets/audio/story_factory_second_en.mp3";
 import audio_es_file from "@/assets/audio/story_factory_second_es.mp3";
@@ -17,11 +16,7 @@ import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 
 import "./StoryFactory.scss";
 
-interface IntroPage2Props {
-  currentPage: number;
-}
-
-export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
+export const StoryFactoryPg2: React.FC = () => {
   const { isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const audio_en = new Audio(audio_en_file);
@@ -91,10 +86,27 @@ export const IntroPage2: React.FC<IntroPage2Props> = ({ currentPage }) => {
                   }}
                 />
               )}
-              <StoryFactoryButton
+              <IonButton
+                className="sf-intro-button"
                 disabled={!audioPlayed}
-                currentPage={currentPage}
-              />
+                expand="block"
+                shape="round"
+                type="button"
+                href="/story-factory/3"
+              >
+                <div>
+                  <div className="story-button-bold">
+                    <FormattedMessage
+                      id="storyFactory.nextButton"
+                      defaultMessage="Next"
+                      description="Button to move to the next page in intro pages"
+                    />
+                  </div>
+                  {!isImmersive && (
+                    <div className="story-button-reg">Let's Play</div>
+                  )}
+                </div>
+              </IonButton>
             </div>
           </IonCardContent>
         </IonCard>

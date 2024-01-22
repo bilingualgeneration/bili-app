@@ -1,25 +1,7 @@
-//AM
-import React, { useState, useEffect } from "react";
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
-  IonGrid,
-  IonImg,
-  IonItem,
-  IonLabel,
-  IonRow,
-  IonText,
-  IonThumbnail,
-} from "@ionic/react";
-import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
-import { Intruder2 } from "./Intruder2";
+import { IntruderGame } from "./IntruderGame";
 
 export const IntruderGameLoader: React.FC = () => {
   //@ts-ignore
@@ -38,5 +20,6 @@ export const IntruderGameLoader: React.FC = () => {
     return "Error loading the game";
   }
 
-  return <Intruder2 game={data} />;
+  // @ts-ignore
+  return <IntruderGame game={data} />;
 };

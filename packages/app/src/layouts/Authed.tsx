@@ -2,7 +2,6 @@ import { FC, useEffect, PropsWithChildren } from "react";
 import { Redirect } from "react-router-dom";
 import { useUser, useSigninCheck } from "reactfire";
 import { useProfile, ProfileContextProvider } from "@/contexts/ProfileContext";
-import { ReqdActionsProvider } from "@/contexts/ReqdActionsContext";
 import { useHistory } from "react-router-dom";
 
 const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -21,11 +20,7 @@ const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
     return <Redirect to="/" />;
   }
   // implied else
-  return (
-    <ProfileContextProvider>
-      <ReqdActionsProvider>{children}</ReqdActionsProvider>
-    </ProfileContextProvider>
-  );
+  return <ProfileContextProvider>{children}</ProfileContextProvider>;
 };
 
 export default AuthedLayout;
