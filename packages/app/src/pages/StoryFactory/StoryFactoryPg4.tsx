@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
-import { StoryFactoryCongrats } from "./Congrats";
+import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
 import "./StoryFactory.scss";
 
 const AWS_BUCKET =
@@ -133,7 +133,12 @@ export const StoryFactoryPage4: FC = () => {
   }
 
   if (showCongrats) {
-    return <StoryFactoryCongrats setShowCongrats={setShowCongrats} />;
+    return (
+      <StoryFactoryCongrats
+        setShowCongrats={setShowCongrats}
+        count={numPlays}
+      />
+    );
   }
 
   // implied else
@@ -275,14 +280,23 @@ export const StoryFactoryPage4: FC = () => {
                     ].join(" "),
                   );
                   const audio = new Audio(`${AWS_BUCKET}${sentence}.mp3`);
-                  audio.play();
+
                   if (lastSentence !== sentence) {
-                    setLastSentence(sentence);
-                    if ((numPlays + 1) % 5 === 0) {
-                      setShowCongrats(true);
-                    }
-                    setNumPlays(numPlays + 1);
+                    audio.onended = () => {
+                      setLastSentence(sentence);
+                      if (
+                        // check if the next number that will be iterated to is a target
+                        numPlays + 1 === 5 ||
+                        numPlays + 1 === 10 ||
+                        numPlays + 1 === 20 ||
+                        numPlays + 1 === 30
+                      ) {
+                        setShowCongrats(true);
+                      }
+                      setNumPlays(numPlays + 1);
+                    };
                   }
+                  audio.play();
                 }}
               >
                 <img className="volume-icon" src={volumeButton} />

@@ -389,7 +389,7 @@ export const StudentDashboard: FC = () => {
         {/* play */}
         <div className="other-story-cards">
           <IonText>
-            <Link to="/play">
+            <Link to="/play" class="no-text-decoration">
               <h1 className="color-selva">
                 <FormattedMessage
                   id="common.play"
