@@ -113,11 +113,19 @@ export const StudentDashboard: FC = () => {
     },
   ];
 
-  console.log(reqdActions);
   return (
     <div id="student-landing-page">
       {reqdActions.showSettingsMessage && (
         <Joyride
+          locale={{
+            close: (
+              <FormattedMessage
+                id="joyride.close"
+                defaultMessage="Close"
+                description="Button label to close Joyride"
+              />
+            ),
+          }}
           callback={(data) => {
             if (data.action === "close") {
               const { showSettingsMessage, ...remainingReqdActions } =
@@ -127,8 +135,9 @@ export const StudentDashboard: FC = () => {
           }}
           steps={[
             {
-              target: "#footer_settings_button",
+              target: "body",
               disableBeacon: true,
+              placement: "center",
               content: (
                 <FormattedMessage
                   defaultMessage="Click here to customize your child's learning experience"

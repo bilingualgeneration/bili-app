@@ -96,6 +96,7 @@ export const Overview: React.FC = ({}) => {
     },
   ];
 
+  // todo: rekey these ids to be joyride.___ eg joyride.back
   const translations = {
     Joyride: {
       back: (

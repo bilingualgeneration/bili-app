@@ -17,8 +17,8 @@ export const Complete: React.FC = () => {
     }
     if (signUpStatus === "done") {
       setReqdActions({
-        showSettingsMessage: true,
         ...reqdActions,
+        showSettingsMessage: true,
       });
     }
   }, [signUpStatus]);
