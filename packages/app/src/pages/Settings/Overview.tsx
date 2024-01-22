@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
 import {
   IonButton,
-  IonButtons,
-  IonContent,
-  IonFooter,
-  IonPage,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonList,
-  IonItem,
   IonLabel,
-  IonItemDivider,
   IonGrid,
   IonRow,
   IonCol,
   IonIcon,
   IonCard,
-  IonThumbnail,
 } from "@ionic/react";
 import Joyride from "react-joyride";
 import {
@@ -42,6 +31,7 @@ import React from "react";
 export const Overview: React.FC = ({}) => {
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
   const { isAdultCheckOpen } = useAdultCheck();
+
   useEffect(() => {
     if (!isAdultCheckOpen) {
       Preferences.get({
@@ -58,6 +48,7 @@ export const Overview: React.FC = ({}) => {
       });
     }
   }, [isAdultCheckOpen]);
+
   const steps = [
     {
       target: "#side-menu-button-sideMenu-profile",
@@ -75,7 +66,7 @@ export const Overview: React.FC = ({}) => {
       disableBeacon: true,
       content: (
         <FormattedMessage
-          id="settings.onboarding.inclusive-spanish"
+          id="settings.onboarding.inclusiveSpanish"
           defaultMessage="Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
           description="Onboarding message for the Profiles button on the side menu"
         />
@@ -105,12 +96,46 @@ export const Overview: React.FC = ({}) => {
     },
   ];
 
+  const translations = {
+    Joyride: {
+      back: (
+        <FormattedMessage
+          id="settings.overview.joyrideBack"
+          defaultMessage="Back"
+          description="Button to go 'back' in the walkthrough tutorial on settings/overview page"
+        />
+      ),
+      last: (
+        <FormattedMessage
+          id="settings.overview.joyrideLast"
+          defaultMessage="Last"
+          description="Appears when user is on 'last' slide of the walkthrough tutorial on settings/overview page"
+        />
+      ),
+      next: (
+        <FormattedMessage
+          id="settings.overview.joyrideNext"
+          defaultMessage="Next"
+          description="Button to go to 'next' section of the walkthrough tutorial on settings/overview page"
+        />
+      ),
+      skip: (
+        <FormattedMessage
+          id="settings.overview.joyrideSkip"
+          defaultMessage="Skip"
+          description="Button to 'skip' the walkthrough tutorial on settings/overview page"
+        />
+      ),
+    },
+  };
+
   const intl = useIntl();
 
   return (
     <>
       {shouldShowTutorial && !isAdultCheckOpen && (
         <Joyride
+          locale={translations.Joyride}
           hideCloseButton
           showSkipButton
           showProgress

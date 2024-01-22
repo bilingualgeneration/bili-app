@@ -174,7 +174,7 @@ export const TeacherAbout: FC = () => {
             <h2>
               <FormattedMessage
                 id="signUpTeacher.role"
-                defaultMessage="WHat is your role?"
+                defaultMessage="What is your role?"
                 description="Title above where teacher can select what role(s) they have"
               />
             </h2>
@@ -205,7 +205,7 @@ export const TeacherAbout: FC = () => {
           <FormattedMessage
             id="common.continue"
             defaultMessage="Continue"
-            description="Button for users to continue on to the next page"
+            description="Button label to continue"
           />
         </IonButton>
       </form>

@@ -15,20 +15,21 @@ export const Splash: React.FC = () => {
       <UnauthedHeader showBackButton={false} />
       <div className="content-wrapper">
         <IonText>
-          <h1 className="ion-text-center">
+          <h2 className="ion-text-center">
             <FormattedMessage
               id="splash.loginTitle"
               defaultMessage="Login"
               description="Title that says 'Login' on Splash page where user can either log in if they have a Bili account or create an account if they are new users"
             />
-          </h1>
+          </h2>
         </IonText>
         <IonCard>
           <IonCardContent>
             <IonCardTitle className="ion-padding-bottom">
               <FormattedMessage
                 id="common.haveAccount"
-                defaultMessage="Already have a Bili account?"
+                defaultMessage="Already have an account?"
+                description="link text if user already has an account"
               />
             </IonCardTitle>
             <IonButton
@@ -37,7 +38,11 @@ export const Splash: React.FC = () => {
               href="/login"
               shape="round"
             >
-              <FormattedMessage id="common.login" defaultMessage="Login" />
+              <FormattedMessage
+                id="common.logIn"
+                defaultMessage="Log In"
+                description="label to log in"
+              />
             </IonButton>
           </IonCardContent>
         </IonCard>

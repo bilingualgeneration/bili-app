@@ -86,7 +86,7 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
                       alignItems: "center",
                       gap: "4px",
                       borderRadius: "16px",
-                      backgroundColor: "#FDC094",
+                      backgroundColor: "#fff",
                       color: "#393939",
                       fontFamily: "Outfit",
                       fontSize: "12px",
@@ -96,7 +96,7 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
                     }}
                   >
                     Próximamente
-                    {!isImmersive && <span>| coming soon </span>}
+                    {!isImmersive && <span>| Coming Soon </span>}
                   </p>
                   {/* )} */}
                 </div>

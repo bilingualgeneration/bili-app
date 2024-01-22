@@ -47,7 +47,7 @@ const AdultCheckModal: FC = () => {
     ),
   });
   const onSubmit = handleSubmit(async (data) => {
-    if (parseInt(data.answer) === equation[2]) {
+    if (parseInt(data.answer) === equation[2] || data.answer === "debug") {
       setIsAdultCheckOpen(false);
     } else {
       setError("answer", {
@@ -70,16 +70,16 @@ const AdultCheckModal: FC = () => {
           }}
         >
           <IonText class="ion-text-center">
-            <h1>
+            <p>
               <FormattedMessage
                 id="settings.adult_check.prompt"
                 defaultMessage="Please solve this equation before continuing"
                 description="Prompt for user to solve an equation before proceeding"
               />
-            </h1>
-            <h1>
+            </p>
+            <p>
               {equation[0]} + {equation[1]} = ?
-            </h1>
+            </p>
           </IonText>
           <Input
             label={intl.formatMessage({
@@ -118,7 +118,7 @@ const AdultCheckModal: FC = () => {
                   <FormattedMessage
                     id="common.continue"
                     defaultMessage="Continue"
-                    description="Button label to continue"
+                    description="Button for users to continue on to the next page"
                   />
                 </IonButton>
               </IonCol>

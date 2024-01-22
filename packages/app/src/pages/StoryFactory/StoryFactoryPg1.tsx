@@ -17,11 +17,7 @@ import audio_es_file from "@/assets/audio/story_factory_first_es.mp3";
 import audio_es_inc_file from "@/assets/audio/story_factory_first_es-inc.mp3";
 import "./StoryFactory.scss";
 
-interface IntroPage1Props {
-  currentPage: number;
-}
-
-export const IntroPage1: FC<IntroPage1Props> = ({ currentPage }) => {
+export const StoryFactoryPg1: FC = () => {
   const { isInclusive, isImmersive } = useProfile();
   const history = useHistory();
   const audio_en = new Audio(audio_en_file);

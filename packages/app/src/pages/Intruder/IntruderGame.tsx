@@ -1,4 +1,3 @@
-//AM
 import React, { useState, useEffect, useMemo } from "react";
 import {
   IonCard,
@@ -45,19 +44,19 @@ interface IntruderGameProps {
   game: Game;
 }
 
-export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
-  function shuffleArray<T>(array: T[]): T[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      // Swap array[i] and array[j]
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+function shuffleArray<T>(array: T[]): T[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    // Swap array[i] and array[j]
+    [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
+}
+
+export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
-
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
@@ -120,7 +119,7 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
 
       setTimeout(() => {
         setShowBackside(false);
-        setCurrentIndex(currentIndex + 1); // Update to new set of cards
+        setCurrentIndex((currentIndex + 1) % data.word_group.length); // Update to new set of cards
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           1: initialStyle,
@@ -165,18 +164,19 @@ export const Intruder2: React.FC<IntruderGameProps> = ({ game: data }) => {
     <>
       <div id="intruder-styles">
         <div className="intruder-game-title">
-          <h2>¿Qué palabra no rima?</h2>
-          {!isImmersive && (
-            <>
-              <p>Which word does not rhyme?</p>
-            </>
-          )}
+          <IonText>
+            <h2>¿Qué palabra no rima?</h2>
+            {!isImmersive && <p>Which word does not rhyme?</p>}
+          </IonText>
         </div>
         <div className="intruder-cards-container">
-          {shuffledCards.map((card) => (
+          {shuffledCards.map((card, index) => (
             <IonCard
               className="intruder-card-style"
-              style={showBackside ? temporaryBackgroundStyle : initialStyle}
+              key={index}
+              style={
+                showBackside ? temporaryBackgroundStyle : cardColors[card.id]
+              }
               onClick={() => handleCardClick(card)}
             >
               {!showBackside && <img src={card.image.url} />}

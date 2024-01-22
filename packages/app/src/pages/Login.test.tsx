@@ -56,7 +56,7 @@ describe("Login Component", () => {
     "login.teacherPassword": "Password",
     "login.emailValidation": "Please enter a valid email address",
     "login.passwordValidation": "Please enter your password",
-    "login.divider": "or login using",
+    "login.divider": "or",
   };
 
   beforeEach(async () => {

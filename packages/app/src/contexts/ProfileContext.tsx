@@ -36,7 +36,6 @@ export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
   if (status === "loading") {
     return <></>;
   }
-  console.log(profileData);
   return (
     <>
       <ProfileContext.Provider
