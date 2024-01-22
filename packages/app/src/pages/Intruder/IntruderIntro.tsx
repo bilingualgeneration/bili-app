@@ -35,7 +35,7 @@ export const IntruderIntro: React.FC = () => {
       audio_es.pause();
       audio_es_inc.pause();
     };
-  });
+  }, []);
 
   useEffect(() => {
     if (isImmersive) {

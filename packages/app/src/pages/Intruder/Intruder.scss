@@ -1,14 +1,11 @@
 #intruder-styles {
   padding: 0 107px;
+  margin: 0 auto;
 
-  .intruder-game-title {
-    padding: 0 0 0 30px;
-  }
   .intruder-cards-container {
     display: flex;
     //height: 612px;
     padding: 0px 40px;
-    justify-content: center;
     align-items: center;
     gap: 44px;
     align-self: stretch;
@@ -26,6 +23,11 @@
     margin-inline: initial;
     min-width: 200px;
     border-radius: 32px;
+  }
+
+  .intruder-card-style img {
+    max-height: 70%;
+    max-width: 70%;
   }
 
   .intruder-card-title {
@@ -73,5 +75,15 @@
 
   .shake-animation {
     animation: shake 1s;
+  }
+
+  .intruder-button-bold h3 {
+    color: var(--Base-Nube, #fff);
+    text-align: center;
+    font-family: Outfit;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 35.2px */
   }
 }

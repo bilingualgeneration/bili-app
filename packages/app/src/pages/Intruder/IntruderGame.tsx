@@ -14,16 +14,19 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
+import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
 import "./Intruder.scss";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
+import { IntruderCongrats } from "./IntruderCongrats";
 
 interface BiliImage {
   url: string;
@@ -57,6 +60,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
+  const card_flip = new Audio(card_flip_audio);
+
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
@@ -84,19 +89,29 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     zIndex: "2",
   };
 
-  const [cardColors, setCardColors] = useState({
-    1: initialStyle,
-    2: initialStyle,
-    3: initialStyle,
+  const [cardColors, setCardColors] = useState<any>({
+    "1": initialStyle,
+    "2": initialStyle,
+    "3": initialStyle,
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
   const [currentCardSet, setCurrentCardSet] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
+
+  const goToNextWordGroup = () => {
+    // Check if the current index is at the last element of the word_group array
+    if (currentIndex >= data.word_group.length - 1) {
+      setCurrentIndex(0); // Reset to the first element
+    } else {
+      setCurrentIndex(currentIndex + 1); // Move to the next element
+    }
+  };
 
   const shuffledCards = useMemo(() => {
     const wordGroup = data.word_group[currentIndex];
@@ -105,10 +120,10 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
         word: wordGroup.intruder_text,
         image: wordGroup.intruder_image,
         isIntruder: true,
-        id: 1,
+        id: "1",
       },
-      { word: wordGroup.word_2_text, image: wordGroup.word_2_image, id: 2 },
-      { word: wordGroup.word_3_text, image: wordGroup.word_3_image, id: 3 },
+      { word: wordGroup.word_2_text, image: wordGroup.word_2_image, id: "2" },
+      { word: wordGroup.word_3_text, image: wordGroup.word_3_image, id: "3" },
     ];
     return shuffleArray(cards);
   }, [data, currentIndex]);
@@ -116,17 +131,26 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
-
+      card_flip.play(); //sound for flipping cards
       setTimeout(() => {
+        if (
+          currentIndex + 1 === 5 ||
+          currentIndex + 1 === 10 ||
+          currentIndex + 1 === 20 ||
+          currentIndex + 1 === data.word_group.length
+        ) {
+          setShowCongrats(true); //go to the IntruderCongrats page
+        }
+
         setShowBackside(false);
-        setCurrentIndex((currentIndex + 1) % data.word_group.length); // Update to new set of cards
+        goToNextWordGroup(); //check for the current index
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
-          1: initialStyle,
-          2: initialStyle,
-          3: initialStyle,
+          "1": initialStyle,
+          "2": initialStyle,
+          "3": initialStyle,
         });
-      }, 2000);
+      }, 3000);
     }
   }, [isCorrectSelected]);
 
@@ -135,13 +159,13 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     if (!card.isIntruder) {
       //logic for the incorrect cards
       audio_incorrect.play(); //plays audio for incorrect choice
-      setCardColors((prevColors) => ({
+      setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: { ...incorrectStyle, animation: "shake 1s" },
       }));
 
       setTimeout(() => {
-        setCardColors((prevColors) => ({
+        setCardColors((prevColors: any) => ({
           ...prevColors,
           [card.id]: initialStyle,
         }));
@@ -149,7 +173,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     } else {
       //logic when the correct card is choosen
       audio_correct.play(); //plays audio for correct choice
-      setCardColors((prevColors) => ({
+      setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: correctStyle,
       }));
@@ -160,20 +184,27 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     }
   };
 
+  if (showCongrats) {
+    return (
+      <IntruderCongrats
+        setShowCongrats={setShowCongrats}
+        count={currentIndex + 1}
+      />
+    );
+  }
+
   return (
     <>
       <div id="intruder-styles">
-        <div className="intruder-game-title">
-          <IonText>
-            <h2>¿Qué palabra no rima?</h2>
-            {!isImmersive && <p>Which word does not rhyme?</p>}
-          </IonText>
-        </div>
+        <IonText>
+          <h2>¿Qué palabra no rima?</h2>
+          {!isImmersive && <p>Which word does not rhyme?</p>}
+        </IonText>
         <div className="intruder-cards-container">
           {shuffledCards.map((card, index) => (
             <IonCard
               className="intruder-card-style"
-              key={index}
+              key={card.id}
               style={
                 showBackside ? temporaryBackgroundStyle : cardColors[card.id]
               }

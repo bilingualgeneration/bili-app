@@ -18,6 +18,7 @@ import Intruder from "@/pages/games/Intruder";
 import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
 import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
+import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
 import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "@/pages/Login";
@@ -59,8 +60,6 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./theme/overrides.scss";
-
-import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
 
 setupIonicReact();
 
