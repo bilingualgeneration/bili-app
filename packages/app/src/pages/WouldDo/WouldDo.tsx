@@ -5,6 +5,7 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
+  IonText,
 } from "@ionic/react";
 
 export const WouldDo: React.FC = () => {
@@ -40,8 +41,10 @@ export const WouldDo: React.FC = () => {
         {" "}
         {/* Background color of the page as seen on Figma */}
         <div style={{ padding: "4px 120px 0px 120px" }}>
-          <h1 style={{ fontWeight: "bold" }}>¿Qué harías?</h1>
-          <p style={{ fontWeight: "normal" }}>What would you do?</p>
+          <IonText>
+            <h1>¿Qué harías?</h1>
+            <p>What would you do?</p>
+          </IonText>
         </div>
         <div
           style={{
