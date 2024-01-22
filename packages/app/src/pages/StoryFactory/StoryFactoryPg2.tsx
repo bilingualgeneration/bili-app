@@ -10,8 +10,8 @@ import {
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import biliCharacter from "@/assets/icons/bili_character.svg";
-import audio_en_file from "@/assets/audio/story_factory_second_en.mp3";
-import audio_es_file from "@/assets/audio/story_factory_second_es.mp3";
+import audio_en_file from "@/assets/audio/StoryFactoryAudio/story_factory_second_en.mp3";
+import audio_es_file from "@/assets/audio/StoryFactoryAudio/story_factory_second_es.mp3";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 
 import "./StoryFactory.scss";
