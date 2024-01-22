@@ -1,48 +1,44 @@
-import biliCharacter from "@/assets/img/bili_in_coat.png";
+import biliCharacter from "@/assets/icons/bili_character.svg";
+
 import React, { useState, useEffect } from "react";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import "./Intruder.scss";
-import "../StoryFactory/StoryFactory.scss";
+import "./StoryFactory.scss";
 
-import audio_5_en from "@/assets/audio/intruder_congrats_5_en.mp3";
-import audio_10_en from "@/assets/audio/intruder_congrats_10_en.mp3";
-import audio_20_en from "@/assets/audio/intruder_congrats_20_en.mp3";
-import audio_all_en from "@/assets/audio/intruder_congrats_all_en.mp3";
-import audio_5_es from "@/assets/audio/intruder_congrats_5_es.mp3";
-import audio_10_es from "@/assets/audio/intruder_congrats_10_es.mp3";
-import audio_20_es from "@/assets/audio/intruder_congrats_20_es.mp3";
-import audio_all_es from "@/assets/audio/intruder_congrats_all_es.mp3";
+import audio_5_en from "@/assets/audio/story_factory_congrats_5_en.mp3";
+import audio_10_en from "@/assets/audio/story_factory_congrats_10_en.mp3";
+import audio_20_en from "@/assets/audio/story_factory_congrats_20_en.mp3";
+import audio_30_en from "@/assets/audio/story_factory_congrats_30_en.mp3";
+import audio_5_es from "@/assets/audio/story_factory_congrats_5_es.mp3";
+import audio_10_es from "@/assets/audio/story_factory_congrats_10_es.mp3";
+import audio_20_es from "@/assets/audio/story_factory_congrats_20_es.mp3";
+import audio_30_es from "@/assets/audio/story_factory_congrats_30_es.mp3";
 
 const sounds: any = {
   en: {
     "5": audio_5_en,
     "10": audio_10_en,
     "20": audio_20_en,
-    all: audio_all_en,
+    "30": audio_30_en,
   },
   es: {
     "5": audio_5_es,
     "10": audio_10_es,
     "20": audio_20_es,
-    all: audio_all_es,
+    "30": audio_30_es,
   },
 };
 
-export const IntruderCongrats: React.FC<{
+export const StoryFactoryCongrats: React.FC<{
   setShowCongrats: any;
-  count: number; // note: when pack is done, count = -1
+  count: number;
 }> = ({ setShowCongrats, count }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { isImmersive } = useProfile();
-  const audio_es = new Audio(
-    sounds.es[count === -1 ? "all" : count.toString()],
-  );
-  const audio_en = new Audio(
-    sounds.en[count === -1 ? "all" : count.toString()],
-  );
+  const audio_es = new Audio(sounds.es[count.toString()]);
+  const audio_en = new Audio(sounds.en[count.toString()]);
   useEffect(() => {
     return () => {
       audio_es.pause();
@@ -74,60 +70,60 @@ export const IntruderCongrats: React.FC<{
               <h1 className="color-selva">
                 {count === 5 && (
                   <FormattedMessage
-                    id="intruder.congrats.title.5"
+                    id="story_factory.congrats.title.5"
                     defaultMessage="Congrats!"
-                    description="Congrats Title when 5 correct"
+                    description="Congrats Title when 5 stories read"
                   />
                 )}
                 {count === 10 && (
                   <FormattedMessage
-                    id="intruder.congrats.title.10"
+                    id="story_factory.congrats.title.10"
                     defaultMessage="Great Job!"
-                    description="Congrats Title when 10 correct"
+                    description="Congrats Title when 10 stories read"
                   />
                 )}
                 {count === 20 && (
                   <FormattedMessage
-                    id="intruder.congrats.title.20"
+                    id="story_factory.congrats.title.20"
                     defaultMessage="Amazing!"
-                    description="Congrats Title when 20 correct"
+                    description="Congrats Title when 20 stories read"
                   />
                 )}
-                {count === -1 && (
+                {count === 30 && (
                   <FormattedMessage
-                    id="intruder.congrats.title.all"
+                    id="story_factory.congrats.title.30"
                     defaultMessage="I knew you could do it!"
-                    description="Congrats Title when all correct"
+                    description="Congrats Title when 30 stories read"
                   />
                 )}
               </h1>
               <h2 className="color-selva">
                 {count === 5 && (
                   <FormattedMessage
-                    id="intruder.congrats.description.5"
-                    defaultMessage="You've found five rhyme intruders. Can you keep going?"
-                    description="Congrats Description when 5 correct"
+                    id="story_factory.congrats.description.5"
+                    defaultMessage="You've created and read five stories. Can you keep going?"
+                    description="Congrats Description when 5 stories read"
                   />
                 )}
                 {count === 10 && (
                   <FormattedMessage
-                    id="intruder.congrats.description.10"
-                    defaultMessage="You've found ten rhyme intruders. How many more can you find?"
-                    description="Congrats Description when 10 correct"
+                    id="story_factory.congrats.description.10"
+                    defaultMessage="You've created and read ten stories. How many more can you read?"
+                    description="Congrats Description when 10 stories read"
                   />
                 )}
                 {count === 20 && (
                   <FormattedMessage
-                    id="intruder.congrats.description.20"
-                    defaultMessage="You've found twenty rhyme intruders. You are a super-rhymer!"
-                    description="Congrats Description when 20 correct"
+                    id="story_factory.congrats.description.20"
+                    defaultMessage="You've reached twenty stories. You are a super-reader!"
+                    description="Congrats Description when 20 stories read"
                   />
                 )}
-                {count === -1 && (
+                {count === 30 && (
                   <FormattedMessage
-                    id="intruder.congrats.description.all"
-                    defaultMessage="Way to go - you've found all of the rhyme intruders!"
-                    description="Congrats Description when all correct"
+                    id="story_factory.congrats.description.30"
+                    defaultMessage="Way to go - you've created and read thirty stories"
+                    description="Congrats Description when 30 stories read"
                   />
                 )}
               </h2>
@@ -139,17 +135,17 @@ export const IntruderCongrats: React.FC<{
                     {count === 5 && "Congrats!"}
                     {count === 10 && "Great job!"}
                     {count === 20 && "Amazing!"}
-                    {count === -1 && "I knew you could do it!"}
+                    {count === 30 && "I knew you could do it!"}
                   </h1>
                   <h2>
                     {count === 5 &&
-                      "You've found five rhyme intruders. Can you keep going?"}
+                      "You've created and read five stories. Can you keep going?"}
                     {count === 10 &&
-                      "You've found ten rhyme intruders. How many more can you find?"}
+                      "You've created and read ten stories. How many more can you read?"}
                     {count === 20 &&
-                      "You've found twenty rhyme intruders. You are a super-rhymer!"}
-                    {count === -1 &&
-                      "Way to go - you've found all of the rhyme intruders!"}
+                      "You've reached twenty stories. You are a super-reader!"}
+                    {count === 30 &&
+                      "Way to go - you've created and read thirty stories"}
                   </h2>
                 </>
               )}
@@ -186,7 +182,7 @@ export const IntruderCongrats: React.FC<{
                 <div>
                   <div className="story-button-bold">
                     <FormattedMessage
-                      id="intruder.keepGoing"
+                      id="story_factory.keepGoing"
                       defaultMessage="Keep Going!"
                       description="Button label to exit congrats screen"
                     />
