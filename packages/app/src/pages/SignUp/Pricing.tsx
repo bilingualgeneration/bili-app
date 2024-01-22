@@ -148,7 +148,6 @@ export const Pricing: React.FC = () => {
                 name="pricing"
                 options={[monthlyOption, annualOption]}
                 displayCardsInRow={true}
-                defaultOption={annualOption}
               />
             </div>
 
