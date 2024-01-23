@@ -155,6 +155,16 @@
       "value": "Bienestar"
     }
   ],
+  "common.years_old": [
+    {
+      "type": 1,
+      "value": "age"
+    },
+    {
+      "type": 0,
+      "value": " años"
+    }
+  ],
   "intruder.congrats.description.10": [
     {
       "type": 0,
@@ -469,18 +479,6 @@
       "value": "Conoce qué es el español inclusivo y por qué existe."
     }
   ],
-  "settings.overview.InclusiveSpanishMiniCard1": [
-    {
-      "type": 0,
-      "value": "Justicia social"
-    }
-  ],
-  "settings.overview.InclusiveSpanishMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recursos"
-    }
-  ],
   "settings.overview.addChildBtn": [
     {
       "type": 0,
@@ -511,18 +509,6 @@
       "value": "Explore características especiales que promueven la producción lingüística auténtica."
     }
   ],
-  "settings.overview.getChildMiniCard1": [
-    {
-      "type": 0,
-      "value": "Padres"
-    }
-  ],
-  "settings.overview.getChildMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recursos"
-    }
-  ],
   "settings.overview.getChildTitle": [
     {
       "type": 0,
@@ -533,18 +519,6 @@
     {
       "type": 0,
       "value": "Cuando entras en cualquier área nueva de la ciencia, casi siempre encuentras."
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard1": [
-    {
-      "type": 0,
-      "value": "Guía"
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recomendado"
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -586,7 +560,7 @@
   "settings.overview.seeAll": [
     {
       "type": 0,
-      "value": "Ver todos los &#40;9&#41;"
+      "value": "Ver todos (9)"
     }
   ],
   "settings.phone": [
@@ -1115,6 +1089,30 @@
     {
       "type": 0,
       "value": "¡Éxito! ¡Lo hiciste!"
+    }
+  ],
+  "tag.guide": [
+    {
+      "type": 0,
+      "value": "Guía"
+    }
+  ],
+  "tag.resources": [
+    {
+      "type": 0,
+      "value": "Recursos"
+    }
+  ],
+  "tags.parents": [
+    {
+      "type": 0,
+      "value": "Padres"
+    }
+  ],
+  "tags.social_justice": [
+    {
+      "type": 0,
+      "value": "Justicia Social"
     }
   ]
 }
