@@ -359,7 +359,7 @@ const Router: React.FC = () => {
         {/* todo: better path */}
         <Route
           exact
-          path="/would-do"
+          path="/would-do/:pack_id"
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#fff">

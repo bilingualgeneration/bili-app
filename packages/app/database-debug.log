@@ -1,8 +1,9 @@
-15:46:26.781 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-15:46:26.998 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
-15:46:27.789 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - bilingual-generation-dev-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 129ms, init: 0ms
-15:46:27.898 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace bilingual-generation-dev-default-rtdb status Active to Active
-09:51:30.336 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
-09:51:30.360 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.Terminator$Terminator - 1 actors left to terminate: bilingual-generation-dev-default-rtdb
-09:51:30.371 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.NamespaceActor - stopped namespace actor for bilingual-generation-dev-default-rtdb
-09:51:30.380 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+11:29:56.822 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+11:29:57.050 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+11:29:57.713 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - bilingual-generation-dev-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 111ms, init: 0ms
+11:29:57.781 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace bilingual-generation-dev-default-rtdb status Active to Active
+14:38:22.549 [FirebaseWorkerPool-1-1] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested 
+namespace bilingual-generation-dev, but the emulator is configured for bilingual-generation-dev-default-rtdb. To 
+opt-out of single project mode add/set the singleProjectMode: false property in 
+the firebase.json emulators config. 
+14:38:22.608 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - bilingual-generation-dev successfully activated FBKV (SurveyIdle(0)) wait: 17ms, init: 0ms
