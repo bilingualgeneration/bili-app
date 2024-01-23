@@ -1,0 +1,32 @@
+$letter-avatar-size: 85px;
+$text-size: 38px;
+$letter-avatar-padding-top: ($letter-avatar-size - $text-size) / 2;
+
+.child-profile-card {
+  &:not(.active) {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  &.active {
+    background-color: #d4e9e8;
+    border-color: #016a67;
+  }
+
+  padding: 1rem;
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .letter-avatar {
+    height: $letter-avatar-size;
+    width: $letter-avatar-size;
+    border-radius: 50%;
+    align-text: center;
+    padding-top: $letter-avatar-padding-top;
+    margin-right: 1.5rem;
+  }
+}

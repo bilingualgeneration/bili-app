@@ -9,24 +9,18 @@ import {
   IonCard,
 } from "@ionic/react";
 import Joyride from "react-joyride";
-import {
-  addOutline,
-  chevronForwardCircle,
-  chevronForwardCircleOutline,
-  ellipse,
-  ellipsisHorizontal,
-  sparkles,
-} from "ionicons/icons";
-import "./Overview.css";
+import { addOutline, ellipse, sparkles } from "ionicons/icons";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
-import SettingsExploreMiniCard from "@/components/Settings/SettingsExplore/SettingsExploreMiniCard";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
+import { ChildProfileCard } from "./ChildProfileCard";
+
+import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
@@ -132,6 +126,9 @@ export const Overview: React.FC = ({}) => {
 
   const intl = useIntl();
 
+  // todo: pull actual child profiles
+  const [activeChildName, setActiveChildName] = useState<string>("Vanessa");
+
   return (
     <>
       {shouldShowTutorial && !isAdultCheckOpen && (
@@ -188,62 +185,37 @@ export const Overview: React.FC = ({}) => {
             </IonCol>
           </IonRow>
 
-          <div className="child-profile-content">
+          <div style={{ marginTop: "2rem" }}>
             <IonRow>
-              <IonCol>
-                <IonCard className="child-profile-card">
-                  <IonGrid className="ion-no-margin ion-no-padding">
-                    <IonRow>
-                      <IonCol size="sm">
-                        <IonIcon
-                          icon={ellipse}
-                          size="large"
-                          className="circle-icon circle-icon-blue"
-                        />
-                        <div className="circle-icon-overlay circle-icon-blue-overlay">
-                          V
-                        </div>
-                      </IonCol>
-
-                      <IonCol className="child-name-age-col">
-                        <h1 className="child-name">Vanessa</h1>
-                        <p>3-5 years old</p>
-                      </IonCol>
-
-                      <IonCol size="1.5" class="ion-text-end">
-                        <IonIcon icon={ellipsisHorizontal} className="more" />
-                      </IonCol>
-                    </IonRow>
-                  </IonGrid>
-                </IonCard>
+              <IonCol
+                className="ion-padding"
+                size="6"
+                onClick={() => {
+                  setActiveChildName("Vanessa");
+                }}
+              >
+                <ChildProfileCard
+                  age="3-5"
+                  isActive={activeChildName === "Vanessa"}
+                  letterAvatarBackgroundColor="#20bfb9"
+                  letterAvatarTextColor="#ffffff"
+                  name="Vanessa"
+                />
               </IonCol>
-
-              <IonCol>
-                <IonCard className="child-profile-card">
-                  <IonGrid className="ion-no-margin ion-no-padding">
-                    <IonRow>
-                      <IonCol size="auto">
-                        <IonIcon
-                          icon={ellipse}
-                          size="large"
-                          className="circle-icon circle-icon-pink"
-                        />
-                        <div className="circle-icon-overlay circle-icon-pink-overlay">
-                          M
-                        </div>
-                      </IonCol>
-
-                      <IonCol className="child-name-age-col">
-                        <h1 className="child-name">Mateo</h1>
-                        <p>5-7 years old</p>
-                      </IonCol>
-
-                      <IonCol size="1.5" class="ion-text-end">
-                        <IonIcon icon={ellipsisHorizontal} className="more" />
-                      </IonCol>
-                    </IonRow>
-                  </IonGrid>
-                </IonCard>
+              <IonCol
+                className="ion-padding"
+                size="6"
+                onClick={() => {
+                  setActiveChildName("Mateo");
+                }}
+              >
+                <ChildProfileCard
+                  age="5-7"
+                  isActive={activeChildName === "Mateo"}
+                  letterAvatarBackgroundColor="#f28ac9"
+                  letterAvatarTextColor="#973d78"
+                  name="Mateo"
+                />
               </IonCol>
             </IonRow>
           </div>
@@ -276,10 +248,14 @@ export const Overview: React.FC = ({}) => {
             </IonCol>
 
             <IonCol size="auto">
-              <IonButton disabled={true} fill="clear" className="see-all">
+              <IonButton
+                disabled={true}
+                fill="clear"
+                id="settings-overview-see-all-button"
+              >
                 <FormattedMessage
                   id="settings.overview.seeAll"
-                  defaultMessage="See all &#40;9&#41;"
+                  defaultMessage="See all (9)"
                   description="See all link in settings"
                 />
               </IonButton>
@@ -303,35 +279,25 @@ export const Overview: React.FC = ({}) => {
                       "When you enter into any new area of science, you almost always find.",
                     description: "Explore card #1 content",
                   })}
-                  // can also change text color of SettingsExploreCard using 'textColor' prop if necessary
-                >
-                  <IonRow>
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#FFAEDC"} // enter a background color for the mini card
-                        cardText={intl.formatMessage({
-                          id: "settings.overview.gettingStartedMiniCard1",
-                          defaultMessage: "Guide",
-                          description:
-                            "Explore card #1 mini card #1 found at the top, which describes the content type of the main card",
-                        })} // enter custom text for the mini card
-                        // can also change color of text for SettingsExploreMiniCard using 'textColor' prop if necessary
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#F1D100"}
-                        cardText={intl.formatMessage({
-                          id: "settings.overview.gettingStartedMiniCard2",
-                          defaultMessage: "Recommended",
-                          description:
-                            "Explore card #1 mini card #2 found at the top, which describes the content type of the main card",
-                        })}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-                  </IonRow>
-                </SettingsExploreCard>
+                  tags={[
+                    {
+                      color: "#FFAEDC",
+                      text: intl.formatMessage({
+                        id: "tag.guide",
+                        defaultMessage: "Guide",
+                        description: "Content tag for guides",
+                      }),
+                    },
+                    {
+                      color: "#F1D100",
+                      text: intl.formatMessage({
+                        id: "tag.resources",
+                        defaultMessage: "Resources",
+                        description: "Content tag for resources",
+                      }),
+                    },
+                  ]}
+                />
               </IonCol>
 
               <IonCol size="md">
@@ -350,33 +316,25 @@ export const Overview: React.FC = ({}) => {
                         "Learn about what Inclusive Spanish is and why it exists.",
                       description: "Explore card #2 content",
                     })}
-                  >
-                    <IonRow>
-                      <IonCol size="auto">
-                        <SettingsExploreMiniCard
-                          customColor={"#D3EAE8"}
-                          cardText={intl.formatMessage({
-                            id: "settings.overview.InclusiveSpanishMiniCard1",
-                            defaultMessage: "Social Justice",
-                            description:
-                              "Explore card #2 mini card #1 found at the top, which describes the content type of the main card",
-                          })}
-                        ></SettingsExploreMiniCard>
-                      </IonCol>
-
-                      <IonCol size="auto">
-                        <SettingsExploreMiniCard
-                          customColor={"#F1D100"}
-                          cardText={intl.formatMessage({
-                            id: "settings.overview.InclusiveSpanishMiniCard2",
-                            defaultMessage: "Resources",
-                            description:
-                              "Explore card #2 mini card #2 found at the top, which describes the content type of the main card",
-                          })}
-                        ></SettingsExploreMiniCard>
-                      </IonCol>
-                    </IonRow>
-                  </SettingsExploreCard>
+                    tags={[
+                      {
+                        color: "#D3EAE8",
+                        text: intl.formatMessage({
+                          id: "tags.social_justice",
+                          defaultMessage: "Social Justice",
+                          description: "Content tag for social justice",
+                        }),
+                      },
+                      {
+                        color: "#F1D100",
+                        text: intl.formatMessage({
+                          id: "tag.resources",
+                          defaultMessage: "Resources",
+                          description: "Content tag for resources",
+                        }),
+                      },
+                    ]}
+                  />
                 </span>
               </IonCol>
 
@@ -396,75 +354,26 @@ export const Overview: React.FC = ({}) => {
                     description: "Explore card #3 content",
                   })}
                   textColor="black"
-                >
-                  <IonRow>
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#973D78"}
-                        cardText={intl.formatMessage({
-                          id: "settings.overview.getChildMiniCard1",
-                          defaultMessage: "Parents",
-                          description:
-                            "Explore card #3 mini card #1 found at the top, which describes the content type of the main card",
-                        })}
-                        textColor="white"
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#F1D100"}
-                        cardText={intl.formatMessage({
-                          id: "settings.overview.getChildMiniCard2",
-                          defaultMessage: "Resources",
-                          description:
-                            "Explore card #3 mini card #2 found at the top, which describes the content type of the main card",
-                        })}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-                  </IonRow>
-                </SettingsExploreCard>
-              </IonCol>
-
-              {/* <IonCol size="md">
-                <SettingsExploreCard
-                  backgroundImage={settingsCardDesign1}
-                  backgroundColor={"#973D78"}
-                  title={"Getting started"}
-                  subtitle={
-                    "When you enter into any new area of science, you almost always find."
-                  }
-                >
-                  <IonRow>
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#FFAEDC"}
-                        cardText={"Guide"}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-
-                    <IonCol>
-                      <SettingsExploreMiniCard
-                        customColor={"#F1D100"}
-                        cardText={"Recommended"}
-                      ></SettingsExploreMiniCard>
-                    </IonCol>
-                  </IonRow>
-                </SettingsExploreCard>
-              </IonCol> */}
-
-              <IonCol className="child-name-age-col ion-align-items-end">
-                <IonButton
-                  className="scroll-right-button"
-                  disabled={true}
-                  fill="clear"
-                >
-                  <IonIcon
-                    aria-label="Scroll Right"
-                    icon={chevronForwardCircleOutline}
-                    className="scroll-right-icon"
-                  />
-                </IonButton>
+                  tags={[
+                    {
+                      color: "#973D78",
+                      text: intl.formatMessage({
+                        id: "tags.parents",
+                        defaultMessage: "Parents",
+                        description: "Content tag for parents",
+                      }),
+                      textColor: "#fff",
+                    },
+                    {
+                      color: "#F1D100",
+                      text: intl.formatMessage({
+                        id: "tag.resources",
+                        defaultMessage: "Resources",
+                        description: "Content tag for resources",
+                      }),
+                    },
+                  ]}
+                />
               </IonCol>
             </IonRow>
           </div>
