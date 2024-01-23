@@ -17,7 +17,7 @@ export const signup = onCall(async (request) => {
 
   // todo: need better solution for pricing tracking
   const userProfile: any = {
-    country: "",
+    country: null,
     dailyPlaytimeLimit: "unlimited",
     dob: null,
     email: data.email,
