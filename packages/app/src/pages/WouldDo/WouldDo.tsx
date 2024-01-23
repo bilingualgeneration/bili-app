@@ -95,6 +95,7 @@ export const WouldDo: FC = () => {
           }}
         >
           {questionsData.map((question, index) => (
+            // todo: remove the link
             <Link to="/would-do/dc6fd688-cbb9-4467-ba41-aad105c5ea40">
               <IonCard
                 key={index}
