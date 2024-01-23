@@ -127,7 +127,7 @@ export const Pricing: React.FC = () => {
                 <FormattedMessage
                   id="signUp.trialTitle"
                   defaultMessage="2 week free trial"
-                  description="Subtitle of page mentioning the 3 week free trial promo"
+                  description="Subtitle of page mentioning the 2 week free trial promo"
                 />
               </div>
               <div className="banner-text2">
