@@ -63,7 +63,7 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
       {...props}
     >
       <IonIcon slot="start" icon={icon} />
-      <IonLabel className="menu-label">{label}</IonLabel>
+      <IonLabel className="menu-label ion-hide-lg-down">{label}</IonLabel>
     </IonItem>
   );
 };

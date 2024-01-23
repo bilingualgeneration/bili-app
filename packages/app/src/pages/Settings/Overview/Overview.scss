@@ -4,11 +4,6 @@
   height: auto;
 }
 
-ion-card.child-profile-card {
-  position: relative;
-  padding: 2%;
-}
-
 .child-profile-heading,
 .explore-bili-heading {
   color: var(--light-suelo, #000);
@@ -22,21 +17,6 @@ ion-card.child-profile-card {
 
 .explore-bili-heading {
   margin-top: 10%;
-}
-
-.child-profile-content {
-  margin-top: 1em; /* 24px; */
-}
-
-.child-name {
-  display: flex;
-  margin-bottom: 0;
-  color: var(--base-suelo, #000);
-
-  /* UI Type/text-2xl/[S] */
-  font-size: 1.5em; /* 24px; */
-  font-weight: 600;
-  line-height: 1.33; /* 32px; 133.333% */
 }
 
 p {
@@ -62,49 +42,18 @@ p {
   line-height: 24px; /* 150% */
 }
 
-ion-button.see-all {
-  width: 5em; /* 72px; */
+#settings-overview-see-all-button {
   color: #889391;
-  font-size: 1em; /* 14px; */
-  font-weight: 600;
   text-decoration-line: underline;
   --background-hover: none;
   --border-radius: 0;
-  --padding-top: 20%;
-  --padding-bottom: 20%;
-}
-
-ion-button.see-all.button-disabled {
-  --background: none;
-}
-
-ion-button.scroll-right-button {
-  --color: black;
-  --padding-top: 0;
-  --padding-bottom: 0;
-  --padding-start: 0;
-  --padding-end: 0;
-  --box-shadow: none;
-  --background-hover: none;
-}
-
-ion-button.scroll-right-button.button-disabled {
-  --background: none;
-}
-
-ion-icon.scroll-right-icon {
-  font-size: 3em;
-  --ionicon-stroke-width: 16px;
+  &.button-disabled {
+    --background: none;
+  }
 }
 
 ion-row.row {
   border-bottom: 1px solid var(--base-hover-shadow, rgba(0, 0, 0, 0.08));
-}
-
-ion-col.child-name-age-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 ion-button.add-child-btn {
@@ -112,39 +61,6 @@ ion-button.add-child-btn {
   --padding-bottom: 5%;
   border-width: 0;
   box-shadow: 0px 12px 12px -6px rgba(0, 0, 0, 0.16);
-}
-
-/******* circle icon + first-name letter overlay styles *******/
-
-.circle-icon {
-  width: 4em;
-  height: 4em;
-}
-
-.circle-icon-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  font-size: 2em;
-  font-weight: 600;
-}
-
-.circle-icon-blue {
-  color: #22beb9;
-}
-
-.circle-icon-blue-overlay {
-  color: white;
-}
-
-.circle-icon-pink {
-  color: #f28ac9;
-}
-
-.circle-icon-pink-overlay {
-  color: #973d78;
 }
 
 .sparkle-icon {
@@ -173,10 +89,4 @@ ion-button.add-child-btn {
     line-height: 1.33;
   }
   /* Add more styles as needed */
-}
-
-.more {
-  opacity: 0.4;
-  font-size: 2em;
-  padding: 0 10%;
 }

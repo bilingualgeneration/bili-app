@@ -155,6 +155,16 @@
       "value": "Wellness"
     }
   ],
+  "common.years_old": [
+    {
+      "type": 1,
+      "value": "age"
+    },
+    {
+      "type": 0,
+      "value": " years old"
+    }
+  ],
   "intruder.congrats.description.10": [
     {
       "type": 0,
@@ -457,18 +467,6 @@
       "value": "Learn about what Inclusive Spanish is and why it exists."
     }
   ],
-  "settings.overview.InclusiveSpanishMiniCard1": [
-    {
-      "type": 0,
-      "value": "Social Justice"
-    }
-  ],
-  "settings.overview.InclusiveSpanishMiniCard2": [
-    {
-      "type": 0,
-      "value": "Resources"
-    }
-  ],
   "settings.overview.addChildBtn": [
     {
       "type": 0,
@@ -499,18 +497,6 @@
       "value": "Explore special features that promote authentic language production."
     }
   ],
-  "settings.overview.getChildMiniCard1": [
-    {
-      "type": 0,
-      "value": "Parents"
-    }
-  ],
-  "settings.overview.getChildMiniCard2": [
-    {
-      "type": 0,
-      "value": "Resources"
-    }
-  ],
   "settings.overview.getChildTitle": [
     {
       "type": 0,
@@ -521,18 +507,6 @@
     {
       "type": 0,
       "value": "When you enter into any new area of science, you almost always find."
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard1": [
-    {
-      "type": 0,
-      "value": "Guide"
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recommended"
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -574,7 +548,7 @@
   "settings.overview.seeAll": [
     {
       "type": 0,
-      "value": "See all &#40;9&#41;"
+      "value": "See all (9)"
     }
   ],
   "settings.phone": [
@@ -1073,6 +1047,30 @@
     {
       "type": 0,
       "value": "Success! You did it!"
+    }
+  ],
+  "tag.guide": [
+    {
+      "type": 0,
+      "value": "Guide"
+    }
+  ],
+  "tag.resources": [
+    {
+      "type": 0,
+      "value": "Resources"
+    }
+  ],
+  "tags.parents": [
+    {
+      "type": 0,
+      "value": "Parents"
+    }
+  ],
+  "tags.social_justice": [
+    {
+      "type": 0,
+      "value": "Social Justice"
     }
   ]
 }

@@ -1,0 +1,33 @@
+$letter-avatar-size: 85px;
+$text-size: 38px;
+$letter-avatar-padding-top: calc(($letter-avatar-size - $text-size) / 2);
+
+.child-profile-card {
+  align-items: center;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 4px;
+  display: flex;
+  justify-content: flex-start;
+  min-width: 280px;
+  padding: 1rem;
+
+  &:not(.active) {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  &.active {
+    background-color: #d4e9e8;
+    border-color: #016a67;
+  }
+
+  .letter-avatar {
+    height: $letter-avatar-size;
+    width: $letter-avatar-size;
+    border-radius: 50%;
+    align-text: center;
+    padding-top: $letter-avatar-padding-top;
+    margin-right: 1.5rem;
+  }
+}

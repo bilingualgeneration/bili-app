@@ -91,7 +91,8 @@ export const SideMenu: React.FC = () => {
           description={"About label for side menu on settings page"}
         />
       ),
-      to: "https://bilingualgeneration.com/bili/",
+      to: "/settings/about",
+      isActive: location.pathname === "/settings/about",
     },
   ];
 
