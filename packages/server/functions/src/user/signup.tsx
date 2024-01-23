@@ -26,7 +26,7 @@ export const signup = onCall(async (request) => {
     isSoundEffects: true,
     language: "es",
     name: data.name,
-    phone: "",
+    phone: null,
     pricing: data.pricing,
     role: data.role,
   };
