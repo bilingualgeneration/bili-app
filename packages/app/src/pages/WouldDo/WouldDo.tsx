@@ -8,7 +8,11 @@ import {
   IonText,
 } from "@ionic/react";
 
-export const WouldDo: React.FC = () => {
+interface WouldDoProps {
+  data: any[]; // Todo: better type of for data
+}
+
+export const WouldDo: React.FC<WouldDoProps> = ({ data }) => {
   const ionCardsData = [
     // an array of objects representing IonCards where es = español and em = english
     {
