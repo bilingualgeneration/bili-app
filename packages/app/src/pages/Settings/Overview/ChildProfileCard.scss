@@ -1,8 +1,17 @@
 $letter-avatar-size: 85px;
 $text-size: 38px;
-$letter-avatar-padding-top: ($letter-avatar-size - $text-size) / 2;
+$letter-avatar-padding-top: calc(($letter-avatar-size - $text-size) / 2);
 
 .child-profile-card {
+  align-items: center;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 4px;
+  display: flex;
+  justify-content: flex-start;
+  min-width: 280px;
+  padding: 1rem;
+
   &:not(.active) {
     background-color: #ffffff;
     border-color: #ffffff;
@@ -12,14 +21,6 @@ $letter-avatar-padding-top: ($letter-avatar-size - $text-size) / 2;
     background-color: #d4e9e8;
     border-color: #016a67;
   }
-
-  padding: 1rem;
-  border-style: solid;
-  border-width: 4px;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 
   .letter-avatar {
     height: $letter-avatar-size;

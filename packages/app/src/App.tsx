@@ -23,7 +23,13 @@ import Journeys from "./pages/Journeys";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "@/pages/Login";
 import Memory from "@/pages/games/Memory";
-import { Overview, Preferences, Progress, Profile } from "@/pages/Settings";
+import {
+  About,
+  Overview,
+  Preferences,
+  Progress,
+  Profile,
+} from "@/pages/Settings";
 import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
@@ -150,6 +156,20 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <ResetPassword />
             </UnauthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/about"
+          render={() => (
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <About />
+                </SettingsLayout>
+              </AdultCheckProvider>
+            </AuthedLayout>
           )}
         />
 

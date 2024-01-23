@@ -1,4 +1,13 @@
 import {
+  addOutline,
+  chevronForwardCircle,
+  chevronForwardCircleOutline,
+  ellipse,
+  ellipsisHorizontal,
+  sparkles,
+} from "ionicons/icons";
+import { FormattedMessage } from "react-intl";
+import {
   IonButton,
   IonButtons,
   IonPage,
@@ -16,19 +25,11 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import {
-  addOutline,
-  chevronForwardCircle,
-  chevronForwardCircleOutline,
-  ellipse,
-  ellipsisHorizontal,
-  sparkles,
-} from "ionicons/icons";
 import { useMaskito } from "@maskito/react";
-//import "./SettingsPage1.css";
-import "./Profile.css";
 import { useEffect, useRef, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
+
+import "./Profile.css";
 
 export const Profile: React.FC = () => {
   const phoneMask = useMaskito({
@@ -54,7 +55,6 @@ export const Profile: React.FC = () => {
       ],
     },
   });
-
   const [selectedCountry, setSelectedCountry] = useState<string | undefined>(
     undefined,
   );

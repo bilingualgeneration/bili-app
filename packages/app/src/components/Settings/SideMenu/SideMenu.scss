@@ -31,3 +31,11 @@
     box-shadow: 2px 0 16px 0 rgba(0, 106, 103, 0.2);
   }
 }
+
+@media only screen and (max-width: 992px) {
+  #settings-side-menu {
+    ion-icon {
+      margin-right: 0;
+    }
+  }
+}
