@@ -14,16 +14,32 @@ export const signup = onCall(async (request) => {
     emailVerified: false,
   });
   const uid: string = userRecord.uid;
-  await admin.firestore().collection("users").doc(uid).set({
-    childName: data.childName,
-    childAge: data.childAge,
-    grades: data.grades,
-    isInclusive: data.isInclusive,
+
+  // todo: need better solution for pricing tracking
+  const userProfile: any = {
+    country: "",
+    dailyPlaytimeLimit: "unlimited",
+    dob: null,
+    email: data.email,
     isImmersive: data.isImmersive,
+    isInclusive: data.isInclusive,
+    isSoundEffects: true,
+    language: "es",
     name: data.name,
+    phone: "",
     pricing: data.pricing,
     role: data.role,
-    school: data.school,
-    schoolRoles: data.schoolRoles,
-  });
+  };
+
+  const childProfile: any = {
+    name: data.childName || "Student A", // default name for teacher
+    age: data.childAge || "?", // default age for teacher,
+    role: "child",
+    points: 0,
+    parentId: uid,
+  };
+  await Promise.all([
+    admin.firestore().collection("users").doc(uid).set(userProfile),
+    admin.firestore().collection("users").add(childProfile),
+  ]);
 });
