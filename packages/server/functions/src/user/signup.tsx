@@ -35,7 +35,7 @@ export const signup = onCall(async (request) => {
     name: data.childName || "Student A", // default name for teacher
     age: data.childAge || "?", // default age for teacher,
     role: "child",
-    points: 0,
+    completions: 0,
     parentId: uid,
   };
   await Promise.all([
