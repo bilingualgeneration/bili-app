@@ -30,6 +30,7 @@ export const Preferences: React.FC = () => {
       [key]: value,
     });
   };
+
   return (
     <>
       <IonList className="preferences-style">
@@ -85,7 +86,7 @@ export const Preferences: React.FC = () => {
             content={intl.formatMessage({
               id: "settingsProgress.preferences.popover2",
               defaultMessage:
-                "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
+                "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish.",
               description:
                 "Description of the language mode for your child's experience in the app",
             })}
