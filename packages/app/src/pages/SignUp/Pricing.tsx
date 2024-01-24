@@ -69,7 +69,15 @@ export const Pricing: React.FC = () => {
     component: (
       <div id="pricing-annual">
         <div className="best-value-block">
-          <p className="best-value-text">best value</p>
+          <p className="best-value-text">
+            <FormattedMessage
+              id="signUp.bestValuePricing"
+              defaultMessage={"best value"}
+              description={
+                "Orange rectangle that sits above 'annual' pricing option that specifies it as the 'best value'"
+              }
+            />
+          </p>
         </div>
         <PricingRadioCard
           title={intl.formatMessage({
