@@ -71,7 +71,7 @@ export const Preferences: React.FC = () => {
               <h4>
                 <FormattedMessage
                   id="settingsProgress.preferences.settingsLanguage"
-                  defaultMessage="Settings language"
+                  defaultMessage="Settings Language"
                   description="Preferences page 'settings language' text"
                 />
               </h4>
@@ -154,7 +154,7 @@ export const Preferences: React.FC = () => {
               id: "settingsProgress.preferences.popover4",
               defaultMessage:
                 "Determine how long your child plays on the app each day.",
-              description: "Daily playtime limit",
+              description: "Daily Playtime Limit",
             })}
             trigger="click-trigger4"
           />
@@ -201,7 +201,7 @@ export const Preferences: React.FC = () => {
               <h4>
                 <FormattedMessage
                   id="settingsProgress.preferences.sound"
-                  defaultMessage="Sound effects"
+                  defaultMessage="Sound Effects"
                   description="Preferences page 'Sound effects' text"
                 />
               </h4>
