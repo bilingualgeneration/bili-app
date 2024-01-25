@@ -87,3 +87,52 @@
     line-height: 110%; /* 35.2px */
   }
 }
+
+.sound-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+ion-button.sound-button-background {
+  --background: var(--Flamenco-High, #ffaedc);
+  --border-radius: 2rem !important;
+  width: 6.25rem;
+  height: 6.25rem;
+  --background-hover: none;
+
+  @media screen and (max-width: 768px) {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 5rem;
+    height: 4rem;
+  }
+}
+
+.sound-icon {
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+
+  @media screen and (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 2rem;
+    height: 2rem;
+  }
+}
