@@ -46,6 +46,7 @@ export const WouldDo: FC = () => {
   }, [data]);
 
   // do a check if status === loading
+
   if (status === "loading") {
     return (
       <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
