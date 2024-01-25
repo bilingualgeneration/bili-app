@@ -7,14 +7,14 @@ import { useProfile } from "@/contexts/ProfileContext";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import "./StoryFactory.scss";
 
-import audio_5_en from "@/assets/audio/story_factory_congrats_5_en.mp3";
-import audio_10_en from "@/assets/audio/story_factory_congrats_10_en.mp3";
-import audio_20_en from "@/assets/audio/story_factory_congrats_20_en.mp3";
-import audio_30_en from "@/assets/audio/story_factory_congrats_30_en.mp3";
-import audio_5_es from "@/assets/audio/story_factory_congrats_5_es.mp3";
-import audio_10_es from "@/assets/audio/story_factory_congrats_10_es.mp3";
-import audio_20_es from "@/assets/audio/story_factory_congrats_20_es.mp3";
-import audio_30_es from "@/assets/audio/story_factory_congrats_30_es.mp3";
+import audio_5_en from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_5_en.mp3";
+import audio_10_en from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_10_en.mp3";
+import audio_20_en from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_20_en.mp3";
+import audio_30_en from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_30_en.mp3";
+import audio_5_es from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_5_es.mp3";
+import audio_10_es from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_10_es.mp3";
+import audio_20_es from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_20_es.mp3";
+import audio_30_es from "@/assets/audio/StoryFactoryAudio/story_factory_congrats_30_es.mp3";
 
 const sounds: any = {
   en: {

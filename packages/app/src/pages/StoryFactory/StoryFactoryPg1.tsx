@@ -12,9 +12,9 @@ import biliCharacter from "@/assets/icons/bili_character.svg";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useHistory } from "react-router-dom";
-import audio_en_file from "@/assets/audio/story_factory_first_en.mp3";
-import audio_es_file from "@/assets/audio/story_factory_first_es.mp3";
-import audio_es_inc_file from "@/assets/audio/story_factory_first_es-inc.mp3";
+import audio_en_file from "@/assets/audio/StoryFactoryAudio/story_factory_first_en.mp3";
+import audio_es_file from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
+import audio_es_inc_file from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
 import "./StoryFactory.scss";
 
 export const StoryFactoryPg1: FC = () => {

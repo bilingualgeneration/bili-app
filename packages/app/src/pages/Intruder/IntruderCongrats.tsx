@@ -7,14 +7,14 @@ import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
 
-import audio_5_en from "@/assets/audio/intruder_congrats_5_en.mp3";
-import audio_10_en from "@/assets/audio/intruder_congrats_10_en.mp3";
-import audio_20_en from "@/assets/audio/intruder_congrats_20_en.mp3";
-import audio_all_en from "@/assets/audio/intruder_congrats_all_en.mp3";
-import audio_5_es from "@/assets/audio/intruder_congrats_5_es.mp3";
-import audio_10_es from "@/assets/audio/intruder_congrats_10_es.mp3";
-import audio_20_es from "@/assets/audio/intruder_congrats_20_es.mp3";
-import audio_all_es from "@/assets/audio/intruder_congrats_all_es.mp3";
+import audio_5_en from "@/assets/audio/IntruderAudio/intruder_congrats_5_en.mp3";
+import audio_10_en from "@/assets/audio/IntruderAudio/intruder_congrats_10_en.mp3";
+import audio_20_en from "@/assets/audio/IntruderAudio/intruder_congrats_20_en.mp3";
+import audio_all_en from "@/assets/audio/IntruderAudio/intruder_congrats_all_en.mp3";
+import audio_5_es from "@/assets/audio/IntruderAudio/intruder_congrats_5_es.mp3";
+import audio_10_es from "@/assets/audio/IntruderAudio/intruder_congrats_10_es.mp3";
+import audio_20_es from "@/assets/audio/IntruderAudio/intruder_congrats_20_es.mp3";
+import audio_all_es from "@/assets/audio/IntruderAudio/intruder_congrats_all_es.mp3";
 
 const sounds: any = {
   en: {
