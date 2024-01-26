@@ -6,7 +6,7 @@ import { useDrag } from "react-use-gesture";
 import styles from "./WouldDoAnimationStyles.module.css";
 
 interface DeckProps {
-  cards: { en: string; es: string }[]; // Adjust the type based on your data structure
+  cards: { en: string; es: string }[]; // Adjust the type based on data structure
 }
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
@@ -70,7 +70,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                     r / 10
                   }deg) rotateZ(${r}deg) scale(${s})`,
               ),
-              // Adjust the rendering of cards based on your data structure
+              // Adjust the rendering of cards based on data structure
             }}
           >
             <div className={styles.card}>
