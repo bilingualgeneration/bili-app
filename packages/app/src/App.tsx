@@ -47,6 +47,7 @@ import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { WouldDo } from "./pages/WouldDo/WouldDo";
+import { WouldDoWithAnimation } from "./pages/WouldDo/WouldDoWithAnimation";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -383,8 +384,20 @@ const Router: React.FC = () => {
           path="/would-do/:pack_id"
           render={() => (
             <AuthedLayout>
-              <HeaderFooter background="#fff">
+              <HeaderFooter background="#FBF2E2">
                 <WouldDo />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/would-do-with-animation/:pack_id"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#FBF2E2">
+                <WouldDoWithAnimation />
               </HeaderFooter>
             </AuthedLayout>
           )}

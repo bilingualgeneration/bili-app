@@ -11,15 +11,16 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
-import "./WouldDo.scss";
+import { Deck } from "./Deck"; //
+import styles from "./WouldDoAnimationStyles.module.css";
 
-export const WouldDo: FC = () => {
+export const WouldDoWithAnimation: FC = () => {
   const { isImmersive } = useProfile();
+
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
 
-  //Firestore operations
   const ref = doc(firestore, "would-do-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
 
@@ -30,7 +31,6 @@ export const WouldDo: FC = () => {
     if (data !== undefined) {
       console.log("Data from Firebase:", data);
 
-      // Transform data to include text in both languages for each question
       const transformedData = data.questions.map((questionItem: any) => {
         const enText = questionItem.question[0].text;
         const esText = questionItem.question[1].text;
@@ -45,8 +45,6 @@ export const WouldDo: FC = () => {
       console.log(transformedData);
     }
   }, [data]);
-
-  // do a check if status === loading
 
   if (status === "loading") {
     return (
@@ -73,30 +71,9 @@ export const WouldDo: FC = () => {
             {!isImmersive && <p>What would you do?</p>}
           </IonText>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {questionsData.map((question, index) => (
-            <IonCard
-              className="would-do-card"
-              key={index}
-              style={{
-                backgroundColor: colors[index % colors.length],
-              }}
-            >
-              <IonCardHeader>
-                <IonCardTitle>{question.es}</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                {isImmersive && <div>{question.en}</div>}
-              </IonCardContent>
-            </IonCard>
-          ))}
+        <div className={styles.container}>
+          <Deck cards={questionsData} />{" "}
+          {/* Passing questionsData to the Deck component */}
         </div>
       </div>
     </>
