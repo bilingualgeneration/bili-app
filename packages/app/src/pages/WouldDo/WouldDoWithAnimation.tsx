@@ -29,7 +29,7 @@ export const WouldDoWithAnimation: FC = () => {
 
   useEffect(() => {
     if (data !== undefined) {
-      console.log("Data from Firebase:", data);
+      // console.log("Data from Firebase:", data);
 
       const transformedData = data.questions.map((questionItem: any) => {
         const enText = questionItem.question[0].text;
@@ -42,7 +42,7 @@ export const WouldDoWithAnimation: FC = () => {
       });
 
       setQuestionsData(transformedData);
-      console.log(transformedData);
+      // console.log(transformedData);
     }
   }, [data]);
 
@@ -72,7 +72,7 @@ export const WouldDoWithAnimation: FC = () => {
           </IonText>
         </div>
         <div className={styles.container}>
-          <Deck cards={questionsData} />{" "}
+          <Deck cards={questionsData} />
           {/* Passing questionsData to the Deck component */}
         </div>
       </div>
