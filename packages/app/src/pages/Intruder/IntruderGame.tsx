@@ -22,7 +22,7 @@ import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/intruder_correct.wav";
-import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
+import card_flip_audio from "@/assets/audio/card_flip_1_sec.wav";
 import instruction_en_audio from "@/assets/audio/intruder_game_instruction_en.mp3";
 import instruction_es_audio from "@/assets/audio/intruder_game_instruction_es.mp3";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
@@ -31,6 +31,7 @@ import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { IntruderCongrats } from "./IntruderCongrats";
 import "./Intruder.scss";
+import "../../theme/animate.scss";
 import { card } from "ionicons/icons";
 
 interface BiliImage {
@@ -252,7 +253,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     return (
       <IntruderCongrats
         setShowCongrats={setShowCongrats}
-        count={currentIndex + 1}
+        count={currentIndex}
       />
     );
   }
