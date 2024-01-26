@@ -5,8 +5,8 @@
     auto;
   display: flex;
   align-items: center;
-  height: 100%;
   justify-content: center;
+  height: 100vh;
   /* position: relative; */
 }
 .deck {
