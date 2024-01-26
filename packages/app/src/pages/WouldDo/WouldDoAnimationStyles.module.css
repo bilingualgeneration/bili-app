@@ -8,6 +8,7 @@
   align-items: center;
   height: 100%;
   justify-content: center;
+  position: relative;
 }
 .deck {
   position: absolute;
@@ -26,12 +27,10 @@
   background-repeat: no-repeat;
   background-position: center center;
   width: 45vh;
-  max-width: 150px;
+  max-width: 100%;
   height: 85vh;
   max-height: 285px;
   will-change: transform;
-  border-radius: 10px;
-  box-shadow:
-    0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
-    0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  border-radius: 34.635px;
+  box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
 }
