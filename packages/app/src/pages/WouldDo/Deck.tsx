@@ -60,23 +60,22 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     <>
       {props.map(({ x, y, rot, scale }, i) => (
         <animated.div
+          {...bind(i)}
           key={i}
-          className={`${styles.deck} ${i === 0 ? styles.endCard : ""}`}
+          className={styles.deck}
           style={{
             x,
             y: i * -20, // To adjust overlap of cards in deck
+            // scale: 1,
             zIndex: cards.length - i, // To adjust z-index to ensure correct stacking order
           }}
         >
           <animated.div
-            {...bind(i)}
             style={{
               transform: interpolate(
                 [rot, scale],
                 (r, s) =>
-                  `perspective(2500px) rotateX(0deg) rotateY(${
-                    r / 0
-                  }deg) rotateZ(${r}deg) scale(${s})`,
+                  `perspective(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0deg)`,
               ),
               // Adjust the rendering of cards based on data structure
             }}
