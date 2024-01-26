@@ -63,7 +63,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
           key={i}
           className={`${styles.deck} ${i === 0 ? styles.endCard : ""}`}
           style={{
-            x: i * -20,
+            x,
             y: i * -20, // To adjust overlap of cards in deck
             zIndex: cards.length - i, // To adjust z-index to ensure correct stacking order
           }}
