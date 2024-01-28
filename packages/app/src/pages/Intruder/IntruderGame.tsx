@@ -231,20 +231,20 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     for (const card of shuffledCards) {
       const wordAudio = new Audio(card.audio.url);
       await new Promise((resolve) => {
-        wordAudio.onended = resolve;
+        wordAudio.onended = () => {
+          setCardColors((prevColors: any) => ({
+            ...prevColors,
+            [card.id]: initialStyle,
+          }));
+
+          resolve();
+        };
         wordAudio.play();
 
         setCardColors((prevColors: any) => ({
           ...prevColors,
           [card.id]: temporaryAudioPlayingStyle,
         }));
-
-        setTimeout(() => {
-          setCardColors((prevColors: any) => ({
-            ...prevColors,
-            [card.id]: initialStyle,
-          }));
-        }, 1200);
       });
     }
   };
