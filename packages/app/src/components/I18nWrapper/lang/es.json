@@ -326,7 +326,7 @@
   "languageMode": [
     {
       "type": 0,
-      "value": "Modo"
+      "value": "Modo Español"
     }
   ],
   "languageMode.bilingual": [
@@ -393,6 +393,30 @@
     {
       "type": 0,
       "value": "Restablecer la contraseña"
+    }
+  ],
+  "settings.about.contactUs": [
+    {
+      "type": 0,
+      "value": "Contáctenos"
+    }
+  ],
+  "settings.about.privacyPolicy": [
+    {
+      "type": 0,
+      "value": "Política de Privacidad"
+    }
+  ],
+  "settings.about.tac": [
+    {
+      "type": 0,
+      "value": "Términos y Condiciones"
+    }
+  ],
+  "settings.about.title": [
+    {
+      "type": 0,
+      "value": "Acerca de"
     }
   ],
   "settings.adult": [
@@ -674,7 +698,7 @@
   "settingsProgress.preferences.limit": [
     {
       "type": 0,
-      "value": "Límite de tiempo de juego diario"
+      "value": "Límite de Tiempo de Juego Diario"
     }
   ],
   "settingsProgress.preferences.popover1": [
@@ -710,13 +734,13 @@
   "settingsProgress.preferences.settingsLanguage": [
     {
       "type": 0,
-      "value": "Idioma de configuración"
+      "value": "Idioma de Configuración"
     }
   ],
   "settingsProgress.preferences.sound": [
     {
       "type": 0,
-      "value": "Efectos de sonido"
+      "value": "Efectos de Sonido"
     }
   ],
   "sideMenu.about": [
@@ -771,6 +795,12 @@
     {
       "type": 0,
       "value": "año"
+    }
+  ],
+  "signUp.bestValuePricing": [
+    {
+      "type": 0,
+      "value": "mejor valor"
     }
   ],
   "signUp.choosePlan": [
