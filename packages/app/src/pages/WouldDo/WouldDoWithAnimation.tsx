@@ -25,7 +25,6 @@ export const WouldDoWithAnimation: FC = () => {
   const { status, data } = useFirestoreDocData(ref);
 
   const [questionsData, setQuestionsData] = useState<any[]>([]);
-  const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   useEffect(() => {
     if (data !== undefined) {

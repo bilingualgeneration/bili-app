@@ -16,18 +16,18 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   const [props, api] = useSprings(cards.length, (i) => ({
-    x: 0,
-    y: i * -4,
+    x: i === 0 ? 0 : -2 - i * 20, // Adjust x position for diagonal descent from upper left to lower right
+    y: i === 0 ? 0 : 10 + i * 20, // Adjust y position for diagonal descent from upper left to lower right
     scale: 1,
-    rot: -10 + Math.random() * 20,
+    rot: i === 0 ? 10 : -10 + Math.random() * 20, // Adjust rotation for the last card
     delay: i * 100,
   }));
 
   const to = (i: number) => ({
-    x: 0,
-    y: i * -4,
+    x: i === 0 ? 0 : 10 - i * 40, // Adjust x position for diagonal descent from upper right to lower left
+    y: i === 0 ? 0 : 10 + i * 20, // Adjust y position for diagonal descent from upper right to lower left
     scale: 1,
-    rot: -10 + Math.random() * 20,
+    rot: i === 0 ? 10 : -10 + Math.random() * 20, // Adjust rotation for the last card
     delay: i * 100,
   });
 
@@ -68,7 +68,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
           style={{
             backgroundColor: colors[i],
             x,
-            y: i * -20, // To adjust overlap of cards in deck
+            y: i * -10, // To adjust upper overlap of cards in deck
             // scale: 1,
             zIndex: cards.length - i, // To adjust z-index to ensure correct stacking order
           }}

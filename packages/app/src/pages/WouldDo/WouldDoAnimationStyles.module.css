@@ -11,17 +11,19 @@
 }
 .deck {
   position: absolute;
-  width: 300px;
-  height: 200px;
+  display: flex;
+  width: 625.845px;
+  height: 460px;
   will-change: transform;
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: none;
+  border-radius: 34.635px;
+  box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
 }
 
-.deck {
-  background-color: white;
+/* .deck > div {
   background-size: auto 85%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -30,6 +32,5 @@
   height: 85vh;
   max-height: 285px;
   will-change: transform;
-  border-radius: 34.635px;
-  box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
-}
+  
+} */
