@@ -47,6 +47,7 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
+import { WouldDo } from "./pages/WouldDo/WouldDo";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -386,6 +387,19 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <TeacherLogin />
             </UnauthedLayout>
+          )}
+        />
+
+        {/* todo: better path */}
+        <Route
+          exact
+          path="/would-do/:pack_id"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#fff">
+                <WouldDo />
+              </HeaderFooter>
+            </AuthedLayout>
           )}
         />
       </Switch>
