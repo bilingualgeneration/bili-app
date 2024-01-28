@@ -13,6 +13,8 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const { isImmersive } = useProfile();
   const [gone] = useState(() => new Set<number>());
 
+  const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
+
   const [props, api] = useSprings(cards.length, (i) => ({
     x: 0,
     y: i * -4,
@@ -64,6 +66,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
           key={i}
           className={styles.deck}
           style={{
+            backgroundColor: colors[i],
             x,
             y: i * -20, // To adjust overlap of cards in deck
             // scale: 1,
