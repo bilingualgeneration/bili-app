@@ -40,7 +40,7 @@ export const IntruderSelect: React.FC = () => {
                 overflowX: "scroll",
               }}
             >
-              <Link to="/intruder/play/9262a65e-0e73-4cbb-988e-697e82d5cb93">
+              <Link to="/intruder/play/ceff6ae6-fe21-456a-9b57-29f07b5b52d5">
                 <StoriesCardNoRating
                   packNumber={1}
                   cover={"/assets/img/drum_image.png"}
