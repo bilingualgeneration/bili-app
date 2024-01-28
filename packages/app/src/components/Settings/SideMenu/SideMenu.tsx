@@ -14,7 +14,6 @@ import { FormattedMessage } from "react-intl";
 import "./SideMenu.scss";
 import { SideMenuOption } from "./SideMenuOption";
 import { useLocation } from "react-router-dom";
-import { Preferences } from "@capacitor/preferences";
 import { useIntl } from "react-intl";
 
 interface Option {
@@ -27,11 +26,6 @@ interface Option {
 export const SideMenu: React.FC = () => {
   const auth = useAuth();
   const location = useLocation();
-
-  // todo: remove this button and functionality; it's only here for dev purposes
-  const resetTutorial = async () => {
-    Preferences.remove({ key: "shouldShowSettingsTutorial" });
-  };
 
   const options: Option[] = [
     {
@@ -123,14 +117,6 @@ export const SideMenu: React.FC = () => {
             }
           />
         </div>
-
-        <IonItem
-          className="hover-highlight"
-          style={{ position: "absolute", bottom: 0 }}
-          onClick={resetTutorial}
-        >
-          <IonLabel className="menu-label">reset tutorial</IonLabel>
-        </IonItem>
       </IonList>
     </div>
   );

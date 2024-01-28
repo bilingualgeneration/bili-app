@@ -1,25 +1,40 @@
-import React from "react";
+import { I18nWrapper } from "@/components/I18nWrapper";
 import { IonContent, IonPage } from "@ionic/react";
+import {
+  LanguageContextProvider,
+  useLanguage,
+} from "@/contexts/LanguageContext";
+import React from "react";
 
 interface UnauthedLayoutProps {
-  children: React.ReactNode;
   background?: string; // Default to false
+  children: React.ReactNode;
 }
 
-const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
+const UnauthedLayoutContents: React.FC<UnauthedLayoutProps> = ({
+  background,
   children,
-  background = "",
 }) => {
   const contentStyle: Record<string, string> = {};
-
+  const { locale } = useLanguage();
   return (
-    <IonPage>
-      <IonContent fullscreen className="ion-padding">
-        <div className="page-wrapper" style={{ background }}>
-          {children}
-        </div>
-      </IonContent>
-    </IonPage>
+    <I18nWrapper locale={locale}>
+      <IonPage>
+        <IonContent fullscreen className="ion-padding">
+          <div className="page-wrapper" style={{ background }}>
+            {children}
+          </div>
+        </IonContent>
+      </IonPage>
+    </I18nWrapper>
+  );
+};
+
+const UnauthedLayout: React.FC<UnauthedLayoutProps> = (props) => {
+  return (
+    <LanguageContextProvider>
+      <UnauthedLayoutContents {...props} />
+    </LanguageContextProvider>
   );
 };
 

@@ -8,16 +8,14 @@ import {
   useState,
 } from "react";
 
-import type { locale } from "@/components/I18nWrapper";
-
 export type language = {
-  locale: locale;
+  locale: any;
   //setLocale: Dispatch<SetStateAction<locale>>
   setLocale: any;
 };
 
 const defaultState: language = {
-  locale: (localStorage.getItem("userLocale") as locale) || "en", // Read from local storage or use a default value
+  locale: (localStorage.getItem("userLocale") as any) || "en", // Read from local storage or use a default value
   setLocale: () => {},
 };
 
@@ -35,7 +33,7 @@ export const LanguageContextProvider = ({
     storedLocale || defaultState.locale,
   );
 
-  const setLocale = (newLocale: locale) => {
+  const setLocale = (newLocale: any) => {
     localStorage.setItem("userLocale", newLocale);
     // @ts-ignore: todo fix
     setLocaleState(newLocale);

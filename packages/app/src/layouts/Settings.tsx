@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FooterMenu } from "@/components/FooterMenu";
+import { I18nWrapper } from "@/components/I18nWrapper";
 import { useHistory } from "react-router-dom";
+import { useProfile } from "@/contexts/ProfileContext";
 import {
   IonButton,
   IonCol,
@@ -135,25 +137,28 @@ export const SettingsLayout: FC<
     background?: string;
   }>
 > = ({ background = "", children }) => {
+  const { settingsLanguage } = useProfile();
   return (
-    <IonPage>
-      <IonContent fullscreen className="ion-padding">
-        <AdultCheckModal />
-        <div className="page-wrapper" style={{ background }}>
-          <IonGrid className="ion-no-padding inner-scroll">
-            <IonRow>
-              <IonCol size="auto" style={{ minHeight: "100vh" }}>
-                <SideMenu />
-              </IonCol>
-              <IonCol>
-                <SettingsHeader></SettingsHeader>
-                {children}
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </div>
-        <FooterMenu />
-      </IonContent>
-    </IonPage>
+    <I18nWrapper locale={settingsLanguage}>
+      <IonPage>
+        <IonContent fullscreen className="ion-padding">
+          <AdultCheckModal />
+          <div className="page-wrapper" style={{ background }}>
+            <IonGrid className="ion-no-padding inner-scroll">
+              <IonRow>
+                <IonCol size="auto" style={{ minHeight: "100vh" }}>
+                  <SideMenu />
+                </IonCol>
+                <IonCol>
+                  <SettingsHeader></SettingsHeader>
+                  {children}
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </div>
+          <FooterMenu />
+        </IonContent>
+      </IonPage>
+    </I18nWrapper>
   );
 };

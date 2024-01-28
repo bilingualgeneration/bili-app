@@ -1,4 +1,5 @@
 import { FC, useEffect, PropsWithChildren } from "react";
+import { I18nWrapper } from "@/components/I18nWrapper";
 import { Redirect } from "react-router-dom";
 import { useUser, useSigninCheck } from "reactfire";
 import { useProfile, ProfileContextProvider } from "@/contexts/ProfileContext";
@@ -20,7 +21,11 @@ const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
     return <Redirect to="/" />;
   }
   // implied else
-  return <ProfileContextProvider>{children}</ProfileContextProvider>;
+  return (
+    <ProfileContextProvider>
+      <I18nWrapper locale="es">{children}</I18nWrapper>
+    </ProfileContextProvider>
+  );
 };
 
 export default AuthedLayout;

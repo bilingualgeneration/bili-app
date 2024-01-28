@@ -230,13 +230,12 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const handleWordAudioClick = async () => {
     for (const card of shuffledCards) {
       const wordAudio = new Audio(card.audio.url);
-      await new Promise((resolve) => {
+      await new Promise<void>((resolve) => {
         wordAudio.onended = () => {
           setCardColors((prevColors: any) => ({
             ...prevColors,
             [card.id]: initialStyle,
           }));
-
           resolve();
         };
         wordAudio.play();
