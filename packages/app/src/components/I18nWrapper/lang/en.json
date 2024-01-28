@@ -261,6 +261,12 @@
       "value": "Close"
     }
   ],
+  "landingPage.assignments": [
+    {
+      "type": 0,
+      "value": "Assignments"
+    }
+  ],
   "landingPage.catgories": [
     {
       "type": 0,
@@ -344,7 +350,7 @@
   "languageMode.immersionTitle": [
     {
       "type": 0,
-      "value": "Spanish immersion"
+      "value": "Spanish Immersion"
     }
   ],
   "languageMode.settings": [
@@ -387,6 +393,30 @@
     {
       "type": 0,
       "value": "Reset Password"
+    }
+  ],
+  "settings.about.contactUs": [
+    {
+      "type": 0,
+      "value": "Contact Us"
+    }
+  ],
+  "settings.about.privacyPolicy": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
+    }
+  ],
+  "settings.about.tac": [
+    {
+      "type": 0,
+      "value": "Terms & Conditions"
+    }
+  ],
+  "settings.about.title": [
+    {
+      "type": 0,
+      "value": "About"
     }
   ],
   "settings.adult": [
@@ -435,6 +465,12 @@
     {
       "type": 0,
       "value": "Full name"
+    }
+  ],
+  "settings.onboarding.inclusive-spanish": [
+    {
+      "type": 0,
+      "value": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
     }
   ],
   "settings.onboarding.inclusiveSpanish": [
@@ -662,7 +698,7 @@
   "settingsProgress.preferences.limit": [
     {
       "type": 0,
-      "value": "Daily playtime limit"
+      "value": "Daily Playtime Limit"
     }
   ],
   "settingsProgress.preferences.popover1": [
@@ -674,7 +710,7 @@
   "settingsProgress.preferences.popover2": [
     {
       "type": 0,
-      "value": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish."
+      "value": "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish."
     }
   ],
   "settingsProgress.preferences.popover3": [
@@ -698,19 +734,25 @@
   "settingsProgress.preferences.settingsLanguage": [
     {
       "type": 0,
-      "value": "Settings language"
+      "value": "Settings Language"
     }
   ],
   "settingsProgress.preferences.sound": [
     {
       "type": 0,
-      "value": "Sound effects"
+      "value": "Sound Effects"
     }
   ],
   "sideMenu.about": [
     {
       "type": 0,
       "value": "About Bili"
+    }
+  ],
+  "sideMenu.logOut": [
+    {
+      "type": 0,
+      "value": "Log out"
     }
   ],
   "sideMenu.overview": [
@@ -753,6 +795,12 @@
     {
       "type": 0,
       "value": "year"
+    }
+  ],
+  "signUp.bestValuePricing": [
+    {
+      "type": 0,
+      "value": "best value"
     }
   ],
   "signUp.choosePlan": [
@@ -947,10 +995,34 @@
       "value": "Student login"
     }
   ],
+  "storyFactory.congrats.description1": [
+    {
+      "type": 0,
+      "value": "You've created and read five stories"
+    }
+  ],
+  "storyFactory.congrats.description2": [
+    {
+      "type": 0,
+      "value": "Can you keep going?"
+    }
+  ],
+  "storyFactory.congrats.title": [
+    {
+      "type": 0,
+      "value": "Congrats"
+    }
+  ],
   "storyFactory.create_message": [
     {
       "type": 0,
       "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
+    }
+  ],
+  "storyFactory.next": [
+    {
+      "type": 0,
+      "value": "Next"
     }
   ],
   "storyFactory.nextButton": [
