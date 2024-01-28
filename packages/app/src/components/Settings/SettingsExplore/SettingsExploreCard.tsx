@@ -30,8 +30,9 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
       <div className="explore-card-content">
-        {tags.map((tag) => (
+        {tags.map((tag, index) => (
           <IonChip
+            key={index}
             style={{
               "--background": tag.color,
               color: tag.textColor || "#000",

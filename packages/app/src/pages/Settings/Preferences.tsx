@@ -22,7 +22,7 @@ import "./Preferences.css";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
-  const { isImmersive, isInclusive, language = "es", uid } = useProfile();
+  const { isImmersive, isInclusive, settingsLanguage, uid } = useProfile();
   const firestore = useFirestore();
   const ref = doc(firestore, "users", uid);
   const updateProfile = (key: string, value: any) => {
@@ -62,9 +62,9 @@ export const Preferences: React.FC = () => {
             placeholder="English"
             interface="popover"
             toggleIcon={chevronForward}
-            value={language}
+            value={settingsLanguage}
             onIonChange={(event) => {
-              updateProfile("language", event.target.value);
+              updateProfile("settingsLanguage", event.target.value);
             }}
           >
             <div className="label-style" slot="label">

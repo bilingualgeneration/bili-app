@@ -24,7 +24,7 @@ export const signup = onCall(async (request) => {
     isImmersive: data.isImmersive,
     isInclusive: data.isInclusive,
     isSoundEffects: true,
-    language: "es",
+    settingsLanguage: data.settingsLanguage,
     name: data.name,
     phone: null,
     pricing: data.pricing,
