@@ -180,14 +180,27 @@ ion-text {
     font-weight: 400 !important;
   }
 
+  h3 {
+    font-size: 32px !important;
+    font-weight: 400 !important;
+  }
+
   h1,
-  h2 {
+  h2,
+  h3 {
     margin-top: 0;
     margin-bottom: 0;
   }
 
   p {
     color: #000;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    line-height: 1.2;
   }
 }
 
@@ -741,4 +754,8 @@ ion-card {
   left: 50%;
   transform: translate(-50%, -50%);
   size: 10rem;
+}
+
+ion-chip {
+  border-radius: 4px;
 }

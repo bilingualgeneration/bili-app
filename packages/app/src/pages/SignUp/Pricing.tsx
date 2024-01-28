@@ -69,7 +69,15 @@ export const Pricing: React.FC = () => {
     component: (
       <div id="pricing-annual">
         <div className="best-value-block">
-          <p className="best-value-text">best value</p>
+          <p className="best-value-text">
+            <FormattedMessage
+              id="signUp.bestValuePricing"
+              defaultMessage={"best value"}
+              description={
+                "Orange rectangle that sits above 'annual' pricing option that specifies it as the 'best value'"
+              }
+            />
+          </p>
         </div>
         <PricingRadioCard
           title={intl.formatMessage({
@@ -126,8 +134,8 @@ export const Pricing: React.FC = () => {
               <div className="banner-text1">
                 <FormattedMessage
                   id="signUp.trialTitle"
-                  defaultMessage="3 week free trial"
-                  description="Subtitle of page mentioning the 3 week free trial promo"
+                  defaultMessage="2 week free trial"
+                  description="Subtitle of page mentioning the 2 week free trial promo"
                 />
               </div>
               <div className="banner-text2">

@@ -2060,6 +2060,7 @@ __metadata:
     "@capacitor/browser": "npm:^5.1.0"
     "@capacitor/cli": "npm:5.4.0"
     "@capacitor/core": "npm:5.4.0"
+    "@capacitor/device": "npm:^5.0.6"
     "@capacitor/haptics": "npm:5.0.6"
     "@capacitor/keyboard": "npm:5.0.6"
     "@capacitor/preferences": "npm:^5.0.6"
@@ -2190,6 +2191,15 @@ __metadata:
   dependencies:
     tslib: "npm:^2.1.0"
   checksum: f25bfdd42a9e2fd69ee5127bba563878910856fe5d329c2ad40d833e783d2dbae9de478b980cd3e10854a79ae41aa022612c17d84d769f71ce2568c9e053b75e
+  languageName: node
+  linkType: hard
+
+"@capacitor/device@npm:^5.0.6":
+  version: 5.0.6
+  resolution: "@capacitor/device@npm:5.0.6"
+  peerDependencies:
+    "@capacitor/core": ^5.0.0
+  checksum: 9ce07541cb316363f247ec8546840f8f1bc416e51c827193888b0df1679e4afb768907ba8aec7fe9014aadf05366608a47b9681fa145becc2bc7be4a71b35803
   languageName: node
   linkType: hard
 

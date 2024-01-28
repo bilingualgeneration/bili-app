@@ -55,6 +55,7 @@ export const TeacherAccountCredentials: React.FC = () => {
             description: "Input label for user's full name",
           })}
           labelPlacement="above"
+          required={true}
           name="name"
           fill="outline"
           control={control}
@@ -119,7 +120,7 @@ export const TeacherAccountCredentials: React.FC = () => {
         </div>
 
         <DividerText
-          className="ion-margin-top"
+          className="ion-margin-top ion-hide"
           text={intl.formatMessage({
             id: "login.divider",
             defaultMessage: "or",
@@ -129,7 +130,7 @@ export const TeacherAccountCredentials: React.FC = () => {
 
         <IonButton
           color="medium"
-          className="ion-margin-top"
+          className="ion-margin-top ion-hide"
           disabled
           expand="block"
           fill="outline"
@@ -147,7 +148,7 @@ export const TeacherAccountCredentials: React.FC = () => {
 
         <IonButton
           color="medium"
-          className="ion-margin-top"
+          className="ion-margin-top ion-hide"
           disabled
           expand="block"
           fill="outline"

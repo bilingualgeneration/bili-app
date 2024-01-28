@@ -2,6 +2,7 @@
 // todo: unsure if Suspense is working
 import { ErrorBoundary } from "react-error-boundary";
 import { SuspenseWithPerf } from "reactfire";
+import { Device } from "@capacitor/device";
 import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
@@ -20,10 +21,16 @@ import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
 import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
 import Journeys from "./pages/Journeys";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Login from "@/pages/Login";
 import Memory from "@/pages/games/Memory";
-import { Overview, Preferences, Progress, Profile } from "@/pages/Settings";
+import {
+  About,
+  Overview,
+  Preferences,
+  Progress,
+  Profile,
+} from "@/pages/Settings";
+import { Debug } from "@/pages/Debug";
 import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
@@ -59,8 +66,9 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "./theme/variables.css";
-import "./theme/overrides.scss";
+import "@/theme/variables.css";
+import "@/theme/overrides.scss";
+import "@/theme/color-classes.scss";
 
 setupIonicReact();
 
@@ -79,6 +87,18 @@ const Router: React.FC = () => {
         />
 
         <Route exact path="/presplash" render={() => <PreSplash />} />
+
+        <Route
+          exact
+          path="/debug"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#f7faf9">
+                <Debug />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
 
         <Route
           exact
@@ -150,6 +170,20 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <ResetPassword />
             </UnauthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/settings/about"
+          render={() => (
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <About />
+                </SettingsLayout>
+              </AdultCheckProvider>
+            </AuthedLayout>
           )}
         />
 
@@ -374,6 +408,20 @@ const Router: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // set default language to device if not already set
+    (async () => {
+      const locale = await localStorage.getItem("userLocale");
+      console.log(locale);
+      if (locale === null) {
+        // no stored language
+        localStorage.setItem(
+          "userLocale",
+          (await Device.getLanguageCode()).value,
+        );
+      }
+    })();
+  }, []);
   return (
     <SuspenseWithPerf fallback={<Loading />} traceId="user-load">
       <ErrorBoundary fallback={<Loading />}>

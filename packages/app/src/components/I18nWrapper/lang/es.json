@@ -155,6 +155,16 @@
       "value": "Bienestar"
     }
   ],
+  "common.years_old": [
+    {
+      "type": 1,
+      "value": "age"
+    },
+    {
+      "type": 0,
+      "value": " años"
+    }
+  ],
   "intruder.congrats.description.10": [
     {
       "type": 0,
@@ -316,7 +326,7 @@
   "languageMode": [
     {
       "type": 0,
-      "value": "Modo"
+      "value": "Modo Español"
     }
   ],
   "languageMode.bilingual": [
@@ -383,6 +393,30 @@
     {
       "type": 0,
       "value": "Restablecer la contraseña"
+    }
+  ],
+  "settings.about.contactUs": [
+    {
+      "type": 0,
+      "value": "Contáctenos"
+    }
+  ],
+  "settings.about.privacyPolicy": [
+    {
+      "type": 0,
+      "value": "Política de Privacidad"
+    }
+  ],
+  "settings.about.tac": [
+    {
+      "type": 0,
+      "value": "Términos y Condiciones"
+    }
+  ],
+  "settings.about.title": [
+    {
+      "type": 0,
+      "value": "Acerca de"
     }
   ],
   "settings.adult": [
@@ -469,18 +503,6 @@
       "value": "Conoce qué es el español inclusivo y por qué existe."
     }
   ],
-  "settings.overview.InclusiveSpanishMiniCard1": [
-    {
-      "type": 0,
-      "value": "Justicia social"
-    }
-  ],
-  "settings.overview.InclusiveSpanishMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recursos"
-    }
-  ],
   "settings.overview.addChildBtn": [
     {
       "type": 0,
@@ -511,18 +533,6 @@
       "value": "Explore características especiales que promueven la producción lingüística auténtica."
     }
   ],
-  "settings.overview.getChildMiniCard1": [
-    {
-      "type": 0,
-      "value": "Padres"
-    }
-  ],
-  "settings.overview.getChildMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recursos"
-    }
-  ],
   "settings.overview.getChildTitle": [
     {
       "type": 0,
@@ -533,18 +543,6 @@
     {
       "type": 0,
       "value": "Cuando entras en cualquier área nueva de la ciencia, casi siempre encuentras."
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard1": [
-    {
-      "type": 0,
-      "value": "Guía"
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recomendado"
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -586,7 +584,7 @@
   "settings.overview.seeAll": [
     {
       "type": 0,
-      "value": "Ver todos los &#40;9&#41;"
+      "value": "Ver todos (9)"
     }
   ],
   "settings.phone": [
@@ -700,7 +698,7 @@
   "settingsProgress.preferences.limit": [
     {
       "type": 0,
-      "value": "Límite de tiempo de juego diario"
+      "value": "Límite de Tiempo de Juego Diario"
     }
   ],
   "settingsProgress.preferences.popover1": [
@@ -736,13 +734,13 @@
   "settingsProgress.preferences.settingsLanguage": [
     {
       "type": 0,
-      "value": "Idioma de configuración"
+      "value": "Idioma de Configuración"
     }
   ],
   "settingsProgress.preferences.sound": [
     {
       "type": 0,
-      "value": "Efectos de sonido"
+      "value": "Efectos de Sonido"
     }
   ],
   "sideMenu.about": [
@@ -797,6 +795,12 @@
     {
       "type": 0,
       "value": "año"
+    }
+  ],
+  "signUp.bestValuePricing": [
+    {
+      "type": 0,
+      "value": "mejor valor"
     }
   ],
   "signUp.choosePlan": [
@@ -874,7 +878,7 @@
   "signUp.trialTitle": [
     {
       "type": 0,
-      "value": "Prueba gratuita de 3 semanas"
+      "value": "Prueba gratuita de 2 semanas"
     }
   ],
   "signUpTeacher.aboutGrade1": [
@@ -1115,6 +1119,30 @@
     {
       "type": 0,
       "value": "¡Éxito! ¡Lo hiciste!"
+    }
+  ],
+  "tag.guide": [
+    {
+      "type": 0,
+      "value": "Guía"
+    }
+  ],
+  "tag.resources": [
+    {
+      "type": 0,
+      "value": "Recursos"
+    }
+  ],
+  "tags.parents": [
+    {
+      "type": 0,
+      "value": "Padres"
+    }
+  ],
+  "tags.social_justice": [
+    {
+      "type": 0,
+      "value": "Justicia Social"
     }
   ]
 }

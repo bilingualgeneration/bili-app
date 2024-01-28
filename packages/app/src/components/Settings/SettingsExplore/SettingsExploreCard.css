@@ -22,27 +22,3 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-
-.explore-card-content {
-  z-index: 1; /* Ensure content is on top of the pseudo-element */
-}
-
-.explore-card-title,
-.explore-card-subtitle {
-  font-style: normal;
-  line-height: 1.33;
-}
-
-.explore-card-title {
-  color: var(--base-nube, #fff);
-  font-size: 1.5rem; /* font-size: 24px; */
-  font-weight: 600;
-  line-height: 32px; /* 133.333% */
-  margin-top: auto; /* Push the title and subtitle to the bottom */
-}
-
-.explore-card-subtitle {
-  color: var(--base-nube, #fff);
-  font-size: 0.875rem; /* font-size: 14px; */
-  font-weight: 400;
-}

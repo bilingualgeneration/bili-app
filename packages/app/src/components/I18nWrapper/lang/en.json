@@ -155,6 +155,16 @@
       "value": "Wellness"
     }
   ],
+  "common.years_old": [
+    {
+      "type": 1,
+      "value": "age"
+    },
+    {
+      "type": 0,
+      "value": " years old"
+    }
+  ],
   "intruder.congrats.description.10": [
     {
       "type": 0,
@@ -251,6 +261,12 @@
       "value": "Close"
     }
   ],
+  "landingPage.assignments": [
+    {
+      "type": 0,
+      "value": "Assignments"
+    }
+  ],
   "landingPage.catgories": [
     {
       "type": 0,
@@ -334,7 +350,7 @@
   "languageMode.immersionTitle": [
     {
       "type": 0,
-      "value": "Spanish immersion"
+      "value": "Spanish Immersion"
     }
   ],
   "languageMode.settings": [
@@ -377,6 +393,30 @@
     {
       "type": 0,
       "value": "Reset Password"
+    }
+  ],
+  "settings.about.contactUs": [
+    {
+      "type": 0,
+      "value": "Contact Us"
+    }
+  ],
+  "settings.about.privacyPolicy": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
+    }
+  ],
+  "settings.about.tac": [
+    {
+      "type": 0,
+      "value": "Terms & Conditions"
+    }
+  ],
+  "settings.about.title": [
+    {
+      "type": 0,
+      "value": "About"
     }
   ],
   "settings.adult": [
@@ -427,6 +467,12 @@
       "value": "Full name"
     }
   ],
+  "settings.onboarding.inclusive-spanish": [
+    {
+      "type": 0,
+      "value": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
+    }
+  ],
   "settings.onboarding.inclusiveSpanish": [
     {
       "type": 0,
@@ -455,18 +501,6 @@
     {
       "type": 0,
       "value": "Learn about what Inclusive Spanish is and why it exists."
-    }
-  ],
-  "settings.overview.InclusiveSpanishMiniCard1": [
-    {
-      "type": 0,
-      "value": "Social Justice"
-    }
-  ],
-  "settings.overview.InclusiveSpanishMiniCard2": [
-    {
-      "type": 0,
-      "value": "Resources"
     }
   ],
   "settings.overview.addChildBtn": [
@@ -499,18 +533,6 @@
       "value": "Explore special features that promote authentic language production."
     }
   ],
-  "settings.overview.getChildMiniCard1": [
-    {
-      "type": 0,
-      "value": "Parents"
-    }
-  ],
-  "settings.overview.getChildMiniCard2": [
-    {
-      "type": 0,
-      "value": "Resources"
-    }
-  ],
   "settings.overview.getChildTitle": [
     {
       "type": 0,
@@ -521,18 +543,6 @@
     {
       "type": 0,
       "value": "When you enter into any new area of science, you almost always find."
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard1": [
-    {
-      "type": 0,
-      "value": "Guide"
-    }
-  ],
-  "settings.overview.gettingStartedMiniCard2": [
-    {
-      "type": 0,
-      "value": "Recommended"
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -574,7 +584,7 @@
   "settings.overview.seeAll": [
     {
       "type": 0,
-      "value": "See all &#40;9&#41;"
+      "value": "See all (9)"
     }
   ],
   "settings.phone": [
@@ -688,7 +698,7 @@
   "settingsProgress.preferences.limit": [
     {
       "type": 0,
-      "value": "Daily playtime limit"
+      "value": "Daily Playtime Limit"
     }
   ],
   "settingsProgress.preferences.popover1": [
@@ -700,7 +710,7 @@
   "settingsProgress.preferences.popover2": [
     {
       "type": 0,
-      "value": "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish."
+      "value": "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish."
     }
   ],
   "settingsProgress.preferences.popover3": [
@@ -724,19 +734,25 @@
   "settingsProgress.preferences.settingsLanguage": [
     {
       "type": 0,
-      "value": "Settings language"
+      "value": "Settings Language"
     }
   ],
   "settingsProgress.preferences.sound": [
     {
       "type": 0,
-      "value": "Sound effects"
+      "value": "Sound Effects"
     }
   ],
   "sideMenu.about": [
     {
       "type": 0,
       "value": "About Bili"
+    }
+  ],
+  "sideMenu.logOut": [
+    {
+      "type": 0,
+      "value": "Log out"
     }
   ],
   "sideMenu.overview": [
@@ -779,6 +795,12 @@
     {
       "type": 0,
       "value": "year"
+    }
+  ],
+  "signUp.bestValuePricing": [
+    {
+      "type": 0,
+      "value": "best value"
     }
   ],
   "signUp.choosePlan": [
@@ -856,7 +878,7 @@
   "signUp.trialTitle": [
     {
       "type": 0,
-      "value": "3 week free trial"
+      "value": "2 week free trial"
     }
   ],
   "signUpTeacher.aboutGrade1": [
@@ -973,10 +995,34 @@
       "value": "Student login"
     }
   ],
+  "storyFactory.congrats.description1": [
+    {
+      "type": 0,
+      "value": "You've created and read five stories"
+    }
+  ],
+  "storyFactory.congrats.description2": [
+    {
+      "type": 0,
+      "value": "Can you keep going?"
+    }
+  ],
+  "storyFactory.congrats.title": [
+    {
+      "type": 0,
+      "value": "Congrats"
+    }
+  ],
   "storyFactory.create_message": [
     {
       "type": 0,
       "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
+    }
+  ],
+  "storyFactory.next": [
+    {
+      "type": 0,
+      "value": "Next"
     }
   ],
   "storyFactory.nextButton": [
@@ -1073,6 +1119,30 @@
     {
       "type": 0,
       "value": "Success! You did it!"
+    }
+  ],
+  "tag.guide": [
+    {
+      "type": 0,
+      "value": "Guide"
+    }
+  ],
+  "tag.resources": [
+    {
+      "type": 0,
+      "value": "Resources"
+    }
+  ],
+  "tags.parents": [
+    {
+      "type": 0,
+      "value": "Parents"
+    }
+  ],
+  "tags.social_justice": [
+    {
+      "type": 0,
+      "value": "Social Justice"
     }
   ]
 }

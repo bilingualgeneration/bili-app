@@ -54,7 +54,7 @@ export const LanguageModeSelect: React.FC = () => {
           }
           title={intl.formatMessage({
             id: "languageMode.immersionTitle",
-            defaultMessage: "Spanish immersion",
+            defaultMessage: "Spanish Immersion",
             description: "Title of the Spanish immersion mode option",
           })}
           content={intl.formatMessage({
