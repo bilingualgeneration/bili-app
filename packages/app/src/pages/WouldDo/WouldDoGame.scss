@@ -1,0 +1,60 @@
+$card-height: 460px;
+$card-width: 630px;
+$header-height: 102px;
+
+#would-do-page {
+  height: calc(100vh - #{$header-height});
+  width: 100vw;
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  overflow: hidden;
+
+  #would-do-question-container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: ($card-height + 40px);
+    width: ($card-width + 40px);
+  }
+
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    user-select: none;
+    ion-card {
+      height: $card-height;
+      width: $card-width;
+      position: relative;
+
+      ion-card-content {
+        height: $card-height;
+        width: $card-width;
+      }
+
+      h2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      h2,
+      p {
+        padding-right: 30px;
+      }
+    }
+    @for $i from 2 through 5 {
+      &:nth-child(#{$i}) {
+        left: 8px * ($i - 1);
+        top: 8px * ($i - 1);
+      }
+    }
+  }
+}
