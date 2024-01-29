@@ -155,6 +155,12 @@
       "value": "Bienestar"
     }
   ],
+  "common.wouldDo": [
+    {
+      "type": 0,
+      "value": "¿Qué harías?"
+    }
+  ],
   "common.years_old": [
     {
       "type": 1,
@@ -878,7 +884,7 @@
   "signUp.trialTitle": [
     {
       "type": 0,
-      "value": "Prueba gratuita de 2 semanas"
+      "value": "Prueba gratuita de 3 semanas"
     }
   ],
   "signUpTeacher.aboutGrade1": [
@@ -1143,6 +1149,12 @@
     {
       "type": 0,
       "value": "Justicia Social"
+    }
+  ],
+  "wouldDo.title": [
+    {
+      "type": 0,
+      "value": "¿Qué harías?"
     }
   ]
 }

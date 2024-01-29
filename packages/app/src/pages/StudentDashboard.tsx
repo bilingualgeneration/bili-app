@@ -17,6 +17,7 @@ import {
 import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
+import { useChildProfile } from "@/contexts/ChildProfileContext";
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
@@ -83,7 +84,10 @@ const WaveIcon: FC<WaveIcon> = ({
 
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
-  const { name, isImmersive } = useProfile();
+  const { isImmersive } = useProfile();
+  const {
+    activeChildProfile: { name },
+  } = useChildProfile();
   const { reqdActions, setReqdActions } = useReqdActions();
   const icons: WaveIcon[] = [
     {

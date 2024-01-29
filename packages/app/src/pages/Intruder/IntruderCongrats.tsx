@@ -4,6 +4,10 @@ import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
+import { httpsCallable } from "firebase/functions";
+import { useChildProfile } from "@/contexts/ChildProfileContext";
+import { useFunctions } from "reactfire";
+
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
 
@@ -35,6 +39,9 @@ export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
+  const {
+    activeChildProfile: { uid },
+  } = useChildProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { isImmersive } = useProfile();
   const audio_es = new Audio(
@@ -43,6 +50,23 @@ export const IntruderCongrats: React.FC<{
   const audio_en = new Audio(
     sounds.en[count === -1 ? "all" : count.toString()],
   );
+  const functions = useFunctions();
+
+  useEffect(() => {
+    // increment number of completions
+    const completionFunction = httpsCallable(
+      functions,
+      "user-child-profile-completion-add",
+    );
+    const data: any = {
+      uid,
+      module: "intruder",
+      moduleAdd: 5,
+      completionsAdd: 1,
+    };
+    completionFunction(data);
+  }, []);
+
   useEffect(() => {
     return () => {
       audio_es.pause();
