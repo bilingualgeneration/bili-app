@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState } from "react";
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonText,
-} from "@ionic/react";
+import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
+import TinderCard from "react-tinder-card";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 
-export const WouldDo: FC = () => {
+import "./WouldDoGame.scss";
+
+export const WouldDoGame: FC = () => {
   const { isImmersive } = useProfile();
+  const [questionsAnswered, setQuestionsAnswered] = useState<number>(0);
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
@@ -27,21 +25,17 @@ export const WouldDo: FC = () => {
 
   useEffect(() => {
     if (data !== undefined) {
-      console.log("Data from Firebase:", data);
-
       // Transform data to include text in both languages for each question
       const transformedData = data.questions.map((questionItem: any) => {
-        const enText = questionItem.question[0].text;
-        const esText = questionItem.question[1].text;
-
         return {
-          es: esText,
-          en: enText,
+          es: questionItem.question.filter((x: any) => x.language === "es")[0]
+            .text,
+          en: questionItem.question.filter((x: any) => x.language === "en")[0]
+            .text,
         };
       });
 
       setQuestionsData(transformedData);
-      console.log(transformedData);
     }
   }, [data]);
 
@@ -57,10 +51,13 @@ export const WouldDo: FC = () => {
     return "Error loading the game";
   }
 
+  if (questionsAnswered === questionsData.length) {
+    // do something?
+  }
+
   return (
     <>
-      <div style={{ backgroundColor: "#FBF2E2" }}>
-        {" "}
+      <div id="would-do-page" style={{ backgroundColor: "#FBF2E2" }}>
         {/* Background color of the page as seen on Figma */}
         <div style={{ padding: "4px 120px 0px 120px" }}>
           <IonText>
@@ -74,31 +71,29 @@ export const WouldDo: FC = () => {
             {!isImmersive && <p>What would you do?</p>}
           </IonText>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div id="would-do-question-container">
           {questionsData.map((question, index) => (
-            <IonCard
+            <TinderCard
               key={index}
-              style={{
-                backgroundColor: colors[index % colors.length],
-                width: "626.89px",
-                height: "460px",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+              className="card"
+              onSwipe={() => {
+                setQuestionsAnswered(questionsAnswered + 1);
               }}
             >
-              <IonCardHeader>
-                <IonCardTitle>{question.es}</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                {isImmersive && <div>{question.en}</div>}
-              </IonCardContent>
-            </IonCard>
+              <IonCard
+                style={{
+                  backgroundColor: colors[index % colors.length],
+                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <IonCardContent>
+                  <IonText>
+                    <h2>{question.es}</h2>
+                    {!isImmersive && <p>{question.en}</p>}
+                  </IonText>
+                </IonCardContent>
+              </IonCard>
+            </TinderCard>
           ))}
         </div>
       </div>

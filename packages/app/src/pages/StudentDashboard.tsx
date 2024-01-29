@@ -108,6 +108,7 @@ export const StudentDashboard: FC = () => {
     {
       reactintlId: "common.community",
       englishLabel: "community",
+      link: "/would-do-game/select",
       backgroundColor: "#23beb9",
       icon: <CommunityIcon />,
     },

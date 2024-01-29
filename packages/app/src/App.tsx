@@ -31,6 +31,7 @@ import {
   Profile,
 } from "@/pages/Settings";
 import { Debug } from "@/pages/Debug";
+import { FormattedMessage } from "react-intl";
 import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
@@ -47,7 +48,13 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { WouldDo } from "./pages/WouldDo/WouldDo";
+import { WouldDoGame } from "@/pages/WouldDo";
+
+import { PackSelect } from "@/components/PackSelect";
+
+// category headers (usually for PackSelect
+import { CommunityHeader } from "@/components/CommunityHeader";
+import { PlayHeader } from "@/components/PlayHeader";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -390,14 +397,36 @@ const Router: React.FC = () => {
           )}
         />
 
-        {/* todo: better path */}
         <Route
           exact
-          path="/would-do/:pack_id"
+          path="/would-do-game/select"
           render={() => (
             <AuthedLayout>
-              <HeaderFooter background="#fff">
-                <WouldDo />
+              <HeaderFooter background="#fbf2e2">
+                <PackSelect
+                  headerComponent={<CommunityHeader />}
+                  module="would-do-game"
+                  packId="dc6fd688-cbb9-4467-ba41-aad105c5ea40"
+                  translatedTitle={
+                    <FormattedMessage
+                      id="common.wouldDo"
+                      defaultMessage="What would you do?"
+                    />
+                  }
+                  englishTitle="What would you do?"
+                />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/would-do-game/play/:pack_id"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#fbf2e2">
+                <WouldDoGame />
               </HeaderFooter>
             </AuthedLayout>
           )}
@@ -412,7 +441,6 @@ const App: React.FC = () => {
     // set default language to device if not already set
     (async () => {
       const locale = await localStorage.getItem("userLocale");
-      console.log(locale);
       if (locale === null) {
         // no stored language
         localStorage.setItem(
