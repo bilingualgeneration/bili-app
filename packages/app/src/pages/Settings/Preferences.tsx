@@ -25,6 +25,7 @@ export const Preferences: React.FC = () => {
   const { isImmersive, isInclusive, settingsLanguage, uid } = useProfile();
   const firestore = useFirestore();
   const ref = doc(firestore, "users", uid);
+  // TODO: we shouldn't allow this straight from the app
   const updateProfile = (key: string, value: any) => {
     updateDoc(ref, {
       [key]: value,

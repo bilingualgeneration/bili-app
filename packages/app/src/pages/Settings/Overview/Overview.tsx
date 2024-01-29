@@ -19,11 +19,14 @@ import { Preferences } from "@capacitor/preferences";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
+import { useChildProfile } from "@/contexts/ChildProfileContext";
 
 import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
+  const { childProfiles, activeChildProfile, setActiveChildProfile } =
+    useChildProfile();
   const { isAdultCheckOpen } = useAdultCheck();
 
   useEffect(() => {
@@ -126,9 +129,14 @@ export const Overview: React.FC = ({}) => {
 
   const intl = useIntl();
 
-  // todo: pull actual child profiles
-  const [activeChildName, setActiveChildName] = useState<string>("Vanessa");
+  if (activeChildProfile === undefined) {
+    return <>loading</>;
+  }
 
+  /*
+     letterAvatarBackgroundColor="#f28ac9"
+     letterAvatarTextColor="#973d78"
+   */
   return (
     <>
       {shouldShowTutorial && !isAdultCheckOpen && (
@@ -187,36 +195,24 @@ export const Overview: React.FC = ({}) => {
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow>
-              <IonCol
-                className="ion-padding"
-                size="6"
-                onClick={() => {
-                  setActiveChildName("Vanessa");
-                }}
-              >
-                <ChildProfileCard
-                  age="3-5"
-                  isActive={activeChildName === "Vanessa"}
-                  letterAvatarBackgroundColor="#20bfb9"
-                  letterAvatarTextColor="#ffffff"
-                  name="Vanessa"
-                />
-              </IonCol>
-              <IonCol
-                className="ion-padding"
-                size="6"
-                onClick={() => {
-                  setActiveChildName("Mateo");
-                }}
-              >
-                <ChildProfileCard
-                  age="5-7"
-                  isActive={activeChildName === "Mateo"}
-                  letterAvatarBackgroundColor="#f28ac9"
-                  letterAvatarTextColor="#973d78"
-                  name="Mateo"
-                />
-              </IonCol>
+              {childProfiles.map((p: any) => (
+                <IonCol
+                  className="ion-padding"
+                  size="6"
+                  onClick={() => {
+                    setActiveChildProfile(p.uid);
+                  }}
+                  key={p.uid}
+                >
+                  <ChildProfileCard
+                    age={p.age}
+                    isActive={activeChildProfile.uid === p.uid}
+                    letterAvatarBackgroundColor="#20bfb9"
+                    letterAvatarTextColor="#ffffff"
+                    name={p.name}
+                  />
+                </IonCol>
+              ))}
             </IonRow>
           </div>
 
