@@ -39,7 +39,15 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">Below 3 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.radioOption1"
+              defaultMessage={"Below 3 years old"}
+              description={
+                "Radio button option #4 'Below 3 years old' in child profile"
+              }
+            />
+          </IonRadio>
         </div>
       ),
       value: "<3",
@@ -47,7 +55,15 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">3-5 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.radioOption2"
+              defaultMessage={"3-5 years old"}
+              description={
+                "Radio button option #4 '3-5 years old' in child profile"
+              }
+            />
+          </IonRadio>
         </div>
       ),
       value: "3-5",
@@ -55,7 +71,15 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">5-7 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.radioOption3"
+              defaultMessage={"5-7 years old"}
+              description={
+                "Radio button option #4 '5-7 years old' in child profile"
+              }
+            />
+          </IonRadio>
         </div>
       ),
       value: "5-7",
@@ -63,7 +87,15 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">Above 7 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.radioOption4"
+              defaultMessage={"Above 7 years old"}
+              description={
+                "Radio button option #4 'above 7 years old' in child profile"
+              }
+            />
+          </IonRadio>
         </div>
       ),
       value: ">7",
