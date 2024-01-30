@@ -1,0 +1,28 @@
+.container {
+  cursor:
+    url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
+      39 39,
+    auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.deck {
+  position: absolute;
+  display: flex;
+  width: 625.845px;
+  height: 460px;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  border-radius: 34.635px;
+  box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card {
+  font-size: 24px;
+}
