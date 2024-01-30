@@ -115,8 +115,8 @@ export const IntruderIntro: React.FC = () => {
                         The Intruder
                       </h1>
                       <h2>
-                        The goal of this game is to identify the word that does
-                        not rhyme with the rest.
+                        Welcome to "The Intruder" game! The goal of this game is
+                        to identify the word that does not rhyme with the rest.
                       </h2>
                     </>
                   )}
