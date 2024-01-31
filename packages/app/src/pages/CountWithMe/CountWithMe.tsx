@@ -1,104 +1,83 @@
-import { IonText } from "@ionic/react";
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
+import { IonCard, IonCardContent, IonText } from "@ionic/react";
+import { FormattedMessage } from "react-intl";
+import { useProfile } from "@/contexts/ProfileContext";
+import { useParams } from "react-router-dom";
+import { useFirestore, useFirestoreDocData } from "reactfire";
+import { doc } from "firebase/firestore";
+import { any, string } from "zod";
 
 export const CountWithMe: React.FC = () => {
-  const data = [
-    {
-      prompt: [
-        // birds count
-        {
-          language: "es",
-          text: "¿Cuántos colibrís hay? Haz clic en cada colibrí para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many hummingbirds are there? Tap on each hummingbird to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      image:
-        "https://ik.imagekit.io/jskeetedev/background%20rainforest%201.png?updatedAt=1706319203925", // background image from imagekit
-      animals: [
-        // each animal is an object with an image url and x and y coordinates
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206962.png?updatedAt=1706501413743",
-          x: 60,
-          y: 400,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206963.png?updatedAt=1706501413594",
-          x: 260,
-          y: 300,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206964.png?updatedAt=1706501397998",
-          x: 500,
-          y: 500,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206965.png?updatedAt=1706501398083",
-          x: 740,
-          y: 300,
-        },
-      ],
-      fact: [
-        {
-          language: "es",
-          text: "¿Cuántos colibrís hay? Haz clic en cada colibrí para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many hummingbirds are there? Tap on each hummingbird to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-    },
-    {
-      prompt: [
-        // dolphins count
-        {
-          language: "es",
-          text: "¿Cuántos delfines rosados hay? Haz clic en cada delfin rosado para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many river dolphins are there? Tap on each river dolphin to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      image:
-        "https://ik.imagekit.io/jskeetedev/background%20rainforest%201-2.png?updatedAt=1706319993691", // background image from imagekit
-      animals: [
-        // each animal is an object with an image url and x and y coordinates
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Layer%202%202.png?updatedAt=1706501398136",
-          x: 20,
-          y: 430,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Layer%203%202.png?updatedAt=1706501398150",
-          x: 500,
-          y: 500,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/dolphin%203%201.png?updatedAt=1706501397958",
-          x: 680,
-          y: 420,
-        },
-      ],
-      fact: [
-        {
-          language: "es",
-          text: "¿Cuántos delfines rosados hay? Haz clic en cada delfin rosado para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many river dolphins are there? Tap on each river dolphin to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-    },
-  ];
+  console.log("Component rendered");
+  const { isImmersive } = useProfile();
+  //@ts-ignore
+  const { pack_id } = useParams();
+  const firestore = useFirestore();
+
+  //Firestore operations
+  const ref = doc(firestore, "count-with-me-game", pack_id);
+  const { status, data } = useFirestoreDocData(ref);
+
+  const [getData, setData] = useState<{
+    animalImages: any[];
+    gameQuestions: any[];
+    gameBackground: any;
+  }>({
+    animalImages: [],
+    gameQuestions: [],
+    gameBackground: any,
+  });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
+  const [showNumber, setSHowNumber] = useState(false);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [data]);
+
+  const goToNextAnimalGroup = () => {
+    // Check if the current index is at the last element of the word_group array
+    if (currentIndex >= data.groups.length - 1) {
+      setCurrentIndex(0); // Reset to the first element
+    } else {
+      setCurrentIndex(currentIndex + 1); // Move to the next element
+    }
+  };
+
+  useEffect(() => {
+    if (data !== undefined) {
+      const animalGroup = data.groups[currentIndex];
+
+      const countGameData = {
+        animalImages: animalGroup.animals,
+        gameQuestions: animalGroup.game_text,
+        gameBackground: animalGroup.game_background_image,
+      };
+
+      setData(countGameData);
+    }
+  }, [data, currentIndex]);
+
+  //function to handle bird click order
+  const arrayOfImagesqueue: number[] = [];
+
+  const handleBirdClickOrder = (index: number) => {
+    arrayOfImagesqueue.push(index);
+    setSHowNumber(true);
+  };
+
+  // do a check if status === loading
+
+  if (status === "loading") {
+    return (
+      <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
+    );
+  }
+
+  if (status === "error") {
+    return "Error loading the game";
+  }
 
   return (
     <div
@@ -126,23 +105,40 @@ export const CountWithMe: React.FC = () => {
         }}
       >
         <IonText>
-          <h1>{data[0].prompt[0].text}</h1> {/* data[0] is hard coded for  */}
-          <p>{data[0].prompt[1].text}</p>
+          {getData.gameQuestions.length > 0 && (
+            <>
+              <h1>{getData.gameQuestions[1].text}</h1>
+              {!isImmersive && <p>{getData.gameQuestions[0].text}</p>}
+            </>
+          )}
         </IonText>
-        <img src={data[0].image} alt="hummingbirds" style={{ width: "100%" }} />
+        <img
+          src={getData.gameBackground.url}
+          alt="hummingbirds"
+          style={{ width: "100%" }}
+        />
 
         {/* Overlay animals */}
-        {data[0].animals.map((animal, index) => (
+        {getData.animalImages.map((animal, index) => (
           <img
             key={index}
-            src={animal.url}
+            src={animal.image.url}
             alt={`animal-${index}`}
             style={{
               position: "absolute",
-              top: `${animal.y}px`,
-              left: `${animal.x}px`,
+              cursor: "pointer",
+              top: `${animal.coordinate_y}px`,
+              left: `${animal.coordinate_x}px`,
             }}
+            onClick={() => handleBirdClickOrder(index)}
           />
+          // {showNumber &&
+          //   (
+          //     <div className="number-overlay">
+          //     123
+          //     </div>
+          //   )
+          // }
         ))}
       </div>
     </div>
