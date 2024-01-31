@@ -9,12 +9,12 @@
   height: 70vh;
 }
 
-.deck {
+.card {
   position: absolute;
-  display: flex;
+  padding: 40px;
   width: 625.845px;
   height: 460px;
-  will-change: transform;
+  /* will-change: transform; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,6 +23,9 @@
   box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
 }
 
-.card {
-  font-size: 24px;
+.card_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }

@@ -11,52 +11,66 @@ interface DeckProps {
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
   const { isImmersive } = useProfile();
-  const [gone, setGone] = useState(() => new Set<number>());
+  const [swiped, setSwiped] = useState(() => new Set<number>());
 
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   const [props, api] = useSprings(cards.length, (i) => ({
-    x: i === 0 ? 0 : -2 - i * 20,
-    y: i === 0 ? 0 : 10 + i * 20,
-    scale: 1,
-    rot: i === 0 ? 10 : -10 + Math.random() * 20,
-    zIndex: cards.length - i, // Add zIndex property
-    delay: i * 100,
+    x: i === 0 ? 0 : -2 - i * 20, //x === 0 if first card. Subsequent cards will be positioned to the left of the first card with a gap of 20 units between each card.
+    y: i === 0 ? 0 : 10 + i * 20, //y === 0 if first card. Subsequent cards will be positioned below the first card with a gap of 20 units between each card.
+    scale: 1, // controls the size of the card, where 1 represents original size
+    rot: 0,
+    zIndex: cards.length - i, // first card has the highest zIndex value, and subsequent cards have decreasing zIndex values
+    delay: i * 100, // determines the delay before each card's animation starts
   }));
 
   const bind = useDrag(
-    ({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
+    ({
+      args: [index],
+      down /* yes being dragged */,
+      movement: [mx] /* mvmt along x axis */,
+      direction: [xDir] /* dir. of mvmt */,
+      velocity,
+    }) => {
       const dir = xDir < 0 ? -1 : 1;
-      if (!down && mx < -100) {
-        // If swiped to the left by a certain threshold
-        gone.add(index);
+      if (!down && mx < -20) {
+        // If swiped to the left (!down) by a certain threshold (-20)
+        swiped.add(index);
         setTimeout(() => {
-          const newGone = new Set(gone);
-          newGone.delete(index);
+          const newSwiped = new Set(swiped);
+          newSwiped.delete(index);
           const newOrder = [...Array(cards.length).keys()].filter(
-            (i) => !newGone.has(i),
+            (i) => !newSwiped.has(i),
           );
           newOrder.push(index);
           api.start((i) => ({
             x: -2 - i * 20,
             y: 10 + i * 20,
             scale: 1,
-            rot: -10 + Math.random() * 20,
+            rot: 0,
             zIndex: cards.length - newOrder.indexOf(i),
             delay: i * 100,
           }));
-          setGone(newGone);
+          setSwiped(newSwiped);
         }, 600);
         return;
       }
       api.start((i) => {
-        if (index !== i) return;
-        const x = down ? mx : 0;
-        const rot = mx / 100;
+        if (index !== i) return; // ensures that animation properties only updated for card being dragged
+
+        // Limit the maximum distance dragged to the left
+        const maxLeftDistance = -150;
+        const constrainedX = down ? Math.min(0, mx) : 0;
+        const x = Math.max(maxLeftDistance, constrainedX);
+
+        // Calculate the tilt angle based on the ratio of the current distance to the maximum distance
+        const maxRotation = -20;
+        const tiltAngle = (x / maxLeftDistance) * maxRotation;
+
         const scale = down ? 1.1 : 1;
         return {
           x,
-          rot,
+          rot: tiltAngle,
           scale,
           delay: undefined,
           config: { friction: 50, tension: down ? 800 : 500 },
@@ -67,34 +81,32 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
   return (
     <>
-      {props.map(({ x, y, rot, scale, zIndex }, i) => (
-        <animated.div
-          {...bind(i)}
-          key={i}
-          className={styles.deck}
-          style={{
-            backgroundColor: colors[i],
-            x,
-            y: i * -10,
-            zIndex,
-          }}
-        >
+      <div className={styles.container}>
+        {props.map(({ x, y, rot, scale, zIndex }, i) => (
           <animated.div
+            {...bind(i)}
+            key={i}
+            className={styles.card}
             style={{
+              backgroundColor: colors[i],
+              x,
+              y: i * -10,
+              zIndex,
               transform: interpolate(
-                [rot, scale],
-                (r, s) =>
-                  `perspective(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(${s})`,
+                [rot, x],
+                (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
               ),
             }}
           >
-            <div className={styles.card}>
-              <h3>{cards[i].es}</h3>
-              {isImmersive && <p>{cards[i].en}</p>}
+            <div className={styles.card_content}>
+              <h1 className={styles.es}>{cards[i].es}</h1>
+              {!isImmersive && (
+                <p className={styles.en_content}>{cards[i].en}</p>
+              )}
             </div>
           </animated.div>
-        </animated.div>
-      ))}
+        ))}
+      </div>
     </>
   );
 };
