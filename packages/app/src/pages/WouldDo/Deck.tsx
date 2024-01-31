@@ -16,7 +16,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   const [props, api] = useSprings(cards.length, (i) => ({
-    x: i === 0 ? 0 : -2 - i * 20, //x === 0 if first card. Subsequent cards will be positioned to the left of the first card with a gap of 20 units between each card.
+    x: i === 0 ? 0 : -2 - i * 10, //x === 0 if first card. Subsequent cards will be positioned to the left of the first card with a gap of 20 units between each card.
     y: i === 0 ? 0 : 10 + i * 20, //y === 0 if first card. Subsequent cards will be positioned below the first card with a gap of 20 units between each card.
     scale: 1, // controls the size of the card, where 1 represents original size
     rot: 0,
@@ -44,7 +44,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
           );
           newOrder.push(index);
           api.start((i) => ({
-            x: -2 - i * 20,
+            x: -2 - i * 10,
             y: 10 + i * 20,
             scale: 1,
             rot: 0,
