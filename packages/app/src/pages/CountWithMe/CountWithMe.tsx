@@ -31,6 +31,7 @@ export const CountWithMe: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showNumber, setSHowNumber] = useState(false);
+  const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -60,11 +61,12 @@ export const CountWithMe: React.FC = () => {
   }, [data, currentIndex]);
 
   //function to handle bird click order
-  const arrayOfImagesqueue: number[] = [];
+  // const arrayOfImagesqueue: number[] = [];
 
   const handleBirdClickOrder = (index: number) => {
-    arrayOfImagesqueue.push(index);
-    setSHowNumber(true);
+    if (!clickedIndexes.includes(index)) {
+      setClickedIndexes([...clickedIndexes, index]);
+    }
   };
 
   // do a check if status === loading
@@ -120,25 +122,41 @@ export const CountWithMe: React.FC = () => {
 
         {/* Overlay animals */}
         {getData.animalImages.map((animal, index) => (
-          <img
+          <div
             key={index}
-            src={animal.image.url}
-            alt={`animal-${index}`}
             style={{
               position: "absolute",
-              cursor: "pointer",
               top: `${animal.coordinate_y}px`,
               left: `${animal.coordinate_x}px`,
+              cursor: "pointer",
             }}
             onClick={() => handleBirdClickOrder(index)}
-          />
-          // {showNumber &&
-          //   (
-          //     <div className="number-overlay">
-          //     123
-          //     </div>
-          //   )
-          // }
+          >
+            <img
+              src={animal.image.url}
+              alt={`animal-${index}`}
+              style={{
+                width: "100%", // or set to actual image width
+                height: "auto", // or set to actual image height
+              }}
+            />
+            {clickedIndexes.includes(index) && (
+              <div
+                className="number-overlay"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                  fontSize: "24px", // Customize as needed
+                  // Additional styling here
+                }}
+              >
+                {index + 1}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>
