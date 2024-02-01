@@ -4,7 +4,6 @@ import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
 import styles from "./styles.module.css";
-import { any } from "zod";
 
 interface DeckProps {
   cards: { en: string; es: string }[]; // Adjust the type based on data structure
@@ -12,7 +11,7 @@ interface DeckProps {
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
   const { isImmersive } = useProfile();
-  const [swiped, setSwiped] = useState(() => new Set<number>());
+  const [swiped, setSwiped] = useState<number[]>([]); // Changed to an array of indices
 
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
@@ -37,27 +36,37 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-        const swipedCard = cards.shift();
-        if (swipedCard != undefined) {
-          cards.push(swipedCard);
-        }
-        console.log(cards[0]["en"]);
-        console.log(index);
+        const updatedSwiped = [...swiped, index]; // Add index of swiped card to swiped array
+        setSwiped(updatedSwiped);
 
         // Animate the swiped card to the back and shift other cards forward
         setTimeout(() => {
+          // Animate the swiped card to the back
+
           // Animate other cards to smoothly shift forward
-          api.start((index) => {
-            const newIndex = index - 1 < 0 ? cards.length - 1 : index - 1; // Calculate the new index after shifting
-            console.log(`Index: ${index} newIndex: ${newIndex}`);
-            return {
-              x: -2 - (newIndex - 1) * 5, // Shift the card forward
-              y: 10 + (newIndex - 1) * 20,
-              scale: 1,
-              rot: 0,
-              zIndex: cards.length - newIndex,
-              delay: newIndex * 100,
-            };
+          api.start((i) => {
+            if (!updatedSwiped.includes(i)) {
+              // If the card is not the swiped card, shift it forward
+              const newIndex = (i - 1 + cards.length) % cards.length; // Calculate the new index with wrapping
+              return {
+                x: -2 - newIndex * 5, // Shift the card forward
+                y: 10 + newIndex * 20,
+                scale: 1,
+                rot: 0,
+                zIndex: cards.length - newIndex,
+                delay: newIndex * 100,
+              };
+            } else {
+              // Default return value to ensure the function always returns an object
+              return {
+                x: 0,
+                y: 0,
+                scale: 1,
+                rot: 0,
+                zIndex: 0,
+                delay: 0,
+              };
+            }
           });
         }, 600);
         return;
