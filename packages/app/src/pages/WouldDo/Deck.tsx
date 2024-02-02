@@ -34,7 +34,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       down, // Flag indicating if the card is being dragged
       movement: [mx], // Movement along the x-axis
       direction: [xDir], // Direction of movement
-      velocity,
     }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
@@ -42,7 +41,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         incOffset((offset + 1) % 5);
         console.log("Offset is now: " + offset);
 
-        // Animate the swiped card to the back and shift other cards forward
+        // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
             if (i == index) {
