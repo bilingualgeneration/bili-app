@@ -6,9 +6,12 @@ import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { any, string } from "zod";
+import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
+import correct_card_audio from "@/assets/audio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
+import "./countWithMe.scss";
 
 export const CountWithMe: React.FC = () => {
-  console.log("Component rendered");
   const { isImmersive } = useProfile();
   //@ts-ignore
   const { pack_id } = useParams();
@@ -21,17 +24,49 @@ export const CountWithMe: React.FC = () => {
   const [getData, setData] = useState<{
     animalImages: any[];
     gameQuestions: any[];
+    countQuestions: any[];
     gameBackground: any;
   }>({
     animalImages: [],
     gameQuestions: [],
+    countQuestions: [],
     gameBackground: any,
   });
 
+  //audio files
+  const audio_correct = new Audio(correct_card_audio);
+  const audio_incorrect = new Audio(incorrect_card_audio);
+  const card_flip = new Audio(card_flip_audio);
+
+  //styles for correct or incorrect choice
+  const initialStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+  };
+
+  const correctStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    border: "8.4px solid var(--alerts-status-success, #12D18E)",
+    boxShadow: "0px 8.4px 25.2px 0px #12D18E",
+  };
+
+  const incorrectStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    border: "8.4px solid var(--Categories-Error, #F0091B)",
+    boxShadow: "0px 8.4px 25.2px 0px #F0091B",
+  };
+
+  //states
+  const [animalColors, setAnimalColors] = useState<{ [key: string]: any }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showNumber, setSHowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
+  const [allAnimalsCLicked, setAllAnimalsClicked] = useState(false);
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -53,6 +88,7 @@ export const CountWithMe: React.FC = () => {
       const countGameData = {
         animalImages: animalGroup.animals,
         gameQuestions: animalGroup.game_text,
+        countQuestions: animalGroup.counting_text,
         gameBackground: animalGroup.game_background_image,
       };
 
@@ -60,14 +96,62 @@ export const CountWithMe: React.FC = () => {
     }
   }, [data, currentIndex]);
 
-  //function to handle bird click order
-  // const arrayOfImagesqueue: number[] = [];
+  //logic  for choosing the correct animal number
+  useEffect(() => {
+    if (isCorrectSelected) {
+    }
+  }, [isCorrectSelected]);
 
+  //function to handle bird click order
   const handleBirdClickOrder = (index: number) => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
     }
+
+    //next step happens only when all images were clicked
+    if (clickedIndexes.length === getData.animalImages.length) {
+      setAllAnimalsClicked(true); // not sure if I need this state
+      if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
+        //logic for the incorrect number
+        audio_incorrect.play(); //plays audio for incorrect choice
+        setAnimalColors((prevColors: any) => ({
+          ...prevColors,
+          [getData.animalImages[index].image.id]: {
+            ...incorrectStyle,
+            animation: "shake 1s",
+          },
+        }));
+
+        setTimeout(() => {
+          setAnimalColors((prevColors: any) => ({
+            ...prevColors,
+            [getData.animalImages[index].image.id]: initialStyle,
+          }));
+        }, 1000);
+      } else {
+        //logic when the correct card is choosen
+        audio_correct.play(); //plays audio for correct choice
+        setAnimalColors((prevColors: any) => ({
+          ...prevColors,
+          [getData.animalImages[index].image.id]: correctStyle,
+        }));
+
+        setTimeout(() => {
+          setIsCorrectSelected(true);
+        }, 1000);
+      }
+    }
   };
+
+  if (showCongrats) {
+    return (
+      <></>
+      // <IntruderCongrats
+      //   setShowCongrats={setShowCongrats}
+      //   count={currentIndex + 1}
+      // />
+    );
+  }
 
   // do a check if status === loading
 
@@ -117,7 +201,12 @@ export const CountWithMe: React.FC = () => {
         <img
           src={getData.gameBackground.url}
           alt="hummingbirds"
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: "32px",
+            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+          }}
         />
 
         {/* Overlay animals */}
@@ -133,12 +222,10 @@ export const CountWithMe: React.FC = () => {
             onClick={() => handleBirdClickOrder(index)}
           >
             <img
+              className="image-count-with-me-style"
               src={animal.image.url}
               alt={`animal-${index}`}
-              style={{
-                width: "100%", // or set to actual image width
-                height: "auto", // or set to actual image height
-              }}
+              style={animalColors[animal.image.id]}
             />
             {clickedIndexes.includes(index) && (
               <div
@@ -149,11 +236,11 @@ export const CountWithMe: React.FC = () => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   color: "white",
-                  fontSize: "24px", // Customize as needed
-                  // Additional styling here
+                  fontSize: "33px",
+                  fontWeight: "700",
                 }}
               >
-                {index + 1}
+                {clickedIndexes.indexOf(index) + 1}
               </div>
             )}
           </div>
