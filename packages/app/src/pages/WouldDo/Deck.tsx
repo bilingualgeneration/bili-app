@@ -4,6 +4,7 @@ import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
 import styles from "./styles.module.css";
+import { off } from "firebase/database";
 
 interface DeckProps {
   cards: { en: string; es: string }[]; // Adjust the type based on data structure
@@ -11,17 +12,18 @@ interface DeckProps {
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
   const { isImmersive } = useProfile();
-  const [swiped, setSwiped] = useState<number[]>([]); // Changed to an array of indices
+  const [swiped, setSwiped] = useState(() => new Set<number>());
+  const [offset, incOffset] = useState(1);
 
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
-  const [props, api] = useSprings(cards.length, (index) => ({
-    x: -2 - index * 5, // Initialize x position of each card
-    y: 10 + index * 20, // Initialize y position of each card
+  const [props, api] = useSprings(cards.length, (i) => ({
+    x: -2 - i * 5, // Initialize x position of each card
+    y: 10 - i * 20, // Initialize y position of each card
     scale: 1, // Initialize scale of each card
     rot: 0, // Initialize rotation angle of each card
-    zIndex: cards.length - index, // Initialize zIndex of each card
-    delay: index * 100, // Delay before starting the animation
+    zIndex: cards.length - i, // Initialize zIndex of each card
+    delay: i * 100, // Delay before starting the animation
   }));
 
   // Binding useDrag() hook to each card using bind function
@@ -32,42 +34,108 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       down, // Flag indicating if the card is being dragged
       movement: [mx], // Movement along the x-axis
       direction: [xDir], // Direction of movement
+      velocity,
     }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-        const updatedSwiped = [...swiped, index]; // Add index of swiped card to swiped array
-        setSwiped(updatedSwiped);
+        // swiped.add(index); // Add index of swiped card to swiped set
+        incOffset((offset + 1) % 5);
+        console.log("Offset is now: " + offset);
+
+        // Calculate the new order of the cards
+        // const newOrder = [...swiped].sort((a, b) => a - b); // Sort the swiped set
+        // const newSwiped = new Set(newOrder); // Update the swiped state with the new order
 
         // Animate the swiped card to the back and shift other cards forward
         setTimeout(() => {
           // Animate the swiped card to the back
 
+          // api.start((i) => ({
+          //   x: -2 - (cards.length - 1) * 10,
+          //   y: 10 + (cards.length - 1) * 20,
+          //   scale: 1,
+          //   rot: 0,
+          //   zIndex: 1, // Set zIndex to ensure it appears behind other cards
+          //   delay: i * 100,
+          // }));
+
           // Animate other cards to smoothly shift forward
           api.start((i) => {
-            if (!updatedSwiped.includes(i)) {
-              // If the card is not the swiped card, shift it forward
-              const newIndex = (i - 1 + cards.length) % cards.length; // Calculate the new index with wrapping
+            if (i == index) {
               return {
-                x: -2 - newIndex * 5, // Shift the card forward
-                y: 10 + newIndex * 20,
-                scale: 1,
-                rot: 0,
-                zIndex: cards.length - newIndex,
-                delay: newIndex * 100,
-              };
-            } else {
-              // Default return value to ensure the function always returns an object
-              return {
-                x: 0,
-                y: 0,
+                x: -22,
+                y: -70,
                 scale: 1,
                 rot: 0,
                 zIndex: 0,
                 delay: 0,
               };
+            } else if (i == (index + 1) % 5) {
+              return {
+                x: -2,
+                y: 10,
+                scale: 1,
+                rot: 0,
+                zIndex: 4,
+                delay: i * 100,
+              };
+            } else if (i == (index + 2) % 5) {
+              return {
+                x: -7,
+                y: -10,
+                scale: 1,
+                rot: 0,
+                zIndex: 3,
+                delay: i * 100,
+              };
+            } else if (i == (index + 3) % 5) {
+              return {
+                x: -12,
+                y: -30,
+                scale: 1,
+                rot: 0,
+                zIndex: 2,
+                delay: i * 100,
+              };
+            } else {
+              return {
+                x: -17,
+                y: -50,
+                scale: 1,
+                rot: 0,
+                zIndex: 1,
+                delay: i * 100,
+              };
             }
+            //   if (i == 0) {
+            //     // If the card is not the swiped card, shift it forward
+            //     return {
+            //       x: -2 - (i + offset) * 5, // Shift the card forward
+            //       y: 10 + (i + offset) * 20,
+            //       scale: 1,
+            //       rot: 0,
+            //       zIndex: cards.length - (i + offset),
+            //       delay: (i + offset) * 100,
+            //     };
+            //   } else {
+            //     // Default return value to ensure the function always returns an object
+            //     return {
+            //       x: -2 - ((i + offset) - 1) * 5, // Shift the card forward
+            //       y: 10 + ((i + offset) - 1) * 20,
+            //       scale: 1,
+            //       rot: 0,
+            //       zIndex: cards.length - (i + offset),
+            //       delay: (i + offset) * 100,
+            //     };
+            //   }
+            // });
           });
+
+          // Update the swiped state after the animation completes
+          // setTimeout(() => {
+          //   setSwiped(newSwiped);
+          // }, 100);
         }, 600);
         return;
       }
@@ -113,7 +181,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               style={{
                 backgroundColor: colors[i], // Set background color based on index
                 x, // Apply x position
-                y: i * -6, // Apply y position (slight vertical offset)
+                y, // Apply y position (slight vertical offset)
                 zIndex, // Apply zIndex
                 transform: interpolate(
                   // Interpolate rotation and translation properties
