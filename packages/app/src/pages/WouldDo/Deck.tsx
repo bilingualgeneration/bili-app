@@ -39,28 +39,11 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-        // swiped.add(index); // Add index of swiped card to swiped set
         incOffset((offset + 1) % 5);
         console.log("Offset is now: " + offset);
 
-        // Calculate the new order of the cards
-        // const newOrder = [...swiped].sort((a, b) => a - b); // Sort the swiped set
-        // const newSwiped = new Set(newOrder); // Update the swiped state with the new order
-
         // Animate the swiped card to the back and shift other cards forward
         setTimeout(() => {
-          // Animate the swiped card to the back
-
-          // api.start((i) => ({
-          //   x: -2 - (cards.length - 1) * 10,
-          //   y: 10 + (cards.length - 1) * 20,
-          //   scale: 1,
-          //   rot: 0,
-          //   zIndex: 1, // Set zIndex to ensure it appears behind other cards
-          //   delay: i * 100,
-          // }));
-
-          // Animate other cards to smoothly shift forward
           api.start((i) => {
             if (i == index) {
               return {
@@ -108,34 +91,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                 delay: i * 100,
               };
             }
-            //   if (i == 0) {
-            //     // If the card is not the swiped card, shift it forward
-            //     return {
-            //       x: -2 - (i + offset) * 5, // Shift the card forward
-            //       y: 10 + (i + offset) * 20,
-            //       scale: 1,
-            //       rot: 0,
-            //       zIndex: cards.length - (i + offset),
-            //       delay: (i + offset) * 100,
-            //     };
-            //   } else {
-            //     // Default return value to ensure the function always returns an object
-            //     return {
-            //       x: -2 - ((i + offset) - 1) * 5, // Shift the card forward
-            //       y: 10 + ((i + offset) - 1) * 20,
-            //       scale: 1,
-            //       rot: 0,
-            //       zIndex: cards.length - (i + offset),
-            //       delay: (i + offset) * 100,
-            //     };
-            //   }
-            // });
           });
-
-          // Update the swiped state after the animation completes
-          // setTimeout(() => {
-          //   setSwiped(newSwiped);
-          // }, 100);
         }, 600);
         return;
       }
