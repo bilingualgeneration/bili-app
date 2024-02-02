@@ -65,7 +65,7 @@ export const CountWithMe: React.FC = () => {
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showNumber, setSHowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
-  const [allAnimalsCLicked, setAllAnimalsClicked] = useState(false);
+  const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
   useEffect(() => {
@@ -106,11 +106,13 @@ export const CountWithMe: React.FC = () => {
   const handleBirdClickOrder = (index: number) => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
+      if (index === getData.animalImages.length - 1) {
+        setAllAnimalsClicked(true);
+      }
     }
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
-      setAllAnimalsClicked(true); // not sure if I need this state
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
         audio_incorrect.play(); //plays audio for incorrect choice
@@ -191,12 +193,30 @@ export const CountWithMe: React.FC = () => {
         }}
       >
         <IonText>
-          {getData.gameQuestions.length > 0 && (
-            <>
-              <h1>{getData.gameQuestions[1].text}</h1>
-              {!isImmersive && <p>{getData.gameQuestions[0].text}</p>}
-            </>
-          )}
+          {getData.gameQuestions.length > 0 &&
+            getData.countQuestions.length > 0 && (
+              <>
+                {allAnimalsClicked ? (
+                  <>
+                    <h1>{getData.countQuestions[1].text}</h1>
+                    {!isImmersive && (
+                      <p className="count-english-text-style">
+                        {getData.countQuestions[0].text}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <h1>{getData.gameQuestions[1].text}</h1>
+                    {!isImmersive && (
+                      <p className="count-english-text-style">
+                        {getData.gameQuestions[0].text}
+                      </p>
+                    )}
+                  </>
+                )}
+              </>
+            )}
         </IonText>
         <img
           src={getData.gameBackground.url}
