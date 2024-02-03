@@ -26,11 +26,15 @@ export const CountWithMe: React.FC = () => {
     gameQuestions: any[];
     countQuestions: any[];
     gameBackground: any;
+    factBackground: any;
+    factText: any[];
   }>({
     animalImages: [],
     gameQuestions: [],
     countQuestions: [],
     gameBackground: any,
+    factBackground: any,
+    factText: [],
   });
 
   //audio files
@@ -90,6 +94,8 @@ export const CountWithMe: React.FC = () => {
         gameQuestions: animalGroup.game_text,
         countQuestions: animalGroup.counting_text,
         gameBackground: animalGroup.game_background_image,
+        factBackground: animalGroup.fact_background_image,
+        factText: animalGroup.fact_text,
       };
 
       setData(countGameData);
@@ -149,9 +155,25 @@ export const CountWithMe: React.FC = () => {
 
   if (showCongrats) {
     return (
-      <></>
-      // <IntruderCongrats
-      //   setShowCongrats={setShowCongrats}
+      <>
+        <h1>{getData.factText[1].text}</h1>
+        {!isImmersive && (
+          <p className="count-english-text-style">{getData.factText[0].text}</p>
+        )}
+        <img
+          src={getData.factBackground.url}
+          alt="animals"
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: "32px",
+            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+          }}
+        />
+      </>
+      // <CountCongrats
+      //  factText = {factText}
+      // factBackround = {factBackround}
       //
       // />
     );
