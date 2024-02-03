@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { Deck } from "./Deck";
+import volumeButton from "@/assets/icons/sf_audio_button.svg";
+import "@/pages/Intruder/Intruder.scss";
 
 import styles from "./styles.module.css";
-import { IonText } from "@ionic/react";
+import { IonButton, IonText } from "@ionic/react";
 
 export const WouldDoWithAnimation: FC = () => {
   const { isImmersive } = useProfile();
@@ -63,6 +65,14 @@ export const WouldDoWithAnimation: FC = () => {
       </div>
       {/* Passing questionsData to the Deck component */}
       <Deck cards={questionsData} />
+      <div className="sound-button">
+        <IonButton
+          className="sound-button-background"
+          // onClick={() => handleWordAudioClick()}
+        >
+          <img className="sound-icon" src={volumeButton} />
+        </IonButton>
+      </div>
     </div>
   );
 };

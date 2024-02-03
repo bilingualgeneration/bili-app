@@ -44,7 +44,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
-            if (i == index) {
+            if (i === index) {
               return {
                 x: -22,
                 y: -70,
@@ -53,41 +53,15 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                 zIndex: 0,
                 delay: 0,
               };
-            } else if (i == (index + 1) % 5) {
-              return {
-                x: -2,
-                y: 10,
-                scale: 1,
-                rot: 0,
-                zIndex: 4,
-                delay: i * 100,
-              };
-            } else if (i == (index + 2) % 5) {
-              return {
-                x: -7,
-                y: -10,
-                scale: 1,
-                rot: 0,
-                zIndex: 3,
-                delay: i * 100,
-              };
-            } else if (i == (index + 3) % 5) {
-              return {
-                x: -12,
-                y: -30,
-                scale: 1,
-                rot: 0,
-                zIndex: 2,
-                delay: i * 100,
-              };
             } else {
+              const distance = (i - index + cards.length) % cards.length;
               return {
-                x: -17,
-                y: -50,
+                x: -2 - distance * 5,
+                y: 10 - distance * 20,
                 scale: 1,
                 rot: 0,
-                zIndex: 1,
-                delay: i * 100,
+                zIndex: cards.length - distance,
+                delay: distance * 100,
               };
             }
           });
@@ -134,7 +108,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               key={i}
               className={styles.card}
               style={{
-                backgroundColor: colors[i], // Set background color based on index
+                backgroundColor: colors[i % colors.length], // Cycle through colors
                 x, // Apply x position
                 y, // Apply y position (slight vertical offset)
                 zIndex, // Apply zIndex
@@ -146,10 +120,12 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               }}
             >
               <div className={styles.card_content}>
-                <h1 className={styles.es}>{cards[i].es}</h1>
+                <h1 className={styles.es}>{cards[i % cards.length].es}</h1>
                 {/* Render English content if not immersive */}
                 {!isImmersive && (
-                  <p className={styles.en_content}>{cards[i].en}</p>
+                  <p className={styles.en_content}>
+                    {cards[i % cards.length].en}
+                  </p>
                 )}
               </div>
             </animated.div>
