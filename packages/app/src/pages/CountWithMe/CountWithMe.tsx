@@ -96,9 +96,11 @@ export const CountWithMe: React.FC = () => {
     }
   }, [data, currentIndex]);
 
-  //logic  for choosing the correct animal number
+  //logic when the correct animal number is choosen
   useEffect(() => {
     if (isCorrectSelected) {
+      setShowCongrats(true);
+      goToNextAnimalGroup();
     }
   }, [isCorrectSelected]);
 
@@ -107,7 +109,7 @@ export const CountWithMe: React.FC = () => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
       if (index === getData.animalImages.length - 1) {
-        setAllAnimalsClicked(true);
+        setAllAnimalsClicked(true); //switches text from game question to count questions
       }
     }
 
@@ -150,7 +152,7 @@ export const CountWithMe: React.FC = () => {
       <></>
       // <IntruderCongrats
       //   setShowCongrats={setShowCongrats}
-      //   count={currentIndex + 1}
+      //
       // />
     );
   }
