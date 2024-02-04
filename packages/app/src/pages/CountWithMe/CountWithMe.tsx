@@ -46,21 +46,26 @@ export const CountWithMe: React.FC = () => {
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
-    boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+    WebkitFilter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
+    filter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
   };
 
   const correctStyle = {
     cursor: "pointer",
     borderRadius: "32px",
-    border: "8.4px solid var(--alerts-status-success, #12D18E)",
-    boxShadow: "0px 8.4px 25.2px 0px #12D18E",
+    WebkitFilter:
+      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+    filter:
+      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
   };
 
   const incorrectStyle = {
     cursor: "pointer",
     borderRadius: "32px",
-    border: "8.4px solid var(--Categories-Error, #F0091B)",
-    boxShadow: "0px 8.4px 25.2px 0px #F0091B",
+    WebkitFilter:
+      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+    filter:
+      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
   };
 
   //states
@@ -171,7 +176,7 @@ export const CountWithMe: React.FC = () => {
           }}
         />
       </>
-      // <CountCongrats
+      // <CountFacts
       //  factText = {factText}
       // factBackround = {factBackround}
       //
