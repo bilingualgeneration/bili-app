@@ -49,7 +49,7 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { WouldDoGame } from "@/pages/WouldDo";
+import { WouldDoGame, WouldDoWithAnimation } from "@/pages/WouldDo";
 
 import { PackSelect } from "@/components/PackSelect";
 
@@ -440,6 +440,18 @@ const Router: React.FC = () => {
             <AuthedLayout>
               <HeaderFooter background="#fbf2e2">
                 <WouldDoGame />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/would-do-with-animation/play/:pack_id"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#fbf2e2">
+                <WouldDoWithAnimation />
               </HeaderFooter>
             </AuthedLayout>
           )}
