@@ -129,10 +129,6 @@ export const Overview: React.FC = ({}) => {
 
   const intl = useIntl();
 
-  if (activeChildProfile === undefined) {
-    return <>loading</>;
-  }
-
   /*
      letterAvatarBackgroundColor="#f28ac9"
      letterAvatarTextColor="#973d78"
@@ -195,7 +191,7 @@ export const Overview: React.FC = ({}) => {
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow>
-              {childProfiles.map((p: any) => (
+              {childProfiles.map((p: any, index: number) => (
                 <IonCol
                   className="ion-padding"
                   size="6"
@@ -206,7 +202,7 @@ export const Overview: React.FC = ({}) => {
                 >
                   <ChildProfileCard
                     age={p.age}
-                    isActive={activeChildProfile.uid === p.uid}
+                    isActive={activeChildProfile === index}
                     letterAvatarBackgroundColor="#20bfb9"
                     letterAvatarTextColor="#ffffff"
                     name={p.name}
@@ -241,20 +237,6 @@ export const Overview: React.FC = ({}) => {
                   />
                 </p>
               </div>
-            </IonCol>
-
-            <IonCol size="auto">
-              <IonButton
-                disabled={true}
-                fill="clear"
-                id="settings-overview-see-all-button"
-              >
-                <FormattedMessage
-                  id="settings.overview.seeAll"
-                  defaultMessage="See all (9)"
-                  description="See all link in settings"
-                />
-              </IonButton>
             </IonCol>
           </IonRow>
 

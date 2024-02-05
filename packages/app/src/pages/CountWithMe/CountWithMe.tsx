@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+//import {CountFacts} from './CountFacts';
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -176,12 +177,14 @@ export const CountWithMe: React.FC = () => {
           }}
         />
       </>
-      // <CountFacts
-      //  factText = {factText}
-      // factBackround = {factBackround}
-      //
-      // />
     );
+    /*
+	<CountFacts
+          factText = {factText}
+	factBackround = {factBackround}
+	/>
+
+    */
   }
 
   // do a check if status === loading

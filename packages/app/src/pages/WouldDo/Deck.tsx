@@ -2,6 +2,8 @@ import React, { FC, useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
+import volumeButton from "@/assets/icons/sf_audio_button.svg";
+import { IonButton } from "@ionic/react";
 
 import styles from "./styles.module.css";
 import { off } from "firebase/database";
@@ -94,6 +96,9 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     },
   );
 
+  const handleWordAudioClick = () => {
+    console.log(cards[offset - 1]);
+  };
   return (
     <>
       <div className={styles.container}>
@@ -123,14 +128,20 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                 <h1 className={styles.es}>{cards[i % cards.length].es}</h1>
                 {/* Render English content if not immersive */}
                 {!isImmersive && (
-                  <p className={styles.en_content}>
-                    {cards[i % cards.length].en}
-                  </p>
+                  <p className="color-suelo">{cards[i % cards.length].en}</p>
                 )}
               </div>
             </animated.div>
           ),
         )}
+      </div>
+      <div className="sound-button">
+        <IonButton
+          className="sound-button-background"
+          onClick={handleWordAudioClick}
+        >
+          <img className="sound-icon" src={volumeButton} />
+        </IonButton>
       </div>
     </>
   );

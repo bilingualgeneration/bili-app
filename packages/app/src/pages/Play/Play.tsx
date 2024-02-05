@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { IonCard, IonCardContent } from "@ionic/react";
+import { IonCard, IonCardContent, IonText } from "@ionic/react";
 
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useIntl } from "react-intl";
 import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
-import FabricaWordmark from "@/assets/icons/fabrica_wordmark.png";
+import FactoryWidget from "@/assets/icons/factory_widget.png";
 import { FormattedMessage } from "react-intl";
 import { PlayHeader } from "@/components/PlayHeader";
+import { Link } from "react-router-dom";
 
 import "./Play.scss";
 
@@ -23,7 +24,16 @@ const StoryFactoryCard: FC = () => {
       }}
     >
       <div className="spreader"></div>
-      <img src={FabricaWordmark} />
+      <img src={FactoryWidget} />
+      <IonText>
+        <h1 className="ion-text-center">
+          <FormattedMessage
+            id="common.storyFactory"
+            defaultMessage="Story Factory!"
+            description="Standalone label for Story Factory"
+          />
+        </h1>
+      </IonText>
       {!isImmersive && <h2>Story Factory</h2>}
     </div>
   );
@@ -57,8 +67,17 @@ const IntruderCard: FC = () => {
 
 const CountCard: FC = () => {
   const { isImmersive } = useProfile();
+  const history = useHistory();
   return (
-    <div id="countCard" className="card">
+    <div
+      id="countCard"
+      className="card"
+      onClick={() => {
+        history.push(
+          "/count-with-me-game/play/58980273-c9e0-4a2e-ac8d-4f3a0553ff96",
+        );
+      }}
+    >
       <div className="spreader"></div>
       <h1>
         <FormattedMessage

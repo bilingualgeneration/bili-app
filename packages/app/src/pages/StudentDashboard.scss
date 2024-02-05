@@ -4,6 +4,11 @@
   }
 
   #wave-icons {
+    background-image: url("/assets/img/wave.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+    margin-right: 100px;
     .wave-icon {
       display: inline-block;
       text-align: center;

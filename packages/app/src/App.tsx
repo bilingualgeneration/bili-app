@@ -21,6 +21,7 @@ import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
 import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
 import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
 import Memory from "@/pages/games/Memory";
@@ -34,6 +35,7 @@ import {
 import { Debug } from "@/pages/Debug";
 import { FormattedMessage } from "react-intl";
 import { Play } from "@/pages/Play";
+import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
@@ -49,7 +51,14 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { WouldDoGame, WouldDoWithAnimation } from "@/pages/WouldDo";
+/*
+import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
+import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
+import { IntruderGame } from "@/pages/Intruder/IntruderGame";
+import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+
+*/
+import { WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 
 import { PackSelect } from "@/components/PackSelect";
 
@@ -77,6 +86,7 @@ import "@ionic/react/css/display.css";
 import "@/theme/variables.css";
 import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
+import "@/theme/text-classes.scss";
 
 setupIonicReact();
 
@@ -162,7 +172,19 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/count-with-me/play/:pack_id"
+          path="/community"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#f7faf9">
+                <Community />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/count-with-me-game/play/:pack_id"
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#f7faf9">
@@ -190,6 +212,18 @@ const Router: React.FC = () => {
             <UnauthedLayout>
               <ResetPassword />
             </UnauthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/tradein"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#f7faf9">
+                <Tradein />
+              </HeaderFooter>
+            </AuthedLayout>
           )}
         />
 
@@ -354,6 +388,30 @@ const Router: React.FC = () => {
 
         <Route
           exact
+          path="/would-do-game/intro"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <WouldDoIntro />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
+          path="/would-do-game/play/:pack_id"
+          render={() => (
+            <AuthedLayout>
+              <HeaderFooter background="#F7FAF9">
+                <WouldDoGame />
+              </HeaderFooter>
+            </AuthedLayout>
+          )}
+        />
+
+        <Route
+          exact
           path="/intruder/intro"
           render={() => (
             <AuthedLayout>
@@ -432,30 +490,6 @@ const Router: React.FC = () => {
             </AuthedLayout>
           )}
         />
-
-        <Route
-          exact
-          path="/would-do-game/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fbf2e2">
-                <WouldDoGame />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/would-do-with-animation/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fbf2e2">
-                <WouldDoWithAnimation />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
       </Switch>
     </IonReactRouter>
   );
@@ -466,6 +500,7 @@ const App: React.FC = () => {
     // set default language to device if not already set
     (async () => {
       const locale = await localStorage.getItem("userLocale");
+      //alert((await Device.getLanguageCode()).value);
       if (locale === null) {
         // no stored language
         localStorage.setItem(
