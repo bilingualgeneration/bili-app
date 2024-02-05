@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import "./ProfileChip.scss";
 
 export const ProfileChip: FC = () => {
-  const {
-    activeChildProfile: { name, completionPoints },
-  } = useChildProfile();
+  const { childProfiles, activeChildProfile } = useChildProfile();
+  const { completionPoints, name } = childProfiles[activeChildProfile];
+
   return (
     <Link to="/tradein">
       <div id="profileChip">

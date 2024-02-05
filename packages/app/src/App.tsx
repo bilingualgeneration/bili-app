@@ -184,7 +184,7 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/count-with-me/play/:pack_id"
+          path="/count-with-me-game/play/:pack_id"
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#f7faf9">

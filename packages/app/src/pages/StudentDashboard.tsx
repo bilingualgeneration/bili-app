@@ -14,7 +14,6 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import Joyride from "react-joyride";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useChildProfile } from "@/contexts/ChildProfileContext";
@@ -34,7 +33,6 @@ import Star from "@/assets/icons/star.svg?react";
 import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
-import { useReqdActions } from "@/contexts/ReqdActionsContext";
 
 import "./StudentDashboard.scss";
 
@@ -88,7 +86,6 @@ export const StudentDashboard: FC = () => {
   const {
     activeChildProfile: { name },
   } = useChildProfile();
-  const { reqdActions, setReqdActions } = useReqdActions();
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
@@ -120,39 +117,6 @@ export const StudentDashboard: FC = () => {
 
   return (
     <div id="student-landing-page">
-      {
-        /*reqdActions.showSettingsMessage && */ <Joyride
-          locale={{
-            close: (
-              <FormattedMessage
-                id="joyride.close"
-                defaultMessage="Close"
-                description="Button label to close Joyride"
-              />
-            ),
-          }}
-          callback={(data) => {
-            if (data.action === "close") {
-              const { showSettingsMessage, ...remainingReqdActions } =
-                reqdActions;
-              setReqdActions(remainingReqdActions);
-            }
-          }}
-          steps={[
-            {
-              target: "#footer_settings_button",
-              disableBeacon: true,
-              content: (
-                <FormattedMessage
-                  defaultMessage="Click here to customize your child's learning experience"
-                  description="Message informing user that they need to go to the settings page to complete their profile"
-                  id="reqdActions.goto_settings.message"
-                />
-              ),
-            },
-          ]}
-        />
-      }
       <div
         className="cards-title background-pattern"
         style={{

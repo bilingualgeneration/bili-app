@@ -28,6 +28,7 @@ export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const { setLocale } = useLanguage();
   const ref = doc(firestore, "users", user.data!.uid);
   const { status, data: profileData } = useFirestoreDocData(ref);
+
   useEffect(() => {
     if (profileData) {
       setLocale(profileData.language || "es");

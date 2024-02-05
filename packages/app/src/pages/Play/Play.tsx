@@ -8,6 +8,7 @@ import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
 import FactoryWidget from "@/assets/icons/factory_widget.png";
 import { FormattedMessage } from "react-intl";
 import { PlayHeader } from "@/components/PlayHeader";
+import { Link } from "react-router-dom";
 
 import "./Play.scss";
 
@@ -66,8 +67,17 @@ const IntruderCard: FC = () => {
 
 const CountCard: FC = () => {
   const { isImmersive } = useProfile();
+  const history = useHistory();
   return (
-    <div id="countCard" className="card">
+    <div
+      id="countCard"
+      className="card"
+      onClick={() => {
+        history.push(
+          "/count-with-me-game/play/58980273-c9e0-4a2e-ac8d-4f3a0553ff96",
+        );
+      }}
+    >
       <div className="spreader"></div>
       <h1>
         <FormattedMessage

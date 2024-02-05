@@ -39,9 +39,7 @@ export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
-  const {
-    activeChildProfile: { uid },
-  } = useChildProfile();
+  const { childProfiles, activeChildProfile } = useChildProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { isImmersive } = useProfile();
   const audio_es = new Audio(
@@ -59,7 +57,7 @@ export const IntruderCongrats: React.FC<{
       "user-child-profile-completion-add",
     );
     const data: any = {
-      uid,
+      uid: childProfiles[activeChildProfile].uid,
       module: "intruder",
       moduleAdd: 5,
       completionsAdd: 1,
