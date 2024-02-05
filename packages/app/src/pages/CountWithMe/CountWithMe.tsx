@@ -1,207 +1,300 @@
-import { CongratsPage } from "./CountCongrats";
-import { FactsPage } from "./CountFacts";
+import React, { FC, useEffect, useState } from "react";
+import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { IonButton, IonText } from "@ionic/react";
-
-interface Animal {
-  url: string;
-  x: number;
-  y: number;
-  rotation: number;
-}
-
-interface Prompt {
-  language: string;
-  text: string;
-}
-
-interface DataItem {
-  prompt: Prompt[];
-  image: string;
-  animals: Animal[];
-  fact: Prompt[];
-  map: string;
-}
-
-const FirstPage = (animalIndex: number, data: DataItem[]) => {
-  // Function to render the first page for each animal
-  return (
-    <>
-      <div
-        style={{
-          backgroundColor: "#F7FAF9",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "20px",
-            width: "1159px",
-            height: "800px",
-            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          <IonText>
-            <h1>{data[animalIndex].prompt[0].text}</h1>
-            <p>{data[animalIndex].prompt[1].text}</p>
-          </IonText>
-          <img
-            src={data[animalIndex].image}
-            alt={`animal-${animalIndex}`}
-            style={{ width: "100%" }}
-          />
-
-          {data[animalIndex].animals.map(
-            (
-              animal,
-              index, // Maps through animals array and renders each animal on the page
-            ) => (
-              <img
-                key={index}
-                src={animal.url}
-                alt={`animal-${index}`}
-                style={{
-                  position: "absolute", // Position each animal absolutely
-                  top: `${animal.y}px`, // hard-coded y position
-                  left: `${animal.x}px`, // hard-coded x position
-                }}
-              />
-            ),
-          )}
-        </div>
-      </div>
-    </>
-  );
-};
+import { useProfile } from "@/contexts/ProfileContext";
+import { useParams } from "react-router-dom";
+import { useFirestore, useFirestoreDocData } from "reactfire";
+import { doc } from "firebase/firestore";
+import { any, string } from "zod";
+import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
+import correct_card_audio from "@/assets/audio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
+import "./countWithMe.scss";
 
 export const CountWithMe: React.FC = () => {
-  const data: DataItem[] = [
-    {
-      prompt: [
-        // birds count
-        {
-          language: "es",
-          text: "¿Cuántos colibrís hay? Haz clic en cada colibrí para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many hummingbirds are there? Tap on each hummingbird to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      image:
-        "https://ik.imagekit.io/jskeetedev/background%20rainforest%201.png?updatedAt=1706319203925", // background image from imagekit
-      animals: [
-        // each animal is an object with an image url, x and y coordinates, and a rotation value set to 0
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206962.png?updatedAt=1706501413743",
-          x: 60,
-          y: 400,
-          rotation: 0,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206963.png?updatedAt=1706501413594",
-          x: 260,
-          y: 300,
-          rotation: 0,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206964.png?updatedAt=1706501397998",
-          x: 500,
-          y: 500,
-          rotation: 0,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Group%206965.png?updatedAt=1706501398083",
-          x: 740,
-          y: 300,
-          rotation: 0,
-        },
-      ],
-      fact: [
-        {
-          language: "es",
-          text: "¿El colibrí es originario de las Américas. Se pueden encontrar muchos colibrís a lo largo de América Central y del Sur.",
-        },
-        {
-          language: "en",
-          text: "The hummingbird is native to the Americas. Many hummingbirds can be found across Central and South America",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      map: "https://ik.imagekit.io/jskeetedev/Screenshot%202024-02-01%20at%202.11%20Background%20Removed.05%E2%80%AFPM.png?updatedAt=1706816649130",
-    },
-    {
-      prompt: [
-        // dolphins count
-        {
-          language: "es",
-          text: "¿Cuántos delfines rosados hay? Haz clic en cada delfin rosado para contarlos.",
-        },
-        {
-          language: "en",
-          text: "How many river dolphins are there? Tap on each river dolphin to count them.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      image:
-        "https://ik.imagekit.io/jskeetedev/background%20rainforest%201-2.png?updatedAt=1706319993691", // background image from imagekit
-      animals: [
-        // each animal is an object with an image url, x and y coordinates, and a rotation value set to 0
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Layer%202%202.png?updatedAt=1706501398136",
-          x: 20,
-          y: 430,
-          rotation: 0,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/Layer%203%202.png?updatedAt=1706501398150",
-          x: 500,
-          y: 500,
-          rotation: 0,
-        },
-        {
-          url: "https://ik.imagekit.io/jskeetedev/dolphin%203%201.png?updatedAt=1706501397958",
-          x: 680,
-          y: 420,
-          rotation: 0,
-        },
-      ],
-      fact: [
-        {
-          language: "es",
-          text: "¿El delfín rosado también es conocido como “boto”, “bufeo” o “delfín rosado de río”. Se pueden encontrar en los ríos de la selva amazónica y son de color rosa o gris.",
-        },
-        {
-          language: "en",
-          text: "The river dolphin is also known as the boto, bufeo, or pink river dolphin. They can be found in the rivers of the Amazon rainforest and are a pink or grey color.",
-        },
-        { language: "es-inc", text: "" },
-      ],
-      map: "https://ik.imagekit.io/jskeetedev/Untitled%20design_Se4AWpbwQ.png?updatedAt=1706817834245",
-    },
-  ];
+  const { isImmersive } = useProfile();
+  //@ts-ignore
+  const { pack_id } = useParams();
+  const firestore = useFirestore();
 
-  const animals = { hummingbirds: 0, dolphins: 1 };
+  //Firestore operations
+  const ref = doc(firestore, "count-with-me-game", pack_id);
+  const { status, data } = useFirestoreDocData(ref);
 
-  // Array of pages to render
-  const pages = [
-    FirstPage(animals.hummingbirds, data),
-    FirstPage(animals.dolphins, data),
-    FactsPage(animals.hummingbirds, data),
-    FactsPage(animals.dolphins, data),
-    CongratsPage(),
-  ];
+  const [getData, setData] = useState<{
+    animalImages: any[];
+    gameQuestions: any[];
+    countQuestions: any[];
+    gameBackground: any;
+    factBackground: any;
+    factText: any[];
+  }>({
+    animalImages: [],
+    gameQuestions: [],
+    countQuestions: [],
+    gameBackground: any,
+    factBackground: any,
+    factText: [],
+  });
 
-  return pages[4];
+  //audio files
+  const audio_correct = new Audio(correct_card_audio);
+  const audio_incorrect = new Audio(incorrect_card_audio);
+  const card_flip = new Audio(card_flip_audio);
+
+  //styles for correct or incorrect choice
+  const initialStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    WebkitFilter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
+    filter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
+  };
+
+  const correctStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    WebkitFilter:
+      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+    filter:
+      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+  };
+
+  const incorrectStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    WebkitFilter:
+      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+    filter:
+      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+  };
+
+  //states
+  const [animalColors, setAnimalColors] = useState<{ [key: string]: any }>({});
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
+  const [showNumber, setSHowNumber] = useState(false);
+  const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
+  const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [data]);
+
+  const goToNextAnimalGroup = () => {
+    // Check if the current index is at the last element of the word_group array
+    if (currentIndex >= data.groups.length - 1) {
+      setCurrentIndex(0); // Reset to the first element
+    } else {
+      setCurrentIndex(currentIndex + 1); // Move to the next element
+    }
+  };
+
+  useEffect(() => {
+    if (data !== undefined) {
+      const animalGroup = data.groups[currentIndex];
+
+      const countGameData = {
+        animalImages: animalGroup.animals,
+        gameQuestions: animalGroup.game_text,
+        countQuestions: animalGroup.counting_text,
+        gameBackground: animalGroup.game_background_image,
+        factBackground: animalGroup.fact_background_image,
+        factText: animalGroup.fact_text,
+      };
+
+      setData(countGameData);
+    }
+  }, [data, currentIndex]);
+
+  //logic when the correct animal number is choosen
+  useEffect(() => {
+    if (isCorrectSelected) {
+      setShowCongrats(true);
+      goToNextAnimalGroup();
+    }
+  }, [isCorrectSelected]);
+
+  //function to handle bird click order
+  const handleBirdClickOrder = (index: number) => {
+    if (!clickedIndexes.includes(index)) {
+      setClickedIndexes([...clickedIndexes, index]);
+      if (index === getData.animalImages.length - 1) {
+        setAllAnimalsClicked(true); //switches text from game question to count questions
+      }
+    }
+
+    //next step happens only when all images were clicked
+    if (clickedIndexes.length === getData.animalImages.length) {
+      if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
+        //logic for the incorrect number
+        audio_incorrect.play(); //plays audio for incorrect choice
+        setAnimalColors((prevColors: any) => ({
+          ...prevColors,
+          [getData.animalImages[index].image.id]: {
+            ...incorrectStyle,
+            animation: "shake 1s",
+          },
+        }));
+
+        setTimeout(() => {
+          setAnimalColors((prevColors: any) => ({
+            ...prevColors,
+            [getData.animalImages[index].image.id]: initialStyle,
+          }));
+        }, 1000);
+      } else {
+        //logic when the correct card is choosen
+        audio_correct.play(); //plays audio for correct choice
+        setAnimalColors((prevColors: any) => ({
+          ...prevColors,
+          [getData.animalImages[index].image.id]: correctStyle,
+        }));
+
+        setTimeout(() => {
+          setIsCorrectSelected(true);
+        }, 1000);
+      }
+    }
+  };
+
+  if (showCongrats) {
+    return (
+      <>
+        <h1>{getData.factText[1].text}</h1>
+        {!isImmersive && (
+          <p className="count-english-text-style">{getData.factText[0].text}</p>
+        )}
+        <img
+          src={getData.factBackground.url}
+          alt="animals"
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: "32px",
+            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+          }}
+        />
+      </>
+      // <CountFacts
+      //  factText = {factText}
+      // factBackround = {factBackround}
+      //
+      // />
+    );
+  }
+
+  // do a check if status === loading
+
+  if (status === "loading") {
+    return (
+      <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
+    );
+  }
+
+  if (status === "error") {
+    return "Error loading the game";
+  }
+
+  return (
+    <div
+      style={{
+        backgroundColor: "#F7FAF9",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "20px",
+          width: "1159px",
+          height: "800px",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          padding: "20px",
+        }}
+      >
+        <IonText>
+          {getData.gameQuestions.length > 0 &&
+            getData.countQuestions.length > 0 && (
+              <>
+                {allAnimalsClicked ? (
+                  <>
+                    <h1>{getData.countQuestions[1].text}</h1>
+                    {!isImmersive && (
+                      <p className="count-english-text-style">
+                        {getData.countQuestions[0].text}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <h1>{getData.gameQuestions[1].text}</h1>
+                    {!isImmersive && (
+                      <p className="count-english-text-style">
+                        {getData.gameQuestions[0].text}
+                      </p>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+        </IonText>
+        <img
+          src={getData.gameBackground.url}
+          alt="hummingbirds"
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: "32px",
+            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+          }}
+        />
+
+        {/* Overlay animals */}
+        {getData.animalImages.map((animal, index) => (
+          <div
+            key={index}
+            style={{
+              position: "absolute",
+              top: `${animal.coordinate_y}px`,
+              left: `${animal.coordinate_x}px`,
+              cursor: "pointer",
+            }}
+            onClick={() => handleBirdClickOrder(index)}
+          >
+            <img
+              className="image-count-with-me-style"
+              src={animal.image.url}
+              alt={`animal-${index}`}
+              style={animalColors[animal.image.id]}
+            />
+            {clickedIndexes.includes(index) && (
+              <div
+                className="number-overlay"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                  fontSize: "33px",
+                  fontWeight: "700",
+                }}
+              >
+                {clickedIndexes.indexOf(index) + 1}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };

@@ -4,17 +4,21 @@ import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
+import { httpsCallable } from "firebase/functions";
+import { useChildProfile } from "@/contexts/ChildProfileContext";
+import { useFunctions } from "reactfire";
+
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
 
-import audio_5_en from "@/assets/audio/intruder_congrats_5_en.mp3";
-import audio_10_en from "@/assets/audio/intruder_congrats_10_en.mp3";
-import audio_20_en from "@/assets/audio/intruder_congrats_20_en.mp3";
-import audio_all_en from "@/assets/audio/intruder_congrats_all_en.mp3";
-import audio_5_es from "@/assets/audio/intruder_congrats_5_es.mp3";
-import audio_10_es from "@/assets/audio/intruder_congrats_10_es.mp3";
-import audio_20_es from "@/assets/audio/intruder_congrats_20_es.mp3";
-import audio_all_es from "@/assets/audio/intruder_congrats_all_es.mp3";
+import audio_5_en from "@/assets/audio/IntruderAudio/intruder_congrats_5_en.mp3";
+import audio_10_en from "@/assets/audio/IntruderAudio/intruder_congrats_10_en.mp3";
+import audio_20_en from "@/assets/audio/IntruderAudio/intruder_congrats_20_en.mp3";
+import audio_all_en from "@/assets/audio/IntruderAudio/intruder_congrats_all_en.mp3";
+import audio_5_es from "@/assets/audio/IntruderAudio/intruder_congrats_5_es.mp3";
+import audio_10_es from "@/assets/audio/IntruderAudio/intruder_congrats_10_es.mp3";
+import audio_20_es from "@/assets/audio/IntruderAudio/intruder_congrats_20_es.mp3";
+import audio_all_es from "@/assets/audio/IntruderAudio/intruder_congrats_all_es.mp3";
 
 const sounds: any = {
   en: {
@@ -35,6 +39,9 @@ export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
+  const {
+    activeChildProfile: { uid },
+  } = useChildProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { isImmersive } = useProfile();
   const audio_es = new Audio(
@@ -43,6 +50,23 @@ export const IntruderCongrats: React.FC<{
   const audio_en = new Audio(
     sounds.en[count === -1 ? "all" : count.toString()],
   );
+  const functions = useFunctions();
+
+  useEffect(() => {
+    // increment number of completions
+    const completionFunction = httpsCallable(
+      functions,
+      "user-child-profile-completion-add",
+    );
+    const data: any = {
+      uid,
+      module: "intruder",
+      moduleAdd: 5,
+      completionsAdd: 1,
+    };
+    completionFunction(data);
+  }, []);
+
   useEffect(() => {
     return () => {
       audio_es.pause();

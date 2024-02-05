@@ -22,14 +22,16 @@ import "./Preferences.css";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
-  const { isImmersive, isInclusive, language = "es", uid } = useProfile();
+  const { isImmersive, isInclusive, settingsLanguage, uid } = useProfile();
   const firestore = useFirestore();
   const ref = doc(firestore, "users", uid);
+  // TODO: we shouldn't allow this straight from the app
   const updateProfile = (key: string, value: any) => {
     updateDoc(ref, {
       [key]: value,
     });
   };
+
   return (
     <>
       <IonList className="preferences-style">
@@ -61,16 +63,16 @@ export const Preferences: React.FC = () => {
             placeholder="English"
             interface="popover"
             toggleIcon={chevronForward}
-            value={language}
+            value={settingsLanguage}
             onIonChange={(event) => {
-              updateProfile("language", event.target.value);
+              updateProfile("settingsLanguage", event.target.value);
             }}
           >
             <div className="label-style" slot="label">
               <h4>
                 <FormattedMessage
                   id="settingsProgress.preferences.settingsLanguage"
-                  defaultMessage="Settings language"
+                  defaultMessage="Settings Language"
                   description="Preferences page 'settings language' text"
                 />
               </h4>
@@ -85,7 +87,7 @@ export const Preferences: React.FC = () => {
             content={intl.formatMessage({
               id: "settingsProgress.preferences.popover2",
               defaultMessage:
-                "Choose the language mode for your child's experience in the app. Bilingual means your child will see the content in English and Spanish. Immersion means your child will only see the content in Spanish.",
+                "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish.",
               description:
                 "Description of the language mode for your child's experience in the app",
             })}
@@ -153,7 +155,7 @@ export const Preferences: React.FC = () => {
               id: "settingsProgress.preferences.popover4",
               defaultMessage:
                 "Determine how long your child plays on the app each day.",
-              description: "Daily playtime limit",
+              description: "Daily Playtime Limit",
             })}
             trigger="click-trigger4"
           />
@@ -200,7 +202,7 @@ export const Preferences: React.FC = () => {
               <h4>
                 <FormattedMessage
                   id="settingsProgress.preferences.sound"
-                  defaultMessage="Sound effects"
+                  defaultMessage="Sound Effects"
                   description="Preferences page 'Sound effects' text"
                 />
               </h4>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -19,18 +20,25 @@ import { useProfile } from "@/contexts/ProfileContext";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
-import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
-import correct_card_audio from "@/assets/audio/intruder_correct.wav";
-import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
-import instruction_en_audio from "@/assets/audio/intruder_game_instruction_en.mp3";
-import instruction_es_audio from "@/assets/audio/intruder_game_instruction_es.mp3";
-import "./Intruder.scss";
+import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
+import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
+import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
+import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
+import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { IntruderCongrats } from "./IntruderCongrats";
+import "./Intruder.scss";
+import "../../theme/animate.scss";
+import { card } from "ionicons/icons";
 
 interface BiliImage {
+  url: string;
+}
+
+interface BiliAudio {
   url: string;
 }
 
@@ -38,10 +46,13 @@ interface Game {
   word_group: Array<{
     intruder_text: string;
     intruder_image: BiliImage;
+    intruder_audio: any;
     word_2_text: string;
     word_2_image: BiliImage;
+    word_2_audio: BiliAudio;
     word_3_text: string;
     word_3_image: BiliImage;
+    word_3_audio: BiliAudio;
   }>;
 }
 
@@ -103,6 +114,13 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     zIndex: "2",
   };
 
+  const temporaryAudioPlayingStyle = {
+    borderRadius: "32px",
+    border: "8.4px solid var(--Base-Hover-Shadow, rgba(0, 0, 0, 0.08))",
+    background: "#FFF",
+    boxShadow: "0px 8.4px 25.2px 7px rgba(0, 0, 0, 0.60)",
+  };
+
   const [cardColors, setCardColors] = useState<any>({
     "1": initialStyle,
     "2": initialStyle,
@@ -110,7 +128,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   });
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [showBackside, setShowBackside] = useState(false);
-  const [currentCardSet, setCurrentCardSet] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
@@ -135,9 +152,20 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
         image: wordGroup.intruder_image,
         isIntruder: true,
         id: "1",
+        audio: wordGroup.intruder_audio[0],
       },
-      { word: wordGroup.word_2_text, image: wordGroup.word_2_image, id: "2" },
-      { word: wordGroup.word_3_text, image: wordGroup.word_3_image, id: "3" },
+      {
+        word: wordGroup.word_2_text,
+        image: wordGroup.word_2_image,
+        id: "2",
+        audio: wordGroup.word_2_audio,
+      },
+      {
+        word: wordGroup.word_3_text,
+        image: wordGroup.word_3_image,
+        id: "3",
+        audio: wordGroup.word_3_audio,
+      },
     ];
     return shuffleArray(cards);
   }, [data, currentIndex]);
@@ -198,11 +226,33 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     }
   };
 
+  //function for the button playing audio for the cards text
+  const handleWordAudioClick = async () => {
+    for (const card of shuffledCards) {
+      const wordAudio = new Audio(card.audio.url);
+      await new Promise<void>((resolve) => {
+        wordAudio.onended = () => {
+          setCardColors((prevColors: any) => ({
+            ...prevColors,
+            [card.id]: initialStyle,
+          }));
+          resolve();
+        };
+        wordAudio.play();
+
+        setCardColors((prevColors: any) => ({
+          ...prevColors,
+          [card.id]: temporaryAudioPlayingStyle,
+        }));
+      });
+    }
+  };
+
   if (showCongrats) {
     return (
       <IntruderCongrats
         setShowCongrats={setShowCongrats}
-        count={currentIndex + 1}
+        count={currentIndex}
       />
     );
   }
@@ -230,6 +280,14 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
               )}
             </IonCard>
           ))}
+        </div>
+        <div className="sound-button">
+          <IonButton
+            className="sound-button-background"
+            onClick={() => handleWordAudioClick()}
+          >
+            <img className="sound-icon" src={volumeButton} />
+          </IonButton>
         </div>
       </div>
     </>

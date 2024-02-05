@@ -1,7 +1,5 @@
 import { FC, useEffect } from "react";
 import { useIntl, FormattedMessage } from "react-intl";
-import { locales } from "@/components/I18nWrapper";
-import type { locale } from "@/components/I18nWrapper";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Select } from "@/components/Select";
 import { z } from "zod";
@@ -18,11 +16,12 @@ export const LanguageSwitcher: FC = () => {
   type schemaType = z.infer<typeof schema>;
   const { control } = useForm<schemaType>({
     defaultValues: {
-      isSpanish: locale === "es",
+      isSpanish: locale.substring(0, 2) === "es",
     },
     mode: "onChange",
     resolver: zodResolver(schema),
   });
+
   const isSpanish: boolean = useWatch({
     control,
     name: "isSpanish",

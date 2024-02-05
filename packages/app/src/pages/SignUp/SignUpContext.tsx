@@ -1,5 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { useAuth, useFunctions } from "reactfire";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
 
@@ -19,6 +20,7 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
   const [data, setData] = useState({});
   const [page, setPage] = useState<string[]>(["roleSelect"]);
   const [signUpStatus, setSignUpStatus] = useState("idle");
+  const { locale } = useLanguage();
   const auth = useAuth();
   const functions = useFunctions();
   const signupFunction = httpsCallable(functions, "user-signup");
@@ -26,7 +28,7 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
     setSignUpStatus("busy");
     await signupFunction({
       ...data,
-      language: "es",
+      settingsLanguage: locale,
     });
     // @ts-ignore
     await signInWithEmailAndPassword(auth, data.email, data.password);
