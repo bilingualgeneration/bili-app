@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { any, string } from "zod";
-import incorrect_card_audio from "@/assets/audio/intruder_incorrect.wav";
-import correct_card_audio from "@/assets/audio/intruder_correct.wav";
-import card_flip_audio from "@/assets/audio/intruder_card_flip.wav";
+import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
+import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
+import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
 import "./countWithMe.scss";
 
 export const CountWithMe: React.FC = () => {
