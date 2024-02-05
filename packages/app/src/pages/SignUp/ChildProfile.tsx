@@ -39,7 +39,13 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">Below 3 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.age.lessThan3"
+              defaultMessage="Below 3 years old"
+              description="Age Range for below 3 years old"
+            />
+          </IonRadio>
         </div>
       ),
       value: "<3",
@@ -47,7 +53,13 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">3-5 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.age.3to5"
+              defaultMessage="3-5 years old"
+              description="Age Range for 3-5 years old"
+            />
+          </IonRadio>
         </div>
       ),
       value: "3-5",
@@ -55,7 +67,13 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">5-7 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.age.5to7"
+              defaultMessage="5-7 years old"
+              description="Age Range for 5-7 years old"
+            />
+          </IonRadio>
         </div>
       ),
       value: "5-7",
@@ -63,7 +81,13 @@ export const ChildProfile: FC = () => {
     {
       component: (
         <div>
-          <IonRadio labelPlacement="end">Above 7 years old</IonRadio>
+          <IonRadio labelPlacement="end">
+            <FormattedMessage
+              id="childProfile.age.above7"
+              defaultMessage="Above 7 years old"
+              description="Age Range for above 7 years old"
+            />
+          </IonRadio>
         </div>
       ),
       value: ">7",

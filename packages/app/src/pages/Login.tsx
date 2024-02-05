@@ -1,10 +1,6 @@
-import { DividerText } from "@/components/DividerText";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { userSchema } from "@bili/schema/user";
-
-import AppleIcon from "@/assets/icons/apple.svg?react";
-import GoogleIcon from "@/assets/icons/google.svg?react";
 
 import React from "react";
 import { useAuth, useSigninCheck } from "reactfire";
@@ -13,23 +9,8 @@ import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Auth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  getAuth,
-} from "firebase/auth";
+import { Auth, signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
-
-const signOut = (auth: { isAuthed?: boolean; user?: null; signOut?: any }) => {
-  auth.signOut();
-};
-
-const signInWithGoogle = async (auth: Auth) => {
-  const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
-};
 
 const handleEmailPasswordSignIn = async (
   auth: Auth,
@@ -114,51 +95,6 @@ const Login: React.FC = () => {
                   type="password"
                 />
               </div>
-
-              <DividerText
-                className="ion-margin-top"
-                text={intl.formatMessage({
-                  id: "login.divider",
-                  defaultMessage: "or",
-                  description: "text to show between options",
-                })}
-              />
-
-              <IonButton
-                color="medium"
-                className="ion-margin-top"
-                disabled
-                expand="block"
-                fill="outline"
-                style={{ opacity: 0.2 }}
-              >
-                <span style={{ marginRight: "1rem" }}>
-                  <GoogleIcon />
-                </span>{" "}
-                <FormattedMessage
-                  id="common.google"
-                  defaultMessage="Continue with Google"
-                  description="Button label to use Google"
-                />
-              </IonButton>
-
-              <IonButton
-                color="medium"
-                className="ion-margin-top"
-                disabled
-                expand="block"
-                fill="outline"
-                style={{ opacity: 0.2 }}
-              >
-                <span style={{ marginRight: "1rem" }}>
-                  <AppleIcon />
-                </span>
-                <FormattedMessage
-                  id="common.apple"
-                  defaultMessage="Continue with Apple"
-                  description="Button label to use Apple"
-                />
-              </IonButton>
 
               <div className="ion-margin-top">
                 <IonButton

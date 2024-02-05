@@ -112,7 +112,7 @@ export const StudentDashboard: FC = () => {
     {
       reactintlId: "common.community",
       englishLabel: "community",
-      link: "/would-do-game/select",
+      link: "/community",
       backgroundColor: "#23beb9",
       icon: <CommunityIcon />,
     },
@@ -120,8 +120,8 @@ export const StudentDashboard: FC = () => {
 
   return (
     <div id="student-landing-page">
-      {reqdActions.showSettingsMessage && (
-        <Joyride
+      {
+        /*reqdActions.showSettingsMessage && */ <Joyride
           locale={{
             close: (
               <FormattedMessage
@@ -140,9 +140,8 @@ export const StudentDashboard: FC = () => {
           }}
           steps={[
             {
-              target: "body",
+              target: "#footer_settings_button",
               disableBeacon: true,
-              placement: "center",
               content: (
                 <FormattedMessage
                   defaultMessage="Click here to customize your child's learning experience"
@@ -153,7 +152,7 @@ export const StudentDashboard: FC = () => {
             },
           ]}
         />
-      )}
+      }
       <div
         className="cards-title background-pattern"
         style={{
@@ -185,11 +184,15 @@ export const StudentDashboard: FC = () => {
           </IonText>
         </div>
         {/* icons */}
-        <div id="wave-icons" style={{ marginTop: "4rem", paddingRight: 100 }}>
+        <div id="wave-icons" style={{ marginTop: "4rem" }}>
           <IonGrid>
             <IonRow>
               {icons.map((icon) => (
-                <IonCol key={icon.reactintlId} className="ion-text-center">
+                <IonCol
+                  key={icon.reactintlId}
+                  className="ion-text-center"
+                  size="3"
+                >
                   <WaveIcon {...icon} />
                 </IonCol>
               ))}
@@ -471,15 +474,17 @@ export const StudentDashboard: FC = () => {
         <br />
         {/* Comunidad */}
         <div className="other-story-cards">
-          <IonText>
-            <h1 className="color-selva">
-              <FormattedMessage
-                id="common.community"
-                defaultMessage="Community"
-              />
-            </h1>
-            {!isImmersive && <h2>Community</h2>}
-          </IonText>
+          <Link to="/community" className="no-text-decoration">
+            <IonText>
+              <h1 className="color-selva">
+                <FormattedMessage
+                  id="common.community"
+                  defaultMessage="Community"
+                />
+              </h1>
+              {!isImmersive && <h2>Community</h2>}
+            </IonText>
+          </Link>
 
           <div
             className="hide-scrollbar"

@@ -242,20 +242,6 @@ export const Overview: React.FC = ({}) => {
                 </p>
               </div>
             </IonCol>
-
-            <IonCol size="auto">
-              <IonButton
-                disabled={true}
-                fill="clear"
-                id="settings-overview-see-all-button"
-              >
-                <FormattedMessage
-                  id="settings.overview.seeAll"
-                  defaultMessage="See all (9)"
-                  description="See all link in settings"
-                />
-              </IonButton>
-            </IonCol>
           </IonRow>
 
           <div className="child-profile-content">

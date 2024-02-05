@@ -15,7 +15,6 @@ ion-toolbar.settings-toolbar {
 
 .bili-logo-settings-page {
   display: flex;
-  padding-left: 50%;
   justify-content: center;
   align-items: center;
   flex: 1 0 0;
