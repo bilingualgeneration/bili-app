@@ -466,6 +466,7 @@ const App: React.FC = () => {
     // set default language to device if not already set
     (async () => {
       const locale = await localStorage.getItem("userLocale");
+      alert((await Device.getLanguageCode()).value);
       if (locale === null) {
         // no stored language
         localStorage.setItem(
