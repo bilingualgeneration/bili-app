@@ -1,27 +1,37 @@
+import { useProfile } from "@/contexts/ProfileContext";
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
+import "./countWithMe.scss";
+// interface Animal {
+//   url: string;
+//   x: number;
+//   y: number;
+//   rotation: number;
+// }
 
-interface Animal {
-  url: string;
-  x: number;
-  y: number;
-  rotation: number;
+// interface Prompt {
+//   language: string;
+//   text: string;
+// }
+
+// interface DataItem {
+//   prompt: Prompt[];
+//   image: string;
+//   animals: Animal[];
+//   fact: Prompt[];
+//   map: string;
+// }
+
+interface FactsPageProps {
+  factText: any[]; // Adjust the type according to what factText actually contains
+  factBackground: string;
 }
 
-interface Prompt {
-  language: string;
-  text: string;
-}
-
-interface DataItem {
-  prompt: Prompt[];
-  image: string;
-  animals: Animal[];
-  fact: Prompt[];
-  map: string;
-}
-
-export const FactsPage = (animalIndex: number, data: DataItem[]) => {
+export const FactsPage: React.FC<FactsPageProps> = ({
+  factText,
+  factBackground,
+}) => {
+  const { isImmersive } = useProfile();
   // Function to render the facts page for each animal
   return (
     <>
@@ -60,8 +70,10 @@ export const FactsPage = (animalIndex: number, data: DataItem[]) => {
             }}
           >
             <IonText>
-              <h2>{data[animalIndex].fact[0].text}</h2>
-              <p>{data[animalIndex].fact[1].text}</p>
+              <h1>{factText[1].text}</h1>
+              {!isImmersive && (
+                <p className="count-english-text-style">{factText[0].text}</p>
+              )}
             </IonText>
           </div>
 
@@ -76,8 +88,8 @@ export const FactsPage = (animalIndex: number, data: DataItem[]) => {
             }}
           >
             <img
-              src={data[animalIndex].map}
-              alt={`animal-${animalIndex}`}
+              src={factBackground}
+              alt={factText[0].text}
               style={{ width: "100%", height: "100%" }}
             />
           </div>

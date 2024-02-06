@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
+import { FactsPage } from "./CountFacts";
 import { doc } from "firebase/firestore";
 import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
@@ -161,30 +162,28 @@ export const CountWithMe: React.FC = () => {
 
   if (showCongrats) {
     return (
-      <>
-        <h1>{getData.factText[1].text}</h1>
-        {!isImmersive && (
-          <p className="count-english-text-style">{getData.factText[0].text}</p>
-        )}
-        <img
-          src={getData.factBackground.url}
-          alt="animals"
-          style={{
-            width: "100%",
-            cursor: "pointer",
-            borderRadius: "32px",
-            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-          }}
-        />
-      </>
-    );
-    /*
-	<CountFacts
-          factText = {factText}
-	factBackround = {factBackround}
-	/>
+      // <>
+      //   <h1>{getData.factText[1].text}</h1>
+      //   {!isImmersive && (
+      //     <p className="count-english-text-style">{getData.factText[0].text}</p>
+      //   )}
+      //   <img
+      //     src={getData.factBackground.url}
+      //     alt="animals"
+      //     style={{
+      //       width: "100%",
+      //       cursor: "pointer",
+      //       borderRadius: "32px",
+      //       boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+      //     }}
+      //   />
+      // </>
 
-    */
+      <FactsPage
+        factText={getData.factText}
+        factBackground={getData.factBackground.url}
+      />
+    );
   }
 
   // do a check if status === loading
