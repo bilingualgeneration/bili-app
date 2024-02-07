@@ -77,7 +77,7 @@ export const CountWithMe: React.FC = () => {
   const [showNumber, setSHowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
-  const [showCongrats, setShowCongrats] = useState<boolean>(false);
+  const [showFacts, setShowFacts] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -112,8 +112,8 @@ export const CountWithMe: React.FC = () => {
   //logic when the correct animal number is choosen
   useEffect(() => {
     if (isCorrectSelected) {
-      setShowCongrats(true);
       goToNextAnimalGroup();
+      setShowFacts(true);
     }
   }, [isCorrectSelected]);
 
@@ -160,16 +160,15 @@ export const CountWithMe: React.FC = () => {
     }
   };
 
-  if (showCongrats) {
+  //show next page if showCongrats(true)
+  if (showFacts) {
     return (
-      //       width: "100%",
-      //       cursor: "pointer",
-      //       borderRadius: "32px",
-      //       boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-
       <FactsPage
         factText={getData.factText}
         factBackground={getData.factBackground.url}
+        onKeepGoingClick={() => {
+          setShowFacts(false);
+        }}
       />
     );
   }
