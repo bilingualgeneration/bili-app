@@ -70,9 +70,9 @@ export const FactsPage: React.FC<FactsPageProps> = ({
             }}
           >
             <IonText>
-              <h1>{factText[1].text}</h1>
+              <h1 className="fact-spanish-text-style">{factText[1].text}</h1>
               {!isImmersive && (
-                <p className="count-english-text-style">{factText[0].text}</p>
+                <p className="fact-english-text-style">{factText[0].text}</p>
               )}
             </IonText>
           </div>

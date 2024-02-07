@@ -162,22 +162,10 @@ export const CountWithMe: React.FC = () => {
 
   if (showCongrats) {
     return (
-      // <>
-      //   <h1>{getData.factText[1].text}</h1>
-      //   {!isImmersive && (
-      //     <p className="count-english-text-style">{getData.factText[0].text}</p>
-      //   )}
-      //   <img
-      //     src={getData.factBackground.url}
-      //     alt="animals"
-      //     style={{
       //       width: "100%",
       //       cursor: "pointer",
       //       borderRadius: "32px",
       //       boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-      //     }}
-      //   />
-      // </>
 
       <FactsPage
         factText={getData.factText}
@@ -229,7 +217,9 @@ export const CountWithMe: React.FC = () => {
               <>
                 {allAnimalsClicked ? (
                   <>
-                    <h1>{getData.countQuestions[1].text}</h1>
+                    <h1 className="count-spanish-text-style">
+                      {getData.countQuestions[1].text}
+                    </h1>
                     {!isImmersive && (
                       <p className="count-english-text-style">
                         {getData.countQuestions[0].text}
@@ -286,12 +276,12 @@ export const CountWithMe: React.FC = () => {
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  color: "white",
-                  fontSize: "33px",
+                  color: `${animal.text_color}`,
+                  fontSize: "127px",
                   fontWeight: "700",
                 }}
               >
-                {clickedIndexes.indexOf(index) + 1}
+                <span>{clickedIndexes.indexOf(index) + 1}</span>
               </div>
             )}
           </div>
