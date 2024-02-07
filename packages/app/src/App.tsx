@@ -16,7 +16,6 @@ import AuthedLayout from "@/layouts/Authed";
 import { CountWithMe } from "@/pages/CountWithMe/CountWithMe";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { I18nWrapper } from "@/components/I18nWrapper";
-import Intruder from "@/pages/games/Intruder";
 import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
 import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
@@ -24,7 +23,6 @@ import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
 import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
-import Memory from "@/pages/games/Memory";
 import {
   About,
   Overview,
@@ -43,8 +41,7 @@ import ResetPassword from "@/pages/ResetPassword";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
-import { StoriesGameLoader } from "./pages/Stories";
-import Stories from "@/pages/games/Stories";
+import { StoriesDragGameLoader } from "./pages/Stories";
 import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
 import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
@@ -121,16 +118,6 @@ const Router: React.FC = () => {
 
         <Route
           exact
-          path="/intruder"
-          render={() => (
-            <AuthedLayout>
-              <Intruder />
-            </AuthedLayout>
-          )}
-        />
-
-        <Route
-          exact
           path="/journeys"
           render={() => (
             <UnauthedLayout>
@@ -145,16 +132,6 @@ const Router: React.FC = () => {
           render={() => (
             <UnauthedLayout>
               <Login />
-            </UnauthedLayout>
-          )}
-        />
-
-        <Route
-          exact
-          path="/memory"
-          render={() => (
-            <UnauthedLayout>
-              <Memory />
             </UnauthedLayout>
           )}
         />
@@ -334,7 +311,7 @@ const Router: React.FC = () => {
           render={() => (
             <AuthedLayout>
               <HeaderFooter background="#FFFFFF">
-                <StoriesGameLoader />
+                <StoriesDragGameLoader />
               </HeaderFooter>
             </AuthedLayout>
           )}

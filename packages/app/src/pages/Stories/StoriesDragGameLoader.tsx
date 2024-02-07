@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
-import { StoriesGame } from "./StoriesGame";
+import { StoriesDragGame } from "./StoriesDragGame";
 
-export const StoriesGameLoader: FC = () => {
+export const StoriesDragGameLoader: FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
@@ -22,5 +22,5 @@ export const StoriesGameLoader: FC = () => {
   }
 
   // @ts-ignore
-  return <StoriesGame game={data} />;
+  return <StoriesDragGame game={data} />;
 };

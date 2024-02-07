@@ -1,45 +1,51 @@
 import React, { useState } from "react";
-import { useDrag, DragSourceMonitor, DragSourceHookSpec } from "react-dnd";
+import { useDrag } from "react-dnd";
 
 interface DragItem {
   type: string;
   letter: string;
+  index: number;
 }
 
 interface LetterSegmentProps {
-  letter: string;
+  letter: any;
+  width: number;
+  height: number;
+  position: { x: number; y: number };
+  index: number;
+  onDrop: (index: number) => void;
 }
 
-export const LetterSegment: React.FC<LetterSegmentProps> = ({ letter }) => {
+export const LetterSegment: React.FC<LetterSegmentProps> = ({
+  letter,
+  width,
+  height,
+  position,
+  index,
+  onDrop,
+}) => {
   const [isCorrect, setIsCorrect] = useState<boolean>(true);
 
-  const handleDragStart = () => {
-    setIsCorrect(false); // Assume letter is incorrect when dragging starts
-  };
-
-  const [{ isDragging }, drag] = useDrag<
-    DragSourceHookSpec<DragItem, unknown, { isDragging: boolean }>,
-    unknown,
-    { isDragging: boolean }
-  >({
+  // Use useDrag hook to make the letter segment draggable
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: "letter",
-    item: { type: "letter", letter } as DragItem,
-    collect: (monitor: DragSourceMonitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
+    item: { type: "letter", letter: letter.props.alt, index },
+    collect: (monitor) => ({ isDragging: !!monitor.isDragging() }),
+  }));
 
   return (
     <div
       ref={drag}
       className={`letter-segment ${!isCorrect ? "incorrect" : ""}`}
       style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        position: "absolute",
+        left: `${position.x}px`,
+        top: `${position.y}px`,
         opacity: isDragging ? 0.5 : 1,
-        boxShadow: !isCorrect ? "0 0 10px red" : "none",
-        color: "#DFD3BB",
+        pointerEvents: isDragging ? "none" : "auto",
       }}
-      draggable
-      onDragStart={handleDragStart}
     >
       {letter}
     </div>
