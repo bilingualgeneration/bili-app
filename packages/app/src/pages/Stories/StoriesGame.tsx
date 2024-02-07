@@ -11,28 +11,65 @@ import { DropZone } from "./DropZone";
 
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
+import { IonText } from "@ionic/react";
 
-interface StoriesGameData {
-  letter: string;
-  correctLetter: string;
+interface LetterImage {
+  url: string;
+}
+
+interface LetterAudio {
+  url: string;
+}
+
+interface Game {
+  dnd_letters: Array<{
+    audio: LetterAudio;
+    image_background: LetterImage;
+    image_foreground: LetterImage;
+  }>;
 }
 
 interface StoriesGameProps {
-  storiesGameData: StoriesGameData[];
+  game: Game;
 }
 
-export const StoriesGame: FC<StoriesGameProps> = ({ storiesGameData }) => {
+export const StoriesGame: FC<StoriesGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
 
   const audio_correct = new Audio(correct_card_audio);
   const audio_incorrect = new Audio(incorrect_card_audio);
 
-  //@ts-ignore
-  const { pack_id } = useParams();
-  const firestore = useFirestore();
+  // const instruction_es = new Audio(instruction_es_audio);
+  // const instruction_en = new Audio(instruction_en_audio);
 
-  const ref = doc(firestore, "stories-game", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  // useEffect(() => {
+  //   if (!isImmersive) {
+  //     instruction_es.onended = () => {
+  //       instruction_en.play();
+  //     };
+  //   }
+  //   instruction_es.play();
+  // }, []);
+
+  const correctStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    border: "8.4px solid var(--alerts-status-success, #12D18E)",
+    boxShadow: "0px 8.4px 25.2px 0px #12D18E",
+  };
+
+  const incorrectStyle = {
+    cursor: "pointer",
+    borderRadius: "32px",
+    border: "8.4px solid var(--Categories-Error, #F0091B)",
+    boxShadow: "0px 8.4px 25.2px 0px #F0091B",
+  };
+
+  // const [letterColors, setLetterColors] = useState<any>({
+  //   "1": initialStyle,
+  //   "2": initialStyle,
+  //   "3": initialStyle,
+  // });
 
   const [wordData, setWordData] = useState<any>(null); // State to store word data from Firebase
 
@@ -54,50 +91,43 @@ export const StoriesGame: FC<StoriesGameProps> = ({ storiesGameData }) => {
 
   useEffect(() => {
     if (data !== undefined) {
-      // Transform data to include both background letter and draggable letter
+      // Transform data to include both background letter, draggable letter, & audio
       const lettersGroup = data.dnd_letters.map((letterItem: any) => {
         return {
-          backdropSegment: letterItem.letter.filter(
-            (x: any) => x.image_background === "es",
-          )[0].text,
-          draggableSegment: letterItem.letter.filter(
-            (x: any) => x.image_foreground === "en",
-          )[0].text,
+          image_background: letterItem.image_background.url,
+          image_foreground: letterItem.image_foreground.url,
+          audio: letterItem.audio.url,
         };
       });
-
       setWordData(lettersGroup);
     }
   }, [data]);
 
-  if (status === "loading") {
-    return (
-      <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
-    );
-  }
-
-  if (status === "error") {
-    return "Error loading the game";
-  }
-
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="App">
-        <h1>Drag and Drop Game</h1>
-        {wordData && (
-          <div className="game-container">
-            <div className="dropzone-container">
-              {wordData.dropZone.map((letter: string, index: number) => (
-                <DropZone key={index} letter={letter} index={index} />
-              ))}
+      <div className="stories-dnd">
+        <IonText>
+          <h1>Arrastra y suelta las letras para formar la palabra "amigos".</h1>
+          {!isImmersive && (
+            <p>Drag and drop the letters to form the word "amigos."</p>
+          )}
+        </IonText>
+        <div className="letter-container">
+          {wordData && (
+            <div className="game-container">
+              <div className="dropzone-container">
+                {wordData.dropZone.map((letter: string, index: number) => (
+                  <DropZone key={index} letter={letter} index={index} />
+                ))}
+              </div>
+              <div className="draggable-container">
+                {wordData.draggable.map((letter: string, index: number) => (
+                  <LetterSegment key={index} letter={letter} />
+                ))}
+              </div>
             </div>
-            <div className="draggable-container">
-              {wordData.draggable.map((letter: string, index: number) => (
-                <LetterSegment key={index} letter={letter} dropzoneColor={""} />
-              ))}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </DndProvider>
   );

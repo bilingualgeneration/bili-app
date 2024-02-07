@@ -8,13 +8,9 @@ interface DragItem {
 
 interface LetterSegmentProps {
   letter: string;
-  dropzoneColor: string; // Color for dropzone letter
 }
 
-export const LetterSegment: React.FC<LetterSegmentProps> = ({
-  letter,
-  dropzoneColor,
-}) => {
+export const LetterSegment: React.FC<LetterSegmentProps> = ({ letter }) => {
   const [isCorrect, setIsCorrect] = useState<boolean>(true);
 
   const handleDragStart = () => {

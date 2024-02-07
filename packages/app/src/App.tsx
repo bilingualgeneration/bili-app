@@ -43,7 +43,7 @@ import ResetPassword from "@/pages/ResetPassword";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
-import { StoriesGame } from "./pages/Stories";
+import { StoriesGameLoader } from "./pages/Stories";
 import Stories from "@/pages/games/Stories";
 import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
 import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
@@ -318,7 +318,7 @@ const Router: React.FC = () => {
           )}
         />
 
-        <Route
+        {/* <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
@@ -326,15 +326,15 @@ const Router: React.FC = () => {
               <Stories id={props.match.params.uuid} />
             </UnauthedLayout>
           )}
-        />
+        /> */}
 
         <Route
           exact
           path="/stories/play/:pack_id"
           render={() => (
             <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoriesGame storiesGameData={[]} />
+              <HeaderFooter background="#FFFFFF">
+                <StoriesGameLoader />
               </HeaderFooter>
             </AuthedLayout>
           )}
