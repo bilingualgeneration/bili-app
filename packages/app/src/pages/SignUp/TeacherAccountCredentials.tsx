@@ -36,7 +36,7 @@ export const TeacherAccountCredentials: React.FC = () => {
       ...data,
       ...response,
     });
-    pushPage("pricing");
+    pushPage("complete");
   });
 
   return (
