@@ -83,9 +83,8 @@ const WaveIcon: FC<WaveIcon> = ({
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
   const { isImmersive } = useProfile();
-  const {
-    activeChildProfile: { name },
-  } = useChildProfile();
+  const { childProfiles, activeChildProfile } = useChildProfile();
+  const { name } = childProfiles[activeChildProfile];
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
