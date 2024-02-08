@@ -1,6 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import "./Stories.scss";
+import { letters } from "./letters";
 
 interface DropZoneProps {
   index: number;
@@ -26,11 +27,8 @@ export const DropZone: React.FC<DropZoneProps> = ({
 
   return (
     <div className={`dropzone ${isOver && canDrop ? "hovered" : ""}`}>
-      <div
-        ref={drop}
-        style={{ border: isOver && canDrop ? "2px solid green" : "" }} // Add border when hovered over with valid drop
-      >
-        {letter}
+      <div ref={drop} className="drop-target">
+        <img src={letters.background_letters[letter]} alt={letter} />
       </div>
       {/* Add red shadow when hovered over with invalid drop */}
       {index === expectedIndex && isOver && !canDrop && (

@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { useDrag } from "react-dnd";
+import { letters } from "./letters";
+
+interface LetterAudio {
+  url: string;
+}
 
 interface DragItem {
   type: string;
@@ -8,46 +13,59 @@ interface DragItem {
 }
 
 interface LetterSegmentProps {
-  letter: any;
-  width: number;
-  height: number;
+  letter: string;
+  audio: LetterAudio;
   position: { x: number; y: number };
   index: number;
-  onDrop: (index: number) => void;
 }
 
-export const LetterSegment: React.FC<LetterSegmentProps> = ({
+export const LetterSegment: FC<LetterSegmentProps> = ({
   letter,
-  width,
-  height,
-  position,
+  audio,
   index,
-  onDrop,
+  position,
 }) => {
-  const [isCorrect, setIsCorrect] = useState<boolean>(true);
+  const [play] = React.useState(new Audio(audio.url));
+  const [audioReady, setAudioReady] = useState(false);
 
-  // Use useDrag hook to make the letter segment draggable
-  const [{ isDragging }, drag] = useDrag(() => ({
+  // useDrag hook for draggable letters
+  const [, drag] = useDrag(() => ({
     type: "letter",
-    item: { type: "letter", letter: letter.props.alt, index },
-    collect: (monitor) => ({ isDragging: !!monitor.isDragging() }),
+    item: { id: "letter", index },
   }));
+
+  // Load audio and handle audio play
+  React.useEffect(() => {
+    play.load();
+    play.addEventListener("canplaythrough", () => {
+      setAudioReady(true);
+    });
+    return () => {
+      play.removeEventListener("canplaythrough", () => {
+        setAudioReady(false);
+      });
+    };
+  }, [audio.url]);
+
+  // Function to handle audio play
+  const handleAudioPlay = () => {
+    if (audioReady) {
+      play.play();
+    }
+  };
 
   return (
     <div
       ref={drag}
-      className={`letter-segment ${!isCorrect ? "incorrect" : ""}`}
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
+        cursor: "move",
         position: "absolute",
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        opacity: isDragging ? 0.5 : 1,
-        pointerEvents: isDragging ? "none" : "auto",
+        left: position?.x || 0,
+        top: position?.y || 0,
       }}
+      onDragEnter={handleAudioPlay}
     >
-      {letter}
+      <img src={letters.draggable_letters[letter]} alt={letter} />
     </div>
   );
 };
