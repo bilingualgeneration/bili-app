@@ -112,7 +112,6 @@ export const CountWithMe: React.FC = () => {
   //logic when the correct animal number is choosen
   useEffect(() => {
     if (isCorrectSelected) {
-      goToNextAnimalGroup();
       setShowFacts(true);
     }
   }, [isCorrectSelected]);
@@ -121,8 +120,9 @@ export const CountWithMe: React.FC = () => {
   const handleBirdClickOrder = (index: number) => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
-      if (index === getData.animalImages.length - 1) {
-        setAllAnimalsClicked(true); //switches text from game question to count questions
+      if (clickedIndexes.length + 1 === getData.animalImages.length) {
+        setAllAnimalsClicked(true);
+        //switches text from game question to count questions
       }
     }
 
@@ -155,6 +155,10 @@ export const CountWithMe: React.FC = () => {
 
         setTimeout(() => {
           setIsCorrectSelected(true);
+          setAnimalColors((prevColors: any) => ({
+            ...prevColors,
+            [getData.animalImages[index].image.id]: initialStyle,
+          }));
         }, 1000);
       }
     }
@@ -167,6 +171,10 @@ export const CountWithMe: React.FC = () => {
         factText={getData.factText}
         factBackground={getData.factBackground.url}
         onKeepGoingClick={() => {
+          setIsCorrectSelected(false);
+          setAllAnimalsClicked(false);
+          setClickedIndexes([]);
+          goToNextAnimalGroup();
           setShowFacts(false);
         }}
       />
@@ -240,7 +248,7 @@ export const CountWithMe: React.FC = () => {
         </IonText>
         <img
           src={getData.gameBackground.url}
-          alt="hummingbirds"
+          alt="animals"
           style={{
             width: "100%",
             cursor: "pointer",
