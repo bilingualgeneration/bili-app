@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDrag } from "react-dnd";
 import { letters } from "./letters";
 
@@ -6,26 +6,20 @@ interface LetterAudio {
   url: string;
 }
 
-interface DragItem {
-  type: string;
-  letter: string;
-  index: number;
-}
-
 interface LetterSegmentProps {
   letter: string;
-  audio: LetterAudio;
+  audio?: LetterAudio;
   position: { x: number; y: number };
   index: number;
 }
 
 export const LetterSegment: FC<LetterSegmentProps> = ({
   letter,
-  audio,
+  audio = { url: "" },
   index,
   position,
 }) => {
-  const [play] = React.useState(new Audio(audio.url));
+  const [play] = useState(new Audio(audio.url));
   const [audioReady, setAudioReady] = useState(false);
 
   // useDrag hook for draggable letters
@@ -35,7 +29,7 @@ export const LetterSegment: FC<LetterSegmentProps> = ({
   }));
 
   // Load audio and handle audio play
-  React.useEffect(() => {
+  useEffect(() => {
     play.load();
     play.addEventListener("canplaythrough", () => {
       setAudioReady(true);
@@ -58,12 +52,12 @@ export const LetterSegment: FC<LetterSegmentProps> = ({
     <div
       ref={drag}
       style={{
-        cursor: "move",
+        cursor: "grab",
         position: "absolute",
         left: position?.x || 0,
         top: position?.y || 0,
       }}
-      onDragEnter={handleAudioPlay}
+      onDragCapture={handleAudioPlay}
     >
       <img src={letters.draggable_letters[letter]} alt={letter} />
     </div>

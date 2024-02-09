@@ -36,10 +36,9 @@ interface StoriesGameProps {
 }
 
 export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
-  const { isImmersive } = useProfile();
-  const [esLetterData, setEsLetterData] = useState<LetterData[] | null>(null);
-  const [esIncletterData, setEsIncLetterData] = useState<LetterData[] | null>(
-    null,
+  const { isInclusive, isImmersive } = useProfile();
+  const [chosenLanguageData, setChosenLanguageData] = useState<LetterData[]>(
+    [],
   );
   const [activeIndex, setActiveIndex] = useState<number>(0); // Track active index for correct order
 
@@ -51,38 +50,48 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
 
   useEffect(() => {
     if (data !== undefined) {
-      const esLetters = data.dnd_letters[0].letter.filter(
-        (item) => item.language === "es",
-      );
-      const esIncLetters = data.dnd_letters[0].letter.filter(
-        (item) => item.language === "es-inc",
-      );
+      // Extract letters and audio based on the value of isInclusive
+      const extractedLetters = data.dnd_letters.map((letterItem: any) => {
+        if (isInclusive) {
+          const esIncItems = letterItem.letter.filter(
+            (item: any) => item.language === "es-inc",
+          );
+          return {
+            esIncText: esIncItems.length > 0 ? esIncItems[0].text : "",
+            esIncAudio: esIncItems.length > 0 ? esIncItems[0].audio : undefined,
+          };
+        } else {
+          const esItems = letterItem.letter.filter(
+            (item: any) => item.language === "es",
+          );
+          return {
+            esText: esItems.length > 0 ? esItems[0].text : "",
+            esAudio: esItems.length > 0 ? esItems[0].audio : undefined,
+          };
+        }
+      });
 
-      const esCombinedLetters = esLetters.map((esItem, index) => ({
-        esText: esItem.text,
-        esAudio: esItem.audio,
-      }));
-
-      const esIncCombinedLetters = esIncLetters.map((esIncItem, index) => ({
-        esIncText: esIncItem.text,
-        esIncAudio: esIncItem.audio,
-      }));
-
-      setEsLetterData(esCombinedLetters);
-      setEsIncLetterData(esIncCombinedLetters);
+      // Set the state variables based on the extracted letters and audio
+      setChosenLanguageData(extractedLetters);
     }
-  }, [data]);
+  }, [data, isInclusive]);
 
   // Calculate positions for draggable letters around the background letters
   const calculateRandomPositions = () => {
-    const backgroundLetters = document.querySelectorAll(".background-letter");
+    const backgroundLettersContainer = document.querySelector(
+      ".dropzone-container",
+    );
+    if (!backgroundLettersContainer) return [];
+
+    const containerRect = backgroundLettersContainer.getBoundingClientRect();
     const positions: { x: number; y: number }[] = [];
-    backgroundLetters.forEach((letter) => {
-      const rect = letter.getBoundingClientRect();
-      const xOffset = rect.left + Math.random() * rect.width;
-      const yOffset = rect.top + Math.random() * rect.height;
+
+    for (let i = 0; i < chosenLanguageData.length; i++) {
+      const xOffset = containerRect.left + Math.random() * containerRect.width;
+      const yOffset = containerRect.top + Math.random() * containerRect.height;
       positions.push({ x: xOffset, y: yOffset });
-    });
+    }
+
     return positions;
   };
 
@@ -106,37 +115,58 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div id="stories-dnd">
-        <h1>Arrastra y suelta las letras para formar la palabra "amigos".</h1>
-        {!isImmersive && (
-          <p>Drag and drop the letters to form the word "amigos."</p>
-        )}
+        <IonText class="ion-text-center">
+          {isInclusive ? (
+            isImmersive ? (
+              <h1>
+                Arrastra y suelta las letras para formar la palabra "amigues".
+              </h1>
+            ) : (
+              <h1>
+                Arrastra y suelta las letras para formar la palabra "amigues".
+              </h1>
+            )
+          ) : isImmersive ? (
+            <h1>
+              Arrastra y suelta las letras para formar la palabra "amigos".
+            </h1>
+          ) : (
+            <h1>
+              Arrastra y suelta las letras para formar la palabra "amigues".
+            </h1>
+          )}
 
-        {/* Rendering DropZone components */}
+          {!isImmersive && (
+            <p>
+              Drag and drop the letters to form the word "
+              {isInclusive ? "amigues" : "amigos"}."
+            </p>
+          )}
+        </IonText>
         <div className="dropzone-container">
-          {esLetterData &&
-            esLetterData.map((letter: any, index: any) => (
-              <DropZone
-                key={index}
-                letter={letter.esText}
-                index={index}
-                expectedIndex={index}
-                onDrop={handleDrop}
-              />
-            ))}
+          {chosenLanguageData.map((letter, index) => (
+            <DropZone
+              key={index}
+              letter={isInclusive ? letter.esIncText : letter.esText}
+              index={index}
+              expectedIndex={index}
+              onDrop={handleDrop}
+            />
+          ))}
         </div>
 
-        {/* Rendering draggable LetterSegment components */}
         <div className="draggable-container">
-          {esIncletterData &&
-            esIncletterData.map((letter: any, index: any) => (
-              <LetterSegment
-                key={index}
-                letter={letter.esIncText}
-                audio={letter.esIncAudio}
-                position={randomizedPositions[index]}
-                index={index}
-              />
-            ))}
+          {chosenLanguageData.map((letter, index) => (
+            <LetterSegment
+              key={index}
+              letter={
+                isInclusive ? letter.esIncText || "" : letter.esText || ""
+              }
+              audio={isInclusive ? letter.esIncAudio : letter.esAudio}
+              index={index}
+              position={randomizedPositions[index]}
+            />
+          ))}
         </div>
       </div>
     </DndProvider>
