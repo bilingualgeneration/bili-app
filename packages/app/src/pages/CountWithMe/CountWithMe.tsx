@@ -176,7 +176,10 @@ export const CountWithMe: React.FC = () => {
           setAllAnimalsClicked(false);
           setClickedIndexes([]);
           goToNextAnimalGroup();
-          setShowFacts(false);
+
+          setTimeout(() => {
+            setShowFacts(false);
+          }, 1000);
         }}
       />
     );
@@ -285,7 +288,7 @@ export const CountWithMe: React.FC = () => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   color: `${animal.text_color}`,
-                  fontSize: "127px",
+                  fontSize: "80px",
                   fontWeight: "700",
                 }}
               >

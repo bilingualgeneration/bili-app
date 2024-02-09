@@ -3,6 +3,12 @@ import React, { useState, useEffect } from "react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { useProfile } from "@/contexts/ProfileContext";
 import { FormattedMessage } from "react-intl";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useHistory } from "react-router-dom";
+import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
+import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
+import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
+
 import "../StoryFactory/StoryFactory.scss";
 
 interface CountCongratsProps {
@@ -21,6 +27,29 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
 
   const { isInclusive, isImmersive } = useProfile();
   const [showText, setShowText] = useState(true); // State to show/hide text
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+
+    if (isImmersive) {
+      if (isInclusive) {
+        addAudio([audio_es_inc_file]);
+      }
+      addAudio([audio_es_file]);
+    } else {
+      addAudio([audio_es_file, audio_en_file]);
+    }
+  }, []);
+  const history = useHistory();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -55,7 +84,7 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
           />
           <div>
             <FormattedMessage
-              id="countWIthMe.complete"
+              id="countWithMe.complete"
               defaultMessage="Activity Completed"
               description="Information that the activity is completed"
             />
@@ -99,7 +128,7 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
                   }}
                 >
                   <FormattedMessage
-                    id="countWIthMe.congrats"
+                    id="countWithMe.congrats"
                     defaultMessage="You've earned a star"
                     description="Congrats text on a star"
                   />
@@ -133,7 +162,7 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
 
             <IonButton
               className="sf-intro-button"
-              //disabled={!audioPlayed}
+              disabled={!audioPlayed}
               expand="block"
               shape="round"
               type="button"
@@ -142,7 +171,7 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
               <div>
                 <div className="story-button-bold">
                   <FormattedMessage
-                    id="countWIthMe.keepGoing"
+                    id="countWithMe.keepGoing"
                     defaultMessage="Keep Going!"
                     description="Button label to exit congrats screen"
                   />
