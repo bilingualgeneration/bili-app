@@ -171,6 +171,7 @@ export const CountWithMe: React.FC = () => {
       <FactsPage
         factText={getData.factText}
         factBackground={getData.factBackground.url}
+        count={currentIndex}
         onKeepGoingClick={() => {
           setIsCorrectSelected(false);
           setAllAnimalsClicked(false);

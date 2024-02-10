@@ -13,12 +13,14 @@ import { useHistory } from "react-router";
 interface FactsPageProps {
   factText: any[]; // Adjust the type according to what factText actually contains
   factBackground: string;
+  count: number;
   onKeepGoingClick: () => void;
 }
 
 export const FactsPage: React.FC<FactsPageProps> = ({
   factText,
   factBackground,
+  count,
   onKeepGoingClick,
 }) => {
   const { isInclusive, isImmersive } = useProfile();
@@ -54,7 +56,7 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   const history = useHistory();
 
   if (showCongrats) {
-    return <CongratsPage onKeepGoingClick={onKeepGoingClick} />;
+    return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
   }
 
   // Function to render the facts page for each animal

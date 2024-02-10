@@ -13,10 +13,12 @@ import "../StoryFactory/StoryFactory.scss";
 
 interface CountCongratsProps {
   onKeepGoingClick: () => void;
+  count: number;
 }
 
 export const CongratsPage: React.FC<CountCongratsProps> = ({
   onKeepGoingClick,
+  count,
 }) => {
   // Function to render the congrats page
   const congrats = {
