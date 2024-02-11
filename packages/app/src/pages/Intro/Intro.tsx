@@ -16,15 +16,9 @@ import audio_es_file from "@/assets/audio/story_factory_first_es.mp3";
 import audio_es_inc_file from "@/assets/audio/story_factory_first_es-inc.mp3";
 import "./Intro.scss";
 
-/*
-an array of objects
-each object needs en, es, es-inc (both text and audio
-in addition to the array (not part of the array), an image
-also a router path to go next
-*/
-
 interface Type {
   text: string;
+  subtext: string;
   audio: string;
 }
 interface IntroProps {
@@ -34,11 +28,12 @@ interface IntroProps {
 }
 
 export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
+  const page = 1;
   const { isInclusive, isImmersive } = useProfile();
   const history = useHistory();
-  const audio_en = new Audio(audio_en_file);
-  const audio_es = new Audio(audio_es_file);
-  const audio_es_inc = new Audio(audio_es_inc_file);
+  const audio_en = new Audio(data[page].en.audio);
+  const audio_es = new Audio(data[page].es.audio);
+  const audio_es_inc = new Audio(data[page].esInc.audio);
   useEffect(() => {
     return () => {
       audio_en.pause();
@@ -86,15 +81,15 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
                 {isInclusive && (
                   <FormattedMessage
                     id="storyFactory.welcome_inc"
-                    defaultMessage="Welcome to the Story Factory!"
-                    description="Main welcome message on Story Factory"
+                    defaultMessage={data[page].en.text}
+                    description="Main welcome message"
                   />
                 )}
                 {!isInclusive && (
                   <FormattedMessage
                     id="storyFactory.welcome"
-                    defaultMessage="Welcome to the Story Factory!"
-                    description="Main welcome message on Story Factory"
+                    defaultMessage={data[page].en.text}
+                    description="Main welcome message"
                   />
                 )}
               </h1>
@@ -103,15 +98,15 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
                 {isInclusive && (
                   <FormattedMessage
                     id={`storyFactory.subwelcome_inc`}
-                    defaultMessage="A place for silly syllabic reading!"
-                    description="Sub welcome message on Story Factory"
+                    defaultMessage={data[page].en.subtext}
+                    description="Sub welcome message"
                   />
                 )}
                 {!isInclusive && (
                   <FormattedMessage
                     id={`storyFactory.subwelcome`}
-                    defaultMessage="A place for silly syllabic reading!"
-                    description="Sub welcome message on Story Factory"
+                    defaultMessage={data[page].en.subtext}
+                    description="Sub welcome message"
                   />
                 )}
               </h2>
@@ -120,9 +115,9 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
                 <>
                   <h1>
                     <br />
-                    Welcome to the story factory!
+                    {data[page].en.text}
                   </h1>
-                  <h2>A place for silly syllabic reading!</h2>
+                  <h2>{data[page].en.subtext}</h2>
                 </>
               )}
             </div>
