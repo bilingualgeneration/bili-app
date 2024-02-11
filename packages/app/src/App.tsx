@@ -11,6 +11,7 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
+import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
 import { CountWithMe } from "@/pages/CountWithMe/CountWithMe";
@@ -514,7 +515,9 @@ const App: React.FC = () => {
     <SuspenseWithPerf fallback={<Loading />} traceId="user-load">
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
-          <Router />
+          <AudioManagerProvider>
+            <Router />
+          </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>
     </SuspenseWithPerf>

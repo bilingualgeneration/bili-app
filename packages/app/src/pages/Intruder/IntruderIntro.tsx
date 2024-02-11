@@ -11,6 +11,7 @@ import {
   IonText,
 } from "@ionic/react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -24,7 +25,21 @@ import "./Intruder.scss";
 export const IntruderIntro: React.FC = () => {
   const { isInclusive, isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+    addAudio([audio_es_file, audio_en_file]);
+  }, []);
   const history = useHistory();
+  /*
   const audio_en = new Audio(audio_en_file);
   const audio_es = new Audio(audio_es_file);
   const audio_es_inc = new Audio(audio_es_inc_file);
@@ -67,7 +82,7 @@ export const IntruderIntro: React.FC = () => {
       }
     }
   }, []);
-
+*/
   return (
     <div className="sf-card">
       <IonCard className="ion-no-margin">

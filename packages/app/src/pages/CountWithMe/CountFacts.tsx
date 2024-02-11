@@ -1,27 +1,64 @@
+import { useProfile } from "@/contexts/ProfileContext";
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
+import { CongratsPage } from "./CountCongrats";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+//temporary audio files, should be chaged for count-with-me files oncel uploade
+import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
+import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
+import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
+import "./countWithMe.scss";
+import { useHistory } from "react-router";
 
-interface Animal {
-  url: string;
-  x: number;
-  y: number;
-  rotation: number;
+interface FactsPageProps {
+  factText: any[]; // Adjust the type according to what factText actually contains
+  factBackground: string;
+  count: number;
+  onKeepGoingClick: () => void;
 }
 
-interface Prompt {
-  language: string;
-  text: string;
-}
+export const FactsPage: React.FC<FactsPageProps> = ({
+  factText,
+  factBackground,
+  count,
+  onKeepGoingClick,
+}) => {
+  const { isInclusive, isImmersive } = useProfile();
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
-interface DataItem {
-  prompt: Prompt[];
-  image: string;
-  animals: Animal[];
-  fact: Prompt[];
-  map: string;
-}
+  useEffect(() => {
+    if (audioPlayed) {
+      setShowCongrats(true);
+    }
+  }, [audioPlayed]);
 
-export const FactsPage = (animalIndex: number, data: DataItem[]) => {
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+
+    if (isImmersive) {
+      if (isInclusive) {
+        addAudio([audio_es_inc_file]);
+      }
+      addAudio([audio_es_file]);
+    } else {
+      addAudio([audio_es_file, audio_en_file]);
+    }
+  }, []);
+  const history = useHistory();
+
+  if (showCongrats) {
+    return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
+  }
+
   // Function to render the facts page for each animal
   return (
     <>
@@ -60,8 +97,10 @@ export const FactsPage = (animalIndex: number, data: DataItem[]) => {
             }}
           >
             <IonText>
-              <h2>{data[animalIndex].fact[0].text}</h2>
-              <p>{data[animalIndex].fact[1].text}</p>
+              <h1 className="fact-spanish-text-style">{factText[1].text}</h1>
+              {!isImmersive && (
+                <p className="fact-english-text-style">{factText[0].text}</p>
+              )}
             </IonText>
           </div>
 
@@ -76,8 +115,8 @@ export const FactsPage = (animalIndex: number, data: DataItem[]) => {
             }}
           >
             <img
-              src={data[animalIndex].map}
-              alt={`animal-${animalIndex}`}
+              src={factBackground}
+              alt={factText[0].text}
               style={{ width: "100%", height: "100%" }}
             />
           </div>
