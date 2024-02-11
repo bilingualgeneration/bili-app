@@ -1,0 +1,43 @@
+#stories-dnd {
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game-container {
+    // position: relative;
+    height: 50vh;
+    width: 100%;
+  }
+
+  .dropzone-container {
+    // position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    width: 100%;
+  }
+}
+
+#dropzone-dnd {
+  .dropzone {
+    /* Your drop zone styling */
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hovered {
+    /* Styling when dragged item is over the drop zone */
+    background-color: #aaffaa;
+  }
+
+  .invalid {
+    /* Styling when dragged item is not allowed to be dropped */
+    background-color: #ffaaaa;
+  }
+}
