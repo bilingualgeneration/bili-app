@@ -1,29 +1,24 @@
 #student-landing-page {
-  .main-block {
-    margin: 0 0 100px 100px;
-  }
-
   #wave-icons {
     background-image: url("/assets/img/wave.png");
     background-repeat: no-repeat;
     background-position: top center;
-    background-size: contain;
-    margin-right: 100px;
+    background-size: 1366px;
+    ion-col:nth-child(2) {
+      margin-top: 1.5rem;
+    }
+
+    ion-col:nth-child(3) {
+      margin-top: 4rem;
+    }
+
     .wave-icon {
       display: inline-block;
       text-align: center;
-      p {
-        margin: 0;
-        &:nth-child(1) {
-          font-weight: bold;
-        }
-        &:nth-child(2) {
-          font-size: smaller;
-        }
-      }
+
       .icon {
         display: inline-block;
-        padding: 1rem;
+        padding: 30px;
         border-radius: 50%;
 
         &.has-link {
@@ -31,8 +26,8 @@
         }
       }
       svg {
-        width: 3rem;
-        height: 3rem;
+        width: 60px;
+        height: 60px;
       }
     }
   }

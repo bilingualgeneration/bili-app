@@ -33,16 +33,19 @@ export const LanguageSwitcher: FC = () => {
 
   return (
     <>
-      <Toggle
-        checked={isSpanish}
-        control={control}
-        label={intl.formatMessage({
-          id: "languageMode",
-          defaultMessage: "English Mode",
-          description: "Label for language mode toggle",
-        })}
-        name="isSpanish"
-      />
+      <div className="text-md semibold color-suelo">
+        <Toggle
+          checked={isSpanish}
+          control={control}
+          label={intl.formatMessage({
+            id: "languageMode",
+            defaultMessage: "English Mode",
+            description: "Label for language mode toggle",
+          })}
+          name="isSpanish"
+          mode="ios"
+        />
+      </div>
     </>
   );
 };
