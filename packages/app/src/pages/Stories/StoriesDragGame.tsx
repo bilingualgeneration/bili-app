@@ -41,12 +41,7 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
     [],
   );
   const [activeIndex, setActiveIndex] = useState<number>(0); // Track active index for correct order
-
-  const getRandomPosition = () => {
-    const xOffset = Math.floor(Math.random() * (window.innerWidth - 100));
-    const yOffset = Math.floor(Math.random() * (window.innerHeight - 100));
-    return { x: xOffset, y: yOffset };
-  };
+  const [correctDrops, setCorrectDrops] = useState<boolean[]>([]); // Track correct drops for each letter
 
   useEffect(() => {
     if (data !== undefined) {
@@ -73,42 +68,24 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
 
       // Set the state variables based on the extracted letters and audio
       setChosenLanguageData(extractedLetters);
+      setCorrectDrops(new Array(extractedLetters.length).fill(false));
     }
   }, [data, isInclusive]);
-
-  // Calculate positions for draggable letters around the background letters
-  const calculateRandomPositions = () => {
-    const backgroundLettersContainer = document.querySelector(
-      ".dropzone-container",
-    );
-    if (!backgroundLettersContainer) return [];
-
-    const containerRect = backgroundLettersContainer.getBoundingClientRect();
-    const positions: { x: number; y: number }[] = [];
-
-    for (let i = 0; i < chosenLanguageData.length; i++) {
-      const xOffset = containerRect.left + Math.random() * containerRect.width;
-      const yOffset = containerRect.top + Math.random() * containerRect.height;
-      positions.push({ x: xOffset, y: yOffset });
-    }
-
-    return positions;
-  };
-
-  // Randomize positions of draggable letters around background letters
-  const randomizedPositions = calculateRandomPositions();
 
   // Function to handle drop event
   const handleDrop = (index: number) => {
     console.log("Dropped at index:", index);
     if (index === activeIndex) {
-      // Correct drop
       console.log("Correct drop!");
-      setActiveIndex(activeIndex + 1); // Increment active index
+      setActiveIndex(activeIndex + 1);
+      const updatedCorrectDrops = [...correctDrops];
+      updatedCorrectDrops[index] = true;
+      setCorrectDrops(updatedCorrectDrops);
     } else {
-      // Incorrect drop
       console.log("Incorrect drop!");
-      // Implement logic to handle incorrect drop (red shadow, audio, etc.)
+      const updatedCorrectDrops = [...correctDrops];
+      updatedCorrectDrops[index] = false;
+      setCorrectDrops(updatedCorrectDrops);
     }
   };
 
@@ -164,7 +141,8 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
               }
               audio={isInclusive ? letter.esIncAudio : letter.esAudio}
               index={index}
-              position={randomizedPositions[index]}
+              onDrop={handleDrop}
+              correctDrop={correctDrops[index]}
             />
           ))}
         </div>

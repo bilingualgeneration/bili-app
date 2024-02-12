@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useDrop } from "react-dnd";
 import "./Stories.scss";
 import { letters } from "./letters";
@@ -10,7 +10,7 @@ interface DropZoneProps {
   onDrop: (index: number) => void;
 }
 
-export const DropZone: React.FC<DropZoneProps> = ({
+export const DropZone: FC<DropZoneProps> = ({
   letter,
   index,
   onDrop,

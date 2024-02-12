@@ -1,4 +1,5 @@
 #stories-dnd {
+  position: relative;
   .header {
     display: flex;
     justify-content: center;
@@ -12,12 +13,20 @@
   }
 
   .dropzone-container {
-    // position: relative;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 65vh;
     width: 100%;
+    overflow: hidden; /* Ensure the draggable letters don't overflow the container */
+  }
+
+  .draggable-letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
   }
 }
 
