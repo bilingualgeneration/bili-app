@@ -63,24 +63,64 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   return (
     <>
       <div
-        className="background-card margin-top-3"
         style={{
-          backgroundImage: `url(${factBackground})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right center",
-          height: 600,
+          backgroundColor: "#F7FAF9",
           display: "flex",
+          justifyContent: "center",
           alignItems: "center",
+          height: "100vh",
         }}
       >
-        <IonText style={{ width: "50%" }}>
-          <h1 className="text-3xl semibold color-suelo">{factText[1].text}</h1>
-          {!isImmersive && (
-            <p className="text-2xl color-english margin-top-2">
-              {factText[0].text}
-            </p>
-          )}
-        </IonText>
+        <div
+          style={{
+            position: "relative",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "20px",
+            width: "1159px",
+            height: "640px",
+            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+            display: "flex",
+            flexDirection: "row", // Use row to align content horizontally
+            justifyContent: "center", // Center content horizontally
+            alignItems: "stretch", // Align items to stretch vertically
+            padding: "20px",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start", // Align text content to the left
+              padding: "20px",
+            }}
+          >
+            <IonText>
+              <h1 className="fact-spanish-text-style">{factText[1].text}</h1>
+              {!isImmersive && (
+                <p className="fact-english-text-style">{factText[0].text}</p>
+              )}
+            </IonText>
+          </div>
+
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-end", // Align map image to the right
+              padding: "20px",
+            }}
+          >
+            <img
+              src={factBackground}
+              alt={factText[0].text}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

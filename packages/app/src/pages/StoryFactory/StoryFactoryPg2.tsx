@@ -92,7 +92,7 @@ export const StoryFactoryPg2: React.FC = () => {
                 expand="block"
                 shape="round"
                 type="button"
-                href="/story-factory/3"
+                href="/story-factory-game/select"
               >
                 <div>
                   <div className="story-button-bold">

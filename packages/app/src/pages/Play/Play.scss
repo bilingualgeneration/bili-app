@@ -16,17 +16,17 @@ $card-margin: 2rem;
     background-image: url("/assets/img/background_purple.png");
     cursor: pointer;
     margin-right: $card-margin;
-    img {
-    }
   }
 
   #intruderCard {
     background-image: url("/assets/img/background_teal.png");
+    cursor: pointer;
     margin-right: $card-margin;
   }
 
   #countCard {
     background: url("/assets/img/background_orange.png");
+    cursor: pointer;
   }
 
   .card {

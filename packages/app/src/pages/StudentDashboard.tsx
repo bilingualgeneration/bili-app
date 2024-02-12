@@ -80,12 +80,14 @@ const wellnessCards = [
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
+    isLocked: true,
   },
   {
     category: "wellness",
     title: "Respirando hondo",
     titleEn: "Breathing deeply",
     cover: "/assets/img/dance_image.png",
+    isLocked: true,
   },
   {
     category: "wellness",
@@ -113,24 +115,24 @@ const wellnessCards = [
 const playCards = [
   {
     category: "play",
-    title: "Fábrica de cuentos",
+    title: "Fábrica de Cuentos",
     titleEn: "Story Factory",
     cover: "/assets/img/card_play_image.png",
-    className: "other-card-image small",
+    link: "/story-factory-game/intro",
   },
   {
     category: "play",
-    title: "El intruso",
+    title: "El Intruso",
     titleEn: "The intruder",
     cover: "/assets/img/mountain_image.png",
-    className: "other-card-image",
+    link: "/intruder-game/intro",
   },
   {
     category: "play",
     title: "Cuenta conmigo",
     titleEn: "Count with me",
     cover: "/assets/img/dance_image.png",
-    className: "other-card-image",
+    link: "/count-with-me-game/intro",
   },
   {
     category: "play",
@@ -151,27 +153,31 @@ const playCards = [
 const communityCards = [
   {
     category: "community",
-    title: "¿Qué harías?",
+    title: "¿Qué Harías?",
     titleEn: "What would you do?",
     cover: "/assets/img/horse_image.png",
+    link: "/would-do-game/intro",
   },
   {
     category: "community",
-    title: "Cuéntame sobre...",
+    title: "Cuéntame Sobre...",
     titleEn: "Tell me about...",
     cover: "/assets/img/card_community_image.png",
+    isLocked: true,
   },
   {
     category: "community",
     title: "Cuentos y dichos",
     titleEn: "Stories and sayings",
     cover: "/assets/img/star_image.png",
+    isLocked: true,
   },
   {
     category: "community",
     title: "Veo Veo",
     titleEn: "I Spy",
     cover: "/assets/img/flowers_image.png",
+    isLocked: true,
   },
   {
     category: "community",

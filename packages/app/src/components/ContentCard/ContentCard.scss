@@ -6,9 +6,12 @@
 }
 .content-card {
   position: relative;
-
   background-size: cover;
   background-position: center center;
+
+  &.has-link {
+    cursor: pointer;
+  }
 
   .category-tag {
     transform: scale(0.5);

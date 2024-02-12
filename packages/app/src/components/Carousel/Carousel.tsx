@@ -14,7 +14,7 @@ const Arrow: React.FC<any> = ({
   return (
     <div
       {...{ onClick }}
-      className={`carousel-arrow-button ${direction}`}
+      className={`${direction} ${className}`}
       style={{ top: height / 2 }}
     >
       <img src={direction === "forward" ? forward : backward} />
@@ -33,6 +33,7 @@ export const Carousel: React.FC<
       <Slider
         className="slider variable-width"
         draggable={false}
+        infinite={false}
         slidesToShow={slidesToShow}
         slidesToScroll={1}
         nextArrow={<Arrow direction="forward" height={height} />}

@@ -199,15 +199,28 @@ export const CountWithMe: React.FC = () => {
   }
 
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "#F7FAF9",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <div
-        class="background-card margin-top-4"
         style={{
-          backgroundImage: `url(${getData.gameBackground.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-          height: 600,
           position: "relative",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "20px",
+          width: "1159px",
+          height: "800px",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          padding: "20px",
         }}
       >
         <IonText>
@@ -240,6 +253,16 @@ export const CountWithMe: React.FC = () => {
               </>
             )}
         </IonText>
+        <img
+          src={getData.gameBackground.url}
+          alt="animals"
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: "32px",
+            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+          }}
+        />
 
         {/* Overlay animals */}
         {getData.animalImages.map((animal, index) => (
@@ -247,7 +270,6 @@ export const CountWithMe: React.FC = () => {
             key={index}
             style={{
               position: "absolute",
-              transform: "scale(0.6) translateY(-230px)",
               top: `${animal.coordinate_y}px`,
               left: `${animal.coordinate_x}px`,
               cursor: "pointer",
@@ -279,44 +301,6 @@ export const CountWithMe: React.FC = () => {
           </div>
         ))}
       </div>
-      <span style={{ display: "none" }}>
-        <div
-          style={{
-            backgroundColor: "#F7FAF9",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              backgroundColor: "#FFFFFF",
-              borderRadius: "20px",
-              width: "1159px",
-              height: "800px",
-              boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              padding: "20px",
-            }}
-          >
-            <img
-              src={getData.gameBackground.url}
-              alt="animals"
-              style={{
-                width: "100%",
-                cursor: "pointer",
-                borderRadius: "32px",
-                boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-              }}
-            />
-          </div>
-        </div>
-      </span>
-    </>
+    </div>
   );
 };

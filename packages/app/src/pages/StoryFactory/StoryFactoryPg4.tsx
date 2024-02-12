@@ -1,7 +1,7 @@
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
-import { IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
+import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
@@ -198,10 +198,16 @@ export const StoryFactoryPage4: FC = () => {
                   speak(0);
                 }}
               >
-                <h1>{getText(words[0][wordIndices[0]].word, "es")}</h1>
-                {!isImmersive && (
-                  <h2>{getText(words[0][wordIndices[0]].word, "en")}</h2>
-                )}
+                <IonText>
+                  <h1 className="text-4xl semibold color-suelo">
+                    {getText(words[0][wordIndices[0]].word, "es")}
+                  </h1>
+                  {!isImmersive && (
+                    <p className="text-3xl color-english">
+                      {getText(words[0][wordIndices[0]].word, "en")}
+                    </p>
+                  )}
+                </IonText>
               </div>
             </IonCol>
 
@@ -212,10 +218,16 @@ export const StoryFactoryPage4: FC = () => {
                   speak(1);
                 }}
               >
-                <h1>{getText(words[1][wordIndices[1]].word, "es")}</h1>
-                {!isImmersive && (
-                  <h2>{getText(words[1][wordIndices[1]].word, "en")}</h2>
-                )}
+                <IonText>
+                  <h1 className="text-4xl semibold color-suelo">
+                    {getText(words[1][wordIndices[1]].word, "es")}
+                  </h1>
+                  {!isImmersive && (
+                    <p className="text-3xl color-english">
+                      {getText(words[1][wordIndices[1]].word, "en")}
+                    </p>
+                  )}
+                </IonText>
               </div>
             </IonCol>
 
@@ -226,10 +238,16 @@ export const StoryFactoryPage4: FC = () => {
                   speak(2);
                 }}
               >
-                <h1>{getText(words[2][wordIndices[2]].word, "es")}</h1>
-                {!isImmersive && (
-                  <h2>{getText(words[2][wordIndices[2]].word, "en")}</h2>
-                )}
+                <IonText>
+                  <h1 className="text-4xl semibold color-suelo">
+                    {getText(words[2][wordIndices[2]].word, "es")}
+                  </h1>
+                  {!isImmersive && (
+                    <p className="text-3xl color-english">
+                      {getText(words[2][wordIndices[2]].word, "en")}
+                    </p>
+                  )}
+                </IonText>
               </div>
             </IonCol>
 
@@ -240,10 +258,16 @@ export const StoryFactoryPage4: FC = () => {
                   speak(3);
                 }}
               >
-                <h1>{getText(words[3][wordIndices[3]].word, "es")}</h1>
-                {!isImmersive && (
-                  <h2>{getText(words[3][wordIndices[3]].word, "en")}</h2>
-                )}
+                <IonText>
+                  <h1 className="text-4xl semibold color-suelo">
+                    {getText(words[3][wordIndices[3]].word, "es")}
+                  </h1>
+                  {!isImmersive && (
+                    <p className="text-3xl color-english">
+                      {getText(words[3][wordIndices[3]].word, "en")}
+                    </p>
+                  )}
+                </IonText>
               </div>
             </IonCol>
           </IonRow>
@@ -305,17 +329,17 @@ export const StoryFactoryPage4: FC = () => {
           </IonRow>
 
           <IonRow>
-            <IonCol className="ion-no-padding">
-              <div>
-                <h2>
+            <IonCol className="ion-no-padding ion-text-center">
+              <IonText>
+                <h1 className="text-3xl semibold color-suelo">
                   <FormattedMessage
                     id="storyFactory.read"
                     defaultMessage="Read"
                     description="Story Factory volume/play button that says 'Read'"
                   />
-                </h2>
-                {!isImmersive && <p>Read</p>}
-              </div>
+                </h1>
+                {!isImmersive && <p className="text-lg color-english">Read</p>}
+              </IonText>
             </IonCol>
           </IonRow>
         </IonGrid>

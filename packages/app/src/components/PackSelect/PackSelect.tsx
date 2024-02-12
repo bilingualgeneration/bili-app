@@ -52,11 +52,21 @@ export const PackSelect: React.FC<props> = ({
   return (
     <>
       {headerComponent}
-      <Carousel slidesToShow={2} height={274}>
-        {cards.map((c, index) => (
-          <ContentCard {...c} key={index} />
-        ))}
-      </Carousel>
+      <div className="background-card">
+        <div className="margin-bottom-2">
+          <IonText>
+            <h1 className="text-5xl color-suelo">{translatedTitle}</h1>
+            {!isImmersive && (
+              <h2 className="text-3xl color-english">{englishTitle}</h2>
+            )}
+          </IonText>
+        </div>
+        <Carousel slidesToShow={2} height={274}>
+          {cards.map((c, index) => (
+            <ContentCard {...c} key={index} />
+          ))}
+        </Carousel>
+      </div>
     </>
   );
 };
