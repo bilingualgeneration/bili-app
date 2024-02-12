@@ -201,7 +201,7 @@ export const CountWithMe: React.FC = () => {
   return (
     <>
       <div
-        class="background-card margin-top-4"
+        className="background-card margin-top-4"
         style={{
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",

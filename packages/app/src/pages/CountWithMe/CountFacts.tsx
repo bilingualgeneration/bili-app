@@ -56,7 +56,7 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   const history = useHistory();
 
   if (showCongrats) {
-    // return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
+    return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
   }
 
   // Function to render the facts page for each animal
