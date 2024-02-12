@@ -1,10 +1,12 @@
 @use "sass:math";
 
-.hide-scrollbar {
-  &::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
+.background-card {
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 2.5rem;
+  min-width: 600px;
 }
 
 .no-text-decoration {
@@ -12,9 +14,9 @@
 }
 
 .page-wrapper {
-  max-width: 1366px;
+  width: 1366px;
   margin: auto;
-  min-height: 100vh;
+  height: 100%;
   padding-bottom: 80px; // clearance for footer
 }
 
@@ -54,13 +56,15 @@ ion-input[type="date"] {
 }
 
 html {
-  background-color: #d3eae8;
-  --ion-font-family: "Outfit";
+  background-color: white;
 }
 
-ion-content {
-  --background: url("/assets/img/background.png") no-repeat center center /
-    cover;
+ion-content::part(background) {
+  background: white;
+}
+
+ion-app::-webkit-scrollbar {
+  display: none;
 }
 
 #header {

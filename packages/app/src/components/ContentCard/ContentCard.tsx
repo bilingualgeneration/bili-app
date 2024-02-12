@@ -1,4 +1,5 @@
 import { CategoryTag } from "@/components/CategoryTag";
+import classnames from "classnames";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import LockIcon from "@/assets/icons/lock.svg?react";
 import "./ContentCard.scss";
@@ -52,7 +53,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   const history = useHistory();
   return (
     <div
-      className="content-card"
+      className={classnames("content-card", { "has-link": link !== undefined })}
       style={{ backgroundImage: `url(${cover})` }}
       onClick={() => {
         if (link) {

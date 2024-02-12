@@ -23,7 +23,7 @@ const StoryFactoryCard: FC = () => {
       id="storyFactoryCard"
       className="card"
       onClick={() => {
-        history.push("/story-factory/1");
+        history.push("/story-factory-game/1");
       }}
     >
       <CategoryTag category="play" className="play-category-tag" />
@@ -108,7 +108,7 @@ export const Play: FC = () => {
     <div id="playPage">
       <PlayHeader />
       <div id="playCardWrapper">
-        <Carousel height={440} slidesToShow={2}>
+        <Carousel height={440} slidesToShow={1}>
           <StoryFactoryCard />
           <IntruderCard />
           <CountCard />
