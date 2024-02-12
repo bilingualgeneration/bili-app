@@ -311,14 +311,14 @@ export const StudentDashboard: FC = () => {
             </h1>
             {!isImmersive && <p className="text-3xl color-english">Stories</p>}
           </IonText>
-          <Carousel height={274}>
-            {storyCards.map((c, index) => (
-              <ContentCard {...c} key={index} />
-            ))}
-          </Carousel>
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {storyCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
+          </div>
         </div>
-        <br />
-        <br />
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
@@ -330,14 +330,14 @@ export const StudentDashboard: FC = () => {
             </h1>
             {!isImmersive && <p className="text-3xl color-english">Wellness</p>}
           </IonText>
-          <Carousel height={274}>
-            {wellnessCards.map((c, index) => (
-              <ContentCard {...c} key={index} />
-            ))}
-          </Carousel>
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {wellnessCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
+          </div>
         </div>
-        <br />
-        <br />
 
         {/* play */}
         <div className="other-story-cards">
@@ -353,14 +353,15 @@ export const StudentDashboard: FC = () => {
               {!isImmersive && <p className="text-3xl color-english">Play</p>}
             </Link>
           </IonText>
-          <Carousel height={274}>
-            {playCards.map((c, index) => (
-              <ContentCard {...c} key={index} />
-            ))}
-          </Carousel>
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {playCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
+          </div>
         </div>
-        <br />
-        <br />
+
         {/* Comunidad */}
         <div className="other-story-cards">
           <Link to="/community" className="no-text-decoration">
@@ -376,11 +377,13 @@ export const StudentDashboard: FC = () => {
               )}
             </IonText>
           </Link>
-          <Carousel height={274}>
-            {communityCards.map((c, index) => (
-              <ContentCard {...c} key={index} />
-            ))}
-          </Carousel>
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {communityCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
     </div>
