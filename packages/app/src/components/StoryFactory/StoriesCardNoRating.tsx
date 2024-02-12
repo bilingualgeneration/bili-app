@@ -55,7 +55,7 @@ export const StoriesCardNoRating: React.FC<StoriesCardNoRatingProps> = ({
             history.push(`/story-factory/play/${storyId}`);
           }
           if (!isLocked && storyId && isIntruder) {
-            history.push(`/intruder/play/${storyId}`);
+            history.push(`/intruder-game/play/${storyId}`);
           }
         }}
       >

@@ -1,0 +1,48 @@
+.content-card,
+.content-lock {
+  height: 274px;
+  width: 320px;
+  border-radius: 12px;
+}
+.content-card {
+  position: relative;
+
+  background-size: cover;
+  background-position: center center;
+
+  .category-tag {
+    transform: scale(0.5);
+    position: absolute;
+    top: -4px;
+    left: -4px;
+  }
+
+  .favorite-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  > ion-text {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .content-lock {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-coming-soon {
+    background-color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+  }
+}

@@ -33,8 +33,8 @@ export const Complete: React.FC = () => {
           flexDirection: "column",
         }}
       >
-        <IonText className="ion-text-center">
-          <h2>
+        <IonText className="ion-text-center margin-bottom-3">
+          <h2 className="text-3xl semibold color-suelo">
             <FormattedMessage
               id="successScreen.success"
               defaultMessage="Success! You did it!"
@@ -45,14 +45,12 @@ export const Complete: React.FC = () => {
 
         <IonImg src="/assets/img/happy_cactus.png" />
         <IonButton
+          className="margin-vertical-3"
           data-testid="complete-continue-button"
           onClick={() => {
             history.push("/student-dashboard");
           }}
           shape="round"
-          style={{
-            marginTop: "24px",
-          }}
         >
           <FormattedMessage
             id="common.continue"

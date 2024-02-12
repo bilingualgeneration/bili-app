@@ -1,14 +1,17 @@
 import { FC } from "react";
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
-
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useIntl } from "react-intl";
+import CountWithMe from "@/assets/icons/count_with_me.png";
 import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
 import FactoryWidget from "@/assets/icons/factory_widget.png";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import { FormattedMessage } from "react-intl";
 import { PlayHeader } from "@/components/PlayHeader";
 import { Link } from "react-router-dom";
+import { Carousel } from "@/components/Carousel";
+import { CategoryTag } from "@/components/CategoryTag";
 
 import "./Play.scss";
 
@@ -23,18 +26,19 @@ const StoryFactoryCard: FC = () => {
         history.push("/story-factory/1");
       }}
     >
-      <div className="spreader"></div>
+      <CategoryTag category="play" className="play-category-tag" />
+      <FavoriteButton fid="category-story factory" />
       <img src={FactoryWidget} />
       <IonText>
-        <h1 className="ion-text-center">
+        <h1 className="text-4xl semibold">
           <FormattedMessage
             id="common.storyFactory"
             defaultMessage="Story Factory!"
             description="Standalone label for Story Factory"
           />
         </h1>
+        {!isImmersive && <p className="text-3xl color-nube">Story Factory</p>}
       </IonText>
-      {!isImmersive && <h2>Story Factory</h2>}
     </div>
   );
 };
@@ -47,20 +51,23 @@ const IntruderCard: FC = () => {
       id="intruderCard"
       className="card"
       onClick={() => {
-        history.push("/intruder/intro");
+        history.push("/intruder-game/intro");
       }}
     >
-      <div className="spreader"></div>
+      <CategoryTag category="play" className="play-category-tag" />
+      <FavoriteButton fid="category-the intruder" />
       <img src={MagnifyingGlass} />
-      <h1>
-        <FormattedMessage
-          id="common.theIntruder"
-          defaultMessage="The Intruder"
-          description="Standalone label for The Intruder"
-        />
-      </h1>
+      <IonText>
+        <h1 className="text-4xl semibold">
+          <FormattedMessage
+            id="common.theIntruder"
+            defaultMessage="The Intruder"
+            description="Standalone label for The Intruder"
+          />
+        </h1>
 
-      {!isImmersive && <h2>The Intruder</h2>}
+        {!isImmersive && <p className="text-3xl color-nube">The Intruder</p>}
+      </IonText>
     </div>
   );
 };
@@ -78,15 +85,19 @@ const CountCard: FC = () => {
         );
       }}
     >
-      <div className="spreader"></div>
-      <h1>
-        <FormattedMessage
-          id="common.countWithMe"
-          defaultMessage="Count with Me"
-          description="Standalone label for Count with Me"
-        />
-      </h1>
-      {!isImmersive && <h2>Count with Me</h2>}
+      <CategoryTag category="play" className="play-category-tag" />
+      <FavoriteButton fid="category-count with me" />
+      <img src={CountWithMe} />
+      <IonText>
+        <h1 className="text-4xl semibold">
+          <FormattedMessage
+            id="common.countWithMe"
+            defaultMessage="Count with Me"
+            description="Standalone label for Count with Me"
+          />
+        </h1>
+        {!isImmersive && <p className="text-3xl color-nube">Count with Me</p>}
+      </IonText>
     </div>
   );
 };
@@ -97,9 +108,11 @@ export const Play: FC = () => {
     <div id="playPage">
       <PlayHeader />
       <div id="playCardWrapper">
-        <StoryFactoryCard />
-        <IntruderCard />
-        <CountCard />
+        <Carousel height={440} slidesToShow={2}>
+          <StoryFactoryCard />
+          <IntruderCard />
+          <CountCard />
+        </Carousel>
       </div>
     </div>
   );

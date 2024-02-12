@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { Carousel } from "@/components/Carousel";
+import { ContentCard } from "@/components/ContentCard";
 import {
   IonButton,
   IonCard,
@@ -21,16 +23,6 @@ import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
-import StemIcon from "@/assets/icons/stem.svg?react";
-import { StoriesCard } from "@/components/StoriesCard";
-import SmallBook from "@/assets/icons/small_book.svg?react";
-import SmallArt from "@/assets/icons/small_art.svg?react";
-import SmallCommunity from "@/assets/icons/small_community.svg?react";
-import SmallFlower from "@/assets/icons/small_flower.svg?react";
-import SmallPlay from "@/assets/icons/small_play.svg?react";
-import Heart from "@/assets/icons/heart.svg?react";
-import Star from "@/assets/icons/star.svg?react";
-import { gameControllerOutline } from "ionicons/icons";
 import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
@@ -61,24 +53,165 @@ const WaveIcon: FC<WaveIcon> = ({
             history.push(link);
           }
         }}
-        className={`icon${link ? " has-link" : ""}`}
+        className={`icon${link ? " has-link" : ""} margin-bottom-1`}
         style={{ backgroundColor }}
       >
         {icon}
       </div>
       <IonText>
-        <h2 className="color-selva">
+        <h2 className="text-2xl semibold color-suelo">
           <FormattedMessage
             defaultMessage={reactintlId}
             description="icon label"
             id={reactintlId}
           />
         </h2>
-        {!isImmersive && <h2>{englishLabel}</h2>}
+        {!isImmersive && (
+          <h2 className="text-lg color-suelo">{englishLabel}</h2>
+        )}
       </IonText>
     </span>
   );
 };
+
+const wellnessCards = [
+  {
+    category: "wellness",
+    title: "Afirmaciones",
+    titleEn: "Affirmations",
+    cover: "/assets/img/drum_image.png",
+  },
+  {
+    category: "wellness",
+    title: "Respirando hondo",
+    titleEn: "Breathing deeply",
+    cover: "/assets/img/dance_image.png",
+  },
+  {
+    category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/band_image.png",
+    isLocked: true,
+  },
+  {
+    category: "wellness",
+    title: "Mantras musicales",
+    titleEn: "Musical mantras",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: true,
+  },
+  {
+    category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: true,
+  },
+];
+
+const playCards = [
+  {
+    category: "play",
+    title: "Fábrica de cuentos",
+    titleEn: "Story Factory",
+    cover: "/assets/img/card_play_image.png",
+    className: "other-card-image small",
+  },
+  {
+    category: "play",
+    title: "El intruso",
+    titleEn: "The intruder",
+    cover: "/assets/img/mountain_image.png",
+    className: "other-card-image",
+  },
+  {
+    category: "play",
+    title: "Cuenta conmigo",
+    titleEn: "Count with me",
+    cover: "/assets/img/dance_image.png",
+    className: "other-card-image",
+  },
+  {
+    category: "play",
+    title: "Las Cestas",
+    titleEn: "The baskets",
+    cover: "/assets/img/band_image.png",
+    isLocked: true,
+  },
+  {
+    category: "play",
+    title: "Afirmaciones",
+    titleEn: "Affirmations",
+    cover: "/assets/img/card_play_image.png",
+    isLocked: true,
+  },
+];
+
+const communityCards = [
+  {
+    category: "community",
+    title: "¿Qué harías?",
+    titleEn: "What would you do?",
+    cover: "/assets/img/horse_image.png",
+  },
+  {
+    category: "community",
+    title: "Cuéntame sobre...",
+    titleEn: "Tell me about...",
+    cover: "/assets/img/card_community_image.png",
+  },
+  {
+    category: "community",
+    title: "Cuentos y dichos",
+    titleEn: "Stories and sayings",
+    cover: "/assets/img/star_image.png",
+  },
+  {
+    category: "community",
+    title: "Veo Veo",
+    titleEn: "I Spy",
+    cover: "/assets/img/flowers_image.png",
+  },
+  {
+    category: "community",
+    title: "Veo Veo",
+    titleEn: "I Spy",
+    cover: "/assets/img/flowers_image.png",
+    isLocked: true,
+  },
+];
+
+const storyCards = [
+  {
+    category: "stories",
+    title: "Qué es lo que te gusta de ti mismo?",
+    titleEn: "What do you like about yourself?",
+    cover: "/assets/img/drum_image.png",
+    isLocked: false,
+  },
+  {
+    category: "stories",
+    title: "Cara de Catrina",
+    titleEn: "Catrina for a Day",
+    cover: "/assets/img/dance_image.png",
+    isLocked: false,
+  },
+  {
+    category: "stories",
+    title: "Soy de...",
+    titleEn: "I'm From...",
+    cover: "/assets/img/band_image.png",
+    isLocked: false,
+  },
+  {
+    category: "stories",
+    title: "El esqueleto travieso",
+    titleEn: "The Mischievous Skeleton",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: false,
+  },
+];
 
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
@@ -88,26 +221,26 @@ export const StudentDashboard: FC = () => {
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
-      englishLabel: "stories",
+      englishLabel: "Stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
     {
       reactintlId: "common.wellness",
-      englishLabel: "wellness",
+      englishLabel: "Wellness",
       backgroundColor: "#ac217b",
       icon: <WellnessIcon />,
     },
     {
       reactintlId: "common.play",
-      englishLabel: "play",
+      englishLabel: "Play",
       link: "/play",
       backgroundColor: "#ff5709",
       icon: <PlayIcon />,
     },
     {
       reactintlId: "common.community",
-      englishLabel: "community",
+      englishLabel: "Community",
       link: "/community",
       backgroundColor: "#23beb9",
       icon: <CommunityIcon />,
@@ -119,31 +252,36 @@ export const StudentDashboard: FC = () => {
       <div
         className="cards-title background-pattern"
         style={{
-          paddingBottom: "2rem",
-          paddingTop: "2rem",
+          paddingBottom: "4rem",
+          paddingTop: "4rem",
           paddingLeft: 100,
+          paddingRight: 100,
         }}
       >
-        <h1>
+        <h1 className="text-5xl color-suelo">
           <FormattedMessage
             id="landingPage.welcome"
             defaultMessage="Hello {name}!"
             values={{ name }}
           />
         </h1>
-        {!isImmersive && <p>Hello {name}!</p>}
+        {!isImmersive && (
+          <p className="text-3xl color-english">Hello {name}!</p>
+        )}
       </div>
 
-      <div className="main-block">
-        <div className="icons-title">
+      <div style={{ marginLeft: 100, marginRight: 100 }}>
+        <div className="icons-title margin-top-3">
           <IonText>
-            <h1>
+            <h1 className="text-5xl color-suelo">
               <FormattedMessage
                 id="landingPage.catgories"
                 defaultMessage="Categories"
               />
             </h1>
-            {!isImmersive && <h2>Categories</h2>}
+            {!isImmersive && (
+              <p className="text-3xl color-english">Categories</p>
+            )}
           </IonText>
         </div>
         {/* icons */}
@@ -168,347 +306,83 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <IonText>
-            <h1 className="color-selva">
+            <h1 className="text-5xl color-suelo">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
-            {!isImmersive && <h2>Stories</h2>}
+            {!isImmersive && <p className="text-3xl color-english">Stories</p>}
           </IonText>
-
-          <div
-            className="hide-scrollbar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              overflowX: "scroll",
-            }}
-          >
-            <StoriesCard
-              title={"Qué es lo que te gusta de ti mismo?"}
-              subtitle={"What do you like about yourself?"}
-              cover={"/assets/img/drum_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"Cara de Catrina"}
-              subtitle={"Catrina for a Day"}
-              cover={"/assets/img/dance_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045A1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"Soy de..."}
-              subtitle={"I'm From..."}
-              cover={"/assets/img/band_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"El esqueleto travieso"}
-              subtitle={"The Mischievous Skeleton"}
-              cover={"/assets/img/mountain_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"Qué es lo que te gusta de ti mismo?"}
-              subtitle={"What do you like about yourself?"}
-              cover={"/assets/img/drum_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"Cara de Catrina"}
-              subtitle={"Catrina for a Day"}
-              cover={"/assets/img/dance_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045A1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"Soy de..."}
-              subtitle={"I'm From..."}
-              cover={"/assets/img/band_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
-
-            <StoriesCard
-              title={"El esqueleto travieso"}
-              subtitle={"The Mischievous Skeleton"}
-              cover={"/assets/img/mountain_image.png"}
-              icon={<SmallBook />}
-              iconBackroundColor="#0045a1"
-              heart={<Heart />}
-              //rating={[<Star />, <Star />, <Star />]}
-              className="other-card-image"
-              isLocked={false}
-            />
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {storyCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
           </div>
         </div>
-        <br />
-        <br />
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
-            <h1 className="color-selva">
+            <h1 className="text-5xl color-suelo">
               <FormattedMessage
                 id="common.wellness"
                 defaultMessage="Wellness"
               />
             </h1>
-            {!isImmersive && <h2>Wellness</h2>}
+            {!isImmersive && <p className="text-3xl color-english">Wellness</p>}
           </IonText>
-
-          <div
-            className="hide-scrollbar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              overflowX: "scroll",
-            }}
-          >
-            <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/drum_image.png"}
-              icon={<SmallFlower />}
-              iconBackroundColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Respirando hondo"}
-              subtitle={"Breathing deeply"}
-              cover={"/assets/img/dance_image.png"}
-              icon={<SmallFlower />}
-              iconBackroundColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Pausa de yoga"}
-              subtitle={"Yoga break"}
-              cover={"/assets/img/band_image.png"}
-              icon={<SmallFlower />}
-              iconBackroundColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
-
-            <StoriesCard
-              title={"Mantras musicales"}
-              subtitle={"Musical mantras"}
-              cover={"/assets/img/mountain_image.png"}
-              icon={<SmallFlower />}
-              iconBackroundColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
-
-            <StoriesCard
-              title={"Pausa de yoga"}
-              subtitle={"Yoga break"}
-              cover={"/assets/img/mountain_image.png"}
-              icon={<SmallFlower />}
-              iconBackroundColor="#AC217B"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {wellnessCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
           </div>
         </div>
-        <br />
-        <br />
+
         {/* play */}
         <div className="other-story-cards">
           <IonText>
             <Link to="/play" className="no-text-decoration">
-              <h1 className="color-selva">
+              <h1 className="text-5xl color-suelo">
                 <FormattedMessage
                   id="common.play"
                   defaultMessage="Play"
                   description="Standalone label for Play"
                 />
               </h1>
-              {!isImmersive && <h2>Play</h2>}
+              {!isImmersive && <p className="text-3xl color-english">Play</p>}
             </Link>
           </IonText>
-
-          <div
-            className="hide-scrollbar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              overflowX: "scroll",
-            }}
-          >
-            <StoriesCard
-              title={"Fábrica de cuentos"}
-              subtitle={"Story Factory"}
-              cover={"/assets/img/card_play_image.png"}
-              icon={<SmallPlay />}
-              iconBackroundColor="#F48722"
-              heart={<Heart />}
-              className="other-card-image small"
-            />
-
-            <StoriesCard
-              title={"El intruso"}
-              subtitle={"The intruder"}
-              cover={"/assets/img/mountain_image.png"}
-              icon={<SmallPlay />}
-              iconBackroundColor="#F48722"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Cuenta conmigo"}
-              subtitle={"Count with me"}
-              cover={"/assets/img/dance_image.png"}
-              icon={<SmallPlay />}
-              iconBackroundColor="#F48722"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Las Cestas"}
-              subtitle={"The baskets"}
-              cover={"/assets/img/band_image.png"}
-              icon={<SmallPlay />}
-              iconBackroundColor="#F48722"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
-
-            <StoriesCard
-              title={"Afirmaciones"}
-              subtitle={"Affirmations"}
-              cover={"/assets/img/card_play_image.png"}
-              icon={<SmallPlay />}
-              iconBackroundColor="#F48722"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {playCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
           </div>
         </div>
-        <br />
-        <br />
+
         {/* Comunidad */}
         <div className="other-story-cards">
           <Link to="/community" className="no-text-decoration">
             <IonText>
-              <h1 className="color-selva">
+              <h1 className="text-5xl color-suelo">
                 <FormattedMessage
                   id="common.community"
                   defaultMessage="Community"
                 />
               </h1>
-              {!isImmersive && <h2>Community</h2>}
+              {!isImmersive && (
+                <p className="text-3xl color-english">Community</p>
+              )}
             </IonText>
           </Link>
-
-          <div
-            className="hide-scrollbar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              overflowX: "scroll",
-            }}
-          >
-            <StoriesCard
-              title={"¿Qué harías?"}
-              subtitle={"What would you do?"}
-              cover={"/assets/img/horse_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroundColor="#23beb9"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Cuéntame sobre..."}
-              subtitle={"Tell me about..."}
-              cover={"/assets/img/card_community_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroundColor="#23beb9"
-              heart={<Heart />}
-              className="other-card-image"
-            />
-
-            <StoriesCard
-              title={"Cuentos y dichos"}
-              subtitle={"Stories and sayings"}
-              cover={"/assets/img/star_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroundColor="#23beb9"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
-
-            <StoriesCard
-              title={"Veo Veo"}
-              subtitle={"I Spy"}
-              cover={"/assets/img/flowers_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroundColor="#23beb9"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
-
-            <StoriesCard
-              title={"Veo Veo"}
-              subtitle={"I Spy"}
-              cover={"/assets/img/flowers_image.png"}
-              icon={<SmallCommunity />}
-              iconBackroundColor="#23beb9"
-              heart={<Heart />}
-              className="other-card-image"
-              isLocked={true}
-            />
+          <div className="margin-top-2 margin-bottom-3">
+            <Carousel height={274}>
+              {communityCards.map((c, index) => (
+                <ContentCard {...c} key={index} />
+              ))}
+            </Carousel>
           </div>
         </div>
       </div>

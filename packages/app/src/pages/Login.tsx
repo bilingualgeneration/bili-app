@@ -56,48 +56,53 @@ const Login: React.FC = () => {
           history.goBack();
         }}
       />
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ maxWidth: 580, margin: "auto" }}
+      >
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="ion-margin-top">
-                <Input
-                  label={intl.formatMessage({
-                    id: "common.email",
-                    defaultMessage: "Your email",
-                    description: "Input label for email",
-                  })}
-                  labelPlacement="above"
-                  required={true}
-                  name="email"
-                  control={control}
-                  fill="outline"
-                  helperText=""
-                  testId="login-email-input"
-                  type="email"
-                />
-              </div>
+              <div className="text-md semibold color-barro">
+                <div>
+                  <Input
+                    label={intl.formatMessage({
+                      id: "common.email",
+                      defaultMessage: "Your email",
+                      description: "Input label for email",
+                    })}
+                    labelPlacement="above"
+                    required={true}
+                    name="email"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="login-email-input"
+                    type="email"
+                  />
+                </div>
 
-              <div className="ion-margin-top">
-                <Input
-                  label={intl.formatMessage({
-                    id: "common.password",
-                    defaultMessage: "Password",
-                    description: "Input label for user's password",
-                  })}
-                  labelPlacement="above"
-                  required={true}
-                  name="password"
-                  control={control}
-                  fill="outline"
-                  helperText=""
-                  testId="login-password-input"
-                  type="password"
-                />
+                <div className="ion-margin-top">
+                  <Input
+                    label={intl.formatMessage({
+                      id: "common.password",
+                      defaultMessage: "Password",
+                      description: "Input label for user's password",
+                    })}
+                    labelPlacement="above"
+                    required={true}
+                    name="password"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="login-password-input"
+                    type="password"
+                  />
+                </div>
               </div>
-
               <div className="ion-margin-top">
                 <IonButton
+                  className="margin-vertical-3"
                   data-testid="account-credentials-continue-button"
                   disabled={!isValid}
                   expand="block"
@@ -111,7 +116,7 @@ const Login: React.FC = () => {
                   />
                 </IonButton>
               </div>
-              <div className="ion-text-center ion-margin-top">
+              <div className="ion-text-center ion-margin-top text-sm">
                 <IonText color="medium">
                   <FormattedMessage
                     id="common.noAccount"
@@ -120,7 +125,7 @@ const Login: React.FC = () => {
                   />{" "}
                   <IonText>
                     {" "}
-                    <a href="/sign-up">
+                    <a href="/sign-up" className="semibold" style={{}}>
                       <FormattedMessage
                         id="common.signUp"
                         defaultMessage="Sign Up"

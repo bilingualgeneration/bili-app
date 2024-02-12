@@ -134,9 +134,9 @@ export const TeacherAbout: FC = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="ion-padding-bottom">
+        <div className="margin-bottom-3">
           <IonText className="ion-text-center">
-            <h1>
+            <h1 className="text-3xl semibold color-suelo">
               <FormattedMessage
                 id="signUpTeacher.aboutTitle"
                 defaultMessage="Tell us about yourself"
@@ -145,12 +145,12 @@ export const TeacherAbout: FC = () => {
             </h1>
           </IonText>
         </div>
-        <div className="ion-margin-top">
+        <div className="margin-bottom-1">
           <IonText>
-            <h2>
+            <h2 className="text-xl semibold color-suelo">
               <FormattedMessage
                 id="signUpTeacher.aboutGrades"
-                defaultMessage="WHat grade(s) do you work with?"
+                defaultMessage="What grade(s) do you work with?"
                 description="Title above area where teachers can check off what grades they teach"
               />
             </h2>
@@ -158,7 +158,7 @@ export const TeacherAbout: FC = () => {
         </div>
         <div>
           <IonGrid>
-            <IonRow>
+            <IonRow className="text-md color-suelo">
               <MultipleCheckbox
                 control={control}
                 labelPlacement="end"
@@ -169,9 +169,9 @@ export const TeacherAbout: FC = () => {
             </IonRow>
           </IonGrid>
         </div>
-        <div className="ion-margin-top">
+        <div className="margin-top-3 margin-bottom-1">
           <IonText>
-            <h2>
+            <h2 className="text-xl semibold color-suelo">
               <FormattedMessage
                 id="signUpTeacher.role"
                 defaultMessage="What is your role?"
@@ -182,7 +182,7 @@ export const TeacherAbout: FC = () => {
         </div>
         <div>
           <IonGrid>
-            <IonRow>
+            <IonRow className="text-md color-suelo">
               <MultipleCheckbox
                 control={control}
                 labelPlacement="end"
@@ -195,7 +195,7 @@ export const TeacherAbout: FC = () => {
         </div>
 
         <IonButton
-          className="ion-margin-top"
+          className="margin-top-2"
           expand="block"
           shape="round"
           type="submit"

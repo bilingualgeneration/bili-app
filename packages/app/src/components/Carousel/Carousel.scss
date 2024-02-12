@@ -1,0 +1,27 @@
+.carousel-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow-x: clip;
+  overflow-y: hidden;
+
+  .slick-track {
+    > * {
+      margin: 0 4px;
+    }
+  }
+}
+
+.carousel-arrow-button {
+  position: absolute;
+  z-index: 9;
+  margin-top: -30px;
+  &.backward {
+    left: 0;
+    margin-left: -20px;
+  }
+
+  &.forward {
+    right: 0;
+    margin-right: -20px;
+  }
+}
