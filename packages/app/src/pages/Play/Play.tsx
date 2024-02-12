@@ -51,7 +51,7 @@ const IntruderCard: FC = () => {
       id="intruderCard"
       className="card"
       onClick={() => {
-        history.push("/intruder/intro");
+        history.push("/intruder-game/intro");
       }}
     >
       <CategoryTag category="play" className="play-category-tag" />

@@ -174,7 +174,7 @@ export const IntruderIntro: React.FC = () => {
               expand="block"
               shape="round"
               type="button"
-              href="/intruder/select"
+              href="/intruder-game/select"
             >
               <div>
                 <div className="story-button-bold">

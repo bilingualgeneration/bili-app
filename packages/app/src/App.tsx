@@ -51,14 +51,6 @@ import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
-
-/*
-import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
-import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
-import { IntruderGame } from "@/pages/Intruder/IntruderGame";
-import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
-
-*/
 import { WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 
 import { PackSelect } from "@/components/PackSelect";
@@ -413,7 +405,7 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/intruder/intro"
+            path="/intruder-game/intro"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
@@ -424,14 +416,14 @@ const Router: React.FC = () => {
           />
           <Route
             exact
-            path="/intruder/select"
+            path="/intruder-game/select"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <PackSelect
                     headerComponent={<PlayHeader />}
                     module="intruder-game"
-                    packId="dc6fd688-cbb9-4467-ba41-aad105c5ea40"
+                    packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
                     translatedTitle={
                       <FormattedMessage
                         id="common.intruder"
@@ -447,19 +439,7 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/intruder/selectx"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
-                  <IntruderSelect />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/intruder/play/:pack_id"
+            path="/intruder-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
