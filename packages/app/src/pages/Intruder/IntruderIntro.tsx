@@ -36,7 +36,16 @@ export const IntruderIntro: React.FC = () => {
     setCallback(() => () => {
       setAudioPlayed(true);
     });
-    addAudio([audio_es_file, audio_en_file]);
+    let sounds = [];
+    if (isInclusive) {
+      sounds.push(audio_es_inc_file);
+    } else {
+      sounds.push(audio_es_file);
+    }
+    if (!isImmersive) {
+      sounds.push(audio_en_file);
+    }
+    addAudio(sounds);
   }, []);
   const history = useHistory();
   /*
