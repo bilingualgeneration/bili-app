@@ -14,13 +14,14 @@ interface DeckProps {
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
   const { isImmersive } = useProfile();
+  const [swiped, setSwiped] = useState(() => new Set<number>());
   const [offset, incOffset] = useState(1);
 
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   const [props, api] = useSprings(cards.length, (i) => ({
     x: -2 - i * 5, // Initialize x position of each card
-    y: 10 - i * 10, // Initialize y position of each card
+    y: 10 - i * 20, // Initialize y position of each card
     scale: 1, // Initialize scale of each card
     rot: 0, // Initialize rotation angle of each card
     zIndex: cards.length - i, // Initialize zIndex of each card
@@ -37,12 +38,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       direction: [xDir], // Direction of movement
     }) => {
       const dir = xDir < 0 ? -1 : 1;
-
-      /* After detecting that the drag event has ended and the horizontal movement exceeds the threshold, 
-      it updates the offset state to shift the cards forward (incOffset((offset + 1) % 5)), and then 
-      it uses api.start() to animate the swiped card and shift other cards forward accordingly. 
-      The animation parameters are set based on whether the current card is the swiped card or not. */
-
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
         incOffset((offset + 1) % 5);
@@ -52,10 +47,9 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         setTimeout(() => {
           api.start((i) => {
             if (i === index) {
-              // if the current card (i) is the same as the swiped card (index). If it is, it means this is the card that was just swiped.
               return {
-                x: -52,
-                y: -90,
+                x: -22,
+                y: -70,
                 scale: 1,
                 rot: 0,
                 zIndex: 0,
@@ -65,7 +59,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               const distance = (i - index + cards.length) % cards.length;
               return {
                 x: -2 - distance * 5,
-                y: 10 - distance * 10,
+                y: 10 - distance * 20,
                 scale: 1,
                 rot: 0,
                 zIndex: cards.length - distance,
@@ -108,7 +102,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   return (
     <>
       <div className={styles.container}>
-        {/* Deck component renders an animated card for each item in the cards array, using the map function: */}
+        {/* Render each card with animated properties */}
         {props.map(
           (
             { x, y, rot, scale, zIndex },
