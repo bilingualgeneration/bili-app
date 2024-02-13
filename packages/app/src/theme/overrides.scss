@@ -56,15 +56,12 @@ ion-input[type="date"] {
 }
 
 html {
-  background-color: white;
+  background-color: #d3eae8;
 }
 
-ion-content::part(background) {
-  background: white;
-}
-
-ion-app::-webkit-scrollbar {
-  display: none;
+ion-content {
+  --background: url("/assets/img/background.png") no-repeat center center /
+    cover;
 }
 
 #header {

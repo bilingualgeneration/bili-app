@@ -47,10 +47,15 @@ export const FactsPage: React.FC<FactsPageProps> = ({
     if (isImmersive) {
       if (isInclusive) {
         addAudio([audio_es_inc_file]);
+      } else {
+        addAudio([audio_es_file]);
       }
-      addAudio([audio_es_file]);
     } else {
-      addAudio([audio_es_file, audio_en_file]);
+      if (isInclusive) {
+        addAudio([audio_es_inc_file, audio_en_file]);
+      } else {
+        addAudio([audio_es_file, audio_en_file]);
+      }
     }
   }, []);
   const history = useHistory();
