@@ -6,7 +6,6 @@ import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton } from "@ionic/react";
 
 import styles from "./styles.module.css";
-import { off } from "firebase/database";
 
 interface DeckProps {
   cards: { en: string; es: string }[]; // Adjust the type based on data structure
@@ -131,10 +130,14 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               }}
             >
               <div className={styles.card_content}>
-                <h1 className={styles.es}>{cards[i % cards.length].es}</h1>
+                <h1 className={`${styles.es} text-3xl semibold`}>
+                  {cards[i % cards.length].es}
+                </h1>
                 {/* Render English content if not immersive */}
                 {!isImmersive && (
-                  <p className="color-suelo">{cards[i % cards.length].en}</p>
+                  <p className="text-lg color-suelo">
+                    {cards[i % cards.length].en}
+                  </p>
                 )}
               </div>
             </animated.div>

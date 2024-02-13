@@ -52,14 +52,14 @@ export const WouldDoGame: FC = () => {
     <div>
       <div style={{ padding: "4px 120px 0px 120px" }}>
         <IonText>
-          <h1>
+          <h1 className="text-5xl margin-top-1">
             <FormattedMessage
               id="wouldDo.title"
               defaultMessage={"What would you do?"}
               description={"Title of '¿Que harías?' page"}
             />
           </h1>
-          {!isImmersive && <p>What would you do?</p>}
+          {!isImmersive && <p className="text-3xl">What would you do?</p>}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}

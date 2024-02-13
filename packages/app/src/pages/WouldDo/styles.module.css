@@ -1,13 +1,11 @@
 .container {
-  cursor:
-    url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
-      39 39,
-    auto;
+  cursor: grab;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
-  height: 60vh;
+  height: 50vh;
   max-height: 100%;
+  margin-bottom: 3rem;
   /* overflow: hidden; */
   position: relative;
   /* padding: 10%; */
@@ -16,8 +14,6 @@
 .card {
   position: absolute;
   padding: 40px;
-  margin-top: 20%;
-  margin-bottom: 5%;
   width: 625.845px;
   height: 400px;
   /* will-change: transform; */
