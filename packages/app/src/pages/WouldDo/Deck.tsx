@@ -3,9 +3,10 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
-import { IonButton } from "@ionic/react";
+import { IonButton, IonText } from "@ionic/react";
 
 import styles from "./styles.module.css";
+import { FormattedMessage } from "react-intl";
 
 interface DeckProps {
   cards: { en: string; es: string }[]; // Adjust the type based on data structure
@@ -151,6 +152,10 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         >
           <img className="sound-icon" src={volumeButton} />
         </IonButton>
+        <IonText>
+          <h1 className="text-3xl semibold color-suelo">Lee</h1>
+          {!isImmersive && <p className="text-lg color-english">Read</p>}
+        </IonText>
       </div>
     </>
   );
