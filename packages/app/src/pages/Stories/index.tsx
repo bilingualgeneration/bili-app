@@ -3,3 +3,4 @@ export * from "./LetterSegment";
 export * from "./StoriesDragGame";
 export * from "./StoriesDragGameLoader";
 export * from "./letters";
+export * from "./ItemTypes";

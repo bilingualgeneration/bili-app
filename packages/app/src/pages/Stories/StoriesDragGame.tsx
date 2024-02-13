@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import update from "immutability-helper";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider, useDrag } from "react-dnd";
 import { LetterSegment } from "./LetterSegment";
@@ -6,9 +7,9 @@ import { DropZone } from "./DropZone";
 import { IonText } from "@ionic/react";
 import { useProfile } from "@/contexts/ProfileContext";
 import "./Stories.scss";
+import { Container } from "./Container";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
-import { letters } from "./letters";
 
 interface LetterAudio {
   url: string;
@@ -89,37 +90,70 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
     }
   };
 
+  const [letters, setLetters] = useState<{
+    [key: string]: {
+      top: number;
+      left: number;
+      title: string;
+    };
+  }>({
+    a: { top: 20, left: 80, title: "Drag me around" },
+    b: { top: 180, left: 20, title: "Drag me too" },
+  });
+
+  const moveBox = (id: string, left: number, top: number) => {
+    setLetters(
+      update(letters, {
+        [id]: {
+          $merge: { left, top },
+        },
+      }),
+    );
+  };
+
+  const [, drop] = useDrag(
+    () => ({
+      type: "LETTER",
+      item: { id: "letter", index: 0, left: 0, top: 0 },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [],
+  );
+
   return (
     <DndProvider backend={HTML5Backend}>
-      <div id="stories-dnd">
-        <IonText class="ion-text-center">
-          {isInclusive ? (
-            isImmersive ? (
-              <h1>
-                Arrastra y suelta las letras para formar la palabra "amigues".
-              </h1>
-            ) : (
-              <h1>
-                Arrastra y suelta las letras para formar la palabra "amigues".
-              </h1>
-            )
-          ) : isImmersive ? (
+      <IonText class="ion-text-center">
+        {isInclusive ? (
+          isImmersive ? (
             <h1>
-              Arrastra y suelta las letras para formar la palabra "amigos".
+              Arrastra y suelta las letras para formar la palabra "amigues".
             </h1>
           ) : (
             <h1>
               Arrastra y suelta las letras para formar la palabra "amigues".
             </h1>
-          )}
+          )
+        ) : isImmersive ? (
+          <h1>Arrastra y suelta las letras para formar la palabra "amigos".</h1>
+        ) : (
+          <h1>
+            Arrastra y suelta las letras para formar la palabra "amigues".
+          </h1>
+        )}
 
-          {!isImmersive && (
-            <p>
-              Drag and drop the letters to form the word "
-              {isInclusive ? "amigues" : "amigos"}."
-            </p>
-          )}
-        </IonText>
+        {!isImmersive && (
+          <p>
+            Drag and drop the letters to form the word "
+            {isInclusive ? "amigues" : "amigos"}."
+          </p>
+        )}
+      </IonText>
+
+      <div className="draggable-container-1"></div>
+
+      <div id="stories-dnd">
         <div className="dropzone-container">
           {chosenLanguageData.map((letter, index) => (
             <DropZone

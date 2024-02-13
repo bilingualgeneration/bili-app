@@ -1,28 +1,25 @@
 #stories-dnd {
+  display: flex;
+  justify-content: center;
   position: relative;
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .game-container {
-    // position: relative;
-    height: 50vh;
-    width: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 100%;
 
   .dropzone-container {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 65vh;
-    width: 100%;
+    height: 20vh;
+    width: 65%;
     overflow: hidden; /* Ensure the draggable letters don't overflow the container */
   }
 
-  .draggable-letter {
+  .draggable-container {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +29,7 @@
 
 #dropzone-dnd {
   .dropzone {
-    /* Your drop zone styling */
+    /* drop zone styling */
     height: 100px;
     width: 100px;
     display: flex;
