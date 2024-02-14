@@ -27,11 +27,13 @@ export const IntruderIntro: React.FC = () => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
 
+  // include this to stop all audio when the component unloads
   useEffect(() => {
     return () => {
       clearAudio();
     };
   }, []);
+
   useEffect(() => {
     setCallback(() => () => {
       setAudioPlayed(true);

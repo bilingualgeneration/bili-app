@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export interface AudioManager {
   addAudio: any;
@@ -23,6 +23,12 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [audios, setAudios] = useState<any[]>([]);
   const [callback, setCallback] = useState<any>(() => {});
+  const audiosRef = useRef(audios);
+
+  useEffect(() => {
+    audiosRef.current = audios;
+  }, [audios]);
+
   useEffect(() => {
     if (audios.length > 0) {
       audios[0].onended = () => {
@@ -46,7 +52,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
 
   const clearAudio = () => {
     // todo: not working
-    audios.forEach((a) => {
+    audiosRef.current.forEach((a) => {
       a.pause();
     });
     setAudios([]);
