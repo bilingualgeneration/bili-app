@@ -21,7 +21,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
   const [props, api] = useSprings(cards.length, (i) => ({
     x: -2 - i * 5, // Initialize x position of each card
-    y: 10 - i * 20, // Initialize y position of each card
+    y: 10 - i * 10, // Initialize y position of each card
     scale: 1, // Initialize scale of each card
     rot: 0, // Initialize rotation angle of each card
     zIndex: cards.length - i, // Initialize zIndex of each card
@@ -62,7 +62,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                 (i - (swiped_card_index + 1) + cards.length) % cards.length; // calculates the distance between the current card (i) and the swiped card (index)
               return {
                 x: -2 - distance * 5,
-                y: 10 - distance * 20,
+                y: 10 - distance * 10,
                 scale: 1,
                 rot: 0,
                 zIndex: cards.length - distance,
@@ -73,6 +73,18 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         }, 600);
         return;
       }
+
+      // if (mx === -150) {
+      //   // If the card is dragged to its maximum distance
+      //   // Perform additional animation here
+      //   api.start((i) => {
+      //     if (swiped_card_index === i) {
+      //       return {
+      //         zIndex: 0
+      //       };
+      //     }
+      //   });
+      // }
 
       // Logic for animating the card while it's being dragged
       api.start((i) => {
