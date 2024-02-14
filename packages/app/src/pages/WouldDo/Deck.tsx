@@ -74,18 +74,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         return;
       }
 
-      // if (mx === -150) {
-      //   // If the card is dragged to its maximum distance
-      //   // Perform additional animation here
-      //   api.start((i) => {
-      //     if (swiped_card_index === i) {
-      //       return {
-      //         zIndex: 0
-      //       };
-      //     }
-      //   });
-      // }
-
       // Logic for animating the card while it's being dragged
       api.start((i) => {
         if (swiped_card_index !== i) {
