@@ -25,6 +25,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     rot: 0, // Initialize rotation angle of each card
     zIndex: cards.length - i, // Initialize zIndex of each card
     delay: i * 100, // Delay before starting the animation
+    hidden: i > 5 ? false : true,
   }));
 
   // Binding useDrag() hook to each card using bind function
@@ -108,13 +109,14 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const handleWordAudioClick = () => {
     // console.log(cards[offset - 1]);
   };
+
   return (
     <>
       <div className={styles.container}>
         {/* Deck component renders an animated card for each item in the cards array, using the map function: */}
         {props.map(
           (
-            { x, y, rot, scale, zIndex },
+            { x, y, rot, scale, zIndex, hidden },
             i, // Index of the card
           ) => (
             <animated.div
@@ -126,6 +128,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                 x, // Apply x position
                 y, // Apply y position (slight vertical offset)
                 zIndex, // Apply zIndex
+                display: hidden ? "inline-block" : "none",
                 transform: interpolate(
                   // Interpolate rotation and translation properties
                   [rot, x],
