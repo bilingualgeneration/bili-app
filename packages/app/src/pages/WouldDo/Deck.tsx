@@ -106,7 +106,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   );
 
   const handleWordAudioClick = () => {
-    console.log(cards[offset - 1]);
+    // console.log(cards[offset - 1]);
   };
   return (
     <>
