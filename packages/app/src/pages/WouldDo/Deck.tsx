@@ -31,7 +31,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const bind = useDrag(
     // Callback function triggered when a drag event occurs
     ({
-      args: [index], // Index of the dragged card
+      args: [swiped_card_index], // Index of the dragged card
       down, // Flag indicating if the card is being dragged
       movement: [mx], // Movement along the x-axis
       direction: [xDir], // Direction of movement
@@ -45,24 +45,25 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-        incOffset((offset + 1) % 5);
-        console.log("Offset is now: " + offset);
 
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
-            if (i === index) {
+            // console.log(`i is: ${i}`);
+            if (i === swiped_card_index) {
               // if the current card (i) is the same as the swiped card (index). If it is, it means this is the card that was just swiped.
+              // console.log(`index is: ${swiped_card_index}`);
               return {
-                x: -52,
-                y: -90,
+                x: -2 - (cards.length - 1) * 5,
+                y: 10 - (cards.length - 1) * 10,
                 scale: 1,
                 rot: 0,
                 zIndex: 0,
                 delay: 0,
               };
             } else {
-              const distance = (i - index + cards.length) % cards.length;
+              const distance =
+                (i - (swiped_card_index + 1) + cards.length) % cards.length; // calculates the distance between the current card (i) and the swiped card (index)
               return {
                 x: -2 - distance * 5,
                 y: 10 - distance * 10,
@@ -79,7 +80,9 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
       // Logic for animating the card while it's being dragged
       api.start((i) => {
-        if (index !== i) return; // Only update properties for the dragged card
+        if (swiped_card_index !== i) {
+          return; // Skip animation for cards other than the swiped card
+        }
 
         // Limit the maximum distance dragged to the left
         const maxLeftDistance = -150;
