@@ -58,7 +58,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <div className="margin-top-1">
+            <div>
               <IonText>
                 <p className="text-sm color-suelo">
                   {/* todo: don't force type cast */}
