@@ -1,5 +1,9 @@
 @use "sass:math";
 
+.drop-shadow {
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
 .background-card {
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
   padding: 2rem;
