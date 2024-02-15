@@ -1,23 +1,83 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
+import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton, IonText } from "@ionic/react";
 
 import styles from "./styles.module.css";
-import { FormattedMessage } from "react-intl";
+
+interface CardAudio {
+  url: string;
+}
+
+interface CardData {
+  esText?: string;
+  esAudio?: CardAudio;
+  esIncText?: string;
+  esIncAudio?: CardAudio;
+  entext?: string;
+  enAudio?: CardAudio;
+}
+
+interface CardItemData {
+  questions: Array<{
+    question: Array<{
+      language: string;
+      text: string;
+      audio: CardAudio;
+    }>;
+  }>;
+}
 
 interface DeckProps {
-  cards: { en: string; es: string }[]; // Adjust the type based on data structure
+  cards: {
+    en?: { text: string; audio: string };
+    es?: { text: string; audio: string };
+    esInc?: { text: string; audio: string };
+  }[];
 }
 
 export const Deck: FC<DeckProps> = ({ cards }) => {
-  const { isImmersive } = useProfile();
-  const [swiped, setSwiped] = useState(() => new Set<number>());
-  const [offset, incOffset] = useState(1);
-
+  const { isInclusive, isImmersive } = useProfile();
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  q;
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
+
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+    console.log("CARDS:" + cards);
+    // let sounds = cards.map(cardItem);
+    // if (isInclusive) {
+    //   sounds.push(cards.en.audio);
+    // } else {
+    //   sounds.push(audio_es_file);
+    // }
+    // if (!isImmersive) {
+    //   sounds.push(audio_en_file);
+    // }
+    // addAudio(sounds);
+  }, []);
+
+  const handleQuestionAudioClick = (audioSrc: string) => {
+    const audio = new Audio(audioSrc);
+    console.log(audioSrc);
+    try {
+      audio.play();
+    } catch (error) {
+      console.error("Failed to play audio:", error);
+    }
+  };
 
   const [props, api] = useSprings(cards.length, (i) => ({
     x: -2 - i * 5, // Initialize x position of each card
@@ -70,7 +130,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
               };
             }
           });
-        }, 600);
+        }, 500);
         return;
       }
 
@@ -101,10 +161,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     },
   );
 
-  const handleWordAudioClick = () => {
-    // console.log(cards[offset - 1]);
-  };
-
   return (
     <>
       <div className={styles.container}>
@@ -113,45 +169,51 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
           (
             { x, y, rot, scale, zIndex, hidden },
             i, // Index of the card
-          ) => (
-            <animated.div
-              {...bind(i)} // Apply the drag gesture binding
-              key={i}
-              className={styles.card}
-              style={{
-                backgroundColor: colors[i % colors.length], // Cycle through colors
-                x, // Apply x position
-                y, // Apply y position (slight vertical offset)
-                zIndex, // Apply zIndex
-                display: hidden ? "inline-block" : "none",
-                transform: interpolate(
-                  // Interpolate rotation and translation properties
-                  [rot, x],
-                  (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
-                ),
-              }}
-            >
-              <div className={styles.card_content}>
-                <h1 className={`${styles.es} text-3xl semibold`}>
-                  {cards[i % cards.length].es}
-                </h1>
-                {/* Render English content if not immersive */}
-                {!isImmersive && (
-                  <p className="text-lg color-suelo">
-                    {cards[i % cards.length].en}
-                  </p>
-                )}
-              </div>
-            </animated.div>
-          ),
+          ) => {
+            // const { en, es } = cards[i % cards.length];
+            return (
+              <animated.div
+                {...bind(i)} // Apply the drag gesture binding
+                key={i}
+                className={styles.card}
+                style={{
+                  backgroundColor: colors[i % colors.length], // Cycle through colors
+                  x, // Apply x position
+                  y, // Apply y position (slight vertical offset)
+                  zIndex, // Apply zIndex
+                  display: hidden ? "inline-block" : "none",
+                  transform: interpolate(
+                    // Interpolate rotation and translation properties
+                    [rot, x],
+                    (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
+                  ),
+                }}
+              >
+                <div className={styles.card_content}>
+                  {!isInclusive && (
+                    <h1 className={`${styles.es} text-3xl semibold`}>
+                      {cards.esInc.text}
+                    </h1>
+                  )}
+                  {/* <h1 className={`${styles.es} text-3xl semibold`}>{es.text}</h1> */}
+                  {/* Render English content if not immersive */}
+                  {!isImmersive && (
+                    <p className="text-lg color-suelo">"test2"</p>
+                    // <p className="text-lg color-suelo">{en.text}</p>
+                  )}
+                </div>
+              </animated.div>
+            );
+          },
         )}
       </div>
+      {/* Render audio button outside of the card */}
       <div className="sound-button">
         <IonButton
           className="sound-button-background"
-          onClick={handleWordAudioClick}
+          onClick={() => handleQuestionAudioClick(cards.es.audio)}
         >
-          <img className="sound-icon" src={volumeButton} />
+          <img className="sound-icon" src={volumeButton} alt="volume" />
         </IonButton>
         <IonText>
           <h1 className="text-3xl semibold color-suelo">Lee</h1>
