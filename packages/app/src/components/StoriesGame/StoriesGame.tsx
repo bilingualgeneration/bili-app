@@ -26,15 +26,11 @@ import InCorrectImage3 from "packages/app/public/assets/img/incorrect_card_2.png
 import InCorrectImage4 from "packages/app/public/assets/img/incorrect_card_3.png";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import corr_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
-import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
 import { useHistory } from "react-router";
 import { card } from "ionicons/icons";
 
@@ -68,6 +64,8 @@ interface Game {
 
 interface StoriesGameProps {
   game: Game;
+  incorrect_choice_sound: string;
+  correct_choice_sound: string;
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -79,12 +77,16 @@ function shuffleArray<T>(array: T[]): T[] {
   return array;
 }
 
-export const StoriesGame: React.FC<StoriesGameProps> = ({ game: data }) => {
+export const StoriesGame: React.FC<StoriesGameProps> = ({
+  game: data,
+  incorrect_choice_sound,
+  correct_choice_sound,
+}) => {
   const { isImmersive, isInclusive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  const audio_correct = new Audio(corr_card_audio);
-  const audio_incorrect = new Audio(incorrect_card_audio);
+  const audio_correct = new Audio(correct_choice_sound);
+  const audio_incorrect = new Audio(incorrect_choice_sound);
 
   useEffect(() => {
     return () => {
@@ -289,7 +291,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({ game: data }) => {
 
   return (
     <>
-      <div id="intruder-styles">
+      <div id="">
         <div className="margin-top-4 margin-bottom-2">
           <IonText>
             {isInclusive ? (
@@ -311,16 +313,33 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({ game: data }) => {
         </div>
         <div className="">
           <IonGrid>
-            <IonRow>
-              {shuffledCards.map((card, index) => (
+            <IonRow className="ion-justify-content-center">
+              {shuffledCards.slice(0, 2).map((card, index) => (
                 <IonCol
                   className=""
-                  size="6"
-                  key={card.id}
-                  style={cardColors[card.id]}
+                  size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img src={card.image.url} />
+                  <img
+                    key={card.id}
+                    style={cardColors[card.id]}
+                    src={card.image.url}
+                  />
+                </IonCol>
+              ))}
+            </IonRow>
+            <IonRow className="ion-justify-content-center">
+              {shuffledCards.slice(2, 4).map((card, index) => (
+                <IonCol
+                  className=""
+                  size="auto"
+                  onClick={() => handleCardClick(card)}
+                >
+                  <img
+                    key={card.id}
+                    style={cardColors[card.id]}
+                    src={card.image.url}
+                  />
                 </IonCol>
               ))}
             </IonRow>
