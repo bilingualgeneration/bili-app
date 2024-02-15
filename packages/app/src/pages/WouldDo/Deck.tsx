@@ -1,7 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
-import { useSprings, animated, to as interpolate } from "@react-spring/web";
+import {
+  SpringValue,
+  useSprings,
+  animated,
+  to as interpolate,
+} from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton, IonText } from "@ionic/react";
@@ -12,38 +17,22 @@ interface CardAudio {
   url: string;
 }
 
-interface CardData {
-  esText?: string;
-  esAudio?: CardAudio;
-  esIncText?: string;
-  esIncAudio?: CardAudio;
-  entext?: string;
-  enAudio?: CardAudio;
-}
-
-interface CardItemData {
-  questions: Array<{
-    question: Array<{
-      language: string;
-      text: string;
-      audio: CardAudio;
-    }>;
-  }>;
-}
-
 interface DeckProps {
   cards: {
-    en?: { text: string; audio: string };
-    es?: { text: string; audio: string };
-    esInc?: { text: string; audio: string };
+    esText?: string;
+    esAudio?: CardAudio | null;
+    enText?: string;
+    enAudio?: CardAudio | null;
+    esIncText?: string;
+    esIncAudio?: CardAudio | null;
   }[];
+  isImmersive: boolean;
+  isInclusive: boolean;
 }
 
-export const Deck: FC<DeckProps> = ({ cards }) => {
-  const { isInclusive, isImmersive } = useProfile();
+export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  q;
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   useEffect(() => {
@@ -56,26 +45,29 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     setCallback(() => () => {
       setAudioPlayed(true);
     });
-    console.log("CARDS:" + cards);
-    // let sounds = cards.map(cardItem);
-    // if (isInclusive) {
-    //   sounds.push(cards.en.audio);
-    // } else {
-    //   sounds.push(audio_es_file);
-    // }
-    // if (!isImmersive) {
-    //   sounds.push(audio_en_file);
-    // }
-    // addAudio(sounds);
+    const audioSources: string[] = [];
+    cards.forEach((card) => {
+      if (isInclusive) {
+        if (card.esIncAudio) audioSources.push(card.esIncAudio.url);
+      } else {
+        if (card.esAudio) audioSources.push(card.esAudio.url);
+      }
+      if (!isImmersive && card.enAudio) audioSources.push(card.enAudio.url);
+    });
+    addAudio(audioSources);
   }, []);
 
   const handleQuestionAudioClick = (audioSrc: string) => {
-    const audio = new Audio(audioSrc);
-    console.log(audioSrc);
-    try {
-      audio.play();
-    } catch (error) {
-      console.error("Failed to play audio:", error);
+    if (audioSrc) {
+      const audio = new Audio(audioSrc);
+      console.log(audioSrc);
+      try {
+        audio.play();
+      } catch (error) {
+        console.error("Failed to play audio:", error);
+      }
+    } else {
+      console.error("Audio source is undefined or null.");
     }
   };
 
@@ -87,6 +79,16 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     zIndex: cards.length - i, // Initialize zIndex of each card
     delay: i * 100, // Delay before starting the animation
     hidden: i > 5 ? false : true,
+
+    onRest: () => {
+      // Callback triggered when all animations have settled
+      const currentCardIndex = Math.abs(Math.round(Math.min(...xValues) / 100)); // Calculate current card index
+      if (currentCardIndex < cards.length) {
+        const currentCard = cards[currentCardIndex]; // Get the current card data
+        console.log("Current Card:", currentCard);
+        // Update state or perform other actions with the current card data
+      }
+    },
   }));
 
   // Binding useDrag() hook to each card using bind function
@@ -105,10 +107,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
-            // console.log(`i is: ${i}`);
             if (i === swiped_card_index) {
-              // if the current card (i) is the same as the swiped card (index). If it is, it means this is the card that was just swiped.
-              // console.log(`index is: ${swiped_card_index}`);
               return {
                 x: -2 - (cards.length - 1) * 5,
                 y: 10 - (cards.length - 1) * 10,
@@ -170,7 +169,44 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
             { x, y, rot, scale, zIndex, hidden },
             i, // Index of the card
           ) => {
-            // const { en, es } = cards[i % cards.length];
+            const card = cards[i % cards.length]; // Get the current card data
+            const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
+              card;
+
+            // Determine which content to display based on user settings
+            let content = null;
+            if (isImmersive && isInclusive) {
+              content = (
+                <>
+                  <h1 className={`${styles.es} text-3xl semibold`}>
+                    {esIncText}
+                  </h1>
+                </>
+              );
+            } else if (isImmersive && !isInclusive) {
+              content = (
+                <>
+                  <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
+                </>
+              );
+            } else if (!isImmersive && isInclusive) {
+              content = (
+                <>
+                  <h1 className={`${styles.es} text-3xl semibold`}>
+                    {esIncText}
+                  </h1>
+                  <p className="text-lg color-english">{enText}</p>
+                </>
+              );
+            } else {
+              content = (
+                <>
+                  <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
+                  <p className="text-lg color-english">{enText}</p>
+                </>
+              );
+            }
+
             return (
               <animated.div
                 {...bind(i)} // Apply the drag gesture binding
@@ -189,19 +225,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                   ),
                 }}
               >
-                <div className={styles.card_content}>
-                  {!isInclusive && (
-                    <h1 className={`${styles.es} text-3xl semibold`}>
-                      {cards.esInc.text}
-                    </h1>
-                  )}
-                  {/* <h1 className={`${styles.es} text-3xl semibold`}>{es.text}</h1> */}
-                  {/* Render English content if not immersive */}
-                  {!isImmersive && (
-                    <p className="text-lg color-suelo">"test2"</p>
-                    // <p className="text-lg color-suelo">{en.text}</p>
-                  )}
-                </div>
+                <div className={styles.card_content}>{content}</div>
               </animated.div>
             );
           },
@@ -211,7 +235,72 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       <div className="sound-button">
         <IonButton
           className="sound-button-background"
-          onClick={() => handleQuestionAudioClick(cards.es.audio)}
+          onClick={() => {
+            console.log("Props:", props);
+            console.log("Cards:", cards);
+            if (props && props.length > 0) {
+              // Check if props array is defined and not empty
+              const xValues = props.map((prop) => prop.x.get()); // Extract all x values
+
+              const currentCardIndex = Math.abs(
+                Math.round(Math.min(...xValues) / 100),
+              ); // Calculate current card index
+              console.log(
+                "Intermediate value after division by 100:",
+                currentCardIndex,
+              );
+
+              // Check if cards array is not empty and if the currentCardIndex is within its bounds
+              if (cards.length > 0 && currentCardIndex < cards.length) {
+                const currentCard = cards[currentCardIndex]; // Get the current card data
+                console.log("Current Card:", currentCard);
+
+                // Add null check to ensure currentCard exists
+                if (currentCard) {
+                  const { esAudio, esIncAudio, enAudio } = currentCard;
+
+                  // Check if the audio source exists before attempting to play it
+                  if (isImmersive && isInclusive) {
+                    if (esIncAudio) {
+                      handleQuestionAudioClick(esIncAudio.url || "");
+                    } else {
+                      console.error(
+                        "Audio source for isImmersive && isInclusive is undefined or null.",
+                      );
+                    }
+                  } else if (isImmersive && !isInclusive) {
+                    if (esAudio) {
+                      handleQuestionAudioClick(esAudio.url || "");
+                    } else {
+                      console.error(
+                        "Audio source for isImmersive & !isInclusive is undefined or null.",
+                      );
+                    }
+                  } else if (!isImmersive && isInclusive) {
+                    if (enAudio) {
+                      handleQuestionAudioClick(enAudio.url || "");
+                    } else {
+                      console.error(
+                        "Audio source for !isImmersive & isInclusive is undefined or null.",
+                      );
+                    }
+                  } else {
+                    if (esAudio) {
+                      handleQuestionAudioClick(esAudio.url || "");
+                    } else {
+                      console.error("Audio source is undefined or null.");
+                    }
+                  }
+                } else {
+                  console.error("Current card is undefined.");
+                }
+              } else {
+                console.error("No cards available or invalid card index.");
+              }
+            } else {
+              console.error("Props array is undefined or empty.");
+            }
+          }}
         >
           <img className="sound-icon" src={volumeButton} alt="volume" />
         </IonButton>
