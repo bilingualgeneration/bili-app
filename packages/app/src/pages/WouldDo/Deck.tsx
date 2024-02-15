@@ -33,6 +33,13 @@ interface DeckProps {
 export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
+  const [currentCard, setCurrentCard] = useState<{
+    esAudio?: CardAudio | null;
+    esIncAudio?: CardAudio | null;
+    enAudio?: CardAudio | null;
+  } | null>(null);
+
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
 
   useEffect(() => {
@@ -57,15 +64,37 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     addAudio(audioSources);
   }, []);
 
-  const handleQuestionAudioClick = (audioSrc: string) => {
-    if (audioSrc) {
-      const audio = new Audio(audioSrc);
-      console.log(audioSrc);
-      try {
-        audio.play();
-      } catch (error) {
-        console.error("Failed to play audio:", error);
-      }
+  // Function to play audio for the current card
+  const playAudio = (index: number) => {
+    const card = cards[index];
+    let audioUrl = "";
+    if (!isImmersive && !isInclusive) {
+      audioUrl = card.esAudio?.url || "";
+    } else if (!isImmersive && isInclusive) {
+      audioUrl = card.esIncAudio?.url || "";
+    } else if (isImmersive && !isInclusive) {
+      audioUrl = card.esAudio?.url || "";
+    } else if (isImmersive && isInclusive) {
+      audioUrl = card.esIncAudio?.url || "";
+    }
+
+    console.log(audioUrl);
+
+    if (audioUrl) {
+      const audio = new Audio(audioUrl);
+      audio.play();
+      audio.addEventListener("ended", () => {
+        // Check if EN audio should be played based on settings and availability
+        if (!isImmersive && card.enAudio) {
+          const enAudioUrl = card.enAudio.url;
+          const enAudio = new Audio(enAudioUrl);
+          enAudio.play();
+        }
+
+        if (index + 1 < cards.length) {
+          playAudio(index + 1);
+        }
+      });
     } else {
       console.error("Audio source is undefined or null.");
     }
@@ -79,16 +108,6 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     zIndex: cards.length - i, // Initialize zIndex of each card
     delay: i * 100, // Delay before starting the animation
     hidden: i > 5 ? false : true,
-
-    onRest: () => {
-      // Callback triggered when all animations have settled
-      const currentCardIndex = Math.abs(Math.round(Math.min(...xValues) / 100)); // Calculate current card index
-      if (currentCardIndex < cards.length) {
-        const currentCard = cards[currentCardIndex]; // Get the current card data
-        console.log("Current Card:", currentCard);
-        // Update state or perform other actions with the current card data
-      }
-    },
   }));
 
   // Binding useDrag() hook to each card using bind function
@@ -129,6 +148,9 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
               };
             }
           });
+          setCurrentCardIndex((prevIndex) => prevIndex + 1);
+          console.log(currentCardIndex);
+          stopAudio();
         }, 500);
         return;
       }
@@ -160,145 +182,83 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     },
   );
 
+  // Function to stop audio playback
+  const stopAudio = () => {
+    const audio = new Audio();
+    audio.pause();
+    audio.currentTime = 0;
+  };
+
   return (
     <>
       <div className={styles.container}>
-        {/* Render each card with animated properties */}
-        {props.map(
-          (
-            { x, y, rot, scale, zIndex, hidden },
-            i, // Index of the card
-          ) => {
-            const card = cards[i % cards.length]; // Get the current card data
-            const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
-              card;
-
-            // Determine which content to display based on user settings
-            let content = null;
-            if (isImmersive && isInclusive) {
-              content = (
-                <>
-                  <h1 className={`${styles.es} text-3xl semibold`}>
-                    {esIncText}
-                  </h1>
-                </>
-              );
-            } else if (isImmersive && !isInclusive) {
-              content = (
-                <>
-                  <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
-                </>
-              );
-            } else if (!isImmersive && isInclusive) {
-              content = (
-                <>
-                  <h1 className={`${styles.es} text-3xl semibold`}>
-                    {esIncText}
-                  </h1>
-                  <p className="text-lg color-english">{enText}</p>
-                </>
-              );
-            } else {
-              content = (
-                <>
-                  <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
-                  <p className="text-lg color-english">{enText}</p>
-                </>
-              );
-            }
-
-            return (
-              <animated.div
-                {...bind(i)} // Apply the drag gesture binding
-                key={i}
-                className={styles.card}
-                style={{
-                  backgroundColor: colors[i % colors.length], // Cycle through colors
-                  x, // Apply x position
-                  y, // Apply y position (slight vertical offset)
-                  zIndex, // Apply zIndex
-                  display: hidden ? "inline-block" : "none",
-                  transform: interpolate(
-                    // Interpolate rotation and translation properties
-                    [rot, x],
-                    (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
-                  ),
-                }}
-              >
-                <div className={styles.card_content}>{content}</div>
-              </animated.div>
+        {props.map(({ x, y, rot, scale, zIndex, hidden }, i) => {
+          const card = cards[i % cards.length];
+          const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
+            card;
+          let content = null;
+          if (isImmersive && isInclusive) {
+            content = (
+              <>
+                <h1 className={`${styles.es} text-3xl semibold`}>
+                  {esIncText}
+                </h1>
+              </>
             );
-          },
-        )}
+          } else if (isImmersive && !isInclusive) {
+            content = (
+              <>
+                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
+              </>
+            );
+          } else if (!isImmersive && isInclusive) {
+            content = (
+              <>
+                <h1 className={`${styles.es} text-3xl semibold`}>
+                  {esIncText}
+                </h1>
+                <p className="text-lg color-english">{enText}</p>
+              </>
+            );
+          } else {
+            content = (
+              <>
+                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
+                <p className="text-lg color-english">{enText}</p>
+              </>
+            );
+          }
+
+          return (
+            <animated.div
+              {...bind(i)}
+              key={i}
+              className={styles.card}
+              style={{
+                backgroundColor: colors[i % colors.length],
+                x,
+                y,
+                zIndex,
+                display: hidden ? "inline-block" : "none",
+                transform: interpolate(
+                  [rot, x],
+                  (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
+                ),
+              }}
+            >
+              <div className={styles.card_content}>{content}</div>
+            </animated.div>
+          );
+        })}
       </div>
-      {/* Render audio button outside of the card */}
       <div className="sound-button">
         <IonButton
           className="sound-button-background"
           onClick={() => {
-            console.log("Props:", props);
-            console.log("Cards:", cards);
-            if (props && props.length > 0) {
-              // Check if props array is defined and not empty
-              const xValues = props.map((prop) => prop.x.get()); // Extract all x values
-
-              const currentCardIndex = Math.abs(
-                Math.round(Math.min(...xValues) / 100),
-              ); // Calculate current card index
-              console.log(
-                "Intermediate value after division by 100:",
-                currentCardIndex,
-              );
-
-              // Check if cards array is not empty and if the currentCardIndex is within its bounds
-              if (cards.length > 0 && currentCardIndex < cards.length) {
-                const currentCard = cards[currentCardIndex]; // Get the current card data
-                console.log("Current Card:", currentCard);
-
-                // Add null check to ensure currentCard exists
-                if (currentCard) {
-                  const { esAudio, esIncAudio, enAudio } = currentCard;
-
-                  // Check if the audio source exists before attempting to play it
-                  if (isImmersive && isInclusive) {
-                    if (esIncAudio) {
-                      handleQuestionAudioClick(esIncAudio.url || "");
-                    } else {
-                      console.error(
-                        "Audio source for isImmersive && isInclusive is undefined or null.",
-                      );
-                    }
-                  } else if (isImmersive && !isInclusive) {
-                    if (esAudio) {
-                      handleQuestionAudioClick(esAudio.url || "");
-                    } else {
-                      console.error(
-                        "Audio source for isImmersive & !isInclusive is undefined or null.",
-                      );
-                    }
-                  } else if (!isImmersive && isInclusive) {
-                    if (enAudio) {
-                      handleQuestionAudioClick(enAudio.url || "");
-                    } else {
-                      console.error(
-                        "Audio source for !isImmersive & isInclusive is undefined or null.",
-                      );
-                    }
-                  } else {
-                    if (esAudio) {
-                      handleQuestionAudioClick(esAudio.url || "");
-                    } else {
-                      console.error("Audio source is undefined or null.");
-                    }
-                  }
-                } else {
-                  console.error("Current card is undefined.");
-                }
-              } else {
-                console.error("No cards available or invalid card index.");
-              }
+            if (currentCardIndex < cards.length) {
+              playAudio(currentCardIndex);
             } else {
-              console.error("Props array is undefined or empty.");
+              console.error("No more cards to play audio for.");
             }
           }}
         >
