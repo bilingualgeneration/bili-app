@@ -26,6 +26,7 @@ import CommunityIcon from "@/assets/icons/community.svg?react";
 import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
+import AmiguesCover from "@/assets/img/amigues_cover.png";
 import "./StudentDashboard.scss";
 
 interface WaveIcon {
@@ -188,42 +189,44 @@ const communityCards = [
   },
 ];
 
-const storyCards = [
-  {
-    category: "stories",
-    title: "Qué es lo que te gusta de ti mismo?",
-    titleEn: "What do you like about yourself?",
-    cover: "/assets/img/drum_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "Cara de Catrina",
-    titleEn: "Catrina for a Day",
-    cover: "/assets/img/dance_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "Soy de...",
-    titleEn: "I'm From...",
-    cover: "/assets/img/band_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "El esqueleto travieso",
-    titleEn: "The Mischievous Skeleton",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: false,
-  },
-];
-
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
   const { childProfiles, activeChildProfile } = useChildProfile();
   const { name } = childProfiles[activeChildProfile];
+
+  const storyCards = [
+    {
+      category: "stories",
+      title: isInclusive ? "¡Amigues!" : "¡Amigos!",
+      titleEn: "Friends!",
+      cover: "/assets/img/amigues_cover.png",
+      link: "/stories/f2e347ac-50b0-4d59-b7f8-682e2659c22f",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Cara de Catrina",
+      titleEn: "Catrina for a Day",
+      cover: "/assets/img/dance_image.png",
+      isLocked: true,
+    },
+    {
+      category: "stories",
+      title: "Soy de...",
+      titleEn: "I'm From...",
+      cover: "/assets/img/band_image.png",
+      isLocked: true,
+    },
+    {
+      category: "stories",
+      title: "El esqueleto travieso",
+      titleEn: "The Mischievous Skeleton",
+      cover: "/assets/img/mountain_image.png",
+      isLocked: true,
+    },
+  ];
+
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",

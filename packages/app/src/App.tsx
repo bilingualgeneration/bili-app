@@ -40,6 +40,8 @@ import ResetPassword from "@/pages/ResetPassword";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
+
+import { Stories } from "@/pages/Stories";
 import { StoriesDragGameLoader } from "./pages/Stories";
 import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
 import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
@@ -83,6 +85,7 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
 
 setupIonicReact();
 
@@ -296,15 +299,17 @@ const Router: React.FC = () => {
             )}
           />
 
-          {/* <Route
-          exact
-          path="/stories/:uuid"
-          render={(props) => (
-            <UnauthedLayout>
-              <Stories id={props.match.params.uuid} />
-            </UnauthedLayout>
-          )}
-        /> */}
+          <Route
+            exact
+            path="/stories/:uuid"
+            render={(props) => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <Stories />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
           <Route
             exact
@@ -313,6 +318,18 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesDragGameLoader />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/stories/game"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <StoriesPictureGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -490,7 +507,7 @@ const Router: React.FC = () => {
                   <PackSelect
                     headerComponent={<CommunityHeader />}
                     module="would-do-game"
-                    packId="dc6fd688-cbb9-4467-ba41-aad105c5ea40"
+                    packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
                     translatedTitle={
                       <FormattedMessage
                         id="common.wouldDo"
