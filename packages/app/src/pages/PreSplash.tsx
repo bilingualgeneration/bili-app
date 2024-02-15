@@ -20,7 +20,7 @@ export const PreSplash: React.FC = () => {
                 >
                   <FormattedMessage
                     id="presplash.tagline"
-                    defaultMessage="Language learning that is abueltia and science–approved"
+                    defaultMessage="Language learning that is abuelita and science–approved"
                   />
                 </p>
               </IonText>
