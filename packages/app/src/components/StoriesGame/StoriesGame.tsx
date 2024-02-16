@@ -42,28 +42,32 @@ interface PictureAudio {
   url: string;
 }
 
-interface Game {
-  card_group: Array<{
-    spanish_question_text: string;
-    spanish_inclusive_question_text: string;
-    english_question_text: string;
-    spanish_inclusive_question_audio?: PictureAudio;
-    spanish_question_audio?: PictureAudio;
-    englsih_question_audio?: PictureAudio;
-    correct_card_image: PictureImage;
-    correct_card_audio?: PictureAudio;
-    incorrect_card_image_2: PictureImage;
-    incorrect_card_audio_2?: PictureAudio;
-    incorrect_card_image_3: PictureImage;
-    incorrect_card_audio_3?: PictureAudio;
-    incorrect_card_image_4: PictureImage;
-    incorrect_card_audio_4?: PictureAudio;
-    nextSlide: () => void;
-  }>;
+interface Story {
+  spanish_question_text: string;
+  spanish_inclusive_question_text: string;
+  english_question_text: string;
+  spanish_inclusive_question_audio?: PictureAudio;
+  spanish_question_audio?: PictureAudio;
+  englsih_question_audio?: PictureAudio;
+  multiply_image_correct_image: PictureImage;
+  correct_card_audio?: PictureAudio;
+  incorrect_card_image_2: PictureImage;
+  incorrect_card_audio_2?: PictureAudio;
+  incorrect_card_image_3: PictureImage;
+  incorrect_card_audio_3?: PictureAudio;
+  incorrect_card_image_4: PictureImage;
+  incorrect_card_audio_4?: PictureAudio;
+}
+
+interface GameCard {
+  image: PictureImage;
+  isTarget: boolean;
+  id: string;
+  audio: PictureAudio;
 }
 
 interface StoriesGameProps {
-  game: Game;
+  game: Story;
   incorrect_choice_sound: string;
   correct_choice_sound: string;
 }
@@ -75,6 +79,58 @@ function shuffleArray<T>(array: T[]): T[] {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+function getCardsFromImageGame(story: Story): GameCard[] {
+  return [
+    {
+      image: story.correct_card_image,
+      isTarget: true,
+      id: "1",
+      audio: story.correct_card_audio!,
+    },
+    {
+      image: story.incorrect_card_image_2,
+      id: "2",
+      audio: story.incorrect_card_audio_2,
+    },
+    {
+      image: story.incorrect_card_image_3,
+      id: "3",
+      audio: story.incorrect_card_audio_3,
+    },
+    {
+      image: story.incorrect_card_image_4,
+      id: "4",
+      audio: story.incorrect_card_audio_4,
+    },
+  ];
+}
+
+function getCardsFromSyllableGame(story: Story): GameCard[] {
+  return [
+    {
+      image: story.correct_card_image,
+      isTarget: true,
+      id: "1",
+      audio: story.correct_card_audio!,
+    },
+    {
+      image: story.incorrect_card_image_2,
+      id: "2",
+      audio: story.incorrect_card_audio_2,
+    },
+    {
+      image: story.incorrect_card_image_3,
+      id: "3",
+      audio: story.incorrect_card_audio_3,
+    },
+    {
+      image: story.incorrect_card_image_4,
+      id: "4",
+      audio: story.incorrect_card_audio_4,
+    },
+  ];
 }
 
 export const StoriesGame: React.FC<StoriesGameProps> = ({
@@ -168,30 +224,9 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   };
 
   const shuffledCards = useMemo(() => {
-    const cardGroup = data.card_group[currentIndex];
-    const cards = [
-      {
-        image: cardGroup.correct_card_image,
-        isTarget: true,
-        id: "1",
-        audio: cardGroup.correct_card_audio,
-      },
-      {
-        image: cardGroup.incorrect_card_image_2,
-        id: "2",
-        audio: cardGroup.incorrect_card_audio_2,
-      },
-      {
-        image: cardGroup.incorrect_card_image_3,
-        id: "3",
-        audio: cardGroup.incorrect_card_audio_3,
-      },
-      {
-        image: cardGroup.incorrect_card_image_4,
-        id: "4",
-        audio: cardGroup.incorrect_card_audio_4,
-      },
-    ];
+    const cards = data.multiply_image_correct_image
+      ? getCardsFromImageGame(data)
+      : getCardsFromImageGame(data);
     return shuffleArray(cards);
   }, [data, currentIndex]);
 
