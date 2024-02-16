@@ -66,19 +66,16 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
 
   // Function to play audio for the current card
   const playAudio = (index: number) => {
+    console.log(`Playing audio: ${index}`);
     const card = cards[index];
     let audioUrl = "";
-    if (!isImmersive && !isInclusive) {
+    if ((!isImmersive && !isInclusive) || (isImmersive && !isInclusive)) {
       audioUrl = card.esAudio?.url || "";
-    } else if (!isImmersive && isInclusive) {
-      audioUrl = card.esIncAudio?.url || "";
-    } else if (isImmersive && !isInclusive) {
-      audioUrl = card.esAudio?.url || "";
-    } else if (isImmersive && isInclusive) {
+    } else {
       audioUrl = card.esIncAudio?.url || "";
     }
 
-    console.log(audioUrl);
+    // console.log(audioUrl);
 
     if (audioUrl) {
       const audio = new Audio(audioUrl);
@@ -89,10 +86,6 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           const enAudioUrl = card.enAudio.url;
           const enAudio = new Audio(enAudioUrl);
           enAudio.play();
-        }
-
-        if (index + 1 < cards.length) {
-          playAudio(index + 1);
         }
       });
     } else {
@@ -122,7 +115,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-
+        stopAudio();
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
@@ -148,9 +141,8 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
               };
             }
           });
-          setCurrentCardIndex((prevIndex) => prevIndex + 1);
-          console.log(currentCardIndex);
-          stopAudio();
+          const newCount = (currentCardIndex + 1) % cards.length;
+          setCurrentCardIndex(newCount);
         }, 500);
         return;
       }
