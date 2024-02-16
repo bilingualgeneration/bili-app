@@ -66,7 +66,7 @@ export const StoryLoader = () => {
         fp.length + 1, // cover
         // todo: for games
       );
-      setPageNumber(1);
+      setPageNumber(0);
       setReady(true);
     }
   }, [data]);
