@@ -1,3 +1,4 @@
+//game logic AM
 import React, { FC, useEffect, useState } from "react";
 //import {CountFacts} from './CountFacts';
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
@@ -5,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
+import { FactsPage } from "./CountFacts";
 import { doc } from "firebase/firestore";
 import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
@@ -76,7 +78,7 @@ export const CountWithMe: React.FC = () => {
   const [showNumber, setSHowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
-  const [showCongrats, setShowCongrats] = useState<boolean>(false);
+  const [showFacts, setShowFacts] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -111,8 +113,7 @@ export const CountWithMe: React.FC = () => {
   //logic when the correct animal number is choosen
   useEffect(() => {
     if (isCorrectSelected) {
-      setShowCongrats(true);
-      goToNextAnimalGroup();
+      setShowFacts(true);
     }
   }, [isCorrectSelected]);
 
@@ -120,8 +121,9 @@ export const CountWithMe: React.FC = () => {
   const handleBirdClickOrder = (index: number) => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
-      if (index === getData.animalImages.length - 1) {
-        setAllAnimalsClicked(true); //switches text from game question to count questions
+      if (clickedIndexes.length + 1 === getData.animalImages.length) {
+        setAllAnimalsClicked(true);
+        //switches text from game question to count questions
       }
     }
 
@@ -154,37 +156,34 @@ export const CountWithMe: React.FC = () => {
 
         setTimeout(() => {
           setIsCorrectSelected(true);
+          setAnimalColors((prevColors: any) => ({
+            ...prevColors,
+            [getData.animalImages[index].image.id]: initialStyle,
+          }));
         }, 1000);
       }
     }
   };
 
-  if (showCongrats) {
+  //show next page if showCongrats(true)
+  if (showFacts) {
     return (
-      <>
-        <h1>{getData.factText[1].text}</h1>
-        {!isImmersive && (
-          <p className="count-english-text-style">{getData.factText[0].text}</p>
-        )}
-        <img
-          src={getData.factBackground.url}
-          alt="animals"
-          style={{
-            width: "100%",
-            cursor: "pointer",
-            borderRadius: "32px",
-            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-          }}
-        />
-      </>
-    );
-    /*
-	<CountFacts
-          factText = {factText}
-	factBackround = {factBackround}
-	/>
+      <FactsPage
+        factText={getData.factText}
+        factBackground={getData.factBackground.url}
+        count={currentIndex}
+        onKeepGoingClick={() => {
+          setIsCorrectSelected(false);
+          setAllAnimalsClicked(false);
+          setClickedIndexes([]);
+          goToNextAnimalGroup();
 
-    */
+          setTimeout(() => {
+            setShowFacts(false);
+          }, 1000);
+        }}
+      />
+    );
   }
 
   // do a check if status === loading
@@ -200,28 +199,15 @@ export const CountWithMe: React.FC = () => {
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: "#F7FAF9",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
+    <>
       <div
+        className="background-card margin-top-4"
         style={{
+          backgroundImage: `url(${getData.gameBackground.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+          height: 600,
           position: "relative",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "20px",
-          width: "1159px",
-          height: "800px",
-          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          padding: "20px",
         }}
       >
         <IonText>
@@ -230,18 +216,22 @@ export const CountWithMe: React.FC = () => {
               <>
                 {allAnimalsClicked ? (
                   <>
-                    <h1>{getData.countQuestions[1].text}</h1>
+                    <h1 className="text-5xl color-suelo">
+                      {getData.countQuestions[1].text}
+                    </h1>
                     {!isImmersive && (
-                      <p className="count-english-text-style">
+                      <p className="text-3xl color-english">
                         {getData.countQuestions[0].text}
                       </p>
                     )}
                   </>
                 ) : (
                   <>
-                    <h1>{getData.gameQuestions[1].text}</h1>
+                    <h1 className="text-5xl color-suelo">
+                      {getData.gameQuestions[1].text}
+                    </h1>
                     {!isImmersive && (
-                      <p className="count-english-text-style">
+                      <p className="text-3xl color-english">
                         {getData.gameQuestions[0].text}
                       </p>
                     )}
@@ -250,16 +240,6 @@ export const CountWithMe: React.FC = () => {
               </>
             )}
         </IonText>
-        <img
-          src={getData.gameBackground.url}
-          alt="hummingbirds"
-          style={{
-            width: "100%",
-            cursor: "pointer",
-            borderRadius: "32px",
-            boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-          }}
-        />
 
         {/* Overlay animals */}
         {getData.animalImages.map((animal, index) => (
@@ -267,6 +247,7 @@ export const CountWithMe: React.FC = () => {
             key={index}
             style={{
               position: "absolute",
+              transform: "scale(0.6) translateY(-230px)",
               top: `${animal.coordinate_y}px`,
               left: `${animal.coordinate_x}px`,
               cursor: "pointer",
@@ -287,17 +268,55 @@ export const CountWithMe: React.FC = () => {
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  color: "white",
-                  fontSize: "33px",
+                  color: `${animal.text_color}`,
+                  fontSize: "80px",
                   fontWeight: "700",
                 }}
               >
-                {clickedIndexes.indexOf(index) + 1}
+                <span>{clickedIndexes.indexOf(index) + 1}</span>
               </div>
             )}
           </div>
         ))}
       </div>
-    </div>
+      <span style={{ display: "none" }}>
+        <div
+          style={{
+            backgroundColor: "#F7FAF9",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              backgroundColor: "#FFFFFF",
+              borderRadius: "20px",
+              width: "1159px",
+              height: "800px",
+              boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              padding: "20px",
+            }}
+          >
+            <img
+              src={getData.gameBackground.url}
+              alt="animals"
+              style={{
+                width: "100%",
+                cursor: "pointer",
+                borderRadius: "32px",
+                boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+              }}
+            />
+          </div>
+        </div>
+      </span>
+    </>
   );
 };

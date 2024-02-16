@@ -1,10 +1,16 @@
 @use "sass:math";
 
-.hide-scrollbar {
-  &::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
+.drop-shadow {
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
+.background-card {
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 2.5rem;
+  min-width: 600px;
 }
 
 .no-text-decoration {
@@ -12,15 +18,10 @@
 }
 
 .page-wrapper {
-  max-width: 1366px;
+  width: 1366px;
   margin: auto;
   min-height: 100vh;
   padding-bottom: 80px; // clearance for footer
-}
-
-.content-wrapper {
-  max-width: 540px;
-  margin: auto;
 }
 
 ion-content::part(scroll) {
@@ -56,22 +57,15 @@ ion-input[type="date"] {
 @font-face {
   font-family: "Outfit";
   src: url("/assets/fonts/Outfit-VariableFont_wght.ttf");
-  // font-weight: normal;  // Or the corresponding font weight if you have multiple files for different weights
-  // font-style: normal;  // Specify 'italic' if it's an italic font style
 }
 
 html {
   background-color: #d3eae8;
-  --ion-font-family: "Outfit";
 }
 
 ion-content {
   --background: url("/assets/img/background.png") no-repeat center center /
     cover;
-}
-
-.swiper-slide > * {
-  text-align: initial;
 }
 
 #header {
@@ -95,9 +89,9 @@ ion-button {
   $paddingY: 23px;
   --padding-bottom: #{$paddingY};
   --padding-top: #{$paddingY};
-  font-weight: bold;
-  font-size: 1rem;
-  //    margin: 24px;
+  font-size: 16pt;
+  line-height: 20px;
+  font-weight: 600;
   text-transform: none;
 
   &:not([shape="round"]) {
@@ -109,37 +103,6 @@ ion-button {
     --color: var(--ion-color-secondary-contrast);
     opacity: 1;
   }
-}
-
-ion-label {
-  color: var(--text-secondary);
-  font-size: 16px;
-  font-family: Outfit;
-  font-weight: 500;
-  line-height: 125%;
-  letter-spacing: 0.48px;
-}
-
-ion-card-title {
-  color: var(--Base-Suelo);
-  text-align: center;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 120%; /* 28.8px */
-  letter-spacing: 0.2px;
-}
-
-ion-card-content {
-  color: var(--greyscale-900, #212121);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
-  /* Paragraph/text-sm/[R] */
-  font-family: Outfit;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
 }
 
 //styles for input fields
@@ -168,62 +131,6 @@ ion-input {
     }
   }
 }
-
-ion-text {
-  h1 {
-    font-size: 64px !important;
-    font-weight: 700 !important;
-  }
-
-  h2 {
-    font-size: 40px !important;
-    font-weight: 400 !important;
-  }
-
-  h3 {
-    font-size: 32px !important;
-    font-weight: 400 !important;
-  }
-
-  h1,
-  h2,
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  p {
-    color: #000;
-  }
-
-  h1,
-  h2,
-  h3,
-  p {
-    line-height: 1.2;
-  }
-}
-
-h4 {
-  color: #fff;
-  font-family: Outfit;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
-}
-
-/*
-ion-text h1{
-    color: var(--greyscale-900, #212121) !important;
-    font-family: Outfit !important;
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    line-height: 110% !important;
-}
-*/
-
-// JC: temporarily disabled this since it was interfering with swiperjs
 
 ion-card {
   display: flex;
@@ -330,18 +237,6 @@ ion-card {
   margin: 10px;
 }
 
-.stories-card-footer p {
-  color: #fff;
-  /* Body */
-  font-family: Work Sans;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.26px;
-  margin-top: 0;
-}
-
 .oval-element-small {
   width: 28px;
   height: 28px;
@@ -354,58 +249,6 @@ ion-card {
 
 .cards-title a {
   text-decoration: none;
-}
-
-.cards-title h2 {
-  color: var(--Base-Selva, #006a67);
-  font-family: Outfit;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
-}
-
-.cards-title p {
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%;
-  margin-top: auto;
-}
-
-#story-juego-title {
-  margin: 0px;
-  padding: 2%;
-  width: 38vw; //381px;
-  color: #fff;
-  font-family: Outfit;
-  font-size: 3rem; //4.5vh; //48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 52.8px */
-}
-
-.cards-title h1 {
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 52.8px */
-}
-
-#story-juego-title2 {
-  margin: 0px;
-  padding: 2%;
-  width: 36vw; //367px;
-  color: #fff;
-  font-family: Outfit;
-  font-size: 1.5rem; //2.5vh; //24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 26.4px */
 }
 
 .individual-juego-card {
@@ -430,10 +273,6 @@ ion-card {
 @media (max-width: 768px) {
   .fabrica-card-content {
     white-space: normal; /* Allow cards to stack vertically */
-    #fabrica-header-text {
-      font-size: 2rem;
-      line-height: 2rem;
-    }
   }
 
   fabrica-card {
@@ -453,20 +292,6 @@ ion-card {
   margin-bottom: 5%;
 }
 
-#fabrica-header-text {
-  text-align: center;
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
-  font-family: Outfit;
-  font-size: 5rem; //8.6vh; //86.26px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 5rem; //3vh; //28.753px; /* 33.333% */
-  letter-spacing: -0.1vh; //-0.899px;
-  color: var(--greyscale-900, #212121);
-}
-
 // felicitaciones page
 
 .felicitaciones-card {
@@ -484,50 +309,6 @@ ion-card {
   margin: auto;
 }
 
-.felicitaciones-title {
-  width: 30vw; //600px;
-  color: var(--base-nube, #fff);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
-  font-family: Outfit;
-  font-size: 4rem; //64px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 70.4px */
-  letter-spacing: -0.125rem; //-2px;
-}
-
-.felicitaciones-subtitle {
-  align-self: stretch;
-  color: var(--cielo-cielo, #d3eae8);
-  font-family: Outfit;
-  font-size: 2.5rem; //40px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 44px */
-}
-
-#congrats-text-bold {
-  align-self: stretch;
-  color: var(--base-nube, #fff);
-  font-family: Outfit;
-  font-size: 2rem; //32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 35.2px */
-}
-
-#congrats-text-reg {
-  align-self: stretch;
-  color: var(--cielo-cielo, #d3eae8);
-  font-family: Outfit;
-  font-size: 1.5rem; //24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 26.4px */
-}
-
 .sigue-adelante-button {
   display: flex;
   width: 23rem; //362.566px;
@@ -541,50 +322,7 @@ ion-card {
   --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
 }
 
-.sigue-button-es {
-  align-self: stretch;
-  color: var(--cielo-lowest, #003735);
-  text-align: center;
-  font-family: Outfit;
-  font-size: 2rem; //32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 35.2px */
-}
-
-.sigue-button-en {
-  align-self: stretch;
-  color: var(--cielo-lowest, #003735);
-  text-align: center;
-  font-family: Outfit;
-  font-size: 1rem; // 12.58px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 17.611px */
-  letter-spacing: 0.19px;
-}
-
 /* JuegoCard Component */
-
-.individual-juego-card .en-pack-title2 {
-  font-size: 1.5rem; //24px;
-  font-weight: bold;
-  color: white;
-  position: absolute;
-  bottom: 0%;
-  left: 5%;
-  text-align: left;
-}
-
-.individual-juego-card .es-pack-title {
-  font-size: 2rem; //24px;
-  font-weight: bold;
-  color: white;
-  position: absolute;
-  bottom: 10%;
-  left: 5%;
-  text-align: left;
-}
 
 .individual-juego-card .game-icon-container {
   position: absolute;
@@ -644,30 +382,7 @@ ion-card {
 
 .juego-card-content-component {
   position: relative;
-
-  p.title {
-    font-size: 1.5rem; //2.5vh; //24px;
-    font-weight: bold;
-    color: white;
-    position: absolute;
-    bottom: -205px;
-    left: 0;
-    text-align: left;
-  }
-
-  p.subtitle {
-    font-size: 1rem; //1.5vh; //13px;
-    color: white;
-    position: absolute;
-    text-align: left;
-    bottom: -230px;
-    left: 0;
-  }
 }
-
-// .juego-card-content-component.locked p.title {
-//   text-align: end;
-// }
 
 // TODO: check if this is correct
 /* Adjustments for smaller screens  */

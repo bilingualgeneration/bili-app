@@ -49,15 +49,23 @@ export const RadioCard: React.FC<RadioCardProps> = ({
           </div>
           <IonCardHeader class="custom-ion-header">
             <IonCardTitle>
-              <IonText color="primary">
+              <IonText>
                 {/* todo: don't force type cast */}
-                {title as string}
+                <p className="text-2xl semibold color-selva">
+                  {title as string}
+                </p>
               </IonText>
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {/* todo: don't force type cast */}
-            {content as string}
+            <div>
+              <IonText>
+                <p className="text-sm color-suelo">
+                  {/* todo: don't force type cast */}
+                  {content as string}
+                </p>
+              </IonText>
+            </div>
           </IonCardContent>
         </div>
       </div>

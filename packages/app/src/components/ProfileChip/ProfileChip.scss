@@ -4,7 +4,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: bold;
   > ion-text {
     margin: 0 1rem;
     * {
@@ -15,7 +14,6 @@
   #profilePoints {
     align-items: center;
     background-color: #ac217b;
-    color: #fff;
     display: inline-flex;
     padding: 0.5rem 0.75rem;
     margin-left: 1rem;

@@ -43,7 +43,7 @@ export const ParentAccountCredentials: React.FC = () => {
       ...data,
       ...response,
     });
-    pushPage("pricing");
+    pushPage("complete");
   });
 
   return (

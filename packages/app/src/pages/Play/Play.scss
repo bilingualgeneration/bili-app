@@ -1,24 +1,15 @@
 $card-margin: 2rem;
 
 #playPage {
-  h1 {
-    font-size: 56px;
-  }
-
-  h2 {
-    font-size: 44px;
-  }
-
-  h1 + h2 {
-    margin-top: 0;
+  .favorite-button {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
   }
 
   #playCardWrapper {
-    display: flex;
-    overflow-x: hidden;
-    width: calc(100% - 100px);
-    height: 540px;
-    margin-left: 100px;
+    width: calc(100% - 200px);
+    margin: auto;
   }
 
   #storyFactoryCard {
@@ -29,25 +20,38 @@ $card-margin: 2rem;
 
   #intruderCard {
     background-image: url("/assets/img/background_teal.png");
+    cursor: pointer;
     margin-right: $card-margin;
   }
 
   #countCard {
     background: url("/assets/img/background_orange.png");
+    cursor: pointer;
   }
 
   .card {
     background-position: center center;
     background-size: cover;
     border-radius: 2rem;
+    text-align: center;
     color: #fff;
+    height: 440px;
+    width: 440px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    .spreader {
-      height: 0px;
-      width: 440px;
+    justify-content: space-between;
+    padding: 2rem 0;
+    img {
+      max-height: 250px;
     }
+  }
+
+  .play-category-tag {
+    transform: scale(0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 }

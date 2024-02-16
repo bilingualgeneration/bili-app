@@ -93,7 +93,7 @@ export const IntruderCongrats: React.FC<{
         <IonCard className="ion-no-margin">
           <IonCardContent className="margin-right">
             <IonText>
-              <h1 className="color-selva">
+              <h1 className="text-6xl color-suelo">
                 {count === 5 && (
                   <FormattedMessage
                     id="intruder.congrats.title.5"
@@ -123,7 +123,8 @@ export const IntruderCongrats: React.FC<{
                   />
                 )}
               </h1>
-              <h2 className="color-selva">
+              <h2 className="text-4xl color-suelo">
+                {/* TODO: replace \n with <br /> or use css to pre-line */}
                 {count === 5 && (
                   <FormattedMessage
                     id="intruder.congrats.description.5"
@@ -155,25 +156,40 @@ export const IntruderCongrats: React.FC<{
               </h2>
 
               {!isImmersive && (
-                <>
-                  <h1>
-                    <br />
+                <div className="margin-top-3">
+                  <h1 className="text-5xl color-english">
                     {count === 5 && "Congrats!"}
                     {count === 10 && "Great job!"}
                     {count === 20 && "Amazing!"}
                     {count === -1 && "I knew you could do it!"}
                   </h1>
-                  <h2>
-                    {count === 5 &&
-                      "You've found five rhyme intruders. Can you keep going?"}
-                    {count === 10 &&
-                      "You've found ten rhyme intruders. How many more can you find?"}
-                    {count === 20 &&
-                      "You've found twenty rhyme intruders. You are a super-rhymer!"}
-                    {count === -1 &&
-                      "Way to go - you've found all of the rhyme intruders!"}
+                  <h2 className="text-3xl color-english">
+                    {count === 5 && (
+                      <>
+                        You've found five rhyme intruders.
+                        <br />
+                        Can you keep going?
+                      </>
+                    )}
+                    {count === 10 && (
+                      <>
+                        You've found ten rhyme intruders.
+                        <br />
+                        How many more can you find?
+                      </>
+                    )}
+                    {count === 20 && (
+                      <>
+                        You've found twenty rhyme intruders.
+                        <br />
+                        You are a super-rhymer!
+                      </>
+                    )}
+                    {count === -1 && (
+                      <>Way to go - you've found all of the rhyme intruders!</>
+                    )}
                   </h2>
-                </>
+                </div>
               )}
             </IonText>
 
@@ -181,7 +197,7 @@ export const IntruderCongrats: React.FC<{
               style={{
                 position: "relative",
                 textAlign: "center",
-                marginTop: "10rem",
+                marginTop: "5rem",
               }}
             >
               {audioPlayed && (
@@ -205,18 +221,18 @@ export const IntruderCongrats: React.FC<{
                   setShowCongrats(false);
                 }}
               >
-                <div>
-                  <div className="story-button-bold">
+                <IonText>
+                  <p className="text-3xl semibold color-nube">
                     <FormattedMessage
                       id="intruder.keepGoing"
                       defaultMessage="Keep Going!"
                       description="Button label to exit congrats screen"
                     />
-                  </div>
+                  </p>
                   {!isImmersive && (
-                    <div className="story-button-reg">Keep going!</div>
+                    <p className="text-sm color-nube">Keep going!</p>
                   )}
-                </div>
+                </IonText>
               </IonButton>
             </div>
           </IonCardContent>

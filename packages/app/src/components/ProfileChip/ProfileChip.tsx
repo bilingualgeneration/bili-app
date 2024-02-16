@@ -13,12 +13,12 @@ export const ProfileChip: FC = () => {
   return (
     <Link to="/tradein">
       <div id="profileChip">
-        <div id="profilePoints">
+        <div id="profilePoints" className="text-sm semibold color-nube">
           <IonIcon icon={starSharp} />
           <IonText>{completionPoints || 0}</IonText>
         </div>
         <IonText>
-          <p>{name}</p>
+          <p className="text-xl semibold color-suelo">{name}</p>
         </IonText>
         <img src={Avatar} />
       </div>

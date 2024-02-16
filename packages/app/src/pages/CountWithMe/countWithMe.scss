@@ -4,11 +4,10 @@
   border-radius: 32px;
 }
 
-.count-english-text-style {
-  font-family: Outfit;
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 40px;
-  letter-spacing: -0.5px;
-  text-align: left;
+.number-overlay span {
+  text-shadow:
+    -3.87px -3.87px 5px #ffffff,
+    3.87px -3.87px 5px #ffffff,
+    -3.87px 3.87px 5px #ffffff,
+    3.87px 3.87px 5px #ffffff;
 }

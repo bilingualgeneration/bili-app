@@ -34,18 +34,18 @@ export const StoryFactoryPg1: FC = () => {
     if (isImmersive) {
       if (isInclusive) {
         audio_es_inc.onended = () => {
-          history.push("/story-factory/2");
+          history.push("/story-factory-game/2");
         };
         audio_es_inc.play();
       } else {
         audio_es.onended = () => {
-          history.push("/story-factory/2");
+          history.push("/story-factory-game/2");
         };
         audio_es.play();
       }
     } else {
       audio_en.onended = () => {
-        history.push("/story-factory/2");
+        history.push("/story-factory-game/2");
       };
       if (isInclusive) {
         audio_es_inc.onended = () => {

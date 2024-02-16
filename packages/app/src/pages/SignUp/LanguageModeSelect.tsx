@@ -39,7 +39,7 @@ export const LanguageModeSelect: React.FC = () => {
           icon={
             <div
               style={{
-                color: "#8B1A00",
+                color: "#ffffff",
                 textAlign: "center",
                 fontFamily: "Outfit",
                 fontSize: "24px",
@@ -63,7 +63,7 @@ export const LanguageModeSelect: React.FC = () => {
               "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
             description: "Description of the Spanish immersion option",
           })}
-          iconBackgroundColor="var(--Habanero-High)"
+          iconBackgroundColor="var(--Desierto-Desierto)"
         />
       </div>
     ),
@@ -77,7 +77,7 @@ export const LanguageModeSelect: React.FC = () => {
           icon={
             <div
               style={{
-                color: "rgba(0, 0, 0, 0.56)",
+                color: "#000000",
                 textAlign: "center",
                 fontFamily: "Outfit",
                 fontSize: "20px",
@@ -103,7 +103,7 @@ export const LanguageModeSelect: React.FC = () => {
               "Choose this setting if you want your child to learn Spanish with English supports and translations.",
             description: "Description of the Bilingual mode option",
           })}
-          iconBackgroundColor="var(--Sol-Low)"
+          iconBackgroundColor="var(--Sol-High)"
         />
       </div>
     ),
@@ -130,8 +130,8 @@ export const LanguageModeSelect: React.FC = () => {
   return (
     <>
       <form className="radio-button-select">
-        <IonText className="ion-text-center">
-          <h2>
+        <IonText className="ion-text-center margin-bottom-1">
+          <h2 className="text-3xl semibold color-suelo">
             <FormattedMessage
               id="languageMode.settings"
               defaultMessage="Choose your settings"

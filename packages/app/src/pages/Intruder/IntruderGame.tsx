@@ -260,10 +260,16 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   return (
     <>
       <div id="intruder-styles">
-        <IonText>
-          <h2>¿Qué palabra no rima?</h2>
-          {!isImmersive && <p>Which word does not rhyme?</p>}
-        </IonText>
+        <div className="margin-top-4 margin-bottom-2">
+          <IonText>
+            <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
+            {!isImmersive && (
+              <p className="text-3xl color-english">
+                Which word does not rhyme?
+              </p>
+            )}
+          </IonText>
+        </div>
         <div className="intruder-cards-container">
           {shuffledCards.map((card, index) => (
             <IonCard
@@ -288,6 +294,14 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           >
             <img className="sound-icon" src={volumeButton} />
           </IonButton>
+          <IonText>
+            <h1 className="text-3xl semibold color-suelo">Lee</h1>
+            {!isImmersive && (
+              <p className="text-lg color-english">
+                Which word does not rhyme?
+              </p>
+            )}
+          </IonText>
         </div>
       </div>
     </>

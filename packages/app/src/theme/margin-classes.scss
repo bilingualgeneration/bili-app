@@ -1,0 +1,25 @@
+@for $margin from 1 through 5 {
+  .margin-top-#{$margin} {
+    margin-top: #{$margin}rem;
+  }
+  .margin-top-#{$margin}-5 {
+    margin-top: calc(#{$margin}rem + 0.5rem);
+  }
+
+  .margin-bottom-#{$margin} {
+    margin-bottom: #{$margin}rem;
+  }
+  .margin-bottom-#{$margin}-5 {
+    margin-bottom: calc(#{$margin}rem + 0.5rem);
+  }
+
+  .margin-vertical-#{$margin} {
+    margin-top: #{$margin}rem;
+    margin-bottom: #{$margin}rem;
+  }
+
+  .margin-vertical-#{$margin}-5 {
+    margin-top: calc(#{$margin}rem + 0.5rem) !important;
+    margin-bottom: calc(#{$margin}rem + 0.5rem) !important;
+  }
+}

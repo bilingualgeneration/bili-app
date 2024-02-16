@@ -1,3 +1,81 @@
+// set standards
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.text-xs,
+.text-sm,
+.text-md,
+.text-lg,
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.text-5xl,
+.text-6xl {
+  font-weight: normal;
+  font-family: Outfit;
+}
+
+.text-xs {
+  font-size: 16px !important;
+  line-height: 16px !important;
+}
+
+.text-sm {
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+
+.text-md {
+  font-size: 16px !important;
+  line-height: 20px !important;
+}
+
+.text-lg {
+  font-size: 18px !important;
+  line-height: 24px !important;
+}
+
 .text-xl {
-  font-size: 20pt;
+  font-size: 20px !important;
+  line-height: 24px !important;
+}
+
+.text-2xl {
+  font-size: 24px !important;
+  line-height: 32px !important;
+}
+
+.text-3xl {
+  font-size: 32px !important;
+  line-height: 40px !important;
+  letter-spacing: -0.5px !important;
+}
+
+.text-4xl {
+  font-size: 40px !important;
+  line-height: 48px !important;
+  letter-spacing: -0.5px !important;
+}
+
+.text-5xl {
+  font-size: 48px !important;
+  font-weight: bold !important;
+  line-height: 56px !important;
+  letter-spacing: -1px !important;
+}
+
+.text-6xl {
+  font-size: 64px !important;
+  font-weight: bold !important;
+  line-height: 72px !important;
+  letter-spacing: -2px !important;
+}
+
+.semibold {
+  font-weight: 600 !important;
 }
