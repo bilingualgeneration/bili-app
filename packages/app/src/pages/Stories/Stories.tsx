@@ -8,6 +8,7 @@ import {
   IonText,
   IonButton,
 } from "@ionic/react";
+import { StoryProvider, useStory } from "./StoryContext";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { useParams } from "react-router";
@@ -18,18 +19,34 @@ import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
 import IllustratorIcon from "@/assets/icons/illustrator_icon.png";
 import NarratorIcon from "@/assets/icons/narrator_icon.png";
+import forward from "@/assets/icons/carousel_forward.svg";
+import backward from "@/assets/icons/carousel_backward.svg";
 
 const getLang = (lang: string, data: any) => {
   return data.filter((d: any) => d.language === lang)[0];
 };
 
 export const Stories = () => {
+  return (
+    <StoryProvider>
+      <StoryLoader />
+    </StoryProvider>
+  );
+};
+
+export const StoryLoader = () => {
   // @ts-ignore
   const { uuid } = useParams();
+  const {
+    setPageNumber,
+    pageNumber,
+    setTotalPages,
+    setFilteredPages,
+    filteredPages,
+    ready,
+    setReady,
+  } = useStory();
   const firestore = useFirestore();
-  const [page, setPage] = useState(0);
-  const [filteredPages, setFilteredPages] = useState<any[]>();
-  const [numPages, setNumPages] = useState();
   //Firestore operations
   const ref = doc(firestore, "story", uuid);
   const { status, data } = useFirestoreDocData(ref);
@@ -45,32 +62,39 @@ export const Stories = () => {
         }
       });
       setFilteredPages(fp);
+      setTotalPages(
+        fp.length + 1, // cover
+        // todo: for games
+      );
+      setPageNumber(0);
+      setReady(true);
     }
   }, [data]);
 
-  if (status === "loading" || filteredPages === undefined) {
+  if (status === "loading" || ready === false) {
     return <></>;
   }
 
   return (
     <>
-      {page === 0 && (
-        <TitleCard
-          data={data}
-          callback={() => {
-            setPage(page + 1);
-          }}
-        />
+      {pageNumber === 0 && (
+        // todo: don't need to pass in whole data
+        <TitleCard data={data} />
       )}
-      <PageCounter currentPage={page} totalPages={filteredPages.length} />
+      {pageNumber > 0 &&
+        pageNumber <= filteredPages.length && ( // todo: less or equal
+          <StoryPage />
+        )}
+      <PageCounter />
     </>
   );
 };
 
-const PageCounter: (args: any) => any = ({ currentPage, totalPages }: any) => {
+const PageCounter = () => {
+  const { totalPages, pageNumber } = useStory();
   let pills = [];
-  for (let index = 0; index < totalPages; index++) {
-    if (index <= currentPage) {
+  for (let index = 0; index < totalPages!; index++) {
+    if (index <= pageNumber!) {
       pills.push(true);
     } else {
       pills.push(false);
@@ -132,8 +156,9 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
   );
 };
 
-const TitleCard = ({ callback, data }: any) => {
+const TitleCard = ({ data }: any) => {
   const { isInclusive, isImmersive } = useProfile();
+  const { pageForward } = useStory();
   return (
     <div className="content-wrapper margin-top-1">
       <IonCard
@@ -213,7 +238,7 @@ const TitleCard = ({ callback, data }: any) => {
             marginLeft: "-25%",
           }}
         >
-          <IonButton shape="round" onClick={callback}>
+          <IonButton shape="round" onClick={pageForward}>
             <IonText
               style={{
                 paddingLeft: "5rem",
@@ -229,5 +254,56 @@ const TitleCard = ({ callback, data }: any) => {
         </div>
       </IonCard>
     </div>
+  );
+};
+
+const StoryPage: React.FC<any> = () => {
+  const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
+  const { isImmersive, isInclusive } = useProfile();
+  const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
+  const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
+  console.log(texts);
+  console.log(page);
+  return (
+    <>
+      <div className="content-wrapper margin-top-1">
+        <IonGrid>
+          <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
+            <IonCol size="auto" style={{ marginRight: "2rem" }}>
+              <IonImg src={backward} onClick={pageBackward} />
+            </IonCol>
+            <IonCol size="auto">
+              <IonCard
+                className="sf-card drop-shadow"
+                style={{
+                  backgroundImage: `url(${page.image.url})`,
+                  backgroundSize: "100% auto",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "bottom center",
+                  display: "block",
+                  width: 740,
+                  height: 740,
+                  position: "relative",
+                }}
+              >
+                <IonCardContent>
+                  <IonText className="ion-text-center">
+                    <h1 className="text-4xl semibold color-suelo">
+                      {isInclusive ? texts["es-inc"].text : texts.es.text}
+                    </h1>
+                    {!isImmersive && (
+                      <p className="text-2xl color-english">{texts.en.text}</p>
+                    )}
+                  </IonText>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+            <IonCol size="auto" style={{ marginLeft: "2rem" }}>
+              <IonImg src={forward} onClick={pageForward} />
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </div>
+    </>
   );
 };

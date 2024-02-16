@@ -18,7 +18,8 @@
 }
 
 .page-wrapper {
-  width: 1366px;
+  max-width: 1366px;
+  min-width: 700px;
   margin: auto;
   min-height: 100vh;
   padding-bottom: 80px; // clearance for footer
