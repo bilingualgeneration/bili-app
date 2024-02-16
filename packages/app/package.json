@@ -21,11 +21,13 @@
   "dependencies": {
     "@babel/cli": "^7.23.0",
     "@bili/schema": "workspace:^",
+    "@capacitor-firebase/authentication": "^5.4.0",
     "@capacitor/app": "5.0.6",
     "@capacitor/browser": "^5.1.0",
-    "@capacitor/core": "5.4.0",
+    "@capacitor/core": "^5.7.0",
     "@capacitor/device": "^5.0.6",
     "@capacitor/haptics": "5.0.6",
+    "@capacitor/ios": "^5.7.0",
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/preferences": "^5.0.6",
     "@capacitor/status-bar": "5.0.6",
@@ -72,7 +74,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
-    "@capacitor/cli": "5.4.0",
+    "@capacitor/cli": "^5.7.0",
     "@formatjs/cli": "^6.2.1",
     "@formatjs/ts-transformer": "^3.13.6",
     "@storybook/addon-essentials": "^7.4.5",
