@@ -1,4 +1,3 @@
-import React, { FC, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   IonButton,
@@ -10,6 +9,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import React, { useEffect, useState } from "react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -20,21 +20,29 @@ interface Type {
   subtext: string;
   audio: string;
 }
-interface IntroProps {
+interface DataObject {
   en: Type;
   es: Type;
   esInc: Type;
 }
+interface IntroProps {
+  data: DataObject[];
+  image: string;
+  nextPath: string;
+  gameName: string; // used for the FormattedMessage id
+}
 
-export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
+export const Intro: React.FC<IntroProps> = ({
+  data,
+  image,
+  nextPath,
+  gameName,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isInclusive, isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
-  const audio_en = new Audio(data[currentIndex].en.audio);
-  const audio_es = new Audio(data[currentIndex].es.audio);
-  const audio_es_inc = new Audio(data[currentIndex].esInc.audio);
 
   useEffect(() => {
     return () => {
@@ -49,12 +57,12 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
     });
     let sounds = [];
     if (isInclusive) {
-      sounds.push(audio_es_inc);
+      sounds.push(data[currentIndex].esInc.audio);
     } else {
-      sounds.push(audio_es);
+      sounds.push(data[currentIndex].es.audio);
     }
     if (!isImmersive) {
-      sounds.push(audio_en);
+      sounds.push(data[currentIndex].en.audio);
     }
     addAudio(sounds);
   }, []);
@@ -68,14 +76,14 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
               <h1 className="color-selva">
                 {isInclusive && (
                   <FormattedMessage
-                    id="storyFactory.welcome_inc" /* Not sure how to alter the id */
+                    id={gameName + ".welcome_inc"}
                     defaultMessage={data[currentIndex].en.text}
                     description="Main welcome message"
                   />
                 )}
                 {!isInclusive && (
                   <FormattedMessage
-                    id="storyFactory.welcome" /* Not sure how to alter the id */
+                    id={gameName + ".welcome"}
                     defaultMessage={data[currentIndex].en.text}
                     description="Main welcome message"
                   />
@@ -85,15 +93,15 @@ export const Intro = (data: IntroProps[], image: string, nextPath: string) => {
               <h2 className="color-selva">
                 {isInclusive && (
                   <FormattedMessage
-                    id="storyFactory.subwelcome_inc" /* Not sure how to alter the id */
+                    id={gameName + ".subwelcome_inc"}
                     defaultMessage={data[currentIndex].en.subtext}
                     description="Sub welcome message"
                   />
                 )}
                 {!isInclusive && (
                   <FormattedMessage
-                    id={`storyFactory.subwelcome`}
-                    defaultMessage={data[currentIndex].en.subtext}
+                    id={gameName + "intruder.subwelcome"}
+                    defaultMessage={data[currentIndex].es.subtext}
                     description="Sub welcome message"
                   />
                 )}
