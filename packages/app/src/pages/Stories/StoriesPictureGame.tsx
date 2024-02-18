@@ -48,11 +48,7 @@ const mockGameData = {
 export const StoriesPictureGame: React.FC = () => {
   return (
     <div>
-      <StoriesGame
-        game={mockGameData}
-        correct_choice_sound={correct_card_audio}
-        incorrect_choice_sound={incorrect_card_audio}
-      />
+      <StoriesGame game={mockGameData} gameType="image" />
     </div>
   );
 };

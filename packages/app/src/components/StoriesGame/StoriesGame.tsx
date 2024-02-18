@@ -43,20 +43,20 @@ interface PictureAudio {
 }
 
 interface Story {
-  spanish_question_text: string;
-  spanish_inclusive_question_text: string;
-  english_question_text: string;
-  spanish_inclusive_question_audio?: PictureAudio;
-  spanish_question_audio?: PictureAudio;
-  englsih_question_audio?: PictureAudio;
-  multiply_image_correct_image: PictureImage;
-  correct_card_audio?: PictureAudio;
-  incorrect_card_image_2: PictureImage;
-  incorrect_card_audio_2?: PictureAudio;
-  incorrect_card_image_3: PictureImage;
-  incorrect_card_audio_3?: PictureAudio;
-  incorrect_card_image_4: PictureImage;
-  incorrect_card_audio_4?: PictureAudio;
+  multiple_image_text: [];
+  multiple_image_correct_image: PictureImage;
+  multiple_image_incorrect_image_1: PictureImage;
+  multiple_image_incorrect_image_2: PictureImage;
+  multiple_image_incorrect_image_3: PictureImage;
+  multiple_syllable_correct_audio: PictureAudio;
+  multiple_syllable_correct_image: PictureImage;
+  multiple_syllable_incorrect_audio_1: PictureAudio;
+  multiple_syllable_incorrect_image_1: PictureImage;
+  multiple_syllable_incorrect_audio_2: PictureAudio;
+  multiple_syllable_incorrect_image_2: PictureImage;
+  multiple_syllable_incorrect_audio_3: PictureAudio;
+  multiple_syllable_incorrect_image_3: PictureImage;
+  multiple_syllable_text: [];
 }
 
 interface GameCard {
@@ -68,8 +68,7 @@ interface GameCard {
 
 interface StoriesGameProps {
   game: Story;
-  incorrect_choice_sound: string;
-  correct_choice_sound: string;
+  gameType: string;
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -84,25 +83,28 @@ function shuffleArray<T>(array: T[]): T[] {
 function getCardsFromImageGame(story: Story): GameCard[] {
   return [
     {
-      image: story.correct_card_image,
+      image: story.multiple_image_correct_image,
       isTarget: true,
       id: "1",
-      audio: story.correct_card_audio!,
+      audio: { url: "@/assets/audio/IntruderAudio/intruder_correct.wav" },
     },
     {
-      image: story.incorrect_card_image_2,
+      image: story.multiple_image_incorrect_image_1,
+      isTarget: false,
       id: "2",
-      audio: story.incorrect_card_audio_2,
+      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
     },
     {
-      image: story.incorrect_card_image_3,
+      image: story.multiple_image_incorrect_image_2,
+      isTarget: false,
       id: "3",
-      audio: story.incorrect_card_audio_3,
+      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
     },
     {
-      image: story.incorrect_card_image_4,
+      image: story.multiple_image_incorrect_image_3,
+      isTarget: false,
       id: "4",
-      audio: story.incorrect_card_audio_4,
+      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
     },
   ];
 }
@@ -110,40 +112,94 @@ function getCardsFromImageGame(story: Story): GameCard[] {
 function getCardsFromSyllableGame(story: Story): GameCard[] {
   return [
     {
-      image: story.correct_card_image,
+      image: story.multiple_syllable_correct_image,
       isTarget: true,
       id: "1",
-      audio: story.correct_card_audio!,
+      audio: story.multiple_syllable_correct_audio,
     },
     {
-      image: story.incorrect_card_image_2,
+      image: story.multiple_syllable_incorrect_image_1,
+      isTarget: false,
       id: "2",
-      audio: story.incorrect_card_audio_2,
+      audio: story.multiple_syllable_incorrect_audio_1,
     },
     {
-      image: story.incorrect_card_image_3,
+      image: story.multiple_syllable_incorrect_image_2,
+      isTarget: false,
       id: "3",
-      audio: story.incorrect_card_audio_3,
+      audio: story.multiple_syllable_incorrect_audio_2,
     },
     {
-      image: story.incorrect_card_image_4,
+      image: story.multiple_syllable_incorrect_image_3,
+      isTarget: false,
       id: "4",
-      audio: story.incorrect_card_audio_4,
+      audio: story.multiple_syllable_incorrect_audio_3,
     },
   ];
 }
 
 export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
-  incorrect_choice_sound,
-  correct_choice_sound,
+  gameType,
 }) => {
   const { isImmersive, isInclusive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  const audio_correct = new Audio(correct_choice_sound);
-  const audio_incorrect = new Audio(incorrect_choice_sound);
+  const [questionsData, setQuestionsData] = useState<any[]>([]);
+  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
+  const [showBackside, setShowBackside] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showNextGame, setShowNextGame] = useState<boolean>(false);
 
+  //questions data
+
+  const imageQuestions = data.multiple_image_text.map((questionItem: any) => {
+    return {
+      text: {
+        en: questionItem.en?.text,
+        es: questionItem.es?.text,
+        "en-inc": questionItem["en-inc"]?.text,
+        "es-inc": questionItem["es-inc"]?.text,
+      },
+      audio: {
+        en: questionItem.en?.audio,
+        es: questionItem.es?.audio,
+        "en-inc": questionItem["en-inc"]?.audio,
+        "es-inc": questionItem["es-inc"]?.audio,
+      },
+    };
+  });
+
+  const syllableQuestions = data.multiple_syllable_text.map(
+    (questionItem: any) => {
+      return {
+        text: {
+          en: questionItem.en?.text,
+          es: questionItem.es?.text,
+          "en-inc": questionItem["en-inc"]?.text,
+          "es-inc": questionItem["es-inc"]?.text,
+        },
+        audio: {
+          en: questionItem.en?.audio,
+          es: questionItem.es?.audio,
+          "en-inc": questionItem["en-inc"]?.audio,
+          "es-inc": questionItem["es-inc"]?.audio,
+        },
+      };
+    },
+  );
+
+  useEffect(() => {
+    if (data !== undefined) {
+      if (gameType === "image") {
+        setQuestionsData(imageQuestions);
+      } else {
+        setQuestionsData(syllableQuestions);
+      }
+    }
+  }, [data]);
+
+  //audio effect for autoplaying
   useEffect(() => {
     return () => {
       clearAudio();
@@ -155,29 +211,27 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     });
 
     if (isImmersive) {
+      const audioUrls = [];
       if (isInclusive) {
-        addAudio([
-          data.card_group[currentIndex].spanish_inclusive_question_audio,
-        ]);
+        audioUrls.push(questionsData[0].audio["es-inc"]);
       } else {
-        addAudio([data.card_group[currentIndex].spanish_question_audio]);
+        audioUrls.push(questionsData[0].audio.es);
       }
+      addAudio(audioUrls);
     } else {
+      const audioUrls = [];
       if (isInclusive) {
-        addAudio([
-          data.card_group[currentIndex].spanish_inclusive_question_audio,
-          data.card_group[currentIndex].englsih_question_audio,
-        ]);
+        audioUrls.push(questionsData[0].audio["es-inc"]);
+        audioUrls.push(questionsData[0].audio["en-inc"]);
       } else {
-        addAudio([
-          data.card_group[currentIndex].spanish_question_audio,
-          data.card_group[currentIndex].englsih_question_audio,
-        ]);
+        audioUrls.push(questionsData[0].audio.es);
+        audioUrls.push(questionsData[0].audio.en);
       }
     }
-  }, []);
+  }, [questionsData, isImmersive, isInclusive]);
   const history = useHistory();
 
+  //styles for correct and wrong cards
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
@@ -204,45 +258,23 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     "3": initialStyle,
     "4": initialStyle,
   });
-  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showBackside, setShowBackside] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showNextGame, setShowNextGame] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
 
-  //not sure if it's needed for this game
-  const goToNextWordGroup = () => {
-    // Check if the current index is at the last element of the word_group array
-    if (currentIndex >= data.card_group.length - 1) {
-      setCurrentIndex(0); // Reset to the first element
-    } else {
-      setCurrentIndex(currentIndex + 1); // Move to the next element
-    }
-  };
-
   const shuffledCards = useMemo(() => {
-    const cards = data.multiply_image_correct_image
-      ? getCardsFromImageGame(data)
-      : getCardsFromImageGame(data);
+    const cards =
+      gameType === "image"
+        ? getCardsFromImageGame(data)
+        : getCardsFromSyllableGame(data);
     return shuffleArray(cards);
-  }, [data, currentIndex]);
+  }, [data, currentIndex, gameType]);
 
   useEffect(() => {
     if (isCorrectSelected) {
       setTimeout(() => {
-        if (
-          currentIndex + 1 === 5 ||
-          currentIndex + 1 === 10 ||
-          currentIndex + 1 === 20 ||
-          currentIndex + 1 === data.card_group.length
-        ) {
-          setShowNextGame(true); //go to the IntruderCongrats page
-        }
-
-        goToNextWordGroup(); //check for the current index
+        setShowNextGame(true);
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           "1": initialStyle,
@@ -256,67 +288,61 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   // Function to handle card click
   const handleCardClick = (card: any) => {
-    if (card.audio ?? false) {
-      //case when audio exists for each card (syllabas game)
-      if (!card.isTarget) {
-        //logic for the incorrect cards
-        const wordAudio = new Audio(card.audio.url);
-        wordAudio.play();
+    if (!card.isTarget) {
+      //logic for the incorrect cards
 
-        //plays audio for incorrect choice
+      addAudio([card.audio.url]);
+
+      //plays audio for incorrect choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+      }));
+
+      setTimeout(() => {
         setCardColors((prevColors: any) => ({
           ...prevColors,
-          [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+          [card.id]: initialStyle,
         }));
-
-        setTimeout(() => {
-          setCardColors((prevColors: any) => ({
-            ...prevColors,
-            [card.id]: initialStyle,
-          }));
-        }, 1000);
-      } else {
-        //logic when the correct card is choosen
-        const wordAudio = new Audio(card.audio.url);
-        wordAudio.play(); //plays audio for correct choice
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: correctStyle,
-        }));
-
-        setTimeout(() => {
-          setIsCorrectSelected(true);
-        }, 1000);
-      }
+      }, 1000);
     } else {
-      //case when audio doesn't exist for each card (picture game)
+      //logic when the correct card is choosen
+      addAudio([card.audio.url]); //plays audio for correct choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: correctStyle,
+      }));
 
-      if (!card.isTarget) {
-        //logic for the incorrect cards
-        audio_incorrect.play(); //plays audio for incorrect choice
+      setTimeout(() => {
+        setIsCorrectSelected(true);
+      }, 1000);
+    }
+
+    if (!card.isTarget) {
+      //logic for the incorrect cards
+      addAudio([card.audio.url]); //plays audio for incorrect choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+      }));
+
+      setTimeout(() => {
         setCardColors((prevColors: any) => ({
           ...prevColors,
-          [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+          [card.id]: initialStyle,
         }));
+      }, 1000);
+    } else {
+      //logic when the correct card is choosen
+      addAudio([card.audio.url]); //plays audio for correct choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: correctStyle,
+      }));
 
-        setTimeout(() => {
-          setCardColors((prevColors: any) => ({
-            ...prevColors,
-            [card.id]: initialStyle,
-          }));
-        }, 1000);
-      } else {
-        //logic when the correct card is choosen
-        audio_correct.play(); //plays audio for correct choice
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: correctStyle,
-        }));
-
-        setTimeout(() => {
-          setIsCorrectSelected(true);
-        }, 1000);
-      }
+      setTimeout(() => {
+        setIsCorrectSelected(true);
+      }, 1000);
     }
   };
 
@@ -331,17 +357,17 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           <IonText>
             {isInclusive ? (
               <h1 className="text-5xl color-suelo">
-                {data.card_group[currentIndex].spanish_inclusive_question_text}
+                {questionsData[0].text["es-inc"]}
               </h1>
             ) : (
               <h1 className="text-5xl color-suelo">
-                {data.card_group[currentIndex].spanish_question_text}
+                {questionsData[0].text.es}
               </h1>
             )}
 
             {!isImmersive && (
               <p className="text-3xl color-english">
-                {data.card_group[currentIndex].english_question_text}
+                {questionsData[0].text.es}
               </p>
             )}
           </IonText>
