@@ -209,21 +209,61 @@ import { Intro } from "@/components/Intro/Intro";
 const data = [
   {
     en: {
-      text: "The Intruder",
+      text: "The Intruder!",
       subtext:
-        "The goal of this game is to identify the word that does not rhyme with the rest.",
+        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
       audio: audio_en_file,
     },
     es: {
-      text: "El Intruso",
+      text: "¡El Intruso!",
       subtext:
-        "El objetivo de este juego es identificar la palabra que no rima con el resto.",
+        "1: !Bienvenidos al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto!",
       audio: audio_es_file,
     },
     esInc: {
-      text: "El Intruso",
+      text: "¡El Intruso!",
       subtext:
-        "El objetivo de este juego es identificar la palabra que no rima con el resto.",
+        "¡El objetivo de este juego es identificar la palabra que no rima con el resto!",
+      audio: audio_es_inc_file,
+    },
+  },
+  {
+    en: {
+      text: "The Intruder!",
+      subtext:
+        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
+      audio: audio_en_file,
+    },
+    es: {
+      text: "¡El Intruso!",
+      subtext:
+        "2: !Bienvenidos al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto!",
+      audio: audio_es_file,
+    },
+    esInc: {
+      text: "¡El Intruso!",
+      subtext:
+        "¡El objetivo de este juego es identificar la palabra que no rima con el resto!",
+      audio: audio_es_inc_file,
+    },
+  },
+  {
+    en: {
+      text: "The Intruder!",
+      subtext:
+        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
+      audio: audio_en_file,
+    },
+    es: {
+      text: "¡El Intruso!",
+      subtext:
+        "3: !Bienvenidos al juego, “El intruso”! El objetivo de este juego es identificar la palabra que no rima con el resto!",
+      audio: audio_es_file,
+    },
+    esInc: {
+      text: "¡El Intruso!",
+      subtext:
+        "¡El objetivo de este juego es identificar la palabra que no rima con el resto!",
       audio: audio_es_inc_file,
     },
   },
