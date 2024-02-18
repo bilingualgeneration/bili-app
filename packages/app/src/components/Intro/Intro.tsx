@@ -52,8 +52,13 @@ export const Intro: React.FC<IntroProps> = ({
 
   useEffect(() => {
     setCallback(() => () => {
-      setAudioPlayed(true);
-      setCurrentIndex(currentIndex + 1);
+      if (currentIndex < data.length - 1) {
+        // increment index to render next message/audio
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        // all audio has played
+        setAudioPlayed(true);
+      }
     });
     let sounds = [];
     if (isInclusive) {
@@ -65,7 +70,7 @@ export const Intro: React.FC<IntroProps> = ({
       sounds.push(data[currentIndex].en.audio);
     }
     addAudio(sounds);
-  }, []);
+  }, [currentIndex, isInclusive, isImmersive, data]);
 
   return (
     <div style={{ position: "relative" }}>
