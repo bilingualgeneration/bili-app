@@ -21,7 +21,7 @@ import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.
 import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
 
 import "./Intruder.scss";
-
+/*
 export const IntruderIntro: React.FC = () => {
   const { isInclusive, isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
@@ -50,50 +50,50 @@ export const IntruderIntro: React.FC = () => {
     addAudio(sounds);
   }, []);
   const history = useHistory();
-  /*
-  const audio_en = new Audio(audio_en_file);
-  const audio_es = new Audio(audio_es_file);
-  const audio_es_inc = new Audio(audio_es_inc_file);
+  
+  // const audio_en = new Audio(audio_en_file);
+  // const audio_es = new Audio(audio_es_file);
+  // const audio_es_inc = new Audio(audio_es_inc_file);
 
-  useEffect(() => {
-    return () => {
-      audio_en.pause();
-      audio_es.pause();
-      audio_es_inc.pause();
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     audio_en.pause();
+  //     audio_es.pause();
+  //     audio_es_inc.pause();
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (isImmersive) {
-      if (isInclusive) {
-        audio_es_inc.onended = () => {
-          setAudioPlayed(true);
-        };
-        audio_es_inc.play();
-      } else {
-        audio_es.onended = () => {
-          setAudioPlayed(true);
-        };
-        audio_es.play();
-      }
-    } else {
-      audio_en.onended = () => {
-        setAudioPlayed(true);
-      };
-      if (isInclusive) {
-        audio_es_inc.onended = () => {
-          audio_en.play();
-        };
-        audio_es_inc.play();
-      } else {
-        audio_es.onended = () => {
-          audio_en.play();
-        };
-        audio_es.play();
-      }
-    }
-  }, []);
-*/
+  // useEffect(() => {
+  //   if (isImmersive) {
+  //     if (isInclusive) {
+  //       audio_es_inc.onended = () => {
+  //         setAudioPlayed(true);
+  //       };
+  //       audio_es_inc.play();
+  //     } else {
+  //       audio_es.onended = () => {
+  //         setAudioPlayed(true);
+  //       };
+  //       audio_es.play();
+  //     }
+  //   } else {
+  //     audio_en.onended = () => {
+  //       setAudioPlayed(true);
+  //     };
+  //     if (isInclusive) {
+  //       audio_es_inc.onended = () => {
+  //         audio_en.play();
+  //       };
+  //       audio_es_inc.play();
+  //     } else {
+  //       audio_es.onended = () => {
+  //         audio_en.play();
+  //       };
+  //       audio_es.play();
+  //     }
+  //   }
+  // }, []);
+
   return (
     <div className="sf-card">
       <IonCard className="ion-no-margin">
@@ -202,5 +202,40 @@ export const IntruderIntro: React.FC = () => {
         </IonCardContent>
       </IonCard>
     </div>
+  );
+};
+*/
+import { Intro } from "@/components/Intro/Intro";
+const data = [
+  {
+    en: {
+      text: "The Intruder",
+      subtext:
+        "The goal of this game is to identify the word that does not rhyme with the rest.",
+      audio: audio_en_file,
+    },
+    es: {
+      text: "El Intruso",
+      subtext:
+        "El objetivo de este juego es identificar la palabra que no rima con el resto.",
+      audio: audio_es_file,
+    },
+    esInc: {
+      text: "El Intruso",
+      subtext:
+        "El objetivo de este juego es identificar la palabra que no rima con el resto.",
+      audio: audio_es_inc_file,
+    },
+  },
+];
+const gameName = "intruder";
+export const IntruderIntro: React.FC = () => {
+  return (
+    <Intro
+      data={data}
+      image={biliCharacter}
+      nextPath="/intruder-game/select"
+      gameName={gameName}
+    />
   );
 };
