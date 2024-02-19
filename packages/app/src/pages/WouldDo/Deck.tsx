@@ -1,3 +1,9 @@
+/*
+  todo: prevent cards below top card from being swipeable
+  can use pointer-events: none to do that
+  however react-springs not getting this css styling
+*/
+
 import React, { FC, useEffect, useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
@@ -48,60 +54,44 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     };
   }, []);
 
-  useEffect(() => {
-    setCallback(() => () => {
-      setAudioPlayed(true);
-    });
-    const audioSources: string[] = [];
-    cards.forEach((card) => {
-      if (isInclusive) {
-        if (card.esIncAudio) audioSources.push(card.esIncAudio.url);
-      } else {
-        if (card.esAudio) audioSources.push(card.esAudio.url);
-      }
-      if (!isImmersive && card.enAudio) audioSources.push(card.enAudio.url);
-    });
-    addAudio(audioSources);
-  }, []);
-
   // Function to play audio for the current card
   const playAudio = (index: number) => {
-    console.log(`Playing audio: ${index}`);
+    // console.log(`Playing audio: ${index}`);
     const card = cards[index];
-    let audioUrl = "";
+    let audios = [];
     if ((!isImmersive && !isInclusive) || (isImmersive && !isInclusive)) {
-      audioUrl = card.esAudio?.url || "";
+      if (card.esAudio) {
+        audios.push(card.esAudio.url);
+      }
+      //audioUrl = card.esAudio?.url || "";
     } else {
-      audioUrl = card.esIncAudio?.url || "";
+      if (card.esIncAudio) {
+        audios.push(card.esIncAudio.url);
+      }
+      //audioUrl = card.esIncAudio?.url || "";
     }
 
-    // console.log(audioUrl);
-
-    if (audioUrl) {
-      const audio = new Audio(audioUrl);
-      audio.play();
-      audio.addEventListener("ended", () => {
-        // Check if EN audio should be played based on settings and availability
-        if (!isImmersive && card.enAudio) {
-          const enAudioUrl = card.enAudio.url;
-          const enAudio = new Audio(enAudioUrl);
-          enAudio.play();
-        }
-      });
-    } else {
-      console.error("Audio source is undefined or null.");
+    if (!isImmersive && card.enAudio) {
+      audios.push(card.enAudio.url);
     }
+    addAudio(audios);
   };
 
-  const [props, api] = useSprings(cards.length, (i) => ({
-    x: -2 - i * 5, // Initialize x position of each card
-    y: 10 - i * 10, // Initialize y position of each card
-    scale: 1, // Initialize scale of each card
-    rot: 0, // Initialize rotation angle of each card
-    zIndex: cards.length - i, // Initialize zIndex of each card
-    delay: i * 100, // Delay before starting the animation
-    hidden: i > 5 ? false : true,
-  }));
+  const [props, api] = useSprings(cards.length, (i) => {
+    // console.log(`Generating props for card ${i}`);
+    return {
+      x: -2 - i * 5, // Initialize x position of each card
+      y: 10 - i * 10, // Initialize y position of each card
+      scale: 1, // Initialize scale of each card
+      rot: 0, // Initialize rotation angle of each card
+      zIndex: cards.length - i, // Initialize zIndex of each card
+      delay: i * 100, // Delay before starting the animation
+      hidden: i > 5 ? false : true,
+      //pointerEvents: i === cards.length - 1 ? 'auto' : 'none'
+    };
+  });
+
+  const newCount = (currentCardIndex + 1) % cards.length;
 
   // Binding useDrag() hook to each card using bind function
   const bind = useDrag(
@@ -115,10 +105,10 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
       const dir = xDir < 0 ? -1 : 1;
       if (!down && mx < -20) {
         // If the drag ends and the horizontal movement exceeds the threshold
-        stopAudio();
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
+            // console.log(`This is the swiped card index: ${swiped_card_index}`);
             if (i === swiped_card_index) {
               return {
                 x: -2 - (cards.length - 1) * 5,
@@ -141,6 +131,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
               };
             }
           });
+          clearAudio();
           const newCount = (currentCardIndex + 1) % cards.length;
           setCurrentCardIndex(newCount);
         }, 500);
@@ -150,7 +141,8 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
       // Logic for animating the card while it's being dragged
       api.start((i) => {
         if (swiped_card_index !== i) {
-          return; // Skip animation for cards other than the swiped card
+          // console.log(`This is the swiped card index: ${swiped_card_index}`);
+          return; // This allows for swipe to be limited to one card at a time vs all cards together
         }
 
         // Limit the maximum distance dragged to the left
@@ -174,17 +166,11 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     },
   );
 
-  // Function to stop audio playback
-  const stopAudio = () => {
-    const audio = new Audio();
-    audio.pause();
-    audio.currentTime = 0;
-  };
-
   return (
     <>
       <div className={styles.container}>
         {props.map(({ x, y, rot, scale, zIndex, hidden }, i) => {
+          // console.log("Card index:", i);
           const card = cards[i % cards.length];
           const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
             card;
