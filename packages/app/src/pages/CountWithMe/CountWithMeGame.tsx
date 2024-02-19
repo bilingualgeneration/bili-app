@@ -12,9 +12,9 @@ import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
-import "./countWithMe.scss";
+import "./CountWithMe.scss";
 
-export const CountWithMe: React.FC = () => {
+export const CountWithMeGame: React.FC = () => {
   const { isImmersive } = useProfile();
   //@ts-ignore
   const { pack_id } = useParams();

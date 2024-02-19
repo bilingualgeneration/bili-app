@@ -14,7 +14,9 @@ import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
-import { CountWithMe } from "@/pages/CountWithMe/CountWithMe";
+import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
+import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
+import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
@@ -167,11 +169,34 @@ const Router: React.FC = () => {
 
           <Route
             exact
+            path="/count-with-me-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <CountWithMeIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/count-with-me-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
             path="/count-with-me-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMe />
+                  <CountWithMeGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}

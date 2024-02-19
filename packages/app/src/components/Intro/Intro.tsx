@@ -56,7 +56,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
     });
     let sounds = [];
     sounds.push(texts[currentIndex].es.audio);
-    if(isImmersive){
+    if(!isImmersive){
       sounds.push(texts[currentIndex].en.audio);
     }
     addAudio(sounds);
