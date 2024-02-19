@@ -1,4 +1,28 @@
 {
+  "childProfile.age.3to5": [
+    {
+      "type": 0,
+      "value": "3-5 años"
+    }
+  ],
+  "childProfile.age.5to7": [
+    {
+      "type": 0,
+      "value": "5-7 años"
+    }
+  ],
+  "childProfile.age.above7": [
+    {
+      "type": 0,
+      "value": "Mayores de 7 años"
+    }
+  ],
+  "childProfile.age.lessThan3": [
+    {
+      "type": 0,
+      "value": "Menores de 3 años"
+    }
+  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -113,6 +137,12 @@
       "value": "Jugar"
     }
   ],
+  "common.sayings": [
+    {
+      "type": 0,
+      "value": "Dichos"
+    }
+  ],
   "common.signUp": [
     {
       "type": 0,
@@ -129,6 +159,12 @@
     {
       "type": 0,
       "value": "¡Fábrica de Cuentos!"
+    }
+  ],
+  "common.tellMeAbout": [
+    {
+      "type": 0,
+      "value": "Cuéntame sobre..."
     }
   ],
   "common.terms": [
@@ -399,6 +435,30 @@
     {
       "type": 0,
       "value": "Bienvenido a la página de inicio de sesión del profesor"
+    }
+  ],
+  "presplash.getStarted": [
+    {
+      "type": 0,
+      "value": "Empecemos"
+    }
+  ],
+  "presplash.noCommitments": [
+    {
+      "type": 0,
+      "value": "Sin compromisos, cancela en cualquier momento."
+    }
+  ],
+  "presplash.tagline": [
+    {
+      "type": 0,
+      "value": "Aprobado por la abuelita y la ciencia"
+    }
+  ],
+  "presplash.tryit": [
+    {
+      "type": 0,
+      "value": "Pruébalo todo GRATIS"
     }
   ],
   "reqdActions.goto_settings.message": [
@@ -1058,7 +1118,7 @@
   "storyFactory.read": [
     {
       "type": 0,
-      "value": "Leer"
+      "value": "Lee"
     }
   ],
   "storyFactory.subwelcome": [

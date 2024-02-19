@@ -1,4 +1,28 @@
 {
+  "childProfile.age.3to5": [
+    {
+      "type": 0,
+      "value": "3-5 years old"
+    }
+  ],
+  "childProfile.age.5to7": [
+    {
+      "type": 0,
+      "value": "5-7 years old"
+    }
+  ],
+  "childProfile.age.above7": [
+    {
+      "type": 0,
+      "value": "Above 7 years old"
+    }
+  ],
+  "childProfile.age.lessThan3": [
+    {
+      "type": 0,
+      "value": "Below 3 years old"
+    }
+  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -21,12 +45,6 @@
     {
       "type": 0,
       "value": "Make a profile for your child"
-    }
-  ],
-  "common.apple": [
-    {
-      "type": 0,
-      "value": "Continue with Apple"
     }
   ],
   "common.community": [
@@ -63,12 +81,6 @@
     {
       "type": 0,
       "value": "Go Back"
-    }
-  ],
-  "common.google": [
-    {
-      "type": 0,
-      "value": "Continue with Google"
     }
   ],
   "common.haveAccount": [
@@ -113,6 +125,12 @@
       "value": "Play"
     }
   ],
+  "common.sayings": [
+    {
+      "type": 0,
+      "value": "Sayings"
+    }
+  ],
   "common.signUp": [
     {
       "type": 0,
@@ -129,6 +147,12 @@
     {
       "type": 0,
       "value": "Story Factory"
+    }
+  ],
+  "common.tellMeAbout": [
+    {
+      "type": 0,
+      "value": "Tell me about..."
     }
   ],
   "common.terms": [
@@ -155,6 +179,12 @@
       "value": "Wellness"
     }
   ],
+  "common.wouldDo": [
+    {
+      "type": 0,
+      "value": "What would you do?"
+    }
+  ],
   "common.years_old": [
     {
       "type": 1,
@@ -163,6 +193,24 @@
     {
       "type": 0,
       "value": " years old"
+    }
+  ],
+  "countWithMe.complete": [
+    {
+      "type": 0,
+      "value": "Activity Completed"
+    }
+  ],
+  "countWithMe.congrats": [
+    {
+      "type": 0,
+      "value": "You've earned a star"
+    }
+  ],
+  "countWithMe.keepGoing": [
+    {
+      "type": 0,
+      "value": "Keep Going!"
     }
   ],
   "intruder.congrats.description.10": [
@@ -213,12 +261,6 @@
       "value": "I knew you could do it!"
     }
   ],
-  "intruder.intruderWelcome": [
-    {
-      "type": 0,
-      "value": "Welcome to the Intruder Page"
-    }
-  ],
   "intruder.keepGoing": [
     {
       "type": 0,
@@ -259,12 +301,6 @@
     {
       "type": 0,
       "value": "Close"
-    }
-  ],
-  "landingPage.assignments": [
-    {
-      "type": 0,
-      "value": "Assignments"
     }
   ],
   "landingPage.catgories": [
@@ -359,12 +395,6 @@
       "value": "Choose your settings"
     }
   ],
-  "login.divider": [
-    {
-      "type": 0,
-      "value": "or"
-    }
-  ],
   "login.teacher": [
     {
       "type": 0,
@@ -375,6 +405,30 @@
     {
       "type": 0,
       "value": "Welcome to Teacher Login Page"
+    }
+  ],
+  "presplash.getStarted": [
+    {
+      "type": 0,
+      "value": "Let's get started"
+    }
+  ],
+  "presplash.noCommitments": [
+    {
+      "type": 0,
+      "value": "No commitments, cancel anytime."
+    }
+  ],
+  "presplash.tagline": [
+    {
+      "type": 0,
+      "value": "Language learning that is abuelita and science–approved"
+    }
+  ],
+  "presplash.tryit": [
+    {
+      "type": 0,
+      "value": "Try it all for FREE"
     }
   ],
   "reqdActions.goto_settings.message": [
@@ -416,7 +470,7 @@
   "settings.about.title": [
     {
       "type": 0,
-      "value": "About"
+      "value": "About Bili"
     }
   ],
   "settings.adult": [
@@ -465,12 +519,6 @@
     {
       "type": 0,
       "value": "Full name"
-    }
-  ],
-  "settings.onboarding.inclusive-spanish": [
-    {
-      "type": 0,
-      "value": "Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
     }
   ],
   "settings.onboarding.inclusiveSpanish": [
@@ -581,12 +629,6 @@
       "value": "Skip"
     }
   ],
-  "settings.overview.seeAll": [
-    {
-      "type": 0,
-      "value": "See all (9)"
-    }
-  ],
   "settings.phone": [
     {
       "type": 0,
@@ -677,12 +719,6 @@
       "value": "Save changes"
     }
   ],
-  "settingsHeader.rate": [
-    {
-      "type": 0,
-      "value": "Rate this app"
-    }
-  ],
   "settingsProgress.preferences.bilingual": [
     {
       "type": 0,
@@ -698,7 +734,7 @@
   "settingsProgress.preferences.limit": [
     {
       "type": 0,
-      "value": "Daily Playtime Limit"
+      "value": "Daily playtime limit"
     }
   ],
   "settingsProgress.preferences.popover1": [
@@ -747,12 +783,6 @@
     {
       "type": 0,
       "value": "About Bili"
-    }
-  ],
-  "sideMenu.logOut": [
-    {
-      "type": 0,
-      "value": "Log out"
     }
   ],
   "sideMenu.overview": [
@@ -914,7 +944,7 @@
   "signUpTeacher.aboutGrades": [
     {
       "type": 0,
-      "value": "WHat grade(s) do you work with?"
+      "value": "What grade(s) do you work with?"
     }
   ],
   "signUpTeacher.aboutOther": [
@@ -965,12 +995,6 @@
       "value": "Your school name"
     }
   ],
-  "splash.classroom": [
-    {
-      "type": 0,
-      "value": "Do you have a classroom code?"
-    }
-  ],
   "splash.createAccountButton": [
     {
       "type": 0,
@@ -989,40 +1013,10 @@
       "value": "New to Bili?"
     }
   ],
-  "splash.studentLoginButton": [
-    {
-      "type": 0,
-      "value": "Student login"
-    }
-  ],
-  "storyFactory.congrats.description1": [
-    {
-      "type": 0,
-      "value": "You've created and read five stories"
-    }
-  ],
-  "storyFactory.congrats.description2": [
-    {
-      "type": 0,
-      "value": "Can you keep going?"
-    }
-  ],
-  "storyFactory.congrats.title": [
-    {
-      "type": 0,
-      "value": "Congrats"
-    }
-  ],
   "storyFactory.create_message": [
     {
       "type": 0,
       "value": "Create over 4,000 different stories with the swipe of your finger or click of a button"
-    }
-  ],
-  "storyFactory.next": [
-    {
-      "type": 0,
-      "value": "Next"
     }
   ],
   "storyFactory.nextButton": [
@@ -1143,6 +1137,12 @@
     {
       "type": 0,
       "value": "Social Justice"
+    }
+  ],
+  "wouldDo.title": [
+    {
+      "type": 0,
+      "value": "What would you do?"
     }
   ]
 }

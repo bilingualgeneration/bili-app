@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from "@/assets/icons/bili_logo.svg?react";
+import Logo from "@/assets/img/bili_logo.png";
 import { IonButton, IonContent, IonImg, IonText, IonPage } from "@ionic/react";
-import "./PreSplash.css";
-import Bili from "@/assets/icons/bili_big_avatar.svg?react";
+import "./PreSplash.scss";
+import Bili from "@/assets/img/bili_presplash_avatar.png";
 import { FormattedMessage } from "react-intl";
 
 export const PreSplash: React.FC = () => {
@@ -12,7 +12,7 @@ export const PreSplash: React.FC = () => {
         <div id="start-page">
           <div className="page-wrapper">
             <div id="inner-start-page">
-              <Logo />
+              <IonImg src={Logo} style={{ width: 150, height: "auto" }} />
               <IonText>
                 <p
                   className="text-2xl color-nube semibold"
@@ -24,7 +24,10 @@ export const PreSplash: React.FC = () => {
                   />
                 </p>
               </IonText>
-              <Bili style={{ margin: "3rem 0" }} />
+              <IonImg
+                src={Bili}
+                style={{ margin: "3rem 0", width: 500, height: "auto" }}
+              />
               <IonText>
                 <p className="text-lg color-cielo-highest semibold">
                   <FormattedMessage
