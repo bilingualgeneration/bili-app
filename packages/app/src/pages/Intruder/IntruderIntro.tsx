@@ -211,7 +211,7 @@ const data = [
     en: {
       text: "The Intruder!",
       subtext:
-        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
+        "The goal of this game is to identify the word that does not rhyme with the rest!",
       audio: audio_en_file,
     },
     es: {
@@ -231,7 +231,7 @@ const data = [
     en: {
       text: "The Intruder!",
       subtext:
-        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
+        "The goal of this game is to identify the word that does not rhyme with the rest!",
       audio: audio_en_file,
     },
     es: {
@@ -251,7 +251,7 @@ const data = [
     en: {
       text: "The Intruder!",
       subtext:
-        'Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest!',
+        "The goal of this game is to identify the word that does not rhyme with the rest!",
       audio: audio_en_file,
     },
     es: {
@@ -268,14 +268,8 @@ const data = [
     },
   },
 ];
-const gameName = "intruder";
 export const IntruderIntro: React.FC = () => {
   return (
-    <Intro
-      data={data}
-      image={biliCharacter}
-      nextPath="/intruder-game/select"
-      gameName={gameName}
-    />
+    <Intro data={data} image={biliCharacter} nextPath="/intruder-game/select" />
   );
 };
