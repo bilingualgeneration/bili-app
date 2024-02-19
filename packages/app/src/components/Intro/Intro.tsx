@@ -10,6 +10,7 @@ import {
   IonText,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
+import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/contexts/ProfileContext";
@@ -25,14 +26,14 @@ interface DataObject {
   es: Type;
 }
 interface IntroProps {
-  data: DataObject[];
+  texts: DataObject[];
   image: string;
   nextPath: string;
 }
 
-export const Intro: React.FC<IntroProps> = ({ data, image, nextPath }) => {
+export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const { isInclusive, isImmersive } = useProfile();
+  const { isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
@@ -45,7 +46,7 @@ export const Intro: React.FC<IntroProps> = ({ data, image, nextPath }) => {
 
   useEffect(() => {
     setCallback(() => () => {
-      if (currentIndex < data.length - 1) {
+      if (currentIndex < texts.length - 1) {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
       } else {
@@ -54,62 +55,72 @@ export const Intro: React.FC<IntroProps> = ({ data, image, nextPath }) => {
       }
     });
     let sounds = [];
-    sounds.push(data[currentIndex].es.audio);
-    sounds.push(data[currentIndex].en.audio);
+    sounds.push(texts[currentIndex].es.audio);
+    if(isImmersive){
+      sounds.push(texts[currentIndex].en.audio);
+    }
     addAudio(sounds);
-  }, [currentIndex, data]);
+  }, [currentIndex, texts]);
 
   return (
-    <div style={{ position: "relative" }}>
-      <div className="ion-no-padding sf-card">
+    <div className='intro-card'>
+      <div className="ion-no-padding sf-card margin-top-4">
         <IonCard className="ion-no-margin">
           <IonCardContent>
             <div style={{ paddingRight: 100 }}>
               <h1 className="text-6xl color-suelo">
-                {data[currentIndex].es.text}
+                {texts[currentIndex].es.text}
               </h1>
               <h2 className="text-4xl color-suelo">
-                {data[currentIndex].es.subtext}
+                {texts[currentIndex].es.subtext}
               </h2>
-              <h1 className="text-6xl color-suelo">
-                <br />
-                {data[currentIndex].en.text}
-              </h1>
-              <h2 className="text-4xl color-suelo">
-                {data[currentIndex].en.subtext}
-              </h2>
+	      {!isImmersive && <>
+		<h1 className="text-6xl color-english margin-top-4">
+                  {texts[currentIndex].en.text}
+		</h1>
+		<h2 className="text-4xl color-english">
+                  {texts[currentIndex].en.subtext}
+		</h2>
+	      </>}
             </div>
             {/* Next Button will display after the audio has played and if the current index is the last index */}
-            {audioPlayed && currentIndex === data.length - 1 && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "40px",
-                }}
-              >
-                <IonButton
-                  onClick={() => history.push(nextPath)}
-                  shape="round"
-                  style={{ width: "auto", height: "auto" }}
-                >
-                  <div>
-                    <h1
-                      style={{ color: "white" }}
-                      className="text-4xl color-suelo"
-                    >
-                      Siguiente
-                    </h1>
-                    <p
-                      style={{ color: "black" }}
-                      className="text-xl color-suelo"
-                    >
-                      Next
-                    </p>
-                  </div>
-                </IonButton>
-              </div>
-            )}
+            <div
+	      className='margin-top-4'
+	      style={{position: 'relative'}}>
+              {audioPlayed && currentIndex === texts.length - 1 && (
+		<img
+                  src={StoryFactoryArrow}
+                  alt="indicator arrow to next button"
+                  style={{
+                    left: 0,
+                    top: 30,
+                    position: "absolute",
+                  }}
+                />
+              )}
+              <IonButton
+                onClick={() => history.push(nextPath)}
+		className='margin-top-3'
+		disabled={!audioPlayed}
+                shape="round"
+		expand='block'
+                style={{width: '50%', margin: 'auto'}}>
+		<IonText>
+                <h1
+                  style={{ color: "white" }}
+                  className="text-4xl color-nube">
+                  Siguiente
+                </h1>
+		{!isImmersive && 
+                 <p
+                   style={{ color: "black" }}
+                   className="text-xl color-nube">
+                   Next
+                 </p>
+		}
+		</IonText>
+              </IonButton>
+            </div>
           </IonCardContent>
         </IonCard>
       </div>

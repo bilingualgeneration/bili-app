@@ -1,0 +1,14 @@
+{
+	"appId": "com.thebilliapp.app",
+	"appName": "Bili - Bilingual Learning",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	},
+	"plugins": {
+		"FirebaseAuthentication": {
+			"skipNativeAuth": false,
+			"providers": []
+		}
+	}
+}
