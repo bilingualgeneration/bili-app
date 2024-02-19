@@ -1,4 +1,4 @@
-import { FC, useEffect, PropsWithChildren } from "react";
+import { FC, useEffect, useState, PropsWithChildren } from "react";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { Redirect } from "react-router-dom";
 import { useUser, useSigninCheck } from "reactfire";
@@ -6,19 +6,30 @@ import { ProfileContextProvider } from "@/contexts/ProfileContext";
 import { ChildProfileContextProvider } from "@/contexts/ChildProfileContext";
 import { FavoritesContextProvider } from "@/contexts/FavoritesContext";
 import { useHistory } from "react-router-dom";
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
 const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
-  const { status: userStatus } = useUser();
+  const [userReady, setUserReady] = useState<boolean>(false);
+  const [isSignedIn, setIsSignedIn] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    FirebaseAuthentication.addListener("authStateChange", (change) => {
+      console.log(change.user);
+      setUserReady(true);
+      setIsSignedIn(change.user !== null);
+    });
+  }, []);
+
+  //const { status: userStatus } = useUser();
   const history = useHistory();
-  const { status, data: signInCheckResult } = useSigninCheck();
   useEffect(() => {
     // clear history so that the back button can operate correctly
   }, []);
-  if (status === "loading" || userStatus === "loading") {
+  if (!userReady) {
     // unsure what the sign in status is
-    return <>loading</>;
+    return <></>;
   }
-  if (signInCheckResult.signedIn === false) {
+  if (isSignedIn === false) {
     // not logged in
     return <Redirect to="/" />;
   }

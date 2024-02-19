@@ -24,9 +24,9 @@ export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const firestore = useFirestore();
-  const user = useUser();
+  const [uid, setUid] = useState<string>("NULL");
   const { setLocale } = useLanguage();
-  const ref = doc(firestore, "users", user.data!.uid);
+  const ref = doc(firestore, "users", uid);
   const { status, data: profileData } = useFirestoreDocData(ref);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
       setLocale(profileData.language || "es");
     }
   }, [profileData]);
-  if (status === "loading") {
+  if (uid === "NULL") {
     return <></>;
   }
   return (
@@ -44,7 +44,7 @@ export const ProfileContextProvider = ({ children }: PropsWithChildren<{}>) => {
           // @ts-ignore: todo fix
           {
             ...profileData,
-            uid: user.data!.uid,
+            uid,
           }
         }
       >
