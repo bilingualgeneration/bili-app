@@ -52,6 +52,8 @@ import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
+import { TellMeAboutIntro } from "./pages/TellMeAbout/TellMeAboutIntro";
+import { TellMeAboutGame } from "./pages/TellMeAbout/TellMeAboutGame";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
@@ -422,6 +424,18 @@ const Router: React.FC = () => {
 
           <Route
             exact
+            path="/tell-me-about-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <TellMeAboutIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
             path="/would-do-game/intro"
             render={() => (
               <AuthedLayout>
@@ -439,6 +453,18 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FBF2E2">
                   <WouldDoGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/tell-me-about-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FBF2E2">
+                  <TellMeAboutGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
