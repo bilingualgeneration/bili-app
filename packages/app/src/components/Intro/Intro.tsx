@@ -23,20 +23,20 @@ interface Type {
 interface DataObject {
   en: Type;
   es: Type;
-  esInc: Type;
+  //esInc: Type;
 }
 interface IntroProps {
   data: DataObject[];
   image: string;
   nextPath: string;
-  gameName: string; // used for the FormattedMessage id
+  //gameName: string; // used for the FormattedMessage id
 }
 
 export const Intro: React.FC<IntroProps> = ({
   data,
   image,
   nextPath,
-  gameName,
+  //gameName,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isInclusive, isImmersive } = useProfile();
@@ -78,7 +78,7 @@ export const Intro: React.FC<IntroProps> = ({
         <IonCard className="ion-no-margin">
           <IonCardContent>
             <div style={{ paddingRight: 100 }}>
-              <h1 className="color-selva">
+              <h1 className="text-6xl color-suelo">
                 {isInclusive && (
                   <FormattedMessage
                     id={gameName + ".welcome_inc"}
@@ -95,14 +95,8 @@ export const Intro: React.FC<IntroProps> = ({
                 )}
               </h1>
 
-              <h2 className="color-selva">
-                {isInclusive && (
-                  <FormattedMessage
-                    id={gameName + ".subwelcome_inc"}
-                    defaultMessage={data[currentIndex].en.subtext}
-                    description="Sub welcome message"
-                  />
-                )}
+              <h2 className="text-4xl color-suelo">
+                {isInclusive && data[currentIndex].es.subtext}
                 {!isInclusive && (
                   <FormattedMessage
                     id={gameName + "intruder.subwelcome"}
