@@ -423,7 +423,7 @@ const Router: React.FC = () => {
             path="/would-do-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <HeaderFooter background="#FBF2E2">
                   <WouldDoGame />
                 </HeaderFooter>
               </AuthedLayout>
