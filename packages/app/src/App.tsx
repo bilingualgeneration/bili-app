@@ -43,8 +43,9 @@ import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
 import { StoriesDragGameLoader } from "./pages/Stories";
-import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
-import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+//import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+//import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
@@ -337,23 +338,11 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/story-factory-game/1"
+            path="/story-factory-game/intro"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPg1 />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/story-factory-game/2"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPg2 />
+                  <StoryFactoryIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
