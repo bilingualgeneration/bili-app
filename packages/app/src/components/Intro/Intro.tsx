@@ -23,23 +23,16 @@ interface Type {
 interface DataObject {
   en: Type;
   es: Type;
-  //esInc: Type;
 }
 interface IntroProps {
   data: DataObject[];
   image: string;
   nextPath: string;
-  //gameName: string; // used for the FormattedMessage id
 }
 
-export const Intro: React.FC<IntroProps> = ({
-  data,
-  image,
-  nextPath,
-  //gameName,
-}) => {
+export const Intro: React.FC<IntroProps> = ({ data, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { isInclusive, isImmersive } = useProfile();
+  // const { isInclusive, isImmersive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
@@ -61,16 +54,10 @@ export const Intro: React.FC<IntroProps> = ({
       }
     });
     let sounds = [];
-    if (isInclusive) {
-      sounds.push(data[currentIndex].esInc.audio);
-    } else {
-      sounds.push(data[currentIndex].es.audio);
-    }
-    if (!isImmersive) {
-      sounds.push(data[currentIndex].en.audio);
-    }
+    sounds.push(data[currentIndex].es.audio);
+    sounds.push(data[currentIndex].en.audio);
     addAudio(sounds);
-  }, [currentIndex, isInclusive, isImmersive, data]);
+  }, [currentIndex, data]);
 
   return (
     <div style={{ position: "relative" }}>
@@ -79,42 +66,18 @@ export const Intro: React.FC<IntroProps> = ({
           <IonCardContent>
             <div style={{ paddingRight: 100 }}>
               <h1 className="text-6xl color-suelo">
-                {isInclusive && (
-                  <FormattedMessage
-                    id={gameName + ".welcome_inc"}
-                    defaultMessage={data[currentIndex].en.text}
-                    description="Main welcome message"
-                  />
-                )}
-                {!isInclusive && (
-                  <FormattedMessage
-                    id={gameName + ".welcome"}
-                    defaultMessage={data[currentIndex].en.text}
-                    description="Main welcome message"
-                  />
-                )}
+                {data[currentIndex].es.text}
               </h1>
-
               <h2 className="text-4xl color-suelo">
-                {isInclusive && data[currentIndex].es.subtext}
-                {!isInclusive && (
-                  <FormattedMessage
-                    id={gameName + "intruder.subwelcome"}
-                    defaultMessage={data[currentIndex].es.subtext}
-                    description="Sub welcome message"
-                  />
-                )}
+                {data[currentIndex].es.subtext}
               </h2>
-
-              {!isImmersive && (
-                <>
-                  <h1>
-                    <br />
-                    {data[currentIndex].en.text}
-                  </h1>
-                  <h2>{data[currentIndex].en.subtext}</h2>
-                </>
-              )}
+              <h1 className="text-6xl color-suelo">
+                <br />
+                {data[currentIndex].en.text}
+              </h1>
+              <h2 className="text-4xl color-suelo">
+                {data[currentIndex].en.subtext}
+              </h2>
             </div>
             {/* Next Button will display after the audio has played and if the current index is the last index */}
             {audioPlayed && currentIndex === data.length - 1 && (
@@ -131,8 +94,18 @@ export const Intro: React.FC<IntroProps> = ({
                   style={{ width: "auto", height: "auto" }}
                 >
                   <div>
-                    <h1 style={{ color: "white" }}>Siguiente</h1>
-                    <p style={{ color: "black" }}>Next</p>
+                    <h1
+                      style={{ color: "white" }}
+                      className="text-4xl color-suelo"
+                    >
+                      Siguiente
+                    </h1>
+                    <p
+                      style={{ color: "black" }}
+                      className="text-xl color-suelo"
+                    >
+                      Next
+                    </p>
                   </div>
                 </IonButton>
               </div>
