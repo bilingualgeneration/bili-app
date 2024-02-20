@@ -145,7 +145,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { isImmersive, isInclusive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  //const [questionsData, setQuestionsData] = useState<any[]>([]);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showNextGame, setShowNextGame] = useState<boolean>(false);
@@ -167,10 +166,19 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     };
   }, [isImmersive, isInclusive, data, gameType]);
 
+  // useEffect(() => {
+  //   return () => {
+  //     clearAudio();
+  //   };
+  // }, []);
+
   //audio effect for autoplaying
   useEffect(() => {
-    addAudio([headerData.es.audio.url]);
-    headerData.en && addAudio([headerData.en.audio.url]);
+    const audios = [headerData.es.audio.url];
+    if (headerData.en) {
+      audios.push(headerData.en.audio.url);
+    }
+    addAudio(audios);
 
     return () => {
       clearAudio();
@@ -301,7 +309,11 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     <>
       <div id="">
         <div className="margin-top-4 margin-bottom-2">
-          <IonText>
+          <IonText
+            style={{
+              textAlign: "center",
+            }}
+          >
             <h1 className="text-5xl color-suelo">{headerData.es.text}</h1>
 
             {headerData.en && (
