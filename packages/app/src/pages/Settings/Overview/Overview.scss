@@ -4,6 +4,11 @@
   height: auto;
 }
 
+.child-profile-content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .child-profile-heading,
 .explore-bili-heading {
   color: var(--light-suelo, #000);
