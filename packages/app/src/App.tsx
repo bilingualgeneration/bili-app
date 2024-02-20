@@ -384,12 +384,11 @@ const Router: React.FC = () => {
                       headerComponent={<PlayHeader />}
                       module="story-factory-game"
                       packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
-                      translatedTitle={
-            intl.formatMessage({
-        id: "common.storyFactory",
-        defaultMessage: "Story Factory"
-            })
-          }
+                      translatedTitle={intl.formatMessage({
+                        id: "common.storyFactory",
+                        defaultMessage: "Story Factory"
+                        })
+                      }
                       englishTitle="Story Factory"
                     />
                   </HeaderFooter>
