@@ -134,7 +134,7 @@ export const TeacherAbout: FC = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="margin-bottom-3">
+        <div className="margin-bottom-2">
           <IonText className="ion-text-center">
             <h1 className="text-3xl semibold color-suelo">
               <FormattedMessage
@@ -145,7 +145,7 @@ export const TeacherAbout: FC = () => {
             </h1>
           </IonText>
         </div>
-        <div className="margin-bottom-1">
+        <div className="margin-bottom-1x">
           <IonText>
             <h2 className="text-xl semibold color-suelo">
               <FormattedMessage
@@ -169,7 +169,7 @@ export const TeacherAbout: FC = () => {
             </IonRow>
           </IonGrid>
         </div>
-        <div className="margin-top-3 margin-bottom-1">
+        <div className="margin-top-1">
           <IonText>
             <h2 className="text-xl semibold color-suelo">
               <FormattedMessage

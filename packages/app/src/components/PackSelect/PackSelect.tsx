@@ -12,7 +12,7 @@ interface props {
   headerComponent: React.ReactNode;
   module: string;
   packId: string;
-  translatedTitle: React.ReactNode;
+  translatedTitle: string;
   englishTitle: string;
 }
 
@@ -27,8 +27,8 @@ export const PackSelect: React.FC<props> = ({
   const cards = [
     {
       fid: `${module}-${packId}`,
-      title: "Paquete 1",
-      titleEn: "Pack 1",
+      title: translatedTitle,
+      titleEn: englishTitle,
       category: "play",
       cover: "/assets/img/drum_image.png",
       isLocked: false,

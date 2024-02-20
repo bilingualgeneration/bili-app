@@ -66,8 +66,8 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
     <div className='intro-card'>
       <div className="ion-no-padding sf-card margin-top-4">
         <IonCard className="ion-no-margin">
-          <IonCardContent>
-            <div style={{ paddingRight: 100 }}>
+          <IonCardContent style={{ paddingRight: 100 }}>
+            <div>
               <h1 className="text-6xl color-suelo">
                 {texts[currentIndex].es.text}
               </h1>

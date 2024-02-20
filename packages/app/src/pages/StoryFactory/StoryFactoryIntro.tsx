@@ -2,9 +2,9 @@ import biliCharacter from "@/assets/img/bili_in_tshirt.png";
 import { useProfile } from "@/contexts/ProfileContext";
 import {Intro} from '@/components/Intro';
 
-import es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_en.mp3";
-import es_inc_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
-import en_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
+import es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
+import es_inc_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
+import en_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_en.mp3";
 import es_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_es.mp3";
 import en_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_en.mp3";
 
