@@ -346,7 +346,7 @@ export const Overview: React.FC = ({}) => {
           </IonRow>
 
           <div className="child-profile-content">
-            <Carousel height={355}>
+            <Carousel height={375}>
               {settingsExploreCards.map((card, index) => (
                 <SettingsExploreCard
                   {...card}
