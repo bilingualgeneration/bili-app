@@ -32,7 +32,7 @@ import {
   Profile,
 } from "@/pages/Settings";
 import { Debug } from "@/pages/Debug";
-import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { Play } from "@/pages/Play";
 import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
@@ -94,9 +94,8 @@ setupIonicReact();
 
 const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
-  const { locale } = useLanguage();
+  const intl = useIntl();
   return (
-    <I18nWrapper locale={locale}>
       <IonReactRouter>
         <Switch>
           <Route
@@ -384,11 +383,11 @@ const Router: React.FC = () => {
                     module="story-factory-game"
                     packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
                     translatedTitle={
-                      <FormattedMessage
-                        id="common.storyFactory"
-                        defaultMessage="Story Factory"
-                      />
-                    }
+		      intl.formatMessage({
+			id: "common.storyFactory",
+			defaultMessage: "Story Factory"
+		      })
+		    }
                     englishTitle="Story Factory"
                   />
                 </HeaderFooter>
@@ -466,10 +465,10 @@ const Router: React.FC = () => {
                     module="intruder-game"
                     packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
                     translatedTitle={
-                      <FormattedMessage
-                        id="common.intruder"
-                        defaultMessage="The Intruder"
-                      />
+		      intl.formatMessage({
+			id: "common.intruder",
+			defaultMessage: "The Intruder"
+		      })
                     }
                     englishTitle="The Intruder"
                   />
@@ -517,16 +516,16 @@ const Router: React.FC = () => {
             path="/would-do-game/select"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#fbf2e2">
+                <HeaderFooter background="#f7faf9">
                   <PackSelect
                     headerComponent={<CommunityHeader />}
                     module="would-do-game"
                     packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
                     translatedTitle={
-                      <FormattedMessage
-                        id="common.wouldDo"
-                        defaultMessage="What would you do?"
-                      />
+		      intl.formatMessage({
+			id: "common.wouldDo",
+			defaultMessage: "What would you do?"
+		      })
                     }
                     englishTitle="What would you do?"
                   />
@@ -536,11 +535,11 @@ const Router: React.FC = () => {
           />
         </Switch>
       </IonReactRouter>
-    </I18nWrapper>
   );
 };
 
 const App: React.FC = () => {
+  const { locale } = useLanguage();
   useEffect(() => {
     // set default language to device if not already set
     (async () => {
@@ -560,7 +559,9 @@ const App: React.FC = () => {
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
           <AudioManagerProvider>
-            <Router />
+	    <I18nWrapper locale={locale}>
+              <Router />
+	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>

@@ -386,25 +386,6 @@ ion-button.sf-intro-button {
   /* background-color: var(--base-humo, #eceeed); */
 }
 
-@media only screen and (min-device-width: 768px) /* iPad Mini and iPad Air */ and (max-device-width: 1024px) /* iPad Mini,
-  iPad Air,
-  and iPad Pro */ and (-webkit-min-device-pixel-ratio: 1) {
-  ion-card.story-page-1-main-card {
-    width: 65vw; /* 1002px */
-    height: 78vh;
-  }
-
-  .bili-character {
-    height: 73vh;
-    width: 41vw;
-    top: 23vh;
-    left: 60vw;
-    z-index: 2;
-  }
-
-  /* Add any other styles or adjustments specific to iPads here */
-}
-
 .sf-header-container {
   display: inline-flex;
   max-width: 100%;

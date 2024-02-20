@@ -24,7 +24,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   title,
 }) => {
   return (
-    <IonCard style={{ cursor: "pointer" }}>
+    <IonCard style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
       <div className="card-inner">
         {icon && (
           <div

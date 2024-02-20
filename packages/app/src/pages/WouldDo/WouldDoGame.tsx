@@ -61,7 +61,7 @@ export const WouldDoGame: FC = () => {
 
   return (
     <div>
-      <div style={{ padding: "4px 120px 0px 120px" }}>
+      <div style={{ padding: "4px 120px 0px 120px" }} className='margin-bottom-2'>
         <IonText>
           <h1 className="text-5xl margin-top-1">
             <FormattedMessage
