@@ -1,12 +1,12 @@
 //AM
-
 import React, { useState, useEffect, useMemo } from "react";
+import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
 import { StoriesGame } from "@/components/StoriesGame";
 
-export const StoriesPictureGame: React.FC = () => {
+export const StoriesSyllableGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
@@ -27,7 +27,7 @@ export const StoriesPictureGame: React.FC = () => {
   console.log(data);
   return (
     <div>
-      <StoriesGame game={data} gameType="image" />
+      <StoriesGame game={data} gameType="syllable" />
     </div>
   );
 };

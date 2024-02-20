@@ -17,18 +17,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { FormattedMessage } from "react-intl";
-import type { MessageFormatElement } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import CorrectImage from "packages/app/public/assets/img/correct_card.png";
-import InCorrectImage2 from "packages/app/public/assets/img/incorrect_card_1.png";
-import InCorrectImage3 from "packages/app/public/assets/img/incorrect_card_2.png";
-import InCorrectImage4 from "packages/app/public/assets/img/incorrect_card_3.png";
-import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
-import corr_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
-import { useParams } from "react-router";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import { useHistory } from "react-router";
@@ -42,8 +31,14 @@ interface PictureAudio {
   url: string;
 }
 
+interface TextPack {
+  text: string;
+  audio: PictureAudio;
+  language: "en" | "es" | "en-inc" | "es-inc";
+}
+
 interface Story {
-  multiple_image_text: [];
+  multiple_image_text: TextPack[];
   multiple_image_correct_image: PictureImage;
   multiple_image_incorrect_image_1: PictureImage;
   multiple_image_incorrect_image_2: PictureImage;
@@ -56,7 +51,7 @@ interface Story {
   multiple_syllable_incorrect_image_2: PictureImage;
   multiple_syllable_incorrect_audio_3: PictureAudio;
   multiple_syllable_incorrect_image_3: PictureImage;
-  multiple_syllable_text: [];
+  multiple_syllable_text: TextPack[];
 }
 
 interface GameCard {
@@ -66,9 +61,14 @@ interface GameCard {
   audio: PictureAudio;
 }
 
+interface GameHeader {
+  es: TextPack;
+  en?: TextPack;
+}
+
 interface StoriesGameProps {
   game: Story;
-  gameType: string;
+  gameType: "image" | "syllable";
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -86,25 +86,25 @@ function getCardsFromImageGame(story: Story): GameCard[] {
       image: story.multiple_image_correct_image,
       isTarget: true,
       id: "1",
-      audio: { url: "@/assets/audio/IntruderAudio/intruder_correct.wav" },
+      audio: { url: "/assets/audio/choice_correct.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_1,
       isTarget: false,
       id: "2",
-      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_2,
       isTarget: false,
       id: "3",
-      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_3,
       isTarget: false,
       id: "4",
-      audio: { url: "@/assets/audio/IntruderAudio/intruder_incorrect.wav" },
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
   ];
 }
@@ -145,91 +145,37 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { isImmersive, isInclusive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  const [questionsData, setQuestionsData] = useState<any[]>([]);
+  //const [questionsData, setQuestionsData] = useState<any[]>([]);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showBackside, setShowBackside] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showNextGame, setShowNextGame] = useState<boolean>(false);
 
-  //questions data
-
-  const imageQuestions = data.multiple_image_text.map((questionItem: any) => {
+  const headerData = useMemo((): GameHeader => {
+    const textPacks =
+      gameType === "image"
+        ? data.multiple_image_text
+        : data.multiple_syllable_text;
     return {
-      text: {
-        en: questionItem.en?.text,
-        es: questionItem.es?.text,
-        "en-inc": questionItem["en-inc"]?.text,
-        "es-inc": questionItem["es-inc"]?.text,
-      },
-      audio: {
-        en: questionItem.en?.audio,
-        es: questionItem.es?.audio,
-        "en-inc": questionItem["en-inc"]?.audio,
-        "es-inc": questionItem["es-inc"]?.audio,
-      },
+      es: textPacks.find(
+        (tp) => tp.language === (isInclusive ? "es-inc" : "es"),
+      )!,
+      en: isImmersive
+        ? undefined
+        : textPacks.find(
+            (tp) => tp.language === (isInclusive ? "en-inc" : "en"),
+          ),
     };
-  });
-
-  const syllableQuestions = data.multiple_syllable_text.map(
-    (questionItem: any) => {
-      return {
-        text: {
-          en: questionItem.en?.text,
-          es: questionItem.es?.text,
-          "en-inc": questionItem["en-inc"]?.text,
-          "es-inc": questionItem["es-inc"]?.text,
-        },
-        audio: {
-          en: questionItem.en?.audio,
-          es: questionItem.es?.audio,
-          "en-inc": questionItem["en-inc"]?.audio,
-          "es-inc": questionItem["es-inc"]?.audio,
-        },
-      };
-    },
-  );
-
-  useEffect(() => {
-    if (data !== undefined) {
-      if (gameType === "image") {
-        setQuestionsData(imageQuestions);
-      } else {
-        setQuestionsData(syllableQuestions);
-      }
-    }
-  }, [data]);
+  }, [isImmersive, isInclusive, data, gameType]);
 
   //audio effect for autoplaying
   useEffect(() => {
+    addAudio([headerData.es.audio.url]);
+    headerData.en && addAudio([headerData.en.audio.url]);
+
     return () => {
       clearAudio();
     };
-  }, []);
-  useEffect(() => {
-    setCallback(() => () => {
-      setAudioPlayed(true);
-    });
-
-    if (isImmersive) {
-      const audioUrls = [];
-      if (isInclusive) {
-        audioUrls.push(questionsData[0].audio["es-inc"]);
-      } else {
-        audioUrls.push(questionsData[0].audio.es);
-      }
-      addAudio(audioUrls);
-    } else {
-      const audioUrls = [];
-      if (isInclusive) {
-        audioUrls.push(questionsData[0].audio["es-inc"]);
-        audioUrls.push(questionsData[0].audio["en-inc"]);
-      } else {
-        audioUrls.push(questionsData[0].audio.es);
-        audioUrls.push(questionsData[0].audio.en);
-      }
-    }
-  }, [questionsData, isImmersive, isInclusive]);
-  const history = useHistory();
+  }, [headerData]);
 
   //styles for correct and wrong cards
   const initialStyle = {
@@ -271,6 +217,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     return shuffleArray(cards);
   }, [data, currentIndex, gameType]);
 
+  console.log(shuffledCards);
   useEffect(() => {
     if (isCorrectSelected) {
       setTimeout(() => {
@@ -355,20 +302,10 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       <div id="">
         <div className="margin-top-4 margin-bottom-2">
           <IonText>
-            {isInclusive ? (
-              <h1 className="text-5xl color-suelo">
-                {questionsData[0].text["es-inc"]}
-              </h1>
-            ) : (
-              <h1 className="text-5xl color-suelo">
-                {questionsData[0].text.es}
-              </h1>
-            )}
+            <h1 className="text-5xl color-suelo">{headerData.es.text}</h1>
 
-            {!isImmersive && (
-              <p className="text-3xl color-english">
-                {questionsData[0].text.es}
-              </p>
+            {headerData.en && (
+              <p className="text-3xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
         </div>
@@ -377,30 +314,24 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(0, 2).map((card, index) => (
                 <IonCol
+                  key={card.id}
                   className=""
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img
-                    key={card.id}
-                    style={cardColors[card.id]}
-                    src={card.image.url}
-                  />
+                  <img style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(2, 4).map((card, index) => (
                 <IonCol
+                  key={index}
                   className=""
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img
-                    key={card.id}
-                    style={cardColors[card.id]}
-                    src={card.image.url}
-                  />
+                  <img style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>
