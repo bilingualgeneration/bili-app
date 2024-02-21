@@ -8,20 +8,24 @@ import { ContentCard } from "@/components/ContentCard";
 import { useProfile } from "@/contexts/ProfileContext";
 import { Carousel } from "@/components/Carousel";
 
+interface Card {
+  uuid: string,
+  icon: any,
+  cover: string,
+  translatedTitle: string,
+  englishTitle: string,
+  isLocked: boolean
+}
+
 interface props {
   headerComponent: React.ReactNode;
-  module: string;
-  packId: string;
-  translatedTitle: string;
-  englishTitle: string;
+  cards: Card
 }
 
 export const PackSelect: React.FC<props> = ({
   headerComponent,
   module,
-  packId,
-  translatedTitle,
-  englishTitle,
+  //cards
 }) => {
   const { isImmersive } = useProfile();
   const cards = [

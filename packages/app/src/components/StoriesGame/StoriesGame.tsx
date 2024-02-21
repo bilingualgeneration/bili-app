@@ -67,7 +67,8 @@ interface GameHeader {
 }
 
 interface StoriesGameProps {
-  game: Story;
+  //game: Story;
+  game: any;
   gameType: "image" | "syllable";
 }
 
@@ -156,12 +157,12 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
         : data.multiple_syllable_text;
     return {
       es: textPacks.find(
-        (tp) => tp.language === (isInclusive ? "es-inc" : "es"),
+        (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
       )!,
       en: isImmersive
         ? undefined
         : textPacks.find(
-            (tp) => tp.language === (isInclusive ? "en-inc" : "en"),
+            (tp: any) => tp.language === (isInclusive ? "en-inc" : "en"),
           ),
     };
   }, [isImmersive, isInclusive, data, gameType]);
@@ -343,7 +344,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img style={cardColors[card.id]} src={card.image.url} />
+                  <img className='game_image' style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>

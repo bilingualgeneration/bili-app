@@ -174,7 +174,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMe />
+                  <CountWithMeGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -351,23 +351,11 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/story-factory-game/1"
+            path="/story-factory-game/intro"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPg1 />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/story-factory-game/2"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPg2 />
+                  <StoryFactoryIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -383,12 +371,7 @@ const Router: React.FC = () => {
                     headerComponent={<PlayHeader />}
                     module="story-factory-game"
                     packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.storyFactory"
-                        defaultMessage="Story Factory"
-                      />
-                    }
+                    translatedTitle="¡Fábrica de Cuentos!"
                     englishTitle="Story Factory"
                   />
                 </HeaderFooter>
@@ -465,12 +448,7 @@ const Router: React.FC = () => {
                     headerComponent={<PlayHeader />}
                     module="intruder-game"
                     packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.intruder"
-                        defaultMessage="The Intruder"
-                      />
-                    }
+                    translatedTitle='El Intruso'
                     englishTitle="The Intruder"
                   />
                 </HeaderFooter>
@@ -517,17 +495,12 @@ const Router: React.FC = () => {
             path="/would-do-game/select"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#fbf2e2">
+                <HeaderFooter background="#f7faf9">
                   <PackSelect
                     headerComponent={<CommunityHeader />}
                     module="would-do-game"
-                    packId="dc6fd688-cbb9-4467-ba41-aad105c5ea40"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.wouldDo"
-                        defaultMessage="What would you do?"
-                      />
-                    }
+                    packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
+                    translatedTitle='¿Qué harías?'
                     englishTitle="What would you do?"
                   />
                 </HeaderFooter>
