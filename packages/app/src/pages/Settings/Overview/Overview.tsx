@@ -39,7 +39,7 @@ export const Overview: React.FC = ({}) => {
           setShouldShowTutorial(true);
           Preferences.set({
             key: "shouldShowSettingsTutorial",
-            value: "false",
+            value: false,
           });
         }
       });
