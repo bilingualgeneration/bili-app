@@ -10,7 +10,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "x": "prettier --write --ignore-unknown"
   },
   "packageManager": "yarn@4.0.1",
   "private": true,

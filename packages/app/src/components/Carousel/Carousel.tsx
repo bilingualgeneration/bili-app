@@ -1,6 +1,6 @@
 import Slider from "react-slick";
-import forward from "@/assets/icons/carousel_forward.png";
-import backward from "@/assets/icons/carousel_backward.png";
+import forward from "@/assets/icons/carousel_forward.svg";
+import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./Carousel.scss";
 

@@ -1,5 +1,13 @@
 @use "sass:math";
 
+.input-bottom.sc-ion-input-ios{
+    border-top: none;
+}
+
+.drop-shadow {
+  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+}
+
 .background-card {
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
   padding: 2rem;
@@ -14,10 +22,11 @@
 }
 
 .page-wrapper {
-  width: 1366px;
+  max-width: 1366px;
+  min-width: 700px;
   margin: auto;
-  height: 100%;
-  padding-bottom: 80px; // clearance for footer
+  min-height: 100vh;
+  //padding-bottom: 80px; // clearance for footer
 }
 
 ion-content::part(scroll) {

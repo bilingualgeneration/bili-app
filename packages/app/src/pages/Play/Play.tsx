@@ -23,7 +23,7 @@ const StoryFactoryCard: FC = () => {
       id="storyFactoryCard"
       className="card"
       onClick={() => {
-        history.push("/story-factory-game/1");
+        history.push("/story-factory-game/intro");
       }}
     >
       <CategoryTag category="play" className="play-category-tag" />

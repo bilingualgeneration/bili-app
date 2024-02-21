@@ -130,7 +130,7 @@ export const LanguageModeSelect: React.FC = () => {
   return (
     <>
       <form className="radio-button-select">
-        <IonText className="ion-text-center margin-bottom-1">
+        <IonText className="ion-text-center">
           <h2 className="text-3xl semibold color-suelo">
             <FormattedMessage
               id="languageMode.settings"

@@ -14,7 +14,9 @@ import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
-import { CountWithMe } from "@/pages/CountWithMe/CountWithMe";
+import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
+import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
+import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
 import { IntruderGame } from "@/pages/Intruder/IntruderGame";
@@ -30,19 +32,23 @@ import {
   Profile,
 } from "@/pages/Settings";
 import { Debug } from "@/pages/Debug";
-import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { Play } from "@/pages/Play";
 import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
+
+import { Stories } from "@/pages/Stories";
 import { StoriesDragGameLoader } from "./pages/Stories";
-import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
-import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+//import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+//import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StudentDashboard } from "@/pages/StudentDashboard";
@@ -90,9 +96,8 @@ setupIonicReact();
 
 const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
-  const { locale } = useLanguage();
+  const intl = useIntl();
   return (
-    <I18nWrapper locale={locale}>
       <IonReactRouter>
         <Switch>
           <Route
@@ -531,11 +536,11 @@ const Router: React.FC = () => {
           />
         </Switch>
       </IonReactRouter>
-    </I18nWrapper>
   );
 };
 
 const App: React.FC = () => {
+  const { locale } = useLanguage();
   useEffect(() => {
     // set default language to device if not already set
     (async () => {
@@ -555,7 +560,9 @@ const App: React.FC = () => {
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
           <AudioManagerProvider>
-            <Router />
+	    <I18nWrapper locale={locale}>
+              <Router />
+	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>

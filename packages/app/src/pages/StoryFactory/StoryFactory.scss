@@ -386,57 +386,6 @@ ion-button.sf-intro-button {
   /* background-color: var(--base-humo, #eceeed); */
 }
 
-/* .fabrica-swirl-rectangle {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.fabrica-rectangle {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.fabrica-flipped-swirl {
-  transform: scaleX(-1);
-}
-
-.polygon-up {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
-    drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
-} */
-
-.bili-character {
-  position: absolute;
-  top: 100px;
-  right: -1.5rem;
-  max-width: 400px;
-  z-index: 2; /* Ensures Bili Character is on top of card */
-}
-
-@media only screen and (min-device-width: 768px) /* iPad Mini and iPad Air */ and (max-device-width: 1024px) /* iPad Mini,
-  iPad Air,
-  and iPad Pro */ and (-webkit-min-device-pixel-ratio: 1) {
-  ion-card.story-page-1-main-card {
-    width: 65vw; /* 1002px */
-    height: 78vh;
-  }
-
-  .bili-character {
-    height: 73vh;
-    width: 41vw;
-    top: 23vh;
-    left: 60vw;
-    z-index: 2;
-  }
-
-  /* Add any other styles or adjustments specific to iPads here */
-}
-
 .sf-header-container {
   display: inline-flex;
   max-width: 100%;
