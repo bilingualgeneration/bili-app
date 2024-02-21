@@ -18,7 +18,6 @@
     font-weight: 600;
     line-height: 1.25; /* 40px; 125% */
     letter-spacing: -0.5px;
-    margin-top: 0;
   }
 
   .explore-bili-heading {
@@ -66,17 +65,15 @@
     --padding-top: 0px;
     --padding-bottom: 0px;
     border-width: 0;
-    box-shadow: 0px 12px 12px -6px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 1px 0px #00000066;
+    box-shadow: 0px 12px 12px -6px #00000029;
   }
 
   .sparkle-icon {
     margin-left: 0.3125em; /* 5px; */
   }
 
-  ion-popover {
-    --padding: 20px;
-    --background: white;
-  }
+
 
   /* Responsive styles for tablets */
   @media only screen and (max-width: 1024px) {
@@ -101,4 +98,29 @@
     }
     /* Add more styles as needed */
   }
+}
+
+ion-popover.cs-hover {
+  --width: 200px;
+}
+
+ion-content.cs-content {
+  --background: white;
+  --border-radius: 20px;
+}
+
+ion-icon.add {
+  --ionicon-stroke-width: 50px;
+}
+
+.popover-arrow::after {
+  top: 3px;
+  border-radius: 3px;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  background: var(--background);
+  content: "";
+  z-index: 10;
 }

@@ -27,6 +27,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
+  const { isImmersive, isInclusive } = useProfile();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
   const { childProfiles, activeChildProfile, setActiveChildProfile } =
     useChildProfile();
@@ -271,73 +272,6 @@ export const Overview: React.FC = ({}) => {
         },
       ],
     },
-    {
-      backgroundImage: settingsCardDesign2,
-      backgroundColor: "#22BEB9",
-      title: intl.formatMessage({
-        id: "settings.overview.inclusiveSpanishTitle",
-        defaultMessage: "Inclusive Spanish",
-        description: "Explore card #2 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.InclusiveSpanishContent",
-        defaultMessage:
-          "Learn about what Inclusive Spanish is and why it exists.",
-        description: "Explore card #2 content",
-      }),
-      tags: [
-        {
-          color: "#D3EAE8",
-          text: intl.formatMessage({
-            id: "tags.social_justice",
-            defaultMessage: "Social Justice",
-            description: "Content tag for social justice",
-          }),
-        },
-        {
-          color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
-        },
-      ],
-    },
-    {
-      backgroundImage: settingsCardDesign3,
-      backgroundColor: "#FFB68F",
-      title: intl.formatMessage({
-        id: "settings.overview.getChildTitle",
-        defaultMessage: "Get your child speaking Spanish with Bili",
-        description: "Explore card #3 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.getChildContent",
-        defaultMessage:
-          "Explore special features that promote authentic language production.",
-        description: "Explore card #3 content",
-      }),
-      tags: [
-        {
-          color: "#973D78",
-          text: intl.formatMessage({
-            id: "tags.parents",
-            defaultMessage: "Parents",
-            description: "Content tag for parents",
-          }),
-          textColor: "#fff",
-        },
-        {
-          color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
-        },
-      ],
-    },
   ];
 
   return (
@@ -361,7 +295,7 @@ export const Overview: React.FC = ({}) => {
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
             <IonCol size="auto">
-              <h1 className="child-profile-heading">
+              <h1 className="child-profile-heading margin-bottom-1-5">
                 <FormattedMessage
                   id="settings.overview.child"
                   defaultMessage="Child Profile"
@@ -370,18 +304,22 @@ export const Overview: React.FC = ({}) => {
               </h1>
             </IonCol>
 
+            {/* UNCOMMENT ONCE +ADD CHILD FUNCTIONALITY IMPLEMENTED - CAN ALSO REMOVE BUTTON POPOVER */}
+
             <IonCol size="auto">
-              <IonButton
+              {/* <IonButton
                 // disabled={true}
                 size="small"
                 id="hover-trigger"
-                className="add-child-btn"
+                className="add-child-btn ion-no-margin"
                 onClick={() => {
                   // route and logic for user to add child
                 }}
               >
                 <IonIcon
+                  className="add"
                   aria-hidden="true"
+                  aria-label="addition icon"
                   slot="start"
                   icon={addOutline}
                   size="small"
@@ -398,24 +336,24 @@ export const Overview: React.FC = ({}) => {
                 className="cs-hover" 
                 trigger="hover-trigger" 
                 triggerAction="hover" 
-                size="cover"
+                side="bottom"
+                alignment="center"
                 showBackdrop={false}
+                arrow={true}
               >
-                <IonContent className="text-xl semibold">
-                ((!isImmersive && !isInclusive) || (isImmersive && !isInclusive)) {
-
-                }
-                  Coming soon!
+                <IonContent className="cs-content ion-text-center">
+                  <div className="text-2xl semibold color-suelo">¡Próximamente!</div>
+                  {!isImmersive && <div className="text-2xl color-english">Coming soon!</div>}
                 </IonContent>  
-              </IonPopover>
+              </IonPopover> */}
             </IonCol>
           </IonRow>
 
           <div style={{ marginTop: "2rem" }}>
-            <IonRow>
+            <IonRow className="margin-bottom-3">
               {childProfiles.map((p: any, index: number) => (
                 <IonCol
-                  className="ion-padding"
+                  className="ion-no-padding"
                   size="6"
                   onClick={() => {
                     setActiveChildProfile(p.uid);
@@ -434,7 +372,7 @@ export const Overview: React.FC = ({}) => {
             </IonRow>
           </div>
 
-          <IonRow class="ion-align-items-end ion-justify-content-between row">
+          <IonRow class="ion-align-items-end ion-justify-content-between row margin-bottom-1-5">
             <IonCol size="auto">
               <div className="explore-bili-heading-subheading-container">
                 <h1 className="explore-bili-heading">
@@ -444,7 +382,7 @@ export const Overview: React.FC = ({}) => {
                     description="Explore Bili heading in settings"
                   />
                 </h1>
-                <p className="explore-bili-subheading">
+                <p className="explore-bili-subheading margin-bottom-1-5">
                   <FormattedMessage
                     id="settings.overview.exploreSubheading"
                     defaultMessage="Learn how to use Bili to meet language goals"
@@ -462,8 +400,8 @@ export const Overview: React.FC = ({}) => {
             </IonCol>
           </IonRow>
 
-          <div className="child-profile-content">
-            <Carousel height={375}>
+          <div className="child-profile-content margin-top-1">
+            <Carousel height={350}>
               {settingsExploreCards.map((card, index) => (
                 <SettingsExploreCard
                   {...card}
