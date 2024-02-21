@@ -17,18 +17,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { FormattedMessage } from "react-intl";
-import type { MessageFormatElement } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
-import CorrectImage from "packages/app/public/assets/img/correct_card.png";
-import InCorrectImage2 from "packages/app/public/assets/img/incorrect_card_1.png";
-import InCorrectImage3 from "packages/app/public/assets/img/incorrect_card_2.png";
-import InCorrectImage4 from "packages/app/public/assets/img/incorrect_card_3.png";
-import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
-import corr_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
-import { useParams } from "react-router";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import { useHistory } from "react-router";
@@ -42,30 +31,44 @@ interface PictureAudio {
   url: string;
 }
 
-interface Game {
-  card_group: Array<{
-    spanish_question_text: string;
-    spanish_inclusive_question_text: string;
-    english_question_text: string;
-    spanish_inclusive_question_audio?: PictureAudio;
-    spanish_question_audio?: PictureAudio;
-    englsih_question_audio?: PictureAudio;
-    correct_card_image: PictureImage;
-    correct_card_audio?: PictureAudio;
-    incorrect_card_image_2: PictureImage;
-    incorrect_card_audio_2?: PictureAudio;
-    incorrect_card_image_3: PictureImage;
-    incorrect_card_audio_3?: PictureAudio;
-    incorrect_card_image_4: PictureImage;
-    incorrect_card_audio_4?: PictureAudio;
-    nextSlide: () => void;
-  }>;
+interface TextPack {
+  text: string;
+  audio: PictureAudio;
+  language: "en" | "es" | "en-inc" | "es-inc";
+}
+
+interface Story {
+  multiple_image_text: TextPack[];
+  multiple_image_correct_image: PictureImage;
+  multiple_image_incorrect_image_1: PictureImage;
+  multiple_image_incorrect_image_2: PictureImage;
+  multiple_image_incorrect_image_3: PictureImage;
+  multiple_syllable_correct_audio: PictureAudio;
+  multiple_syllable_correct_image: PictureImage;
+  multiple_syllable_incorrect_audio_1: PictureAudio;
+  multiple_syllable_incorrect_image_1: PictureImage;
+  multiple_syllable_incorrect_audio_2: PictureAudio;
+  multiple_syllable_incorrect_image_2: PictureImage;
+  multiple_syllable_incorrect_audio_3: PictureAudio;
+  multiple_syllable_incorrect_image_3: PictureImage;
+  multiple_syllable_text: TextPack[];
+}
+
+interface GameCard {
+  image: PictureImage;
+  isTarget: boolean;
+  id: string;
+  audio: PictureAudio;
+}
+
+interface GameHeader {
+  es: TextPack;
+  en?: TextPack;
 }
 
 interface StoriesGameProps {
-  game: Game;
-  incorrect_choice_sound: string;
-  correct_choice_sound: string;
+  game: Story;
+  gameType: "image" | "syllable";
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -77,51 +80,112 @@ function shuffleArray<T>(array: T[]): T[] {
   return array;
 }
 
+function getCardsFromImageGame(story: Story): GameCard[] {
+  return [
+    {
+      image: story.multiple_image_correct_image,
+      isTarget: true,
+      id: "1",
+      audio: { url: "/assets/audio/choice_correct.wav" },
+    },
+    {
+      image: story.multiple_image_incorrect_image_1,
+      isTarget: false,
+      id: "2",
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
+    },
+    {
+      image: story.multiple_image_incorrect_image_2,
+      isTarget: false,
+      id: "3",
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
+    },
+    {
+      image: story.multiple_image_incorrect_image_3,
+      isTarget: false,
+      id: "4",
+      audio: { url: "/assets/audio/choice_incorrect.wav" },
+    },
+  ];
+}
+
+function getCardsFromSyllableGame(story: Story): GameCard[] {
+  return [
+    {
+      image: story.multiple_syllable_correct_image,
+      isTarget: true,
+      id: "1",
+      audio: story.multiple_syllable_correct_audio,
+    },
+    {
+      image: story.multiple_syllable_incorrect_image_1,
+      isTarget: false,
+      id: "2",
+      audio: story.multiple_syllable_incorrect_audio_1,
+    },
+    {
+      image: story.multiple_syllable_incorrect_image_2,
+      isTarget: false,
+      id: "3",
+      audio: story.multiple_syllable_incorrect_audio_2,
+    },
+    {
+      image: story.multiple_syllable_incorrect_image_3,
+      isTarget: false,
+      id: "4",
+      audio: story.multiple_syllable_incorrect_audio_3,
+    },
+  ];
+}
+
 export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
-  incorrect_choice_sound,
-  correct_choice_sound,
+  gameType,
 }) => {
   const { isImmersive, isInclusive } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
-  const audio_correct = new Audio(correct_choice_sound);
-  const audio_incorrect = new Audio(incorrect_choice_sound);
+  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showNextGame, setShowNextGame] = useState<boolean>(false);
 
+  const headerData = useMemo((): GameHeader => {
+    const textPacks =
+      gameType === "image"
+        ? data.multiple_image_text
+        : data.multiple_syllable_text;
+    return {
+      es: textPacks.find(
+        (tp) => tp.language === (isInclusive ? "es-inc" : "es"),
+      )!,
+      en: isImmersive
+        ? undefined
+        : textPacks.find(
+            (tp) => tp.language === (isInclusive ? "en-inc" : "en"),
+          ),
+    };
+  }, [isImmersive, isInclusive, data, gameType]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     clearAudio();
+  //   };
+  // }, []);
+
+  //audio effect for autoplaying
   useEffect(() => {
+    const audios = [headerData.es.audio.url];
+    if (headerData.en) {
+      audios.push(headerData.en.audio.url);
+    }
+    addAudio(audios);
+
     return () => {
       clearAudio();
     };
-  }, []);
-  useEffect(() => {
-    setCallback(() => () => {
-      setAudioPlayed(true);
-    });
+  }, [headerData]);
 
-    if (isImmersive) {
-      if (isInclusive) {
-        addAudio([
-          data.card_group[currentIndex].spanish_inclusive_question_audio,
-        ]);
-      } else {
-        addAudio([data.card_group[currentIndex].spanish_question_audio]);
-      }
-    } else {
-      if (isInclusive) {
-        addAudio([
-          data.card_group[currentIndex].spanish_inclusive_question_audio,
-          data.card_group[currentIndex].englsih_question_audio,
-        ]);
-      } else {
-        addAudio([
-          data.card_group[currentIndex].spanish_question_audio,
-          data.card_group[currentIndex].englsih_question_audio,
-        ]);
-      }
-    }
-  }, []);
-  const history = useHistory();
-
+  //styles for correct and wrong cards
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
@@ -148,66 +212,24 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     "3": initialStyle,
     "4": initialStyle,
   });
-  const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showBackside, setShowBackside] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showNextGame, setShowNextGame] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
 
-  //not sure if it's needed for this game
-  const goToNextWordGroup = () => {
-    // Check if the current index is at the last element of the word_group array
-    if (currentIndex >= data.card_group.length - 1) {
-      setCurrentIndex(0); // Reset to the first element
-    } else {
-      setCurrentIndex(currentIndex + 1); // Move to the next element
-    }
-  };
-
   const shuffledCards = useMemo(() => {
-    const cardGroup = data.card_group[currentIndex];
-    const cards = [
-      {
-        image: cardGroup.correct_card_image,
-        isTarget: true,
-        id: "1",
-        audio: cardGroup.correct_card_audio,
-      },
-      {
-        image: cardGroup.incorrect_card_image_2,
-        id: "2",
-        audio: cardGroup.incorrect_card_audio_2,
-      },
-      {
-        image: cardGroup.incorrect_card_image_3,
-        id: "3",
-        audio: cardGroup.incorrect_card_audio_3,
-      },
-      {
-        image: cardGroup.incorrect_card_image_4,
-        id: "4",
-        audio: cardGroup.incorrect_card_audio_4,
-      },
-    ];
+    const cards =
+      gameType === "image"
+        ? getCardsFromImageGame(data)
+        : getCardsFromSyllableGame(data);
     return shuffleArray(cards);
-  }, [data, currentIndex]);
+  }, [data, currentIndex, gameType]);
 
+  console.log(shuffledCards);
   useEffect(() => {
     if (isCorrectSelected) {
       setTimeout(() => {
-        if (
-          currentIndex + 1 === 5 ||
-          currentIndex + 1 === 10 ||
-          currentIndex + 1 === 20 ||
-          currentIndex + 1 === data.card_group.length
-        ) {
-          setShowNextGame(true); //go to the IntruderCongrats page
-        }
-
-        goToNextWordGroup(); //check for the current index
+        setShowNextGame(true);
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           "1": initialStyle,
@@ -221,67 +243,61 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   // Function to handle card click
   const handleCardClick = (card: any) => {
-    if (card.audio ?? false) {
-      //case when audio exists for each card (syllabas game)
-      if (!card.isTarget) {
-        //logic for the incorrect cards
-        const wordAudio = new Audio(card.audio.url);
-        wordAudio.play();
+    if (!card.isTarget) {
+      //logic for the incorrect cards
 
-        //plays audio for incorrect choice
+      addAudio([card.audio.url]);
+
+      //plays audio for incorrect choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+      }));
+
+      setTimeout(() => {
         setCardColors((prevColors: any) => ({
           ...prevColors,
-          [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+          [card.id]: initialStyle,
         }));
-
-        setTimeout(() => {
-          setCardColors((prevColors: any) => ({
-            ...prevColors,
-            [card.id]: initialStyle,
-          }));
-        }, 1000);
-      } else {
-        //logic when the correct card is choosen
-        const wordAudio = new Audio(card.audio.url);
-        wordAudio.play(); //plays audio for correct choice
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: correctStyle,
-        }));
-
-        setTimeout(() => {
-          setIsCorrectSelected(true);
-        }, 1000);
-      }
+      }, 1000);
     } else {
-      //case when audio doesn't exist for each card (picture game)
+      //logic when the correct card is choosen
+      addAudio([card.audio.url]); //plays audio for correct choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: correctStyle,
+      }));
 
-      if (!card.isTarget) {
-        //logic for the incorrect cards
-        audio_incorrect.play(); //plays audio for incorrect choice
+      setTimeout(() => {
+        setIsCorrectSelected(true);
+      }, 1000);
+    }
+
+    if (!card.isTarget) {
+      //logic for the incorrect cards
+      addAudio([card.audio.url]); //plays audio for incorrect choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+      }));
+
+      setTimeout(() => {
         setCardColors((prevColors: any) => ({
           ...prevColors,
-          [card.id]: { ...incorrectStyle, animation: "shake 1s" },
+          [card.id]: initialStyle,
         }));
+      }, 1000);
+    } else {
+      //logic when the correct card is choosen
+      addAudio([card.audio.url]); //plays audio for correct choice
+      setCardColors((prevColors: any) => ({
+        ...prevColors,
+        [card.id]: correctStyle,
+      }));
 
-        setTimeout(() => {
-          setCardColors((prevColors: any) => ({
-            ...prevColors,
-            [card.id]: initialStyle,
-          }));
-        }, 1000);
-      } else {
-        //logic when the correct card is choosen
-        audio_correct.play(); //plays audio for correct choice
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: correctStyle,
-        }));
-
-        setTimeout(() => {
-          setIsCorrectSelected(true);
-        }, 1000);
-      }
+      setTimeout(() => {
+        setIsCorrectSelected(true);
+      }, 1000);
     }
   };
 
@@ -293,21 +309,15 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     <>
       <div id="">
         <div className="margin-top-4 margin-bottom-2">
-          <IonText>
-            {isInclusive ? (
-              <h1 className="text-5xl color-suelo">
-                {data.card_group[currentIndex].spanish_inclusive_question_text}
-              </h1>
-            ) : (
-              <h1 className="text-5xl color-suelo">
-                {data.card_group[currentIndex].spanish_question_text}
-              </h1>
-            )}
+          <IonText
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <h1 className="text-5xl color-suelo">{headerData.es.text}</h1>
 
-            {!isImmersive && (
-              <p className="text-3xl color-english">
-                {data.card_group[currentIndex].english_question_text}
-              </p>
+            {headerData.en && (
+              <p className="text-3xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
         </div>
@@ -316,30 +326,24 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(0, 2).map((card, index) => (
                 <IonCol
+                  key={card.id}
                   className=""
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img
-                    key={card.id}
-                    style={cardColors[card.id]}
-                    src={card.image.url}
-                  />
+                  <img style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(2, 4).map((card, index) => (
                 <IonCol
+                  key={index}
                   className=""
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img
-                    key={card.id}
-                    style={cardColors[card.id]}
-                    src={card.image.url}
-                  />
+                  <img style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>
