@@ -72,14 +72,14 @@ const AdultCheckModal: FC = () => {
           }}
         >
           <IonText class="ion-text-center">
-            <p>
+            <p className="text-2xl semibold">
               <FormattedMessage
                 id="settings.adult_check.prompt"
                 defaultMessage="Please solve this equation before continuing"
                 description="Prompt for user to solve an equation before proceeding"
               />
             </p>
-            <p>
+            <p className="text-xl">
               {equation[0]} + {equation[1]} = ?
             </p>
           </IonText>

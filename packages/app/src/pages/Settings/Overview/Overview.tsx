@@ -6,7 +6,8 @@ import {
   IonRow,
   IonCol,
   IonIcon,
-  IonCard,
+  IonPopover,
+  IonContent,
 } from "@ionic/react";
 import Joyride from "react-joyride";
 import { addOutline, ellipse, sparkles } from "ionicons/icons";
@@ -21,6 +22,7 @@ import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
 import { useChildProfile } from "@/contexts/ChildProfileContext";
+import { useProfile } from "@/contexts/ProfileContext";
 
 import "./Overview.scss";
 
@@ -147,7 +149,7 @@ export const Overview: React.FC = ({}) => {
       subtitle: intl.formatMessage({
         id: "settings.overview.gettingStartedContent",
         defaultMessage:
-          "When you enter into any new area of science, you almost always find.",
+          "Your Essential Guide to Getting Started with the Bili App.",
         description: "Explore card #1 content",
       }),
       tags: [
@@ -239,7 +241,7 @@ export const Overview: React.FC = ({}) => {
   ];
 
   return (
-    <>
+    <div id="settings-profile">
       {shouldShowTutorial && !isAdultCheckOpen && (
         <Joyride
           locale={translations.Joyride}
@@ -270,8 +272,9 @@ export const Overview: React.FC = ({}) => {
 
             <IonCol size="auto">
               <IonButton
-                disabled={true}
+                // disabled={true}
                 size="small"
+                id="hover-trigger"
                 className="add-child-btn"
                 onClick={() => {
                   // route and logic for user to add child
@@ -283,7 +286,7 @@ export const Overview: React.FC = ({}) => {
                   icon={addOutline}
                   size="small"
                 />
-                <IonLabel style={{ color: "var(--Base-Nube)" }}>
+                <IonLabel className="text-sm semibold" style={{ color: "var(--Base-Nube)" }}>
                   <FormattedMessage
                     id="settings.overview.addChildBtn"
                     defaultMessage="Add child"
@@ -291,6 +294,20 @@ export const Overview: React.FC = ({}) => {
                   />
                 </IonLabel>
               </IonButton>
+              <IonPopover 
+                className="cs-hover" 
+                trigger="hover-trigger" 
+                triggerAction="hover" 
+                size="cover"
+                showBackdrop={false}
+              >
+                <IonContent className="text-xl semibold">
+                ((!isImmersive && !isInclusive) || (isImmersive && !isInclusive)) {
+
+                }
+                  Coming soon!
+                </IonContent>  
+              </IonPopover>
             </IonCol>
           </IonRow>
 
@@ -357,6 +374,6 @@ export const Overview: React.FC = ({}) => {
           </div>
         </IonGrid>
       </div>
-    </>
+    </div>  
   );
 };
