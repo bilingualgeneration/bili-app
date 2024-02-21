@@ -39,6 +39,7 @@ import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
@@ -89,6 +90,7 @@ import "@/theme/text-classes.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
+import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
 
 setupIonicReact();
 
@@ -161,29 +163,6 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <Community />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/count-with-me-game/intro"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <CountWithMeIntro />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-          <Route
-            exact
-            path="/count-with-me-game/select"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <CountWithMeSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -324,17 +303,15 @@ const Router: React.FC = () => {
             )}
           />
 
-          <Route
-            exact
-            path="/stories/:uuid"
-            render={(props) => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <Stories />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
+          {/* <Route
+          exact
+          path="/stories/:uuid"
+          render={(props) => (
+            <UnauthedLayout>
+              <Stories id={props.match.params.uuid} />
+            </UnauthedLayout>
+          )}
+        /> */}
 
           <Route
             exact
@@ -350,11 +327,23 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/stories/game"
+            path="/stories/game/:pack_id"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesPictureGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/stories/game2/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <StoriesSyllableGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -382,12 +371,7 @@ const Router: React.FC = () => {
                     headerComponent={<PlayHeader />}
                     module="story-factory-game"
                     packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
-                    translatedTitle={
-		      intl.formatMessage({
-			id: "common.storyFactory",
-			defaultMessage: "Story Factory"
-		      })
-		    }
+                    translatedTitle="¡Fábrica de Cuentos!"
                     englishTitle="Story Factory"
                   />
                 </HeaderFooter>
@@ -436,7 +420,7 @@ const Router: React.FC = () => {
             path="/would-do-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#FBF2E2">
+                <HeaderFooter background="#F7FAF9">
                   <WouldDoGame />
                 </HeaderFooter>
               </AuthedLayout>
@@ -464,12 +448,7 @@ const Router: React.FC = () => {
                     headerComponent={<PlayHeader />}
                     module="intruder-game"
                     packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
-                    translatedTitle={
-		      intl.formatMessage({
-			id: "common.intruder",
-			defaultMessage: "The Intruder"
-		      })
-                    }
+                    translatedTitle='El Intruso'
                     englishTitle="The Intruder"
                   />
                 </HeaderFooter>
@@ -521,12 +500,7 @@ const Router: React.FC = () => {
                     headerComponent={<CommunityHeader />}
                     module="would-do-game"
                     packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
-                    translatedTitle={
-		      intl.formatMessage({
-			id: "common.wouldDo",
-			defaultMessage: "What would you do?"
-		      })
-                    }
+                    translatedTitle='¿Qué harías?'
                     englishTitle="What would you do?"
                   />
                 </HeaderFooter>

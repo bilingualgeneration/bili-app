@@ -83,8 +83,8 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
 
   const [props, api] = useSprings(cards.length, (i) => {
     return {
-      x: i * 5, // Initialize x position of each card
-      y: i * 10, // Initialize y position of each card
+      x: -2 - i * 5, // Initialize x position of each card
+      y: 10 - i * 10, // Initialize y position of each card
       scale: 1, // Initialize scale of each card
       rot: 0, // Initialize rotation angle of each card
       zIndex: cards.length - i, // Initialize zIndex of each card
@@ -112,8 +112,8 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
             // console.log(`This is the swiped card index: ${swiped_card_index}`);
             if (i === swiped_card_index) {
               return {
-                x: (cards.length - 1) * 5,
-                y: (cards.length - 1) * 10,
+                x: -2 - (cards.length - 1) * 5,
+                y: 10 - (cards.length - 1) * 10,
                 scale: 1,
                 rot: 0,
                 zIndex: 0,
@@ -123,8 +123,8 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
               const distance =
                 (i - (swiped_card_index + 1) + cards.length) % cards.length; // calculates the distance between the current card (i) and the swiped card (index)
               return {
-                x: distance * 5,
-                y: distance * 10,
+                x: -2 - distance * 5,
+                y: 10 - distance * 10,
                 scale: 1,
                 rot: 0,
                 zIndex: cards.length - distance - 1,

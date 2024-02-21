@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { CongratsPage } from "./CountCongrats";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
+import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.wav";
+import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.wav";
+import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.wav";
 import "./CountWithMe.scss";
 import { useHistory } from "react-router";
 

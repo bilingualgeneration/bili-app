@@ -24,8 +24,8 @@ import {useAudioManager} from '@/contexts/AudioManagerContext';
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
-import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
-import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
+import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.wav";
+import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.wav";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -88,6 +88,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
+    aspectRatio: '1 / 3',
     border: '8.4px solid transparent',
     boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
   };
