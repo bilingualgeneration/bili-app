@@ -25,11 +25,13 @@ export const WouldDoSelect: React.FC = () => {
       isLocked: true
     },
   ];
-  return <PackSelect
-           module="would-do-game"
-	   category="community"
-           translatedTitle='¿Qué harías?'
-           englishTitle="What would you do?"
-	   placeholderCards={placeholderCards}
-  />;
+  return (
+    <PackSelect
+      module="would-do-game"
+	    category="community"
+      translatedTitle='¿Qué harías?'
+      englishTitle="What would you do?"
+	    placeholderCards={placeholderCards}
+    />
+  );
 }
