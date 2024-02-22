@@ -77,9 +77,9 @@ export const PackSelect: React.FC<props> = ({
     <div className="background-card">
       <div className="margin-bottom-2">
         <IonText>
-          <h1 className="text-5xl color-suelo">{translatedTitle}</h1>
+          <h1 style={{marginLeft: 30}} className="text-5xl color-suelo">{translatedTitle}</h1>
           {!isImmersive && (
-            <h2 className="text-3xl color-english">{englishTitle}</h2>
+            <h2 style={{marginLeft: 30}} className="text-3xl color-english">{englishTitle}</h2>
             )}
           </IonText>
         </div>
