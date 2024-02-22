@@ -4,9 +4,6 @@ import React, { useState, useEffect } from "react";
 import { CongratsPage } from "./CountCongrats";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.wav";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.wav";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.wav";
 import "./CountWithMe.scss";
 import { useHistory } from "react-router";
 
@@ -27,10 +24,14 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
-
+  const ften = factText.filter((f) => f.language === 'en')[0];
+  const ftes = factText.filter((f) => f.language === 'es')[0];
+  const ftesinc = factText.filter((f) => f.language === 'es-inc')[0];
+  
   useEffect(() => {
     if (audioPlayed) {
-      setShowCongrats(true);
+      //setShowCongrats(true);
+      onKeepGoingClick();
     }
   }, [audioPlayed]);
 
@@ -43,20 +44,18 @@ export const FactsPage: React.FC<FactsPageProps> = ({
     setCallback(() => () => {
       setAudioPlayed(true);
     });
-
-    if (isImmersive) {
-      if (isInclusive) {
-        addAudio([audio_es_inc_file]);
-      } else {
-        addAudio([audio_es_file]);
-      }
-    } else {
-      if (isInclusive) {
-        addAudio([audio_es_inc_file, audio_en_file]);
-      } else {
-        addAudio([audio_es_file, audio_en_file]);
+    let audios = [];
+    if(isInclusive){
+      audios.push(ftesinc.audio.url);
+    }else{
+      audios.push(ftes.audio.url);
+    }
+    if(!isImmersive){
+      if(ften && ften.audio){
+	audios.push(ften.audio.url);
       }
     }
+    addAudio(audios);
   }, []);
   const history = useHistory();
 
@@ -71,9 +70,11 @@ export const FactsPage: React.FC<FactsPageProps> = ({
         className="background-card margin-top-3"
         style={{
           backgroundImage: `url(${factBackground})`,
+	  backgroundSize: 'auto 100%',
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
-          height: 600,
+	  aspectRatio: '1159 / 724',
+	  width: '80%',
           display: "flex",
           alignItems: "center",
         }}

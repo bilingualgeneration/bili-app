@@ -173,6 +173,32 @@ const Router: React.FC = () => {
 
           <Route
             exact
+            path="/count-with-me-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  
+          <Route
+            exact
+            path="/count-with-me-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  
+          <Route
+            exact
             path="/count-with-me-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
