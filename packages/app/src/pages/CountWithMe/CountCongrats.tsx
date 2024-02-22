@@ -85,14 +85,18 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
             alt="background"
           />
           <div>
+	    <IonText>
+	    <h1 className='text-4xl color-suelo semibold'>
             <FormattedMessage
               id="countWithMe.complete"
               defaultMessage="Activity Completed"
               description="Information that the activity is completed"
             />
+	    </h1>
             {!isImmersive && (
-              <p style={{ textAlign: "center" }}>Activity Completed</p>
+              <p className='text-2xl color-english' style={{ textAlign: "center" }}>Activity Completed</p>
             )}
+	    </IonText>
           </div>
 
           <div

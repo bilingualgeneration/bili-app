@@ -12,10 +12,14 @@ import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
+import {useHistory} from 'react-router-dom';
 import "./CountWithMe.scss";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 
 export const CountWithMeGame: React.FC = () => {
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
+  const history = useHistory();
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
@@ -80,6 +84,7 @@ export const CountWithMeGame: React.FC = () => {
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
 
+  
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
@@ -87,7 +92,8 @@ export const CountWithMeGame: React.FC = () => {
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= data.groups.length - 1) {
-      setCurrentIndex(0); // Reset to the first element
+      //setCurrentIndex(0); // Reset to the first element
+      history.replace('/student-dashboard');
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
@@ -116,6 +122,26 @@ export const CountWithMeGame: React.FC = () => {
       setShowFacts(true);
     }
   }, [isCorrectSelected]);
+
+  useEffect(() => {
+    console.log(getData);
+    if(getData.countQuestions.length > 0){
+    const ften = getData.countQuestions.filter((f) => f.language === 'en')[0];
+    const ftes = getData.countQuestions.filter((f) => f.language === 'es')[0];
+    const ftesinc = getData.countQuestions.filter((f) => f.language === 'es-inc')[0];
+    let audios = [];
+      audios.push(ftes.audio.url);
+    if(!isImmersive){
+      if(ften && ften.audio){
+	audios.push(ften.audio.url);
+      }
+    }
+    if(!showFacts){
+      //addAudio(audios);
+    }
+    }
+    
+  }, [JSON.stringify(getData)]);
 
   //function to handle bird click order
   const handleBirdClickOrder = (index: number) => {
@@ -206,7 +232,7 @@ export const CountWithMeGame: React.FC = () => {
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-          height: 600,
+	  aspectRatio: '1159 / 724',
           position: "relative",
         }}
       >
@@ -247,9 +273,10 @@ export const CountWithMeGame: React.FC = () => {
             key={index}
             style={{
               position: "absolute",
-              transform: "scale(0.6) translateY(-230px)",
-              top: `${animal.coordinate_y}px`,
-              left: `${animal.coordinate_x}px`,
+	      width: '25%',
+	      height: 'auto',
+              bottom: `${animal.y_percent || index * 5}%`,
+              left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
             }}
             onClick={() => handleBirdClickOrder(index)}

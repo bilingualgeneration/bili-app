@@ -66,7 +66,7 @@ export const PackSelect: React.FC<props> = ({
       titleEn,
       fid,
       category,
-      cover: p.cover_image.url,
+      cover: p.cover_image?.url || 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png',
       link: `/${module}/play/${p.id}`
     };
   });

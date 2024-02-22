@@ -81,7 +81,7 @@ const CountCard: FC = () => {
       className="card"
       onClick={() => {
         history.push(
-          "/count-with-me-game/play/58980273-c9e0-4a2e-ac8d-4f3a0553ff96",
+          "/count-with-me-game/intro",
         );
       }}
     >
