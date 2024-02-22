@@ -1,5 +1,5 @@
 //game logic AM
-import React, { FC, useEffect, useState } from "react";
+import React, { useRef, FC, useEffect, useState } from "react";
 //import {CountFacts} from './CountFacts';
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
@@ -83,7 +83,7 @@ export const CountWithMeGame: React.FC = () => {
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
-
+  const prevState = useRef<string>('');
   
   useEffect(() => {
     setCurrentIndex(0);
@@ -112,9 +112,37 @@ export const CountWithMeGame: React.FC = () => {
         factText: animalGroup.fact_text,
       };
 
+      console.log(countGameData);
+      let audios = [];
+      if(allAnimalsClicked){
+	const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
+	const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
+	const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+	audios.push(ftes.audio.url);
+	if(!isImmersive){
+	  if(ften && ften.audio){
+	    audios.push(ften.audio.url);
+	  }
+	}
+      }else{
+	const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+	const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+	const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+	audios.push(ftes.audio.url);
+	if(!isImmersive){
+	  if(ften && ften.audio){
+	    audios.push(ften.audio.url);
+	  }
+	}
+      }
+      if(!showFacts){
+	addAudio(audios);
+      }
+
+      
       setData(countGameData);
     }
-  }, [data, currentIndex]);
+  }, [data, currentIndex, allAnimalsClicked]);
 
   //logic when the correct animal number is choosen
   useEffect(() => {
@@ -122,26 +150,6 @@ export const CountWithMeGame: React.FC = () => {
       setShowFacts(true);
     }
   }, [isCorrectSelected]);
-
-  useEffect(() => {
-    console.log(getData);
-    if(getData.countQuestions.length > 0){
-    const ften = getData.countQuestions.filter((f) => f.language === 'en')[0];
-    const ftes = getData.countQuestions.filter((f) => f.language === 'es')[0];
-    const ftesinc = getData.countQuestions.filter((f) => f.language === 'es-inc')[0];
-    let audios = [];
-      audios.push(ftes.audio.url);
-    if(!isImmersive){
-      if(ften && ften.audio){
-	audios.push(ften.audio.url);
-      }
-    }
-    if(!showFacts){
-      //addAudio(audios);
-    }
-    }
-    
-  }, [JSON.stringify(getData)]);
 
   //function to handle bird click order
   const handleBirdClickOrder = (index: number) => {
@@ -203,10 +211,7 @@ export const CountWithMeGame: React.FC = () => {
           setAllAnimalsClicked(false);
           setClickedIndexes([]);
           goToNextAnimalGroup();
-
-          setTimeout(() => {
-            setShowFacts(false);
-          }, 1000);
+          setShowFacts(false);
         }}
       />
     );
