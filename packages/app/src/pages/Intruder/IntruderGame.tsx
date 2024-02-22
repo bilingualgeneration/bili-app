@@ -88,7 +88,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
-    aspectRatio: '1 / 3',
+    aspectRatio: '1 / 1.25',
     border: '8.4px solid transparent',
     boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
   };
