@@ -26,11 +26,13 @@ export const IntruderSelect: React.FC = () => {
       isLocked: true
     },
   ];
-  return <PackSelect
-           module="intruder-game"
-	   category="play"
-           translatedTitle='El Intruso'
-           englishTitle="The Intruder"
-	   placeholderCards={placeholderCards}
-  />;
+  return (
+    <PackSelect
+      module="intruder-game"
+      category="play"
+      translatedTitle='El Intruso'
+      englishTitle="The Intruder"
+      placeholderCards={placeholderCards}
+    />
+  );
 }
