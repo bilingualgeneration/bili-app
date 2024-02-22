@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import {
   collection,
 //  where,
-  query
+  query,
+  orderBy,
 } from 'firebase/firestore';
 import { ContentCard } from "@/components/ContentCard";
 import { IonCard, IonIcon, IonText } from "@ionic/react";
@@ -49,7 +50,7 @@ export const PackSelect: React.FC<props> = ({
   const firestore = useFirestore();
   const { isInclusive, isImmersive } = useProfile();
   const cardsCollection = collection(firestore, module);
-  const cardsQuery = query(cardsCollection);
+  const cardsQuery = query(cardsCollection, orderBy('id', 'asc'));
   const {status, data} = useFirestoreCollectionData(cardsQuery, {idField: 'id'});
   if(status === 'loading'){
     return <>loading</>;

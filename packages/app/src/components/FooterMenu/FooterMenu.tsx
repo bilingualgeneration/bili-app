@@ -64,7 +64,7 @@ export const FooterMenu: React.FC = ({}) => {
           </IonRow>
         </IonGrid>
       </div>
-      {reqdActions.showSettingsMessage && (
+      {reqdActions.showSettingsMessage && false && (
         <Joyride
           locale={{
             close: (

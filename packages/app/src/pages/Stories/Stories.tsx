@@ -14,6 +14,8 @@ import { doc } from "firebase/firestore";
 import { useParams } from "react-router";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useEffect, useState } from "react";
+import volumeButton from "@/assets/icons/sf_audio_button.svg";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 
 import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
@@ -21,6 +23,8 @@ import IllustratorIcon from "@/assets/icons/illustrator_icon.png";
 import NarratorIcon from "@/assets/icons/narrator_icon.png";
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
+
+import './Stories.scss';
 
 const getLang = (lang: string, data: any) => {
   return data.filter((d: any) => d.language === lang)[0];
@@ -76,7 +80,7 @@ export const StoryLoader = () => {
   }
 
   return (
-    <>
+    <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
         // todo: don't need to pass in whole data
         <TitleCard data={data} />
@@ -86,7 +90,7 @@ export const StoryLoader = () => {
           <StoryPage />
         )}
       <PageCounter />
-    </>
+    </div>
   );
 };
 
@@ -260,10 +264,15 @@ const TitleCard = ({ data }: any) => {
 const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
   const { isImmersive, isInclusive } = useProfile();
+  const {addAudio, clearAudio} = useAudioManager();
+  useEffect(() => {
+    return clearAudio;
+  }, []);
+  useEffect(() => {
+    clearAudio();
+  }, [pageNumber]);
   const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
-  console.log(texts);
-  console.log(page);
   return (
     <>
       <div className="content-wrapper margin-top-1">
@@ -296,6 +305,30 @@ const StoryPage: React.FC<any> = () => {
                     )}
                   </IonText>
                 </IonCardContent>
+				  <IonButton
+                    className="volume-button-background"
+		    onClick={() => {
+		      let audios = [];
+		      if(isInclusive){
+			if(texts['es-inc'].audio){
+			  audios.push(texts['es-inc'].audio.url);
+			}
+		      }else{
+			if(texts['es'].audio){
+			  audios.push(texts['es'].audio.url);
+			}		
+		      }
+		      if(!isImmersive){
+			if(texts['en'].audio){
+			  audios.push(texts['en'].audio.url);
+			}
+		      }
+		      addAudio(audios);
+		    }}
+		  >
+		    <img className="volume-icon" src={volumeButton} />
+		  </IonButton>
+
               </IonCard>
             </IonCol>
             <IonCol size="auto" style={{ marginLeft: "2rem" }}>

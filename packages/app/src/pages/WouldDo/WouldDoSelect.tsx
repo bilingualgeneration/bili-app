@@ -3,9 +3,9 @@ import { PackSelect } from "@/components/PackSelect";
 export const WouldDoSelect: React.FC = () => {
   const placeholderCards = [
     {
-      title: 'abc',
+      title: 'abcasddassad',
       titleEn: 'def',
-      category: 'play',
+      category: 'community',
       cover: '',
       isLocked: true
     },
