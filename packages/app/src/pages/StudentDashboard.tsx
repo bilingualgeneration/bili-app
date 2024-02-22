@@ -209,21 +209,24 @@ export const StudentDashboard: FC = () => {
       title: "Cara de Catrina",
       titleEn: "Catrina for a Day",
       cover: "/assets/img/dance_image.png",
-      isLocked: true,
+      link: "/stories/791c76d0-4835-4fcc-8c75-44a17c606be4",
+      isLocked: false
     },
     {
       category: "stories",
-      title: "Soy de...",
-      titleEn: "I'm From...",
+      title: "¿Qué es lo que te gusta de ti?",
+      titleEn: "What do you like about yourself?",
       cover: "/assets/img/band_image.png",
-      isLocked: true,
+      link: "/stories/ea4e21a7-ae7c-4ec7-9112-23e19e7a0932",
+      isLocked: false,
     },
     {
       category: "stories",
       title: "El esqueleto travieso",
       titleEn: "The Mischievous Skeleton",
       cover: "/assets/img/mountain_image.png",
-      isLocked: true,
+      link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
+      isLocked: false,
     },
   ];
 

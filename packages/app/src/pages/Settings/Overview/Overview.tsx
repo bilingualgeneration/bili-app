@@ -135,7 +135,7 @@ export const Overview: React.FC = ({}) => {
    */
   return (
     <>
-      {shouldShowTutorial && !isAdultCheckOpen && (
+      {shouldShowTutorial && !isAdultCheckOpen && false && (
         <Joyride
           locale={translations.Joyride}
           hideCloseButton
