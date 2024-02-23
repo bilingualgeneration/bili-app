@@ -42,7 +42,7 @@
   }
 }
 
-.volume-button-background {
+.stories-volume-button-background {
   background-color: var(--Flamenco-High, #ffaedc);
   border-radius: 2rem !important;
   cursor: pointer;
@@ -67,7 +67,8 @@
   }
 }
 
-.volume-icon {
+.stories-volume-icon {
+    margin-top: 10px;
   flex-shrink: 0;
   width: 3.75rem;
   height: 3.75rem;

@@ -298,7 +298,7 @@ const StoryPage: React.FC<any> = () => {
                   </IonText>
 		  <div style={{position: 'relative'}}>
 		    <div
-                      className="volume-button-background"
+                      className="stories-volume-button-background"
 		      onClick={() => {
 			let audios = [];
 			if(isInclusive){
@@ -318,7 +318,7 @@ const StoryPage: React.FC<any> = () => {
 			addAudio(audios);
 		      }}
 		    >
-		      <img className="volume-icon" src={volumeButton} />
+		      <img className="stories-volume-icon" src={volumeButton} />
 		    </div>
 		    <img style={{margin: 'auto', marginTop: '2rem'}} src={page.image.url} />
 		  </div>
