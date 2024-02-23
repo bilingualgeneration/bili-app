@@ -106,7 +106,10 @@ export const Play: FC = () => {
   const { isImmersive } = useProfile();
   return (
     <div id="playPage">
-      <PlayHeader />
+      <PlayHeader 
+        title="Juego"
+        subtitle="Play"
+      />
           <StoryFactoryCard />
           <IntruderCard />
           <CountCard />

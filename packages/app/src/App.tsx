@@ -41,6 +41,7 @@ import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
+import { ProfileComingSoon } from "./pages/ProfileComingSoon";
 import ResetPassword from "@/pages/ResetPassword";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
@@ -204,6 +205,18 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <CountWithMeGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/profile-coming-soon"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <ProfileComingSoon />
                 </HeaderFooter>
               </AuthedLayout>
             )}
