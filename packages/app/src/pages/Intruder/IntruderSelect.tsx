@@ -1,6 +1,4 @@
 import { PackSelect } from "@/components/PackSelect";
-import boot from '../../../public/assets/img/boot_image.png';
-import horse from '../../../public/assets/img/horse_image.png';
 
 export const IntruderSelect: React.FC = () => {
   const placeholderCards = [
@@ -8,14 +6,14 @@ export const IntruderSelect: React.FC = () => {
       title: 'Paquete 2',
       titleEn: 'Pack 2',
       category: 'play',
-      cover: boot,
+      cover: '/assets/img/boot_image.png',
       isLocked: true
     },
     {
       title: 'Paquete 3',
       titleEn: 'Pack 3',
       category: 'play',
-      cover: horse,
+      cover: '/assets/img/horse_image.png',
       isLocked: true
     },
     {

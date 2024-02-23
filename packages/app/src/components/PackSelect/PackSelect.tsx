@@ -53,7 +53,7 @@ export const PackSelect: React.FC<props> = ({
   const cardsQuery = query(cardsCollection, orderBy('id', 'asc'));
   const {status, data} = useFirestoreCollectionData(cardsQuery, {idField: 'id'});
   if(status === 'loading'){
-    return <>loading</>;
+    return <></>;
   }
 
   const cards = data.map((p, index) => {

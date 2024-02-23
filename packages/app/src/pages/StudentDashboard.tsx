@@ -78,6 +78,13 @@ const WaveIcon: FC<WaveIcon> = ({
 const wellnessCards = [
   {
     category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: true,
+  },
+  {
+    category: "wellness",
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
@@ -101,13 +108,6 @@ const wellnessCards = [
     category: "wellness",
     title: "Mantras musicales",
     titleEn: "Musical mantras",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: true,
-  },
-  {
-    category: "wellness",
-    title: "Pausa de yoga",
-    titleEn: "Yoga break",
     cover: "/assets/img/mountain_image.png",
     isLocked: true,
   },
@@ -179,14 +179,7 @@ const communityCards = [
     titleEn: "I Spy",
     cover: "/assets/img/flowers_image.png",
     isLocked: true,
-  },
-  {
-    category: "community",
-    title: "Veo Veo",
-    titleEn: "I Spy",
-    cover: "/assets/img/flowers_image.png",
-    isLocked: true,
-  },
+  }
 ];
 
 export const StudentDashboard: FC = () => {
@@ -224,7 +217,7 @@ export const StudentDashboard: FC = () => {
       category: "stories",
       title: "El esqueleto travieso",
       titleEn: "The Mischievous Skeleton",
-      cover: "/assets/img/mountain_image.png",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg",
       link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
       isLocked: false,
     },

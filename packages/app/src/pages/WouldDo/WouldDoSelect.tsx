@@ -1,5 +1,4 @@
 import { PackSelect } from "@/components/PackSelect";
-import boot from '../../../public/assets/img/boot_image.png';
 
 export const WouldDoSelect: React.FC = () => {
   const placeholderCards = [
@@ -21,7 +20,7 @@ export const WouldDoSelect: React.FC = () => {
       title: 'Nivel 5',
       titleEn: 'Level 5',
       category: 'community',
-      cover: boot,
+      cover: '/assets/img/boot_image.png',
       isLocked: true
     },
   ];
