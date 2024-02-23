@@ -27,6 +27,8 @@ import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
 import AmiguesCover from "@/assets/img/amigues_cover.png";
+import CatrinaCover from '@/assets/img/catrina.png';
+import GustaCover from '@/assets/img/gusta.png';
 import "./StudentDashboard.scss";
 
 interface WaveIcon {
@@ -201,7 +203,7 @@ export const StudentDashboard: FC = () => {
       category: "stories",
       title: "Cara de Catrina",
       titleEn: "Catrina for a Day",
-      cover: "/assets/img/dance_image.png",
+      cover: CatrinaCover,
       link: "/stories/791c76d0-4835-4fcc-8c75-44a17c606be4",
       isLocked: false
     },
@@ -209,7 +211,7 @@ export const StudentDashboard: FC = () => {
       category: "stories",
       title: "¿Qué es lo que te gusta de ti?",
       titleEn: "What do you like about yourself?",
-      cover: "/assets/img/band_image.png",
+      cover: GustaCover,
       link: "/stories/ea4e21a7-ae7c-4ec7-9112-23e19e7a0932",
       isLocked: false,
     },
