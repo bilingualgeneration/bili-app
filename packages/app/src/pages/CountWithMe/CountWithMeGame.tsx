@@ -111,35 +111,34 @@ export const CountWithMeGame: React.FC = () => {
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
       };
+      // console.log(animalGroup);
 
-      console.log(countGameData);
+      // console.log(countGameData);
       let audios = [];
       if(allAnimalsClicked){
-	const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
-	const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
-	const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
-	audios.push(ftes.audio.url);
-	if(!isImmersive){
-	  if(ften && ften.audio){
-	    audios.push(ften.audio.url);
-	  }
-	}
+        const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
+        const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
+        const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+        audios.push(ftes.audio.url);
+        if(!isImmersive){
+          if(ften && ften.audio){
+            audios.push(ften.audio.url);
+          }
+        }
       }else{
-	const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-	const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-	const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
-	audios.push(ftes.audio.url);
-	if(!isImmersive){
-	  if(ften && ften.audio){
-	    audios.push(ften.audio.url);
-	  }
-	}
+        const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+        const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+        const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+        audios.push(ftes.audio.url);
+        if(!isImmersive){
+          if(ften && ften.audio){
+            audios.push(ften.audio.url);
+          }
+        }
       }
       if(!showFacts){
-	addAudio(audios);
-      }
-
-      
+	      addAudio(audios);
+      }  
       setData(countGameData);
     }
   }, [data, currentIndex, allAnimalsClicked]);
@@ -229,18 +228,25 @@ export const CountWithMeGame: React.FC = () => {
     return "Error loading the game";
   }
 
+  // Function to generate CSS class name based on group index
+  const getGroupClassName = (groupIndex: number) => {
+    return `group-${data.animalGroup}`;
+  };
+
   return (
     <>
+      {/* Main container with background image */}
       <div
         className="background-card margin-top-4"
         style={{
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-	  aspectRatio: '1159 / 724',
+	        aspectRatio: '1159 / 724',
           position: "relative",
         }}
       >
+        {/* Render text based on game or count questions */}
         <IonText>
           {getData.gameQuestions.length > 0 &&
             getData.countQuestions.length > 0 && (
@@ -287,12 +293,14 @@ export const CountWithMeGame: React.FC = () => {
             }}
             onClick={() => handleBirdClickOrder(index)}
           >
+            {/* Animal image */}
             <img
               className="image-count-with-me-style"
               src={animal.image.url}
               alt={`animal-${index}`}
               style={animalColors[animal.image.id]}
             />
+            {/* Render number overlay if clicked */}
             {clickedIndexes.includes(index) && (
               <div
                 className="number-overlay"
@@ -306,6 +314,7 @@ export const CountWithMeGame: React.FC = () => {
                   fontWeight: "700",
                 }}
               >
+                {/* Display clicked index */}
                 <span>{clickedIndexes.indexOf(index) + 1}</span>
               </div>
             )}

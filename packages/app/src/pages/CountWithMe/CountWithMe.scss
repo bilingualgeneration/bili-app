@@ -1,7 +1,6 @@
 .image-count-with-me-style {
-  width: 80%;
+  max-height: calc((100vh - 300px - 100px)/2);
   height: auto;
-  max-width: 100%;
   border-radius: 32px;
 }
 
