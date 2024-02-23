@@ -80,10 +80,10 @@ export const FactsPage: React.FC<FactsPageProps> = ({
         }}
       >
         <IonText style={{ width: "50%" }}>
-          <h1 className="text-3xl semibold color-suelo">{factText[1].text}</h1>
+          <h1 className="text-3xl semibold color-suelo">{ftes.text}</h1>
           {!isImmersive && (
             <p className="text-2xl color-english margin-top-2">
-              {factText[0].text}
+              {ften.text}
             </p>
           )}
         </IonText>
