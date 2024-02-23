@@ -86,7 +86,7 @@ export const CountWithMeGame: React.FC = () => {
   const prevState = useRef<string>('');
   
   useEffect(() => {
-    setCurrentIndex(0);
+    setCurrentIndex(5);
   }, [data]);
 
   const goToNextAnimalGroup = () => {
@@ -278,8 +278,9 @@ export const CountWithMeGame: React.FC = () => {
             key={index}
             style={{
               position: "absolute",
-	      width: '25%',
-	      height: 'auto',
+              width: '25%',
+              maxWidth: '100%',
+              height: 'auto',
               bottom: `${animal.y_percent || index * 5}%`,
               left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
