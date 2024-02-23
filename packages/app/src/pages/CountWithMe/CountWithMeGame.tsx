@@ -167,7 +167,7 @@ export const CountWithMeGame: React.FC = () => {
 	if(!isImmersive){
 	  audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
 	}
-	addAudio(audios);
+	//addAudio(audios);
       }
     }
 
