@@ -37,6 +37,7 @@ export const CountWithMeGame: React.FC = () => {
     gameBackground: any;
     factBackground: any;
     factText: any[];
+    voice: string;
   }>({
     animalImages: [],
     gameQuestions: [],
@@ -44,6 +45,7 @@ export const CountWithMeGame: React.FC = () => {
     gameBackground: any,
     factBackground: any,
     factText: [],
+    voice: ''
   });
 
   //audio files
