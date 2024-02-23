@@ -332,15 +332,17 @@ const Router: React.FC = () => {
             )}
           />
 
-          {/* <Route
+	  <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
-            <UnauthedLayout>
-              <Stories id={props.match.params.uuid} />
-            </UnauthedLayout>
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+              <Stories />
+                </HeaderFooter>
+              </AuthedLayout>
           )}
-        /> */}
+        />
 
           <Route
             exact

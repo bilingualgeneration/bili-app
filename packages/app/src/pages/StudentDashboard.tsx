@@ -27,6 +27,8 @@ import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
 import AmiguesCover from "@/assets/img/amigues_cover.png";
+import CatrinaCover from '@/assets/img/catrina.png';
+import GustaCover from '@/assets/img/gusta.png';
 import "./StudentDashboard.scss";
 
 interface WaveIcon {
@@ -78,6 +80,13 @@ const WaveIcon: FC<WaveIcon> = ({
 const wellnessCards = [
   {
     category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: true,
+  },
+  {
+    category: "wellness",
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
@@ -101,13 +110,6 @@ const wellnessCards = [
     category: "wellness",
     title: "Mantras musicales",
     titleEn: "Musical mantras",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: true,
-  },
-  {
-    category: "wellness",
-    title: "Pausa de yoga",
-    titleEn: "Yoga break",
     cover: "/assets/img/mountain_image.png",
     isLocked: true,
   },
@@ -179,14 +181,7 @@ const communityCards = [
     titleEn: "I Spy",
     cover: "/assets/img/flowers_image.png",
     isLocked: true,
-  },
-  {
-    category: "community",
-    title: "Veo Veo",
-    titleEn: "I Spy",
-    cover: "/assets/img/flowers_image.png",
-    isLocked: true,
-  },
+  }
 ];
 
 export const StudentDashboard: FC = () => {
@@ -208,22 +203,25 @@ export const StudentDashboard: FC = () => {
       category: "stories",
       title: "Cara de Catrina",
       titleEn: "Catrina for a Day",
-      cover: "/assets/img/dance_image.png",
-      isLocked: true,
+      cover: CatrinaCover,
+      link: "/stories/791c76d0-4835-4fcc-8c75-44a17c606be4",
+      isLocked: false
     },
     {
       category: "stories",
-      title: "Soy de...",
-      titleEn: "I'm From...",
-      cover: "/assets/img/band_image.png",
-      isLocked: true,
+      title: "¿Qué es lo que te gusta de ti?",
+      titleEn: "What do you like about yourself?",
+      cover: GustaCover,
+      link: "/stories/ea4e21a7-ae7c-4ec7-9112-23e19e7a0932",
+      isLocked: false,
     },
     {
       category: "stories",
       title: "El esqueleto travieso",
       titleEn: "The Mischievous Skeleton",
-      cover: "/assets/img/mountain_image.png",
-      isLocked: true,
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg",
+      link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
+      isLocked: false,
     },
   ];
 

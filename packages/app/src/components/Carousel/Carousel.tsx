@@ -28,6 +28,8 @@ export const Carousel: React.FC<
     slidesToShow?: number;
   }>
 > = ({ children, height, slidesToShow = 3 }) => {
+
+  /*
   return (
     <div className="carousel-container" style={{ height }}>
       <Slider
@@ -44,4 +46,8 @@ export const Carousel: React.FC<
       </Slider>
     </div>
   );
+  */
+  return <div className='c'>
+    {children}
+  </div>;
 };

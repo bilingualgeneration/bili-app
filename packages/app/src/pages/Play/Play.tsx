@@ -107,13 +107,9 @@ export const Play: FC = () => {
   return (
     <div id="playPage">
       <PlayHeader />
-      <div id="playCardWrapper">
-        <Carousel height={440} slidesToShow={1}>
           <StoryFactoryCard />
           <IntruderCard />
           <CountCard />
-        </Carousel>
-      </div>
     </div>
   );
 };

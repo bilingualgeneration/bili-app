@@ -32,7 +32,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
   useEffect(() => {
     if (audios.length > 0) {
       audios[0].onended = () => {
-        if (audios.length === 1) {
+        if (audios.length === 1 && callback) {
           // last one played
           callback();
         }
@@ -40,7 +40,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
       };
       audios[0].play();
     }
-  }, [audios]);
+  }, [audios, callback]);
   const addAudio = (inputAudios: any[]) => {
     // silence existing audio
     // todo: probably not working
