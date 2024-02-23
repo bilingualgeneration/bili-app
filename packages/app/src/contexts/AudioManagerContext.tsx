@@ -40,7 +40,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
       };
       audios[0].play();
     }
-  }, [audios]);
+  }, [audios, callback]);
   const addAudio = (inputAudios: any[]) => {
     // silence existing audio
     // todo: probably not working
