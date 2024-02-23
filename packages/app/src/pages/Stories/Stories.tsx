@@ -86,9 +86,9 @@ export const StoryLoader = () => {
         <TitleCard data={data} />
       )}
       {pageNumber > 0 &&
-        pageNumber <= filteredPages.length && ( // todo: less or equal
-          <StoryPage />
-        )}
+       pageNumber <= filteredPages.length && ( // todo: less or equal
+					       <StoryPage />
+      )}
       <PageCounter />
     </div>
   );
@@ -151,7 +151,7 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
         </IonCol>
         <IonCol size="auto">
           <IonText>
-            <h2 className="text-sm semibold color-suelo">{text.es}</h2>
+            <h2 style={{marginTop: 0}} className="text-sm semibold color-suelo">{text.es}</h2>
             <p className="text-xs color-english">{value}</p>
           </IonText>
         </IonCol>
@@ -168,12 +168,8 @@ const TitleCard = ({ data }: any) => {
       <IonCard
         className="sf-card drop-shadow"
         style={{
-          backgroundImage: `url(${data.cover.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "bottom center",
           display: "block",
           width: 740,
-          height: 740,
           position: "relative",
         }}
       >
@@ -232,6 +228,7 @@ const TitleCard = ({ data }: any) => {
               </IonCol>
             </IonRow>
           </IonGrid>
+	  <img src={data.cover.url} style={{ width: '100%', marginTop: '2rem'}} />
         </IonCardContent>
         <div
           className="ion-text-center"
@@ -277,62 +274,67 @@ const StoryPage: React.FC<any> = () => {
     <>
       <div className="content-wrapper margin-top-1">
         <IonGrid>
-          <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
-            <IonCol size="auto" style={{ marginRight: "2rem" }}>
-              <IonImg src={backward} onClick={pageBackward} />
+          <IonRow style={{ alignItems: "start", justifyContent: "center" }}>
+            <IonCol size="auto" style={{ marginRight: "2rem", marginTop: "20vh" }}>
+              <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
             </IonCol>
             <IonCol size="auto">
               <IonCard
                 className="sf-card drop-shadow"
                 style={{
-                  backgroundImage: `url(${page.image.url})`,
-                  backgroundSize: "100% auto",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "bottom center",
+		  width: 740,
                   display: "block",
-                  width: 740,
-                  height: 740,
                   position: "relative",
                 }}
               >
-                <IonCardContent>
+                <IonCardContent className='ion-text-center'>
                   <IonText className="ion-text-center">
-                    <h1 className="text-4xl semibold color-suelo">
+                    <h1 className="text-3xl semibold color-suelo">
                       {isInclusive ? texts["es-inc"].text : texts.es.text}
                     </h1>
                     {!isImmersive && (
                       <p className="text-2xl color-english">{texts.en.text}</p>
                     )}
                   </IonText>
+		  <div style={{position: 'relative'}}>
+		    <div
+                      className="volume-button-background"
+		      onClick={() => {
+			let audios = [];
+			if(isInclusive){
+			  if(texts['es-inc'].audio){
+			    audios.push(texts['es-inc'].audio.url);
+			  }
+			}else{
+			  if(texts['es'].audio){
+			    audios.push(texts['es'].audio.url);
+			  }		
+			}
+			if(!isImmersive){
+			  if(texts['en'].audio){
+			    audios.push(texts['en'].audio.url);
+			  }
+			}
+			addAudio(audios);
+		      }}
+		    >
+		      <img className="volume-icon" src={volumeButton} />
+		    </div>
+		    <img style={{margin: 'auto', marginTop: '2rem'}} src={page.image.url} />
+		  </div>
                 </IonCardContent>
-				  <IonButton
-                    className="volume-button-background"
-		    onClick={() => {
-		      let audios = [];
-		      if(isInclusive){
-			if(texts['es-inc'].audio){
-			  audios.push(texts['es-inc'].audio.url);
-			}
-		      }else{
-			if(texts['es'].audio){
-			  audios.push(texts['es'].audio.url);
-			}		
-		      }
-		      if(!isImmersive){
-			if(texts['en'].audio){
-			  audios.push(texts['en'].audio.url);
-			}
-		      }
-		      addAudio(audios);
-		    }}
-		  >
-		    <img className="volume-icon" src={volumeButton} />
-		  </IonButton>
 
               </IonCard>
             </IonCol>
-            <IonCol size="auto" style={{ marginLeft: "2rem" }}>
-              <IonImg src={forward} onClick={pageForward} />
+            <IonCol size="auto" style={{ marginLeft: "2rem", marginTop: "20vh" }}>
+	      <IonImg
+		src={forward}
+		onClick={pageForward}
+		style={{
+		  cursor: pageNumber === filteredPages.length ? 'default' : 'pointer',
+		  opacity: pageNumber === filteredPages.length ? 0 : 1
+		}}
+	      />
             </IonCol>
           </IonRow>
         </IonGrid>

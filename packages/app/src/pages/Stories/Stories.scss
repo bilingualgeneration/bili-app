@@ -42,14 +42,15 @@
   }
 }
 
-ion-button.volume-button-background {
-  --background: var(--Flamenco-High, #ffaedc);
-  --border-radius: 2rem !important;
+.volume-button-background {
+  background-color: var(--Flamenco-High, #ffaedc);
+  border-radius: 2rem !important;
+  cursor: pointer;
   width: 6.25rem;
   height: 6.25rem;
   position: absolute;
-  left: 50px;
-  bottom: 50px;
+  left: 0px;
+  top: 0px;
   @media screen and (max-width: 768px) {
     width: 5rem;
     height: 5rem;
