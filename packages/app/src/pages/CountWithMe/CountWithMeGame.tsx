@@ -90,7 +90,7 @@ export const CountWithMeGame: React.FC = () => {
   const prevState = useRef<string>('');
 
   useEffect(() => {
-    setCurrentIndex(5);
+    setCurrentIndex(10);
   }, [data]);
 
   const goToNextAnimalGroup = () => {
@@ -113,7 +113,7 @@ export const CountWithMeGame: React.FC = () => {
         gameBackground: animalGroup.game_background_image,
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
-	voice: animalGroup.counting_voice
+	      voice: animalGroup.counting_voice
       };
       // console.log(animalGroup);
 
@@ -246,10 +246,8 @@ export const CountWithMeGame: React.FC = () => {
   const gftes = getData.gameQuestions.filter((f: any) => f.language === 'es')[0];
   const gftesinc = getData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
 
-  // Function to generate CSS class name based on group index
-  const getGroupClassName = (groupIndex: number) => {
-    return `group-${data.animalGroup}`;
-  };
+  // generate CSS class name based on group index
+  const animalGroupClass = `group-${currentIndex}`;
 
   return (
     <>
@@ -300,11 +298,12 @@ export const CountWithMeGame: React.FC = () => {
         {getData.animalImages.map((animal, index) => (
           <div
             key={index}
+            className={`animal ${animalGroupClass}`}
             style={{
               position: "absolute",
-              width: '25%',
-              maxWidth: '100%',
-              height: 'auto',
+              // width: '25%',
+              // maxWidth: '100%',
+              // height: 'auto',
               bottom: `${animal.y_percent || index * 5}%`,
               left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
@@ -313,7 +312,7 @@ export const CountWithMeGame: React.FC = () => {
           >
             {/* Animal image */}
             <img
-              className="image-count-with-me-style"
+              // className="image-count-with-me-style"
               src={animal.image.url}
               alt={`animal-${index}`}
               style={animalColors[animal.image.id]}

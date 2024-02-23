@@ -1,7 +1,7 @@
 .image-count-with-me-style {
-  max-height: calc((100vh - 300px - 100px)/2);
+  // max-height: calc((100vh - 300px - 100px)/2);
   height: auto;
-  border-radius: 32px;
+  // border-radius: 32px;
 }
 
 .number-overlay span {
@@ -10,4 +10,50 @@
     3.87px -3.87px 5px #ffffff,
     -3.87px 3.87px 5px #ffffff,
     3.87px 3.87px 5px #ffffff;
+}
+
+.group-0 {
+  width: 30%
+}
+
+.group-1 {
+  width: 27%;
+}
+
+.group-2 {
+  max-width: 18%;
+}
+
+.group-3 {
+  width: 25%;
+}
+
+.group-4 {
+  max-width: 18%;
+  // max-height: calc((100vh - 300px - 100px)/2);
+}
+
+.group-5 {
+  max-width: 12%;
+}
+
+.group-6 {
+  max-width: 14%;
+}
+
+.group-7 {
+  max-width: 40%;
+}
+
+.group-8 {
+  max-width: 10%;
+}
+
+.group-9 {
+  max-width: 20%;
+  // max-height: calc((100vh - 300px - 100px)/2);
+}
+
+.group-10 {
+  max-width: 13%;
 }
