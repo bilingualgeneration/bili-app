@@ -1,19 +1,20 @@
 #communityCardWrapper {
   display: flex;
   justify-content: space-around;
+  align-items: stretch;
 }
 
 .community-card {
-  width: 303px;
-  height: 529px;
-  background-color: var(--Cielo-Cielo);
-  padding: 2rem;
-  border-radius: 2rem;
-  position: relative;
-  img {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
+    aspect-ratio: 1/1;
+    width: 30%;
+    background-color: var(--Cielo-Cielo);
+    padding: 2rem;
+    border-radius: 2rem;
+    img {
+	height: 250px;
+	width: auto;
+	display: block;
+	margin: auto;
+	margin-bottom: 3rem;
+    }
 }

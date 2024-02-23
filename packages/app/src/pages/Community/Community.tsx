@@ -1,5 +1,9 @@
 import { FC } from "react";
-import { IonCard, IonCardContent, IonText } from "@ionic/react";
+import {
+  IonCard,
+  IonCardContent,
+  IonText,
+} from "@ionic/react";
 
 import { useProfile } from "@/contexts/ProfileContext";
 import { useIntl } from "react-intl";
@@ -16,19 +20,19 @@ import "./Community.scss";
 const Card: FC<any> = ({ image, link, translatedTitle, title }) => {
   const { isImmersive } = useProfile();
   return (
-    <Link to={link} className="no-text-decoration">
       <div className="community-card">
-        <IonText className="ion-text-center">
-          <h2 style={{ color: "#133441" }}>{translatedTitle}</h2>
-          {!isImmersive && (
-            <h3 className="text-xl" style={{ color: "#1c1c17" }}>
+	<Link to={link} className="no-text-decoration">
+          <img src={image} />
+          <IonText className="ion-text-center">
+            <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
+            {!isImmersive && (
+              <h3 className="text-2xl color-cielo">
               {title}
-            </h3>
-          )}
-        </IonText>
-        <img src={image} />
+              </h3>
+            )}
+          </IonText>
+	</Link>
       </div>
-    </Link>
   );
 };
 

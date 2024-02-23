@@ -16,7 +16,7 @@ const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
   }, []);
   if (status === "loading" || userStatus === "loading") {
     // unsure what the sign in status is
-    return <>loading</>;
+    return <></>;
   }
   if (signInCheckResult.signedIn === false) {
     // not logged in
