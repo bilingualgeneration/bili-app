@@ -306,7 +306,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   return (
     <>
-      <div id="">
+      <div id="text-container">
         <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText
             className=""
