@@ -29,7 +29,7 @@ export const CountWithMeGame: React.FC = () => {
   //Firestore operations
   const ref = doc(firestore, "count-with-me-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
-
+  
   const [getData, setData] = useState<{
     animalImages: any[];
     gameQuestions: any[];
@@ -86,7 +86,7 @@ export const CountWithMeGame: React.FC = () => {
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
   const prevState = useRef<string>('');
-  
+
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
@@ -104,7 +104,6 @@ export const CountWithMeGame: React.FC = () => {
   useEffect(() => {
     if (data !== undefined) {
       const animalGroup = data.groups[currentIndex];
-
       const countGameData = {
         animalImages: animalGroup.animals,
         gameQuestions: animalGroup.game_text,
@@ -112,6 +111,7 @@ export const CountWithMeGame: React.FC = () => {
         gameBackground: animalGroup.game_background_image,
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
+	voice: animalGroup.counting_voice
       };
 
       let audios = [];
@@ -160,13 +160,21 @@ export const CountWithMeGame: React.FC = () => {
         setAllAnimalsClicked(true);
         //switches text from game question to count questions
       }
+      if(clickedIndexes.length + 1 !== getData.animalImages.length){
+	let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
+	if(!isImmersive){
+	  audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
+	}
+	addAudio(audios);
+      }
     }
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
-        audio_incorrect.play(); //plays audio for incorrect choice
+	addAudio([incorrect_card_audio]);
+        //audio_incorrect.play(); //plays audio for incorrect choice
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: {
@@ -183,7 +191,8 @@ export const CountWithMeGame: React.FC = () => {
         }, 1000);
       } else {
         //logic when the correct card is choosen
-        audio_correct.play(); //plays audio for correct choice
+        //audio_correct.play(); //plays audio for correct choice
+	addAudio([correct_card_audio]);
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: correctStyle,
