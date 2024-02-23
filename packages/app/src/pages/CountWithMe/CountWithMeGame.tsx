@@ -23,7 +23,9 @@ export const CountWithMeGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
-
+  useEffect(() => {
+    return clearAudio;
+  }, []);
   //Firestore operations
   const ref = doc(firestore, "count-with-me-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
@@ -79,21 +81,21 @@ export const CountWithMeGame: React.FC = () => {
   const [animalColors, setAnimalColors] = useState<{ [key: string]: any }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showNumber, setSHowNumber] = useState(false);
+  const [showNumber, setShowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
   const prevState = useRef<string>('');
   
   useEffect(() => {
-    setCurrentIndex(0);
+    setCurrentIndex(7);
   }, [data]);
 
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array
-    if (currentIndex >= data.groups.length - 1) {
-      //setCurrentIndex(0); // Reset to the first element
-      history.replace('/student-dashboard');
+    if (currentIndex >= 7) {
+      setCurrentIndex(0); // Reset to the first element
+      //history.replace('/student-dashboard');
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
@@ -112,7 +114,6 @@ export const CountWithMeGame: React.FC = () => {
         factText: animalGroup.fact_text,
       };
 
-      console.log(countGameData);
       let audios = [];
       if(allAnimalsClicked){
 	const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
@@ -228,6 +229,12 @@ export const CountWithMeGame: React.FC = () => {
   if (status === "error") {
     return "Error loading the game";
   }
+  const cften = getData.countQuestions.filter((f: any) => f.language === 'en')[0];
+  const cftes = getData.countQuestions.filter((f: any) => f.language === 'es')[0];
+  const cftesinc = getData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+  const gften = getData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+  const gftes = getData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+  const gftesinc = getData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
 
   return (
     <>
@@ -247,23 +254,23 @@ export const CountWithMeGame: React.FC = () => {
               <>
                 {allAnimalsClicked ? (
                   <>
-                    <h1 className="text-5xl color-suelo">
-                      {getData.countQuestions[1].text}
+                    <h1 className="text-4xl color-suelo">
+                      {cftes.text}
                     </h1>
                     {!isImmersive && (
                       <p className="text-3xl color-english">
-                        {getData.countQuestions[0].text}
+                        {cften.text}
                       </p>
                     )}
                   </>
                 ) : (
                   <>
-                    <h1 className="text-5xl color-suelo">
-                      {getData.gameQuestions[1].text}
+                    <h1 className="text-4xl color-suelo">
+                      {gftes.text}
                     </h1>
                     {!isImmersive && (
                       <p className="text-3xl color-english">
-                        {getData.gameQuestions[0].text}
+                        {gften.text}
                       </p>
                     )}
                   </>
