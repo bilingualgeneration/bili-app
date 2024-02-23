@@ -272,6 +272,39 @@ export const Overview: React.FC = ({}) => {
         },
       ],
     },
+    {
+      backgroundImage: settingsCardDesign2,
+      backgroundColor: "#22BEB9",
+      title: intl.formatMessage({
+        id: "settings.overview.inclusiveSpanishTitle",
+        defaultMessage: "Inclusive Spanish",
+        description: "Explore card #2 title",
+      }),
+      subtitle: intl.formatMessage({
+        id: "settings.overview.InclusiveSpanishContent",
+        defaultMessage:
+          "Learn about what Inclusive Spanish is and why it exists.",
+        description: "Explore card #2 content",
+      }),
+      tags: [
+        {
+          color: "#D3EAE8",
+          text: intl.formatMessage({
+            id: "tags.social_justice",
+            defaultMessage: "Social Justice",
+            description: "Content tag for social justice",
+          }),
+        },
+        {
+          color: "#F1D100",
+          text: intl.formatMessage({
+            id: "tag.resources",
+            defaultMessage: "Resources",
+            description: "Content tag for resources",
+          }),
+        },
+      ],
+    },
   ];
 
   return (
