@@ -1,5 +1,5 @@
 //game logic AM
-import React, { FC, useEffect, useState } from "react";
+import React, { useRef, FC, useEffect, useState } from "react";
 //import {CountFacts} from './CountFacts';
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
@@ -12,18 +12,24 @@ import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
+import {useHistory} from 'react-router-dom';
 import "./CountWithMe.scss";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 
 export const CountWithMeGame: React.FC = () => {
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
+  const history = useHistory();
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
-
+  useEffect(() => {
+    return clearAudio;
+  }, []);
   //Firestore operations
   const ref = doc(firestore, "count-with-me-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
-
+  
   const [getData, setData] = useState<{
     animalImages: any[];
     gameQuestions: any[];
@@ -31,6 +37,7 @@ export const CountWithMeGame: React.FC = () => {
     gameBackground: any;
     factBackground: any;
     factText: any[];
+    voice: string;
   }>({
     animalImages: [],
     gameQuestions: [],
@@ -38,6 +45,7 @@ export const CountWithMeGame: React.FC = () => {
     gameBackground: any,
     factBackground: any,
     factText: [],
+    voice: ''
   });
 
   //audio files
@@ -75,10 +83,11 @@ export const CountWithMeGame: React.FC = () => {
   const [animalColors, setAnimalColors] = useState<{ [key: string]: any }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showNumber, setSHowNumber] = useState(false);
+  const [showNumber, setShowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
+  const prevState = useRef<string>('');
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -86,8 +95,9 @@ export const CountWithMeGame: React.FC = () => {
 
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array
-    if (currentIndex >= data.groups.length - 1) {
+    if (currentIndex >= 7) {
       setCurrentIndex(0); // Reset to the first element
+      //history.replace('/student-dashboard');
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
@@ -96,7 +106,6 @@ export const CountWithMeGame: React.FC = () => {
   useEffect(() => {
     if (data !== undefined) {
       const animalGroup = data.groups[currentIndex];
-
       const countGameData = {
         animalImages: animalGroup.animals,
         gameQuestions: animalGroup.game_text,
@@ -104,11 +113,39 @@ export const CountWithMeGame: React.FC = () => {
         gameBackground: animalGroup.game_background_image,
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
+	voice: animalGroup.counting_voice
       };
 
+      let audios = [];
+      if(allAnimalsClicked){
+	const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
+	const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
+	const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+	audios.push(ftes.audio.url);
+	if(!isImmersive){
+	  if(ften && ften.audio){
+	    audios.push(ften.audio.url);
+	  }
+	}
+      }else{
+	const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+	const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+	const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+	audios.push(ftes.audio.url);
+	if(!isImmersive){
+	  if(ften && ften.audio){
+	    audios.push(ften.audio.url);
+	  }
+	}
+      }
+      if(!showFacts){
+	addAudio(audios);
+      }
+
+      
       setData(countGameData);
     }
-  }, [data, currentIndex]);
+  }, [data, currentIndex, allAnimalsClicked]);
 
   //logic when the correct animal number is choosen
   useEffect(() => {
@@ -125,13 +162,21 @@ export const CountWithMeGame: React.FC = () => {
         setAllAnimalsClicked(true);
         //switches text from game question to count questions
       }
+      if(clickedIndexes.length + 1 !== getData.animalImages.length){
+	let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
+	if(!isImmersive){
+	  audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
+	}
+	//addAudio(audios);
+      }
     }
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
-        audio_incorrect.play(); //plays audio for incorrect choice
+	addAudio([incorrect_card_audio]);
+        //audio_incorrect.play(); //plays audio for incorrect choice
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: {
@@ -148,7 +193,8 @@ export const CountWithMeGame: React.FC = () => {
         }, 1000);
       } else {
         //logic when the correct card is choosen
-        audio_correct.play(); //plays audio for correct choice
+        //audio_correct.play(); //plays audio for correct choice
+	addAudio([correct_card_audio]);
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: correctStyle,
@@ -177,10 +223,7 @@ export const CountWithMeGame: React.FC = () => {
           setAllAnimalsClicked(false);
           setClickedIndexes([]);
           goToNextAnimalGroup();
-
-          setTimeout(() => {
-            setShowFacts(false);
-          }, 1000);
+          setShowFacts(false);
         }}
       />
     );
@@ -197,6 +240,12 @@ export const CountWithMeGame: React.FC = () => {
   if (status === "error") {
     return "Error loading the game";
   }
+  const cften = getData.countQuestions.filter((f: any) => f.language === 'en')[0];
+  const cftes = getData.countQuestions.filter((f: any) => f.language === 'es')[0];
+  const cftesinc = getData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+  const gften = getData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+  const gftes = getData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+  const gftesinc = getData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
 
   return (
     <>
@@ -206,7 +255,7 @@ export const CountWithMeGame: React.FC = () => {
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-          height: 600,
+	  aspectRatio: '1159 / 724',
           position: "relative",
         }}
       >
@@ -216,23 +265,23 @@ export const CountWithMeGame: React.FC = () => {
               <>
                 {allAnimalsClicked ? (
                   <>
-                    <h1 className="text-5xl color-suelo">
-                      {getData.countQuestions[1].text}
+                    <h1 className="text-4xl color-suelo">
+                      {cftes.text}
                     </h1>
                     {!isImmersive && (
                       <p className="text-3xl color-english">
-                        {getData.countQuestions[0].text}
+                        {cften.text}
                       </p>
                     )}
                   </>
                 ) : (
                   <>
-                    <h1 className="text-5xl color-suelo">
-                      {getData.gameQuestions[1].text}
+                    <h1 className="text-4xl color-suelo">
+                      {gftes.text}
                     </h1>
                     {!isImmersive && (
                       <p className="text-3xl color-english">
-                        {getData.gameQuestions[0].text}
+                        {gften.text}
                       </p>
                     )}
                   </>
@@ -247,9 +296,10 @@ export const CountWithMeGame: React.FC = () => {
             key={index}
             style={{
               position: "absolute",
-              transform: "scale(0.6) translateY(-230px)",
-              top: `${animal.coordinate_y}px`,
-              left: `${animal.coordinate_x}px`,
+	      width: '25%',
+	      height: 'auto',
+              bottom: `${animal.y_percent || index * 5}%`,
+              left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
             }}
             onClick={() => handleBirdClickOrder(index)}

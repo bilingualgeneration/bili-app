@@ -1,7 +1,7 @@
 .intro-card{
-    height: calc(100vh - 95px);
-    position: relative;
-    overflow: hidden;
+//    height: calc(100vh - 95px);
+//    position: relative;
+//    overflow: hidden;
 }
 
 .sf-card {
@@ -17,11 +17,12 @@
 }
 
 .bili-character {
-    position: absolute;
-    bottom: -300px;
+    position: fixed;
+    bottom: -200px;
     right: 0;
-  //top: 100px;
-  //right: -1.5rem;
-  max-width: 400px;
-  z-index: 2; /* Ensures Bili Character is on top of card */
+    //top: 100px;
+    //right: -1.5rem;
+    height: auto;
+    width: 300px;
+    z-index: 2; /* Ensures Bili Character is on top of card */
 }

@@ -1,5 +1,14 @@
 @use "sass:math";
 
+.game_image {
+//    width: 100px;
+//    height: 100px;
+}
+
+.input-bottom.sc-ion-input-ios{
+    border-top: none;
+}
+
 .drop-shadow {
   box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
 }

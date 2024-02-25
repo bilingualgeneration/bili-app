@@ -5,9 +5,9 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
+import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.wav";
+import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.wav";
+import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.wav";
 
 import "../StoryFactory/StoryFactory.scss";
 
@@ -85,14 +85,18 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
             alt="background"
           />
           <div>
+	    <IonText>
+	    <h1 className='text-4xl color-suelo semibold'>
             <FormattedMessage
               id="countWithMe.complete"
               defaultMessage="Activity Completed"
               description="Information that the activity is completed"
             />
+	    </h1>
             {!isImmersive && (
-              <p style={{ textAlign: "center" }}>Activity Completed</p>
+              <p className='text-2xl color-english' style={{ textAlign: "center" }}>Activity Completed</p>
             )}
+	    </IonText>
           </div>
 
           <div

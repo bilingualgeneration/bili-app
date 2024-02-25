@@ -18,9 +18,12 @@ import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
 import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
 import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
-import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
-import { IntruderGame } from "@/pages/Intruder/IntruderGame";
-import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+import {
+  IntruderSelect,
+  IntruderIntro,
+  IntruderGame,
+  IntruderGameLoader
+} from '@/pages/Intruder';
 import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
@@ -32,20 +35,21 @@ import {
   Profile,
 } from "@/pages/Settings";
 import { Debug } from "@/pages/Debug";
-import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { Play } from "@/pages/Play";
 import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
 import { StoriesDragGameLoader } from "./pages/Stories";
-//import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 //import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
@@ -57,13 +61,13 @@ import { TellMeAboutGame } from "./pages/TellMeAbout/TellMeAboutGame";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
-import { WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
+import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
-import { CommunityHeader } from "@/components/CommunityHeader";
-import { PlayHeader } from "@/components/PlayHeader";
+//import { CommunityHeader } from "@/components/CommunityHeader";
+//import { PlayHeader } from "@/components/PlayHeader";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -91,14 +95,14 @@ import "@/theme/text-classes.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
+import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
 
 setupIonicReact();
 
 const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
-  const { locale } = useLanguage();
+  const intl = useIntl();
   return (
-    <I18nWrapper locale={locale}>
       <IonReactRouter>
         <Switch>
           <Route
@@ -175,23 +179,26 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMeIntro />
+		  <CountWithMeIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
+
+	  
           <Route
             exact
             path="/count-with-me-game/select"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMeSelect />
+		  <CountWithMeSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
 
+	  
           <Route
             exact
             path="/count-with-me-game/play/:pack_id"
@@ -327,17 +334,17 @@ const Router: React.FC = () => {
             )}
           />
 
-          <Route
-            exact
-            path="/stories/:uuid"
-            render={(props) => (
+	  <Route
+          exact
+          path="/stories/:uuid"
+          render={(props) => (
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
-                  <Stories />
+              <Stories />
                 </HeaderFooter>
               </AuthedLayout>
-            )}
-          />
+          )}
+        />
 
           <Route
             exact
@@ -353,11 +360,23 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/stories/game"
+            path="/stories/game/:pack_id"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesPictureGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/stories/game2/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <StoriesSyllableGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -381,18 +400,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <PackSelect
-                    headerComponent={<PlayHeader />}
-                    module="story-factory-game"
-                    packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.storyFactory"
-                        defaultMessage="Story Factory"
-                      />
-                    }
-                    englishTitle="Story Factory"
-                  />
+		  <StoryFactorySelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -451,7 +459,7 @@ const Router: React.FC = () => {
             path="/would-do-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#FBF2E2">
+                <HeaderFooter background="#F7FAF9">
                   <WouldDoGame />
                 </HeaderFooter>
               </AuthedLayout>
@@ -487,18 +495,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <PackSelect
-                    headerComponent={<PlayHeader />}
-                    module="intruder-game"
-                    packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.intruder"
-                        defaultMessage="The Intruder"
-                      />
-                    }
-                    englishTitle="The Intruder"
-                  />
+		  <IntruderSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -543,30 +540,19 @@ const Router: React.FC = () => {
             path="/would-do-game/select"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#fbf2e2">
-                  <PackSelect
-                    headerComponent={<CommunityHeader />}
-                    module="would-do-game"
-                    packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
-                    translatedTitle={
-                      <FormattedMessage
-                        id="common.wouldDo"
-                        defaultMessage="What would you do?"
-                      />
-                    }
-                    englishTitle="What would you do?"
-                  />
+                <HeaderFooter background="#f7faf9">
+		  <WouldDoSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
         </Switch>
       </IonReactRouter>
-    </I18nWrapper>
   );
 };
 
 const App: React.FC = () => {
+  const { locale } = useLanguage();
   useEffect(() => {
     // set default language to device if not already set
     (async () => {
@@ -586,7 +572,9 @@ const App: React.FC = () => {
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
           <AudioManagerProvider>
-            <Router />
+	    <I18nWrapper locale={locale}>
+              <Router />
+	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>
