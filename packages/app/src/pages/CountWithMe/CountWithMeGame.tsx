@@ -90,7 +90,7 @@ export const CountWithMeGame: React.FC = () => {
   const prevState = useRef<string>('');
 
   useEffect(() => {
-    setCurrentIndex(10);
+    setCurrentIndex(12);
   }, [data]);
 
   const goToNextAnimalGroup = () => {
