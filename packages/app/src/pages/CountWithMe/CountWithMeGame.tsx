@@ -113,36 +113,35 @@ export const CountWithMeGame: React.FC = () => {
         gameBackground: animalGroup.game_background_image,
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
-	voice: animalGroup.counting_voice
+	      voice: animalGroup.counting_voice
       };
+      // console.log(animalGroup);
 
       let audios = [];
       if(allAnimalsClicked){
-	const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
-	const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
-	const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
-	audios.push(ftes.audio.url);
-	if(!isImmersive){
-	  if(ften && ften.audio){
-	    audios.push(ften.audio.url);
-	  }
-	}
+        const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
+        const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
+        const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+        audios.push(ftes.audio.url);
+        if(!isImmersive){
+          if(ften && ften.audio){
+            audios.push(ften.audio.url);
+          }
+        }
       }else{
-	const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-	const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-	const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
-	audios.push(ftes.audio.url);
-	if(!isImmersive){
-	  if(ften && ften.audio){
-	    audios.push(ften.audio.url);
-	  }
-	}
+        const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+        const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+        const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+        audios.push(ftes.audio.url);
+        if(!isImmersive){
+          if(ften && ften.audio){
+            audios.push(ften.audio.url);
+          }
+        }
       }
       if(!showFacts){
-	addAudio(audios);
-      }
-
-      
+	      addAudio(audios);
+      }  
       setData(countGameData);
     }
   }, [data, currentIndex, allAnimalsClicked]);
@@ -247,18 +246,23 @@ export const CountWithMeGame: React.FC = () => {
   const gftes = getData.gameQuestions.filter((f: any) => f.language === 'es')[0];
   const gftesinc = getData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
 
+  // generate CSS class name based on group index
+  const animalGroupClass = `group-${currentIndex}`;
+
   return (
     <>
+      {/* Main container with background image */}
       <div
         className="background-card margin-top-4"
         style={{
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-	  aspectRatio: '1159 / 724',
+	        aspectRatio: '1159 / 724',
           position: "relative",
         }}
       >
+        {/* Render text based on game or count questions */}
         <IonText>
           {getData.gameQuestions.length > 0 &&
             getData.countQuestions.length > 0 && (
@@ -294,22 +298,26 @@ export const CountWithMeGame: React.FC = () => {
         {getData.animalImages.map((animal, index) => (
           <div
             key={index}
+            className={`animal ${animalGroupClass}`}
             style={{
               position: "absolute",
-	      width: '25%',
-	      height: 'auto',
+              // width: '25%',
+              // maxWidth: '100%',
+              // height: 'auto',
               bottom: `${animal.y_percent || index * 5}%`,
               left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
             }}
             onClick={() => handleBirdClickOrder(index)}
           >
+            {/* Animal image */}
             <img
-              className="image-count-with-me-style"
+              // className="image-count-with-me-style"
               src={animal.image.url}
               alt={`animal-${index}`}
               style={animalColors[animal.image.id]}
             />
+            {/* Render number overlay if clicked */}
             {clickedIndexes.includes(index) && (
               <div
                 className="number-overlay"
@@ -323,6 +331,7 @@ export const CountWithMeGame: React.FC = () => {
                   fontWeight: "700",
                 }}
               >
+                {/* Display clicked index */}
                 <span>{clickedIndexes.indexOf(index) + 1}</span>
               </div>
             )}

@@ -1,4 +1,6 @@
 .explore-card {
+  margin: 4px;
+  padding: 20px;
   display: flex;
   width: 332px;
   height: 340px;

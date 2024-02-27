@@ -72,14 +72,14 @@ const AdultCheckModal: FC = () => {
           }}
         >
           <IonText class="ion-text-center">
-            <p>
+            <p className="text-2xl semibold">
               <FormattedMessage
                 id="settings.adult_check.prompt"
                 defaultMessage="Please solve this equation before continuing"
                 description="Prompt for user to solve an equation before proceeding"
               />
             </p>
-            <p>
+            <p className="text-xl">
               {equation[0]} + {equation[1]} = ?
             </p>
           </IonText>
@@ -146,10 +146,10 @@ export const SettingsLayout: FC<
           <div className="page-wrapper" style={{ background }}>
             <IonGrid className="ion-no-padding inner-scroll">
               <IonRow>
-                <IonCol size="auto" style={{ minHeight: "100vh" }}>
+                <IonCol size="2.75" style={{ minHeight: "100vh" }}>
                   <SideMenu />
                 </IonCol>
-                <IonCol>
+                <IonCol size="9.25">
                   <SettingsHeader></SettingsHeader>
                   {children}
                 </IonCol>
