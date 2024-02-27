@@ -255,7 +255,7 @@ export const StudentDashboard: FC = () => {
   ];
 
   return (
-    <div id="student-landing-page">
+    <div id="student-landing-page" style={{paddingBottom: "33vh"}}>
       <div
         className="cards-title background-pattern"
         style={{
