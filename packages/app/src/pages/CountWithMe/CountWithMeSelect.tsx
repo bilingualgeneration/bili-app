@@ -1,13 +1,37 @@
 import { PackSelect } from "@/components/PackSelect";
-import { PlayHeader } from "@/components/PlayHeader";
 
 
 export const CountWithMeSelect: React.FC = () => {
-  return <PackSelect
-           headerComponent={<PlayHeader />}
-           module="count-with-me-game"
-           packId="5a8a152d-8d2e-4741-bf8f-d8024d4e2d7b"
-           translatedTitle='Cuenta Conmigo'
-           englishTitle="Count With Me"
-  />;
+  const placeholderCards = [
+    {
+      title: 'Instruments',
+      titleEn: 'Instrumentos',
+      category: 'play',
+      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/thumbnail_Image_Container3_49e525e22a.png',
+      isLocked: true
+    },
+    {
+      title: 'Sports',
+      titleEn: 'Deportes',
+      category: 'play',
+      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/stories_friends_cover_e66b64561c.svg',
+      isLocked: true
+    },
+    {
+      title: 'Costumes',
+      titleEn: 'Disfraces',
+      category: 'play',
+      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg',
+      isLocked: true
+    },
+  ];
+  return (
+    <PackSelect
+      module="count-with-me-game"
+      category="play"
+      translatedTitle='Cuenta Conmigo'
+      englishTitle="Count With Me"
+      placeholderCards={placeholderCards}
+    />
+  );
 }

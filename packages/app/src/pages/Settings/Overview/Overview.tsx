@@ -43,7 +43,7 @@ export const Overview: React.FC = ({}) => {
           setShouldShowTutorial(true);
           Preferences.set({
             key: "shouldShowSettingsTutorial",
-            value: false,
+            value: "false",
           });
         }
       });
@@ -309,7 +309,7 @@ export const Overview: React.FC = ({}) => {
 
   return (
     <div id="settings-profile">
-      {shouldShowTutorial && !isAdultCheckOpen && (
+      {shouldShowTutorial && !isAdultCheckOpen && false && (
         <Joyride
           locale={translations.Joyride}
           hideCloseButton
