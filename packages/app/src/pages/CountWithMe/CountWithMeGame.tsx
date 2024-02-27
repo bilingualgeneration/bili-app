@@ -12,7 +12,7 @@ import { any, string } from "zod";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 
@@ -29,7 +29,7 @@ export const CountWithMeGame: React.FC = () => {
   //Firestore operations
   const ref = doc(firestore, "count-with-me-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
-  
+
   const [getData, setData] = useState<{
     animalImages: any[];
     gameQuestions: any[];
@@ -48,10 +48,10 @@ export const CountWithMeGame: React.FC = () => {
     voice: ''
   });
 
-  //audio files
-  const audio_correct = new Audio(correct_card_audio);
-  const audio_incorrect = new Audio(incorrect_card_audio);
-  const card_flip = new Audio(card_flip_audio);
+  // //audio files
+  // const audio_correct = new Audio(correct_card_audio);
+  // const audio_incorrect = new Audio(incorrect_card_audio);
+  // const card_flip = new Audio(card_flip_audio);
 
   //styles for correct or incorrect choice
   const initialStyle = {
@@ -113,35 +113,37 @@ export const CountWithMeGame: React.FC = () => {
         gameBackground: animalGroup.game_background_image,
         factBackground: animalGroup.fact_background_image,
         factText: animalGroup.fact_text,
-	      voice: animalGroup.counting_voice
+        voice: animalGroup.counting_voice
       };
       // console.log(animalGroup);
 
       let audios = [];
-      if(allAnimalsClicked){
+      if (allAnimalsClicked) {
         const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
         const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
-        const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
+        //const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
         audios.push(ftes.audio.url);
-        if(!isImmersive){
-          if(ften && ften.audio){
+        if (!isImmersive) {
+          if (ften && ften.audio) {
             audios.push(ften.audio.url);
           }
         }
-      }else{
-        const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-        const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-        const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
-        audios.push(ftes.audio.url);
-        if(!isImmersive){
-          if(ften && ften.audio){
-            audios.push(ften.audio.url);
-          }
-        }
+        addAudio(audios);
       }
-      if(!showFacts){
-	      addAudio(audios);
-      }  
+      // }else{
+      //   const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+      //   const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+      //   //const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+      //   audios.push(ftes.audio.url);
+      //   if(!isImmersive){
+      //     if(ften && ften.audio){
+      //       audios.push(ften.audio.url);
+      //     }
+      //   }
+      // }
+      // if (!showFacts) {
+      //   addAudio(audios);
+      // }
       setData(countGameData);
     }
   }, [data, currentIndex, allAnimalsClicked]);
@@ -157,24 +159,27 @@ export const CountWithMeGame: React.FC = () => {
   const handleBirdClickOrder = (index: number) => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
+     
+      if (clickedIndexes.length + 1 !== getData.animalImages.length) {
+        let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
+        if (!isImmersive) {
+          audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
+        }
+        addAudio(audios);
+      }
+
       if (clickedIndexes.length + 1 === getData.animalImages.length) {
         setAllAnimalsClicked(true);
         //switches text from game question to count questions
       }
-      if(clickedIndexes.length + 1 !== getData.animalImages.length){
-	let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
-	if(!isImmersive){
-	  audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
-	}
-	//addAudio(audios);
-      }
+
     }
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
-	addAudio([incorrect_card_audio]);
+        addAudio([incorrect_card_audio]);
         //audio_incorrect.play(); //plays audio for incorrect choice
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
@@ -193,7 +198,7 @@ export const CountWithMeGame: React.FC = () => {
       } else {
         //logic when the correct card is choosen
         //audio_correct.play(); //plays audio for correct choice
-	addAudio([correct_card_audio]);
+        addAudio([correct_card_audio]);
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: correctStyle,
@@ -258,7 +263,7 @@ export const CountWithMeGame: React.FC = () => {
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-	        aspectRatio: '1159 / 724',
+          aspectRatio: '1159 / 724',
           position: "relative",
         }}
       >
