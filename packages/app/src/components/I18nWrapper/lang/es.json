@@ -626,7 +626,7 @@
   "settings.overview.gettingStartedContent": [
     {
       "type": 0,
-      "value": "Cuando entras en cualquier área nueva de la ciencia, casi siempre encuentras."
+      "value": "Tu guía esencial para comenzar con la aplicación de Bili."
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -842,7 +842,7 @@
   "sideMenu.overview": [
     {
       "type": 0,
-      "value": "Descripción general"
+      "value": "Visión general"
     }
   ],
   "sideMenu.preferences": [
