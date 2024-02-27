@@ -48,10 +48,6 @@ export const CountWithMeGame: React.FC = () => {
     voice: ''
   });
 
-  // //audio files
-  // const audio_correct = new Audio(correct_card_audio);
-  // const audio_incorrect = new Audio(incorrect_card_audio);
-  // const card_flip = new Audio(card_flip_audio);
 
   //styles for correct or incorrect choice
   const initialStyle = {
@@ -153,16 +149,12 @@ export const CountWithMeGame: React.FC = () => {
         }
         addAudio(audios);
       }
-
        //switches text from game question to count questions and wait until the number's audio is stopped
       if (clickedIndexes.length + 1 === getData.animalImages.length) {
         setTimeout(() => {
           setAllAnimalsClicked(true);
         }, 2000);
-        
-       
       }
-
     }
 
     //next step happens only when all images were clicked
