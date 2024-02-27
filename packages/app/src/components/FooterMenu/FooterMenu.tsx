@@ -26,7 +26,7 @@ export const FooterMenu: React.FC = ({}) => {
   const { reqdActions, setReqdActions } = useReqdActions();
   return (
     <>
-      <div style={{ position: "fixed", left: "calc(50% - 175px)", bottom: 0 }}>
+      <div style={{ position: "fixed", left: "calc(50% - 175px)", bottom: 0, zIndex: 999}}>
         <IonGrid
           fixed={true}
           style={{
