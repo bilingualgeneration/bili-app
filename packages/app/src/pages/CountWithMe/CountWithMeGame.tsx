@@ -97,7 +97,7 @@ export const CountWithMeGame: React.FC = () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= 7) {
       setCurrentIndex(0); // Reset to the first element
-      //history.replace('/student-dashboard');
+      
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
@@ -118,10 +118,9 @@ export const CountWithMeGame: React.FC = () => {
       // console.log(animalGroup);
 
       let audios = [];
-      if (allAnimalsClicked) {
+      if (allAnimalsClicked) { //audio for the count questions
         const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
         const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
-        //const ftesinc = countGameData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
         audios.push(ftes.audio.url);
         if (!isImmersive) {
           if (ften && ften.audio) {
@@ -130,20 +129,7 @@ export const CountWithMeGame: React.FC = () => {
         }
         addAudio(audios);
       }
-      // }else{
-      //   const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-      //   const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-      //   //const ftesinc = countGameData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
-      //   audios.push(ftes.audio.url);
-      //   if(!isImmersive){
-      //     if(ften && ften.audio){
-      //       audios.push(ften.audio.url);
-      //     }
-      //   }
-      // }
-      // if (!showFacts) {
-      //   addAudio(audios);
-      // }
+  
       setData(countGameData);
     }
   }, [data, currentIndex, allAnimalsClicked]);
@@ -160,7 +146,7 @@ export const CountWithMeGame: React.FC = () => {
     if (!clickedIndexes.includes(index)) {
       setClickedIndexes([...clickedIndexes, index]);
      
-      if (clickedIndexes.length + 1 !== getData.animalImages.length) {
+      if (clickedIndexes.length + 1 <= getData.animalImages.length) {
         let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
         if (!isImmersive) {
           audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
@@ -168,9 +154,13 @@ export const CountWithMeGame: React.FC = () => {
         addAudio(audios);
       }
 
+       //switches text from game question to count questions and wait until the number's audio is stopped
       if (clickedIndexes.length + 1 === getData.animalImages.length) {
-        setAllAnimalsClicked(true);
-        //switches text from game question to count questions
+        setTimeout(() => {
+          setAllAnimalsClicked(true);
+        }, 2000);
+        
+       
       }
 
     }
@@ -180,7 +170,7 @@ export const CountWithMeGame: React.FC = () => {
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
         addAudio([incorrect_card_audio]);
-        //audio_incorrect.play(); //plays audio for incorrect choice
+       //plays audio for incorrect choice
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
           [getData.animalImages[index].image.id]: {
@@ -197,7 +187,7 @@ export const CountWithMeGame: React.FC = () => {
         }, 1000);
       } else {
         //logic when the correct card is choosen
-        //audio_correct.play(); //plays audio for correct choice
+         //plays audio for correct choice
         addAudio([correct_card_audio]);
         setAnimalColors((prevColors: any) => ({
           ...prevColors,
