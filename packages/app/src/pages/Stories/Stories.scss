@@ -41,17 +41,14 @@
     background-color: #ffaaaa;
   }
 }
-
 .stories-game-image {
   margin: 7px;
   max-height: calc((100vh - 300px - 100px)/2);
 }
-
 .text-responsive h1{
   font-weight: bold;
   margin: 0 68px 0 68px;
 }
-
 #text-container {
   text-4xl {
     font-size: 40px !important; 
@@ -78,5 +75,52 @@
       line-height: 26px !important; 
       letter-spacing: normal !important; 
     }
+  }
+}
+
+.stories-volume-button-background {
+  background-color: var(--Flamenco-High, #ffaedc);
+  border-radius: 2rem !important;
+  cursor: pointer;
+  width: 6.25rem;
+  height: 6.25rem;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  @media screen and (max-width: 768px) {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 5rem;
+    height: 4rem;
+  }
+}
+
+.stories-volume-icon {
+    margin-top: 10px;
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+
+  @media screen and (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 2rem;
+    height: 2rem;
   }
 }

@@ -26,7 +26,7 @@ export const FooterMenu: React.FC = ({}) => {
   const { reqdActions, setReqdActions } = useReqdActions();
   return (
     <>
-      <div style={{ position: "fixed", left: "calc(50% - 175px)", bottom: 0 }}>
+      <div style={{ position: "fixed", left: "calc(50% - 175px)", bottom: 0, zIndex: 999}}>
         <IonGrid
           fixed={true}
           style={{
@@ -64,7 +64,7 @@ export const FooterMenu: React.FC = ({}) => {
           </IonRow>
         </IonGrid>
       </div>
-      {reqdActions.showSettingsMessage && (
+      {reqdActions.showSettingsMessage && false && (
         <Joyride
           locale={{
             close: (

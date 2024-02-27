@@ -18,9 +18,12 @@ import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
 import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
 import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
-import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
-import { IntruderGame } from "@/pages/Intruder/IntruderGame";
-import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+import {
+  IntruderSelect,
+  IntruderIntro,
+  IntruderGame,
+  IntruderGameLoader
+} from '@/pages/Intruder';
 import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
@@ -46,7 +49,7 @@ import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
 import { StoriesDragGameLoader } from "./pages/Stories";
-//import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
+import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 //import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
@@ -56,13 +59,13 @@ import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
-import { WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
+import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
-import { CommunityHeader } from "@/components/CommunityHeader";
-import { PlayHeader } from "@/components/PlayHeader";
+//import { CommunityHeader } from "@/components/CommunityHeader";
+//import { PlayHeader } from "@/components/PlayHeader";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -168,6 +171,32 @@ const Router: React.FC = () => {
             )}
           />
 
+          <Route
+            exact
+            path="/count-with-me-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  
+          <Route
+            exact
+            path="/count-with-me-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  
           <Route
             exact
             path="/count-with-me-game/play/:pack_id"
@@ -303,15 +332,17 @@ const Router: React.FC = () => {
             )}
           />
 
-          {/* <Route
+	  <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
-            <UnauthedLayout>
-              <Stories id={props.match.params.uuid} />
-            </UnauthedLayout>
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+              <Stories />
+                </HeaderFooter>
+              </AuthedLayout>
           )}
-        /> */}
+        />
 
           <Route
             exact
@@ -367,13 +398,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <PackSelect
-                    headerComponent={<PlayHeader />}
-                    module="story-factory-game"
-                    packId="55cb3673-8fb1-49cd-826a-0ddf2360025d"
-                    translatedTitle="¡Fábrica de Cuentos!"
-                    englishTitle="Story Factory"
-                  />
+		  <StoryFactorySelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -444,13 +469,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <PackSelect
-                    headerComponent={<PlayHeader />}
-                    module="intruder-game"
-                    packId="ceff6ae6-fe21-456a-9b57-29f07b5b52d5"
-                    translatedTitle='El Intruso'
-                    englishTitle="The Intruder"
-                  />
+		  <IntruderSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -496,13 +515,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <PackSelect
-                    headerComponent={<CommunityHeader />}
-                    module="would-do-game"
-                    packId="cfab339e-5ac0-4411-be0d-1ca7fb1ae920"
-                    translatedTitle='¿Qué harías?'
-                    englishTitle="What would you do?"
-                  />
+		  <WouldDoSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
