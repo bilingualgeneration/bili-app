@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import { useProfile } from "@/contexts/ProfileContext";
-import "./ComingSoon.scss";
+import "./ComingSoonCard.scss";
 
 interface ComingSoonCardProps {
     cardColor: string;

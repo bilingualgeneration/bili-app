@@ -1,0 +1,27 @@
+.content-container {
+    margin-left: 5.3%;
+    position: relative;
+}
+
+.heading-container {
+    width: 703px;
+    height: 208px;
+    margin: 0 0 4% 2.5%;
+
+    @media (max-width: 1024px) { /* iPad Mini landscape width */
+        margin: 0 0 0 4%; 
+    }
+}
+
+.bili-helmet-image {
+    position: absolute;
+    left: 800px;
+    bottom: 187px;
+    max-width: 23%;
+
+    @media (max-width: 1024px) { /* iPad Mini landscape width */
+        left: 715px;
+        bottom: 187px;
+        max-width: 23%; 
+    }
+}

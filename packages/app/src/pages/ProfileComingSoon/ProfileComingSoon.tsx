@@ -6,6 +6,8 @@ import stars from "@/assets/icons/profile_coming_soon/coming_soon_card_stars.svg
 import stickers from "@/assets/icons/profile_coming_soon/coming_soon_card_stickers.svg";
 import bili from "@/assets/icons/profile_coming_soon/coming_soon_card_bili.svg";
 import { Carousel } from "@/components/Carousel";
+import "./ProfileComingSoon.scss";
+import biliHelmet from "@/assets/icons/profile_coming_soon/bili_profile_coming_soon.svg";
 
 export const ProfileComingSoon: FC = () => {
     const { isImmersive } = useProfile();
@@ -31,7 +33,7 @@ export const ProfileComingSoon: FC = () => {
     ];
 
     return (
-      <div>
+      <>
         <PlayHeader 
             bannerColor="#FFF8F0"
             title="Mi Perfil - Próximamente" 
@@ -39,26 +41,29 @@ export const ProfileComingSoon: FC = () => {
             titleClassName="text-5xl color-suelo"
             subtitleClassName="text-3xl color-english semibold"
         />
+        <div className="content-container">   
+          <div className="heading-container">
+            <h1 className="text-6xl bold">
+              Nuevas funciones en camino
+            </h1>
+            {!isImmersive &&
+              <p className="text-4xl color-english">
+                New features on the way
+              </p>
+            }
+          </div>
 
-        <div>
-          <h1 className="text-6xl bold">
-            Nuevas funciones en camino
-          </h1>
-          {!isImmersive &&
-            <p className="text-4xl color-english">
-              New features on the way
-            </p>
-          }
+          <img src={biliHelmet} alt="Bili Character Icon" className="bili-helmet-image"/>
+
+          <Carousel height={240} slideMargin={15}>
+            {profileCards.map((card, index) => (
+              <ComingSoonCard
+                {...card}
+                key={index}
+              />
+            ))}
+          </Carousel>
         </div>
-
-        <Carousel height={300}>
-          {profileCards.map((card, index) => (
-            <ComingSoonCard
-              {...card}
-              key={index}
-            />
-          ))}
-        </Carousel>
-      </div>
+      </>
     );
 };
