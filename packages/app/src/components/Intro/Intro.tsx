@@ -101,7 +101,6 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
               <IonButton
                 onClick={() => history.push(nextPath)}
 		className='margin-top-3'
-		disabled={!audioPlayed}
                 shape="round"
 		expand='block'
                 style={{width: '50%', margin: 'auto'}}>
