@@ -34,7 +34,6 @@ interface IntroProps {
 export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isImmersive } = useProfile();
-  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
 
@@ -49,9 +48,6 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
       if (currentIndex < texts.length - 1) {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
-      } else {
-        // all audio has played
-        setAudioPlayed(true);
       }
     });
     let sounds = [];
@@ -83,17 +79,16 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
 		</h2>
 	      </>}
             </div>
-            {/* Next Button will display after the audio has played and if the current index is the last index */}
             <div
 	      className='margin-top-4'
 	      style={{position: 'relative'}}>
-              {audioPlayed && currentIndex === texts.length - 1 && (
+              {currentIndex === texts.length - 1 && (
 		<img
                   src={StoryFactoryArrow}
                   alt="indicator arrow to next button"
                   style={{
                     left: 0,
-                    top: 30,
+                    top: 12,
                     position: "absolute",
                   }}
                 />
