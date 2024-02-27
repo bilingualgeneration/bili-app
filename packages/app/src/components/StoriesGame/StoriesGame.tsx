@@ -19,9 +19,7 @@ import {
 } from "@ionic/react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-//temporary audio files, should be chaged for count-with-me files oncel uploade
-import { useHistory } from "react-router";
-import { card } from "ionicons/icons";
+import "../../pages/Stories/Stories.scss";
 
 interface PictureImage {
   url: string;
@@ -308,14 +306,15 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   return (
     <>
-      <div id="">
-        <div className="margin-top-4 margin-bottom-2">
+      <div id="text-container">
+        <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText
+            className=""
             style={{
               textAlign: "center",
             }}
           >
-            <h1 className="text-5xl color-suelo">{headerData.es.text}</h1>
+            <h1 className="text-4xl color-suelo">{headerData.es.text}</h1>
 
             {headerData.en && (
               <p className="text-3xl color-english">{headerData.en.text}</p>
@@ -323,7 +322,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           </IonText>
         </div>
         <div className="">
-          <IonGrid>
+          <IonGrid fixed={true}>
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(0, 2).map((card, index) => (
                 <IonCol
@@ -332,7 +331,10 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img style={cardColors[card.id]} src={card.image.url} />
+                  <img className="stories-game-image" style={
+                    cardColors[card.id]
+                  } 
+                    src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>
@@ -344,7 +346,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img className='game_image' style={cardColors[card.id]} src={card.image.url} />
+                  <img className="stories-game-image" style={cardColors[card.id]} src={card.image.url} />
                 </IonCol>
               ))}
             </IonRow>

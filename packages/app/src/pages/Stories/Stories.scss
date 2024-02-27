@@ -41,6 +41,42 @@
     background-color: #ffaaaa;
   }
 }
+.stories-game-image {
+  margin: 7px;
+  max-height: calc((100vh - 300px - 100px)/2);
+}
+.text-responsive h1{
+  font-weight: bold;
+  margin: 0 68px 0 68px;
+}
+#text-container {
+  text-4xl {
+    font-size: 40px !important; 
+    line-height: 48px !important; 
+    letter-spacing: -0.5px !important; 
+  }
+
+  .text-3xl {
+    font-size: 24px !important; 
+    line-height: 28px !important; 
+    letter-spacing: -0.5px !important; 
+  }
+
+  // Media query for screens with a max-width of 768px
+  @media (max-width: 1180px) {
+    .text-4xl {
+      font-size: 30px !important; 
+      line-height: 32px !important; 
+      letter-spacing: normal !important; 
+    }
+
+    .text-3xl {
+      font-size: 23px !important; 
+      line-height: 26px !important; 
+      letter-spacing: normal !important; 
+    }
+  }
+}
 
 .stories-volume-button-background {
   background-color: var(--Flamenco-High, #ffaedc);
