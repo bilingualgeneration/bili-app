@@ -33,6 +33,7 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
         {tags.map((tag, index) => (
           <IonChip
             key={index}
+            className="text-xs"
             style={{
               "--background": tag.color,
               color: tag.textColor || "#000",
@@ -44,12 +45,12 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
       </div>
       <IonText style={{ position: "absolute", bottom: 0 }}>
         <h3
-          className="explore-card-title"
+          className="text-2xl semibold"
           style={{ color: textColor, marginBottom: 8 }}
         >
           {title}
         </h3>
-        <p className="explore-card-subtitle" style={{ color: textColor }}>
+        <p className="text-sm margin-bottom-1" style={{ color: textColor }}>
           {subtitle}
         </p>
       </IonText>
