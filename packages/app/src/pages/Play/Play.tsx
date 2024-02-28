@@ -110,15 +110,16 @@ export const Play: FC = () => {
         title="Juego"
         subtitle="Play"
       />
-
-      <Carousel 
-        height={445}
-        slideMargin={10}
-      >
-        <StoryFactoryCard />
-        <IntruderCard />
-        <CountCard />
-      </Carousel>
+      <div className="carousel-container">
+        <Carousel 
+          height={445}
+          slideMargin={10}
+        >
+          <StoryFactoryCard />
+          <IntruderCard />
+          <CountCard />
+        </Carousel>
+      </div>
     </div>
   );
 };

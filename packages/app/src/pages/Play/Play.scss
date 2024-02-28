@@ -1,16 +1,17 @@
 // $card-margin: 2rem;
 
 #playPage {
+  
   .favorite-button {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
   }
 
-  #playCardWrapper {
-    width: calc(100% - 200px);
-    margin: auto;
-  }
+  // #playCardWrapper {
+  //   width: calc(100% - 200px);
+  //   margin: auto;
+  // }
 
   #storyFactoryCard {
     background-image: url("/assets/img/background_purple.png");
