@@ -9,6 +9,7 @@ interface CarouselProps extends React.PropsWithChildren<{
     height: number;
     slidesToShow?: number;
     slideMargin?: number;
+    infinite?: boolean;
 }> {}
 
 const Arrow: React.FC<any> = ({
@@ -29,12 +30,17 @@ const Arrow: React.FC<any> = ({
   );
 };
 
-export const Carousel: React.FC<CarouselProps> = ({ children, height, slidesToShow = 1, slideMargin = 4 }) => {
+export const Carousel: React.FC<CarouselProps> = ({ 
+  children, 
+  height, 
+  slidesToShow = 1, 
+  slideMargin = 4,
+  infinite = false,
+}) => {
   
   const settings: Settings = {
-    className: "slider variable-width",
     draggable: false,
-    infinite: false,
+    infinite,
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
     nextArrow: <Arrow direction="forward" height={height} />,

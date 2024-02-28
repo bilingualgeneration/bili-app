@@ -8,6 +8,7 @@ import bili from "@/assets/icons/profile_coming_soon/coming_soon_card_bili.svg";
 import { Carousel } from "@/components/Carousel";
 import "./ProfileComingSoon.scss";
 import biliHelmet from "@/assets/icons/profile_coming_soon/bili_profile_coming_soon.svg";
+import biliWorkshop from "@/assets/icons/profile_coming_soon/bili_workshop.svg";
 
 export const ProfileComingSoon: FC = () => {
     const { isImmersive } = useProfile();
@@ -53,9 +54,12 @@ export const ProfileComingSoon: FC = () => {
             }
           </div>
 
-          <img src={biliHelmet} alt="Bili Character Icon" className="bili-helmet-image"/>
+          <img src={biliWorkshop} alt="Bili Character Icon" className="bili-helmet-image"/>
 
-          <Carousel height={240} slideMargin={15}>
+          <Carousel 
+            height={240} 
+            slideMargin={15}
+          >
             {profileCards.map((card, index) => (
               <ComingSoonCard
                 {...card}

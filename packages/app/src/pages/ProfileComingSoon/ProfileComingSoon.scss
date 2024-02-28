@@ -16,12 +16,12 @@
 .bili-helmet-image {
     position: absolute;
     left: 800px;
-    bottom: 187px;
-    max-width: 23%;
+    bottom: 0px;
+    max-width: 25%;
 
     @media (max-width: 1024px) { /* iPad Mini landscape width */
         left: 715px;
-        bottom: 187px;
-        max-width: 23%; 
+        bottom: 15px;
+        max-width: 27%; 
     }
 }
