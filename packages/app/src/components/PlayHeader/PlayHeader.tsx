@@ -7,7 +7,7 @@ import "./PlayHeader.scss";
 
 interface PlayHeaderProps {
   bannerColor?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   titleClassName?: string;
   subtitleClassName?: string;

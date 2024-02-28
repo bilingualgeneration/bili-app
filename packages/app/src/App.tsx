@@ -55,6 +55,7 @@ import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
+import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
@@ -212,11 +213,11 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/profile-coming-soon"
+            path="/stories-landing-page"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <ProfileComingSoon />
+                  <StoriesLandingPage />
                 </HeaderFooter>
               </AuthedLayout>
             )}
