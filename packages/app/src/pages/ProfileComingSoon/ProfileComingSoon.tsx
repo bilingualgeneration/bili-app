@@ -54,11 +54,12 @@ export const ProfileComingSoon: FC = () => {
             }
           </div>
 
-          <img src={biliWorkshop} alt="Bili Character Icon" className="bili-helmet-image"/>
+          <img src={biliHelmet} alt="Bili Character Icon" className="bili-helmet-image"/>
 
           <Carousel 
             height={240} 
             slideMargin={15}
+            infinite={true}
           >
             {profileCards.map((card, index) => (
               <ComingSoonCard
