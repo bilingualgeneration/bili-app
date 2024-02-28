@@ -4,6 +4,9 @@
   however react-springs not getting this css styling
 */
 
+const MAX_CARDS_SHOWN = 1;
+
+
 import React, { FC, useEffect, useState } from "react";
 import { useProfile } from "@/contexts/ProfileContext";
 import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
@@ -17,7 +20,7 @@ import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton, IonText } from "@ionic/react";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 interface CardAudio {
   url: string;
@@ -45,10 +48,11 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     esIncAudio?: CardAudio | null;
     enAudio?: CardAudio | null;
   } | null>(null);
-
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
-
   useEffect(() => {
+    setCallback(() => {
+      // do nothing
+    });
     return () => {
       clearAudio();
     };
@@ -78,7 +82,6 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
   };
 
   const [props, api] = useSprings(cards.length, (i) => {
-    // console.log(`Generating props for card ${i}`);
     return {
       x: -2 - i * 5, // Initialize x position of each card
       y: 10 - i * 10, // Initialize y position of each card
@@ -86,8 +89,6 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
       rot: 0, // Initialize rotation angle of each card
       zIndex: cards.length - i, // Initialize zIndex of each card
       delay: i * 100, // Delay before starting the animation
-      hidden: i > 5 ? false : true,
-      //pointerEvents: i === cards.length - 1 ? 'auto' : 'none'
     };
   });
 
@@ -126,7 +127,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
                 y: 10 - distance * 10,
                 scale: 1,
                 rot: 0,
-                zIndex: cards.length - distance,
+                zIndex: cards.length - distance - 1,
                 delay: distance * 100,
               };
             }
@@ -169,7 +170,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
   return (
     <>
       <div className={styles.container}>
-        {props.map(({ x, y, rot, scale, zIndex, hidden }, i) => {
+    {props.map(({ x, y, rot, scale, zIndex }, i) => {
           // console.log("Card index:", i);
           const card = cards[i % cards.length];
           const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
@@ -178,7 +179,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           if (isImmersive && isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-3xl semibold`}>
+                <h1 className={`${styles.es} text-2xl semibold`}>
                   {esIncText}
                 </h1>
               </>
@@ -186,13 +187,13 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           } else if (isImmersive && !isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
+                <h1 className={`${styles.es} text-2xl semibold`}>{esText}</h1>
               </>
             );
           } else if (!isImmersive && isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-3xl semibold`}>
+                <h1 className={`${styles.es} text-2xl semibold`}>
                   {esIncText}
                 </h1>
                 <p className="text-lg color-english">{enText}</p>
@@ -206,7 +207,6 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
               </>
             );
           }
-
           return (
             <animated.div
               {...bind(i)}
@@ -217,14 +217,16 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
                 x,
                 y,
                 zIndex,
-                display: hidden ? "inline-block" : "none",
+		pointerEvents: i === currentCardIndex ? 'auto' : 'none',
                 transform: interpolate(
                   [rot, x],
                   (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
                 ),
               }}
             >
-              <div className={styles.card_content}>{content}</div>
+              <div className={styles.card_content}>
+		{content}
+	      </div>
             </animated.div>
           );
         })}

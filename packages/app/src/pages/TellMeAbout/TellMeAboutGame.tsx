@@ -18,7 +18,7 @@ export const TellMeAboutGame: FC = () => {
   const { pack_id } = useParams();
   const firestore = useFirestore();
 
-  const ref = doc(firestore, "tell-me-about-game", pack_id);
+  const ref = doc(firestore, "would-do-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
   const [questionsData, setQuestionsData] = useState<any[]>([]);
 
@@ -61,13 +61,13 @@ export const TellMeAboutGame: FC = () => {
 
   return (
     <div>
-      <div style={{ padding: "4px 120px 0px 120px" }}>
+      <div style={{ padding: "4px 120px 0px 120px" }} className='margin-bottom-2'>
         <IonText>
           <h1 className="text-5xl margin-top-1">
             <FormattedMessage
-              id="tellMeAbout.title"
+              id="wouldDo.title"
               defaultMessage={"What would you do?"}
-              description={"Title of 'Tell Me About' page"}
+              description={"Title of '¿Que harías?' page"}
             />
           </h1>
           {!isImmersive && <p className="text-3xl">What would you do?</p>}
