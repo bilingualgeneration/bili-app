@@ -41,7 +41,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   const settings: Settings = {
     draggable: false,
     infinite,
-    slidesToShow: slidesToShow,
+    slidesToShow,
     slidesToScroll: 1,
     nextArrow: <Arrow direction="forward" height={height} />,
     prevArrow: <Arrow direction="backward" height={height} />,
