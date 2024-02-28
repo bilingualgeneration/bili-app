@@ -52,8 +52,10 @@ export const Carousel: React.FC<CarouselProps> = ({
     <div className="carousel-container" style={{ height }}>
       <style>
         {`
-          .slick-track > * {
+          .slick-track {
+            > * {
             margin: 0 ${slideMargin}px; /* Set margin dynamically */
+            } 
           }
         `}
       </style>

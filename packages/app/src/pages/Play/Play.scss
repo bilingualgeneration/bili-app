@@ -1,4 +1,4 @@
-$card-margin: 2rem;
+// $card-margin: 2rem;
 
 #playPage {
   .favorite-button {
@@ -15,13 +15,13 @@ $card-margin: 2rem;
   #storyFactoryCard {
     background-image: url("/assets/img/background_purple.png");
     cursor: pointer;
-    margin-right: $card-margin;
+    // margin-right: $card-margin;
   }
 
   #intruderCard {
     background-image: url("/assets/img/background_teal.png");
     cursor: pointer;
-    margin-right: $card-margin;
+    // margin-right: $card-margin;
   }
 
   #countCard {
@@ -30,7 +30,7 @@ $card-margin: 2rem;
   }
 
   .card {
-      display: inline-block;
+    // display: inline-block;
     background-position: center center;
     background-size: cover;
     border-radius: 2rem;
@@ -57,6 +57,6 @@ $card-margin: 2rem;
   }
 }
 
-.card {
-    display: inline-block !important;
-}
+// .card {
+//     display: inline-block !important;
+// }
