@@ -1,6 +1,5 @@
 #playBanner {
-  background-image: url(/assets/img/background_pattern_lp.png);
-  background-size: cover;
+  position: relative;
   background-color: #ff5709;
   color: #fff;
   padding: 1rem 0 1rem 100px;
@@ -9,4 +8,17 @@
   @media (max-width: 1024px) { /* iPad Mini landscape width */
     margin-bottom: 1rem; 
   }
+
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // background-size: cover;
+    // background-position: 100%;
+    opacity: .8;
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
 }
+
+

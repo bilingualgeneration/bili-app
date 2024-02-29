@@ -229,6 +229,7 @@ export const StudentDashboard: FC = () => {
     {
       reactintlId: "common.stories",
       englishLabel: "Stories",
+      link: "/stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
@@ -313,10 +314,12 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <IonText>
+            <Link to="/stories" className="no-text-decoration">
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
             {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
