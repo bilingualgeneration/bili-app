@@ -91,9 +91,8 @@ export const CountWithMeGame: React.FC = () => {
 
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array
-    if (currentIndex >= 7) {
+    if (currentIndex >= data.groups.length - 1) {
       setCurrentIndex(0); // Reset to the first element
-      
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
