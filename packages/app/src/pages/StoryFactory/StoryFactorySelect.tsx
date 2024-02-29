@@ -16,13 +16,13 @@ export const StoryFactorySelect: React.FC = () => {
       cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg',
       isLocked: true
     },
-    {
-      title: 'Pre Lector',
-      titleEn: 'Pre Reader',
-      category: 'play',
-      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/thumbnail_Image_Container3_49e525e22a.png',
-      isLocked: true
-    },
+    // {
+    //   title: 'Paquete 4',
+    //   titleEn: 'Pack 4',
+    //   category: 'play',
+    //   cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/thumbnail_Image_Container3_49e525e22a.png',
+    //   isLocked: true
+    // },s
   ];
   return (
     <PackSelect
