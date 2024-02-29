@@ -93,6 +93,7 @@ export const CountWithMeGame: React.FC = () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= data.groups.length - 1) {
       setCurrentIndex(0); // Reset to the first element
+      history.replace('/student-dashboard');
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
