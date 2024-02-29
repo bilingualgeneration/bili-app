@@ -33,6 +33,7 @@ interface IntroProps {
 
 export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasAudioPlayed, setHasAudioPlayed] = useState(false);
   const { isImmersive } = useProfile();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
@@ -48,6 +49,8 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
       if (currentIndex < texts.length - 1) {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
+      }else{
+	setHasAudioPlayed(true);
       }
     });
     let sounds = [];
@@ -82,7 +85,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
             <div
 	      className='margin-top-4'
 	      style={{position: 'relative'}}>
-              {currentIndex === texts.length - 1 && (
+              {hasAudioPlayed && currentIndex === texts.length - 1 && (
 		<img
                   src={StoryFactoryArrow}
                   alt="indicator arrow to next button"
