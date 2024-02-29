@@ -467,13 +467,17 @@ ion-card.new-felicitaciones-card {
   z-index: 1;
 }
 
+.congrats-container {
+  position: relative;
+}
+
 .stars-overlay {
   position: absolute;
   width: 100%;
-  top: 0;
+  top: -95px;
   left: 75px;
   right: 0;
-  bottom: -60px;
+  bottom: -250px;
   background: url("../../assets/icons/sf_stars_overlay.svg");
   position: absolute;
   z-index: 2;
