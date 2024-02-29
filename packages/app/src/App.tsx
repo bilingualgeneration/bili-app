@@ -24,7 +24,6 @@ import {
   IntruderGame,
   IntruderGameLoader
 } from '@/pages/Intruder';
-import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
 import {
@@ -246,11 +245,11 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/tradein"
+            path="/profile/coming-soon"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <Tradein />
+                  <ProfileComingSoon />
                 </HeaderFooter>
               </AuthedLayout>
             )}
