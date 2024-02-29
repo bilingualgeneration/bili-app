@@ -70,7 +70,7 @@ export const StoryLoader = () => {
         fp.length + 1, // cover
         // todo: for games
       );
-      setPageNumber(0);
+      setPageNumber(1);
       setReady(true);
     }
   }, [data]);
@@ -86,10 +86,12 @@ export const StoryLoader = () => {
         <TitleCard data={data} />
       )}
       {pageNumber > 0 &&
-       pageNumber <= filteredPages.length && ( // todo: less or equal
-					       <StoryPage />
+       // todo: less or equal
+       pageNumber <= filteredPages.length && ( <>
+	 <StoryPage />
+	 <PageCounter />
+       </>
       )}
-      <PageCounter />
     </div>
   );
 };
@@ -184,8 +186,34 @@ const TitleCard = ({ data }: any) => {
               </p>
             )}
           </IonText>
-          <IonGrid>
-            <IonRow>
+	  <img src={data.cover.url} style={{ width: '100%', marginTop: '2rem'}} />
+        </IonCardContent>
+        <div
+          className="ion-text-center"
+          style={{
+            position: "absolute",
+            bottom: "2rem",
+            left: "50%",
+            marginLeft: "-25%",
+          }}
+        >
+          <IonButton shape="round" onClick={pageForward}>
+            <IonText
+              style={{
+                paddingLeft: "5rem",
+                paddingRight: "5rem",
+              }}
+            >
+              <h1 className="text-3xl semibold color-nube">¡Leamos!</h1>
+              {!isImmersive && (
+                <p className="text-sm color-nube">Let's read!</p>
+              )}
+            </IonText>
+          </IonButton>
+        </div>
+      </IonCard>
+          <IonGrid className='margin-top-3'>
+            <IonRow style={{justifyContent: 'center'}}>
               <IonCol size="auto">
                 <Pill
                   icon={AgesIcon}
@@ -228,32 +256,6 @@ const TitleCard = ({ data }: any) => {
               </IonCol>
             </IonRow>
           </IonGrid>
-	  <img src={data.cover.url} style={{ width: '100%', marginTop: '2rem'}} />
-        </IonCardContent>
-        <div
-          className="ion-text-center"
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "50%",
-            marginLeft: "-25%",
-          }}
-        >
-          <IonButton shape="round" onClick={pageForward}>
-            <IonText
-              style={{
-                paddingLeft: "5rem",
-                paddingRight: "5rem",
-              }}
-            >
-              <h1 className="text-3xl semibold color-nube">¡Leamos!</h1>
-              {!isImmersive && (
-                <p className="text-sm color-nube">Let's read!</p>
-              )}
-            </IonText>
-          </IonButton>
-        </div>
-      </IonCard>
     </div>
   );
 };
@@ -270,35 +272,44 @@ const StoryPage: React.FC<any> = () => {
   }, [pageNumber]);
   const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
+  const cardStyles = {
+    width: 400,
+    height: 400
+  };
   return (
     <>
       <div className="content-wrapper margin-top-1">
         <IonGrid>
-          <IonRow style={{ alignItems: "start", justifyContent: "center" }}>
-            <IonCol size="auto" style={{ marginRight: "2rem", marginTop: "20vh" }}>
+          <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
+            <IonCol size="auto">
               <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
             </IonCol>
             <IonCol size="auto">
               <IonCard
                 className="sf-card drop-shadow"
-                style={{
-		  width: 740,
-                  display: "block",
-                  position: "relative",
-                }}
+                style={cardStyles}
               >
-                <IonCardContent className='ion-text-center'>
+                <IonCardContent className='ion-text-center'
+
+		  style={{
+		    display: 'flex',
+		    flexDirection: 'column',
+		    justifyContent: 'space-between',
+		    height: '100%'
+		  }}>
                   <IonText className="ion-text-center">
-                    <h1 className="text-3xl semibold color-suelo">
+                    <h1 className="text-2xl semibold color-suelo">
                       {isInclusive ? texts["es-inc"].text : texts.es.text}
                     </h1>
                     {!isImmersive && (
-                      <p className="text-2xl color-english">{texts.en.text}</p>
+                      <p className="text-xl color-english">{texts.en.text}</p>
                     )}
                   </IonText>
-		  <div style={{position: 'relative'}}>
-		    <div
-                      className="stories-volume-button-background"
+		  <div>
+		    <IonButton
+		      size='small'
+		      fill='clear'
+		      className='stories-volume-button'
 		      onClick={() => {
 			let audios = [];
 			if(isInclusive){
@@ -319,14 +330,22 @@ const StoryPage: React.FC<any> = () => {
 		      }}
 		    >
 		      <img className="stories-volume-icon" src={volumeButton} />
-		    </div>
-		    <img style={{margin: 'auto', marginTop: '2rem'}} src={page.image.url} />
+		    </IonButton>
 		  </div>
                 </IonCardContent>
-
               </IonCard>
             </IonCol>
-            <IonCol size="auto" style={{ marginLeft: "2rem", marginTop: "20vh" }}>
+            <IonCol size="auto">
+              <IonCard
+                className="sf-card drop-shadow"
+                style={cardStyles}
+              >
+                <IonCardContent className='ion-text-center'>
+		  <img src={page.image.url} />
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+            <IonCol size="auto">
 	      <IonImg
 		src={forward}
 		onClick={pageForward}
