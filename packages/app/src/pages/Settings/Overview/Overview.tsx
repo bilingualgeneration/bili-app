@@ -41,10 +41,12 @@ export const Overview: React.FC = ({}) => {
         if (response.value === null) {
           // have never seen it before
           setShouldShowTutorial(true);
+	  /*
           Preferences.set({
             key: "shouldShowSettingsTutorial",
             value: false,
           });
+	  */
         }
       });
     }
