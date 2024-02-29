@@ -24,7 +24,7 @@ export const PlayHeader: FC<PlayHeaderProps> = ({
   const { isImmersive } = useProfile();
   return (
     <div id="playBanner" style={{ backgroundColor: bannerColor }}>
-      {/* <img src={pattern} className="banner-overlay" style={{ backgroundColor: bannerColor }}/> */}
+      <div className="banner-overlay" style={{ backgroundColor: bannerColor }}/>
       <IonText className="banner-content">
         <h1 className={`${titleClassName}`}>
           {title}

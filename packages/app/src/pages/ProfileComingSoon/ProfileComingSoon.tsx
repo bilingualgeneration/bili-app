@@ -44,7 +44,7 @@ export const ProfileComingSoon: FC = () => {
         />
         <div className="content-container">   
           <div className="heading-container">
-            <h1 className="text-6xl bold">
+            <h1 className="text-6xl bold carousel-header-margin">
               Nuevas funciones en camino
             </h1>
             {!isImmersive &&
@@ -56,18 +56,20 @@ export const ProfileComingSoon: FC = () => {
 
           <img src={biliHelmet} alt="Bili Character Icon" className="bili-helmet-image"/>
 
-          <Carousel 
-            height={240} 
-            slideMargin={15}
-            infinite={true}
-          >
-            {profileCards.map((card, index) => (
-              <ComingSoonCard
-                {...card}
-                key={index}
-              />
-            ))}
-          </Carousel>
+          <div className="margin-top-3">
+            <Carousel 
+              height={240} 
+              slideMargin={15}
+              infinite={true}
+            >
+              {profileCards.map((card, index) => (
+                <ComingSoonCard
+                  {...card}
+                  key={index}
+                />
+              ))}
+            </Carousel>
+          </div>
         </div>
       </>
     );
