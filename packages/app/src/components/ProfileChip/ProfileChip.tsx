@@ -11,7 +11,7 @@ export const ProfileChip: FC = () => {
   const { completionPoints, name } = childProfiles[activeChildProfile];
 
   return (
-    <Link to="/tradein">
+    <Link to="/profile/coming-soon" className="no-text-decoration">
       <div id="profileChip">
         <div id="profilePoints" className="text-sm semibold color-nube">
           <IonIcon icon={starSharp} />
