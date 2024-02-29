@@ -173,7 +173,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
-      addAudio([card_flip_audio]);
       setTimeout(() => {
         if (
           currentIndex + 1 === 5 ||
@@ -214,7 +213,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       }, 1000);
     } else {
       //logic when the correct card is choosen
-      addAudio([correct_card_audio]);
+      addAudio([correct_card_audio, card_flip_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: correctStyle,
