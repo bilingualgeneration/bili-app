@@ -123,8 +123,18 @@ export const CountWithMeGame: React.FC = () => {
             audios.push(ften.audio.url);
           }
         }
-        addAudio(audios);
+        
+      }else{ //audio for the game questions
+        const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
+        const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+        audios.push(ftes.audio.url);
+        if(!isImmersive){
+          if(ften && ften.audio){
+            audios.push(ften.audio.url);
+          }
+        }
       }
+      addAudio(audios);
   
       setData(countGameData);
     }
