@@ -9,6 +9,10 @@
     margin: 1.5%;
     box-shadow: -1.6612545251846313px 3.3225090503692627px 9.967527389526367px 0px #00000040;
 
+    @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
+        width: 600px;
+    }
+
     .subtitle {
         margin-top: 10px;
     }
