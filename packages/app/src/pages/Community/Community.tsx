@@ -21,7 +21,7 @@ const Card: FC<any> = ({ image, link, translatedTitle, title }) => {
   const { isImmersive } = useProfile();
   return (
       <div className="community-card">
-	<Link to={link} className="no-text-decoration">
+	      <Link to={link} className="no-text-decoration">
           <img src={image} />
           <IonText className="ion-text-center">
             <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
@@ -31,7 +31,7 @@ const Card: FC<any> = ({ image, link, translatedTitle, title }) => {
               </h3>
             )}
           </IonText>
-	</Link>
+	      </Link>
       </div>
   );
 };

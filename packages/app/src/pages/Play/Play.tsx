@@ -106,10 +106,20 @@ export const Play: FC = () => {
   const { isImmersive } = useProfile();
   return (
     <div id="playPage">
-      <PlayHeader />
+      <PlayHeader 
+        title="Juego"
+        subtitle="Play"
+      />
+      <div className="carousel-container">
+        <Carousel 
+          height={445}
+          slideMargin={10}
+        >
           <StoryFactoryCard />
           <IntruderCard />
           <CountCard />
+        </Carousel>
+      </div>
     </div>
   );
 };
