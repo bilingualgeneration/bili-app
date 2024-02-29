@@ -289,16 +289,23 @@ const StoryPage: React.FC<any> = () => {
                 className="sf-card drop-shadow"
                 style={cardStyles}
               >
-                <IonCardContent className='ion-text-center'>
+                <IonCardContent className='ion-text-center'
+
+		  style={{
+		    display: 'flex',
+		    flexDirection: 'column',
+		    justifyContent: 'space-between',
+		    height: '100%'
+		  }}>
                   <IonText className="ion-text-center">
-                    <h1 className="text-3xl semibold color-suelo">
+                    <h1 className="text-2xl semibold color-suelo">
                       {isInclusive ? texts["es-inc"].text : texts.es.text}
                     </h1>
                     {!isImmersive && (
-                      <p className="text-2xl color-english">{texts.en.text}</p>
+                      <p className="text-xl color-english">{texts.en.text}</p>
                     )}
                   </IonText>
-		  <div style={{position: 'relative'}}>
+		  <div>
 		    <IonButton
 		      size='small'
 		      fill='clear'
