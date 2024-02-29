@@ -213,7 +213,7 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/stories-landing-page"
+            path="/stories"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
