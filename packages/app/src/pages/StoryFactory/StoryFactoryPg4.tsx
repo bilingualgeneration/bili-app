@@ -146,7 +146,7 @@ export const StoryFactoryPage4: FC = () => {
     <>
       <div id="sf-game-page" style={{ userSelect: "none" }}>
         <div className="sf-background-pattern"></div>
-        <IonGrid>
+        <IonGrid className="sf-game-content">
           <IonRow className="ion-justify-content-center">
             <IonCol>
               <div className="sf-colorful-text-heading">
