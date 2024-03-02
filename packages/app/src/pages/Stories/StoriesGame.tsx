@@ -18,6 +18,7 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useProfile } from "@/contexts/ProfileContext";
+import {useStory} from './StoryContext';
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "../../pages/Stories/Stories.scss";
 
@@ -146,8 +147,8 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showNextGame, setShowNextGame] = useState<boolean>(false);
-
+  const {pageForward} = useStory();
+  
   const headerData = useMemo((): GameHeader => {
     const textPacks =
       gameType === "image"
@@ -224,11 +225,11 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     return shuffleArray(cards);
   }, [data, currentIndex, gameType]);
 
-  console.log(shuffledCards);
   useEffect(() => {
+    // todo: remove from useEffect
     if (isCorrectSelected) {
       setTimeout(() => {
-        setShowNextGame(true);
+	pageForward();
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           "1": initialStyle,
@@ -299,10 +300,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       }, 1000);
     }
   };
-
-  if (showNextGame) {
-    return <></>;
-  }
 
   return (
     <>

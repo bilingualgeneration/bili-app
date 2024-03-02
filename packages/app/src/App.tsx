@@ -93,8 +93,6 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
-import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
 
 setupIonicReact();
 
@@ -364,30 +362,6 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesDragGameLoader />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesPictureGame />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game2/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesSyllableGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
