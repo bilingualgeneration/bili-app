@@ -104,33 +104,51 @@ export const StoryLoader = () => {
       {pageNumber > 0 &&
        // todo: less or equal
        pageNumber <= filteredPages.length && ( <>
-	 <StoryPage />
+	 <PageWrapper>
+	   <StoryPage />
+	 </PageWrapper>
 	 <PageCounter />
        </>
       )}
       {pageNumber === filteredPages.length + 1 &&
        hasMultipleImage && <>
-	 <StoriesGame game={data} gameType="image" />
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="image" />
+	   </IonCol>
+	 </PageWrapper>
 	 <PageCounter />
-      </>}
+       </>}
       
       {pageNumber === filteredPages.length + 1 &&
        hasMultipleSyllable &&
        !hasMultipleImage && <>
-	 <StoriesGame game={data} gameType="syllable" />
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="syllable" />
+	   </IonCol>
+	 </PageWrapper>
       	 <PageCounter />
        </>}
       
       {pageNumber === filteredPages.length + 2 &&
        hasMultipleImage &&
        hasMultipleSyllable && <>
-	 <StoriesGame game={data} gameType="syllable" />
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="syllable" />
+	   </IonCol>
+	 </PageWrapper>
       	 <PageCounter />
        </>}
 
       {pageNumber === totalPages - 1 &&
        <>
-	 <p>congrats!</p>
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <p>congrats!</p>
+	   </IonCol>
+	 </PageWrapper>
        	 <PageCounter />
        </>}
     </div>
@@ -301,6 +319,31 @@ const TitleCard = ({ data }: any) => {
   );
 };
 
+const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
+  const {
+    pageBackward,
+    pageForward,
+    pageNumber,
+    totalPages
+  } = useStory();
+  return <div className="content-wrapper margin-top-1">
+    <IonGrid>
+      <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
+	<IonCol size="auto">
+          <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
+	</IonCol>
+	{children}
+        <IonCol size="auto">
+	  <IonImg
+	    src={forward}
+	    onClick={pageForward}
+	    style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
+  </div>;
+};
+
 const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
   const { isImmersive, isInclusive } = useProfile();
@@ -319,80 +362,66 @@ const StoryPage: React.FC<any> = () => {
   };
   return (
     <>
-      <div className="content-wrapper margin-top-1">
-        <IonGrid>
-          <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
-            <IonCol size="auto">
-              <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
-            </IonCol>
-            <IonCol size="auto">
-              <IonCard
-                className="sf-card drop-shadow"
-                style={cardStyles}
-              >
-                <IonCardContent className='ion-text-center'
+      <IonCol size="auto">
+        <IonCard
+          className="sf-card drop-shadow"
+          style={cardStyles}
+        >
+          <IonCardContent className='ion-text-center'
 
-				style={{
-				  display: 'flex',
-				  flexDirection: 'column',
-				  justifyContent: 'space-between',
-				  height: '100%'
-				}}>
-                  <IonText className="ion-text-center">
-                    <h1 className="text-2xl semibold color-suelo">
-                      {isInclusive ? texts["es-inc"].text : texts.es.text}
-                    </h1>
-                    {!isImmersive && (
-                      <p className="text-xl color-english">{texts.en.text}</p>
-                    )}
-                  </IonText>
-		  <div>
-		    <IonButton
-		      size='small'
-		      fill='clear'
-		      className='stories-volume-button'
-		      onClick={() => {
-			let audios = [];
-			if(isInclusive){
-			  if(texts['es-inc'].audio){
-			    audios.push(texts['es-inc'].audio.url);
-			  }
-			}else{
-			  if(texts['es'].audio){
-			    audios.push(texts['es'].audio.url);
-			  }		
-			}
-			if(!isImmersive){
-			  if(texts['en'].audio){
-			    audios.push(texts['en'].audio.url);
-			  }
-			}
-			addAudio(audios);
-		      }}
-		    >
-		      <img className="stories-volume-icon" src={volumeButton} />
-		    </IonButton>
-		  </div>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-            <IonCol size="auto">
-              <IonCard
-                className="sf-card drop-shadow"
-                style={cardStyles}>
-                <IonCardContent className='ion-text-center'>
-		  <img src={page.image.url} />
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-            <IonCol size="auto">
-	      <IonImg
-	      src={forward}
-	      onClick={pageForward} />
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </div>
+			  style={{
+			    display: 'flex',
+			    flexDirection: 'column',
+			    justifyContent: 'space-between',
+			    height: '100%'
+			  }}>
+            <IonText className="ion-text-center">
+              <h1 className="text-2xl semibold color-suelo">
+                {isInclusive ? texts["es-inc"].text : texts.es.text}
+              </h1>
+              {!isImmersive && (
+                <p className="text-xl color-english">{texts.en.text}</p>
+              )}
+            </IonText>
+	    <div>
+	      <IonButton
+		size='small'
+		fill='clear'
+		className='stories-volume-button'
+		onClick={() => {
+		  let audios = [];
+		  if(isInclusive){
+		    if(texts['es-inc'].audio){
+		      audios.push(texts['es-inc'].audio.url);
+		    }
+		  }else{
+		    if(texts['es'].audio){
+		      audios.push(texts['es'].audio.url);
+		    }		
+		  }
+		  if(!isImmersive){
+		    if(texts['en'].audio){
+		      audios.push(texts['en'].audio.url);
+		    }
+		  }
+		  addAudio(audios);
+		}}
+	      >
+		<img className="stories-volume-icon" src={volumeButton} />
+	      </IonButton>
+	    </div>
+          </IonCardContent>
+        </IonCard>
+      </IonCol>
+      <IonCol size="auto">
+        <IonCard
+          className="sf-card drop-shadow"
+          style={cardStyles}>
+          <IonCardContent className='ion-text-center'>
+	    <img src={page.image.url} />
+          </IonCardContent>
+        </IonCard>
+      </IonCol>
     </>
   );
 };

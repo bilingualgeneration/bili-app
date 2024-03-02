@@ -303,7 +303,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   return (
     <>
-      <div id="text-container">
+      <div style={{width: 800, margin: 'auto', textAlign: 'center'}}>
         <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText
             className=""
