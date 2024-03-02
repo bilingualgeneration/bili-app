@@ -8,6 +8,7 @@ import {
   IonText,
   IonButton,
 } from "@ionic/react";
+import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
@@ -42,10 +43,15 @@ export const StoryLoader = () => {
   // @ts-ignore
   const { uuid } = useParams();
   const {
+    hasMultipleImage,
+    hasMultipleSyllable,
     setPageNumber,
     pageNumber,
+    setHasMultipleImage,
+    setHasMultipleSyllable,
     setTotalPages,
     setFilteredPages,
+    totalPages,
     filteredPages,
     ready,
     setReady,
@@ -65,11 +71,20 @@ export const StoryLoader = () => {
           return langs.includes("es");
         }
       });
+      let totalPages = fp.length;
+      totalPages++; // cover
+      if(data.multiple_image_text){
+	totalPages++;
+	setHasMultipleImage(true);
+      }
+      if(data.multiple_syllable_text){
+	totalPages++;
+	setHasMultipleSyllable(true);
+      }
+
+      totalPages++; // congrats page
       setFilteredPages(fp);
-      setTotalPages(
-        fp.length + 1, // cover
-        // todo: for games
-      );
+      setTotalPages(totalPages);
       setPageNumber(0);
       setReady(true);
     }
@@ -79,6 +94,7 @@ export const StoryLoader = () => {
     return <></>;
   }
 
+  //console.log(`${pageNumber} / ${totalPages}`);
   return (
     <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
@@ -92,6 +108,31 @@ export const StoryLoader = () => {
 	 <PageCounter />
        </>
       )}
+      {pageNumber === filteredPages.length + 1 &&
+       hasMultipleImage && <>
+	 <StoriesGame game={data} gameType="image" />
+	 <PageCounter />
+      </>}
+      
+      {pageNumber === filteredPages.length + 1 &&
+       hasMultipleSyllable &&
+       !hasMultipleImage && <>
+	 <StoriesGame game={data} gameType="syllable" />
+      	 <PageCounter />
+       </>}
+      
+      {pageNumber === filteredPages.length + 2 &&
+       hasMultipleImage &&
+       hasMultipleSyllable && <>
+	 <StoriesGame game={data} gameType="syllable" />
+      	 <PageCounter />
+       </>}
+
+      {pageNumber === totalPages - 1 &&
+       <>
+	 <p>congrats!</p>
+       	 <PageCounter />
+       </>}
     </div>
   );
 };
@@ -212,50 +253,50 @@ const TitleCard = ({ data }: any) => {
           </IonButton>
         </div>
       </IonCard>
-          <IonGrid className='margin-top-3'>
-            <IonRow style={{justifyContent: 'center'}}>
-              <IonCol size="auto">
-                <Pill
-                  icon={AgesIcon}
-                  text={{
-                    en: "Ages",
-                    es: "Edades",
-                  }}
-                  value={`${data.age_min}-${data.age_max}`}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={AuthorIcon}
-                  text={{
-                    en: "Escrito por",
-                    es: "Written by",
-                  }}
-                  value={data.author}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={IllustratorIcon}
-                  text={{
-                    en: "Ilustrado por",
-                    es: "Illustrated by",
-                  }}
-                  value={data.illustrator}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={NarratorIcon}
-                  text={{
-                    en: "Narrado por",
-                    es: "Narrated by",
-                  }}
-                  value={data.narrator}
-                />
-              </IonCol>
-            </IonRow>
-          </IonGrid>
+      <IonGrid className='margin-top-2'>
+        <IonRow style={{justifyContent: 'center'}}>
+          <IonCol size="auto">
+            <Pill
+              icon={AgesIcon}
+              text={{
+                en: "Ages",
+                es: "Edades",
+              }}
+              value={`${data.age_min}-${data.age_max}`}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={AuthorIcon}
+              text={{
+                en: "Escrito por",
+                es: "Written by",
+              }}
+              value={data.author}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={IllustratorIcon}
+              text={{
+                en: "Ilustrado por",
+                es: "Illustrated by",
+              }}
+              value={data.illustrator}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={NarratorIcon}
+              text={{
+                en: "Narrado por",
+                es: "Narrated by",
+              }}
+              value={data.narrator}
+            />
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </div>
   );
 };
@@ -291,12 +332,12 @@ const StoryPage: React.FC<any> = () => {
               >
                 <IonCardContent className='ion-text-center'
 
-		  style={{
-		    display: 'flex',
-		    flexDirection: 'column',
-		    justifyContent: 'space-between',
-		    height: '100%'
-		  }}>
+				style={{
+				  display: 'flex',
+				  flexDirection: 'column',
+				  justifyContent: 'space-between',
+				  height: '100%'
+				}}>
                   <IonText className="ion-text-center">
                     <h1 className="text-2xl semibold color-suelo">
                       {isInclusive ? texts["es-inc"].text : texts.es.text}
@@ -338,8 +379,7 @@ const StoryPage: React.FC<any> = () => {
             <IonCol size="auto">
               <IonCard
                 className="sf-card drop-shadow"
-                style={cardStyles}
-              >
+                style={cardStyles}>
                 <IonCardContent className='ion-text-center'>
 		  <img src={page.image.url} />
                 </IonCardContent>
@@ -347,13 +387,8 @@ const StoryPage: React.FC<any> = () => {
             </IonCol>
             <IonCol size="auto">
 	      <IonImg
-		src={forward}
-		onClick={pageForward}
-		style={{
-		  cursor: pageNumber === filteredPages.length ? 'default' : 'pointer',
-		  opacity: pageNumber === filteredPages.length ? 0 : 1
-		}}
-	      />
+	      src={forward}
+	      onClick={pageForward} />
             </IonCol>
           </IonRow>
         </IonGrid>
