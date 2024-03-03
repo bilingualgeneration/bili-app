@@ -60,7 +60,6 @@ import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
-
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
@@ -94,6 +93,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
 import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
+import { Wellness } from "./pages/Wellness/Wellnes";
 
 setupIonicReact();
 
@@ -515,11 +515,24 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <WouldDoSelect />
+		              <WouldDoSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/wellness"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <Wellness />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
         </Switch>
       </IonReactRouter>
   );
