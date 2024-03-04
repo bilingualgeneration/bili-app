@@ -3,6 +3,7 @@ import { doc } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
 import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
+import { useAudioManager } from '@/contexts/AudioManagerContext';
 import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
@@ -73,6 +74,7 @@ const generateSVG = (color: string, direction: string) => {
 
 export const StoryFactoryPage4: FC = () => {
   const { isImmersive } = useProfile();
+  const {addAudio, clearAudio} = useAudioManager();
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
@@ -83,6 +85,9 @@ export const StoryFactoryPage4: FC = () => {
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
   const [numPlays, setNumPlays] = useState<number>(0);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
+  useEffect(() => {
+    return clearAudio;
+  }, []);
   useEffect(() => {
     if (data !== undefined) {
       setWords([
@@ -124,8 +129,9 @@ export const StoryFactoryPage4: FC = () => {
     const text: string = normalizeAWS(
       getText(words[position][wordIndices[position]].word, language),
     );
-    const audio = new Audio(`${AWS_BUCKET}${text}.mp3`);
-    audio.play();
+    addAudio(`${AWS_BUCKET}${text}.mp3`);
+    //const audio = new Audio(`${AWS_BUCKET}${text}.mp3`);
+    //audio.play();
   };
 
   if (words.length === 0) {
@@ -303,6 +309,12 @@ export const StoryFactoryPage4: FC = () => {
                       getText(words[3][wordIndices[3]].word, "es"),
                     ].join(" "),
                   );
+
+
+		  /////////////////////////////
+		  /////////////////
+
+		  
                   const audio = new Audio(`${AWS_BUCKET}${sentence}.mp3`);
 
                   if (lastSentence !== sentence) {

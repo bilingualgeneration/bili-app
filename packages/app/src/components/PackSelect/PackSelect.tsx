@@ -71,7 +71,6 @@ export const PackSelect: React.FC<props> = ({
       link: `/${module}/play/${p.id}`
     };
   });
-  console.log(placeholderCards);
   return <>
     {category == 'play' && <PlayHeader />}
     {category == 'community' && <CommunityHeader />}
