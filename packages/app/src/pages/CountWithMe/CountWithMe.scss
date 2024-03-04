@@ -64,3 +64,60 @@
 .group-12 {
   max-width: 12%;
 }
+
+// congrats page
+
+.congrats-star {
+  width: 700px;
+  height: auto;
+  position: absolute;
+  // top: 25vh;
+  // left: 43vw;
+  animation: star 3s;
+  z-index: 2;
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* Common styles for iPad */
+    top: 100px;
+    left: 300px;
+  }
+
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+    /* Landscape orientation for iPad Pro & Air */
+    top: 250px;
+    left: 600px;
+  }
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* portrait iPad mini */
+    top: 250px;
+    left: 280px;
+
+    @media (orientation: Landscape) {
+      top: 180px;
+      left: 410px;
+    }
+  }
+}
+
+.button-container {
+  position: relative;
+  // justify-content: flex-start;
+  // text-align: center;
+  // margin-top: 15rem;
+  z-index: 1;
+}
+
+.count-congrats {
+  position: absolute;
+}
+
+/* animation */
+
+// @keyframes star {
+//   0% {transition:  1s ease; top: 0px; left: 50px;}
+//   25% {top: 0px; left: 50px;}
+//   50% {top: 0px; left: 50px;}
+//   75% {top: 0px; left: 50px;}
+//   100% {top: 0px; left: 50px;}
+// }
