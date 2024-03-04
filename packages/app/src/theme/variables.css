@@ -25,6 +25,7 @@ http://ionicframework.com/docs/theming/ */
   --Sol-Low: #e3c029;
   --Sol-High: #ffe24f;
   --Flamenco-High: #ffaedc;
+  --Flamenco-Lowest: #5D0947;
 
   /** primary **/
   --ion-color-primary: var(--Base-Selva);
