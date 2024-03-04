@@ -93,7 +93,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
 import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
-import { Wellness } from "./pages/Wellness/Wellnes";
+import { Wellness } from "./pages/Wellness/Wellness";
 
 setupIonicReact();
 
