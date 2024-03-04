@@ -85,7 +85,7 @@ export const StoryLoader = () => {
       totalPages++; // congrats page
       setFilteredPages(fp);
       setTotalPages(totalPages);
-      setPageNumber(9);
+      setPageNumber(0);
       setReady(true);
     }
   }, [data]);
