@@ -1,4 +1,28 @@
 {
+  "childProfile.age.3to5": [
+    {
+      "type": 0,
+      "value": "3-5 años"
+    }
+  ],
+  "childProfile.age.5to7": [
+    {
+      "type": 0,
+      "value": "5-7 años"
+    }
+  ],
+  "childProfile.age.above7": [
+    {
+      "type": 0,
+      "value": "Mayores de 7 años"
+    }
+  ],
+  "childProfile.age.lessThan3": [
+    {
+      "type": 0,
+      "value": "Menores de 3 años"
+    }
+  ],
   "childProfile.ageLabel": [
     {
       "type": 0,
@@ -8,13 +32,13 @@
   "childProfile.nameLabel": [
     {
       "type": 0,
-      "value": "Ingrese el nombre o apodo de su hijo:"
+      "value": "Ingrese el nombre o apodo de tu hijo:"
     }
   ],
   "childProfile.subtitle": [
     {
       "type": 0,
-      "value": "Esto nos ayuda a personalizar la experiencia de aprendizaje de su hijo. Puede agregar más perfiles en la configuración."
+      "value": "Esto nos ayuda a personalizar la experiencia de aprendizaje de tu hijo. Puede agregar más perfiles en la configuración."
     }
   ],
   "childProfile.title": [
@@ -113,6 +137,12 @@
       "value": "Jugar"
     }
   ],
+  "common.sayings": [
+    {
+      "type": 0,
+      "value": "Dichos"
+    }
+  ],
   "common.signUp": [
     {
       "type": 0,
@@ -128,7 +158,13 @@
   "common.storyFactory": [
     {
       "type": 0,
-      "value": "Fábrica de Cuentos"
+      "value": "¡Fábrica de Cuentos!"
+    }
+  ],
+  "common.tellMeAbout": [
+    {
+      "type": 0,
+      "value": "Cuéntame sobre..."
     }
   ],
   "common.terms": [
@@ -169,6 +205,24 @@
     {
       "type": 0,
       "value": " años"
+    }
+  ],
+  "countWithMe.complete": [
+    {
+      "type": 0,
+      "value": "Actividad completada"
+    }
+  ],
+  "countWithMe.congrats": [
+    {
+      "type": 0,
+      "value": "Te ganaste una estrella"
+    }
+  ],
+  "countWithMe.keepGoing": [
+    {
+      "type": 0,
+      "value": "¡Sigue adelante!"
     }
   ],
   "intruder.congrats.description.10": [
@@ -383,10 +437,34 @@
       "value": "Bienvenido a la página de inicio de sesión del profesor"
     }
   ],
+  "presplash.getStarted": [
+    {
+      "type": 0,
+      "value": "Empecemos"
+    }
+  ],
+  "presplash.noCommitments": [
+    {
+      "type": 0,
+      "value": "Sin compromisos, cancela en cualquier momento."
+    }
+  ],
+  "presplash.tagline": [
+    {
+      "type": 0,
+      "value": "Aprobado por la abuelita y la ciencia"
+    }
+  ],
+  "presplash.tryit": [
+    {
+      "type": 0,
+      "value": "Pruébalo todo GRATIS"
+    }
+  ],
   "reqdActions.goto_settings.message": [
     {
       "type": 0,
-      "value": "Haga clic aquí para personalizar la experiencia de aprendizaje de su hijo"
+      "value": "Haga clic aquí para personalizar la experiencia de aprendizaje de tu hijo"
     }
   ],
   "reset.email": [
@@ -422,7 +500,7 @@
   "settings.about.title": [
     {
       "type": 0,
-      "value": "Acerca de"
+      "value": "Acerca de Bili"
     }
   ],
   "settings.adult": [
@@ -506,7 +584,7 @@
   "settings.overview.InclusiveSpanishContent": [
     {
       "type": 0,
-      "value": "Conoce qué es el español inclusivo y por qué existe."
+      "value": "Aprende qué es el español inclusivo y por qué existe."
     }
   ],
   "settings.overview.addChildBtn": [
@@ -536,7 +614,7 @@
   "settings.overview.getChildContent": [
     {
       "type": 0,
-      "value": "Explore características especiales que promueven la producción lingüística auténtica."
+      "value": "Explora características especiales que promueven la producción lingüística auténtica."
     }
   ],
   "settings.overview.getChildTitle": [
@@ -548,7 +626,7 @@
   "settings.overview.gettingStartedContent": [
     {
       "type": 0,
-      "value": "Cuando entras en cualquier área nueva de la ciencia, casi siempre encuentras."
+      "value": "Tu guía esencial para comenzar con la aplicación de Bili."
     }
   ],
   "settings.overview.gettingStartedTitle": [
@@ -578,7 +656,7 @@
   "settings.overview.joyrideNext": [
     {
       "type": 0,
-      "value": "Próximo"
+      "value": "Siguiente"
     }
   ],
   "settings.overview.joyrideSkip": [
@@ -764,7 +842,7 @@
   "sideMenu.overview": [
     {
       "type": 0,
-      "value": "Descripción general"
+      "value": "Visión general"
     }
   ],
   "sideMenu.preferences": [
@@ -884,7 +962,7 @@
   "signUp.trialTitle": [
     {
       "type": 0,
-      "value": "Prueba gratuita de 3 semanas"
+      "value": "Prueba gratuita de 2 semanas"
     }
   ],
   "signUpTeacher.aboutGrade1": [
@@ -1028,19 +1106,19 @@
   "storyFactory.next": [
     {
       "type": 0,
-      "value": "Próximo"
+      "value": "Siguiente"
     }
   ],
   "storyFactory.nextButton": [
     {
       "type": 0,
-      "value": "Próximo"
+      "value": "Siguiente"
     }
   ],
   "storyFactory.read": [
     {
       "type": 0,
-      "value": "Leer"
+      "value": "Lee"
     }
   ],
   "storyFactory.subwelcome": [

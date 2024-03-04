@@ -1,87 +1,92 @@
+import { useProfile } from "@/contexts/ProfileContext";
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
+import { CongratsPage } from "./CountCongrats";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+//temporary audio files, should be chaged for count-with-me files oncel uploade
+import "./CountWithMe.scss";
+import { useHistory } from "react-router";
 
-interface Animal {
-  url: string;
-  x: number;
-  y: number;
-  rotation: number;
+interface FactsPageProps {
+  factText: any[]; // Adjust the type according to what factText actually contains
+  factBackground: string;
+  count: number;
+  onKeepGoingClick: () => void;
 }
 
-interface Prompt {
-  language: string;
-  text: string;
-}
+export const FactsPage: React.FC<FactsPageProps> = ({
+  factText,
+  factBackground,
+  count,
+  onKeepGoingClick,
+}) => {
+  const { isInclusive, isImmersive } = useProfile();
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
+  const ften = factText.filter((f) => f.language === 'en')[0];
+  const ftes = factText.filter((f) => f.language === 'es')[0];
+  const ftesinc = factText.filter((f) => f.language === 'es-inc')[0];
+  
+  useEffect(() => {
+    if (audioPlayed) {
+      //setShowCongrats(true);
+      onKeepGoingClick();
+    }
+  }, [audioPlayed]);
 
-interface DataItem {
-  prompt: Prompt[];
-  image: string;
-  animals: Animal[];
-  fact: Prompt[];
-  map: string;
-}
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+    let audios = [];
+    if(isInclusive){
+      audios.push(ftesinc.audio.url);
+    }else{
+      audios.push(ftes.audio.url);
+    }
+    if(!isImmersive){
+      if(ften && ften.audio){
+	audios.push(ften.audio.url);
+      }
+    }
+    addAudio(audios);
+  }, []);
+  const history = useHistory();
 
-export const FactsPage = (animalIndex: number, data: DataItem[]) => {
+  if (showCongrats) {
+    return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
+  }
+
   // Function to render the facts page for each animal
   return (
     <>
       <div
+        className="background-card margin-top-3"
         style={{
-          backgroundColor: "#F7FAF9",
+          backgroundImage: `url(${factBackground})`,
+	  backgroundSize: 'auto 100%',
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+	  aspectRatio: '1159 / 724',
+	  width: '80%',
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
         }}
       >
-        <div
-          style={{
-            position: "relative",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "20px",
-            width: "1159px",
-            height: "640px",
-            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-            display: "flex",
-            flexDirection: "row", // Use row to align content horizontally
-            justifyContent: "center", // Center content horizontally
-            alignItems: "stretch", // Align items to stretch vertically
-            padding: "20px",
-          }}
-        >
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start", // Align text content to the left
-              padding: "20px",
-            }}
-          >
-            <IonText>
-              <h2>{data[animalIndex].fact[0].text}</h2>
-              <p>{data[animalIndex].fact[1].text}</p>
-            </IonText>
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-end", // Align map image to the right
-              padding: "20px",
-            }}
-          >
-            <img
-              src={data[animalIndex].map}
-              alt={`animal-${animalIndex}`}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </div>
-        </div>
+        <IonText style={{ width: "50%" }}>
+          <h1 className="text-3xl semibold color-suelo">{ftes.text}</h1>
+          {!isImmersive && (
+            <p className="text-2xl color-english margin-top-2">
+              {ften.text}
+            </p>
+          )}
+        </IonText>
       </div>
     </>
   );

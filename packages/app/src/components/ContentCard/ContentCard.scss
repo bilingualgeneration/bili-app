@@ -1,0 +1,67 @@
+.content-card,
+.content-lock {
+  height: 274px;
+  width: 320px;
+  border-radius: 12px;
+}
+.content-card {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+
+  &.has-link {
+    cursor: pointer;
+  }
+
+  .category-tag {
+    transform: scale(0.5);
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    z-index: 2;
+  }
+
+  .favorite-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  > ion-text {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+  }
+
+  .content-lock {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .content-coming-soon {
+    background-color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    z-index: 2;
+  }
+
+  &::after{
+      background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      z-index: 1;
+      border-radius: 12px;	       
+  }
+}

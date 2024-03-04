@@ -25,23 +25,13 @@ export const ChildProfileContextProvider = ({
   children,
 }: PropsWithChildren<{}>) => {
   const firestore = useFirestore();
-  const [activeChildProfile, internalSetActiveChildProfile] =
-    useState<childProfile>();
+  const [activeChildProfile, setActiveChildProfile] = useState<number>(0);
   const { uid } = useProfile();
   const ref = query(
     collection(firestore, "users"),
     where("parentId", "==", uid),
   );
   const { status, data } = useFirestoreCollectionData(ref);
-  useEffect(() => {
-    if (data && activeChildProfile === undefined) {
-      // todo: save active child
-      internalSetActiveChildProfile({
-        ...data[0],
-        uid: data[0].NO_ID_FIELD,
-      });
-    }
-  }, [data]);
   if (status === "loading" || activeChildProfile === undefined) {
     return <></>;
   }
@@ -53,15 +43,7 @@ export const ChildProfileContextProvider = ({
           {
             childProfiles: data.map((d: any) => ({ uid: d.NO_ID_FIELD, ...d })),
             activeChildProfile,
-            setActiveChildProfile: (uid: string) => {
-              const selectedProfile: any = data.filter(
-                (p: any) => p.NO_ID_FIELD === uid,
-              )[0];
-              internalSetActiveChildProfile({
-                uid: selectedProfile.NO_ID_FIELD,
-                ...selectedProfile,
-              });
-            },
+            setActiveChildProfile,
           }
         }
       >

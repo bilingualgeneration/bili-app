@@ -72,6 +72,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
             {isLocked && (
               <IonChip
                 style={{
+                  borderRadius: "18px",
                   backgroundColor: "#fff",
                   fontWeight: "bold",
                   margin: 0,
@@ -80,8 +81,10 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
                 Proximante{!isImmersive && " | Coming Soon"}
               </IonChip>
             )}
-            <h4 style={{ marginTop: 8 }}>{title as string}</h4>
-            {!isImmersive && <p>{subtitle as string}</p>}
+            <h4 className="text-2xl semibold color-nube">{title as string}</h4>
+            {!isImmersive && (
+              <p className="text-sm color-nube">{subtitle as string}</p>
+            )}
           </div>
           <div>{heart}</div>
         </div>

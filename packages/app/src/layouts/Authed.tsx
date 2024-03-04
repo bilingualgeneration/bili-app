@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { useUser, useSigninCheck } from "reactfire";
 import { ProfileContextProvider } from "@/contexts/ProfileContext";
 import { ChildProfileContextProvider } from "@/contexts/ChildProfileContext";
+import { FavoritesContextProvider } from "@/contexts/FavoritesContext";
 import { useHistory } from "react-router-dom";
 
 const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -15,7 +16,7 @@ const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
   }, []);
   if (status === "loading" || userStatus === "loading") {
     // unsure what the sign in status is
-    return <>loading</>;
+    return <></>;
   }
   if (signInCheckResult.signedIn === false) {
     // not logged in
@@ -25,7 +26,9 @@ const AuthedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <ProfileContextProvider>
       <ChildProfileContextProvider>
-        <I18nWrapper locale="es">{children}</I18nWrapper>
+        <I18nWrapper locale="es">
+          <FavoritesContextProvider>{children}</FavoritesContextProvider>
+        </I18nWrapper>
       </ChildProfileContextProvider>
     </ProfileContextProvider>
   );

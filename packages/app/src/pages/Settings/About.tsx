@@ -17,7 +17,7 @@ export const About: React.FC = () => {
         defaultMessage: "Terms & Conditions",
         description: "Link text for terms and conditions",
       }),
-      url: "https://bilingualgeneration.com/bili/",
+      url: "https://thebiliapp.com/terms/",
     },
     {
       text: intl.formatMessage({
@@ -25,7 +25,7 @@ export const About: React.FC = () => {
         defaultMessage: "Privacy Policy",
         description: "Link text for privacy policy",
       }),
-      url: "https://bilingualgeneration.com/bili/",
+      url: "https://thebiliapp.com/privacy-policy/",
     },
     {
       text: intl.formatMessage({
@@ -33,7 +33,7 @@ export const About: React.FC = () => {
         defaultMessage: "Contact Us",
         description: "Link text for contact us",
       }),
-      url: "https://bilingualgeneration.com/bili/",
+      url: "mailto:support@bilingualgeneration",
     },
   ];
   return (
@@ -43,7 +43,7 @@ export const About: React.FC = () => {
           <h1 className="color-suelo">
             <FormattedMessage
               id="settings.about.title"
-              defaultMessage="About"
+              defaultMessage="About Bili"
               description="Title for about page"
             />
           </h1>

@@ -89,34 +89,6 @@ ion-button.sf-intro-button {
   line-height: 110%;
 }
 
-.cards-title h2 {
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
-}
-
-.cards-title p {
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%;
-  margin-top: auto;
-}
-
-.cards-title h1 {
-  color: #1c1c17;
-  font-family: Outfit;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%; /* 52.8px */
-}
-
 #story-juego-title2 {
   margin: 0px;
   padding: 2%;
@@ -414,57 +386,6 @@ ion-button.sf-intro-button {
   /* background-color: var(--base-humo, #eceeed); */
 }
 
-/* .fabrica-swirl-rectangle {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.fabrica-rectangle {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.fabrica-flipped-swirl {
-  transform: scaleX(-1);
-}
-
-.polygon-up {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
-    drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
-} */
-
-.bili-character {
-  position: absolute;
-  top: 100px;
-  right: -1.5rem;
-  max-width: 400px;
-  z-index: 2; /* Ensures Bili Character is on top of card */
-}
-
-@media only screen and (min-device-width: 768px) /* iPad Mini and iPad Air */ and (max-device-width: 1024px) /* iPad Mini,
-  iPad Air,
-  and iPad Pro */ and (-webkit-min-device-pixel-ratio: 1) {
-  ion-card.story-page-1-main-card {
-    width: 65vw; /* 1002px */
-    height: 78vh;
-  }
-
-  .bili-character {
-    height: 73vh;
-    width: 41vw;
-    top: 23vh;
-    left: 60vw;
-    z-index: 2;
-  }
-
-  /* Add any other styles or adjustments specific to iPads here */
-}
-
 .sf-header-container {
   display: inline-flex;
   max-width: 100%;
@@ -546,13 +467,17 @@ ion-card.new-felicitaciones-card {
   z-index: 1;
 }
 
+.congrats-container {
+  position: relative;
+}
+
 .stars-overlay {
   position: absolute;
   width: 100%;
-  top: 0;
+  top: -95px;
   left: 75px;
   right: 0;
-  bottom: -60px;
+  bottom: -250px;
   background: url("../../assets/icons/sf_stars_overlay.svg");
   position: absolute;
   z-index: 2;
@@ -679,7 +604,7 @@ ion-card.new-felicitaciones-card {
   font-weight: 700;
   letter-spacing: -1.057px;
   padding: 5px 0 5px;
-  margin: 5% 5% 7%;
+  // margin: 5% 5% 7%;
   white-space: pre;
 
   @media screen and (max-width: 768px) {
@@ -696,31 +621,70 @@ ion-card.new-felicitaciones-card {
   }
 }
 
-ion-row.slots {
-  margin-bottom: 3%;
-}
-
 .sf-game-option {
-  width: 100%;
-  border-radius: 200px;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  display: flex;
+  justify-content: center;
   text-align: center;
-  color: #000;
-  h1 {
-    font-size: 56px;
-  }
-
-  h2 {
-    font-size: 40px;
-    font-weight: normal;
-  }
+  align-items: center;
+  width: 100%;
+  height: 220px;
+  border-radius: 100px;
+  padding: 3rem 1rem;
 }
 
-#sf-game-page ion-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#sf-game-page {
+  position: relative;
+  padding: 0px 2%;
+  
+  ion-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // TODO: add background pattern in & resize for dif devices
+
+  // .sf-background-pattern {
+  //   position: absolute;
+  //   background-image: url('../../assets/icons/sf_background_pattern.svg');
+  //   background-repeat: round;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   // mix-blend-mode: multiply;
+  //   z-index: 1;
+
+  //   @media (max-width: 1024px) {// size for smaller iPads (iPad Air, iPad Pro 9.7-inch, etc.)
+  //     background-size: 1400px; 
+  //     background-repeat: repeat;
+  //     top: 0;
+  //     left: 0;
+  //   }
+
+  //   @media (max-width: 834px) {// size for iPad Pro 11-inch
+  //     background-size: 200px; 
+  //   }
+
+  //   @media (max-width: 768px) {// size for iPad Mini and iPad Pro 10.5-inch
+  //     background-size: 180px; 
+  //   }
+
+  //   @media (max-width: 576px) {// size for iPad Pro 12.9-inch and iPad Pro 12.9-inch (4th generation)
+  //     background-size: 150px; 
+  //   }
+
+  //   @media (max-width: 540px) {// size for smaller iPads in landscape mode
+  //     background-size: 120px; 
+  //   }
+  // }
+}
+
+.sf-game-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 1000px;
 }
 
 .option-orange {

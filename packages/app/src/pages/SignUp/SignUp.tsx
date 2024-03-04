@@ -56,10 +56,10 @@ export const SignUpComponent: React.FC = () => {
   return (
     <>
       <UnauthedHeader backButtonOnClick={backButtonOnClick} />
-      <div className="content-wrapper">
-        <IonCard>
+      <div className="page-wrapper">
+        <IonCard style={{ maxWidth: 580, margin: "auto" }}>
           <IonCardContent>
-            <div className="ion-padding">
+            <div className="margin-bottom-3">
               <IonProgressBar
                 color="primary"
                 style={{ width: "60%", margin: "auto" }}

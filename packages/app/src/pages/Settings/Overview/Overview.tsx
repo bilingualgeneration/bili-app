@@ -6,10 +6,12 @@ import {
   IonRow,
   IonCol,
   IonIcon,
-  IonCard,
+  IonPopover,
+  IonContent,
 } from "@ionic/react";
 import Joyride from "react-joyride";
 import { addOutline, ellipse, sparkles } from "ionicons/icons";
+import { Carousel } from "@/components/Carousel";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
@@ -20,10 +22,12 @@ import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
 import { useChildProfile } from "@/contexts/ChildProfileContext";
+import { useProfile } from "@/contexts/ProfileContext";
 
 import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
+  const { isImmersive, isInclusive } = useProfile();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
   const { childProfiles, activeChildProfile, setActiveChildProfile } =
     useChildProfile();
@@ -37,10 +41,12 @@ export const Overview: React.FC = ({}) => {
         if (response.value === null) {
           // have never seen it before
           setShouldShowTutorial(true);
+	  /*
           Preferences.set({
             key: "shouldShowSettingsTutorial",
-            value: "false",
+            value: false,
           });
+	  */
         }
       });
     }
@@ -129,17 +135,117 @@ export const Overview: React.FC = ({}) => {
 
   const intl = useIntl();
 
-  if (activeChildProfile === undefined) {
-    return <>loading</>;
-  }
-
   /*
      letterAvatarBackgroundColor="#f28ac9"
      letterAvatarTextColor="#973d78"
    */
+
+  const settingsExploreCards = [
+    {
+      backgroundImage: settingsCardDesign1,
+      backgroundColor: "#973D78",
+      title: intl.formatMessage({
+        id: "settings.overview.gettingStartedTitle",
+        defaultMessage: "Getting started",
+        description: "Explore card #1 title",
+      }),
+      subtitle: intl.formatMessage({
+        id: "settings.overview.gettingStartedContent",
+        defaultMessage:
+          "Your Essential Guide to Getting Started with the Bili App.",
+        description: "Explore card #1 content",
+      }),
+      tags: [
+        {
+          color: "#FFAEDC",
+          text: intl.formatMessage({
+            id: "tag.guide",
+            defaultMessage: "Guide",
+            description: "Content tag for guides",
+          }),
+        },
+        {
+          color: "#F1D100",
+          text: intl.formatMessage({
+            id: "tag.resources",
+            defaultMessage: "Resources",
+            description: "Content tag for resources",
+          }),
+        },
+      ],
+    },
+    {
+      backgroundImage: settingsCardDesign2,
+      backgroundColor: "#22BEB9",
+      title: intl.formatMessage({
+        id: "settings.overview.inclusiveSpanishTitle",
+        defaultMessage: "Inclusive Spanish",
+        description: "Explore card #2 title",
+      }),
+      subtitle: intl.formatMessage({
+        id: "settings.overview.InclusiveSpanishContent",
+        defaultMessage:
+          "Learn about what Inclusive Spanish is and why it exists.",
+        description: "Explore card #2 content",
+      }),
+      tags: [
+        {
+          color: "#D3EAE8",
+          text: intl.formatMessage({
+            id: "tags.social_justice",
+            defaultMessage: "Social Justice",
+            description: "Content tag for social justice",
+          }),
+        },
+        {
+          color: "#F1D100",
+          text: intl.formatMessage({
+            id: "tag.resources",
+            defaultMessage: "Resources",
+            description: "Content tag for resources",
+          }),
+        },
+      ],
+    },
+    {
+      backgroundImage: settingsCardDesign3,
+      backgroundColor: "#FFB68F",
+      title: intl.formatMessage({
+        id: "settings.overview.getChildTitle",
+        defaultMessage: "Get your child speaking Spanish with Bili",
+        description: "Explore card #3 title",
+      }),
+      subtitle: intl.formatMessage({
+        id: "settings.overview.getChildContent",
+        defaultMessage:
+          "Explore special features that promote authentic language production.",
+        description: "Explore card #3 content",
+      }),
+      tags: [
+        {
+          color: "#973D78",
+          text: intl.formatMessage({
+            id: "tags.parents",
+            defaultMessage: "Parents",
+            description: "Content tag for parents",
+          }),
+          textColor: "#fff",
+        },
+        {
+          color: "#F1D100",
+          text: intl.formatMessage({
+            id: "tag.resources",
+            defaultMessage: "Resources",
+            description: "Content tag for resources",
+          }),
+        },
+      ],
+    },
+  ];
+
   return (
-    <>
-      {shouldShowTutorial && !isAdultCheckOpen && (
+    <div id="settings-profile">
+      {shouldShowTutorial && !isAdultCheckOpen && false && (
         <Joyride
           locale={translations.Joyride}
           hideCloseButton
@@ -158,7 +264,7 @@ export const Overview: React.FC = ({}) => {
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
             <IonCol size="auto">
-              <h1 className="child-profile-heading">
+              <h1 className="child-profile-heading margin-bottom-1-5">
                 <FormattedMessage
                   id="settings.overview.child"
                   defaultMessage="Child Profile"
@@ -167,22 +273,27 @@ export const Overview: React.FC = ({}) => {
               </h1>
             </IonCol>
 
+            {/* UNCOMMENT ONCE +ADD CHILD FUNCTIONALITY IMPLEMENTED - CAN ALSO REMOVE BUTTON POPOVER */}
+
             <IonCol size="auto">
-              <IonButton
-                disabled={true}
+              {/* <IonButton
+                // disabled={true}
                 size="small"
-                className="add-child-btn"
+                id="hover-trigger"
+                className="add-child-btn ion-no-margin"
                 onClick={() => {
                   // route and logic for user to add child
                 }}
               >
                 <IonIcon
+                  className="add"
                   aria-hidden="true"
+                  aria-label="addition icon"
                   slot="start"
                   icon={addOutline}
                   size="small"
                 />
-                <IonLabel style={{ color: "var(--Base-Nube)" }}>
+                <IonLabel className="text-sm semibold" style={{ color: "var(--Base-Nube)" }}>
                   <FormattedMessage
                     id="settings.overview.addChildBtn"
                     defaultMessage="Add child"
@@ -190,14 +301,28 @@ export const Overview: React.FC = ({}) => {
                   />
                 </IonLabel>
               </IonButton>
+              <IonPopover 
+                className="cs-hover" 
+                trigger="hover-trigger" 
+                triggerAction="hover" 
+                side="bottom"
+                alignment="center"
+                showBackdrop={false}
+                arrow={true}
+              >
+                <IonContent className="cs-content ion-text-center">
+                  <div className="text-2xl semibold color-suelo">¡Próximamente!</div>
+                  {!isImmersive && <div className="text-2xl color-english">Coming soon!</div>}
+                </IonContent>  
+              </IonPopover> */}
             </IonCol>
           </IonRow>
 
           <div style={{ marginTop: "2rem" }}>
-            <IonRow>
-              {childProfiles.map((p: any) => (
+            <IonRow className="margin-bottom-3">
+              {childProfiles.map((p: any, index: number) => (
                 <IonCol
-                  className="ion-padding"
+                  className="ion-no-padding"
                   size="6"
                   onClick={() => {
                     setActiveChildProfile(p.uid);
@@ -206,7 +331,7 @@ export const Overview: React.FC = ({}) => {
                 >
                   <ChildProfileCard
                     age={p.age}
-                    isActive={activeChildProfile.uid === p.uid}
+                    isActive={activeChildProfile === index}
                     letterAvatarBackgroundColor="#20bfb9"
                     letterAvatarTextColor="#ffffff"
                     name={p.name}
@@ -216,7 +341,7 @@ export const Overview: React.FC = ({}) => {
             </IonRow>
           </div>
 
-          <IonRow class="ion-align-items-end ion-justify-content-between row">
+          <IonRow class="ion-align-items-end ion-justify-content-between row margin-bottom-1-5">
             <IonCol size="auto">
               <div className="explore-bili-heading-subheading-container">
                 <h1 className="explore-bili-heading">
@@ -226,7 +351,7 @@ export const Overview: React.FC = ({}) => {
                     description="Explore Bili heading in settings"
                   />
                 </h1>
-                <p className="explore-bili-subheading">
+                <p className="explore-bili-subheading margin-bottom-1-5">
                   <FormattedMessage
                     id="settings.overview.exploreSubheading"
                     defaultMessage="Learn how to use Bili to meet language goals"
@@ -242,139 +367,20 @@ export const Overview: React.FC = ({}) => {
                 </p>
               </div>
             </IonCol>
-
-            <IonCol size="auto">
-              <IonButton
-                disabled={true}
-                fill="clear"
-                id="settings-overview-see-all-button"
-              >
-                <FormattedMessage
-                  id="settings.overview.seeAll"
-                  defaultMessage="See all (9)"
-                  description="See all link in settings"
-                />
-              </IonButton>
-            </IonCol>
           </IonRow>
 
-          <div className="child-profile-content">
-            <IonRow>
-              <IonCol size="md">
+          <div className="child-profile-content margin-top-1">
+            <Carousel height={350}>
+              {settingsExploreCards.map((card, index) => (
                 <SettingsExploreCard
-                  backgroundImage={settingsCardDesign1}
-                  backgroundColor={"#973D78"}
-                  title={intl.formatMessage({
-                    id: "settings.overview.gettingStartedTitle",
-                    defaultMessage: "Getting started",
-                    description: "Explore card #1 title",
-                  })}
-                  subtitle={intl.formatMessage({
-                    id: "settings.overview.gettingStartedContent",
-                    defaultMessage:
-                      "When you enter into any new area of science, you almost always find.",
-                    description: "Explore card #1 content",
-                  })}
-                  tags={[
-                    {
-                      color: "#FFAEDC",
-                      text: intl.formatMessage({
-                        id: "tag.guide",
-                        defaultMessage: "Guide",
-                        description: "Content tag for guides",
-                      }),
-                    },
-                    {
-                      color: "#F1D100",
-                      text: intl.formatMessage({
-                        id: "tag.resources",
-                        defaultMessage: "Resources",
-                        description: "Content tag for resources",
-                      }),
-                    },
-                  ]}
+                  {...card}
+                  key={index}
                 />
-              </IonCol>
-
-              <IonCol size="md">
-                <span id="inclusive-spanish-card">
-                  <SettingsExploreCard
-                    backgroundImage={settingsCardDesign2}
-                    backgroundColor={"#22BEB9"}
-                    title={intl.formatMessage({
-                      id: "settings.overview.inclusiveSpanishTitle",
-                      defaultMessage: "Inclusive Spanish",
-                      description: "Explore card #2 title",
-                    })}
-                    subtitle={intl.formatMessage({
-                      id: "settings.overview.InclusiveSpanishContent",
-                      defaultMessage:
-                        "Learn about what Inclusive Spanish is and why it exists.",
-                      description: "Explore card #2 content",
-                    })}
-                    tags={[
-                      {
-                        color: "#D3EAE8",
-                        text: intl.formatMessage({
-                          id: "tags.social_justice",
-                          defaultMessage: "Social Justice",
-                          description: "Content tag for social justice",
-                        }),
-                      },
-                      {
-                        color: "#F1D100",
-                        text: intl.formatMessage({
-                          id: "tag.resources",
-                          defaultMessage: "Resources",
-                          description: "Content tag for resources",
-                        }),
-                      },
-                    ]}
-                  />
-                </span>
-              </IonCol>
-
-              <IonCol size="md">
-                <SettingsExploreCard
-                  backgroundImage={settingsCardDesign3}
-                  backgroundColor={"#FFB68F"}
-                  title={intl.formatMessage({
-                    id: "settings.overview.getChildTitle",
-                    defaultMessage: "Get your child speaking Spanish with Bili",
-                    description: "Explore card #3 title",
-                  })}
-                  subtitle={intl.formatMessage({
-                    id: "settings.overview.getChildContent",
-                    defaultMessage:
-                      "Explore special features that promote authentic language production.",
-                    description: "Explore card #3 content",
-                  })}
-                  textColor="black"
-                  tags={[
-                    {
-                      color: "#973D78",
-                      text: intl.formatMessage({
-                        id: "tags.parents",
-                        defaultMessage: "Parents",
-                        description: "Content tag for parents",
-                      }),
-                      textColor: "#fff",
-                    },
-                    {
-                      color: "#F1D100",
-                      text: intl.formatMessage({
-                        id: "tag.resources",
-                        defaultMessage: "Resources",
-                        description: "Content tag for resources",
-                      }),
-                    },
-                  ]}
-                />
-              </IonCol>
-            </IonRow>
+              ))}
+            </Carousel>
           </div>
         </IonGrid>
       </div>
-    </>
+    </div>  
   );
 };

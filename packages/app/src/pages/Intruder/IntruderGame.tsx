@@ -20,11 +20,12 @@ import { useProfile } from "@/contexts/ProfileContext";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
+import {useAudioManager} from '@/contexts/AudioManagerContext';
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
-import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
-import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
+import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.wav";
+import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.wav";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -71,25 +72,24 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { isImmersive } = useProfile();
-  const audio_correct = new Audio(correct_card_audio);
-  const audio_incorrect = new Audio(incorrect_card_audio);
-  const card_flip = new Audio(card_flip_audio);
-
-  const instruction_es = new Audio(instruction_es_audio);
-  const instruction_en = new Audio(instruction_en_audio);
+  const {addAudio, clearAudio, setCallback} = useAudioManager();
 
   useEffect(() => {
-    if (!isImmersive) {
-      instruction_es.onended = () => {
-        instruction_en.play();
-      };
+    const audios = [instruction_es_audio];
+    if(!isImmersive){
+      audios.push(instruction_en_audio);
     }
-    instruction_es.play();
+    addAudio(audios);
+    return () => {
+      clearAudio();
+    };
   }, []);
 
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
+    aspectRatio: '1 / 1.25',
+    border: '8.4px solid transparent',
     boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
   };
 
@@ -173,7 +173,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
-      card_flip.play(); //sound for flipping cards
       setTimeout(() => {
         if (
           currentIndex + 1 === 5 ||
@@ -200,7 +199,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const handleCardClick = (card: any) => {
     if (!card.isIntruder) {
       //logic for the incorrect cards
-      audio_incorrect.play(); //plays audio for incorrect choice
+      console.log('123');
+      addAudio([incorrect_card_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: { ...incorrectStyle, animation: "shake 1s" },
@@ -214,7 +214,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       }, 1000);
     } else {
       //logic when the correct card is choosen
-      audio_correct.play(); //plays audio for correct choice
+      addAudio([correct_card_audio, card_flip_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: correctStyle,
@@ -228,6 +228,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   //function for the button playing audio for the cards text
   const handleWordAudioClick = async () => {
+    // todo: audiomanager needs interstitial before and after callbacks
     for (const card of shuffledCards) {
       const wordAudio = new Audio(card.audio.url);
       await new Promise<void>((resolve) => {
@@ -260,10 +261,16 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   return (
     <>
       <div id="intruder-styles">
-        <IonText>
-          <h2>¿Qué palabra no rima?</h2>
-          {!isImmersive && <p>Which word does not rhyme?</p>}
-        </IonText>
+        <div className="margin-top-4 margin-bottom-2">
+          <IonText>
+            <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
+            {!isImmersive && (
+              <p className="text-3xl color-english">
+                Which word does not rhyme?
+              </p>
+            )}
+          </IonText>
+        </div>
         <div className="intruder-cards-container">
           {shuffledCards.map((card, index) => (
             <IonCard
@@ -274,10 +281,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
               }
               onClick={() => handleCardClick(card)}
             >
-              {!showBackside && <img src={card.image.url} />}
-              {!showBackside && (
-                <p className="intruder-card-title">{card.word}</p>
-              )}
+	      <img src={card.image.url} style={{opacity: showBackside ? 0 : 1}}/>
+	      <p className="text-5xl color-suelo" style={{opacity: showBackside ? 0 : 1}}>{card.word}</p>
             </IonCard>
           ))}
         </div>
@@ -288,6 +293,14 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           >
             <img className="sound-icon" src={volumeButton} />
           </IonButton>
+          <IonText>
+            <h1 className="text-3xl semibold color-suelo">Lee</h1>
+            {!isImmersive && (
+              <p className="text-lg color-english">
+                Read
+              </p>
+            )}
+          </IonText>
         </div>
       </div>
     </>

@@ -11,19 +11,21 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
+import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
-import { CountWithMe } from "@/pages/CountWithMe/CountWithMe";
+import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
+import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
+import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
-import { I18nWrapper } from "@/components/I18nWrapper";
-import Intruder from "@/pages/games/Intruder";
-import { IntruderIntro } from "@/pages/Intruder/IntruderIntro";
-import { IntruderSelect } from "@/pages/Intruder/IntruderSelect";
-import { IntruderGame } from "@/pages/Intruder/IntruderGame";
-import { IntruderGameLoader } from "./pages/Intruder/IntruderGameLoader";
+import {
+  IntruderSelect,
+  IntruderIntro,
+  IntruderGame,
+  IntruderGameLoader
+} from '@/pages/Intruder';
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
-import Memory from "@/pages/games/Memory";
 import {
   About,
   Overview,
@@ -32,30 +34,38 @@ import {
   Profile,
 } from "@/pages/Settings";
 import { Debug } from "@/pages/Debug";
-import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { Play } from "@/pages/Play";
+import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
+import { ProfileComingSoon } from "./pages/ProfileComingSoon";
 import ResetPassword from "@/pages/ResetPassword";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
 import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
-import Stories from "@/pages/games/Stories";
-import { StoryFactoryPg1 } from "@/pages/StoryFactory/StoryFactoryPg1";
-import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+
+import { Stories } from "@/pages/Stories";
+import { StoriesDragGameLoader } from "./pages/Stories";
+import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
+//import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
+import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
+import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
-import { WouldDoGame, WouldDoWithAnimation } from "@/pages/WouldDo";
-
+import { useLanguage } from "@/contexts/LanguageContext";
+import { I18nWrapper } from "@/components/I18nWrapper";
+import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
-import { CommunityHeader } from "@/components/CommunityHeader";
-import { PlayHeader } from "@/components/PlayHeader";
+//import { CommunityHeader } from "@/components/CommunityHeader";
+//import { PlayHeader } from "@/components/PlayHeader";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -77,396 +87,451 @@ import "@ionic/react/css/display.css";
 import "@/theme/variables.css";
 import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
+import "@/theme/margin-classes.scss";
+import "@/theme/text-classes.scss";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Wellness } from "./pages/Wellness/Wellness";
 
 setupIonicReact();
 
 const Router: React.FC = () => {
+  const contentStyle: Record<string, string> = {};
+  const intl = useIntl();
   return (
-    <IonReactRouter>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <UnauthedLayout>
-              <Preload />
-            </UnauthedLayout>
-          )}
-        />
+      <IonReactRouter>
+        <Switch>
+	  <ScrollToTop>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <UnauthedLayout>
+                <Preload />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route exact path="/presplash" render={() => <PreSplash />} />
+          <Route exact path="/presplash" render={() => <PreSplash />} />
 
-        <Route
-          exact
-          path="/debug"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#f7faf9">
-                <Debug />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/debug"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <Debug />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/intruder"
-          render={() => (
-            <AuthedLayout>
-              <Intruder />
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/journeys"
+            render={() => (
+              <UnauthedLayout>
+                <Journeys />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/journeys"
-          render={() => (
-            <UnauthedLayout>
-              <Journeys />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/login"
+            render={() => (
+              <UnauthedLayout>
+                <Login />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/login"
-          render={() => (
-            <UnauthedLayout>
-              <Login />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/play"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <Play />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/memory"
-          render={() => (
-            <UnauthedLayout>
-              <Memory />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/community"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <Community />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/play"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#f7faf9">
-                <Play />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/count-with-me-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/count-with-me/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#f7faf9">
-                <CountWithMe />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+	  
+          <Route
+            exact
+            path="/count-with-me-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        {/* temp route for development */}
-        <Route
-          exact
-          path="/pricing"
-          render={() => (
-            <UnauthedLayout>
-              <Pricing />
-            </UnauthedLayout>
-          )}
-        />
+	  
+          <Route
+            exact
+            path="/count-with-me-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <CountWithMeGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/reset-password"
-          render={() => (
-            <UnauthedLayout>
-              <ResetPassword />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/stories"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StoriesLandingPage />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/settings/about"
-          render={() => (
-            <AuthedLayout>
-              <AdultCheckProvider>
-                <SettingsLayout background="#f7faf9">
-                  <About />
-                </SettingsLayout>
-              </AdultCheckProvider>
-            </AuthedLayout>
-          )}
-        />
+          {/* temp route for development */}
+          <Route
+            exact
+            path="/pricing"
+            render={() => (
+              <UnauthedLayout>
+                <Pricing />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/settings/overview"
-          render={() => (
-            <AuthedLayout>
-              <AdultCheckProvider>
-                <SettingsLayout background="#f7faf9">
-                  <Overview />
-                </SettingsLayout>
-              </AdultCheckProvider>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/reset-password"
+            render={() => (
+              <UnauthedLayout>
+                <ResetPassword />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/settings/preferences"
-          render={() => (
-            <AuthedLayout>
-              <AdultCheckProvider>
-                <SettingsLayout background="#f7faf9">
-                  <Preferences />
-                </SettingsLayout>
-              </AdultCheckProvider>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/profile/coming-soon"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <ProfileComingSoon />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/settings/profile"
-          render={() => (
-            <AuthedLayout>
-              <AdultCheckProvider>
-                <SettingsLayout background="#f7faf9">
-                  <Profile />
-                </SettingsLayout>
-              </AdultCheckProvider>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/settings/about"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <About />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/settings/progress"
-          render={() => (
-            <AuthedLayout>
-              <AdultCheckProvider>
-                <SettingsLayout background="#f7faf9">
-                  <Progress />
-                </SettingsLayout>
-              </AdultCheckProvider>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/settings/overview"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <Overview />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/sign-up"
-          render={() => (
-            <UnauthedLayout>
-              <SignUp />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/settings/preferences"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <Preferences />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/splash"
-          render={() => (
-            <UnauthedLayout>
-              <Splash />
-            </UnauthedLayout>
-          )}
-        />
-        <Route
+          <Route
+            exact
+            path="/settings/profile"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <Profile />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/settings/progress"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <Progress />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/sign-up"
+            render={() => (
+              <UnauthedLayout>
+                <SignUp />
+              </UnauthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/splash"
+            render={() => (
+              <UnauthedLayout>
+                <Splash />
+              </UnauthedLayout>
+            )}
+          />
+
+	  <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
-            <UnauthedLayout>
-              <Stories id={props.match.params.uuid} />
-            </UnauthedLayout>
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+              <Stories />
+                </HeaderFooter>
+              </AuthedLayout>
           )}
         />
 
-        <Route
-          exact
-          path="/story-factory/1"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPg1 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/stories/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <StoriesDragGameLoader />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/story-factory/2"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPg2 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/story-factory-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <StoryFactoryIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/story-factory/3"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage3 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/story-factory-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <StoryFactorySelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/story-factory/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage4 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/story-factory-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <StoryFactoryPage4 />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/story-factory/6"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <StoryFactoryPage4 />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/story-factory/6"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <StoryFactoryPage4 />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/intruder/intro"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <IntruderIntro />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/would-do-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <WouldDoIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/intruder/select"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <IntruderSelect />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/would-do-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <WouldDoGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/intruder/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#F7FAF9">
-                <IntruderGameLoader />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/intruder-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <IntruderIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/intruder-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <IntruderSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/student-dashboard"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fff">
-                <StudentDashboard />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/intruder-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <IntruderGameLoader />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/teacher-login"
-          render={() => (
-            <UnauthedLayout>
-              <TeacherLogin />
-            </UnauthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/student-dashboard"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#fff">
+                  <StudentDashboard />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/would-do-game/select"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fbf2e2">
-                <PackSelect
-                  headerComponent={<CommunityHeader />}
-                  module="would-do-game"
-                  packId="dc6fd688-cbb9-4467-ba41-aad105c5ea40"
-                  translatedTitle={
-                    <FormattedMessage
-                      id="common.wouldDo"
-                      defaultMessage="What would you do?"
-                    />
-                  }
-                  englishTitle="What would you do?"
-                />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/teacher-login"
+            render={() => (
+              <UnauthedLayout>
+                <TeacherLogin />
+              </UnauthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/would-do-game/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fbf2e2">
-                <WouldDoGame />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
+          <Route
+            exact
+            path="/would-do-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <WouldDoSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
 
-        <Route
-          exact
-          path="/would-do-with-animation/play/:pack_id"
-          render={() => (
-            <AuthedLayout>
-              <HeaderFooter background="#fbf2e2">
-                <WouldDoWithAnimation />
-              </HeaderFooter>
-            </AuthedLayout>
-          )}
-        />
-      </Switch>
-    </IonReactRouter>
+          <Route
+            exact
+            path="/wellness"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <Wellness />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+	  </ScrollToTop>
+        </Switch>
+      </IonReactRouter>
   );
 };
 
 const App: React.FC = () => {
+  const { locale } = useLanguage();
   useEffect(() => {
     // set default language to device if not already set
     (async () => {
       const locale = await localStorage.getItem("userLocale");
-      alert((await Device.getLanguageCode()).value);
       if (locale === null) {
         // no stored language
         localStorage.setItem(
@@ -480,7 +545,11 @@ const App: React.FC = () => {
     <SuspenseWithPerf fallback={<Loading />} traceId="user-load">
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
-          <Router />
+          <AudioManagerProvider>
+	    <I18nWrapper locale={locale}>
+	      <Router />
+	    </I18nWrapper>
+          </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>
     </SuspenseWithPerf>

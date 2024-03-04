@@ -1,20 +1,8 @@
-#playBanner {
+#communityBanner {
   background-image: url(/assets/img/background_pattern_lp.png);
   background-size: cover;
-  background-color: #ff5709;
-  color: #fff;
+  background-color: #d3eae8;
+  color: #1c1c17;
   padding: 1rem 0 1rem 100px;
   margin-bottom: 4rem;
-
-  h1 {
-    font-size: 56px;
-  }
-
-  h2 {
-    font-size: 44px;
-  }
-
-  h1 + h2 {
-    margin-top: 0;
-  }
 }

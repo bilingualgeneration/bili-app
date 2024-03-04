@@ -1,17 +1,57 @@
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
+import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
+import { useProfile } from "@/contexts/ProfileContext";
+import { FormattedMessage } from "react-intl";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useHistory } from "react-router-dom";
+import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.wav";
+import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.wav";
+import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.wav";
 
-export const CongratsPage = () => {
+import "../StoryFactory/StoryFactory.scss";
+
+interface CountCongratsProps {
+  onKeepGoingClick: () => void;
+  count: number;
+}
+
+export const CongratsPage: React.FC<CountCongratsProps> = ({
+  onKeepGoingClick,
+  count,
+}) => {
   // Function to render the congrats page
   const congrats = {
     background:
       "https://ik.imagekit.io/jskeetedev/Untitled%20design%20(3).png?updatedAt=1706831646016",
     star: "https://ik.imagekit.io/jskeetedev/Untitled%20design%20(2).png?updatedAt=1706831320447",
-    es: "Te ganaste una estrella",
-    en: "You've earned a star",
   };
 
+  const { isInclusive, isImmersive } = useProfile();
   const [showText, setShowText] = useState(true); // State to show/hide text
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, setCallback } = useAudioManager();
+
+  useEffect(() => {
+    return () => {
+      clearAudio();
+    };
+  }, []);
+  useEffect(() => {
+    setCallback(() => () => {
+      setAudioPlayed(true);
+    });
+
+    if (isImmersive) {
+      if (isInclusive) {
+        addAudio([audio_es_inc_file]);
+      }
+      addAudio([audio_es_file]);
+    } else {
+      addAudio([audio_es_file, audio_en_file]);
+    }
+  }, []);
+  const history = useHistory();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -40,14 +80,24 @@ export const CongratsPage = () => {
               position: "absolute",
               width: "1200px",
               height: "auto",
-              zIndex: 1,
+              zIndex: -1,
             }}
             alt="background"
           />
-          <IonText>
-            <h1>Actividad Completada</h1>
-            <p style={{ textAlign: "center" }}>Activity Completed</p>
-          </IonText>
+          <div>
+	    <IonText>
+	    <h1 className='text-4xl color-suelo semibold'>
+            <FormattedMessage
+              id="countWithMe.complete"
+              defaultMessage="Activity Completed"
+              description="Information that the activity is completed"
+            />
+	    </h1>
+            {!isImmersive && (
+              <p className='text-2xl color-english' style={{ textAlign: "center" }}>Activity Completed</p>
+            )}
+	    </IonText>
+          </div>
 
           <div
             style={{
@@ -76,21 +126,68 @@ export const CongratsPage = () => {
                   color: "#fff",
                 }}
               >
-                <p style={{ fontSize: "26px", margin: 0, color: "black" }}>
-                  {congrats.es}
-                </p>
-                <p style={{ fontSize: "12px", margin: 0, color: "black" }}>
-                  {congrats.en}
-                </p>
+                <div
+                  style={{
+                    fontSize: "26px",
+                    margin: 0,
+                    color: "black",
+                  }}
+                >
+                  <FormattedMessage
+                    id="countWithMe.congrats"
+                    defaultMessage="You've earned a star"
+                    description="Congrats text on a star"
+                  />
+                </div>
+
+                {!isImmersive && (
+                  <p style={{ fontSize: "12px", margin: 0, color: "black" }}>
+                    You've earned a star
+                  </p>
+                )}
               </div>
             )}
           </div>
 
-          <IonButton shape="round" style={{ width: "300px" }}>
-            ¡Sigue adelante!
-            <br />
-            Keep Going!
-          </IonButton>
+          <div
+            style={{
+              position: "relative",
+              textAlign: "center",
+              marginTop: "10rem",
+            }}
+          >
+            <img
+              src={StoryFactoryArrow}
+              alt="indicator arrow to next button"
+              style={{
+                right: "110%",
+                top: 3,
+                position: "absolute",
+              }}
+            />
+
+            <IonButton
+              className="sf-intro-button"
+              disabled={!audioPlayed}
+              expand="block"
+              shape="round"
+              type="button"
+              onClick={onKeepGoingClick}
+            >
+              <div>
+                <div className="story-button-bold">
+                  <FormattedMessage
+                    id="countWithMe.keepGoing"
+                    defaultMessage="Keep Going!"
+                    description="Button label to exit congrats screen"
+                  />
+                </div>
+                {!isImmersive && (
+                  <div className="story-button-reg">Keep going!</div>
+                )}
+              </div>
+            </IonButton>
+          </div>
         </div>
       </div>
     </>

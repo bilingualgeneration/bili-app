@@ -10,6 +10,7 @@ http://ionicframework.com/docs/theming/ */
   /** color names **/
   --Arena-High: #eee8de;
   --Base-Barro: #889391;
+  --Base-Nube: #ffffff;
   --Base-Selva: #006a67;
   --Base-Suelo: #000000;
   --Cielo-Cielo: #d3eae8;
@@ -22,7 +23,9 @@ http://ionicframework.com/docs/theming/ */
   --Habanero-Low: #8b1a00;
   --Flamenco-Highest: #ffd8eb;
   --Sol-Low: #e3c029;
+  --Sol-High: #ffe24f;
   --Flamenco-High: #ffaedc;
+  --Flamenco-Lowest: #5D0947;
 
   /** primary **/
   --ion-color-primary: var(--Base-Selva);

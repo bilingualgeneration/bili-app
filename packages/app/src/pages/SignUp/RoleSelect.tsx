@@ -96,7 +96,7 @@ export const RoleSelect: React.FC = () => {
     <>
       <form onSubmit={onSubmit} className="radio-button-select">
         <IonText className="ion-text-center">
-          <h2>
+          <h2 className="text-3xl semibold color-suelo">
             <FormattedMessage
               id="signUp.describe"
               defaultMessage="Which best describes you?"
@@ -110,6 +110,7 @@ export const RoleSelect: React.FC = () => {
           options={[teacherOption, parentOption]}
         />
         <IonButton
+          className="margin-vertical-1"
           shape="round"
           type="button"
           onClick={onSubmit}

@@ -1,10 +1,6 @@
-import { DividerText } from "@/components/DividerText";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { userSchema } from "@bili/schema/user";
-
-import AppleIcon from "@/assets/icons/apple.svg?react";
-import GoogleIcon from "@/assets/icons/google.svg?react";
 
 import React from "react";
 import { useAuth, useSigninCheck } from "reactfire";
@@ -13,23 +9,8 @@ import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Auth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  getAuth,
-} from "firebase/auth";
+import { Auth, signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
-
-const signOut = (auth: { isAuthed?: boolean; user?: null; signOut?: any }) => {
-  auth.signOut();
-};
-
-const signInWithGoogle = async (auth: Auth) => {
-  const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
-};
 
 const handleEmailPasswordSignIn = async (
   auth: Auth,
@@ -75,93 +56,53 @@ const Login: React.FC = () => {
           history.goBack();
         }}
       />
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ maxWidth: 580, margin: "auto" }}
+      >
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="ion-margin-top">
-                <Input
-                  label={intl.formatMessage({
-                    id: "common.email",
-                    defaultMessage: "Your email",
-                    description: "Input label for email",
-                  })}
-                  labelPlacement="above"
-                  required={true}
-                  name="email"
-                  control={control}
-                  fill="outline"
-                  helperText=""
-                  testId="login-email-input"
-                  type="email"
-                />
+              <div className="text-md semibold color-barro">
+                <div>
+                  <Input
+                    label={intl.formatMessage({
+                      id: "common.email",
+                      defaultMessage: "Your email",
+                      description: "Input label for email",
+                    })}
+                    labelPlacement="above"
+                    required={true}
+                    name="email"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="login-email-input"
+                    type="email"
+                  />
+                </div>
+
+                <div className="ion-margin-top">
+                  <Input
+                    label={intl.formatMessage({
+                      id: "common.password",
+                      defaultMessage: "Password",
+                      description: "Input label for user's password",
+                    })}
+                    labelPlacement="above"
+                    required={true}
+                    name="password"
+                    control={control}
+                    fill="outline"
+                    helperText=""
+                    testId="login-password-input"
+                    type="password"
+                  />
+                </div>
               </div>
-
-              <div className="ion-margin-top">
-                <Input
-                  label={intl.formatMessage({
-                    id: "common.password",
-                    defaultMessage: "Password",
-                    description: "Input label for user's password",
-                  })}
-                  labelPlacement="above"
-                  required={true}
-                  name="password"
-                  control={control}
-                  fill="outline"
-                  helperText=""
-                  testId="login-password-input"
-                  type="password"
-                />
-              </div>
-
-              <DividerText
-                className="ion-margin-top"
-                text={intl.formatMessage({
-                  id: "login.divider",
-                  defaultMessage: "or",
-                  description: "text to show between options",
-                })}
-              />
-
-              <IonButton
-                color="medium"
-                className="ion-margin-top"
-                disabled
-                expand="block"
-                fill="outline"
-                style={{ opacity: 0.2 }}
-              >
-                <span style={{ marginRight: "1rem" }}>
-                  <GoogleIcon />
-                </span>{" "}
-                <FormattedMessage
-                  id="common.google"
-                  defaultMessage="Continue with Google"
-                  description="Button label to use Google"
-                />
-              </IonButton>
-
-              <IonButton
-                color="medium"
-                className="ion-margin-top"
-                disabled
-                expand="block"
-                fill="outline"
-                style={{ opacity: 0.2 }}
-              >
-                <span style={{ marginRight: "1rem" }}>
-                  <AppleIcon />
-                </span>
-                <FormattedMessage
-                  id="common.apple"
-                  defaultMessage="Continue with Apple"
-                  description="Button label to use Apple"
-                />
-              </IonButton>
-
               <div className="ion-margin-top">
                 <IonButton
+                  className="margin-vertical-3"
                   data-testid="account-credentials-continue-button"
                   disabled={!isValid}
                   expand="block"
@@ -175,7 +116,7 @@ const Login: React.FC = () => {
                   />
                 </IonButton>
               </div>
-              <div className="ion-text-center ion-margin-top">
+              <div className="ion-text-center ion-margin-top text-sm">
                 <IonText color="medium">
                   <FormattedMessage
                     id="common.noAccount"
@@ -184,7 +125,7 @@ const Login: React.FC = () => {
                   />{" "}
                   <IonText>
                     {" "}
-                    <a href="/sign-up">
+                    <a href="/sign-up" className="semibold" style={{}}>
                       <FormattedMessage
                         id="common.signUp"
                         defaultMessage="Sign Up"
