@@ -73,11 +73,11 @@ export const StoryLoader = () => {
       });
       let totalPages = fp.length;
       totalPages++; // cover
-      if(data.multiple_image_text){
+      if(data.multiple_image_text && data.multiple_image_text.length > 0){
 	totalPages++;
 	setHasMultipleImage(true);
       }
-      if(data.multiple_syllable_text){
+      if(data.multiple_syllable_text && data.multiple_syllable_text.length > 0){
 	totalPages++;
 	setHasMultipleSyllable(true);
       }
@@ -85,7 +85,7 @@ export const StoryLoader = () => {
       totalPages++; // congrats page
       setFilteredPages(fp);
       setTotalPages(totalPages);
-      setPageNumber(0);
+      setPageNumber(9);
       setReady(true);
     }
   }, [data]);
@@ -94,7 +94,6 @@ export const StoryLoader = () => {
     return <></>;
   }
 
-  //console.log(`${pageNumber} / ${totalPages}`);
   return (
     <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
