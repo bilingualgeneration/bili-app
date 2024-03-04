@@ -27,6 +27,18 @@ export const CategoryTag: React.FC<{
       bgColor = "#22beb9";
       icon = <CommunityIcon />;
       break;
+    case "affirmation":
+      bgColor = "#AC217B";
+      icon = <WellnessIcon />;
+      break;
+    case "yoga":
+      bgColor = "#AC217B";
+      icon = <WellnessIcon />;
+      break;
+    case "other_wellness":
+    bgColor = "#AC217B";
+    icon = <WellnessIcon />;
+    break;
   }
   return (
     <div
