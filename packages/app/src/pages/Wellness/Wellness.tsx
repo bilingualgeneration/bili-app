@@ -7,6 +7,7 @@ import BreathingGirl from "@/assets/img/breathing_girl.png";
 import { CategoryTag } from "@/components/CategoryTag";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { useHistory } from "react-router";
+import Lock from "@/assets/icons/lock.svg?react";
 import "./Wellness.scss";
 import "../Play/Play.scss";
 
@@ -37,7 +38,6 @@ const PlayHeader: FC = () => {
 
     return (
       <div
-        id=""
         className="card another-cards"
         style={rotationStyle}
         onClick={() => {
@@ -69,6 +69,10 @@ const PlayHeader: FC = () => {
          // history.push("/intruder-game/intro");
         }}
       >
+	
+        <div className="content-lock">
+          <Lock />
+        </div>
         <CategoryTag category="affirmation" className="play-category-tag" />
         <FavoriteButton fid="category-the intruder" />
         <img src={AffirmationGirl} />
@@ -95,6 +99,9 @@ const PlayHeader: FC = () => {
          // history.push("/intruder-game/intro");
         }}
       >
+        <div className="content-lock">
+          <Lock />
+        </div>
         <CategoryTag category="yoga" className="play-category-tag" />
         <FavoriteButton fid="category-the intruder" />
         <img src={BreathingGirl} />

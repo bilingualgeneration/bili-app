@@ -229,6 +229,7 @@ export const StudentDashboard: FC = () => {
     {
       reactintlId: "common.stories",
       englishLabel: "Stories",
+      link: "/stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
@@ -236,6 +237,7 @@ export const StudentDashboard: FC = () => {
       reactintlId: "common.wellness",
       englishLabel: "Wellness",
       backgroundColor: "#ac217b",
+      link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
@@ -255,7 +257,7 @@ export const StudentDashboard: FC = () => {
   ];
 
   return (
-    <div id="student-landing-page" style={{paddingBottom: "33vh"}}>
+    <div id="student-landing-page">
       <div
         className="cards-title background-pattern"
         style={{
@@ -313,10 +315,12 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <IonText>
+            <Link to="/stories" className="no-text-decoration">
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
             {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
@@ -329,6 +333,7 @@ export const StudentDashboard: FC = () => {
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
+            <Link to="/wellness" className="no-text-decoration">
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage
                 id="common.wellness"
@@ -336,6 +341,7 @@ export const StudentDashboard: FC = () => {
               />
             </h1>
             {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>

@@ -8,6 +8,7 @@ import {
   IonText,
   IonButton,
 } from "@ionic/react";
+import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
@@ -42,10 +43,15 @@ export const StoryLoader = () => {
   // @ts-ignore
   const { uuid } = useParams();
   const {
+    hasMultipleImage,
+    hasMultipleSyllable,
     setPageNumber,
     pageNumber,
+    setHasMultipleImage,
+    setHasMultipleSyllable,
     setTotalPages,
     setFilteredPages,
+    totalPages,
     filteredPages,
     ready,
     setReady,
@@ -65,11 +71,20 @@ export const StoryLoader = () => {
           return langs.includes("es");
         }
       });
+      let totalPages = fp.length;
+      totalPages++; // cover
+      if(data.multiple_image_text){
+	totalPages++;
+	setHasMultipleImage(true);
+      }
+      if(data.multiple_syllable_text){
+	totalPages++;
+	setHasMultipleSyllable(true);
+      }
+
+      totalPages++; // congrats page
       setFilteredPages(fp);
-      setTotalPages(
-        fp.length + 1, // cover
-        // todo: for games
-      );
+      setTotalPages(totalPages);
       setPageNumber(0);
       setReady(true);
     }
@@ -79,6 +94,7 @@ export const StoryLoader = () => {
     return <></>;
   }
 
+  //console.log(`${pageNumber} / ${totalPages}`);
   return (
     <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
@@ -86,10 +102,55 @@ export const StoryLoader = () => {
         <TitleCard data={data} />
       )}
       {pageNumber > 0 &&
-       pageNumber <= filteredPages.length && ( // todo: less or equal
-					       <StoryPage />
+       // todo: less or equal
+       pageNumber <= filteredPages.length && ( <>
+	 <PageWrapper>
+	   <StoryPage />
+	 </PageWrapper>
+	 <PageCounter />
+       </>
       )}
-      <PageCounter />
+      {pageNumber === filteredPages.length + 1 &&
+       hasMultipleImage && <>
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="image" />
+	   </IonCol>
+	 </PageWrapper>
+	 <PageCounter />
+       </>}
+      
+      {pageNumber === filteredPages.length + 1 &&
+       hasMultipleSyllable &&
+       !hasMultipleImage && <>
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="syllable" />
+	   </IonCol>
+	 </PageWrapper>
+      	 <PageCounter />
+       </>}
+      
+      {pageNumber === filteredPages.length + 2 &&
+       hasMultipleImage &&
+       hasMultipleSyllable && <>
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <StoriesGame game={data} gameType="syllable" />
+	   </IonCol>
+	 </PageWrapper>
+      	 <PageCounter />
+       </>}
+
+      {pageNumber === totalPages - 1 &&
+       <>
+	 <PageWrapper>
+	   <IonCol size='auto'>
+	     <p>congrats!</p>
+	   </IonCol>
+	 </PageWrapper>
+       	 <PageCounter />
+       </>}
     </div>
   );
 };
@@ -184,50 +245,6 @@ const TitleCard = ({ data }: any) => {
               </p>
             )}
           </IonText>
-          <IonGrid>
-            <IonRow>
-              <IonCol size="auto">
-                <Pill
-                  icon={AgesIcon}
-                  text={{
-                    en: "Ages",
-                    es: "Edades",
-                  }}
-                  value={`${data.age_min}-${data.age_max}`}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={AuthorIcon}
-                  text={{
-                    en: "Escrito por",
-                    es: "Written by",
-                  }}
-                  value={data.author}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={IllustratorIcon}
-                  text={{
-                    en: "Ilustrado por",
-                    es: "Illustrated by",
-                  }}
-                  value={data.illustrator}
-                />
-              </IonCol>
-              <IonCol size="auto">
-                <Pill
-                  icon={NarratorIcon}
-                  text={{
-                    en: "Narrado por",
-                    es: "Narrated by",
-                  }}
-                  value={data.narrator}
-                />
-              </IonCol>
-            </IonRow>
-          </IonGrid>
 	  <img src={data.cover.url} style={{ width: '100%', marginTop: '2rem'}} />
         </IonCardContent>
         <div
@@ -254,8 +271,77 @@ const TitleCard = ({ data }: any) => {
           </IonButton>
         </div>
       </IonCard>
+      <IonGrid className='margin-top-2'>
+        <IonRow style={{justifyContent: 'center'}}>
+          <IonCol size="auto">
+            <Pill
+              icon={AgesIcon}
+              text={{
+                en: "Ages",
+                es: "Edades",
+              }}
+              value={`${data.age_min}-${data.age_max}`}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={AuthorIcon}
+              text={{
+                en: "Escrito por",
+                es: "Written by",
+              }}
+              value={data.author}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={IllustratorIcon}
+              text={{
+                en: "Ilustrado por",
+                es: "Illustrated by",
+              }}
+              value={data.illustrator}
+            />
+          </IonCol>
+          <IonCol size="auto">
+            <Pill
+              icon={NarratorIcon}
+              text={{
+                en: "Narrado por",
+                es: "Narrated by",
+              }}
+              value={data.narrator}
+            />
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </div>
   );
+};
+
+const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
+  const {
+    pageBackward,
+    pageForward,
+    pageNumber,
+    totalPages
+  } = useStory();
+  return <div className="content-wrapper margin-top-1">
+    <IonGrid>
+      <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
+	<IonCol size="auto">
+          <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
+	</IonCol>
+	{children}
+        <IonCol size="auto">
+	  <IonImg
+	    src={forward}
+	    onClick={pageForward}
+	    style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
+  </div>;
 };
 
 const StoryPage: React.FC<any> = () => {
@@ -270,75 +356,72 @@ const StoryPage: React.FC<any> = () => {
   }, [pageNumber]);
   const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
+  const cardStyles = {
+    width: 400,
+    height: 400
+  };
   return (
     <>
-      <div className="content-wrapper margin-top-1">
-        <IonGrid>
-          <IonRow style={{ alignItems: "start", justifyContent: "center" }}>
-            <IonCol size="auto" style={{ marginRight: "2rem", marginTop: "20vh" }}>
-              <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
-            </IonCol>
-            <IonCol size="auto">
-              <IonCard
-                className="sf-card drop-shadow"
-                style={{
-		  width: 740,
-                  display: "block",
-                  position: "relative",
-                }}
-              >
-                <IonCardContent className='ion-text-center'>
-                  <IonText className="ion-text-center">
-                    <h1 className="text-3xl semibold color-suelo">
-                      {isInclusive ? texts["es-inc"].text : texts.es.text}
-                    </h1>
-                    {!isImmersive && (
-                      <p className="text-2xl color-english">{texts.en.text}</p>
-                    )}
-                  </IonText>
-		  <div style={{position: 'relative'}}>
-		    <div
-                      className="stories-volume-button-background"
-		      onClick={() => {
-			let audios = [];
-			if(isInclusive){
-			  if(texts['es-inc'].audio){
-			    audios.push(texts['es-inc'].audio.url);
-			  }
-			}else{
-			  if(texts['es'].audio){
-			    audios.push(texts['es'].audio.url);
-			  }		
-			}
-			if(!isImmersive){
-			  if(texts['en'].audio){
-			    audios.push(texts['en'].audio.url);
-			  }
-			}
-			addAudio(audios);
-		      }}
-		    >
-		      <img className="stories-volume-icon" src={volumeButton} />
-		    </div>
-		    <img style={{margin: 'auto', marginTop: '2rem'}} src={page.image.url} />
-		  </div>
-                </IonCardContent>
+      <IonCol size="auto">
+        <IonCard
+          className="sf-card drop-shadow"
+          style={cardStyles}
+        >
+          <IonCardContent className='ion-text-center'
 
-              </IonCard>
-            </IonCol>
-            <IonCol size="auto" style={{ marginLeft: "2rem", marginTop: "20vh" }}>
-	      <IonImg
-		src={forward}
-		onClick={pageForward}
-		style={{
-		  cursor: pageNumber === filteredPages.length ? 'default' : 'pointer',
-		  opacity: pageNumber === filteredPages.length ? 0 : 1
+			  style={{
+			    display: 'flex',
+			    flexDirection: 'column',
+			    justifyContent: 'space-between',
+			    height: '100%'
+			  }}>
+            <IonText className="ion-text-center">
+              <h1 className="text-2xl semibold color-suelo">
+                {isInclusive ? texts["es-inc"].text : texts.es.text}
+              </h1>
+              {!isImmersive && (
+                <p className="text-xl color-english">{texts.en.text}</p>
+              )}
+            </IonText>
+	    <div>
+	      <IonButton
+		size='small'
+		fill='clear'
+		className='stories-volume-button'
+		onClick={() => {
+		  let audios = [];
+		  if(isInclusive){
+		    if(texts['es-inc'].audio){
+		      audios.push(texts['es-inc'].audio.url);
+		    }
+		  }else{
+		    if(texts['es'].audio){
+		      audios.push(texts['es'].audio.url);
+		    }		
+		  }
+		  if(!isImmersive){
+		    if(texts['en'].audio){
+		      audios.push(texts['en'].audio.url);
+		    }
+		  }
+		  addAudio(audios);
 		}}
-	      />
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </div>
+	      >
+		<img className="stories-volume-icon" src={volumeButton} />
+	      </IonButton>
+	    </div>
+          </IonCardContent>
+        </IonCard>
+      </IonCol>
+      <IonCol size="auto">
+        <IonCard
+          className="sf-card drop-shadow"
+          style={cardStyles}>
+          <IonCardContent className='ion-text-center'>
+	    <img src={page.image.url} />
+          </IonCardContent>
+        </IonCard>
+      </IonCol>
     </>
   );
 };

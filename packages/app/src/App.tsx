@@ -24,7 +24,6 @@ import {
   IntruderGame,
   IntruderGameLoader
 } from '@/pages/Intruder';
-import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
 import {
@@ -41,6 +40,7 @@ import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
+import { ProfileComingSoon } from "./pages/ProfileComingSoon";
 import ResetPassword from "@/pages/ResetPassword";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
@@ -54,6 +54,7 @@ import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
+import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import UnauthedLayout from "@/layouts/Unauthed";
@@ -91,8 +92,6 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
-import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
 import { Wellness } from "./pages/Wellness/Wellness";
 
 setupIonicReact();
@@ -209,6 +208,18 @@ const Router: React.FC = () => {
             )}
           />
 
+          <Route
+            exact
+            path="/stories"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StoriesLandingPage />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
           {/* temp route for development */}
           <Route
             exact
@@ -232,11 +243,11 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/tradein"
+            path="/profile/coming-soon"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <Tradein />
+                  <ProfileComingSoon />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -351,30 +362,6 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesDragGameLoader />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesPictureGame />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game2/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesSyllableGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
