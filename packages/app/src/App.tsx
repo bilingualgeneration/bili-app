@@ -102,6 +102,7 @@ const Router: React.FC = () => {
   return (
       <IonReactRouter>
         <Switch>
+	  <ScrollToTop>
           <Route
             exact
             path="/"
@@ -519,7 +520,7 @@ const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
-
+	  </ScrollToTop>
         </Switch>
       </IonReactRouter>
   );
@@ -547,7 +548,7 @@ const App: React.FC = () => {
         <IonApp>
           <AudioManagerProvider>
 	    <I18nWrapper locale={locale}>
-              <Router />
+	      <Router />
 	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>
