@@ -297,7 +297,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
             {!isImmersive && (
               <p className="text-lg color-english">
-                Which word does not rhyme?
+                Read
               </p>
             )}
           </IonText>
