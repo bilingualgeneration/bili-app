@@ -91,7 +91,7 @@ export const CountWithMeGame: React.FC = () => {
   const prevState = useRef<string>('');
 
   useEffect(() => {
-    setCurrentIndex(7);
+    setCurrentIndex(0);
   }, [data]);
 
   if (showCongrats) {

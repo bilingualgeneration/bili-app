@@ -15,6 +15,8 @@ import count_congrats_es_3 from '@/assets/audio/CountAudio/count_congrats_es_3.m
 import count_congrats_es_6 from '@/assets/audio/CountAudio/count_congrats_es_6.mp3';
 import count_congrats_es_9 from '@/assets/audio/CountAudio/count_congrats_es_9.mp3';
 import count_congrats_es_13 from '@/assets/audio/CountAudio/count_congrats_es_13.mp3';
+import activity_completed_en from '@/assets/audio/CountAudio/activity_completed_en.wav';
+import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_es.wav';
 
 // svgs
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
@@ -46,7 +48,7 @@ export const CountCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const { isInclusive, isImmersive } = useProfile();
+  const { isImmersive } = useProfile();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
@@ -56,25 +58,30 @@ export const CountCongrats: React.FC<{
   // const audio_es = new Audio(sounds.es[count.toString()]);
   // const audio_en = new Audio(sounds.en[count.toString()]);
 
+  const audio_es = new Audio(activity_completed_es);
+  const audio_en = new Audio(activity_completed_en);
+
   useEffect(() => {
     return () => {
-      clearAudio();
+      audio_es.pause();
+      audio_en.pause();
     };
   }, []);
 
   useEffect(() => {
-    setCallback(() => () => {
+    const audioCallback = () => {
       setAudioPlayed(true);
-    });
+    };
 
     if (isImmersive) {
-      if (isInclusive) {
-        addAudio([]);
-      }
-      addAudio([]);
+      audio_es.onended = audioCallback;
     } else {
-      addAudio([]);
+      audio_es.onended = () => {
+        audio_en.onended = audioCallback;
+        audio_en.play();
+      };
     }
+    audio_es.play();
   }, []);
 
   const history = useHistory();
@@ -177,17 +184,18 @@ export const CountCongrats: React.FC<{
           marginTop: "auto",
         }}
       >
-        <img
-          src={StoryFactoryArrow}
-          alt="indicator arrow to the next button"
-          style={{
-            left: "calc(50% - 350px)",
-            top: 3,
-            position: "absolute",
-          }}
-          className="bounce-arrow"
-        />
-
+        {audioPlayed && ( 
+          <img
+            src={StoryFactoryArrow}
+            alt="indicator arrow to the next button"
+            style={{
+              left: "calc(50% - 350px)",
+              top: 3,
+              position: "absolute",
+            }}
+            className="bounce-arrow"
+          />
+        )}
         <IonButton
           className="sf-intro-button"
           disabled={!audioPlayed}
