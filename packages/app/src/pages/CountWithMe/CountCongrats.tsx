@@ -94,7 +94,6 @@ export const CountCongrats: React.FC<{
           src={starsOverlay}
           style={{
             position: "absolute",
-            // maxHeight: "85vh",
             top: "70px",
             left: "calc(40% - 250px)",
             zIndex: 1,
@@ -102,12 +101,11 @@ export const CountCongrats: React.FC<{
           alt="background"
         />
         <div
+          className="margin-top-4"
           style={{
-            height: "50vh",
             width: "auto",
             display: "flex",
             flexDirection: "column",
-            marginTop: "20%",
             alignItems: "center",
             justifyContent: "end",
             position: "relative",
