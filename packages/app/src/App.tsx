@@ -14,6 +14,7 @@ import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
+import { CountCongrats } from "./pages/CountWithMe";
 import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
 import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
 import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
@@ -177,7 +178,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeIntro />
+		              <CountWithMeIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -190,7 +191,20 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeSelect />
+		              <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          {/* temp route for development */}
+          <Route
+            exact
+            path="/count-congrats"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <CountCongrats />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -344,15 +358,15 @@ const Router: React.FC = () => {
             )}
           />
 
-	  <Route
+	      <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-              <Stories />
-                </HeaderFooter>
-              </AuthedLayout>
+            <AuthedLayout>
+              <HeaderFooter background="#FFFFFF">
+                <Stories />
+              </HeaderFooter>
+            </AuthedLayout>
           )}
         />
 
@@ -386,7 +400,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <StoryFactorySelect />
+		              <StoryFactorySelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -457,7 +471,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <IntruderSelect />
+		              <IntruderSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}

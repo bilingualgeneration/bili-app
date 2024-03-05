@@ -1,7 +1,7 @@
 import { useProfile } from "@/contexts/ProfileContext";
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
-import { CongratsPage } from "./CountCongrats";
+import { CountCongrats } from "./CountCongrats";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import "./CountWithMe.scss";
@@ -52,7 +52,7 @@ export const FactsPage: React.FC<FactsPageProps> = ({
     }
     if(!isImmersive){
       if(ften && ften.audio){
-	audios.push(ften.audio.url);
+	    audios.push(ften.audio.url);
       }
     }
     addAudio(audios);
@@ -60,7 +60,7 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   const history = useHistory();
 
   if (showCongrats) {
-    return <CongratsPage count={count} onKeepGoingClick={onKeepGoingClick} />;
+    return <CountCongrats count={count} onKeepGoingClick={onKeepGoingClick} />;
   }
 
   // Function to render the facts page for each animal
@@ -70,11 +70,11 @@ export const FactsPage: React.FC<FactsPageProps> = ({
         className="background-card margin-top-3"
         style={{
           backgroundImage: `url(${factBackground})`,
-	  backgroundSize: 'auto 100%',
+	        backgroundSize: 'auto 100%',
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
-	  aspectRatio: '1159 / 724',
-	  width: '80%',
+          aspectRatio: '1159 / 724',
+          width: '80%',
           display: "flex",
           alignItems: "center",
         }}
