@@ -48,7 +48,7 @@ export const CountCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
@@ -63,25 +63,24 @@ export const CountCongrats: React.FC<{
 
   useEffect(() => {
     return () => {
-      audio_es.pause();
-      audio_en.pause();
+      clearAudio();
     };
   }, []);
 
   useEffect(() => {
-    const audioCallback = () => {
+    setCallback(() => () => {
       setAudioPlayed(true);
-    };
+    });
 
     if (isImmersive) {
-      audio_es.onended = audioCallback;
+      if (isInclusive) {
+        addAudio([audio_es]);
+      } else {
+        addAudio([audio_en]);
+      }
     } else {
-      audio_es.onended = () => {
-        audio_en.onended = audioCallback;
-        audio_en.play();
-      };
+      addAudio([audio_en]);
     }
-    audio_es.play();
   }, []);
 
   const history = useHistory();
