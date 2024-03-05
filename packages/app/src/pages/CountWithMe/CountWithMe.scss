@@ -68,44 +68,57 @@
 // congrats page
 
 .congrats-star {
-  // width: 700px;
-  // height: auto;
-  // position: absolute;
-  // top: 25vh;
-  // left: 43vw;
-  // animation: star 3s;
-  // z-index: 2;
-
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    /* Common styles for iPad */
-    top: 100px;
-    left: 300px;
-  }
-
-  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
-    /* Landscape orientation for iPad Pro & Air */
-    top: 250px;
-    left: 600px;
-  }
-
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    /* portrait iPad mini */
-    top: 250px;
-    left: 280px;
-
-    @media (orientation: Landscape) {
-      top: 180px;
-      left: 410px;
-    }
-  }
+  animation: grow 2s;
+  // position:absolute;
+  // top : 50px;
+  // background-color:black;
+  // left:50px;
+  height:auto;
+  width:450px;
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 2s;
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: 2s;
+  -webkit-animation-name: grow;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: grow;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: linear;
+  
+  transition-property: -moz-transform;
+  transition-duration: 2s;
+  animation-name: grow;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
 }
 
 /* animation */
 
-// @keyframes star {
-//   0% {transition:  1s ease; top: 0px; left: 50px;}
-//   25% {top: 0px; left: 50px;}
-//   50% {top: 0px; left: 50px;}
-//   75% {top: 0px; left: 50px;}
-//   100% {top: 0px; left: 50px;}
-// }
+@-webkit-keyframes grow {
+  from {
+      -webkit-transform:scale(2);
+  }
+  to {
+      -webkit-transform:scale(1);
+  }
+}
+@-moz-keyframes grow {
+  from {
+      -moz-transform:scale(2);
+  }
+  to {
+      -moz-transform:scale(1);
+  }
+}
+@keyframes grow {
+  from {
+      transform:scale(2);
+  }
+  to {
+      transform:scale(1);
+  }
+}
