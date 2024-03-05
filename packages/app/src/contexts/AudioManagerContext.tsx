@@ -23,11 +23,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [audios, setAudios] = useState<any[]>([]);
   const [callback, setCallback] = useState<any>(() => {});
-  const audiosRef = useRef(audios);
-
-  useEffect(() => {
-    audiosRef.current = audios;
-  }, [audios]);
+  const audiosRef = useRef<any[]>(audios);
 
   useEffect(() => {
     if (audios.length > 0) {
@@ -37,17 +33,24 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
           callback();
         }
         setAudios(audios.slice(1));
+	audiosRef.current = audios.slice(1);
       };
-      audios[0].play();
+      //audios[0].play();
+      if(audiosRef.current[0]){
+	audiosRef.current[0].play();
+      }
     }
   }, [audios, callback]);
+
   const addAudio = (inputAudios: any[]) => {
     // silence existing audio
     // todo: probably not working
-    audios.forEach((a) => {
+    audiosRef.current.forEach((a) => {
       a.pause();
     });
-    setAudios(inputAudios.map((a) => new Audio(a)));
+    const newAudios = inputAudios.map((a) => new Audio(a));
+    audiosRef.current = newAudios;
+    setAudios(newAudios);
   };
 
   const clearAudio = () => {
@@ -55,7 +58,8 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
     audiosRef.current.forEach((a) => {
       a.pause();
     });
-    setAudios([]);
+    //setAudios([]);
+    audiosRef.current = [];
   };
   return (
     <AudioManagerContext.Provider

@@ -62,7 +62,6 @@ import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
-
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
@@ -94,6 +93,7 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Wellness } from "./pages/Wellness/Wellness";
 
 setupIonicReact();
 
@@ -103,6 +103,7 @@ const Router: React.FC = () => {
   return (
       <IonReactRouter>
         <Switch>
+	  <ScrollToTop>
           <Route
             exact
             path="/"
@@ -521,6 +522,19 @@ const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/wellness"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <Wellness />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+	  </ScrollToTop>
         </Switch>
       </IonReactRouter>
   );
@@ -547,9 +561,9 @@ const App: React.FC = () => {
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
           <AudioManagerProvider>
-	          <I18nWrapper locale={locale}>
-              <Router />
-	          </I18nWrapper>
+	    <I18nWrapper locale={locale}>
+	      <Router />
+	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>

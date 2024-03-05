@@ -199,6 +199,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const handleCardClick = (card: any) => {
     if (!card.isIntruder) {
       //logic for the incorrect cards
+      console.log('123');
       addAudio([incorrect_card_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
@@ -296,7 +297,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
             {!isImmersive && (
               <p className="text-lg color-english">
-                Which word does not rhyme?
+                Read
               </p>
             )}
           </IonText>
