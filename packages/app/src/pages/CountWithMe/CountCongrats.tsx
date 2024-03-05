@@ -92,10 +92,10 @@ export const CountCongrats: React.FC<{
       <div style={{ padding: "10px" }}>
         <div
           style={{
-            height: "60vh",
+            height: "80vh",
+            width: "auto",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
             alignItems: "center",
             position: "relative",
           }}
@@ -111,108 +111,109 @@ export const CountCongrats: React.FC<{
             }}
             alt="background"
           />
-          <div>
-            <IonText>
-              <h1 className='text-4xl color-suelo semibold'>
-                <FormattedMessage
-                  id="countWithMe.complete"
-                  defaultMessage="Activity Completed"
-                  description="Information that the activity is completed"
-                />
-              </h1>
-              {!isImmersive && (
-                <p className='text-2xl color-english' style={{ textAlign: "center" }}>Activity Completed</p>
-              )}
-            </IonText>
-          
-
-            <div
-              style={{
-                position: "absolute",
-                zIndex: 2,
-                textAlign: "center",
-                top: "170px",
-                left: "400px"
-              }}
-            >
-              <img
-                src={congrats.star}
-                alt="star"
-                style={{
-                  width: showText ? "700px" : "200px",
-                  height: "auto",
-                  position: "relative",
-                  transition: "width 1s ease", // transition effect to animate star shrink
-                }}
+          <IonText>
+            <h1 className="text-4xl color-suelo semibold">
+              <FormattedMessage
+                id="countWithMe.complete"
+                defaultMessage="Activity Completed"
+                description="Information that the activity is completed"
               />
-              {showText && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)", // Center text horizontally and vertically in the star
-                  }}
-                >
-                  <div className="text-3xl semibold">
-                    <FormattedMessage
-                      id="countWithMe.congrats"
-                      defaultMessage="You've earned a star"
-                      description="Congrats text on a star"
-                    />
-                  </div>
+            </h1>
+            {!isImmersive && (
+              <p className="text-2xl color-english" style={{ textAlign: "center" }}>
+                Activity Completed
+              </p>
+            )}
+          </IonText>
 
-                  {!isImmersive && (
-                    <p style={{ fontSize: "12px", margin: 0, color: "black" }}>
-                      You've earned a star
-                    </p>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              position: "relative",
+              zIndex: 2,
+              textAlign: "center",
+            }}
+          >
+            <img
+              src={congrats.star}
+              alt="star"
               style={{
+                width: showText ? "700px" : "200px",
+                height: "auto",
                 position: "relative",
-                textAlign: "end",
-                marginTop: "5%",
+                transition: "width 1s ease", // transition effect to animate star shrink
               }}
-            >
-              <img
-                src={StoryFactoryArrow}
-                alt="indicator arrow to next button"
+            />
+            {showText && (
+              <div
                 style={{
-                  right: 450,
-                  top: 3,
                   position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)", // Center text horizontally and vertically in the star
+                  zIndex: "3",
                 }}
-                className="bounce-arrow"
-              />
-
-              <IonButton
-                className="sf-intro-button"
-                disabled={!audioPlayed}
-                expand="block"
-                shape="round"
-                type="button"
-                onClick={onKeepGoingClick}
               >
-                <div>
-                  <div className="story-button-bold">
-                    <FormattedMessage
-                      id="countWithMe.keepGoing"
-                      defaultMessage="Keep Going!"
-                      description="Button label to exit congrats screen"
-                    />
-                  </div>
-                  {!isImmersive && (
-                    <div className="story-button-reg">Keep going!</div>
-                  )}
+                <div className="text-3xl semibold">
+                  <FormattedMessage
+                    id="countWithMe.congrats"
+                    defaultMessage="You've earned a star"
+                    description="Congrats text on a star"
+                  />
                 </div>
-              </IonButton>
-            </div>
+
+                {!isImmersive && (
+                  <p className="text-sm color-english">
+                    You've earned a star
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          textAlign: "center",
+          zIndex: 2,
+        }}
+      >
+        <img
+          src={StoryFactoryArrow}
+          alt="indicator arrow to the next button"
+          style={{
+            right: 740,
+            top: 3,
+            position: "absolute",
+          }}
+          className="bounce-arrow"
+        />
+
+        <IonButton
+          className="sf-intro-button"
+          disabled={!audioPlayed}
+          expand="block"
+          shape="round"
+          type="button"
+          onClick={onKeepGoingClick}
+        >
+          <div>
+            <div className="story-button-bold">
+              <FormattedMessage
+                id="countWithMe.keepGoing"
+                defaultMessage="Keep Going!"
+                description="Button label to exit congrats screen"
+              />
+            </div>
+            {!isImmersive && (
+              <div className="story-button-reg">Keep going!</div>
+            )}
+          </div>
+        </IonButton>
       </div>
     </>
   );

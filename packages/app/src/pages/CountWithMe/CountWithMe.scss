@@ -68,13 +68,13 @@
 // congrats page
 
 .congrats-star {
-  width: 700px;
-  height: auto;
-  position: absolute;
+  // width: 700px;
+  // height: auto;
+  // position: absolute;
   // top: 25vh;
   // left: 43vw;
-  animation: star 3s;
-  z-index: 2;
+  // animation: star 3s;
+  // z-index: 2;
 
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     /* Common styles for iPad */
@@ -98,18 +98,6 @@
       left: 410px;
     }
   }
-}
-
-.button-container {
-  position: relative;
-  // justify-content: flex-start;
-  // text-align: center;
-  // margin-top: 15rem;
-  z-index: 1;
-}
-
-.count-congrats {
-  position: absolute;
 }
 
 /* animation */
