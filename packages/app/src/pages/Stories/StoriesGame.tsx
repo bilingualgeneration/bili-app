@@ -158,7 +158,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       es: textPacks.find(
         (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
       )!,
-      en: isImmersive
+      en: !isImmersive
         ? undefined
         : textPacks.find(
             (tp: any) => tp.language === (isInclusive ? "en-inc" : "en"),
