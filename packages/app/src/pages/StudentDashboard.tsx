@@ -223,6 +223,30 @@ export const StudentDashboard: FC = () => {
       link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
       isLocked: false,
     },
+    {
+      category: "stories",
+      title: "¡Me gusta!",
+      titleEn: "I Like It!",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Me_Gusta_fc5d6f6fec.png",
+      link: "/stories/2dc82579-85a5-488e-8bc6-ab18cc349b3c",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Mancha de plátano",
+      titleEn: "Plantain Stain",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/mancha_Cover_fa80bfa1a7.png",
+      link: "/stories/64578366-bf8d-4e58-813c-113f9c81fb66",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Corazón contento",
+      titleEn: "Happy Heart",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Corazon_e769c63ee2.png",
+      link: "/stories/7935ba4a-0800-49a5-8ce8-2f1d3ca0a906",
+      isLocked: false,
+    },
   ];
 
   const icons: WaveIcon[] = [
