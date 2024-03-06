@@ -15,8 +15,8 @@ import count_congrats_es_3 from '@/assets/audio/CountAudio/count_congrats_es_3.m
 import count_congrats_es_6 from '@/assets/audio/CountAudio/count_congrats_es_6.mp3';
 import count_congrats_es_9 from '@/assets/audio/CountAudio/count_congrats_es_9.mp3';
 import count_congrats_es_13 from '@/assets/audio/CountAudio/count_congrats_es_13.mp3';
-import activity_completed_en from '@/assets/audio/CountAudio/activity_completed_en.wav';
-import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_es.wav';
+import activity_completed_en from '@/assets/audio/CountAudio/activity_completed_en.mp3';
+import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_es.mp3';
 
 // svgs
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
