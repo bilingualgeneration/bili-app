@@ -20,22 +20,26 @@ import "./Community.scss";
 
 const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
   const { isImmersive } = useProfile();
+  const content = <>
+    <img src={image} />
+    <IonText className="ion-text-center">
+      <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
+      {!isImmersive && (
+        <h3 className="text-2xl color-cielo">
+	  {title}
+        </h3>
+      )}
+    </IonText>
+  </>;
   return (
     <div className="community-card">
       {locked && <div className="content-lock">
           <Lock />
         </div>}
-	<Link to={link} className="no-text-decoration">
-          <img src={image} />
-          <IonText className="ion-text-center">
-            <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
-            {!isImmersive && (
-              <h3 className="text-2xl color-cielo">
-		{title}
-              </h3>
-            )}
-          </IonText>
-	</Link>
+      {link && <Link to={link} className="no-text-decoration">
+	{content}
+      </Link>}
+      {!link && content}
       </div>
   );
 };

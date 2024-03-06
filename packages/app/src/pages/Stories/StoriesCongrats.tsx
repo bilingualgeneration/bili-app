@@ -22,8 +22,6 @@ import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
 import starsOverlay from "@/assets/icons/sf_stars_overlay.svg";
 
-import "./CountWithMe.scss";
-
 const sounds: any = {
   en: {
     "3": count_congrats_en_3,
@@ -39,7 +37,7 @@ const sounds: any = {
   },
 };
 
-export const CountCongrats: React.FC<{
+export const StoriesCongrats: React.FC<{
   onKeepGoingClick?: any;
   count?: number;
 }> = ({ onKeepGoingClick, count }) => {
@@ -58,8 +56,8 @@ export const CountCongrats: React.FC<{
   // const audio_es = new Audio(sounds.es[count.toString()]);
   // const audio_en = new Audio(sounds.en[count.toString()]);
 
-  const audio_es = new Audio(activity_completed_es);
-  const audio_en = new Audio(activity_completed_en);
+  //const audio_es = new Audio(activity_completed_es);
+  //const audio_en = new Audio(activity_completed_en);
 
   useEffect(() => {
     return () => {
@@ -71,16 +69,11 @@ export const CountCongrats: React.FC<{
     setCallback(() => () => {
       setAudioPlayed(true);
     });
-
-    if (isImmersive) {
-      if (isInclusive) {
-        addAudio([audio_es]);
-      } else {
-        addAudio([audio_en]);
-      }
-    } else {
-      addAudio([audio_en]);
+    const audios = [activity_completed_es];
+    if (!isImmersive) {
+      audios.push(activity_completed_en);
     }
+    addAudio(audios);
   }, []);
 
   const history = useHistory();

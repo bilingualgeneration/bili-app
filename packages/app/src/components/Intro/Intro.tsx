@@ -50,7 +50,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
       }else{
-	setHasAudioPlayed(true);
+	      setHasAudioPlayed(true);
       }
     });
     let sounds = [];
@@ -73,20 +73,23 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
               <h2 className="text-4xl color-suelo">
                 {texts[currentIndex].es.subtext}
               </h2>
-	      {!isImmersive && <>
-		<h1 className="text-6xl color-english margin-top-4">
-                  {texts[currentIndex].en.text}
-		</h1>
-		<h2 className="text-4xl color-english">
-                  {texts[currentIndex].en.subtext}
-		</h2>
-	      </>}
+              {!isImmersive && 
+                <>
+                  <h1 className="text-6xl color-english margin-top-4">
+                    {texts[currentIndex].en.text}
+                  </h1>
+                  <h2 className="text-4xl color-english">
+                    {texts[currentIndex].en.subtext}
+                  </h2>
+                </>
+              }
             </div>
             <div
-	      className='margin-top-4'
-	      style={{position: 'relative'}}>
+              className='margin-top-4'
+              style={{position: 'relative'}}
+            >
               {hasAudioPlayed && currentIndex === texts.length - 1 && (
-		<img
+                <img
                   src={StoryFactoryArrow}
                   alt="indicator arrow to next button"
                   style={{
@@ -98,24 +101,24 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
               )}
               <IonButton
                 onClick={() => history.push(nextPath)}
-		className='margin-top-3'
+		            className='margin-top-3'
                 shape="round"
-		expand='block'
+		            expand='block'
                 style={{width: '50%', margin: 'auto'}}>
-		<IonText>
-                <h1
-                  style={{ color: "white" }}
-                  className="text-4xl color-nube">
-                  Siguiente
-                </h1>
-		{!isImmersive && 
-                 <p
-                   style={{ color: "black" }}
-                   className="text-xl color-nube">
-                   Next
-                 </p>
-		}
-		</IonText>
+                <IonText>
+                  <h1
+                    style={{ color: "white" }}
+                    className="text-4xl color-nube">
+                    Siguiente
+                  </h1>
+                  {!isImmersive && 
+                  <p
+                    style={{ color: "black" }}
+                    className="text-xl color-nube">
+                    Next
+                  </p>
+                  }
+                </IonText>
               </IonButton>
             </div>
           </IonCardContent>

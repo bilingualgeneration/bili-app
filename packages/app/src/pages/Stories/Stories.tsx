@@ -8,6 +8,7 @@ import {
   IonText,
   IonButton,
 } from "@ionic/react";
+import {StoriesCongrats} from './StoriesCongrats';
 import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -17,6 +18,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { useEffect, useState } from "react";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
+import {useHistory} from 'react-router-dom';
 
 import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
@@ -42,6 +44,7 @@ export const Stories = () => {
 export const StoryLoader = () => {
   // @ts-ignore
   const { uuid } = useParams();
+  const history = useHistory();
   const {
     hasMultipleImage,
     hasMultipleSyllable,
@@ -145,7 +148,9 @@ export const StoryLoader = () => {
        <>
 	 <PageWrapper>
 	   <IonCol size='auto'>
-	     <p>congrats!</p>
+	     <StoriesCongrats onKeepGoingClick={() => {
+	       history.push('/stories');
+	       }}/>
 	   </IonCol>
 	 </PageWrapper>
        	 <PageCounter />
@@ -327,17 +332,16 @@ const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   } = useStory();
   return <div className="content-wrapper margin-top-1">
     <IonGrid>
-      <IonRow style={{ alignItems: "center", justifyContent: "center" }}>
-	<IonCol size="auto">
-          <IonImg src={backward} onClick={pageBackward} style={{cursor: 'pointer'}} />
-	</IonCol>
+      <IonRow>
+	<IonCol></IonCol>
+	<IonImg className='page-control backward' src={backward} onClick={pageBackward} />
 	{children}
-        <IonCol size="auto">
-	  <IonImg
-	    src={forward}
-	    onClick={pageForward}
-	    style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
-        </IonCol>
+	<IonImg
+	  className='page-control forward'
+	  src={forward}
+	  onClick={pageForward}
+	  style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
+	<IonCol></IonCol>
       </IonRow>
     </IonGrid>
   </div>;
@@ -356,8 +360,8 @@ const StoryPage: React.FC<any> = () => {
   const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
   const cardStyles = {
-    width: 400,
-    height: 400
+    width: 460,
+    height: 460
   };
   return (
     <>
@@ -366,8 +370,7 @@ const StoryPage: React.FC<any> = () => {
           className="sf-card drop-shadow"
           style={cardStyles}
         >
-          <IonCardContent className='ion-text-center'
-
+          <IonCardContent className='ion-text-center ion-no-padding'
 			  style={{
 			    display: 'flex',
 			    flexDirection: 'column',
@@ -416,7 +419,7 @@ const StoryPage: React.FC<any> = () => {
         <IonCard
           className="sf-card drop-shadow"
           style={cardStyles}>
-          <IonCardContent className='ion-text-center'>
+          <IonCardContent className='ion-text-center ion-no-padding'>
 	    <img src={page.image.url} />
           </IonCardContent>
         </IonCard>

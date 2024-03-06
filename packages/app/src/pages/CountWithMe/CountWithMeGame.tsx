@@ -15,17 +15,21 @@ import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav
 import { useHistory } from 'react-router-dom';
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { CountCongrats } from "./CountCongrats";
 
 export const CountWithMeGame: React.FC = () => {
   const { isInclusive, isImmersive } = useProfile();
   const history = useHistory();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
+
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
+
   useEffect(() => {
     return clearAudio;
   }, []);
+
   //Firestore operations
   const ref = doc(firestore, "count-with-me-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
@@ -79,15 +83,20 @@ export const CountWithMeGame: React.FC = () => {
   const [animalColors, setAnimalColors] = useState<{ [key: string]: any }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
-  const [showNumber, setShowNumber] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
+  const [animalGroupsPlayed, setAnimalGroupsPlayed] = useState(0);
+  const [showCongrats, setShowCongrats] = useState(false);
   const prevState = useRef<string>('');
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [data]);
+
+  if (showCongrats) {
+    return <CountCongrats onKeepGoingClick={showFacts} count={currentIndex} />;
+  }
 
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array

@@ -64,3 +64,61 @@
 .group-12 {
   max-width: 12%;
 }
+
+// congrats page
+
+.congrats-star {
+  animation: grow 2s;
+  // position:absolute;
+  // top : 50px;
+  // background-color:black;
+  // left:50px;
+  height:auto;
+  width:400px;
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 2s;
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: 2s;
+  -webkit-animation-name: grow;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: grow;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: linear;
+  
+  transition-property: -moz-transform;
+  transition-duration: 2s;
+  animation-name: grow;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+/* animation */
+
+@-webkit-keyframes grow {
+  from {
+      -webkit-transform:scale(2);
+  }
+  to {
+      -webkit-transform:scale(1);
+  }
+}
+@-moz-keyframes grow {
+  from {
+      -moz-transform:scale(2);
+  }
+  to {
+      -moz-transform:scale(1);
+  }
+}
+@keyframes grow {
+  from {
+      transform:scale(2);
+  }
+  to {
+      transform:scale(1);
+  }
+}

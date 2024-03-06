@@ -82,7 +82,7 @@ export const Profile: React.FC = () => {
           <IonGrid>
             <IonRow className="ion-justify-content-between row">
               <IonCol size="auto">
-                <h1 className="child-profile-heading">
+                <h1 className="child-profile-heading" style={{marginLeft: 30}}>
                   <FormattedMessage
                     id="settings.adult"
                     defaultMessage="Adult Profile"
