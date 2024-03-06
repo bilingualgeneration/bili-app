@@ -86,7 +86,9 @@ export const StoryFactoryPage4: FC = () => {
   const [numPlays, setNumPlays] = useState<number>(0);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
   useEffect(() => {
-    return clearAudio;
+    return () => {
+      clearAudio();
+    };
   }, []);
   useEffect(() => {
     if (data !== undefined) {
@@ -129,7 +131,7 @@ export const StoryFactoryPage4: FC = () => {
     const text: string = normalizeAWS(
       getText(words[position][wordIndices[position]].word, language),
     );
-    addAudio(`${AWS_BUCKET}${text}.mp3`);
+    addAudio([`${AWS_BUCKET}${text}.mp3`]);
     //const audio = new Audio(`${AWS_BUCKET}${text}.mp3`);
     //audio.play();
   };
@@ -314,6 +316,7 @@ export const StoryFactoryPage4: FC = () => {
 		  /////////////////////////////
 		  /////////////////
 
+		  //addAudio([`${AWS_BUCKET}${sentence}.mp3`]);
 		  
                   const audio = new Audio(`${AWS_BUCKET}${sentence}.mp3`);
 

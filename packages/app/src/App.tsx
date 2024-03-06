@@ -7,7 +7,7 @@ import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact, IonPage } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -268,19 +268,15 @@ const Router: React.FC = () => {
             )}
           />
 
-          <Route
-            exact
-            path="/settings/about"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <SettingsLayout background="#f7faf9">
-                    <About />
-                  </SettingsLayout>
-                </AdultCheckProvider>
-              </AuthedLayout>
-            )}
-          />
+	  <Route exact path="/settings/about">
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <About />
+                </SettingsLayout>
+              </AdultCheckProvider>
+            </AuthedLayout>
+	  </Route>
 
           <Route
             exact

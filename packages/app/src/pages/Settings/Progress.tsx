@@ -110,7 +110,7 @@ export const Progress: React.FC = () => {
 
         <IonGrid className="whole-grid-style">
           <IonRow>
-            <IonCol size="8">
+            <IonCol size="12">
               <IonCard className="ion-no-padding">
                 <IonGrid className="grid-graph-style">
                   <IonRow>
@@ -206,142 +206,133 @@ export const Progress: React.FC = () => {
               </IonCard>
             </IonCol>
 
-            <IonCol size="4" className="second-column">
-              <IonRow>
-                <IonCol>
-                  <div className="grid-card">
-                    <RadioCard
-                      icon={
-                        <div
-                          style={{
-                            color: "#000",
-                            textAlign: "center",
-                            fontFamily: "Outfit",
-                            fontSize: "36px",
-                            fontStyle: "normal",
-                            fontWeight: "800",
-                            lineHeight: "800",
-                            letterSpacing: "0.2px",
-                          }}
-                        >
-                          1
-                        </div>
-                      }
-                      title={"Fabrica de cuentos"}
-                      content={intl.formatMessage({
-                        id: "settings.progress.activity1",
-                        defaultMessage: "20 minutes in total",
-                        description:
-                          "Time spent on activity1 (displayed on activity1 card on progress settings page)",
-                      })}
-                      iconBackgroundColor="#22BEB9"
-                    />
-                  </div>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol>
-                  <div className="grid-card">
-                    <RadioCard
-                      icon={
-                        <div
-                          style={{
-                            color: "#000",
-                            textAlign: "center",
-                            fontFamily: "Outfit",
-                            fontSize: "36px",
-                            fontStyle: "normal",
-                            fontWeight: "600",
-                            lineHeight: "800",
-                            letterSpacing: "0.2px",
-                          }}
-                        >
-                          2
-                        </div>
-                      }
-                      title={"Afirmaciones"}
-                      content={intl.formatMessage({
-                        id: "settings.progress.activity2",
-                        defaultMessage: "12 minutes in total",
-                        description:
-                          "Time spent on activity2 (displayed on activity2 card on progress settings page)",
-                      })}
-                      iconBackgroundColor="#FFE24F"
-                    />
-                  </div>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol>
-                  <div className="grid-card">
-                    <RadioCard
-                      icon={
-                        <div
-                          style={{
-                            color: "#000",
-                            textAlign: "center",
-                            fontFamily: "Outfit",
-                            fontSize: "36px",
-                            fontStyle: "normal",
-                            fontWeight: "800",
-                            lineHeight: "800",
-                            letterSpacing: "0.2px",
-                          }}
-                        >
-                          3
-                        </div>
-                      }
-                      title={"Cuento: Cara de Catrina"}
-                      content={intl.formatMessage({
-                        id: "settings.progress.activity3",
-                        defaultMessage: "9 minutes in total",
-                        description:
-                          "Time spent on activity3 (displayed on activity3 card on progress settings page)",
-                      })}
-                      iconBackgroundColor="#FFAEDC"
-                    />
-                  </div>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol class="ion-text-center">
-                  <IonCard className="activities-card">
-                    <div className="activities-card-overlay"></div>
-                    <IonGrid>
-                      <IonRow class="ion-align-items-center">
-                        <IonCol>
-                          <span>25</span>
-                        </IonCol>
-
-                        <IonCol class="ion-text-center">
-                          <IonIcon
-                            className="book-icon"
-                            icon={bookOutline}
-                            aria-hidden="true"
-                          />
-                        </IonCol>
-                      </IonRow>
-
-                      <IonRow>
-                        <IonCol>
-                          <IonCardTitle>
-                            <FormattedMessage
-                              id="settings.progress.activities"
-                              defaultMessage="Activities"
-                              description="'Activities' card on Progress page detailing number of activities"
-                            />
-                          </IonCardTitle>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCard>
-                </IonCol>
-              </IonRow>
-            </IonCol>
           </IonRow>
+	  <IonRow id='settings-progress-bottom-row'>
+            <IonCol size-xs='6'>
+              <div className="grid-card">
+                <RadioCard
+                  icon={
+                    <div
+                      style={{
+                        color: "#000",
+                        textAlign: "center",
+                        fontFamily: "Outfit",
+                        fontSize: "36px",
+                        fontStyle: "normal",
+                        fontWeight: "800",
+                        lineHeight: "800",
+                        letterSpacing: "0.2px",
+                      }}
+                    >
+                      1
+                    </div>
+                  }
+                  title={"Fabrica de cuentos"}
+                  content={intl.formatMessage({
+                    id: "settings.progress.activity1",
+                    defaultMessage: "20 minutes in total",
+                    description:
+                          "Time spent on activity1 (displayed on activity1 card on progress settings page)",
+                  })}
+                      iconBackgroundColor="#22BEB9"
+                />
+              </div>
+            </IonCol>
+	    
+            <IonCol size-xs='6'>
+              <div className="grid-card">
+                <RadioCard
+                  icon={
+                    <div
+                      style={{
+                        color: "#000",
+                        textAlign: "center",
+                        fontFamily: "Outfit",
+                        fontSize: "36px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        lineHeight: "800",
+                        letterSpacing: "0.2px",
+                      }}
+                    >
+                      2
+                    </div>
+                  }
+                  title={"Afirmaciones"}
+                  content={intl.formatMessage({
+                    id: "settings.progress.activity2",
+                    defaultMessage: "12 minutes in total",
+                    description:
+                          "Time spent on activity2 (displayed on activity2 card on progress settings page)",
+                  })}
+                  iconBackgroundColor="#FFE24F"
+                />
+              </div>
+            </IonCol>
+	    
+            <IonCol size-xs='6'>
+              <div className="grid-card">
+                <RadioCard
+                  icon={
+                    <div
+                      style={{
+                        color: "#000",
+                        textAlign: "center",
+                        fontFamily: "Outfit",
+                        fontSize: "36px",
+                        fontStyle: "normal",
+                        fontWeight: "800",
+                        lineHeight: "800",
+                        letterSpacing: "0.2px",
+                      }}
+                    >
+                      3
+                    </div>
+                  }
+                  title={"Cuento: Cara de Catrina"}
+                  content={intl.formatMessage({
+                    id: "settings.progress.activity3",
+                    defaultMessage: "9 minutes in total",
+                    description:
+                          "Time spent on activity3 (displayed on activity3 card on progress settings page)",
+                  })}
+                  iconBackgroundColor="#FFAEDC"
+                />
+              </div>
+            </IonCol>
+            <IonCol class="ion-text-center" size-xs="6">
+              <IonCard className="activities-card">
+                <div className="activities-card-overlay"></div>
+                <IonGrid>
+                  <IonRow class="ion-align-items-center">
+                    <IonCol>
+                      <span>25</span>
+                    </IonCol>
+		    
+                    <IonCol class="ion-text-center">
+                      <IonIcon
+                        className="book-icon"
+                        icon={bookOutline}
+                        aria-hidden="true"
+                      />
+                    </IonCol>
+                  </IonRow>
+		  
+                  <IonRow>
+                    <IonCol>
+                      <IonCardTitle>
+                        <FormattedMessage
+                          id="settings.progress.activities"
+                          defaultMessage="Activities"
+                          description="'Activities' card on Progress page detailing number of activities"
+                        />
+                      </IonCardTitle>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonCard>
+            </IonCol>
+	  </IonRow>
         </IonGrid>
       </div>
     </>
