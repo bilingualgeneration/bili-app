@@ -111,6 +111,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     backgroundImage: `url(${cover})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+    aspectRatio: '1 / 1.25',
+    border: '8.4px solid transparent',
     zIndex: "2",
   };
 

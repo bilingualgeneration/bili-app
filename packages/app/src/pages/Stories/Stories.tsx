@@ -377,6 +377,7 @@ const StoryPage: React.FC<any> = () => {
 			    justifyContent: 'space-between',
 			    height: '100%'
 			  }}>
+	    <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-2xl semibold color-suelo">
                 {isInclusive ? texts["es-inc"].text : texts.es.text}
