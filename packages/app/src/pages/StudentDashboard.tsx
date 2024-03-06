@@ -263,10 +263,9 @@ export const StudentDashboard: FC = () => {
         style={{
           paddingBottom: "4rem",
           paddingTop: "4rem",
-          paddingLeft: 100,
-          paddingRight: 100,
-        }}
-      >
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}>
         <h1 className="text-5xl color-suelo carousel-header-margin">
           <FormattedMessage
             id="landingPage.welcome"
@@ -279,7 +278,7 @@ export const StudentDashboard: FC = () => {
         )}
       </div>
 
-      <div style={{ marginLeft: 100, marginRight: 100 }}>
+      <div style={{ marginLeft: 20, marginRight: 20 }}>
         <div className="icons-title margin-top-3">
           <IonText>
             <h1 className="text-5xl color-suelo carousel-header-margin">

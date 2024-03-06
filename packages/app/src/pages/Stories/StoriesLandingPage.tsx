@@ -72,8 +72,9 @@ export const StoriesLandingPage: FC = () => {
                     <Carousel height={274}>
                         {storiesCards.map((c, index) => (
                             <ContentCard 
-                                {...c} 
-                                key={index} 
+                              {...c}
+			      fid={index.toString()}
+                              key={index} 
                             />
                         ))}
                     </Carousel>

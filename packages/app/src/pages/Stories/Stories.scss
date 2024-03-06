@@ -81,10 +81,12 @@
 .stories-volume-button {
     --background: var(--Flamenco-High, #ffaedc);
     --ripple-color: var(--Flamenco-High, #ffaedc);
+    height: 62px;
+    width: 62px;
 }
 
 .stories-volume-icon {
-    height: 2rem;
+    height: 38px;
     width: auto;
     /*
     width: auto;
@@ -92,4 +94,24 @@
     padding: 1rem;
     border-radius: 1rem;
     */
+}
+
+.content-wrapper {
+    .page-control {
+	height: 4rem;
+	width: auto;
+	position: absolute;
+	&.forward {
+	    top: calc(300px + 62px / 2);
+	    right: calc(50% - 460px - 36px);
+	    z-index: 100;
+	}
+
+	&.backward {
+	    top: calc(300px + 62px / 2);
+	    left: calc(50% - 460px - 36px);
+	    z-index: 100;
+	}
+    }
+    
 }
