@@ -1,27 +1,28 @@
-$card-margin: 2rem;
+// $card-margin: 2rem;
 
 #playPage {
+
   .favorite-button {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
   }
 
-  #playCardWrapper {
-    width: calc(100% - 200px);
-    margin: auto;
-  }
+  // #playCardWrapper {
+  //   width: calc(100% - 200px);
+  //   margin: auto;
+  // }
 
   #storyFactoryCard {
     background-image: url("/assets/img/background_purple.png");
     cursor: pointer;
-    margin-right: $card-margin;
+    // margin-right: $card-margin;
   }
 
   #intruderCard {
     background-image: url("/assets/img/background_teal.png");
     cursor: pointer;
-    margin-right: $card-margin;
+    // margin-right: $card-margin;
   }
 
   #countCard {
@@ -30,7 +31,7 @@ $card-margin: 2rem;
   }
 
   .card {
-      display: inline-block;
+    // display: inline-block;
     background-position: center center;
     background-size: cover;
     border-radius: 2rem;
@@ -57,6 +58,6 @@ $card-margin: 2rem;
   }
 }
 
-.card {
-    display: inline-block !important;
-}
+// .card {
+//     display: inline-block !important;
+// }

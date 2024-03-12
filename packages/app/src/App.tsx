@@ -7,13 +7,14 @@ import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact, IonPage } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, RouteComponentProps, Route, Switch } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { AuthProvider, useFirebaseApp } from "reactfire";
 import AuthedLayout from "@/layouts/Authed";
+import { CountCongrats } from "./pages/CountWithMe";
 import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
 import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
 import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
@@ -24,7 +25,6 @@ import {
   IntruderGame,
   IntruderGameLoader
 } from '@/pages/Intruder';
-import { Tradein } from "@/pages/Tradein";
 import Journeys from "./pages/Journeys";
 import Login from "@/pages/Login";
 import {
@@ -41,6 +41,7 @@ import { Community } from "@/pages/Community";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { Pricing } from "@/pages/SignUp/Pricing";
+import { ProfileComingSoon } from "./pages/ProfileComingSoon";
 import ResetPassword from "@/pages/ResetPassword";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
@@ -54,6 +55,7 @@ import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
+import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
 import { TellMeAboutIntro } from "@/pages/TellMeAbout/TellMeAboutIntro";
@@ -62,7 +64,6 @@ import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
-
 import { PackSelect } from "@/components/PackSelect";
 
 // category headers (usually for PackSelect
@@ -94,8 +95,7 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { StoriesPictureGame } from "./pages/Stories/StoriesPictureGame";
-import { StoriesSyllableGame } from "./pages/Stories/StoriesSyllableGame";
+import { Wellness } from "./pages/Wellness/Wellness";
 
 setupIonicReact();
 
@@ -105,6 +105,7 @@ const Router: React.FC = () => {
   return (
       <IonReactRouter>
         <Switch>
+	  <ScrollToTop>
           <Route
             exact
             path="/"
@@ -179,7 +180,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeIntro />
+		              <CountWithMeIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -192,7 +193,20 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeSelect />
+		              <CountWithMeSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          {/* temp route for development */}
+          <Route
+            exact
+            path="/count-congrats"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <CountCongrats />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -206,6 +220,18 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <CountWithMeGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/stories"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StoriesLandingPage />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -234,29 +260,25 @@ const Router: React.FC = () => {
 
           <Route
             exact
-            path="/tradein"
+            path="/profile/coming-soon"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <Tradein />
+                  <ProfileComingSoon />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
 
-          <Route
-            exact
-            path="/settings/about"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <SettingsLayout background="#f7faf9">
-                    <About />
-                  </SettingsLayout>
-                </AdultCheckProvider>
-              </AuthedLayout>
-            )}
-          />
+	  <Route exact path="/settings/about">
+            <AuthedLayout>
+              <AdultCheckProvider>
+                <SettingsLayout background="#f7faf9">
+                  <About />
+                </SettingsLayout>
+              </AdultCheckProvider>
+            </AuthedLayout>
+	  </Route>
 
           <Route
             exact
@@ -334,15 +356,15 @@ const Router: React.FC = () => {
             )}
           />
 
-	  <Route
+	      <Route
           exact
           path="/stories/:uuid"
           render={(props) => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-              <Stories />
-                </HeaderFooter>
-              </AuthedLayout>
+            <AuthedLayout>
+              <HeaderFooter background="#FFFFFF">
+                <Stories />
+              </HeaderFooter>
+            </AuthedLayout>
           )}
         />
 
@@ -353,30 +375,6 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FFFFFF">
                   <StoriesDragGameLoader />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesPictureGame />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/stories/game2/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
-                  <StoriesSyllableGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -400,7 +398,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <StoryFactorySelect />
+		              <StoryFactorySelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -495,7 +493,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <IntruderSelect />
+		              <IntruderSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -541,11 +539,24 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <WouldDoSelect />
+		              <WouldDoSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/wellness"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <Wellness />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+	  </ScrollToTop>
         </Switch>
       </IonReactRouter>
   );
@@ -557,7 +568,6 @@ const App: React.FC = () => {
     // set default language to device if not already set
     (async () => {
       const locale = await localStorage.getItem("userLocale");
-      //alert((await Device.getLanguageCode()).value);
       if (locale === null) {
         // no stored language
         localStorage.setItem(
@@ -573,7 +583,7 @@ const App: React.FC = () => {
         <IonApp>
           <AudioManagerProvider>
 	    <I18nWrapper locale={locale}>
-              <Router />
+	      <Router />
 	    </I18nWrapper>
           </AudioManagerProvider>
         </IonApp>

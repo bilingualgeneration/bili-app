@@ -1,17 +1,14 @@
-.c > * {
-    display: inline-block;
-}
 .carousel-container {
   padding-left: 30px;
   padding-right: 30px;
   overflow-x: clip;
   overflow-y: hidden;
 
-  .slick-track {
-    > * {
-      margin: 0 4px;
-    }
-  }
+  // .slick-track {
+  //   > * {
+  //     margin: 0 4px;
+  //   }
+  // }
 }
 
 .slick-arrow {

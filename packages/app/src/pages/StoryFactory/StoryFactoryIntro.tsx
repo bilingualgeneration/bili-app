@@ -32,7 +32,7 @@ export const StoryFactoryIntro: React.FC = () => {
 	audio: es_2
       },
       en: {
-	subtext: `Create over 4,000 different stories with the swipe of your finger or click of a button.`,
+	subtext: `Create over 4,000 different stories with the swipe of your finger or click of a button.`,
 	audio: en_2
       }
     },

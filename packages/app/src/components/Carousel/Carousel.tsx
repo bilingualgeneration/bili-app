@@ -1,8 +1,16 @@
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.scss";
+
+interface CarouselProps extends React.PropsWithChildren<{
+    height: number;
+    slidesToShow?: number;
+    slideMargin?: number;
+    infinite?: boolean;
+}> {}
 
 const Arrow: React.FC<any> = ({
   className,
@@ -22,32 +30,38 @@ const Arrow: React.FC<any> = ({
   );
 };
 
-export const Carousel: React.FC<
-  React.PropsWithChildren<{
-    height: number;
-    slidesToShow?: number;
-  }>
-> = ({ children, height, slidesToShow = 3 }) => {
+export const Carousel: React.FC<CarouselProps> = ({ 
+  children, 
+  height, 
+  slidesToShow = 1, 
+  slideMargin = 4,
+  infinite = false,
+}) => {
+  
+  const settings: Settings = {
+    draggable: false,
+    infinite,
+    slidesToShow,
+    slidesToScroll: 1,
+    nextArrow: <Arrow direction="forward" height={height} />,
+    prevArrow: <Arrow direction="backward" height={height} />,
+    variableWidth: true,
+  };
 
-  /*
   return (
     <div className="carousel-container" style={{ height }}>
-      <Slider
-        className="slider variable-width"
-        draggable={false}
-        infinite={false}
-        slidesToShow={slidesToShow}
-        slidesToScroll={1}
-        nextArrow={<Arrow direction="forward" height={height} />}
-        prevArrow={<Arrow direction="backward" height={height} />}
-        variableWidth={true}
-      >
+      <style>
+        {`
+          .slick-track {
+            > * {
+            margin: 0 ${slideMargin}px; /* Set margin dynamically */
+            } 
+          }
+        `}
+      </style>
+      <Slider {...settings}>
         {children}
       </Slider>
     </div>
   );
-  */
-  return <div className='c'>
-    {children}
-  </div>;
 };

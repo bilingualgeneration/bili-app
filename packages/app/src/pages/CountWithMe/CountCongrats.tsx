@@ -5,26 +5,47 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.wav";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.wav";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.wav";
 
-import "../StoryFactory/StoryFactory.scss";
+// audio
+import count_congrats_en_3 from '@/assets/audio/CountAudio/count_congrats_en_3.mp3';
+import count_congrats_en_6 from '@/assets/audio/CountAudio/count_congrats_en_6.mp3';
+import count_congrats_en_9 from '@/assets/audio/CountAudio/count_congrats_en_9.mp3';
+import count_congrats_en_13 from '@/assets/audio/CountAudio/count_congrats_en_13.mp3';
+import count_congrats_es_3 from '@/assets/audio/CountAudio/count_congrats_es_3.mp3';
+import count_congrats_es_6 from '@/assets/audio/CountAudio/count_congrats_es_6.mp3';
+import count_congrats_es_9 from '@/assets/audio/CountAudio/count_congrats_es_9.mp3';
+import count_congrats_es_13 from '@/assets/audio/CountAudio/count_congrats_es_13.mp3';
+import activity_completed_en from '@/assets/audio/CountAudio/activity_completed_en.mp3';
+import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_es.mp3';
 
-interface CountCongratsProps {
-  onKeepGoingClick: () => void;
-  count: number;
-}
+// svgs
+import congratsStar from "@/assets/icons/count_congrats_star.svg";
+import starsOverlay from "@/assets/icons/sf_stars_overlay.svg";
 
-export const CongratsPage: React.FC<CountCongratsProps> = ({
-  onKeepGoingClick,
-  count,
-}) => {
+import "./CountWithMe.scss";
+
+const sounds: any = {
+  en: {
+    "3": count_congrats_en_3,
+    "6": count_congrats_en_6,
+    "9": count_congrats_en_9,
+    "13": count_congrats_en_13,
+  },
+  es: {
+    "3": count_congrats_es_3,
+    "6": count_congrats_es_6,
+    "9": count_congrats_es_9,
+    "13": count_congrats_es_13,
+  },
+};
+
+export const CountCongrats: React.FC<{
+  onKeepGoingClick?: any;
+  count?: number;
+}> = ({ onKeepGoingClick, count }) => {
   // Function to render the congrats page
   const congrats = {
-    background:
-      "https://ik.imagekit.io/jskeetedev/Untitled%20design%20(3).png?updatedAt=1706831646016",
-    star: "https://ik.imagekit.io/jskeetedev/Untitled%20design%20(2).png?updatedAt=1706831320447",
+    star: congratsStar,
   };
 
   const { isInclusive, isImmersive } = useProfile();
@@ -32,11 +53,20 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
 
+  // can potentially uncomment once 'congrats after x animals' screen is built
+
+  // const audio_es = new Audio(sounds.es[count.toString()]);
+  // const audio_en = new Audio(sounds.en[count.toString()]);
+
+  const audio_es = new Audio(activity_completed_es);
+  const audio_en = new Audio(activity_completed_en);
+
   useEffect(() => {
     return () => {
       clearAudio();
     };
   }, []);
+
   useEffect(() => {
     setCallback(() => () => {
       setAudioPlayed(true);
@@ -44,95 +74,89 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
 
     if (isImmersive) {
       if (isInclusive) {
-        addAudio([audio_es_inc_file]);
+        addAudio([audio_es]);
+      } else {
+        addAudio([audio_en]);
       }
-      addAudio([audio_es_file]);
     } else {
-      addAudio([audio_es_file, audio_en_file]);
+      addAudio([audio_en]);
     }
   }, []);
+
   const history = useHistory();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowText(false);
-    }, 2000); // Set timeout to hide text after 2 seconds
+    }, 3000); // Set timeout to hide text after 3 seconds
 
     return () => clearTimeout(timeout);
   }, []); // This effect runs only once
 
   return (
     <>
-      <div style={{ padding: "50px" }}>
-        <div
+      <div style={{ padding: "20px" }}>
+        <img
+          src={starsOverlay}
           style={{
-            height: "100vh",
+            position: "absolute",
+            top: "70px",
+            left: "calc(40% - 250px)",
+            zIndex: 1,
+          }}
+          alt="background"
+        />
+        <div
+          className="margin-top-4"
+          style={{
+            width: "auto",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
             alignItems: "center",
+            justifyContent: "end",
             position: "relative",
           }}
         >
-          <img
-            src={congrats.background}
-            style={{
-              position: "absolute",
-              width: "1200px",
-              height: "auto",
-              zIndex: -1,
-            }}
-            alt="background"
-          />
-          <div>
-	    <IonText>
-	    <h1 className='text-4xl color-suelo semibold'>
-            <FormattedMessage
-              id="countWithMe.complete"
-              defaultMessage="Activity Completed"
-              description="Information that the activity is completed"
-            />
-	    </h1>
+          <IonText>
+            <h1 className="text-4xl color-suelo semibold">
+              <FormattedMessage
+                id="countWithMe.complete"
+                defaultMessage="Activity Completed"
+                description="Information that the activity is completed"
+              />
+            </h1>
             {!isImmersive && (
-              <p className='text-2xl color-english' style={{ textAlign: "center" }}>Activity Completed</p>
+              <p className="text-2xl color-english" style={{ textAlign: "center" }}>
+                Activity Completed
+              </p>
             )}
-	    </IonText>
-          </div>
+          </IonText>
 
           <div
             style={{
+              display: "flex",
               position: "relative",
-              zIndex: 2,
-              textAlign: "center",
+              zIndex: 3,
             }}
           >
             <img
+              className="congrats-star"
               src={congrats.star}
               alt="star"
-              style={{
-                width: showText ? "700px" : "200px",
-                height: "auto",
-                position: "relative",
-                transition: "width 1s ease", // transition effect to animate star shrink
-              }}
             />
             {showText && (
               <div
                 style={{
                   position: "absolute",
+                  display: "flex",
+                  flexDirection: "column",
                   top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)", // Center text horizontally and vertically in the star
-                  color: "#fff",
+                  left: "55%",
+                  transform: "translate(-50%, -50%)", // Center horizontally
+                  zIndex: "3",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "26px",
-                    margin: 0,
-                    color: "black",
-                  }}
-                >
+                <div className="text-3xl semibold">
                   <FormattedMessage
                     id="countWithMe.congrats"
                     defaultMessage="You've earned a star"
@@ -141,54 +165,57 @@ export const CongratsPage: React.FC<CountCongratsProps> = ({
                 </div>
 
                 {!isImmersive && (
-                  <p style={{ fontSize: "12px", margin: 0, color: "black" }}>
+                  <p className="text-sm color-english">
                     You've earned a star
                   </p>
                 )}
               </div>
             )}
           </div>
-
-          <div
-            style={{
-              position: "relative",
-              textAlign: "center",
-              marginTop: "10rem",
-            }}
-          >
-            <img
-              src={StoryFactoryArrow}
-              alt="indicator arrow to next button"
-              style={{
-                right: "110%",
-                top: 3,
-                position: "absolute",
-              }}
-            />
-
-            <IonButton
-              className="sf-intro-button"
-              disabled={!audioPlayed}
-              expand="block"
-              shape="round"
-              type="button"
-              onClick={onKeepGoingClick}
-            >
-              <div>
-                <div className="story-button-bold">
-                  <FormattedMessage
-                    id="countWithMe.keepGoing"
-                    defaultMessage="Keep Going!"
-                    description="Button label to exit congrats screen"
-                  />
-                </div>
-                {!isImmersive && (
-                  <div className="story-button-reg">Keep going!</div>
-                )}
-              </div>
-            </IonButton>
-          </div>
         </div>
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          textAlign: "center",
+          zIndex: 2,
+          marginTop: "auto",
+        }}
+      >
+        {audioPlayed && ( 
+          <img
+            src={StoryFactoryArrow}
+            alt="indicator arrow to the next button"
+            style={{
+              left: "calc(50% - 350px)",
+              top: 3,
+              position: "absolute",
+            }}
+            className="bounce-arrow"
+          />
+        )}
+        <IonButton
+          className="sf-intro-button"
+          disabled={!audioPlayed}
+          expand="block"
+          shape="round"
+          type="button"
+          onClick={onKeepGoingClick}
+        >
+          <div>
+            <div className="story-button-bold">
+              <FormattedMessage
+                id="countWithMe.keepGoing"
+                defaultMessage="Keep Going!"
+                description="Button label to exit congrats screen"
+              />
+            </div>
+            {!isImmersive && (
+              <div className="story-button-reg">Keep going!</div>
+            )}
+          </div>
+        </IonButton>
       </div>
     </>
   );

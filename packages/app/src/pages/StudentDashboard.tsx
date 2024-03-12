@@ -223,12 +223,37 @@ export const StudentDashboard: FC = () => {
       link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
       isLocked: false,
     },
+    {
+      category: "stories",
+      title: "¡Me gusta!",
+      titleEn: "I Like It!",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Me_Gusta_fc5d6f6fec.png",
+      link: "/stories/2dc82579-85a5-488e-8bc6-ab18cc349b3c",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Mancha de plátano",
+      titleEn: "Plantain Stain",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/mancha_Cover_fa80bfa1a7.png",
+      link: "/stories/64578366-bf8d-4e58-813c-113f9c81fb66",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Corazón contento",
+      titleEn: "Happy Heart",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Corazon_e769c63ee2.png",
+      link: "/stories/7935ba4a-0800-49a5-8ce8-2f1d3ca0a906",
+      isLocked: false,
+    },
   ];
 
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
       englishLabel: "Stories",
+      link: "/stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
@@ -236,6 +261,7 @@ export const StudentDashboard: FC = () => {
       reactintlId: "common.wellness",
       englishLabel: "Wellness",
       backgroundColor: "#ac217b",
+      link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
@@ -255,16 +281,15 @@ export const StudentDashboard: FC = () => {
   ];
 
   return (
-    <div id="student-landing-page" style={{paddingBottom: "33vh"}}>
+    <div id="student-landing-page">
       <div
         className="cards-title background-pattern"
         style={{
           paddingBottom: "4rem",
           paddingTop: "4rem",
-          paddingLeft: 100,
-          paddingRight: 100,
-        }}
-      >
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}>
         <h1 className="text-5xl color-suelo carousel-header-margin">
           <FormattedMessage
             id="landingPage.welcome"
@@ -277,7 +302,7 @@ export const StudentDashboard: FC = () => {
         )}
       </div>
 
-      <div style={{ marginLeft: 100, marginRight: 100 }}>
+      <div style={{ marginLeft: 20, marginRight: 20 }}>
         <div className="icons-title margin-top-3">
           <IonText>
             <h1 className="text-5xl color-suelo carousel-header-margin">
@@ -313,10 +338,12 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <IonText>
+            <Link to="/stories" className="no-text-decoration">
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
             {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
@@ -329,6 +356,7 @@ export const StudentDashboard: FC = () => {
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
+            <Link to="/wellness" className="no-text-decoration">
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage
                 id="common.wellness"
@@ -336,6 +364,7 @@ export const StudentDashboard: FC = () => {
               />
             </h1>
             {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>

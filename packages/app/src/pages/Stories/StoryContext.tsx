@@ -17,6 +17,10 @@ interface StoryState {
   setFilteredPages: Dispatch<SetStateAction<any[]>>;
   ready: boolean;
   setReady: Dispatch<SetStateAction<boolean>>;
+  hasMultipleImage: boolean;
+  setHasMultipleImage: Dispatch<SetStateAction<boolean>>;
+  hasMultipleSyllable: boolean;
+  setHasMultipleSyllable: Dispatch<SetStateAction<boolean>>;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -30,6 +34,8 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [totalPages, setTotalPages] = useState<number>(0);
   const [filteredPages, setFilteredPages] = useState<any[]>([]);
   const [ready, setReady] = useState<boolean>(false);
+  const [hasMultipleImage, setHasMultipleImage] = useState<boolean>(false);
+  const [hasMultipleSyllable, setHasMultipleSyllable] = useState<boolean>(false);
   const pageForward = () => {
     setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
   };
@@ -39,6 +45,10 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <StoryContext.Provider
       value={{
+	hasMultipleImage,
+	hasMultipleSyllable,
+	setHasMultipleImage,
+	setHasMultipleSyllable,
         pageNumber,
         pageForward,
         pageBackward,

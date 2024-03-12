@@ -21,11 +21,11 @@ import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
 import {useAudioManager} from '@/contexts/AudioManagerContext';
-import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
-import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
-import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.wav";
-import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.wav";
-import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.wav";
+import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
+import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
+import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
+import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
+import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { useFirestore, useFirestoreDocData } from "reactfire";
@@ -111,6 +111,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     backgroundImage: `url(${cover})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+    aspectRatio: '1 / 1.25',
+    border: '8.4px solid transparent',
     zIndex: "2",
   };
 
@@ -173,7 +175,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
-      addAudio([card_flip_audio]);
       setTimeout(() => {
         if (
           currentIndex + 1 === 5 ||
@@ -200,6 +201,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const handleCardClick = (card: any) => {
     if (!card.isIntruder) {
       //logic for the incorrect cards
+      console.log('123');
       addAudio([incorrect_card_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
@@ -214,7 +216,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       }, 1000);
     } else {
       //logic when the correct card is choosen
-      addAudio([correct_card_audio]);
+      addAudio([correct_card_audio, card_flip_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
         [card.id]: correctStyle,
@@ -297,7 +299,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
             {!isImmersive && (
               <p className="text-lg color-english">
-                Which word does not rhyme?
+                Read
               </p>
             )}
           </IonText>

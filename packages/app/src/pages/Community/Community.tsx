@@ -10,6 +10,7 @@ import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { Link } from "react-router-dom";
+import Lock from "@/assets/icons/lock.svg?react";
 
 import don_lola from "@/assets/img/don_lola.png";
 import nuriah from "@/assets/img/nuriah.png";
@@ -17,21 +18,28 @@ import tunita from "@/assets/img/tunita.png";
 
 import "./Community.scss";
 
-const Card: FC<any> = ({ image, link, translatedTitle, title }) => {
+const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
   const { isImmersive } = useProfile();
+  const content = <>
+    <img src={image} />
+    <IonText className="ion-text-center">
+      <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
+      {!isImmersive && (
+        <h3 className="text-2xl color-cielo">
+	  {title}
+        </h3>
+      )}
+    </IonText>
+  </>;
   return (
-      <div className="community-card">
-	<Link to={link} className="no-text-decoration">
-          <img src={image} />
-          <IonText className="ion-text-center">
-            <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
-            {!isImmersive && (
-              <h3 className="text-2xl color-cielo">
-              {title}
-              </h3>
-            )}
-          </IonText>
-	</Link>
+    <div className="community-card">
+      {locked && <div className="content-lock">
+          <Lock />
+        </div>}
+      {link && <Link to={link} className="no-text-decoration">
+	{content}
+      </Link>}
+      {!link && content}
       </div>
   );
 };
@@ -49,7 +57,7 @@ export const Community: FC = () => {
       title: "Tell me about...",
       link: "/tell-me-about",
       image: nuriah,
-      locked: false,
+      locked: true,
     },
     {
       translatedTitle: intl.formatMessage({
