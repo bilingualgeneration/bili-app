@@ -9,14 +9,14 @@ interface LetterAudio {
 }
 
 interface LetterSegmentProps {
-  id: string;
+  id?: string;
   letter: string;
   audio?: LetterAudio;
   index: number;
   onDrop: (index: number) => void;
   correctDrop: boolean;
-  left: number;
-  top: number;
+  left?: number;
+  top?: number;
 }
 
 export const LetterSegment: FC<LetterSegmentProps> = ({

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { CSSProperties, FC } from 'react'
 import { useDrop, XYCoord } from "react-dnd";
 import "./Stories.scss";
 import { letters } from "./letters";
@@ -10,6 +10,13 @@ interface DropZoneProps {
   letter: any;
   expectedIndex: number;
   onDrop: (index: number, left: number, top: number) => void;
+}
+
+const styles: CSSProperties = {
+  width: 800,
+  height: 800,
+  border: '1px solid black',
+  position: 'relative',
 }
 
 export const DropZone: FC<DropZoneProps> = ({

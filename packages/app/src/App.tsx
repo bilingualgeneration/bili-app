@@ -22,7 +22,6 @@ import { HeaderFooter } from "@/components/HeaderFooter";
 import {
   IntruderSelect,
   IntruderIntro,
-  IntruderGame,
   IntruderGameLoader
 } from '@/pages/Intruder';
 import Journeys from "./pages/Journeys";
@@ -49,15 +48,14 @@ import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
-import { StoriesDragGameLoader } from "./pages/Stories";
+import { StoriesDragGameLoader } from "@/pages/Stories";
 import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
-//import { StoryFactoryPg2 } from "@/pages/StoryFactory/StoryFactoryPg2";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
-import { StoryFactoryPage3 } from "@/pages/StoryFactory/StoryFactoryPg3";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
+import { TempDragGame } from "@/pages/Stories/dnd_temp";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
@@ -103,7 +101,7 @@ const Router: React.FC = () => {
   return (
       <IonReactRouter>
         <Switch>
-	  <ScrollToTop>
+	        <ScrollToTop>
           <Route
             exact
             path="/"
@@ -235,14 +233,16 @@ const Router: React.FC = () => {
             )}
           />
 
-          {/* temp route for development */}
+          {/* temp route & temp game for development */}
           <Route
             exact
-            path="/pricing"
+            path="/temp-drag-game"
             render={() => (
-              <UnauthedLayout>
-                <Pricing />
-              </UnauthedLayout>
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <TempDragGame />
+                </HeaderFooter>
+              </AuthedLayout>
             )}
           />
 
@@ -268,7 +268,7 @@ const Router: React.FC = () => {
             )}
           />
 
-	  <Route exact path="/settings/about">
+	        <Route exact path="/settings/about">
             <AuthedLayout>
               <AdultCheckProvider>
                 <SettingsLayout background="#f7faf9">
@@ -276,7 +276,7 @@ const Router: React.FC = () => {
                 </SettingsLayout>
               </AdultCheckProvider>
             </AuthedLayout>
-	  </Route>
+	        </Route>
 
           <Route
             exact
@@ -366,7 +366,7 @@ const Router: React.FC = () => {
           )}
         />
 
-          <Route
+          {/* <Route
             exact
             path="/stories/play/:pack_id"
             render={() => (
@@ -376,7 +376,7 @@ const Router: React.FC = () => {
                 </HeaderFooter>
               </AuthedLayout>
             )}
-          />
+          /> */}
 
           <Route
             exact
