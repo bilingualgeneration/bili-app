@@ -3,26 +3,19 @@
   margin: 0 auto;
 
   .intruder-cards-container {
-    display: flex;
-    //height: 612px;
-    padding: 0px 40px;
-    align-items: center;
-    gap: 44px;
-    align-self: stretch;
+      display: flex;
+      gap: 3rem;
   }
 
   .intruder-card-style {
-    display: flex;
-    width: 360px;
-    height: 540px;
-    padding: 124.245px 20px 30px 20px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 80px;
-    margin-inline: initial;
-    min-width: 200px;
-    border-radius: 32px;
+      flex-basis: 0;
+      flex-grow: 1;
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      border-radius: 32px;
   }
 
   .intruder-card-style img {
@@ -30,42 +23,6 @@
     max-width: 70%;
   }
 
-  .intruder-card-title {
-    color: var(--Base-Suelo, #000);
-    text-align: center;
-    font-family: Outfit;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 56px; /* 116.667% */
-    letter-spacing: -1px;
-  }
-
-  @media screen and (max-width: 850px) {
-    .intruder-card-title {
-      font-size: 28px;
-    }
-
-    .intruder-card-style img {
-      width: 70%;
-    }
-
-    .intruder-card-style {
-      height: 340px;
-      padding: 14.245px 0px 0px 0px;
-      gap: 25px;
-    }
-  }
-
-  .intruder-button-bold h3 {
-    color: var(--Base-Nube, #fff);
-    text-align: center;
-    font-family: Outfit;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%; /* 35.2px */
-  }
 }
 
 .sound-button {

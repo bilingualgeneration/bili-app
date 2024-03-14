@@ -219,3 +219,13 @@ ion-item.kids-name-select {
 .progress-content-container {
   padding: 16px 72px;
 }
+
+#settings-progress-bottom-row {
+    margin-top: 1rem;
+    ion-col > * {
+	height: 100%;
+    }
+    .grid-card {
+	padding: 8px;
+    }
+}

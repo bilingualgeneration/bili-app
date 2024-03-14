@@ -17,3 +17,19 @@
 .shake-animation {
   animation: shake 1s;
 }
+
+@keyframes bounceArrow {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.bounce-arrow {
+  animation: bounceArrow 1s infinite;
+}

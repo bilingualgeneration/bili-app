@@ -31,7 +31,6 @@ export const Preferences: React.FC = () => {
       [key]: value,
     });
   };
-
   return (
     <>
       <IonList className="preferences-style">

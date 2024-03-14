@@ -1,0 +1,57 @@
+.content-container {
+    margin: 50px 30px;
+    position: relative;
+
+    @media (max-width: 768px) { /* iPad Mini portrait and landscape width */
+        margin: 20px; 
+    }
+}
+
+.heading-container {
+    width: 703px;
+    height: 208px;
+    margin: 0 0 0 65px;
+
+    @media (max-width: 768px) { /* iPad Mini portrait and landscape width */
+        width: auto;
+        margin: 0 0 0 50px;
+        padding: 0 20px;
+    }
+
+    @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
+        width: auto;
+        margin: 0 0 0 0px;
+        padding: 0 20px;
+    }
+}
+
+.bili-helmet-image {
+    position: absolute;
+    left: 760px;
+    bottom: 190px;
+    max-width: 290px;
+
+    @media (max-width: 1024px) { /* iPad Mini portrait and landscape width */
+        left: 750px;
+        bottom: 210px;
+        max-width: 200px;
+    }
+
+    @media (max-width: 1000px) { /* iPad Mini portrait and landscape width */
+        left: 720px;
+        bottom: 210px;
+        max-width: 190px;
+    }
+
+    @media (max-width: 960px) { /* iPad Mini portrait and landscape width */
+        left: 500px;
+        bottom: 190px;
+        max-width: 190px;
+    }
+
+    @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
+        left: 500px;
+        bottom: 200px;
+        max-width: 150px;
+    }
+}

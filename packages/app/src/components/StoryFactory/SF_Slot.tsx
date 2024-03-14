@@ -39,24 +39,11 @@ export const SF_Slot: React.FC<SF_SlotProps> = ({
 
   return (
     <>
-      <div
-      // style={{
-      //     display: "flex",
-      //     flexDirection: "column",
-      //     alignItems: "center",
-      //     width: '100%',
-      //     height: '20vh',
-      //     gap: '7.17px',
-      //     flexShrink: '0',
-      //     borderRadius: '200px',
-      //     margin: '0px 1% 0px',
-      // }}
-      >
+      <div>
         <IonGrid class="ion-no-padding">
           {/* Row for upward arrows */}
           <IonRow className="ion-justify-content-center">
             <IonCol>
-              {/* <div className="up-button"> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="55"
@@ -78,7 +65,6 @@ export const SF_Slot: React.FC<SF_SlotProps> = ({
                   fill={arrowColor} // Dynamically set fill based on array option
                 />
               </svg>
-              {/* </div> */}
             </IonCol>
           </IonRow>
 

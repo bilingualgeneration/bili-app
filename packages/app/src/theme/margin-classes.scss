@@ -1,21 +1,21 @@
 @for $margin from 1 through 5 {
   .margin-top-#{$margin} {
-    margin-top: #{$margin}rem;
+    margin-top: #{$margin}rem !important;
   }
   .margin-top-#{$margin}-5 {
-    margin-top: calc(#{$margin}rem + 0.5rem);
+    margin-top: calc(#{$margin}rem + 0.5rem) !important;
   }
 
   .margin-bottom-#{$margin} {
-    margin-bottom: #{$margin}rem;
+    margin-bottom: #{$margin}rem !important;
   }
   .margin-bottom-#{$margin}-5 {
-    margin-bottom: calc(#{$margin}rem + 0.5rem);
+    margin-bottom: calc(#{$margin}rem + 0.5rem) !important;
   }
 
   .margin-vertical-#{$margin} {
-    margin-top: #{$margin}rem;
-    margin-bottom: #{$margin}rem;
+    margin-top: #{$margin}rem !important;
+    margin-bottom: #{$margin}rem !important;
   }
 
   .margin-vertical-#{$margin}-5 {

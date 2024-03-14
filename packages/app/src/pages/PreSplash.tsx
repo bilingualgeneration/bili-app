@@ -10,8 +10,8 @@ export const PreSplash: React.FC = () => {
     <IonPage>
       <IonContent>
         <div id="start-page">
-          <div className="page-wrapper">
-            <div id="inner-start-page">
+          <div className="page-wrapper" style={{paddingBottom: 0}}>
+            <div id="inner-start-page" style={{paddingTop: '3rem', paddingBottom: '2rem'}}>
               <Logo />
               <IonText>
                 <p
@@ -20,7 +20,7 @@ export const PreSplash: React.FC = () => {
                 >
                   <FormattedMessage
                     id="presplash.tagline"
-                    defaultMessage="Language learning that is abueltia and science–approved"
+                    defaultMessage="Language learning that is abuelita and science–approved"
                   />
                 </p>
               </IonText>

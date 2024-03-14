@@ -26,6 +26,9 @@ import CommunityIcon from "@/assets/icons/community.svg?react";
 import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
+import AmiguesCover from "@/assets/img/amigues_cover.png";
+import CatrinaCover from '@/assets/img/catrina.png';
+import GustaCover from '@/assets/img/gusta.png';
 import "./StudentDashboard.scss";
 
 interface WaveIcon {
@@ -77,6 +80,13 @@ const WaveIcon: FC<WaveIcon> = ({
 const wellnessCards = [
   {
     category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/mountain_image.png",
+    isLocked: true,
+  },
+  {
+    category: "wellness",
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
@@ -100,13 +110,6 @@ const wellnessCards = [
     category: "wellness",
     title: "Mantras musicales",
     titleEn: "Musical mantras",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: true,
-  },
-  {
-    category: "wellness",
-    title: "Pausa de yoga",
-    titleEn: "Yoga break",
     cover: "/assets/img/mountain_image.png",
     isLocked: true,
   },
@@ -178,56 +181,79 @@ const communityCards = [
     titleEn: "I Spy",
     cover: "/assets/img/flowers_image.png",
     isLocked: true,
-  },
-  {
-    category: "community",
-    title: "Veo Veo",
-    titleEn: "I Spy",
-    cover: "/assets/img/flowers_image.png",
-    isLocked: true,
-  },
-];
-
-const storyCards = [
-  {
-    category: "stories",
-    title: "Qué es lo que te gusta de ti mismo?",
-    titleEn: "What do you like about yourself?",
-    cover: "/assets/img/drum_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "Cara de Catrina",
-    titleEn: "Catrina for a Day",
-    cover: "/assets/img/dance_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "Soy de...",
-    titleEn: "I'm From...",
-    cover: "/assets/img/band_image.png",
-    isLocked: false,
-  },
-  {
-    category: "stories",
-    title: "El esqueleto travieso",
-    titleEn: "The Mischievous Skeleton",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: false,
-  },
+  }
 ];
 
 export const StudentDashboard: FC = () => {
   const intl = useIntl();
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
   const { childProfiles, activeChildProfile } = useChildProfile();
   const { name } = childProfiles[activeChildProfile];
+
+  const storyCards = [
+    {
+      category: "stories",
+      title: isInclusive ? "¡Amigues!" : "¡Amigos!",
+      titleEn: "Friends!",
+      cover: "/assets/img/amigues_cover.png",
+      link: "/stories/f2e347ac-50b0-4d59-b7f8-682e2659c22f",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Cara de Catrina",
+      titleEn: "Catrina for a Day",
+      cover: CatrinaCover,
+      link: "/stories/791c76d0-4835-4fcc-8c75-44a17c606be4",
+      isLocked: false
+    },
+    {
+      category: "stories",
+      title: "¿Qué es lo que te gusta de ti?",
+      titleEn: "What do you like about yourself?",
+      cover: GustaCover,
+      link: "/stories/ea4e21a7-ae7c-4ec7-9112-23e19e7a0932",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "El esqueleto travieso",
+      titleEn: "The Mischievous Skeleton",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg",
+      link: "/stories/944328dc-bf51-4af3-ba28-a97565a65a43",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "¡Me gusta!",
+      titleEn: "I Like It!",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Me_Gusta_fc5d6f6fec.png",
+      link: "/stories/2dc82579-85a5-488e-8bc6-ab18cc349b3c",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Mancha de plátano",
+      titleEn: "Plantain Stain",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/mancha_Cover_fa80bfa1a7.png",
+      link: "/stories/64578366-bf8d-4e58-813c-113f9c81fb66",
+      isLocked: false,
+    },
+    {
+      category: "stories",
+      title: "Corazón contento",
+      titleEn: "Happy Heart",
+      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Corazon_e769c63ee2.png",
+      link: "/stories/7935ba4a-0800-49a5-8ce8-2f1d3ca0a906",
+      isLocked: false,
+    },
+  ];
+
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
       englishLabel: "Stories",
+      link: "/stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
@@ -235,6 +261,7 @@ export const StudentDashboard: FC = () => {
       reactintlId: "common.wellness",
       englishLabel: "Wellness",
       backgroundColor: "#ac217b",
+      link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
@@ -260,11 +287,10 @@ export const StudentDashboard: FC = () => {
         style={{
           paddingBottom: "4rem",
           paddingTop: "4rem",
-          paddingLeft: 100,
-          paddingRight: 100,
-        }}
-      >
-        <h1 className="text-5xl color-suelo">
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}>
+        <h1 className="text-5xl color-suelo carousel-header-margin">
           <FormattedMessage
             id="landingPage.welcome"
             defaultMessage="Hello {name}!"
@@ -272,26 +298,26 @@ export const StudentDashboard: FC = () => {
           />
         </h1>
         {!isImmersive && (
-          <p className="text-3xl color-english">Hello {name}!</p>
+          <p className="text-3xl color-english carousel-header-margin">Hello {name}!</p>
         )}
       </div>
 
-      <div style={{ marginLeft: 100, marginRight: 100 }}>
+      <div style={{ marginLeft: 20, marginRight: 20 }}>
         <div className="icons-title margin-top-3">
           <IonText>
-            <h1 className="text-5xl color-suelo">
+            <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage
                 id="landingPage.catgories"
                 defaultMessage="Categories"
               />
             </h1>
             {!isImmersive && (
-              <p className="text-3xl color-english">Categories</p>
+              <p className="text-3xl color-english carousel-header-margin">Categories</p>
             )}
           </IonText>
         </div>
         {/* icons */}
-        <div id="wave-icons" style={{ marginTop: "4rem" }}>
+        <div id="wave-icons" style={{ marginTop: "4rem", marginLeft: 30, marginRight: 30 }}>
           <IonGrid>
             <IonRow>
               {icons.map((icon) => (
@@ -312,10 +338,12 @@ export const StudentDashboard: FC = () => {
         {/* stories */}
         <div className="stories-story-cards">
           <IonText>
-            <h1 className="text-5xl color-suelo">
+            <Link to="/stories" className="no-text-decoration">
+            <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
-            {!isImmersive && <p className="text-3xl color-english">Stories</p>}
+            {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
@@ -328,13 +356,15 @@ export const StudentDashboard: FC = () => {
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
-            <h1 className="text-5xl color-suelo">
+            <Link to="/wellness" className="no-text-decoration">
+            <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage
                 id="common.wellness"
                 defaultMessage="Wellness"
               />
             </h1>
-            {!isImmersive && <p className="text-3xl color-english">Wellness</p>}
+            {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
+	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
@@ -349,14 +379,14 @@ export const StudentDashboard: FC = () => {
         <div className="other-story-cards">
           <IonText>
             <Link to="/play" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo">
+              <h1 className="text-5xl color-suelo carousel-header-margin">
                 <FormattedMessage
                   id="common.play"
                   defaultMessage="Play"
                   description="Standalone label for Play"
                 />
               </h1>
-              {!isImmersive && <p className="text-3xl color-english">Play</p>}
+              {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Play</p>}
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -372,14 +402,14 @@ export const StudentDashboard: FC = () => {
         <div className="other-story-cards">
           <Link to="/community" className="no-text-decoration">
             <IonText>
-              <h1 className="text-5xl color-suelo">
+              <h1 className="text-5xl color-suelo carousel-header-margin">
                 <FormattedMessage
                   id="common.community"
                   defaultMessage="Community"
                 />
               </h1>
               {!isImmersive && (
-                <p className="text-3xl color-english">Community</p>
+                <p className="text-3xl color-english carousel-header-margin">Community</p>
               )}
             </IonText>
           </Link>

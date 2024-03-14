@@ -11,7 +11,8 @@ import styles from "./styles.module.css";
 import { IonText } from "@ionic/react";
 
 export const WouldDoGame: FC = () => {
-  const { isImmersive } = useProfile();
+  const { isInclusive, isImmersive } = useProfile();
+  const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
 
   //@ts-ignore
   const { pack_id } = useParams();
@@ -19,21 +20,31 @@ export const WouldDoGame: FC = () => {
 
   const ref = doc(firestore, "would-do-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
-
   const [questionsData, setQuestionsData] = useState<any[]>([]);
 
   useEffect(() => {
     if (data !== undefined) {
-      // Transform data to include text in both languages for each question
+      // Transform data to include text and audio in both languages for each card
       const transformedData = data.questions.map((questionItem: any) => {
+        const es = questionItem.question.find(
+          (item: any) => item.language === "es",
+        );
+        const en = questionItem.question.find(
+          (item: any) => item.language === "en",
+        );
+        const esInc = questionItem.question.find(
+          (item: any) => item.language === "es-inc",
+        );
+
         return {
-          es: questionItem.question.filter((x: any) => x.language === "es")[0]
-            .text,
-          en: questionItem.question.filter((x: any) => x.language === "en")[0]
-            .text,
+          esText: es?.text || "",
+          esAudio: es?.audio || null,
+          enText: en?.text || "",
+          enAudio: en?.audio || null,
+          esIncText: esInc?.text || "",
+          esIncAudio: esInc?.audio || null,
         };
       });
-
       setQuestionsData(transformedData);
     }
   }, [data]);
@@ -50,20 +61,24 @@ export const WouldDoGame: FC = () => {
 
   return (
     <div>
-      <div style={{ padding: "4px 120px 0px 120px" }}>
+      <div style={{ padding: "4px 120px 0px 120px" }} className='margin-bottom-2'>
         <IonText>
-          <h1>
+          <h1 className="text-5xl margin-top-1">
             <FormattedMessage
               id="wouldDo.title"
               defaultMessage={"What would you do?"}
               description={"Title of '¿Que harías?' page"}
             />
           </h1>
-          {!isImmersive && <p>What would you do?</p>}
+          {!isImmersive && <p className="text-3xl">What would you do?</p>}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}
-      <Deck cards={questionsData} />
+      <Deck
+        cards={questionsData}
+        isImmersive={isImmersive}
+        isInclusive={isInclusive}
+      />
     </div>
   );
 };

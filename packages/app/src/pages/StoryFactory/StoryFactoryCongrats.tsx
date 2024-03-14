@@ -61,7 +61,7 @@ export const StoryFactoryCongrats: React.FC<{
     audio_es.play();
   }, []);
   return (
-    <div style={{ position: "relative", marginTop: "4rem" }}>
+    <div className="congrats-container margin-top-4">
       <div className="stars-overlay"></div>
       <div className="ion-no-padding sf-card">
         <IonCard className="ion-no-margin">
@@ -163,10 +163,11 @@ export const StoryFactoryCongrats: React.FC<{
                   src={StoryFactoryArrow}
                   alt="indicator arrow to next button"
                   style={{
-                    left: 0,
+                    left: 50,
                     top: 3,
                     position: "absolute",
                   }}
+                  className="bounce-arrow"
                 />
               )}
               <IonButton

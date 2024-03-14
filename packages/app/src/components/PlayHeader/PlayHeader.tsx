@@ -1,21 +1,40 @@
 import { FC } from "react";
+import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/contexts/ProfileContext";
+import pattern from "@/assets/icons/header_background_pattern.svg";
 
 import "./PlayHeader.scss";
 
-export const PlayHeader: FC = () => {
+interface PlayHeaderProps {
+  bannerColor?: string;
+  title?: string;
+  subtitle?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
+}
+
+export const PlayHeader: FC<PlayHeaderProps> = ({
+  bannerColor = "#ff5709",
+  title,
+  subtitle,
+  titleClassName = "text-5xl color-nube",
+  subtitleClassName = "text-3xl color-nube",
+}) => {
   const { isImmersive } = useProfile();
   return (
-    <div id="playBanner">
-      <h1>
-        <FormattedMessage
-          id="common.play"
-          defaultMessage="Play"
-          description="Standalone label for Play"
-        />
-      </h1>
-      {!isImmersive && <h2>Play</h2>}
+    <div id="playBanner" style={{ backgroundColor: bannerColor }}>
+      <div className="banner-overlay" style={{ backgroundColor: bannerColor }}/>
+      <IonText className="banner-content">
+        <h1 className={`${titleClassName}`}>
+          {title}
+        </h1>
+        {!isImmersive &&
+          <p className={`${subtitleClassName}`}>
+            {subtitle}
+          </p>
+        }
+      </IonText>
     </div>
   );
 };

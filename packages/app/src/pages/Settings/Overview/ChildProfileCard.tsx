@@ -27,7 +27,7 @@ export const ChildProfileCard: React.FC<ChildProfileCard> = ({
       >
         <IonText>
           <h3
-            className="ion-text-center"
+            className="ion-text-center text-2xl"
             style={{ color: letterAvatarTextColor }}
           >
             {name.substring(0, 1).toUpperCase()}
@@ -35,8 +35,8 @@ export const ChildProfileCard: React.FC<ChildProfileCard> = ({
         </IonText>
       </div>
       <IonText>
-        <h3 className="color-suelo">{name}</h3>
-        <p className="color-barro ion-no-margin">
+        <h3 className="text-xl semibold color-suelo">{name}</h3>
+        <p className="text-lg semibold color-barro ion-no-margin">
           <FormattedMessage
             id="common.years_old"
             defaultMessage="{age} years old"

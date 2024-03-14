@@ -1,0 +1,92 @@
+#wellnessPage {
+    overflow-x: hidden;
+
+    .content-lock {
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 2rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+	height: 100%;
+	width: 100%;
+    }
+    
+    #affirmation-card {
+	background-color: #D6D3F0;
+	transform: rotate(5deg);
+	margin-top: 80px;
+    }
+    #yoga-card {
+	background-color: #FFAEDC;
+	transform: rotate(-5deg);
+	margin-top: 80px;
+    }
+    .headerBanner {
+	background-image: url(/assets/img/background_pattern_lp.png);
+	background-size: cover;
+	background-color: #973D78;
+	;
+	color: #fff;
+	padding: 1rem 0 1rem 100px;
+	margin-bottom: 4rem;
+    }
+    
+    h1 {
+	font-size: 56px;
+    }
+    
+    h2 {
+	font-size: 44px;
+    }
+    
+    h1 + h2 {
+	margin-top: 0;
+    }
+
+    .main-block {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 60px;
+	
+    }
+    .card {
+	
+	margin: 0 20px;
+	flex-shrink: 0;
+	background-color: #FEDCCC;
+	display: inline-block;
+	background-position: center center;
+	background-size: cover;
+	border-radius: 2rem;
+	text-align: center;
+	height: 440px;
+	width: 440px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 2rem 0;
+	img {
+	    max-height: 250px;
+	}
+	display: inline-block !important;
+    }
+
+    .play-category-tag {
+	transform: scale(0.5);
+	position: absolute;
+	left: 0;
+	top: 0;
+    }
+    .favorite-button {
+	position: absolute;
+	bottom: 0.5rem;
+	right: 0.5rem;
+    }
+}

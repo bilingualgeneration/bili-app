@@ -124,36 +124,26 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <IonText class="ion-text-center">
-        {isInclusive ? (
-          isImmersive ? (
-            <h1>
-              Arrastra y suelta las letras para formar la palabra "amigues".
-            </h1>
+      <div id="stories-dnd">
+        <IonText class="ion-text-center">
+          {isImmersive ? (
+            isInclusive ? (
+              <h1>
+                Arrastra y suelta las letras para formar la palabra "amigues".
+              </h1>
+            ) : (
+              <h1>
+                Arrastra y suelta las letras para formar la palabra "amigos".
+              </h1>
+            )
           ) : (
             <h1>
-              Arrastra y suelta las letras para formar la palabra "amigues".
+              Drag and drop the letters to form the word "
+              {isInclusive ? "amigues" : "amigos"}".
             </h1>
-          )
-        ) : isImmersive ? (
-          <h1>Arrastra y suelta las letras para formar la palabra "amigos".</h1>
-        ) : (
-          <h1>
-            Arrastra y suelta las letras para formar la palabra "amigues".
-          </h1>
-        )}
+          )}
+        </IonText>
 
-        {!isImmersive && (
-          <p>
-            Drag and drop the letters to form the word "
-            {isInclusive ? "amigues" : "amigos"}."
-          </p>
-        )}
-      </IonText>
-
-      <div className="draggable-container-1"></div>
-
-      <div id="stories-dnd">
         <div className="dropzone-container">
           {chosenLanguageData.map((letter, index) => (
             <DropZone
