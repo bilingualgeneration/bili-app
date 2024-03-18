@@ -17,8 +17,9 @@ import AuthedLayout from "@/layouts/Authed";
 import { CountCongrats } from "./pages/CountWithMe";
 import { CountWithMeIntro } from "@/pages/CountWithMe/CountWithMeIntro";
 import { CountWithMeSelect } from "@/pages/CountWithMe/CountWithMeSelect";
-import { CountWithMeGame } from "@/pages/CountWithMe/CountWithMeGame";
 import { HeaderFooter } from "@/components/HeaderFooter";
+import { Wellness } from "./pages/Wellness/Wellness";
+import { CountGameLoader } from "./pages/CountWithMe/CountGameLoader";
 import {
   IntruderSelect,
   IntruderIntro,
@@ -93,7 +94,8 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Wellness } from "./pages/Wellness/Wellness";
+
+
 
 setupIonicReact();
 
@@ -217,7 +219,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMeGame />
+                  <CountGameLoader />
                 </HeaderFooter>
               </AuthedLayout>
             )}
