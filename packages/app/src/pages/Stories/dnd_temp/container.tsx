@@ -61,10 +61,12 @@ export const Container: FC = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div ref={drop} style={styles}>
                 {Object.keys(boxes).map((key) => (
+                    // @ts-ignore
                     <DraggableBox
                         key={key}
                         id={key}
-                        {...(boxes[key] as { top: number; left: number; title?: string; type: string } )}                    />
+                        {...(boxes[key] as { top: number; left: number; title?: string; type: string } )}                    
+                    />
                 ))}
             </div>
         </div>

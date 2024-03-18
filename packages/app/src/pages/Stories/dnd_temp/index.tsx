@@ -1,16 +1,22 @@
-import { FC } from 'react'
-import { render } from 'react-dom'
+import { FC, useEffect, useState } from 'react'
 import Example from './example'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { TouchBackend } from 'react-dnd-touch-backend'
-import { Device } from '@capacitor/device'
+import { TouchBackend, TouchBackendOptions } from 'react-dnd-touch-backend'
+import { isPlatform } from '@ionic/react';
 
 export const TempDragGame: FC = () => {
-    Device.getInfo().then((info) => {console.log(info.platform);});
+    let backend;
+
+    if (isPlatform('ipad' || 'tablet' || 'iphone')) {
+        backend = TouchBackend;
+    } else {
+        backend = HTML5Backend;
+    }
+    
     return (
         <div>
-            <DndProvider backend={TouchBackend}>
+            <DndProvider backend={backend}>
                 <Example />
             </DndProvider>
         </div>
