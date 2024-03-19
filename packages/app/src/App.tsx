@@ -48,14 +48,13 @@ import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
-import { StoriesDragGameLoader } from "@/pages/Stories";
+import { StoriesDragGameLoader } from "@/pages/Stories/dnd_temp/index";
 import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
-import { TempDragGame } from "@/pages/Stories/dnd_temp";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
@@ -240,7 +239,7 @@ const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <TempDragGame />
+                  <StoriesDragGameLoader />
                 </HeaderFooter>
               </AuthedLayout>
             )}
