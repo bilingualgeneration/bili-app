@@ -1,14 +1,16 @@
 import update from 'immutability-helper'
 import type { CSSProperties, FC } from 'react'
 import { memo, useCallback, useState, useMemo } from 'react'
-import { useDrop } from 'react-dnd'
+import { useDrop, useDrag } from 'react-dnd'
 import { useProfile } from "@/contexts/ProfileContext";
 
-import { DraggableBox } from './draggableBox'
+import { DraggableLetter } from './draggableLetter'
 import type { DragItem } from './interfaces'
 import { ItemTypes } from './itemTypes'
 import { DropZone } from '../DropZone'
 import { useFirebaseData } from './firebaseUtils';
+
+import '../Stories.scss';
 
 const styles: CSSProperties = {
     width: 1300,
@@ -18,29 +20,37 @@ const styles: CSSProperties = {
     zIndex: 1,
 }
 
-interface BoxMap {
+interface LetterMap {
     [key: string]: { top: number; left: number }
 }
 
 export const Container: FC<{ gameData: any }> = memo(function Container({ gameData }) {
     const { isInclusive, isImmersive } = useProfile();
-    const [boxes, setBoxes] = useState<BoxMap>({
-        c: { top: 250, left: 100 },
-    })
-
     const [chosenLanguageData] = useFirebaseData(gameData);
 
-    const moveBox = useCallback(
+    const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({
+        a: { top: 20, left: 80 },
+        b: { top: 250, left: 100 },
+        c: { top: 150, left: 100 },
+        d: { top: 200, left: 100 },
+        e: { top: 250, left: 200 },
+        f: { top: 250, left: 150 },
+        g: { top: 250, left: 300 },
+    })
+
+    
+
+    const moveLetters = useCallback(
         (id: string, left: number, top: number) => {
-            setBoxes(
-                update(boxes, {
+            setInitialLetterPlacement(
+                update(initialLetterPlacement, {
                     [id]: {
                         $merge: { left, top },
                     },
                 }),
             )
         },
-        [boxes],
+        [initialLetterPlacement],
     )
 
     const [, drop] = useDrop(
@@ -55,31 +65,45 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 let left = Math.round(item.left + delta.x)
                 let top = Math.round(item.top + delta.y)
 
-                moveBox(item.id, left, top)
+                moveLetters(item.id, left, top)
                 return undefined
             },
         }),
-        [moveBox],
+        [moveLetters],
     )
+
+    const [, drag] = useDrag(
+        () => ({
+            type: ItemTypes.LETTER,
+            item: { type: ItemTypes.LETTER },
+        }),
+        []
+    );
 
     return (
         <div id='stories-dnd'>
-            <div className='dropzone-container'>
+            <div className='dropzone-container' ref={drop}>
                 {chosenLanguageData.map((letter: any, index: number) => (
                     <DropZone
                         key={index}
                         letter={isInclusive ? letter.esIncText : letter.esText}
                         index={index}
-                        expectedIndex={index}           
+                        expectedIndex={index} 
+                        accept={[]} 
+                        onDrop={function (item: any): void
+                        {
+                            throw new Error('Function not implemented.');
+                        } }                   
                     />
                 ))}
             </div>
-            <div ref={drop} style={styles}>
-                {Object.keys(boxes).map((key) => (
-                    <DraggableBox
-                        key={key}
-                        id={key}
-                        {...(boxes[key] as { top: number; left: number } )}                    
+            <div className='draggable-container'>
+                {chosenLanguageData.map((letter: any, index: number) => (
+                    <DraggableLetter
+                        key={index}
+                        id={letter.id}
+                        letterData={letter} 
+                        {...initialLetterPlacement[letter.id]}
                     />
                 ))}
             </div>

@@ -8,13 +8,24 @@
   height: 90%;
   width: 100%;
 
-  .dropzone-container {
+  .draggable-container {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
-    width: 65%;
+    z-index: 2;
+  }
+
+  .dropzone-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    width: 1300px;
+    border: 1px solid black;
+    position: 'relative';
+    z-index: 1;
     overflow: hidden; /* Ensure the draggable letters don't overflow the container */
   }
 }
@@ -40,6 +51,7 @@
     background-color: #ffaaaa;
   }
 }
+
 .stories-game-image {
   margin: 7px;
   max-height: calc((100vh - 300px - 100px)/2);
