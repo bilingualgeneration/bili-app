@@ -4,7 +4,6 @@ import { useDragLayer } from 'react-dnd'
 
 import { BoxDragPreview, LetterDragPreview } from './boxDragPreview'
 import { ItemTypes } from './itemTypes'
-import a_drag  from '@/assets/icons/stories_dnd/draggable_letters/a_drag.svg'
 
 const layerStyles: CSSProperties = {
   position: 'fixed',
@@ -47,8 +46,6 @@ export const CustomDragLayer: FC = () => {
 
     function renderItem() {
         switch (itemType) {
-            case ItemTypes.BOX:
-                return <BoxDragPreview title={item.title} />;
             case ItemTypes.LETTER:
                 return <LetterDragPreview />;
             default:

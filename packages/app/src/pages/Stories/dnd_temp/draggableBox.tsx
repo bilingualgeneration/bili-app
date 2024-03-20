@@ -1,8 +1,7 @@
 import type { CSSProperties, FC } from 'react'
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 import type { DragSourceMonitor } from 'react-dnd'
 import { useDrag } from 'react-dnd'
-import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import { Box, Letter } from './box'
 import { ItemTypes } from './itemTypes'
@@ -26,38 +25,55 @@ function getStyles(
 
 export interface DraggableBoxProps {
   id: string
-  title: string
   left: number
   top: number
-  type: string
+  audio?: { url: string };
 }
 
 export const DraggableBox: FC<DraggableBoxProps> = memo(function DraggableBox(
   props,
 ) {
-  const { id, title, left, top, type } = props
-  const [{ isDragging }, drag, preview] = useDrag(
-    () => ({
-      type,
-      item: { id, left, top, title },
-      collect: (monitor: DragSourceMonitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    }),
-    [id, left, top, title, type],
-  )
+    const { id, left, top, audio } = props
+    const [{ isDragging }, drag, preview] = useDrag(
+        () => ({
+            type: ItemTypes.LETTER,
+            item: { id, left, top },
+            collect: (monitor: DragSourceMonitor) => ({
+                isDragging: monitor.isDragging(),
+            }),
+        }),
+        [id, left, top, audio],
+    )
 
-  useEffect(() => {
-    preview(getEmptyImage(), { captureDraggingState: true })
-  }, [])
+    const [audioReady, setAudioReady] = useState(false)
 
-  return (
-    <div
-      ref={drag}
-      style={getStyles(left, top, isDragging)}
-      role="DraggableBox"
-    >
-      {type === ItemTypes.BOX ? <Box title={title} /> : <Letter />} {/* Render Box or Letter based on type */}
-    </div>
-  )
+    useEffect(() => {
+        if (audio && audio.url) {
+            const audioElement = new Audio(audio.url);
+            audioElement.load();
+            audioElement.addEventListener("canplaythrough", () => {
+                setAudioReady(true);
+        });
+    
+            return () => {
+                audioElement.removeEventListener("canplaythrough", () => {
+                setAudioReady(false);
+                });
+            };
+        }
+  
+        // Explicitly return undefined when audio or audio.url is falsy
+        return undefined;
+    }, [audio]);
+
+
+    return (
+        <div
+            ref={drag}
+            style={getStyles(left, top, isDragging)}
+            role="DraggableBox"
+        >
+            <Letter />
+        </div>
+    )
 })

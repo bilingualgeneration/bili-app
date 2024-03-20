@@ -1,54 +1,39 @@
-import type { CSSProperties, FC } from 'react'
-import { useDrop, XYCoord } from "react-dnd";
-import "./Stories.scss";
-import { letters } from "./letters";
-import { ItemTypes } from "./ItemTypes";
-import { LetterSegment } from "./LetterSegment";
+import type { FC } from 'react'
+import { letters } from './letters';
+import { memo } from 'react'
+import { useDrop } from "react-dnd";
+import { ItemTypes } from '../Stories/dnd_temp/itemTypes';
 
 interface DropZoneProps {
-  index: number;
-  letter: any;
-  expectedIndex: number;
-  onDrop: (index: number, left: number, top: number) => void;
+    index?: number;
+    letter?: any;
+    expectedIndex?: number;
+    onDrop?: (index: number, left: number, top: number) => void;
 }
 
-const styles: CSSProperties = {
-  width: 800,
-  height: 800,
-  border: '1px solid black',
-  position: 'relative',
-}
+export const DropZone: FC<DropZoneProps> = memo(function DropZone({
+    index,
+    letter,
+    expectedIndex,
+    onDrop,
+}) {
+    const [{ isOver, canDrop }, drop] = useDrop(() => ({
+        accept: ItemTypes.LETTER,
+        drop: () => ({ name: 'BackgroundLetter' }),
+        collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+        }),
+    }), [])
 
-export const DropZone: FC<DropZoneProps> = ({
-  index,
-  letter,
-  expectedIndex,
-  onDrop,
-}) => {
-  const [{ isOver, canDrop }, drop] = useDrop(() => ({
-    accept: "letter",
-    drop: (item: any, monitor) => {
-      const delta = monitor.getDifferenceFromInitialOffset() as XYCoord;
-      const left = Math.round(item.left + delta.x);
-      const top = Math.round(item.top + delta.y);
-      // onDrop(index, left, top)
-      return undefined;
-    },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-      canDrop: !!monitor.canDrop(),
-    }),
-  }));
-
-  return (
-    <div className={`dropzone`} ref={drop}>
-      <div className="drop-target">
-        <img src={letters.background_letters[letter]} alt={letter} />
-      </div>
-      {/* Add red shadow when hovered over with invalid drop */}
-      {index === expectedIndex && isOver && !canDrop && (
-        <div className="red-shadow" />
-      )}
-    </div>
-  );
-};
+    return (
+        <div className={`dropzone`} ref={drop}>
+            <div className="drop-target">
+                <img src={letters.background_letters[letter]} alt={letter} />
+            </div>
+            {index === expectedIndex && isOver && !canDrop && (
+                <div className="red-shadow" />
+            )}
+        </div>
+    );
+});

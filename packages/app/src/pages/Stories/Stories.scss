@@ -17,19 +17,12 @@
     width: 65%;
     overflow: hidden; /* Ensure the draggable letters don't overflow the container */
   }
-
-  .draggable-container {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-  }
 }
 
 #dropzone-dnd {
   .dropzone {
     /* drop zone styling */
+    position: absolute;
     height: 100px;
     width: 100px;
     display: flex;
@@ -103,21 +96,22 @@
 }
 
 .content-wrapper {
-    .page-control {
-	height: 4rem;
-	width: auto;
-	position: absolute;
-	&.forward {
-	    top: calc(300px + 62px / 2);
-	    right: calc(50% - 460px - 36px);
-	    z-index: 100;
-	}
+  .page-control {
+    height: 4rem;
+    width: auto;
+    position: absolute;
 
-	&.backward {
-	    top: calc(300px + 62px / 2);
-	    left: calc(50% - 460px - 36px);
-	    z-index: 100;
-	}
+    &.forward {
+      top: calc(300px + 62px / 2);
+      right: calc(50% - 460px - 36px);
+      z-index: 100;
     }
+
+    &.backward {
+      top: calc(300px + 62px / 2);
+      left: calc(50% - 460px - 36px);
+      z-index: 100;
+    }
+  }
     
 }

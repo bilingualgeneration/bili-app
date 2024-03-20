@@ -48,7 +48,7 @@ import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 
 import { Stories } from "@/pages/Stories";
-import { StoriesDragGameLoader } from "@/pages/Stories/dnd_temp/index";
+import { StoriesDragGame } from "@/pages/Stories/dnd_temp/StoriesDragGame";
 import { StoryFactorySelect } from "@/pages/StoryFactory/StoryFactorySelect";
 import { StoryFactoryIntro } from "@/pages/StoryFactory/StoryFactoryIntro";
 import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
@@ -235,11 +235,11 @@ const Router: React.FC = () => {
           {/* temp route & temp game for development */}
           <Route
             exact
-            path="/temp-drag-game"
+            path="/stories/play/drag-game/:pack_id"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <StoriesDragGameLoader />
+                  <StoriesDragGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
