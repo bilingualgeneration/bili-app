@@ -3,9 +3,9 @@ import biliCharacter from "@/assets/img/bili_in_tshirt.png";
 import { IonButton } from "@ionic/react";
 import { useProfile } from "@/contexts/ProfileContext";
 
-import audio_en_file from "@/assets/audio/WouldDoAudio/instruction_en.wav";
-import audio_es_file from "@/assets/audio/WouldDoAudio/instruction_es.wav";
-import audio_es_inc_file from "@/assets/audio/WouldDoAudio/instruction_es_inc.wav";
+import audio_en_file from "@/assets/audio/WouldDoAudio/instruction_en.mp3";
+import audio_es_file from "@/assets/audio/WouldDoAudio/instruction_es.mp3";
+import audio_es_inc_file from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
 
 export const TellMeAboutIntro: React.FC = () => {
   const { isInclusive } = useProfile();
