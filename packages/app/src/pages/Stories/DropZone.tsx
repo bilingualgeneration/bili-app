@@ -41,6 +41,8 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
       <div className="drop-target">
           <img src={letters.background_letters[letter]} alt={letter} />
       </div>
+      
+      {/* TODO: Add correct/incorrect styling */}
       {index === expectedIndex && isOver && !canDrop && (
         <div className="red-shadow" />
       )}

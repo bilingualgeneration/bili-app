@@ -10,15 +10,15 @@ const styles: CSSProperties = {
 }
 
 export interface LetterDragPreviewProps {
-    correct?: boolean
+    letter?: boolean
 }
 
 export const LetterDragPreview: FC<LetterDragPreviewProps> = memo(
-    function BoxDragPreview({ correct }) {
+    function BoxDragPreview({ letter }) {
 
         return (
             <div style={styles}>
-                <Letter />
+                <Letter letter={letter} preview />
             </div>
         )
     },

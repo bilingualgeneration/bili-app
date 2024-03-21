@@ -1,11 +1,12 @@
 import type { CSSProperties, FC } from 'react'
 import { memo, useEffect, useState } from 'react'
-import { DragSourceMonitor, DragPreviewImage, useDrag } from 'react-dnd'
+import { DragSourceMonitor, useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
+import { letters } from '../letters';
 import { Letter } from './letter';
 import { ItemTypes } from './itemTypes'
-import { useProfile } from '@/contexts/ProfileContext'
+import { useAudioManager } from '@/contexts/AudioManagerContext';
 
 function getStyles(
     left: number,
@@ -25,68 +26,56 @@ function getStyles(
     }
 }
 
+export interface Audio {
+    url: string;
+}
+
 export interface DraggableLetterProps {
     id: string
     left: number
     top: number
-    audio?: { url: string };
-    letterData: any;
+    audio?: Audio;
+    letter: any;
 }
 
 export const DraggableLetter: FC<DraggableLetterProps> = memo(function DraggableLetter(
     props,
 )   {
-    // console.log('Props in DraggableLetter:', props);
-    const { id, left, top, audio, letterData } = props
+    const { id, left, top, audio, letter } = props
+    const { addAudio, clearAudio } = useAudioManager();
+
     const [{ isDragging }, drag, preview] = useDrag(
         () => ({
             type: ItemTypes.LETTER,
-            item: { id, left, top, audio, letterData },
+            item: { id, left, top, audio, letter },
             collect: (monitor: DragSourceMonitor) => ({
                 isDragging: monitor.isDragging(),
             }),
         }),
-        [id, left, top, audio, letterData],
+        [id, left, top, audio, letter],
     )
-
-    // const { isInclusive, isImmersive } = useProfile();
-
-    // console.log(letterData);
 
     useEffect(() => {
         // Generate empty drag preview image once when component mounts
         preview(getEmptyImage(), { captureDraggingState: true })
     }, []) // Empty dependency array to run the effect only once when mounted
 
-    // const letterText = isInclusive ? letterData.esIncText : letterData.esText;
-    // console.log(letters.draggable_letters[letterText]);
-
-    const [audioReady, setAudioReady] = useState(false)
+    // const letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
 
     useEffect(() => {
-        if (audio && audio.url) {
-            const audioElement = new Audio(audio.url);
-            audioElement.load();
-            audioElement.addEventListener("canplaythrough", () => {
-                setAudioReady(true);
-        });
-    
-            return () => {
-                audioElement.removeEventListener("canplaythrough", () => {
-                setAudioReady(false);
-                });
-            };
+        if (isDragging && audio?.url) {
+            addAudio([audio.url]);
+        } else {
+            clearAudio();
         }
-        // Explicitly return undefined when audio or audio.url is falsy
-        return undefined;
-    },  [audio]);
+    }, [isDragging, audio]);
 
     return (
         <div
             ref={drag}
             style={getStyles(left, top, isDragging)}
         >
-            <Letter letter={letterData}/>
+            <Letter letter={letter}/>
         </div>
     )
 })

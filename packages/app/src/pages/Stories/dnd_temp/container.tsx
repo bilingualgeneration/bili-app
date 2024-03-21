@@ -1,13 +1,14 @@
-import update from 'immutability-helper'
-import type { CSSProperties, FC } from 'react'
-import { memo, useCallback, useState, useMemo } from 'react'
-import { useDrop, useDrag } from 'react-dnd'
+import update from 'immutability-helper';
+import type { CSSProperties, FC } from 'react';
+import { letters } from '../letters';
+import { memo, useCallback, useState } from 'react';
+import { useDrop, useDrag } from 'react-dnd';
 import { useProfile } from "@/contexts/ProfileContext";
 
-import { DraggableLetter } from './draggableLetter'
-import type { DragItem } from './interfaces'
-import { ItemTypes } from './itemTypes'
-import { DropZone } from '../DropZone'
+import { DraggableLetter } from './draggableLetter';
+import type { DragItem } from './interfaces';
+import { ItemTypes } from './itemTypes';
+import { DropZone } from '../DropZone';
 import { useFirebaseData } from './firebaseUtils';
 
 import '../Stories.scss';
@@ -29,7 +30,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     const [chosenLanguageData] = useFirebaseData(gameData);
 
     const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({
-        id0: { top: 20, left: 80 },
+        id0: { top: 100, left: 80 },
         id1: { top: 250, left: 100 },
         id2: { top: 150, left: 100 },
         id3: { top: 200, left: 100 },
@@ -106,17 +107,21 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
             <div className='draggable-container'>
                  {Object.keys(initialLetterPlacement).map((key) => {
                     const letter = chosenLanguageData.find((letter) => letter.id === key);
+                    // console.log(letter);
                     if (!letter) {
                         console.error(`No letter found for id "${key}"`);
                         return null;
                     }
                     return (
-                        <DraggableLetter
-                            key={key}
-                            id={key}
-                            letterData={isInclusive ? letter.esIncText : letter.esText} 
-                            {...initialLetterPlacement[key]}    
-                        />
+                        <>
+                            <DraggableLetter
+                                key={key}
+                                id={key}
+                                letter={isInclusive ? letter.esIncText : letter.esText} 
+                                audio={isInclusive ? letter.esIncAudio : letter.esAudio?.url ? { url: letter.esAudio.url } : { url: '' }}
+                                {...initialLetterPlacement[key]}    
+                            />
+                        </>
                     );
                 })}
             </div>

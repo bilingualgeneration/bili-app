@@ -47,7 +47,7 @@ export const CustomDragLayer: FC = () => {
     function renderItem() {
         switch (itemType) {
             case ItemTypes.LETTER:
-                return <LetterDragPreview />;
+                return <LetterDragPreview letter={item.letter} />;
             default:
                 return null;
         }

@@ -1,5 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import { memo } from 'react'
+import { letters } from '../letters';
 import '../Stories.scss';
 
 const draggableLetterStyles: CSSProperties = {
@@ -13,13 +14,15 @@ export interface LetterProps {
 }
 
 export const Letter: FC<LetterProps> = memo(function Letter({ preview, letter, yellow }) {
+  const letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
   // const backgroundColor = yellow ? 'yellow' : 'white'
-  // console.log(letters.draggable_letters);
+  // console.log(letters.draggable_letters[letter]);
   return (
       <div
         style={{ ...draggableLetterStyles }}
         role={preview ? 'LetterPreview' : 'Letter'}
       >
+        {letterImg}
         {letter}
       </div>
   )
