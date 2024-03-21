@@ -1,11 +1,9 @@
 import type { CSSProperties, FC } from 'react'
 import { memo, useEffect, useState } from 'react'
-import type { DragSourceMonitor } from 'react-dnd'
+import { DragSourceMonitor, DragPreviewImage, useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import { useDrag } from 'react-dnd'
 
-import { letters } from '../letters';
-import { Letter } from './letter'
+import { Letter } from './letter';
 import { ItemTypes } from './itemTypes'
 import { useProfile } from '@/contexts/ProfileContext'
 
@@ -16,7 +14,7 @@ function getStyles(
 ): CSSProperties {
     const transform = `translate3d(${left}px, ${top}px, 0)`
     return {
-        zIndex: '2',
+        // zIndex: '2',
         position: 'absolute',
         transform,
         WebkitTransform: transform,
@@ -27,22 +25,20 @@ function getStyles(
     }
 }
 
-export interface DraggableBoxProps {
+export interface DraggableLetterProps {
     id: string
     left: number
     top: number
     audio?: { url: string };
     letterData: any;
-    preview?: boolean
-    yellow?: boolean
 }
 
-export const DraggableLetter: FC<DraggableBoxProps> = memo(function DraggableBox(
+export const DraggableLetter: FC<DraggableLetterProps> = memo(function DraggableLetter(
     props,
 )   {
     // console.log('Props in DraggableLetter:', props);
-    const { id, left, top, audio, letterData, preview, yellow } = props
-    const [{ isDragging }, drag, previewRef] = useDrag(
+    const { id, left, top, audio, letterData } = props
+    const [{ isDragging }, drag, preview] = useDrag(
         () => ({
             type: ItemTypes.LETTER,
             item: { id, left, top, audio, letterData },
@@ -53,18 +49,17 @@ export const DraggableLetter: FC<DraggableBoxProps> = memo(function DraggableBox
         [id, left, top, audio, letterData],
     )
 
-    const { isInclusive, isImmersive } = useProfile();
-    const role = preview ? 'BoxPreview' : 'Letter';
+    // const { isInclusive, isImmersive } = useProfile();
 
     // console.log(letterData);
 
     useEffect(() => {
         // Generate empty drag preview image once when component mounts
-        previewRef(getEmptyImage(), { captureDraggingState: true })
+        preview(getEmptyImage(), { captureDraggingState: true })
     }, []) // Empty dependency array to run the effect only once when mounted
 
-    const letterText = isInclusive ? letterData.esIncText : letterData.esText;
-    console.log(letters.draggable_letters[letterText]);
+    // const letterText = isInclusive ? letterData.esIncText : letterData.esText;
+    // console.log(letters.draggable_letters[letterText]);
 
     const [audioReady, setAudioReady] = useState(false)
 
@@ -90,9 +85,8 @@ export const DraggableLetter: FC<DraggableBoxProps> = memo(function DraggableBox
         <div
             ref={drag}
             style={getStyles(left, top, isDragging)}
-            role={role}
         >
-            <img src={letters.draggable_letters[letterText]} alt={letterText} />
+            <Letter letter={letterData}/>
         </div>
     )
 })

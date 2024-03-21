@@ -1,7 +1,5 @@
 import type { CSSProperties, FC } from 'react'
 import { memo } from 'react'
-import { letters } from '../letters';
-import { useProfile } from "@/contexts/ProfileContext";
 import '../Stories.scss';
 
 const draggableLetterStyles: CSSProperties = {
@@ -15,15 +13,14 @@ export interface LetterProps {
 }
 
 export const Letter: FC<LetterProps> = memo(function Letter({ preview, letter, yellow }) {
-  const { isInclusive, isImmersive } = useProfile();
   // const backgroundColor = yellow ? 'yellow' : 'white'
-  
+  // console.log(letters.draggable_letters);
   return (
       <div
         style={{ ...draggableLetterStyles }}
-        role={preview ? 'BoxPreview' : 'Letter'}
+        role={preview ? 'LetterPreview' : 'Letter'}
       >
-        <img src={letters.draggable_letters[letter]} alt={letter} />
+        {letter}
       </div>
   )
 })

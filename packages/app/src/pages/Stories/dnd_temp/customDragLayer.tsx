@@ -2,7 +2,7 @@ import type { CSSProperties, FC } from 'react'
 import type { XYCoord } from 'react-dnd'
 import { useDragLayer } from 'react-dnd'
 
-import { LetterDragPreview } from './boxDragPreview'
+import { LetterDragPreview } from './LetterDragPreview'
 import { ItemTypes } from './itemTypes'
 
 const layerStyles: CSSProperties = {

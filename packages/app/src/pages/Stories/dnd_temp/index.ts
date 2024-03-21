@@ -1,5 +1,5 @@
 export * from './letter';
-export * from './boxDragPreview';
+export * from './LetterDragPreview';
 export * from './container';
 export * from './customDragLayer';
 export * from './draggableLetter';

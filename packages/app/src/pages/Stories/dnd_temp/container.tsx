@@ -29,29 +29,34 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     const [chosenLanguageData] = useFirebaseData(gameData);
 
     const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({
-        a: { top: 20, left: 80 },
-        b: { top: 250, left: 100 },
-        c: { top: 150, left: 100 },
-        d: { top: 200, left: 100 },
-        e: { top: 250, left: 200 },
-        f: { top: 250, left: 150 },
-        g: { top: 250, left: 300 },
+        id0: { top: 20, left: 80 },
+        id1: { top: 250, left: 100 },
+        id2: { top: 150, left: 100 },
+        id3: { top: 200, left: 100 },
+        id4: { top: 250, left: 200 },
+        id5: { top: 250, left: 150 },
+        id6: { top: 250, left: 300 },
     })
-
-    
 
     const moveLetters = useCallback(
         (id: string, left: number, top: number) => {
+            // Check if the id exists in initialLetterPlacement
+            if (!(id in initialLetterPlacement)) {
+                console.error(`Invalid id "${id}" provided to moveLetters.`);
+                return;
+            }
+    
+            // Update the state using immutability-helper's $merge
             setInitialLetterPlacement(
                 update(initialLetterPlacement, {
                     [id]: {
                         $merge: { left, top },
                     },
                 }),
-            )
+            );
         },
         [initialLetterPlacement],
-    )
+    );
 
     const [, drop] = useDrop(
         () => ({
@@ -65,6 +70,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 let left = Math.round(item.left + delta.x)
                 let top = Math.round(item.top + delta.y)
 
+                console.log("Dropped item id:", item.id); 
                 moveLetters(item.id, left, top)
                 return undefined
             },
@@ -98,14 +104,21 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 ))}
             </div>
             <div className='draggable-container'>
-                {chosenLanguageData.map((letter: any, index: number) => (
-                    <DraggableLetter
-                        key={index}
-                        id={letter.id}
-                        letterData={letter} 
-                        {...initialLetterPlacement[letter.id]}
-                    />
-                ))}
+                 {Object.keys(initialLetterPlacement).map((key) => {
+                    const letter = chosenLanguageData.find((letter) => letter.id === key);
+                    if (!letter) {
+                        console.error(`No letter found for id "${key}"`);
+                        return null;
+                    }
+                    return (
+                        <DraggableLetter
+                            key={key}
+                            id={key}
+                            letterData={isInclusive ? letter.esIncText : letter.esText} 
+                            {...initialLetterPlacement[key]}    
+                        />
+                    );
+                })}
             </div>
         </div>
     )
