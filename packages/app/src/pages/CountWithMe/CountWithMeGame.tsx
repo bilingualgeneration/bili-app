@@ -101,7 +101,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
   const [showCongrats, setShowCongrats] = useState(false);
-  const prevState = useRef<string>('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -182,8 +182,11 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
       }
        //switches text from game question to count questions and wait until the number's audio is stopped
       if (clickedIndexes.length + 1 === getData.animalImages.length) {
+        
+        setIsButtonDisabled(true);
         setTimeout(() => {
           setAllAnimalsClicked(true);
+          setIsButtonDisabled(false);
         }, 2000);
       }
     }
@@ -316,7 +319,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
               left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
             }}
-            onClick={() => handleBirdClickOrder(index)}
+            onClick={!isButtonDisabled ? () => handleBirdClickOrder(index) : undefined}
           >
             {/* Animal image */}
             <img
@@ -346,7 +349,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
           </div>
         ))}
       </div>
-      <span style={{ display: "none" }}>
+      {/* <span style={{ display: "none" }}>
         <div
           style={{
             backgroundColor: "#F7FAF9",
@@ -383,7 +386,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
             />
           </div>
         </div>
-      </span>
+      </span> */}
     </>
   );
 };
