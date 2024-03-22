@@ -8,13 +8,13 @@ const draggableLetterStyles: CSSProperties = {
 }
 
 export interface LetterProps {
-  letter?: any;
+  letter: any;
   preview?: boolean
   yellow?: boolean
 }
 
 export const Letter: FC<LetterProps> = memo(function Letter({ preview, letter, yellow }) {
-  const letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
+  let letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
   // const backgroundColor = yellow ? 'yellow' : 'white'
   // console.log(letters.draggable_letters[letter]);
   return (

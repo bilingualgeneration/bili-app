@@ -30,10 +30,10 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     const [chosenLanguageData] = useFirebaseData(gameData);
 
     const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({
-        id0: { top: 100, left: 80 },
-        id1: { top: 250, left: 100 },
-        id2: { top: 150, left: 100 },
-        id3: { top: 200, left: 100 },
+        id0: { top: 250, left: -40 },
+        id1: { top: 250, left: 20 },
+        id2: { top: 250, left: 70 },
+        id3: { top: 250, left: 100 },
         id4: { top: 250, left: 200 },
         id5: { top: 250, left: 150 },
         id6: { top: 250, left: 300 },
