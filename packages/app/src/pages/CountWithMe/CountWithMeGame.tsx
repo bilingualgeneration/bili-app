@@ -187,7 +187,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
         setTimeout(() => {
           setAllAnimalsClicked(true);
           setIsButtonDisabled(false);
-        }, 2000);
+        }, 1700);
       }
     }
 
@@ -349,44 +349,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
           </div>
         ))}
       </div>
-      {/* <span style={{ display: "none" }}>
-        <div
-          style={{
-            backgroundColor: "#F7FAF9",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              backgroundColor: "#FFFFFF",
-              borderRadius: "20px",
-              width: "1159px",
-              height: "800px",
-              boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              padding: "20px",
-            }}
-          >
-            <img
-              src={getData.gameBackground.url}
-              alt="animals"
-              style={{
-                width: "100%",
-                cursor: "pointer",
-                borderRadius: "32px",
-                boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-              }}
-            />
-          </div>
-        </div>
-      </span> */}
+     
     </>
   );
 };
