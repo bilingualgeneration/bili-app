@@ -14,16 +14,15 @@ export interface LetterProps {
 }
 
 export const Letter: FC<LetterProps> = memo(function Letter({ preview, letter, yellow }) {
-  let letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
+  let letterImg = <img style={{maxWidth: "unset"}} src={letters.draggable_letters[letter]} alt={letter} />
   // const backgroundColor = yellow ? 'yellow' : 'white'
-  // console.log(letters.draggable_letters[letter]);
+  
   return (
       <div
         style={{ ...draggableLetterStyles }}
         role={preview ? 'LetterPreview' : 'Letter'}
       >
         {letterImg}
-        {letter}
       </div>
   )
 })

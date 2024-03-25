@@ -15,7 +15,6 @@ function getStyles(
 ): CSSProperties {
     const transform = `translate3d(${left}px, ${top}px, 0)`
     return {
-        // zIndex: '2',
         position: 'absolute',
         transform,
         WebkitTransform: transform,
@@ -59,8 +58,6 @@ export const DraggableLetter: FC<DraggableLetterProps> = memo(function Draggable
         // Generate empty drag preview image once when component mounts
         preview(getEmptyImage(), { captureDraggingState: true })
     }, []) // Empty dependency array to run the effect only once when mounted
-
-    // const letterImg = <img src={letters.draggable_letters[letter]} alt={letter} />
 
     useEffect(() => {
         if (isDragging && audio?.url) {

@@ -79,13 +79,13 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         [moveLetters],
     )
 
-    const [, drag] = useDrag(
-        () => ({
-            type: ItemTypes.LETTER,
-            item: { type: ItemTypes.LETTER },
-        }),
-        []
-    );
+    // const [, drag] = useDrag(
+    //     () => ({
+    //         type: ItemTypes.LETTER,
+    //         item: { type: ItemTypes.LETTER },
+    //     }),
+    //     []
+    // );
 
     return (
         <div id='stories-dnd'>
@@ -112,16 +112,15 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                         console.error(`No letter found for id "${key}"`);
                         return null;
                     }
+                    console.log(key);
                     return (
-                        <>
-                            <DraggableLetter
-                                key={key}
-                                id={key}
-                                letter={isInclusive ? letter.esIncText : letter.esText} 
-                                audio={isInclusive ? letter.esIncAudio : letter.esAudio?.url ? { url: letter.esAudio.url } : { url: '' }}
-                                {...initialLetterPlacement[key]}    
-                            />
-                        </>
+                        <DraggableLetter
+                            key={key}
+                            id={key}
+                            letter={isInclusive ? letter.esIncText : letter.esText} 
+                            audio={isInclusive ? letter.esIncAudio : letter.esAudio}
+                            {...initialLetterPlacement[key]}    
+                        />    
                     );
                 })}
             </div>
