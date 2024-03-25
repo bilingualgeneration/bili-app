@@ -170,7 +170,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
   return (
     <>
       <div className={styles.container}>
-    {props.map(({ x, y, rot, scale, zIndex }, i) => {
+        {props.map(({ x, y, rot, scale, zIndex }, i) => {
           // console.log("Card index:", i);
           const card = cards[i % cards.length];
           const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
@@ -217,7 +217,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
                 x,
                 y,
                 zIndex,
-		pointerEvents: i === currentCardIndex ? 'auto' : 'none',
+		            pointerEvents: i === currentCardIndex ? 'auto' : 'none',
                 transform: interpolate(
                   [rot, x],
                   (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,

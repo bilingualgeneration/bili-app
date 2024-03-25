@@ -5,6 +5,8 @@ import { memo, useCallback, useState } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import { useProfile } from "@/contexts/ProfileContext";
 
+import { Game } from './Gamification';
+import { LetterMap } from './Gamification';
 import { DraggableLetter } from './draggableLetter';
 import type { DragItem } from './interfaces';
 import { ItemTypes } from './itemTypes';
@@ -21,23 +23,15 @@ const styles: CSSProperties = {
     zIndex: 1,
 }
 
-interface LetterMap {
-    [key: string]: { top: number; left: number }
-}
+const game = new Game();
 
 export const Container: FC<{ gameData: any }> = memo(function Container({ gameData }) {
     const { isInclusive, isImmersive } = useProfile();
     const [chosenLanguageData] = useFirebaseData(gameData);
+    // console.log(chosenLanguageData);
 
-    const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({
-        id0: { top: 250, left: -40 },
-        id1: { top: 250, left: 20 },
-        id2: { top: 250, left: 70 },
-        id3: { top: 250, left: 100 },
-        id4: { top: 250, left: 200 },
-        id5: { top: 250, left: 150 },
-        id6: { top: 250, left: 300 },
-    })
+    // Define initialLetterPlacement state and its setter function
+    const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>(game.initialLetterPlacement);
 
     const moveLetters = useCallback(
         (id: string, left: number, top: number) => {
@@ -87,42 +81,68 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     //     []
     // );
 
+    // Generate word dynamically from chosenLanguageData
+    const word = chosenLanguageData.map((letter: any) => isInclusive ? letter.esIncText : letter.esText).join('');
+
     return (
         <div id='stories-dnd'>
-            <div className='dropzone-container' ref={drop}>
-                {chosenLanguageData.map((letter: any, index: number) => (
-                    <DropZone
-                        key={index}
-                        letter={isInclusive ? letter.esIncText : letter.esText}
-                        index={index}
-                        expectedIndex={index} 
-                        accept={[]} 
-                        onDrop={function (item: any): void
-                        {
-                            throw new Error('Function not implemented.');
-                        } }                   
-                    />
-                ))}
+            <div className='header-section margin-top-2 margin-bottom-2'>
+                {isImmersive && isInclusive ? (
+                    <h1 className='text-4xl semibold'>
+                        Arrastra y suelta las letras para formar la palabra '{word}'
+                    </h1>
+                ) : isImmersive ? (
+                    <h1 className='text-4xl semibold'>
+                        Arrastra y suelta las letras para formar la palabra '{word}'
+                    </h1>
+                ) : (
+                    <h1 className='text-4xl semibold'>
+                        Drag and drop the letters to form the word '{word}'
+                    </h1>
+                )}
+                {!isImmersive && (
+                    <p className='text-2xl color-english'>
+                        Drag and drop the letters to form the word '{word}'
+                    </p>
+                )}
             </div>
-            <div className='draggable-container'>
-                 {Object.keys(initialLetterPlacement).map((key) => {
-                    const letter = chosenLanguageData.find((letter) => letter.id === key);
-                    // console.log(letter);
-                    if (!letter) {
-                        console.error(`No letter found for id "${key}"`);
-                        return null;
-                    }
-                    console.log(key);
-                    return (
-                        <DraggableLetter
-                            key={key}
-                            id={key}
-                            letter={isInclusive ? letter.esIncText : letter.esText} 
-                            audio={isInclusive ? letter.esIncAudio : letter.esAudio}
-                            {...initialLetterPlacement[key]}    
-                        />    
-                    );
-                })}
+
+            <div className='game-section'>
+                <div className='dropzone-container' ref={drop}>
+                    {chosenLanguageData.map((letter: any, index: number) => (
+                        <DropZone
+                            key={index}
+                            letter={isInclusive ? letter.esIncText : letter.esText}
+                            index={index}
+                            expectedIndex={index} 
+                            accept={[]} 
+                            onDrop={function (item: any): void
+                            {
+                                throw new Error('Function not implemented.');
+                            } }                   
+                        />
+                    ))}
+                </div>
+                <div className='draggable-container'>
+                    {Object.keys(initialLetterPlacement).map((key) => {
+                        const letter = chosenLanguageData.find((letter) => letter.id === key);
+                        // console.log(letter);
+                        if (!letter) {
+                            console.error(`No letter found for id "${key}"`);
+                            return null;
+                        }
+                        // console.log(key);
+                        return (
+                            <DraggableLetter
+                                key={key}
+                                id={key}
+                                letter={isInclusive ? letter.esIncText : letter.esText} 
+                                audio={isInclusive ? letter.esIncAudio : letter.esAudio}
+                                {...initialLetterPlacement[key]}    
+                            />    
+                        );
+                    })}
+                </div>
             </div>
         </div>
     )
