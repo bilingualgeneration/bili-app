@@ -26,7 +26,7 @@ export const TellMeAboutSelect: React.FC = () => {
   ];
   return (
     <PackSelect
-      module="would-do-game"
+      module="tell-me-about-game"
 	    category="community"
       translatedTitle='¿Qué harías?'
       englishTitle="What would you do?"

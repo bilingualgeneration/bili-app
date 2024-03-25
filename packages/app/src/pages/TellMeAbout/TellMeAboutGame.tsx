@@ -18,7 +18,7 @@ export const TellMeAboutGame: FC = () => {
   const { pack_id } = useParams();
   const firestore = useFirestore();
 
-  const ref = doc(firestore, "would-do-game", pack_id);
+  const ref = doc(firestore, "tell-me-about-game", pack_id);
   const { status, data } = useFirestoreDocData(ref);
   const [questionsData, setQuestionsData] = useState<any[]>([]);
 

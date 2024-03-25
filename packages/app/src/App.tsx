@@ -96,6 +96,7 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { TellMeAboutSelect } from "./pages/TellMeAbout";
 
 
 
@@ -546,6 +547,18 @@ const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/tell-me-about-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <TellMeAboutSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />  
 
           <Route
             exact
