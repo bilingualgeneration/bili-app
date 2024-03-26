@@ -1,55 +1,45 @@
 #stories-dnd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
   .header-section{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
   }
 
   .game-section {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
-    width: 100%;
-  }
-
-  .draggable-container {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-  }
-
-  .dropzone-container {
+    // background-color: #aaffaa;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 700px;
     width: 1300px;
-    border: 1px solid black;
-    position: 'relative';
+  }
+
+  .dropzone-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    // height: 100px;
+    // width: 500px;
     z-index: 1;
-    overflow: hidden; /* Ensure the draggable letters don't overflow the container */
   }
 }
 
 #dropzone-dnd {
-  .dropzone {
-    /* drop zone styling */
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  // .dropzone {
+  //   /* drop zone styling */
+  //   position: absolute;
+    
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 
   .hovered {
     /* Styling when dragged item is over the drop zone */

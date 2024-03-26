@@ -33,11 +33,8 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
 
   // console.log(letter);
 
-  // TODO: Apply CSS class to longer letters to lower them
-  const longerLetterAlignment = 'longer-letter-alignment';
-
   return (
-    <div className={`dropzone`} ref={drop}>
+    <div ref={drop}>
       <div className="drop-target">
           <img src={letters.background_letters[letter]} alt={letter} />
       </div>

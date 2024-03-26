@@ -1,28 +1,4 @@
-
-export type LetterMap = {
-    [key: string]: { top: number; left: number };
-};
-
 export class Game {
-    public initialLetterPlacement: LetterMap;
-
-    constructor() {
-        this.initialLetterPlacement = this.determineInitialLetterPlacement();
-    }
-
-    private determineInitialLetterPlacement(): LetterMap {
-        // Logic to determine initial letter placement
-        return {
-          id0: { top: -250, left: -40 },
-          id1: { top: 250, left: 20 },
-          id2: { top: 250, left: 70 },
-          id3: { top: 250, left: 100 },
-          id4: { top: 250, left: 200 },
-          id5: { top: 250, left: 150 },
-          id6: { top: 250, left: 300 },
-        };
-    }
-
     public shuffleAndSplitLetters(letters: string[]): [string[], string[]] {
         // Create a copy of the input array to avoid mutating the original array
         const shuffledLetters = [...letters];
