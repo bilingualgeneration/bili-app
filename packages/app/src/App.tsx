@@ -59,6 +59,8 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
+import { TellMeAboutIntro } from "@/pages/TellMeAbout/TellMeAboutIntro";
+import { TellMeAboutGame } from "@/pages/TellMeAbout/TellMeAboutGame";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
@@ -94,6 +96,7 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { TellMeAboutSelect } from "./pages/TellMeAbout";
 
 
 
@@ -430,6 +433,18 @@ const Router: React.FC = () => {
 
           <Route
             exact
+            path="/tell-me-about-game/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <TellMeAboutIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
             path="/would-do-game/intro"
             render={() => (
               <AuthedLayout>
@@ -447,6 +462,18 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
                   <WouldDoGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/tell-me-about-game/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FBF2E2">
+                  <TellMeAboutGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -520,6 +547,18 @@ const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/tell-me-about-game/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <TellMeAboutSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />  
 
           <Route
             exact
