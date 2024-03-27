@@ -1,8 +1,7 @@
 import update from 'immutability-helper';
 import type { CSSProperties, FC } from 'react';
-import { letters } from '../letters';
-import { memo, useCallback, useState } from 'react';
-import { useDrop, useDrag } from 'react-dnd';
+import { memo, useCallback, useState, useEffect } from 'react';
+import { useDrop } from 'react-dnd';
 import { useProfile } from "@/contexts/ProfileContext";
 
 import { Game } from './Gamification';
@@ -14,40 +13,71 @@ import { useFirebaseData } from './firebaseUtils';
 
 import '../Stories.scss';
 
+// Define CSS styles for the container
 const styles: CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
     width: 1300,
-    height: 800,
+    height: 700,
     border: '1px solid black',
     position: 'relative',
     zIndex: 1,
 }
+
+interface Audio {
+    url: string;
+    // Other properties as needed
+}
+
+// Define the interface for the LetterMap
 interface LetterMap {
     [key: string]: { top: number; left: number }
 }
 
+// Create an instance of the Game class
 const game = new Game();
 
 export const Container: FC<{ gameData: any }> = memo(function Container({ gameData }) {
     const { isInclusive, isImmersive } = useProfile();
     const [chosenLanguageData] = useFirebaseData(gameData);
-    // console.log(chosenLanguageData);
+    const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({});
 
-    const letterArray = chosenLanguageData.map((letter: any) => isInclusive ? letter.esIncText : letter.esText);
+    // Split the letters and shuffle them
+    const letterArray = chosenLanguageData.map((letter: any, id: any) => isInclusive ? letter.esIncText : letter.esText);
 
-    const [firstHalf, secondHalf] = game.shuffleAndSplitLetters(letterArray);
+    // TODO: possibly make a top and bottom row of letters
+    // Shuffle and split letters
+    const [firstHalf, secondHalf] = game.shuffleAndSplitLetters(
+        letterArray.map((letter, index) => ({
+            id: `id${index}`,
+            esIncText: letter,
+            esText: letter,
+            esIncAudio: '', // Provide appropriate values if available
+            esAudio: '', // Provide appropriate values if available
+        }))
+    );
 
-    // Combine both shuffled arrays to get the equivalent indices
     const combinedArray = [...firstHalf, ...secondHalf];
+    
+    // Generate the initialLetterPlacement state once when chosenLanguageData changes
+    useEffect(() => {
+        // Initialize a new placement object
+        const newPlacement: LetterMap = {};
 
-    // Generate initialLetterPlacement dynamically for both halves combined
-    const initialLetterPlacement: LetterMap = {};
-    combinedArray.forEach((letter, index) => {
-        initialLetterPlacement[`id${index}`] = { top: -250, left: index * 50 };
-    });
+        // Calculate the width of each letter based on the number of letters
+        const letterWidth = 1200 / combinedArray.length;
+        // console.log(combinedArray);
+        
+        // Generate the placement for each letter
+        combinedArray.forEach((letter, index) => {
+            const left = index * letterWidth;
+            newPlacement[letter.id] = { top: 50, left };
+        });
+        // Update the state with the new placement object
+        setInitialLetterPlacement(newPlacement);
+    }, [chosenLanguageData, isInclusive]);
 
-    const [placementState, setPlacementState] = useState<LetterMap>(initialLetterPlacement);
-    console.log(initialLetterPlacement);
-
+    // Define the moveLetters callback function
     const moveLetters = useCallback(
         (id: string, left: number, top: number) => {
             // Check if the id exists in initialLetterPlacement
@@ -55,9 +85,8 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 console.error(`Invalid id "${id}" provided to moveLetters.`);
                 return;
             }
-    
             // Update the state using immutability-helper's $merge
-            setPlacementState(
+            setInitialLetterPlacement(
                 update(initialLetterPlacement, {
                     [id]: {
                         $merge: { left, top },
@@ -68,41 +97,31 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         [initialLetterPlacement],
     );
 
-
-
+    // Define the drop handler for the DropZone
     const [, drop] = useDrop(
         () => ({
             accept: ItemTypes.LETTER,
             drop(item: DragItem, monitor) {
                 const delta = monitor.getDifferenceFromInitialOffset() as {
-                    x: number
-                    y: number
-                }
-
-                let left = Math.round(item.left + delta.x)
-                let top = Math.round(item.top + delta.y)
-
-                console.log("Dropped item id:", item.id); 
-                moveLetters(item.id, left, top)
-                return undefined
+                    x: number;
+                    y: number;
+                };
+                let left = Math.round(item.left + delta.x);
+                let top = Math.round(item.top + delta.y);
+                
+                moveLetters(item.id, left, top);
+                return undefined;
             },
         }),
         [moveLetters],
-    )
-
-    // const [, drag] = useDrag(
-    //     () => ({
-    //         type: ItemTypes.LETTER,
-    //         item: { type: ItemTypes.LETTER },
-    //     }),
-    //     []
-    // );
+    );
 
     // Generate word dynamically from previously created array
-    const word = letterArray.join('');
+    const word = chosenLanguageData.map((letter: any) => isInclusive ? letter.esIncText : letter.esText).join('');
 
     return (
         <div id='stories-dnd'>
+            {/* Render header section */}
             <div className='header-section margin-top-2 margin-bottom-2'>
                 {isImmersive && isInclusive ? (
                     <h1 className='text-4xl semibold'>
@@ -124,43 +143,41 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 )}
             </div>
 
-            <div className='game-section'>
-                <div className='dropzone-container' ref={drop}>
-                    {chosenLanguageData.map((letter: any, index: number) => (
+            {/* Render game section */}
+            <div className='game-section' ref={drop}>
+                {/* Render dropzone container */}
+                <div className='dropzone-container'>
+                    {chosenLanguageData.map((letter: any, index: number) => ( 
                         <DropZone
                             key={index}
                             letter={isInclusive ? letter.esIncText : letter.esText}
                             index={index}
-                            expectedIndex={index} 
-                            accept={[]} 
-                            onDrop={function (item: any): void
-                            {
-                                throw new Error('Function not implemented.');
-                            } }                   
+                            expectedIndex={index}
+                            accept={[]}
+                            onDrop={() => {}} // Placeholder function
                         />
                     ))}
                 </div>
-                <div className='draggable-container'>
+                {/* Render draggable letter container */}
+                <div style={styles}>
                     {Object.keys(initialLetterPlacement).map((key) => {
-                        const letter = chosenLanguageData.find((letter) => letter.id === key);
-                        // console.log(letter);
+                        const letter = combinedArray.find((letter) => letter.id === key);
                         if (!letter) {
                             console.error(`No letter found for id "${key}"`);
                             return null;
                         }
-                        // console.log(key);
                         return (
                             <DraggableLetter
                                 key={key}
                                 id={key}
-                                letter={isInclusive ? letter.esIncText : letter.esText} 
-                                audio={isInclusive ? letter.esIncAudio : letter.esAudio}
-                                {...initialLetterPlacement[key]}    
-                            />    
+                                letter={isInclusive ? letter.esIncText : letter.esText}
+                                audio={{ url: isInclusive ? letter.esIncAudio : letter.esAudio }}
+                                {...initialLetterPlacement[key]}
+                            />
                         );
                     })}
                 </div>
             </div>
         </div>
-    )
+    );
 });
