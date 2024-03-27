@@ -15,8 +15,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 700px;
-    width: 1300px;
+  }
+
+  .drag-letters-container {
+    border: '1px solid black';
+    position: 'relative';
+    z-index: 1;
   }
 
   .dropzone-container {

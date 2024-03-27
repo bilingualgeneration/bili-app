@@ -22,4 +22,6 @@ export class Game {
         // Return the two halves as a tuple
         return [firstHalf, secondHalf];
     }    
+
+    // public isLetterCorrect()
 }

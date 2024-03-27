@@ -15,8 +15,9 @@ import '../Stories.scss';
 
 // Define CSS styles for the container
 const styles: CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 1300,
     height: 700,
     border: '1px solid black',
@@ -52,8 +53,8 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
             id: `id${index}`,
             esIncText: letter,
             esText: letter,
-            esIncAudio: '', // Provide appropriate values if available
-            esAudio: '', // Provide appropriate values if available
+            esIncAudio: '',
+            esAudio: '',
         }))
     );
 
@@ -61,21 +62,39 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     
     // Generate the initialLetterPlacement state once when chosenLanguageData changes
     useEffect(() => {
-        // Initialize a new placement object
-        const newPlacement: LetterMap = {};
-
-        // Calculate the width of each letter based on the number of letters
-        const letterWidth = 1200 / combinedArray.length;
-        // console.log(combinedArray);
-        
-        // Generate the placement for each letter
-        combinedArray.forEach((letter, index) => {
-            const left = index * letterWidth;
-            newPlacement[letter.id] = { top: 50, left };
+        // Calculate the width of each letter based on the desired spacing
+        const letterWidth = 112;
+        // Calculate the total width available for each row
+        const totalWidthTop = letterWidth * firstHalf.length;
+        const totalWidthBottom = letterWidth * secondHalf.length;
+    
+        // Calculate the initial left position for each letter in the firstHalf array
+        const initialLeftTop = -(totalWidthTop / 2);
+        const initialLeftBottom = -(totalWidthBottom / 2);
+    
+        // Generate the placement for each letter in the firstHalf array
+        const newPlacementTop: LetterMap = {};
+        firstHalf.forEach((letter, index) => {
+            // Add randomness to the left position (range: -20 to 20 pixels)
+            const left = initialLeftTop + index * letterWidth + Math.random() * 40 - 20;
+            newPlacementTop[letter.id] = { top: 210, left };
         });
+    
+        // Generate the placement for each letter in the secondHalf array
+        const newPlacementBottom: LetterMap = {};
+        secondHalf.forEach((letter, index) => {
+            // Add randomness to the left position (range: -20 to 20 pixels)
+            const left = initialLeftBottom + index * letterWidth + Math.random() * 40 - 20;
+            newPlacementBottom[letter.id] = { top: -210, left };
+        });
+    
+        // Merge the placements for both arrays
+        const newPlacement = { ...newPlacementTop, ...newPlacementBottom };
+    
         // Update the state with the new placement object
         setInitialLetterPlacement(newPlacement);
-    }, [chosenLanguageData, isInclusive]);
+    }, [chosenLanguageData, isInclusive]);   
+    
 
     // Define the moveLetters callback function
     const moveLetters = useCallback(
@@ -159,7 +178,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                     ))}
                 </div>
                 {/* Render draggable letter container */}
-                <div style={styles}>
+                <div className='drag-letters-container' style={styles}>
                     {Object.keys(initialLetterPlacement).map((key) => {
                         const letter = combinedArray.find((letter) => letter.id === key);
                         if (!letter) {
