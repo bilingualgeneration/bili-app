@@ -1,6 +1,6 @@
 export class Game {
     public shuffleAndSplitLetters(letters: Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>): [Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>, Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>] {
-        // Create a copy of the input array to avoid mutating the original array
+        // Create a copy of input array to avoid mutating original array
         const shuffledLetters = [...letters];
         
         // Use Fisher-Yates/Durstenfeld shuffle algorithm

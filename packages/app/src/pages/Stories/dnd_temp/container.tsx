@@ -63,7 +63,13 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     // Generate the initialLetterPlacement state once when chosenLanguageData changes
     useEffect(() => {
         // Calculate the width of each letter based on the desired spacing
-        const letterWidth = 112;
+        let letterWidth = 0;
+        if (combinedArray.length <= 7) {
+            letterWidth = 200;
+        } else {
+            letterWidth = 150;
+        };
+        
         // Calculate the total width available for each row
         const totalWidthTop = letterWidth * firstHalf.length;
         const totalWidthBottom = letterWidth * secondHalf.length;
@@ -93,8 +99,12 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     
         // Update the state with the new placement object
         setInitialLetterPlacement(newPlacement);
-    }, [chosenLanguageData, isInclusive]);   
-    
+    }, [chosenLanguageData, isInclusive]); // Run only once when component mounts    
+
+    // Function to generate a random offset within a range
+    const getRandomOffset = (min: number, max: number) => {
+        return Math.random() * (max - min) + min;
+    };
 
     // Define the moveLetters callback function
     const moveLetters = useCallback(
