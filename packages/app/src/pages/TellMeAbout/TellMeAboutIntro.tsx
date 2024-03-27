@@ -12,18 +12,18 @@ export const TellMeAboutIntro: React.FC = () => {
   const texts: any = [
     {
       es: {
-	text: '¿Qué harías?',
+	text: 'Cuéntame sobre...',
 	subtext: isInclusive
-	    ? '¡Te damos la bienvenida  a la actividad "qué harías"! Encuentra un amigue o una persona mayor. Tomen turnos hablando sobre lo que harían en cada situación.'
-	: '¡Bienvenidos a la actividad “qué harías”! Encuentra un amigo o un adulto. Tomen turnos hablando sobre lo que harían en cada situación.',
+	    ? '¡Te damos la bienvenida  a la actividad "cuéntame sobre"! Encuentra un amigue o una persona mayor. Tomen turnos hablando las cosas que les gustan.' // not sure if this is inclusive
+	: '¡Bienvenidos a la actividad "cuéntame sobre"! Encuentra un amigo o un adulto. Túrnense para contarse las cosas que les gustan.',
 	audio: isInclusive ? audio_es_inc_file : audio_es_file
       },
       en: {
-	text: 'What Would You Do?',
-	subtext: 'Welcome to the "qué harías" activity! Find a friend or adult. Take turns talking about what you would do in each situation. ',
+	text: 'Tell me about...',
+	subtext: 'Welcome to the "cuéntame sobre" activity! Find a friend or adult. Take turns telling each other about the things you like.',
 	audio: audio_en_file
       }
     }
   ]
-  return <Intro texts={texts} image={biliCharacter} nextPath="/would-do-game/select" />;
+  return <Intro texts={texts} image={biliCharacter} nextPath="/tell-me-about-game/select" />;
 };

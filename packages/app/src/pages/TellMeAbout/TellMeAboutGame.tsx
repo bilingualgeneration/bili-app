@@ -65,12 +65,12 @@ export const TellMeAboutGame: FC = () => {
         <IonText>
           <h1 className="text-5xl margin-top-1">
             <FormattedMessage
-              id="wouldDo.title"
-              defaultMessage={"What would you do?"}
-              description={"Title of '¿Que harías?' page"}
+              id="tellMeAbout.title" // not found
+              defaultMessage={"Tell me about..."}
+              description={"Title of 'Cuéntame sobre...' page"}
             />
           </h1>
-          {!isImmersive && <p className="text-3xl">What would you do?</p>}
+          {!isImmersive && <p className="text-3xl">Tell me about...</p>}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}

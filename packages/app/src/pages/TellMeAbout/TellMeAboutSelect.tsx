@@ -28,8 +28,8 @@ export const TellMeAboutSelect: React.FC = () => {
     <PackSelect
       module="tell-me-about-game"
 	    category="community"
-      translatedTitle='¿Qué harías?'
-      englishTitle="What would you do?"
+      translatedTitle='Cuéntame sobre...'
+      englishTitle="Tell me about..."
 	    placeholderCards={placeholderCards}
     />
   );
