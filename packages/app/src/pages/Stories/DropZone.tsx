@@ -3,12 +3,15 @@ import { letters } from './letters';
 import { memo, useState } from 'react'
 import { useDrop } from "react-dnd";
 import { ItemTypes } from '../Stories/dnd_temp/itemTypes';
+import { Game } from '../Stories/dnd_temp/Gamification';
+
+import '../Stories/Stories.scss';
 
 interface DropZoneProps {
   index?: number;
   letter?: any;
-  expectedIndex?: number;
-  accept: string[];
+  expectedLetter?: number;
+  dropZoneLetters: string[];
   lastDroppedItem?: any;
   onDrop: (item: any, isCorrect: boolean) => void;
 }
@@ -16,8 +19,8 @@ interface DropZoneProps {
 export const DropZone: FC<DropZoneProps> = memo(function DropZone({
   index,
   letter,
-  expectedIndex,
-  accept,
+  expectedLetter,
+  dropZoneLetters,
   lastDroppedItem,
   onDrop,
 }) {
@@ -38,7 +41,7 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
       </div>
       
       {/* TODO: Add correct/incorrect styling */}
-      {index === expectedIndex && isOver && !canDrop && (
+      {index === expectedLetter && isOver && !canDrop && (
         <div className="red-shadow" />
       )}
     </div>
