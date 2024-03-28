@@ -35,6 +35,10 @@
   }
 }
 
+.drop-target {
+  margin: 5px;
+}
+
 .rotated-letter {
   transform: rotate(-7deg); /* Initial tilt angle */
   -webkit-transform: rotate(-7deg); /* For Safari */

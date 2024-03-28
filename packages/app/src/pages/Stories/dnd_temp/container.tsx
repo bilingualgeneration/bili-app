@@ -201,7 +201,8 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                                 id={key}
                                 letter={isInclusive ? letter.esIncText : letter.esText}
                                 audio={{ url: isInclusive ? letter.esIncAudio : letter.esAudio }}
-                                {...initialLetterPlacement[key]}                            />
+                                {...initialLetterPlacement[key]}                            
+                            />
                         );
                     })}
                 </div>
