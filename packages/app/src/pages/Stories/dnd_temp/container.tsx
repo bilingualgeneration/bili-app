@@ -32,7 +32,7 @@ interface Audio {
 
 // Define the interface for the LetterMap
 interface LetterMap {
-    [key: string]: { top: number; left: number }
+    [key: string]: { top: number; left: number; transform?: string }
 }
 
 // Create an instance of the Game class
@@ -62,9 +62,9 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     
     // Generate the initialLetterPlacement state once when chosenLanguageData changes
     useEffect(() => {
-        // Calculate the width of each letter based on the desired spacing
+        // Calculate the width of each letter based on len of word (bigger word = less space)
         let letterWidth = 0;
-        if (combinedArray.length <= 7) {
+        if (combinedArray.length <= 8) {
             letterWidth = 200;
         } else {
             letterWidth = 150;
@@ -81,18 +81,22 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         // Generate the placement for each letter in the firstHalf array
         const newPlacementTop: LetterMap = {};
         firstHalf.forEach((letter, index) => {
-            // Add randomness to the left position (range: -20 to 20 pixels)
-            const left = initialLeftTop + index * letterWidth + Math.random() * 40 - 20;
-            newPlacementTop[letter.id] = { top: 210, left };
+            // Add randomness to the left position (range: -20 to 20 px)
+            const left = initialLeftTop + index * letterWidth + Math.random() + 50;
+            const top = 210 + (index % 2 === 0 ? 0 : 20); // Shift every other letter down 20px
+            const rotation = index % 2 === 0 ? 20 : -20; // Rotate every other letter 20 degrees
+            newPlacementTop[letter.id] = { top, left, transform: `rotate(${rotation}deg)`  };
         });
-    
+
         // Generate the placement for each letter in the secondHalf array
         const newPlacementBottom: LetterMap = {};
         secondHalf.forEach((letter, index) => {
-            // Add randomness to the left position (range: -20 to 20 pixels)
-            const left = initialLeftBottom + index * letterWidth + Math.random() * 40 - 20;
-            newPlacementBottom[letter.id] = { top: -210, left };
+            // Add randomness to the left position (range: -20 to 20 px)
+            const left = initialLeftBottom + index * letterWidth + Math.random() + 50;
+            const top = -250 + (index % 2 === 0 ? 20 : 0); // Shift every other letter up 20px
+            newPlacementBottom[letter.id] = { top, left };
         });
+
     
         // Merge the placements for both arrays
         const newPlacement = { ...newPlacementTop, ...newPlacementBottom };
@@ -100,11 +104,6 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         // Update the state with the new placement object
         setInitialLetterPlacement(newPlacement);
     }, [chosenLanguageData, isInclusive]); // Run only once when component mounts    
-
-    // Function to generate a random offset within a range
-    const getRandomOffset = (min: number, max: number) => {
-        return Math.random() * (max - min) + min;
-    };
 
     // Define the moveLetters callback function
     const moveLetters = useCallback(
@@ -146,7 +145,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     );
 
     // Generate word dynamically from previously created array
-    const word = chosenLanguageData.map((letter: any) => isInclusive ? letter.esIncText : letter.esText).join('');
+    const word = letterArray.join('');
 
     return (
         <div id='stories-dnd'>
@@ -189,7 +188,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 </div>
                 {/* Render draggable letter container */}
                 <div className='drag-letters-container' style={styles}>
-                    {Object.keys(initialLetterPlacement).map((key) => {
+                    {Object.keys(initialLetterPlacement).map((key, index) => {
                         const letter = combinedArray.find((letter) => letter.id === key);
                         if (!letter) {
                             console.error(`No letter found for id "${key}"`);
@@ -197,12 +196,12 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                         }
                         return (
                             <DraggableLetter
+                                rotation={ index % 2 === 0 ? 15 : -15} 
                                 key={key}
                                 id={key}
                                 letter={isInclusive ? letter.esIncText : letter.esText}
                                 audio={{ url: isInclusive ? letter.esIncAudio : letter.esAudio }}
-                                {...initialLetterPlacement[key]}
-                            />
+                                {...initialLetterPlacement[key]}                            />
                         );
                     })}
                 </div>

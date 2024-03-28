@@ -31,8 +31,6 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
     }),
   }), [])
 
-  console.log(letter);
-
   return (
     <div ref={drop}>
       <div className="drop-target">

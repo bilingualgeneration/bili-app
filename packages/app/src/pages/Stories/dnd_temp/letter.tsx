@@ -15,7 +15,6 @@ export interface LetterProps {
 
 export const Letter: FC<LetterProps> = memo(function Letter({ preview, letter, yellow }) {
   let letterImg = <img style={{maxWidth: "unset"}} src={letters.draggable_letters[letter]} alt={letter} />
-  console.log("Letter:", letter);
   // const backgroundColor = yellow ? 'yellow' : 'white'
   
   return (

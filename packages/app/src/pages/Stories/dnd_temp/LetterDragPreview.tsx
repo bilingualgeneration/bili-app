@@ -5,8 +5,8 @@ import { Letter } from './letter'
 
 const styles: CSSProperties = {
   display: 'inline-block',
-  transform: 'rotate(-7deg)',
-  WebkitTransform: 'rotate(-7deg)',
+  transform: 'rotate(0deg)',
+  WebkitTransform: 'rotate(0deg)',
 }
 
 export interface LetterDragPreviewProps {

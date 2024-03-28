@@ -7,18 +7,20 @@ import { letters } from '../letters';
 import { Letter } from './letter';
 import { ItemTypes } from './itemTypes'
 import { useAudioManager } from '@/contexts/AudioManagerContext';
+import '../Stories.scss';
 
 function getStyles(
     left: number,
     top: number,
     isDragging: boolean,
+    transform: string,
 ): CSSProperties {
-    const transform = `translate3d(${left}px, ${top}px, 0)`
+    const finalTransform = `translate3d(${left}px, ${top}px, 0) ${transform}`;
     return {
         position: 'absolute',
         zIndex: 2,
-        transform,
-        WebkitTransform: transform,
+        transform: finalTransform,
+        WebkitTransform: finalTransform,
         // IE fallback: hide the real node using CSS when dragging
         // because IE will ignore our custom "empty image" drag preview.
         opacity: isDragging ? 0 : 1,
@@ -36,12 +38,13 @@ export interface DraggableLetterProps {
     top: number
     audio?: Audio;
     letter: any;
+    rotation: number; // Rotation angle in degrees
 }
 
 export const DraggableLetter: FC<DraggableLetterProps> = memo(function DraggableLetter(
     props,
 )   {
-    const { id, left, top, audio, letter } = props
+    const { id, left, top, audio, letter, rotation } = props
     const { addAudio, clearAudio } = useAudioManager();
 
     const [{ isDragging }, drag, preview] = useDrag(
@@ -68,10 +71,12 @@ export const DraggableLetter: FC<DraggableLetterProps> = memo(function Draggable
         }
     }, [isDragging, audio]);
 
+    const transform = `rotate(${rotation}deg)`; // Applying rotation transform
+
     return (
         <div
             ref={drag}
-            style={getStyles(left, top, isDragging)}
+            style={getStyles(left, top, isDragging, transform)}
         >
             <Letter letter={letter}/>
         </div>

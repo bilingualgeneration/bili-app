@@ -35,6 +35,17 @@
   }
 }
 
+.rotated-letter {
+  transform: rotate(-7deg); /* Initial tilt angle */
+  -webkit-transform: rotate(-7deg); /* For Safari */
+}
+
+.rotated-letter:nth-child(even) {
+  transform: rotate(7deg); /* Alternating tilt angle */
+  -webkit-transform: rotate(7deg); /* For Safari */
+}
+
+
 #dropzone-dnd {
   // .dropzone {
   //   /* drop zone styling */
