@@ -78,7 +78,7 @@ export const StoriesLandingPage: FC = () => {
         <>
             
 
-            <div className="stories-landing-page-container" id="stories-landing-page">
+            <div  id="stories-landing-page">
                 {/* stories cards header + row */}
                 {/* TEXT doesn't fit the whole PackSelect pattern */}
                 {/* <div>
@@ -105,13 +105,15 @@ export const StoriesLandingPage: FC = () => {
                     {!isImmersive && (
                         <h2 className="text-3xl color-english carousel-header-margin">Family and community</h2>
                     )}
-                </div>
 
                 <img 
                     src={comingSoonBlock}
                     alt="Coming Soon Image"
-                    className="margin-bottom-5"
+                    className="margin-bottom-5 coming-soon-picture-margin"
                 />
+                </div>
+
+               
             </div>
         </>
     );
