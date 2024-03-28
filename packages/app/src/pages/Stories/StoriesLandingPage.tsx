@@ -3,13 +3,14 @@ import { Play } from "../Play";
 import { useProfile } from "@/contexts/ProfileContext";
 import { Carousel } from "@/components/Carousel";
 import "./StoriesLandingPage.scss";
-import { PlayHeader } from "@/components/PlayHeader";
+import { PackHeader } from "@/components/PackHeader";
 import { ContentCard } from "@/components/ContentCard";
 import comingSoonBlock from "@/assets/icons/coming_soon_block.svg";
 import CatrinaCover from '@/assets/img/catrina.png';
 import GustaCover from '@/assets/img/gusta.png';
 
 import './StoriesLandingPage.scss';
+import { PackSelect } from "@/components/PackSelect";
 
 export const StoriesLandingPage: FC = () => {
     const { isImmersive, isInclusive } = useProfile();
@@ -75,33 +76,27 @@ export const StoriesLandingPage: FC = () => {
   
     return (
         <>
-            <PlayHeader
-                bannerColor="#006A67"
-                title="Cuentos" 
-                subtitle="Stories"
-                titleClassName="text-5xl color-nube"
-                subtitleClassName="text-3xl color-nube"
-            />
+            
 
             <div className="stories-landing-page-container" id="stories-landing-page">
                 {/* stories cards header + row */}
-                <div>
+                {/* TEXT doesn't fit the whole PackSelect pattern */}
+                {/* <div>
                     <h1 className="text-5xl bold carousel-header-margin all-about-me-header">Todo sobre mi </h1>
                     {!isImmersive && (
                         <h2 className="text-3xl color-english carousel-header-margin">All about me</h2>
                     )}
-                </div>
+                </div> */}  
                 
                 <div className="margin-top-2 margin-bottom-3">
-                    <Carousel height={274}>
-                        {storiesCards.map((c, index) => (
-                            <ContentCard 
-                              {...c}
-			      fid={index.toString()}
-                              key={index} 
-                            />
-                        ))}
-                    </Carousel>
+
+                    <PackSelect 
+                        translatedTitle={"Cuentos"} 
+                        englishTitle={"Stories"} 
+                        category={"story"} 
+                        module={"story"}  
+                        pack_name_field = {"title"}          
+                    />
                 </div>
 
                 {/* family and community header + row */}
