@@ -78,13 +78,23 @@ export const PackSelect: React.FC<props> = ({
   return <>
     {category == 'play' && <PlayHeader />}
     {category == 'community' && <CommunityHeader />}
-    {category == 'story' && <PackHeader 
-      bannerColor="#006A67"
-      title="Cuentos" 
-      subtitle="Stories"
-      titleClassName="text-5xl color-nube"
-      subtitleClassName="text-3xl color-nube"
-      />
+    {category == 'story' && (
+      <>
+        <PackHeader 
+          bannerColor="#006A67"
+          title="Cuentos" 
+          subtitle="Stories"
+          titleClassName="text-5xl color-nube"
+          subtitleClassName="text-3xl color-nube"
+        />
+        <div className="all-about-me-header">
+            <h1 className="text-5xl bold carousel-header-margin">Todo sobre mi </h1>
+            {!isImmersive && (
+            <h2 className="text-3xl color-english carousel-header-margin">All about me</h2>
+            )}
+        </div>
+
+      </>)
     }
     <div className="background-card">
       <div className="margin-bottom-2">
