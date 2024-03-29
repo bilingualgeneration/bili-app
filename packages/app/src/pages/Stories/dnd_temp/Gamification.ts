@@ -26,7 +26,7 @@ export class Game {
         return [firstHalf, secondHalf];
     }    
 
-    public isLetterCorrect(droppedLetter: string, expectedLetter: string): boolean {
+    public checkLetterCorrect(droppedLetter: string, expectedLetter: string): boolean {
         // Compare the dropped letter with the expected letter
         return droppedLetter === expectedLetter;
     }
@@ -37,7 +37,7 @@ export class Game {
         
         // Check if the dropped letter matches the expected letter
         const expectedLetter = ''; // Get the expected letter
-        const isCorrect = this.isLetterCorrect(letter, expectedLetter);
+        const isCorrect = this.checkLetterCorrect(letter, expectedLetter);
         
         if (!this.dropZoneLetters[dropIndex] || this.dropZoneLetters[dropIndex] === letter) {
             // Replace the drop zone letter with the draggable letter
@@ -48,17 +48,5 @@ export class Game {
         }
     }
 
-    public replaceDropZoneLetter(dropIndex: number, draggableLetterId: string): void {
-        // Find the index of the draggable letter by its id
-        const draggableIndex = this.dropZoneLetters.findIndex(letter => letter === draggableLetterId);
-        if (draggableIndex !== -1) {
-            // Replace the drop zone letter with the draggable letter
-            this.dropZoneLetters[dropIndex] = this.dropZoneLetters[draggableIndex];
-            // Clear the draggable letter from its original position
-            this.dropZoneLetters[draggableIndex] = '';
-            // Now can implement any UI update or state management as needed
-            // For example, if using React, can update state to trigger re-renders
-            this.updateDropZoneLetters([...this.dropZoneLetters]);
-        }
-    }
+    
 }

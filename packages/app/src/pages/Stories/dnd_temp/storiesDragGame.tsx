@@ -7,7 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
 import { isPlatform } from '@ionic/react';
 import { Container } from './container';
-import { CustomDragLayer } from './customDragLayer';
+import { CustomDragLayer } from './';
 
 export const StoriesDragGame: FC = () => {
     //@ts-ignore

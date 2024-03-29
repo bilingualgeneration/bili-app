@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import type { CSSProperties, FC } from 'react';
-import { memo, useCallback, useState, useEffect } from 'react';
+import { memo, useCallback, useState, useEffect, useRef } from 'react';
 import { useDrop } from 'react-dnd';
 import { useProfile } from "@/contexts/ProfileContext";
 
@@ -27,7 +27,6 @@ const styles: CSSProperties = {
 
 interface Audio {
     url: string;
-    // Other properties as needed
 }
 
 // Define the interface for the LetterMap
@@ -38,19 +37,19 @@ interface LetterMap {
 // Create an instance of the Game class
 const gameInstance = new Game();
 
-export const Container: FC<{ gameData: any }> = memo(function Container({ gameData }) {
+export const Container: FC<{ gameData: any  }> = memo(function Container({ gameData }) {
     const { isInclusive, isImmersive } = useProfile();
     const [chosenLanguageData] = useFirebaseData(gameData);
     const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({});
     const [dropZoneLetters, setDropZoneLetters] = useState<string[]>([]);
-
-    gameInstance.updateDropZoneLetters = (letters: string[]) => {
-        // Update the state with the new drop zone letters
-        setDropZoneLetters(letters);
-    };
+    const dropzoneRef = useRef<HTMLDivElement>(null);
+    const [droppedLetter, setDroppedLetter] = useState<string>('');
+    const [expectedLetter, setExpectedLetter] = useState<string>('');
+    const [isLetterCorrect, setIsLetterCorrect] = useState<boolean>();
 
     // Split the letters and shuffle them
     const letterArray = chosenLanguageData.map((letter: any, id: any) => isInclusive ? letter.esIncText : letter.esText);
+    const correctOrder = letterArray;
 
     // Shuffle and split letters
     const [firstHalf, secondHalf] = gameInstance.shuffleAndSplitLetters(
@@ -106,7 +105,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         const newPlacement = { ...newPlacementTop, ...newPlacementBottom };
     
         // Update the state with the new placement object
-        setInitialLetterPlacement(newPlacement);
+        setInitialLetterPlacement(newPlacement);   
     }, [chosenLanguageData, isInclusive]); // Run only once when component mounts    
 
     // Define the moveLetters callback function
@@ -129,7 +128,6 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         [initialLetterPlacement],
     );
 
-    // Define the drop handler for the DropZone
     const [, drop] = useDrop(
         () => ({
             accept: ItemTypes.LETTER,
@@ -140,49 +138,59 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                 };
                 let left = Math.round(item.left + delta.x);
                 let top = Math.round(item.top + delta.y);
-                
-                moveLetters(item.id, left, top);
-                return undefined;
-            },
+
+                // console.log("Dropped DraggableLetter Coordinates:");
+                // console.log("X: " + left + "px");
+                // console.log("Y: " + top + "px");
+
+                console.log("Dropped DraggableLetter:", item.letter);
+                console.log("onto dropzoneLetter:", expectedLetter);
+                setDroppedLetter(item.letter);
+
+                // if expectedLetter ==
+
+                // Calculate the center coordinates of the draggable item
+                const draggableCenterX = item.left + item.width / 2;
+                const draggableCenterY = item.top + item.height / 2;
+
+                // Iterate through dropzone letters to find the closest one
+                dropZoneLetters.forEach((dropzoneLetter, index) => {
+                    if (!dropzoneRef.current) return;
+
+                    const dropzoneRect = dropzoneRef.current.getBoundingClientRect();
+
+                    // Calculate the center coordinates of the dropzone letter
+                    const dropzoneCenterX = dropzoneRect.left + dropzoneRect.width / 2;
+                    const dropzoneCenterY = dropzoneRect.top + dropzoneRect.height / 2;
+
+                    // Calculate the distance between draggable item and dropzone letter
+                    const distance = Math.sqrt(
+                        Math.pow(draggableCenterX - dropzoneCenterX, 2) + Math.pow(draggableCenterY - dropzoneCenterY, 2)
+                    );
+
+                    // Define a threshold to determine the snap distance
+                    const snapThreshold = 50;
+
+                    setIsLetterCorrect(gameInstance.checkLetterCorrect(item.letter, expectedLetter))
+
+                    // If the distance is less than the threshold and it's the correct letter, snap the draggable item to the dropzone letter
+                    if (distance < snapThreshold && gameInstance.checkLetterCorrect(item.letter, expectedLetter)) {
+                        // Snap the draggable item to the dropzone letter
+                        left = dropzoneRect.left; // Snap left position
+                        top = dropzoneRect.top; // Snap top position
+                }
+            });
+            // Update the state with the new position (snapped or original)
+            moveLetters(item.id, left, top);
+            return undefined;
+        },
         }),
-        [moveLetters],
+        [moveLetters, expectedLetter, droppedLetter, isLetterCorrect],
     );
 
     // Generate word dynamically from previously created array
     const word = letterArray.join('');
-    const correctOrder = letterArray;
-    // console.log(correctOrder);
-
-    // Define the function to check if the letter is correct
-    const isLetterCorrect = (droppedLetter: string, expectedLetter: string): boolean => {
-        return droppedLetter === expectedLetter;
-    };
-
-    // Define the function to handle drop event
-    const handleDrop = (dropIndex: number, item: { id: string; letter: string }): void => {
-        const { id, letter } = item;
-        const expectedLetter = dropZoneLetters[dropIndex];
-        const isCorrect = isLetterCorrect(letter, expectedLetter);
-        
-        if (isCorrect) {
-            replaceDropZoneLetter(dropIndex, id);
-        } else if (!dropZoneLetters[dropIndex] || dropZoneLetters[dropIndex] === letter) {
-            setDropZoneLetters((prevLetters) => {
-                const newLetters = [...prevLetters];
-                newLetters[dropIndex] = letter;
-                return newLetters;
-            });
-        }
-    };
-
-    // Define the function to replace the DropZone letter with the draggableLetter
-    const replaceDropZoneLetter = (dropIndex: number, draggableLetterId: string): void => {
-        setDropZoneLetters((prevLetters) => {
-            const newLetters = [...prevLetters];
-            newLetters[dropIndex] = draggableLetterId;
-            return newLetters;
-        });
-    };
+    
 
     return (
         <div id='stories-dnd'>
@@ -217,14 +225,14 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                             key={index}
                             letter={isInclusive ? letter.esIncText : letter.esText}
                             index={index}
-                            expectedLetter={correctOrder[index]}
+                            expectedLetter={letter}
                             dropZoneLetters={dropZoneLetters}
-                            onDrop={(item) => handleDrop(index, item)}
+                            // onDrop={gameInstance.checkLetterCorrect(expectedLetter, droppedLetter)}                            
                         />
                     ))}
                 </div>
                 {/* Render draggable letter container */}
-                <div className='drag-letters-container' style={styles}>
+                <div style={styles}>
                     {Object.keys(initialLetterPlacement).map((key, index) => {
                         const letter = combinedArray.find((letter) => letter.id === key);
                         if (!letter) {
@@ -233,7 +241,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                         }
                         return (
                             <DraggableLetter
-                                rotation={ index % 2 === 0 ? 15 : -15} 
+                                rotation={index % 2 === 0 ? 15 : -15} 
                                 key={key}
                                 id={key}
                                 letter={isInclusive ? letter.esIncText : letter.esText}

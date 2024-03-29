@@ -17,12 +17,6 @@
     align-items: center;
   }
 
-  .drag-letters-container {
-    border: '1px solid black';
-    position: 'relative';
-    z-index: 1;
-  }
-
   .dropzone-container {
     position: absolute;
     display: flex;

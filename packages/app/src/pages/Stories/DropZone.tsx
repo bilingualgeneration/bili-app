@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { letters } from './letters';
-import { memo, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useDrop } from "react-dnd";
 import { ItemTypes } from '../Stories/dnd_temp/itemTypes';
 import { Game } from '../Stories/dnd_temp/Gamification';
@@ -13,7 +13,7 @@ interface DropZoneProps {
   expectedLetter?: number;
   dropZoneLetters: string[];
   lastDroppedItem?: any;
-  onDrop: (item: any, isCorrect: boolean) => void;
+  onDrop?: boolean;
 }
 
 export const DropZone: FC<DropZoneProps> = memo(function DropZone({
@@ -24,7 +24,20 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
   lastDroppedItem,
   onDrop,
 }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const dropZoneRef = useRef<HTMLDivElement>(null);
+  const [dropZoneRect, setDropZoneRect] = useState<DOMRect | null>(null);
+
+  useEffect(() => {
+    if (dropZoneRef.current) {
+      const rect = dropZoneRef.current.getBoundingClientRect();
+      setDropZoneRect(rect);
+
+      // console.log(`DropZone ${index} Coordinates:`);
+      // console.log("X: " + rect.left + "px");
+      // console.log("Y: " + rect.top + "px");
+    }
+  }, [index]);
+
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemTypes.LETTER,
     drop: () => ({ name: 'BackgroundLetter' }),
@@ -35,8 +48,8 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
   }), [])
 
   return (
-    <div ref={drop}>
-      <div className="drop-target">
+    <div ref={dropZoneRef}>
+      <div ref={drop} className="drop-target">
           <img src={letters.background_letters[letter]} alt={letter} />
       </div>
       
