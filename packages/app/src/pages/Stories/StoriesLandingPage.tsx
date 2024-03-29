@@ -106,11 +106,14 @@ export const StoriesLandingPage: FC = () => {
                         <h2 className="text-3xl color-english carousel-header-margin">Family and community</h2>
                     )}
 
-                <img 
-                    src={comingSoonBlock}
-                    alt="Coming Soon Image"
-                    className="margin-bottom-5 coming-soon-picture-margin"
-                />
+                    <div className="image-container">
+                        <img 
+                            src={comingSoonBlock}
+                            alt="Coming Soon Image"
+                            className="margin-bottom-5 coming-soon-picture-margin"
+                        />
+                    </div>
+                
                 </div>
 
                

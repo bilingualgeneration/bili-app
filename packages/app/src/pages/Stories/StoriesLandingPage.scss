@@ -7,9 +7,11 @@
         margin-left: 6.5rem;
     }
 
-    .coming-soon-picture-margin{
-        margin-left: 3.1rem;
-        max-width: 90%;
+   
+    .image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; /* Ensures the container takes the full width */
     }
 
     .all-about-me-header {
