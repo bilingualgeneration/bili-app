@@ -1,30 +1,36 @@
+type LetterTuple = [string, string, string];
+
 export class Game {
     private dropZoneLetters: string[] = [];
     public updateDropZoneLetters!: ((letters: string[]) => void);
 
-    public shuffleAndSplitLetters(letters: Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>): [Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>, Array<{ id: string; esIncText: string; esText: string; esIncAudio: string; esAudio: string }>] {
-        // Create a copy of input array to avoid mutating original array
-        const shuffledLetters = [...letters];
-        
+    public shuffleAndSplitLetters(data: { id: string; letter: string; audioUrl: string }[]): [LetterTuple[], LetterTuple[]] {
+        // Create a copy of the input array to avoid mutating the original array
+        const shuffledData = [...data];
+    
         // Use Fisher-Yates/Durstenfeld shuffle algorithm
-        for (let i = shuffledLetters.length - 1; i > 0; i--) {
+        for (let i = shuffledData.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             if (i !== j) {
                 // Swap elements at indices i and j
-                [shuffledLetters[i], shuffledLetters[j]] = [shuffledLetters[j], shuffledLetters[i]];
+                [shuffledData[i], shuffledData[j]] = [shuffledData[j], shuffledData[i]];
             }
         }
-        
+    
         // Calculate the midpoint index to split the array
-        const midpoint = Math.floor(shuffledLetters.length / 2);
-        
+        const midpoint = Math.floor(shuffledData.length / 2);
+    
         // Split the shuffled array into two halves
-        const firstHalf = shuffledLetters.slice(0, midpoint);
-        const secondHalf = shuffledLetters.slice(midpoint);
-        
-        // Return the two halves as a tuple
-        return [firstHalf, secondHalf];
-    }    
+        const firstHalf = shuffledData.slice(0, midpoint);
+        const secondHalf = shuffledData.slice(midpoint);
+    
+        // Return the two halves of data as tuples containing ID, letter, and audio URL
+        const firstHalfData: [string, string, string][] = firstHalf.map(item => [item.id, item.letter, item.audioUrl]);
+        const secondHalfData: [string, string, string][] = secondHalf.map(item => [item.id, item.letter, item.audioUrl]);
+    
+        // Return the two halves of data as tuples
+        return [firstHalfData, secondHalfData];
+    }               
 
     public checkLetterCorrect(droppedLetter: string, expectedLetter: string): boolean {
         // Compare the dropped letter with the expected letter

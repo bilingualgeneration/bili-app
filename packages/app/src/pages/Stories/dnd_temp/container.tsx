@@ -47,22 +47,32 @@ export const Container: FC<{ gameData: any  }> = memo(function Container({ gameD
     const [expectedLetter, setExpectedLetter] = useState<string>('');
     const [isLetterCorrect, setIsLetterCorrect] = useState<boolean>();
 
-    // Split the letters and shuffle them
-    const letterArray = chosenLanguageData.map((letter: any, id: any) => isInclusive ? letter.esIncText : letter.esText);
+    const letterArray = chosenLanguageData.map((letter: any) => isInclusive ? letter.esIncText : letter.esText);
     const correctOrder = letterArray;
 
-    // Shuffle and split letters
-    const [firstHalf, secondHalf] = gameInstance.shuffleAndSplitLetters(
-        letterArray.map((letter, index) => ({
-            id: `id${index}`,
-            esIncText: letter,
-            esText: letter,
-            esIncAudio: '',
-            esAudio: '',
-        }))
-    );
+    const extractedData = chosenLanguageData.map(item => {
+        const letter = isInclusive ? item.esIncText : item.esText;
+        const audioUrl = isInclusive ? item.esIncAudio?.url : item.esAudio?.url;
+    
+        return {
+            id: item.id,
+            letter: letter || '', // Set a default value if letter is undefined
+            audioUrl: audioUrl || '' // Set a default value if audioUrl is undefined
+        };
+    });
 
-    const combinedArray = [...firstHalf, ...secondHalf];
+    // console.log('letter array: ', letterArray);
+    // console.log('extracted data: ', extractedData);
+
+    // Shuffle and split letters
+    const [firstHalf, secondHalf] = gameInstance.shuffleAndSplitLetters(extractedData);
+
+
+    const combinedArray = [...firstHalf, ...secondHalf].map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
+    // console.log('first half: ', firstHalf);
+    // console.log('second half: ', secondHalf);
+    // console.log('combined array: ', combinedArray);
+    
     
     // Generate the initialLetterPlacement state once when chosenLanguageData changes
     useEffect(() => {
@@ -77,36 +87,40 @@ export const Container: FC<{ gameData: any  }> = memo(function Container({ gameD
         // Calculate the total width available for each row
         const totalWidthTop = letterWidth * firstHalf.length;
         const totalWidthBottom = letterWidth * secondHalf.length;
-    
+
         // Calculate the initial left position for each letter in the firstHalf array
         const initialLeftTop = -(totalWidthTop / 2);
         const initialLeftBottom = -(totalWidthBottom / 2);
-    
+
+        // Convert LetterTuple arrays to the desired type
+        const firstHalfData: { id: string; letter: string; audioUrl: string }[] = firstHalf.map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
+        const secondHalfData: { id: string; letter: string; audioUrl: string }[] = secondHalf.map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
+
         // Generate the placement for each letter in the firstHalf array
         const newPlacementTop: LetterMap = {};
-        firstHalf.forEach((letter, index) => {
+        firstHalfData.forEach((item, index) => {
             // Add randomness to the left position (range: -20 to 20 px)
             const left = initialLeftTop + index * letterWidth + Math.random() + 50;
             const top = 210 + (index % 2 === 0 ? 0 : 20); // Shift every other letter down 20px
-            newPlacementTop[letter.id] = { top, left  };
+            newPlacementTop[item.id] = { top, left };
         });
 
         // Generate the placement for each letter in the secondHalf array
         const newPlacementBottom: LetterMap = {};
-        secondHalf.forEach((letter, index) => {
+        secondHalfData.forEach((item, index) => {
             // Add randomness to the left position (range: -20 to 20 px)
             const left = initialLeftBottom + index * letterWidth + Math.random() + 50;
             const top = -250 + (index % 2 === 0 ? 20 : 0); // Shift every other letter up 20px
-            newPlacementBottom[letter.id] = { top, left };
+            newPlacementBottom[item.id] = { top, left };
         });
 
-    
         // Merge the placements for both arrays
         const newPlacement = { ...newPlacementTop, ...newPlacementBottom };
-    
+
         // Update the state with the new placement object
         setInitialLetterPlacement(newPlacement);   
-    }, [chosenLanguageData, isInclusive]); // Run only once when component mounts    
+    }, [chosenLanguageData, isInclusive]);
+    
 
     // Define the moveLetters callback function
     const moveLetters = useCallback(
@@ -222,31 +236,33 @@ export const Container: FC<{ gameData: any  }> = memo(function Container({ gameD
                 <div className='dropzone-container'>
                     {chosenLanguageData.map((letter: any, index: number) => ( 
                         <DropZone
-                            key={index}
+                            key={letter.id} // Use unique ID as key
                             letter={isInclusive ? letter.esIncText : letter.esText}
                             index={index}
                             expectedLetter={letter}
                             dropZoneLetters={dropZoneLetters}
-                            // onDrop={gameInstance.checkLetterCorrect(expectedLetter, droppedLetter)}                            
                         />
                     ))}
                 </div>
+
                 {/* Render draggable letter container */}
                 <div style={styles}>
-                    {Object.keys(initialLetterPlacement).map((key, index) => {
-                        const letter = combinedArray.find((letter) => letter.id === key);
+                    {Object.entries(initialLetterPlacement).map(([id, { top, left }]: [string, { top: number; left: number }], index) => {
+                        const letter = combinedArray.find(item => item.id === id);
                         if (!letter) {
-                            console.error(`No letter found for id "${key}"`);
+                            console.error(`No letter found for id "${id}"`);
                             return null;
                         }
+                        const { letter: letterText, audioUrl } = letter;
                         return (
                             <DraggableLetter
                                 rotation={index % 2 === 0 ? 15 : -15} 
-                                key={key}
-                                id={key}
-                                letter={isInclusive ? letter.esIncText : letter.esText}
-                                audio={{ url: isInclusive ? letter.esIncAudio : letter.esAudio }}
-                                {...initialLetterPlacement[key]}                           
+                                key={id}
+                                id={id}
+                                letter={letterText}
+                                audio={{ url: audioUrl }}
+                                top={top}
+                                left={left}                           
                             />
                         );
                     })}
