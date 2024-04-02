@@ -232,7 +232,7 @@ export const Container: FC<{ gameData: any  }> = memo(function Container({ gameD
 
             {/* Render game section */}
             <div className='game-section' ref={drop}>
-                {/* Render dropzone container */}
+                {/* Render dropzone letters */}
                 <div className='dropzone-container'>
                     {chosenLanguageData.map((letter: any, index: number) => ( 
                         <DropZone
@@ -245,7 +245,7 @@ export const Container: FC<{ gameData: any  }> = memo(function Container({ gameD
                     ))}
                 </div>
 
-                {/* Render draggable letter container */}
+                {/* Render draggable letters */}
                 <div style={styles}>
                     {Object.entries(initialLetterPlacement).map(([id, { top, left }]: [string, { top: number; left: number }], index) => {
                         const letter = combinedArray.find(item => item.id === id);
