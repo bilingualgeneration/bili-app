@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { DragSourceMonitor, useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
@@ -39,13 +39,15 @@ export interface DraggableLetterProps {
     audio?: Audio;
     letter: any;
     rotation: number; // Rotation angle in degrees
+    moveLetters: (id: string, left: number, top: number) => void;
 }
 
 export const DraggableLetter: FC<DraggableLetterProps> = memo(function DraggableLetter(
     props,
 )   {
-    const { id, left, top, audio, letter, rotation } = props
+    const { id, left, top, audio, letter, rotation, moveLetters } = props
     const { addAudio, clearAudio } = useAudioManager();
+    const ref = useRef<HTMLDivElement>(null);
 
     const [{ isDragging }, drag, preview] = useDrag(
         () => ({
