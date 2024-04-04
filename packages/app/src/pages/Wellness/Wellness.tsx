@@ -1,4 +1,3 @@
-
 import { useProfile } from "@/contexts/ProfileContext";
 import { IonText } from "@ionic/react";
 import { FC } from "react";
@@ -58,6 +57,8 @@ const PlayHeader: FC = () => {
     );
   };
 
+
+// todo: change mouse cursor to pointer
   const AffirmationCard: FC = () => {
     const { isImmersive } = useProfile();
     const history = useHistory();
@@ -66,21 +67,17 @@ const PlayHeader: FC = () => {
         id="affirmation-card"
         className="card"
         onClick={() => {
-         // history.push("/intruder-game/intro");
+          history.push("/affirmations/intro");
         }}
       >
-	
-        <div className="content-lock">
-          <Lock />
-        </div>
         <CategoryTag category="affirmation" className="play-category-tag" />
-        <FavoriteButton fid="category-the intruder" />
+        <FavoriteButton fid="category-affirmations" />
         <img src={AffirmationGirl} />
         <IonText>
           <h1 className="text-4xl semibold color-flamenco-lowest">
-          Afirmaciones
+            Afirmaciones
           </h1>
-  
+	  
           {!isImmersive && <p className="text-3xl color-flamenco-lowest">Affirmations</p>}
         </IonText>
       </div>

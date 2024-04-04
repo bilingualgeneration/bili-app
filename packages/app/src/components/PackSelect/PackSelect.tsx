@@ -22,6 +22,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { Carousel } from "@/components/Carousel";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { PlayHeader } from "@/components/PlayHeader";
+import { PackHeader } from '../PackHeader';
 
 interface Card {
   uuid?: string,
@@ -38,6 +39,7 @@ interface props {
   category: string,
   module: string;
   placeholderCards?: Card[];
+  pack_name_field?: string;
 }
 
 export const PackSelect: React.FC<props> = ({
@@ -45,7 +47,8 @@ export const PackSelect: React.FC<props> = ({
   translatedTitle,
   englishTitle,
   category,
-  placeholderCards = []
+  placeholderCards = [],
+  pack_name_field = 'pack_name',
 }) => {
   const firestore = useFirestore();
   const { isInclusive, isImmersive } = useProfile();
@@ -57,10 +60,11 @@ export const PackSelect: React.FC<props> = ({
   }
 
   const cards = data.map((p, index) => {
-    const esTitle = p.pack_name.filter((pn: any) => pn.language === 'es');
-    const esIncTitle = p.pack_name.filter((pn: any) => pn.language === 'es');
+    
+    const esTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es');
+    const esIncTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es-inc');
     const title: string = isInclusive && esIncTitle.length > 0 ? esIncTitle[0].text : esTitle[0].text;
-    const titleEn: string = p.pack_name.filter((pn: any) => pn.language === 'en')[0].text;
+    const titleEn: string = p[pack_name_field].filter((pn: any) => pn.language === 'en')[0].text;
     const fid: string = `${module}/${p.id}`;
     return {
       title,
@@ -74,6 +78,24 @@ export const PackSelect: React.FC<props> = ({
   return <>
     {category == 'play' && <PlayHeader />}
     {category == 'community' && <CommunityHeader />}
+    {category == 'story' && (
+      <>
+        <PackHeader 
+          bannerColor="#006A67"
+          title="Cuentos" 
+          subtitle="Stories"
+          titleClassName="text-5xl color-nube"
+          subtitleClassName="text-3xl color-nube"
+        />
+        <div className="all-about-me-header">
+            <h1 className="text-5xl bold carousel-header-margin">Todo sobre mi </h1>
+            {!isImmersive && (
+            <h2 className="text-3xl color-english carousel-header-margin">All about me</h2>
+            )}
+        </div>
+
+      </>)
+    }
     <div className="background-card">
       <div className="margin-bottom-2">
         <IonText>

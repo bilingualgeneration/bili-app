@@ -4,11 +4,18 @@
 
 #stories-landing-page {
     .carousel-header-margin{
-        margin-left: 30px;
+        margin-left: 6.5rem;
+    }
+
+   
+    .image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; /* Ensures the container takes the full width */
     }
 
     .all-about-me-header {
-        margin-left: 30px;
+        margin-bottom: 30px;
         @media (max-width: 1024px) { /* iPad Mini landscape width */
             margin-top: 3rem; 
         }

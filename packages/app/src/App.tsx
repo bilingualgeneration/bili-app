@@ -21,6 +21,11 @@ import { HeaderFooter } from "@/components/HeaderFooter";
 import { Wellness } from "./pages/Wellness/Wellness";
 import { CountGameLoader } from "./pages/CountWithMe/CountGameLoader";
 import {
+  AffirmationsGame,
+  AffirmationsIntro,
+  AffirmationsSelect,
+} from '@/pages/Affirmations';
+import {
   IntruderSelect,
   IntruderIntro,
   IntruderGame,
@@ -474,6 +479,42 @@ const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#FBF2E2">
                   <TellMeAboutGame />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/affirmations/intro"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <AffirmationsIntro />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  
+          <Route
+            exact
+            path="/affirmations/select"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		  <AffirmationsSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/affirmations/play/:pack_id"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#F7FAF9">
+                  <AffirmationsGame />
                 </HeaderFooter>
               </AuthedLayout>
             )}
