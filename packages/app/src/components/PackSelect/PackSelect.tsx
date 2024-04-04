@@ -33,15 +33,17 @@ interface Card {
 }
 
 interface props {
-  translatedTitle: string,
-  englishTitle: string,
-  category: string,
+  translatedTitle: string;
+  englishTitle: string;
+  category: string;
   module: string;
+  modulePath?: string;
   placeholderCards?: Card[];
 }
 
 export const PackSelect: React.FC<props> = ({
   module,
+  modulePath,
   translatedTitle,
   englishTitle,
   category,
@@ -68,7 +70,7 @@ export const PackSelect: React.FC<props> = ({
       fid,
       category,
       cover: p.cover_image?.url || 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png',
-      link: `/${module}/play/${p.id}`
+      link: `/${modulePath || module}/play/${p.id}`
     };
   });
   return <>

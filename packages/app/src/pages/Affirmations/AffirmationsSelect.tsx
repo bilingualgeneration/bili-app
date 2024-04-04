@@ -15,9 +15,10 @@ export const AffirmationsSelect: React.FC = () => {
 
   // todo - rename affirmation to affirmations-game
   return <PackSelect
-  module='affirmation'
-  category='wellness'
-  translatedTitle='Afirmaciones'
-  englishTitle='Affirmations'
-  placeholderCards={placeholderCards} />;
+	   module='affirmation'
+	   modulePath='affirmations'
+	   category='wellness'
+	   translatedTitle='Afirmaciones'
+	   englishTitle='Affirmations'
+	   placeholderCards={placeholderCards} />;
 };
