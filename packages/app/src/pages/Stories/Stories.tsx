@@ -249,7 +249,7 @@ const TitleCard = ({ data }: any) => {
               </p>
             )}
           </IonText>
-	  <img src={data.cover.url} style={{ width: '100%', marginTop: '2rem'}} />
+	  <img src={data.cover_image.url} style={{ width: '100%', marginTop: '2rem'}} />
         </IonCardContent>
         <div
           className="ion-text-center"
