@@ -43,7 +43,10 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
     <IonCard
       className='drop-shadow'
       style={{
-	aspectRatio: 312 / 516,
+	aspectRatio: 1200 / 1950,
+	backgroundImage: showFront ? `url('${image.url}')` : '',
+	backgroundSize: 'contain',
+	backgroundPosition: 'center center',
 	backgroundColor: showFront ? 'inherit' : '#D6D3F0'
       }}
       onClick={() => {setShowFront(!showFront);}}
@@ -52,11 +55,11 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
     alignSelf: 'stretch',
     height: '100%',
     display: 'flex',
-	flexDirection: 'column',
-	justifyContent: 'space-between'
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }}>
     {showFront && <>
-	<img src={image.url} />
+      <div></div>
 	<IonText>
 	  <h1 className='text-xl semibold color-suelo'>
 	    {text_front_es.text}
@@ -66,14 +69,21 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 	  </p>}
 	</IonText>
     </>}
-    {!showFront && <div className='ion-text-left'>
+    {!showFront && <div className='ion-text-left' style={{height: '100%'}}>
 	<h1 className='text-xl semibold color-suelo'>
 	  ¡Platiquemos!
 	</h1>
 	<h2 className='text-lg color-english'>
 	  Let's Talk!
 	</h2>
-      <div style={{borderBottom: '2px solid black'}} className='margin-top-1 margin-bottom-1'></div>
+	<div style={{
+	  borderTop: '2px solid black',
+	  display: 'flex',
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  flexDirection: 'column',
+	  height: '100%'
+	}} className='margin-top-1 margin-bottom-1'>
       <IonText>
       <h1 className='text-xl semibold color-suelo'>
 	{text_back_es.text}
@@ -82,6 +92,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 	{text_front_en.text}
       </h2>
       </IonText>
+      </div>
     </div>
     }
       </IonCardContent>
@@ -111,7 +122,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   ;
 };
 
-const CARDS_PER_PAGE = 2;
+const CARDS_PER_PAGE = 3;
 
 export const AffirmationsGame: React.FC = () => {
   //@ts-ignore
