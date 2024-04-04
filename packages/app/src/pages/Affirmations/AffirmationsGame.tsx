@@ -43,8 +43,8 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
     <IonCard
       className='drop-shadow'
       style={{
-	backgroundColor: showFront ? 'inherit' : '#D6D3F0',
-	height: '100%'
+	aspectRatio: 312 / 516,
+	backgroundColor: showFront ? 'inherit' : '#D6D3F0'
       }}
       onClick={() => {setShowFront(!showFront);}}
     >
