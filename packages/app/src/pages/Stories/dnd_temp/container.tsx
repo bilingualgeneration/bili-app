@@ -26,6 +26,12 @@ const styles: CSSProperties = {
     zIndex: 1,
 }
 
+interface DropPosition {
+    char: string;
+    x: number;
+    y: number;
+}
+
 interface Audio {
     url: string;
 }
@@ -41,6 +47,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
     const { isInclusive, isImmersive } = useProfile();
     const [chosenLanguageData] = useFirebaseData(gameData);
     const [initialLetterPlacement, setInitialLetterPlacement] = useState<LetterMap>({});
+    const [dropzonePlacement, setDropzonePlacement] = useState<DropPosition[]>([]);
     const [dropZoneLetters, setDropZoneLetters] = useState<string[]>([]);
     const dropzoneRef = useRef<HTMLDivElement>(null);
     const [droppedLetter, setDroppedLetter] = useState<string>('');
@@ -68,7 +75,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         return [...firstHalf, ...secondHalf].map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
     }, [extractedData]);
 
-    // Generate the initialLetterPlacement state once when chosenLanguageData changes
+    // Generate the dropzone placement state once when chosenLanguageData changes
     useEffect(() => {
         // Calculate the width of each letter based on len of word (bigger word = less space)
         let letterWidth = 0;
@@ -77,6 +84,46 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         } else {
             letterWidth = 150;
         };
+
+        const dropzoneLetterWidth = 100;
+
+        const calculateDropPositions = () => {
+            const containerWidth = 1300;
+            const containerHeight = 700;
+            const desiredSpacing = 5;
+            const dropzoneLetterWidth = 100;
+        
+            // Calculate total width of all characters and spacing
+            const totalWidthCharacters = dropzoneLetterWidth * letterArray.length;
+            const totalWidthSpacing = desiredSpacing * (letterArray.length - 1);
+            const totalWidth = totalWidthCharacters + totalWidthSpacing;
+        
+            // Calculate starting X position to center the characters
+            const startX = (containerWidth - totalWidth) / 2;
+            const startY = (containerHeight - 154) / 2; // Center vertically with respect to letter height
+        
+            const positions: DropPosition[] = [];
+            let currentX = startX;
+        
+            // Loop through each character and position it accordingly
+            for (let i = 0; i < letterArray.length; i++) {
+                let currentLetterWidth = dropzoneLetterWidth;
+        
+                // Adjust the position of 'i' to make it more centered based on width
+                if (letterArray[i] === 'i') {
+                    currentLetterWidth = 37; // Width of the 'i' character
+                }
+        
+                const adjustment = (dropzoneLetterWidth - currentLetterWidth) / 2;
+        
+                positions.push({ char: letterArray[i], x: currentX + adjustment, y: startY });
+                currentX += dropzoneLetterWidth + desiredSpacing;
+            }
+        
+            return positions;
+        }
+
+        setDropzonePlacement(calculateDropPositions())
         
         // Calculate the total width available for each row
         const totalWidthTop = letterWidth * firstHalf.length;
@@ -85,7 +132,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         // Calculate the initial left position for each letter in the firstHalf array
         const initialLeftTop = -(totalWidthTop / 2);
         const initialLeftBottom = -(totalWidthBottom / 2);
-
+        
         // Convert LetterTuple arrays to the desired type
         const firstHalfData: { id: string; letter: string; audioUrl: string }[] = firstHalf.map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
         const secondHalfData: { id: string; letter: string; audioUrl: string }[] = secondHalf.map(([id, letter, audioUrl]) => ({ id, letter, audioUrl }));
@@ -95,7 +142,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         firstHalfData.forEach((item, index) => {
             // Add randomness to the left position (range: -20 to 20 px)
             const left = initialLeftTop + index * letterWidth + Math.random() + 50;
-            const top = 210 + (index % 2 === 0 ? 0 : 20); // Shift every other letter down 20px
+            const top = 170 + (index % 2 === 0 ? 0 : 20); // Shift every other letter down 20px
             newPlacementTop[item.id] = { top, left };
         });
 
@@ -104,7 +151,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         secondHalfData.forEach((item, index) => {
             // Add randomness to the left position (range: -20 to 20 px)
             const left = initialLeftBottom + index * letterWidth + Math.random() + 50;
-            const top = -250 + (index % 2 === 0 ? 20 : 0); // Shift every other letter up 20px
+            const top = -330 + (index % 2 === 0 ? 20 : 0); // Shift every other letter up 20px
             newPlacementBottom[item.id] = { top, left };
         });
 
@@ -167,23 +214,24 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
             </div>
 
             {/* Render game section */}
-            <div className='game-section'>
+            <div style={styles}>
                 {/* Render dropzone letters */}
-                <div className='dropzone-container'>
-                    {chosenLanguageData.map((letter: any, index: number) => (
+                <div>
+                    {dropzonePlacement.map(({ char, x, y }, index) => (
                         <DropZone
-                            key={letter.id}
-                            letter={isInclusive ? letter.esIncText : letter.esText}
+                            key={index}
+                            letter={char}
                             index={index}
-                            expectedLetter={letter}
+                            expectedLetter={char}
                             dropZoneLetters={dropZoneLetters}
                             onDropChange={(letter) => handleDrop(letter)}
+                            position={{ x, y }}
                         />
                     ))}
-                </div>
+                </div>  
 
                 {/* Render draggable letters */}
-                <div style={styles}>
+                <div >
                     {Object.entries(initialLetterPlacement).map(([id, { top, left }]: [string, { top: number; left: number }], index) => {
                         const letter = combinedArray.find(item => item.id === id);
                         if (!letter) {
@@ -204,7 +252,7 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                             />
                         );
                     })}
-                </div>
+                </div>       
             </div>
         </div>
     );

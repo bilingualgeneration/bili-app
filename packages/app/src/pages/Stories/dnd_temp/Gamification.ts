@@ -1,5 +1,15 @@
 type LetterTuple = [string, string, string];
 
+type CharPosition = {
+    char: string;
+    x: number;
+    y: number;
+};
+  
+  type DraggableLetter = CharPosition & {
+    id: string;
+};
+
 export class Game {
     private dropZoneLetters: string[] = [];
     public updateDropZoneLetters!: ((letters: string[]) => void);
@@ -36,22 +46,25 @@ export class Game {
     public checkLetterCorrect(droppedLetter: string, expectedLetter: string): boolean {
         // Compare the dropped letter with the expected letter
         return droppedLetter === expectedLetter;
-    }
+    }  
 
-    public handleDrop(dropIndex: number, item: { id: string; letter: string }): void {
-        // Handle the drop event here
-        const { id, letter } = item;
+    // public calculateCharPositionsAndLetters(word: string): { charPositions: CharPosition[], draggableLetters: DraggableLetter[] } {
+    //     const containerWidth = 1300;
+    //     const containerHeight = 700;
+    //     const spaceBetweenChars = 5; // Gap between characters in pixels
         
-        // Check if the dropped letter matches the expected letter
-        const expectedLetter = ''; // Get the expected letter
-        const isCorrect = this.checkLetterCorrect(letter, expectedLetter);
+    //     const totalLetterWidth = letterWidth * letterArray.length;
+    //     const startX = (containerWidth - totalLetterWidth - (spaceBetweenChars * (letterArray.length - 1))) / 2;
+    //     const startY = containerHeight / 2; // Center vertically
+    
+    //     const positions: DropPosition[] = [];
+    //     let currentX = startX;
+    
+    //     for (let i = 0; i < letterArray.length; i++) {
+    //         positions.push({ char: letterArray[i], x: currentX, y: startY });
+    //         currentX += letterWidth + spaceBetweenChars;
+    //     }
         
-        if (!this.dropZoneLetters[dropIndex] || this.dropZoneLetters[dropIndex] === letter) {
-            // Replace the drop zone letter with the draggable letter
-            this.dropZoneLetters[dropIndex] = letter;
-            // Now can implement any UI update or state management as needed
-            // For example, if using React, can update state to trigger re-renders
-            this.updateDropZoneLetters([...this.dropZoneLetters]);
-        }
-    }    
+    //     return positions;
+    // }
 }
