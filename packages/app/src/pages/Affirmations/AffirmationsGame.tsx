@@ -25,6 +25,16 @@ interface AffirmationsCardProps {
   text_front: any
 }
 
+/*
+interface MultilingualTextAndAudio {
+  language: 'en' | 'en-inc' | 'es' | 'es-inc',
+  text: string
+  audio: any
+}
+*/
+
+type MultilingualTextAndAudio = any;
+
 const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   image,
   text_back,
@@ -33,12 +43,12 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   const { isImmersive } = useProfile();
   const {addAudio} = useAudioManager();
   const [showFront, setShowFront] = useState<boolean>(true);
-  const text_back_es = text_back.filter((t) => t.language === 'es')[0];
-  const text_back_es_inc = text_back.filter((t) => t.language === 'es-inc')[0];
-  const text_back_en = text_back.filter((t) => t.language === 'en')[0];
-  const text_front_es = text_front.filter((t) => t.language === 'es')[0];
-  const text_front_es_inc = text_front.filter((t) => t.language === 'es-inc')[0];
-  const text_front_en = text_front.filter((t) => t.language === 'en')[0];
+  const text_back_es = text_back.filter((t: MultilingualTextAndAudio) => t.language === 'es')[0];
+  const text_back_es_inc = text_back.filter((t: MultilingualTextAndAudio) => t.language === 'es-inc')[0];
+  const text_back_en = text_back.filter((t: MultilingualTextAndAudio) => t.language === 'en')[0];
+  const text_front_es = text_front.filter((t: MultilingualTextAndAudio) => t.language === 'es')[0];
+  const text_front_es_inc = text_front.filter((t: MultilingualTextAndAudio) => t.language === 'es-inc')[0];
+  const text_front_en = text_front.filter((t: MultilingualTextAndAudio) => t.language === 'en')[0];
   return <>
     <IonCard
       className='drop-shadow'
@@ -163,7 +173,7 @@ export const AffirmationsGame: React.FC = () => {
 	    }}
 	    src={backward} />
 	</IonCol>
-	{data.cards.slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE).map((c) => <IonCol key={c.id}>
+	{data.cards.slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE).map((c: any) => <IonCol key={c.id}>
 	  <AffirmationsCard image={c.image} text_back={c.text_back} text_front={c.text_front} />
 	</IonCol>)}
 	<IonCol size='auto' style={{display: 'flex'}}>
