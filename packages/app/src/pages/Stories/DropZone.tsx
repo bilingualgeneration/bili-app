@@ -21,12 +21,10 @@ interface DropZoneProps {
     left?: number;
     expectedLetter?: string;
     dropZoneLetters: string[];
-    onDropChange: (letter: string) => void;
+    onDrop: (letter: string) => void;
+    onDropChange?: (letter: string) => void;
     position: {x: number, y: number};
 }
-
-// instance of Game class
-const gameInstance = new Game();
 
 export const DropZone: FC<DropZoneProps> = memo(function DropZone({
   index,
@@ -35,33 +33,44 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
   left,
   expectedLetter,
   dropZoneLetters,
+  onDrop,
   onDropChange,
   position,
 }) {
-  const dropZoneRef = useRef<HTMLDivElement>(null);
-
   const { x, y } = position;
-  console.log(`dropzone x: ${x}, y: ${y} `)
+  // console.log(`dropzone x: ${x}, y: ${y} `)
 
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemTypes.LETTER,
     drop: (item: DragItem, monitor: DropTargetMonitor) => {
-        const delta = monitor.getDifferenceFromInitialOffset() as {
-            x: number;
-            y: number;
-        };
-        const left = Math.round(item.left + delta.x);
-        const top = Math.round(item.top + delta.y);
-        onDropChange(item.letter);
+      const delta = monitor.getDifferenceFromInitialOffset() as {
+          x: number;
+          y: number;
+      };
+
+      const droppedLetter = item.letter;
+      const gridSize = 1300;
+      
+      if (droppedLetter === expectedLetter) {
+        // Calculate snapped position based on grid size
+        const snappedX = Math.round((item.left + delta.x - x) / gridSize) * gridSize + x;
+        const snappedY = Math.round((item.top + delta.y - y) / gridSize) * gridSize + y;
+        console.log('correct drop!')
+
+        // Update position of dropped letter
+        onDrop(expectedLetter);
+      } else {
+        console.log('incorrect')
+      }
     },
     collect: (monitor: DropTargetMonitor) => ({
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
     }),
-  }), [onDropChange]);
+  }), [onDrop, expectedLetter, x, y]);
 
   return (
-    <div ref={dropZoneRef}>
+    <div>
         <div ref={drop} style={{ ...styles, left: x, top: y }} className="drop-target">
           <img className="dropzone-letter" src={letters.background_letters[letter]} alt={letter} />
         </div>

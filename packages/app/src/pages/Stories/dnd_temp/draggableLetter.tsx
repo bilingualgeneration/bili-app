@@ -22,7 +22,7 @@ function getStyles(
         transform: finalTransform,
         WebkitTransform: finalTransform,
         // IE fallback: hide the real node using CSS when dragging
-        // because IE will ignore our custom "empty image" drag preview.
+        // because IE will ignore "empty image" drag preview.
         opacity: isDragging ? 0 : 1,
         height: isDragging ? 0 : '',
     }
@@ -39,15 +39,13 @@ export interface DraggableLetterProps {
     audio?: Audio;
     letter: any;
     rotation: number; // Rotation angle in degrees
-    moveLetters: (id: string, left: number, top: number) => void;
 }
 
 export const DraggableLetter: FC<DraggableLetterProps> = memo(function DraggableLetter(
     props,
 )   {
-    const { id, left, top, audio, letter, rotation, moveLetters } = props
+    const { id, left, top, audio, letter, rotation } = props
     const { addAudio, clearAudio } = useAudioManager();
-    const ref = useRef<HTMLDivElement>(null);
 
     const [{ isDragging }, drag, preview] = useDrag(
         () => ({

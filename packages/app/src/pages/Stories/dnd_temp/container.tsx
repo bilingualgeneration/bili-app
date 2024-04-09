@@ -162,27 +162,8 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
         setInitialLetterPlacement(newPlacement);
     }, [chosenLanguageData, isInclusive]);
 
-    // Define the moveLetters callback function
-    const moveLetters = useCallback(
-        (id: string, left: number, top: number) => {
-            if (!(id in initialLetterPlacement)) {
-                console.error(`Invalid id "${id}" provided to moveLetters.`);
-                return;
-            }
-            // Update the state using immutability-helper's $merge
-            setInitialLetterPlacement(
-                update(initialLetterPlacement, {
-                    [id]: {
-                        $merge: { left, top },
-                    },
-                }),
-            );
-        },
-        [initialLetterPlacement],
-    );
-
     // Drop handler for DropZone
-    const handleDrop = (letter: string) => {
+    const handleSuccessDrop = (letter: string, left: number, top: number) => {
         setExpectedLetter(letter);
     };
 
@@ -224,8 +205,9 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                             index={index}
                             expectedLetter={char}
                             dropZoneLetters={dropZoneLetters}
-                            onDropChange={(letter) => handleDrop(letter)}
-                            position={{ x, y }}
+                            // onSuccessDrop={handleSuccessDrop}
+                            position={{ x, y }} 
+                            onDrop={char}                        
                         />
                     ))}
                 </div>  
@@ -248,7 +230,6 @@ export const Container: FC<{ gameData: any }> = memo(function Container({ gameDa
                                 audio={{ url: audioUrl }}
                                 top={top}
                                 left={left}
-                                moveLetters={moveLetters}
                             />
                         );
                     })}
