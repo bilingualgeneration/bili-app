@@ -55,9 +55,8 @@ export const Community: FC = () => {
         description: "title for tell me about",
       }),
       title: "Tell me about...",
-      link: "/tell-me-about",
+      link: "/tell-me-about-game/intro",
       image: nuriah,
-      locked: true,
     },
     {
       translatedTitle: intl.formatMessage({

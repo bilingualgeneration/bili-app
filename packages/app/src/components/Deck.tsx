@@ -4,7 +4,7 @@
   however react-springs not getting this css styling
 */
 
-const MAX_CARDS_SHOWN = 1;
+const MAX_CARDS_SHOWN = 3;
 
 
 import React, { FC, useEffect, useState } from "react";
@@ -20,7 +20,7 @@ import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton, IonText } from "@ionic/react";
 
-import styles from "./styles.module.scss";
+import styles from "./Deck.module.scss";
 
 interface CardAudio {
   url: string;
@@ -81,13 +81,14 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
     addAudio(audios);
   };
 
-  const [props, api] = useSprings(cards.length, (i) => {
+  const [props, api] = useSprings(cards.length, (j) => {
+    const i = Math.min(j, MAX_CARDS_SHOWN);
     return {
       x: -2 - i * 5, // Initialize x position of each card
       y: 10 - i * 10, // Initialize y position of each card
       scale: 1, // Initialize scale of each card
       rot: 0, // Initialize rotation angle of each card
-      zIndex: cards.length - i, // Initialize zIndex of each card
+      zIndex: cards.length - j, // Initialize zIndex of each card
       delay: i * 100, // Delay before starting the animation
     };
   });
@@ -112,22 +113,22 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
             // console.log(`This is the swiped card index: ${swiped_card_index}`);
             if (i === swiped_card_index) {
               return {
-                x: -2 - (cards.length - 1) * 5,
-                y: 10 - (cards.length - 1) * 10,
+                x: -2 - Math.min((cards.length - 1), MAX_CARDS_SHOWN) * 5,
+                y: 10 - Math.min((cards.length - 1), MAX_CARDS_SHOWN) * 10,
                 scale: 1,
                 rot: 0,
                 zIndex: 0,
                 delay: 0,
               };
             } else {
-              const distance =
-                (i - (swiped_card_index + 1) + cards.length) % cards.length; // calculates the distance between the current card (i) and the swiped card (index)
+	      const d = (i - (swiped_card_index + 1) + cards.length) % cards.length;
+              const distance = Math.min(MAX_CARDS_SHOWN, d); // calculates the distance between the current card (i) and the swiped card (index)
               return {
                 x: -2 - distance * 5,
                 y: 10 - distance * 10,
                 scale: 1,
                 rot: 0,
-                zIndex: cards.length - distance - 1,
+                zIndex: cards.length - d - 1,
                 delay: distance * 100,
               };
             }
@@ -221,7 +222,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
                 transform: interpolate(
                   [rot, x],
                   (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
-                ),
+                )
               }}
             >
               <div className={styles.card_content}>

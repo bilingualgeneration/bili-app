@@ -64,8 +64,11 @@ import { StoryFactoryPage4 } from "@/pages/StoryFactory/StoryFactoryPg4";
 import { StoriesLandingPage } from "@/pages/Stories";
 import { StudentDashboard } from "@/pages/StudentDashboard";
 import TeacherLogin from "@/pages/TeacherLogin";
-import { TellMeAboutIntro } from "@/pages/TellMeAbout/TellMeAboutIntro";
-import { TellMeAboutGame } from "@/pages/TellMeAbout/TellMeAboutGame";
+import {
+  TellMeAboutGame,
+  TellMeAboutIntro,
+  TellMeAboutSelect,
+} from "@/pages/TellMeAbout";
 import UnauthedLayout from "@/layouts/Unauthed";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { I18nWrapper } from "@/components/I18nWrapper";
@@ -101,8 +104,6 @@ import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { TellMeAboutSelect } from "./pages/TellMeAbout";
-
 
 
 setupIonicReact();
