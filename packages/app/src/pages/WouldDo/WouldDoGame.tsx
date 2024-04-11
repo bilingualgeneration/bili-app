@@ -4,7 +4,7 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { useParams } from "react-router-dom";
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc } from "firebase/firestore";
-import { Deck } from "./Deck";
+import { Deck } from "@/components//Deck";
 import "@/pages/Intruder/Intruder.scss";
 
 import styles from "./styles.module.css";
