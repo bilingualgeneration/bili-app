@@ -180,7 +180,7 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           if (isImmersive && isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-2xl semibold`}>
+                <h1 className={`${styles.es} text-3xl semibold`}>
                   {esIncText}
                 </h1>
               </>
@@ -188,13 +188,13 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           } else if (isImmersive && !isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-2xl semibold`}>{esText}</h1>
+                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
               </>
             );
           } else if (!isImmersive && isInclusive) {
             content = (
               <>
-                <h1 className={`${styles.es} text-2xl semibold`}>
+                <h1 className={`${styles.es} text-3xl semibold`}>
                   {esIncText}
                 </h1>
                 <p className="text-lg color-english">{enText}</p>

@@ -166,7 +166,7 @@ const communityCards = [
     title: "Cuéntame Sobre...",
     titleEn: "Tell me about...",
     cover: "/assets/img/card_community_image.png",
-    isLocked: true,
+    link: "/tell-me-about-game/intro"
   },
   {
     category: "community",

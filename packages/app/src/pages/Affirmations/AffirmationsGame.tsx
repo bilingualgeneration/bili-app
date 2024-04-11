@@ -26,12 +26,12 @@ interface AffirmationsCardProps {
 }
 
 /*
-interface MultilingualTextAndAudio {
-  language: 'en' | 'en-inc' | 'es' | 'es-inc',
-  text: string
-  audio: any
-}
-*/
+   interface MultilingualTextAndAudio {
+   language: 'en' | 'en-inc' | 'es' | 'es-inc',
+   text: string
+   audio: any
+   }
+ */
 
 type MultilingualTextAndAudio = any;
 
@@ -51,7 +51,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   const text_front_en = text_front.filter((t: MultilingualTextAndAudio) => t.language === 'en')[0];
   return <>
     <IonCard
-      className='drop-shadow'
+      className='drop-shadow ion-no-padding'
       style={{
 	aspectRatio: 1200 / 1950,
 	backgroundImage: showFront ? `url('${image.url}')` : '',
@@ -61,74 +61,80 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
       }}
       onClick={() => {setShowFront(!showFront);}}
     >
-  <IonCardContent className='ion-text-center' style={{
-    alignSelf: 'stretch',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  }}>
-    {showFront && <>
-      <div></div>
-	<IonText>
+      <IonCardContent className='ion-text-center' style={{
+	alignSelf: 'stretch',
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'space-between'
+      }}>
+	{showFront && <>
+	  <div></div>
+	  <IonText>
+	    <h1 className='text-xl semibold color-suelo'>
+	      {text_front_es.text}
+	    </h1>
+	    {!isImmersive && <p className='text-lg color-english'>
+	      {text_front_en.text}
+	    </p>}
+	  </IonText>
+	</>}
+	{!showFront && <div className='ion-text-left' style={{height: '100%'}}>
 	  <h1 className='text-xl semibold color-suelo'>
-	    {text_front_es.text}
+	    ¡Platiquemos!
 	  </h1>
-	  {!isImmersive && <p className='text-lg color-english'>
-	    {text_front_en.text}
-	  </p>}
-	</IonText>
-    </>}
-    {!showFront && <div className='ion-text-left' style={{height: '100%'}}>
-	<h1 className='text-xl semibold color-suelo'>
-	  ¡Platiquemos!
-	</h1>
-	<h2 className='text-lg color-english'>
-	  Let's Talk!
-	</h2>
-	<div style={{
-	  borderTop: '2px solid black',
-	  display: 'flex',
-	  justifyContent: 'center',
-	  alignItems: 'center',
-	  flexDirection: 'column',
-	  height: '100%'
-	}} className='margin-top-1 margin-bottom-1'>
-      <IonText>
-      <h1 className='text-xl semibold color-suelo'>
-	{text_back_es.text}
-      </h1>
-      <h2 className='text-lg color-english'>
-	{text_front_en.text}
-      </h2>
-      </IonText>
-      </div>
-    </div>
-    }
-      </IonCardContent>
-  </IonCard>
-  	  <div className='ion-text-center margin-top-3'>
-	  <IonButton
-	    style={{'--background': '#FFD8E8'}}
-	    onClick={() => {
-	      const audios = [];
-	      if(showFront){
-		audios.push(text_front_es.audio.url);
-		if(!isImmersive){
-		  audios.push(text_front_en.audio.url);
-		}
-	      }else{
-		audios.push(text_back_es.audio.url);
-		if(!isImmersive){
-		  audios.push(text_back_en.audio.url);
-		}
-	      }
-	      addAudio(audios);
-	    }}>
-	    <img src={volumeButton} />
-	  </IonButton>
+	  <h2 className='text-lg color-english'>
+	    Let's Talk!
+	  </h2>
+	  <div style={{
+	    borderTop: '2px solid black',
+	    display: 'flex',
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    flexDirection: 'column',
+	    height: '100%'
+	  }} className='margin-top-1 margin-bottom-1'>
+	    <IonText>
+	      <p className='text-xl semibold color-suelo'>
+		{text_back_es.text}
+	      </p>
+	      <p className='text-lg color-english margin-top-1'>
+		{text_back_en.text}
+	      </p>
+	    </IonText>
 	  </div>
-</>
+	</div>
+	}
+      </IonCardContent>
+    </IonCard>
+    <div className='ion-text-center margin-top-3'>
+      <IonButton
+	style={{
+	  '--background': '#FFD8E8',
+	  height: 50,
+	  width: 50,
+	  fontSize: '10pt'
+	}}
+	size='small'
+	onClick={() => {
+	  const audios = [];
+	  if(showFront){
+	    audios.push(text_front_es.audio.url);
+	    if(!isImmersive){
+	      audios.push(text_front_en.audio.url);
+	    }
+	  }else{
+	    audios.push(text_back_es.audio.url);
+	    if(!isImmersive){
+	      audios.push(text_back_en.audio.url);
+	    }
+	  }
+	  addAudio(audios);
+	}}>
+	<img src={volumeButton} />
+      </IonButton>
+    </div>
+  </>
   ;
 };
 
@@ -138,7 +144,7 @@ export const AffirmationsGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   const firestore = useFirestore();
-  const [page, setPage] = useState<number>(0);
+  const [cardIndex, setCardIndex] = useState<number>(0);
   
   //Firestore operations
   const ref = doc(firestore, "affirmation", pack_id);
@@ -154,8 +160,8 @@ export const AffirmationsGame: React.FC = () => {
     return <></>;
   }
 
-  const canBackward = page > 0;
-  const canForward = page * CARDS_PER_PAGE + CARDS_PER_PAGE < data.cards.length;
+  const canBackward = cardIndex > 0;
+  const canForward = cardIndex + CARDS_PER_PAGE < data.cards.length;
   
   return <>
     <IonGrid>
@@ -168,12 +174,12 @@ export const AffirmationsGame: React.FC = () => {
 	    }}
 	    onClick={() => {
 	      if(canBackward){
-		setPage(page - 1);
+		setCardIndex(Math.max(0, cardIndex - CARDS_PER_PAGE));
 	      }
 	    }}
 	    src={backward} />
 	</IonCol>
-	{data.cards.slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE).map((c: any) => <IonCol key={c.id}>
+	{data.cards.slice(cardIndex, cardIndex + CARDS_PER_PAGE).map((c: any) => <IonCol key={c.id}>
 	  <AffirmationsCard image={c.image} text_back={c.text_back} text_front={c.text_front} />
 	</IonCol>)}
 	<IonCol size='auto' style={{display: 'flex'}}>
@@ -184,7 +190,7 @@ export const AffirmationsGame: React.FC = () => {
 	    }}
 	    onClick={() => {
 	      if(canForward){
-		setPage(page + 1);
+		setCardIndex(Math.min(data.cards.length - CARDS_PER_PAGE, cardIndex + CARDS_PER_PAGE));
 	      }
 	    }}
 	    src={forward} />
