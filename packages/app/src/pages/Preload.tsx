@@ -3,8 +3,6 @@ import { IonSpinner } from "@ionic/react";
 import { Redirect } from "react-router";
 import {useProfile} from '@/hooks/Profile';
 
-//import { useSigninCheck } from "reactfire";
-
 export const Preload: React.FC = () => {
   const {
     isLoading,

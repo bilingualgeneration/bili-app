@@ -1,7 +1,4 @@
 import {useProfile} from '@/hooks/Profile';
-
-
-//import { useAuth } from "reactfire";
 import { IonButton, IonIcon, IonItem, IonLabel, IonList } from "@ionic/react";
 import {
   arrowBackOutline,
