@@ -13,7 +13,7 @@ import './LanguageToggle.css';
 type LanguageToggleState = any;
 type Language = 'en' | 'esen' | 'es';
 interface LanguageToggleProviderProps {
-  allowedLanguages: Language[]
+  allowedLanguages?: Language[]
 }
 
 const LanguageToggleContext = createContext<LanguageToggleState>({} as LanguageToggleState);

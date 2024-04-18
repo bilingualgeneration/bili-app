@@ -6,7 +6,7 @@ import {
 import '@/theme/style-classes.css';
 import '@/theme/text-classes.scss';
 
-const meta: Meta<typeof Input> = {
+const meta: Meta<typeof LanguageToggle> = {
   argTypes: {
     control: {
       table: {
@@ -32,7 +32,7 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof LanguageToggle>;
 
 export const Default: Story = {
   args: {
