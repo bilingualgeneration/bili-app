@@ -21,7 +21,7 @@ const LanguageToggleContext = createContext<LanguageToggleState>({} as LanguageT
 export const useLanguageToggle = () => useContext(LanguageToggleContext);
 
 export const LanguageToggleProvider: React.FC<React.PropsWithChildren<LanguageToggleProviderProps>> = ({
-  allowedLanguages = ['en', 'es', 'en'],
+  allowedLanguages = ['en', 'es', 'esen'],
   children
 }) => {
   const [language, setLanguage] = useState<Language>(allowedLanguages[0]);
@@ -44,7 +44,8 @@ export const LanguageToggle: React.FC = () => {
   } = useLanguageToggle();
   const [pressed, setPressed] = useState<boolean>(false);
   return <div
-	   className={classnames('drop-shadow', 'language-toggle', language, {pressed})}
+	   className={classnames('drop-shadow', 'language-toggle',
+				 language, {pressed})}
 	   onMouseDown={() => {
 	     setPressed(true);
 	   }}
@@ -52,7 +53,10 @@ export const LanguageToggle: React.FC = () => {
 	     setPressed(false);
 	     cycleLanguage();
 	   }}>
-    <div className={classnames('language-toggle-inner')}>
+    <div className={classnames('language-toggle-inner',
+				 'text-2xl',
+				 'semibold',
+    )}>
       {language === 'esen' ? <>es<br />en</>: language}
     </div>
   </div>;

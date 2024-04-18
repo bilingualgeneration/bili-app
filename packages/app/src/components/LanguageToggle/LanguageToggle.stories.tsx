@@ -4,6 +4,7 @@ import {
   LanguageToggleProvider
 } from "./LanguageToggle";
 import '@/theme/style-classes.css';
+import '@/theme/text-classes.scss';
 
 const meta: Meta<typeof Input> = {
   argTypes: {
