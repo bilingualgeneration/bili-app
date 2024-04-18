@@ -1,4 +1,3 @@
-import React from "react";
 import { IonCard } from "@ionic/react";
 import { IonIcon } from "@ionic/react";
 import {
@@ -7,7 +6,7 @@ import {
   lockClosedOutline,
 } from "ionicons/icons";
 import { MessageFormatElement } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import "./sf_SlotMachineGame.css";
 import { useHistory } from "react-router-dom";
 
@@ -28,7 +27,7 @@ export const JuegoCard: React.FC<JuegoCardProps> = ({
   showOverlay = true,
   storyId,
 }) => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const history = useHistory();
 
   // conditionally make card clickable

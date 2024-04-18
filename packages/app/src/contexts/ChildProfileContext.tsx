@@ -35,16 +35,28 @@ export const ChildProfileContextProvider = ({
   if (status === "loading" || activeChildProfile === undefined) {
     return <></>;
   }
+  const profile = {
+    completionPoints: 100,
+    name: 'abc'
+  };
+  
   return (
     <>
       <ChildProfileContext.Provider
         value={
-          // @ts-ignore: todo fix
+        // @ts-ignore: todo fix
+	/*
           {
             childProfiles: data.map((d: any) => ({ uid: d.NO_ID_FIELD, ...d })),
             activeChildProfile,
             setActiveChildProfile,
           }
+	 */
+	{
+	  childProfiles: [profile],
+	  activeChildProfile: 0,
+	  setActiveChildProfile,
+	}
         }
       >
         {children}

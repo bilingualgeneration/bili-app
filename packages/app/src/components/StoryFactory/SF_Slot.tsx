@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { IonIcon } from "@ionic/react";
 import { volumeMedium } from "ionicons/icons";
@@ -8,7 +8,7 @@ import polygonDown from "@/assets/icons/polygon_down.svg";
 import { FormattedMessage } from "react-intl";
 import "@/pages/StoryFactory/StoryFactory.css";
 
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 interface SF_SlotProps {
   es: string;
@@ -31,7 +31,7 @@ export const SF_Slot: React.FC<SF_SlotProps> = ({
   colorOptionsArrows,
   colorOptionsOvals,
 }) => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive }} = useProfile();
 
   // Extract arrow colors and oval color from the arrays
   const arrowColor = colorOptionsArrows[position];

@@ -320,7 +320,9 @@ export const Overview: React.FC = ({}) => {
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow className="margin-bottom-3">
-              {childProfiles.map((p: any, index: number) => (
+              {
+		/*
+		childProfiles.map((p: any, index: number) => (
                 <IonCol
                   className="ion-no-padding"
                   size="6"
@@ -337,7 +339,9 @@ export const Overview: React.FC = ({}) => {
                     name={p.name}
                   />
                 </IonCol>
-              ))}
+		))
+		*/
+	      }
             </IonRow>
           </div>
 

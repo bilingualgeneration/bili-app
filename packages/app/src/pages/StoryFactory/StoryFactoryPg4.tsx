@@ -1,13 +1,15 @@
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
 import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from '@/contexts/AudioManagerContext';
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { useParams } from "react-router-dom";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc
+} from '@/hooks/FirestoreDoc';
 import "./StoryFactory.scss";
 
 const AWS_BUCKET =
@@ -72,14 +74,18 @@ const generateSVG = (color: string, direction: string) => {
   }
 };
 
-export const StoryFactoryPage4: FC = () => {
-  const { isImmersive } = useProfile();
-  const {addAudio, clearAudio} = useAudioManager();
+export const StoryFactoryPage4: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  const firestore = useFirestore();
-  const ref = doc(firestore, "story-factory-game", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  return <FirestoreDocProvider collection='story-factory-game' id={pack_id}>
+    <StoryFactoryHydratedGame />
+  </FirestoreDocProvider>;
+};
+
+const StoryFactoryHydratedGame: React.FC = () => {
+  const { profile: {isImmersive} } = useProfile();
+  const {addAudio, clearAudio} = useAudioManager();
+  const { status, data } = useFirestoreDoc();
   const [words, setWords] = useState<any[][]>([]);
   const [lastSentence, setLastSentence] = useState<string>("");
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
@@ -91,7 +97,8 @@ export const StoryFactoryPage4: FC = () => {
     };
   }, []);
   useEffect(() => {
-    if (data !== undefined) {
+    if (data !== undefined
+	&& data !== null) {
       setWords([
         shuffleArray(
           data.word_group.filter((word: any) => word.position === 1),
@@ -149,6 +156,14 @@ export const StoryFactoryPage4: FC = () => {
     );
   }
 
+  if(status === 'loading'){
+    return <>loading</>;
+  }
+
+  if(status === 'error'){
+    return <>error</>;
+  }
+  
   // implied else
   return (
     <>

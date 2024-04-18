@@ -1,5 +1,6 @@
+import {auth} from '@/components/Firebase';
 import { createContext, PropsWithChildren, useContext, useState } from "react";
-import { useAuth, useFunctions } from "reactfire";
+import { useFunctions } from "reactfire";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
@@ -21,7 +22,6 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
   const [page, setPage] = useState<string[]>(["roleSelect"]);
   const [signUpStatus, setSignUpStatus] = useState("idle");
   const { locale } = useLanguage();
-  const auth = useAuth();
   const functions = useFunctions();
   const signupFunction = httpsCallable(functions, "user-signup");
   const signUp = async () => {

@@ -11,10 +11,12 @@ import {
 import {StoriesCongrats} from './StoriesCongrats';
 import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc
+} from '@/hooks/FirestoreDoc';
 import { useParams } from "react-router";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { useEffect, useState } from "react";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
@@ -34,11 +36,32 @@ const getLang = (lang: string, data: any) => {
 };
 
 export const Stories = () => {
-  return (
-    <StoryProvider>
-      <StoryLoader />
-    </StoryProvider>
-  );
+  // @ts-ignore
+  const { uuid } = useParams();
+  
+  return <FirestoreDocProvider collection='story' id={uuid}>
+    <StoriesHydrated />
+    </FirestoreDocProvider>;
+};
+
+const StoriesHydrated: React.FC = () => {
+  const {status, data} = useFirestoreDoc();
+  switch(status){
+    case 'loading':
+      return <>loading</>;
+      break;
+    case 'error':
+      return <>error</>;
+      break;
+    case 'ready':
+      return <StoryProvider>
+	<StoryLoader />
+      </StoryProvider>;
+      break;
+    default:
+      return <>default case</>;
+      break;
+  }
 };
 
 export const StoryLoader = () => {
@@ -59,11 +82,8 @@ export const StoryLoader = () => {
     ready,
     setReady,
   } = useStory();
-  const firestore = useFirestore();
-  //Firestore operations
-  const ref = doc(firestore, "story", uuid);
-  const { status, data } = useFirestoreDocData(ref);
-  const { isInclusive, isImmersive } = useProfile();
+  const { status, data } = useFirestoreDoc();
+  const { profile: {isInclusive, isImmersive} } = useProfile();
   useEffect(() => {
     if (data) {
       const fp = data.pages.filter((p: any) => {
@@ -226,7 +246,7 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
 };
 
 const TitleCard = ({ data }: any) => {
-  const { isInclusive, isImmersive } = useProfile();
+  const {profile: { isInclusive, isImmersive }} = useProfile();
   const { pageForward } = useStory();
   return (
     <div className="content-wrapper margin-top-1">
@@ -349,7 +369,7 @@ const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
 
 const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
-  const { isImmersive, isInclusive } = useProfile();
+  const {profile: { isImmersive, isInclusive }} = useProfile();
   const {addAudio, clearAudio} = useAudioManager();
   useEffect(() => {
     return clearAudio;

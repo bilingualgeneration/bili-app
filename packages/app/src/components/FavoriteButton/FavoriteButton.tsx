@@ -21,7 +21,7 @@ export const FavoriteButton: React.FC<{
     >
       <IonIcon
         slot="icon-only"
-        icon={favoriteIds.has(fid) ? heart : heartOutline}
+        icon={favoriteIds?.has(fid) ? heart : heartOutline}
       />
     </IonButton>
   );

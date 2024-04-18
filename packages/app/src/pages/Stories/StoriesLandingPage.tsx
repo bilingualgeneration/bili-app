@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Play } from "../Play";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { Carousel } from "@/components/Carousel";
 import "./StoriesLandingPage.scss";
 import comingSoonBlock from "@/assets/icons/coming_soon_block.svg";
@@ -8,7 +8,7 @@ import './StoriesLandingPage.scss';
 import { PackSelect } from "@/components/PackSelect";
 
 export const StoriesLandingPage: FC = () => {
-    const { isImmersive, isInclusive } = useProfile();
+    const { profile: {isImmersive, isInclusive }} = useProfile();
   
     return (
         <>

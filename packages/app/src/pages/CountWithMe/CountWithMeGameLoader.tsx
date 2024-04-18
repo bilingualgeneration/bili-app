@@ -3,18 +3,17 @@ import {
   FirestoreDocProvider,
   useFirestoreDoc
 } from '@/hooks/FirestoreDoc';
-import { IntruderGame } from "./IntruderGame";
+import { CountWithMeGame } from "./CountWithMeGame";
 
-export const IntruderGameLoader: React.FC = () => {
+export const CountWithMeGameLoader: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-
-  return <FirestoreDocProvider collection='intruder-game' id={pack_id}>
-    <IntruderHydratedGame />
+  return <FirestoreDocProvider collection='count-with-me-game' id={pack_id}>
+    <CountWithMeHydratedGame />
   </FirestoreDocProvider>;
-}
+};
 
-const IntruderHydratedGame: React.FC = () => {
+const CountWithMeHydratedGame: React.FC = () => {
   const {status, data} = useFirestoreDoc();
   if (status === "loading") {
     // todo: loading screen
@@ -27,5 +26,5 @@ const IntruderHydratedGame: React.FC = () => {
   }
 
   // @ts-ignore
-  return <IntruderGame game={data} />;
+  return <CountWithMeGame game={data} />;
 };

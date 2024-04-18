@@ -1,28 +1,31 @@
-import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
-import { useIntl, FormattedMessage } from "react-intl";
+import {
+  FormattedMessage,
+  useIntl,
+} from "react-intl";
+import {getFirebaseAuth} from '@/components/Firebase';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonText
+} from "@ionic/react";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {UnauthedHeader} from "@/components/UnauthedHeader";
+import {useState} from 'react';
+
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+
+
+
 import { userSchema } from "@bili/schema/user";
 
-import React from "react";
-import { useAuth, useSigninCheck } from "reactfire";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Auth, signInWithEmailAndPassword, getAuth } from "firebase/auth";
-import { UnauthedHeader } from "@/components/UnauthedHeader";
 
-const handleEmailPasswordSignIn = async (
-  auth: Auth,
-  email: string,
-  password: string,
-) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.error("Error signing in with email and password:", error);
-  }
-};
 
 interface FormInputs {
   email: string;
@@ -30,9 +33,7 @@ interface FormInputs {
 }
 
 const Login: React.FC = () => {
-  //uncomment when will be implementing Firebase Auth
-  const auth = useAuth();
-  // const {status, data: signinResult} = useSigninCheck();
+  const auth = getFirebaseAuth();
   const intl = useIntl();
   const {
     control,
@@ -42,11 +43,19 @@ const Login: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(userSchema),
   });
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const onSubmit = handleSubmit(async (data) => {
-    await signInWithEmailAndPassword(auth, data.email, data.password);
-    history.push("/student-dashboard");
+    setIsLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      // todo: need to present error message
+      console.error("Error signing in with email and password:", error);
+    }
+    //history.push("/student-dashboard");
+    setIsLoading(false);
   });
 
   return (
@@ -66,6 +75,11 @@ const Login: React.FC = () => {
               <div className="text-md semibold color-barro">
                 <div>
                   <Input
+                    control={control}
+		    disabled={isLoading}
+
+
+		  
                     label={intl.formatMessage({
                       id: "common.email",
                       defaultMessage: "Your email",
@@ -74,7 +88,6 @@ const Login: React.FC = () => {
                     labelPlacement="above"
                     required={true}
                     name="email"
-                    control={control}
                     fill="outline"
                     helperText=""
                     testId="login-email-input"
@@ -84,6 +97,10 @@ const Login: React.FC = () => {
 
                 <div className="ion-margin-top">
                   <Input
+                    control={control}
+		    disabled={isLoading}
+
+		  
                     label={intl.formatMessage({
                       id: "common.password",
                       defaultMessage: "Password",
@@ -92,7 +109,6 @@ const Login: React.FC = () => {
                     labelPlacement="above"
                     required={true}
                     name="password"
-                    control={control}
                     fill="outline"
                     helperText=""
                     testId="login-password-input"
@@ -104,7 +120,7 @@ const Login: React.FC = () => {
                 <IonButton
                   className="margin-vertical-3"
                   data-testid="account-credentials-continue-button"
-                  disabled={!isValid}
+                  disabled={!isValid || isLoading}
                   expand="block"
                   shape="round"
                   type="submit"

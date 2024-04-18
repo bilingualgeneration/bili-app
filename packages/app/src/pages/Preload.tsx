@@ -1,13 +1,17 @@
 import React from "react";
 import { IonSpinner } from "@ionic/react";
 import { Redirect } from "react-router";
+import {useProfile} from '@/hooks/Profile';
 
-import { useSigninCheck } from "reactfire";
+//import { useSigninCheck } from "reactfire";
 
 export const Preload: React.FC = () => {
-  const { status, data: signinResult } = useSigninCheck();
+  const {
+    isLoading,
+    isLoggedIn,
+  } = useProfile();
 
-  if (status === "loading") {
+  if (isLoading) {
     // still trying to communicate with Firebase
     // todo: make spinner larger
     // todo: center spinner on page
@@ -18,11 +22,7 @@ export const Preload: React.FC = () => {
     );
   }
 
-  const { signedIn, user } = signinResult;
-
-  // todo: grab full user profile from firestore
-
-  if (signedIn) {
+  if (isLoggedIn) {
     // todo: redirect based on user account type
     return <Redirect to="/student-dashboard" />;
   } else {

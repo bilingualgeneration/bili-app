@@ -5,7 +5,7 @@ import LockIcon from "@/assets/icons/lock.svg?react";
 import "./ContentCard.scss";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 type ContentCardProps = {
   title: string;
@@ -19,7 +19,7 @@ type ContentCardProps = {
 };
 
 const ComingSoon: React.FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   return (
     <div className="content-coming-soon">
       <IonText>
@@ -49,7 +49,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   isLocked = false,
   link,
 }) => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const history = useHistory();
   return (
     <div

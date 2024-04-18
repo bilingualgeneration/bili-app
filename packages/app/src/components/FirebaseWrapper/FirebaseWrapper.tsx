@@ -16,7 +16,7 @@ export const FirebaseWrapper: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   return (
-    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <FirebaseAppProvider firebaseConfig={firebaseConfig} appName='asdf'>
       <FirebaseFeaturesWrapper>{children}</FirebaseFeaturesWrapper>
     </FirebaseAppProvider>
   );

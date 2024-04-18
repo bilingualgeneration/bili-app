@@ -1,9 +1,15 @@
+import {Redirect} from 'react-router-dom';
+import {useProfile} from '@/hooks/Profile';
+
+
+
+
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FooterMenu } from "@/components/FooterMenu";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile as useOldProfile } from "@/contexts/ProfileContext";
 import {
   IonButton,
   IonCol,
@@ -25,6 +31,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const AdultCheckModal: FC = () => {
   const { isAdultCheckOpen, setIsAdultCheckOpen } = useAdultCheck();
   const [equation, setEquation] = useState<number[]>([1, 2, 3]);
+  const {isLoggedIn} = useProfile();
   useEffect(() => {
     setIsAdultCheckOpen(true);
     // generate 2 digit numbers
@@ -63,6 +70,9 @@ const AdultCheckModal: FC = () => {
       });
     }
   });
+  if (!isLoggedIn) {
+    return <Redirect to="/" />;
+  }
   return (
     <IonModal canDismiss={!isAdultCheckOpen} isOpen={isAdultCheckOpen && false}>
       <div className="ion-padding">
@@ -133,11 +143,11 @@ const AdultCheckModal: FC = () => {
 };
 
 export const SettingsLayout: FC<
-  React.PropsWithChildren<{
-    background?: string;
-  }>
+React.PropsWithChildren<{
+  background?: string;
+}>
 > = ({ background = "", children }) => {
-  const { settingsLanguage } = useProfile();
+  const { settingsLanguage } = useOldProfile();
   return (
     <I18nWrapper locale={settingsLanguage}>
       <IonPage>

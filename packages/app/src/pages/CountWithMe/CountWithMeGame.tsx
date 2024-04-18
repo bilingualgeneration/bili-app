@@ -1,15 +1,14 @@
 //game logic AM
 import React, { useRef, FC, useEffect, useState } from "react";
-//import {CountFacts} from './CountFacts';
 import {IonText} from "@ionic/react";
-import { useProfile } from "@/contexts/ProfileContext";
-import { FactsPage } from "./CountFacts";
+import { useProfile } from "@/hooks/Profile";
+import { CountWithMeFacts } from "./CountWithMeFacts";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
 import { useHistory } from 'react-router-dom';
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { CountCongrats } from "./CountCongrats";
+import { CountWithMeCongrats } from "./CountWithMeCongrats";
 
 interface BiliImage {
   url: string;
@@ -57,7 +56,7 @@ interface CountGameProps {
 }
 
 export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
-  const { isInclusive, isImmersive } = useProfile();
+  const { profile: {isInclusive, isImmersive }} = useProfile();
   const history = useHistory();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
 
@@ -108,7 +107,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
   }, [data]);
 
   if (showCongrats) {
-    return <CountCongrats onKeepGoingClick={showFacts} count={currentIndex} />;
+    return <CountWithMeCongrats onKeepGoingClick={showFacts} count={currentIndex} />;
   }
 
   const goToNextAnimalGroup = () => {
@@ -234,7 +233,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
   //show next page if showCongrats(true)
   if (showFacts) {
     return (
-      <FactsPage
+      <CountWithMeFacts
         factText={getData.factText}
         factBackground={getData.factBackground.url}
         count={currentIndex}

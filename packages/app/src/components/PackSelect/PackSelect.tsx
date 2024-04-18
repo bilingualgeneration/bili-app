@@ -18,7 +18,7 @@ import {
   useFirestore,
   useFirestoreCollectionData,
 } from 'reactfire';
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { Carousel } from "@/components/Carousel";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { PlayHeader } from "@/components/PlayHeader";
@@ -53,7 +53,7 @@ export const PackSelect: React.FC<props> = ({
   pack_name_field = 'pack_name',
 }) => {
   const firestore = useFirestore();
-  const { isInclusive, isImmersive } = useProfile();
+  const { profile: {isInclusive, isImmersive }} = useProfile();
   const cardsCollection = collection(firestore, module);
   const cardsQuery = query(cardsCollection, orderBy('id', 'asc'));
   const {status, data} = useFirestoreCollectionData(cardsQuery, {idField: 'id'});

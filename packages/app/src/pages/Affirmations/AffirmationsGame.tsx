@@ -1,4 +1,15 @@
-import { doc } from "firebase/firestore";
+import {useAudioManager} from '@/contexts/AudioManagerContext';
+import {
+  useEffect,
+  useState,
+} from 'react';
+import {useParams} from 'react-router';
+import {useProfile} from '@/hooks/Profile';
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc
+} from '@/hooks/FirestoreDoc';
+
 import {
   IonButton,
   IonCard,
@@ -9,11 +20,6 @@ import {
   IonRow,
   IonText,
 } from '@ionic/react';
-import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useParams } from "react-router";
-import { useProfile } from "@/contexts/ProfileContext";
-import { useState} from 'react';
-import { useFirestore, useFirestoreDocData } from "reactfire";
 
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import forward from "@/assets/icons/carousel_forward.svg";
@@ -40,7 +46,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   text_back,
   text_front
 }) => {
-  const { isImmersive } = useProfile();
+  const {profile: {isImmersive} } = useProfile();
   const {addAudio} = useAudioManager();
   const [showFront, setShowFront] = useState<boolean>(true);
   const text_back_es = text_back.filter((t: MultilingualTextAndAudio) => t.language === 'es')[0];
@@ -138,18 +144,23 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   ;
 };
 
-const CARDS_PER_PAGE = 3;
-
 export const AffirmationsGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  const firestore = useFirestore();
-  const [cardIndex, setCardIndex] = useState<number>(0);
-  
-  //Firestore operations
-  const ref = doc(firestore, "affirmation", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  return <FirestoreDocProvider collection='affirmation' id={pack_id}>
+    <AffirmationsHydratedGame />
+  </FirestoreDocProvider>;
+};
 
+
+const CARDS_PER_PAGE = 3;
+
+type Status = 'error' | 'loading' | 'ready';
+
+const AffirmationsHydratedGame: React.FC = () => {
+  const [cardIndex, setCardIndex] = useState<number>(0);
+  const {status, data} = useFirestoreDoc();
+  
   if (status === "loading") {
     // todo: loading screen
     return <></>;

@@ -16,7 +16,7 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
@@ -28,8 +28,6 @@ import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_ins
 import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
 import { IntruderCongrats } from "./IntruderCongrats";
 import "./Intruder.scss";
 import "../../theme/animate.scss";
@@ -71,7 +69,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const {addAudio, clearAudio, setCallback} = useAudioManager();
 
   useEffect(() => {
