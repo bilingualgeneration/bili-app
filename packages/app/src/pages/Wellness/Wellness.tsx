@@ -1,4 +1,4 @@
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { IonText } from "@ionic/react";
 import { FC } from "react";
 import AffirmationGirl from "@/assets/img/affirmation_girl.png";
@@ -11,7 +11,7 @@ import "./Wellness.scss";
 import "../Play/Play.scss";
 
 const PlayHeader: FC = () => {
-    const { isImmersive, isInclusive } = useProfile();
+    const { profile: {isImmersive, isInclusive} } = useProfile();
     return (
       <div className="headerBanner">
         <IonText>
@@ -29,7 +29,7 @@ const PlayHeader: FC = () => {
   };
 
   const AnotherCard: FC<{ rotation?: number }> = ({ rotation = 0 }) => {
-    const { isImmersive } = useProfile();
+    const { profile: {isImmersive} } = useProfile();
     const history = useHistory();
     const rotationStyle = {
       transform: `rotate(${rotation}deg)`,
@@ -60,7 +60,7 @@ const PlayHeader: FC = () => {
 
 // todo: change mouse cursor to pointer
   const AffirmationCard: FC = () => {
-    const { isImmersive } = useProfile();
+    const { profile: {isImmersive} } = useProfile();
     const history = useHistory();
     return (
       <div
@@ -86,7 +86,7 @@ const PlayHeader: FC = () => {
 
 
   const YogaCard: FC = () => {
-    const { isImmersive } = useProfile();
+    const { profile: {isImmersive }} = useProfile();
     const history = useHistory();
     return (
       <div
@@ -115,7 +115,7 @@ const PlayHeader: FC = () => {
 
 
 export const Wellness: FC = () => {
-    const { isImmersive } = useProfile();
+    const { profile: {isImmersive} } = useProfile();
     return (
       <div id="wellnessPage">
         <PlayHeader />

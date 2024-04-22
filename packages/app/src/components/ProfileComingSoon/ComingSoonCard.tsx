@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import "./ComingSoonCard.scss";
 
 interface ComingSoonCardProps {
@@ -15,7 +15,7 @@ export const ComingSoonCard: FC<ComingSoonCardProps> = ({
     subtitle,
     cardImage
   }) => {
-    const { isImmersive } = useProfile();
+    const { profile:{ isImmersive }} = useProfile();
     return (
       <div id="coming-soon-card" className="card-styles" style={{ backgroundColor: cardColor }}>
         <img src={cardImage} alt="Card Image" className="card-image" />

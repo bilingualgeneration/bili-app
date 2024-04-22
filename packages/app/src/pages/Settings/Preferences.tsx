@@ -13,17 +13,16 @@ import {
 import Question from "@/assets/icons/question.svg?react";
 import { chevronForward } from "ionicons/icons";
 import { Popover } from "@/components/Popover";
-import { useFirestore } from "reactfire";
+import { firestore } from "@/components/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 import "./Preferences.css";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
-  const { isImmersive, isInclusive, settingsLanguage, uid } = useProfile();
-  const firestore = useFirestore();
+  const { user: {uid}, profile: {isImmersive, isInclusive, settingsLanguage }} = useProfile();
   const ref = doc(firestore, "users", uid);
   // TODO: we shouldn't allow this straight from the app
   const updateProfile = (key: string, value: any) => {

@@ -1,0 +1,18 @@
+#appLoadingIndicator {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    * {
+	width: 50vw;
+    }
+
+    ion-progress-bar{
+	border-radius: 1rem;
+	height: 2rem;
+	margin-top: 2rem;
+    }
+}

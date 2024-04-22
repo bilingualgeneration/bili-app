@@ -1,5 +1,4 @@
-import React from "react";
-import { useAuth } from "reactfire";
+import {useProfile} from '@/hooks/Profile';
 import { IonButton, IonIcon, IonItem, IonLabel, IonList } from "@ionic/react";
 import {
   arrowBackOutline,
@@ -24,7 +23,7 @@ interface Option {
 }
 
 export const SideMenu: React.FC = () => {
-  const auth = useAuth();
+  const {signout} = useProfile();
   const location = useLocation();
 
   const options: Option[] = [
@@ -103,7 +102,7 @@ export const SideMenu: React.FC = () => {
 
         <div
           onClick={() => {
-            auth.signOut();
+            signout();
           }}
         >
           <SideMenuOption

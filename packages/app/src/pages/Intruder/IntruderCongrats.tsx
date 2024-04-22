@@ -2,11 +2,12 @@ import biliCharacter from "@/assets/img/bili_in_coat.png";
 import React, { useState, useEffect } from "react";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import { httpsCallable } from "firebase/functions";
-import { useChildProfile } from "@/contexts/ChildProfileContext";
-import { useFunctions } from "reactfire";
+import {
+  getFunctions,
+  httpsCallable
+} from 'firebase/functions';
 
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
@@ -39,16 +40,15 @@ export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
-  const { childProfiles, activeChildProfile } = useChildProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive}, activeChildProfile } = useProfile();
   const audio_es = new Audio(
     sounds.es[count === -1 ? "all" : count.toString()],
   );
   const audio_en = new Audio(
     sounds.en[count === -1 ? "all" : count.toString()],
   );
-  const functions = useFunctions();
+  const functions = getFunctions();
 
   useEffect(() => {
     // increment number of completions
@@ -57,7 +57,7 @@ export const IntruderCongrats: React.FC<{
       "user-child-profile-completion-add",
     );
     const data: any = {
-      uid: childProfiles[activeChildProfile].uid,
+      uid: activeChildProfile.id,
       module: "intruder",
       moduleAdd: 5,
       completionsAdd: 1,

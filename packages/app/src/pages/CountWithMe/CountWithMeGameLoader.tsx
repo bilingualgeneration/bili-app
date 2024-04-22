@@ -1,20 +1,19 @@
+import { useParams } from "react-router";
 import {
   FirestoreDocProvider,
   useFirestoreDoc
 } from '@/hooks/FirestoreDoc';
-import { useParams } from 'react-router';
-import { StoriesDragGame } from './StoriesDragGame';
+import { CountWithMeGame } from "./CountWithMeGame";
 
-export const StoriesDragGameLoader: React.FC = () => {
+export const CountWithMeGameLoader: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-
-  return <FirestoreDocProvider collection='story' id={pack_id}>
-    <HydratedStoriesDragGame />
+  return <FirestoreDocProvider collection='count-with-me-game' id={pack_id}>
+    <CountWithMeHydratedGame />
   </FirestoreDocProvider>;
-}
+};
 
-const HydratedStoriesDragGame: React.FC = () => {
+const CountWithMeHydratedGame: React.FC = () => {
   const {status, data} = useFirestoreDoc();
   if (status === "loading") {
     // todo: loading screen
@@ -27,5 +26,5 @@ const HydratedStoriesDragGame: React.FC = () => {
   }
 
   // @ts-ignore
-  return <StoriesDragGame game={data} />;
+  return <CountWithMeGame game={data} />;
 };

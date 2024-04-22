@@ -5,7 +5,7 @@ import {
   IonText,
 } from "@ionic/react";
 
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
 import { CommunityHeader } from "@/components/CommunityHeader";
@@ -19,7 +19,7 @@ import tunita from "@/assets/img/tunita.png";
 import "./Community.scss";
 
 const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
-  const { isImmersive } = useProfile();
+  const {profile: {isImmersive}} = useProfile();
   const content = <>
     <img src={image} />
     <IonText className="ion-text-center">
@@ -46,7 +46,7 @@ const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
 
 export const Community: FC = () => {
   const intl = useIntl();
-  const { isImmersive } = useProfile();
+  const {profile: {isImmersive}} = useProfile();
   const cards = [
     {
       translatedTitle: intl.formatMessage({

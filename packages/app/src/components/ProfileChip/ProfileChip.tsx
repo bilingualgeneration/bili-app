@@ -1,15 +1,15 @@
-import { FC } from "react";
 import { IonText, IonIcon } from "@ionic/react";
-import { useChildProfile } from "@/contexts/ChildProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { starSharp } from "ionicons/icons";
 import Avatar from "@/assets/icons/avatar.png";
 import { Link } from "react-router-dom";
 import "./ProfileChip.scss";
 
-export const ProfileChip: FC = () => {
+export const ProfileChip: React.FC = () => {
+  /*
   const { childProfiles, activeChildProfile } = useChildProfile();
-  const { completionPoints, name } = childProfiles[activeChildProfile];
-
+   */
+  const { activeChildProfile: {completionPoints, name} } = useProfile();
   return (
     <Link to="/profile/coming-soon" className="no-text-decoration">
       <div id="profileChip">

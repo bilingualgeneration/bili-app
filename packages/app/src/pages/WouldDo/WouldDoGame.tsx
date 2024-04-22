@@ -1,29 +1,36 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { useParams } from "react-router-dom";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc,
+} from '@/hooks/FirestoreDoc';
 import { Deck } from "@/components//Deck";
 import "@/pages/Intruder/Intruder.scss";
 
 import styles from "./styles.module.css";
 import { IonText } from "@ionic/react";
 
-export const WouldDoGame: FC = () => {
+export const WouldDoGame: React.FC = () => {
+  //@ts-ignore
+  const { pack_id } = useParams();
+  return <FirestoreDocProvider collection='would-do-game' id={pack_id}>
+    <WouldDoHydratedGame />
+  </FirestoreDocProvider>;
+
+};
+
+const WouldDoHydratedGame: React.FC = () => {
   const { isInclusive, isImmersive } = useProfile();
   const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
 
-  //@ts-ignore
-  const { pack_id } = useParams();
-  const firestore = useFirestore();
-
-  const ref = doc(firestore, "would-do-game", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  const { status, data } = useFirestoreDoc();
   const [questionsData, setQuestionsData] = useState<any[]>([]);
 
   useEffect(() => {
-    if (data !== undefined) {
+    if (data !== undefined
+	&& data !== null) {
       // Transform data to include text and audio in both languages for each card
       const transformedData = data.questions.map((questionItem: any) => {
         const es = questionItem.question.find(

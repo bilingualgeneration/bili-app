@@ -1,23 +1,29 @@
 import { useParams } from "react-router";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc
+} from '@/hooks/FirestoreDoc';
 import { IntruderGame } from "./IntruderGame";
 
 export const IntruderGameLoader: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  const firestore = useFirestore();
 
-  //Firestore operations
-  const ref = doc(firestore, "intruder-game", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  return <FirestoreDocProvider collection='intruder-game' id={pack_id}>
+    <IntruderHydratedGame />
+  </FirestoreDocProvider>;
+}
 
+const IntruderHydratedGame: React.FC = () => {
+  const {status, data} = useFirestoreDoc();
   if (status === "loading") {
-    return "Loading...";
+    // todo: loading screen
+    return <></>;
   }
 
   if (status === "error") {
-    return "Error loading the game";
+    // todo: better error checking
+    return <></>;
   }
 
   // @ts-ignore

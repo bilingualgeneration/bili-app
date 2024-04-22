@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import pattern from "@/assets/icons/header_background_pattern.svg";
 
 import "./PlayHeader.scss";
@@ -14,14 +13,14 @@ interface PlayHeaderProps {
   subtitleClassName?: string;
 }
 
-export const PlayHeader: FC<PlayHeaderProps> = ({
+export const PlayHeader: React.FC<PlayHeaderProps> = ({
   bannerColor = "#ff5709",
   title,
   subtitle,
   titleClassName = "text-5xl color-nube",
   subtitleClassName = "text-3xl color-nube",
 }) => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   return (
     <div id="playBanner" style={{ backgroundColor: bannerColor }}>
       <div className="banner-overlay" style={{ backgroundColor: bannerColor }}/>

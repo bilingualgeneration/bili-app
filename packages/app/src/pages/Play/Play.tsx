@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { useIntl } from "react-intl";
 import CountWithMe from "@/assets/icons/count_with_me.png";
 import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
@@ -16,7 +16,7 @@ import { CategoryTag } from "@/components/CategoryTag";
 import "./Play.scss";
 
 const StoryFactoryCard: FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const history = useHistory();
   return (
     <div
@@ -44,7 +44,7 @@ const StoryFactoryCard: FC = () => {
 };
 
 const IntruderCard: FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const history = useHistory();
   return (
     <div
@@ -73,7 +73,7 @@ const IntruderCard: FC = () => {
 };
 
 const CountCard: FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const history = useHistory();
   return (
     <div
@@ -103,7 +103,7 @@ const CountCard: FC = () => {
 };
 
 export const Play: FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile:{ isImmersive} } = useProfile();
   return (
     <div id="playPage">
       <PlayHeader 
