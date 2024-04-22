@@ -21,16 +21,14 @@ import { Preferences } from "@capacitor/preferences";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
-import { useChildProfile } from "@/contexts/ChildProfileContext";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
-  const { isImmersive, isInclusive } = useProfile();
+  const {profile: { isImmersive, isInclusive }} = useProfile();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-  const { childProfiles, activeChildProfile, setActiveChildProfile } =
-    useChildProfile();
+  //const { childProfiles, activeChildProfile, setActiveChildProfile } = useChildProfile();
   const { isAdultCheckOpen } = useAdultCheck();
 
   useEffect(() => {

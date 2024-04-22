@@ -38,7 +38,6 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  
   return <FirestoreDocProvider collection='story' id={uuid}>
     <StoriesHydrated />
     </FirestoreDocProvider>;

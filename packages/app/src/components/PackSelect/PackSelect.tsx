@@ -15,9 +15,9 @@ import { ContentCard } from "@/components/ContentCard";
 import { IonCard, IonIcon, IonText } from "@ionic/react";
 
 import {
-  useFirestore,
-  useFirestoreCollectionData,
-} from 'reactfire';
+  FirestoreCollectionProvider,
+  useFirestoreCollection,
+} from '@/hooks/FirestoreCollection';
 import { useProfile } from "@/hooks/Profile";
 import { Carousel } from "@/components/Carousel";
 import { CommunityHeader } from "@/components/CommunityHeader";
@@ -43,7 +43,13 @@ interface props {
   pack_name_field?: string;
 }
 
-export const PackSelect: React.FC<props> = ({
+export const PackSelect: React.FC<props> = (props) => {
+  return <FirestoreCollectionProvider collection={props.module}>
+    <HydratedPackSelect {...props} />
+  </FirestoreCollectionProvider>;
+};
+
+export const HydratedPackSelect: React.FC<props> = ({
   module,
   modulePath,
   translatedTitle,
@@ -52,17 +58,12 @@ export const PackSelect: React.FC<props> = ({
   placeholderCards = [],
   pack_name_field = 'pack_name',
 }) => {
-  const firestore = useFirestore();
   const { profile: {isInclusive, isImmersive }} = useProfile();
-  const cardsCollection = collection(firestore, module);
-  const cardsQuery = query(cardsCollection, orderBy('id', 'asc'));
-  const {status, data} = useFirestoreCollectionData(cardsQuery, {idField: 'id'});
+  const {status, data} = useFirestoreCollection();
   if(status === 'loading'){
     return <></>;
   }
-
-  const cards = data.map((p, index) => {
-    
+  const cards = data.map((p: any, index: number) => {    
     const esTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es');
     const esIncTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es-inc');
     const title: string = isInclusive && esIncTitle.length > 0 ? esIncTitle[0].text : esTitle[0].text;
@@ -74,7 +75,7 @@ export const PackSelect: React.FC<props> = ({
       fid,
       category,
       cover: p.cover_image?.url || 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png',
-      link: `/${modulePath || module}/play/${p.id}`
+      link: `/${modulePath || module}/play/${p.uuid}`
     };
   });
   return <>
@@ -108,7 +109,7 @@ export const PackSelect: React.FC<props> = ({
           </IonText>
         </div>
         <Carousel slidesToShow={2} height={274}>
-          {cards.map((c, index) => (
+          {cards.map((c: Card, index: number) => (
             <ContentCard {...c} key={index} />
           ))}
           {placeholderCards.map((c: Card, index: number) => (

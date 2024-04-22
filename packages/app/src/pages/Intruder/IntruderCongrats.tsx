@@ -4,10 +4,10 @@ import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import { httpsCallable } from "firebase/functions";
-
-// todo: need to test
-import { useFunctions } from "reactfire";
+import {
+  getFunctions,
+  httpsCallable
+} from 'firebase/functions';
 
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
@@ -48,7 +48,7 @@ export const IntruderCongrats: React.FC<{
   const audio_en = new Audio(
     sounds.en[count === -1 ? "all" : count.toString()],
   );
-  const functions = useFunctions();
+  const functions = getFunctions();
 
   useEffect(() => {
     // increment number of completions

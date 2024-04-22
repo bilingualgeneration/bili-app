@@ -89,6 +89,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	  profileUnsubscribe.current();
 	}
 	setProfile(null);
+	setActiveChildProfile(null);
       }
     }
   }, [user]);
@@ -119,6 +120,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	     isLoggedIn: user !== undefined && user !== null,
 	     profile,
 	     childProfiles,
-	     signout
+	     signout,
+	     user
 	   }} />;
 };

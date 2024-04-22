@@ -1,24 +1,29 @@
-import { FC } from "react";
-import { useParams } from "react-router";
-import { useFirestore, useFirestoreDocData } from "reactfire";
-import { doc } from "firebase/firestore";
-import { StoriesDragGame } from "./StoriesDragGame";
+import {
+  FirestoreDocProvider,
+  useFirestoreDoc
+} from '@/hooks/FirestoreDoc';
+import { useParams } from 'react-router';
+import { StoriesDragGame } from './StoriesDragGame';
 
-export const StoriesDragGameLoader: FC = () => {
+export const StoriesDragGameLoader: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  const firestore = useFirestore();
 
-  //Firestore operations
-  const ref = doc(firestore, "story", pack_id);
-  const { status, data } = useFirestoreDocData(ref);
+  return <FirestoreDocProvider collection='story' id={pack_id}>
+    <HydratedStoriesDragGame />
+  </FirestoreDocProvider>;
+}
 
+const HydratedStoriesDragGame: React.FC = () => {
+  const {status, data} = useFirestoreDoc();
   if (status === "loading") {
-    return "Loading...";
+    // todo: loading screen
+    return <></>;
   }
 
   if (status === "error") {
-    return "Error loading the game";
+    // todo: better error checking
+    return <></>;
   }
 
   // @ts-ignore

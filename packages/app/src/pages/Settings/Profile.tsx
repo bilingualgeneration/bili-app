@@ -1,12 +1,14 @@
 import { FormattedMessage, useIntl } from "react-intl";
-import { httpsCallable } from "firebase/functions";
+import {
+  getFunctions,
+  httpsCallable
+} from "firebase/functions";
 import { IonButton, IonGrid, IonRow, IonCol } from "@ionic/react";
 import { Input } from "@/components/Input";
 import { useMaskito } from "@maskito/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useFunctions } from "reactfire";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -22,7 +24,7 @@ export const Profile: React.FC = () => {
     dob: z.string().nullable(),
     country: z.string().nullable(),
   });
-  const { name, phone, email, dob, country } = useProfile();
+  const {profile: { name, phone, email, dob, country }} = useProfile();
   const { control, handleSubmit } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       country,
@@ -34,7 +36,7 @@ export const Profile: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-  const functions = useFunctions();
+  const functions = getFunctions();
   const updateParentProfileFunction = httpsCallable(
     functions,
     "user-parent-profile-update",

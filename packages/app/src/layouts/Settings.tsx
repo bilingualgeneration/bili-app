@@ -9,7 +9,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { FooterMenu } from "@/components/FooterMenu";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { useHistory } from "react-router-dom";
-import { useProfile as useOldProfile } from "@/contexts/ProfileContext";
 import {
   IonButton,
   IonCol,
@@ -147,9 +146,8 @@ React.PropsWithChildren<{
   background?: string;
 }>
 > = ({ background = "", children }) => {
-  const { settingsLanguage } = useOldProfile();
   return (
-    <I18nWrapper locale={settingsLanguage}>
+    <I18nWrapper locale={'en'}>
       <IonPage>
         <IonContent fullscreen className="ion-padding">
           <AdultCheckModal />

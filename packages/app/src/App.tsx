@@ -11,14 +11,12 @@ import {Router} from '@/components/Router';
 // todo: unsure if ErrorBoundary is necessary
 // todo: unsure if Suspense is working
 import { ErrorBoundary } from "react-error-boundary";
-import { SuspenseWithPerf } from "reactfire";
 import { Device } from "@capacitor/device";
 import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
-import { AuthProvider, useFirebaseApp } from "reactfire";
 import { useIntl } from "react-intl";
 
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -80,7 +78,6 @@ const App: React.FC = () => {
     })();
   }, []);
   return (
-    <SuspenseWithPerf fallback={<Loading />} traceId="user-load">
       <ErrorBoundary fallback={<Loading />}>
         <IonApp>
           <AudioManagerProvider>
@@ -94,7 +91,6 @@ const App: React.FC = () => {
           </AudioManagerProvider>
         </IonApp>
       </ErrorBoundary>
-    </SuspenseWithPerf>
   );
 };
 
