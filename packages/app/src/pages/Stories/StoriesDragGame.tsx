@@ -4,7 +4,7 @@ import { DndProvider, useDrag } from "react-dnd";
 import { LetterSegment } from "./LetterSegment";
 import { DropZone } from "./DropZone";
 import { IonText } from "@ionic/react";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import "./Stories.scss";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
@@ -36,7 +36,7 @@ interface StoriesGameProps {
 }
 
 export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
-  const { isInclusive, isImmersive } = useProfile();
+  const {profile: { isInclusive, isImmersive }} = useProfile();
   const [chosenLanguageData, setChosenLanguageData] = useState<LetterData[]>(
     [],
   );

@@ -1,7 +1,7 @@
-import { useProfile } from "@/contexts/ProfileContext";
+import {useProfile} from "@/hooks/Profile";
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
-import { CountCongrats } from "./CountCongrats";
+import { CountWithMeCongrats } from "./CountWithMeCongrats";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import "./CountWithMe.scss";
@@ -14,13 +14,13 @@ interface FactsPageProps {
   onKeepGoingClick: () => void;
 }
 
-export const FactsPage: React.FC<FactsPageProps> = ({
+export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   factText,
   factBackground,
   count,
   onKeepGoingClick,
 }) => {
-  const { isInclusive, isImmersive } = useProfile();
+  const {profile: { isInclusive, isImmersive }} = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
@@ -60,7 +60,7 @@ export const FactsPage: React.FC<FactsPageProps> = ({
   const history = useHistory();
 
   if (showCongrats) {
-    return <CountCongrats count={count} onKeepGoingClick={onKeepGoingClick} />;
+    return <CountWithMeCongrats count={count} onKeepGoingClick={onKeepGoingClick} />;
   }
 
   // Function to render the facts page for each animal

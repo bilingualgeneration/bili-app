@@ -1,6 +1,5 @@
 import App from "./App";
 import { createRoot } from "react-dom/client";
-import { FirebaseWrapper } from "./components/FirebaseWrapper";
 import { LanguageContextProvider } from "@/contexts/LanguageContext";
 import React from "react";
 
@@ -11,11 +10,9 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-  <FirebaseWrapper>
     <LanguageContextProvider>
       <ReqdActionsProvider>
         <App />
       </ReqdActionsProvider>
     </LanguageContextProvider>
-  </FirebaseWrapper>,
 );

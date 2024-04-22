@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import { PlayHeader } from "@/components/PlayHeader";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { ComingSoonCard } from "@/components/ProfileComingSoon";
 import stars from "@/assets/icons/profile_coming_soon/coming_soon_card_stars.svg";
 import stickers from "@/assets/icons/profile_coming_soon/coming_soon_card_stickers.svg";
@@ -11,7 +11,7 @@ import biliHelmet from "@/assets/icons/profile_coming_soon/bili_profile_coming_s
 import biliWorkshop from "@/assets/icons/profile_coming_soon/bili_workshop.svg";
 
 export const ProfileComingSoon: FC = () => {
-    const { isImmersive } = useProfile();
+    const { profile: {isImmersive} } = useProfile();
     const profileCards = [
       {
         cardColor: "#9A90F0",

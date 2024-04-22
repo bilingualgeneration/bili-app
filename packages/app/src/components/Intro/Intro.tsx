@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import "./Intro.scss";
 
 interface Type {
@@ -34,7 +34,7 @@ interface IntroProps {
 export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasAudioPlayed, setHasAudioPlayed] = useState(false);
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
 

@@ -1,7 +1,7 @@
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
@@ -39,7 +39,7 @@ const sounds: any = {
   },
 };
 
-export const CountCongrats: React.FC<{
+export const CountWithMeCongrats: React.FC<{
   onKeepGoingClick?: any;
   count?: number;
 }> = ({ onKeepGoingClick, count }) => {
@@ -48,7 +48,7 @@ export const CountCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const { isInclusive, isImmersive } = useProfile();
+  const {profile: { isInclusive, isImmersive }} = useProfile();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();

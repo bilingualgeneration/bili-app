@@ -21,16 +21,14 @@ import { Preferences } from "@capacitor/preferences";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
-import { useChildProfile } from "@/contexts/ChildProfileContext";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 import "./Overview.scss";
 
 export const Overview: React.FC = ({}) => {
-  const { isImmersive, isInclusive } = useProfile();
+  const {profile: { isImmersive, isInclusive }} = useProfile();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-  const { childProfiles, activeChildProfile, setActiveChildProfile } =
-    useChildProfile();
+  //const { childProfiles, activeChildProfile, setActiveChildProfile } = useChildProfile();
   const { isAdultCheckOpen } = useAdultCheck();
 
   useEffect(() => {
@@ -320,7 +318,9 @@ export const Overview: React.FC = ({}) => {
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow className="margin-bottom-3">
-              {childProfiles.map((p: any, index: number) => (
+              {
+		/*
+		childProfiles.map((p: any, index: number) => (
                 <IonCol
                   className="ion-no-padding"
                   size="6"
@@ -337,7 +337,9 @@ export const Overview: React.FC = ({}) => {
                     name={p.name}
                   />
                 </IonCol>
-              ))}
+		))
+		*/
+	      }
             </IonRow>
           </div>
 

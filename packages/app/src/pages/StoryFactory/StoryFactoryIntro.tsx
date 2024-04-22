@@ -1,5 +1,5 @@
 import biliCharacter from "@/assets/img/bili_in_tshirt.png";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import {Intro} from '@/components/Intro';
 
 import es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
@@ -9,7 +9,7 @@ import es_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_es.mp3";
 import en_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_en.mp3";
 
 export const StoryFactoryIntro: React.FC = () => {
-  const { isInclusive } = useProfile();
+  const { profile: {isInclusive }} = useProfile();
   const texts: any = [
     {
       es: {

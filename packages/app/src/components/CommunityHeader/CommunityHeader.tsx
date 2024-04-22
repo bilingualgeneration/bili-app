@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 
 import "./CommunityHeader.scss";
 
 export const CommunityHeader: FC = () => {
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   return (
     <div id="communityBanner">
       <IonText>

@@ -1,5 +1,5 @@
 import biliCharacter from "@/assets/img/bili_in_coat.png";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import {Intro} from '@/components/Intro';
 
 import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
@@ -9,7 +9,7 @@ import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction
 import "./Intruder.scss";
 
 export const IntruderIntro: React.FC = () => {
-  const { isInclusive } = useProfile();
+  const { profile: {isInclusive} } = useProfile();
   const texts: any = [
     {
       es: {

@@ -8,7 +8,6 @@ const MAX_CARDS_SHOWN = 3;
 
 
 import React, { FC, useEffect, useState } from "react";
-import { useProfile } from "@/contexts/ProfileContext";
 import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
 import {
   SpringValue,

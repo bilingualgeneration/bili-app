@@ -17,7 +17,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import {useStory} from './StoryContext';
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "../../pages/Stories/Stories.scss";
@@ -142,7 +142,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
   gameType,
 }) => {
-  const { isImmersive, isInclusive } = useProfile();
+  const { profile: {isImmersive, isInclusive} } = useProfile();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);

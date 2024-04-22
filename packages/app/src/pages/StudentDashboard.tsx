@@ -1,4 +1,5 @@
-import { FC } from "react";
+import {useProfile} from '@/hooks/Profile';
+
 import { Carousel } from "@/components/Carousel";
 import { ContentCard } from "@/components/ContentCard";
 import {
@@ -17,8 +18,6 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
-import { useChildProfile } from "@/contexts/ChildProfileContext";
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
@@ -39,14 +38,14 @@ interface WaveIcon {
   reactintlId: string;
 }
 
-const WaveIcon: FC<WaveIcon> = ({
+const WaveIcon: React.FC<WaveIcon> = ({
   backgroundColor,
   englishLabel,
   icon,
   link,
   reactintlId,
 }) => {
-  const { isImmersive } = useProfile();
+  const {profile: {isImmersive}} = useProfile();
   const history = useHistory();
   return (
     <span className="wave-icon">
@@ -184,11 +183,15 @@ const communityCards = [
   }
 ];
 
-export const StudentDashboard: FC = () => {
+export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
-  const { isInclusive, isImmersive } = useProfile();
-  const { childProfiles, activeChildProfile } = useChildProfile();
-  const { name } = childProfiles[activeChildProfile];
+  const {
+    activeChildProfile: {name},
+    profile: {
+      isInclusive,
+      isImmersive,
+    }
+  } = useProfile();
 
   const storyCards = [
     {

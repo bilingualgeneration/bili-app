@@ -3,7 +3,7 @@ import biliCharacter from "@/assets/icons/bili_character.svg";
 import React, { useState, useEffect } from "react";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import "./StoryFactory.scss";
 
@@ -36,7 +36,7 @@ export const StoryFactoryCongrats: React.FC<{
   count: number;
 }> = ({ setShowCongrats, count }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { isImmersive } = useProfile();
+  const { profile: {isImmersive} } = useProfile();
   const audio_es = new Audio(sounds.es[count.toString()]);
   const audio_en = new Audio(sounds.en[count.toString()]);
   useEffect(() => {

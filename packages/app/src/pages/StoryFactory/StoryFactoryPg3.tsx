@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IonCard, IonIcon, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/contexts/ProfileContext";
+import { useProfile } from "@/hooks/Profile";
 import { StoriesCardNoRating } from "@/components/StoryFactory/StoriesCardNoRating";
 import { gameControllerOutline } from "ionicons/icons";
 import { PlayHeader } from "@/components/PlayHeader";
@@ -9,7 +9,7 @@ import Heart from "@/assets/icons/heart.svg?react";
 import "./StoryFactory.scss";
 
 export const StoryFactoryPage3: React.FC = () => {
-  const { isImmersive } = useProfile();
+  const {profile: { isImmersive }} = useProfile();
   return (
     <>
       <PlayHeader />

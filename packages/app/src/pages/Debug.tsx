@@ -7,10 +7,9 @@ import {
   IonItem,
 } from "@ionic/react";
 import { Preferences } from "@capacitor/preferences";
-import { useAuth } from "reactfire";
+import { auth } from "@/components/Firebase";
 
 export const Debug: React.FC = () => {
-  const auth = useAuth();
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
