@@ -11,7 +11,6 @@ import {Router} from '@/components/Router';
 // todo: unsure if ErrorBoundary is necessary
 // todo: unsure if Suspense is working
 import { ErrorBoundary } from "react-error-boundary";
-import { Device } from "@capacitor/device";
 import { Loading } from "@/pages/Loading";
 
 import React, { useEffect, useState } from "react";
@@ -20,6 +19,7 @@ import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { useIntl } from "react-intl";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import {InterfaceLanguageProvider} from '@/hooks/InterfaceLanguage';
 import { I18nWrapper } from "@/components/I18nWrapper";
 
 
@@ -64,22 +64,10 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const { locale } = useLanguage();
-  useEffect(() => {
-    // set default language to device if not already set
-    (async () => {
-      const locale = await localStorage.getItem("userLocale");
-      if (locale === null) {
-        // no stored language
-        localStorage.setItem(
-          "userLocale",
-          (await Device.getLanguageCode()).value,
-        );
-      }
-    })();
-  }, []);
   return (
-      <ErrorBoundary fallback={<Loading />}>
-        <IonApp>
+    <ErrorBoundary fallback={<Loading />}>
+      <IonApp>
+	<InterfaceLanguageProvider>
           <AudioManagerProvider>
 	    <ProfileProvider>
 	      <I18nWrapper locale={locale}>
@@ -89,8 +77,9 @@ const App: React.FC = () => {
 	      </I18nWrapper>
 	    </ProfileProvider>
           </AudioManagerProvider>
-        </IonApp>
-      </ErrorBoundary>
+	</InterfaceLanguageProvider>
+      </IonApp>
+    </ErrorBoundary>
   );
 };
 

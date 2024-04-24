@@ -6,6 +6,7 @@ import {
   IonCardTitle,
   IonText,
 } from "@ionic/react";
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 
@@ -35,18 +36,19 @@ export const Splash: React.FC = () => {
                   description="link text if user already has an account"
                 />
               </IonCardTitle>
-              <IonButton
-                className=""
-                expand="block"
-                href="/login"
-                shape="round"
-              >
-                <FormattedMessage
-                  id="common.logIn"
-                  defaultMessage="Log In"
-                  description="label to log in"
-                />
-              </IonButton>
+	      <Link to='/login' className='no-underline'>
+		<IonButton
+                  className=""
+                  expand="block"
+                  shape="round"
+		>
+                  <FormattedMessage
+                    id="common.logIn"
+                    defaultMessage="Log In"
+                    description="label to log in"
+                  />
+		</IonButton>
+	      </Link>
             </IonCardContent>
           </IonCard>
 
@@ -58,17 +60,17 @@ export const Splash: React.FC = () => {
                   defaultMessage="New to Bili?"
                 />
               </IonCardTitle>
-              <IonButton
-                expand="block"
-                fill="outline"
-                href="/sign-up"
-                shape="round"
-              >
-                <FormattedMessage
-                  id="splash.createAccountButton"
-                  defaultMessage="Create an account"
-                />
-              </IonButton>
+	      <Link to='/sign-up' className='no-underline'>
+		<IonButton
+                  expand="block"
+                  fill="outline"
+                  shape="round">
+                  <FormattedMessage
+                    id="splash.createAccountButton"
+                    defaultMessage="Create an account"
+                  />
+		</IonButton>
+	      </Link>
             </IonCardContent>
           </IonCard>
         </div>

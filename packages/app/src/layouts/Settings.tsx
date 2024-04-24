@@ -1,6 +1,6 @@
 import {Redirect} from 'react-router-dom';
 import {useProfile} from '@/hooks/Profile';
-
+import {useInterfaceLanguage} from '@/hooks/InterfaceLanguage';
 
 
 
@@ -146,8 +146,9 @@ React.PropsWithChildren<{
   background?: string;
 }>
 > = ({ background = "", children }) => {
+  const {language} = useInterfaceLanguage();
   return (
-    <I18nWrapper locale={'en'}>
+    <I18nWrapper locale={language}>
       <IonPage>
         <IonContent fullscreen className="ion-padding">
           <AdultCheckModal />
