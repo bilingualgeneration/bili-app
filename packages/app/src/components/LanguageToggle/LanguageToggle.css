@@ -9,6 +9,9 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
     
     > .language-toggle-inner {
 	display: flex;

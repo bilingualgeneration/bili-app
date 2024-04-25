@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from '@/contexts/AudioManagerContext';
-import { useProfile } from "@/hooks/Profile";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useParams } from "react-router-dom";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
@@ -83,7 +83,7 @@ export const StoryFactoryPage4: React.FC = () => {
 };
 
 const StoryFactoryHydratedGame: React.FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const {addAudio, clearAudio} = useAudioManager();
   const { status, data } = useFirestoreDoc();
   const [words, setWords] = useState<any[][]>([]);
@@ -134,13 +134,48 @@ const StoryFactoryHydratedGame: React.FC = () => {
     setWordIndices(newWordIndices);
   };
 
-  const speak = (position: number, language: string = "es") => {
-    const text: string = normalizeAWS(
-      getText(words[position][wordIndices[position]].word, language),
-    );
-    addAudio([`${AWS_BUCKET}${text}.mp3`]);
-    //const audio = new Audio(`${AWS_BUCKET}${text}.mp3`);
-    //audio.play();
+  const speak = (position: number) => {
+    const audios = [];
+    switch(language){
+      case 'en':
+	audios.push(
+	  normalizeAWS(
+	    getText(
+	      words[position][wordIndices[position]].word, 'en'
+	    )
+	  )
+	);
+	break;
+      case 'es':
+	audios.push(
+	  normalizeAWS(
+	    getText(
+	      words[position][wordIndices[position]].word, 'es'
+	    )
+	  )
+	);
+	break;
+      case 'esen':
+	audios.push(
+	  normalizeAWS(
+	    getText(
+	      words[position][wordIndices[position]].word, 'es'
+	    )
+	  )
+	);
+	audios.push(
+	  normalizeAWS(
+	    getText(
+	      words[position][wordIndices[position]].word, 'en'
+	    )
+	  )
+	);
+	break;
+      default:
+
+	break;
+    }
+    addAudio(audios.map((text) => `${AWS_BUCKET}${text}.mp3`));
   };
 
   if (words.length === 0) {
@@ -223,9 +258,11 @@ const StoryFactoryHydratedGame: React.FC = () => {
               >
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {getText(words[0][wordIndices[0]].word, "es")}
+                    {language === 'en'
+		    ? getText(words[0][wordIndices[0]].word, "en")
+		    : getText(words[0][wordIndices[0]].word, "es")}
                   </h1>
-                  {!isImmersive && (
+                  {language === 'esen' && (
                     <p className="text-3xl color-english">
                       {getText(words[0][wordIndices[0]].word, "en")}
                     </p>
@@ -243,9 +280,11 @@ const StoryFactoryHydratedGame: React.FC = () => {
               >
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {getText(words[1][wordIndices[1]].word, "es")}
+                    {language === 'en'
+		    ? getText(words[1][wordIndices[1]].word, "en")
+		    : getText(words[1][wordIndices[1]].word, "es")}
                   </h1>
-                  {!isImmersive && (
+                  {language === 'esen' && (
                     <p className="text-3xl color-english">
                       {getText(words[1][wordIndices[1]].word, "en")}
                     </p>
@@ -263,9 +302,11 @@ const StoryFactoryHydratedGame: React.FC = () => {
               >
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {getText(words[2][wordIndices[2]].word, "es")}
+                    {language === 'en'
+		    ? getText(words[2][wordIndices[2]].word, "en")
+		    : getText(words[2][wordIndices[2]].word, "es")}
                   </h1>
-                  {!isImmersive && (
+                  {language === 'esen' && (
                     <p className="text-3xl color-english">
                       {getText(words[2][wordIndices[2]].word, "en")}
                     </p>
@@ -283,9 +324,11 @@ const StoryFactoryHydratedGame: React.FC = () => {
               >
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {getText(words[3][wordIndices[3]].word, "es")}
+                    {language === 'en'
+		    ? getText(words[3][wordIndices[3]].word, "en")
+		    : getText(words[3][wordIndices[3]].word, "es")}
                   </h1>
-                  {!isImmersive && (
+                  {language === 'esen' && (
                     <p className="text-3xl color-english">
                       {getText(words[3][wordIndices[3]].word, "en")}
                     </p>
@@ -318,6 +361,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
               <IonButton
                 className="volume-button-background"
                 onClick={() => {
+		  // TODO: need to check for en and esen
                   const sentence: string = normalizeAWS(
                     [
                       getText(words[0][wordIndices[0]].word, "es"),
@@ -368,7 +412,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
                     description="Story Factory volume/play button that says 'Read'"
                   />
                 </h1>
-                {!isImmersive && <p className="text-lg color-english">Read</p>}
+                {language === 'esen' && <p className="text-lg color-english">Read</p>}
               </IonText>
             </IonCol>
           </IonRow>

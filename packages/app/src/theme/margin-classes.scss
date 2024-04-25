@@ -1,3 +1,8 @@
+.margin-horizontal-carousel {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 @for $margin from 1 through 5 {
   .margin-top-#{$margin} {
     margin-top: #{$margin}rem !important;

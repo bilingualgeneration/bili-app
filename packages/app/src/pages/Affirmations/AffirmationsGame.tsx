@@ -4,7 +4,6 @@ import {
   useState,
 } from 'react';
 import {useParams} from 'react-router';
-import {useProfile} from '@/hooks/Profile';
 import {
   FirestoreDocProvider,
   useFirestoreDoc
@@ -20,6 +19,7 @@ import {
   IonRow,
   IonText,
 } from '@ionic/react';
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import forward from "@/assets/icons/carousel_forward.svg";
@@ -46,7 +46,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   text_back,
   text_front
 }) => {
-  const {profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const {addAudio} = useAudioManager();
   const [showFront, setShowFront] = useState<boolean>(true);
   const text_back_es = text_back.filter((t: MultilingualTextAndAudio) => t.language === 'es')[0];
@@ -78,20 +78,22 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 	  <div></div>
 	  <IonText>
 	    <h1 className='text-xl semibold color-suelo'>
-	      {text_front_es.text}
+	      {language !== 'en' ? text_front_es.text : text_front_en.text}
 	    </h1>
-	    {!isImmersive && <p className='text-lg color-english'>
+	    {language === 'esen' && <p className='text-lg color-english'>
 	      {text_front_en.text}
 	    </p>}
 	  </IonText>
 	</>}
 	{!showFront && <div className='ion-text-left' style={{height: '100%'}}>
 	  <h1 className='text-xl semibold color-suelo'>
-	    ¡Platiquemos!
+	    {language !== 'en' ? '¡Platiquemos!' : "Let's Talk!"}
 	  </h1>
-	  <h2 className='text-lg color-english'>
-	    Let's Talk!
-	  </h2>
+	  {language === 'esen' &&
+	   <h2 className='text-lg color-english'>
+	     Let's Talk!
+	   </h2>
+	  }
 	  <div style={{
 	    borderTop: '2px solid black',
 	    display: 'flex',
@@ -102,11 +104,13 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 	  }} className='margin-top-1 margin-bottom-1'>
 	    <IonText>
 	      <p className='text-xl semibold color-suelo'>
-		{text_back_es.text}
+		{language !== 'en' ? text_back_es.text : text_back_en.text}
 	      </p>
+	      {language === 'esen' &&
 	      <p className='text-lg color-english margin-top-1'>
 		{text_back_en.text}
 	      </p>
+	      }
 	    </IonText>
 	  </div>
 	</div>
@@ -125,13 +129,21 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 	onClick={() => {
 	  const audios = [];
 	  if(showFront){
-	    audios.push(text_front_es.audio.url);
-	    if(!isImmersive){
+	    if(language !== 'en'){
+	      audios.push(text_front_es.audio.url);
+	    }else{
+	      audios.push(text_front_en.audio.url);
+	    }
+	    if(language === 'esen'){
 	      audios.push(text_front_en.audio.url);
 	    }
 	  }else{
-	    audios.push(text_back_es.audio.url);
-	    if(!isImmersive){
+	    if(language !== 'en'){
+	      audios.push(text_back_es.audio.url);
+	    }else{
+	      audios.push(text_back_en.audio.url);
+	    }
+	    if(language === 'esen'){
 	      audios.push(text_back_en.audio.url);
 	    }
 	  }

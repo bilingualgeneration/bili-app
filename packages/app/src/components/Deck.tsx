@@ -18,6 +18,7 @@ import {
 import { useDrag } from "react-use-gesture";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { IonButton, IonText } from "@ionic/react";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import styles from "./Deck.module.scss";
 
@@ -34,13 +35,13 @@ interface DeckProps {
     esIncText?: string;
     esIncAudio?: CardAudio | null;
   }[];
-  isImmersive: boolean;
   isInclusive: boolean;
 }
 
-export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
+export const Deck: FC<DeckProps> = ({ cards, isInclusive }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const {language} = useLanguageToggle();
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const [currentCard, setCurrentCard] = useState<{
     esAudio?: CardAudio | null;
@@ -59,23 +60,25 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
 
   // Function to play audio for the current card
   const playAudio = (index: number) => {
-    // console.log(`Playing audio: ${index}`);
     const card = cards[index];
     let audios = [];
-    if ((!isImmersive && !isInclusive) || (isImmersive && !isInclusive)) {
-      if (card.esAudio) {
-        audios.push(card.esAudio.url);
-      }
-      //audioUrl = card.esAudio?.url || "";
-    } else {
-      if (card.esIncAudio) {
-        audios.push(card.esIncAudio.url);
-      }
-      //audioUrl = card.esIncAudio?.url || "";
-    }
+    switch(language){
+      case 'en':
+	if(card.enAudio){audios.push(card.enAudio.url)};
+	break;
+      case 'es':
+	if(!isInclusive && card.esAudio){audios.push(card.esAudio.url);}
+	if(isInclusive && card.esIncAudio){audios.push(card.esIncAudio.url);}
 
-    if (!isImmersive && card.enAudio) {
-      audios.push(card.enAudio.url);
+	break;
+      case 'esen':
+	if(!isInclusive && card.esAudio){audios.push(card.esAudio.url);}
+	if(isInclusive && card.esIncAudio){audios.push(card.esIncAudio.url);}
+	if(card.enAudio){audios.push(card.enAudio.url)};
+	break;
+      default:
+
+	break;
     }
     addAudio(audios);
   };
@@ -175,38 +178,19 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           const card = cards[i % cards.length];
           const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
             card;
-          let content = null;
-          if (isImmersive && isInclusive) {
-            content = (
-              <>
-                <h1 className={`${styles.es} text-3xl semibold`}>
-                  {esIncText}
-                </h1>
-              </>
-            );
-          } else if (isImmersive && !isInclusive) {
-            content = (
-              <>
-                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
-              </>
-            );
-          } else if (!isImmersive && isInclusive) {
-            content = (
-              <>
-                <h1 className={`${styles.es} text-3xl semibold`}>
-                  {esIncText}
-                </h1>
-                <p className="text-lg color-english">{enText}</p>
-              </>
-            );
-          } else {
-            content = (
-              <>
-                <h1 className={`${styles.es} text-3xl semibold`}>{esText}</h1>
-                <p className="text-lg color-english">{enText}</p>
-              </>
-            );
-          }
+      const content = <>
+	<h1 className={`${styles.es} text-3xl semibold`}>
+          {language === 'en'
+	  ? enText
+	  : (isInclusive
+	   ? esIncText
+	   : esText
+	  )}
+        </h1>
+	{language === 'esen' &&
+	 <p className="text-lg color-english">{enText}</p>
+	}
+      </>
           return (
             <animated.div
               {...bind(i)}
@@ -245,8 +229,10 @@ export const Deck: FC<DeckProps> = ({ cards, isImmersive, isInclusive }) => {
           <img className="sound-icon" src={volumeButton} alt="volume" />
         </IonButton>
         <IonText>
-          <h1 className="text-3xl semibold color-suelo">Lee</h1>
-          {!isImmersive && <p className="text-lg color-english">Read</p>}
+          <h1 className="text-3xl semibold color-suelo">
+	    {language === 'en' ? 'Read' : 'Lee'}
+	  </h1>
+          {language === 'esen' && <p className="text-lg color-english">Read</p>}
         </IonText>
       </div>
     </>

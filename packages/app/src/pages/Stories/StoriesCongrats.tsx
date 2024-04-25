@@ -5,6 +5,7 @@ import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 // audio
 import count_congrats_en_3 from '@/assets/audio/CountAudio/count_congrats_en_3.mp3';
@@ -46,7 +47,8 @@ export const StoriesCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const { profile: {isInclusive, isImmersive} } = useProfile();
+  const { profile: {isInclusive} } = useProfile();
+  const {language} = useLanguageToggle();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
@@ -69,9 +71,20 @@ export const StoriesCongrats: React.FC<{
     setCallback(() => () => {
       setAudioPlayed(true);
     });
-    const audios = [activity_completed_es];
-    if (!isImmersive) {
-      audios.push(activity_completed_en);
+    let audios = [];
+    switch(language){
+      case 'en':
+	audios.push(activity_completed_en);
+	break;
+      case 'es':
+	audios.push(activity_completed_es);
+	break;
+      case 'esen':
+	audios.push(activity_completed_es);
+	audios.push(activity_completed_en);
+	break;
+      default:
+	break;
     }
     addAudio(audios);
   }, []);
@@ -118,7 +131,7 @@ export const StoriesCongrats: React.FC<{
                 description="Information that the activity is completed"
               />
             </h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-2xl color-english" style={{ textAlign: "center" }}>
                 Activity Completed
               </p>
@@ -157,7 +170,7 @@ export const StoriesCongrats: React.FC<{
                   />
                 </div>
 
-                {!isImmersive && (
+                {language === 'esen' && (
                   <p className="text-sm color-english">
                     You've earned a star
                   </p>
@@ -204,7 +217,7 @@ export const StoriesCongrats: React.FC<{
                 description="Button label to exit congrats screen"
               />
             </div>
-            {!isImmersive && (
+            {language === 'esen' && (
               <div className="story-button-reg">Keep going!</div>
             )}
           </div>

@@ -1,6 +1,5 @@
 import React, {FC} from "react";
-import { PlayHeader } from "@/components/PlayHeader";
-import { useProfile } from "@/hooks/Profile";
+import { PackHeader } from "@/components/PackHeader";
 import { ComingSoonCard } from "@/components/ProfileComingSoon";
 import stars from "@/assets/icons/profile_coming_soon/coming_soon_card_stars.svg";
 import stickers from "@/assets/icons/profile_coming_soon/coming_soon_card_stickers.svg";
@@ -9,9 +8,10 @@ import { Carousel } from "@/components/Carousel";
 import "./ProfileComingSoon.scss";
 import biliHelmet from "@/assets/icons/profile_coming_soon/bili_profile_coming_soon.svg";
 import biliWorkshop from "@/assets/icons/profile_coming_soon/bili_workshop.svg";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 export const ProfileComingSoon: FC = () => {
-    const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
     const profileCards = [
       {
         cardColor: "#9A90F0",
@@ -32,22 +32,24 @@ export const ProfileComingSoon: FC = () => {
         cardImage: bili,
       }
     ];
+  
 
     return (
       <>
-        <PlayHeader 
-            bannerColor="#FFF8F0"
-            title="Mi Perfil - Próximamente" 
-            subtitle="My Profile - Coming Soon!"
-            titleClassName="text-5xl color-suelo"
-            subtitleClassName="text-3xl color-english semibold"
+        <PackHeader 
+	  bannerColor="#FFF8F0"
+          title={language === 'en' ? 'My Profile - Coming Soon!' : 'Mi Perfil - Próximamente'}
+          subtitle="My Profile - Coming Soon!"
+          titleClassName="text-5xl color-suelo"
+          subtitleClassName="text-3xl color-english semibold"
         />
         <div className="content-container">   
           <div className="heading-container">
             <h1 className="text-6xl bold carousel-header-margin">
-              Nuevas funciones en camino
+	      {language !== 'en' && 'Nuevas funciones en camino'}
+	      {language === 'en' && 'New features on the way'}
             </h1>
-            {!isImmersive &&
+            {language === 'esen' &&
               <p className="text-4xl color-english">
                 New features on the way
               </p>

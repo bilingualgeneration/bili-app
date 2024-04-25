@@ -7,6 +7,7 @@ import {
   useFirestoreDoc,
 } from '@/hooks/FirestoreDoc';
 import { Deck } from "@/components//Deck";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 import "@/pages/Intruder/Intruder.scss";
 
 import styles from "./styles.module.css";
@@ -22,7 +23,8 @@ export const WouldDoGame: React.FC = () => {
 };
 
 const WouldDoHydratedGame: React.FC = () => {
-  const { isInclusive, isImmersive } = useProfile();
+  const { isInclusive } = useProfile();
+  const {language} = useLanguageToggle();
   const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
 
   const { status, data } = useFirestoreDoc();
@@ -77,13 +79,12 @@ const WouldDoHydratedGame: React.FC = () => {
               description={"Title of '¿Que harías?' page"}
             />
           </h1>
-          {!isImmersive && <p className="text-3xl">What would you do?</p>}
+          {language === 'esen' && <p className="text-3xl">What would you do?</p>}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}
       <Deck
         cards={questionsData}
-        isImmersive={isImmersive}
         isInclusive={isInclusive}
       />
     </div>

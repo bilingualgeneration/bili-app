@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import "./Intro.scss";
 
 interface Type {
@@ -34,7 +34,7 @@ interface IntroProps {
 export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasAudioPlayed, setHasAudioPlayed] = useState(false);
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const history = useHistory();
 
@@ -50,12 +50,16 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
       }else{
-	      setHasAudioPlayed(true);
+	setHasAudioPlayed(true);
       }
     });
     let sounds = [];
-    sounds.push(texts[currentIndex].es.audio);
-    if(!isImmersive){
+    if(language !== 'en'){
+      sounds.push(texts[currentIndex].es.audio);
+    }else{
+      sounds.push(texts[currentIndex].en.audio);
+    }
+    if(language === 'esen'){
       sounds.push(texts[currentIndex].en.audio);
     }
     addAudio(sounds);
@@ -68,12 +72,14 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
           <IonCardContent style={{ paddingRight: 100 }}>
             <div>
               <h1 className="text-6xl color-suelo">
-                {texts[currentIndex].es.text}
+                {language !== 'en' && texts[currentIndex].es.text}
+                {language === 'en' && texts[currentIndex].en.text}
               </h1>
               <h2 className="text-4xl color-suelo">
-                {texts[currentIndex].es.subtext}
+                {language !== 'en' && texts[currentIndex].es.subtext}
+                {language === 'en' && texts[currentIndex].en.subtext}
               </h2>
-              {!isImmersive && 
+              {language === 'esen' && 
                 <>
                   <h1 className="text-6xl color-english margin-top-4">
                     {texts[currentIndex].en.text}
@@ -86,8 +92,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
             </div>
             <div
               className='margin-top-4'
-              style={{position: 'relative'}}
-            >
+              style={{position: 'relative'}}>
               {hasAudioPlayed && currentIndex === texts.length - 1 && (
                 <img
                   src={StoryFactoryArrow}
@@ -101,17 +106,18 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
               )}
               <IonButton
                 onClick={() => history.push(nextPath)}
-		            className='margin-top-3'
+		className='margin-top-3'
                 shape="round"
-		            expand='block'
+		expand='block'
                 style={{width: '50%', margin: 'auto'}}>
                 <IonText>
                   <h1
                     style={{ color: "white" }}
                     className="text-4xl color-nube">
-                    Siguiente
+		    {language !== 'en' && 'Siguiente'}
+		    {language === 'en' && 'Next'}
                   </h1>
-                  {!isImmersive && 
+                  {language === 'esen' && 
                   <p
                     style={{ color: "black" }}
                     className="text-xl color-nube">

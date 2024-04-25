@@ -3,21 +3,16 @@
 }
 
 #stories-landing-page {
-    .carousel-header-margin{
-        margin-left: 6.5rem;
-    }
-
-   
+    margin-left: 70px;
+    margin-right: 30px;
     .image-container {
-        display: flex;
-        justify-content: center;
-        width: 100%; /* Ensures the container takes the full width */
-    }
-
-    .all-about-me-header {
-        margin-bottom: 30px;
-        @media (max-width: 1024px) { /* iPad Mini landscape width */
-            margin-top: 3rem; 
-        }
+	background: url('/assets/img/coming_soon_block.svg');
+	background-size: cover;
+	border-radius: 1rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	margin: auto;
+	margin-top: 1rem;
+	text-align: center;
     }
 }
