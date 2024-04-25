@@ -1,17 +1,17 @@
 {
   "name": "CapacitorPreferences",
-  "version": "5.0.6",
+  "version": "6.0.0",
   "summary": "The Preferences API provides a simple key/value persistent store for lightweight data.",
   "license": "MIT",
   "homepage": "https://capacitorjs.com",
   "authors": "Ionic <hi@ionicframework.com>",
   "source": {
     "git": "https://github.com/ionic-team/capacitor-plugins.git",
-    "tag": "@capacitor/preferences@5.0.6"
+    "tag": "@capacitor/preferences@6.0.0"
   },
   "source_files": [
-    "ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}",
-    "preferences/ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}"
+    "ios/Sources/**/*.{swift,h,m,c,cc,mm,cpp}",
+    "preferences/ios/Sources/**/*.{swift,h,m,c,cc,mm,cpp}"
   ],
   "platforms": {
     "ios": "13.0"
