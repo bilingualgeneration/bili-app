@@ -6,6 +6,7 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import "./CountWithMe.scss";
 import { useHistory } from "react-router";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 interface FactsPageProps {
   factText: any[]; // Adjust the type according to what factText actually contains
@@ -20,7 +21,8 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   count,
   onKeepGoingClick,
 }) => {
-  const {profile: { isInclusive, isImmersive }} = useProfile();
+  const {profile: { isInclusive}} = useProfile();
+  const {language} = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
@@ -30,7 +32,6 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   
   useEffect(() => {
     if (audioPlayed) {
-      //setShowCongrats(true);
       onKeepGoingClick();
     }
   }, [audioPlayed]);
@@ -45,15 +46,19 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
       setAudioPlayed(true);
     });
     let audios = [];
-    if(isInclusive){
-      audios.push(ftesinc.audio.url);
-    }else{
-      audios.push(ftes.audio.url);
-    }
-    if(!isImmersive){
-      if(ften && ften.audio){
-	    audios.push(ften.audio.url);
-      }
+    switch(language){
+      case 'en':
+	audios.push(ften.audio.url);
+	break;
+      case 'es':
+	audios.push(isInclusive ? ftesinc.audio.url : ftes.audio.url);
+	break;
+      case 'esen':
+	audios.push(isInclusive ? ftesinc.audio.url : ftes.audio.url);
+	audios.push(ften.audio.url);
+	break;
+      default:
+	break;
     }
     addAudio(audios);
   }, []);
@@ -70,7 +75,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
         className="background-card margin-top-3"
         style={{
           backgroundImage: `url(${factBackground})`,
-	        backgroundSize: 'auto 100%',
+	  backgroundSize: 'auto 100%',
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
           aspectRatio: '1159 / 724',
@@ -80,8 +85,11 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
         }}
       >
         <IonText style={{ width: "50%" }}>
-          <h1 className="text-3xl semibold color-suelo">{ftes.text}</h1>
-          {!isImmersive && (
+          <h1 className="text-3xl semibold color-suelo">
+	    {language !== 'en' && ftes.text}
+	    {language === 'en' && ften.text}
+	  </h1>
+          {language === 'esen' && (
             <p className="text-2xl color-english margin-top-2">
               {ften.text}
             </p>

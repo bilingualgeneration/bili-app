@@ -6,6 +6,7 @@ import "./ContentCard.scss";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 type ContentCardProps = {
   title: string;
@@ -19,12 +20,14 @@ type ContentCardProps = {
 };
 
 const ComingSoon: React.FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   return (
     <div className="content-coming-soon">
       <IonText>
         <p className="text-xs semibold color-suelo">
-          Próximamente{!isImmersive && " | Coming Soon"}
+	  {language === 'en' && 'Coming Soon'}
+	  {language === 'es' && 'Próximamente'}
+	  {language === 'esen' && 'Próximamente | Coming Soon'}
         </p>
       </IonText>
     </div>
@@ -49,7 +52,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   isLocked = false,
   link,
 }) => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   return (
     <div
@@ -65,8 +68,10 @@ export const ContentCard: React.FC<ContentCardProps> = ({
       <FavoriteButton fid={fid} />
       <IonText>
         {isLocked && <ComingSoon />}
-        <h1 className="text-2xl semibold color-nube">{title}</h1>
-        {!isImmersive && <p className="text-sm color-nube">{titleEn}</p>}
+        <h1 className="text-2xl semibold color-nube">
+	  {language === 'en' ? titleEn : title}
+	</h1>
+        {language === 'esen' && <p className="text-sm color-nube">{titleEn}</p>}
       </IonText>
       {isLocked && <Lock />}
     </div>

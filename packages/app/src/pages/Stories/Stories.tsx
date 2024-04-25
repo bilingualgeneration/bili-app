@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import {useHistory} from 'react-router-dom';
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
@@ -82,7 +83,8 @@ export const StoryLoader = () => {
     setReady,
   } = useStory();
   const { status, data } = useFirestoreDoc();
-  const { profile: {isInclusive, isImmersive} } = useProfile();
+  const { profile: {isInclusive} } = useProfile();
+  const {language} = useLanguageToggle();
   useEffect(() => {
     if (data) {
       const fp = data.pages.filter((p: any) => {
@@ -222,6 +224,7 @@ const PageCounter = () => {
 };
 
 const Pill: (args: any) => any = ({ icon, text, value }) => {
+  const {language} = useLanguageToggle();
   return (
     <IonGrid
       style={{
@@ -235,7 +238,12 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
         </IonCol>
         <IonCol size="auto">
           <IonText>
-            <h2 style={{marginTop: 0}} className="text-sm semibold color-suelo">{text.es}</h2>
+            <h2 style={{marginTop: 0}} className="text-sm semibold color-suelo">
+	      
+	      {language === 'en'
+	      ? text.en
+	      : text.es}
+	    </h2>
             <p className="text-xs color-english">{value}</p>
           </IonText>
         </IonCol>
@@ -245,7 +253,8 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
 };
 
 const TitleCard = ({ data }: any) => {
-  const {profile: { isInclusive, isImmersive }} = useProfile();
+  const {profile: { isInclusive}} = useProfile();
+  const {language} = useLanguageToggle();
   const { pageForward } = useStory();
   return (
     <div className="content-wrapper margin-top-1">
@@ -260,9 +269,11 @@ const TitleCard = ({ data }: any) => {
         <IonCardContent>
           <IonText className="ion-text-center">
             <h1 className="text-5xl color-suelo">
-              {getLang(isInclusive ? "es-inc" : "es", data.title).text}
+	      {language === 'en'
+	      ? getLang("en", data.title).text
+	      : getLang(isInclusive ? "es-inc" : "es", data.title).text}
             </h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-3xl color-english">
                 {getLang("en", data.title).text}
               </p>
@@ -286,8 +297,12 @@ const TitleCard = ({ data }: any) => {
                 paddingRight: "5rem",
               }}
             >
-              <h1 className="text-3xl semibold color-nube">¡Leamos!</h1>
-              {!isImmersive && (
+              <h1 className="text-3xl semibold color-nube">
+		{language === 'en'
+		? "Let's read!"
+		: '¡Leamos!'}
+	      </h1>
+              {language === 'esen' && (
                 <p className="text-sm color-nube">Let's read!</p>
               )}
             </IonText>
@@ -310,8 +325,8 @@ const TitleCard = ({ data }: any) => {
             <Pill
               icon={AuthorIcon}
               text={{
-                en: "Escrito por",
-                es: "Written by",
+                es: "Escrito por",
+                en: "Written by",
               }}
               value={data.author}
             />
@@ -320,8 +335,8 @@ const TitleCard = ({ data }: any) => {
             <Pill
               icon={IllustratorIcon}
               text={{
-                en: "Ilustrado por",
-                es: "Illustrated by",
+                es: "Ilustrado por",
+                en: "Illustrated by",
               }}
               value={data.illustrator}
             />
@@ -330,8 +345,8 @@ const TitleCard = ({ data }: any) => {
             <Pill
               icon={NarratorIcon}
               text={{
-                en: "Narrado por",
-                es: "Narrated by",
+                es: "Narrado por",
+                en: "Narrated by",
               }}
               value={data.narrator}
             />
@@ -368,7 +383,8 @@ const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
 
 const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
-  const {profile: { isImmersive, isInclusive }} = useProfile();
+  const {profile: { isInclusive }} = useProfile();
+  const {language} = useLanguageToggle();
   const {addAudio, clearAudio} = useAudioManager();
   useEffect(() => {
     return clearAudio;
@@ -387,8 +403,7 @@ const StoryPage: React.FC<any> = () => {
       <IonCol size="auto">
         <IonCard
           className="sf-card drop-shadow"
-          style={cardStyles}
-        >
+          style={cardStyles}>
           <IonCardContent className='ion-text-center ion-no-padding'
 			  style={{
 			    display: 'flex',
@@ -399,9 +414,11 @@ const StoryPage: React.FC<any> = () => {
 	    <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-2xl semibold color-suelo">
-                {isInclusive ? texts["es-inc"].text : texts.es.text}
+                {language === 'en'
+		? texts.en.text
+		: (isInclusive ? texts["es-inc"].text : texts.es.text)}
               </h1>
-              {!isImmersive && (
+              {language === 'esen' && (
                 <p className="text-xl color-english">{texts.en.text}</p>
               )}
             </IonText>
@@ -412,19 +429,41 @@ const StoryPage: React.FC<any> = () => {
 		className='stories-volume-button'
 		onClick={() => {
 		  let audios = [];
-		  if(isInclusive){
-		    if(texts['es-inc'].audio){
-		      audios.push(texts['es-inc'].audio.url);
-		    }
-		  }else{
-		    if(texts['es'].audio){
-		      audios.push(texts['es'].audio.url);
-		    }		
-		  }
-		  if(!isImmersive){
-		    if(texts['en'].audio){
-		      audios.push(texts['en'].audio.url);
-		    }
+		  switch(language){
+		    case 'en':
+		      if(texts['en'].audio){
+			audios.push(texts['en'].audio.url);
+		      }
+		      break;
+		    case 'es':
+		      if(isInclusive){
+			if(texts['es-inc'].audio){
+			  audios.push(texts['es-inc'].audio.url);
+			}
+		      }else{
+			if(texts['es'].audio){
+			  audios.push(texts['es'].audio.url);
+			}
+		      }
+		      
+		      break;
+		    case 'esen':
+		      if(isInclusive){
+			if(texts['es-inc'].audio){
+			  audios.push(texts['es-inc'].audio.url);
+			}
+		      }else{
+			if(texts['es'].audio){
+			  audios.push(texts['es'].audio.url);
+			}
+		      }
+		      if(texts['en'].audio){
+			audios.push(texts['en'].audio.url);
+		      }
+		      break;
+		    default:
+
+		      break;
 		  }
 		  addAudio(audios);
 		}}

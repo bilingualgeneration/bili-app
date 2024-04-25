@@ -9,50 +9,39 @@ import { useHistory } from "react-router";
 import Lock from "@/assets/icons/lock.svg?react";
 import "./Wellness.scss";
 import "../Play/Play.scss";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 const PlayHeader: FC = () => {
-    const { profile: {isImmersive, isInclusive} } = useProfile();
-    return (
-      <div className="headerBanner">
-        <IonText>
+  const {language} = useLanguageToggle();
+  return (
+    <div className="headerBanner">
+      <IonText>
         <h1 className='text-5xl color-nube'>
-        Bienestar
+	  {(language === 'es' || language === 'esen') && 'Bienestar'}
+	  {language === 'en' && 'Wellness'}
         </h1>
-        {!isImmersive &&
+        {language === 'esen' &&
          <p className='text-3xl color-nube'>
-            Wellness
+           Wellness
          </p>
         }
-        </IonText>
-      </div>
-    );
-  };
+      </IonText>
+    </div>
+  );
+};
 
   const AnotherCard: FC<{ rotation?: number }> = ({ rotation = 0 }) => {
-    const { profile: {isImmersive} } = useProfile();
-    const history = useHistory();
     const rotationStyle = {
       transform: `rotate(${rotation}deg)`,
-  };
-
+    };
+    
     return (
       <div
         className="card another-cards"
         style={rotationStyle}
-        onClick={() => {
-         // history.push("/intruder-game/intro");
-        }}
       >
         <CategoryTag category="other_wellness" className="play-category-tag" />
         <FavoriteButton fid="category-the intruder" />
-        {/* <img src={AffirmationGirl} />
-        <IonText>
-          <h1 className="text-4xl semibold">
-          Afirmaciones
-          </h1>
-  
-          {!isImmersive && <p className="text-3xl color-nube">Affirmations</p>}
-        </IonText> */}
       </div>
     );
   };
@@ -60,7 +49,7 @@ const PlayHeader: FC = () => {
 
 // todo: change mouse cursor to pointer
   const AffirmationCard: FC = () => {
-    const { profile: {isImmersive} } = useProfile();
+    const {language} = useLanguageToggle();
     const history = useHistory();
     return (
       <div
@@ -75,26 +64,23 @@ const PlayHeader: FC = () => {
         <img src={AffirmationGirl} />
         <IonText>
           <h1 className="text-4xl semibold color-flamenco-lowest">
-            Afirmaciones
+	  {(language === 'es' || language === 'esen') && 'Afirmaciones'}
+	  {language === 'en' && 'Affirmations'}
           </h1>
 	  
-          {!isImmersive && <p className="text-3xl color-flamenco-lowest">Affirmations</p>}
+          {language === 'esen' && <p className="text-3xl color-flamenco-lowest">Affirmations</p>}
         </IonText>
       </div>
     );
   };
 
 
-  const YogaCard: FC = () => {
-    const { profile: {isImmersive }} = useProfile();
-    const history = useHistory();
+const YogaCard: FC = () => {
+  const {language} = useLanguageToggle();
     return (
       <div
         id="yoga-card"
         className="card"
-        onClick={() => {
-         // history.push("/intruder-game/intro");
-        }}
       >
         <div className="content-lock">
           <Lock />
@@ -104,10 +90,12 @@ const PlayHeader: FC = () => {
         <img src={BreathingGirl} />
         <IonText>
           <h1 className="text-4xl semibold color-flamenco-lowest">
-          Respirando hondo
+	  {(language === 'es' || language === 'esen') && 'Respirando hondo'}
+	  {language === 'en' && 'Breathing Deeply'}
+          
           </h1>
   
-          {!isImmersive && <p className="text-3xl color-flamenco-lowest">Breathing deeply</p>}
+          {language === 'esen' && <p className="text-3xl color-flamenco-lowest">Breathing deeply</p>}
         </IonText>
       </div>
     );

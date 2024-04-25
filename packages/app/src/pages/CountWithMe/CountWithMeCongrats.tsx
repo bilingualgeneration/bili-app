@@ -5,6 +5,7 @@ import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 // audio
 import count_congrats_en_3 from '@/assets/audio/CountAudio/count_congrats_en_3.mp3';
@@ -48,7 +49,8 @@ export const CountWithMeCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const {profile: { isInclusive, isImmersive }} = useProfile();
+  const {profile: { isInclusive}} = useProfile();
+  const {language} = useLanguageToggle();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
@@ -72,7 +74,7 @@ export const CountWithMeCongrats: React.FC<{
       setAudioPlayed(true);
     });
 
-    if (isImmersive) {
+    if (language === 'esen') {
       if (isInclusive) {
         addAudio([audio_es]);
       } else {
@@ -125,7 +127,7 @@ export const CountWithMeCongrats: React.FC<{
                 description="Information that the activity is completed"
               />
             </h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-2xl color-english" style={{ textAlign: "center" }}>
                 Activity Completed
               </p>
@@ -164,7 +166,7 @@ export const CountWithMeCongrats: React.FC<{
                   />
                 </div>
 
-                {!isImmersive && (
+                {language === 'esen' && (
                   <p className="text-sm color-english">
                     You've earned a star
                   </p>
@@ -211,7 +213,7 @@ export const CountWithMeCongrats: React.FC<{
                 description="Button label to exit congrats screen"
               />
             </div>
-            {!isImmersive && (
+            {language === 'esen' && (
               <div className="story-button-reg">Keep going!</div>
             )}
           </div>

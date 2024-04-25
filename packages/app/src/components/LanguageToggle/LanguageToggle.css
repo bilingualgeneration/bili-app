@@ -1,0 +1,46 @@
+.language-toggle{
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    height: 78px;
+    width: 78px;
+    border-radius: 28px;
+    display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    
+    > .language-toggle-inner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+    }
+    /* todo: nest .en etc */
+}
+
+.language-toggle.en {
+    background-color: #0045A1;
+}
+.language-toggle.en.pressed {
+    background-color: #003782;
+}
+
+.language-toggle.es {
+    background-color: #F0091B;
+}
+.language-toggle.es.pressed {
+    background-color: #C00617;
+}
+
+.language-toggle.esen {
+    background-color: #006A67;
+}
+.language-toggle.esen.pressed {
+    background-color: #005552;
+}

@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { CountWithMeCongrats } from "./CountWithMeCongrats";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 interface BiliImage {
   url: string;
@@ -56,7 +57,8 @@ interface CountGameProps {
 }
 
 export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
-  const { profile: {isInclusive, isImmersive }} = useProfile();
+  const { profile: {isInclusive}} = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   const { addAudio, clearAudio, setCallback } = useAudioManager();
 
@@ -138,22 +140,40 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
       if (allAnimalsClicked) { //audio for the count questions
         const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
         const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
-        audios.push(ftes.audio.url);
-        if (!isImmersive) {
-          if (ften && ften.audio) {
+
+	switch(language){
+	  case 'en':
             audios.push(ften.audio.url);
-          }
-        }
-        
+	    break;
+	  case 'es':
+            audios.push(ftes.audio.url);
+	    break;
+	  case 'esen':
+            audios.push(ftes.audio.url);
+            audios.push(ften.audio.url);
+	    break;
+	  default:
+
+	    break;
+	}
       }else{ //audio for the game questions
         const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
         const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-        audios.push(ftes.audio.url);
-        if(!isImmersive){
-          if(ften && ften.audio){
+	switch(language){
+	  case 'en':
             audios.push(ften.audio.url);
-          }
-        }
+	    break;
+	  case 'es':
+            audios.push(ftes.audio.url);
+	    break;
+	  case 'esen':
+            audios.push(ftes.audio.url);
+            audios.push(ften.audio.url);
+	    break;
+	  default:
+
+	    break;
+	}
       }
       addAudio(audios);
   
@@ -173,10 +193,23 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
       setClickedIndexes([...clickedIndexes, index]);
      
       if (clickedIndexes.length + 1 <= getData.animalImages.length) {
-        let audios = [`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`];
-        if (!isImmersive) {
-          audios.push(`/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`);
-        }
+        let audios = [];
+	const audio_es = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`;
+	const audio_en = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`;
+	switch(language){
+	  case 'en':
+            audios.push(audio_en);
+	    break;
+	  case 'es':
+            audios.push(audio_es);
+	    break;
+	  case 'esen':
+            audios.push(audio_es);
+            audios.push(audio_en);
+	    break;
+	  default:
+	    break;
+	}
         addAudio(audios);
       }
        //switches text from game question to count questions and wait until the number's audio is stopped
@@ -280,9 +313,10 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
                 {allAnimalsClicked ? (
                   <>
                     <h1 className="text-4xl color-suelo">
-                      {cftes.text}
+                      {language !== 'en' && cftes.text}
+                      {language === 'en' && cften.text}
                     </h1>
-                    {!isImmersive && (
+                    {language === 'esen' && (
                       <p className="text-3xl color-english">
                         {cften.text}
                       </p>
@@ -291,9 +325,10 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
                 ) : (
                   <>
                     <h1 className="text-4xl color-suelo">
-                      {gftes.text}
+                      {language !== 'en' && gftes.text}
+                      {language === 'en' && gften.text}
                     </h1>
-                    {!isImmersive && (
+                    {language === 'esen' && (
                       <p className="text-3xl color-english">
                         {gften.text}
                       </p>

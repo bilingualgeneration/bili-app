@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
 import { useIntl } from "react-intl";
 import CountWithMe from "@/assets/icons/count_with_me.png";
 import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
@@ -12,11 +11,12 @@ import { PlayHeader } from "@/components/PlayHeader";
 import { Link } from "react-router-dom";
 import { Carousel } from "@/components/Carousel";
 import { CategoryTag } from "@/components/CategoryTag";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import "./Play.scss";
 
 const StoryFactoryCard: FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   return (
     <div
@@ -37,14 +37,14 @@ const StoryFactoryCard: FC = () => {
             description="Standalone label for Story Factory"
           />
         </h1>
-        {!isImmersive && <p className="text-3xl color-nube">Story Factory</p>}
+        {language === 'esen' && <p className="text-3xl color-nube">Story Factory</p>}
       </IonText>
     </div>
   );
 };
 
 const IntruderCard: FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   return (
     <div
@@ -66,14 +66,14 @@ const IntruderCard: FC = () => {
           />
         </h1>
 
-        {!isImmersive && <p className="text-3xl color-nube">The Intruder</p>}
+        {language === 'esen' && <p className="text-3xl color-nube">The Intruder</p>}
       </IonText>
     </div>
   );
 };
 
 const CountCard: FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   return (
     <div
@@ -96,20 +96,17 @@ const CountCard: FC = () => {
             description="Standalone label for Count with Me"
           />
         </h1>
-        {!isImmersive && <p className="text-3xl color-nube">Count with Me</p>}
+        {language === 'esen' && <p className="text-3xl color-nube">Count with Me</p>}
       </IonText>
     </div>
   );
 };
 
 export const Play: FC = () => {
-  const { profile:{ isImmersive} } = useProfile();
+  const intl = useIntl();
   return (
     <div id="playPage">
-      <PlayHeader 
-        title="Juego"
-        subtitle="Play"
-      />
+      <PlayHeader />
       <div className="carousel-container">
         <Carousel 
           height={445}

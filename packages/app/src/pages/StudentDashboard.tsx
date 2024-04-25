@@ -18,6 +18,7 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
@@ -46,6 +47,7 @@ const WaveIcon: React.FC<WaveIcon> = ({
   reactintlId,
 }) => {
   const {profile: {isImmersive}} = useProfile();
+  const {language} = useLanguageToggle();
   const history = useHistory();
   return (
     <span className="wave-icon">
@@ -62,13 +64,13 @@ const WaveIcon: React.FC<WaveIcon> = ({
       </div>
       <IonText>
         <h2 className="text-2xl semibold color-suelo">
-          <FormattedMessage
-            defaultMessage={reactintlId}
-            description="icon label"
-            id={reactintlId}
-          />
+           <FormattedMessage
+             defaultMessage={reactintlId}
+             description="icon label"
+             id={reactintlId}
+           />
         </h2>
-        {!isImmersive && (
+        {language === 'esen' && (
           <h2 className="text-lg color-suelo">{englishLabel}</h2>
         )}
       </IonText>
@@ -183,16 +185,41 @@ const communityCards = [
   }
 ];
 
+const Banner: React.FC = () => {
+  const {activeChildProfile: {name}} = useProfile();
+  const {language} = useLanguageToggle();
+  return <div
+           className="cards-title background-pattern"
+           style={{
+             paddingBottom: "4rem",
+             paddingTop: "4rem",
+             paddingLeft: 20,
+             paddingRight: 20,
+           }}>
+    <h1 className="text-5xl color-suelo carousel-header-margin">
+      <FormattedMessage
+        id="landingPage.welcome"
+        defaultMessage="Hello {name}!"
+        values={{ name }}
+      />
+    </h1>
+    {language === 'esen' && (
+      <p className="text-3xl color-english carousel-header-margin">Hello {name}!</p>
+        )}
+  </div>;
+}
+
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
   const {
     activeChildProfile: {name},
     profile: {
       isInclusive,
-      isImmersive,
     }
   } = useProfile();
-
+  const {language} = useLanguageToggle();
+  const isImmersive = true;
+  
   const storyCards = [
     {
       category: "story/play",
@@ -285,26 +312,7 @@ export const StudentDashboard: React.FC = () => {
 
   return (
     <div id="student-landing-page">
-      <div
-        className="cards-title background-pattern"
-        style={{
-          paddingBottom: "4rem",
-          paddingTop: "4rem",
-          paddingLeft: 20,
-          paddingRight: 20,
-        }}>
-        <h1 className="text-5xl color-suelo carousel-header-margin">
-          <FormattedMessage
-            id="landingPage.welcome"
-            defaultMessage="Hello {name}!"
-            values={{ name }}
-          />
-        </h1>
-        {!isImmersive && (
-          <p className="text-3xl color-english carousel-header-margin">Hello {name}!</p>
-        )}
-      </div>
-
+      <Banner />
       <div style={{ marginLeft: 20, marginRight: 20 }}>
         <div className="icons-title margin-top-3">
           <IonText>
@@ -314,7 +322,7 @@ export const StudentDashboard: React.FC = () => {
                 defaultMessage="Categories"
               />
             </h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-3xl color-english carousel-header-margin">Categories</p>
             )}
           </IonText>
@@ -345,7 +353,7 @@ export const StudentDashboard: React.FC = () => {
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage id="common.stories" defaultMessage="Stories" />
             </h1>
-            {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
+            {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
 	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -366,7 +374,7 @@ export const StudentDashboard: React.FC = () => {
                 defaultMessage="Wellness"
               />
             </h1>
-            {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
+            {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
 	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -389,7 +397,7 @@ export const StudentDashboard: React.FC = () => {
                   description="Standalone label for Play"
                 />
               </h1>
-              {!isImmersive && <p className="text-3xl color-english carousel-header-margin">Play</p>}
+              {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Play</p>}
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -411,7 +419,7 @@ export const StudentDashboard: React.FC = () => {
                   defaultMessage="Community"
                 />
               </h1>
-              {!isImmersive && (
+              {language === 'esen' && (
                 <p className="text-3xl color-english carousel-header-margin">Community</p>
               )}
             </IonText>

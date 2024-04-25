@@ -4,9 +4,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import {Router} from '@/components/Router';
-
-
-
+import {LanguageToggleProvider} from '@/components/LanguageToggle';
 
 // todo: unsure if ErrorBoundary is necessary
 // todo: unsure if Suspense is working
@@ -55,6 +53,7 @@ import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
 import "@/theme/margin-classes.scss";
 import "@/theme/text-classes.scss";
+import "@/theme/style-classes.css";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,18 +62,17 @@ import "slick-carousel/slick/slick-theme.css";
 setupIonicReact();
 
 const App: React.FC = () => {
-  const { locale } = useLanguage();
   return (
     <ErrorBoundary fallback={<Loading />}>
       <IonApp>
 	<InterfaceLanguageProvider>
           <AudioManagerProvider>
 	    <ProfileProvider>
-	      <I18nWrapper locale={locale}>
+	      <LanguageToggleProvider>
 		<AppWrapper>
 		  <Router />
 		</AppWrapper>
-	      </I18nWrapper>
+	      </LanguageToggleProvider>
 	    </ProfileProvider>
           </AudioManagerProvider>
 	</InterfaceLanguageProvider>

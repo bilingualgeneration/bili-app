@@ -61,7 +61,6 @@ import {
 } from '@/pages/Stories';
 import {
   StoryFactoryIntro,
-  StoryFactoryPage3,
   StoryFactoryPage4,
   StoryFactorySelect,
 } from '@/pages/StoryFactory';

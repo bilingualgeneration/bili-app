@@ -1,12 +1,11 @@
-import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/hooks/Profile";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import "./CommunityHeader.scss";
 
-export const CommunityHeader: FC = () => {
-  const { profile: {isImmersive} } = useProfile();
+export const CommunityHeader: React.FC = () => {
+  const {language} = useLanguageToggle();
   return (
     <div id="communityBanner">
       <IonText>
@@ -17,7 +16,7 @@ export const CommunityHeader: FC = () => {
             description="Standalone label for Community"
           />
         </h1>
-        {!isImmersive &&
+        {language === 'esen' &&
 	 <p className='text-3xl color-suelo'>
 	   Community
 	 </p>

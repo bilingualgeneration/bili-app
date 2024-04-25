@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/hooks/Profile";
 import pattern from "@/assets/icons/header_background_pattern.svg";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 
 import "./PackHeader.scss";
 
@@ -21,15 +21,15 @@ export const PackHeader: FC<PackHeaderProps> = ({
   titleClassName = "text-5xl color-nube",
   subtitleClassName = "text-3xl color-nube",
 }) => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   return (
     <div id="packBanner" style={{ backgroundColor: bannerColor }}>
       <div className="banner-overlay" style={{ backgroundColor: bannerColor }}/>
       <IonText className="banner-content">
         <h1 className={`${titleClassName}`}>
-          {title}
+	  {title}
         </h1>
-        {!isImmersive &&
+        {language === 'esen' &&
           <p className={`${subtitleClassName}`}>
             {subtitle}
           </p>

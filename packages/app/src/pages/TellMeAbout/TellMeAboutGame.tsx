@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 import { useParams } from "react-router-dom";
 import {
   FirestoreDocProvider,
@@ -22,7 +23,8 @@ export const TellMeAboutGame: React.FC = () => {
 
 
 const TellMeAboutHydratedGame: React.FC = () => {
-  const { profile: {isInclusive, isImmersive }} = useProfile();
+  const { profile: {isInclusive }} = useProfile();
+  const {language} = useLanguageToggle();
   const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
   const {status, data} = useFirestoreDoc();
 
@@ -72,18 +74,16 @@ const TellMeAboutHydratedGame: React.FC = () => {
         <IonText>
           <h1 className="text-5xl margin-top-1">
             <FormattedMessage
-              id="tellMeAbout.title" // not found
-              defaultMessage={"Tell me about..."}
+              id="common.tellMeAbout"
               description={"Title of 'Cuéntame sobre...' page"}
             />
           </h1>
-          {!isImmersive && <p className="text-3xl">Tell me about...</p>}
+          {language === 'esen' && <p className="text-3xl">Tell me about...</p>}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}
       <Deck
         cards={questionsData}
-        isImmersive={isImmersive}
         isInclusive={isInclusive}
       />
     </div>

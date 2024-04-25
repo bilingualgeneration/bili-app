@@ -18,6 +18,7 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
+import {useLanguageToggle} from '@/components/LanguageToggle';
 import {useStory} from './StoryContext';
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "../../pages/Stories/Stories.scss";
@@ -142,7 +143,8 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
   gameType,
 }) => {
-  const { profile: {isImmersive, isInclusive} } = useProfile();
+  const { profile: {isInclusive} } = useProfile();
+  const {language} = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, setCallback } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
@@ -158,13 +160,13 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       es: textPacks.find(
         (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
       )!,
-      en: !isImmersive
+      en: language === 'esen'
         ? undefined
         : textPacks.find(
             (tp: any) => tp.language === (isInclusive ? "en-inc" : "en"),
           ),
     };
-  }, [isImmersive, isInclusive, data, gameType]);
+  }, [language, isInclusive, data, gameType]);
 
   // useEffect(() => {
   //   return () => {

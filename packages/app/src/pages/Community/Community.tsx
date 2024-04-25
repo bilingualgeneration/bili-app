@@ -5,7 +5,7 @@ import {
   IonText,
 } from "@ionic/react";
 
-import { useProfile } from "@/hooks/Profile";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
 import { CommunityHeader } from "@/components/CommunityHeader";
@@ -19,12 +19,14 @@ import tunita from "@/assets/img/tunita.png";
 import "./Community.scss";
 
 const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
-  const {profile: {isImmersive}} = useProfile();
+  const {language} = useLanguageToggle();
   const content = <>
     <img src={image} />
     <IonText className="ion-text-center">
-      <h1 className='text-3xl semibold color-cielo'>{translatedTitle}</h1>
-      {!isImmersive && (
+      <h1 className='text-3xl semibold color-cielo'>
+	{language === 'en' ? title : translatedTitle}
+      </h1>
+      {language === 'esen' && (
         <h3 className="text-2xl color-cielo">
 	  {title}
         </h3>
@@ -46,7 +48,6 @@ const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
 
 export const Community: FC = () => {
   const intl = useIntl();
-  const {profile: {isImmersive}} = useProfile();
   const cards = [
     {
       translatedTitle: intl.formatMessage({

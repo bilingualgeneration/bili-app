@@ -16,7 +16,7 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/hooks/Profile";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
 import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
@@ -69,12 +69,13 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const { profile: {isImmersive} } = useProfile();
+  const {language} = useLanguageToggle();
   const {addAudio, clearAudio, setCallback} = useAudioManager();
 
   useEffect(() => {
+    // todo: allow only English?
     const audios = [instruction_es_audio];
-    if(!isImmersive){
+    if(language === 'esen'){
       audios.push(instruction_en_audio);
     }
     addAudio(audios);
@@ -264,7 +265,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
         <div className="margin-top-4 margin-bottom-2">
           <IonText>
             <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-3xl color-english">
                 Which word does not rhyme?
               </p>
@@ -295,7 +296,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           </IonButton>
           <IonText>
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
-            {!isImmersive && (
+            {language === 'esen' && (
               <p className="text-lg color-english">
                 Read
               </p>
