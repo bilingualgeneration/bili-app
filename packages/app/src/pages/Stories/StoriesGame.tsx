@@ -155,24 +155,17 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     const textPacks =
       gameType === "image"
         ? data.multiple_image_text
-        : data.multiple_syllable_text;
+      : data.multiple_syllable_text;
+    console.log(textPacks);
     return {
       es: textPacks.find(
         (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
       )!,
-      en: language === 'esen'
-        ? undefined
-        : textPacks.find(
-            (tp: any) => tp.language === (isInclusive ? "en-inc" : "en"),
+      en: textPacks.find(
+            (tp: any) => tp.language === "en",
           ),
     };
   }, [language, isInclusive, data, gameType]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     clearAudio();
-  //   };
-  // }, []);
 
   //audio effect for autoplaying
   useEffect(() => {
@@ -302,7 +295,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       }, 1000);
     }
   };
-
+  console.log(headerData);
   return (
     <>
       <div style={{width: 800, margin: 'auto', textAlign: 'center'}}>
@@ -313,9 +306,13 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
               textAlign: "center",
             }}
           >
-            <h1 className="text-4xl color-suelo">{headerData.es.text}</h1>
+            <h1 className="text-4xl color-suelo">
+	      {language === 'en'
+	      ? headerData.en.text
+	      : headerData.es.text}
+	    </h1>
 
-            {headerData.en && (
+            {language === 'esen' && headerData.en && (
               <p className="text-3xl color-english">{headerData.en.text}</p>
             )}
           </IonText>

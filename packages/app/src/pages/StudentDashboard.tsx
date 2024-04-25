@@ -81,16 +81,17 @@ const WaveIcon: React.FC<WaveIcon> = ({
 const wellnessCards = [
   {
     category: "wellness",
-    title: "Pausa de yoga",
-    titleEn: "Yoga break",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: true,
-  },
-  {
-    category: "wellness",
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
+    link: "/affirmations/intro",
+    isLocked: false,
+  },
+  {
+    category: "wellness",
+    title: "Pausa de yoga",
+    titleEn: "Yoga break",
+    cover: "/assets/img/mountain_image.png",
     isLocked: true,
   },
   {
