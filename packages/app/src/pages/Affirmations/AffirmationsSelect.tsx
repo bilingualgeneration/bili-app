@@ -2,15 +2,20 @@ import { PackSelect } from "@/components/PackSelect";
 
 export const AffirmationsSelect: React.FC = () => {
   const placeholderCards: any[] = [
-    /*
     {
-      title: 'Paquete 2',
-      titleEn: 'Pack 2',
+      title: 'Familia y comunidad',
+      titleEn: 'Family and Community',
       category: 'play',
-      cover: '/assets/img/boot_image.png',
+      cover: '/assets/img/family_community.png',
       isLocked: true
     },
-    */
+    {
+      title: 'Nature',
+      titleEn: 'La naturaleza',
+      category: 'play',
+      cover: '/assets/img/nature.png',
+      isLocked: true
+    },
   ];
 
   // todo - rename affirmation to affirmations-game
