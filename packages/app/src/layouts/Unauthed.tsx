@@ -1,8 +1,10 @@
+import {I18nWrapper} from '@/components/I18nWrapper';
 import {
   IonContent,
   IonPage,
 } from '@ionic/react';
 import {Redirect} from 'react-router-dom';
+import {useInterfaceLanguage} from '@/hooks/InterfaceLanguage';
 import {useProfile} from '@/hooks/Profile';
 
 interface UnauthedLayoutProps {
@@ -15,6 +17,7 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   children,
 }) => {
   const {isLoggedIn} = useProfile();
+  const {language} = useInterfaceLanguage();
   // assume there are no public pages
   if(isLoggedIn){
     return <Redirect to='/student-dashboard' />;
@@ -22,9 +25,11 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
+	<I18nWrapper locale={language}>
         <div className="page-wrapper" style={{ background }}>
           {children}
         </div>
+	</I18nWrapper>
       </IonContent>
     </IonPage>
   );

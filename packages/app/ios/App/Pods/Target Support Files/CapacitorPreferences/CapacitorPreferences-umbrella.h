@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "PreferencesPlugin.h"
 
 FOUNDATION_EXPORT double CapacitorPreferencesVersionNumber;
 FOUNDATION_EXPORT const unsigned char CapacitorPreferencesVersionString[];
