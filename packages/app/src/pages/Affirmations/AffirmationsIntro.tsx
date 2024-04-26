@@ -18,7 +18,7 @@ export const AffirmationsIntro: React.FC = () => {
   const texts: any = [
     {
       es: {
-	text: "¡Affirmatciones!",
+	text: "¡Afirmaciones!",
 	subtext: isInclusive
 	       ? es
 	       : esInc,

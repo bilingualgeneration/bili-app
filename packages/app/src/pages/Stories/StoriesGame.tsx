@@ -308,7 +308,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           >
             <h1 className="text-4xl color-suelo">
 	      {language === 'en'
-	      ? headerData.en.text
+	      ? headerData.en?.text
 	      : headerData.es.text}
 	    </h1>
 
