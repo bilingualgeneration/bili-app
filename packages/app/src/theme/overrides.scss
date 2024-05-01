@@ -94,6 +94,8 @@ ion-button {
   line-height: 20px;
   font-weight: 600;
   text-transform: none;
+  font-family: "Outfit";
+  
 
   &:not([shape="round"]) {
     --border-radius: 0.75rem;

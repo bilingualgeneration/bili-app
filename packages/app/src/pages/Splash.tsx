@@ -36,19 +36,19 @@ export const Splash: React.FC = () => {
                   description="link text if user already has an account"
                 />
               </IonCardTitle>
-	      <Link to='/login' className='no-underline'>
-		<IonButton
+              <Link to='/login' className='no-underline'>
+                <IonButton
                   className=""
                   expand="block"
                   shape="round"
-		>
+                >
                   <FormattedMessage
                     id="common.logIn"
                     defaultMessage="Log In"
                     description="label to log in"
                   />
-		</IonButton>
-	      </Link>
+                </IonButton>
+              </Link>
             </IonCardContent>
           </IonCard>
 
@@ -60,8 +60,8 @@ export const Splash: React.FC = () => {
                   defaultMessage="New to Bili?"
                 />
               </IonCardTitle>
-	      <Link to='/sign-up' className='no-underline'>
-		<IonButton
+              <Link to='/sign-up' className='no-underline'>
+                <IonButton
                   expand="block"
                   fill="outline"
                   shape="round">
@@ -69,8 +69,8 @@ export const Splash: React.FC = () => {
                     id="splash.createAccountButton"
                     defaultMessage="Create an account"
                   />
-		</IonButton>
-	      </Link>
+                </IonButton>
+              </Link>
             </IonCardContent>
           </IonCard>
         </div>
