@@ -102,25 +102,48 @@ export const ParentAccountCredentials: React.FC = () => {
         </div>
 
         <div className="ion-margin-top">
-          <IonCheckbox labelPlacement="end" justify="start">
-            <IonText class="ion-text-wrap">
-              <IonText
-                color="primary"
-                style={{ fontWeight: "bold", marginRight: 8 }}
-              >
-                <FormattedMessage
-                  id="common.terms"
-                  defaultMessage="Terms of Service. "
-                  description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
-                />
-              </IonText>
+          <IonCheckbox labelPlacement="end" justify="start" />
+            <IonText class="ion-text-wrap" style={{marginLeft: '20px',}}>
+
               <FormattedMessage
                 id="common.termsAgree"
-                defaultMessage="I agree to the Terms of Service. I have read and understand the Privacy Policy"
+                defaultMessage="I agree to the "
                 description="Terms of Service where users can check off if they agree while in sign up process."
               />
+
+              <a href="https://thebiliapp.com/terms/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                <IonText
+                  color="primary"
+                  style={{ fontWeight: "bold", marginRight: 8 }}
+                >
+                  <FormattedMessage
+                    id="common.terms"
+                    defaultMessage="Terms of Service."
+                    description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
+                  />
+                </IonText>
+              </a>
+             
+              <FormattedMessage
+                id="common.termsAgree2"
+                defaultMessage="I have read and understand "
+                description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
+              />
+              <br/>
+              <a href="https://thebiliapp.com/privacy-policy/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                <IonText
+                  color="primary"
+                  style={{ fontWeight: "bold", marginLeft: '28pt', }}
+                >
+                  <FormattedMessage
+                    id="common.terms2"
+                    defaultMessage="Privacy Policy."
+                    description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
+                  />
+                </IonText>
+              </a>
+
             </IonText>
-          </IonCheckbox>
         </div>
 
         <div className="ion-margin-top">
