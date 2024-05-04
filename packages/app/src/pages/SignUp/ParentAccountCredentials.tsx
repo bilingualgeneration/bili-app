@@ -9,6 +9,7 @@ import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 
 import "./AccountCredentials.css";
 import { useIntl, FormattedMessage } from "react-intl";
+import { useState } from "react";
 
 interface FormInputs {
   name: string;
@@ -37,6 +38,8 @@ export const ParentAccountCredentials: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
+
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   const onSubmit = handleSubmit((response) => {
     setData({
@@ -102,7 +105,7 @@ export const ParentAccountCredentials: React.FC = () => {
         </div>
 
         <div className="ion-margin-top">
-          <IonCheckbox labelPlacement="end" justify="start" />
+          <IonCheckbox labelPlacement="end" justify="start" checked={acceptedTerms} onIonChange={e => setAcceptedTerms(e.detail.checked)} />
             <IonText class="ion-text-wrap" style={{marginLeft: '20px',}}>
 
               <FormattedMessage
@@ -149,7 +152,7 @@ export const ParentAccountCredentials: React.FC = () => {
         <div className="ion-margin-top">
           <IonButton
             data-testid="account-credentials-continue-button"
-            disabled={!isValid}
+            disabled={!isValid || !acceptedTerms}
             expand="block"
             shape="round"
             type="submit"
