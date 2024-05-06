@@ -364,19 +364,13 @@ const StoryFactoryHydratedGame: React.FC = () => {
 		  // TODO: need to check for en and esen
                   const sentence: string = normalizeAWS(
                     [
-                      getText(words[0][wordIndices[0]].word, "es"),
-                      getText(words[1][wordIndices[1]].word, "es"),
-                      getText(words[2][wordIndices[2]].word, "es"),
-                      getText(words[3][wordIndices[3]].word, "es"),
+                      getText(words[0][wordIndices[0]].word, language),
+                      getText(words[1][wordIndices[1]].word, language),
+                      getText(words[2][wordIndices[2]].word, language),
+                      getText(words[3][wordIndices[3]].word, language),
                     ].join(" "),
                   );
 
-
-		  /////////////////////////////
-		  /////////////////
-
-		  //addAudio([`${AWS_BUCKET}${sentence}.mp3`]);
-		  
                   const audio = new Audio(`${AWS_BUCKET}${sentence}.mp3`);
 
                   if (lastSentence !== sentence) {
