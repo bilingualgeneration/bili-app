@@ -1,0 +1,10 @@
+.dnd-drop-targets-container {
+    .drop-target {
+	display: inline-block;
+    }
+
+    .drop-target:not(.dropped) img{
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+    }
+}

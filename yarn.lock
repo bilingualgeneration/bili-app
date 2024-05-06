@@ -2106,6 +2106,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.32.2"
     eslint-plugin-storybook: "npm:^0.6.14"
     firebase: "npm:^10.4.0"
+    immutability-helper: "npm:^3.1.1"
     ionicons: "npm:^7.0.0"
     jsdom: "npm:^22.1.0"
     npm-run-all: "npm:^4.1.5"
@@ -12540,6 +12541,13 @@ __metadata:
   version: 5.2.4
   resolution: "ignore@npm:5.2.4"
   checksum: 7c7cd90edd9fea6e037f9b9da4b01bf0a86b198ce78345f9bbd983929d68ff14830be31111edc5d70c264921f4962404d75b7262b4d9cc3bc12381eccbd03096
+  languageName: node
+  linkType: hard
+
+"immutability-helper@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "immutability-helper@npm:3.1.1"
+  checksum: daf4f3a696b8735c5d2c9b1bac42908b66bfc18ea5484bccf6658f3e622e1486663b5ef781e1a407ee81183e16942e8b2596cc859ea94d522ba07731c2845f0e
   languageName: node
   linkType: hard
 
