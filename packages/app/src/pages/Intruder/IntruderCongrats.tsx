@@ -115,7 +115,7 @@ export const IntruderCongrats: React.FC<{
                     description="Congrats Title when 20 correct"
                   />
                 )}
-                {count === -1 && (
+                {count === 0 && (
                   <FormattedMessage
                     id="intruder.congrats.title.all"
                     defaultMessage="I knew you could do it!"
@@ -146,7 +146,7 @@ export const IntruderCongrats: React.FC<{
                     description="Congrats Description when 20 correct"
                   />
                 )}
-                {count === -1 && (
+                {count === 0 && (
                   <FormattedMessage
                     id="intruder.congrats.description.all"
                     defaultMessage="Way to go - you've found all of the rhyme intruders!"
@@ -161,7 +161,7 @@ export const IntruderCongrats: React.FC<{
                     {count === 5 && "Congrats!"}
                     {count === 10 && "Great job!"}
                     {count === 20 && "Amazing!"}
-                    {count === -1 && "I knew you could do it!"}
+                    {count === 0 && "I knew you could do it!"}
                   </h1>
                   <h2 className="text-3xl color-english">
                     {count === 5 && (
@@ -185,7 +185,7 @@ export const IntruderCongrats: React.FC<{
                         You are a super-rhymer!
                       </>
                     )}
-                    {count === -1 && (
+                    {count === 0 && (
                       <>Way to go - you've found all of the rhyme intruders!</>
                     )}
                   </h2>
