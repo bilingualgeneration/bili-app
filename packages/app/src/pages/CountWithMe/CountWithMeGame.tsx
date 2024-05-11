@@ -194,33 +194,38 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
      
       if (clickedIndexes.length + 1 <= getData.animalImages.length) {
         let audios = [];
-	const audio_es = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`;
-	const audio_en = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`;
-	switch(language){
-	  case 'en':
-            audios.push(audio_en);
-	    break;
-	  case 'es':
-            audios.push(audio_es);
-	    break;
-	  case 'esen':
-            audios.push(audio_es);
-            audios.push(audio_en);
-	    break;
-	  default:
-	    break;
-	}
+        const audio_es = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`;
+        const audio_en = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`;
+        switch(language){
+          case 'en':
+                  audios.push(audio_en);
+            break;
+          case 'es':
+                  audios.push(audio_es);
+            break;
+          case 'esen':
+                  audios.push(audio_es);
+                  audios.push(audio_en);
+            break;
+          default:
+            break;
+	      }
+
+        //switches text from game question to count questions and wait until the number's audio is stopped
+        if (clickedIndexes.length + 1 === getData.animalImages.length) {
+    
+          setIsButtonDisabled(true);
+
+            setCallback(() => () => {
+              setAllAnimalsClicked(true);
+              setIsButtonDisabled(false);
+            });         
+        }
         addAudio(audios);
       }
-       //switches text from game question to count questions and wait until the number's audio is stopped
-      if (clickedIndexes.length + 1 === getData.animalImages.length) {
-        
-        setIsButtonDisabled(true);
-        setTimeout(() => {
-          setAllAnimalsClicked(true);
-          setIsButtonDisabled(false);
-        }, 1700);
-      }
+
+   
+     
     }
 
     //next step happens only when all images were clicked
