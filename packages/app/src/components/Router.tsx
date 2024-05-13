@@ -45,6 +45,7 @@ import {
 } from '@/pages/Intruder';
 import Login from '@/pages/Login';
 import {Play} from '@/pages/Play';
+import {DnDDev} from '@/pages/DnD';
 import {Preload} from '@/pages/Preload';
 import {PreSplash} from '@/pages/PreSplash';
 import {ProfileComingSoon} from '@/pages/ProfileComingSoon';
@@ -337,6 +338,18 @@ export const Router: React.FC = () => {
             )}
           />
 
+          <Route
+            exact
+            path="/dnd"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <DnDDev />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+	  
           <Route
             exact
             path="/stories/play/:pack_id"

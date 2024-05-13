@@ -2,7 +2,7 @@ import { generateSpeech } from "./generate.js";
 
 const buildRequest = ({ text }) => {
   return {
-    text: `<speak><prosody rate="66%">${text}</prosody></speak>`,
+    text: `<speak>${text}</speak>`,
     textType: "ssml",
       voiceId: "Kendra",
     //voiceId: 'Lucia',
@@ -14,8 +14,8 @@ const texts1 = [
     "The cow",
     "My mom",
     "The frog",
-    "Ms. María",
-    "Mr. Carlos",
+    "Doña María",
+    "Don Carlos",
     "The cat",
     "The rabbit",
     "The bird",
@@ -62,7 +62,7 @@ const texts4 = [
     "each afternoon",
 ];
 
-let texts = [...texts1, ...texts2, ...texts3, ...texts4];
+let texts = [];
 
 for (const one of texts1) {
   for (const two of texts2) {
