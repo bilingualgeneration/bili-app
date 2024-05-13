@@ -61,7 +61,7 @@ const texts4 = [
   "cada tarde",
 ];
 
-let texts = [...texts1, ...texts2, ...texts3, ...texts4];
+let texts = [];
 
 for (const one of texts1) {
   for (const two of texts2) {
