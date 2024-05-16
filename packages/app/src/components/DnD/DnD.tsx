@@ -26,29 +26,27 @@ import update from 'immutability-helper';
 
 import './DnD.css';
 
-const generateRandomPosition = () => {
-  const letterHeight = 100;
-  const letterWidth = 50;
-    const minTop = 0;
-    const maxTop = 800 - letterHeight;
-    const minLeft = 0;
-    const maxLeft = 1366 - letterWidth;
-    const bias = 0.8; // Adjust bias as needed
-
-    // Generate random values for top and left
-    const randomTop = Math.random() * (maxTop - minTop) + minTop;
-    const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
-
-    // Apply bias to avoid the center of the box
-    const topBias = (Math.random() < bias) ? 0 : (randomTop < maxTop / 2 ? randomTop * 0.2 : (maxTop - randomTop) * 0.2);
-    const leftBias = (Math.random() < bias) ? 0 : (randomLeft < maxLeft / 2 ? randomLeft * 0.2 : (maxLeft - randomLeft) * 0.2);
-
-    const position = {
-        top: randomTop + topBias,
-        left: randomLeft + leftBias
-    };
-
-    return position;
+const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {height: number, width: number}) => {
+  const minTop = 0;
+  const maxTop = 800 - letterHeight;
+  const minLeft = 0;
+  const maxLeft = 1366 - letterWidth;
+  const bias = 0.8; // Adjust bias as needed
+  
+  // Generate random values for top and left
+  const randomTop = Math.random() * (maxTop - minTop) + minTop;
+  const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
+  
+  // Apply bias to avoid the center of the box
+  const topBias = (Math.random() < bias) ? 0 : (randomTop < maxTop / 2 ? randomTop * 0.2 : (maxTop - randomTop) * 0.2);
+  const leftBias = (Math.random() < bias) ? 0 : (randomLeft < maxLeft / 2 ? randomLeft * 0.2 : (maxLeft - randomLeft) * 0.2);
+  
+  const position = {
+    top: randomTop + topBias,
+    left: randomLeft + leftBias
+  };
+  
+  return position;
 }
 
 export interface DnDProps {
@@ -75,7 +73,7 @@ const Hydrator: React.FC<DnDProps> = (props) => {
       piecesExpanded.map(
 	(p: any, index: number) => {
 	  const id: string = index.toString();
-	  const {left, top} = generateRandomPosition();
+	  const {left, top} = generateRandomPosition({height: p.image.height, width: p.image.width});
 	  return [
 	    id,
 	    {

@@ -1,3 +1,4 @@
+import audio_correct from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
 import {
   DragPreviewImage,
   DragSourceMonitor,
@@ -7,6 +8,7 @@ import {
   useEffect,
   useState
 } from 'react';
+import {useAudioManager} from '@/contexts/AudioManagerContext';
 
 export interface PieceProps {
   audio_on_drop: any;
@@ -31,6 +33,7 @@ export const Piece: React.FC<PieceProps> = ({
   top,
   ...props
 }) => {
+  const {addAudio} = useAudioManager();
   // todo: better way to play audio?
   const [audio_drag] = useState(new Audio(audio_on_drag.url));
   const [audio_drop] = useState(new Audio(audio_on_drop.url));
@@ -50,7 +53,10 @@ export const Piece: React.FC<PieceProps> = ({
       audio_drag.currentTime = 0;
     }
     if(dropped){
-      audio_drop.play();
+      addAudio([
+	audio_on_drop.url,
+	audio_correct
+      ]);
     }
   }, [isDragging, dropped]);
   if(isDragging || dropped){

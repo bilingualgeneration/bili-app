@@ -8,7 +8,6 @@ import {
 } from 'react';
 
 import audio_incorrect from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
-import audio_correct from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
 
 export interface DropTargetProps {
   image: any,
@@ -35,7 +34,6 @@ export const DropTarget: React.FC<DropTargetProps> = ({
 	      $merge: {dropped: true}
 	    },
 	  }));
-	  addAudio([audio_correct]);
 	  setHasDropped(true);
 	  setIsCorrect(true);
 	}else{
