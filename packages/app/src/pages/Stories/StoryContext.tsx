@@ -37,10 +37,14 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [hasMultipleImage, setHasMultipleImage] = useState<boolean>(false);
   const [hasMultipleSyllable, setHasMultipleSyllable] = useState<boolean>(false);
   const pageForward = () => {
-    setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
+    if(totalPages > 0){
+      setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
+    }
   };
   const pageBackward = () => {
-    setPageNumber((p) => (p > 0 ? p - 1 : 0));
+    if(totalPages > 0){
+      setPageNumber((p) => (p > 0 ? p - 1 : 0));
+    }
   };
   return (
     <StoryContext.Provider
