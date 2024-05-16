@@ -1,20 +1,14 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { Subject } from 'rxjs';
 
 export interface AudioManager {
   addAudio: any;
-  callback: any;
+  onended: any;
   setCallback: any;
   clearAudio: any;
 }
 
-const defaultState: AudioManager = {
-  addAudio: () => {},
-  callback: () => {},
-  clearAudio: () => {},
-  setCallback: () => {},
-};
-
-const AudioManagerContext = createContext<AudioManager>(defaultState);
+const AudioManagerContext = createContext<AudioManager>({} as AudioManager);
 
 export const useAudioManager = () => useContext(AudioManagerContext);
 
@@ -22,25 +16,24 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [audios, setAudios] = useState<any[]>([]);
-  const [callback, setCallback] = useState<any>(() => {});
+  const [onended] = useState<any>(new Subject());
   const audiosRef = useRef<any[]>(audios);
 
   useEffect(() => {
     if (audios.length > 0) {
       audios[0].onended = () => {
-        if (audios.length === 1 && callback) {
+        if (audios.length === 1) {
           // last one played
-          callback();
+	  onended.next();
         }
         setAudios(audios.slice(1));
 	audiosRef.current = audios.slice(1);
       };
-      //audios[0].play();
       if(audiosRef.current[0]){
 	audiosRef.current[0].play();
       }
     }
-  }, [audios, callback]);
+  }, [audios]);
 
   const addAudio = (inputAudios: any[]) => {
     // silence existing audio
@@ -65,9 +58,9 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
     <AudioManagerContext.Provider
       value={{
         addAudio,
-        callback,
-        setCallback,
         clearAudio,
+	setCallback: () => {},
+	onended
       }}
     >
       {children}

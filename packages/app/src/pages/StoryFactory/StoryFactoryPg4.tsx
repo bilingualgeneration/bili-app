@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from '@/contexts/AudioManagerContext';
@@ -10,6 +10,7 @@ import {
   FirestoreDocProvider,
   useFirestoreDoc
 } from '@/hooks/FirestoreDoc';
+
 import "./StoryFactory.scss";
 
 const AWS_BUCKET =
@@ -19,10 +20,10 @@ function normalizeAWS(s: string) {
   const payload: string = s
     .toLowerCase() // need to lowercase first so replacements don't get overwritten
     .replace(/ /g, "_")
-    .replace(/á/g, "a%CC%81")
-    .replace(/é/g, "e%CC%81")
-    .replace(/ñ/g, "n%CC%83")
-    .replace(/í/g, "i%CC%81")
+    .replace(/á/g, "%C3%A1")
+    .replace(/é/g, "%C3%A9")
+    .replace(/ñ/g, "%C3%B1")
+    .replace(/í/g, "%C3%AD")
     .replace(regex, "");
   return payload;
 }
@@ -84,15 +85,35 @@ export const StoryFactoryPage4: React.FC = () => {
 
 const StoryFactoryHydratedGame: React.FC = () => {
   const {language} = useLanguageToggle();
-  const {addAudio, clearAudio} = useAudioManager();
+  const {addAudio, clearAudio, onended} = useAudioManager();
   const { status, data } = useFirestoreDoc();
   const [words, setWords] = useState<any[][]>([]);
   const [lastSentence, setLastSentence] = useState<string>("");
+  const lastSentenceRef = useRef(lastSentence);
+  const [currentSentence, setCurrentSentence] = useState<string>("");
+  const currentSentenceRef = useRef(currentSentence);
   const [wordIndices, setWordIndices] = useState([0, 0, 0, 0]);
   const [numPlays, setNumPlays] = useState<number>(0);
+  const numPlaysRef = useRef(numPlays);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
   useEffect(() => {
+    const subscription = onended.subscribe(() => {
+      if(currentSentenceRef.current !== lastSentenceRef.current){
+	if (
+          // check if the next number that will be iterated to is a target
+          numPlaysRef.current + 1 === 5 ||
+          numPlaysRef.current + 1 === 10 ||
+          numPlaysRef.current + 1 === 20 ||
+          numPlaysRef.current + 1 === 30
+        ) {
+          setShowCongrats(true);
+        }
+        setNumPlays((n) => n + 1);
+	numPlaysRef.current = numPlaysRef.current + 1;
+      }
+    });
     return () => {
+      subscription.unsubscribe();
       clearAudio();
     };
   }, []);
@@ -132,50 +153,6 @@ const StoryFactoryHydratedGame: React.FC = () => {
     newWordIndices[position] =
       (newWordIndices[position] + 1) % words[position].length;
     setWordIndices(newWordIndices);
-  };
-
-  const speak = (position: number) => {
-    const audios = [];
-    switch(language){
-      case 'en':
-	audios.push(
-	  normalizeAWS(
-	    getText(
-	      words[position][wordIndices[position]].word, 'en'
-	    )
-	  )
-	);
-	break;
-      case 'es':
-	audios.push(
-	  normalizeAWS(
-	    getText(
-	      words[position][wordIndices[position]].word, 'es'
-	    )
-	  )
-	);
-	break;
-      case 'esen':
-	audios.push(
-	  normalizeAWS(
-	    getText(
-	      words[position][wordIndices[position]].word, 'es'
-	    )
-	  )
-	);
-	audios.push(
-	  normalizeAWS(
-	    getText(
-	      words[position][wordIndices[position]].word, 'en'
-	    )
-	  )
-	);
-	break;
-      default:
-
-	break;
-    }
-    addAudio(audios.map((text) => `${AWS_BUCKET}${text}.mp3`));
   };
 
   if (words.length === 0) {
@@ -250,12 +227,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
           {/* Row for ovals w/ words */}
           <IonRow class="ion-justify-content-center">
             <IonCol>
-              <div
-                className="sf-game-option option-orange"
-                onClick={() => {
-                  speak(0);
-                }}
-              >
+              <div className="sf-game-option option-orange">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
                     {language === 'en'
@@ -272,12 +244,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
             </IonCol>
 
             <IonCol>
-              <div
-                className="sf-game-option option-blue"
-                onClick={() => {
-                  speak(1);
-                }}
-              >
+              <div className="sf-game-option option-blue">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
                     {language === 'en'
@@ -294,12 +261,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
             </IonCol>
 
             <IonCol>
-              <div
-                className="sf-game-option option-yellow"
-                onClick={() => {
-                  speak(2);
-                }}
-              >
+              <div className="sf-game-option option-yellow">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
                     {language === 'en'
@@ -316,12 +278,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
             </IonCol>
 
             <IonCol>
-              <div
-                className="sf-game-option option-purple"
-                onClick={() => {
-                  speak(3);
-                }}
-              >
+              <div className="sf-game-option option-purple">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
                     {language === 'en'
@@ -362,33 +319,50 @@ const StoryFactoryHydratedGame: React.FC = () => {
                 className="volume-button-background"
                 onClick={() => {
 		  // TODO: need to check for en and esen
-                  const sentence: string = normalizeAWS(
-                    [
-                      getText(words[0][wordIndices[0]].word, language),
-                      getText(words[1][wordIndices[1]].word, language),
-                      getText(words[2][wordIndices[2]].word, language),
-                      getText(words[3][wordIndices[3]].word, language),
-                    ].join(" "),
-                  );
-
-                  const audio = new Audio(`${AWS_BUCKET}${sentence}.mp3`);
-
-                  if (lastSentence !== sentence) {
-                    audio.onended = () => {
-                      setLastSentence(sentence);
-                      if (
-                        // check if the next number that will be iterated to is a target
-                        numPlays + 1 === 5 ||
-                        numPlays + 1 === 10 ||
-                        numPlays + 1 === 20 ||
-                        numPlays + 1 === 30
-                      ) {
-                        setShowCongrats(true);
-                      }
-                      setNumPlays(numPlays + 1);
-                    };
-                  }
-                  audio.play();
+		  const audios = [];
+		  if(language !== 'esen'){
+                    audios.push(
+		      AWS_BUCKET + 
+		      normalizeAWS([
+			getText(words[0][wordIndices[0]].word, language),
+			getText(words[1][wordIndices[1]].word, language),
+			getText(words[2][wordIndices[2]].word, language),
+			getText(words[3][wordIndices[3]].word, language),
+                      ].join(" ")
+		      )
+		      + '.mp3'
+		    );
+		  }else{
+                    audios.push(
+		      AWS_BUCKET + 
+		      normalizeAWS([
+			getText(words[0][wordIndices[0]].word, 'es'),
+			getText(words[1][wordIndices[1]].word, 'es'),
+			getText(words[2][wordIndices[2]].word, 'es'),
+			getText(words[3][wordIndices[3]].word, 'es'),
+                      ].join(" ")
+		      )
+		      + '.mp3'
+		    );
+                    audios.push(
+		      AWS_BUCKET + 
+		      normalizeAWS(
+			[
+			  getText(words[0][wordIndices[0]].word, 'en'),
+			  getText(words[1][wordIndices[1]].word, 'en'),
+			  getText(words[2][wordIndices[2]].word, 'en'),
+			  getText(words[3][wordIndices[3]].word, 'en'),
+			].join(" ")
+		      )
+		      + '.mp3'
+		    );
+		  }
+		  const sentence = JSON.stringify(audios);
+		  setLastSentence(currentSentence);
+		  lastSentenceRef.current = currentSentence;
+		  setCurrentSentence(sentence);
+		  currentSentenceRef.current = sentence;
+		  addAudio(audios);
                 }}
               >
                 <img className="volume-icon" src={volumeButton} />

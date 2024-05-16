@@ -2129,6 +2129,7 @@ __metadata:
     react-tinder-card: "npm:^1.6.4"
     react-use: "npm:^17.4.2"
     react-use-gesture: "npm:^9.1.3"
+    rxjs: "npm:^7.8.1"
     sass: "npm:^1.69.2"
     slick-carousel: "npm:^1.8.1"
     storybook: "npm:^7.4.5"
@@ -17373,7 +17374,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.1":
+"rxjs@npm:^7.5.1, rxjs@npm:^7.8.1":
   version: 7.8.1
   resolution: "rxjs@npm:7.8.1"
   dependencies:
