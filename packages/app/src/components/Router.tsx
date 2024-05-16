@@ -59,6 +59,7 @@ import {
   Stories,
   StoriesDragGameLoader,
   StoriesLandingPage,
+  StoryBuilder
 } from '@/pages/Stories';
 import {
   StoryFactoryIntro,
@@ -202,6 +203,17 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <StoriesLandingPage />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/story-builder"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StoryBuilder />
                 </HeaderFooter>
               </AuthedLayout>
             )}

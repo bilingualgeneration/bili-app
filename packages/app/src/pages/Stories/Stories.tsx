@@ -357,7 +357,7 @@ const TitleCard = ({ data }: any) => {
   );
 };
 
-const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
+export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const {
     pageBackward,
     pageForward,
@@ -381,7 +381,7 @@ const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   </div>;
 };
 
-const StoryPage: React.FC<any> = () => {
+export const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
   const {profile: { isInclusive }} = useProfile();
   const {language} = useLanguageToggle();
