@@ -13,13 +13,16 @@ export const useDnD = () => useContext(DnDContext);
 
 export const DnDProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const [pieces, setPieces] = useState<any[]>([]);
-  const percentDropped = Object.values(pieces).filter((p) => p.dropped).length / Object.keys(pieces).length;
+  const [targetPieces, setTargetPieces] = useState<any[]>([]);
+  const percentDropped = Object.values(pieces).filter((p) => p.dropped).length / Object.keys(targetPieces).length;
   
   return <DnDContext.Provider
 	   children={children}
 	   value={{
 	     percentDropped,
 	     pieces,
-	     setPieces
+	     setPieces,
+	     targetPieces,
+	     setTargetPieces,
 	   }} />;
 };

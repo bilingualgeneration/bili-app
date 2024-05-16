@@ -26,6 +26,29 @@ import update from 'immutability-helper';
 
 import './DnD.css';
 
+const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {height: number, width: number}) => {
+  const minTop = 0;
+  const maxTop = 800 - letterHeight;
+  const minLeft = 0;
+  const maxLeft = 1366 - letterWidth;
+  const bias = 0.8; // Adjust bias as needed
+  
+  // Generate random values for top and left
+  const randomTop = Math.random() * (maxTop - minTop) + minTop;
+  const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
+  
+  // Apply bias to avoid the center of the box
+  const topBias = (Math.random() < bias) ? 0 : (randomTop < maxTop / 2 ? randomTop * 0.2 : (maxTop - randomTop) * 0.2);
+  const leftBias = (Math.random() < bias) ? 0 : (randomLeft < maxLeft / 2 ? randomLeft * 0.2 : (maxLeft - randomLeft) * 0.2);
+  
+  const position = {
+    top: randomTop + topBias,
+    left: randomLeft + leftBias
+  };
+  
+  return position;
+}
+
 export interface DnDProps {
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[]
@@ -42,10 +65,29 @@ export const DnD: React.FC<DnDProps> = (props) => {
 }
 
 const Hydrator: React.FC<DnDProps> = (props) => {
-  const {pieces, setPieces} = useDnD();
+  const {pieces, setPieces, setTargetPieces} = useDnD();
   useEffect(() => {
     const piecesMap = Object.fromEntries(props.pieces.map((p) => [p.text, p]));
+    const piecesExpanded = props.pieces.map(({count, ...p}) => Array(count).fill(p)).flat();
     const pieceInstances = Object.fromEntries(
+      piecesExpanded.map(
+	(p: any, index: number) => {
+	  const id: string = index.toString();
+	  const {left, top} = generateRandomPosition({height: p.image.height, width: p.image.width});
+	  return [
+	    id,
+	    {
+	      ...p,
+	      dropped: false,
+	      id,
+	      left,
+	      top,
+	    }
+	  ];
+	}
+      )
+    );
+    const targetPieceInstances = Object.fromEntries(
       props.target.split('-').map(
 	(t: string, index: number) => {
 	  const p = piecesMap[t];
@@ -53,15 +95,17 @@ const Hydrator: React.FC<DnDProps> = (props) => {
 	  return [
 	    id,
 	    {
+	      ...p,
 	      dropped: false,
 	      id,
 	      left: index * 100,
 	      top: 0,
-	      ...p
 	    }
 	  ];
       })
     );
+
+    setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
   }, [props, setPieces]);
   return <Container/>;
@@ -70,15 +114,15 @@ const Hydrator: React.FC<DnDProps> = (props) => {
 interface ContainerProps {}
 
 const Container: React.FC<ContainerProps> = () => {
-  const {percentDropped, pieces, setPieces} = useDnD();
+  const {percentDropped, targetPieces, pieces, setPieces} = useDnD();
   const dropTargets = useMemo(() => {
-    return Object.values(pieces).map(
+    return Object.values(targetPieces).map(
       (p: any) => ({
 	image: p.image,
 	text: p.text,
       })
     );
-  }, [pieces]);
+  }, [targetPieces]);
   const movePiece = useCallback(
     (id: string, left: number, top: number) => {
       setPieces(
@@ -111,7 +155,7 @@ const Container: React.FC<ContainerProps> = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '50vh',
+    height: 800,
     position: 'relative'
   }}>
     {Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
