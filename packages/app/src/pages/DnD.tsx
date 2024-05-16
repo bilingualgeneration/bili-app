@@ -25,11 +25,10 @@ export const HydratedDnDDev: React.FC = () => {
     return <></>;
   }
 
-  console.log(data);
   return <>
     <DnD
-      target={''}
-      pieces={[]}
+      target={data.target}
+      pieces={data.pieces}
     />
   </>;
 };
