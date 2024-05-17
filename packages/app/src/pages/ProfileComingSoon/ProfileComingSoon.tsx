@@ -37,7 +37,7 @@ export const ProfileComingSoon: FC = () => {
     return (
       <>
         <PackHeader 
-	  bannerColor="#FFF8F0"
+	    bannerColor="#FFF8F0"
           title={language === 'en' ? 'My Profile - Coming Soon!' : 'Mi Perfil - Próximamente'}
           subtitle="My Profile - Coming Soon!"
           titleClassName="text-5xl color-suelo"

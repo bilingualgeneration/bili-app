@@ -1,0 +1,19 @@
+#student-card {
+    width: 12.5rem;
+    height: 16.5rem;
+    padding: 1.5rem 0 0 0;
+    gap: 8px;
+    border-radius: 16px 0px 0px 0px;
+    border: 3px 0px 0px 0px;
+    opacity: 0px;
+    
+
+    @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
+        
+    }
+
+    .subtitle {
+        margin-top: 10px;
+    }
+}
+
