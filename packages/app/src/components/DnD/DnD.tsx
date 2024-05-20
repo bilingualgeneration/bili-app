@@ -174,14 +174,14 @@ const Container: React.FC<ContainerProps> = () => {
   const { percentDropped, targetPieces, pieces, setPieces } = useDnD();
 
   const dropTargets = useMemo(() => {
-    return Object.values(targetPieces).map((p) => ({
+    return Object.values(targetPieces).map((p: any) => ({
       image: p.image,
       text: p.text,
     }));
   }, [targetPieces]);
 
   const movePiece = useCallback(
-    (id, left, top) => {
+    (id: string, left: number, top: number) => {
       setPieces(
         update(pieces, {
           [id]: {
@@ -196,7 +196,7 @@ const Container: React.FC<ContainerProps> = () => {
   const [, drop] = useDrop(
     () => ({
       accept: "piece",
-      drop(item, monitor) {
+      drop(item: any, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
         if (delta) {
           const left = Math.round(item.left + delta.x);
