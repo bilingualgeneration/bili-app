@@ -63,6 +63,19 @@ const generateOverlappingPosition = (
   };
 };
 
+const checkOverlap = (
+  pos1: { top: number; left: number },
+  pos2: { top: number; left: number },
+  size: { width: number; height: number },
+) => {
+  return (
+    pos1.left < pos2.left + size.width &&
+    pos1.left + size.width > pos2.left &&
+    pos1.top < pos2.top + size.height &&
+    pos1.top + size.height > pos2.top
+  );
+};
+
 export interface DnDProps {
   target: string;
   pieces: Omit<PieceProps, "dropped" | "id" | "left" | "top">[];
@@ -88,6 +101,8 @@ const Hydrator: React.FC<DnDProps> = (props) => {
       .flat();
 
     const pieceInstances: { [key: string]: any } = {};
+    const overlappingPairs: Set<string> = new Set();
+
     piecesExpanded.forEach((p, index) => {
       const id = index.toString();
       const letterSize = { height: p.image.height, width: p.image.width };
@@ -97,15 +112,30 @@ const Hydrator: React.FC<DnDProps> = (props) => {
       }));
 
       let newPosition;
+
       if (Math.random() < overlapFactor && existingPositions.length > 0) {
-        // Generate a position that overlaps with an existing piece
-        const existingPosition =
-          existingPositions[
-            Math.floor(Math.random() * existingPositions.length)
-          ];
-        newPosition = generateOverlappingPosition(letterSize, existingPosition);
+        // Find an existing position that is not already part of an overlapping pair
+        const availablePositions = existingPositions.filter(
+          (pos) => !overlappingPairs.has(`${pos.top}-${pos.left}`),
+        );
+
+        if (availablePositions.length > 0) {
+          const existingPosition =
+            availablePositions[
+              Math.floor(Math.random() * availablePositions.length)
+            ];
+          newPosition = generateOverlappingPosition(
+            letterSize,
+            existingPosition,
+          );
+          overlappingPairs.add(
+            `${existingPosition.top}-${existingPosition.left}`,
+          );
+          overlappingPairs.add(`${newPosition.top}-${newPosition.left}`);
+        } else {
+          newPosition = generateRandomPosition(letterSize);
+        }
       } else {
-        // Generate a random position with bias
         newPosition = generateRandomPosition(letterSize);
       }
 
