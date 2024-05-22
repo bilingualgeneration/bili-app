@@ -9,71 +9,84 @@ import update from "immutability-helper";
 
 import "./DnD.css";
 
-const playArea = { width: 1366, height: 800 };
-const overlapBias = 0.5; // Adjust bias as needed
-const overlapFactor = 0.5; // Adjust factor to increase overlap probability
-
-const generateRandomPosition = (letterSize: {
-  height: number;
-  width: number;
-}): { top: number; left: number } => {
-  const { height: letterHeight, width: letterWidth } = letterSize;
-  const minTop = 0;
-  const maxTop = playArea.height - letterHeight;
-  const minLeft = 0;
-  const maxLeft = playArea.width - letterWidth;
-
-  const randomTop = Math.random() * (maxTop - minTop) + minTop;
-  const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
-
-  const topBias =
-    Math.random() < overlapBias
-      ? 0
-      : randomTop < maxTop / 2
-        ? randomTop * 0.2
-        : (maxTop - randomTop) * 0.2;
-  const leftBias =
-    Math.random() < overlapBias
-      ? 0
-      : randomLeft < maxLeft / 2
-        ? randomLeft * 0.2
-        : (maxLeft - randomLeft) * 0.2;
-
-  return {
-    top: randomTop + topBias,
-    left: randomLeft + leftBias,
-  };
+// Function to shuffle array
+const shuffleArray = (array: any[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 };
 
-const generateOverlappingPosition = (
-  letterSize: { height: number; width: number },
-  existingPosition: { top: number; left: number },
-): { top: number; left: number } => {
-  const { height: letterHeight, width: letterWidth } = letterSize;
-  const overlapMargin = 0.1 * letterWidth; // Adjust as needed for desired overlap amount
+// Function to calculate predefined points around the target area
+const calculatePerimeterPoints = (
+  targetArea: { top: number; left: number; width: number; height: number },
+  letterSize: { width: number; height: number },
+  numPoints: number,
+): { top: number; left: number }[] => {
+  const points: { top: number; left: number }[] = [];
+  const padding = 10; // Padding around the target area
 
-  const top =
-    existingPosition.top + Math.random() * overlapMargin - overlapMargin / 2;
-  const left =
-    existingPosition.left + Math.random() * overlapMargin - overlapMargin / 2;
+  // Top side
+  for (let i = 0; i < numPoints / 4; i++) {
+    points.push({
+      top: targetArea.top - letterSize.height - padding,
+      left:
+        targetArea.left +
+        (i * (targetArea.width - letterSize.width)) / (numPoints / 4),
+    });
+  }
 
-  return {
-    top: Math.max(0, Math.min(top, playArea.height - letterHeight)),
-    left: Math.max(0, Math.min(left, playArea.width - letterWidth)),
-  };
+  // Right side
+  for (let i = 0; i < numPoints / 4; i++) {
+    points.push({
+      top:
+        targetArea.top +
+        (i * (targetArea.height - letterSize.height)) / (numPoints / 4),
+      left: targetArea.left + targetArea.width + padding,
+    });
+  }
+
+  // Bottom side
+  for (let i = 0; i < numPoints / 4; i++) {
+    points.push({
+      top: targetArea.top + targetArea.height + padding,
+      left:
+        targetArea.left +
+        (i * (targetArea.width - letterSize.width)) / (numPoints / 4),
+    });
+  }
+
+  // Left side
+  for (let i = 0; i < numPoints / 4; i++) {
+    points.push({
+      top:
+        targetArea.top +
+        (i * (targetArea.height - letterSize.height)) / (numPoints / 4),
+      left: targetArea.left - letterSize.width - padding,
+    });
+  }
+
+  return points.slice(0, numPoints);
 };
 
-const checkOverlap = (
-  pos1: { top: number; left: number },
-  pos2: { top: number; left: number },
-  size: { width: number; height: number },
-) => {
-  return (
-    pos1.left < pos2.left + size.width &&
-    pos1.left + size.width > pos2.left &&
-    pos1.top < pos2.top + size.height &&
-    pos1.top + size.height > pos2.top
-  );
+// Function to render perimeter points for debugging
+const renderPerimeterPoints = (points: { top: number; left: number }[]) => {
+  return points.map((point, index) => (
+    <div
+      key={index}
+      style={{
+        position: "absolute",
+        top: point.top,
+        left: point.left,
+        width: "5px",
+        height: "5px",
+        backgroundColor: "red",
+        borderRadius: "50%",
+        zIndex: 9999,
+      }}
+    ></div>
+  ));
 };
 
 export interface DnDProps {
@@ -92,7 +105,16 @@ export const DnD: React.FC<DnDProps> = (props) => {
 };
 
 const Hydrator: React.FC<DnDProps> = (props) => {
-  const { pieces, setPieces, setTargetPieces } = useDnD();
+  const { pieces, setPieces, setTargetPieces, targetPieces } = useDnD();
+  const [perimeterPoints, setPerimeterPoints] = useState<
+    { top: number; left: number }[]
+  >([]);
+  const [targetArea, setTargetArea] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     const piecesMap = Object.fromEntries(props.pieces.map((p) => [p.text, p]));
@@ -100,88 +122,123 @@ const Hydrator: React.FC<DnDProps> = (props) => {
       .map(({ count, ...p }) => Array(count).fill(p))
       .flat();
 
-    const pieceInstances: { [key: string]: any } = {};
-    const overlappingPairs: Set<string> = new Set();
+    const shuffledPieces = shuffleArray(piecesExpanded);
 
-    piecesExpanded.forEach((p, index) => {
-      const id = index.toString();
-      const letterSize = { height: p.image.height, width: p.image.width };
-      const existingPositions = Object.values(pieceInstances).map((p) => ({
-        top: p.top,
-        left: p.left,
-      }));
-
-      let newPosition;
-
-      if (Math.random() < overlapFactor && existingPositions.length > 0) {
-        // Find an existing position that is not already part of an overlapping pair
-        const availablePositions = existingPositions.filter(
-          (pos) => !overlappingPairs.has(`${pos.top}-${pos.left}`),
-        );
-
-        if (availablePositions.length > 0) {
-          const existingPosition =
-            availablePositions[
-              Math.floor(Math.random() * availablePositions.length)
-            ];
-          newPosition = generateOverlappingPosition(
-            letterSize,
-            existingPosition,
-          );
-          overlappingPairs.add(
-            `${existingPosition.top}-${existingPosition.left}`,
-          );
-          overlappingPairs.add(`${newPosition.top}-${newPosition.left}`);
-        } else {
-          newPosition = generateRandomPosition(letterSize);
-        }
-      } else {
-        newPosition = generateRandomPosition(letterSize);
-      }
-
-      pieceInstances[id] = {
-        ...p,
-        dropped: false,
-        id,
-        left: newPosition.left,
-        top: newPosition.top,
-      };
-    });
-
-    const targetPieceInstances: { [key: string]: any } = {};
-    props.target.split("-").forEach((t, index) => {
-      const p = piecesMap[t];
-      const id = index.toString();
-      targetPieceInstances[id] = {
-        ...p,
-        dropped: false,
-        id,
-        left: index * 100,
-        top: 0,
-      };
-    });
+    const targetPieceInstances = props.target.split("-").reduce(
+      (acc, t, index) => {
+        const p = piecesMap[t];
+        const id = index.toString();
+        acc[id] = {
+          ...p,
+          dropped: false,
+          id,
+          left: index * p.image.width,
+          top: 0,
+        };
+        return acc;
+      },
+      {} as { [key: string]: any },
+    );
 
     setTargetPieces(targetPieceInstances);
-    setPieces(pieceInstances);
+    setPieces(
+      shuffledPieces.map((p, index) => ({ ...p, id: index.toString() })),
+    );
   }, [props, setPieces, setTargetPieces]);
 
-  return <Container />;
+  useEffect(() => {
+    const calculateTargetArea = () => {
+      if (targetPieces && Object.keys(targetPieces).length > 0) {
+        const pieceValues = Object.values(targetPieces);
+        const top = Math.min(...pieceValues.map((p) => p.top));
+        const left = Math.min(...pieceValues.map((p) => p.left));
+        const bottom = Math.max(
+          ...pieceValues.map((p) => p.top + p.image.height),
+        );
+        const right = Math.max(
+          ...pieceValues.map((p) => p.left + p.image.width),
+        );
+
+        setTargetArea({
+          top,
+          left,
+          width: right - left,
+          height: bottom - top,
+        });
+      }
+    };
+    calculateTargetArea();
+  }, [targetPieces]);
+
+  useEffect(() => {
+    if (targetArea && pieces.length > 0) {
+      const letterSize = {
+        width: pieces[0].image.width,
+        height: pieces[0].image.height,
+      };
+      const calculatedPoints = calculatePerimeterPoints(
+        targetArea,
+        letterSize,
+        pieces.length,
+      );
+      setPerimeterPoints(calculatedPoints);
+
+      const pieceInstances = pieces.reduce(
+        (acc, p, index) => {
+          const id = index.toString();
+          const position = calculatedPoints[index];
+          acc[id] = {
+            ...p,
+            dropped: false,
+            id,
+            left: position.left,
+            top: position.top,
+          };
+          return acc;
+        },
+        {} as { [key: string]: any },
+      );
+
+      setPieces(pieceInstances);
+    }
+  }, [targetArea, pieces, setPieces]);
+
+  return (
+    <Container
+      target={props.target}
+      perimeterPoints={perimeterPoints}
+      targetArea={targetArea}
+    />
+  );
 };
 
-interface ContainerProps {}
+interface ContainerProps {
+  target: string;
+  perimeterPoints: { top: number; left: number }[];
+  targetArea: {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null;
+}
 
-const Container: React.FC<ContainerProps> = () => {
+const Container: React.FC<ContainerProps> = ({
+  target,
+  perimeterPoints,
+  targetArea,
+}) => {
   const { percentDropped, targetPieces, pieces, setPieces } = useDnD();
 
   const dropTargets = useMemo(() => {
-    return Object.values(targetPieces).map((p: any) => ({
+    return Object.values(targetPieces).map((p) => ({
       image: p.image,
       text: p.text,
     }));
   }, [targetPieces]);
 
   const movePiece = useCallback(
-    (id: string, left: number, top: number) => {
+    (id, left, top) => {
       setPieces(
         update(pieces, {
           [id]: {
@@ -196,7 +253,7 @@ const Container: React.FC<ContainerProps> = () => {
   const [, drop] = useDrop(
     () => ({
       accept: "piece",
-      drop(item: any, monitor) {
+      drop(item, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
         if (delta) {
           const left = Math.round(item.left + delta.x);
@@ -208,6 +265,28 @@ const Container: React.FC<ContainerProps> = () => {
     }),
     [movePiece],
   );
+
+  const calculateBoundingBox = () => {
+    if (targetPieces && Object.keys(targetPieces).length > 0) {
+      const pieceValues = Object.values(targetPieces);
+      const top = Math.min(...pieceValues.map((p) => p.top));
+      const left = Math.min(...pieceValues.map((p) => p.left));
+      const bottom = Math.max(
+        ...pieceValues.map((p) => p.top + p.image.height),
+      );
+      const right = Math.max(...pieceValues.map((p) => p.left + p.image.width));
+
+      return {
+        top,
+        left,
+        width: right - left,
+        height: bottom - top,
+      };
+    }
+    return null;
+  };
+
+  const targetBoundingBox = calculateBoundingBox();
 
   return (
     <>
@@ -221,14 +300,31 @@ const Container: React.FC<ContainerProps> = () => {
           position: "relative",
         }}
       >
-        {Object.keys(pieces).map((key) => (
-          <Piece key={key} {...pieces[key]} />
-        ))}
-        <div className="dnd-drop-targets-container">
+        <div
+          className="dnd-drop-targets-container"
+          style={{ position: "relative" }}
+        >
           {dropTargets.map((d, index) => (
             <DropTarget key={index} {...d} />
           ))}
+          {targetBoundingBox && (
+            <div
+              style={{
+                position: "absolute",
+                top: targetBoundingBox.top,
+                left: targetBoundingBox.left,
+                width: targetBoundingBox.width,
+                height: targetBoundingBox.height,
+                border: "2px dashed blue",
+                zIndex: 9998,
+              }}
+            ></div>
+          )}
         </div>
+        {Object.keys(pieces).map((key) => (
+          <Piece key={key} {...pieces[key]} />
+        ))}
+        {renderPerimeterPoints(perimeterPoints)}
       </div>
       <h1>{percentDropped.toFixed(2) * 100}% Correct</h1>
     </>
