@@ -18,6 +18,7 @@ export interface PieceProps {
   id: string;
   image: any;
   left: number;
+  rotation: number,
   text: string;
   top: number;
 }
@@ -29,13 +30,17 @@ export const Piece: React.FC<PieceProps> = ({
   id,
   image,
   left,
+  rotation,
   text,
   top,
   ...props
 }) => {
   const {addAudio} = useAudioManager();
   // todo: better way to play audio?
-  const [audio_drag] = useState(new Audio(audio_on_drag.url));
+  const a = new Audio(audio_on_drag.url);
+  // speed up across the board
+  a.playbackRate = 1.50;
+  const [audio_drag] = useState(a);
   const [audio_drop] = useState(new Audio(audio_on_drop.url));
   const [{isDragging}, drag, preview] = useDrag(() => ({
     collect: (monitor: DragSourceMonitor) => ({
@@ -68,6 +73,7 @@ export const Piece: React.FC<PieceProps> = ({
       left,
       position: 'absolute',
       top,
+      rotate: `${rotation}deg`
     }}>
       <img src={image.url} />
     </span>
