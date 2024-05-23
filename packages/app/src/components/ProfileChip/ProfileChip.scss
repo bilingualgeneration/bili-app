@@ -39,3 +39,9 @@
     border-radius: 8px;
   }
 }
+
+ion-popover {
+  &::part(content) {
+    min-width: 290px;
+  }
+}

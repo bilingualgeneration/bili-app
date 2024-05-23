@@ -50,6 +50,7 @@ export const ProfileChip: React.FC = () => {
         side="bottom"
         alignment="end"
         trigger="top-center"
+        arrow = {false}
 
       >
         <IonContent id="profile-chip-popover">
@@ -61,7 +62,7 @@ export const ProfileChip: React.FC = () => {
               lines="none"
               href="/profile/coming-soon"
             >
-              <IonIcon icon={StudentAvatar} />
+              <IonIcon icon={StudentAvatar} style={{marginRight: "7px"}}/>
               <IonText>
                 <h1 className="text-md semibold">
                   {language !== 'en' && `Mi perfil`}
