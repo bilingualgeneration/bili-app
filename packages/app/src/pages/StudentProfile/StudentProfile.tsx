@@ -16,7 +16,7 @@ interface StudentCard {
 export const StudentProfile: FC = () => {
   const { language } = useLanguageToggle();
   const teacherName = "Mr.Molina";
-  const isTeacherProfile = true;
+  const isTeacherProfile = false;
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<StudentCard | null>(null);
 
@@ -54,8 +54,8 @@ export const StudentProfile: FC = () => {
     },
 
     {
-      nameEn: "AleksandraTheGreat M.",
-      nameEs: "Michel M.",
+      nameEn: "Jack M.",
+      nameEs: "Jack M.",
       profileImage: studentImage1
     },
 
@@ -107,7 +107,6 @@ export const StudentProfile: FC = () => {
                 >
                   <StudentProfileCard
                     nameEn={student.nameEn}
-                    nameEs={student.nameEs}
                     profileImage={student.profileImage}
                   />
                 </IonCol>
