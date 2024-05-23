@@ -10,12 +10,16 @@ import {
 import audio_incorrect from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
 
 export interface DropTargetProps {
+  classes: string,
   image: any,
+  isBlank: boolean,
   text: string,
 }
 
 export const DropTarget: React.FC<DropTargetProps> = ({
+  classes,
   image,
+  isBlank,
   text,
 }) => {
   const {addAudio} = useAudioManager();
@@ -51,10 +55,11 @@ export const DropTarget: React.FC<DropTargetProps> = ({
       'drop-shadow-correct': isCorrect === true,
       'drop-shadow-incorrect': isCorrect === false,
       'shake-animation': isCorrect === false,
-      'drop-target': true
-    })}
+      'drop-target': true,
+      'is-blank': isBlank
+    }, classes)}
 	  ref={drop}>
-      <img src={image.url} />
+      <img src={image?.url} />
     </span>
   </>;
 }

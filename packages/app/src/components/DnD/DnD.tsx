@@ -1,3 +1,6 @@
+const LETTER_MAX_ROTATION = 15;
+
+import classnames from 'classnames';
 import {
   DndProvider as ReactDndProvider,
   useDrop,
@@ -82,29 +85,35 @@ const Hydrator: React.FC<DnDProps> = (props) => {
 	      id,
 	      left,
 	      top,
+	      rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
 	    }
 	  ];
 	}
       )
     );
-    const targetPieceInstances = Object.fromEntries(
-      props.target.split('-').map(
-	(t: string, index: number) => {
-	  const p = piecesMap[t];
-	  const id: string = index.toString();
-	  return [
-	    id,
-	    {
-	      ...p,
-	      dropped: false,
-	      id,
-	      left: index * 100,
-	      top: 0,
-	    }
-	  ];
-      })
-    );
-
+    const targetPieceInstances = 
+      props.target
+	   .split(' ')
+	   .map((word) => 
+	     Object.fromEntries(
+	       word.split('-').map(
+		 (t: string, index: number) => {
+		   const p = piecesMap[t.replace(/_$/, '')];
+		   const id: string = index.toString();
+		   return [
+		     id,
+		     {
+		       ...p,
+		       dropped: false,
+		       id,
+		       isBlank: t.endsWith('_'),
+		       left: index * 100,
+		       top: 0,
+		     }
+		   ];
+	       })
+	     )
+	   );
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
   }, [props, setPieces]);
@@ -116,12 +125,15 @@ interface ContainerProps {}
 const Container: React.FC<ContainerProps> = () => {
   const {percentDropped, targetPieces, pieces, setPieces} = useDnD();
   const dropTargets = useMemo(() => {
-    return Object.values(targetPieces).map(
-      (p: any) => ({
+    return targetPieces.map(
+      (word: any, wordIndex: number) => Object.values(word).map(
+      (p: any, letterIndex) => ({
+	classes: classnames({'leftMargin': wordIndex > 0 && letterIndex === 0}),
 	image: p.image,
-	text: p.text,
+	text: p.text.replace(/_$/, ''),
+	isBlank: p.isBlank
       })
-    );
+    ));
   }, [targetPieces]);
   const movePiece = useCallback(
     (id: string, left: number, top: number) => {
@@ -161,8 +173,8 @@ const Container: React.FC<ContainerProps> = () => {
     {Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
     <div className='dnd-drop-targets-container'>
       {dropTargets.map(
-	(d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
-      )}
+	(word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
+      ))}
     </div>
   </div>
     <h1>

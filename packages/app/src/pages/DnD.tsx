@@ -19,13 +19,12 @@ export const HydratedDnDDev: React.FC = () => {
     // todo: loading screen
     return <></>;
   }
-
   if (status === "error") {
     // todo: better error checking
     return <></>;
   }
-
   return <>
+    {data.target_image && <div className='ion-text-center'><img src={data.target_image.url} /></div>}
     <DnD
       target={data.target}
       pieces={data.pieces}
