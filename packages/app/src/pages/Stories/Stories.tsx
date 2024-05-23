@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import {
   IonGrid,
   IonCol,
@@ -39,9 +40,9 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  return <FirestoreDocProvider collection='story' id={uuid}>
+  return <FirestoreDocProvider collection='story' id={uuid} populate={['story-vocabulary-list']}>
     <StoriesHydrated />
-    </FirestoreDocProvider>;
+  </FirestoreDocProvider>;
 };
 
 const StoriesHydrated: React.FC = () => {
@@ -81,6 +82,7 @@ export const StoryLoader = () => {
     filteredPages,
     ready,
     setReady,
+    setVocab,
   } = useStory();
   const { status, data } = useFirestoreDoc();
   const { profile: {isInclusive} } = useProfile();
@@ -105,11 +107,32 @@ export const StoryLoader = () => {
 	totalPages++;
 	setHasMultipleSyllable(true);
       }
-
+      if(data['story-vocabulary-list']){
+	let tempVocab = {
+	  es: {},
+	  'es-inc': {},
+	  en: {}
+	};
+	for(const list of data['story-vocabulary-list']){
+	  for(const word of list.words){
+	    for(const translation of word.word){
+	      // todo: better typing
+	      // @ts-ignore
+	      tempVocab[translation.language][translation.word] = {
+		...translation,
+		image: word.image
+	      }
+	    }
+	  }
+	}
+	setVocab(tempVocab);
+      }
+	
       totalPages++; // congrats page
       setFilteredPages(fp);
       setTotalPages(totalPages);
-      setPageNumber(0);
+      //setPageNumber(0);
+      setPageNumber(1);
       setReady(true);
     }
   }, [data]);
@@ -381,11 +404,28 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   </div>;
 };
 
+const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
+  children,
+  language,
+}) => {
+  const {vocab} = useStory();
+  console.log(language);
+  // @ts-ignore
+  return children!.split(' ').map((text: string) => {
+    let classes = ['word']
+    if(vocab[language][text]){
+      classes.push('vocab');
+    }
+    return <span className={classnames(classes)}>{text}</span>;
+  });
+}
+
 export const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
   const {profile: { isInclusive }} = useProfile();
   const {language} = useLanguageToggle();
   const {addAudio, clearAudio} = useAudioManager();
+
   useEffect(() => {
     return clearAudio;
   }, []);
@@ -414,12 +454,18 @@ export const StoryPage: React.FC<any> = () => {
 	    <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-2xl semibold color-suelo">
+		<SegmentedText language={language === 'esen' ? 'es' : language}>
                 {language === 'en'
 		? texts.en.text
 		: (isInclusive ? texts["es-inc"].text : texts.es.text)}
+		</SegmentedText>
               </h1>
               {language === 'esen' && (
-                <p className="text-xl color-english">{texts.en.text}</p>
+                <p className="text-xl color-english">
+		  <SegmentedText language='en'>
+		    {texts.en.text}
+		  </SegmentedText>
+		</p>
               )}
             </IonText>
 	    <div>

@@ -115,3 +115,13 @@
     }
     
 }
+
+.word {
+    display: inline-block;
+    &:not(:first-child) {
+	margin-left: 0.5rem;
+    }
+    &.vocab {
+	border-bottom: 3px dashed #23beb9;
+    }
+}
