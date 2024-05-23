@@ -63,12 +63,12 @@ export const ProfileChip: React.FC = () => {
             >
               <IonIcon icon={StudentAvatar} />
               <IonText>
-                <h1 className="text-xl semibold">
+                <h1 className="text-md semibold">
                   {language !== 'en' && `Mi perfil`}
                   {language === 'en' && `My profile`}
                 </h1>
                 {language === 'esen' &&
-                  <p className="text-md">
+                  <p className="text-sm">
                     My profile
                   </p>
                 }
@@ -84,12 +84,12 @@ export const ProfileChip: React.FC = () => {
             >
               <IonIcon icon={StudentLogout} style={{marginRight: "7px"}}/>
               <IonText >
-                <h1 className="text-xl semibold">
+                <h1 className="text-md semibold">
                   {language !== 'en' && `Cambiar de estudiante`}
                   {language === 'en' && `Change student`}
                 </h1>
                 {language === 'esen' &&
-                  <p className="text-md">
+                  <p className="text-sm">
                     Change student
                   </p>
                 }
