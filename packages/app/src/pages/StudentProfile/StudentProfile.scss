@@ -4,27 +4,32 @@
         margin: 50px 90px;
         position: relative;
 
+    }
+
+    .content-container ion-item {
+        padding-right: 100px;
         
+        @media (max-width: 1024px) { /* iPad Mini portrait and landscape width */
+            padding-right: 10.2rem;
+        }
+        @media (max-width: 932px) { /* iPad Mini portrait and landscape width */
+            padding-right: 9rem;
+        }
+        @media (max-width: 844px) { /* iPad Mini portrait and landscape width */
+            padding-right: 7.4rem;
+        }
         @media (max-width: 768px) { /* iPad Mini portrait and landscape width */
-            margin: 20px; 
+            padding-right: 5.2rem;
         }
     }
 
     .heading-container {
     
         margin: 0 0 25px 0;
+    }
 
-        @media (max-width: 768px) { /* iPad Mini portrait and landscape width */
-            width: auto;
-            margin: 0 0 0 50px;
-            padding: 0 20px;
-        }
-
-        @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
-            width: auto;
-            margin: 0 0 0 0px;
-            padding: 0 20px;
-        }
+    .table-cards{
+        margin-left: 8px;
     }
 
     .student-card, .student-card-selected {

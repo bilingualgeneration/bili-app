@@ -15,8 +15,8 @@ interface StudentCard {
 
 export const StudentProfile: FC = () => {
   const { language } = useLanguageToggle();
-  const classroomName = "Classroom name";
-  const isTeacherProfile = false;
+  const classroomName = "304";
+  const isTeacherProfile = true;
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<StudentCard | null>(null);
 
@@ -82,8 +82,8 @@ export const StudentProfile: FC = () => {
           <IonItem>
             <div className="heading-container">
               <h1 className="text-3xl semibold">
-                {language !== 'en' && `La clase de la ${classroomName}`}
-                {language === 'en' && `${classroomName} Class`}
+                {language !== 'en' && `Aula ${classroomName} clase`}
+                {language === 'en' && `Classroom ${classroomName} Class`}
               </h1>
             </div>
           </IonItem>
