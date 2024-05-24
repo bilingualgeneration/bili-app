@@ -1,28 +1,29 @@
 .dnd-drop-targets-container {
-    .drop-target{
-	display: inline-block;
+  .drop-target {
+    display: inline-block;
 
-	img{
-	    pointer-events: none;
-	    user-select: none;
-	}
-	    
-	&.leftMargin {
-	    margin-left: 100px;
-	}
-	
-	&:not(.dropped){
-	    &.is-blank {
-		border-bottom: 6px solid #C8BA8F;
-		margin-bottom: -6px;
-		img{
-		    opacity: 0;
-		}
-	    }
-	    img{
-		filter: sepia(100%) hue-rotate(10deg);
-		/*-webkit-filter: grayscale(100%);*/
-	    }
-	}
+    img {
+      pointer-events: none;
+      user-select: none;
     }
+
+    &.leftMargin {
+      /* margin-left: 100px; */
+    }
+
+    &:not(.dropped) {
+      &.is-blank {
+        border-bottom: 6px solid #c8ba8f;
+        margin-bottom: -6px;
+        img {
+          opacity: 0;
+        }
+      }
+
+      img {
+        filter: sepia(100%) hue-rotate(10deg);
+        /*-webkit-filter: grayscale(100%);*/
+      }
+    }
+  }
 }
