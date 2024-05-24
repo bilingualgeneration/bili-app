@@ -40,8 +40,6 @@
   }
 }
 
-ion-popover {
-  &::part(content) {
-    min-width: 290px;
-  }
+ion-popover.profile-popover-style {
+  --width: 280px;
 }

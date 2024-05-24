@@ -51,11 +51,11 @@ export const ProfileChip: React.FC = () => {
         alignment="end"
         trigger="top-center"
         arrow = {false}
+        className="profile-popover-style"
 
       >
         <IonContent id="profile-chip-popover">
           <IonList>
-
             <IonItem
               button={true}
               detail={false}
@@ -96,7 +96,6 @@ export const ProfileChip: React.FC = () => {
                 }
               </IonText>
             </IonItem>
-
           </IonList>
         </IonContent>
       </IonPopover>
