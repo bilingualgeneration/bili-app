@@ -24,7 +24,7 @@ export const PackHeader: FC<PackHeaderProps> = ({
   const {language} = useLanguageToggle();
   return (
     <div id="packBanner" style={{ backgroundColor: bannerColor }}>
-      <div className="banner-overlay" style={{ backgroundColor: bannerColor }}/>
+      <div className="banner-overlay"/>
       <IonText className="banner-content">
         <h1 className={`${titleClassName}`}>
 	  {title}
