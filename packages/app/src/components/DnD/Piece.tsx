@@ -39,7 +39,7 @@ export const Piece: React.FC<PieceProps> = ({
   // todo: better way to play audio?
   const a = new Audio(audio_on_drag.url);
   // speed up across the board
-  a.playbackRate = 1.50;
+  a.playbackRate = 1.25;
   const [audio_drag] = useState(a);
   const [audio_drop] = useState(new Audio(audio_on_drop.url));
   const [{isDragging}, drag, preview] = useDrag(() => ({
