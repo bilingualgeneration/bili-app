@@ -7,7 +7,7 @@ import {
   useState
 } from 'react';
 
-import audio_incorrect from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
+import audio_incorrect from "@/assets/audio/incorrect.mp3";
 
 export interface DropTargetProps {
   classes: string,

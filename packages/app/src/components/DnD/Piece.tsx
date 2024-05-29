@@ -1,4 +1,4 @@
-import audio_correct from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
+import audio_correct from "@/assets/audio/correct.mp3";
 import {
   DragPreviewImage,
   DragSourceMonitor,
