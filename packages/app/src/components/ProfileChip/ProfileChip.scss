@@ -23,3 +23,24 @@
     }
   }
 }
+
+.custom-button-color {
+  all: unset;
+}
+
+#profile-chip-popover {
+  ion-list {
+    background-color: #c3ece2;
+    //border-radius: 12px;
+  }
+  ion-item{
+    font-family: "Outfit";
+    margin: 8px 4px 8px 4px;
+    border-radius: 8px;
+  }
+}
+
+ion-popover.profile-popover-style {
+  --width: 280px;
+  --offset-y: 10px;
+}

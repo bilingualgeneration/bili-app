@@ -17,12 +17,10 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import almohada1 from "@/assets/icons/intruder_almohada_1.svg";
-import empanada from "@/assets/icons/intruder_empanada.svg";
 import cover from "@/assets/icons/card_back.svg";
 import {useAudioManager} from '@/contexts/AudioManagerContext';
-import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.mp3";
-import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.mp3";
+import incorrect_card_audio from "@/assets/audio/incorrect.mp3";
+import correct_card_audio from "@/assets/audio/correct.mp3";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
 import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
 import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";

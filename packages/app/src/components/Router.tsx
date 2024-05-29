@@ -79,6 +79,7 @@ import {
   WouldDoIntro,
   WouldDoGame,
 } from '@/pages/WouldDo';
+import { StudentProfile } from '@/pages/StudentProfile';
 
 
 export const Router: React.FC = () => {
@@ -598,6 +599,19 @@ export const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
+
+          <Route
+            exact
+            path="/student"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+		              <StudentProfile />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
 	</ScrollToTop>
       </Switch>
     </IonReactRouter>
