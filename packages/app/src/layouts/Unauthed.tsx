@@ -24,7 +24,7 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   }
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding">
+      <IonContent fullscreen className="ion-padding background-figures">
 	<I18nWrapper locale={language}>
         <div className="page-wrapper" style={{ background }}>
           {children}
