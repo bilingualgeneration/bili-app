@@ -6,6 +6,22 @@ import {
   useState,
 } from "react";
 
+
+type Vocab = any;
+type Lang = string;
+
+type VocabDictionaries = {
+  [lang: Lang]: {
+    [key: string]: Vocab
+  }
+};
+
+type VocabLookup = {
+  [key: string]: {
+    [lang: Lang]: string
+  }
+}
+
 interface StoryState {
   pageNumber: number;
   pageForward: any;
@@ -21,8 +37,14 @@ interface StoryState {
   setHasMultipleImage: Dispatch<SetStateAction<boolean>>;
   hasMultipleSyllable: boolean;
   setHasMultipleSyllable: Dispatch<SetStateAction<boolean>>;
-  vocab: any;
-  setVocab: Dispatch<SetStateAction<any>>;
+  vocab: VocabDictionaries;
+  setVocab: Dispatch<SetStateAction<VocabDictionaries>>;
+  vocabLookup: VocabLookup;
+  setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
+  currentVocabWord: string;
+  setCurrentVocabWord: Dispatch<SetStateAction<string>>;
+  isVocabOpen: boolean;
+  setIsVocabOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -38,11 +60,14 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [ready, setReady] = useState<boolean>(false);
   const [hasMultipleImage, setHasMultipleImage] = useState<boolean>(false);
   const [hasMultipleSyllable, setHasMultipleSyllable] = useState<boolean>(false);
-  const [vocab, setVocab] = useState<any>({
+  const [isVocabOpen, setIsVocabOpen] = useState<boolean>(false);
+  const [currentVocabWord, setCurrentVocabWord] = useState<string>('');
+  const [vocab, setVocab] = useState<VocabDictionaries>({
     es: {},
     'es-inc': {},
     en: {}
   });
+  const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
   const pageForward = () => {
     if(totalPages > 0){
       setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
@@ -72,6 +97,12 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         setReady,
 	vocab,
 	setVocab,
+	currentVocabWord,
+	setCurrentVocabWord,
+	isVocabOpen,
+	setIsVocabOpen,
+	vocabLookup,
+	setVocabLookup,
       }}
       children={children}
     />

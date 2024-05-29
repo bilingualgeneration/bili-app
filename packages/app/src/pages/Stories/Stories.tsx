@@ -8,6 +8,7 @@ import {
   IonCardContent,
   IonText,
   IonButton,
+  useIonModal,
 } from "@ionic/react";
 import {StoriesCongrats} from './StoriesCongrats';
 import { StoriesGame } from "./StoriesGame";
@@ -19,6 +20,7 @@ import {
 import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
 import { useEffect, useState } from "react";
+import {VocabModal} from './VocabModal';
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import {useHistory} from 'react-router-dom';
@@ -83,6 +85,7 @@ export const StoryLoader = () => {
     ready,
     setReady,
     setVocab,
+    setVocabLookup,
   } = useStory();
   const { status, data } = useFirestoreDoc();
   const { profile: {isInclusive} } = useProfile();
@@ -113,6 +116,7 @@ export const StoryLoader = () => {
 	  'es-inc': {},
 	  en: {}
 	};
+	let tempVocabLookup = {};
 	for(const list of data['story-vocabulary-list']){
 	  for(const word of list.words){
 	    for(const translation of word.word){
@@ -121,10 +125,29 @@ export const StoryLoader = () => {
 	      tempVocab[translation.language][translation.word] = {
 		...translation,
 		image: word.image
+	      };
+
+	      // nested loops!
+	      // needed to build out lookup table
+	      // performance is ok since it's a max of 3 items
+	      for(const nestedTranslation of word.word){
+		if(translation.language !== nestedTranslation.language){
+		  // @ts-ignore
+		  if(!tempVocabLookup[translation.word]){
+		    // @ts-ignore
+		    tempVocabLookup[translation.word] = {
+		      [nestedTranslation.language]: nestedTranslation.word
+		    }
+		  }else{
+		    // @ts-ignore
+		    tempVocabLookup[translation.word][nestedTranslation.language] = nestedTranslation.word;
+		  }
+		}
 	      }
 	    }
 	  }
 	}
+	setVocabLookup(tempVocabLookup);
 	setVocab(tempVocab);
       }
 	
@@ -408,15 +431,29 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
   children,
   language,
 }) => {
-  const {vocab} = useStory();
-  console.log(language);
+  const {
+    setCurrentVocabWord,
+    setIsVocabOpen,
+    vocab
+  } = useStory();
   // @ts-ignore
-  return children!.split(' ').map((text: string) => {
-    let classes = ['word']
+  return children!.split(' ').map((text: string, index: number) => {
+    let classes = ['word'];
     if(vocab[language][text]){
       classes.push('vocab');
     }
-    return <span className={classnames(classes)}>{text}</span>;
+    return <span
+	     className={classnames(classes)}
+	     onClick={() => {
+	       if(vocab[language][text]){
+		 setCurrentVocabWord(text);
+		 setIsVocabOpen(true);
+	       }
+	     }}
+	     key={index}
+	   >
+      {text}
+    </span>;
   });
 }
 
@@ -529,6 +566,7 @@ export const StoryPage: React.FC<any> = () => {
           </IonCardContent>
         </IonCard>
       </IonCol>
+      <VocabModal />
     </>
   );
 };
