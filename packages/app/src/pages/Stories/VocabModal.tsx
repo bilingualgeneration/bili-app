@@ -89,7 +89,7 @@ export const VocabModal: React.FC = () => {
                         </h1>
                         {language === 'esen' &&
                           <p className="text-3xl">
-                            en?.word
+                            {en?.word}
                           </p>
                         }
                       </IonText>
@@ -117,7 +117,7 @@ export const VocabModal: React.FC = () => {
                         </h1>
                         {language === 'esen' &&
                           <p className="text-xl">
-                            en?.definition
+                            {en?.definition}
                           </p>
                         }
                       </IonText>
