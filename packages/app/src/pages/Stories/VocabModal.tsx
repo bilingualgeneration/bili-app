@@ -71,17 +71,20 @@ export const VocabModal: React.FC = () => {
                 <IonRow class="ion-align-items-start">
                   <IonCol>
                     <div className='word-row'>
-                      <AudioButton audio={{
-                        en: {
-                          url: en?.word_audio?.url || '',
-                        },
-                        es: {
-                          url: (isInclusive ? esInc : es)?.word_audio?.url || '',
-                        }
-                      }} />
+                      <div className='audio-button-word'>
+                        <AudioButton audio={{
+                          en: {
+                            url: en?.word_audio?.url || '',
+                          },
+                          es: {
+                            url: (isInclusive ? esInc : es)?.word_audio?.url || '',
+                          }
+                        }} />
+                      </div>
+                      
                       <IonText>
                         <h1 className="text-4xl semibold">
-                          {language !== 'en' && (isInclusive ? esInc?.word : es.word)}
+                          {language !== 'en' && (isInclusive ? esInc?.word : es?.word)}
                           {language === 'en' && en?.word}
                         </h1>
                         {language === 'esen' &&
@@ -96,17 +99,20 @@ export const VocabModal: React.FC = () => {
                 <IonRow class="ion-align-items-start">
                   <IonCol>
                     <div className='word-row'>
-                      <AudioButton audio={{
-                        en: {
-                          url: en?.definition_audio?.url || '',
-                        },
-                        es: {
-                          url: (isInclusive ? esInc : es)?.definition_audio?.url || '',
-                        }
-                      }} />
+                      <div className='audio-button-word'>
+                        <AudioButton audio={{
+                          en: {
+                            url: en?.definition_audio?.url || '',
+                          },
+                          es: {
+                            url: (isInclusive ? esInc : es)?.definition_audio?.url || '',
+                          }
+                        }} />
+                      </div>
+                     
                       <IonText>
                         <h1 className="text-2xl semibold">
-                          {language !== 'en' && (isInclusive ? esInc?.definition : es.definition)}
+                          {language !== 'en' && (isInclusive ? esInc?.definition : es?.definition)}
                           {language === 'en' && en?.definition}
                         </h1>
                         {language === 'esen' &&
