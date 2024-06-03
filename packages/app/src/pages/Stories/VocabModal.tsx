@@ -13,10 +13,9 @@ export const VocabModal: React.FC = () => {
     vocab,
     vocabLookup,
     currentVocabWord,
-    setIsVocabOpen,
-    isVocabOpen
+    setCurrentVocabWord
   } = useStory();
-  const lookup = vocabLookup[currentVocabWord] || {
+  const lookup = vocabLookup[currentVocabWord ?? ''] || {
     es: '',
     ['es-inc']: '',
     en: ''
@@ -31,17 +30,17 @@ export const VocabModal: React.FC = () => {
      sometimes es, esInc, and en can be undefined
      if esInc is undefined, reuse es instead
    */
-  console.log(es);
-  console.log(esInc);
-  console.log(en);
+   //console.log(es);
+   //console.log(esInc);
+   //console.log(en);
   
   // to close modal, call setIsVocabOpen(false);
   
   return <>
     <IonModal
-      isOpen={isVocabOpen}
+      isOpen={currentVocabWord !== null}
       onWillDismiss={() => {
-	setIsVocabOpen(false);
+	setCurrentVocabWord(null);
       }}>
       <IonContent>
 	<div className='ion-padding'>
