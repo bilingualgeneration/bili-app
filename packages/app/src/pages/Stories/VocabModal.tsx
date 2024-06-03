@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonCol,
   IonContent,
   IonIcon,
@@ -14,6 +15,7 @@ import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import "./VocabModal.scss";
 import { useProfile } from '@/hooks/Profile';
 import { AudioButton } from '@/components/AudioButton';
+import CloseButton from '@/assets/icons/close_button.svg'
 
 
 // todo: ion-padding on IonContent is overridden
@@ -64,7 +66,16 @@ export const VocabModal: React.FC = () => {
       }}
     >
       <IonContent id='vocab-modal-id' className='vocab-modal-content'>
-        <div className='ion-padding modal-width'>
+        <div className='ion-padding modal-container'>
+          <IonButton 
+            onClick={() => setIsVocabOpen(false)}
+            size='small'
+            fill='clear'
+            className="close-button-icon"
+            >
+            <img src={CloseButton} />
+           
+          </IonButton>
           <IonList>
             <IonRow>
               <IonCol>
@@ -88,7 +99,7 @@ export const VocabModal: React.FC = () => {
                           {language === 'en' && en?.word}
                         </h1>
                         {language === 'esen' &&
-                          <p className="text-3xl">
+                          <p className="text-3xl semibold word-color">
                             {en?.word}
                           </p>
                         }
@@ -116,7 +127,7 @@ export const VocabModal: React.FC = () => {
                           {language === 'en' && en?.definition}
                         </h1>
                         {language === 'esen' &&
-                          <p className="text-xl">
+                          <p className="text-xl word-color">
                             {en?.definition}
                           </p>
                         }

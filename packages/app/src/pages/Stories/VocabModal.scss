@@ -6,11 +6,32 @@
    .audio-button-word{
     margin-right: 24px;
    } 
+   .modal-container {
+    margin-top: 70px;
+    position: relative;
+   }
 
+   .close-button-icon {
+    --padding-bottom: 0;
+    --padding-top: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+    position: absolute;
+    top: -50px;
+    right: 10px;
+   }
+
+   .word-color{
+    color: #00000073;
+    ;
+   }
 }
 
 ion-modal .vocab-modal-content{
     width: 920px;
+    @media (max-width: 920px) { /* iPad Mini portrait and landscape width */
+        width: 620px;
+    }
 }
 
 ion-modal {
