@@ -10,7 +10,7 @@ import {
   IonButton,
   useIonModal,
 } from "@ionic/react";
-import {StoriesCongrats} from './StoriesCongrats';
+import { StoriesCongrats } from './StoriesCongrats';
 import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
 import {
@@ -20,11 +20,11 @@ import {
 import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
 import { useEffect, useState } from "react";
-import {VocabModal} from './VocabModal';
+import { VocabModal } from './VocabModal';
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import {useHistory} from 'react-router-dom';
-import {useLanguageToggle} from '@/components/LanguageToggle';
+import { useHistory } from 'react-router-dom';
+import { useLanguageToggle } from '@/components/LanguageToggle';
 
 import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
@@ -48,8 +48,8 @@ export const Stories = () => {
 };
 
 const StoriesHydrated: React.FC = () => {
-  const {status, data} = useFirestoreDoc();
-  switch(status){
+  const { status, data } = useFirestoreDoc();
+  switch (status) {
     case 'loading':
       return <>loading</>;
       break;
@@ -58,7 +58,7 @@ const StoriesHydrated: React.FC = () => {
       break;
     case 'ready':
       return <StoryProvider>
-	<StoryLoader />
+        <StoryLoader />
       </StoryProvider>;
       break;
     default:
@@ -88,8 +88,8 @@ export const StoryLoader = () => {
     setVocabLookup,
   } = useStory();
   const { status, data } = useFirestoreDoc();
-  const { profile: {isInclusive} } = useProfile();
-  const {language} = useLanguageToggle();
+  const { profile: { isInclusive } } = useProfile();
+  const { language } = useLanguageToggle();
   useEffect(() => {
     if (data) {
       const fp = data.pages.filter((p: any) => {
@@ -102,55 +102,55 @@ export const StoryLoader = () => {
       });
       let totalPages = fp.length;
       totalPages++; // cover
-      if(data.multiple_image_text && data.multiple_image_text.length > 0){
-	totalPages++;
-	setHasMultipleImage(true);
+      if (data.multiple_image_text && data.multiple_image_text.length > 0) {
+        totalPages++;
+        setHasMultipleImage(true);
       }
-      if(data.multiple_syllable_text && data.multiple_syllable_text.length > 0){
-	totalPages++;
-	setHasMultipleSyllable(true);
+      if (data.multiple_syllable_text && data.multiple_syllable_text.length > 0) {
+        totalPages++;
+        setHasMultipleSyllable(true);
       }
-      if(data['story-vocabulary-list']){
-	let tempVocab = {
-	  es: {},
-	  'es-inc': {},
-	  en: {}
-	};
-	let tempVocabLookup = {};
-	for(const list of data['story-vocabulary-list']){
-	  for(const word of list.words){
-	    for(const translation of word.word){
-	      // todo: better typing
-	      // @ts-ignore
-	      tempVocab[translation.language][translation.word] = {
-		...translation,
-		image: word.image
-	      };
+      if (data['story-vocabulary-list']) {
+        let tempVocab = {
+          es: {},
+          'es-inc': {},
+          en: {}
+        };
+        let tempVocabLookup = {};
+        for (const list of data['story-vocabulary-list']) {
+          for (const word of list.words) {
+            for (const translation of word.word) {
+              // todo: better typing
+              // @ts-ignore
+              tempVocab[translation.language][translation.word] = {
+                ...translation,
+                image: word.image
+              };
 
-	      // nested loops!
-	      // needed to build out lookup table
-	      // performance is ok since it's a max of 3 items
-	      for(const nestedTranslation of word.word){
-		if(translation.language !== nestedTranslation.language){
-		  // @ts-ignore
-		  if(!tempVocabLookup[translation.word]){
-		    // @ts-ignore
-		    tempVocabLookup[translation.word] = {
-		      [nestedTranslation.language]: nestedTranslation.word
-		    }
-		  }else{
-		    // @ts-ignore
-		    tempVocabLookup[translation.word][nestedTranslation.language] = nestedTranslation.word;
-		  }
-		}
-	      }
-	    }
-	  }
-	}
-	setVocabLookup(tempVocabLookup);
-	setVocab(tempVocab);
+              // nested loops!
+              // needed to build out lookup table
+              // performance is ok since it's a max of 3 items
+              for (const nestedTranslation of word.word) {
+                if (translation.language !== nestedTranslation.language) {
+                  // @ts-ignore
+                  if (!tempVocabLookup[translation.word]) {
+                    // @ts-ignore
+                    tempVocabLookup[translation.word] = {
+                      [nestedTranslation.language]: nestedTranslation.word
+                    }
+                  } else {
+                    // @ts-ignore
+                    tempVocabLookup[translation.word][nestedTranslation.language] = nestedTranslation.word;
+                  }
+                }
+              }
+            }
+          }
+        }
+        setVocabLookup(tempVocabLookup);
+        setVocab(tempVocab);
       }
-	
+
       totalPages++; // congrats page
       setFilteredPages(fp);
       setTotalPages(totalPages);
@@ -165,63 +165,63 @@ export const StoryLoader = () => {
   }
 
   return (
-    <div style={{paddingBottom: 100}}>
+    <div style={{ paddingBottom: 100 }}>
       {pageNumber === 0 && (
         // todo: don't need to pass in whole data
         <TitleCard data={data} />
       )}
       {pageNumber > 0 &&
-       // todo: less or equal
-       pageNumber <= filteredPages.length && ( <>
-	 <PageWrapper>
-	   <StoryPage />
-	 </PageWrapper>
-	 <PageCounter />
-       </>
-      )}
+        // todo: less or equal
+        pageNumber <= filteredPages.length && (<>
+          <PageWrapper>
+            <StoryPage />
+          </PageWrapper>
+          <PageCounter />
+        </>
+        )}
       {pageNumber === filteredPages.length + 1 &&
-       hasMultipleImage && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="image" />
-	   </IonCol>
-	 </PageWrapper>
-	 <PageCounter />
-       </>}
-      
+        hasMultipleImage && <>
+          <PageWrapper>
+            <IonCol size='auto'>
+              <StoriesGame game={data} gameType="image" />
+            </IonCol>
+          </PageWrapper>
+          <PageCounter />
+        </>}
+
       {pageNumber === filteredPages.length + 1 &&
-       hasMultipleSyllable &&
-       !hasMultipleImage && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="syllable" />
-	   </IonCol>
-	 </PageWrapper>
-      	 <PageCounter />
-       </>}
-      
+        hasMultipleSyllable &&
+        !hasMultipleImage && <>
+          <PageWrapper>
+            <IonCol size='auto'>
+              <StoriesGame game={data} gameType="syllable" />
+            </IonCol>
+          </PageWrapper>
+          <PageCounter />
+        </>}
+
       {pageNumber === filteredPages.length + 2 &&
-       hasMultipleImage &&
-       hasMultipleSyllable && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="syllable" />
-	   </IonCol>
-	 </PageWrapper>
-      	 <PageCounter />
-       </>}
+        hasMultipleImage &&
+        hasMultipleSyllable && <>
+          <PageWrapper>
+            <IonCol size='auto'>
+              <StoriesGame game={data} gameType="syllable" />
+            </IonCol>
+          </PageWrapper>
+          <PageCounter />
+        </>}
 
       {pageNumber === totalPages - 1 &&
-       <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesCongrats onKeepGoingClick={() => {
-	       history.push('/stories');
-	       }}/>
-	   </IonCol>
-	 </PageWrapper>
-       	 <PageCounter />
-       </>}
+        <>
+          <PageWrapper>
+            <IonCol size='auto'>
+              <StoriesCongrats onKeepGoingClick={() => {
+                history.push('/stories');
+              }} />
+            </IonCol>
+          </PageWrapper>
+          <PageCounter />
+        </>}
     </div>
   );
 };
@@ -270,7 +270,7 @@ const PageCounter = () => {
 };
 
 const Pill: (args: any) => any = ({ icon, text, value }) => {
-  const {language} = useLanguageToggle();
+  const { language } = useLanguageToggle();
   return (
     <IonGrid
       style={{
@@ -284,12 +284,12 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
         </IonCol>
         <IonCol size="auto">
           <IonText>
-            <h2 style={{marginTop: 0}} className="text-sm semibold color-suelo">
-	      
-	      {language === 'en'
-	      ? text.en
-	      : text.es}
-	    </h2>
+            <h2 style={{ marginTop: 0 }} className="text-sm semibold color-suelo">
+
+              {language === 'en'
+                ? text.en
+                : text.es}
+            </h2>
             <p className="text-xs color-english">{value}</p>
           </IonText>
         </IonCol>
@@ -299,8 +299,8 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
 };
 
 const TitleCard = ({ data }: any) => {
-  const {profile: { isInclusive}} = useProfile();
-  const {language} = useLanguageToggle();
+  const { profile: { isInclusive } } = useProfile();
+  const { language } = useLanguageToggle();
   const { pageForward } = useStory();
   return (
     <div className="content-wrapper margin-top-1">
@@ -315,9 +315,9 @@ const TitleCard = ({ data }: any) => {
         <IonCardContent>
           <IonText className="ion-text-center">
             <h1 className="text-5xl color-suelo">
-	      {language === 'en'
-	      ? getLang("en", data.title).text
-	      : getLang(isInclusive ? "es-inc" : "es", data.title).text}
+              {language === 'en'
+                ? getLang("en", data.title).text
+                : getLang(isInclusive ? "es-inc" : "es", data.title).text}
             </h1>
             {language === 'esen' && (
               <p className="text-3xl color-english">
@@ -325,7 +325,7 @@ const TitleCard = ({ data }: any) => {
               </p>
             )}
           </IonText>
-	  <img src={data.cover_image.url} style={{ width: '100%', marginTop: '2rem'}} />
+          <img src={data.cover_image.url} style={{ width: '100%', marginTop: '2rem' }} />
         </IonCardContent>
         <div
           className="ion-text-center"
@@ -344,10 +344,10 @@ const TitleCard = ({ data }: any) => {
               }}
             >
               <h1 className="text-3xl semibold color-nube">
-		{language === 'en'
-		? "Let's read!"
-		: '¡Leamos!'}
-	      </h1>
+                {language === 'en'
+                  ? "Let's read!"
+                  : '¡Leamos!'}
+              </h1>
               {language === 'esen' && (
                 <p className="text-sm color-nube">Let's read!</p>
               )}
@@ -356,7 +356,7 @@ const TitleCard = ({ data }: any) => {
         </div>
       </IonCard>
       <IonGrid className='margin-top-2'>
-        <IonRow style={{justifyContent: 'center'}}>
+        <IonRow style={{ justifyContent: 'center' }}>
           <IonCol size="auto">
             <Pill
               icon={AgesIcon}
@@ -403,7 +403,7 @@ const TitleCard = ({ data }: any) => {
   );
 };
 
-export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
+export const PageWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
   const {
     pageBackward,
     pageForward,
@@ -413,21 +413,21 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   return <div className="content-wrapper margin-top-1">
     <IonGrid>
       <IonRow>
-	<IonCol></IonCol>
-	<IonImg className='page-control backward' src={backward} onClick={pageBackward} />
-	{children}
-	<IonImg
-	  className='page-control forward'
-	  src={forward}
-	  onClick={pageForward}
-	  style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
-	<IonCol></IonCol>
+        <IonCol></IonCol>
+        <IonImg className='page-control backward' src={backward} onClick={pageBackward} />
+        {children}
+        <IonImg
+          className='page-control forward'
+          src={forward}
+          onClick={pageForward}
+          style={{ opacity: pageNumber === totalPages - 1 ? 0 : 1 }} />
+        <IonCol></IonCol>
       </IonRow>
     </IonGrid>
   </div>;
 };
 
-const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
+const SegmentedText: React.FC<React.PropsWithChildren<{ language: string }>> = ({
   children,
   language,
 }) => {
@@ -439,19 +439,19 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
   // @ts-ignore
   return children!.split(' ').map((text: string, index: number) => {
     let classes = ['word'];
-    if(vocab[language][text]){
+    if (vocab[language][text]) {
       classes.push('vocab');
     }
     return <span
-	     className={classnames(classes)}
-	     onClick={() => {
-	       if(vocab[language][text]){
-		 setCurrentVocabWord(text);
-		 setIsVocabOpen(true);
-	       }
-	     }}
-	     key={index}
-	   >
+      className={classnames(classes)}
+      onClick={() => {
+        if (vocab[language][text]) {
+          setCurrentVocabWord(text);
+          setIsVocabOpen(true);
+        }
+      }}
+      key={index}
+    >
       {text}
     </span>;
   });
@@ -459,9 +459,9 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
 
 export const StoryPage: React.FC<any> = () => {
   const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
-  const {profile: { isInclusive }} = useProfile();
-  const {language} = useLanguageToggle();
-  const {addAudio, clearAudio} = useAudioManager();
+  const { profile: { isInclusive } } = useProfile();
+  const { language } = useLanguageToggle();
+  const { addAudio, clearAudio } = useAudioManager();
 
   useEffect(() => {
     return clearAudio;
@@ -482,78 +482,78 @@ export const StoryPage: React.FC<any> = () => {
           className="sf-card drop-shadow"
           style={cardStyles}>
           <IonCardContent className='ion-text-center ion-no-padding'
-			  style={{
-			    display: 'flex',
-			    flexDirection: 'column',
-			    justifyContent: 'space-between',
-			    height: '100%'
-			  }}>
-	    <div></div>
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              height: '100%'
+            }}>
+            <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-2xl semibold color-suelo">
-		<SegmentedText language={language === 'esen' ? 'es' : language}>
-                {language === 'en'
-		? texts.en.text
-		: (isInclusive ? texts["es-inc"].text : texts.es.text)}
-		</SegmentedText>
+                <SegmentedText language={language === 'esen' ? 'es' : language}>
+                  {language === 'en'
+                    ? texts.en.text
+                    : (isInclusive ? texts["es-inc"].text : texts.es.text)}
+                </SegmentedText>
               </h1>
               {language === 'esen' && (
                 <p className="text-xl color-english">
-		  <SegmentedText language='en'>
-		    {texts.en.text}
-		  </SegmentedText>
-		</p>
+                  <SegmentedText language='en'>
+                    {texts.en.text}
+                  </SegmentedText>
+                </p>
               )}
             </IonText>
-	    <div>
-	      <IonButton
-		size='small'
-		fill='clear'
-		className='stories-volume-button'
-		onClick={() => {
-		  let audios = [];
-		  switch(language){
-		    case 'en':
-		      if(texts['en'].audio){
-			audios.push(texts['en'].audio.url);
-		      }
-		      break;
-		    case 'es':
-		      if(isInclusive){
-			if(texts['es-inc'].audio){
-			  audios.push(texts['es-inc'].audio.url);
-			}
-		      }else{
-			if(texts['es'].audio){
-			  audios.push(texts['es'].audio.url);
-			}
-		      }
-		      
-		      break;
-		    case 'esen':
-		      if(isInclusive){
-			if(texts['es-inc'].audio){
-			  audios.push(texts['es-inc'].audio.url);
-			}
-		      }else{
-			if(texts['es'].audio){
-			  audios.push(texts['es'].audio.url);
-			}
-		      }
-		      if(texts['en'].audio){
-			audios.push(texts['en'].audio.url);
-		      }
-		      break;
-		    default:
+            <div>
+              <IonButton
+                size='small'
+                fill='clear'
+                className='stories-volume-button'
+                onClick={() => {
+                  let audios = [];
+                  switch (language) {
+                    case 'en':
+                      if (texts['en'].audio) {
+                        audios.push(texts['en'].audio.url);
+                      }
+                      break;
+                    case 'es':
+                      if (isInclusive) {
+                        if (texts['es-inc'].audio) {
+                          audios.push(texts['es-inc'].audio.url);
+                        }
+                      } else {
+                        if (texts['es'].audio) {
+                          audios.push(texts['es'].audio.url);
+                        }
+                      }
 
-		      break;
-		  }
-		  addAudio(audios);
-		}}
-	      >
-		<img className="stories-volume-icon" src={volumeButton} />
-	      </IonButton>
-	    </div>
+                      break;
+                    case 'esen':
+                      if (isInclusive) {
+                        if (texts['es-inc'].audio) {
+                          audios.push(texts['es-inc'].audio.url);
+                        }
+                      } else {
+                        if (texts['es'].audio) {
+                          audios.push(texts['es'].audio.url);
+                        }
+                      }
+                      if (texts['en'].audio) {
+                        audios.push(texts['en'].audio.url);
+                      }
+                      break;
+                    default:
+
+                      break;
+                  }
+                  addAudio(audios);
+                }}
+              >
+                <img className="stories-volume-icon" src={volumeButton} />
+              </IonButton>
+            </div>
           </IonCardContent>
         </IonCard>
       </IonCol>
@@ -562,7 +562,7 @@ export const StoryPage: React.FC<any> = () => {
           className="sf-card drop-shadow"
           style={cardStyles}>
           <IonCardContent className='ion-text-center ion-no-padding'>
-	    <img src={page.image.url} />
+            <img src={page.image.url} />
           </IonCardContent>
         </IonCard>
       </IonCol>

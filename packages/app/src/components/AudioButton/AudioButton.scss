@@ -1,46 +1,18 @@
-#profileChip {
-  background-color: #c3ece2;
-  border-radius: 2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  > ion-text {
-    margin: 0 1rem;
-    * {
-      margin: 0;
-    }
-  }
 
-  #profilePoints {
-    align-items: center;
-    background-color: #ac217b;
-    display: inline-flex;
-    padding: 0.5rem 0.75rem;
-    margin-left: 1rem;
-    border-radius: 1rem;
-    ion-icon {
-      margin-right: 0.5rem;
-    }
-  }
+.stories-volume-button {
+  --background: var(--Flamenco-High, #ffaedc);
+  --ripple-color: var(--Flamenco-High, #ffaedc);
+  height: 62px;
+  width: 62px;
 }
 
-.custom-button-color {
-  all: unset;
-}
-
-#profile-chip-popover {
-  ion-list {
-    background-color: #c3ece2;
-    //border-radius: 12px;
-  }
-  ion-item{
-    font-family: "Outfit";
-    margin: 8px 4px 8px 4px;
-    border-radius: 8px;
-  }
-}
-
-ion-popover.profile-popover-style {
-  --width: 280px;
-  --offset-y: 10px;
+.stories-volume-icon {
+  height: 38px;
+  width: auto;
+  /*
+  width: auto;
+  background-color: var(--Flamenco-High, #ffaedc);
+  padding: 1rem;
+  border-radius: 1rem;
+  */
 }

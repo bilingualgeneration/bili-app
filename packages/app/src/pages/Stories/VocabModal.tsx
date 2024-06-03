@@ -12,11 +12,15 @@ import { useLanguageToggle } from '@/components/LanguageToggle';
 import { useStory } from './StoryContext';
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import "./VocabModal.scss";
+import { useProfile } from '@/hooks/Profile';
+import { AudioButton } from '@/components/AudioButton';
+
 
 // todo: ion-padding on IonContent is overridden
 
 export const VocabModal: React.FC = () => {
   const { language } = useLanguageToggle(); // is es, esen, or en
+  const { profile: { isInclusive } } = useProfile();
   const {
     vocab,
     vocabLookup,
@@ -29,9 +33,15 @@ export const VocabModal: React.FC = () => {
     ['es-inc']: '',
     en: ''
   };
+  console.log("VOCABLOOKUP", vocabLookup)
+  console.log("CUrrentVocabWord", currentVocabWord)
+  console.log("LOKUP", lookup)
   const es = vocab.es[lookup.es];
   const esInc = vocab['es-inc'][lookup['es-inc']];
   const en = vocab.en[lookup.en];
+
+  const imageUrl = language === 'en' ? (en?.image?.url || '') : (isInclusive ? (esInc?.image?.url || '') : (es?.image?.url || ''));
+
 
   /*
      to see the props in es, run console.log(es);
@@ -39,9 +49,9 @@ export const VocabModal: React.FC = () => {
      sometimes es, esInc, and en can be undefined
      if esInc is undefined, reuse es instead
    */
-  console.log(es);
-  console.log(esInc);
-  console.log(en);
+  console.log(es, "SPANISH");
+  console.log(esInc?.word, "INCLUSIVE");
+  console.log(en, "ENGLISH");
 
   // to close modal, call setIsVocabOpen(false);
 
@@ -50,46 +60,73 @@ export const VocabModal: React.FC = () => {
       isOpen={isVocabOpen}
       onWillDismiss={() => {
         setIsVocabOpen(false);
-        
+
       }}
-      >
+    >
       <IonContent id='vocab-modal-id' className='vocab-modal-content'>
         <div className='ion-padding modal-width'>
           <IonList>
             <IonRow>
               <IonCol>
-              <IonItem>
-              <IonIcon icon={StudentAvatar} />
-              <IonText>
-                <h1 className="text-md semibold">
-                  {language !== 'en' && `amable`}
-                  {language === 'en' && `kind`}
-                </h1>
-                {language === 'esen' &&
-                  <p className="text-sm">
-                    kind
-                  </p>
-                }
-              </IonText>
-            </IonItem>
-            <IonItem>
-              <IonIcon icon={StudentAvatar} />
-              <IonText>
-                <h1 className="text-md semibold">
-                  {language !== 'en' && `Una palabra usada para describir a alguien o algo que muestra <dulce>, consideración, y cariño.`}
-                  {language === 'en' && `A word used to describe someone or something that is sweet, thoughtful, or caring. `}
-                </h1>
-                {language === 'esen' &&
-                  <p className="text-sm">
-                    A word used to describe someone or something that is sweet, thoughtful, or caring. 
-                  </p>
-                }
-              </IonText>
-            </IonItem>
+                <IonRow class="ion-align-items-start">
+                  <IonCol>
+                    <div className='word-row'>
+                      <AudioButton audio={{
+                        en: {
+                          url: en?.word_audio?.url || '',
+                        },
+                        es: {
+                          url: (isInclusive ? esInc : es)?.word_audio?.url || '',
+                        }
+                      }} />
+                      <IonText>
+                        <h1 className="text-4xl semibold">
+                          {language !== 'en' && (isInclusive ? esInc?.word : es.word)}
+                          {language === 'en' && en?.word}
+                        </h1>
+                        {language === 'esen' &&
+                          <p className="text-3xl">
+                            en?.word
+                          </p>
+                        }
+                      </IonText>
+                    </div>
+                  </IonCol>
+                </IonRow>
+                <IonRow class="ion-align-items-start">
+                  <IonCol>
+                    <div className='word-row'>
+                      <AudioButton audio={{
+                        en: {
+                          url: en?.definition_audio?.url || '',
+                        },
+                        es: {
+                          url: (isInclusive ? esInc : es)?.definition_audio?.url || '',
+                        }
+                      }} />
+                      <IonText>
+                        <h1 className="text-2xl semibold">
+                          {language !== 'en' && (isInclusive ? esInc?.definition : es.definition)}
+                          {language === 'en' && en?.definition}
+                        </h1>
+                        {language === 'esen' &&
+                          <p className="text-xl">
+                            en?.definition
+                          </p>
+                        }
+                      </IonText>
+                    </div>
+                  </IonCol>
+
+                </IonRow>
+
               </IonCol>
-              <IonCol>
-                <img src="/src/assets/icons/vocab_image.png" alt="" />
-              </IonCol>
+              {imageUrl && (
+                <IonCol>
+                  <img src={imageUrl} alt="Word popover image" />
+                </IonCol>
+              )}
+
             </IonRow>
 
           </IonList>
