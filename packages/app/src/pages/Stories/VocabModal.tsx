@@ -38,7 +38,7 @@ export const VocabModal: React.FC = () => {
   console.log("LOKUP", lookup)
   const es = vocab.es[lookup.es];
   const esInc = vocab['es-inc'][lookup['es-inc']];
-  const en = vocab.en[lookup.en];
+  const en = lookup.en ? vocab.en[lookup.en] : vocab.en[currentVocabWord];
 
   const imageUrl = language === 'en' ? (en?.image?.url || '') : (isInclusive ? (esInc?.image?.url || '') : (es?.image?.url || ''));
 
