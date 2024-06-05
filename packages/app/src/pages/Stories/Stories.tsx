@@ -1,3 +1,10 @@
+import classnames from 'classnames';
+import {DnD} from '@/components/DnD';
+
+import {
+  DnDProvider,
+  useDnD
+} from '@/hooks/DnD';
 import {
   IonGrid,
   IonCol,
@@ -7,6 +14,7 @@ import {
   IonCardContent,
   IonText,
   IonButton,
+  useIonModal,
 } from "@ionic/react";
 import {StoriesCongrats} from './StoriesCongrats';
 import { StoriesGame } from "./StoriesGame";
@@ -18,6 +26,7 @@ import {
 import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
 import { useEffect, useState } from "react";
+import {VocabModal} from './VocabModal';
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import {useHistory} from 'react-router-dom';
@@ -39,16 +48,16 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  return <FirestoreDocProvider collection='story' id={uuid}>
+  return <FirestoreDocProvider collection='story' id={uuid} populate={['story-vocabulary-list', 'dnd-game']}>
     <StoriesHydrated />
-    </FirestoreDocProvider>;
+  </FirestoreDocProvider>;
 };
 
 const StoriesHydrated: React.FC = () => {
   const {status, data} = useFirestoreDoc();
   switch(status){
     case 'loading':
-      return <>loading</>;
+      return <></>;
       break;
     case 'error':
       return <>error</>;
@@ -69,18 +78,14 @@ export const StoryLoader = () => {
   const { uuid } = useParams();
   const history = useHistory();
   const {
-    hasMultipleImage,
-    hasMultipleSyllable,
+    pages,
+    setPages,
     setPageNumber,
     pageNumber,
-    setHasMultipleImage,
-    setHasMultipleSyllable,
-    setTotalPages,
-    setFilteredPages,
-    totalPages,
-    filteredPages,
     ready,
     setReady,
+    setVocab,
+    setVocabLookup,
   } = useStory();
   const { status, data } = useFirestoreDoc();
   const { profile: {isInclusive} } = useProfile();
@@ -95,8 +100,37 @@ export const StoryLoader = () => {
           return langs.includes("es");
         }
       });
-      let totalPages = fp.length;
-      totalPages++; // cover
+      let pages: any[] = [];
+      // push intro page
+      pages.push(<TitleCard data={data} />);
+
+      // push filtered pages
+      pages = pages.concat(
+	data.pages.map((data: any) => 
+	  <>
+	    <PageWrapper>
+	      <StoryPage page={data} />
+	    </PageWrapper>
+	    <PageCounter />
+	  </>
+	)
+      );
+
+      // todo: push multiple games
+
+      pages = pages.concat(
+	data['dnd-game'].map((data: any) => <>
+	  <PageWrapper>
+	    <DnDGame data={data} />
+	  </PageWrapper>
+	  <PageCounter />
+	</>)
+      );
+
+      // temp
+      pages.push(<TitleCard data={data} />);
+      
+      /*
       if(data.multiple_image_text && data.multiple_image_text.length > 0){
 	totalPages++;
 	setHasMultipleImage(true);
@@ -105,11 +139,53 @@ export const StoryLoader = () => {
 	totalPages++;
 	setHasMultipleSyllable(true);
       }
+      */
 
-      totalPages++; // congrats page
-      setFilteredPages(fp);
-      setTotalPages(totalPages);
-      setPageNumber(0);
+      // handle story vocabulary
+      if(data['story-vocabulary-list']){
+	let tempVocab = {
+	  es: {},
+	  'es-inc': {},
+	  en: {}
+	};
+	let tempVocabLookup = {};
+	for(const list of data['story-vocabulary-list']){
+	  for(const word of list.words){
+	    for(const translation of word.word){
+	      // todo: better typing
+	      // @ts-ignore
+	      tempVocab[translation.language][translation.word] = {
+		...translation,
+		image: word.image
+	      };
+
+	      // nested loops!
+	      // needed to build out lookup table
+	      // performance is ok since it's a max of 3 items
+	      for(const nestedTranslation of word.word){
+		if(translation.language !== nestedTranslation.language){
+		  // @ts-ignore
+		  if(!tempVocabLookup[translation.word]){
+		    // @ts-ignore
+		    tempVocabLookup[translation.word] = {
+		      [nestedTranslation.language]: nestedTranslation.word
+		    }
+		  }else{
+		    // @ts-ignore
+		    tempVocabLookup[translation.word][nestedTranslation.language] = nestedTranslation.word;
+		  }
+		}
+	      }
+	    }
+	  }
+	}
+	setVocabLookup(tempVocabLookup);
+	setVocab(tempVocab);
+      }
+
+      setPages(pages);
+      //setPageNumber(0);
+      setPageNumber(1);
       setReady(true);
     }
   }, [data]);
@@ -118,8 +194,8 @@ export const StoryLoader = () => {
     return <></>;
   }
 
-  return (
-    <div style={{paddingBottom: 100}}>
+  /*
+      <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
         // todo: don't need to pass in whole data
         <TitleCard data={data} />
@@ -177,11 +253,14 @@ export const StoryLoader = () => {
        	 <PageCounter />
        </>}
     </div>
-  );
+  */
+  
+  return pages[pageNumber];
 };
 
 const PageCounter = () => {
-  const { totalPages, pageNumber } = useStory();
+  const { pages, pageNumber } = useStory();
+  const totalPages = pages.length;
   let pills = [];
   for (let index = 0; index < totalPages!; index++) {
     if (index <= pageNumber!) {
@@ -362,8 +441,9 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     pageBackward,
     pageForward,
     pageNumber,
-    totalPages
+    pages
   } = useStory();
+  const totalPages = pages.length;
   return <div className="content-wrapper margin-top-1">
     <IonGrid>
       <IonRow>
@@ -381,18 +461,47 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   </div>;
 };
 
-export const StoryPage: React.FC<any> = () => {
-  const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
+const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
+  children,
+  language,
+}) => {
+  const {
+    setCurrentVocabWord,
+    vocab
+  } = useStory();
+  // @ts-ignore
+  return children!.split(' ').map((text: string, index: number) => {
+    let classes = ['word'];
+    if(vocab[language][text]){
+      classes.push('vocab');
+    }
+    return <span
+	     className={classnames(classes)}
+	     onClick={() => {
+	       if(vocab[language][text]){
+		 setCurrentVocabWord(text);
+	       }
+	     }}
+	     key={index}
+	   >
+      {text}
+    </span>;
+  });
+}
+
+export const StoryPage: React.FC<React.PropsWithChildren<{page: any}>> = ({page}) => {
+  const { pageNumber, pages, pageForward, pageBackward } = useStory();
   const {profile: { isInclusive }} = useProfile();
   const {language} = useLanguageToggle();
   const {addAudio, clearAudio} = useAudioManager();
+
   useEffect(() => {
     return clearAudio;
   }, []);
   useEffect(() => {
     clearAudio();
   }, [pageNumber]);
-  const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
+  //const page = pages[pageNumber];
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
   const cardStyles = {
     width: 460,
@@ -414,12 +523,18 @@ export const StoryPage: React.FC<any> = () => {
 	    <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-2xl semibold color-suelo">
+		<SegmentedText language={language === 'esen' ? 'es' : language}>
                 {language === 'en'
 		? texts.en.text
 		: (isInclusive ? texts["es-inc"].text : texts.es.text)}
+		</SegmentedText>
               </h1>
               {language === 'esen' && (
-                <p className="text-xl color-english">{texts.en.text}</p>
+                <p className="text-xl color-english">
+		  <SegmentedText language='en'>
+		    {texts.en.text}
+		  </SegmentedText>
+		</p>
               )}
             </IonText>
 	    <div>
@@ -483,6 +598,37 @@ export const StoryPage: React.FC<any> = () => {
           </IonCardContent>
         </IonCard>
       </IonCol>
+      <VocabModal />
     </>
   );
 };
+
+
+
+const DnDGame: React.FC<{data: any}> = ({data}) => {
+  return <DnDProvider>
+    <WrappedDnDGame data={data} />
+  </DnDProvider>;
+}
+
+const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
+  const {piecesDropped} = useDnD();
+  return <>
+    <IonCol size="auto">
+      <div style={{width: 940}}>
+	<IonText>
+	<h1 className="text-2xl">
+	  Instructions
+	</h1>
+	<h2 className='text-lg'>
+	  subinstructions
+	</h2>
+	</IonText>
+	<DnD
+	target={data.target}
+	pieces={data.pieces}
+	/>
+      </div>
+    </IonCol>
+  </>;
+}

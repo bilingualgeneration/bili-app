@@ -58,16 +58,14 @@ const StoryBuilderLoader: React.FC = () => {
   // todo: throwing component update race condition
   const {
     setPageNumber,
-    setFilteredPages,
-    totalPages,
-    filteredPages,
+    pages,
+    setPages,
     ready,
     setReady,
   } = useStory();
-  console.log(totalPages);
   if(!ready){
-    setPageNumber(1);
-    setFilteredPages([
+    setPageNumber(0);
+    setPages([
       generatePage({
 	en: '',
 	es: '',
@@ -85,8 +83,10 @@ const StoryBuilderLoader: React.FC = () => {
 };
 
 const HydratedStoryBuilder: React.FC = () => {
+//     <StoryPage />
+
   return <PageWrapper>
-    <StoryPage />
+
   </PageWrapper>;
 };
 
@@ -99,8 +99,8 @@ const StoryBuilderForm: React.FC = () => {
     });
   };
   const {
-    filteredPages,
-    setFilteredPages,
+    pages,
+    setPages,
   } = useStory();
   const {
     control,
@@ -114,8 +114,8 @@ const StoryBuilderForm: React.FC = () => {
   });
   const values = watch();
   const page = generatePage(values);
-  if(JSON.stringify(filteredPages[0]) !== JSON.stringify(page)){
-    setFilteredPages([page]);
+  if(JSON.stringify(pages[0]) !== JSON.stringify(page)){
+    setPages([page]);
   }
   return <div style={{
     width: 800,

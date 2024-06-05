@@ -150,7 +150,7 @@ React.PropsWithChildren<{
   return (
     <I18nWrapper locale={language}>
       <IonPage>
-        <IonContent fullscreen className="ion-padding">
+        <IonContent fullscreen className="ion-padding background-figures">
           <AdultCheckModal />
           <div className="page-wrapper" style={{ background }}>
             <IonGrid className="ion-no-padding inner-scroll">

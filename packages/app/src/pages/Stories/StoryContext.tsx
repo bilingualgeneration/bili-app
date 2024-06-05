@@ -6,21 +6,37 @@ import {
   useState,
 } from "react";
 
+
+type Vocab = any;
+type Lang = string;
+
+type VocabDictionaries = {
+  [lang: Lang]: {
+    [key: string]: Vocab
+  }
+};
+
+type VocabLookup = {
+  [key: string]: {
+    [lang: Lang]: string
+  }
+}
+
 interface StoryState {
+  pages: any;
+  setPages: Dispatch<SetStateAction<any>>;
   pageNumber: number;
   pageForward: any;
   pageBackward: any;
   setPageNumber: Dispatch<SetStateAction<number>>;
-  totalPages: number;
-  setTotalPages: Dispatch<SetStateAction<number>>;
-  filteredPages: any[];
-  setFilteredPages: Dispatch<SetStateAction<any[]>>;
   ready: boolean;
   setReady: Dispatch<SetStateAction<boolean>>;
-  hasMultipleImage: boolean;
-  setHasMultipleImage: Dispatch<SetStateAction<boolean>>;
-  hasMultipleSyllable: boolean;
-  setHasMultipleSyllable: Dispatch<SetStateAction<boolean>>;
+  vocab: VocabDictionaries;
+  setVocab: Dispatch<SetStateAction<VocabDictionaries>>;
+  vocabLookup: VocabLookup;
+  setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
+  currentVocabWord: string | null;
+  setCurrentVocabWord: Dispatch<SetStateAction<string | null>>;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -31,11 +47,16 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [filteredPages, setFilteredPages] = useState<any[]>([]);
+  const [pages, setPages] = useState<any>([]);
   const [ready, setReady] = useState<boolean>(false);
-  const [hasMultipleImage, setHasMultipleImage] = useState<boolean>(false);
-  const [hasMultipleSyllable, setHasMultipleSyllable] = useState<boolean>(false);
+  const [currentVocabWord, setCurrentVocabWord] = useState<string | null>(null);
+  const [vocab, setVocab] = useState<VocabDictionaries>({
+    es: {},
+    'es-inc': {},
+    en: {}
+  });
+  const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
+  const totalPages = pages.length;
   const pageForward = () => {
     if(totalPages > 0){
       setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
@@ -49,20 +70,20 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <StoryContext.Provider
       value={{
-	hasMultipleImage,
-	hasMultipleSyllable,
-	setHasMultipleImage,
-	setHasMultipleSyllable,
         pageNumber,
         pageForward,
         pageBackward,
         setPageNumber,
-        totalPages,
-        setTotalPages,
-        filteredPages,
-        setFilteredPages,
         ready,
         setReady,
+	vocab,
+	setVocab,
+	currentVocabWord,
+	setCurrentVocabWord,
+	vocabLookup,
+	setVocabLookup,
+	pages,
+	setPages,
       }}
       children={children}
     />

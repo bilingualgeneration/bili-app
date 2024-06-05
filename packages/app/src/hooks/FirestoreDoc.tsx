@@ -5,8 +5,12 @@ import {
   useState,
 } from 'react';
 import {
+  collection,
   doc,
-  getDoc
+  getDoc,
+  getDocs,
+  query,
+  where,
 } from 'firebase/firestore';
 import {firestore} from '@/components/Firebase';
 
@@ -21,26 +25,36 @@ type Status = 'error' | 'loading' | 'ready';
 
 interface Props {
   collection: any,
-  id: string
+  id: string,
+  populate?: string[]
 }
 
 export const FirestoreDocProvider: React.FC<React.PropsWithChildren<Props>> = ({
   children,
-  collection,
-  id
+  collection: collectionPath,
+  id,
+  populate = []
 }) => {
   const [status, setStatus] = useState<Status>('loading');
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    getDoc(doc(firestore, collection, id))
-    .then((snapshot) => {
+    (async () => {
+      const snapshot: any = await getDoc(doc(firestore, collectionPath, id));
+      let payload = snapshot.data();
+      for(const p of populate){
+	const docs = await getDocs(
+	  query(
+	    collection(firestore, p),
+	    where(collectionPath, '==', id)
+	  )
+	);
+	payload[p] = docs.docs.map((d) => d.data());
+      }
       setStatus('ready');
-      setData(snapshot.data());
-    })
-    .catch((error) => {
-      setStatus('error');
-    });
+      setData(payload);
+      // todo: handle errors
+    })();
   }, [collection, id]);
 
   return <FirestoreDocContext.Provider

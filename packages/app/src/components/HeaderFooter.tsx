@@ -31,7 +31,7 @@ export const HeaderFooter: FC<
   const history = useHistory();
   return (
     <IonPage>
-      <IonContent fullscreen={true} className="ion-padding">
+      <IonContent fullscreen={true} className="ion-padding background-figures">
         <div className="page-wrapper" style={{ background }}>
           <IonGrid id="authedHeader">
             <IonRow class="ion-align-items-center">
