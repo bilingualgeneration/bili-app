@@ -57,7 +57,7 @@ const StoriesHydrated: React.FC = () => {
   const {status, data} = useFirestoreDoc();
   switch(status){
     case 'loading':
-      return <>loading</>;
+      return <></>;
       break;
     case 'error':
       return <>error</>;
@@ -185,7 +185,7 @@ export const StoryLoader = () => {
 
       setPages(pages);
       //setPageNumber(0);
-      setPageNumber(9);
+      setPageNumber(1);
       setReady(true);
     }
   }, [data]);
@@ -298,7 +298,6 @@ const PageCounter = () => {
           return <div style={stylesEmpty} key={index}></div>;
         }
       })}
-      {pageNumber}
     </div>
   );
 };
