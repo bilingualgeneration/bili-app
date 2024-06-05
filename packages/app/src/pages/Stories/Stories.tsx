@@ -1,4 +1,10 @@
 import classnames from 'classnames';
+import {DnD} from '@/components/DnD';
+
+import {
+  DnDProvider,
+  useDnD
+} from '@/hooks/DnD';
 import {
   IonGrid,
   IonCol,
@@ -42,7 +48,7 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  return <FirestoreDocProvider collection='story' id={uuid} populate={['story-vocabulary-list']}>
+  return <FirestoreDocProvider collection='story' id={uuid} populate={['story-vocabulary-list', 'dnd-game']}>
     <StoriesHydrated />
   </FirestoreDocProvider>;
 };
@@ -72,16 +78,10 @@ export const StoryLoader = () => {
   const { uuid } = useParams();
   const history = useHistory();
   const {
-    hasMultipleImage,
-    hasMultipleSyllable,
+    pages,
+    setPages,
     setPageNumber,
     pageNumber,
-    setHasMultipleImage,
-    setHasMultipleSyllable,
-    setTotalPages,
-    setFilteredPages,
-    totalPages,
-    filteredPages,
     ready,
     setReady,
     setVocab,
@@ -100,8 +100,37 @@ export const StoryLoader = () => {
           return langs.includes("es");
         }
       });
-      let totalPages = fp.length;
-      totalPages++; // cover
+      let pages: any[] = [];
+      // push intro page
+      pages.push(<TitleCard data={data} />);
+
+      // push filtered pages
+      pages = pages.concat(
+	data.pages.map((data: any) => 
+	  <>
+	    <PageWrapper>
+	      <StoryPage page={data} />
+	    </PageWrapper>
+	    <PageCounter />
+	  </>
+	)
+      );
+
+      // todo: push multiple games
+
+      pages = pages.concat(
+	data['dnd-game'].map((data: any) => <>
+	  <PageWrapper>
+	    <DnDGame data={data} />
+	  </PageWrapper>
+	  <PageCounter />
+	</>)
+      );
+
+      // temp
+      pages.push(<TitleCard data={data} />);
+      
+      /*
       if(data.multiple_image_text && data.multiple_image_text.length > 0){
 	totalPages++;
 	setHasMultipleImage(true);
@@ -110,6 +139,9 @@ export const StoryLoader = () => {
 	totalPages++;
 	setHasMultipleSyllable(true);
       }
+      */
+
+      // handle story vocabulary
       if(data['story-vocabulary-list']){
 	let tempVocab = {
 	  es: {},
@@ -150,12 +182,10 @@ export const StoryLoader = () => {
 	setVocabLookup(tempVocabLookup);
 	setVocab(tempVocab);
       }
-	
-      totalPages++; // congrats page
-      setFilteredPages(fp);
-      setTotalPages(totalPages);
+
+      setPages(pages);
       //setPageNumber(0);
-      setPageNumber(1);
+      setPageNumber(9);
       setReady(true);
     }
   }, [data]);
@@ -164,8 +194,8 @@ export const StoryLoader = () => {
     return <></>;
   }
 
-  return (
-    <div style={{paddingBottom: 100}}>
+  /*
+      <div style={{paddingBottom: 100}}>
       {pageNumber === 0 && (
         // todo: don't need to pass in whole data
         <TitleCard data={data} />
@@ -223,11 +253,14 @@ export const StoryLoader = () => {
        	 <PageCounter />
        </>}
     </div>
-  );
+  */
+  
+  return pages[pageNumber];
 };
 
 const PageCounter = () => {
-  const { totalPages, pageNumber } = useStory();
+  const { pages, pageNumber } = useStory();
+  const totalPages = pages.length;
   let pills = [];
   for (let index = 0; index < totalPages!; index++) {
     if (index <= pageNumber!) {
@@ -265,6 +298,7 @@ const PageCounter = () => {
           return <div style={stylesEmpty} key={index}></div>;
         }
       })}
+      {pageNumber}
     </div>
   );
 };
@@ -408,8 +442,9 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     pageBackward,
     pageForward,
     pageNumber,
-    totalPages
+    pages
   } = useStory();
+  const totalPages = pages.length;
   return <div className="content-wrapper margin-top-1">
     <IonGrid>
       <IonRow>
@@ -433,7 +468,6 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
 }) => {
   const {
     setCurrentVocabWord,
-    setIsVocabOpen,
     vocab
   } = useStory();
   // @ts-ignore
@@ -447,7 +481,6 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
 	     onClick={() => {
 	       if(vocab[language][text]){
 		 setCurrentVocabWord(text);
-		 setIsVocabOpen(true);
 	       }
 	     }}
 	     key={index}
@@ -457,8 +490,8 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
   });
 }
 
-export const StoryPage: React.FC<any> = () => {
-  const { pageNumber, filteredPages, pageForward, pageBackward } = useStory();
+export const StoryPage: React.FC<React.PropsWithChildren<{page: any}>> = ({page}) => {
+  const { pageNumber, pages, pageForward, pageBackward } = useStory();
   const {profile: { isInclusive }} = useProfile();
   const {language} = useLanguageToggle();
   const {addAudio, clearAudio} = useAudioManager();
@@ -469,7 +502,7 @@ export const StoryPage: React.FC<any> = () => {
   useEffect(() => {
     clearAudio();
   }, [pageNumber]);
-  const page = filteredPages[pageNumber - 1]; // subtract 1 for cover page
+  //const page = pages[pageNumber];
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
   const cardStyles = {
     width: 460,
@@ -570,3 +603,33 @@ export const StoryPage: React.FC<any> = () => {
     </>
   );
 };
+
+
+
+const DnDGame: React.FC<{data: any}> = ({data}) => {
+  return <DnDProvider>
+    <WrappedDnDGame data={data} />
+  </DnDProvider>;
+}
+
+const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
+  const {piecesDropped} = useDnD();
+  return <>
+    <IonCol size="auto">
+      <div style={{width: 940}}>
+	<IonText>
+	<h1 className="text-2xl">
+	  Instructions
+	</h1>
+	<h2 className='text-lg'>
+	  subinstructions
+	</h2>
+	</IonText>
+	<DnD
+	target={data.target}
+	pieces={data.pieces}
+	/>
+      </div>
+    </IonCol>
+  </>;
+}

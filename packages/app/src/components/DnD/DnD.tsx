@@ -1,14 +1,13 @@
 const LETTER_MAX_ROTATION = 15;
+const MAX_HEIGHT = 400;
+const MAX_WIDTH = 940;
 
 import classnames from 'classnames';
 import {
   DndProvider as ReactDndProvider,
   useDrop,
 } from 'react-dnd';
-import {
-  DnDProvider,
-  useDnD,
-} from '@/hooks/DnD';
+import {useDnD} from '@/hooks/DnD';
 import {
   DropTarget,
   DropTargetProps,
@@ -29,11 +28,12 @@ import update from 'immutability-helper';
 
 import './DnD.css';
 
+
 const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {height: number, width: number}) => {
   const minTop = 0;
-  const maxTop = 800 - letterHeight;
+  const maxTop = MAX_HEIGHT - letterHeight;
   const minLeft = 0;
-  const maxLeft = 1366 - letterWidth;
+  const maxLeft = MAX_WIDTH - letterWidth;
   const bias = 0.8; // Adjust bias as needed
   
   // Generate random values for top and left
@@ -60,18 +60,16 @@ export interface DnDProps {
 export const DnD: React.FC<DnDProps> = (props) => {
   return <>
     <ReactDndProvider backend={HTML5Backend}>
-      <DnDProvider>
-	<Hydrator {...props} />
-      </DnDProvider>
+      <Hydrator {...props} />
     </ReactDndProvider>
   </>;
 }
 
-const Hydrator: React.FC<DnDProps> = (props) => {
+const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target}) => {
   const {pieces, setPieces, setTargetPieces} = useDnD();
   useEffect(() => {
-    const piecesMap = Object.fromEntries(props.pieces.map((p) => [p.text, p]));
-    const piecesExpanded = props.pieces.map(({count, ...p}) => Array(count).fill(p)).flat();
+    const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
+    const piecesExpanded = propsPieces.map(({count, ...p}) => Array(count).fill(p)).flat();
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map(
 	(p: any, index: number) => {
@@ -92,47 +90,47 @@ const Hydrator: React.FC<DnDProps> = (props) => {
       )
     );
     const targetPieceInstances = 
-      props.target
-	   .split(' ')
-	   .map((word) => 
-	     Object.fromEntries(
-	       word.split('-').map(
-		 (t: string, index: number) => {
-		   const p = piecesMap[t.replace(/_$/, '')];
-		   const id: string = index.toString();
-		   return [
-		     id,
-		     {
-		       ...p,
-		       dropped: false,
-		       id,
-		       isBlank: t.endsWith('_'),
-		       left: index * 100,
-		       top: 0,
-		     }
-		   ];
-	       })
-	     )
-	   );
+     target
+       .split(' ')
+       .map((word) => 
+	 Object.fromEntries(
+	   word.split('-').map(
+	     (t: string, index: number) => {
+	       const p = piecesMap[t.replace(/_$/, '')];
+	       const id: string = index.toString();
+	       return [
+		 id,
+		 {
+		   ...p,
+		   dropped: false,
+		   id,
+		   isBlank: t.endsWith('_'),
+		   left: index * 100,
+		   top: 0,
+		 }
+	       ];
+	   })
+	 )
+       );
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
-  }, [props, setPieces]);
+  }, [propsPieces, target, setPieces]);
   return <Container/>;
 }
 
 interface ContainerProps {}
 
 const Container: React.FC<ContainerProps> = () => {
-  const {percentDropped, targetPieces, pieces, setPieces} = useDnD();
+  const {targetPieces, pieces, setPieces, piecesDropped} = useDnD();
   const dropTargets = useMemo(() => {
     return targetPieces.map(
       (word: any, wordIndex: number) => Object.values(word).map(
-      (p: any, letterIndex) => ({
-	classes: classnames({'leftMargin': wordIndex > 0 && letterIndex === 0}),
-	image: p.image,
-	text: p.text.replace(/_$/, ''),
-	isBlank: p.isBlank
-      })
+	(p: any, letterIndex) => ({
+	  classes: classnames({'leftMargin': wordIndex > 0 && letterIndex === 0}),
+	  image: p.image,
+	  text: p.text.replace(/_$/, ''),
+	  isBlank: p.isBlank
+	})
     ));
   }, [targetPieces]);
   const movePiece = useCallback(
@@ -163,22 +161,22 @@ const Container: React.FC<ContainerProps> = () => {
     [movePiece]
   );
   return <>
-  <div ref={drop} style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 800,
-    position: 'relative'
-  }}>
-    {Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
-    <div className='dnd-drop-targets-container'>
-      {dropTargets.map(
-	(word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
-      ))}
+    <div className='dnd-play-area'>
+      <div ref={drop} style={{
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	height: MAX_HEIGHT,
+	position: 'relative'
+      }}>
+	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
+	<div className='dnd-drop-targets-container'>
+	  {dropTargets.map(
+	    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
+	  ))}
+	</div>
+      </div>
+      {piecesDropped}
     </div>
-  </div>
-    <h1>
-      {percentDropped.toFixed(2) * 100}% Correct
-    </h1>
   </>
 };
