@@ -185,7 +185,7 @@ export const StoryLoader = () => {
 
       setPages(pages);
       //setPageNumber(0);
-      setPageNumber(1);
+      setPageNumber(9);
       setReady(true);
     }
   }, [data]);
@@ -298,6 +298,7 @@ const PageCounter = () => {
           return <div style={stylesEmpty} key={index}></div>;
         }
       })}
+      {pageNumber}
     </div>
   );
 };

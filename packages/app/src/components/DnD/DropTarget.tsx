@@ -42,8 +42,10 @@ export const DropTarget: React.FC<DropTargetProps> = ({
 	  setIsCorrect(true);
 	  setPiecesDropped((n: number) => n + 1);
 	}else{
-	  addAudio([audio_incorrect]);
-	  setIsCorrect(false);
+	  if(!hasDropped){
+	    addAudio([audio_incorrect]);
+	    setIsCorrect(false);
+	  }
 	}
       },
       collect: (monitor) => ({})
