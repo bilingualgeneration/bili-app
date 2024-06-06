@@ -1,5 +1,13 @@
 .dnd-drop-targets-container {
-    .drop-target{
+    text-align: center;
+    
+    .dnd-image {
+	display: block;
+	pointer-events: none;
+	user-select: none;
+    }
+    
+    .drop-target {
 	display: inline-block;
 
 	img{

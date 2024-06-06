@@ -1,6 +1,7 @@
 const LETTER_MAX_ROTATION = 15;
 
 import classnames from 'classnames';
+import {DnDImage} from './DnDImage';
 import {
   DndProvider as ReactDndProvider,
   useDrop,
@@ -54,21 +55,20 @@ const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {hei
 
 export interface DnDProps {
   target: string,
-  pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[]
+  pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
+  targetImage?: string
 }
 
 export const DnD: React.FC<DnDProps> = (props) => {
   return <>
     <ReactDndProvider backend={HTML5Backend}>
-      <DnDProvider>
-	<Hydrator {...props} />
-      </DnDProvider>
+      <Hydrator {...props} />
     </ReactDndProvider>
   </>;
 }
 
 const Hydrator: React.FC<DnDProps> = (props) => {
-  const {pieces, setPieces, setTargetPieces} = useDnD();
+  const {pieces, setPieces, setTargetPieces, piecesDropped} = useDnD();
   useEffect(() => {
     const piecesMap = Object.fromEntries(props.pieces.map((p) => [p.text, p]));
     const piecesExpanded = props.pieces.map(({count, ...p}) => Array(count).fill(p)).flat();
@@ -117,13 +117,17 @@ const Hydrator: React.FC<DnDProps> = (props) => {
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
   }, [props, setPieces]);
-  return <Container/>;
+  return <Container targetImage={props.targetImage}/>;
 }
 
-interface ContainerProps {}
+interface ContainerProps {
+  targetImage?: string
+}
 
-const Container: React.FC<ContainerProps> = () => {
-  const {percentDropped, targetPieces, pieces, setPieces} = useDnD();
+const Container: React.FC<ContainerProps> = ({
+  targetImage
+}) => {
+  const {targetPieces, pieces, setPieces} = useDnD();
   const dropTargets = useMemo(() => {
     return targetPieces.map(
       (word: any, wordIndex: number) => Object.values(word).map(
@@ -170,15 +174,15 @@ const Container: React.FC<ContainerProps> = () => {
     height: 800,
     position: 'relative'
   }}>
-    {Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
-    <div className='dnd-drop-targets-container'>
-      {dropTargets.map(
-	(word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
-      ))}
+  {Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
+  <div className='dnd-drop-targets-container'>
+  {targetImage &&
+   <DnDImage src={targetImage} />
+  }
+  {dropTargets.map(
+    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
+  ))}
     </div>
   </div>
-    <h1>
-      {percentDropped.toFixed(2) * 100}% Correct
-    </h1>
   </>
 };

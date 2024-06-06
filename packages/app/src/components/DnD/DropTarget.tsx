@@ -23,7 +23,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   text,
 }) => {
   const {addAudio} = useAudioManager();
-  const {pieces, setPieces} = useDnD();
+  const {pieces, setPieces, setPiecesDropped} = useDnD();
   const [hasDropped, setHasDropped] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [, drop] = useDrop(
@@ -40,6 +40,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
 	  }));
 	  setHasDropped(true);
 	  setIsCorrect(true);
+	  setPiecesDropped((n: number) => n + 1);
 	}else{
 	  addAudio([audio_incorrect]);
 	  setIsCorrect(false);

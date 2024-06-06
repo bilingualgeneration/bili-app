@@ -75,15 +75,17 @@ const generateSVG = (color: string, direction: string) => {
   }
 };
 
-export const StoryFactoryPage4: React.FC = () => {
+/*
+export const StoryFactoryLevel2: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   return <FirestoreDocProvider collection='story-factory-game' id={pack_id}>
     <StoryFactoryHydratedGame />
   </FirestoreDocProvider>;
 };
+*/
 
-const StoryFactoryHydratedGame: React.FC = () => {
+export const StoryFactoryLevel2: React.FC = () => {
   const {language} = useLanguageToggle();
   const {addAudio, clearAudio, onended} = useAudioManager();
   const { status, data } = useFirestoreDoc();
