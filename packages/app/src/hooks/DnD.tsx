@@ -13,6 +13,7 @@ export const useDnD = () => useContext(DnDContext);
 export const DnDProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const [pieces, setPieces] = useState<any[]>([]);
   const [targetPieces, setTargetPieces] = useState<any[]>([]);
+  const [totalTargets, setTotalTargets] = useState<number>(0);
   const [piecesDropped, setPiecesDropped] = useState<number>(0);
   return <DnDContext.Provider
 	   children={children}
@@ -23,5 +24,7 @@ export const DnDProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 	     setPieces,
 	     targetPieces,
 	     setTargetPieces,
+	     totalTargets,
+	     setTotalTargets,
 	   }} />;
 };

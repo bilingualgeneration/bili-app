@@ -9,6 +9,9 @@ import {
 import {
   useFirestoreDoc
 } from '@/hooks/FirestoreDoc';
+import {
+  useEffect,
+} from 'react';
 
 export const StoryFactoryLevel1: React.FC = () => {
   return <DnDProvider>
@@ -19,10 +22,16 @@ export const StoryFactoryLevel1: React.FC = () => {
 const WrappedSF1: React.FC = () => {
   const {data: {['dnd-game']: games}} = useFirestoreDoc();
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const {piecesDropped} = useDnD();
-  console.log(piecesDropped);
+  const {totalTargets, piecesDropped} = useDnD();
+  useEffect(() => {
+    if(piecesDropped >= totalTargets
+       && totalTargets > 0){
+      setPageNumber(pageNumber === games.length - 1 ? 0 : pageNumber + 1);
+    }
+  }, [piecesDropped, totalTargets, setPageNumber]);
   return <>
     <DnD
+      key={pageNumber}
       targetImage={games[pageNumber].targetImage.url}
       target={games[pageNumber].target}
       pieces={games[pageNumber].pieces}

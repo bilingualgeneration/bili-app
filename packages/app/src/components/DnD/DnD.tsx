@@ -1,5 +1,5 @@
 const LETTER_MAX_ROTATION = 15;
-const MAX_HEIGHT = 400;
+const MAX_HEIGHT = 600;
 const MAX_WIDTH = 940;
 
 import classnames from 'classnames';
@@ -67,8 +67,14 @@ export const DnD: React.FC<DnDProps> = (props) => {
   </>;
 }
 
-const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target}) => {
-  const {pieces, setPieces, setTargetPieces} = useDnD();
+const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}) => {
+  const {
+    pieces,
+    setPieces,
+    setTargetPieces,
+    setPiecesDropped,
+    setTotalTargets,
+  } = useDnD();
   useEffect(() => {
     const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
     const piecesExpanded = propsPieces.map(({count, ...p}) => Array(count).fill(p)).flat();
@@ -91,6 +97,7 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target}) => {
 	}
       )
     );
+    let tempTotalTargets = 0;
     const targetPieceInstances = 
      target
        .split(' ')
@@ -100,6 +107,7 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target}) => {
 	     (t: string, index: number) => {
 	       const p = piecesMap[t.replace(/_$/, '')];
 	       const id: string = index.toString();
+	       tempTotalTargets++;
 	       return [
 		 id,
 		 {
@@ -116,8 +124,10 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target}) => {
        );
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
+    setTotalTargets(tempTotalTargets);
+    setPiecesDropped(0);
   }, [propsPieces, target, setPieces]);
-  return <Container/>;
+  return <Container targetImage={targetImage}/>;
 }
 
 interface ContainerProps {
@@ -175,17 +185,16 @@ const Container: React.FC<ContainerProps> = ({
 	height: MAX_HEIGHT,
 	position: 'relative'
       }}>
-	{targetImage &&
-	 <DnDImage src={targetImage} />
-	}
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
 	<div className='dnd-drop-targets-container'>
+	  {targetImage &&
+	   <DnDImage src={targetImage} />
+	  }
 	  {dropTargets.map(
 	    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
 	  ))}
 	</div>
       </div>
-      {piecesDropped}
     </div>
   </>
 };
