@@ -6,7 +6,6 @@
 
 const MAX_CARDS_SHOWN = 3;
 
-
 import React, { FC, useEffect, useState } from "react";
 import { AudioManager, useAudioManager } from "@/contexts/AudioManagerContext";
 import {
@@ -40,7 +39,7 @@ interface DeckProps {
 
 export const Deck: FC<DeckProps> = ({ cards, isInclusive }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const { addAudio, clearAudio} = useAudioManager();
   const {language} = useLanguageToggle();
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const [currentCard, setCurrentCard] = useState<{
@@ -50,9 +49,6 @@ export const Deck: FC<DeckProps> = ({ cards, isInclusive }) => {
   } | null>(null);
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
   useEffect(() => {
-    setCallback(() => {
-      // do nothing
-    });
     return () => {
       clearAudio();
     };

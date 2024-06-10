@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 export interface AudioManager {
   addAudio: any;
   onended: any;
-  setCallback: any;
   clearAudio: any;
 }
 
@@ -59,7 +58,6 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
       value={{
         addAudio,
         clearAudio,
-	setCallback: () => {},
 	onended
       }}
     >

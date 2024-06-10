@@ -7,6 +7,8 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
 import {useLanguageToggle} from '@/components/LanguageToggle';
 
+import {first} from 'rxjs/operators';
+
 // audio
 import count_congrats_en_3 from '@/assets/audio/CountAudio/count_congrats_en_3.mp3';
 import count_congrats_en_6 from '@/assets/audio/CountAudio/count_congrats_en_6.mp3';
@@ -53,7 +55,7 @@ export const CountWithMeCongrats: React.FC<{
   const {language} = useLanguageToggle();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const { addAudio, clearAudio, onended} = useAudioManager();
 
   // can potentially uncomment once 'congrats after x animals' screen is built
 
@@ -64,13 +66,7 @@ export const CountWithMeCongrats: React.FC<{
   const audio_en = new Audio(activity_completed_en);
 
   useEffect(() => {
-    return () => {
-      clearAudio();
-    };
-  }, []);
-
-  useEffect(() => {
-    setCallback(() => () => {
+    onended.pipe(first()).subscribe(() => {
       setAudioPlayed(true);
     });
 
@@ -83,6 +79,9 @@ export const CountWithMeCongrats: React.FC<{
     } else {
       addAudio([audio_en]);
     }
+    return () => {
+      clearAudio();
+    };
   }, []);
 
   const history = useHistory();
