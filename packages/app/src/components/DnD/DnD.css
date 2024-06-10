@@ -1,12 +1,10 @@
 .dnd-play-area {
-    border: 1px solid red;
     width: 100%;
 }
 
 .dnd-drop-targets-container {
-    text-align: center;
-    
     .dnd-image {
+	margin: auto;
 	display: block;
 	pointer-events: none;
 	user-select: none;

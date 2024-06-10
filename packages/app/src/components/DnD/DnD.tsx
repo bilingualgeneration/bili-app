@@ -145,7 +145,8 @@ const Container: React.FC<ContainerProps> = ({
 	  classes: classnames({'leftMargin': wordIndex > 0 && letterIndex === 0}),
 	  image: p.image,
 	  text: p.text.replace(/_$/, ''),
-	  isBlank: p.isBlank
+	  isBlank: p.isBlank,
+	  renderTrigger: new Date()
 	})
     ));
   }, [targetPieces]);
