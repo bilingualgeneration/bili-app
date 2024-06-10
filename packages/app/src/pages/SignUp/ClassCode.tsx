@@ -12,7 +12,7 @@ import HouseIcon from "@/assets/icons/house.svg?react";
 import { useState } from "react";
 
 
-//import "./ClassCode.css";
+import "./ClassCode.scss";
 
 
 export const ClassCode: React.FC = () => {
@@ -47,9 +47,9 @@ export const ClassCode: React.FC = () => {
             <form onSubmit={onSubmit} className="">
                 
 
-                <IonCard style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
-                    <div className="card-inner">
-                        <div className="title-content">
+                <IonCard id="class-code-styles" style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
+                    <div className="">
+                        <div className="">
                             <div
                                 className=""
                                 style={{
@@ -84,15 +84,20 @@ export const ClassCode: React.FC = () => {
                                     <IonGrid>
                                         <IonRow>
                                         {code.map((digit, index) => (
-                                            <IonCol size="3" key={index}>
+                                            <IonCol size="1" key={index}>
                                                 <IonItem>
-                                                <IonInput
-                                                    value={digit}
-                                                    type="number"
-                                                    maxlength={1}
-                                                    //onIonInput={(e: any) => handleChange(e.target.value, index)}
-                                                />
+                                                    <IonInput
+                                                        value={digit}
+                                                        type="number"
+                                                        maxlength={1}
+                                                        fill="solid"
+                                                        aria-label="code-number"
+                                                        className="custom-input-style"
+                                                        //onIonInput={(e: any) => handleChange(e.target.value, index)}
+                                                    />
                                                 </IonItem>
+                                                
+                                                
                                             </IonCol>
                                         ))}
                                         </IonRow>
