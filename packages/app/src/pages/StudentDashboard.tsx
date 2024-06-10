@@ -17,6 +17,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
+import { PackSelect } from "@/components/PackSelect";
 import { useIntl, FormattedMessage } from "react-intl";
 import {useLanguageToggle} from '@/components/LanguageToggle';
 import StoriesIcon from "@/assets/icons/stories.svg?react";
@@ -220,65 +221,6 @@ export const StudentDashboard: React.FC = () => {
   } = useProfile();
   const {language} = useLanguageToggle();
   const isImmersive = true;
-  
-  const storyCards = [
-    {
-      category: "story/play",
-      title: isInclusive ? "¡Amigues!" : "¡Amigos!",
-      titleEn: "Friends!",
-      cover: "/assets/img/amigues_cover.png",
-      link: "/story/play/f2e347ac-50b0-4d59-b7f8-682e2659c22f",
-      isLocked: false,
-    },
-    {
-      category: "story/play",
-      title: "Cara de Catrina",
-      titleEn: "Catrina for a Day",
-      cover: CatrinaCover,
-      link: "/story/play/791c76d0-4835-4fcc-8c75-44a17c606be4",
-      isLocked: false
-    },
-    {
-      category: "story/play",
-      title: "¿Qué es lo que te gusta de ti?",
-      titleEn: "What do you like about yourself?",
-      cover: GustaCover,
-      link: "/story/play/ea4e21a7-ae7c-4ec7-9112-23e19e7a0932",
-      isLocked: false,
-    },
-    {
-      category: "story/play",
-      title: "El esqueleto travieso",
-      titleEn: "The Mischievous Skeleton",
-      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg",
-      link: "/story/play/944328dc-bf51-4af3-ba28-a97565a65a43",
-      isLocked: false,
-    },
-    {
-      category: "story/play",
-      title: "¡Me gusta!",
-      titleEn: "I Like It!",
-      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Me_Gusta_fc5d6f6fec.png",
-      link: "/story/play/2dc82579-85a5-488e-8bc6-ab18cc349b3c",
-      isLocked: false,
-    },
-    {
-      category: "story/play",
-      title: "Mancha de plátano",
-      titleEn: "Plantain Stain",
-      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/mancha_Cover_fa80bfa1a7.png",
-      link: "/story/play/64578366-bf8d-4e58-813c-113f9c81fb66",
-      isLocked: false,
-    },
-    {
-      category: "story/play",
-      title: "Corazón contento",
-      titleEn: "Happy Heart",
-      cover: "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/Cover_Corazon_e769c63ee2.png",
-      link: "/story/play/7935ba4a-0800-49a5-8ce8-2f1d3ca0a906",
-      isLocked: false,
-    },
-  ];
 
   const icons: WaveIcon[] = [
     {
@@ -358,11 +300,15 @@ export const StudentDashboard: React.FC = () => {
 	    </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
-            <Carousel height={274}>
-              {storyCards.map((c, index) => (
-                <ContentCard {...c} key={index} />
-              ))}
-            </Carousel>
+          <PackSelect 
+            translatedTitle={"Cuentos"} 
+            englishTitle={"Stories"} 
+            category={"story"} 
+            module={"story"}
+	    only_cards={true}
+            pack_name_field = {"title"}
+	    sortBy='order'
+          />
           </div>
         </div>
         {/* wellness */}
