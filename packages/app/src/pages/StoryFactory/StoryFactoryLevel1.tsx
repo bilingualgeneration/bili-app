@@ -36,7 +36,7 @@ const WrappedSF1: React.FC = () => {
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
   return <>
     <DnD
-      targetImage={games[pageNumber].targetImage.url}
+      targetImage={games[pageNumber].targetImage}
       target={games[pageNumber].target}
       pieces={games[pageNumber].pieces}
     />

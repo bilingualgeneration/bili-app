@@ -3,6 +3,8 @@
 }
 
 .dnd-drop-targets-container {
+    text-align: center;
+    
     .dnd-image {
 	margin: auto;
 	display: block;

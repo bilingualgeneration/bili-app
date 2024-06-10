@@ -1,4 +1,5 @@
 const LETTER_MAX_ROTATION = 15;
+const PIECE_HORIZONTAL_SPACER = 10;
 const MAX_HEIGHT = 600;
 const MAX_WIDTH = 940;
 
@@ -29,25 +30,43 @@ import update from 'immutability-helper';
 
 import './DnD.css';
 
+const shuffle = (array: any[]) => {
+  let currentIndex = array.length;
+  
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+    
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+};
 
-const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {height: number, width: number}) => {
-  const minTop = 0;
-  const maxTop = MAX_HEIGHT - letterHeight;
-  const minLeft = 0;
-  const maxLeft = MAX_WIDTH - letterWidth;
-  const bias = 0.8; // Adjust bias as needed
-  
-  // Generate random values for top and left
-  const randomTop = Math.random() * (maxTop - minTop) + minTop;
-  const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
-  
-  // Apply bias to avoid the center of the box
-  const topBias = (Math.random() < bias) ? 0 : (randomTop < maxTop / 2 ? randomTop * 0.2 : (maxTop - randomTop) * 0.2);
-  const leftBias = (Math.random() < bias) ? 0 : (randomLeft < maxLeft / 2 ? randomLeft * 0.2 : (maxLeft - randomLeft) * 0.2);
-  
+type generateRandomPosition = (args: {
+  letterHeight: number,
+  letterWidth: number,
+  placedWidths: number,
+  targetHeight: number,
+  targetWidth: number,
+}) => {
+  top: number,
+  left: number
+}
+
+const generateRandomPosition: generateRandomPosition = ({
+  letterHeight,
+  letterWidth,
+  placedWidths,
+  targetHeight,
+  targetWidth,
+}) => {
   const position = {
-    top: randomTop + topBias,
-    left: randomLeft + leftBias
+    top: MAX_HEIGHT - letterHeight,
+    left: placedWidths + PIECE_HORIZONTAL_SPACER,
   };
   
   return position;
@@ -56,7 +75,7 @@ const generateRandomPosition = ({height: letterHeight, width: letterWidth}: {hei
 export interface DnDProps {
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
-  targetImage?: string
+  targetImage?: any
 }
 
 export const DnD: React.FC<DnDProps> = (props) => {
@@ -78,26 +97,10 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
   useEffect(() => {
     const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
     const piecesExpanded = propsPieces.map(({count, ...p}) => Array(count).fill(p)).flat();
-    const pieceInstances = Object.fromEntries(
-      piecesExpanded.map(
-	(p: any, index: number) => {
-	  const id: string = index.toString();
-	  const {left, top} = generateRandomPosition({height: p.image.height, width: p.image.width});
-	  return [
-	    id,
-	    {
-	      ...p,
-	      dropped: false,
-	      id,
-	      left,
-	      top,
-	      rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
-	    }
-	  ];
-	}
-      )
-    );
+    shuffle(piecesExpanded);
     let tempTotalTargets = 0;
+    let targetTotalWidth = 0;
+    let targetTotalHeight = 0;
     const targetPieceInstances = 
      target
        .split(' ')
@@ -108,6 +111,8 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 	       const p = piecesMap[t.replace(/_$/, '')];
 	       const id: string = index.toString();
 	       tempTotalTargets++;
+	       targetTotalWidth += p.image.width;
+	       targetTotalHeight = Math.max(targetTotalHeight, p.image.height);
 	       return [
 		 id,
 		 {
@@ -122,6 +127,37 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 	   })
 	 )
        );
+    if(targetImage){
+      targetTotalWidth = Math.max(targetTotalWidth, targetImage.width);
+      targetTotalHeight += targetImage.height;
+    }
+    let placedWidths = 0;
+    const pieceInstances = Object.fromEntries(
+      piecesExpanded.map(
+	(p: any, index: number) => {
+	  const id: string = index.toString();
+	  const {left, top} = generateRandomPosition({
+	    letterHeight: p.image.height,
+	    letterWidth: p.image.width,
+	    placedWidths,
+	    targetHeight: targetTotalHeight,
+	    targetWidth: targetTotalWidth,
+	  });
+	  placedWidths += p.image.width + PIECE_HORIZONTAL_SPACER;
+	  return [
+	    id,
+	    {
+	      ...p,
+	      dropped: false,
+	      id,
+	      left,
+	      top,
+	      rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
+	    }
+	  ];
+	}
+      )
+    );
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
     setTotalTargets(tempTotalTargets);
@@ -131,7 +167,7 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 }
 
 interface ContainerProps {
-  targetImage?: string
+  targetImage?: any
 }
 
 const Container: React.FC<ContainerProps> = ({
@@ -189,7 +225,7 @@ const Container: React.FC<ContainerProps> = ({
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
 	<div className='dnd-drop-targets-container'>
 	  {targetImage &&
-	   <DnDImage src={targetImage} />
+	   <DnDImage src={targetImage.url} />
 	  }
 	  {dropTargets.map(
 	    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />

@@ -53,7 +53,15 @@ export const DropTarget: React.FC<DropTargetProps> = ({
       },
       collect: (monitor) => ({})
     }),
-    [setHasDropped, setPieces, pieces]
+    [
+      addAudio,
+      hasDropped,
+      setHasDropped,
+      setIsCorrect,
+      setPiecesDropped,
+      setPieces,
+      pieces
+    ]
   );
   useEffect(() => {
     setIsCorrect(null);
