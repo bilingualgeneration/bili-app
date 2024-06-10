@@ -25,6 +25,7 @@ export const LanguageToggleProvider: React.FC<React.PropsWithChildren<LanguageTo
   children
 }) => {
   const [language, setLanguage] = useState<Language>(allowedLanguages[0]);
+  const [isVisible, setIsVisible] = useState(true);
   const cycleLanguage = useCallback(() => {
     setLanguage(allowedLanguages[(allowedLanguages.indexOf(language) + 1) % allowedLanguages.length]);
   }, [language, setLanguage]);
@@ -32,7 +33,9 @@ export const LanguageToggleProvider: React.FC<React.PropsWithChildren<LanguageTo
 	   children={children}
 	   value={{
 	     language,
-	     cycleLanguage
+	     cycleLanguage,
+	     isVisible,
+	     setIsVisible
 	   }}
   />
 };
@@ -40,12 +43,19 @@ export const LanguageToggleProvider: React.FC<React.PropsWithChildren<LanguageTo
 export const LanguageToggle: React.FC = () => {
   const {
     cycleLanguage,
-    language
+    language,
+    isVisible,
   } = useLanguageToggle();
   const [pressed, setPressed] = useState<boolean>(false);
   return <div
-	   className={classnames('drop-shadow', 'language-toggle',
-				 language, {pressed})}
+	   className={classnames(
+	     'drop-shadow',
+	     'language-toggle',
+	     language,
+	     {
+	       pressed,
+	       ['ion-hide']: isVisible === false
+	   })}
 	   onMouseDown={() => {
 	     setPressed(true);
 	   }}

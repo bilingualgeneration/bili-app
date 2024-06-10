@@ -1,5 +1,6 @@
 const LETTER_MAX_ROTATION = 15;
 const PIECE_HORIZONTAL_SPACER = 10;
+const PIECE_VERTICAL_SPACER = 10;
 const MAX_HEIGHT = 600;
 const MAX_WIDTH = 940;
 
@@ -50,6 +51,7 @@ type generateRandomPosition = (args: {
   letterHeight: number,
   letterWidth: number,
   placedWidths: number,
+  placedHeights: number,
   targetHeight: number,
   targetWidth: number,
 }) => {
@@ -61,12 +63,13 @@ const generateRandomPosition: generateRandomPosition = ({
   letterHeight,
   letterWidth,
   placedWidths,
+  placedHeights,
   targetHeight,
   targetWidth,
 }) => {
   const position = {
-    top: MAX_HEIGHT - letterHeight,
-    left: placedWidths + PIECE_HORIZONTAL_SPACER,
+    top: placedHeights + PIECE_VERTICAL_SPACER,
+    left: 0,
   };
   
   return position;
@@ -132,6 +135,7 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
       targetTotalHeight += targetImage.height;
     }
     let placedWidths = 0;
+    let placedHeights = 0;
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map(
 	(p: any, index: number) => {
@@ -140,10 +144,12 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 	    letterHeight: p.image.height,
 	    letterWidth: p.image.width,
 	    placedWidths,
+	    placedHeights,
 	    targetHeight: targetTotalHeight,
 	    targetWidth: targetTotalWidth,
 	  });
 	  placedWidths += p.image.width + PIECE_HORIZONTAL_SPACER;
+	  placedHeights += p.image.height + PIECE_VERTICAL_SPACER;
 	  return [
 	    id,
 	    {

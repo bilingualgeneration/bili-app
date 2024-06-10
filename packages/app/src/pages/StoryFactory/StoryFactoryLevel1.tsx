@@ -3,6 +3,7 @@
 import {DnD} from '@/components/DnD';
 import { useAudioManager } from '@/contexts/AudioManagerContext';
 import {useState} from 'react';
+import {useLanguageToggle} from '@/components/LanguageToggle';
 import {
   DnDProvider,
   useDnD
@@ -23,6 +24,29 @@ export const StoryFactoryLevel1: React.FC = () => {
 
 const WrappedSF1: React.FC = () => {
   const {data: {['dnd-game']: games}} = useFirestoreDoc();
+  const {language, setIsVisible} = useLanguageToggle();
+  useEffect(() => {
+    setIsVisible(false);
+    return () => {
+      setIsVisible(true);
+    }
+  });
+  const filteredGames = games.filter((g: any) => {
+    switch(language){
+      case 'es':
+	// todo: check if inclusive also
+	return g.language === 'es';
+	break;
+      case 'en':
+	return g.language === 'en';
+	break;
+      case 'esen':
+	// todo: check if inclusive also
+	return true;
+      default:
+	return false;
+    }
+  });
   const [pageNumber, setPageNumber] = useState<number>(0);
   const {totalTargets, piecesDropped} = useDnD();
   const {onended} = useAudioManager();
@@ -30,15 +54,15 @@ const WrappedSF1: React.FC = () => {
     if(piecesDropped >= totalTargets
        && totalTargets > 0){
       onended.pipe(first()).subscribe(() => {
-	setPageNumber(pageNumber === games.length - 1 ? 0 : pageNumber + 1);
+	setPageNumber(pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1);
       });
     }
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
   return <>
     <DnD
-      targetImage={games[pageNumber].targetImage}
-      target={games[pageNumber].target}
-      pieces={games[pageNumber].pieces}
+      targetImage={filteredGames[pageNumber].targetImage}
+      target={filteredGames[pageNumber].target}
+      pieces={filteredGames[pageNumber].pieces}
     />
   </>;
 };
