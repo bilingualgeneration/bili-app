@@ -68,7 +68,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const {language} = useLanguageToggle();
-  const {addAudio, clearAudio, setCallback} = useAudioManager();
+  const {addAudio, clearAudio} = useAudioManager();
 
   useEffect(() => {
     // todo: allow only English?

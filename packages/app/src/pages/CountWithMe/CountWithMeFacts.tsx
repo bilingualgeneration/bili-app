@@ -7,6 +7,7 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "./CountWithMe.scss";
 import { useHistory } from "react-router";
 import {useLanguageToggle} from '@/components/LanguageToggle';
+import {first} from 'rxjs/operators';
 
 interface FactsPageProps {
   factText: any[]; // Adjust the type according to what factText actually contains
@@ -24,7 +25,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   const {profile: { isInclusive}} = useProfile();
   const {language} = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const { addAudio, clearAudio, onended} = useAudioManager();
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
   const ften = factText.filter((f) => f.language === 'en')[0];
   const ftes = factText.filter((f) => f.language === 'es')[0];
@@ -42,7 +43,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
     };
   }, []);
   useEffect(() => {
-    setCallback(() => () => {
+    onended.pipe(first()).subscribe(() => {
       setAudioPlayed(true);
     });
     let audios = [];

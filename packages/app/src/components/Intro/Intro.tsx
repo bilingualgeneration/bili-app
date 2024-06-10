@@ -35,7 +35,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasAudioPlayed, setHasAudioPlayed] = useState(false);
   const {language} = useLanguageToggle();
-  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const { addAudio, clearAudio, onended } = useAudioManager();
   const history = useHistory();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
   }, []);
 
   useEffect(() => {
-    setCallback(() => () => {
+    const subscription = onended.subscribe(() => {
       if (currentIndex < texts.length - 1) {
         // increment index to render next message/audio
         setCurrentIndex(currentIndex + 1);
@@ -63,6 +63,9 @@ export const Intro: React.FC<IntroProps> = ({ texts, image, nextPath }) => {
       sounds.push(texts[currentIndex].en.audio);
     }
     addAudio(sounds);
+    return () => {
+      subscription.unsubscribe();
+    }
   }, [currentIndex, texts]);
 
   return (

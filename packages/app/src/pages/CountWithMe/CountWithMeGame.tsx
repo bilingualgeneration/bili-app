@@ -10,6 +10,7 @@ import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { CountWithMeCongrats } from "./CountWithMeCongrats";
 import {useLanguageToggle} from '@/components/LanguageToggle';
+import {first} from 'rxjs/operators';
 
 interface BiliImage {
   url: string;
@@ -60,7 +61,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
   const { profile: {isInclusive}} = useProfile();
   const {language} = useLanguageToggle();
   const history = useHistory();
-  const { addAudio, clearAudio, setCallback } = useAudioManager();
+  const { addAudio, clearAudio, onended} = useAudioManager();
 
 
   useEffect(() => {
@@ -215,11 +216,10 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({game: data}) => {
         if (clickedIndexes.length + 1 === getData.animalImages.length) {
     
           setIsButtonDisabled(true);
-
-            setCallback(() => () => {
+	  onended.pipe(first()).subscribe(() => {
               setAllAnimalsClicked(true);
               setIsButtonDisabled(false);
-            });         
+          });         
         }
         addAudio(audios);
       }
