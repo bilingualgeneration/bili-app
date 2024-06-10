@@ -170,16 +170,23 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   useEffect(() => {
     switch(language){
       case 'es':
-	addAudio([headerData.es.audio.url]);
+	if(headerData.es){
+	  addAudio([headerData.es.audio.url]);
+	}
 	break;
       case 'en':
-	addAudio([headerData.en.audio.url]);
+	if(headerData.en){
+	  addAudio([headerData.en.audio.url]);
+	}
 	break;
       case 'esen':
-	addAudio([
-	  headerData.es.audio.url,
-	  headerData.en.audio.url
-	]);
+	if(headerData.es
+	  && headerData.en){
+	  addAudio([
+	    headerData.es.audio.url,
+	    headerData.en.audio.url
+	  ]);
+	}
 	break;
       default:
 	break;
