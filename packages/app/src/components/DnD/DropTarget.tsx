@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import {useAudioManager} from '@/contexts/AudioManagerContext';
+import {useEffect} from 'react';
 import {useDnD} from '@/hooks/DnD';
 import {useDrop} from 'react-dnd';
 import update from 'immutability-helper';
@@ -14,6 +15,7 @@ export interface DropTargetProps {
   image: any,
   isBlank: boolean,
   text: string,
+  renderTrigger: Date,
 }
 
 export const DropTarget: React.FC<DropTargetProps> = ({
@@ -21,9 +23,10 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   image,
   isBlank,
   text,
+  renderTrigger
 }) => {
   const {addAudio} = useAudioManager();
-  const {pieces, setPieces} = useDnD();
+  const {pieces, setPieces, setPiecesDropped} = useDnD();
   const [hasDropped, setHasDropped] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [, drop] = useDrop(
@@ -40,15 +43,30 @@ export const DropTarget: React.FC<DropTargetProps> = ({
 	  }));
 	  setHasDropped(true);
 	  setIsCorrect(true);
+	  setPiecesDropped((n: number) => n + 1);
 	}else{
-	  addAudio([audio_incorrect]);
-	  setIsCorrect(false);
+	  if(!hasDropped){
+	    addAudio([audio_incorrect]);
+	    setIsCorrect(false);
+	  }
 	}
       },
       collect: (monitor) => ({})
     }),
-    [setHasDropped, setPieces, pieces]
+    [
+      addAudio,
+      hasDropped,
+      setHasDropped,
+      setIsCorrect,
+      setPiecesDropped,
+      setPieces,
+      pieces
+    ]
   );
+  useEffect(() => {
+    setIsCorrect(null);
+    setHasDropped(false);
+  }, [renderTrigger]);
   return <>
     <span className={classNames({
       dropped: hasDropped,

@@ -43,7 +43,8 @@ interface props {
   modulePath?: string;
   placeholderCards?: Card[];
   pack_name_field?: string;
-  only_cards?: boolean
+  only_cards?: boolean;
+  sortBy?: string
 }
 
 export const PackSelect: React.FC<props> = (props) => {
@@ -60,7 +61,8 @@ export const HydratedPackSelect: React.FC<props> = ({
   category,
   placeholderCards = [],
   pack_name_field = 'pack_name',
-  only_cards = false
+  only_cards = false,
+  sortBy
 }) => {
   const { profile: {isInclusive}} = useProfile();
   const {language} = useLanguageToggle();
@@ -68,7 +70,14 @@ export const HydratedPackSelect: React.FC<props> = ({
   if(status === 'loading'){
     return <></>;
   }
-  const cards = data.map((p: any, index: number) => {    
+  const cards = data.sort((a: Card, b: Card) => {
+    if(sortBy){
+      // @ts-ignore
+      return a[sortBy] < b[sortBy] ? -1 : 1;
+    }else{
+      return 0;
+    }
+    }).map((p: any, index: number) => {    
     const esTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es');
     const esIncTitle = p[pack_name_field].filter((pn: any) => pn.language === 'es-inc');
     const title: string = isInclusive && esIncTitle.length > 0 ? esIncTitle[0].text : esTitle[0].text;

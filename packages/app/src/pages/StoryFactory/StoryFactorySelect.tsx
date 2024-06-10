@@ -3,13 +3,6 @@ import { PackSelect } from "@/components/PackSelect";
 export const StoryFactorySelect: React.FC = () => {
   const placeholderCards = [
     {
-      title: 'Lector temprano',
-      titleEn: 'Early reader',
-      category: 'play',
-      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/stories_friends_cover_e66b64561c.svg',
-      isLocked: true
-    },
-    {
       title: 'Lector avanzado',
       titleEn: 'Advanced reader',
       category: 'play',
@@ -22,7 +15,7 @@ export const StoryFactorySelect: React.FC = () => {
     //   category: 'play',
     //   cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/thumbnail_Image_Container3_49e525e22a.png',
     //   isLocked: true
-    // },s
+    // },
   ];
   return (
     <PackSelect
@@ -31,6 +24,7 @@ export const StoryFactorySelect: React.FC = () => {
       translatedTitle='¡Fábrica de Cuentos!'
       englishTitle="Story Factory"
       placeholderCards={placeholderCards}
+      sortBy='level'
     />
   );
 }

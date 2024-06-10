@@ -63,7 +63,7 @@ import {
 } from '@/pages/Stories';
 import {
   StoryFactoryIntro,
-  StoryFactoryPage4,
+  StoryFactoryPlay,
   StoryFactorySelect,
 } from '@/pages/StoryFactory';
 import {StudentDashboard} from '@/pages/StudentDashboard';
@@ -405,19 +405,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPage4 />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/story-factory/6"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
-                  <StoryFactoryPage4 />
+                  <StoryFactoryPlay />
                 </HeaderFooter>
               </AuthedLayout>
             )}

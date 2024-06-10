@@ -1,5 +1,18 @@
+.dnd-play-area {
+    width: 100%;
+}
+
 .dnd-drop-targets-container {
-    .drop-target{
+    text-align: center;
+    
+    .dnd-image {
+	margin: auto;
+	display: block;
+	pointer-events: none;
+	user-select: none;
+    }
+    
+    .drop-target {
 	display: inline-block;
 
 	img{
