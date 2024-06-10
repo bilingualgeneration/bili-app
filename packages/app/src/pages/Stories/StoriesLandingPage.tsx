@@ -32,7 +32,8 @@ export const StoriesLandingPage: FC = () => {
             category={"story"} 
             module={"story"}
 	    only_cards={true}
-            pack_name_field = {"title"}          
+            pack_name_field = {"title"}
+	    sortBy='order'
           />
         </div>
 
