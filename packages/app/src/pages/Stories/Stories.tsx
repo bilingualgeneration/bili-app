@@ -127,20 +127,41 @@ export const StoryLoader = () => {
 	</>)
       );
 
-      // temp
-      pages.push(<TitleCard data={data} />);
-      
-      /*
       if(data.multiple_image_text && data.multiple_image_text.length > 0){
-	totalPages++;
-	setHasMultipleImage(true);
+	pages.push(
+	  <>
+	    <PageWrapper>
+	      <IonCol size='auto'>
+		<StoriesGame game={data} gameType="image" />
+	      </IonCol>
+	    </PageWrapper>
+	    <PageCounter />
+	  </>
+	)
       }
+      
       if(data.multiple_syllable_text && data.multiple_syllable_text.length > 0){
-	totalPages++;
-	setHasMultipleSyllable(true);
+	<>
+	  <PageWrapper>
+	    <IonCol size='auto'>
+	      <StoriesGame game={data} gameType="syllable" />
+	    </IonCol>
+	  </PageWrapper>
+      	  <PageCounter />
+	</>
       }
-      */
 
+      pages.push(<>
+	<PageWrapper>
+	  <IonCol size='auto'>
+	    <StoriesCongrats onKeepGoingClick={() => {
+	      history.push('/stories');
+	    }}/>
+	  </IonCol>
+	</PageWrapper>
+       	<PageCounter />
+      </>);
+      
       // handle story vocabulary
       if(data['story-vocabulary-list']){
 	let tempVocab = {
@@ -184,8 +205,7 @@ export const StoryLoader = () => {
       }
 
       setPages(pages);
-      //setPageNumber(0);
-      setPageNumber(9);
+      setPageNumber(0);
       setReady(true);
     }
   }, [data]);
@@ -193,68 +213,6 @@ export const StoryLoader = () => {
   if (status === "loading" || ready === false) {
     return <></>;
   }
-
-  /*
-      <div style={{paddingBottom: 100}}>
-      {pageNumber === 0 && (
-        // todo: don't need to pass in whole data
-        <TitleCard data={data} />
-      )}
-      {pageNumber > 0 &&
-       // todo: less or equal
-       pageNumber <= filteredPages.length && ( <>
-	 <PageWrapper>
-	   <StoryPage />
-	 </PageWrapper>
-	 <PageCounter />
-       </>
-      )}
-      {pageNumber === filteredPages.length + 1 &&
-       hasMultipleImage && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="image" />
-	   </IonCol>
-	 </PageWrapper>
-	 <PageCounter />
-       </>}
-      
-      {pageNumber === filteredPages.length + 1 &&
-       hasMultipleSyllable &&
-       !hasMultipleImage && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="syllable" />
-	   </IonCol>
-	 </PageWrapper>
-      	 <PageCounter />
-       </>}
-      
-      {pageNumber === filteredPages.length + 2 &&
-       hasMultipleImage &&
-       hasMultipleSyllable && <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesGame game={data} gameType="syllable" />
-	   </IonCol>
-	 </PageWrapper>
-      	 <PageCounter />
-       </>}
-
-      {pageNumber === totalPages - 1 &&
-       <>
-	 <PageWrapper>
-	   <IonCol size='auto'>
-	     <StoriesCongrats onKeepGoingClick={() => {
-	       history.push('/stories');
-	       }}/>
-	   </IonCol>
-	 </PageWrapper>
-       	 <PageCounter />
-       </>}
-    </div>
-  */
-  
   return pages[pageNumber];
 };
 
@@ -298,7 +256,6 @@ const PageCounter = () => {
           return <div style={stylesEmpty} key={index}></div>;
         }
       })}
-      {pageNumber}
     </div>
   );
 };
@@ -618,12 +575,9 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
     <IonCol size="auto">
       <div style={{width: 940}}>
 	<IonText>
-	<h1 className="text-2xl">
-	  Instructions
+	<h1 className="text-4xl ion-text-center color-suelo">
+	  {data.instructions}
 	</h1>
-	<h2 className='text-lg'>
-	  subinstructions
-	</h2>
 	</IonText>
 	<DnD
 	target={data.target}

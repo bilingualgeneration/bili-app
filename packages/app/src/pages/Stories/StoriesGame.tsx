@@ -156,7 +156,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       gameType === "image"
         ? data.multiple_image_text
       : data.multiple_syllable_text;
-    console.log(textPacks);
     return {
       es: textPacks.find(
         (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
@@ -169,16 +168,26 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   //audio effect for autoplaying
   useEffect(() => {
-    const audios = [headerData.es.audio.url];
-    if (headerData.en) {
-      audios.push(headerData.en.audio.url);
+    switch(language){
+      case 'es':
+	addAudio([headerData.es.audio.url]);
+	break;
+      case 'en':
+	addAudio([headerData.en.audio.url]);
+	break;
+      case 'esen':
+	addAudio([
+	  headerData.es.audio.url,
+	  headerData.en.audio.url
+	]);
+	break;
+      default:
+	break;
     }
-    addAudio(audios);
-
     return () => {
       clearAudio();
     };
-  }, [headerData]);
+  }, [headerData, language]);
 
   //styles for correct and wrong cards
   const initialStyle = {
