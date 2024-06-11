@@ -80,15 +80,16 @@ export const ClassCode: React.FC = () => {
                                 </IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
-                                <div>
-                                    <IonGrid>
-                                        <IonRow>
+                                <div className="digit-wrapper">
+                                    
                                         {code.map((digit, index) => (
-                                            <IonCol size="1" key={index}>
-                                                <IonItem>
+                                            <div className= "digit-window" key={index}>
+                                                <IonItem
+                                                    lines="none"
+                                                >
                                                     <IonInput
                                                         value={digit}
-                                                        type="number"
+                                                        //type=""
                                                         maxlength={1}
                                                         fill="solid"
                                                         aria-label="code-number"
@@ -98,10 +99,9 @@ export const ClassCode: React.FC = () => {
                                                 </IonItem>
                                                 
                                                 
-                                            </IonCol>
+                                            </div>
                                         ))}
-                                        </IonRow>
-                                    </IonGrid>
+                                    
                                 </div>
                             </IonCardContent>
                         </div>

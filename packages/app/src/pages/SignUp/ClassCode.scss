@@ -3,5 +3,18 @@
     ion-input.custom-input-style{
         --background: #EFF0F6;
         --border-color: none;
+        --padding-start: 10px;
+        width: 84px;
+        height: 76px;
+        font-family: Outfit;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 44px;
+        text-align: center;
+
+    }
+
+    .digit-wrapper {
+        display: flex;
     }
 }
