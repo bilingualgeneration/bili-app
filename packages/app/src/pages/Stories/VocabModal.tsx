@@ -34,25 +34,11 @@ export const VocabModal: React.FC = () => {
     ['es-inc']: '',
     en: ''
   };
-  console.log("VOCABLOOKUP", vocabLookup)
-  console.log("CUrrentVocabWord", currentVocabWord)
-  console.log("LOKUP", lookup)
   const es = vocab.es[lookup.es];
   const esInc = vocab['es-inc'][lookup['es-inc']];
   const en = lookup.en ? vocab.en[lookup.en] : vocab.en[currentVocabWord!];
 
   const imageUrl = language === 'en' ? (en?.image?.url || '') : (isInclusive ? (esInc?.image?.url || '') : (es?.image?.url || ''));
-
-
-  /*
-     to see the props in es, run console.log(es);
-     esInc and en have the same props;
-     sometimes es, esInc, and en can be undefined
-     if esInc is undefined, reuse es instead
-   */
-  console.log(es, "SPANISH");
-  console.log(esInc?.word, "INCLUSIVE");
-  console.log(en, "ENGLISH");
 
   return <>
     <IonModal
@@ -68,8 +54,7 @@ export const VocabModal: React.FC = () => {
             fill='clear'
             className="close-button-icon"
             >
-            <img src={CloseButton} />
-           
+            <img src={CloseButton} />           
           </IonButton>
           <IonList>
             <IonRow>
@@ -90,12 +75,13 @@ export const VocabModal: React.FC = () => {
                       
                       <IonText>
                         <h1 className="text-4xl semibold">
-                          {language !== 'en' && (isInclusive ? esInc?.word : es?.word)}
-                          {language === 'en' && en?.word}
+                          {language !== 'en' && (isInclusive ?
+						 <SyllableBreakdown word={esInc?.syllable_breakdown} /> : <SyllableBreakdown word={es?.syllable_breakdown} />)}
+                          {language === 'en' && <SyllableBreakdown word={en?.syllable_breakdown} />}
                         </h1>
                         {language === 'esen' &&
                           <p className="text-3xl semibold word-color">
-                            {en?.word}
+                            <SyllableBreakdown word={en?.syllable_breakdown} />
                           </p>
                         }
                       </IonText>
@@ -147,3 +133,22 @@ export const VocabModal: React.FC = () => {
     </IonModal>
   </>;
 }
+
+const SyllableBreakdown: React.FC<{word: string}> = ({word = ''}) => {
+  const segments = word
+    .split(' ')
+    .map((w: string) => w.split('-').map((s: string, index: number) => (
+      <span className='vocab-syllable-breakdown segment' key={index}>
+	{s}
+	<span className='vocab-syllable-breakdown underline'></span>
+      </span>
+      ))
+    );
+  return <>
+    {segments.map((w: any, index: number) => (
+      <span className='vocab-syllable-breakdown word' key={index}>
+	{w}
+      </span>
+    ))}
+  </>;
+};

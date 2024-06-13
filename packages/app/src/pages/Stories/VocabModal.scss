@@ -37,3 +37,22 @@ ion-modal .vocab-modal-content{
 ion-modal {
     --width: auto;
 }
+
+.vocab-syllable-breakdown {
+    &.word + &.word{
+	margin-left: 1rem;
+    }
+
+    &.segment{
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+    }
+
+    &.underline{
+	display: inline-block;
+	border-top: 0.5rem solid #ec59b1;
+	border-radius: 1rem;
+	width: 80%;
+    }
+}
