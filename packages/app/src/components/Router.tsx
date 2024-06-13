@@ -335,7 +335,7 @@ export const Router: React.FC = () => {
             path="/sign-up/class-code"
             render={() => (
               <UnauthedLayout>
-                <ClassCode />
+                <SignUp entry='classCode' />
               </UnauthedLayout>
             )}
           />

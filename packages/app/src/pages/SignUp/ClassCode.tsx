@@ -26,27 +26,31 @@ export const ClassCode: React.FC = () => {
         formState: { isValid },
     } = useForm<z.infer<typeof schema>>({
         mode: "onBlur",
-        resolver: zodResolver(schema),
+        // resolver: zodResolver(schema),
     });
     const { data, setData, pushPage } = useSignUpData();
     const [code, setCode] = useState<string[]>(['', '', '', '']);
-
+    const schoolCode = ['1', '2', '3', '4']
 
     const onSubmit = handleSubmit((responses) => {
-        //add logic where to store user's choice
+       
         setData({
             ...data,
             ...responses,
         });
         // @ts-ignore todo: better typing
-
+        pushPage("parentAccountCredentials");
     });
+
+    const handleChange = (value: string, index: number) => {
+        const newCode = [...code];
+        newCode[index] = value;
+        setCode(newCode);
+    };
 
     return (
         <>
-            <form onSubmit={onSubmit} className="">
-                
-
+            <form className="">
                 <IonCard id="class-code-styles" style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
                     <div className="">
                         <div className="">
@@ -62,9 +66,9 @@ export const ClassCode: React.FC = () => {
                             >
 
                             </div>
-                            <IonCardHeader class="custom-ion-header">
+                            <IonCardHeader class="custom-ion-header margin-bottom-3">
                                 <IonCardTitle>
-                                    <IonText>
+                                    <IonText className="ion-text-center">
                                         {/* todo: don't force type cast */}
                                         <h2 className="text-3xl semibold color-suelo">
                                             <FormattedMessage
@@ -73,7 +77,10 @@ export const ClassCode: React.FC = () => {
                                                 description="Title of page where user is presented with button options where they can choose if they are a teacher or parent/caregiver."
                                             />
                                         </h2>
-                                        <p className="text-2xl semibold color-selva">
+                                        <p
+                                            className="text-lg"
+                                            style={{ marginTop: "12px" }}
+                                        >
                                             Don’t know your class code? Ask a teacher
                                         </p>
                                     </IonText>
@@ -81,27 +88,27 @@ export const ClassCode: React.FC = () => {
                             </IonCardHeader>
                             <IonCardContent>
                                 <div className="digit-wrapper">
-                                    
-                                        {code.map((digit, index) => (
-                                            <div className= "digit-window" key={index}>
-                                                <IonItem
-                                                    lines="none"
-                                                >
-                                                    <IonInput
-                                                        value={digit}
-                                                        //type=""
-                                                        maxlength={1}
-                                                        fill="solid"
-                                                        aria-label="code-number"
-                                                        className="custom-input-style"
-                                                        //onIonInput={(e: any) => handleChange(e.target.value, index)}
-                                                    />
-                                                </IonItem>
-                                                
-                                                
-                                            </div>
-                                        ))}
-                                    
+
+                                    {code.map((digit, index) => (
+                                        <div className="digit-window" key={index}>
+                                            <IonItem
+                                                lines="none"
+                                            >
+                                                <IonInput
+                                                    value={digit}
+                                                    maxlength={1}
+                                                    fill="solid"
+                                                    aria-label="code-number"
+                                                    className="custom-input-style"
+                                                    
+                                                    onIonInput={(e: any) => handleChange(e.target.value, index)}
+                                                />
+                                            </IonItem>
+
+
+                                        </div>
+                                    ))}
+
                                 </div>
                             </IonCardContent>
                         </div>
@@ -111,10 +118,13 @@ export const ClassCode: React.FC = () => {
                 <IonButton
                     className="margin-vertical-1"
                     shape="round"
-                    type="button"
-                    onClick={onSubmit}
+                    expand="block"
+                    type="submit"
+                    onClick={(e) => {
+                        onSubmit(e)
+                    }}
                     data-testid="role-select-continue-button"
-                    disabled={!isValid}
+                    //disabled={!isValid}
                 >
                     <FormattedMessage
                         id="common.continue"

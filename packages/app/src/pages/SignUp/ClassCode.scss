@@ -4,6 +4,7 @@
         --background: #EFF0F6;
         --border-color: none;
         --padding-start: 10px;
+        --border-radius: 16px;
         width: 84px;
         height: 76px;
         font-family: Outfit;
@@ -14,7 +15,12 @@
 
     }
 
+    ion-input.custom-input-style .input-wrapper {
+        border-radius: 16px;
+    }
+
     .digit-wrapper {
         display: flex;
+        justify-content: center;
     }
 }
