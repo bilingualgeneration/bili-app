@@ -430,14 +430,17 @@ const SegmentedText: React.FC<React.PropsWithChildren<{language: string}>> = ({
   // @ts-ignore
   return children!.split(' ').map((text: string, index: number) => {
     let classes = ['word'];
-    if(vocab[language][text]){
+    const normalized_word = text
+      .toLowerCase()
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]*$/, '');
+    if(vocab[language][normalized_word]){
       classes.push('vocab');
     }
     return <span
 	     className={classnames(classes)}
 	     onClick={() => {
-	       if(vocab[language][text]){
-		 setCurrentVocabWord(text);
+	       if(vocab[language][normalized_word]){
+		 setCurrentVocabWord(normalized_word);
 	       }
 	     }}
 	     key={index}
