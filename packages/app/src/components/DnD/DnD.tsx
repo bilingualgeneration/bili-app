@@ -111,9 +111,11 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 	 Object.fromEntries(
 	   word.split('-').map(
 	     (t: string, index: number) => {
-	       const p = piecesMap[t.replace(/_$/, '')];
+	       const p = piecesMap[t.replace(/[_*]$/, '')];
 	       const id: string = index.toString();
-	       tempTotalTargets++;
+	       if(!t.endsWith('*')){
+		 tempTotalTargets++;
+	       }
 	       targetTotalWidth += p.image.width;
 	       targetTotalHeight = Math.max(targetTotalHeight, p.image.height);
 	       return [
