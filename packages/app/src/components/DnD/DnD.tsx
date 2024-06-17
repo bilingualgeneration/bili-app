@@ -69,7 +69,7 @@ const generateRandomPosition: generateRandomPosition = ({
 }) => {
   const position = {
     top: placedHeights + PIECE_VERTICAL_SPACER,
-    left: 0,
+    left: 40,
   };
   
   return position;
@@ -78,7 +78,7 @@ const generateRandomPosition: generateRandomPosition = ({
 export interface DnDProps {
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
-  targetImage?: any
+  width?: number
 }
 
 export const DnD: React.FC<DnDProps> = (props) => {

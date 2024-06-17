@@ -149,7 +149,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { addAudio, clearAudio} = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {pageForward} = useStory();
+  const {pageNumber, pageLocks, setPageLocks} = useStory();
   
   const headerData = useMemo((): GameHeader => {
     const textPacks =
@@ -237,10 +237,14 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   }, [data, currentIndex, gameType]);
 
   useEffect(() => {
-    // todo: remove from useEffect
+    // todo: remove settimeout
     if (isCorrectSelected) {
       setTimeout(() => {
-	pageForward();
+	//pageForward();
+	setPageLocks({
+	  ...pageLocks,
+	  [pageNumber]: false
+	});
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           "1": initialStyle,
