@@ -23,4 +23,9 @@
         display: flex;
         justify-content: center;
     }
+
+    .digit-wrapper ion-item {
+       // padding-left: 0 !important;
+        --padding-start: 0;
+    }
 }

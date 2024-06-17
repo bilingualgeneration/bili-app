@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import HouseIcon from "@/assets/icons/house.svg?react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 import "./ClassCode.scss";
@@ -30,7 +30,14 @@ export const ClassCode: React.FC = () => {
     });
     const { data, setData, pushPage } = useSignUpData();
     const [code, setCode] = useState<string[]>(['', '', '', '']);
-    const schoolCode = ['1', '2', '3', '4']
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+    const correctCode = ['1', '2', '3', '4']
+
+    useEffect(() => {
+        // Check if the input code matches the correct code
+        const codeMatches = code.join('') === correctCode.join('');
+        setIsButtonEnabled(codeMatches);
+    }, [code]);
 
     const onSubmit = handleSubmit((responses) => {
        
@@ -51,10 +58,12 @@ export const ClassCode: React.FC = () => {
     return (
         <>
             <form className="">
-                <IonCard id="class-code-styles" style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
+                <IonCard 
+                    id="class-code-styles" 
+                    style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
                     <div className="">
                         <div className="">
-                            <div
+                            {/* <div
                                 className=""
                                 style={{
                                     backgroundColor: "var(--Flamenco-High)",
@@ -64,8 +73,7 @@ export const ClassCode: React.FC = () => {
                                     borderRadius: "4px",
                                 }}
                             >
-
-                            </div>
+                            </div> */}
                             <IonCardHeader class="custom-ion-header margin-bottom-3">
                                 <IonCardTitle>
                                     <IonText className="ion-text-center">
@@ -116,15 +124,15 @@ export const ClassCode: React.FC = () => {
                 </IonCard>
 
                 <IonButton
-                    className="margin-vertical-1"
+                    className="margin-vertical-3"
                     shape="round"
                     expand="block"
-                    type="submit"
+                    type="button"
                     onClick={(e) => {
                         onSubmit(e)
                     }}
                     data-testid="role-select-continue-button"
-                    //disabled={!isValid}
+                    disabled={!isButtonEnabled}
                 >
                     <FormattedMessage
                         id="common.continue"
