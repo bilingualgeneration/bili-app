@@ -105,7 +105,7 @@ export const StoryLoader = () => {
       let pageLocks: any = {};
       // push intro page
       pages.push(<TitleCard data={data} />);
-
+      console.log(data);
       // push filtered pages
       pages = pages.concat(
 	data.pages.map((data: any) => 
@@ -213,7 +213,7 @@ export const StoryLoader = () => {
 
       setPageLocks(pageLocks);
       setPages(pages);
-      setPageNumber(12);
+      setPageNumber(0);
       setReady(true);
     }
   }, [data]);
