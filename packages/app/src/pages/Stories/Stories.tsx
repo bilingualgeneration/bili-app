@@ -83,6 +83,7 @@ export const StoryLoader = () => {
     setPageNumber,
     pageNumber,
     ready,
+    setPageLocks,
     setReady,
     setVocab,
     setVocabLookup,
@@ -101,6 +102,7 @@ export const StoryLoader = () => {
         }
       });
       let pages: any[] = [];
+      let pageLocks: any = {};
       // push intro page
       pages.push(<TitleCard data={data} />);
 
@@ -116,8 +118,9 @@ export const StoryLoader = () => {
 	)
       );
 
-      // todo: push multiple games
-
+      for(let index = 0; index < data['dnd-game'].length; index++){
+	pageLocks[pages.length + index] = true;
+      }
       pages = pages.concat(
 	data['dnd-game'].map((data: any) => <>
 	  <PageWrapper>
@@ -128,6 +131,7 @@ export const StoryLoader = () => {
       );
 
       if(data.multiple_image_text && data.multiple_image_text.length > 0){
+	pageLocks[pages.length] = true;
 	pages.push(
 	  <>
 	    <PageWrapper>
@@ -141,6 +145,8 @@ export const StoryLoader = () => {
       }
       
       if(data.multiple_syllable_text && data.multiple_syllable_text.length > 0){
+	pageLocks[pages.length] = true;
+	pages.push(
 	<>
 	  <PageWrapper>
 	    <IonCol size='auto'>
@@ -149,6 +155,7 @@ export const StoryLoader = () => {
 	  </PageWrapper>
       	  <PageCounter />
 	</>
+	);
       }
 
       pages.push(<>
@@ -204,8 +211,9 @@ export const StoryLoader = () => {
 	setVocab(tempVocab);
       }
 
+      setPageLocks(pageLocks);
       setPages(pages);
-      setPageNumber(0);
+      setPageNumber(12);
       setReady(true);
     }
   }, [data]);
@@ -399,7 +407,8 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     pageBackward,
     pageForward,
     pageNumber,
-    pages
+    pages,
+    pageLocks
   } = useStory();
   const totalPages = pages.length;
   return <div className="content-wrapper margin-top-1">
@@ -409,7 +418,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
 	<IonImg className='page-control backward' src={backward} onClick={pageBackward} />
 	{children}
 	<IonImg
-	  className='page-control forward'
+	className={classnames('page-control', 'forward', {locked: pageLocks[pageNumber]})}
 	  src={forward}
 	  onClick={pageForward}
 	  style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
@@ -462,7 +471,6 @@ export const StoryPage: React.FC<React.PropsWithChildren<{page: any}>> = ({page}
   useEffect(() => {
     clearAudio();
   }, [pageNumber]);
-  //const page = pages[pageNumber];
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
   const cardStyles = {
     width: 460,
@@ -483,7 +491,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<{page: any}>> = ({page}
 			  }}>
 	    <div></div>
             <IonText className="ion-text-center">
-              <h1 className="text-2xl semibold color-suelo">
+              <h1 className="text-1_5xl semibold color-suelo">
 		<SegmentedText language={language === 'esen' ? 'es' : language}>
                 {language === 'en'
 		? texts.en.text
@@ -491,7 +499,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<{page: any}>> = ({page}
 		</SegmentedText>
               </h1>
               {language === 'esen' && (
-                <p className="text-xl color-english">
+                <p className="text-lg color-english">
 		  <SegmentedText language='en'>
 		    {texts.en.text}
 		  </SegmentedText>
@@ -573,7 +581,17 @@ const DnDGame: React.FC<{data: any}> = ({data}) => {
 }
 
 const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
-  const {piecesDropped} = useDnD();
+  const {pageLocks, setPageLocks, pageNumber} = useStory();
+  const {piecesDropped, totalTargets} = useDnD();
+  useEffect(() => {
+    if(piecesDropped >= totalTargets
+       && totalTargets > 0){
+      setPageLocks({
+	...pageLocks,
+	[pageNumber]: false
+      });
+    }
+  }, [piecesDropped, totalTargets]);
   return <>
     <IonCol size="auto">
       <div style={{width: 940}}>

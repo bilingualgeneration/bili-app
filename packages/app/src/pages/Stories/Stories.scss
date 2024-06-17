@@ -112,6 +112,10 @@
 	    left: calc(50% - 460px - 36px);
 	    z-index: 100;
 	}
+
+	&.locked{
+	    opacity: 50% !important;
+	}
     }
     
 }

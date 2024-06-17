@@ -37,6 +37,8 @@ interface StoryState {
   setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
   currentVocabWord: string | null;
   setCurrentVocabWord: Dispatch<SetStateAction<string | null>>;
+  pageLocks: any;
+  setPageLocks: Dispatch<SetStateAction<any>>;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -50,6 +52,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [pages, setPages] = useState<any>([]);
   const [ready, setReady] = useState<boolean>(false);
   const [currentVocabWord, setCurrentVocabWord] = useState<string | null>(null);
+  const [pageLocks, setPageLocks] = useState<any>({});
   const [vocab, setVocab] = useState<VocabDictionaries>({
     es: {},
     'es-inc': {},
@@ -58,7 +61,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
   const totalPages = pages.length;
   const pageForward = () => {
-    if(totalPages > 0){
+    if(totalPages > 0 && !pageLocks[pageNumber]){
       setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
     }
   };
@@ -70,6 +73,8 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <StoryContext.Provider
       value={{
+	pageLocks,
+	setPageLocks,
         pageNumber,
         pageForward,
         pageBackward,
