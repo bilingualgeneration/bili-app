@@ -65,12 +65,13 @@ const StoryBuilderLoader: React.FC = () => {
   } = useStory();
   if(!ready){
     setPageNumber(0);
+    const blankPage = generatePage({
+      en: '',
+      es: '',
+      esInc: ''
+    });
     setPages([
-      generatePage({
-	en: '',
-	es: '',
-	esInc: ''
-      })
+      <StoryPage page={blankPage} />
     ]);
     setReady(true);
     return <></>;
@@ -83,10 +84,10 @@ const StoryBuilderLoader: React.FC = () => {
 };
 
 const HydratedStoryBuilder: React.FC = () => {
-//     <StoryPage />
+  const {pages, pageNumber} = useStory();
 
   return <PageWrapper>
-
+    {pages[pageNumber]}
   </PageWrapper>;
 };
 
@@ -114,8 +115,9 @@ const StoryBuilderForm: React.FC = () => {
   });
   const values = watch();
   const page = generatePage(values);
-  if(JSON.stringify(pages[0]) !== JSON.stringify(page)){
-    setPages([page]);
+
+  if(JSON.stringify(pages[0].props.page) !== JSON.stringify(page)){
+    setPages([<StoryPage page={page} />]);
   }
   return <div style={{
     width: 800,
