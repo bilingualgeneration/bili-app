@@ -1,10 +1,20 @@
 #class-code-styles{
 
+    // ion-input {
+
+    //       &.has-focus {
+    //         --border-width: 2px;
+    //         --border-color: var(--Base-Selva) !important;
+            
+    //       }
+    //     }
+      
+
     ion-input.custom-input-style{
-        --background: #EFF0F6;
-        --border-color: none;
-        --padding-start: 10px;
-        --border-radius: 16px;
+        // --background: #EFF0F6;
+        // --border-color: none;
+        // --padding-start: 10px;
+        // --border-radius: 16px;
         width: 84px;
         height: 76px;
         font-family: Outfit;
@@ -15,17 +25,13 @@
 
     }
 
-    ion-input.custom-input-style .input-wrapper {
-        border-radius: 16px;
-    }
+    // ion-input.custom-input-style .input-wrapper {
+    //     border-radius: 16px;
+    // }
 
     .digit-wrapper {
         display: flex;
         justify-content: center;
-    }
-
-    .digit-wrapper ion-item {
-       // padding-left: 0 !important;
-        --padding-start: 0;
+        gap: 16px;
     }
 }

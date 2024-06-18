@@ -13,31 +13,28 @@ import { useEffect, useState } from "react";
 
 
 import "./ClassCode.scss";
+import { Input } from "@/components/Input";
 
 
 export const ClassCode: React.FC = () => {
     const intl = useIntl();
     const schema = z.object({
-        role: z.string().min(1), //nonempty was deprecated
+        code0: z.string(),
+        code1: z.string(),
+        code2: z.string(),
+        code3: z.string(),
     });
     const {
         control,
         handleSubmit,
         formState: { isValid },
+        watch
+
     } = useForm<z.infer<typeof schema>>({
-        mode: "onBlur",
-        // resolver: zodResolver(schema),
+        mode: "onChange",
+        resolver: zodResolver(schema),
     });
     const { data, setData, pushPage } = useSignUpData();
-    const [code, setCode] = useState<string[]>(['', '', '', '']);
-    const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-    const correctCode = ['1', '2', '3', '4']
-
-    useEffect(() => {
-        // Check if the input code matches the correct code
-        const codeMatches = code.join('') === correctCode.join('');
-        setIsButtonEnabled(codeMatches);
-    }, [code]);
 
     const onSubmit = handleSubmit((responses) => {
        
@@ -48,12 +45,15 @@ export const ClassCode: React.FC = () => {
         // @ts-ignore todo: better typing
         pushPage("parentAccountCredentials");
     });
+    const inputs = ['code0', 'code1', 'code2', 'code3']
 
-    const handleChange = (value: string, index: number) => {
-        const newCode = [...code];
-        newCode[index] = value;
-        setCode(newCode);
-    };
+    const values = watch()
+    console.log(values)
+    const isValidCode = 
+        values.code0 === '1' && 
+        values.code1 === '2' && 
+        values.code2 === '3' && 
+        values.code3 === '4'
 
     return (
         <>
@@ -63,33 +63,27 @@ export const ClassCode: React.FC = () => {
                     style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
                     <div className="">
                         <div className="">
-                            {/* <div
-                                className=""
-                                style={{
-                                    backgroundColor: "var(--Flamenco-High)",
-                                    marginLeft: "18px",
-                                    paddingLeft: "8px",
-                                    paddingRight: "8px",
-                                    borderRadius: "4px",
-                                }}
-                            >
-                            </div> */}
                             <IonCardHeader class="custom-ion-header margin-bottom-3">
                                 <IonCardTitle>
                                     <IonText className="ion-text-center">
                                         {/* todo: don't force type cast */}
                                         <h2 className="text-3xl semibold color-suelo">
                                             <FormattedMessage
-                                                id="signUp.classCode"
+                                                id="signUpParent.classCode"
                                                 defaultMessage="What’s your class code?"
-                                                description="Title of page where user is presented with button options where they can choose if they are a teacher or parent/caregiver."
+                                               
                                             />
                                         </h2>
                                         <p
                                             className="text-lg"
                                             style={{ marginTop: "12px" }}
                                         >
-                                            Don’t know your class code? Ask a teacher
+                                            <FormattedMessage
+                                                id="signUpParent.classCodeAsk"
+                                                defaultMessage="Don’t know your class code? Ask a teacher"
+                                                
+                                            />
+                                            
                                         </p>
                                     </IonText>
                                 </IonCardTitle>
@@ -97,23 +91,18 @@ export const ClassCode: React.FC = () => {
                             <IonCardContent>
                                 <div className="digit-wrapper">
 
-                                    {code.map((digit, index) => (
-                                        <div className="digit-window" key={index}>
-                                            <IonItem
-                                                lines="none"
-                                            >
-                                                <IonInput
-                                                    value={digit}
-                                                    maxlength={1}
-                                                    fill="solid"
-                                                    aria-label="code-number"
-                                                    className="custom-input-style"
-                                                    
-                                                    onIonInput={(e: any) => handleChange(e.target.value, index)}
+                                    {inputs.map((name) => (
+                                        <div className="digit-window" key={name}>
+                                           
+                                                <Input
+                                                className="custom-input-style"
+                                                control = {control}
+                                                fill = "outline"
+                                                labelPlacement = "floating"
+                                                name = {name}
+                                                required={true}
                                                 />
-                                            </IonItem>
-
-
+                                           
                                         </div>
                                     ))}
 
@@ -128,15 +117,12 @@ export const ClassCode: React.FC = () => {
                     shape="round"
                     expand="block"
                     type="button"
-                    onClick={(e) => {
-                        onSubmit(e)
-                    }}
+                    onClick={onSubmit}
                     data-testid="role-select-continue-button"
-                    disabled={!isButtonEnabled}
+                    disabled={!isValidCode}
                 >
                     <FormattedMessage
                         id="common.continue"
-                        defaultMessage="Continue"
                         description="Button label to continue"
                     />
                 </IonButton>

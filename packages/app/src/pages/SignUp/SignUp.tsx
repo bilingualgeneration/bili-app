@@ -30,8 +30,8 @@ export const SignUp: React.FC<{entry?: string}> = ({entry}) => (
 );
 
 const progressLookup: { [key: string]: number } = {
-  classCode: 0,
   roleSelect: 0,
+  classCode: 0.25,
   teacherAbout: 0.25,
   childProfile: 0.25,
   languageModeSelect: 0.5,
