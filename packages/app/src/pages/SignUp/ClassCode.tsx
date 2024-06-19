@@ -1,5 +1,3 @@
-import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
-
 import { IonButton, IonLabel, IonItem, IonInput, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 
@@ -7,10 +5,6 @@ import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
-import HouseIcon from "@/assets/icons/house.svg?react";
-import { useEffect, useState } from "react";
-
 
 import "./ClassCode.scss";
 import { Input } from "@/components/Input";
@@ -27,7 +21,7 @@ export const ClassCode: React.FC = () => {
     const {
         control,
         handleSubmit,
-        formState: { isValid },
+        formState: {},
         watch
 
     } = useForm<z.infer<typeof schema>>({
@@ -48,7 +42,7 @@ export const ClassCode: React.FC = () => {
     const inputs = ['code0', 'code1', 'code2', 'code3']
 
     const values = watch()
-    console.log(values)
+    
     const isValidCode = 
         values.code0 === '1' && 
         values.code1 === '2' && 
@@ -71,7 +65,6 @@ export const ClassCode: React.FC = () => {
                                             <FormattedMessage
                                                 id="signUpParent.classCode"
                                                 defaultMessage="What’s your class code?"
-                                               
                                             />
                                         </h2>
                                         <p
