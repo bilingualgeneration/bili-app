@@ -99,13 +99,8 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
     setUser(undefined);
     userRef.current = undefined;
     signOut(auth).then(() => {
-      console.log('signed out');
     });
   };
-
-  //console.log(profile);
-//  console.log(profileRef.current);
-
   
   const isLoading =
     user === undefined

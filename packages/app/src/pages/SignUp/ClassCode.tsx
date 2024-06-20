@@ -48,7 +48,6 @@ export const ClassCode: React.FC = () => {
     const inputs = ['code0', 'code1', 'code2', 'code3']
 
     const values = watch()
-    console.log(values)
     const isValidCode = 
         values.code0 === '1' && 
         values.code1 === '2' && 
