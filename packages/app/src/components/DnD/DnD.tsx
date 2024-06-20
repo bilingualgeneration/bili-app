@@ -47,34 +47,6 @@ const shuffle = (array: any[]) => {
   }
 };
 
-type generateRandomPosition = (args: {
-  letterHeight: number,
-  letterWidth: number,
-  placedWidths: number,
-  placedHeights: number,
-  targetHeight: number,
-  targetWidth: number,
-}) => {
-  top: number,
-  left: number
-}
-
-const generateRandomPosition: generateRandomPosition = ({
-  letterHeight,
-  letterWidth,
-  placedWidths,
-  placedHeights,
-  targetHeight,
-  targetWidth,
-}) => {
-  const position = {
-    top: placedHeights + PIECE_VERTICAL_SPACER,
-    left: 40,
-  };
-  
-  return position;
-}
-
 export interface DnDProps {
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
@@ -137,32 +109,24 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
       targetTotalWidth = Math.max(targetTotalWidth, targetImage.width);
       targetTotalHeight += targetImage.height;
     }
-    let placedWidths = 0;
-    let placedHeights = 0;
+    let leftPosition = 10;
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map(
 	(p: any, index: number) => {
 	  const id: string = index.toString();
-	  const {left, top} = generateRandomPosition({
-	    letterHeight: p.image.height,
-	    letterWidth: p.image.width,
-	    placedWidths,
-	    placedHeights,
-	    targetHeight: targetTotalHeight,
-	    targetWidth: targetTotalWidth,
-	  });
-	  placedWidths += p.image.width + PIECE_HORIZONTAL_SPACER;
-	  placedHeights += p.image.height + PIECE_VERTICAL_SPACER;
+	  const newP = {
+	    ...p,
+	    dropped: false,
+	    id,
+	    left: leftPosition,
+	    top: MAX_HEIGHT - p.image.height - 30,
+	    rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
+	  };
+
+	  leftPosition += p.image.width + PIECE_HORIZONTAL_SPACER;
 	  return [
 	    id,
-	    {
-	      ...p,
-	      dropped: false,
-	      id,
-	      left,
-	      top,
-	      rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
-	    }
+	    newP
 	  ];
 	}
       )
@@ -225,14 +189,11 @@ const Container: React.FC<ContainerProps> = ({
   return <>
     <div className='dnd-play-area'>
       <div ref={drop} style={{
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
 	height: MAX_HEIGHT,
 	position: 'relative'
       }}>
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
-	<div className='dnd-drop-targets-container'>
+	<div className={classnames('dnd-drop-targets-container', {hasImage: targetImage})}>
 	  {targetImage &&
 	   <DnDImage src={targetImage.url} />
 	  }
