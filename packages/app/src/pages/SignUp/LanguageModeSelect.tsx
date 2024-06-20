@@ -66,7 +66,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: true,
+    value: 'en',
   };
 
   const spanishOption: ExtendedRadioOption = {
@@ -104,7 +104,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: true,
+    value: 'es',
   };
 
   const billingualOption: ExtendedRadioOption = {
@@ -144,7 +144,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: false,
+    value: 'esen',
   };
 
   const onSubmit = handleSubmit((responses) => {
