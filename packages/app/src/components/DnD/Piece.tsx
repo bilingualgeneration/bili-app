@@ -9,6 +9,7 @@ import {
   useState
 } from 'react';
 import {useAudioManager} from '@/contexts/AudioManagerContext';
+import {useDnD} from '@/hooks/DnD';
 
 export interface PieceProps {
   audio_on_drop: any;
@@ -35,6 +36,8 @@ export const Piece: React.FC<PieceProps> = ({
   top,
   ...props
 }) => {
+  const {audioOnComplete, piecesDropped, totalTargets} = useDnD();
+  console.log(audioOnComplete);
   const {addAudio} = useAudioManager();
   // todo: better way to play audio?
   const a = new Audio(audio_on_drag.url);
@@ -58,10 +61,12 @@ export const Piece: React.FC<PieceProps> = ({
       audio_drag.currentTime = 0;
     }
     if(dropped){
-      addAudio([
-	audio_on_drop.url,
-	audio_correct
-      ]);
+      let audio = [audio_on_drop.url];
+      if(piecesDropped + 1 >= totalTargets){
+	audio.push(audioOnComplete);
+      }
+      audio.push(audio_correct);
+      addAudio(audio);
     }
   }, [isDragging, dropped]);
   if(isDragging || dropped){

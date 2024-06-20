@@ -48,6 +48,7 @@ const shuffle = (array: any[]) => {
 };
 
 export interface DnDProps {
+  audioOnComplete: string;
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
   width?: number,
@@ -62,9 +63,10 @@ export const DnD: React.FC<DnDProps> = (props) => {
   </>;
 }
 
-const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}) => {
+const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, target, targetImage}) => {
   const {
     pieces,
+    setAudioOnComplete,
     setPieces,
     setTargetPieces,
     setPiecesDropped,
@@ -131,6 +133,8 @@ const Hydrator: React.FC<DnDProps> = ({pieces: propsPieces, target, targetImage}
 	}
       )
     );
+    setAudioOnComplete(audioOnComplete);
+    console.log(audioOnComplete);
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
     setTotalTargets(tempTotalTargets);

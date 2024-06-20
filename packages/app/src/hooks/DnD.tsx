@@ -11,6 +11,7 @@ const DnDContext = createContext<DnDState>({} as DnDState);
 export const useDnD = () => useContext(DnDContext);
 
 export const DnDProvider: React.FC<React.PropsWithChildren> = ({children}) => {
+  const [audioOnComplete, setAudioOnComplete] = useState<string>('');
   const [pieces, setPieces] = useState<any[]>([]);
   const [targetPieces, setTargetPieces] = useState<any[]>([]);
   const [totalTargets, setTotalTargets] = useState<number>(0);
@@ -18,6 +19,8 @@ export const DnDProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   return <DnDContext.Provider
 	   children={children}
 	   value={{
+	     audioOnComplete,
+	     setAudioOnComplete,
 	     piecesDropped,
 	     setPiecesDropped,
 	     pieces,

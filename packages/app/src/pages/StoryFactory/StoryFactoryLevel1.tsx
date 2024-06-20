@@ -60,6 +60,7 @@ const WrappedSF1: React.FC = () => {
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
   return <>
     <DnD
+      audioOnComplete={filteredGames[pageNumber].audio_on_complete.url}
       targetImage={filteredGames[pageNumber].targetImage}
       target={filteredGames[pageNumber].target}
       pieces={filteredGames[pageNumber].pieces}
