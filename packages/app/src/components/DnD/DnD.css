@@ -1,15 +1,27 @@
 .dnd-play-area {
     width: 100%;
+    text-align: center;
 }
 
 .dnd-drop-targets-container {
     text-align: center;
+    display: inline-block;
+
+    &.hasImage{
+	margin-top: 1rem;
+    }
+
+    &:not(.hasImage){
+	margin-top: 8rem;
+    }
     
     .dnd-image {
 	margin: auto;
 	display: block;
 	pointer-events: none;
 	user-select: none;
+	height: 320px;
+	width: auto;
     }
     
     .drop-target {
