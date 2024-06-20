@@ -73,6 +73,30 @@ export const Splash: React.FC = () => {
               </Link>
             </IonCardContent>
           </IonCard>
+
+
+          <IonCard>
+            <IonCardContent>
+              <IonCardTitle className={titleClasses}>
+                <FormattedMessage
+                  id="splash.classCode"
+                  defaultMessage="Do you have a classroom code?"
+                />
+              </IonCardTitle>
+              <Link to='/sign-up/class-code' className='no-underline'>
+                <IonButton
+                  expand="block"
+                  fill="outline"
+                  shape="round">
+                  <FormattedMessage
+                    id="splash.classCodeButton"
+                    defaultMessage="Student login"
+                  />
+                </IonButton>
+              </Link>
+            </IonCardContent>
+          </IonCard>
+
         </div>
       </div>
     </>

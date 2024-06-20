@@ -79,6 +79,7 @@ import {
   WouldDoGame,
 } from '@/pages/WouldDo';
 import { StudentProfile } from '@/pages/StudentProfile';
+import { ClassCode } from '@/pages/SignUp/ClassCode';
 
 
 export const Router: React.FC = () => {
@@ -324,6 +325,16 @@ export const Router: React.FC = () => {
             render={() => (
               <UnauthedLayout>
                 <SignUp />
+              </UnauthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/sign-up/class-code"
+            render={() => (
+              <UnauthedLayout>
+                <SignUp entry='classCode' />
               </UnauthedLayout>
             )}
           />

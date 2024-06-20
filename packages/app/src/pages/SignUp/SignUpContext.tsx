@@ -1,5 +1,5 @@
 import {auth} from '@/components/Firebase';
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useEffect, useRef, useState } from "react";
 import {
   getFunctions,
   httpsCallable
@@ -19,13 +19,15 @@ const SignUpDataContext = createContext({
 });
 export const useSignUpData = () => useContext(SignUpDataContext);
 
-export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
+export const SignUpDataProvider = ({ children, entry }: PropsWithChildren<{entry?: string}>) => {
   const [data, setData] = useState({});
-  const [page, setPage] = useState<string[]>(["roleSelect"]);
+  const [page, setPage] = useState<string[]>(entry ? [entry] : ["roleSelect"]);//set it to roleSeclect or ClassCode
   const [signUpStatus, setSignUpStatus] = useState("idle");
   const { locale } = useLanguage();
   const functions = getFunctions();
   const signupFunction = httpsCallable(functions, "user-signup");
+
+
   const signUp = async () => {
     setSignUpStatus("busy");
     await signupFunction({
@@ -36,9 +38,11 @@ export const SignUpDataProvider = ({ children }: PropsWithChildren<{}>) => {
     await signInWithEmailAndPassword(auth, data.email, data.password);
     setSignUpStatus("done");
   };
+
   const pushPage = (newPage: string): void => {
     setPage(page.concat(newPage));
   };
+  
   return (
     <SignUpDataContext.Provider
       value={{

@@ -21,15 +21,17 @@ import {
 } from "@/pages/SignUp/SignUpContext";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useHistory } from "react-router-dom";
+import { ClassCode } from "./ClassCode";
 
-export const SignUp: React.FC = () => (
-  <SignUpDataProvider>
+export const SignUp: React.FC<{entry?: string}> = ({entry}) => (
+  <SignUpDataProvider entry={entry}>
     <SignUpComponent />
   </SignUpDataProvider>
 );
 
 const progressLookup: { [key: string]: number } = {
   roleSelect: 0,
+  classCode: 0.25,
   teacherAbout: 0.25,
   childProfile: 0.25,
   languageModeSelect: 0.5,
@@ -66,6 +68,7 @@ export const SignUpComponent: React.FC = () => {
                 value={progressLookup[page]}
               />
             </div>
+            {page === "classCode" && <ClassCode/>}
             {page === "roleSelect" && <RoleSelect />}
             {page === "teacherAbout" && <TeacherAbout />}
             {page === "childProfile" && <ChildProfile />}
