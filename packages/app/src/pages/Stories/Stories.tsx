@@ -601,6 +601,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
 	</h1>
 	</IonText>
 	<DnD
+	audioOnComplete={data.audio_on_complete}
 	target={data.target}
 	pieces={data.pieces}
 	/>
