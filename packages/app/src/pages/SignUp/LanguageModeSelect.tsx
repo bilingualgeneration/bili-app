@@ -32,6 +32,44 @@ export const LanguageModeSelect: React.FC = () => {
   });
   const { data, setData, pushPage } = useSignUpData();
 
+
+  const englishOption: ExtendedRadioOption = {
+    component: (
+      <div>
+        <RadioCard
+          icon={
+            <div
+              style={{
+                color: "#FFFFFF",
+                textAlign: "center",
+                fontFamily: "Outfit",
+                fontSize: "24px",
+                fontStyle: "normal",
+                fontWeight: "700",
+                lineHeight: "120%",
+                letterSpacing: "0.2px",
+              }}
+            >
+              ES
+            </div>
+          }
+          title={intl.formatMessage({
+            id: "languageMode.engImmersionTitle",
+            defaultMessage: "English Immersion",
+            description: "Title of the Spanish immersion mode option",
+          })}
+          content={intl.formatMessage({
+            id: "languageMode.engImmersion",
+            defaultMessage:
+              "Choose this setting if you want your child to learn all content and activities in the English language.",
+          })}
+          iconBackgroundColor="#0045A1"
+        />
+      </div>
+    ),
+    value: true,
+  };
+
   const spanishOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -39,7 +77,7 @@ export const LanguageModeSelect: React.FC = () => {
           icon={
             <div
               style={{
-                color: "#ffffff",
+                color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
                 fontSize: "24px",
@@ -63,7 +101,7 @@ export const LanguageModeSelect: React.FC = () => {
               "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
             description: "Description of the Spanish immersion option",
           })}
-          iconBackgroundColor="var(--Desierto-Desierto)"
+          iconBackgroundColor="#F0091B"
         />
       </div>
     ),
@@ -77,7 +115,7 @@ export const LanguageModeSelect: React.FC = () => {
           icon={
             <div
               style={{
-                color: "#000000",
+                color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
                 fontSize: "20px",
@@ -103,7 +141,7 @@ export const LanguageModeSelect: React.FC = () => {
               "Choose this setting if you want your child to learn Spanish with English supports and translations.",
             description: "Description of the Bilingual mode option",
           })}
-          iconBackgroundColor="var(--Sol-High)"
+          iconBackgroundColor="#006A67"
         />
       </div>
     ),
@@ -142,7 +180,7 @@ export const LanguageModeSelect: React.FC = () => {
         <ExtendedRadio
           control={control}
           name="isImmersive"
-          options={[spanishOption, billingualOption]}
+          options={[billingualOption, spanishOption, englishOption ]}
         />
         <IonButton
           data-testid="language-select-continue-button"
