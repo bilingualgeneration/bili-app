@@ -20,7 +20,7 @@ import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 export const LanguageModeSelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
-    isImmersive: z.boolean(),
+    isImmersive: z.enum(['en', 'es', 'esen']),
   });
   const {
     control,
