@@ -1,0 +1,35 @@
+#teacher-about-styles {
+
+    .grades-styles{
+        display: flex;
+    }
+
+    .grades-styles ion-checkbox::part(container) {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        border: 3px solid #889391
+        ;
+      }
+
+    .roles-styles ion-checkbox::part(container) {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 3px solid #889391
+    ;
+    }
+
+    .customer-school-select ion-select {
+        --border-radius: 16px;
+        --border-color:#006A671F;
+        --border-width:3px;
+        
+    }
+
+    .customer-school-select ion-select:focus {
+        --border-color:#006A67;
+        --background: #F2FFFD;
+      }
+    
+}
