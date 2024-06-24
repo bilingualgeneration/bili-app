@@ -82,25 +82,6 @@ export const TeacherAccountCredentials: React.FC = () => {
           <div className="ion-margin-top">
             <Input
               label={intl.formatMessage({
-                id: "signUpTeacher.school",
-                defaultMessage: "Your school name",
-                description:
-                  "Input area label where users who choose teacher must enter the name of their school as requirement",
-              })}
-              labelPlacement="above"
-              required={true}
-              name="school"
-              control={control}
-              fill="outline"
-              helperText=""
-              testId="teacher-account-credentials-email-input"
-              type="text"
-            />
-          </div>
-
-          <div className="ion-margin-top">
-            <Input
-              label={intl.formatMessage({
                 id: "common.password",
                 defaultMessage: "Password",
                 description: "Input label for user's password",
