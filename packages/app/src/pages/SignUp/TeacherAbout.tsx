@@ -128,7 +128,7 @@ export const TeacherAbout: FC = () => {
       ...data,
       ...response,
     });
-    pushPage("languageModeSelect");
+    pushPage("teacherAccountCredentials");
   });
 
   return (
