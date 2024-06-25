@@ -149,7 +149,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { addAudio, clearAudio} = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {pageNumber, pageLocks, setPageLocks} = useStory();
+  const {pageNumber, pageLocks, setPageLocks, pageForward} = useStory();
   
   const headerData = useMemo((): GameHeader => {
     const textPacks =
@@ -240,7 +240,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     // todo: remove settimeout
     if (isCorrectSelected) {
       setTimeout(() => {
-	//pageForward();
 	setPageLocks({
 	  ...pageLocks,
 	  [pageNumber]: false
@@ -252,10 +251,12 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           "3": initialStyle,
           "4": initialStyle,
         });
+	pageForward();
       }, 3000);
     }
   }, [isCorrectSelected]);
 
+  
   // Function to handle card click
   const handleCardClick = (card: any) => {
     if (!card.isTarget) {
@@ -315,7 +316,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       }, 1000);
     }
   };
-  console.log(headerData);
   return (
     <>
       <div style={{width: 800, margin: 'auto', textAlign: 'center'}}>
