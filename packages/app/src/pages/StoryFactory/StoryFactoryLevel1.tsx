@@ -48,7 +48,7 @@ const WrappedSF1: React.FC = () => {
     }
   });
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const {totalTargets, piecesDropped} = useDnD();
+  const {totalTargets, piecesDropped, setPiecesDropped} = useDnD();
   const {onended} = useAudioManager();
   useEffect(() => {
     if(piecesDropped >= totalTargets
