@@ -20,11 +20,15 @@
 	display: block;
 	pointer-events: none;
 	user-select: none;
-	height: 320px;
+	height: 260px;
 	width: auto;
     }
     
     .drop-target {
+	&:not(:last-child){
+	    margin-right: 0.75rem;
+	}
+
 	display: inline-block;
 
 	img{

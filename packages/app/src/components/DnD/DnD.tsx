@@ -1,7 +1,7 @@
 const LETTER_MAX_ROTATION = 15;
-const PIECE_HORIZONTAL_SPACER = 10;
+const PIECE_HORIZONTAL_SPACER = 40;
 const PIECE_VERTICAL_SPACER = 10;
-const MAX_HEIGHT = 600;
+const MAX_HEIGHT = 700;
 const MAX_WIDTH = 940;
 
 import classnames from 'classnames';
@@ -134,7 +134,6 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
       )
     );
     setAudioOnComplete(audioOnComplete);
-    console.log(audioOnComplete);
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
     setTotalTargets(tempTotalTargets);
@@ -202,7 +201,7 @@ const Container: React.FC<ContainerProps> = ({
 	   <DnDImage src={targetImage.url} />
 	  }
 	  {dropTargets.map(
-	    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
+	    (word: any) => word.map((d: DropTargetProps) => <DropTarget key={d.text} {...d} />
 	  ))}
 	</div>
       </div>
