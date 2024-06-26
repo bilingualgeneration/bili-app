@@ -20,6 +20,12 @@
     ;
     }
 
+    .grades-styles ion-col,
+    .roles-styles ion-col {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
     .customer-school-select ion-select {
         --border-radius: 16px;
         --border-color:#006A671F;
