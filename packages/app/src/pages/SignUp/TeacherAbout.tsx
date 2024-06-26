@@ -13,7 +13,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
-  return <IonCol size="3">{children}</IonCol>;
+  return <IonCol size="4">{children}</IonCol>;
 };
 
 const OptionWrapperRoles = ({ children }: { children: JSX.Element }) => {
@@ -41,8 +41,7 @@ export const TeacherAbout: FC = () => {
     resolver: zodResolver(schema),
   });
 
-  const schoolNames = ['Arts Magnet School', 'Washington School', 'Livermore School',];
-
+ 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
       label: intl.formatMessage({
@@ -202,6 +201,17 @@ export const TeacherAbout: FC = () => {
           </IonGrid>
         </div>
 
+        <div className="margin-bottom-1x margin-top-1">
+          <IonText>
+            <h2 className="text-xl semibold color-suelo">
+              <FormattedMessage
+                id="signUpTeacher.aboutSchools"
+                defaultMessage="What is the name of your school?"
+                
+              />
+            </h2>
+          </IonText>
+        </div>
         <div className="customer-school-select">
           <IonList>
               <IonSelect aria-label="School" interface="popover" labelPlacement="floating" fill="outline">
