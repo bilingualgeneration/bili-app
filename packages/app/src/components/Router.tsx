@@ -5,6 +5,7 @@ import {
   IonRouterOutlet
 } from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
+import {MinimalHeader} from '@/components/MinimalHeader';
 import {
   Redirect,
   Route,
@@ -402,9 +403,9 @@ export const Router: React.FC = () => {
             path="/story-factory-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <StoryFactoryPlay />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />

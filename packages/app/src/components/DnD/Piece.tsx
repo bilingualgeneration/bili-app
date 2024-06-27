@@ -1,15 +1,16 @@
 import audio_correct from "@/assets/audio/correct.mp3";
 import {
-  DragPreviewImage,
   DragSourceMonitor,
   useDrag,
 } from 'react-dnd';
+import {isPlatform} from '@ionic/react';
 import {
   useEffect,
   useState
 } from 'react';
 import {useAudioManager} from '@/contexts/AudioManagerContext';
 import {useDnD} from '@/hooks/DnD';
+import {usePreview} from 'react-dnd-preview';
 
 export interface PieceProps {
   audio_on_drop: any;
@@ -23,6 +24,19 @@ export interface PieceProps {
   text: string;
   top: number;
 }
+
+const PiecePreview: React.FC = () => {
+  const preview = usePreview();
+  if(!preview.display){
+    return null;
+  }
+  const {itemType, item, style} = preview;
+  // @ts-ignore
+  const url = item.image.url;
+  return <span className='letter' style={style}>
+    <img src={url} />
+  </span>;
+};
 
 export const Piece: React.FC<PieceProps> = ({
   audio_on_drop,
@@ -53,7 +67,7 @@ export const Piece: React.FC<PieceProps> = ({
       set_audio_drop(new Audio(audio_on_drop.url));
     }
   }, [audio_on_drop]);
-  const [{isDragging}, drag, preview] = useDrag(() => ({
+  const [{isDragging}, drag] = useDrag(() => ({
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -94,8 +108,8 @@ export const Piece: React.FC<PieceProps> = ({
     return <span ref={drag}></span>;
   }
   return <>
-    <DragPreviewImage connect={preview} src={image.url} />
-    <span ref={drag} style={{
+    {!isPlatform('desktop') && <PiecePreview />}
+    <span className='letter' ref={drag} style={{
       left,
       position: 'absolute',
       top,

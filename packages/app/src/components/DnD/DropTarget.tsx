@@ -74,6 +74,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
       'drop-shadow-incorrect': isCorrect === false,
       'shake-animation': isCorrect === false,
       'drop-target': true,
+      'letter': true,
       'is-blank': isBlank
     }, classes)}
 	  ref={drop}>

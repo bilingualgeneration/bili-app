@@ -1,9 +1,21 @@
 .dnd-play-area {
     width: 100%;
     text-align: center;
+    .letter img {
+	height: 25vh;
+	max-height: 150px;
+	width: auto;
+    }
+
+    .dnd-image{
+	height: 40vh !important;
+	max-height: 320px !important;
+	width: auto;
+    }
 }
 
 .dnd-drop-targets-container {
+
     text-align: center;
     display: inline-block;
 
