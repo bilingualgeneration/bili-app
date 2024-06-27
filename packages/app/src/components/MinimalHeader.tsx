@@ -10,11 +10,11 @@ export const MinimalHeader: React.FC<React.PropsWithChildren> = ({children}) => 
       <IonContent fullscreen={true} className='ion-padding background-figures'>
 	<div
 	  className='page-wrapper'
-	  style={{ background: 'white', position: 'relative' }}>
+	  style={{ background: 'white', position: 'relative', padding: 0 }}>
 	  <div style={{position: 'absolute', left: 10, top: 24, zIndex: 999}}>
 	    <BackButton />
 	  </div>
-	  {children}
+	    {children}
 	</div>
       </IonContent>
     </IonPage>

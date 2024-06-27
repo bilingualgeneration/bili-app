@@ -56,10 +56,12 @@ export const Piece: React.FC<PieceProps> = ({
   const [audio_drop, set_audio_drop] = useState<HTMLAudioElement | null>(null);
   useEffect(() => {
     // todo: better way to play audio?
-    const a = new Audio(audio_on_drag.url);
-    // speed up across the board
-    a.playbackRate = 1.25;
-    set_audio_drag(a);
+    if(audio_on_drag){
+      const a = new Audio(audio_on_drag.url);
+      // speed up across the board
+      a.playbackRate = 1.25;
+      set_audio_drag(a);
+    }
   }, [audio_on_drag, set_audio_drag]);
 
   useEffect(() => {

@@ -61,9 +61,8 @@ const WrappedSF1: React.FC = () => {
     }
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
   const {offsetWidth: dndWidth} = dndWrapperRef.current || {offsetHeight: 0, offsetWidth: 0};
-  console.log(dndWidth);
   return <>
-    <div ref={dndWrapperRef}>
+    <div ref={dndWrapperRef} style={{height: '100%'}}>
       {dndWidth > 0 && 
        <DnD
 	 audioOnComplete={filteredGames[pageNumber].audio_on_complete.url}

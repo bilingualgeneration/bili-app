@@ -121,7 +121,13 @@ export const StoryLoader = () => {
 	pageLocks[pages.length + index] = true;
       }
       pages = pages.concat(
-	data['dnd-game'].map((data: any) => <>
+	data['dnd-game'].filter((d: any) => {
+	  if(isInclusive && language === 'es'){
+	    return d.language === 'es-inc';
+	  }else{
+	    return d.language === language;
+	  }
+	}).map((data: any) => <>
 	  <PageWrapper>
 	    <DnDGame data={data} />
 	  </PageWrapper>
@@ -594,7 +600,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
   }, [piecesDropped, totalTargets]);
   return <>
     <IonCol size="auto">
-      <div style={{width: 940}}>
+      <div>
 	<IonText>
 	<h1 className="text-4xl ion-text-center color-suelo">
 	  {data.instructions}
@@ -602,7 +608,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
 	</IonText>
 	<DnD
 	audioOnComplete={data.audio_on_complete}
-	width={100}
+	width={1366}
 	target={data.target}
 	pieces={data.pieces}
 	/>

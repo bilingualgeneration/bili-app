@@ -18,6 +18,8 @@ import {
   DropTargetProps,
 } from './DropTarget';
 import {HTML5toTouch} from 'rdndmb-html5-to-touch';
+import {isPlatform} from '@ionic/react';
+import {usePreview} from 'react-dnd-preview';
 
 import {
   Piece,
@@ -48,6 +50,20 @@ const shuffle = (array: any[]) => {
       array[randomIndex], array[currentIndex]];
   }
 };
+
+const PiecePreview: React.FC = () => {
+  const preview = usePreview();
+  if(!preview.display){
+    return null;
+  }
+  const {itemType, item, style} = preview;
+  // @ts-ignore
+  const url = item.image.url;
+  return <span className='letter' style={style}>
+    <img src={url} />
+  </span>;
+};
+
 
 export interface DnDProps {
   audioOnComplete: string;
@@ -200,11 +216,12 @@ const Container: React.FC<ContainerProps> = ({
     [movePiece]
   );
   return <>
-    <div className='dnd-play-area'>
+    <div className='dnd-play-area' style={{height: '100%'}}>
       <div ref={drop} style={{
-	height: MAX_HEIGHT,
+	height: '100%',
 	position: 'relative'
       }}>
+	{!isPlatform('desktop') && <PiecePreview />}
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
 	<div className={classnames('dnd-drop-targets-container', {hasImage: targetImage})}>
 	  {targetImage &&
