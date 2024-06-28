@@ -46,7 +46,7 @@ export const VocabModal: React.FC = () => {
       onWillDismiss={() => {
         setCurrentVocabWord(null);
       }}>
-      <IonContent id='vocab-modal-id' className='vocab-modal-content'>
+      <div id='vocab-modal-id' className='vocab-modal-content'>
         <div className='ion-padding modal-container'>
           <IonButton
             onClick={() => setCurrentVocabWord(null)}
@@ -129,7 +129,7 @@ export const VocabModal: React.FC = () => {
 
           </IonList>
         </div>
-      </IonContent>
+      </div>
     </IonModal>
   </>;
 }
