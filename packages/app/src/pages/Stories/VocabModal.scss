@@ -17,7 +17,7 @@
     --padding-start: 0;
     --padding-end: 0;
     position: absolute;
-    top: -50px;
+    top: -60px;
     right: 10px;
    }
 
@@ -32,10 +32,12 @@ ion-modal .vocab-modal-content{
     @media (max-width: 920px) { /* iPad Mini portrait and landscape width */
         width: 620px;
     }
+    
 }
 
 ion-modal {
     --width: auto;
+    --max-height: 450px;
 }
 
 .vocab-syllable-breakdown {
