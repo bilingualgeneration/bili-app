@@ -205,7 +205,7 @@ export const TeacherAbout: FC = () => {
           <IonText>
             <h2 className="text-xl semibold color-suelo">
               <FormattedMessage
-                id="signUpTeacher.aboutSchools"
+                id="signUpTeacher.school"
                 defaultMessage="What is the name of your school?"
                 
               />
