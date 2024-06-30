@@ -4,10 +4,7 @@ import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import {
-  getFunctions,
-  httpsCallable
-} from 'firebase/functions';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
@@ -41,7 +38,10 @@ export const IntruderCongrats: React.FC<{
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { profile: {isImmersive}, activeChildProfile } = useProfile();
+  const {
+    profile: { isImmersive },
+    activeChildProfile,
+  } = useProfile();
   const audio_es = new Audio(
     sounds.es[count === -1 ? "all" : count.toString()],
   );

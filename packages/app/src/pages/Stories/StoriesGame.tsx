@@ -18,8 +18,8 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
-import {useLanguageToggle} from '@/components/LanguageToggle';
-import {useStory} from './StoryContext';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "../../pages/Stories/Stories.scss";
 
@@ -143,53 +143,50 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
   gameType,
 }) => {
-  const { profile: {isInclusive} } = useProfile();
-  const {language} = useLanguageToggle();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const { language } = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio} = useAudioManager();
+  const { addAudio, clearAudio } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {pageNumber, pageLocks, setPageLocks, pageForward} = useStory();
-  
+  const { pageNumber, pageLocks, setPageLocks, pageForward, handleAttempt } =
+    useStory();
+
   const headerData = useMemo((): GameHeader => {
     const textPacks =
       gameType === "image"
         ? data.multiple_image_text
-      : data.multiple_syllable_text;
+        : data.multiple_syllable_text;
     return {
       es: textPacks.find(
         (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
       )!,
-      en: textPacks.find(
-            (tp: any) => tp.language === "en",
-          ),
+      en: textPacks.find((tp: any) => tp.language === "en"),
     };
   }, [language, isInclusive, data, gameType]);
 
   //audio effect for autoplaying
   useEffect(() => {
-    switch(language){
-      case 'es':
-	if(headerData.es){
-	  addAudio([headerData.es.audio.url]);
-	}
-	break;
-      case 'en':
-	if(headerData.en){
-	  addAudio([headerData.en.audio.url]);
-	}
-	break;
-      case 'esen':
-	if(headerData.es
-	  && headerData.en){
-	  addAudio([
-	    headerData.es.audio.url,
-	    headerData.en.audio.url
-	  ]);
-	}
-	break;
+    switch (language) {
+      case "es":
+        if (headerData.es) {
+          addAudio([headerData.es.audio.url]);
+        }
+        break;
+      case "en":
+        if (headerData.en) {
+          addAudio([headerData.en.audio.url]);
+        }
+        break;
+      case "esen":
+        if (headerData.es && headerData.en) {
+          addAudio([headerData.es.audio.url, headerData.en.audio.url]);
+        }
+        break;
       default:
-	break;
+        break;
     }
     return () => {
       clearAudio();
@@ -240,10 +237,10 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     // todo: remove settimeout
     if (isCorrectSelected) {
       setTimeout(() => {
-	setPageLocks({
-	  ...pageLocks,
-	  [pageNumber]: false
-	});
+        setPageLocks({
+          ...pageLocks,
+          [pageNumber]: false,
+        });
         setIsCorrectSelected(false); // Reset the state
         setCardColors({
           "1": initialStyle,
@@ -251,15 +248,25 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           "3": initialStyle,
           "4": initialStyle,
         });
-	pageForward();
+        pageForward();
       }, 3000);
     }
   }, [isCorrectSelected]);
 
-  
   // Function to handle card click
   const handleCardClick = (card: any) => {
+    console.log("card", card);
+    handleAttempt({ pageNumber, correct: card.isTarget });
+    // setAttempt((prev) => [
+    //   ...prev,
+    //   {
+    //     pageNumber,
+    //     card,
+    //   },
+    // ]);
+
     if (!card.isTarget) {
+      console.log("incorrect 1");
       //logic for the incorrect cards
 
       addAudio([card.audio.url]);
@@ -290,6 +297,8 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     }
 
     if (!card.isTarget) {
+      console.log("incorrect 2");
+
       //logic for the incorrect cards
       addAudio([card.audio.url]); //plays audio for incorrect choice
       setCardColors((prevColors: any) => ({
@@ -318,7 +327,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   };
   return (
     <>
-      <div style={{width: 800, margin: 'auto', textAlign: 'center'}}>
+      <div style={{ width: 800, margin: "auto", textAlign: "center" }}>
         <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText
             className=""
@@ -327,12 +336,10 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
             }}
           >
             <h1 className="text-4xl color-suelo">
-	      {language === 'en'
-	      ? headerData.en?.text
-	      : headerData.es.text}
-	    </h1>
+              {language === "en" ? headerData.en?.text : headerData.es.text}
+            </h1>
 
-            {language === 'esen' && headerData.en && (
+            {language === "esen" && headerData.en && (
               <p className="text-3xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
@@ -347,10 +354,11 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img className="stories-game-image" style={
-                    cardColors[card.id]
-                  } 
-                    src={card.image.url} />
+                  <img
+                    className="stories-game-image"
+                    style={cardColors[card.id]}
+                    src={card.image.url}
+                  />
                 </IonCol>
               ))}
             </IonRow>
@@ -362,7 +370,11 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   size="auto"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img className="stories-game-image" style={cardColors[card.id]} src={card.image.url} />
+                  <img
+                    className="stories-game-image"
+                    style={cardColors[card.id]}
+                    src={card.image.url}
+                  />
                 </IonCol>
               ))}
             </IonRow>
