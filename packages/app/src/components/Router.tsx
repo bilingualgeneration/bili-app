@@ -1,20 +1,12 @@
-import {AdultCheckProvider} from '@/contexts/AdultCheckContext';
-import {AuthedLayout} from '@/layouts/Authed';
-import {HeaderFooter} from '@/components/HeaderFooter';
-import {
-  IonRouterOutlet
-} from '@ionic/react';
-import {IonReactRouter} from '@ionic/react-router';
-import {
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-} from 'react-router-dom';
-import {ScrollToTop} from '@/components/ScrollToTop';
-import {SettingsLayout} from '@/layouts/Settings';
-import UnauthedLayout from '@/layouts/Unauthed';
-
+import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
+import { AuthedLayout } from "@/layouts/Authed";
+import { HeaderFooter } from "@/components/HeaderFooter";
+import { IonRouterOutlet } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { SettingsLayout } from "@/layouts/Settings";
+import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
 import {
@@ -23,71 +15,67 @@ import {
   Preferences,
   Progress,
   Profile,
-} from '@/pages/Settings';
+} from "@/pages/Settings";
 import {
   AffirmationsGame,
   AffirmationsIntro,
   AffirmationsSelect,
-} from '@/pages/Affirmations';
-import {Community} from '@/pages/Community';
+} from "@/pages/Affirmations";
+import { Community } from "@/pages/Community";
 import {
   CountWithMeCongrats,
   CountWithMeGameLoader,
   CountWithMeIntro,
   CountWithMeSelect,
-} from '@/pages/CountWithMe';
-import {Debug} from '@/pages/Debug';
+} from "@/pages/CountWithMe";
+import { Debug } from "@/pages/Debug";
 import {
   IntruderSelect,
   IntruderIntro,
   IntruderGame,
-  IntruderGameLoader
-} from '@/pages/Intruder';
-import Login from '@/pages/Login';
-import {Play} from '@/pages/Play';
-import {Preload} from '@/pages/Preload';
-import {PreSplash} from '@/pages/PreSplash';
-import {ProfileComingSoon} from '@/pages/ProfileComingSoon';
+  IntruderGameLoader,
+} from "@/pages/Intruder";
+import Login from "@/pages/Login";
+import { Play } from "@/pages/Play";
+import { Preload } from "@/pages/Preload";
+import { PreSplash } from "@/pages/PreSplash";
+import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
 ///////////
-import {Pricing} from '@/pages/SignUp/Pricing';
-import ResetPassword from '@/pages/ResetPassword';
-import {SignUp} from '@/pages/SignUp';
+import { Pricing } from "@/pages/SignUp/Pricing";
+import ResetPassword from "@/pages/ResetPassword";
+import { SignUp } from "@/pages/SignUp";
 ///////////////
-import {Splash} from '@/pages/Splash';
+import { Splash } from "@/pages/Splash";
 import {
   Stories,
   StoriesDragGameLoader,
   StoriesLandingPage,
-  StoryBuilder
-} from '@/pages/Stories';
+  StoryBuilder,
+} from "@/pages/Stories";
 import {
   StoryFactoryIntro,
   StoryFactoryPlay,
   StoryFactorySelect,
-} from '@/pages/StoryFactory';
-import {StudentDashboard} from '@/pages/StudentDashboard';
-import TeacherLogin from '@/pages/TeacherLogin';
+} from "@/pages/StoryFactory";
+import { StudentDashboard } from "@/pages/StudentDashboard";
+import TeacherLogin from "@/pages/TeacherLogin";
 import {
   TellMeAboutGame,
   TellMeAboutIntro,
   TellMeAboutSelect,
-} from '@/pages/TellMeAbout';
-import {Wellness} from '@/pages/Wellness';
-import {
-  WouldDoSelect,
-  WouldDoIntro,
-  WouldDoGame,
-} from '@/pages/WouldDo';
-import { StudentProfile } from '@/pages/StudentProfile';
-import { ClassCode } from '@/pages/SignUp/ClassCode';
-
+} from "@/pages/TellMeAbout";
+import { Wellness } from "@/pages/Wellness";
+import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
+import { StudentProfile } from "@/pages/StudentProfile";
+import { ClassCode } from "@/pages/SignUp/ClassCode";
+import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
   return (
     <IonReactRouter>
       <Switch>
-	<ScrollToTop>
+        <ScrollToTop>
           <Route
             exact
             path="/"
@@ -152,20 +140,19 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeIntro />
+                  <CountWithMeIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
 
-	  
           <Route
             exact
             path="/count-with-me-game/select"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeSelect />
+                  <CountWithMeSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -178,13 +165,12 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeCongrats />
+                  <CountWithMeCongrats />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
 
-	  
           <Route
             exact
             path="/count-with-me-game/play/:pack_id"
@@ -253,7 +239,7 @@ export const Router: React.FC = () => {
             )}
           />
 
-	  <Route exact path="/settings/about">
+          <Route exact path="/settings/about">
             <AuthedLayout>
               <AdultCheckProvider>
                 <SettingsLayout background="#f7faf9">
@@ -261,7 +247,7 @@ export const Router: React.FC = () => {
                 </SettingsLayout>
               </AdultCheckProvider>
             </AuthedLayout>
-	  </Route>
+          </Route>
 
           <Route
             exact
@@ -334,7 +320,7 @@ export const Router: React.FC = () => {
             path="/sign-up/class-code"
             render={() => (
               <UnauthedLayout>
-                <SignUp entry='classCode' />
+                <SignUp entry="classCode" />
               </UnauthedLayout>
             )}
           />
@@ -349,14 +335,26 @@ export const Router: React.FC = () => {
             )}
           />
 
-	  <Route
+          <Route
+            exact
+            path="/reports"
+            render={(props) => (
+              <AuthedLayout>
+                <HeaderFooter background="#FFFFFF">
+                  <Reports />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
             exact
             path="/story/play/:uuid"
             render={(props) => (
               <AuthedLayout>
-		<HeaderFooter background="#FFFFFF">
+                <HeaderFooter background="#FFFFFF">
                   <Stories />
-		</HeaderFooter>
+                </HeaderFooter>
               </AuthedLayout>
             )}
           />
@@ -391,7 +389,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <StoryFactorySelect />
+                  <StoryFactorySelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -462,20 +460,19 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <AffirmationsIntro />
+                  <AffirmationsIntro />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
 
-	  
           <Route
             exact
             path="/affirmations/select"
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <AffirmationsSelect />
+                  <AffirmationsSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -510,7 +507,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <IntruderSelect />
+                  <IntruderSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -556,7 +553,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <WouldDoSelect />
+                  <WouldDoSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -568,11 +565,11 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <TellMeAboutSelect />
+                  <TellMeAboutSelect />
                 </HeaderFooter>
               </AuthedLayout>
             )}
-          />  
+          />
 
           <Route
             exact
@@ -580,7 +577,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <Wellness />
+                  <Wellness />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -592,13 +589,12 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		              <StudentProfile />
+                  <StudentProfile />
                 </HeaderFooter>
               </AuthedLayout>
             )}
           />
-
-	</ScrollToTop>
+        </ScrollToTop>
       </Switch>
     </IonReactRouter>
   );

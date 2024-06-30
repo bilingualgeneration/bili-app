@@ -27,7 +27,9 @@ export const JuegoCard: React.FC<JuegoCardProps> = ({
   showOverlay = true,
   storyId,
 }) => {
-  const { profile: {isImmersive} } = useProfile();
+  const {
+    profile: { isImmersive },
+  } = useProfile();
   const history = useHistory();
 
   // conditionally make card clickable
