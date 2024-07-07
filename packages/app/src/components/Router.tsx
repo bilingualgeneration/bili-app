@@ -178,7 +178,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeCongrats />
+		              <CountWithMeCongrats />
                 </HeaderFooter>
               </AuthedLayout>
             )}

@@ -35,9 +35,9 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
     if (audioPlayed) {
       if (
         count + 1 === 3 ||
-        count + 1 === 10 ||
-        count + 1 === 20 ||
-        count + 1 === 30 // needs to be changed 
+        count + 1 === 6 ||
+        count + 1 === 9 ||
+        count + 1 === 13 
       ) {
         setShowCongrats(true);
       } else {
