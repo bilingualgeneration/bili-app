@@ -35,7 +35,7 @@ export const HeaderFooter: FC<
         <div className="page-wrapper" style={{ background }}>
           <IonGrid id="authedHeader">
             <IonRow class="ion-align-items-center">
-              <IonCol>
+              <IonCol size="5">
                 {showBackButton && (
                   <IonButton
                     fill="clear"
@@ -46,12 +46,12 @@ export const HeaderFooter: FC<
                   </IonButton>
                 )}
               </IonCol>
-              <IonCol className="ion-text-center">
+              <IonCol className="ion-text-center" size="2">
                 <Link to="/">
                   <img src={biliLogo} />
                 </Link>
               </IonCol>
-              <IonCol className="ion-text-right">
+              <IonCol className="ion-text-right" size="5">
                 <ProfileChip />
               </IonCol>
             </IonRow>
