@@ -1,5 +1,3 @@
-import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
-
 import { IonButton, IonLabel, IonItem, IonInput, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 
@@ -8,8 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import "./ClassCode.scss";
 import { Input } from "@/components/Input";
 
@@ -81,7 +78,6 @@ export const ClassCode: React.FC = () => {
                                             <FormattedMessage
                                                 id="signUpParent.classCode"
                                                 defaultMessage="What’s your class code?"
-
                                             />
                                         </h2>
                                         <p

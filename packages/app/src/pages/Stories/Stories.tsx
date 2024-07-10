@@ -105,10 +105,9 @@ export const StoryLoader = () => {
       let pageLocks: any = {};
       // push intro page
       pages.push(<TitleCard data={data} />);
-      console.log(data);
       // push filtered pages
       pages = pages.concat(
-	data.pages.map((data: any) => 
+	fp.map((data: any) => 
 	  <>
 	    <PageWrapper>
 	      <StoryPage page={data} />
@@ -581,7 +580,7 @@ const DnDGame: React.FC<{data: any}> = ({data}) => {
 }
 
 const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
-  const {pageLocks, setPageLocks, pageNumber} = useStory();
+  const {pageLocks, setPageLocks, pageNumber, pageForward} = useStory();
   const {piecesDropped, totalTargets} = useDnD();
   useEffect(() => {
     if(piecesDropped >= totalTargets
@@ -590,6 +589,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
 	...pageLocks,
 	[pageNumber]: false
       });
+      pageForward();
     }
   }, [piecesDropped, totalTargets]);
   return <>
