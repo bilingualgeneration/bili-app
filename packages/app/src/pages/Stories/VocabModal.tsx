@@ -42,6 +42,7 @@ export const VocabModal: React.FC = () => {
 
   return <>
     <IonModal
+      id='stories-vocab-modal'
       isOpen={currentVocabWord !== null}
       onWillDismiss={() => {
         setCurrentVocabWord(null);
