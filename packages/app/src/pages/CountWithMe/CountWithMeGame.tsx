@@ -8,7 +8,6 @@ import correct_card_audio from "@/assets/audio/correct.mp3";
 import { useHistory } from 'react-router-dom';
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { CountWithMeCongrats } from "./CountWithMeCongrats";
 import { useLanguageToggle } from '@/components/LanguageToggle';
 import { first } from 'rxjs/operators';
 
