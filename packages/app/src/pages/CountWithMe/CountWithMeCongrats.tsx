@@ -26,6 +26,7 @@ import congratsStar from "@/assets/icons/count_congrats_star.svg";
 import starsOverlay from "@/assets/icons/sf_stars_overlay.svg";
 
 import "./CountWithMe.scss";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const sounds: any = {
   en: {
@@ -44,47 +45,92 @@ const sounds: any = {
 
 export const CountWithMeCongrats: React.FC<{
   onKeepGoingClick?: any;
-  count?: number;
+  count: number;
 }> = ({ onKeepGoingClick, count }) => {
   // Function to render the congrats page
   const congrats = {
     star: congratsStar,
   };
 
-  const {profile: { isInclusive}} = useProfile();
+  const { profile: {isImmersive}, activeChildProfile } = useProfile();
   const {language} = useLanguageToggle();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended} = useAudioManager();
+  const audio_es = new Audio(
+    sounds.es[count === -1 ? "all" : count.toString()],
+  );
+  const audio_en = new Audio(
+    sounds.en[count === -1 ? "all" : count.toString()],
+  );
+  const functions = getFunctions();
 
   // can potentially uncomment once 'congrats after x animals' screen is built
 
   // const audio_es = new Audio(sounds.es[count.toString()]);
   // const audio_en = new Audio(sounds.en[count.toString()]);
 
-  const audio_es = new Audio(activity_completed_es);
-  const audio_en = new Audio(activity_completed_en);
+  // const audio_es = new Audio(activity_completed_es);
+  // const audio_en = new Audio(activity_completed_en);
 
-  useEffect(() => {
-    onended.pipe(first()).subscribe(() => {
-      setAudioPlayed(true);
-    });
+  // useEffect(() => {
+  //   onended.pipe(first()).subscribe(() => {
+  //     setAudioPlayed(true);
+  //   });
 
-    if (language === 'esen') {
-      if (isInclusive) {
-        addAudio([audio_es]);
-      } else {
-        addAudio([audio_en]);
-      }
-    } else {
-      addAudio([audio_en]);
-    }
-    return () => {
-      clearAudio();
-    };
-  }, []);
+  //   if (language === 'esen') {
+  //     if (isInclusive) {
+  //       addAudio([audio_es]);
+  //     } else {
+  //       addAudio([audio_en]);
+  //     }
+  //   } else {
+  //     addAudio([audio_en]);
+  //   }
+  //   return () => {
+  //     clearAudio();
+  //   };
+  // }, []);
 
   const history = useHistory();
+
+  useEffect(() => {
+    // increment number of completions
+    const completionFunction = httpsCallable(
+      functions,
+      "user-child-profile-completion-add",
+    );
+    const data: any = {
+      uid: activeChildProfile.id,
+      module: "count-with-me-game", //not sure if it's a correct module 
+      moduleAdd: 5,
+      completionsAdd: 1,
+    };
+    completionFunction(data);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      audio_es.pause();
+      audio_en.pause();
+    };
+  }, []);
+  useEffect(() => {
+    if (isImmersive) {
+      audio_es.onended = () => {
+        setAudioPlayed(true);
+      };
+    } else {
+      audio_es.onended = () => {
+        audio_en.onended = () => {
+          setAudioPlayed(true);
+        };
+        audio_en.play();
+      };
+    }
+    audio_es.play();
+  }, []);
+
 
   useEffect(() => {
     const timeout = setTimeout(() => {

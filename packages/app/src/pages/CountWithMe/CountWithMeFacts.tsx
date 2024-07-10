@@ -33,7 +33,17 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   
   useEffect(() => {
     if (audioPlayed) {
-      onKeepGoingClick();
+      if (
+        count + 1 === 3 ||
+        count + 1 === 6 ||
+        count + 1 === 9 ||
+        count + 1 === 13 
+      ) {
+        setShowCongrats(true);
+      } else {
+        onKeepGoingClick();
+      }
+      
     }
   }, [audioPlayed]);
 
@@ -63,10 +73,12 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
         }
     addAudio(audios);
   }, []);
+
   const history = useHistory();
 
   if (showCongrats) {
-    return <CountWithMeCongrats count={count} onKeepGoingClick={onKeepGoingClick} />;
+
+    return <CountWithMeCongrats count={count + 1} onKeepGoingClick={onKeepGoingClick} />;
   }
 
   // Function to render the facts page for each animal

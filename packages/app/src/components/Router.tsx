@@ -174,11 +174,11 @@ export const Router: React.FC = () => {
           {/* temp route for development */}
           <Route
             exact
-            path="/count-congrats"
-            render={() => (
+            path="/count-congrats/:count"
+            render={({match: {params}}) => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeCongrats />
+		              <CountWithMeCongrats count={parseInt(params.count)} />
                 </HeaderFooter>
               </AuthedLayout>
             )}
