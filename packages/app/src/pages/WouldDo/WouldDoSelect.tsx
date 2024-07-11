@@ -6,7 +6,7 @@ export const WouldDoSelect: React.FC = () => {
       title: 'Nivel 3',
       titleEn: 'Level 3',
       category: 'community',
-      cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/stories_friends_cover_e66b64561c.svg',
+      cover: '/assets/img/boot_image.png',
       isLocked: true
     },
     {
@@ -16,21 +16,15 @@ export const WouldDoSelect: React.FC = () => {
       cover: 'https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/thumbnail_drum_image_42dab560fb.png',
       isLocked: true
     },
-    {
-      title: 'Nivel 5',
-      titleEn: 'Level 5',
-      category: 'community',
-      cover: '/assets/img/boot_image.png',
-      isLocked: true
-    },
   ];
   return (
     <PackSelect
       module="would-do-game"
-	    category="community"
+      category="community"
       translatedTitle='¿Qué harías?'
       englishTitle="What would you do?"
-	    placeholderCards={placeholderCards}
+      placeholderCards={placeholderCards}
+      sortBy='handle'
     />
   );
 }
