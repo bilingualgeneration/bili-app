@@ -1,7 +1,8 @@
 import { IonText, IonIcon, IonPopover, IonList, IonItem, IonContent, IonButton, IonLabel } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
-import { starSharp } from "ionicons/icons";
+import { heart } from "ionicons/icons";
 import Avatar from "@/assets/icons/avatar.png";
+import StarNotSharp from "@/assets/icons/star_profile.svg"
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import StudentLogout from "@/assets/icons/logout.svg";
 import { Link } from "react-router-dom";
@@ -30,8 +31,12 @@ export const ProfileChip: React.FC = () => {
       <div>
         <button onClick={openPopover} className="custom-button-color" id="top-center">
           <div id="profileChip">
-            <div id="profilePoints" className="text-sm semibold color-nube">
-              <IonIcon icon={starSharp} />
+            <div id="starPoints" className="text-sm semibold color-nube">
+              <IonIcon icon={StarNotSharp} />
+              <IonText>{completionPoints || 0}</IonText>
+            </div>
+            <div id="heartPoints" className="text-sm semibold color-nube">
+              <IonIcon icon={heart} />
               <IonText>{completionPoints || 0}</IonText>
             </div>
             <IonText>

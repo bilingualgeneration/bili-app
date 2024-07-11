@@ -42,23 +42,24 @@ export const VocabModal: React.FC = () => {
 
   return <>
     <IonModal
+      id='stories-vocab-modal'
       isOpen={currentVocabWord !== null}
       onWillDismiss={() => {
-	setCurrentVocabWord(null);
+        setCurrentVocabWord(null);
       }}>
-      <IonContent id='vocab-modal-id' className='vocab-modal-content'>
+      <div id='vocab-modal-id' className='vocab-modal-content'>
         <div className='ion-padding modal-container'>
-          <IonButton 
+          <IonButton
             onClick={() => setCurrentVocabWord(null)}
             size='small'
             fill='clear'
             className="close-button-icon"
-            >
-            <img src={CloseButton} />           
+          >
+            <img src={CloseButton} />
           </IonButton>
           <IonList>
-            <IonRow>
-              <IonCol>
+            <IonRow style={{gap: '14px'}}>
+              <IonCol size='8'>
                 <IonRow class="ion-align-items-start">
                   <IonCol>
                     <div className='word-row'>
@@ -72,11 +73,11 @@ export const VocabModal: React.FC = () => {
                           }
                         }} />
                       </div>
-                      
+
                       <IonText>
                         <h1 className="text-4xl semibold">
                           {language !== 'en' && (isInclusive ?
-						 <SyllableBreakdown word={esInc?.syllable_breakdown} /> : <SyllableBreakdown word={es?.syllable_breakdown} />)}
+                            <SyllableBreakdown word={esInc?.syllable_breakdown} /> : <SyllableBreakdown word={es?.syllable_breakdown} />)}
                           {language === 'en' && <SyllableBreakdown word={en?.syllable_breakdown} />}
                         </h1>
                         {language === 'esen' &&
@@ -101,7 +102,7 @@ export const VocabModal: React.FC = () => {
                           }
                         }} />
                       </div>
-                     
+
                       <IonText>
                         <h1 className="text-2xl semibold">
                           {language !== 'en' && (isInclusive ? esInc?.definition : es?.definition)}
@@ -129,25 +130,25 @@ export const VocabModal: React.FC = () => {
 
           </IonList>
         </div>
-      </IonContent>
+      </div>
     </IonModal>
   </>;
 }
 
-const SyllableBreakdown: React.FC<{word: string}> = ({word = ''}) => {
+const SyllableBreakdown: React.FC<{ word: string }> = ({ word = '' }) => {
   const segments = word
     .split(' ')
     .map((w: string) => w.split('-').map((s: string, index: number) => (
       <span className='vocab-syllable-breakdown segment' key={index}>
-	{s}
-	<span className='vocab-syllable-breakdown underline'></span>
+        {s}
+        <span className='vocab-syllable-breakdown underline'></span>
       </span>
-      ))
+    ))
     );
   return <>
     {segments.map((w: any, index: number) => (
       <span className='vocab-syllable-breakdown word' key={index}>
-	{w}
+        {w}
       </span>
     ))}
   </>;
