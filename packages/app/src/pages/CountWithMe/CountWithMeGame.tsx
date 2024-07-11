@@ -293,8 +293,9 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   return (
     <>
       {/* Main container with background image */}
+      <div className='padding-top-4'></div>
       <div
-        className="background-card margin-top-4"
+        className="background-card"
         style={{
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",

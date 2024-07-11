@@ -311,7 +311,7 @@ const TitleCard = ({ data }: any) => {
   const {language} = useLanguageToggle();
   const { pageForward } = useStory();
   return (
-    <div className="content-wrapper margin-top-1">
+    <div className="content-wrapper padding-top-1">
       <IonCard
         className="sf-card drop-shadow"
         style={{

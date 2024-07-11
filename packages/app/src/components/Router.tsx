@@ -41,7 +41,6 @@ import {Debug} from '@/pages/Debug';
 import {
   IntruderSelect,
   IntruderIntro,
-  IntruderGame,
   IntruderGameLoader
 } from '@/pages/Intruder';
 import Login from '@/pages/Login';
@@ -191,9 +190,9 @@ export const Router: React.FC = () => {
             path="/count-with-me-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
+                <MinimalHeader>
                   <CountWithMeGameLoader />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -439,9 +438,9 @@ export const Router: React.FC = () => {
             path="/would-do-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <WouldDoGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -451,9 +450,9 @@ export const Router: React.FC = () => {
             path="/tell-me-about-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#FBF2E2">
+                <MinimalHeader>
                   <TellMeAboutGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -487,9 +486,9 @@ export const Router: React.FC = () => {
             path="/affirmations/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <AffirmationsGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -522,9 +521,9 @@ export const Router: React.FC = () => {
             path="/intruder-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <IntruderGameLoader />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
