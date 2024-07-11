@@ -1,7 +1,7 @@
 // todo: refactor so we don't have to pull more than once
 
 import {DnD} from '@/components/DnD';
-import { useAudioManager } from '@/contexts/AudioManagerContext';
+import {useAudioManager} from '@/contexts/AudioManagerContext';
 import {useState} from 'react';
 import {useLanguageToggle} from '@/components/LanguageToggle';
 import {
@@ -13,6 +13,7 @@ import {
 } from '@/hooks/FirestoreDoc';
 import {
   useEffect,
+  useRef,
 } from 'react';
 import {first} from 'rxjs/operators';
 
@@ -23,6 +24,7 @@ export const StoryFactoryLevel1: React.FC = () => {
 };
 
 const WrappedSF1: React.FC = () => {
+  const dndWrapperRef = useRef<HTMLDivElement | null>(null);
   const {data: {['dnd-game']: games}} = useFirestoreDoc();
   const {language, setIsVisible} = useLanguageToggle();
   useEffect(() => {
@@ -58,12 +60,18 @@ const WrappedSF1: React.FC = () => {
       });
     }
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
+  const {offsetWidth: dndWidth} = dndWrapperRef.current || {offsetHeight: 0, offsetWidth: 0};
   return <>
-    <DnD
-      audioOnComplete={filteredGames[pageNumber].audio_on_complete.url}
-      targetImage={filteredGames[pageNumber].targetImage}
-      target={filteredGames[pageNumber].target}
-      pieces={filteredGames[pageNumber].pieces}
-    />
+    <div ref={dndWrapperRef} style={{height: '100%'}}>
+      {dndWidth > 0 && 
+       <DnD
+	 audioOnComplete={filteredGames[pageNumber].audio_on_complete.url}
+	 width={dndWidth}
+	 targetImage={filteredGames[pageNumber].targetImage}
+	 target={filteredGames[pageNumber].target}
+	 pieces={filteredGames[pageNumber].pieces}
+      />
+      }
+    </div>
   </>;
 };

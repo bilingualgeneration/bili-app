@@ -1,6 +1,31 @@
 .dnd-play-area {
     width: 100%;
     text-align: center;
+    
+    img{
+	display: none;
+    }
+
+    * {
+	font-size: 100px;
+	font-weight: bold;
+    }
+    
+    .letter {
+	&.dnd-incorrect {
+	    text-shadow:
+		0px 2px 5px red,
+		2px 0px 5px red,
+		0px -2px 5px red,
+		-2px 0px 5px red;
+	}
+    }
+
+    .dnd-image{
+	height: 40vh !important;
+	max-height: 320px !important;
+	width: auto;
+    }
 }
 
 .dnd-drop-targets-container {
@@ -12,7 +37,7 @@
     }
 
     &:not(.hasImage){
-	margin-top: 8rem;
+	margin-top: calc((450px - 117px) / 2);
     }
     
     .dnd-image {
@@ -20,38 +45,22 @@
 	display: block;
 	pointer-events: none;
 	user-select: none;
-	height: 260px;
 	width: auto;
     }
     
-    .drop-target {
+    .drop-target {	
 	&:not(:last-child){
 	    margin-right: 0.75rem;
 	}
 
 	display: inline-block;
 
-	img{
-	    pointer-events: none;
-	    user-select: none;
-	}
-	    
 	&.leftMargin {
 	    margin-left: 100px;
 	}
 	
 	&:not(.dropped){
-	    &.is-blank {
-		border-bottom: 6px solid #C8BA8F;
-		margin-bottom: -6px;
-		img{
-		    opacity: 0;
-		}
-	    }
-	    img{
-		filter: sepia(100%) hue-rotate(10deg);
-		/*-webkit-filter: grayscale(100%);*/
-	    }
+	    color: black !important;
 	}
     }
 }

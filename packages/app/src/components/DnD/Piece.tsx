@@ -1,9 +1,9 @@
 import audio_correct from "@/assets/audio/correct.mp3";
 import {
-  DragPreviewImage,
   DragSourceMonitor,
   useDrag,
 } from 'react-dnd';
+import {hashLetter} from './DnD';
 import {
   useEffect,
   useState
@@ -24,6 +24,22 @@ export interface PieceProps {
   top: number;
 }
 
+/*
+const PiecePreview: React.FC = () => {
+  const preview = usePreview();
+  if(!preview.display){
+    return null;
+  }
+  const {itemType, item, style} = preview;
+  // @ts-ignore
+  const url = item.image.url;
+  return <span className='letter' style={style}>
+    {item.text}
+    <img src={url} />
+  </span>;
+};
+*/
+
 export const Piece: React.FC<PieceProps> = ({
   audio_on_drop,
   audio_on_drag,
@@ -42,10 +58,12 @@ export const Piece: React.FC<PieceProps> = ({
   const [audio_drop, set_audio_drop] = useState<HTMLAudioElement | null>(null);
   useEffect(() => {
     // todo: better way to play audio?
-    const a = new Audio(audio_on_drag.url);
-    // speed up across the board
-    a.playbackRate = 1.25;
-    set_audio_drag(a);
+    if(audio_on_drag){
+      const a = new Audio(audio_on_drag.url);
+      // speed up across the board
+      a.playbackRate = 1.25;
+      set_audio_drag(a);
+    }
   }, [audio_on_drag, set_audio_drag]);
 
   useEffect(() => {
@@ -53,7 +71,7 @@ export const Piece: React.FC<PieceProps> = ({
       set_audio_drop(new Audio(audio_on_drop.url));
     }
   }, [audio_on_drop]);
-  const [{isDragging}, drag, preview] = useDrag(() => ({
+  const [{isDragging}, drag] = useDrag(() => ({
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -94,14 +112,14 @@ export const Piece: React.FC<PieceProps> = ({
     return <span ref={drag}></span>;
   }
   return <>
-    <DragPreviewImage connect={preview} src={image.url} />
-    <span ref={drag} style={{
+    <span className='letter' ref={drag} style={{
+      color: hashLetter(text),
       left,
       position: 'absolute',
       top,
       rotate: `${rotation}deg`
     }}>
-      <img src={image.url} />
+      {text}
     </span>
   </>;
 }
