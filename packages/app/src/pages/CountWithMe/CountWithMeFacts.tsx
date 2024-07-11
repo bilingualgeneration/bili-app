@@ -84,8 +84,9 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   // Function to render the facts page for each animal
   return (
     <>
+      <div className='padding-top-4'></div>
       <div
-        className="background-card margin-top-3"
+        className="background-card"
         style={{
           backgroundImage: `url(${factBackground})`,
 	        backgroundSize: 'auto 100%',
