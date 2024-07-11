@@ -118,6 +118,5 @@
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.32.2"
   },
-  "description": "An Ionic project",
-  "stableVersion": "0.0.1"
+    "description": "An Ionic project"
 }
