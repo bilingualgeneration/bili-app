@@ -355,9 +355,9 @@ export const Router: React.FC = () => {
             path="/story/play/:uuid"
             render={(props) => (
               <AuthedLayout>
-		<HeaderFooter background="#FFFFFF">
+		<MinimalHeader>
                   <Stories />
-		</HeaderFooter>
+		</MinimalHeader>
               </AuthedLayout>
             )}
           />

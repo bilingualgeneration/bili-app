@@ -52,6 +52,7 @@ import "@/theme/variables.css";
 import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
 import "@/theme/margin-classes.scss";
+import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
 

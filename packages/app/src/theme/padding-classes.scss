@@ -1,0 +1,25 @@
+@for $padding from 1 through 5 {
+  .padding-top-#{$padding} {
+    padding-top: #{$padding}rem !important;
+  }
+  .padding-top-#{$padding}-5 {
+    padding-top: calc(#{$padding}rem + 0.5rem) !important;
+  }
+
+  .padding-bottom-#{$padding} {
+    padding-bottom: #{$padding}rem !important;
+  }
+  .padding-bottom-#{$padding}-5 {
+    padding-bottom: calc(#{$padding}rem + 0.5rem) !important;
+  }
+
+  .padding-vertical-#{$padding} {
+    padding-top: #{$padding}rem !important;
+    padding-bottom: #{$padding}rem !important;
+  }
+
+  .padding-vertical-#{$padding}-5 {
+    padding-top: calc(#{$padding}rem + 0.5rem) !important;
+    padding-bottom: calc(#{$padding}rem + 0.5rem) !important;
+  }
+}

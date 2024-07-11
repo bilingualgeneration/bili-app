@@ -1,5 +1,8 @@
 import classnames from 'classnames';
-import {DnD} from '@/components/DnD';
+import {
+  DnD,
+  MAX_HEIGHT
+} from '@/components/DnD';
 
 import {
   DnDProvider,
@@ -120,6 +123,7 @@ export const StoryLoader = () => {
       for(let index = 0; index < data['dnd-game'].length; index++){
 	pageLocks[pages.length + index] = true;
       }
+
       pages = pages.concat(
 	data['dnd-game'].filter((d: any) => {
 	  if(isInclusive && language === 'es'){
@@ -218,7 +222,8 @@ export const StoryLoader = () => {
 
       setPageLocks(pageLocks);
       setPages(pages);
-      setPageNumber(0);
+      //      setPageNumber(0);
+      setPageNumber(8);
       setReady(true);
     }
   }, [data]);
@@ -416,7 +421,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     pageLocks
   } = useStory();
   const totalPages = pages.length;
-  return <div className="content-wrapper margin-top-1">
+  return <div className="content-wrapper padding-top-1">
     <IonGrid>
       <IonRow>
 	<IonCol></IonCol>
@@ -600,7 +605,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
   }, [piecesDropped, totalTargets]);
   return <>
     <IonCol size="auto">
-      <div>
+      <div style={{height: MAX_HEIGHT}}>
 	<IonText>
 	<h1 className="text-4xl ion-text-center color-suelo">
 	  {data.instructions}

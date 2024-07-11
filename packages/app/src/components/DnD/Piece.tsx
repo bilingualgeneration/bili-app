@@ -3,14 +3,13 @@ import {
   DragSourceMonitor,
   useDrag,
 } from 'react-dnd';
-import {isPlatform} from '@ionic/react';
+import {hashLetter} from './DnD';
 import {
   useEffect,
   useState
 } from 'react';
 import {useAudioManager} from '@/contexts/AudioManagerContext';
 import {useDnD} from '@/hooks/DnD';
-import {usePreview} from 'react-dnd-preview';
 
 export interface PieceProps {
   audio_on_drop: any;
@@ -25,6 +24,7 @@ export interface PieceProps {
   top: number;
 }
 
+/*
 const PiecePreview: React.FC = () => {
   const preview = usePreview();
   if(!preview.display){
@@ -34,9 +34,11 @@ const PiecePreview: React.FC = () => {
   // @ts-ignore
   const url = item.image.url;
   return <span className='letter' style={style}>
+    {item.text}
     <img src={url} />
   </span>;
 };
+*/
 
 export const Piece: React.FC<PieceProps> = ({
   audio_on_drop,
@@ -110,14 +112,14 @@ export const Piece: React.FC<PieceProps> = ({
     return <span ref={drag}></span>;
   }
   return <>
-    {!isPlatform('desktop') && <PiecePreview />}
     <span className='letter' ref={drag} style={{
+      color: hashLetter(text),
       left,
       position: 'absolute',
       top,
       rotate: `${rotation}deg`
     }}>
-      <img src={image.url} />
+      {text}
     </span>
   </>;
 }

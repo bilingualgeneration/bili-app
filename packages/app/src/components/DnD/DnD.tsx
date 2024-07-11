@@ -1,13 +1,16 @@
 const LETTER_MAX_ROTATION = 15;
 const PIECE_HORIZONTAL_SPACER = 40;
 const PIECE_VERTICAL_SPACER = 10;
-const MAX_HEIGHT = 450;
+export const MAX_HEIGHT = 450;
 const MAX_WIDTH = 940;
 const PIECE_TOP_OFFSET = 20;
-const PIECE_LEFT_OFFSET = 100;
+const PIECE_LEFT_OFFSET = 80;
+const PIECE_HEIGHT = 90;
+const PIECE_WIDTH = 10;
 
 import classnames from 'classnames';
 import {DnDImage} from './DnDImage';
+import {isPlatform} from '@ionic/react';
 import {
   useDrop,
 } from 'react-dnd';
@@ -18,7 +21,6 @@ import {
   DropTargetProps,
 } from './DropTarget';
 import {HTML5toTouch} from 'rdndmb-html5-to-touch';
-import {isPlatform} from '@ionic/react';
 import {usePreview} from 'react-dnd-preview';
 
 import {
@@ -34,6 +36,21 @@ import {
 import update from 'immutability-helper';
 
 import './DnD.css';
+
+const colors = [
+  '#ff5708',
+  '#22beb9',
+  '#8b1a00',
+  '#5D0947'
+];
+
+export const hashLetter = (text: string) => {
+  let hash = 0;
+  for(let index = 0; index < text.length; index++){
+    hash += text.charCodeAt(index);
+  }
+  return colors[hash % colors.length];
+}
 
 const shuffle = (array: any[]) => {
   let currentIndex = array.length;
@@ -60,6 +77,10 @@ const PiecePreview: React.FC = () => {
   // @ts-ignore
   const url = item.image.url;
   return <span className='letter' style={style}>
+    {
+      // @ts-ignore
+      item.text
+    }
     <img src={url} />
   </span>;
 };
@@ -112,8 +133,8 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
 	       if(!t.endsWith('*')){
 		 tempTotalTargets++;
 	       }
-	       targetTotalWidth += p.image.width;
-	       targetTotalHeight = Math.max(targetTotalHeight, p.image.height);
+	       targetTotalWidth += PIECE_WIDTH;
+	       targetTotalHeight = Math.max(targetTotalHeight, PIECE_HEIGHT);
 	       return [
 		 id,
 		 {
@@ -144,13 +165,18 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
 	    dropped: false,
 	    id,
 	    left: leftPosition,
-	    top: topPosition,
+	    top: targetImage ? topPosition : 0,
 	    rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
 	  };
-	  topPosition += p.image.height + PIECE_VERTICAL_SPACER;
-	  if(index === Math.floor(totalPieces / 2) - 1){
-	    leftPosition = Math.floor(width / 2 + targetTotalWidth / 2 + PIECE_LEFT_OFFSET);
-	    topPosition = PIECE_TOP_OFFSET;
+	  topPosition += PIECE_HEIGHT + PIECE_VERTICAL_SPACER;
+
+	  if(targetImage){
+	    if(index === Math.floor(totalPieces / 2) - 1){
+	      leftPosition = Math.floor(width / 2 + targetTotalWidth / 2);
+	      topPosition = PIECE_TOP_OFFSET;
+	    }
+	  }else{
+	    leftPosition += PIECE_WIDTH + PIECE_LEFT_OFFSET;
 	  }
 	  return [
 	    id,
@@ -221,7 +247,10 @@ const Container: React.FC<ContainerProps> = ({
 	height: '100%',
 	position: 'relative'
       }}>
-	{!isPlatform('desktop') && <PiecePreview />}
+	{
+	  (isPlatform('ios') || isPlatform('android'))
+	  && <PiecePreview />
+	}
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
 	<div className={classnames('dnd-drop-targets-container', {hasImage: targetImage})}>
 	  {targetImage &&
