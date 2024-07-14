@@ -2,6 +2,7 @@ import { IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, Ion
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { RadioCard } from "@/components/RadioCard";
+import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
 import "./ClassOverview.scss";
 
 export const ClassOverview: React.FC = () => {
@@ -183,7 +184,7 @@ export const ClassOverview: React.FC = () => {
                             </IonRow>
                             <IonRow>
 
-                                <IonCol className="class-game-names-persentage">
+                                <IonCol size = "6" className="class-game-names-persentage">
                                     <IonRow>
                                         {/*game names with percentage */}
                                         <IonCol className="progress-data class-game-name-percentage">
@@ -266,8 +267,13 @@ export const ClassOverview: React.FC = () => {
                                 </IonCol>
 
                                 {/* graph columnn */}
-                                <IonCol className="class-graph-persentage">
-
+                                <IonCol size = "6" className="class-graph-persentage">
+                                    <PieChartComponent 
+                                    data={[24,32,28,16]} 
+                                    colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
+                                    innRadius={5} 
+                                    width={400} 
+                                    height={400}/>
                                 </IonCol >
 
 
