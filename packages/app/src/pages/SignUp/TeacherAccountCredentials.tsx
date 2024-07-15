@@ -18,7 +18,7 @@ export const TeacherAccountCredentials: React.FC = () => {
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
-    school: z.string().min(1),
+    //school: z.string().min(1),
     password: z.string().min(8),
     //tos: z.literal<boolean>(true),
     //marketingUpdates: z.boolean()
@@ -32,7 +32,6 @@ export const TeacherAccountCredentials: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-
   const onSubmit = handleSubmit((response) => {
     setData({
       ...data,
