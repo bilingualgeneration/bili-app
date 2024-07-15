@@ -44,7 +44,7 @@ export const database = getDatabase(app);
 export const firestore = getFirestore(app);
 export const functions = getFunctions(app);
 
-if(import.meta.env.VITE_ENVIRONMENT === 'emulator'){
+if(import.meta.env.VITE_FIREBASE_ENVIRONMENT === 'emulator'){
   connectAuthEmulator(auth, 'http://localhost:9099');
   connectDatabaseEmulator(database, 'localhost', 9000)
   connectFirestoreEmulator(firestore, 'localhost', 8080);
