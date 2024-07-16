@@ -1,4 +1,4 @@
-import { IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText } from "@ionic/react"
+import { IonButton, IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText } from "@ionic/react"
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { RadioCard } from "@/components/RadioCard";
@@ -297,7 +297,7 @@ export const ClassOverview: React.FC = () => {
                                     colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
                                     innRadius={3} 
                                     width={220} 
-                                    height={220}
+                                    height={225}
                                     cX={110}
                                     cY={100}
                                     />
@@ -308,6 +308,17 @@ export const ClassOverview: React.FC = () => {
 
                             </IonCard>
                             {/* blog part */}
+                                    <IonCard>
+                                       <div className="class-overview-blog-styles">
+                                            <IonIcon>
+
+                                            </IonIcon>
+                                            <p></p>
+                                            <IonButton>
+                                                
+                                            </IonButton>
+                                        </div> 
+                                    </IonCard>
                             <IonRow>
 
                             </IonRow>
