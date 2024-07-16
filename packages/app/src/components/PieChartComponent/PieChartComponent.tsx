@@ -41,7 +41,7 @@ const renderCustomizedLabel = ({
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
-      style={{ fontSize: '14px', fontWeight: 'bold', fontFamily: 'Output' }}
+      style={{ fontSize: '14px', fontWeight: 'bold', fontFamily: 'Outfit' }}
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
@@ -65,8 +65,8 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innR
         outerRadius={100}
         fill="#8884d8"
         dataKey="value"
-        paddingAngle={5}
-        cornerRadius={10}
+        paddingAngle={0}
+        cornerRadius={6}
       >
         {formattedData.map((entry, index) => (
           <Cell

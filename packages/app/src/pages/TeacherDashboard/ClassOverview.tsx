@@ -3,6 +3,10 @@ import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
+import CommunityIcon from "@/assets/icons/community.svg";
+import StoriesIcon from "@/assets/icons/stories.svg";
+import WellnessIcon from "@/assets/icons/wellness.svg";
+import PlayIcon from "@/assets/icons/play.svg";
 import "./ClassOverview.scss";
 
 export const ClassOverview: React.FC = () => {
@@ -153,7 +157,7 @@ export const ClassOverview: React.FC = () => {
                                             Learning time summary
                                         </h1>
                                         <IonGrid>
-                                            <IonRow>
+                                            <IonRow className="ion-align-items-center">
                                                 <IonCol className="custom-col-class-overview">
                                                     <div className="button-wrapper-class-grid">
                                                         <button>
@@ -187,77 +191,96 @@ export const ClassOverview: React.FC = () => {
                                 <IonCol size = "6" className="class-game-names-persentage">
                                     <IonRow>
                                         {/*game names with percentage */}
-                                        <IonCol className="progress-data class-game-name-percentage">
+                                        <IonCol className="class-game-name-percentage">
                                             {/* first group */}
                                             <IonRow className="no-padding">
-                                                <IonCol size="1">
-                                                    <span className="small-oval-element color-1"></span>
+                                                <IonCol size="3">
+                                                    <span className="small-oval-element color-1">
+                                                        <IonIcon icon={StoriesIcon}>
+
+                                                        </IonIcon>
+                                                    </span>
                                                 </IonCol>
-                                                <IonCol size="7">
-                                                    <p className="grid-text-style-small">Communidad</p>
+                                                <IonCol size="6">
+                                                    <p className="text-lg semibold">Cuentos</p>
+                                                    
                                                     <p>
-                                                        <FormattedMessage
-                                                            id="settings.progress.community"
-                                                            defaultMessage="Community"
-                                                            description="'Community' label for the learning breakdown chart"
-                                                        />
+                                                        Stories
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="4">24%</IonCol>
+                                                <IonCol size="3">
+                                                    <p>
+                                                    24%
+                                                    </p>
+                                                </IonCol>
                                             </IonRow>
                                             {/* second group */}
 
                                             <IonRow>
-                                                <IonCol size="1">
-                                                    <span className="small-oval-element color-2"></span>
+                                                <IonCol size="3">
+                                                    <span className="small-oval-element color-2">
+                                                    <IonIcon icon={WellnessIcon}>
+
+                                                    </IonIcon>
+                                                    </span>
                                                 </IonCol>
-                                                <IonCol size="7">
-                                                    <p className="grid-text-style-small">Cuentos</p>
+                                                <IonCol size="6">
+                                                    <p className="text-lg semibold">Bienestar</p>
                                                     <p>
-                                                        <FormattedMessage
-                                                            id="settings.progress.stories"
-                                                            defaultMessage="Stories"
-                                                            description="'Stories' label for the learning breakdown chart"
-                                                        />
+                                                        Wellness
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="4">26%</IonCol>
+                                                <IonCol size="3">
+                                                    <p>
+                                                    16%
+                                                    </p>
+                                                </IonCol>
                                             </IonRow>
                                             {/* third group */}
 
                                             <IonRow>
-                                                <IonCol size="1">
-                                                    <span className="small-oval-element color-3"></span>
+                                                <IonCol size="3">
+                                                    <span className="small-oval-element color-3">
+                                                        <IonIcon icon={PlayIcon}>
+
+                                                        </IonIcon>
+                                                    </span>
                                                 </IonCol>
-                                                <IonCol size="7">
-                                                    <p className="grid-text-style-small">Bienestar</p>
+                                                <IonCol size="6">
+                                                    <p className="text-lg semibold">Juego</p>
+                                                    
                                                     <p>
-                                                        <FormattedMessage
-                                                            id="settings.progress.wellness"
-                                                            defaultMessage="Wellness"
-                                                            description="'Wellness' label for the learning breakdown chart"
-                                                        />
+                                                        Play
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="4">39%</IonCol>
+                                                <IonCol size="3">
+                                                    <p>
+                                                    28%
+                                                    </p>
+                                                </IonCol>
                                             </IonRow>
                                             {/* fourth group */}
 
                                             <IonRow>
-                                                <IonCol size="1">
-                                                    <span className="small-oval-element color-4"></span>
+                                                <IonCol size="3">
+                                                    <span className="small-oval-element color-4">
+                                                        <IonIcon icon={CommunityIcon}>
+
+                                                        </IonIcon>
+                                                    </span>
                                                 </IonCol>
-                                                <IonCol size="7">
-                                                    <p className="grid-text-style-small">Juego</p>
+                                                <IonCol size="6">
+                                                    <p className="text-lg semibold">Communidad</p>
+                                                    
                                                     <p>
-                                                        <FormattedMessage
-                                                            id="settings.progress.play"
-                                                            defaultMessage="Play"
-                                                            description="'Play' label for the learning breakdown chart"
-                                                        />
+                                                        Community
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="4">11%</IonCol>
+                                                <IonCol size="3">
+                                                    <p>
+                                                    32%
+                                                    </p>
+                                                </IonCol>
                                             </IonRow>
                                         </IonCol>
 
@@ -271,7 +294,7 @@ export const ClassOverview: React.FC = () => {
                                     <PieChartComponent 
                                     data={[24,32,28,16]} 
                                     colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
-                                    innRadius={5} 
+                                    innRadius={3} 
                                     width={400} 
                                     height={400}/>
                                 </IonCol >
