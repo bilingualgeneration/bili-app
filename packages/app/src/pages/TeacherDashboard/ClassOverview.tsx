@@ -149,6 +149,7 @@ export const ClassOverview: React.FC = () => {
                     <IonRow>
                         {/* left card with graph*/}
                         <IonCol>
+                            <IonCard>
                             {/* Learning time summary row */}
                             <IonRow>
                                 <IonCol>
@@ -295,12 +296,17 @@ export const ClassOverview: React.FC = () => {
                                     data={[24,32,28,16]} 
                                     colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
                                     innRadius={3} 
-                                    width={400} 
-                                    height={400}/>
+                                    width={220} 
+                                    height={220}
+                                    cX={110}
+                                    cY={100}
+                                    />
                                 </IonCol >
 
 
                             </IonRow>
+
+                            </IonCard>
                             {/* blog part */}
                             <IonRow>
 

@@ -8,6 +8,8 @@ interface PieChartComponentProps {
     innRadius: number;
     width: number;
     height: number;
+    cX: number;
+    cY: number;
   }
 
 export type CustomizedLabelProps = {
@@ -48,17 +50,18 @@ const renderCustomizedLabel = ({
   );
 };
 
-const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innRadius, width, height }) =>  {
+const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innRadius, width, height, cX, cY }) =>  {
     const formattedData = data.map((value, index) => ({
         name: `Group ${index + 1}`,
         value: value
       }));
     return (
+    
     <PieChart width={width} height={height}>
       <Pie
         data={formattedData}
-        cx={200}
-        cy={200}
+        cx={cX}
+        cy={cY}
         labelLine={false}
         label={renderCustomizedLabel}
         innerRadius={innRadius}
