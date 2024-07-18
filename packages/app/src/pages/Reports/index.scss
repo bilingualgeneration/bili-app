@@ -1,0 +1,114 @@
+#reportsTable {
+  padding: 1rem 2rem;
+
+  table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+  }
+
+  // th {
+  //   padding: 8px 16px;
+  //   border-bottom: 4px solid transparent;
+  //   background-clip: padding-box;
+
+  //   background-color: red;
+
+  //   font-size: 16px;
+  // }
+
+  // tbody td {
+  //   background-color: rgba(247, 250, 249, 1);
+  //   padding: 8px 16px;
+  //   border-bottom: 4px solid transparent;
+  //   background-clip: padding-box;
+
+  //   font-size: 16px;
+  // }
+
+  // .subRow {
+  //   background-color: white;
+  //   font-size: 12px;
+  // }
+
+  // .firstCell {
+  //   border-top-left-radius: 8px;
+  //   border-bottom-left-radius: 8px;
+  // }
+
+  // .lastCell {
+  //   border-top-right-radius: 8px;
+  //   border-bottom-right-radius: 8px;
+  // }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Creates a gap between rows */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  th,
+  td {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    position: relative;
+  }
+
+  th {
+    // background-color: red;
+  }
+
+  .overallSummaryCell {
+    background-color: rgba(236, 238, 237, 1);
+  }
+
+  tbody td {
+    background-color: rgba(247, 250, 249, 1);
+  }
+
+  .subRow {
+    background-color: white;
+    font-size: 12px;
+  }
+
+  .firstCell {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-left: 1px solid transparent;
+
+    width: 200px;
+  }
+
+  .lastCell {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-right: 1px solid transparent;
+  }
+
+  .rightBorderCell {
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  #footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 24px 8px 36px;
+
+    background-color: rgba(0, 106, 103, 0.12);
+
+    border-radius: 5px;
+
+    #paginationButtonsContainer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
