@@ -22,7 +22,7 @@ import { getReportData } from "@/pages/Reports/getData";
 const activityColumn = {
   header: "Overall Summary",
   accessorKey: "activity",
-  cell: ({ row, getValue }) => (
+  cell: ({ row, getValue }: {row: any, getValue: any}) => (
     <div>
       {row.getCanExpand() && (
         <button
@@ -60,7 +60,7 @@ const sampleColumns = [
   {
     header: "Overall Summary",
     accessorKey: "activity",
-    cell: ({ row, getValue }) => (
+    cell: ({ row, getValue }: {row: any, getValue: any}) => (
       <div>
         {row.getCanExpand() && (
           <button
