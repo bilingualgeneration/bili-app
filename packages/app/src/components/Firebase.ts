@@ -1,23 +1,14 @@
-import {Capacitor} from '@capacitor/core';
-import {initializeApp} from 'firebase/app';
-import {
-  connectDatabaseEmulator,
-  getDatabase
-} from 'firebase/database';
-import {
-  connectFirestoreEmulator,
-  getFirestore,
-} from 'firebase/firestore';
-import {
-  connectFunctionsEmulator,
-  getFunctions
-} from 'firebase/functions';
+import { Capacitor } from "@capacitor/core";
+import { initializeApp } from "firebase/app";
+import { connectDatabaseEmulator, getDatabase } from "firebase/database";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
+import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import {
   connectAuthEmulator,
   getAuth,
   indexedDBLocalPersistence,
   initializeAuth,
-} from 'firebase/auth';
+} from "firebase/auth";
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -30,14 +21,14 @@ const app = initializeApp({
 });
 
 export const getFirebaseAuth: any = () => {
-  if(Capacitor.isNativePlatform()){
+  if (Capacitor.isNativePlatform()) {
     return initializeAuth(app, {
       persistence: indexedDBLocalPersistence,
     });
-  }else{
+  } else {
     return getAuth();
   }
-}
+};
 
 export const auth = getFirebaseAuth(app);
 export const database = getDatabase(app);
