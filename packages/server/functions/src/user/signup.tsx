@@ -38,6 +38,7 @@ export const signup = onCall(async (request) => {
     completionPoints: 0,
     parentId: uid,
   };
+
   await Promise.all([
     admin.firestore().collection("users").doc(uid).set(userProfile),
     admin.firestore().collection("users").add(childProfile),

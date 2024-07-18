@@ -1,4 +1,8 @@
 import {
+  getFunctions,
+  httpsCallable
+} from 'firebase/functions';
+import {
   IonButton,
   IonCard,
   IonCardContent,
@@ -10,6 +14,9 @@ import { Preferences } from "@capacitor/preferences";
 import { auth } from "@/components/Firebase";
 
 export const Debug: React.FC = () => {
+  const functions = getFunctions();
+  const createClassroomFunction = httpsCallable(functions, 'classroom-create');
+  const createSchoolFunction = httpsCallable(functions, 'school-create');
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -51,6 +58,28 @@ export const Debug: React.FC = () => {
             </IonButton>
           </IonItem>
         </IonList>
+        <IonButton
+          size="small"
+          slot="end"
+          onClick={() => {
+	    createSchoolFunction({
+	      name: 'hello world'
+	    });
+          }}
+        >
+	  create school
+        </IonButton>
+        <IonButton
+          size="small"
+          slot="end"
+          onClick={() => {
+	    createClassroomFunction({
+	      name: 'hello world'
+	    });
+          }}
+        >
+	  create classroom
+        </IonButton>
       </IonCardContent>
     </IonCard>
   );
