@@ -61,6 +61,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
   const totalPages = pages.length;
   const pageForward = () => {
+    // todo: better logic handling for pageLocks
     if(totalPages > 0 && !pageLocks[pageNumber]){
       setPageNumber((p) => (p < totalPages - 1 ? p + 1 : totalPages - 1));
     }

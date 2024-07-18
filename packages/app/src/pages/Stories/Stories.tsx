@@ -1,5 +1,8 @@
 import classnames from 'classnames';
-import {DnD} from '@/components/DnD';
+import {
+  DnD,
+  MAX_HEIGHT
+} from '@/components/DnD';
 
 import {
   DnDProvider,
@@ -105,10 +108,9 @@ export const StoryLoader = () => {
       let pageLocks: any = {};
       // push intro page
       pages.push(<TitleCard data={data} />);
-      console.log(data);
       // push filtered pages
       pages = pages.concat(
-	data.pages.map((data: any) => 
+	fp.map((data: any) => 
 	  <>
 	    <PageWrapper>
 	      <StoryPage page={data} />
@@ -121,8 +123,15 @@ export const StoryLoader = () => {
       for(let index = 0; index < data['dnd-game'].length; index++){
 	pageLocks[pages.length + index] = true;
       }
+
       pages = pages.concat(
-	data['dnd-game'].map((data: any) => <>
+	data['dnd-game'].filter((d: any) => {
+	  if(isInclusive && language === 'es'){
+	    return d.language === 'es-inc';
+	  }else{
+	    return d.language === language;
+	  }
+	}).map((data: any) => <>
 	  <PageWrapper>
 	    <DnDGame data={data} />
 	  </PageWrapper>
@@ -302,7 +311,7 @@ const TitleCard = ({ data }: any) => {
   const {language} = useLanguageToggle();
   const { pageForward } = useStory();
   return (
-    <div className="content-wrapper margin-top-1">
+    <div className="content-wrapper padding-top-1">
       <IonCard
         className="sf-card drop-shadow"
         style={{
@@ -411,7 +420,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     pageLocks
   } = useStory();
   const totalPages = pages.length;
-  return <div className="content-wrapper margin-top-1">
+  return <div className="content-wrapper padding-top-1">
     <IonGrid>
       <IonRow>
 	<IonCol></IonCol>
@@ -581,7 +590,7 @@ const DnDGame: React.FC<{data: any}> = ({data}) => {
 }
 
 const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
-  const {pageLocks, setPageLocks, pageNumber} = useStory();
+  const {pageLocks, setPageLocks, pageNumber, pageForward} = useStory();
   const {piecesDropped, totalTargets} = useDnD();
   useEffect(() => {
     if(piecesDropped >= totalTargets
@@ -590,11 +599,12 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
 	...pageLocks,
 	[pageNumber]: false
       });
+      pageForward();
     }
   }, [piecesDropped, totalTargets]);
   return <>
     <IonCol size="auto">
-      <div style={{width: 940}}>
+      <div style={{height: MAX_HEIGHT}}>
 	<IonText>
 	<h1 className="text-4xl ion-text-center color-suelo">
 	  {data.instructions}
@@ -602,6 +612,7 @@ const WrappedDnDGame: React.FC<{data: any}> = ({data}) => {
 	</IonText>
 	<DnD
 	audioOnComplete={data.audio_on_complete}
+	width={1366}
 	target={data.target}
 	pieces={data.pieces}
 	/>

@@ -1,12 +1,20 @@
-import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
-import { AuthedLayout } from "@/layouts/Authed";
-import { HeaderFooter } from "@/components/HeaderFooter";
-import { IonRouterOutlet } from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
-import { ScrollToTop } from "@/components/ScrollToTop";
-import { SettingsLayout } from "@/layouts/Settings";
-import UnauthedLayout from "@/layouts/Unauthed";
+import {AdultCheckProvider} from '@/contexts/AdultCheckContext';
+import {AuthedLayout} from '@/layouts/Authed';
+import {HeaderFooter} from '@/components/HeaderFooter';
+import {
+  IonRouterOutlet
+} from '@ionic/react';
+import {IonReactRouter} from '@ionic/react-router';
+import {MinimalHeader} from '@/components/MinimalHeader';
+import {
+  Redirect,
+  Route,
+  RouteComponentProps,
+  Switch,
+} from 'react-router-dom';
+import {ScrollToTop} from '@/components/ScrollToTop';
+import {SettingsLayout} from '@/layouts/Settings';
+import UnauthedLayout from '@/layouts/Unauthed';
 
 // todo: rename
 import {
@@ -32,14 +40,13 @@ import { Debug } from "@/pages/Debug";
 import {
   IntruderSelect,
   IntruderIntro,
-  IntruderGame,
-  IntruderGameLoader,
-} from "@/pages/Intruder";
-import Login from "@/pages/Login";
-import { Play } from "@/pages/Play";
-import { Preload } from "@/pages/Preload";
-import { PreSplash } from "@/pages/PreSplash";
-import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
+  IntruderGameLoader
+} from '@/pages/Intruder';
+import Login from '@/pages/Login';
+import {Play} from '@/pages/Play';
+import {Preload} from '@/pages/Preload';
+import {PreSplash} from '@/pages/PreSplash';
+import {ProfileComingSoon} from '@/pages/ProfileComingSoon';
 ///////////
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
@@ -161,11 +168,11 @@ export const Router: React.FC = () => {
           {/* temp route for development */}
           <Route
             exact
-            path="/count-congrats"
-            render={() => (
+            path="/count-congrats/:count"
+            render={({match: {params}}) => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <CountWithMeCongrats />
+		  <CountWithMeCongrats count={parseInt(params.count)} />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -176,9 +183,9 @@ export const Router: React.FC = () => {
             path="/count-with-me-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
+                <MinimalHeader>
                   <CountWithMeGameLoader />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -352,9 +359,9 @@ export const Router: React.FC = () => {
             path="/story/play/:uuid"
             render={(props) => (
               <AuthedLayout>
-                <HeaderFooter background="#FFFFFF">
+		<MinimalHeader>
                   <Stories />
-                </HeaderFooter>
+		</MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -400,9 +407,9 @@ export const Router: React.FC = () => {
             path="/story-factory-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <StoryFactoryPlay />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -436,9 +443,9 @@ export const Router: React.FC = () => {
             path="/would-do-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <WouldDoGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -448,9 +455,9 @@ export const Router: React.FC = () => {
             path="/tell-me-about-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#FBF2E2">
+                <MinimalHeader>
                   <TellMeAboutGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -483,9 +490,9 @@ export const Router: React.FC = () => {
             path="/affirmations/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <AffirmationsGame />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -518,9 +525,9 @@ export const Router: React.FC = () => {
             path="/intruder-game/play/:pack_id"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#F7FAF9">
+                <MinimalHeader>
                   <IntruderGameLoader />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />

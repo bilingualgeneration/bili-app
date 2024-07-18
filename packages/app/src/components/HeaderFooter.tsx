@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from "react";
+import {BackButton} from '@/components/BackButton';
 import {
   IonButton,
   IonButtons,
@@ -14,10 +15,8 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { FooterMenu } from "@/components/FooterMenu";
-import backButton from "@/assets/icons/back_button_orange.svg";
 import biliLogo from "@/assets/icons/bili.svg";
 import { ProfileChip } from "@/components/ProfileChip";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "./HeaderFooter.scss";
@@ -28,30 +27,21 @@ export const HeaderFooter: FC<
   }>
 > = ({ background = "", children }) => {
   const showBackButton = true;
-  const history = useHistory();
   return (
     <IonPage>
       <IonContent fullscreen={true} className="ion-padding background-figures">
         <div className="page-wrapper" style={{ background }}>
           <IonGrid id="authedHeader">
             <IonRow class="ion-align-items-center">
-              <IonCol>
-                {showBackButton && (
-                  <IonButton
-                    fill="clear"
-                    id="back_button"
-                    onClick={history.goBack}
-                  >
-                    <IonIcon slot="icon-only" icon={backButton} />
-                  </IonButton>
-                )}
+              <IonCol size="5">
+                {showBackButton && <BackButton />}
               </IonCol>
-              <IonCol className="ion-text-center">
+              <IonCol className="ion-text-center" size="2">
                 <Link to="/">
                   <img src={biliLogo} />
                 </Link>
               </IonCol>
-              <IonCol className="ion-text-right">
+              <IonCol className="ion-text-right" size="5">
                 <ProfileChip />
               </IonCol>
             </IonRow>

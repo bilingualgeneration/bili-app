@@ -1,5 +1,5 @@
 import { FC, JSX } from "react";
-import { IonButton, IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
+import { IonButton, IonCol, IonGrid, IonItem, IonList, IonRow, IonSelect, IonSelectOption, IonText } from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
@@ -8,12 +8,16 @@ import type {
   MultipleCheckboxProps,
   MultipleCheckboxOption,
 } from "@/components/MultipleCheckbox";
-
+import "./TeacherAbout.scss";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
-  return <IonCol size="6">{children}</IonCol>;
+  return <IonCol size="4">{children}</IonCol>;
+};
+
+const OptionWrapperRoles = ({ children }: { children: JSX.Element }) => {
+  return <IonCol size="4">{children}</IonCol>;
 };
 
 export const TeacherAbout: FC = () => {
@@ -37,6 +41,7 @@ export const TeacherAbout: FC = () => {
     resolver: zodResolver(schema),
   });
 
+ 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
       label: intl.formatMessage({
@@ -88,7 +93,7 @@ export const TeacherAbout: FC = () => {
     },
   ];
 
-  const rolesOptions: MultipleCheckboxOption[] = [
+  const rolesOptions = [
     {
       label: intl.formatMessage({
         id: "signUpTeacher.roleAdmin",
@@ -128,12 +133,12 @@ export const TeacherAbout: FC = () => {
       ...data,
       ...response,
     });
-    pushPage("languageModeSelect");
+    pushPage("teacherAccountCredentials");
   });
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id="teacher-about-styles">
         <div className="margin-bottom-2">
           <IonText className="ion-text-center">
             <h1 className="text-3xl semibold color-suelo">
@@ -156,9 +161,9 @@ export const TeacherAbout: FC = () => {
             </h2>
           </IonText>
         </div>
-        <div>
+        <div className="text-md color-suelo grades-styles">
           <IonGrid>
-            <IonRow className="text-md color-suelo">
+            <IonRow>
               <MultipleCheckbox
                 control={control}
                 labelPlacement="end"
@@ -168,6 +173,8 @@ export const TeacherAbout: FC = () => {
               />
             </IonRow>
           </IonGrid>
+
+
         </div>
         <div className="margin-top-1">
           <IonText>
@@ -180,18 +187,39 @@ export const TeacherAbout: FC = () => {
             </h2>
           </IonText>
         </div>
-        <div>
+        <div className="text-md color-suelo roles-styles">
           <IonGrid>
-            <IonRow className="text-md color-suelo">
+            <IonRow >
               <MultipleCheckbox
                 control={control}
                 labelPlacement="end"
                 options={rolesOptions}
                 name="schoolRoles"
-                wrapper={OptionWrapper}
+                wrapper={OptionWrapperRoles}
               />
             </IonRow>
           </IonGrid>
+        </div>
+
+        <div className="margin-bottom-1x margin-top-1">
+          <IonText>
+            <h2 className="text-xl semibold color-suelo">
+              <FormattedMessage
+                id="signUpTeacher.school"
+                defaultMessage="What is the name of your school?"
+                
+              />
+            </h2>
+          </IonText>
+        </div>
+        <div className="customer-school-select">
+          <IonList>
+              <IonSelect aria-label="School" interface="popover" labelPlacement="floating" fill="outline">
+                <IonSelectOption value="arts magnet">Arts Magnet School</IonSelectOption>
+                <IonSelectOption value="washington">Washington School</IonSelectOption>
+                <IonSelectOption value="livermore">Livermore School</IonSelectOption>
+              </IonSelect>
+          </IonList>
         </div>
 
         <IonButton

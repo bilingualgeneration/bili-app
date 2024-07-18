@@ -1,9 +1,9 @@
 import audio_correct from "@/assets/audio/correct.mp3";
 import {
-  DragPreviewImage,
   DragSourceMonitor,
   useDrag,
 } from 'react-dnd';
+import {hashLetter} from './DnD';
 import {
   useEffect,
   useState
@@ -24,6 +24,22 @@ export interface PieceProps {
   top: number;
 }
 
+/*
+const PiecePreview: React.FC = () => {
+  const preview = usePreview();
+  if(!preview.display){
+    return null;
+  }
+  const {itemType, item, style} = preview;
+  // @ts-ignore
+  const url = item.image.url;
+  return <span className='letter' style={style}>
+    {item.text}
+    <img src={url} />
+  </span>;
+};
+*/
+
 export const Piece: React.FC<PieceProps> = ({
   audio_on_drop,
   audio_on_drag,
@@ -37,15 +53,25 @@ export const Piece: React.FC<PieceProps> = ({
   ...props
 }) => {
   const {audioOnComplete, piecesDropped, totalTargets} = useDnD();
-  console.log(audioOnComplete);
   const {addAudio} = useAudioManager();
-  // todo: better way to play audio?
-  const a = new Audio(audio_on_drag.url);
-  // speed up across the board
-  a.playbackRate = 1.25;
-  const [audio_drag] = useState(a);
-  const [audio_drop] = useState(new Audio(audio_on_drop.url));
-  const [{isDragging}, drag, preview] = useDrag(() => ({
+  const [audio_drag, set_audio_drag] = useState<HTMLAudioElement | null>(null);
+  const [audio_drop, set_audio_drop] = useState<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    // todo: better way to play audio?
+    if(audio_on_drag){
+      const a = new Audio(audio_on_drag.url);
+      // speed up across the board
+      a.playbackRate = 1.25;
+      set_audio_drag(a);
+    }
+  }, [audio_on_drag, set_audio_drag]);
+
+  useEffect(() => {
+    if(audio_on_drop){
+      set_audio_drop(new Audio(audio_on_drop.url));
+    }
+  }, [audio_on_drop]);
+  const [{isDragging}, drag] = useDrag(() => ({
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -53,34 +79,47 @@ export const Piece: React.FC<PieceProps> = ({
     type: 'piece',
   }), [id, image, left, text, top]);
   useEffect(() => {
-    if(isDragging){
-      audio_drag.loop = true;
-      audio_drag.play();
-    }else{
-      audio_drag.pause();
-      audio_drag.currentTime = 0;
+    if(audio_drag){
+      if(isDragging){
+	audio_drag.loop = true;
+	audio_drag.play();
+      }else{
+	audio_drag.pause();
+	audio_drag.currentTime = 0;
+      }
     }
     if(dropped){
+      // todo: sometimes plays the wrong on_drop
       let audio = [audio_on_drop.url];
-      if(piecesDropped + 1 >= totalTargets){
+      if(piecesDropped >= totalTargets){
 	audio.push(audioOnComplete);
       }
       audio.push(audio_correct);
       addAudio(audio);
     }
-  }, [isDragging, dropped]);
+  }, [
+    audio_drag,
+    audio_on_drop,
+    audioOnComplete,
+    audio_correct,
+    isDragging,
+    dropped,
+    piecesDropped,
+    totalTargets,
+    audioOnComplete,
+  ]);
   if(isDragging || dropped){
     return <span ref={drag}></span>;
   }
   return <>
-    <DragPreviewImage connect={preview} src={image.url} />
-    <span ref={drag} style={{
+    <span className='letter' ref={drag} style={{
+      color: hashLetter(text),
       left,
       position: 'absolute',
       top,
       rotate: `${rotation}deg`
     }}>
-      <img src={image.url} />
+      {text}
     </span>
   </>;
 }

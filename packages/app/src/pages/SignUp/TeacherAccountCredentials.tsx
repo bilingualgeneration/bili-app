@@ -7,16 +7,18 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
+import { useState } from "react";
 
 // todo: expand Input to include checkbox
 
 export const TeacherAccountCredentials: React.FC = () => {
   const intl = useIntl();
   const { data, setData, pushPage } = useSignUpData();
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
-    school: z.string().min(1),
+    //school: z.string().min(1),
     password: z.string().min(8),
     //tos: z.literal<boolean>(true),
     //marketingUpdates: z.boolean()
@@ -30,7 +32,6 @@ export const TeacherAccountCredentials: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-
   const onSubmit = handleSubmit((response) => {
     setData({
       ...data,
@@ -80,25 +81,6 @@ export const TeacherAccountCredentials: React.FC = () => {
           <div className="ion-margin-top">
             <Input
               label={intl.formatMessage({
-                id: "signUpTeacher.school",
-                defaultMessage: "Your school name",
-                description:
-                  "Input area label where users who choose teacher must enter the name of their school as requirement",
-              })}
-              labelPlacement="above"
-              required={true}
-              name="school"
-              control={control}
-              fill="outline"
-              helperText=""
-              testId="teacher-account-credentials-email-input"
-              type="text"
-            />
-          </div>
-
-          <div className="ion-margin-top">
-            <Input
-              label={intl.formatMessage({
                 id: "common.password",
                 defaultMessage: "Password",
                 description: "Input label for user's password",
@@ -114,28 +96,58 @@ export const TeacherAccountCredentials: React.FC = () => {
             />
           </div>
 
-          <div className="margin-bottom-3 margin-top-2">
-            <IonCheckbox labelPlacement="end" justify="start">
-              <IonText class="ion-text-wrap">
-                <IonText className="color-selva">
-                  <FormattedMessage
-                    id="common.terms"
-                    defaultMessage="Terms of Service."
-                    description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
-                  />
-                </IonText>{" "}
+          <div className="ion-margin-top" style={{display: 'flex'}}>
+          <IonCheckbox labelPlacement="end" justify="start" checked={acceptedTerms} onIonChange={e => setAcceptedTerms(e.detail.checked)} />
+            <IonText class="ion-text-wrap" style={{marginLeft: '10px',}}>
+              <p>
                 <FormattedMessage
                   id="common.termsAgree"
-                  defaultMessage="I agree to the Terms of Service. I have read and understand the Privacy Policy"
+                  defaultMessage="I agree to the "
                   description="Terms of Service where users can check off if they agree while in sign up process."
                 />
-              </IonText>
-            </IonCheckbox>
-          </div>
+
+                <a href="https://thebiliapp.com/terms/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                  <IonText
+                    color="primary"
+                    style={{ fontWeight: "bold", marginRight: 8 }}
+                  >
+                    <FormattedMessage
+                      id="common.terms"
+                      defaultMessage="Terms of Service."
+                      description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
+                    />
+                  </IonText>
+                </a>
+              </p>
+             
+             <p>
+              <FormattedMessage
+                  id="common.termsAgree2"
+                  defaultMessage="I have read and understand "
+                  
+                />
+                
+                <a href="https://thebiliapp.com/privacy-policy/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                  <IonText
+                    color="primary"
+                    style={{ fontWeight: "bold", marginLeft: '6pt', }}
+                  >
+                    <FormattedMessage
+                      id="common.terms2"
+                      defaultMessage="Privacy Policy."
+                      description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
+                    />
+                  </IonText>
+                </a>
+
+             </p>
+              
+            </IonText>
+        </div>
         </div>
         <IonButton
           data-testid="teacher-account-credentials-continue-button"
-          disabled={!isValid}
+          disabled={!isValid || !acceptedTerms}
           expand="block"
           shape="round"
           type="submit"

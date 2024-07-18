@@ -1,21 +1,27 @@
 const LETTER_MAX_ROTATION = 15;
-const PIECE_HORIZONTAL_SPACER = 10;
+const PIECE_HORIZONTAL_SPACER = 40;
 const PIECE_VERTICAL_SPACER = 10;
-const MAX_HEIGHT = 600;
+export const MAX_HEIGHT = 450;
 const MAX_WIDTH = 940;
+const PIECE_TOP_OFFSET = 20;
+const PIECE_LEFT_OFFSET = 80;
+const PIECE_HEIGHT = 90;
+const PIECE_WIDTH = 10;
 
 import classnames from 'classnames';
 import {DnDImage} from './DnDImage';
+import {isPlatform} from '@ionic/react';
 import {
-  DndProvider as ReactDndProvider,
   useDrop,
 } from 'react-dnd';
+import {DndProvider as ReactDndProvider} from 'react-dnd-multi-backend';
 import {useDnD} from '@/hooks/DnD';
 import {
   DropTarget,
   DropTargetProps,
 } from './DropTarget';
-import {HTML5Backend} from 'react-dnd-html5-backend';
+import {HTML5toTouch} from 'rdndmb-html5-to-touch';
+import {usePreview} from 'react-dnd-preview';
 
 import {
   Piece,
@@ -30,6 +36,21 @@ import {
 import update from 'immutability-helper';
 
 import './DnD.css';
+
+const colors = [
+  '#ff5708',
+  '#22beb9',
+  '#8b1a00',
+  '#5D0947'
+];
+
+export const hashLetter = (text: string) => {
+  let hash = 0;
+  for(let index = 0; index < text.length; index++){
+    hash += text.charCodeAt(index);
+  }
+  return colors[hash % colors.length];
+}
 
 const shuffle = (array: any[]) => {
   let currentIndex = array.length;
@@ -47,23 +68,44 @@ const shuffle = (array: any[]) => {
   }
 };
 
+const PiecePreview: React.FC = () => {
+  const preview = usePreview();
+  if(!preview.display){
+    return null;
+  }
+  const {itemType, item, style} = preview;
+  // @ts-ignore
+  const url = item.image.url;
+  return <span className='letter' style={style}>
+    {
+      // @ts-ignore
+      item.text
+    }
+    <img src={url} />
+  </span>;
+};
+
+
 export interface DnDProps {
   audioOnComplete: string;
+  width: number,
   target: string,
   pieces: Omit<PieceProps, 'dropped' | 'id' | 'left' | 'top'>[],
-  width?: number,
   targetImage?: any,
 }
 
+
+//    <ReactDndProvider backend={HTML5Backend}>
+
 export const DnD: React.FC<DnDProps> = (props) => {
   return <>
-    <ReactDndProvider backend={HTML5Backend}>
+    <ReactDndProvider options={HTML5toTouch}>
       <Hydrator {...props} />
     </ReactDndProvider>
   </>;
 }
 
-const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, target, targetImage}) => {
+const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, target, targetImage, width}) => {
   const {
     pieces,
     setAudioOnComplete,
@@ -87,12 +129,12 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
 	   word.split('-').map(
 	     (t: string, index: number) => {
 	       const p = piecesMap[t.replace(/[_*]$/, '')];
-	       const id: string = index.toString();
+	       const id: string = p.text + index;
 	       if(!t.endsWith('*')){
 		 tempTotalTargets++;
 	       }
-	       targetTotalWidth += p.image.width;
-	       targetTotalHeight = Math.max(targetTotalHeight, p.image.height);
+	       targetTotalWidth += PIECE_WIDTH;
+	       targetTotalHeight = Math.max(targetTotalHeight, PIECE_HEIGHT);
 	       return [
 		 id,
 		 {
@@ -100,7 +142,7 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
 		   dropped: false,
 		   id,
 		   isBlank: t.endsWith('_'),
-		   left: index * 100,
+		   left: 0,
 		   top: 0,
 		 }
 	       ];
@@ -111,7 +153,9 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
       targetTotalWidth = Math.max(targetTotalWidth, targetImage.width);
       targetTotalHeight += targetImage.height;
     }
-    let leftPosition = 10;
+    let leftPosition = PIECE_LEFT_OFFSET;
+    let topPosition = PIECE_TOP_OFFSET;
+    const totalPieces = piecesExpanded.length;
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map(
 	(p: any, index: number) => {
@@ -121,11 +165,19 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
 	    dropped: false,
 	    id,
 	    left: leftPosition,
-	    top: MAX_HEIGHT - p.image.height - 30,
+	    top: targetImage ? topPosition : 0,
 	    rotation: Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) - LETTER_MAX_ROTATION
 	  };
+	  topPosition += PIECE_HEIGHT + PIECE_VERTICAL_SPACER;
 
-	  leftPosition += p.image.width + PIECE_HORIZONTAL_SPACER;
+	  if(targetImage){
+	    if(index === Math.floor(totalPieces / 2) - 1){
+	      leftPosition = Math.floor(width / 2 + targetTotalWidth / 2);
+	      topPosition = PIECE_TOP_OFFSET;
+	    }
+	  }else{
+	    leftPosition += PIECE_WIDTH + PIECE_LEFT_OFFSET;
+	  }
 	  return [
 	    id,
 	    newP
@@ -134,7 +186,6 @@ const Hydrator: React.FC<DnDProps> = ({audioOnComplete, pieces: propsPieces, tar
       )
     );
     setAudioOnComplete(audioOnComplete);
-    console.log(audioOnComplete);
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
     setTotalTargets(tempTotalTargets);
@@ -191,18 +242,22 @@ const Container: React.FC<ContainerProps> = ({
     [movePiece]
   );
   return <>
-    <div className='dnd-play-area'>
+    <div className='dnd-play-area' style={{height: '100%'}}>
       <div ref={drop} style={{
-	height: MAX_HEIGHT,
+	height: '100%',
 	position: 'relative'
       }}>
+	{
+	  (isPlatform('ios') || isPlatform('android'))
+	  && <PiecePreview />
+	}
 	{Object.keys(pieces).map((key) => <Piece key={key} {...pieces[key]} />)}
 	<div className={classnames('dnd-drop-targets-container', {hasImage: targetImage})}>
 	  {targetImage &&
 	   <DnDImage src={targetImage.url} />
 	  }
 	  {dropTargets.map(
-	    (word: any) => word.map((d: DropTargetProps, index: number) => <DropTarget key={index} {...d} />
+	    (word: any) => word.map((d: DropTargetProps) => <DropTarget key={d.text} {...d} />
 	  ))}
 	</div>
       </div>

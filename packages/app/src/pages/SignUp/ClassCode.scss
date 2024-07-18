@@ -1,20 +1,7 @@
 #class-code-styles{
 
-    // ion-input {
-
-    //       &.has-focus {
-    //         --border-width: 2px;
-    //         --border-color: var(--Base-Selva) !important;
-            
-    //       }
-    //     }
-      
-
     ion-input.custom-input-style{
-        // --background: #EFF0F6;
-        // --border-color: none;
-        // --padding-start: 10px;
-        // --border-radius: 16px;
+        
         width: 84px;
         height: 76px;
         font-family: Outfit;
@@ -24,10 +11,6 @@
         text-align: center;
 
     }
-
-    // ion-input.custom-input-style .input-wrapper {
-    //     border-radius: 16px;
-    // }
 
     .digit-wrapper {
         display: flex;
