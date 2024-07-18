@@ -1,5 +1,8 @@
-import classnames from "classnames";
-import { DnD } from "@/components/DnD";
+import classnames from 'classnames';
+import {
+  DnD,
+  MAX_HEIGHT
+} from '@/components/DnD';
 
 import { DnDProvider, useDnD } from "@/hooks/DnD";
 import {
@@ -42,15 +45,13 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  return (
-    <FirestoreDocProvider
-      collection="story"
-      id={uuid}
-      populate={["story-vocabulary-list", "dnd-game"]}
-    >
-      <StoriesHydrated />
-    </FirestoreDocProvider>
-  );
+  return <FirestoreDocProvider collection='story' id={uuid} populate={[
+    'story-vocabulary-list',
+    'dnd-game',
+    'multiple-choice-game'
+  ]}>
+    <StoriesHydrated />
+  </FirestoreDocProvider>;
 };
 
 const StoriesHydrated: React.FC = () => {
@@ -131,29 +132,70 @@ export const StoryLoader = () => {
       for (let index = 0; index < data["dnd-game"].length; index++) {
         pageLocks[pages.length + index] = true;
       }
-      pages = pages.concat(
-        data["dnd-game"].map((data: any) => (
-          <>
-            <PageWrapper>
-              <DnDGame data={data} />
-            </PageWrapper>
-            <PageCounter />
-          </>
-        )),
-      );
 
-      if (data.multiple_image_text && data.multiple_image_text.length > 0) {
-        pageLocks[pages.length] = true;
-        pages.push(
-          <>
-            <PageWrapper>
-              <IonCol size="auto">
-                <StoriesGame game={data} gameType="image" />
-              </IonCol>
-            </PageWrapper>
-            <PageCounter />
-          </>,
-        );
+      if(data['dnd-game']){
+	pages = pages.concat(
+	  data['dnd-game'].filter((d: any) => {
+	    if(isInclusive && language === 'es'){
+	      return d.language === 'es-inc';
+	    }else{
+	      return d.language === language;
+	    }
+	  }).map((data: any) => <>
+	    <PageWrapper>
+	      <DnDGame data={data} />
+	    </PageWrapper>
+	    <PageCounter />
+	  </>)
+	);
+      }
+
+      if(data['multiple-choice-game']){
+	pages = pages.concat(
+	  data['multiple-choice-game']
+	    .filter((mcg) => mcg.language.includes(language))
+	    .map((mcg) => {
+	      const hasAudio = mcg.choices[0].audio !== null;
+	      const correctChoice = mcg.choices.filter((choice) => choice.isCorrect)[0];
+	      const incorrectChoices = mcg.choices.filter((choice) => !choice.isCorrect);
+	      let payload;
+	      if(hasAudio){
+		// todo: refactor
+		payload = {
+		  multiple_syllable_text: mcg.instructions,
+		  multiple_syllable_correct_image: correctChoice.image,
+		  multiple_syllable_correct_audio: correctChoice.audio,
+		  multiple_syllable_incorrect_image_1: incorrectChoices[0].image,
+		  multiple_syllable_incorrect_audio_1: incorrectChoices[0].audio,
+		  multiple_syllable_incorrect_image_2: incorrectChoices[1].image,
+		  multiple_syllable_incorrect_audio_2: incorrectChoices[1].audio,
+		  multiple_syllable_incorrect_image_3: incorrectChoices[2].image,
+		  multiple_syllable_incorrect_audio_3: incorrectChoices[2].audio,
+		};
+	      }else{
+		payload = {
+		  multiple_image_text: mcg.instructions,
+		  multiple_image_correct_image: correctChoice.image,
+		  multiple_image_correct_audio: correctChoice.audio,
+		  multiple_image_incorrect_image_1: incorrectChoices[0].image,
+		  multiple_image_incorrect_audio_1: incorrectChoices[0].audio,
+		  multiple_image_incorrect_image_2: incorrectChoices[1].image,
+		  multiple_image_incorrect_audio_2: incorrectChoices[1].audio,
+		  multiple_image_incorrect_image_3: incorrectChoices[2].image,
+		  multiple_image_incorrect_audio_3: incorrectChoices[2].audio,
+		};
+	      }
+	      
+	      return <>
+		<PageWrapper>
+		  <IonCol size='auto'>
+		    <StoriesGame game={payload} gameType={hasAudio ? 'syllable' : 'image' } />
+		  </IonCol>
+		</PageWrapper>
+		<PageCounter />
+	      </>
+	    })
+	);
       }
 
       if (
@@ -325,7 +367,7 @@ const TitleCard = ({ data }: any) => {
   const { language } = useLanguageToggle();
   const { pageForward } = useStory();
   return (
-    <div className="content-wrapper margin-top-1">
+    <div className="content-wrapper padding-top-1">
       <IonCard
         className="sf-card drop-shadow"
         style={{
@@ -432,30 +474,21 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
   const { pageBackward, pageForward, pageNumber, pages, pageLocks } =
     useStory();
   const totalPages = pages.length;
-  return (
-    <div className="content-wrapper margin-top-1">
-      <IonGrid>
-        <IonRow>
-          <IonCol></IonCol>
-          <IonImg
-            className="page-control backward"
-            src={backward}
-            onClick={pageBackward}
-          />
-          {children}
-          <IonImg
-            className={classnames("page-control", "forward", {
-              locked: pageLocks[pageNumber],
-            })}
-            src={forward}
-            onClick={pageForward}
-            style={{ opacity: pageNumber === totalPages - 1 ? 0 : 1 }}
-          />
-          <IonCol></IonCol>
-        </IonRow>
-      </IonGrid>
-    </div>
-  );
+  return <div className="content-wrapper padding-top-1">
+    <IonGrid>
+      <IonRow>
+	<IonCol></IonCol>
+	<IonImg className='page-control backward' src={backward} onClick={pageBackward} />
+	{children}
+	<IonImg
+	className={classnames('page-control', 'forward', {locked: pageLocks[pageNumber]})}
+	  src={forward}
+	  onClick={pageForward}
+	  style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
+	<IonCol></IonCol>
+      </IonRow>
+    </IonGrid>
+  </div>;
 };
 
 const SegmentedText: React.FC<
@@ -524,13 +557,11 @@ export const StoryPage: React.FC<React.PropsWithChildren<{ page: any }>> = ({
             <div></div>
             <IonText className="ion-text-center">
               <h1 className="text-1_5xl semibold color-suelo">
-                <SegmentedText language={language === "esen" ? "es" : language}>
-                  {language === "en"
-                    ? texts.en.text
-                    : isInclusive
-                      ? texts["es-inc"].text
-                      : texts.es.text}
-                </SegmentedText>
+		<SegmentedText language={language === 'esen' ? 'es' : language}>
+                  {language === 'en'
+		  ? texts.en.text
+		  : (isInclusive ? texts["es-inc"].text : texts.es.text)}
+		</SegmentedText>
               </h1>
               {language === "esen" && (
                 <p className="text-lg color-english">
@@ -621,22 +652,21 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
       pageForward();
     }
   }, [piecesDropped, totalTargets]);
-  return (
-    <>
-      <IonCol size="auto">
-        <div style={{ width: 940 }}>
-          <IonText>
-            <h1 className="text-4xl ion-text-center color-suelo">
-              {data.instructions}
-            </h1>
-          </IonText>
-          <DnD
-            audioOnComplete={data.audio_on_complete}
-            target={data.target}
-            pieces={data.pieces}
-          />
-        </div>
-      </IonCol>
-    </>
-  );
-};
+  return <>
+    <IonCol size="auto">
+      <div style={{height: MAX_HEIGHT}}>
+	<IonText>
+	  <h1 className="text-4xl ion-text-center color-suelo">
+	    {data.instructions}
+	  </h1>
+	</IonText>
+	<DnD
+	audioOnComplete={data.audio_on_complete}
+	width={1366}
+	target={data.target}
+	pieces={data.pieces}
+	/>
+      </div>
+    </IonCol>
+  </>;
+}

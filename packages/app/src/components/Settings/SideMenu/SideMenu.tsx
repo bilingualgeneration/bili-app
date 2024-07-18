@@ -116,6 +116,9 @@ export const SideMenu: React.FC = () => {
             }
           />
         </div>
+	<div className='ion-text-right'>
+	  v{import.meta.env.VITE_APP_VERSION}
+	</div>
       </IonList>
     </div>
   );

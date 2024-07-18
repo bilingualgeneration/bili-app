@@ -260,7 +260,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   return (
     <>
       <div id="intruder-styles">
-        <div className="margin-top-4 margin-bottom-2">
+        <div className="padding-top-4 margin-bottom-2">
           <IonText>
             <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
             {language === 'esen' && (

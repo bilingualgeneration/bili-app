@@ -139,10 +139,9 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const recordUserActivity = httpsCallable(functions, "user-activity-record");
 
   const pageForward = () => {
-    if (totalPages > 0) {
+    if (totalPages > 0 && !pageLocks[pageNumber]) {
       setPageNumber((p) => {
         const newPage = p < totalPages - 1 ? p + 1 : totalPages - 1;
-
         if (id) {
           recordUserActivity({
             activity: "story",
