@@ -55,6 +55,7 @@ import "@/theme/margin-classes.scss";
 import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
+import '@/theme/device-zooms.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
