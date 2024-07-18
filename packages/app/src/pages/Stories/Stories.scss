@@ -102,13 +102,13 @@
 	width: auto;
 	position: absolute;
 	&.forward {
-	    top: calc(300px + 62px / 2);
+	    top: 230px;
 	    right: calc(50% - 460px - 36px);
 	    z-index: 100;
 	}
 
 	&.backward {
-	    top: calc(300px + 62px / 2);
+	    top: 230px;
 	    left: calc(50% - 460px - 36px);
 	    z-index: 100;
 	}

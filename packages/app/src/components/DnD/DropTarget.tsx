@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import {hashLetter} from './DnD';
 import {useAudioManager} from '@/contexts/AudioManagerContext';
 import {useEffect} from 'react';
 import {useDnD} from '@/hooks/DnD';
@@ -48,6 +49,10 @@ export const DropTarget: React.FC<DropTargetProps> = ({
 	  if(!hasDropped){
 	    addAudio([audio_incorrect]);
 	    setIsCorrect(false);
+	    setTimeout(() => {
+	      // todo: accomplish without settimeout
+	      setIsCorrect(null);
+	    }, 1000);
 	  }
 	}
       },
@@ -70,14 +75,15 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   return <>
     <span className={classNames({
       dropped: hasDropped,
-      'drop-shadow-correct': isCorrect === true,
-      'drop-shadow-incorrect': isCorrect === false,
+      'dnd-correct': isCorrect === true,
+      'dnd-incorrect': isCorrect === false,
       'shake-animation': isCorrect === false,
       'drop-target': true,
-      'is-blank': isBlank
+      'letter': true
     }, classes)}
+      style={{color: hashLetter(text)}}
 	  ref={drop}>
-      <img src={image?.url} />
+      {isBlank && !hasDropped ? text.replace(/./g, '_') : text}
     </span>
   </>;
 }
