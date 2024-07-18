@@ -22,7 +22,7 @@
     .graph-header {
         padding-bottom: 40px;
     }
-    
+
     .class-game-name-percentage ion-row {
         margin-bottom: 8px;
     }
@@ -50,4 +50,15 @@
         
         background:  #22BEB9;
       }
+
+    .review-word-styles {
+        background: #F7FAF9;
+        height: 52px;
+    }
+
+    ion-progress-bar {
+        --background: #f3e895;
+        --progress-background: #09c567;
+      }
+
 }

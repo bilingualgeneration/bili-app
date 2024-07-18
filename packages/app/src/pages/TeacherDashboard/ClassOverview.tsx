@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText } from "@ionic/react"
+import { IonButton, IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonList, IonProgressBar, IonRow, IonText } from "@ionic/react"
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { RadioCard } from "@/components/RadioCard";
@@ -7,6 +7,7 @@ import CommunityIcon from "@/assets/icons/community.svg";
 import StoriesIcon from "@/assets/icons/stories.svg";
 import WellnessIcon from "@/assets/icons/wellness.svg";
 import PlayIcon from "@/assets/icons/play.svg";
+import StudentPicture from "@/assets/img/student_picture.png";
 import "./ClassOverview.scss";
 
 export const ClassOverview: React.FC = () => {
@@ -189,7 +190,7 @@ export const ClassOverview: React.FC = () => {
                             </IonRow>
                             <IonRow>
 
-                                <IonCol size = "6" className="class-game-names-persentage">
+                                <IonCol size = "6.5" className="class-game-names-persentage">
                                     <IonRow>
                                         {/*game names with percentage */}
                                         <IonCol className="class-game-name-percentage">
@@ -203,13 +204,13 @@ export const ClassOverview: React.FC = () => {
                                                     </span>
                                                 </IonCol>
                                                 <IonCol size="6">
-                                                    <p className="text-lg semibold">Cuentos</p>
+                                                    <p className="text-md-no-line-height semibold">Cuentos</p>
                                                     
                                                     <p>
                                                         Stories
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="3">
+                                                <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
                                                     24%
                                                     </p>
@@ -226,12 +227,12 @@ export const ClassOverview: React.FC = () => {
                                                     </span>
                                                 </IonCol>
                                                 <IonCol size="6">
-                                                    <p className="text-lg semibold">Bienestar</p>
+                                                    <p className="text-md-no-line-height semibold">Bienestar</p>
                                                     <p>
                                                         Wellness
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="3">
+                                                <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
                                                     16%
                                                     </p>
@@ -248,13 +249,13 @@ export const ClassOverview: React.FC = () => {
                                                     </span>
                                                 </IonCol>
                                                 <IonCol size="6">
-                                                    <p className="text-lg semibold">Juego</p>
+                                                    <p className="text-md-no-line-height semibold">Juego</p>
                                                     
                                                     <p>
                                                         Play
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="3">
+                                                <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
                                                     28%
                                                     </p>
@@ -271,13 +272,13 @@ export const ClassOverview: React.FC = () => {
                                                     </span>
                                                 </IonCol>
                                                 <IonCol size="6">
-                                                    <p className="text-lg semibold">Communidad</p>
+                                                    <p className="text-md-no-line-height semibold">Communidad</p>
                                                     
                                                     <p>
                                                         Community
                                                     </p>
                                                 </IonCol>
-                                                <IonCol size="3">
+                                                <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
                                                     32%
                                                     </p>
@@ -291,15 +292,15 @@ export const ClassOverview: React.FC = () => {
                                 </IonCol>
 
                                 {/* graph columnn */}
-                                <IonCol size = "6" className="class-graph-persentage">
+                                <IonCol size = "5.5" className="class-graph-persentage">
                                     <PieChartComponent 
                                     data={[24,32,28,16]} 
                                     colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
                                     innRadius={3} 
-                                    width={220} 
-                                    height={225}
-                                    cX={110}
-                                    cY={100}
+                                    width={190} 
+                                    height={195}
+                                    cX={95}
+                                    cY={85}
                                     />
                                 </IonCol >
 
@@ -326,7 +327,43 @@ export const ClassOverview: React.FC = () => {
                         </IonCol>
                         {/* right card with progress bar*/}
                         <IonCol>
+                            <IonCard>
+                                <h1>
+                                    Needs more support
+                                </h1>
+                                
+                                <IonList lines="full">
+                                    {Array.from({ length: 5 }, (_, index) => (
+                                        <IonItem key={index}>
+                                        <div className="student-needs-support-picture">
+                                            <img src={StudentPicture} alt="" />
+                                        </div>
+                                        <div className="student-needs-support-text"></div>
+                                        <div className="student-needs-support-progress-bar">
+                                            <IonProgressBar 
+                                            value={0.25} 
+                                            buffer={1}
+                                            color="success"
+                                            >
+                                        
+                                            </IonProgressBar>
+                                        </div>
+                                        </IonItem>
+                                    ))}
+                                </IonList>
+                                    <div className="review-word-styles">
 
+                                    </div>
+                                    <IonButton
+                                        className="margin-vertical-1"
+                                        shape="round"
+                                        type="button"
+                                        //onClick={}
+                                    >
+                                        See all students
+                                    </IonButton>
+                                
+                            </IonCard>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
