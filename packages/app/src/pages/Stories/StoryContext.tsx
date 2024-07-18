@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { updateActivityAccuracy, updateActivityStars } from "@/realtimeDb";
+import { updateActivityStars } from "@/realtimeDb";
 import { getStarsFromStoryAttempts } from "@/lib/utils";
 
 type Vocab = any;

@@ -79,6 +79,7 @@ const StoriesHydrated: React.FC = () => {
 export const StoryLoader = () => {
   // @ts-ignore
   const { uuid } = useParams();
+  const { language } = useLanguageToggle();
 
   const history = useHistory();
 
@@ -153,11 +154,11 @@ export const StoryLoader = () => {
       if(data['multiple-choice-game']){
 	pages = pages.concat(
 	  data['multiple-choice-game']
-	    .filter((mcg) => mcg.language.includes(language))
-	    .map((mcg) => {
+	    .filter((mcg: any) => mcg.language.includes(language))
+	    .map((mcg: any) => {
 	      const hasAudio = mcg.choices[0].audio !== null;
-	      const correctChoice = mcg.choices.filter((choice) => choice.isCorrect)[0];
-	      const incorrectChoices = mcg.choices.filter((choice) => !choice.isCorrect);
+	      const correctChoice = mcg.choices.filter((choice: any) => choice.isCorrect)[0];
+	      const incorrectChoices = mcg.choices.filter((choice: any) => !choice.isCorrect);
 	      let payload;
 	      if(hasAudio){
 		// todo: refactor
@@ -279,7 +280,7 @@ export const StoryLoader = () => {
       setPageNumber(0);
       setReady(true);
     }
-  }, [data]);
+  }, [data, language]);
 
   if (status === "loading" || ready === false) {
     return <></>;
