@@ -70,11 +70,16 @@ import {
   TellMeAboutGame,
   TellMeAboutIntro,
   TellMeAboutSelect,
-} from "@/pages/TellMeAbout";
-import { Wellness } from "@/pages/Wellness";
-import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
-import { StudentProfile } from "@/pages/StudentProfile";
-import { ClassCode } from "@/pages/SignUp/ClassCode";
+} from '@/pages/TellMeAbout';
+import {Wellness} from '@/pages/Wellness';
+import {
+  WouldDoSelect,
+  WouldDoIntro,
+  WouldDoGame,
+} from '@/pages/WouldDo';
+import { StudentProfile } from '@/pages/StudentProfile';
+import { ClassCode } from '@/pages/SignUp/ClassCode';
+import { ClassOverview } from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -306,6 +311,20 @@ export const Router: React.FC = () => {
                 <AdultCheckProvider>
                   <SettingsLayout background="#f7faf9">
                     <Progress />
+                  </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/class-overview"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <SettingsLayout background="#f7faf9">
+                    <ClassOverview />
                   </SettingsLayout>
                 </AdultCheckProvider>
               </AuthedLayout>

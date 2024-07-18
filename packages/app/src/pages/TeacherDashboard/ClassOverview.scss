@@ -1,0 +1,64 @@
+#teacher-dashboard-class-overview-id {
+
+    .custom-col-class-overview {
+        text-align: center;
+        border: 1px solid #CBCBCB;
+        padding: 10px 0 10px 0;
+    }
+
+    .button-wrapper-class-grid button {
+        background: none;
+        
+    }
+
+    .graph-header ion-grid{
+        padding: 0;
+        ion-row {
+            max-width: 280px;
+            height: 40px;
+        }
+    }
+
+    .graph-header {
+        padding-bottom: 40px;
+    }
+
+    .class-game-name-percentage ion-row {
+        margin-bottom: 8px;
+    }
+
+    .small-oval-element {
+        flex-shrink: 0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+      }
+
+      .color-1 {
+        background:  #0045A1;
+      }
+      .color-2 {
+        background: #AC217B;
+      }
+      .color-3 {
+        background:  #FF5708;
+      }
+      .color-4 {
+        
+        background:  #22BEB9;
+      }
+
+    .review-word-styles {
+        background: #F7FAF9;
+        height: 52px;
+    }
+
+    ion-progress-bar {
+        --background: #f3e895;
+        --progress-background: #09c567;
+      }
+
+}
