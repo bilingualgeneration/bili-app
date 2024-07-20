@@ -56,9 +56,41 @@
         height: 52px;
     }
 
-    ion-progress-bar {
-        --background: #f3e895;
-        --progress-background: #09c567;
-      }
+    .active-button-green{
+        background-color: #22BEB9;
+    }
+
+    .students-needs-support-list ion-item {
+        --padding-start: 0; 
+        --inner-padding-end: 0;
+    }
+
+    .student-needs-support-picture {
+        margin: 13px 13px 13px 0;
+    }
+
+    .student-needs-support-text{
+        font-size: 14px;
+        width: 90px;
+        font-family: 'Outfit';
+        
+    }
+
+    .student-needs-support-text-problem {
+        color: #889391;
+    }
+
+
+    .student-needs-support-progress-bar {
+        width: 53%;
+        position: relative;
+        margin-left: 30px;
+    }
+
+    .student-needs-support-progress-bar-percentage {
+        position: absolute;
+        right: 0;
+        top: -190%;
+    }
 
 }

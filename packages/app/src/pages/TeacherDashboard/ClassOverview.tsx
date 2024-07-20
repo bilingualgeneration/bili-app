@@ -9,9 +9,75 @@ import WellnessIcon from "@/assets/icons/wellness.svg";
 import PlayIcon from "@/assets/icons/play.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import "./ClassOverview.scss";
+import { useState } from "react";
+
+
+const studentData = [
+    {
+      name: "Michel Jourdan",
+      exercise: "Word family",
+      percentage: 0.32,
+      image: StudentPicture,
+    },
+    {
+      name: "John Doe",
+      exercise: "Math exercises",
+      percentage: 0.45,
+      image: StudentPicture,
+    },
+    {
+      name: "Jane Smith",
+      exercise: "Reading test",
+      percentage: 0.75,
+      image: StudentPicture,
+    },
+    {
+      name: "Alice Johnson",
+      exercise: "Grammar test",
+      percentage: 0.58,
+      image: StudentPicture,
+    },
+    {
+      name: "Bob Brown",
+      exercise: "Science quiz",
+      percentage: 0.85,
+      image: StudentPicture,
+    },
+  ];
+  
+  const dataAtSchool = [24, 32, 28, 16];
+  const dataAtHome = [18, 25, 40, 17];
+  const dataAllLearning = dataAtSchool.map((value, index) => value + dataAtHome[index]); 
 
 export const ClassOverview: React.FC = () => {
+
     const intl = useIntl();
+    const [selectedCategory, setSelectedCategory] = useState<string>("school");
+
+    const handleButtonClick = (category: string) => {
+        setSelectedCategory(category);
+    };
+
+    const getButtonClass = (buttonName: string) => {
+        return selectedCategory === buttonName ? "active-button-green" : "";
+    };
+
+    let data;
+    switch (selectedCategory) {
+        case "home":
+        data = dataAtHome;
+        break;
+
+        case "all":
+        data = dataAllLearning;
+        break;
+
+        case "school":
+        default:
+        data = dataAtSchool;
+        
+    }
+
     return (
         <div id="teacher-dashboard-class-overview-id">
             {/* header text */}
@@ -162,14 +228,20 @@ export const ClassOverview: React.FC = () => {
                                             <IonRow className="ion-align-items-center">
                                                 <IonCol className="custom-col-class-overview">
                                                     <div className="button-wrapper-class-grid">
-                                                        <button>
+                                                        <button
+                                                            className={getButtonClass("school")}
+                                                            onClick={() => handleButtonClick("school")}
+                                                        >
                                                             <p className="text-sm semibold">At school</p>
                                                         </button>
                                                     </div>
                                                 </IonCol>
                                                 <IonCol className="custom-col-class-overview">
                                                     <div className="button-wrapper-class-grid">
-                                                        <button>
+                                                        <button
+                                                            className={getButtonClass("home")}
+                                                            onClick={() => handleButtonClick("home")} 
+                                                        >
                                                             <p className="text-sm semibold">At home</p>
                                                         </button>
                                                     </div>
@@ -177,7 +249,10 @@ export const ClassOverview: React.FC = () => {
                                                 </IonCol>
                                                 <IonCol className="custom-col-class-overview">
                                                     <div className="button-wrapper-class-grid">
-                                                        <button>
+                                                        <button
+                                                            className={getButtonClass("all")}
+                                                            onClick={() => handleButtonClick("all")}
+                                                        >
                                                             <p className="text-sm semibold">All learning</p>
                                                         </button>
                                                     </div>
@@ -190,7 +265,7 @@ export const ClassOverview: React.FC = () => {
                             </IonRow>
                             <IonRow>
 
-                                <IonCol size = "6.5" className="class-game-names-persentage">
+                                <IonCol size = "6.5" className="class-game-names-percentage">
                                     <IonRow>
                                         {/*game names with percentage */}
                                         <IonCol className="class-game-name-percentage">
@@ -212,7 +287,7 @@ export const ClassOverview: React.FC = () => {
                                                 </IonCol>
                                                 <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
-                                                    24%
+                                                    {data[0]}%
                                                     </p>
                                                 </IonCol>
                                             </IonRow>
@@ -234,7 +309,7 @@ export const ClassOverview: React.FC = () => {
                                                 </IonCol>
                                                 <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
-                                                    16%
+                                                    {data[1]}%
                                                     </p>
                                                 </IonCol>
                                             </IonRow>
@@ -257,7 +332,7 @@ export const ClassOverview: React.FC = () => {
                                                 </IonCol>
                                                 <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
-                                                    28%
+                                                    {data[2]}%
                                                     </p>
                                                 </IonCol>
                                             </IonRow>
@@ -280,7 +355,7 @@ export const ClassOverview: React.FC = () => {
                                                 </IonCol>
                                                 <IonCol size="3" style={{textAlign: "center",}}>
                                                     <p>
-                                                    32%
+                                                    {data[3]}%
                                                     </p>
                                                 </IonCol>
                                             </IonRow>
@@ -292,14 +367,14 @@ export const ClassOverview: React.FC = () => {
                                 </IonCol>
 
                                 {/* graph columnn */}
-                                <IonCol size = "5.5" className="class-graph-persentage">
+                                <IonCol size = "5.5" className="class-graph-percentage">
                                     <PieChartComponent 
-                                    data={[24,32,28,16]} 
+                                    data={data} 
                                     colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
                                     innRadius={3} 
                                     width={190} 
                                     height={195}
-                                    cX={95}
+                                    cX={90}
                                     cY={85}
                                     />
                                 </IonCol >
@@ -332,18 +407,33 @@ export const ClassOverview: React.FC = () => {
                                     Needs more support
                                 </h1>
                                 
-                                <IonList lines="full">
-                                    {Array.from({ length: 5 }, (_, index) => (
+                                <IonList lines="full" className="students-needs-support-list">
+                                    {studentData.map((student, index) => (
+                                        
                                         <IonItem key={index}>
                                         <div className="student-needs-support-picture">
-                                            <img src={StudentPicture} alt="" />
+                                            <img src={student.image} alt="" />
                                         </div>
-                                        <div className="student-needs-support-text"></div>
+                                        <div className="student-needs-support-text">
+                                            <p className="student-needs-support-text-name">
+                                                {student.name}
+                                            </p>
+                                            <p className="student-needs-support-text-problem">
+                                                {student.exercise}
+                                            </p>
+                                        </div>
                                         <div className="student-needs-support-progress-bar">
+                                            <div className="student-needs-support-progress-bar-percentage">
+                                            {Math.round(student.percentage * 100)}%
+                                            </div>
                                             <IonProgressBar 
-                                            value={0.25} 
+                                            value={student.percentage} 
                                             buffer={1}
-                                            color="success"
+                                            style={{
+                                                '--background': student.percentage < 0.50 ? '#FFDAD2' : '#FFF3D3' ,
+                                                '--progress-background': student.percentage < 0.50 ? '#FF5708' : '#F1D100' ,
+
+                                            }}
                                             >
                                         
                                             </IonProgressBar>
