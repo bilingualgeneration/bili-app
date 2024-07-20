@@ -226,20 +226,22 @@ export const ClassOverview: React.FC = () => {
                                         </h1>
                                         <IonGrid>
                                             <IonRow className="ion-align-items-center">
-                                                <IonCol className="custom-col-class-overview">
+                                                <IonCol 
+                                                    className={`custom-col-class-overview ${getButtonClass("school")}`}
+                                                >
                                                     <div className="button-wrapper-class-grid">
-                                                        <button
-                                                            className={getButtonClass("school")}
+                                                        <button 
                                                             onClick={() => handleButtonClick("school")}
                                                         >
                                                             <p className="text-sm semibold">At school</p>
                                                         </button>
                                                     </div>
                                                 </IonCol>
-                                                <IonCol className="custom-col-class-overview">
+                                                <IonCol 
+                                                    className={`custom-col-class-overview ${getButtonClass("home")}`}
+                                                    >
                                                     <div className="button-wrapper-class-grid">
                                                         <button
-                                                            className={getButtonClass("home")}
                                                             onClick={() => handleButtonClick("home")} 
                                                         >
                                                             <p className="text-sm semibold">At home</p>
@@ -247,10 +249,11 @@ export const ClassOverview: React.FC = () => {
                                                     </div>
 
                                                 </IonCol>
-                                                <IonCol className="custom-col-class-overview">
+                                                <IonCol 
+                                                    className={`custom-col-class-overview ${getButtonClass("all")}`}
+                                                >
                                                     <div className="button-wrapper-class-grid">
                                                         <button
-                                                            className={getButtonClass("all")}
                                                             onClick={() => handleButtonClick("all")}
                                                         >
                                                             <p className="text-sm semibold">All learning</p>
