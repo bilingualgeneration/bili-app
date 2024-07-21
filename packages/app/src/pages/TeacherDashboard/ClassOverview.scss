@@ -37,6 +37,16 @@
         height: 40px;
       }
 
+      .smaller-oval-element {
+        flex-shrink: 0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+      }
+
       .color-1 {
         background:  #0045A1;
       }
@@ -50,10 +60,27 @@
         
         background:  #22BEB9;
       }
+      .color-5 {
+        background: #ECEEED;
+      }
+
+      .text-color-grey {
+        color: #889391;
+      }
+
+      .text-color-black {
+        color: black;
+      }
 
     .review-word-styles {
         background: #F7FAF9;
         height: 52px;
+        border-radius: 8px;
+
+        ion-row {
+            margin-top: 3px;
+            margin-left: 6px;
+        }
     }
 
     .active-button-green{
@@ -75,11 +102,6 @@
         font-family: 'Outfit';
         
     }
-
-    .student-needs-support-text-problem {
-        color: #889391;
-    }
-
 
     .student-needs-support-progress-bar {
         width: 53%;

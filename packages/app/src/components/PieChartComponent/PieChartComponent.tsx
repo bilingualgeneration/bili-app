@@ -18,7 +18,7 @@ export type CustomizedLabelProps = {
     midAngle: any;
     innerRadius: any;
     outerRadius: any;
-    percent: any;
+    value: any;
     index?: any;
 }
 
@@ -29,13 +29,14 @@ const renderCustomizedLabel = ({
   midAngle,
   innerRadius,
   outerRadius,
-  percent,
+  value,
   index,
 }:CustomizedLabelProps): JSX.Element => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+ 
   return (
     <text
       x={x}
@@ -45,7 +46,7 @@ const renderCustomizedLabel = ({
       dominantBaseline="central"
       style={{ fontSize: '14px', fontWeight: 'bold', fontFamily: 'Outfit' }}
     >
-      {`${(percent * 100).toFixed(0)}%`}
+      {`${value}%`}
     </text>
   );
 };
@@ -55,6 +56,8 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innR
         name: `Group ${index + 1}`,
         value: value
       }));
+
+      console.log("PIe", data)
     return (
     
     <PieChart width={width} height={height}>

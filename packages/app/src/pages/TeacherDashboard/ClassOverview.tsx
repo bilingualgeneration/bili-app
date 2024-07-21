@@ -7,47 +7,49 @@ import CommunityIcon from "@/assets/icons/community.svg";
 import StoriesIcon from "@/assets/icons/stories.svg";
 import WellnessIcon from "@/assets/icons/wellness.svg";
 import PlayIcon from "@/assets/icons/play.svg";
+import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
+import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import "./ClassOverview.scss";
 import { useState } from "react";
 
 
 const studentData = [
     {
-      name: "Michel Jourdan",
-      exercise: "Word family",
-      percentage: 0.32,
-      image: StudentPicture,
+        name: "Michel Jourdan",
+        exercise: "Word family",
+        percentage: 0.32,
+        image: StudentPicture,
     },
     {
-      name: "John Doe",
-      exercise: "Math exercises",
-      percentage: 0.45,
-      image: StudentPicture,
+        name: "John Doe",
+        exercise: "Math exercises",
+        percentage: 0.45,
+        image: StudentPicture,
     },
     {
-      name: "Jane Smith",
-      exercise: "Reading test",
-      percentage: 0.75,
-      image: StudentPicture,
+        name: "Jane Smith",
+        exercise: "Reading test",
+        percentage: 0.75,
+        image: StudentPicture,
     },
     {
-      name: "Alice Johnson",
-      exercise: "Grammar test",
-      percentage: 0.58,
-      image: StudentPicture,
+        name: "Alice Johnson",
+        exercise: "Grammar test",
+        percentage: 0.58,
+        image: StudentPicture,
     },
     {
-      name: "Bob Brown",
-      exercise: "Science quiz",
-      percentage: 0.85,
-      image: StudentPicture,
+        name: "Bob Brown",
+        exercise: "Science quiz",
+        percentage: 0.85,
+        image: StudentPicture,
     },
-  ];
-  
-  const dataAtSchool = [24, 32, 28, 16];
-  const dataAtHome = [18, 25, 40, 17];
-  const dataAllLearning = dataAtSchool.map((value, index) => value + dataAtHome[index]); 
+];
+
+const dataAtSchool = [24, 32, 28, 16];
+const dataAtHome = [18, 25, 40, 17];
+const dataAllLearning = dataAtSchool.map((value, index) => value + dataAtHome[index]);
 
 export const ClassOverview: React.FC = () => {
 
@@ -65,19 +67,20 @@ export const ClassOverview: React.FC = () => {
     let data;
     switch (selectedCategory) {
         case "home":
-        data = dataAtHome;
-        break;
+            data = dataAtHome;
+            break;
 
         case "all":
-        data = dataAllLearning;
-        break;
+            data = dataAllLearning;
+            break;
 
         case "school":
         default:
-        data = dataAtSchool;
-        
+            data = dataAtSchool;
+
     }
 
+    console.log(data, "DATA")
     return (
         <div id="teacher-dashboard-class-overview-id">
             {/* header text */}
@@ -217,187 +220,199 @@ export const ClassOverview: React.FC = () => {
                         {/* left card with graph*/}
                         <IonCol>
                             <IonCard>
-                            {/* Learning time summary row */}
-                            <IonRow>
-                                <IonCol>
-                                    <div className="graph-header">
-                                        <h1>
-                                            Learning time summary
-                                        </h1>
-                                        <IonGrid>
-                                            <IonRow className="ion-align-items-center">
-                                                <IonCol 
-                                                    className={`custom-col-class-overview ${getButtonClass("school")}`}
-                                                >
-                                                    <div className="button-wrapper-class-grid">
-                                                        <button 
-                                                            onClick={() => handleButtonClick("school")}
-                                                        >
-                                                            <p className="text-sm semibold">At school</p>
-                                                        </button>
-                                                    </div>
-                                                </IonCol>
-                                                <IonCol 
-                                                    className={`custom-col-class-overview ${getButtonClass("home")}`}
+                                {/* Learning time summary row */}
+                                <IonRow>
+                                    <IonCol>
+                                        <div className="graph-header">
+                                            <h1>
+                                                Learning time summary
+                                            </h1>
+                                            <IonGrid>
+                                                <IonRow className="ion-align-items-center">
+                                                    <IonCol
+                                                        className={`custom-col-class-overview ${getButtonClass("school")}`}
                                                     >
-                                                    <div className="button-wrapper-class-grid">
-                                                        <button
-                                                            onClick={() => handleButtonClick("home")} 
-                                                        >
-                                                            <p className="text-sm semibold">At home</p>
-                                                        </button>
-                                                    </div>
+                                                        <div className="button-wrapper-class-grid">
+                                                            <button
+                                                                onClick={() => handleButtonClick("school")}
+                                                            >
+                                                                <p className="text-sm semibold">At school</p>
+                                                            </button>
+                                                        </div>
+                                                    </IonCol>
+                                                    <IonCol
+                                                        className={`custom-col-class-overview ${getButtonClass("home")}`}
+                                                    >
+                                                        <div className="button-wrapper-class-grid">
+                                                            <button
+                                                                onClick={() => handleButtonClick("home")}
+                                                            >
+                                                                <p className="text-sm semibold">At home</p>
+                                                            </button>
+                                                        </div>
 
-                                                </IonCol>
-                                                <IonCol 
-                                                    className={`custom-col-class-overview ${getButtonClass("all")}`}
-                                                >
-                                                    <div className="button-wrapper-class-grid">
-                                                        <button
-                                                            onClick={() => handleButtonClick("all")}
-                                                        >
-                                                            <p className="text-sm semibold">All learning</p>
-                                                        </button>
-                                                    </div>
+                                                    </IonCol>
+                                                    <IonCol
+                                                        className={`custom-col-class-overview ${getButtonClass("all")}`}
+                                                    >
+                                                        <div className="button-wrapper-class-grid">
+                                                            <button
+                                                                onClick={() => handleButtonClick("all")}
+                                                            >
+                                                                <p className="text-sm semibold">All learning</p>
+                                                            </button>
+                                                        </div>
 
-                                                </IonCol>
-                                            </IonRow>
-                                        </IonGrid>
-                                    </div>
-                                </IonCol>
-                            </IonRow>
-                            <IonRow>
+                                                    </IonCol>
+                                                </IonRow>
+                                            </IonGrid>
+                                        </div>
+                                    </IonCol>
+                                </IonRow>
+                                <IonRow>
 
-                                <IonCol size = "6.5" className="class-game-names-percentage">
-                                    <IonRow>
-                                        {/*game names with percentage */}
-                                        <IonCol className="class-game-name-percentage">
-                                            {/* first group */}
-                                            <IonRow className="no-padding">
-                                                <IonCol size="3">
-                                                    <span className="small-oval-element color-1">
-                                                        <IonIcon icon={StoriesIcon}>
+                                    <IonCol size="6.5" className="class-game-names-percentage">
+                                        <IonRow>
+                                            {/*game names with percentage */}
+                                            <IonCol className="class-game-name-percentage">
+                                                {/* first group */}
+                                                <IonRow className="no-padding">
+                                                    <IonCol size="3">
+                                                        <span className="small-oval-element color-1">
+                                                            <IonIcon icon={StoriesIcon}>
 
-                                                        </IonIcon>
-                                                    </span>
-                                                </IonCol>
-                                                <IonCol size="6">
-                                                    <p className="text-md-no-line-height semibold">Cuentos</p>
-                                                    
-                                                    <p>
-                                                        Stories
-                                                    </p>
-                                                </IonCol>
-                                                <IonCol size="3" style={{textAlign: "center",}}>
-                                                    <p>
-                                                    {data[0]}%
-                                                    </p>
-                                                </IonCol>
-                                            </IonRow>
-                                            {/* second group */}
+                                                            </IonIcon>
+                                                        </span>
+                                                    </IonCol>
+                                                    <IonCol size="6">
+                                                        <p className="text-md-no-line-height semibold text-color-black">Cuentos</p>
 
-                                            <IonRow>
-                                                <IonCol size="3">
-                                                    <span className="small-oval-element color-2">
-                                                    <IonIcon icon={WellnessIcon}>
+                                                        <p className="text-color-grey">
+                                                            Stories
+                                                        </p>
+                                                    </IonCol>
+                                                    <IonCol size="3" style={{ textAlign: "center", }}>
+                                                        <p>
+                                                            {data[0]}%
+                                                        </p>
+                                                    </IonCol>
+                                                </IonRow>
+                                                {/* second group */}
 
-                                                    </IonIcon>
-                                                    </span>
-                                                </IonCol>
-                                                <IonCol size="6">
-                                                    <p className="text-md-no-line-height semibold">Bienestar</p>
-                                                    <p>
-                                                        Wellness
-                                                    </p>
-                                                </IonCol>
-                                                <IonCol size="3" style={{textAlign: "center",}}>
-                                                    <p>
-                                                    {data[1]}%
-                                                    </p>
-                                                </IonCol>
-                                            </IonRow>
-                                            {/* third group */}
+                                                <IonRow>
+                                                    <IonCol size="3">
+                                                        <span className="small-oval-element color-2">
+                                                            <IonIcon icon={WellnessIcon}>
 
-                                            <IonRow>
-                                                <IonCol size="3">
-                                                    <span className="small-oval-element color-3">
-                                                        <IonIcon icon={PlayIcon}>
+                                                            </IonIcon>
+                                                        </span>
+                                                    </IonCol>
+                                                    <IonCol size="6">
+                                                        <p className="text-md-no-line-height semibold text-color-black">Bienestar</p>
+                                                        <p className="text-color-grey">
+                                                            Wellness
+                                                        </p>
+                                                    </IonCol>
+                                                    <IonCol size="3" style={{ textAlign: "center", }}>
+                                                        <p>
+                                                            {data[1]}%
+                                                        </p>
+                                                    </IonCol>
+                                                </IonRow>
+                                                {/* third group */}
 
-                                                        </IonIcon>
-                                                    </span>
-                                                </IonCol>
-                                                <IonCol size="6">
-                                                    <p className="text-md-no-line-height semibold">Juego</p>
-                                                    
-                                                    <p>
-                                                        Play
-                                                    </p>
-                                                </IonCol>
-                                                <IonCol size="3" style={{textAlign: "center",}}>
-                                                    <p>
-                                                    {data[2]}%
-                                                    </p>
-                                                </IonCol>
-                                            </IonRow>
-                                            {/* fourth group */}
+                                                <IonRow>
+                                                    <IonCol size="3">
+                                                        <span className="small-oval-element color-3">
+                                                            <IonIcon icon={PlayIcon}>
 
-                                            <IonRow>
-                                                <IonCol size="3">
-                                                    <span className="small-oval-element color-4">
-                                                        <IonIcon icon={CommunityIcon}>
+                                                            </IonIcon>
+                                                        </span>
+                                                    </IonCol>
+                                                    <IonCol size="6">
+                                                        <p className="text-md-no-line-height semibold text-color-black">Juego</p>
 
-                                                        </IonIcon>
-                                                    </span>
-                                                </IonCol>
-                                                <IonCol size="6">
-                                                    <p className="text-md-no-line-height semibold">Communidad</p>
-                                                    
-                                                    <p>
-                                                        Community
-                                                    </p>
-                                                </IonCol>
-                                                <IonCol size="3" style={{textAlign: "center",}}>
-                                                    <p>
-                                                    {data[3]}%
-                                                    </p>
-                                                </IonCol>
-                                            </IonRow>
-                                        </IonCol>
+                                                        <p className="text-color-grey">
+                                                            Play
+                                                        </p>
+                                                    </IonCol>
+                                                    <IonCol size="3" style={{ textAlign: "center", }}>
+                                                        <p>
+                                                            {data[2]}%
+                                                        </p>
+                                                    </IonCol>
+                                                </IonRow>
+                                                {/* fourth group */}
 
-                                    </IonRow>
+                                                <IonRow>
+                                                    <IonCol size="3">
+                                                        <span className="small-oval-element color-4">
+                                                            <IonIcon icon={CommunityIcon}>
 
+                                                            </IonIcon>
+                                                        </span>
+                                                    </IonCol>
+                                                    <IonCol size="6">
+                                                        <p className="text-md-no-line-height semibold text-color-black">Communidad</p>
 
-                                </IonCol>
+                                                        <p className="text-color-grey">
+                                                            Community
+                                                        </p>
+                                                    </IonCol>
+                                                    <IonCol size="3" style={{ textAlign: "center", }}>
+                                                        <p>
+                                                            {data[3]}%
+                                                        </p>
+                                                    </IonCol>
+                                                </IonRow>
+                                            </IonCol>
 
-                                {/* graph columnn */}
-                                <IonCol size = "5.5" className="class-graph-percentage">
-                                    <PieChartComponent 
-                                    data={data} 
-                                    colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']} 
-                                    innRadius={3} 
-                                    width={190} 
-                                    height={195}
-                                    cX={90}
-                                    cY={85}
-                                    />
-                                </IonCol >
+                                        </IonRow>
 
 
-                            </IonRow>
+                                    </IonCol>
+
+                                    {/* graph columnn */}
+                                    <IonCol size="5.5" className="class-graph-percentage">
+                                        <PieChartComponent
+                                            data={data}
+                                            colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']}
+                                            innRadius={3}
+                                            width={190}
+                                            height={195}
+                                            cX={90}
+                                            cY={85}
+                                        />
+                                    </IonCol >
+
+
+                                </IonRow>
 
                             </IonCard>
                             {/* blog part */}
-                                    <IonCard>
-                                       <div className="class-overview-blog-styles">
-                                            <IonIcon>
+                            <IonCard>
+                                <div className="class-overview-blog-styles">
+                                    <IonGrid>
+                                        <IonRow>
+                                            <IonCol>
+                                            <img src={StudentsReadingPicture} alt="" />
+                                            </IonCol>
+                                            <IonCol>
+                                            <p><a href="https://biliblog.com">Visit the Bili blog</a></p>
+                                                <p>Explore resources and tips for teaching multilingual students</p>
+                                            </IonCol>
+                                            <IonCol>
+                                                <IonButton>
+                                                    Learn more
+                                                </IonButton>
+                                            </IonCol>
+                                        </IonRow>
+                                    </IonGrid>
 
-                                            </IonIcon>
-                                            <p></p>
-                                            <IonButton>
-                                                
-                                            </IonButton>
-                                        </div> 
-                                    </IonCard>
+
+
+                                </div>
+                            </IonCard>
                             <IonRow>
 
                             </IonRow>
@@ -409,53 +424,71 @@ export const ClassOverview: React.FC = () => {
                                 <h1>
                                     Needs more support
                                 </h1>
-                                
+
                                 <IonList lines="full" className="students-needs-support-list">
                                     {studentData.map((student, index) => (
-                                        
-                                        <IonItem key={index}>
-                                        <div className="student-needs-support-picture">
-                                            <img src={student.image} alt="" />
-                                        </div>
-                                        <div className="student-needs-support-text">
-                                            <p className="student-needs-support-text-name">
-                                                {student.name}
-                                            </p>
-                                            <p className="student-needs-support-text-problem">
-                                                {student.exercise}
-                                            </p>
-                                        </div>
-                                        <div className="student-needs-support-progress-bar">
-                                            <div className="student-needs-support-progress-bar-percentage">
-                                            {Math.round(student.percentage * 100)}%
-                                            </div>
-                                            <IonProgressBar 
-                                            value={student.percentage} 
-                                            buffer={1}
-                                            style={{
-                                                '--background': student.percentage < 0.50 ? '#FFDAD2' : '#FFF3D3' ,
-                                                '--progress-background': student.percentage < 0.50 ? '#FF5708' : '#F1D100' ,
 
-                                            }}
-                                            >
-                                        
-                                            </IonProgressBar>
-                                        </div>
+                                        <IonItem key={index}>
+                                            <div className="student-needs-support-picture">
+                                                <img src={student.image} alt="" />
+                                            </div>
+                                            <div className="student-needs-support-text">
+                                                <p className="student-needs-support-text-name">
+                                                    {student.name}
+                                                </p>
+                                                <p className="student-needs-support-text-problem text-color-grey">
+                                                    {student.exercise}
+                                                </p>
+                                            </div>
+                                            <div className="student-needs-support-progress-bar">
+                                                <div className="student-needs-support-progress-bar-percentage">
+                                                    {Math.round(student.percentage * 100)}%
+                                                </div>
+                                                <IonProgressBar
+                                                    value={student.percentage}
+                                                    buffer={1}
+                                                    style={{
+                                                        '--background': student.percentage < 0.50 ? '#FFDAD2' : '#FFF3D3',
+                                                        '--progress-background': student.percentage < 0.50 ? '#FF5708' : '#F1D100',
+
+                                                    }}
+                                                >
+
+                                                </IonProgressBar>
+                                            </div>
                                         </IonItem>
                                     ))}
                                 </IonList>
-                                    <div className="review-word-styles">
+                                <div className="review-word-styles">
+                                    <IonGrid>
+                                        <IonRow className="ion-align-items-center ion-justify-content-center">
+                                            <IonCol size="1.1" >
+                                                <span className="smaller-oval-element color-5">
+                                                    <IonIcon icon={LightBulb}>
+                                                    </IonIcon>
+                                                </span>
+                                            </IonCol>
+                                            <IonCol>
+                                                <p className="text-sm text-color-black">
+                                                    Review word families again
+                                                </p>
+                                                <p className="text-xs text-color-grey">
+                                                    Some students need help with this concept
+                                                </p>
+                                            </IonCol>
+                                        </IonRow>
 
-                                    </div>
-                                    <IonButton
-                                        className="margin-vertical-1"
-                                        shape="round"
-                                        type="button"
-                                        //onClick={}
-                                    >
-                                        See all students
-                                    </IonButton>
-                                
+                                    </IonGrid>
+                                </div>
+                                <IonButton
+                                    className="margin-vertical-1"
+                                    shape="round"
+                                    type="button"
+                                //onClick={}
+                                >
+                                    See all students
+                                </IonButton>
+
                             </IonCard>
                         </IonCol>
                     </IonRow>
