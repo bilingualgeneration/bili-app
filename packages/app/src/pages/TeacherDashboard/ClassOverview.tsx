@@ -390,21 +390,23 @@ export const ClassOverview: React.FC = () => {
 
                             </IonCard>
                             {/* blog part */}
-                            <IonCard>
+                            <IonCard className="card-blog">
                                 <div className="class-overview-blog-styles">
                                     <IonGrid>
-                                        <IonRow>
-                                            <IonCol>
+                                        <IonRow class="ion-align-items-center">
+                                            <IonCol size="2.5">
                                             <img src={StudentsReadingPicture} alt="" />
                                             </IonCol>
                                             <IonCol>
-                                            <p><a href="https://biliblog.com">Visit the Bili blog</a></p>
-                                                <p>Explore resources and tips for teaching multilingual students</p>
+                                            <p className="text-xl semibold text-color-black">Visit the Bili blog</p>
+                                                <p>Explore resources and tips for <br/>teaching multilingual students</p>
                                             </IonCol>
-                                            <IonCol>
-                                                <IonButton>
+                                            <IonCol size="2.5">
+                                                <button className="visit-blog-button">
+                                                    <p className="text-sm semibold">
                                                     Learn more
-                                                </IonButton>
+                                                    </p>
+                                                </button>
                                             </IonCol>
                                         </IonRow>
                                     </IonGrid>
@@ -481,10 +483,6 @@ export const ClassOverview: React.FC = () => {
                                     </IonGrid>
                                 </div>
                                 <IonButton
-                                    className="margin-vertical-1"
-                                    shape="round"
-                                    type="button"
-                                //onClick={}
                                 >
                                     See all students
                                 </IonButton>
