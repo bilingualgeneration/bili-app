@@ -143,6 +143,10 @@ export const ClassOverview: React.FC = () => {
 
                                     })}
                                     iconBackgroundColor="#22BEB9"
+                                    titleFontSize="xl"
+                                    titleColor="color-suelo"
+                                    contentFontSize="sm"
+                                    contentColor="color-barro"
                                 />
                             </div>
                         </IonCol>
@@ -173,6 +177,10 @@ export const ClassOverview: React.FC = () => {
 
                                     })}
                                     iconBackgroundColor="#FFE24F"
+                                    titleFontSize="xl"
+                                    titleColor="color-suelo"
+                                    contentFontSize="sm"
+                                    contentColor="color-barro"
                                 />
                             </div>
                         </IonCol>
@@ -203,6 +211,10 @@ export const ClassOverview: React.FC = () => {
 
                                     })}
                                     iconBackgroundColor="#FFAEDC"
+                                    titleFontSize="xl"
+                                    titleColor="color-suelo"
+                                    contentFontSize="sm"
+                                    contentColor="color-barro"
                                 />
                             </div>
                         </IonCol>
@@ -403,9 +415,11 @@ export const ClassOverview: React.FC = () => {
                                             </IonCol>
                                             <IonCol size="2.5">
                                                 <button className="visit-blog-button">
-                                                    <p className="text-sm semibold">
-                                                    Learn more
-                                                    </p>
+                                                    <a href="https://thebiliapp.com/blog/">
+                                                        <p className="text-sm semibold">
+                                                        Learn more
+                                                        </p>
+                                                    </a>
                                                 </button>
                                             </IonCol>
                                         </IonRow>

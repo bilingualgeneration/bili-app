@@ -34,8 +34,12 @@
         padding: 4px 12px 4px 12px;
         border-radius: 8px;
         background-color: #006A67;
-        color: white;
+        
         font-weight: 600;
+
+        p {
+            color: white;
+        }
     }
 
     .small-oval-element {
@@ -109,15 +113,15 @@
 
     .student-needs-support-text{
         font-size: 14px;
-        width: 90px;
+        width: 110px;
         font-family: 'Outfit';
         
     }
 
     .student-needs-support-progress-bar {
-        width: 53%;
+        width: 50%;
         position: relative;
-        margin-left: 30px;
+        margin-left: 120px;
     }
 
     .student-needs-support-progress-bar-percentage {
