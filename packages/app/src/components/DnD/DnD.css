@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Tobi';
+    src: url('/assets/fonts/TobiRegular.otf')
+}
+
 .dnd-play-area {
     width: 100%;
     text-align: center;
@@ -12,6 +17,8 @@
     }
     
     .letter {
+	font-family: 'Tobi';
+	
 	&.dnd-incorrect {
 	    text-shadow:
 		0px 2px 5px red,

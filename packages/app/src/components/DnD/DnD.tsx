@@ -38,10 +38,22 @@ import update from 'immutability-helper';
 import './DnD.css';
 
 const colors = [
+  '#ffb68f',
+  '#f48722',
+  '#c25808',
+  '#ff8b70',
   '#ff5708',
-  '#22beb9',
   '#8b1a00',
-  '#5D0947'
+  '#22beb9',
+  '#006a67',
+  '#f28ac9',
+  '#ec59b1',
+  '#ac217b',
+  '#8fb8fa',
+  '#4b84e1',
+  '#0045a1',
+  '#9a90f0',
+  '#6154d5',
 ];
 
 export const hashLetter = (text: string) => {
