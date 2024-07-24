@@ -242,32 +242,35 @@ export const StoryLoader = () => {
         for (const list of data["story-vocabulary-list"]) {
           for (const word of list.words) {
             for (const translation of word.word) {
-              // todo: better typing
-              // @ts-ignore
-              tempVocab[translation.language][translation.word] = {
-                ...translation,
-                image: word.image,
-              };
+	      for (const targetWord of translation.word.split(',').map((s: string) => s.trim())){
 
-              // nested loops!
-              // needed to build out lookup table
-              // performance is ok since it's a max of 3 items
-              for (const nestedTranslation of word.word) {
-                if (translation.language !== nestedTranslation.language) {
-                  // @ts-ignore
-                  if (!tempVocabLookup[translation.word]) {
+		// todo: better typing
+		// @ts-ignore
+		tempVocab[translation.language][targetWord] = {
+                  ...translation,
+                  image: word.image,
+		};
+		
+		// nested loops!
+		// needed to build out lookup table
+		// performance is ok since it's a max of 3 items
+		for (const nestedTranslation of word.word) {
+                  if (translation.language !== nestedTranslation.language) {
                     // @ts-ignore
-                    tempVocabLookup[translation.word] = {
-                      [nestedTranslation.language]: nestedTranslation.word,
-                    };
-                  } else {
-                    // @ts-ignore
-                    tempVocabLookup[translation.word][
-                      nestedTranslation.language
-                    ] = nestedTranslation.word;
+                    if (!tempVocabLookup[targetWord]) {
+                      // @ts-ignore
+                      tempVocabLookup[targetWord] = {
+			[nestedTranslation.language]: targetWord
+                      };
+                    } else {
+                      // @ts-ignore
+                      tempVocabLookup[targetWord][
+			nestedTranslation.language
+                      ] = targetWord;
+                    }
                   }
-                }
-              }
+		}
+	      }
             }
           }
         }
@@ -277,7 +280,8 @@ export const StoryLoader = () => {
 
       setPageLocks(pageLocks);
       setPages(pages);
-      setPageNumber(0);
+      //      setPageNumber(0);
+      setPageNumber(5);
       setReady(true);
     }
   }, [data, language]);
