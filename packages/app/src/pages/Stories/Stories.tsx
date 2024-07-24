@@ -280,8 +280,7 @@ export const StoryLoader = () => {
 
       setPageLocks(pageLocks);
       setPages(pages);
-      //      setPageNumber(0);
-      setPageNumber(5);
+      setPageNumber(0);
       setReady(true);
     }
   }, [data, language]);
