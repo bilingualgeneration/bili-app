@@ -6,6 +6,18 @@
         padding: 10px 0 10px 0;
     }
 
+    .custom-col-class-overview.first-column {
+        border-top-left-radius: 5px; 
+        border-bottom-left-radius: 5px; 
+        border-right: none;
+      }
+
+    .custom-col-class-overview.last-column {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none; 
+    }
+
     .classroom-name-text {
         margin-right: 8px;
     }

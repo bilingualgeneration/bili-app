@@ -95,7 +95,7 @@ export const ClassOverview: React.FC = () => {
                                 </IonText>
                                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                                 <IonText className="text-sm semibold overview-text-header">
-                                        Overview
+                                    Overview
                                 </IonText>
                             </div>
                             <div className="classroom-name-block">
@@ -105,13 +105,13 @@ export const ClassOverview: React.FC = () => {
                                 <button className="visit-students-button">
                                     <Link to="/student" className="no-underline">
                                         <p className="text-md semibold color-suelo">
-                                        Go to student app
+                                            Go to student app
                                         </p>
                                     </Link>
-                                </button>       
+                                </button>
 
                             </div>
-                           
+
                         </div>
                     </IonLabel>
                 </IonItem>
@@ -245,12 +245,12 @@ export const ClassOverview: React.FC = () => {
                                             <IonText className="text-xl semibold color-suelo">
                                                 Learning time summary
                                             </IonText>
-                                                
-                                           
+
+
                                             <IonGrid className="table-green-buttons">
                                                 <IonRow className="ion-align-items-center">
                                                     <IonCol
-                                                        className={`custom-col-class-overview ${getButtonClass("school")}`}
+                                                        className={`custom-col-class-overview first-column ${getButtonClass("school")}`}
                                                     >
                                                         <div className="button-wrapper-class-grid">
                                                             <button
@@ -273,7 +273,7 @@ export const ClassOverview: React.FC = () => {
 
                                                     </IonCol>
                                                     <IonCol
-                                                        className={`custom-col-class-overview ${getButtonClass("all")}`}
+                                                        className={`custom-col-class-overview last-column ${getButtonClass("all")}`}
                                                     >
                                                         <div className="button-wrapper-class-grid">
                                                             <button
@@ -398,9 +398,9 @@ export const ClassOverview: React.FC = () => {
                                             data={data}
                                             colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']}
                                             innRadius={3}
-                                            width={190}
-                                            height={195}
-                                            cX={90}
+                                            width={200}
+                                            height={205}
+                                            cX={105}
                                             cY={85}
                                         />
                                     </IonCol >
@@ -415,17 +415,20 @@ export const ClassOverview: React.FC = () => {
                                     <IonGrid>
                                         <IonRow class="ion-align-items-center">
                                             <IonCol size="2.5">
-                                            <img src={StudentsReadingPicture} alt="" />
+                                                <img src={StudentsReadingPicture} alt="" />
                                             </IonCol>
                                             <IonCol>
-                                            <p className="text-xl semibold text-color-black">Visit the Bili blog</p>
-                                                <p>Explore resources and tips for <br/>teaching multilingual students</p>
+                                                <p className="text-xl semibold text-color-black">Visit the Bili blog</p>
+                                                <p>Explore resources and tips for <br />teaching multilingual students</p>
                                             </IonCol>
                                             <IonCol size="2.5">
                                                 <button className="visit-blog-button">
-                                                    <a href="https://thebiliapp.com/blog/">
+                                                    <a
+                                                        href="https://thebiliapp.com/blog/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer">
                                                         <p className="text-sm semibold">
-                                                        Learn more
+                                                            Learn more
                                                         </p>
                                                     </a>
                                                 </button>
