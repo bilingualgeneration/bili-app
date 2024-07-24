@@ -11,7 +11,19 @@
     }
   }
 
-  #profilePoints {
+  #starPoints {
+    align-items: center;
+    background-color: #006A67;
+    display: inline-flex;
+    padding: 0.5rem 0.75rem;
+    margin-left: 1rem;
+    border-radius: 1rem;
+    ion-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  #heartPoints {
     align-items: center;
     background-color: #ac217b;
     display: inline-flex;
@@ -22,6 +34,7 @@
       margin-right: 0.5rem;
     }
   }
+
 }
 
 .custom-button-color {

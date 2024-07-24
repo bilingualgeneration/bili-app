@@ -1,9 +1,6 @@
 import {Redirect} from 'react-router-dom';
 import {useProfile} from '@/hooks/Profile';
 import {useInterfaceLanguage} from '@/hooks/InterfaceLanguage';
-
-
-
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FooterMenu } from "@/components/FooterMenu";

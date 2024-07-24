@@ -17,6 +17,7 @@ import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { useIntl } from "react-intl";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import {TimeTrackerProvider} from '@/hooks/TimeTracker';
 import {InterfaceLanguageProvider} from '@/hooks/InterfaceLanguage';
 import { I18nWrapper } from "@/components/I18nWrapper";
 
@@ -52,8 +53,10 @@ import "@/theme/variables.css";
 import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
 import "@/theme/margin-classes.scss";
+import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
+import '@/theme/device-zooms.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -70,7 +73,9 @@ const App: React.FC = () => {
 	    <ProfileProvider>
 	      <LanguageToggleProvider>
 		<AppWrapper>
-		  <Router />
+		  <TimeTrackerProvider>
+		    <Router />	
+		  </TimeTrackerProvider>
 		</AppWrapper>
 	      </LanguageToggleProvider>
 	    </ProfileProvider>
