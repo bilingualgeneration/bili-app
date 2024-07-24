@@ -12,6 +12,7 @@ import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import "./ClassOverview.scss";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const studentData = [
@@ -87,26 +88,31 @@ export const ClassOverview: React.FC = () => {
             <div className="overview-header">
                 <IonItem>
                     <IonLabel>
-                        <div className="header-overview-first-row">
-                            <IonText>
-                                1st Grade Spanish
-                            </IonText>
-                            <IonIcon color="medium" icon={ArrowRight}></IonIcon>
-                            <IonText>
-                                <strong>
-                                    Overview
-                                </strong>
-
-                            </IonText>
-                            <h1>
-                                <strong>
+                        <div className="header-overview-row">
+                            <div className="header-overview-arrow">
+                                <IonText className="text-sm color-barro classroom-name-text">
                                     1st Grade Spanish
-                                </strong>
+                                </IonText>
+                                <IonIcon color="medium" icon={ArrowRight}></IonIcon>
+                                <IonText className="text-sm semibold overview-text-header">
+                                        Overview
+                                </IonText>
+                            </div>
+                            <div className="classroom-name-block">
+                                <IonText className="text-3xl semibold">
+                                    1st Grade Spanish
+                                </IonText>
+                                <button className="visit-students-button">
+                                    <Link to="/student" className="no-underline">
+                                        <p className="text-md semibold color-suelo">
+                                        Go to student app
+                                        </p>
+                                    </Link>
+                                </button>       
 
-                            </h1>
+                            </div>
+                           
                         </div>
-
-
                     </IonLabel>
                 </IonItem>
 
@@ -236,10 +242,12 @@ export const ClassOverview: React.FC = () => {
                                 <IonRow>
                                     <IonCol>
                                         <div className="graph-header">
-                                            <h1>
+                                            <IonText className="text-xl semibold color-suelo">
                                                 Learning time summary
-                                            </h1>
-                                            <IonGrid>
+                                            </IonText>
+                                                
+                                           
+                                            <IonGrid className="table-green-buttons">
                                                 <IonRow className="ion-align-items-center">
                                                     <IonCol
                                                         className={`custom-col-class-overview ${getButtonClass("school")}`}
