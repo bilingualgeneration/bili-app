@@ -451,9 +451,9 @@ export const ClassOverview: React.FC = () => {
                         {/* right card with progress bar*/}
                         <IonCol>
                             <IonCard>
-                                <h1>
+                                <IonText className="text-xl semibold color-suelo">
                                     Needs more support
-                                </h1>
+                                </IonText>
 
                                 <IonList lines="full" className="students-needs-support-list">
                                     {studentData.map((student, index) => (

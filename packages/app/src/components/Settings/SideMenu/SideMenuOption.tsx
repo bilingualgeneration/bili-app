@@ -61,9 +61,13 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
     <IonItem
       className={isActive ? "hover-highlight-active" : "hover-highlight"}
       {...props}
+      detail={false}
     >
-      <IonIcon slot="start" icon={icon} />
-      <IonLabel className="menu-label ion-hide-lg-down">{label}</IonLabel>
+      <IonIcon 
+        icon={icon} 
+        style={{width: '24px', height: '24px', marginRight: '12px',}}
+      />
+      <IonLabel className="text-md semibold menu-label ion-hide-lg-down">{label}</IonLabel>
     </IonItem>
   );
 };
