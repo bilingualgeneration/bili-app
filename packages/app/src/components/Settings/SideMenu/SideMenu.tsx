@@ -93,7 +93,7 @@ export const SideMenu: React.FC = () => {
     <div id="settings-side-menu" style={{ height: "100%" }}>
       <IonList
         lines="none"
-        style={{ height: "100%", padding: "1rem" }}
+        style={{ height: "100%"}}
         className="side-menu-styles"
       >
         {options.map((option, index) => (

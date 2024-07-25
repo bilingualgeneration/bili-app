@@ -152,7 +152,7 @@ React.PropsWithChildren<{
           <div className="page-wrapper" style={{ background }}>
             <IonGrid className="ion-no-padding inner-scroll">
               <IonRow>
-                <IonCol size="2" style={{ minHeight: "100vh" }}>
+                <IonCol size="1.85" style={{ minHeight: "100vh" }}>
                   <SideMenu />
                 </IonCol>
                 <IonCol size="10">
