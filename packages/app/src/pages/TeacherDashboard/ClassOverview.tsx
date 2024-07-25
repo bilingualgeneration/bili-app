@@ -6,6 +6,9 @@ import PieChartComponent from "@/components/PieChartComponent/PieChartComponent"
 import CommunityIcon from "@/assets/icons/community.svg";
 import StoriesIcon from "@/assets/icons/stories.svg";
 import WellnessIcon from "@/assets/icons/wellness.svg";
+import DropIcon from "@/assets/icons/drop.svg";
+import HouseIcon from "@/assets/icons/house.svg";
+import PresentIcon from "@/assets/icons/present.svg";
 import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
@@ -139,7 +142,7 @@ export const ClassOverview: React.FC = () => {
                                                 letterSpacing: "0.2px",
                                             }}
                                         >
-                                            1
+                                            <IonIcon icon={DropIcon}></IonIcon>
                                         </div>
                                     }
                                     title={"Chris Newton"}
@@ -148,7 +151,7 @@ export const ClassOverview: React.FC = () => {
                                         defaultMessage: "Highest accuracy this week",
 
                                     })}
-                                    iconBackgroundColor="#22BEB9"
+                                    iconBackgroundColor="#D3EAE8"
                                     titleFontSize="xl"
                                     titleColor="color-suelo"
                                     contentFontSize="sm"
@@ -173,7 +176,7 @@ export const ClassOverview: React.FC = () => {
                                                 letterSpacing: "0.2px",
                                             }}
                                         >
-                                            2
+                                            <IonIcon icon={HouseIcon}></IonIcon>
                                         </div>
                                     }
                                     title={"Blanche Malone"}
@@ -182,7 +185,7 @@ export const ClassOverview: React.FC = () => {
                                         defaultMessage: "Most at-home learning this week",
 
                                     })}
-                                    iconBackgroundColor="#FFE24F"
+                                    iconBackgroundColor="#FFDBCA"
                                     titleFontSize="xl"
                                     titleColor="color-suelo"
                                     contentFontSize="sm"
@@ -207,7 +210,7 @@ export const ClassOverview: React.FC = () => {
                                                 letterSpacing: "0.2px",
                                             }}
                                         >
-                                            3
+                                            <IonIcon icon={PresentIcon}></IonIcon>
                                         </div>
                                     }
                                     title={"Eunice Wilkins"}
@@ -216,7 +219,7 @@ export const ClassOverview: React.FC = () => {
                                         defaultMessage: "Earned the most stars this week",
 
                                     })}
-                                    iconBackgroundColor="#FFAEDC"
+                                    iconBackgroundColor="#FFD8EB"
                                     titleFontSize="xl"
                                     titleColor="color-suelo"
                                     contentFontSize="sm"
