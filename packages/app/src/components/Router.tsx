@@ -80,6 +80,7 @@ import {
 import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
 import { ClassOverview } from '@/pages/TeacherDashboard';
+import { MyClassrooms } from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -326,6 +327,18 @@ export const Router: React.FC = () => {
                   <SettingsLayout background="#f7faf9">
                     <ClassOverview />
                   </SettingsLayout>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                    <MyClassrooms/>
                 </AdultCheckProvider>
               </AuthedLayout>
             )}
