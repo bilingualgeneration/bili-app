@@ -337,9 +337,9 @@ export const Router: React.FC = () => {
             path="/classrooms"
             render={() => (
               <AuthedLayout>
-                <AdultCheckProvider>
-                    <MyClassrooms/>
-                </AdultCheckProvider>
+                <HeaderFooter background="#f7faf9">
+                  <MyClassrooms/>
+                </HeaderFooter>
               </AuthedLayout>
             )}
           />
