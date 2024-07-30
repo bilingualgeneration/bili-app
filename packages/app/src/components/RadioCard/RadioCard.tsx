@@ -34,7 +34,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   contentColor = 'color-suelo', // default color for content
 }) => {
   return (
-    <IonCard className='radio-card' style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
+    <IonCard className='radio-card'>
       <div className="card-inner">
         {icon && (
           <div
