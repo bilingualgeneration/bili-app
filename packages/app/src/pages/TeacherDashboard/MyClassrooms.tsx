@@ -24,7 +24,7 @@ import React from "react";
 
 import { useProfile } from "@/hooks/Profile";
 
-import "./MyClassrooms.css";
+import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
 
 export const MyClassrooms: React.FC = () => {
@@ -306,7 +306,7 @@ export const MyClassrooms: React.FC = () => {
     ];
 
     return (
-        <div id="settings-profile">
+        <div id="add-my-classrooms-id">
             {shouldShowTutorial && !isAdultCheckOpen && false && (
                 <Joyride
                     locale={translations.Joyride}
@@ -334,9 +334,9 @@ export const MyClassrooms: React.FC = () => {
                         </IonCol>
                     </IonRow>
 
-                    <IonRow>
-                        <IonCol>
-                            <div className="">
+                    <IonRow className="ion-justify-content-between">
+                        <IonCol size="5.75">
+                            <div className="classroom-names">
                                 <RadioCard
                                     icon={
                                         <div
@@ -351,26 +351,23 @@ export const MyClassrooms: React.FC = () => {
                                                 letterSpacing: "0.2px",
                                             }}
                                         >
-                                            LC
+                                            BM
                                         </div>
                                     }
-                                    title={"Blanche Malone"}
-                                    content={intl.formatMessage({
-                                        id: "teacherDashboard.mostLearning",
-                                        defaultMessage: "Most at-home learning this week",
-
-                                    })}
+                                    title={"Blanche Malone Class"}
+                                    subTitle={"3rd Grade"}
+                                    content={"19 students"}
                                     iconBackgroundColor="#FFDBCA"
                                     titleFontSize="xl"
                                     titleColor="color-suelo"
-                                    contentFontSize="sm"
+                                    contentFontSize="lg"
                                     contentColor="color-barro"
                                 />
                             </div>
                         </IonCol>
 
-                        <IonCol>
-                            <div className="">
+                        <IonCol size="5.75">
+                            <div className="classroom-names">
                                 <RadioCard
                                     icon={
                                         <div
@@ -385,15 +382,16 @@ export const MyClassrooms: React.FC = () => {
                                                 letterSpacing: "0.2px",
                                             }}
                                         >
-                                            KS
+                                            SL
                                         </div>
                                     }
                                     title={"Sra. Lynch’s Clase "}
-                                    content={"1st Grade & 2nd Grade"}
+                                    subTitle={"1st Grade & 2nd Grade"}
+                                    content={"19 students"}
                                     iconBackgroundColor="#FFD8EB"
                                     titleFontSize="xl"
                                     titleColor="color-suelo"
-                                    contentFontSize="sm"
+                                    contentFontSize="lg"
                                     contentColor="color-barro"
                                 />
                             </div>
