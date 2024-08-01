@@ -193,8 +193,8 @@ const Banner: React.FC = () => {
   return <div
            className="cards-title background-pattern"
            style={{
-             paddingBottom: "4rem",
-             paddingTop: "4rem",
+             paddingBottom: "2rem",
+             paddingTop: "2rem",
              paddingLeft: 20,
              paddingRight: 20,
            }}>

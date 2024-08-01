@@ -212,9 +212,9 @@ export const Router: React.FC = () => {
             path="/story-builder"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
+                <MinimalHeader>
                   <StoryBuilder />
-                </HeaderFooter>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
