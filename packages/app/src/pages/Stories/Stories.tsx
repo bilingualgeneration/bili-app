@@ -389,10 +389,13 @@ const TitleCard = ({ data }: any) => {
   return (
     <div className="content-wrapper padding-top-1">
       <IonCard
-        className="sf-card drop-shadow"
+        className="sf-card drop-shadow story-page"
         style={{
+	  background: `url(${data.cover_image.url})`,
+	  backgroundSize: 'contain',
+	  backgroundRepeat: 'no-repeat',
+	  backgroundPositionY: 'bottom',
           display: "block",
-          width: 740,
           position: "relative",
         }}
       >
@@ -409,18 +412,15 @@ const TitleCard = ({ data }: any) => {
               </p>
             )}
           </IonText>
-          <img
-            src={data.cover_image.url}
-            style={{ width: "100%", marginTop: "2rem" }}
-          />
         </IonCardContent>
         <div
           className="ion-text-center"
           style={{
             position: "absolute",
             bottom: "2rem",
-            left: "50%",
-            marginLeft: "-25%",
+	    left: 0,
+	    padding: 'auto',
+	    width: '100%'
           }}
         >
           <IonButton shape="round" onClick={pageForward}>
@@ -576,14 +576,10 @@ export const StoryPage: React.FC<React.PropsWithChildren<{ page: any }>> = ({
     clearAudio();
   }, [pageNumber]);
   const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
-  const cardStyles = {
-    width: 460,
-    height: 460,
-  };
   return (
     <>
       <IonCol size="auto">
-        <IonCard className="sf-card drop-shadow" style={cardStyles}>
+        <IonCard className="sf-card drop-shadow story-page">
           <IonCardContent
             className="ion-text-center ion-no-padding"
             style={{
@@ -660,7 +656,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<{ page: any }>> = ({
         </IonCard>
       </IonCol>
       <IonCol size="auto">
-        <IonCard className="sf-card drop-shadow" style={cardStyles}>
+        <IonCard className="sf-card drop-shadow story-page">
           <IonCardContent className="ion-text-center ion-no-padding">
             <img src={page.image.url} />
           </IonCardContent>

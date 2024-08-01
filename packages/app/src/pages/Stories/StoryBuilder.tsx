@@ -159,6 +159,5 @@ const StoryBuilderForm: React.FC = () => {
               </h4>
             </div>
           </IonToggle>
-
   </div>;
 }

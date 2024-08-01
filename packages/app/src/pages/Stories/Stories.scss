@@ -1,3 +1,12 @@
+:root{
+    --storyPageSize: 530px;
+}
+
+.story-page {
+    width: var(--storyPageSize);
+    height: var(--storyPageSize);
+}
+
 #stories-dnd {
   .header {
     display: flex;
@@ -103,13 +112,13 @@
 	position: absolute;
 	&.forward {
 	    top: 230px;
-	    right: calc(50% - 460px - 36px);
+	    right: calc(50% - var(--storyPageSize) - 36px);
 	    z-index: 100;
 	}
 
 	&.backward {
 	    top: 230px;
-	    left: calc(50% - 460px - 36px);
+	    left: calc(50% - var(--storyPageSize) - 36px);
 	    z-index: 100;
 	}
 

@@ -24,12 +24,12 @@ const Word: React.FC<{word: any}> = ({word}) => {
       <img src={image} style={{height: 120, width: 'auto'}} />
     </div>
     <IonText>
-      <h1 className='text-3xl semibold color-suelo'>
+      <h1 className='text-2xl semibold color-suelo'>
 	{language === 'en' && en}
 	{(language === 'es' || language === 'esen') && es}
       </h1>
       {language === 'esen' &&
-      <h2 className='text-2xl color-english'>
+      <h2 className='text-1xl color-english'>
 	{en}
       </h2>}
     </IonText>
@@ -40,10 +40,9 @@ export const KeyVocab: React.FC<{words: any}> = ({
   words
 }) => {
   return <IonCard
-           className="sf-card drop-shadow"
+           className="sf-card drop-shadow story-page"
            style={{
              display: "block",
-             width: 740,
              position: "relative",
            }}
 	 >
