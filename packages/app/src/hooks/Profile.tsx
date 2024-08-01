@@ -77,9 +77,11 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	  }]
 	}));
 	setChildProfiles(childProfs);
-	const aci = snapshot.docs[0].id;
-	setActiveChildId(aci);
-	setActiveChildProfile(childProfs[aci]);
+	if(snapshot.docs.length > 0){
+	  const aci = snapshot.docs[0].id;
+	  setActiveChildId(aci);
+	  setActiveChildProfile(childProfs[aci]);
+	}
       });
       childProfilesUnsubscribe.current = childProfilesUnsub;
       // todo: set active child profile
@@ -104,8 +106,8 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
   
   const isLoading =
     user === undefined
-    || profile === undefined
-    || activeChildProfile === undefined;
+    || profile === undefined;
+    //|| activeChildProfile === undefined;
   return <ProfileContext.Provider
 	   children={children}
 	   value={{

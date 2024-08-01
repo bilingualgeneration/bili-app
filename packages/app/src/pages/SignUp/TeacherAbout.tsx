@@ -4,6 +4,7 @@ import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { MultipleCheckbox } from "@/components/MultipleCheckbox";
+import {Select} from '@/components/Select';
 import type {
   MultipleCheckboxProps,
   MultipleCheckboxOption,
@@ -27,6 +28,7 @@ export const TeacherAbout: FC = () => {
   const schema = z.object({
     grades: z.string().array().optional(),
     schoolRoles: z.string().array().optional(),
+    schoolName: z.string()
   });
   const {
     control,
@@ -129,6 +131,7 @@ export const TeacherAbout: FC = () => {
   ];
 
   const onSubmit = handleSubmit((response) => {
+    console.log(response);
     setData({
       ...data,
       ...response,
@@ -213,13 +216,25 @@ export const TeacherAbout: FC = () => {
           </IonText>
         </div>
         <div className="customer-school-select">
-          <IonList>
-              <IonSelect aria-label="School" interface="popover" labelPlacement="floating" fill="outline">
-                <IonSelectOption value="arts magnet">Arts Magnet School</IonSelectOption>
-                <IonSelectOption value="washington">Washington School</IonSelectOption>
-                <IonSelectOption value="livermore">Livermore School</IonSelectOption>
-              </IonSelect>
-          </IonList>
+	  <Select
+	    control={control}
+	    fill='outline'
+	    options={[
+	      {
+		value: 'Arts Magnet School',
+		label: 'Arts Magnet School'
+	      },
+	      {
+		value: 'Washington School',
+		label: 'Washington School'
+	      },
+	      {
+		value: 'Livermore School',
+		label: 'Livermore School'
+	      },
+	    ]}
+	    name='schoolName'
+	  />
         </div>
 
         <IonButton

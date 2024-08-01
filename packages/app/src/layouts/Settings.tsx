@@ -144,6 +144,7 @@ React.PropsWithChildren<{
 }>
 > = ({ background = "", children }) => {
   const {language} = useInterfaceLanguage();
+  const {profile} = useProfile();
   return (
     <I18nWrapper locale={language}>
       <IonPage>
@@ -162,7 +163,10 @@ React.PropsWithChildren<{
               </IonRow>
             </IonGrid>
           </div>
-          <FooterMenu />
+          {
+	    profile.role === 'parent'
+	    && <FooterMenu />
+	  }
         </IonContent>
       </IonPage>
     </I18nWrapper>
