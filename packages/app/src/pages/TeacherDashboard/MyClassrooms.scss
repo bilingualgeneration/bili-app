@@ -134,4 +134,12 @@
     z-index: 10;
   }
 
+  #classroom_name_wrapper > ion-col:nth-of-type(odd) .classroom-names {
+    margin-right: 30px;
+  }
+
+  #classroom_name_wrapper > ion-col:nth-of-type(even) .classroom-names {
+    margin-left: 30px;
+  }
+
 }

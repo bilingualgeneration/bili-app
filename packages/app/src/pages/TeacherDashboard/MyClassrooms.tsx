@@ -17,6 +17,7 @@ import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
+import ClassRoomAvatar from "@/assets/icons/classroom_avatar.svg"
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
@@ -132,6 +133,32 @@ export const MyClassrooms: React.FC = () => {
             ),
         },
     };
+
+    const classRoomData: any[] = [
+
+        // {
+        //     image: ClassRoomAvatar,
+        //     title: "Blanche Malone Class",
+        //     subTitle: "3rd Grade",
+        //     content: "19 students",
+
+        // },
+        // {
+        //     image: ClassRoomAvatar,
+        //     title: "Sra. Lynch’s Clase",
+        //     subTitle: "1st Grade & 2nd Grade",
+        //     content: "19 students",
+
+        // },
+        // {
+        //     image: ClassRoomAvatar,
+        //     title: "Mr. Molina Clase",
+        //     subTitle: " 2nd Grade",
+        //     content: "15 students",
+
+        // },
+
+    ];
 
     const intl = useIntl();
 
@@ -334,69 +361,29 @@ export const MyClassrooms: React.FC = () => {
                         </IonCol>
                     </IonRow>
 
-                    <IonRow className="ion-justify-content-between">
-                        <IonCol size="5.75">
-                            <div className="classroom-names">
-                                <RadioCard
-                                    icon={
-                                        <div
-                                            style={{
-                                                color: "#000",
-                                                textAlign: "center",
-                                                fontFamily: "Outfit",
-                                                fontSize: "36px",
-                                                fontStyle: "normal",
-                                                fontWeight: "600",
-                                                lineHeight: "800",
-                                                letterSpacing: "0.2px",
-                                            }}
-                                        >
-                                            BM
-                                        </div>
-                                    }
-                                    title={"Blanche Malone Class"}
-                                    subTitle={"3rd Grade"}
-                                    content={"19 students"}
-                                    iconBackgroundColor="#FFDBCA"
-                                    titleFontSize="xl"
-                                    titleColor="color-suelo"
-                                    contentFontSize="lg"
-                                    contentColor="color-barro"
-                                />
-                            </div>
-                        </IonCol>
-
-                        <IonCol size="5.75">
-                            <div className="classroom-names">
-                                <RadioCard
-                                    icon={
-                                        <div
-                                            style={{
-                                                color: "#000",
-                                                textAlign: "center",
-                                                fontFamily: "Outfit",
-                                                fontSize: "36px",
-                                                fontStyle: "normal",
-                                                fontWeight: "800",
-                                                lineHeight: "800",
-                                                letterSpacing: "0.2px",
-                                            }}
-                                        >
-                                            SL
-                                        </div>
-                                    }
-                                    title={"Sra. Lynch’s Clase "}
-                                    subTitle={"1st Grade & 2nd Grade"}
-                                    content={"19 students"}
-                                    iconBackgroundColor="#FFD8EB"
-                                    titleFontSize="xl"
-                                    titleColor="color-suelo"
-                                    contentFontSize="lg"
-                                    contentColor="color-barro"
-                                />
-                            </div>
-                        </IonCol>
-                    </IonRow>
+                    {classRoomData && classRoomData.length > 0 && (
+                        <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
+                            {classRoomData.map((classRoom, index) => (
+                                <IonCol size="6">
+                                    <div className="classroom-names">
+                                        <RadioCard
+                                            icon={
+                                                <img src={classRoom.image} />
+                                            }
+                                            title={classRoom.title}
+                                            subTitle={classRoom.subTitle}
+                                            content={classRoom.content}
+                                            iconBackgroundColor=""
+                                            titleFontSize="xl"
+                                            titleColor="color-suelo"
+                                            contentFontSize="lg"
+                                            contentColor="color-barro"
+                                        />
+                                    </div>
+                                </IonCol>
+                            ))}
+                        </IonRow>
+                    )}
 
                     <IonRow
                         className="ion-justify-content-between margin-bottom-3 add-new-class-row ion-align-items-center"
