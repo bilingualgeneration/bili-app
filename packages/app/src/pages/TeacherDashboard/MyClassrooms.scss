@@ -1,0 +1,145 @@
+#add-my-classrooms-id {
+
+  .add-class-button {
+    width: 56px;
+    height: 56px;
+    background-color: #006A67;
+    border-radius: 8px;
+}
+
+.add-new-class-row {
+    margin-top: 59px;
+    background-color: #D3EAE8;
+    border-radius: 18px;
+    padding: 36px;
+}
+
+    .settings-pg1-container {
+      margin: 3% 2%;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .classroom-names ion-card{
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+    }
+
+    .child-profile-content {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  
+    .child-profile-heading,
+    .explore-bili-heading {
+      color: var(--light-suelo, #000);
+      font-size: 2em; /* 32px; */
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.25; /* 40px; 125% */
+      letter-spacing: -0.5px;
+    }
+  
+    .explore-bili-heading {
+      margin-top: 10%;
+    }
+    
+    .explore-bili-subheading {
+      color: var(--base-barro, #889391);
+      font-feature-settings:
+        "clig" off,
+        "liga" off;
+      font-family: Outfit;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+    }
+  
+    #settings-overview-see-all-button {
+      color: #889391;
+      text-decoration-line: underline;
+      --background-hover: none;
+      --border-radius: 0;
+      &.button-disabled {
+        --background: none;
+      }
+    }
+  
+    ion-row.row {
+      border-bottom: 1px solid var(--base-hover-shadow, rgba(0, 0, 0, 0.08));
+    }
+  
+    ion-button.add-child-btn {
+      --padding-top: 0px;
+      --padding-bottom: 0px;
+      border-width: 0;
+      box-shadow: 0px 0px 1px 0px #00000066;
+      box-shadow: 0px 12px 12px -6px #00000029;
+    }
+  
+    .sparkle-icon {
+      margin-left: 0.3125em; /* 5px; */
+    }
+  
+  
+  
+    /* Responsive styles for tablets */
+    @media only screen and (max-width: 1024px) {
+      .settings-pg1-container {
+        margin: 3% 2%;
+      }
+      .child-profile-heading {
+        font-size: 1.75em;
+        line-height: 1.29;
+      }
+      
+    }
+  
+    /* Responsive styles for smaller screens, e.g., mobile */
+    @media only screen and (max-width: 768px) {
+      .settings-pg1-container {
+        margin: 3% 2%;
+      }
+      h1.child-profile-heading {
+        font-size: 1.5em;
+        line-height: 1.33;
+      }
+      
+    }
+  
+  
+  ion-popover.cs-hover {
+    --width: 200px;
+  }
+  
+  ion-content.cs-content {
+    --background: white;
+    --border-radius: 20px;
+  }
+  
+  ion-icon.add {
+    --ionicon-stroke-width: 50px;
+  }
+  
+  .popover-arrow::after {
+    top: 3px;
+    border-radius: 3px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: var(--background);
+    content: "";
+    z-index: 10;
+  }
+
+  #classroom_name_wrapper > ion-col:nth-of-type(odd) .classroom-names {
+    margin-right: 30px;
+  }
+
+  #classroom_name_wrapper > ion-col:nth-of-type(even) .classroom-names {
+    margin-left: 30px;
+  }
+
+}

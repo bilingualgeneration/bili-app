@@ -79,7 +79,8 @@ import {
 } from '@/pages/WouldDo';
 import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
-import { ClassOverview } from '@/pages/TeacherDashboard';
+import { AddClassroom, ClassOverview } from '@/pages/TeacherDashboard';
+import { MyClassrooms } from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -327,6 +328,30 @@ export const Router: React.FC = () => {
                     <ClassOverview />
                   </SettingsLayout>
                 </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <MyClassrooms/>
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/add_classroom"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddClassroom/>
+                </HeaderFooter>
               </AuthedLayout>
             )}
           />

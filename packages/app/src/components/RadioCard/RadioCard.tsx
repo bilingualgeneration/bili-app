@@ -8,23 +8,40 @@ import {
 import type { MessageFormatElement } from "react-intl";
 import React from "react";
 
+import './RadioCard.css';
+
 type RadioCardProps = {
   title: string | MessageFormatElement[];
   content: string | MessageFormatElement[];
+  subTitle?: string | MessageFormatElement[];
   icon?: React.ReactNode;
   iconBackgroundColor?: string;
   badge?: React.ReactNode;
+  titleFontSize?: string;
+  titleColor?: string;
+  contentFontSize?: string;
+  contentColor?: string;
+  subTitleFontSize?: string;
+  subTitleColor?: string;
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
   badge,
   content,
+  subTitle,
   icon,
   iconBackgroundColor,
   title,
+  titleFontSize = '2xl', // default font-size for title
+  titleColor = 'color-selva', // default color for title
+  subTitleFontSize = 'lg', // default font-size for subTitle
+  subTitleColor = 'color-barro', // default color for subTitle
+  contentFontSize = 'sm', // default font-size for content
+  contentColor = 'color-suelo', // default color for content
+  
 }) => {
   return (
-    <IonCard style={{ cursor: "pointer", paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
+    <IonCard className='radio-card'>
       <div className="card-inner">
         {icon && (
           <div
@@ -51,7 +68,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
             <IonCardTitle>
               <IonText>
                 {/* todo: don't force type cast */}
-                <p className="text-2xl semibold color-selva">
+                <p className={`text-${titleFontSize} semibold ${titleColor}`}>
                   {title as string}
                 </p>
               </IonText>
@@ -60,10 +77,16 @@ export const RadioCard: React.FC<RadioCardProps> = ({
           <IonCardContent>
             <div>
               <IonText>
-                <p className="text-sm color-suelo">
+              {subTitle && (
+                  <p className={`text-${subTitleFontSize} semibold ${subTitleColor}`}>
+                    {subTitle as string}
+                  </p>
+              )}
+                <p className={`text-${contentFontSize} ${contentColor}`}>
                   {/* todo: don't force type cast */}
                   {content as string}
                 </p>
+               
               </IonText>
             </div>
           </IonCardContent>
