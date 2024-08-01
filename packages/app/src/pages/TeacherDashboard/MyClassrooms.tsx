@@ -27,6 +27,7 @@ import { useProfile } from "@/hooks/Profile";
 
 import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
+import { Link } from "react-router-dom";
 
 export const MyClassrooms: React.FC = () => {
 
@@ -394,11 +395,12 @@ export const MyClassrooms: React.FC = () => {
                             </IonText>
                         </IonCol>
                         <IonCol size="0.75">
-                            <button className="add-class-button">
-                                <IonIcon size="large" color="light" icon={addOutline}>
-                                </IonIcon>
-                            </button>
-
+                            <Link to="/classrooms/add_classroom">
+                                <button className="add-class-button">
+                                    <IonIcon size="large" color="light" icon={addOutline}>
+                                    </IonIcon>
+                                </button>
+                            </Link>
                         </IonCol>
                     </IonRow>
 
