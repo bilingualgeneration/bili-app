@@ -137,27 +137,27 @@ export const MyClassrooms: React.FC = () => {
 
     const classRoomData: any[] = [
 
-        // {
-        //     image: ClassRoomAvatar,
-        //     title: "Blanche Malone Class",
-        //     subTitle: "3rd Grade",
-        //     content: "19 students",
+        {
+            image: ClassRoomAvatar,
+            title: "Blanche Malone Class",
+            subTitle: "3rd Grade",
+            content: "19 students",
 
-        // },
-        // {
-        //     image: ClassRoomAvatar,
-        //     title: "Sra. Lynch’s Clase",
-        //     subTitle: "1st Grade & 2nd Grade",
-        //     content: "19 students",
+        },
+        {
+            image: ClassRoomAvatar,
+            title: "Sra. Lynch’s Clase",
+            subTitle: "1st Grade & 2nd Grade",
+            content: "19 students",
 
-        // },
-        // {
-        //     image: ClassRoomAvatar,
-        //     title: "Mr. Molina Clase",
-        //     subTitle: " 2nd Grade",
-        //     content: "15 students",
+        },
+        {
+            image: ClassRoomAvatar,
+            title: "Mr. Molina Clase",
+            subTitle: " 2nd Grade",
+            content: "15 students",
 
-        // },
+        },
 
     ];
 
