@@ -16,6 +16,7 @@ import {
   IonButton,
   useIonModal,
 } from "@ionic/react";
+import {KeyVocab} from './KeyVocab';
 import { StoriesCongrats } from "./StoriesCongrats";
 import { StoriesGame } from "./StoriesGame";
 import { StoryProvider, useStory } from "./StoryContext";
@@ -105,7 +106,6 @@ export const StoryLoader = () => {
   useEffect(() => {
     if (data) {
       setId(uuid);
-
       const fp = data.pages.filter((p: any) => {
         const langs = p.text.map((t: any) => t.language);
         if (isInclusive) {
@@ -118,6 +118,69 @@ export const StoryLoader = () => {
       let pageLocks: any = {};
       // push intro page
       pages.push(<TitleCard data={data} />);
+
+
+      // handle story vocabulary
+      let tempVocab = {
+        es: {},
+        "es-inc": {},
+        en: {},
+      };
+      let keyVocab: any[] = [];
+      if (data["story-vocabulary-list"]) {
+        let tempVocabLookup = {};
+        for (const list of data["story-vocabulary-list"]) {
+          for (const word of list.words) {
+	    keyVocab.push(word);
+            for (const translation of word.word) {
+	      for (const targetWord of translation.word.split(',').map((s: string) => s.trim())){
+		// todo: better typing
+		// @ts-ignore
+		tempVocab[translation.language][targetWord] = {
+                  ...translation,
+                  image: word.image,
+		};
+		
+		// nested loops!
+		// needed to build out lookup table
+		// performance is ok since it's a max of 3 items
+		for (const nestedTranslation of word.word) {
+                  if (translation.language !== nestedTranslation.language) {
+                    // @ts-ignore
+                    if (!tempVocabLookup[targetWord]) {
+                      // @ts-ignore
+                      tempVocabLookup[targetWord] = {
+			[nestedTranslation.language]: targetWord
+                      };
+                    } else {
+                      // @ts-ignore
+                      tempVocabLookup[targetWord][
+			nestedTranslation.language
+                      ] = targetWord;
+                    }
+                  }
+		}
+	      }
+            }
+          }
+        }
+        setVocabLookup(tempVocabLookup);
+        setVocab(tempVocab);
+      }
+
+      // key vocab
+      if(
+	language === 'en' && Object.keys(tempVocab.en).length > 0
+	|| language.startsWith('es') && Object.keys(tempVocab.es).length + Object.keys(tempVocab['es-inc']).length > 0
+      ){
+	pages.push(<>
+	  <KeyVocabPageWrapper>
+	    <KeyVocab words={keyVocab} />
+	  </KeyVocabPageWrapper>
+	  <PageCounter />
+	</>);
+      }
+      
       // push filtered pages
       pages = pages.concat(
         fp.map((data: any) => (
@@ -230,53 +293,6 @@ export const StoryLoader = () => {
           <PageCounter />
         </>,
       );
-
-      // handle story vocabulary
-      if (data["story-vocabulary-list"]) {
-        let tempVocab = {
-          es: {},
-          "es-inc": {},
-          en: {},
-        };
-        let tempVocabLookup = {};
-        for (const list of data["story-vocabulary-list"]) {
-          for (const word of list.words) {
-            for (const translation of word.word) {
-	      for (const targetWord of translation.word.split(',').map((s: string) => s.trim())){
-
-		// todo: better typing
-		// @ts-ignore
-		tempVocab[translation.language][targetWord] = {
-                  ...translation,
-                  image: word.image,
-		};
-		
-		// nested loops!
-		// needed to build out lookup table
-		// performance is ok since it's a max of 3 items
-		for (const nestedTranslation of word.word) {
-                  if (translation.language !== nestedTranslation.language) {
-                    // @ts-ignore
-                    if (!tempVocabLookup[targetWord]) {
-                      // @ts-ignore
-                      tempVocabLookup[targetWord] = {
-			[nestedTranslation.language]: targetWord
-                      };
-                    } else {
-                      // @ts-ignore
-                      tempVocabLookup[targetWord][
-			nestedTranslation.language
-                      ] = targetWord;
-                    }
-                  }
-		}
-	      }
-            }
-          }
-        }
-        setVocabLookup(tempVocabLookup);
-        setVocab(tempVocab);
-      }
 
       setPageLocks(pageLocks);
       setPages(pages);
@@ -473,7 +489,7 @@ const TitleCard = ({ data }: any) => {
 };
 
 export const PageWrapper: React.FC<React.PropsWithChildren> = ({
-  children,
+  children
 }) => {
   const { pageBackward, pageForward, pageNumber, pages, pageLocks } =
     useStory();
@@ -493,6 +509,25 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
       </IonRow>
     </IonGrid>
   </div>;
+};
+
+const KeyVocabPageWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
+  const { pageBackward, pageForward, pageNumber, pages, pageLocks } =
+    useStory();
+  const totalPages = pages.length;
+  return <div className="content-wrapper padding-top-1">
+    <IonGrid>
+      <IonRow>
+	<IonImg className='page-control backward' src={backward} onClick={pageBackward} />
+	{children}
+	<IonImg
+	className={classnames('page-control', 'forward', {locked: pageLocks[pageNumber]})}
+	  src={forward}
+	  onClick={pageForward}
+	  style={{opacity: pageNumber === totalPages - 1 ? 0 : 1}}/>
+      </IonRow>
+    </IonGrid>
+  </div>;  
 };
 
 const SegmentedText: React.FC<

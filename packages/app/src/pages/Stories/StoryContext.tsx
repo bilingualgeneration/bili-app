@@ -57,7 +57,6 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pages, setPages] = useState<any>([]);
   const totalPages = pages.length;
-  console.log("pages", pages);
 
   const [ready, setReady] = useState<boolean>(false);
   const [currentVocabWord, setCurrentVocabWord] = useState<string | null>(null);
@@ -70,7 +69,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
 
   const [attempts, setAttempts] = useState<any[]>([]);
-  console.log("attempts", attempts);
+  //console.log("attempts", attempts);
 
   const [id, setId] = useState<string | null>(null);
 
@@ -81,7 +80,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
     pageNumber: number;
     correct: boolean;
   }) => {
-    console.log("pageNumber, correct", pageNumber, correct);
+    //console.log("pageNumber, correct", pageNumber, correct);
     setAttempts((prevAttempts) => {
       const newAttempts = [...prevAttempts];
 
