@@ -1,0 +1,26 @@
+#class-about-styles {
+    .grades-styles{
+        display: flex;
+    }
+
+    .grades-styles ion-checkbox::part(container) {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        border: 3px solid #889391
+        ;
+      }
+
+    .grades-styles ion-col {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .classroom-name-input label {
+        /* Your custom styles here */
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+      }
+    
+}
