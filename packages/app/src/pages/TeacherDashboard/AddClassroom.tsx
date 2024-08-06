@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { FormattedMessage } from "react-intl";
 import { isValid, z } from "zod";
 
+import "./AddClassroom.scss";
+
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
     return <IonCol size="4">{children}</IonCol>;
 };
@@ -74,15 +76,7 @@ export const AddClassroom: React.FC = () => {
                             </IonText>
                         </div>
 
-                        {/* <div className="margin-bottom-1x margin-top-1">
-                    <IonText>
-                        <h2 className="text-xl semibold color-suelo">
-                            Class Name
-                        </h2>
-                    </IonText>
-                </div> */}
-
-                        <div className="classroom-name-input">
+                        <div className="classroom-input-styles">
                             <Input
                                 label="Class Name"
                                 labelPlacement="above"
@@ -93,6 +87,7 @@ export const AddClassroom: React.FC = () => {
                                 helperText="Guidance about how to name the classroom"
                                 testId="teacher-account-credentials-name-input"
                                 type="text"
+                                className="classroom-name-input"
                             />
                         </div>
 
