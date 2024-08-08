@@ -32,13 +32,14 @@ export const add = onCall(async (request) => {
   const classroomId = admin.firestore().collection('scrap').doc().id;
   let tasks: any[] = [];
   let classroomPayload = {
-    name: data.name,
-    grades: data.grades,
-    language: data.language,
     allowLanguageToggle: data.allowLanguageToggle,
+    grades: data.grades,
     isInclusive: data.isInclusive,
+    language: data.language,
+    name: data.name,
     school: profile.school.id,
-    teachers: [uid]
+    size: data.students.length,
+    teachers: [uid],
   }
 
   tasks.push(admin.firestore().collection('classrooms').doc(classroomId).set(classroomPayload));
