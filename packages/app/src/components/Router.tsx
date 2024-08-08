@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom';
 import {ScrollToTop} from '@/components/ScrollToTop';
 import {SettingsLayout} from '@/layouts/Settings';
+import {TeacherDashboardWrapper} from '@/components/TeacherDashboardWrapper';
 import UnauthedLayout from '@/layouts/Unauthed';
 
 // todo: rename
@@ -337,21 +338,21 @@ export const Router: React.FC = () => {
             path="/classrooms"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
+                <TeacherDashboardWrapper>
                   <MyClassrooms/>
-                </HeaderFooter>
+                </TeacherDashboardWrapper>
               </AuthedLayout>
             )}
           />
 
           <Route
             exact
-            path="/classrooms/add_classroom"
+            path="/classrooms/add"
             render={() => (
               <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
+                <TeacherDashboardWrapper>
                   <AddClassroom/>
-                </HeaderFooter>
+                </TeacherDashboardWrapper>
               </AuthedLayout>
             )}
           />
