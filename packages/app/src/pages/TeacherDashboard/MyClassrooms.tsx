@@ -10,17 +10,15 @@ import {
     IonContent,
     IonText,
 } from "@ionic/react";
-import Joyride from "react-joyride";
 import { addOutline, ellipse, sparkles, } from "ionicons/icons";
 import { Carousel } from "@/components/Carousel";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
-import ClassRoomAvatar from "@/assets/icons/classroom_avatar.svg"
+import ClassroomAvatar from "@/assets/icons/classroom_avatar.svg"
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
-import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 
 import { useProfile } from "@/hooks/Profile";
@@ -29,138 +27,28 @@ import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
 import { Link } from "react-router-dom";
 
+const gradesLookup: {[i: string]: string} = {
+  'p': 'Pre-K',
+  'k': 'Kindergarten',
+  '1': '1st Grade',
+  '2': '2nd Grade',
+  '3': '3rd Grade',
+  '4': '4th Grade',
+  '5': '5th Grade',
+}
+
+const getGrades = (grades: string[]) => {
+  return grades.map(
+    (g: string) => gradesLookup[g]
+  ).join(', ');
+};
+
 export const MyClassrooms: React.FC = () => {
-
-    const { profile: { isImmersive, isInclusive } } = useProfile();
-    const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-    //const { childProfiles, activeChildProfile, setActiveChildProfile } = useChildProfile();
-    const { isAdultCheckOpen } = useAdultCheck();
-
-    useEffect(() => {
-        if (!isAdultCheckOpen) {
-            Preferences.get({
-                key: "shouldShowSettingsTutorial",
-            }).then((response) => {
-                if (response.value === null) {
-                    // have never seen it before
-                    setShouldShowTutorial(true);
-                    /*
-                        Preferences.set({
-                          key: "shouldShowSettingsTutorial",
-                          value: false,
-                        });
-                    */
-                }
-            });
-        }
-    }, [isAdultCheckOpen]);
-
-    const steps = [
-        {
-            target: "#side-menu-button-sideMenu-profile",
-            disableBeacon: true,
-            content: (
-                <FormattedMessage
-                    id="settings.onboarding.profile"
-                    defaultMessage="Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.'"
-                    description="Onboarding message for the Profiles button on the side menu"
-                />
-            ),
-        },
-        {
-            target: "#inclusive-spanish-card",
-            disableBeacon: true,
-            content: (
-                <FormattedMessage
-                    id="settings.onboarding.inclusiveSpanish"
-                    defaultMessage="Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
-                    description="Onboarding message for the Profiles button on the side menu"
-                />
-            ),
-        },
-        {
-            target: "#side-menu-button-sideMenu-preferences",
-            disableBeacon: true,
-            content: (
-                <FormattedMessage
-                    id="settings.onboarding.preferences"
-                    defaultMessage="Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits."
-                    description="Onboarding message for the Preferences button on the side menu"
-                />
-            ),
-        },
-        {
-            target: "#side-menu-button-sideMenu-progress",
-            disableBeacon: true,
-            content: (
-                <FormattedMessage
-                    id="settings.onboarding.progress"
-                    defaultMessage="Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities."
-                    description="Onboarding message for the Progress button on the side menu"
-                />
-            ),
-        },
-    ];
-
-    const translations = {
-        Joyride: {
-            back: (
-                <FormattedMessage
-                    id="settings.overview.joyrideBack"
-                    defaultMessage="Back"
-                    description="Button to go 'back' in the walkthrough tutorial on settings/overview page"
-                />
-            ),
-            last: (
-                <FormattedMessage
-                    id="settings.overview.joyrideLast"
-                    defaultMessage="Last"
-                    description="Appears when user is on 'last' slide of the walkthrough tutorial on settings/overview page"
-                />
-            ),
-            next: (
-                <FormattedMessage
-                    id="settings.overview.joyrideNext"
-                    defaultMessage="Next"
-                    description="Button to go to 'next' section of the walkthrough tutorial on settings/overview page"
-                />
-            ),
-            skip: (
-                <FormattedMessage
-                    id="settings.overview.joyrideSkip"
-                    defaultMessage="Skip"
-                    description="Button to 'skip' the walkthrough tutorial on settings/overview page"
-                />
-            ),
-        },
-    };
-
-    const classRoomData: any[] = [
-
-        {
-            image: ClassRoomAvatar,
-            title: "Blanche Malone Class",
-            subTitle: "3rd Grade",
-            content: "19 students",
-
-        },
-        {
-            image: ClassRoomAvatar,
-            title: "Sra. Lynch’s Clase",
-            subTitle: "1st Grade & 2nd Grade",
-            content: "19 students",
-
-        },
-        {
-            image: ClassRoomAvatar,
-            title: "Mr. Molina Clase",
-            subTitle: " 2nd Grade",
-            content: "15 students",
-
-        },
-
-    ];
-
+  const {
+    profile: { isImmersive, isInclusive },
+    classrooms: classrooms
+  } = useProfile();
+  
     const intl = useIntl();
 
 
@@ -335,21 +223,6 @@ export const MyClassrooms: React.FC = () => {
 
     return (
         <div id="add-my-classrooms-id">
-            {shouldShowTutorial && !isAdultCheckOpen && false && (
-                <Joyride
-                    locale={translations.Joyride}
-                    hideCloseButton
-                    showSkipButton
-                    showProgress
-                    steps={steps}
-                    continuous={true}
-                    styles={{
-                        tooltipContainer: {
-                            textAlign: "left",
-                        },
-                    }}
-                />
-            )}
             <div className="settings-pg1-container">
                 <IonGrid class="adult-profile-content">
                     <IonRow class="ion-justify-content-between row">
@@ -362,18 +235,20 @@ export const MyClassrooms: React.FC = () => {
                         </IonCol>
                     </IonRow>
 
-                    {classRoomData && classRoomData.length > 0 && (
+                    {Object.keys(classrooms).length > 0 && (
                         <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
-                            {classRoomData.map((classRoom, index) => (
-                                <IonCol size="6">
+                            {Object.values(classrooms).map((classroom: any, index) => (
+                                <IonCol size="6" key={classroom.id}>
                                     <div className="classroom-names">
                                         <RadioCard
                                             icon={
-                                                <img src={classRoom.image} />
+                                                <img src={ClassroomAvatar} />
                                             }
-                                            title={classRoom.title}
-                                            subTitle={classRoom.subTitle}
-                                            content={classRoom.content}
+                                          title={classroom.name}
+                                            subTitle={getGrades(classroom.grades)}
+                              content={intl.formatMessage(
+				{id: 'pages.classrooms.classroomSize'},{size: classroom.size}
+			      )}
                                             iconBackgroundColor=""
                                             titleFontSize="xl"
                                             titleColor="color-suelo"
