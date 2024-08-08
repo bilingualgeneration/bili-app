@@ -10,11 +10,17 @@ import "./ProfileChip.scss";
 import { useRef, useState } from "react";
 import { useLanguageToggle } from "../LanguageToggle";
 
+const defaultChildProfile = {
+  completionPoints: 0,
+  name: ''
+}
+
 export const ProfileChip: React.FC = () => {
   /*
   const { childProfiles, activeChildProfile } = useChildProfile();
    */
-  const { activeChildProfile: { completionPoints, name } } = useProfile();
+  const {activeChildProfile} = useProfile();
+  const { completionPoints, name } = activeChildProfile || defaultChildProfile;
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();

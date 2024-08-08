@@ -395,7 +395,7 @@ export const MyClassrooms: React.FC = () => {
                             </IonText>
                         </IonCol>
                         <IonCol size="0.75">
-                            <Link to="/classrooms/add_classroom">
+                            <Link to="/classrooms/add">
                                 <button className="add-class-button">
                                     <IonIcon size="large" color="light" icon={addOutline}>
                                     </IonIcon>
