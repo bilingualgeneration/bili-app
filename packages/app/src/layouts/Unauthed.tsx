@@ -17,13 +17,12 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   children,
 }) => {
   const {isLoggedIn, profile} = useProfile();
-  console.log(profile);
   const {language} = useInterfaceLanguage();
   // assume there are no public pages
   if(isLoggedIn){
     switch(profile.role){
       case 'teacher':
-	return <Redirect to='/settings/overview' />;
+	return <Redirect to='/classrooms' />;
 	break;
       case 'parent':
 	return <Redirect to='/student-dashboard' />;
