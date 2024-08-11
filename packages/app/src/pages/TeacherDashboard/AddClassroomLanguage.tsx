@@ -22,6 +22,7 @@ import { Popover } from "@/components/Popover";
 import { useProfile } from "@/hooks/Profile";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/components/Firebase";
+import { useHistory } from "react-router";
 
 export const AddClassroomLanguage: React.FC = () => {
     const intl = useIntl();
@@ -37,6 +38,7 @@ export const AddClassroomLanguage: React.FC = () => {
         resolver: zodResolver(schema),
     });
     const { data, setData, pushPage } = useSignUpData();
+    const history = useHistory();
     const { user: {uid}, profile: {isImmersive, isInclusive, settingsLanguage }} = useProfile();
     const ref = doc(firestore, "users", uid);
   // TODO: we shouldn't allow this straight from the app
@@ -167,6 +169,7 @@ export const AddClassroomLanguage: React.FC = () => {
             ...responses,
         });
 
+        history.push('/classrooms/add_students');
     });
 
     return (
@@ -175,13 +178,9 @@ export const AddClassroomLanguage: React.FC = () => {
             <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px", }}>
                 <form className="radio-button-select">
                     <IonText className="ion-text-center">
-                        <h2 className="text-3xl semibold color-suelo">
-                            <FormattedMessage
-                                id="languageMode.settings"
-                                defaultMessage="Choose your settings"
-                                description="User can choose if they want bilingual settings or English assisted settings"
-                            />
-                        </h2>
+                        <h3 className="text-3xl semibold color-suelo">
+                            Classroom language settings
+                        </h3>
                     </IonText>
                     <ExtendedRadio
                         control={control}
@@ -239,9 +238,7 @@ export const AddClassroomLanguage: React.FC = () => {
                                     <p className="text-2xl semibold">
                                     Inclusive Spanish
                                     </p>
-                                </IonText>
-                                    
-                                
+                                </IonText> 
                             </div>
                         </IonToggle>
                     </IonItem>

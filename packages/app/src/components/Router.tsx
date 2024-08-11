@@ -79,7 +79,7 @@ import {
 } from '@/pages/WouldDo';
 import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
-import { AddClassroom, ClassOverview, AddClassroomLanguage } from '@/pages/TeacherDashboard';
+import { AddClassroom, ClassOverview, AddClassroomLanguage, AddStudents } from '@/pages/TeacherDashboard';
 import { MyClassrooms } from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
@@ -363,6 +363,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <AddClassroomLanguage/>
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/add_students"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddStudents/>
                 </HeaderFooter>
               </AuthedLayout>
             )}
