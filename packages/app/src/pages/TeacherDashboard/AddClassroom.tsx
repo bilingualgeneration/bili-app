@@ -8,6 +8,8 @@ import { FormattedMessage } from "react-intl";
 import { isValid, z } from "zod";
 
 import "./AddClassroom.scss";
+import { useSignUpData } from "../SignUp/SignUpContext";
+import { useHistory } from "react-router";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
     return <IonCol size="4">{children}</IonCol>;
@@ -58,6 +60,22 @@ export const AddClassroom: React.FC = () => {
             value: "5th",
         },
     ];
+
+    const { data, setData, pushPage } = useSignUpData();
+
+    const history = useHistory();
+
+    //button logic
+    const onSubmit = handleSubmit((responses) => {
+
+        setData({
+          ...data,
+          ...responses,
+        });
+        
+        history.push('/classrooms/add_classroom_language');
+
+      });
 
     return (
         <>
@@ -110,17 +128,16 @@ export const AddClassroom: React.FC = () => {
                                     />
                                 </IonRow>
                             </IonGrid>
-
                         </div>
-
 
                         <IonButton
                             className="margin-top-2"
                             expand="block"
                             shape="round"
-                            type="submit"
+                            type="button"
                             data-testid="teacher-about-continue-button"
                             disabled={!isValid}
+                            onClick={onSubmit}
                         >
                             <FormattedMessage
                                 id="common.continue"
