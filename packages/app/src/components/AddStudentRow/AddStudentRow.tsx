@@ -28,10 +28,16 @@ export const AddStudentRow: React.FC<RowProps> = ({
                     <IonCol size={colSizes[2]}>{student.primaryEmail}</IonCol>
                     <IonCol size={colSizes[3]}>{student.secondaryEmail}</IonCol>
                     <IonCol size={colSizes[4]}>
-                        <IonIcon size="large" icon={DeleteIcon} />
+                            <IonIcon 
+                            icon={DeleteIcon} 
+                            style={{fontSize: '20px',}}
+                            />
                     </IonCol>
                     <IonCol size={colSizes[5]}>
-                        <IonIcon icon={create} />
+                        <IonIcon 
+                        icon={create} 
+                        
+                        />
                     </IonCol>
                 </IonRow>
            ))}
