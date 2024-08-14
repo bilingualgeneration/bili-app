@@ -1,15 +1,41 @@
 #add-students-page {
+
+    .add-students-title {
+        padding: 36px 0;
+    }
+
+    .first-title-row {
+        padding: 16px 0;
+    }
+
+    .add-and-upload-buttons {
+        display: flex;
+        gap: 24px;
+    }
+
     .add-student-button {
-        padding: 6px 12px;
+        padding: 4px 12px 4px 4px;
         color: white;
         border-radius: 8px;
         background: #006A67;
+        display: flex;
+        gap: 4px;
     }
 
     .upload-csv-button {
-        padding: 6px 12px;
+        padding: 4px 12px 4px 4px;
         border-radius: 8px;
         border: 1px solid  #006A67;
         background: transparent;
+        display: flex;
+        gap: 4px;
+    }
+
+    .add-student-button ion-icon, .upload-csv-button ion-icon {
+        font-size: 24px;
+    }
+
+    .add-student-button p,  .upload-csv-button p{
+        margin-top: 3px;
     }
 }

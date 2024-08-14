@@ -181,6 +181,9 @@ export const AddClassroomLanguage: React.FC = () => {
                         <h3 className="text-3xl semibold color-suelo">
                             Classroom language settings
                         </h3>
+                        <p className="text-lg color-barro">
+                        * You can always change this later
+                        </p>
                     </IonText>
                     <ExtendedRadio
                         control={control}

@@ -2,6 +2,7 @@ import { IonCard, IonCol, IonGrid, IonIcon, IonRow, IonText } from "@ionic/react
 import DeleteIcon from "@/assets/icons/delete_button.svg";
 import { create, createSharp, createOutline, addOutline, addSharp, cloudDownloadOutline } from "ionicons/icons";
 import AddButton from "@/assets/icons/add_button.svg";
+import { AddStudentRow } from "@/components/AddStudentRow";
 import "./AddStudents.scss";
 
 export const AddStudents: React.FC = () => {
@@ -41,7 +42,7 @@ export const AddStudents: React.FC = () => {
             <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "24px", }}>
                 <form action="">
                 <IonText className="ion-text-center">
-                        <h3 className="text-3xl semibold color-suelo">
+                        <h3 className="add-students-title text-3xl semibold color-suelo">
                             Add your students
                         </h3>
                 </IonText>
@@ -67,30 +68,22 @@ export const AddStudents: React.FC = () => {
                         </IonCol>
                     </IonRow>
 
-                    {studentsData.map((student, index) => (
-                        <IonRow key={index} className="text-sm color-suelo">
-                        <IonCol size="2">{student.firstName}</IonCol>
-                        <IonCol size="2">{student.lastName}</IonCol>
-                        <IonCol size="3">{student.primaryEmail}</IonCol>
-                        <IonCol size="3">{student.secondaryEmail}</IonCol>
-                        <IonCol size="1">
-                            <IonIcon src={DeleteIcon}/>
-                        </IonCol>
-                        <IonCol size="1">
-                            <IonIcon src={create}/>
-                        </IonCol>
-                        
-                        </IonRow>
-                    ))}
+                    <AddStudentRow studentData={studentsData}/>
 
                 </IonGrid>
-                <div>
+                <div className="add-and-upload-buttons">
                     <button className="add-student-button text-sm semibold">
                     <IonIcon src={AddButton}/>
+                        <p>
                         Add another student
+                        </p>
                     </button>
                     <button className="upload-csv-button text-sm semibold color-selva">
-                    <IonIcon src={cloudDownloadOutline}/> Upload .CSV
+                    <IonIcon src={cloudDownloadOutline}/> 
+                    <p>
+                        Upload .CSV
+                    </p>
+                    
                     </button>
                 </div>
 

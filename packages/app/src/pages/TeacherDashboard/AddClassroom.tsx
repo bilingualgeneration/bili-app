@@ -40,6 +40,10 @@ export const AddClassroom: React.FC = () => {
             value: "prek",
         },
         {
+            label: "Kindergarten",
+            value: "kinder",
+        },
+        {
             label: "1st Grade",
             value: "1st",
         },
@@ -51,13 +55,10 @@ export const AddClassroom: React.FC = () => {
             label: "3rd Grade",
             value: "3rd",
         },
+       
         {
-            label: "4th Grade",
-            value: "4th",
-        },
-        {
-            label: "5th Grade",
-            value: "5th",
+            label: "Other",
+            value: "other",
         },
     ];
 
