@@ -321,20 +321,6 @@ export const Router: React.FC = () => {
 
           <Route
             exact
-            path="/class-overview"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <SettingsLayout background="#f7faf9">
-                    <ClassOverview />
-                  </SettingsLayout>
-                </AdultCheckProvider>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
             path="/classrooms"
             render={() => (
               <AuthedLayout>
@@ -346,6 +332,20 @@ export const Router: React.FC = () => {
           />
 
           <Route
+            exact
+            path="/classrooms/:uuid"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <TeacherDashboardWrapper>
+                    <ClassOverview />
+                  </TeacherDashboardWrapper>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+	  <Route
             exact
             path="/classrooms/add"
             render={() => (

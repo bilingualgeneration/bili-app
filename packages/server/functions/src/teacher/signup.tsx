@@ -33,7 +33,7 @@ export const signup = onCall(async (request) => {
 
   const emailDomain = request.data.email.trim().toLowerCase().split('@')[1];
 
-  const schoolQuery = (await admin.firestore().collection('schools').where(
+  const schoolQuery = (await admin.firestore().collection('school').where(
     'emailDomains',
     'array-contains',
     emailDomain
@@ -61,7 +61,7 @@ export const signup = onCall(async (request) => {
   const uid: string = userRecord.uid;
 
   await Promise.all([
-    admin.firestore().collection('users').doc(uid).set(profile),
+    admin.firestore().collection('user').doc(uid).set(profile),
   ]);
 
 });

@@ -19,6 +19,10 @@ import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import ClassroomAvatar from "@/assets/icons/classroom_avatar.svg"
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
+import {
+  FirestoreCollectionProvider,
+  useFirestoreCollection,
+} from '@/hooks/FirestoreCollection';
 import React from "react";
 
 import { useProfile } from "@/hooks/Profile";
@@ -45,13 +49,10 @@ const getGrades = (grades: string[]) => {
 
 export const MyClassrooms: React.FC = () => {
   const {
-    profile: { isImmersive, isInclusive },
-    classrooms: classrooms
+    user: {uid},
+    profile: { isImmersive, isInclusive }
   } = useProfile();
-  
     const intl = useIntl();
-
-
     const settingsExploreCards = [
         {
             backgroundImage: settingsCardDesign1,
@@ -234,33 +235,17 @@ export const MyClassrooms: React.FC = () => {
                         <IonCol size="auto">
                         </IonCol>
                     </IonRow>
-
-                    {Object.keys(classrooms).length > 0 && (
-                        <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
-                            {Object.values(classrooms).map((classroom: any, index) => (
-                                <IonCol size="6" key={classroom.id}>
-                                    <div className="classroom-names">
-                                        <RadioCard
-                                            icon={
-                                                <img src={ClassroomAvatar} />
-                                            }
-                                          title={classroom.name}
-                                            subTitle={getGrades(classroom.grades)}
-                              content={intl.formatMessage(
-				{id: 'pages.classrooms.classroomSize'},{size: classroom.size}
-			      )}
-                                            iconBackgroundColor=""
-                                            titleFontSize="xl"
-                                            titleColor="color-suelo"
-                                            contentFontSize="lg"
-                                            contentColor="color-barro"
-                                        />
-                                    </div>
-                                </IonCol>
-                            ))}
-                        </IonRow>
-                    )}
-
+		    <FirestoreCollectionProvider
+		      collection='classroom'
+		      filters={[
+			[
+			  'teachers',
+			  'array-contains',
+			  uid
+			]
+		      ]}>
+		      <ClassroomsList />
+		    </FirestoreCollectionProvider>
                     <IonRow
                         className="ion-justify-content-between margin-bottom-3 add-new-class-row ion-align-items-center"
                     >
@@ -316,5 +301,80 @@ export const MyClassrooms: React.FC = () => {
             </div>
         </div>
     );
+}
 
+const ClassroomsList: React.FC = () => {
+  const intl = useIntl();
+  const {data, status} = useFirestoreCollection();
+  switch(status){
+    case 'loading':
+      return <></>;
+      break;
+    case 'error':
+      return <>error</>;
+      break;
+    case 'ready':
+      console.log(data);
+      return <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
+        {data.map((classroom: any, index: number) => (
+          <IonCol size="6" key={classroom.id}>
+            <div className="classroom-names">
+	      <Link to={`/classrooms/${classroom.id}`} className='no-underline'>
+                <RadioCard
+                  icon={
+                    <img src={ClassroomAvatar} />
+                  }
+                  title={classroom.name}
+                  subTitle={getGrades(classroom.grades)}
+		content={intl.formatMessage(
+		  {id: 'pages.classrooms.classroomSize'},{size: classroom.size}
+		)}
+                  iconBackgroundColor=""
+                  titleFontSize="xl"
+                  titleColor="color-suelo"
+                  contentFontSize="lg"
+                  contentColor="color-barro"
+                />
+				    </Link>
+            </div>
+          </IonCol>
+        ))}
+      </IonRow>;
+      break;
+    default:
+      return <>this should never render</>;
+  }
+  /*
+                    {Object.keys(classrooms).length > 0 && (
+                        <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
+                            {Object.values(classrooms).map((classroom: any, index) => (
+                                <IonCol size="6" key={classroom.id}>
+                                  <div className="classroom-names">
+				    <Link to={`/classrooms/${classroom.id}`} className='no-underline'>
+                                      <RadioCard
+                                        icon={
+                                          <img src={ClassroomAvatar} />
+                                        }
+                                        title={classroom.name}
+                                        subTitle={getGrades(classroom.grades)}
+					content={intl.formatMessage(
+					  {id: 'pages.classrooms.classroomSize'},{size: classroom.size}
+					)}
+                                        iconBackgroundColor=""
+                                        titleFontSize="xl"
+                                        titleColor="color-suelo"
+                                        contentFontSize="lg"
+                                        contentColor="color-barro"
+                                        />
+				    </Link>
+                                  </div>
+                                </IonCol>
+                            ))}
+                        </IonRow>
+                    )}
+
+   */
+  return <>
+
+  </>;
 }

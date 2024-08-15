@@ -23,10 +23,10 @@ const getUserByEmail = async (email: string) => {
 export const add = onCall(async (request) => {
   // todo: verify that teacher is logged in
   const uid: string = request.auth!.uid;
-  const profile = (await admin.firestore().collection('users').doc(uid).get()).data();
+  const profile = (await admin.firestore().collection('user').doc(uid).get()).data();
 
   // todo: check that school exists!
-  //const school = (await admin.firestore().collection('schools').doc(profile.school.id).get()).data();
+  //const school = (await admin.firestore().collection('school').doc(profile.school.id).get()).data();
   const {data} = request;
 
   const classroomId = admin.firestore().collection('scrap').doc().id;
@@ -42,7 +42,7 @@ export const add = onCall(async (request) => {
     teachers: [uid],
   }
 
-  tasks.push(admin.firestore().collection('classrooms').doc(classroomId).set(classroomPayload));
+  tasks.push(admin.firestore().collection('classroom').doc(classroomId).set(classroomPayload));
   
   for(const student of data.students){
     // todo: check if student already exists
@@ -57,12 +57,46 @@ export const add = onCall(async (request) => {
     }
 
     // todo: check if student account already exists
-    tasks.push(admin.firestore().collection('students').add({
+    tasks.push(admin.firestore().collection('student').add({
       firstName: student.firstName,
       lastName: student.lastName,
-      classrooms: [classroomId]
+      classroom: [classroomId]
     }));
   }
 
+  tasks.push(admin.firestore().collection('classroomAnalytics').add({
+    classroom: classroomId,
+    studentNeeds: [],
+    studentHighlights: [],
+    learningTimeSummary: {
+      stories: {
+	atSchool: 0, // in minutes
+	atHome: 0
+      },
+      wellness: {
+	atSchool: 0,
+	atHome: 0
+      },
+      games: {
+	atSchool: 0,
+	atHome: 0
+      },
+      community: {
+	atSchool: 0,
+	atHome: 0
+      },
+    }
+    /*
+       studentNeeds
+       - student, percent, area
+       studentHighlights
+       - student, area
+       learningTimeSummary
+       - stories, wellness, games, community
+         - atSchool, atHome
+    */
+  }));
+  
+  
   await Promise.all(tasks);
 });

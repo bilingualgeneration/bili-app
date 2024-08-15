@@ -31,7 +31,9 @@ export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const [user, setUser] = useState<any>(undefined);
-  const [classrooms, setClassrooms] = useState<any>(undefined);
+  const [activeClassroom, setActiveClassroom] = useState<string | null>(null);
+
+  //const [classrooms, setClassrooms] = useState<any>(undefined);
 
   const [activeChildProfile, setActiveChildProfile] = useState<any>(undefined);
   const [activeChildId, setActiveChildId] = useState<string | undefined>(undefined);
@@ -39,7 +41,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
   const [profile, setProfile] = useState<any>(undefined);
   const [childProfiles, setChildProfiles] = useState<any>(undefined);
   const profileUnsubscribe = useRef<Unsubscribe | null>();
-  const classroomsUnsubscribe = useRef<Unsubscribe | null>();
+  //const classroomsUnsubscribe = useRef<Unsubscribe | null>();
   const childProfilesUnsubscribe = useRef<Unsubscribe | null>();
   useEffect(() => {
     onAuthStateChanged(auth, (userState) => {
@@ -55,7 +57,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
   useEffect(() => {
     if(user){
       // get profile
-      const userDoc = doc(firestore, 'users', user.uid);
+      const userDoc = doc(firestore, 'user', user.uid);
       const unsub = onSnapshot(userDoc, (d) => {
 	const data = d.data();
 	if(data){
@@ -65,6 +67,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
       profileUnsubscribe.current = unsub;
 
       // get classrooms
+      /*
       const classroomsCollection = collection(firestore, 'classrooms');
       const classroomsQuery = query(
 	classroomsCollection,
@@ -84,8 +87,9 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	setClassrooms(classroomData);
 	classroomsUnsubscribe.current = classroomsUnsub;
       });
+      */
       
-      const childrenCollection = collection(firestore, 'users');
+      const childrenCollection = collection(firestore, 'user');
       const childrenQuery = query(
 	childrenCollection,
 	where(
@@ -118,15 +122,18 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	if(childProfilesUnsubscribe.current){
 	  childProfilesUnsubscribe.current();
 	}
+
+	/*
 	if(classroomsUnsubscribe.current){
 	  classroomsUnsubscribe.current();
 	}
+	*/
 	setProfile(null);
 	setActiveChildProfile(null);
-	setClassrooms(null);
+	//setClassrooms(null);
 	profileUnsubscribe.current = null;
 	childProfilesUnsubscribe.current = null;
-	classroomsUnsubscribe.current = null;
+	//classroomsUnsubscribe.current = null;
       }
     }
   }, [user]);
@@ -141,7 +148,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
   
   const isLoading =
     user === undefined
-    || classrooms === undefined
+    //|| classrooms === undefined
     || profile === undefined;
     //|| activeChildProfile === undefined;
   return <ProfileContext.Provider
@@ -149,7 +156,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({children}) =
 	   value={{
 	     activeChildId,
 	     activeChildProfile,
-	     classrooms,
+	     //classrooms,
 	     isLoading,
 	     isLoggedIn: user !== undefined && user !== null,
 	     profile,
