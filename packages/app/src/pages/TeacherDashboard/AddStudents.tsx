@@ -100,10 +100,13 @@ export const AddStudents: React.FC = () => {
                         </IonRow>
 
                         {/* rows with student data */}
-                        <AddStudentRow studentData={studentsData} />
+                        <AddStudentRow 
+                            studentData={studentsData} 
+                            handleDeleteStudent={handleDeleteStudent}
+                        />
 
                         {/* row for inputting student data */}
-                        {isAdding && (
+                        
                              <form onSubmit={handleSubmit(handleSaveStudentClick)}>
                                 <IonRow className="text-sm color-suelo">
                                 <IonCol size="2">
@@ -131,29 +134,40 @@ export const AddStudents: React.FC = () => {
                                         name="secondaryEmail"                                   />
                                 </IonCol>
                                 <IonCol size="1">
-                                    <IonButton type="submit">Save</IonButton>
+                                    <button 
+                                        type="submit"
+                                        className="add-student-button text-sm semibold"
+                                    >
+                                        <IonIcon src={AddButton} />
+                                        <p>
+                                            Add student
+                                        </p>
+                                    </button>
                                 </IonCol>
-                                <IonCol size="1">
-                                    <IonButton
+                                <IonCol 
+                                    size="1"
+                                    className="reset-button-column"
+                                    >
+                                    <button
+                                        className="reset-student-button text-sm semibold"
                                          onClick={() => {reset();}}
                                     >
-                                    <IonIcon src={DeleteIcon} />
-                                    reset
-                                    </IonButton>
+                                       <p>
+                                            Reset
+                                        </p> 
+                                    </button>
                                 </IonCol>
                             </IonRow>
                              </form>
-                            
-                        )}
 
                     </IonGrid>
                     <div className="add-and-upload-buttons">
-                        <IonButton onClick={handleAddStudentClick} className="add-student-button text-sm semibold">
+                        {/* <IonButton onClick={handleAddStudentClick} className="add-student-button text-sm semibold">
                             <IonIcon src={AddButton} />
                             <p>
                                 Add another student
                             </p>
-                        </IonButton>
+                        </IonButton> */}
                         <button className="upload-csv-button text-sm semibold color-selva">
                             <IonIcon src={cloudDownloadOutline} />
                             <p>

@@ -1,0 +1,20 @@
+#add-student-row-component {
+    .add-student-row {
+        border-radius: 19.421px;
+        padding: 16px;
+        align-items: center;
+        margin-top: 4px;
+    }
+
+    .even-row {
+        background-color: rgba(0, 106, 103, 0.12);
+    }
+
+    .odd-row {
+        background-color: rgba(247, 250, 249, 1);
+    }
+
+    .student-row-delete-button ion-icon {
+        font-size: 20px;
+    }
+}
