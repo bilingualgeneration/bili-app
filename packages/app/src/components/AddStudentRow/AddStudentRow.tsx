@@ -24,6 +24,21 @@ export const AddStudentRow: React.FC<RowProps> = ({
 
     const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
+    function onDeleteClick(index: number) {
+        if (selectedRow === index) {
+            handleDeleteStudent(index)
+            setSelectedRow(null)
+        } else {
+            setSelectedRow(index)
+        }
+    }
+
+    function onPopoverDismiss(index: number) {
+        if (selectedRow === index) {
+            setSelectedRow(null)
+        }
+    }
+
     return (
         <div id='add-student-row-component'>
             {studentData.map((student, index) => (
@@ -46,7 +61,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                         <button 
                         id={`click-trigger ${index}`}
                         className='student-row-delete-button'
-                        onClick={() => handleDeleteStudent(index)}
+                        onClick={() => onDeleteClick(index)}
                         >
                             <IonIcon 
                             icon={DeleteIcon}                     
@@ -56,8 +71,12 @@ export const AddStudentRow: React.FC<RowProps> = ({
                             trigger={`click-trigger ${index}`}
                             triggerAction="click"
                             showBackdrop={false}
+                            onDidDismiss={() => onPopoverDismiss(index)}
+                            side="bottom" 
+                            alignment="start"
+                            size="auto"
                             >
-                            <IonContent class="ion-padding">Delete</IonContent>
+                            <IonContent class="ion-padding">Want to delete?</IonContent>
                         </IonPopover>
                         
                     </IonCol>

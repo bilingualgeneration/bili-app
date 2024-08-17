@@ -7,19 +7,39 @@ import "./AddStudents.scss";
 import { useState } from "react";
 import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useSignUpData } from "../SignUp/SignUpContext";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useHistory } from "react-router";
+import { firestore } from "@/components/Firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { useProfile } from "@/hooks/Profile";
+import { FormattedMessage } from "react-intl";
 
 export const AddStudents: React.FC = () => {
-
-    const { control, handleSubmit, reset } = useForm({
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            primaryEmail: "",
-            secondaryEmail: "",
-        },
-
+    const schema = z.object({
+        isImmersive: z.enum(['en', 'es', 'esen']),
     });
-
+    
+    const { data, setData, pushPage } = useSignUpData();
+    const history = useHistory();
+    const { user: {uid}, profile: {isImmersive, isInclusive, settingsLanguage }} = useProfile();
+    const ref = doc(firestore, "users", uid);
+  // TODO: we shouldn't allow this straight from the app
+    const updateProfile = (key: string, value: any) => {
+        updateDoc(ref, {
+        [key]: value,
+        });
+    };
+    const {
+        control,
+        handleSubmit,
+        reset,
+        formState: { isValid },
+    } = useForm<z.infer<typeof schema>>({
+        mode: "onBlur",
+        resolver: zodResolver(schema),
+    });
     const [studentsData, setStudentsData] = useState([
         {
             firstName: "John",
@@ -47,24 +67,26 @@ export const AddStudents: React.FC = () => {
         },
     ]);
 
-    const [isAdding, setIsAdding] = useState(true);
-
-    const handleAddStudentClick = () => {
-        setIsAdding(true);
-    };
-
     const handleSaveStudentClick = (data: any) => {
         setStudentsData([...studentsData, data]);
-        //setIsAdding(false);
         reset();
     };
 
     const handleDeleteStudent = (index: number) => {
         const updatedStudents = studentsData.filter((_, i) => i !== index);
         setStudentsData(updatedStudents);
-        setIsAdding(false);
+        
     };
 
+    const onSubmit = handleSubmit((responses) => {
+
+        setData({
+            ...data,
+            ...responses,
+        });
+
+        history.push('/classrooms/add_students');
+    });
 
     return (
 
@@ -162,12 +184,7 @@ export const AddStudents: React.FC = () => {
 
                     </IonGrid>
                     <div className="add-and-upload-buttons">
-                        {/* <IonButton onClick={handleAddStudentClick} className="add-student-button text-sm semibold">
-                            <IonIcon src={AddButton} />
-                            <p>
-                                Add another student
-                            </p>
-                        </IonButton> */}
+                        
                         <button className="upload-csv-button text-sm semibold color-selva">
                             <IonIcon src={cloudDownloadOutline} />
                             <p>
@@ -177,7 +194,24 @@ export const AddStudents: React.FC = () => {
                         </button>
                     </div>
 
+                    <IonButton
+                        data-testid="language-select-continue-button"
+                        shape="round"
+                        type="button"
+                        onClick={onSubmit}
+                    >
+                        <FormattedMessage
+                            id="common.continue"
+                            defaultMessage="Continue"
+                            description="Button label to continue"
+                        />
+                    </IonButton>
+
             </IonCard>
         </div>
     )
+}
+
+function setData(arg0: any) {
+    throw new Error("Function not implemented.");
 }
