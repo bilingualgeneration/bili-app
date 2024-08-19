@@ -8,7 +8,8 @@ import {
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { updateActivityStars } from "@/realtimeDb";
-import { getStarsFromStoryAttempts } from "@/lib/utils";
+import { getStarsFromAttempts } from "@/lib/utils";
+import { useActivity } from "@/contexts/ActivityContext";
 
 type Vocab = any;
 type Lang = string;
@@ -24,6 +25,20 @@ type VocabLookup = {
     [lang: Lang]: string;
   };
 };
+
+export type Attempt = {
+  pageNumber: number;
+  mistakes: number;
+};
+
+type PageNumber = number;
+
+export type GameData = Record<
+  PageNumber,
+  {
+    totalMistakesPossible: number;
+  }
+>;
 
 interface StoryState {
   pages: any;
@@ -44,7 +59,6 @@ interface StoryState {
   setPageLocks: Dispatch<SetStateAction<any>>;
   id: string | null;
   setId: Dispatch<SetStateAction<string | null>>;
-  handleAttempt: (params: { pageNumber: number; correct: boolean }) => void;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -68,45 +82,17 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   });
   const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
 
-  const [attempts, setAttempts] = useState<any[]>([]);
-  //console.log("attempts", attempts);
+  const {
+    attempts,
+    gamesData,
+    setPageNumber: setActivityPageNumber,
+  } = useActivity();
 
   const [id, setId] = useState<string | null>(null);
 
-  const handleAttempt = ({
-    pageNumber,
-    correct,
-  }: {
-    pageNumber: number;
-    correct: boolean;
-  }) => {
-    //console.log("pageNumber, correct", pageNumber, correct);
-    setAttempts((prevAttempts) => {
-      const newAttempts = [...prevAttempts];
-
-      const attemptIndex = newAttempts.findIndex(
-        (item) => item.pageNumber === pageNumber,
-      );
-
-      if (attemptIndex === -1) {
-        newAttempts.push({
-          pageNumber,
-          count: 1,
-        });
-      } else if (!correct) {
-        newAttempts[attemptIndex].count += 1;
-      }
-
-      return newAttempts;
-    });
-  };
-
-  // Reset attempt
-  // useEffect(() => {
-  //   if (pageNumber === filteredPages.length + 1) {
-  //     setAttempt([]);
-  //   }
-  // }, [pageNumber, filteredPages]);
+  useEffect(() => {
+    setActivityPageNumber(pageNumber);
+  }, [pageNumber]);
 
   // Record attempt and calculate stars
   useEffect(() => {
@@ -127,8 +113,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         userId: "user1",
         activity: "story",
         activityId: id,
-        // TODO: change numOfGames based on game
-        stars: getStarsFromStoryAttempts(attempts, 2),
+        stars: getStarsFromAttempts(attempts, gamesData),
       });
     }
   }, [pageNumber, totalPages]);
@@ -139,6 +124,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
 
   const pageForward = () => {
     if (totalPages > 0 && !pageLocks[pageNumber]) {
+      // Increment page
       setPageNumber((p) => {
         const newPage = p < totalPages - 1 ? p + 1 : totalPages - 1;
         if (id) {
@@ -186,7 +172,6 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         setPages,
         id,
         setId,
-        handleAttempt,
       }}
       children={children}
     />

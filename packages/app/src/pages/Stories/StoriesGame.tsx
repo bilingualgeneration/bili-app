@@ -22,6 +22,7 @@ import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "../../pages/Stories/Stories.scss";
+import { useActivity } from "@/contexts/ActivityContext";
 
 interface PictureImage {
   url: string;
@@ -151,8 +152,8 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { addAudio, clearAudio } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { pageNumber, pageLocks, setPageLocks, pageForward, handleAttempt } =
-    useStory();
+  const { pageNumber, pageLocks, setPageLocks, pageForward } = useStory();
+  const { handleMistake } = useActivity();
 
   const headerData = useMemo((): GameHeader => {
     const textPacks =
@@ -255,18 +256,8 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   // Function to handle card click
   const handleCardClick = (card: any) => {
-    console.log("card", card);
-    handleAttempt({ pageNumber, correct: card.isTarget });
-    // setAttempt((prev) => [
-    //   ...prev,
-    //   {
-    //     pageNumber,
-    //     card,
-    //   },
-    // ]);
-
     if (!card.isTarget) {
-      console.log("incorrect 1");
+      handleMistake();
       //logic for the incorrect cards
 
       addAudio([card.audio.url]);
@@ -297,8 +288,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     }
 
     if (!card.isTarget) {
-      console.log("incorrect 2");
-
       //logic for the incorrect cards
       addAudio([card.audio.url]); //plays audio for incorrect choice
       setCardColors((prevColors: any) => ({
