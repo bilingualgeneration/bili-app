@@ -3,3 +3,4 @@ export * from "./MyClassrooms";
 export * from "./AddClassroom";
 export * from "./AddClassroomLanguage";
 export * from "./AddStudents";
+export * from "./InviteCaregivers";

@@ -79,7 +79,7 @@ import {
 } from '@/pages/WouldDo';
 import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
-import { AddClassroom, ClassOverview, AddClassroomLanguage, AddStudents } from '@/pages/TeacherDashboard';
+import { AddClassroom, ClassOverview, AddClassroomLanguage, AddStudents, InviteCaregivers } from '@/pages/TeacherDashboard';
 import { MyClassrooms } from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
@@ -375,6 +375,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <AddStudents/>
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/invite_caregivers"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <InviteCaregivers/>
                 </HeaderFooter>
               </AuthedLayout>
             )}

@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCol, IonGrid, IonIcon, IonRow, IonText } from "@ionic/react"
+import { IonButton, IonCard, IonCol, IonGrid, IonIcon, IonRouterLink, IonRow, IonText } from "@ionic/react"
 import DeleteIcon from "@/assets/icons/delete_button.svg";
 import { create, createSharp, createOutline, addOutline, addSharp, cloudDownloadOutline } from "ionicons/icons";
 import AddButton from "@/assets/icons/add_button.svg";
@@ -20,15 +20,15 @@ export const AddStudents: React.FC = () => {
     const schema = z.object({
         isImmersive: z.enum(['en', 'es', 'esen']),
     });
-    
+
     const { data, setData, pushPage } = useSignUpData();
     const history = useHistory();
-    const { user: {uid}, profile: {isImmersive, isInclusive, settingsLanguage }} = useProfile();
+    const { user: { uid }, profile: { isImmersive, isInclusive, settingsLanguage } } = useProfile();
     const ref = doc(firestore, "users", uid);
-  // TODO: we shouldn't allow this straight from the app
+    // TODO: we shouldn't allow this straight from the app
     const updateProfile = (key: string, value: any) => {
         updateDoc(ref, {
-        [key]: value,
+            [key]: value,
         });
     };
     const {
@@ -75,130 +75,122 @@ export const AddStudents: React.FC = () => {
     const handleDeleteStudent = (index: number) => {
         const updatedStudents = studentsData.filter((_, i) => i !== index);
         setStudentsData(updatedStudents);
-        
+
     };
 
-    const onSubmit = handleSubmit((responses) => {
-
-        setData({
-            ...data,
-            ...responses,
-        });
-
-        history.push('/classrooms/add_students');
-    });
 
     return (
 
         <div id="add-students-page">
             <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "24px", }}>
-              
-                    <IonText className="ion-text-center">
-                        <h3 className="add-students-title text-3xl semibold color-suelo">
-                            Add your students
-                        </h3>
-                    </IonText>
-                    <IonGrid className="add-students-grid">
-                        {/* title row */}
-                        <IonRow className="first-title-row text-md color-suelo semibold">
+
+                <IonText className="ion-text-center">
+                    <h3 className="add-students-title text-3xl semibold color-suelo">
+                        Add your students
+                    </h3>
+                </IonText>
+                <IonGrid className="add-students-grid">
+                    {/* title row */}
+                    <IonRow className="first-title-row text-md color-suelo semibold">
+                        <IonCol size="2">
+                            Student first name
+                        </IonCol>
+                        <IonCol size="2">
+                            Student last name
+                        </IonCol>
+                        <IonCol size="3">
+                            Primary home contact email
+                        </IonCol>
+                        <IonCol size="3">
+                            Secondary home contact email
+                        </IonCol>
+                        <IonCol>
+
+                        </IonCol>
+                        <IonCol>
+
+                        </IonCol>
+                    </IonRow>
+
+                    {/* rows with student data */}
+                    <AddStudentRow
+                        studentData={studentsData}
+                        handleDeleteStudent={handleDeleteStudent}
+                    />
+
+                    {/* row for inputting student data */}
+
+                    <form onSubmit={handleSubmit(handleSaveStudentClick)}>
+                        <IonRow className="text-sm color-suelo">
                             <IonCol size="2">
-                                Student first name
+                                <Input
+                                    placeholder="First name"
+                                    control={control}
+                                    name="firstName" />
                             </IonCol>
                             <IonCol size="2">
-                                Student last name
+                                <Input
+                                    placeholder="Last name"
+                                    control={control}
+                                    name="lastName" />
                             </IonCol>
                             <IonCol size="3">
-                                Primary home contact email
+                                <Input
+                                    placeholder="Primary email"
+                                    control={control}
+                                    name="primaryEmail" />
                             </IonCol>
                             <IonCol size="3">
-                                Secondary home contact email
+                                <Input
+                                    placeholder="Secondary email"
+                                    control={control}
+                                    name="secondaryEmail" />
                             </IonCol>
-                            <IonCol>
-
+                            <IonCol size="1">
+                                <button
+                                    type="submit"
+                                    className="add-student-button text-sm semibold"
+                                >
+                                    <IonIcon src={AddButton} />
+                                    <p>
+                                        Add student
+                                    </p>
+                                </button>
                             </IonCol>
-                            <IonCol>
-
+                            <IonCol
+                                size="1"
+                                className="reset-button-column"
+                            >
+                                <button
+                                    className="reset-student-button text-sm semibold"
+                                    type="button"
+                                    onClick={() => { reset(); }}
+                                >
+                                    <p>
+                                        Reset
+                                    </p>
+                                </button>
                             </IonCol>
                         </IonRow>
+                    </form>
 
-                        {/* rows with student data */}
-                        <AddStudentRow 
-                            studentData={studentsData} 
-                            handleDeleteStudent={handleDeleteStudent}
-                        />
+                </IonGrid>
+                <div className="add-and-upload-buttons">
 
-                        {/* row for inputting student data */}
-                        
-                             <form onSubmit={handleSubmit(handleSaveStudentClick)}>
-                                <IonRow className="text-sm color-suelo">
-                                <IonCol size="2">
-                                    <Input
-                                        placeholder="First name"
-                                        control={control} 
-                                        name="firstName"                                  />
-                                </IonCol>
-                                <IonCol size="2">
-                                    <Input
-                                        placeholder="Last name"
-                                        control={control} 
-                                        name="lastName"                                 />
-                                </IonCol>
-                                <IonCol size="3">
-                                    <Input
-                                        placeholder="Primary email"
-                                        control={control} 
-                                        name="primaryEmail"                                    />
-                                </IonCol>
-                                <IonCol size="3">
-                                    <Input
-                                        placeholder="Secondary email" 
-                                        control={control} 
-                                        name="secondaryEmail"                                   />
-                                </IonCol>
-                                <IonCol size="1">
-                                    <button 
-                                        type="submit"
-                                        className="add-student-button text-sm semibold"
-                                    >
-                                        <IonIcon src={AddButton} />
-                                        <p>
-                                            Add student
-                                        </p>
-                                    </button>
-                                </IonCol>
-                                <IonCol 
-                                    size="1"
-                                    className="reset-button-column"
-                                    >
-                                    <button
-                                        className="reset-student-button text-sm semibold"
-                                         onClick={() => {reset();}}
-                                    >
-                                       <p>
-                                            Reset
-                                        </p> 
-                                    </button>
-                                </IonCol>
-                            </IonRow>
-                             </form>
+                    <button className="upload-csv-button text-sm semibold color-selva">
+                        <IonIcon src={cloudDownloadOutline} />
+                        <p>
+                            Upload .CSV
+                        </p>
 
-                    </IonGrid>
-                    <div className="add-and-upload-buttons">
-                        
-                        <button className="upload-csv-button text-sm semibold color-selva">
-                            <IonIcon src={cloudDownloadOutline} />
-                            <p>
-                                Upload .CSV
-                            </p>
+                    </button>
+                </div>
 
-                        </button>
-                    </div>
-
+                <IonRouterLink routerLink="/classrooms/invite_caregivers">
                     <IonButton
-                        data-testid="language-select-continue-button"
+                        data-testid="caregiver-select-continue-button"
                         shape="round"
                         type="button"
-                        onClick={onSubmit}
                     >
                         <FormattedMessage
                             id="common.continue"
@@ -206,12 +198,11 @@ export const AddStudents: React.FC = () => {
                             description="Button label to continue"
                         />
                     </IonButton>
+                </IonRouterLink>
 
             </IonCard>
         </div>
     )
 }
 
-function setData(arg0: any) {
-    throw new Error("Function not implemented.");
-}
+
