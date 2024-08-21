@@ -72,6 +72,15 @@ export const AddStudents: React.FC = () => {
         reset();
     };
 
+    const handleEditStudentClick =  (data: any, index: number) => {
+        // Updates the student data directly at the specified index
+        studentsData[index] = data;
+        // Updates the state 
+        setStudentsData([...studentsData]); 
+        // Resets the form
+        reset();
+    };
+
     const handleDeleteStudent = (index: number) => {
         const updatedStudents = studentsData.filter((_, i) => i !== index);
         setStudentsData(updatedStudents);
@@ -115,8 +124,8 @@ export const AddStudents: React.FC = () => {
                     {/* rows with student data */}
                     <AddStudentRow
                         studentData={studentsData}
-                        handleDeleteStudent={handleDeleteStudent}
-                    />
+                        handleDeleteStudent={handleDeleteStudent} 
+                        handleEditStudentClick={handleEditStudentClick}                    />
 
                     {/* row for inputting student data */}
 
