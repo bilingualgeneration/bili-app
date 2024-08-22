@@ -1,4 +1,4 @@
-import {useProfile} from '@/hooks/Profile';
+import { useProfile } from "@/hooks/Profile";
 import { IonButton, IonIcon, IonItem, IonLabel, IonList } from "@ionic/react";
 import {
   arrowBackOutline,
@@ -13,6 +13,8 @@ import { FormattedMessage } from "react-intl";
 import "./SideMenu.scss";
 import { SideMenuOption } from "./SideMenuOption";
 import { useLocation } from "react-router-dom";
+import { useStudent } from "@/hooks/Student";
+import { useClassroom } from "@/hooks/Classroom";
 import { useIntl } from "react-intl";
 
 interface Option {
@@ -23,7 +25,9 @@ interface Option {
 }
 
 export const SideMenu: React.FC = () => {
-  const {signout} = useProfile();
+  const { signout } = useProfile();
+  const { setInfo: setClassroomInfo } = useClassroom();
+  const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
 
   const options: Option[] = [
@@ -93,7 +97,7 @@ export const SideMenu: React.FC = () => {
     <div id="settings-side-menu" style={{ height: "100%" }}>
       <IonList
         lines="none"
-        style={{ height: "100%"}}
+        style={{ height: "100%" }}
         className="side-menu-styles"
       >
         {options.map((option, index) => (
@@ -102,6 +106,17 @@ export const SideMenu: React.FC = () => {
 
         <div
           onClick={() => {
+            setClassroomInfo({
+              name: null,
+              schoolId: null,
+              id: null,
+            });
+            setStudentInfo({
+              firstName: null,
+              lastName: null,
+              id: null,
+            });
+
             signout();
           }}
         >
@@ -116,9 +131,9 @@ export const SideMenu: React.FC = () => {
             }
           />
         </div>
-	<div className='ion-text-right'>
-	  v{import.meta.env.VITE_APP_VERSION}
-	</div>
+        <div className="ion-text-right">
+          v{import.meta.env.VITE_APP_VERSION}
+        </div>
       </IonList>
     </div>
   );
