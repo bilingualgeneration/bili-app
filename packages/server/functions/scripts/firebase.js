@@ -1,18 +1,11 @@
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
-  projectId: 'bilingual-generation-dev'
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://bilingual-generation-dev-default-rtdb.firebaseio.com",
 });
-
-const firestoreEmulator = admin.firestore();
-firestoreEmulator.settings({
-  host: 'localhost:8080',
-  ssl: false
-});
-
-const firestore = admin.firestore();
 
 module.exports = {
-    firestore,
-    firestoreEmulator
-}
+  firestore: admin.firestore(),
+};
