@@ -44,6 +44,7 @@
         align-items: center;
         justify-content: center;
         margin-right: 24px;
+	cursor: pointer;
     }
     
     .student-card-selected {

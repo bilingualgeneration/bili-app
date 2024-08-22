@@ -6,7 +6,9 @@ import {
 } from 'react';
 import {
   collection,
-  getDocs
+  getDocs,
+  query,
+  where
 } from 'firebase/firestore';
 import {firestore} from '@/components/Firebase';
 
@@ -19,26 +21,37 @@ export const useFirestoreCollection = () => useContext(FirestoreCollectionContex
 
 type Status = 'error' | 'loading' | 'ready';
 
-interface Props {collection: any}
+interface Props {
+  collection: any
+  filters?: any
+}
 
 export const FirestoreCollectionProvider: React.FC<React.PropsWithChildren<Props>> = ({
   children,
-  collection: collectionPath
+  collection: collectionPath,
+  filters = []
 }) => {
   const [status, setStatus] = useState<Status>('loading');
   const [data, setData] = useState<any>(null);
 
+  let q = query(collection(firestore, collectionPath));
+  for(const f of filters){
+    q = query(q, where(f[0], f[1], f[2]));
+  }
   useEffect(() => {
-    getDocs(collection(firestore, collectionPath))
-    .then((snapshot) => {
-      setStatus('ready');
-      setData(snapshot.docs.map((doc) => doc.data()));
-    })
-    .catch((error) => {
-      setStatus('error');
-    });
+    getDocs(q)
+      .then((snapshot) => {
+	setStatus('ready');
+	setData(snapshot.docs.map((doc) => ({
+	  id: doc.id,
+	  ...doc.data()
+	})));
+      })
+      .catch((error) => {
+	setStatus('error');
+      });
   }, [collection]);
-
+  
   return <FirestoreCollectionContext.Provider
 	   children={children}
 	   value={{

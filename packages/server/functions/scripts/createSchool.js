@@ -12,7 +12,7 @@ const main = async () => {
 
     const f = isLive === 'y' ? firestore : firestoreEmulator;
     await f
-	.collection('schools')
+	.collection('school')
 	.add({
 	    name,
 	    emailDomains

@@ -15,7 +15,7 @@ export const childProfileCompletionAdd = onCall(async (request) => {
   } = request.data;
   await admin
     .firestore()
-    .collection("users")
+    .collection("user")
     .doc(uid)
     .update({
       completionPoints: admin.firestore.FieldValue.increment(completionsAdd),

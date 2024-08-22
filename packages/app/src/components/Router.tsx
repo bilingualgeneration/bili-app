@@ -78,10 +78,13 @@ import {
   WouldDoIntro,
   WouldDoGame,
 } from '@/pages/WouldDo';
-import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
-import { AddClassroom, ClassOverview } from '@/pages/TeacherDashboard';
-import { MyClassrooms } from '@/pages/TeacherDashboard';
+import {
+  AddClassroom,
+  ClassOverview,
+  StudentSelect,
+  MyClassrooms
+} from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -321,20 +324,6 @@ export const Router: React.FC = () => {
 
           <Route
             exact
-            path="/class-overview"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <SettingsLayout background="#f7faf9">
-                    <ClassOverview />
-                  </SettingsLayout>
-                </AdultCheckProvider>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
             path="/classrooms"
             render={() => (
               <AuthedLayout>
@@ -346,6 +335,32 @@ export const Router: React.FC = () => {
           />
 
           <Route
+            exact
+            path="/classrooms/:classroomId"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <TeacherDashboardWrapper>
+                    <ClassOverview />
+                  </TeacherDashboardWrapper>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/:classroomId/select-student"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StudentSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+	  <Route
             exact
             path="/classrooms/add"
             render={() => (
@@ -635,17 +650,6 @@ export const Router: React.FC = () => {
             )}
           />
 
-          <Route
-            exact
-            path="/student"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <StudentProfile />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
         </ScrollToTop>
       </Switch>
     </IonReactRouter>
