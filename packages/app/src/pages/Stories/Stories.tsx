@@ -46,11 +46,11 @@ const getLang = (lang: string, data: any) => {
 export const Stories = () => {
   // @ts-ignore
   const { uuid } = useParams();
-  return <FirestoreDocProvider collection='story' id={uuid} populate={[
-    'story-vocabulary-list',
-    'dnd-game',
-    'multiple-choice-game'
-  ]}>
+  return <FirestoreDocProvider collection='story' id={uuid} populate={{
+    'story-vocabulary-list': ['story', '==', uuid],
+    'dnd-game': ['story', '==', uuid],
+    'multiple-choice-game': ['story', '==', uuid]
+  }}>
     <StoriesHydrated />
   </FirestoreDocProvider>;
 };

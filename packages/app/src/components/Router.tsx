@@ -78,10 +78,13 @@ import {
   WouldDoIntro,
   WouldDoGame,
 } from '@/pages/WouldDo';
-import { StudentProfile } from '@/pages/StudentProfile';
 import { ClassCode } from '@/pages/SignUp/ClassCode';
-import { AddClassroom, ClassOverview } from '@/pages/TeacherDashboard';
-import { MyClassrooms } from '@/pages/TeacherDashboard';
+import {
+  AddClassroom,
+  ClassOverview,
+  StudentSelect,
+  MyClassrooms
+} from '@/pages/TeacherDashboard';
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -333,7 +336,7 @@ export const Router: React.FC = () => {
 
           <Route
             exact
-            path="/classrooms/:uuid"
+            path="/classrooms/:classroomId"
             render={() => (
               <AuthedLayout>
                 <AdultCheckProvider>
@@ -341,6 +344,18 @@ export const Router: React.FC = () => {
                     <ClassOverview />
                   </TeacherDashboardWrapper>
                 </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/:classroomId/select-student"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StudentSelect />
+                </HeaderFooter>
               </AuthedLayout>
             )}
           />
@@ -635,17 +650,6 @@ export const Router: React.FC = () => {
             )}
           />
 
-          <Route
-            exact
-            path="/student"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <StudentProfile />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
         </ScrollToTop>
       </Switch>
     </IonReactRouter>

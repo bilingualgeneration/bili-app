@@ -9,7 +9,12 @@ import {StoryFactoryLevel2} from './StoryFactoryLevel2';
 export const StoryFactoryPlay: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  return <FirestoreDocProvider collection='story-factory-game' id={pack_id} populate={['dnd-game']}>
+  return <FirestoreDocProvider
+	   collection='story-factory-game'
+	   id={pack_id}
+	   populate={{
+	     'dnd-game': ['story-factory-game', '==', 'pack_id']
+	   }}>
     <StoryFactoryHydratedGame />
   </FirestoreDocProvider>;
 };

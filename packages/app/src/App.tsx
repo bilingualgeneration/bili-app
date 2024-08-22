@@ -5,6 +5,7 @@ import {
 } from "@ionic/react";
 import {Router} from '@/components/Router';
 import {LanguageToggleProvider} from '@/components/LanguageToggle';
+import {ClassroomProvider} from '@/hooks/Classroom';
 
 // todo: unsure if ErrorBoundary is necessary
 // todo: unsure if Suspense is working
@@ -21,11 +22,9 @@ import {TimeTrackerProvider} from '@/hooks/TimeTracker';
 import {InterfaceLanguageProvider} from '@/hooks/InterfaceLanguage';
 import { I18nWrapper } from "@/components/I18nWrapper";
 
-
-
 import { PackSelect } from "@/components/PackSelect";
 import {ProfileProvider} from '@/hooks/Profile';
-
+import {StudentProvider} from '@/hooks/Student';
 
 
 // category headers (usually for PackSelect
@@ -72,11 +71,15 @@ const App: React.FC = () => {
           <AudioManagerProvider>
 	    <ProfileProvider>
 	      <LanguageToggleProvider>
-		<AppWrapper>
-		  <TimeTrackerProvider>
-		    <Router />	
-		  </TimeTrackerProvider>
-		</AppWrapper>
+		<ClassroomProvider>
+		  <StudentProvider>
+		    <AppWrapper>
+		      <TimeTrackerProvider>
+			<Router />	
+		      </TimeTrackerProvider>
+		    </AppWrapper>
+		  </StudentProvider>
+		</ClassroomProvider>
 	      </LanguageToggleProvider>
 	    </ProfileProvider>
           </AudioManagerProvider>

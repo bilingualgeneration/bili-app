@@ -9,18 +9,13 @@ import { Link } from "react-router-dom";
 import "./ProfileChip.scss";
 import { useRef, useState } from "react";
 import { useLanguageToggle } from "../LanguageToggle";
-
-const defaultChildProfile = {
-  completionPoints: 0,
-  name: ''
-}
+import {useClassroom} from '@/hooks/Classroom';
+import {useStudent} from '@/hooks/Student';
 
 export const ProfileChip: React.FC = () => {
-  /*
-  const { childProfiles, activeChildProfile } = useChildProfile();
-   */
-  const {activeChildProfile} = useProfile();
-  const { completionPoints, name } = activeChildProfile || defaultChildProfile;
+  const {firstName} = useStudent();
+  const {id: classroomId} = useClassroom();
+  const completionPoints = 0;
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();
@@ -46,7 +41,7 @@ export const ProfileChip: React.FC = () => {
               <IonText>{completionPoints || 0}</IonText>
             </div>
             <IonText>
-              <p className="text-xl semibold color-suelo">{name}</p>
+              <p className="text-xl semibold color-suelo">{firstName}</p>
             </IonText>
             <img src={Avatar} />
           </div>
@@ -67,12 +62,11 @@ export const ProfileChip: React.FC = () => {
       >
         <IonContent id="profile-chip-popover">
           <IonList>
+	    <Link to={`/profile/coming-soon`} className='no-underline'>
             <IonItem
               button={true}
               detail={false}
-              lines="none"
-              href="/profile/coming-soon"
-            >
+              lines="none">
               <IonIcon icon={StudentAvatar} style={{marginRight: "7px"}}/>
               <IonText>
                 <h1 className="text-md semibold">
@@ -86,14 +80,14 @@ export const ProfileChip: React.FC = () => {
                 }
               </IonText>
             </IonItem>
+	    </Link>
 
+	    <Link to={`/classrooms/${classroomId}/select-student`} className='no-underline'>
             <IonItem
               button={true}
               detail={false}
               lines="none"
-              className="change-student"
-              href="/student"
-            >
+              className="change-student">
               <IonIcon icon={StudentLogout} style={{marginRight: "7px"}}/>
               <IonText >
                 <h1 className="text-md semibold">
@@ -107,6 +101,7 @@ export const ProfileChip: React.FC = () => {
                 }
               </IonText>
             </IonItem>
+	    </Link>
           </IonList>
         </IonContent>
       </IonPopover>

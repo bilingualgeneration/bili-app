@@ -15,18 +15,19 @@ import {
 import {firestore} from '@/components/Firebase';
 
 type FirestoreDocState = any;
-
 const FirestoreDocContext = createContext<FirestoreDocState>({} as FirestoreDocState);
-
 export const useFirestoreDoc = () => useContext(FirestoreDocContext);
 
-
 type Status = 'error' | 'loading' | 'ready';
+
+interface PropsPopulate {
+  [index: string]: string[]
+}
 
 interface Props {
   collection: any,
   id: string,
-  populate?: string[]
+  populate?: PropsPopulate
 }
 
 export const FirestoreDocProvider: React.FC<React.PropsWithChildren<Props>> = ({
@@ -42,17 +43,25 @@ export const FirestoreDocProvider: React.FC<React.PropsWithChildren<Props>> = ({
     (async () => {
       const snapshot: any = await getDoc(doc(firestore, collectionPath, id));
       let payload = snapshot.data();
-      for(const p of populate){
+      for(const p of Object.keys(populate)){
 	const docs = await getDocs(
 	  query(
-	    collection(firestore, p),
-	    where(collectionPath, '==', id)
+	    query(collection(firestore, p)),
+	    // @ts-ignore
+	    where(populate[p][0], populate[p][1], populate[p][2])
 	  )
 	);
-	payload[p] = docs.docs.map((d) => d.data());
+	payload[p] = docs.docs.map((d) => ({
+	  id: d.id,
+	  ...d.data()
+	})
+	);
       }
       setStatus('ready');
-      setData(payload);
+      setData({
+	id,
+	...payload
+      });
       // todo: handle errors
     })();
   }, [collection, id]);

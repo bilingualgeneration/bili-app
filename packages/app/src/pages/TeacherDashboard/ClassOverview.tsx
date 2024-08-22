@@ -14,24 +14,26 @@ import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import "./ClassOverview.scss";
-import { useState } from "react";
+import {useClassroom} from '@/hooks/Classroom';
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
+
+import "./ClassOverview.scss";
 
 const dataAtSchool = [24, 32, 28, 16];
 const dataAtHome = [18, 25, 40, 17];
 const dataAllLearning = dataAtSchool.map((value, index) => value + dataAtHome[index]);
 
 export const ClassOverview: React.FC = () => {
-  const { uuid } = useParams<{uuid: string}>();
+  const { classroomId } = useParams<{classroomId: string}>();
   return <FirestoreDocProvider
 	   collection='classroom'
-	   id={uuid}
-	   populate={[
-	     'classroomAnalytics'
-	   ]}
+	   id={classroomId}
+	   populate={{
+	     'classroomAnalytics': ['classroom', '==', classroomId]
+	   }}
 	 >
     <ClassLoader />
   </FirestoreDocProvider>;
@@ -72,6 +74,8 @@ const studentHighlightsStyle = {
 };
 
 export const ClassOverviewHydrated: React.FC<any> = ({
+  id,
+  school,
   name,
   classroomAnalytics: {
     studentHighlights,
@@ -79,6 +83,21 @@ export const ClassOverviewHydrated: React.FC<any> = ({
   }
 }) => {
   const intl = useIntl();
+  const {
+    setInfo,
+  } = useClassroom();
+  useEffect(() => {
+    setInfo({
+      name,
+      id,
+      schoolId: school
+    });
+  }, [
+    setInfo,
+    id,
+    school,
+    name
+  ]);
   return (
     <div id="teacher-dashboard-class-overview-id">
       {/* header text */}
@@ -100,15 +119,13 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                   {name}
                 </IonText>
                 <button className="visit-students-button">
-                  <Link to="/student" className="no-underline">
+                  <Link to={`/classrooms/${id}/select-student`} className="no-underline">
                     <p className="text-md semibold color-suelo">
                       Go to student app
                     </p>
                   </Link>
                 </button>
-
               </div>
-
             </div>
           </IonLabel>
         </IonItem>

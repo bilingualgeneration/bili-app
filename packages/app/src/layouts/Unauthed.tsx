@@ -6,6 +6,7 @@ import {
 import {Redirect} from 'react-router-dom';
 import {useInterfaceLanguage} from '@/hooks/InterfaceLanguage';
 import {useProfile} from '@/hooks/Profile';
+import {useStudent} from '@/hooks/Student';
 
 interface UnauthedLayoutProps {
   background?: string; // Default to false
@@ -18,11 +19,16 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
 }) => {
   const {isLoggedIn, profile} = useProfile();
   const {language} = useInterfaceLanguage();
+  const {id: studentId} = useStudent();
   // assume there are no public pages
   if(isLoggedIn){
     switch(profile.role){
       case 'teacher':
-	return <Redirect to='/classrooms' />;
+	if(studentId === null){
+	  return <Redirect to='/classrooms' />;
+	}else{
+	  return <Redirect to='/student-dashboard' />;
+	}
 	break;
       case 'parent':
 	return <Redirect to='/student-dashboard' />;

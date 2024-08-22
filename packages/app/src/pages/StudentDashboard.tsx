@@ -20,6 +20,7 @@ import {
 import { PackSelect } from "@/components/PackSelect";
 import { useIntl, FormattedMessage } from "react-intl";
 import {useLanguageToggle} from '@/components/LanguageToggle';
+import {useStudent} from '@/hooks/Student';
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
@@ -188,7 +189,7 @@ const communityCards = [
 ];
 
 const Banner: React.FC = () => {
-  const {activeChildProfile: {name}} = useProfile();
+  const {firstName} = useStudent();
   const {language} = useLanguageToggle();
   return <div
            className="cards-title background-pattern"
@@ -201,12 +202,12 @@ const Banner: React.FC = () => {
     <h1 className="text-5xl color-suelo carousel-header-margin">
       <FormattedMessage
         id="landingPage.welcome"
-        defaultMessage="Hello {name}!"
-        values={{ name }}
+        defaultMessage="Hello {firstName}!"
+        values={{ firstName }}
       />
     </h1>
     {language === 'esen' && (
-      <p className="text-3xl color-english carousel-header-margin">Hello {name}!</p>
+      <p className="text-3xl color-english carousel-header-margin">Hello {firstName}!</p>
         )}
   </div>;
 }
@@ -214,7 +215,6 @@ const Banner: React.FC = () => {
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
   const {
-    activeChildProfile: {name},
     profile: {
       isInclusive,
     }
