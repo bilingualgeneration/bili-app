@@ -17,10 +17,7 @@ import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 
 export const AddStudents: React.FC = () => {
-    const schema = z.object({
-        isImmersive: z.enum(['en', 'es', 'esen']),
-    });
-
+  
     const { data, setData, pushPage } = useSignUpData();
     const history = useHistory();
     const { user: { uid }, profile: { isImmersive, isInclusive, settingsLanguage } } = useProfile();
@@ -36,9 +33,9 @@ export const AddStudents: React.FC = () => {
         handleSubmit,
         reset,
         formState: { isValid },
-    } = useForm<z.infer<typeof schema>>({
+    } = useForm({
         mode: "onBlur",
-        resolver: zodResolver(schema),
+        
     });
     const [studentsData, setStudentsData] = useState([
         {
@@ -67,6 +64,7 @@ export const AddStudents: React.FC = () => {
         },
     ]);
 
+    // TODO: check saving function
     const handleSaveStudentClick = (data: any) => {
         setStudentsData([...studentsData, data]);
         reset();
@@ -125,8 +123,9 @@ export const AddStudents: React.FC = () => {
                     <AddStudentRow
                         studentData={studentsData}
                         handleDeleteStudent={handleDeleteStudent} 
-                        handleEditStudentClick={handleEditStudentClick}                    />
-
+                        handleEditStudentClick={handleEditStudentClick}                    
+                    />
+      
                     {/* row for inputting student data */}
 
                     <form onSubmit={handleSubmit(handleSaveStudentClick)}>

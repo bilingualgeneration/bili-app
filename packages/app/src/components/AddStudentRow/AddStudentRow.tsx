@@ -133,7 +133,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                                     />
                                 </button>
                                 <IonAlert
-                                    header="Delete student: "
+                                    header="Delete Student"
                                     subHeader="Are you sure about this?"
                                     trigger={`present-alert ${index}`}
                                     className="custom-alert-delete-student"
@@ -146,8 +146,8 @@ export const AddStudentRow: React.FC<RowProps> = ({
                                             },
                                         },
                                         {
-                                            text: 'OK',
-                                            role: 'confirm',
+                                            text: 'Delete',
+                                            role: 'destructive',
                                             handler: () => {
                                                 handleDeleteStudent(index);
                                             },
