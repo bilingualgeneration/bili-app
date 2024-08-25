@@ -1,3 +1,4 @@
+//A.M.
 import {
     IonButton,
     IonCard,
@@ -10,7 +11,9 @@ import {
     IonText,
     IonToggle,
 } from "@ionic/react";
-import Question from "@/assets/icons/question.svg?react";
+import Letter from "@/assets/icons/letter.svg";
+import Printer from "@/assets/icons/printer.svg";
+import Star from "@/assets/icons/star.svg";
 import { useIntl, FormattedMessage } from "react-intl";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -65,7 +68,7 @@ export const InviteCaregivers: React.FC = () => {
                                 letterSpacing: "0.2px",
                             }}
                         >
-                            ES
+                            src={Letter}
                         </div>
                     }
                     title={'By email'}
@@ -94,7 +97,7 @@ export const InviteCaregivers: React.FC = () => {
                                 letterSpacing: "0.2px",
                             }}
                         >
-                            ES
+                            src={Printer}
                         </div>
                     }
                     title={'Both email and flyer'}
@@ -123,9 +126,7 @@ export const InviteCaregivers: React.FC = () => {
                                 letterSpacing: "0.2px",
                             }}
                         >
-                            EN
-                            <br />
-                            ES
+                            src={Star}
                         </div>
                     }
                     title={'By print out flyer'}
