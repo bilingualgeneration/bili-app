@@ -2,7 +2,7 @@
   "name": "@bili/app",
   "packageManager": "yarn@4.0.1",
   "private": true,
-  "version": "0.0.1+5",
+  "version": "0.0.1+7",
   "type": "module",
   "scripts": {
     "dev": "vite",

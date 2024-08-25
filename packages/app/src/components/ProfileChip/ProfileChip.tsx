@@ -1,20 +1,30 @@
-import { IonText, IonIcon, IonPopover, IonList, IonItem, IonContent, IonButton, IonLabel } from "@ionic/react";
+import {
+  IonText,
+  IonIcon,
+  IonPopover,
+  IonList,
+  IonItem,
+  IonContent,
+  IonButton,
+  IonLabel,
+} from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
 import { heart } from "ionicons/icons";
 import Avatar from "@/assets/icons/avatar.png";
-import StarNotSharp from "@/assets/icons/star_profile.svg"
+import StarNotSharp from "@/assets/icons/star_profile.svg";
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import StudentLogout from "@/assets/icons/logout.svg";
 import { Link } from "react-router-dom";
 import "./ProfileChip.scss";
 import { useRef, useState } from "react";
 import { useLanguageToggle } from "../LanguageToggle";
+import { useClassroom } from "@/hooks/Classroom";
+import { useStudent } from "@/hooks/Student";
 
 export const ProfileChip: React.FC = () => {
-  /*
-  const { childProfiles, activeChildProfile } = useChildProfile();
-   */
-  const { activeChildProfile: { completionPoints, name } } = useProfile();
+  const { firstName } = useStudent();
+  const { id: classroomId } = useClassroom();
+  const completionPoints = 0;
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();
@@ -24,12 +34,14 @@ export const ProfileChip: React.FC = () => {
     setPopoverOpen(true);
   };
 
-
   return (
-
     <>
       <div>
-        <button onClick={openPopover} className="custom-button-color" id="top-center">
+        <button
+          onClick={openPopover}
+          className="custom-button-color"
+          id="top-center"
+        >
           <div id="profileChip">
             <div id="starPoints" className="text-sm semibold color-nube">
               <IonIcon icon={StarNotSharp} />
@@ -40,7 +52,7 @@ export const ProfileChip: React.FC = () => {
               <IonText>{completionPoints || 0}</IonText>
             </div>
             <IonText>
-              <p className="text-xl semibold color-suelo">{name}</p>
+              <p className="text-xl semibold color-suelo">{firstName}</p>
             </IonText>
             <img src={Avatar} />
           </div>
@@ -55,52 +67,46 @@ export const ProfileChip: React.FC = () => {
         side="bottom"
         alignment="end"
         trigger="top-center"
-        arrow = {false}
+        arrow={false}
         className="profile-popover-style"
-
       >
         <IonContent id="profile-chip-popover">
           <IonList>
-            <IonItem
-              button={true}
-              detail={false}
-              lines="none"
-              href="/profile/coming-soon"
-            >
-              <IonIcon icon={StudentAvatar} style={{marginRight: "7px"}}/>
-              <IonText>
-                <h1 className="text-md semibold">
-                  {language !== 'en' && `Mi perfil`}
-                  {language === 'en' && `My profile`}
-                </h1>
-                {language === 'esen' &&
-                  <p className="text-sm">
-                    My profile
-                  </p>
-                }
-              </IonText>
-            </IonItem>
+            <Link to={`/profile/coming-soon`} className="no-underline">
+              <IonItem button={true} detail={false} lines="none">
+                <IonIcon icon={StudentAvatar} style={{ marginRight: "7px" }} />
+                <IonText>
+                  <h1 className="text-md semibold">
+                    {language !== "en" && `Mi perfil`}
+                    {language === "en" && `My profile`}
+                  </h1>
+                  {language === "esen" && <p className="text-sm">My profile</p>}
+                </IonText>
+              </IonItem>
+            </Link>
 
-            <IonItem
-              button={true}
-              detail={false}
-              lines="none"
-              className="change-student"
-              href="/student"
+            <Link
+              to={`/classrooms/${classroomId}/select-student`}
+              className="no-underline"
             >
-              <IonIcon icon={StudentLogout} style={{marginRight: "7px"}}/>
-              <IonText >
-                <h1 className="text-md semibold">
-                  {language !== 'en' && `Cambiar de estudiante`}
-                  {language === 'en' && `Change student`}
-                </h1>
-                {language === 'esen' &&
-                  <p className="text-sm">
-                    Change student
-                  </p>
-                }
-              </IonText>
-            </IonItem>
+              <IonItem
+                button={true}
+                detail={false}
+                lines="none"
+                className="change-student"
+              >
+                <IonIcon icon={StudentLogout} style={{ marginRight: "7px" }} />
+                <IonText>
+                  <h1 className="text-md semibold">
+                    {language !== "en" && `Cambiar de estudiante`}
+                    {language === "en" && `Change student`}
+                  </h1>
+                  {language === "esen" && (
+                    <p className="text-sm">Change student</p>
+                  )}
+                </IonText>
+              </IonItem>
+            </Link>
           </IonList>
         </IonContent>
       </IonPopover>

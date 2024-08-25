@@ -75,6 +75,7 @@
   "login.divider": "o",
   "login.teacher": "Iniciar sesión como profesor",
   "login.teacherWelcome": "Bienvenido a la página de inicio de sesión del profesor",
+  "pages.classrooms.classroomSize": "{size} estudiantes",
   "pages.storiesLandingPage.comingSoon": "Próximamente",
   "pages.storiesLandingPage.familyAndCommunity": "Familia y comunidad",
   "pages.storiesLandingPage.title": "Cuentos",

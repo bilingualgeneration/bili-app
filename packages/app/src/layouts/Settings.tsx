@@ -1,6 +1,6 @@
-import {Redirect} from 'react-router-dom';
-import {useProfile} from '@/hooks/Profile';
-import {useInterfaceLanguage} from '@/hooks/InterfaceLanguage';
+import { Redirect } from "react-router-dom";
+import { useProfile } from "@/hooks/Profile";
+import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FooterMenu } from "@/components/FooterMenu";
@@ -27,7 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const AdultCheckModal: FC = () => {
   const { isAdultCheckOpen, setIsAdultCheckOpen } = useAdultCheck();
   const [equation, setEquation] = useState<number[]>([1, 2, 3]);
-  const {isLoggedIn} = useProfile();
+  const { isLoggedIn } = useProfile();
   useEffect(() => {
     setIsAdultCheckOpen(true);
     // generate 2 digit numbers
@@ -139,11 +139,12 @@ const AdultCheckModal: FC = () => {
 };
 
 export const SettingsLayout: FC<
-React.PropsWithChildren<{
-  background?: string;
-}>
+  React.PropsWithChildren<{
+    background?: string;
+  }>
 > = ({ background = "", children }) => {
-  const {language} = useInterfaceLanguage();
+  const { language } = useInterfaceLanguage();
+  const { profile } = useProfile();
   return (
     <I18nWrapper locale={language}>
       <IonPage>
@@ -162,7 +163,7 @@ React.PropsWithChildren<{
               </IonRow>
             </IonGrid>
           </div>
-          <FooterMenu />
+          {profile.role === "parent" && <FooterMenu />}
         </IonContent>
       </IonPage>
     </I18nWrapper>

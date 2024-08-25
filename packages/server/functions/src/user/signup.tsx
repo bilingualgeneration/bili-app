@@ -39,7 +39,7 @@ export const signup = onCall(async (request) => {
     parentId: uid,
   };
   await Promise.all([
-    admin.firestore().collection("users").doc(uid).set(userProfile),
-    admin.firestore().collection("users").add(childProfile),
+    admin.firestore().collection("user").doc(uid).set(userProfile),
+    admin.firestore().collection("user").add(childProfile),
   ]);
 });

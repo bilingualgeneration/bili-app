@@ -1,4 +1,4 @@
-import {useProfile} from '@/hooks/Profile';
+import { useProfile } from "@/hooks/Profile";
 
 import { Carousel } from "@/components/Carousel";
 import { ContentCard } from "@/components/ContentCard";
@@ -19,7 +19,8 @@ import {
 } from "@ionic/react";
 import { PackSelect } from "@/components/PackSelect";
 import { useIntl, FormattedMessage } from "react-intl";
-import {useLanguageToggle} from '@/components/LanguageToggle';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useStudent } from "@/hooks/Student";
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
@@ -28,8 +29,8 @@ import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 
 import AmiguesCover from "@/assets/img/amigues_cover.png";
-import CatrinaCover from '@/assets/img/catrina.png';
-import GustaCover from '@/assets/img/gusta.png';
+import CatrinaCover from "@/assets/img/catrina.png";
+import GustaCover from "@/assets/img/gusta.png";
 import "./StudentDashboard.scss";
 
 interface WaveIcon {
@@ -47,8 +48,10 @@ const WaveIcon: React.FC<WaveIcon> = ({
   link,
   reactintlId,
 }) => {
-  const {profile: {isImmersive}} = useProfile();
-  const {language} = useLanguageToggle();
+  const {
+    profile: { isImmersive },
+  } = useProfile();
+  const { language } = useLanguageToggle();
   const history = useHistory();
   return (
     <span className="wave-icon">
@@ -65,13 +68,13 @@ const WaveIcon: React.FC<WaveIcon> = ({
       </div>
       <IonText>
         <h2 className="text-2xl semibold color-suelo">
-           <FormattedMessage
-             defaultMessage={reactintlId}
-             description="icon label"
-             id={reactintlId}
-           />
+          <FormattedMessage
+            defaultMessage={reactintlId}
+            description="icon label"
+            id={reactintlId}
+          />
         </h2>
-        {language === 'esen' && (
+        {language === "esen" && (
           <h2 className="text-lg color-suelo">{englishLabel}</h2>
         )}
       </IonText>
@@ -169,7 +172,7 @@ const communityCards = [
     title: "Cuéntame Sobre...",
     titleEn: "Tell me about...",
     cover: "/assets/img/card_community_image.png",
-    link: "/tell-me-about-game/intro"
+    link: "/tell-me-about-game/intro",
   },
   {
     category: "community",
@@ -184,42 +187,44 @@ const communityCards = [
     titleEn: "I Spy",
     cover: "/assets/img/flowers_image.png",
     isLocked: true,
-  }
+  },
 ];
 
 const Banner: React.FC = () => {
-  const {activeChildProfile: {name}} = useProfile();
-  const {language} = useLanguageToggle();
-  return <div
-           className="cards-title background-pattern"
-           style={{
-             paddingBottom: "4rem",
-             paddingTop: "4rem",
-             paddingLeft: 20,
-             paddingRight: 20,
-           }}>
-    <h1 className="text-5xl color-suelo carousel-header-margin">
-      <FormattedMessage
-        id="landingPage.welcome"
-        defaultMessage="Hello {name}!"
-        values={{ name }}
-      />
-    </h1>
-    {language === 'esen' && (
-      <p className="text-3xl color-english carousel-header-margin">Hello {name}!</p>
-        )}
-  </div>;
-}
+  const { firstName } = useStudent();
+  const { language } = useLanguageToggle();
+  return (
+    <div
+      className="cards-title background-pattern"
+      style={{
+        paddingBottom: "2rem",
+        paddingTop: "2rem",
+        paddingLeft: 20,
+        paddingRight: 20,
+      }}
+    >
+      <h1 className="text-5xl color-suelo carousel-header-margin">
+        <FormattedMessage
+          id="landingPage.welcome"
+          defaultMessage="Hello {firstName}!"
+          values={{ firstName }}
+        />
+      </h1>
+      {language === "esen" && (
+        <p className="text-3xl color-english carousel-header-margin">
+          Hello {firstName}!
+        </p>
+      )}
+    </div>
+  );
+};
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
   const {
-    activeChildProfile: {name},
-    profile: {
-      isInclusive,
-    }
+    profile: { isInclusive },
   } = useProfile();
-  const {language} = useLanguageToggle();
+  const { language } = useLanguageToggle();
   const isImmersive = true;
 
   const icons: WaveIcon[] = [
@@ -265,13 +270,18 @@ export const StudentDashboard: React.FC = () => {
                 defaultMessage="Categories"
               />
             </h1>
-            {language === 'esen' && (
-              <p className="text-3xl color-english carousel-header-margin">Categories</p>
+            {language === "esen" && (
+              <p className="text-3xl color-english carousel-header-margin">
+                Categories
+              </p>
             )}
           </IonText>
         </div>
         {/* icons */}
-        <div id="wave-icons" style={{ marginTop: "4rem", marginLeft: 30, marginRight: 30 }}>
+        <div
+          id="wave-icons"
+          style={{ marginTop: "4rem", marginLeft: 30, marginRight: 30 }}
+        >
           <IonGrid>
             <IonRow>
               {icons.map((icon) => (
@@ -293,36 +303,47 @@ export const StudentDashboard: React.FC = () => {
         <div className="stories-story-cards">
           <IonText>
             <Link to="/stories" className="no-text-decoration">
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <FormattedMessage id="common.stories" defaultMessage="Stories" />
-            </h1>
-            {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Stories</p>}
-	    </Link>
+              <h1 className="text-5xl color-suelo carousel-header-margin">
+                <FormattedMessage
+                  id="common.stories"
+                  defaultMessage="Stories"
+                />
+              </h1>
+              {language === "esen" && (
+                <p className="text-3xl color-english carousel-header-margin">
+                  Stories
+                </p>
+              )}
+            </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
-          <PackSelect 
-            translatedTitle={"Cuentos"} 
-            englishTitle={"Stories"} 
-            category={"story"} 
-            module={"story"}
-	    only_cards={true}
-            pack_name_field = {"title"}
-	    sortBy='order'
-          />
+            <PackSelect
+              translatedTitle={"Cuentos"}
+              englishTitle={"Stories"}
+              category={"story"}
+              module={"story"}
+              only_cards={true}
+              pack_name_field={"title"}
+              sortBy="order"
+            />
           </div>
         </div>
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
             <Link to="/wellness" className="no-text-decoration">
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <FormattedMessage
-                id="common.wellness"
-                defaultMessage="Wellness"
-              />
-            </h1>
-            {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Wellness</p>}
-	    </Link>
+              <h1 className="text-5xl color-suelo carousel-header-margin">
+                <FormattedMessage
+                  id="common.wellness"
+                  defaultMessage="Wellness"
+                />
+              </h1>
+              {language === "esen" && (
+                <p className="text-3xl color-english carousel-header-margin">
+                  Wellness
+                </p>
+              )}
+            </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
@@ -344,7 +365,11 @@ export const StudentDashboard: React.FC = () => {
                   description="Standalone label for Play"
                 />
               </h1>
-              {language === 'esen' && <p className="text-3xl color-english carousel-header-margin">Play</p>}
+              {language === "esen" && (
+                <p className="text-3xl color-english carousel-header-margin">
+                  Play
+                </p>
+              )}
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -366,8 +391,10 @@ export const StudentDashboard: React.FC = () => {
                   defaultMessage="Community"
                 />
               </h1>
-              {language === 'esen' && (
-                <p className="text-3xl color-english carousel-header-margin">Community</p>
+              {language === "esen" && (
+                <p className="text-3xl color-english carousel-header-margin">
+                  Community
+                </p>
               )}
             </IonText>
           </Link>

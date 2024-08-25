@@ -75,6 +75,7 @@
   "login.divider": "or",
   "login.teacher": "Login as Teacher",
   "login.teacherWelcome": "Welcome to Teacher Login Page",
+  "pages.classrooms.classroomSize": "{size} students",
   "pages.storiesLandingPage.comingSoon": "Coming Soon",
   "pages.storiesLandingPage.familyAndCommunity": "Family and community",
   "pages.storiesLandingPage.title": "Stories",

@@ -1,31 +1,18 @@
-import {
-  FormattedMessage,
-  useIntl,
-} from "react-intl";
-import {getFirebaseAuth} from '@/components/Firebase';
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonText
-} from "@ionic/react";
-import {signInWithEmailAndPassword} from "firebase/auth";
-import {UnauthedHeader} from "@/components/UnauthedHeader";
-import {useState} from 'react';
+import { FormattedMessage, useIntl } from "react-intl";
+import { getFirebaseAuth } from "@/components/Firebase";
+import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
+import { useState } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-
-
-
 
 import { userSchema } from "@bili/schema/user";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
-
 
 interface FormInputs {
   email: string;
@@ -76,10 +63,7 @@ const Login: React.FC = () => {
                 <div>
                   <Input
                     control={control}
-		    disabled={isLoading}
-
-
-		  
+                    disabled={isLoading}
                     label={intl.formatMessage({
                       id: "common.email",
                       defaultMessage: "Your email",
@@ -98,9 +82,7 @@ const Login: React.FC = () => {
                 <div className="ion-margin-top">
                   <Input
                     control={control}
-		    disabled={isLoading}
-
-		  
+                    disabled={isLoading}
                     label={intl.formatMessage({
                       id: "common.password",
                       defaultMessage: "Password",
