@@ -8,7 +8,7 @@ import {
 import type { MessageFormatElement } from "react-intl";
 import React from "react";
 
-import './RadioCard.css';
+import "./RadioCard.css";
 
 type RadioCardProps = {
   title: string | MessageFormatElement[];
@@ -32,16 +32,15 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   icon,
   iconBackgroundColor,
   title,
-  titleFontSize = '2xl', // default font-size for title
-  titleColor = 'color-selva', // default color for title
-  subTitleFontSize = 'lg', // default font-size for subTitle
-  subTitleColor = 'color-barro', // default color for subTitle
-  contentFontSize = 'sm', // default font-size for content
-  contentColor = 'color-suelo', // default color for content
-  
+  titleFontSize = "2xl", // default font-size for title
+  titleColor = "color-selva", // default color for title
+  subTitleFontSize = "lg", // default font-size for subTitle
+  subTitleColor = "color-barro", // default color for subTitle
+  contentFontSize = "sm", // default font-size for content
+  contentColor = "color-suelo", // default color for content
 }) => {
   return (
-    <IonCard className='radio-card'>
+    <IonCard className="radio-card">
       <div className="card-inner">
         {icon && (
           <div
@@ -52,18 +51,24 @@ export const RadioCard: React.FC<RadioCardProps> = ({
           </div>
         )}
         <div className="title-content">
-          <div
-            className="badge-content"
-            style={{
-              backgroundColor: "var(--Flamenco-High)",
-              marginLeft: "18px",
-              paddingLeft: "8px",
-              paddingRight: "8px",
-              borderRadius: "4px",
-            }}
-          >
-            {badge}
-          </div>
+          {badge && (
+            <div
+              className="badge-content"
+              style={{
+                backgroundColor: "#F48722",
+                marginTop: "15px",
+                marginLeft: "18px",
+                padding: "4px 8px",
+                borderRadius: "4px",
+                color: "#000000",
+                fontSize: "10px",
+                fontWeight: "600",
+              }}
+            >
+              {badge}
+            </div>
+          )}
+
           <IonCardHeader class="custom-ion-header">
             <IonCardTitle>
               <IonText>
@@ -77,16 +82,17 @@ export const RadioCard: React.FC<RadioCardProps> = ({
           <IonCardContent>
             <div>
               <IonText>
-              {subTitle && (
-                  <p className={`text-${subTitleFontSize} semibold ${subTitleColor}`}>
+                {subTitle && (
+                  <p
+                    className={`text-${subTitleFontSize} semibold ${subTitleColor}`}
+                  >
                     {subTitle as string}
                   </p>
-              )}
+                )}
                 <p className={`text-${contentFontSize} ${contentColor}`}>
                   {/* todo: don't force type cast */}
                   {content as string}
                 </p>
-               
               </IonText>
             </div>
           </IonCardContent>
