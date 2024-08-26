@@ -16,7 +16,7 @@ import {
 import { KeyVocab } from "./KeyVocab";
 import { StoriesCongrats } from "./StoriesCongrats";
 import { StoriesGame } from "./StoriesGame";
-import { GameData, StoryProvider, useStory } from "./StoryContext";
+import { StoryProvider, useStory } from "./StoryContext";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
@@ -31,7 +31,11 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./Stories.scss";
-import { ActivityProvider, useActivity } from "@/contexts/ActivityContext";
+import {
+  ActivityProvider,
+  GameData,
+  useActivity,
+} from "@/contexts/ActivityContext";
 
 const getLang = (lang: string, data: any) => {
   return data.filter((d: any) => d.language === lang)[0];
@@ -99,8 +103,7 @@ export const StoryLoader = () => {
     setId,
   } = useStory();
 
-  const { setActivityState, setGamesData, setFirstGamePageNumber } =
-    useActivity();
+  const { setGamesData, setActivityState } = useActivity();
 
   const { status, data } = useFirestoreDoc();
   console.log("data", data);
@@ -110,11 +113,20 @@ export const StoryLoader = () => {
   } = useProfile();
 
   useEffect(() => {
+    if (!uuid) return;
+
+    setActivityState({
+      type: "story",
+      id: uuid,
+    });
+  }, [uuid]);
+
+  useEffect(() => {
     if (data) {
       setId(uuid);
 
       let firstGamePageNumber = null;
-      const gamesData: GameData = {};
+      const gamesData: GameData = new Map();
 
       const fp = data.pages.filter((p: any) => {
         const langs = p.text.map((t: any) => t.language);
@@ -230,9 +242,12 @@ export const StoryLoader = () => {
           })
           .map((data: any, index: number) => {
             console.log("data dnd", data);
-            gamesData[pages.length + index] = {
+            gamesData.set(data.uuid, {
               totalMistakesPossible: data.pieces.length,
-            };
+            });
+            // gamesData[pages.length + index] = {
+            //   totalMistakesPossible: data.pieces.length,
+            // };
 
             return (
               <>
@@ -253,9 +268,12 @@ export const StoryLoader = () => {
         const gamePages = data["multiple-choice-game"]
           .filter((mcg: any) => mcg.language.includes(language))
           .map((mcg: any, index: number) => {
-            gamesData[pages.length + index] = {
+            gamesData.set(mcg.uuid, {
               totalMistakesPossible: mcg.choices.length,
-            };
+            });
+            // gamesData[pages.length + index] = {
+            //   totalMistakesPossible: mcg.choices.length,
+            // };
 
             const hasAudio = mcg.choices[0].audio !== null;
             const correctChoice = mcg.choices.filter(
@@ -297,6 +315,7 @@ export const StoryLoader = () => {
                 <PageWrapper>
                   <IonCol size="auto">
                     <StoriesGame
+                      id={mcg.uuid}
                       game={payload}
                       gameType={hasAudio ? "syllable" : "image"}
                     />
@@ -319,9 +338,14 @@ export const StoryLoader = () => {
         console.log("multi syll", data.multiple_syllable_text);
         pageLocks[pages.length] = true;
 
-        gamesData[pages.length] = {
+        const gameId = "multiple_syllable_text";
+
+        gamesData.set(gameId, {
           totalMistakesPossible: 4,
-        };
+        });
+        // gamesData[pages.length] = {
+        //   totalMistakesPossible: 4,
+        // };
 
         if (!firstGamePageNumber) firstGamePageNumber = pages.length;
 
@@ -329,7 +353,7 @@ export const StoryLoader = () => {
           <>
             <PageWrapper>
               <IonCol size="auto">
-                <StoriesGame game={data} gameType="syllable" />
+                <StoriesGame id={gameId} game={data} gameType="syllable" />
               </IonCol>
             </PageWrapper>
             <PageCounter />
@@ -352,9 +376,10 @@ export const StoryLoader = () => {
         </>,
       );
 
+      setGamesData(gamesData);
       setPageLocks(pageLocks);
       setPages(pages);
-      setFirstGamePageNumber(firstGamePageNumber);
+      // setFirstGamePageNumber(firstGamePageNumber);
       setPageNumber(0);
       setReady(true);
     }
@@ -686,6 +711,7 @@ const DnDGame: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
+  console.log("dnd game", data);
   const { pageLocks, setPageLocks, pageNumber, pageForward } = useStory();
   const { piecesDropped, totalTargets } = useDnD();
   useEffect(() => {
@@ -708,6 +734,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
             </h1>
           </IonText>
           <DnD
+            gameId={data.uuid}
             audioOnComplete={data.audio_on_complete}
             width={1366}
             target={data.target}

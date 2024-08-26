@@ -12,6 +12,7 @@ import { useStory } from "@/pages/Stories/StoryContext";
 import { useActivity } from "@/contexts/ActivityContext";
 
 export interface DropTargetProps {
+  gameId: string;
   classes: string;
   image: any;
   isBlank: boolean;
@@ -20,6 +21,7 @@ export interface DropTargetProps {
 }
 
 export const DropTarget: React.FC<DropTargetProps> = ({
+  gameId,
   classes,
   image,
   isBlank,
@@ -30,7 +32,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   const { pieces, setPieces, setPiecesDropped } = useDnD();
   const [hasDropped, setHasDropped] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const { handleMistake } = useActivity();
+  const { handleAttempt } = useActivity();
 
   const [, drop] = useDrop(
     () => ({
@@ -78,11 +80,10 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   }, [renderTrigger]);
 
   useEffect(() => {
-    console.log("isCorrect", isCorrect);
-    if (isCorrect === false) {
-      handleMistake();
-    }
-  }, [isCorrect]);
+    if (!gameId || isCorrect === null) return;
+
+    handleAttempt(gameId, isCorrect);
+  }, [isCorrect, gameId]);
 
   return (
     <>

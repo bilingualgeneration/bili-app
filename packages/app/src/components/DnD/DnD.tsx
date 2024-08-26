@@ -93,6 +93,7 @@ export interface DnDProps {
   target: string;
   pieces: Omit<PieceProps, "dropped" | "id" | "left" | "top">[];
   targetImage?: any;
+  gameId: string;
 }
 
 //    <ReactDndProvider backend={HTML5Backend}>
@@ -113,6 +114,7 @@ const Hydrator: React.FC<DnDProps> = ({
   target,
   targetImage,
   width,
+  gameId,
 }) => {
   const {
     pieces,
@@ -195,14 +197,15 @@ const Hydrator: React.FC<DnDProps> = ({
     setTotalTargets(tempTotalTargets);
     setPiecesDropped(0);
   }, [propsPieces, target, setPieces]);
-  return <Container targetImage={targetImage} />;
+  return <Container targetImage={targetImage} gameId={gameId} />;
 };
 
 interface ContainerProps {
+  gameId: string;
   targetImage?: any;
 }
 
-const Container: React.FC<ContainerProps> = ({ targetImage }) => {
+const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
   const { targetPieces, pieces, setPieces } = useDnD();
   const dropTargets = useMemo(() => {
     return targetPieces.map((word: any, wordIndex: number) =>
@@ -264,7 +267,7 @@ const Container: React.FC<ContainerProps> = ({ targetImage }) => {
             {targetImage && <DnDImage src={targetImage.url} />}
             {dropTargets.map((word: any) =>
               word.map((d: DropTargetProps) => (
-                <DropTarget key={d.text} {...d} />
+                <DropTarget key={d.text} {...d} gameId={gameId} />
               )),
             )}
           </div>

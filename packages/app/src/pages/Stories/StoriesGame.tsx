@@ -68,7 +68,7 @@ interface GameHeader {
 }
 
 interface StoriesGameProps {
-  //game: Story;
+  id: string;
   game: any;
   gameType: "image" | "syllable";
 }
@@ -141,6 +141,7 @@ function getCardsFromSyllableGame(story: Story): GameCard[] {
 }
 
 export const StoriesGame: React.FC<StoriesGameProps> = ({
+  id,
   game: data,
   gameType,
 }) => {
@@ -153,7 +154,9 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pageNumber, pageLocks, setPageLocks, pageForward } = useStory();
-  const { handleMistake } = useActivity();
+  const { handleAttempt } = useActivity();
+
+  console.log("$$ stories game", data);
 
   const headerData = useMemo((): GameHeader => {
     const textPacks =
@@ -256,8 +259,9 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
 
   // Function to handle card click
   const handleCardClick = (card: any) => {
+    handleAttempt(id, Boolean(card.isTarget));
+
     if (!card.isTarget) {
-      handleMistake();
       //logic for the incorrect cards
 
       addAudio([card.audio.url]);

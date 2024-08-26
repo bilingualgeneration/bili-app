@@ -1,4 +1,4 @@
-import { Attempt, GameData } from "@/pages/Stories/StoryContext";
+import { Attempts, GameData } from "@/contexts/ActivityContext";
 
 const MAX_POINTS = 10;
 
@@ -6,32 +6,38 @@ export const calculatePoints = (
   mistakes: number,
   totalPossibleMistakes: number,
 ): number => {
+  const pointsDiff = Math.ceil(MAX_POINTS / 4);
+
   if (mistakes === 0) {
-    return 10; // 0 mistakes = 10 points
+    return MAX_POINTS; // 0 mistakes = 10 points
   } else if (mistakes <= totalPossibleMistakes * 0.25) {
-    return 7; // Up to 25% of possible mistakes = 7 points
+    return MAX_POINTS - pointsDiff; // Up to 25% of possible mistakes = 7 points
   } else if (mistakes <= totalPossibleMistakes * 0.5) {
-    return 4; // Up to 50% of possible mistakes = 4 points
+    return MAX_POINTS - 2 * pointsDiff; // Up to 50% of possible mistakes = 4 points
   } else {
     return 1; // More than 50% of possible mistakes = 1 point
   }
 };
 
 export const getStarsFromAttempts = (
-  attempts: Attempt[],
+  attempts: Attempts,
   gameData: GameData,
 ) => {
-  const totalPoints = attempts.reduce((points, attempt) => {
-    return (
-      points +
-      calculatePoints(
-        attempt.mistakes,
-        gameData[attempt.pageNumber]?.totalMistakesPossible || 0,
-      )
-    );
-  }, 0);
+  let totalPoints = 0;
+  let numOfGames = 0;
 
-  const numOfGames = attempts.length;
+  attempts.forEach((attempt, gameId) => {
+    if (!gameId) return;
+
+    const gameInfo = gameData.get(gameId);
+    if (!gameInfo) return;
+
+    const totalMistakesPossible = gameInfo.totalMistakesPossible || 0;
+
+    totalPoints += calculatePoints(attempt.mistakes, totalMistakesPossible);
+    numOfGames += 1;
+  });
+
   const percentage = 100 * (totalPoints / (MAX_POINTS * numOfGames));
 
   if (percentage >= 90 && percentage <= 100) {

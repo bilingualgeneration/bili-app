@@ -1,14 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useClassroom } from "@/hooks/Classroom";
+import { useStudent } from "@/hooks/Student";
+import { getStarsFromAttempts } from "@/lib/utils";
+import { updateActivityStars } from "@/realtimeDb";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { createContext, useContext, useState } from "react";
 
 export type Attempt = {
-  pageNumber: number;
   mistakes: number;
 };
 
-type PageNumber = number;
+type GameId = string;
 
-export type GameData = Record<
-  PageNumber,
+export type Attempts = Map<GameId, Attempt>;
+
+export type GameData = Map<
+  GameId,
   {
     totalMistakesPossible: number;
   }
@@ -17,23 +23,17 @@ export type GameData = Record<
 type ActivityState = {
   type: string | null;
   id: string | null;
-  classroomId: string | null;
-  studentId: string | null;
 };
 
 type ActivityContextType = {
   activityState: ActivityState;
   setActivityState: React.Dispatch<React.SetStateAction<ActivityState>>;
-  gamesData: GameData;
   setGamesData: React.Dispatch<React.SetStateAction<GameData>>;
-  attempts: Attempt[];
-  setAttempts: React.Dispatch<React.SetStateAction<Attempt[]>>;
-  handleMistake: () => void;
+  handleAttempt: (gameId: GameId, isCorrect: boolean) => void;
   handleResetAttempts: () => void;
+  handleRecordAttempt: () => Promise<number>;
+  stars: number;
   hearts: number;
-  setHearts: React.Dispatch<React.SetStateAction<number>>;
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-  setFirstGamePageNumber: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 const ActivityContext = createContext<ActivityContextType | undefined>(
@@ -54,40 +54,32 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   const [activityState, setActivityState] = useState<ActivityState>({
     type: null,
     id: null,
-    classroomId: null,
-    studentId: null,
   });
 
-  const [pageNumber, setPageNumber] = useState<number>(0);
-  const [firstGamePageNumber, setFirstGamePageNumber] = useState<number | null>(
-    null,
-  );
-
-  const [gamesData, setGamesData] = useState<GameData>({});
-  const [attempts, setAttempts] = useState<Attempt[]>([]);
+  const [gamesData, setGamesData] = useState<GameData>(new Map());
+  const [attempts, setAttempts] = useState<Attempts>(new Map());
   const [hearts, setHearts] = useState<number>(0);
+  const [stars, setStars] = useState(0);
 
-  console.log("attempts", attempts);
-  console.log("gamesData", gamesData);
+  const student = useStudent();
+  const classroom = useClassroom();
+  console.log("student", student);
+  console.log("classroom", classroom);
 
-  const handleMistake = () => {
+  const functions = getFunctions();
+  const recordUserActivity = httpsCallable(functions, "user-activity-record");
+
+  const handleAttempt = (gameId: GameId, isCorrect: boolean) => {
     setAttempts((prev) => {
-      const newAttempts = [...prev];
-      const attemptIndex = newAttempts.findIndex(
-        (attempt) => attempt.pageNumber === pageNumber,
-      );
+      const newAttempts = new Map(prev);
+      const attempt = newAttempts.get(gameId);
 
-      if (attemptIndex === -1) {
-        newAttempts.push({
-          pageNumber,
-          mistakes: 1,
-        });
+      if (attempt) {
+        if (!isCorrect) {
+          attempt.mistakes += 1;
+        }
       } else {
-        const attempt = newAttempts[attemptIndex];
-        newAttempts[attemptIndex] = {
-          ...attempt,
-          mistakes: attempt.mistakes + 1,
-        };
+        newAttempts.set(gameId, { mistakes: isCorrect ? 0 : 1 });
       }
 
       return newAttempts;
@@ -95,49 +87,49 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const handleResetAttempts = () => {
-    setAttempts([]);
+    setAttempts(new Map());
   };
 
-  // Reset attempt
-  useEffect(() => {
-    if (pageNumber === firstGamePageNumber) {
-      handleResetAttempts();
-    }
-  }, [pageNumber, firstGamePageNumber]);
+  const handleRecordAttempt = async () => {
+    if (!activityState.id || !activityState.type)
+      throw new Error("Activity ID or type missing");
 
-  // If there is no record of an attempt on this page then add one
-  useEffect(() => {
-    if (firstGamePageNumber !== null && pageNumber === firstGamePageNumber) {
-      setAttempts((prev) => {
-        const attempt = prev.find((item) => item.pageNumber === pageNumber);
-        if (attempt) return prev;
+    const stars = getStarsFromAttempts(attempts, gamesData);
+    setStars(stars);
 
-        return [
-          ...prev,
-          {
-            pageNumber,
-            mistakes: 0,
-          },
-        ];
-      });
-    }
-  }, [firstGamePageNumber, pageNumber]);
+    await recordUserActivity({
+      activity: activityState.type,
+      activityId: activityState.id,
+      type: "attempt",
+      time: new Date().toISOString(),
+      version: "0.0.1",
+      data: JSON.stringify({
+        attempts: Object.fromEntries(attempts),
+      }),
+    });
+
+    await updateActivityStars({
+      classroomId: classroom.id,
+      userId: student.id,
+      activity: activityState.type,
+      activityId: activityState.id,
+      stars,
+    });
+
+    return stars;
+  };
 
   return (
     <ActivityContext.Provider
       value={{
         activityState,
         setActivityState,
-        gamesData,
         setGamesData,
-        attempts,
-        setAttempts,
-        handleMistake,
+        handleAttempt,
         handleResetAttempts,
+        handleRecordAttempt,
+        stars,
         hearts,
-        setHearts,
-        setPageNumber,
-        setFirstGamePageNumber,
       }}
     >
       {children}

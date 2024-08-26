@@ -20,8 +20,9 @@ export const StoryFactoryLevel1: React.FC = () => {
 const WrappedSF1: React.FC = () => {
   const dndWrapperRef = useRef<HTMLDivElement | null>(null);
   const {
-    data: { ["dnd-game"]: games },
+    data: { ["dnd-game"]: games, ...rest },
   } = useFirestoreDoc();
+  console.log("games, rest", games, rest);
   const { language, setIsVisible } = useLanguageToggle();
   useEffect(() => {
     setIsVisible(false);
@@ -66,6 +67,8 @@ const WrappedSF1: React.FC = () => {
       <div ref={dndWrapperRef} style={{ height: "100%" }}>
         {dndWidth > 0 && (
           <DnD
+            // TODO: fix
+            gameId="sfl1"
             audioOnComplete={filteredGames[pageNumber].audio_on_complete.url}
             width={dndWidth}
             targetImage={filteredGames[pageNumber].targetImage}

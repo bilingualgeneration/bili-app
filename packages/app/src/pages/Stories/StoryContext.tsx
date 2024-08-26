@@ -7,8 +7,6 @@ import {
   useState,
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { updateActivityStars } from "@/realtimeDb";
-import { getStarsFromAttempts } from "@/lib/utils";
 import { useActivity } from "@/contexts/ActivityContext";
 
 type Vocab = any;
@@ -25,20 +23,6 @@ type VocabLookup = {
     [lang: Lang]: string;
   };
 };
-
-export type Attempt = {
-  pageNumber: number;
-  mistakes: number;
-};
-
-type PageNumber = number;
-
-export type GameData = Record<
-  PageNumber,
-  {
-    totalMistakesPossible: number;
-  }
->;
 
 interface StoryState {
   pages: any;
@@ -82,40 +66,19 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   });
   const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
 
-  const {
-    attempts,
-    gamesData,
-    setPageNumber: setActivityPageNumber,
-  } = useActivity();
+  const { handleRecordAttempt } = useActivity();
 
   const [id, setId] = useState<string | null>(null);
 
-  useEffect(() => {
-    setActivityPageNumber(pageNumber);
-  }, [pageNumber]);
-
   // Record attempt and calculate stars
   useEffect(() => {
-    if (id && pageNumber === totalPages - 1) {
-      recordUserActivity({
-        activity: "story",
-        activityId: id,
-        type: "attempt",
-        time: new Date().toISOString(),
-        version: "0.0.1",
-        data: JSON.stringify({
-          attempts,
-        }),
-      });
+    const recordAttempt = async () => {
+      if (id && pageNumber === totalPages - 1) {
+        await handleRecordAttempt();
+      }
+    };
 
-      updateActivityStars({
-        classroomId: null,
-        userId: "user1",
-        activity: "story",
-        activityId: id,
-        stars: getStarsFromAttempts(attempts, gamesData),
-      });
-    }
+    recordAttempt();
   }, [pageNumber, totalPages]);
 
   const functions = getFunctions();
