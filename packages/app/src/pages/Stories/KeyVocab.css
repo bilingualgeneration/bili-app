@@ -1,0 +1,11 @@
+.stories-key-vocab-pill {
+  display: flex;
+  border-radius: 12.7px;
+  padding: 1rem;
+  background-color: #ffffff;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
