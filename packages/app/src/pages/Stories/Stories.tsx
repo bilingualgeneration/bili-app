@@ -31,6 +31,11 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./Stories.scss";
+import {
+  ActivityProvider,
+  GameData,
+  useActivity,
+} from "@/contexts/ActivityContext";
 
 const getLang = (lang: string, data: any) => {
   return data.filter((d: any) => d.language === lang)[0];
@@ -65,9 +70,11 @@ const StoriesHydrated: React.FC = () => {
       break;
     case "ready":
       return (
-        <StoryProvider>
-          <StoryLoader />
-        </StoryProvider>
+        <ActivityProvider>
+          <StoryProvider>
+            <StoryLoader />
+          </StoryProvider>
+        </ActivityProvider>
       );
       break;
     default:
@@ -96,15 +103,31 @@ export const StoryLoader = () => {
     setId,
   } = useStory();
 
+  const { setGamesData, setActivityState } = useActivity();
+
   const { status, data } = useFirestoreDoc();
+  console.log("data", data);
 
   const {
     profile: { isInclusive },
   } = useProfile();
 
   useEffect(() => {
+    if (!uuid) return;
+
+    setActivityState({
+      type: "story",
+      id: uuid,
+    });
+  }, [uuid]);
+
+  useEffect(() => {
     if (data) {
       setId(uuid);
+
+      let firstGamePageNumber = null;
+      const gamesData: GameData = new Map();
+
       const fp = data.pages.filter((p: any) => {
         const langs = p.text.map((t: any) => t.language);
         if (isInclusive) {
@@ -209,99 +232,128 @@ export const StoryLoader = () => {
       }
 
       if (data["dnd-game"]) {
-        pages = pages.concat(
-          data["dnd-game"]
-            .filter((d: any) => {
-              if (isInclusive && language === "es") {
-                return d.language === "es-inc";
-              } else {
-                return d.language === language;
-              }
-            })
-            .map((data: any) => (
+        const gamePages = data["dnd-game"]
+          .filter((d: any) => {
+            if (isInclusive && language === "es") {
+              return d.language === "es-inc";
+            } else {
+              return d.language === language;
+            }
+          })
+          .map((data: any, index: number) => {
+            console.log("data dnd", data);
+            gamesData.set(data.uuid, {
+              totalMistakesPossible: data.pieces.length,
+            });
+            // gamesData[pages.length + index] = {
+            //   totalMistakesPossible: data.pieces.length,
+            // };
+
+            return (
               <>
                 <PageWrapper>
                   <DnDGame data={data} />
                 </PageWrapper>
                 <PageCounter />
               </>
-            )),
-        );
+            );
+          });
+
+        if (!firstGamePageNumber) firstGamePageNumber = pages.length;
+
+        pages = pages.concat(gamePages);
       }
 
       if (data["multiple-choice-game"]) {
-        pages = pages.concat(
-          data["multiple-choice-game"]
-            .filter((mcg: any) => mcg.language.includes(language))
-            .map((mcg: any) => {
-              const hasAudio = mcg.choices[0].audio !== null;
-              const correctChoice = mcg.choices.filter(
-                (choice: any) => choice.isCorrect,
-              )[0];
-              const incorrectChoices = mcg.choices.filter(
-                (choice: any) => !choice.isCorrect,
-              );
-              let payload;
-              if (hasAudio) {
-                // todo: refactor
-                payload = {
-                  multiple_syllable_text: mcg.instructions,
-                  multiple_syllable_correct_image: correctChoice.image,
-                  multiple_syllable_correct_audio: correctChoice.audio,
-                  multiple_syllable_incorrect_image_1:
-                    incorrectChoices[0].image,
-                  multiple_syllable_incorrect_audio_1:
-                    incorrectChoices[0].audio,
-                  multiple_syllable_incorrect_image_2:
-                    incorrectChoices[1].image,
-                  multiple_syllable_incorrect_audio_2:
-                    incorrectChoices[1].audio,
-                  multiple_syllable_incorrect_image_3:
-                    incorrectChoices[2].image,
-                  multiple_syllable_incorrect_audio_3:
-                    incorrectChoices[2].audio,
-                };
-              } else {
-                payload = {
-                  multiple_image_text: mcg.instructions,
-                  multiple_image_correct_image: correctChoice.image,
-                  multiple_image_correct_audio: correctChoice.audio,
-                  multiple_image_incorrect_image_1: incorrectChoices[0].image,
-                  multiple_image_incorrect_audio_1: incorrectChoices[0].audio,
-                  multiple_image_incorrect_image_2: incorrectChoices[1].image,
-                  multiple_image_incorrect_audio_2: incorrectChoices[1].audio,
-                  multiple_image_incorrect_image_3: incorrectChoices[2].image,
-                  multiple_image_incorrect_audio_3: incorrectChoices[2].audio,
-                };
-              }
+        const gamePages = data["multiple-choice-game"]
+          .filter((mcg: any) => mcg.language.includes(language))
+          .map((mcg: any, index: number) => {
+            gamesData.set(mcg.uuid, {
+              totalMistakesPossible: mcg.choices.length,
+            });
+            // gamesData[pages.length + index] = {
+            //   totalMistakesPossible: mcg.choices.length,
+            // };
 
-              return (
-                <>
-                  <PageWrapper>
-                    <IonCol size="auto">
-                      <StoriesGame
-                        game={payload}
-                        gameType={hasAudio ? "syllable" : "image"}
-                      />
-                    </IonCol>
-                  </PageWrapper>
-                  <PageCounter />
-                </>
-              );
-            }),
-        );
+            const hasAudio = mcg.choices[0].audio !== null;
+            const correctChoice = mcg.choices.filter(
+              (choice: any) => choice.isCorrect,
+            )[0];
+            const incorrectChoices = mcg.choices.filter(
+              (choice: any) => !choice.isCorrect,
+            );
+            let payload;
+            if (hasAudio) {
+              // todo: refactor
+              payload = {
+                multiple_syllable_text: mcg.instructions,
+                multiple_syllable_correct_image: correctChoice.image,
+                multiple_syllable_correct_audio: correctChoice.audio,
+                multiple_syllable_incorrect_image_1: incorrectChoices[0].image,
+                multiple_syllable_incorrect_audio_1: incorrectChoices[0].audio,
+                multiple_syllable_incorrect_image_2: incorrectChoices[1].image,
+                multiple_syllable_incorrect_audio_2: incorrectChoices[1].audio,
+                multiple_syllable_incorrect_image_3: incorrectChoices[2].image,
+                multiple_syllable_incorrect_audio_3: incorrectChoices[2].audio,
+              };
+            } else {
+              payload = {
+                multiple_image_text: mcg.instructions,
+                multiple_image_correct_image: correctChoice.image,
+                multiple_image_correct_audio: correctChoice.audio,
+                multiple_image_incorrect_image_1: incorrectChoices[0].image,
+                multiple_image_incorrect_audio_1: incorrectChoices[0].audio,
+                multiple_image_incorrect_image_2: incorrectChoices[1].image,
+                multiple_image_incorrect_audio_2: incorrectChoices[1].audio,
+                multiple_image_incorrect_image_3: incorrectChoices[2].image,
+                multiple_image_incorrect_audio_3: incorrectChoices[2].audio,
+              };
+            }
+
+            return (
+              <>
+                <PageWrapper>
+                  <IonCol size="auto">
+                    <StoriesGame
+                      id={mcg.uuid}
+                      game={payload}
+                      gameType={hasAudio ? "syllable" : "image"}
+                    />
+                  </IonCol>
+                </PageWrapper>
+                <PageCounter />
+              </>
+            );
+          });
+
+        if (!firstGamePageNumber) firstGamePageNumber = pages.length;
+
+        pages = pages.concat(gamePages);
       }
 
       if (
         data.multiple_syllable_text &&
         data.multiple_syllable_text.length > 0
       ) {
+        console.log("multi syll", data.multiple_syllable_text);
         pageLocks[pages.length] = true;
+
+        const gameId = "multiple_syllable_text";
+
+        gamesData.set(gameId, {
+          totalMistakesPossible: 4,
+        });
+        // gamesData[pages.length] = {
+        //   totalMistakesPossible: 4,
+        // };
+
+        if (!firstGamePageNumber) firstGamePageNumber = pages.length;
+
         pages.push(
           <>
             <PageWrapper>
               <IonCol size="auto">
-                <StoriesGame game={data} gameType="syllable" />
+                <StoriesGame id={gameId} game={data} gameType="syllable" />
               </IonCol>
             </PageWrapper>
             <PageCounter />
@@ -324,8 +376,10 @@ export const StoryLoader = () => {
         </>,
       );
 
+      setGamesData(gamesData);
       setPageLocks(pageLocks);
       setPages(pages);
+      // setFirstGamePageNumber(firstGamePageNumber);
       setPageNumber(0);
       setReady(true);
     }
@@ -667,6 +721,7 @@ const DnDGame: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
+  console.log("dnd game", data);
   const { pageLocks, setPageLocks, pageNumber, pageForward } = useStory();
   const { piecesDropped, totalTargets } = useDnD();
   useEffect(() => {
@@ -678,6 +733,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
       pageForward();
     }
   }, [piecesDropped, totalTargets]);
+
   return (
     <>
       <IonCol size="auto">
@@ -688,6 +744,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
             </h1>
           </IonText>
           <DnD
+            gameId={data.uuid}
             audioOnComplete={data.audio_on_complete}
             width={1366}
             target={data.target}
