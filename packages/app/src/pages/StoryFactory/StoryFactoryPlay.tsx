@@ -2,6 +2,7 @@ import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useParams } from "react-router-dom";
 import { StoryFactoryLevel1 } from "./StoryFactoryLevel1";
 import { StoryFactoryLevel2 } from "./StoryFactoryLevel2";
+import { ActivityProvider } from "@/contexts/ActivityContext";
 
 export const StoryFactoryPlay: React.FC = () => {
   //@ts-ignore
@@ -14,7 +15,9 @@ export const StoryFactoryPlay: React.FC = () => {
         "dnd-game": ["story-factory-game", "==", pack_id],
       }}
     >
-      <StoryFactoryHydratedGame />
+      <ActivityProvider>
+        <StoryFactoryHydratedGame />
+      </ActivityProvider>
     </FirestoreDocProvider>
   );
 };
