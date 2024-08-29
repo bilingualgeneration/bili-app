@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Subject } from 'rxjs';
+import { Subject } from "rxjs";
 
 export interface AudioManager {
   addAudio: any;
@@ -23,13 +23,13 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
       audios[0].onended = () => {
         if (audios.length === 1) {
           // last one played
-	  onended.next();
+          onended.next();
         }
         setAudios(audios.slice(1));
-	audiosRef.current = audios.slice(1);
+        audiosRef.current = audios.slice(1);
       };
-      if(audiosRef.current[0]){
-	audiosRef.current[0].play();
+      if (audiosRef.current[0]) {
+        audiosRef.current[0].play();
       }
     }
   }, [audios]);
@@ -40,7 +40,8 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
     audiosRef.current.forEach((a) => {
       a.pause();
     });
-    const newAudios = inputAudios.map((a) => new Audio(a));
+    const filteredAudios = inputAudios.filter((a) => a);
+    const newAudios = filteredAudios.map((a) => new Audio(a));
     audiosRef.current = newAudios;
     setAudios(newAudios);
   };
@@ -58,7 +59,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
       value={{
         addAudio,
         clearAudio,
-	onended
+        onended,
       }}
     >
       {children}
