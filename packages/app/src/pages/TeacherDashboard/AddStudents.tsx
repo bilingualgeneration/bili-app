@@ -184,10 +184,11 @@ export const AddStudents: React.FC = () => {
           </form>
         </IonGrid>
         <div className="add-and-upload-buttons">
-          <button className="upload-csv-button text-sm semibold color-selva">
+          {/* TEMPORARY Hidden Button For .CSV files */}
+          {/* <button className="upload-csv-button text-sm semibold color-selva">
             <IonIcon src={cloudDownloadOutline} />
             <p>Upload .CSV</p>
-          </button>
+          </button> */}
         </div>
 
         <div className="add-student-button-continue">

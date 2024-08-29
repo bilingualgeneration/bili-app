@@ -26,33 +26,12 @@ import { useProfile } from "@/hooks/Profile";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/components/Firebase";
 import { useHistory } from "react-router";
+import "./InviteCaregivers.scss";
 
 export const InviteCaregivers: React.FC = () => {
-  const intl = useIntl();
-  const schema = z.object({
-    isImmersive: z.enum(["en", "es", "esen"]),
-  });
-  const {
-    control,
-    handleSubmit,
-    formState: { isValid },
-  } = useForm<z.infer<typeof schema>>({
-    mode: "onBlur",
-    resolver: zodResolver(schema),
-  });
   const { data, setData, pushPage } = useSignUpData();
   const history = useHistory();
-  const {
-    user: { uid },
-    profile: { isImmersive, isInclusive, settingsLanguage },
-  } = useProfile();
-  const ref = doc(firestore, "users", uid);
-  // TODO: we shouldn't allow this straight from the app
-  const updateProfile = (key: string, value: any) => {
-    updateDoc(ref, {
-      [key]: value,
-    });
-  };
+  const { control, handleSubmit, setValue, reset } = useForm();
 
   const emailOption: ExtendedRadioOption = {
     component: (
@@ -67,7 +46,7 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "en",
+    value: "",
   };
 
   const emailAndFlyerOption: ExtendedRadioOption = {
@@ -84,7 +63,7 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "es",
+    value: "",
   };
 
   const flyerOption: ExtendedRadioOption = {
@@ -100,7 +79,7 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "esen",
+    value: "",
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -113,14 +92,14 @@ export const InviteCaregivers: React.FC = () => {
   });
 
   return (
-    <div className="">
+    <div id="invite-caregivers-page">
       <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
         <form className="radio-button-select">
           <IonText className="ion-text-center">
             <h3 className="text-3xl semibold color-suelo">
               You’ve created your class!
             </h3>
-            <p className="text-xl semibold color-suelo">
+            <p className="text-xl semibold color-suelo margin-top-2 invite-caregivers-text">
               Invite student caregivers to download the app
             </p>
           </IonText>
@@ -132,7 +111,7 @@ export const InviteCaregivers: React.FC = () => {
 
           <IonButton
             data-testid="caregiver-select-continue-button"
-            disabled={!isValid}
+            //disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}

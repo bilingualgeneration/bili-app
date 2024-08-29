@@ -16,6 +16,8 @@ import AuthorIcon from "@/assets/icons/author_icon.png";
 import IllustratorIcon from "@/assets/icons/illustrator_icon.png";
 import NarratorIcon from "@/assets/icons/narrator_icon.png";
 
+import "./KeyVocab.css";
+
 const getWordByLanguage = (word: any, language: string) => {
   let payload = word.filter((w: any) => w.language === language);
   return payload.length === 1 ? payload[0].word.split(",")[0].trim() : null;
@@ -32,6 +34,7 @@ const Word: React.FC<{ word: any }> = ({ word }) => {
     <IonCol
       size="4"
       className="ion-text-center"
+      style={{ cursor: "pointer" }}
       onClick={() => {
         setCurrentVocabWord(en);
       }}
@@ -40,13 +43,11 @@ const Word: React.FC<{ word: any }> = ({ word }) => {
         <img src={image} style={{ height: 120, width: "auto" }} />
       </div>
       <IonText>
-        <h1 className="text-2xl semibold color-suelo">
+        <h1 className="text-2xl semibold color-selva">
           {language === "en" && en}
           {(language === "es" || language === "esen") && es}
         </h1>
-        {language === "esen" && (
-          <h2 className="text-1xl color-english">{en}</h2>
-        )}
+        {language === "esen" && <h2 className="text-xl color-english">{en}</h2>}
       </IonText>
     </IonCol>
   );
@@ -69,6 +70,7 @@ export const KeyVocab: React.FC<KeyVocab> = ({
   illustrator,
   narrator,
 }) => {
+  const { language } = useLanguageToggle();
   return (
     <>
       <IonCol size="auto">
@@ -118,6 +120,18 @@ export const KeyVocab: React.FC<KeyVocab> = ({
           }}
         >
           <IonCardContent>
+            <IonText>
+              <h1 className="text-4xl text-semibold color-suelo ion-text-center">
+                {language === "en"
+                  ? "Story vocabulary"
+                  : "Vocabulario del cuento"}
+              </h1>
+              {language === "esen" && (
+                <h2 className="text-2xl color-english ion-text-center">
+                  Story vocabulary
+                </h2>
+              )}
+            </IonText>
             <IonGrid>
               <IonRow>
                 {Object.values(words).map((word: any) => (
@@ -136,30 +150,22 @@ export const KeyVocab: React.FC<KeyVocab> = ({
 const Pill: (args: any) => any = ({ icon, text, value }) => {
   const { language } = useLanguageToggle();
   return (
-    <IonGrid
-      style={{
-        backgroundColor: "white",
-        border: "1px solid #bebebe",
-        borderRadius: "1rem",
-      }}
-      className="drop-shadow margin-bottom-1"
-    >
-      <IonRow style={{ alignItems: "center" }}>
-        <IonCol size="1">
-          <IonImg src={icon} />
-        </IonCol>
-        <IonCol size="auto">
-          <IonText>
-            <h2
-              style={{ marginTop: 0 }}
-              className="text-lg semibold color-suelo"
-            >
-              {language === "en" ? text.en : text.es}
-            </h2>
-            <p className="text-sm color-english">{value}</p>
-          </IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
+    <div className="stories-key-vocab-pill drop-shadow">
+      <IonImg
+        src={icon}
+        style={{ height: 38, aspectRatio: 1, marginRight: "1rem" }}
+      />
+      <IonText>
+        <h2 style={{ marginTop: 0 }}>
+          <span className="text-lg semibold color-suelo">
+            {language === "en" ? text.en : text.es}
+          </span>
+          {language === "esen" && (
+            <span className="text-lg color-english"> {text.en}</span>
+          )}
+        </h2>
+        <p className="text-sm color-english">{value}</p>
+      </IonText>
+    </div>
   );
 };

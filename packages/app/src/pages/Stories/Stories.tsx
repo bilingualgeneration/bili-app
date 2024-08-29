@@ -567,6 +567,7 @@ const SegmentedText: React.FC<
   React.PropsWithChildren<{ language: string }>
 > = ({ children, language }) => {
   const { setCurrentVocabWord, vocab } = useStory();
+  let isItalic: boolean = false;
   // @ts-ignore
   return children!.split(" ").map((text: string, index: number) => {
     let classes = ["word"];
@@ -575,6 +576,15 @@ const SegmentedText: React.FC<
       .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]*$/, "");
     if (vocab[language][normalized_word]) {
       classes.push("vocab");
+    }
+    if (text.startsWith("*")) {
+      isItalic = true;
+    }
+    if (isItalic) {
+      classes.push("italic");
+    }
+    if (text.endsWith("*")) {
+      isItalic = false;
     }
     return (
       <span
@@ -586,7 +596,7 @@ const SegmentedText: React.FC<
         }}
         key={index}
       >
-        {text}
+        {text.replace(/^\*|\*$/g, "")}
       </span>
     );
   });

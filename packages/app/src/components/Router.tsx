@@ -37,6 +37,7 @@ import {
   IntruderGameLoader,
 } from "@/pages/Intruder";
 import Login from "@/pages/Login";
+import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
 import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
@@ -75,8 +76,8 @@ import {
   AddStudents,
   InviteCaregivers,
   StudentSelect,
+  MyClassrooms,
 } from "@/pages/TeacherDashboard";
-import { MyClassrooms } from "@/pages/TeacherDashboard";
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -104,6 +105,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <Debug />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/phrase-matcher-test"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <PhraseMatcherTest />
                 </HeaderFooter>
               </AuthedLayout>
             )}

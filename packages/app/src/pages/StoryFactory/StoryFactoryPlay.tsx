@@ -11,7 +11,7 @@ export const StoryFactoryPlay: React.FC = () => {
       collection="story-factory-game"
       id={pack_id}
       populate={{
-        "dnd-game": ["story-factory-game", "==", "pack_id"],
+        "dnd-game": ["story-factory-game", "==", pack_id],
       }}
     >
       <StoryFactoryHydratedGame />
@@ -29,7 +29,6 @@ const StoryFactoryHydratedGame: React.FC = () => {
   if (status === "error") {
     return <>error</>;
   }
-
   switch (data.level) {
     case 1:
       return <StoryFactoryLevel1 />;
