@@ -1,30 +1,25 @@
-import {IonProgressBar} from '@ionic/react';
-import {
-  useState,
-} from 'react';
-import {useProfile} from '@/hooks/Profile';
-import {useClassroom} from '@/hooks/Classroom';
-import {useStudent} from '@/hooks/Student';
+import { IonProgressBar } from "@ionic/react";
+import { useState } from "react";
+import { useProfile } from "@/hooks/Profile";
+import { useClassroom } from "@/hooks/Classroom";
+import { useStudent } from "@/hooks/Student";
 
-import './AppWrapper.css';
+import "./AppWrapper.css";
 
 // todo: minimum loading time
 
-export const AppWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
-  const {isLoading: isProfileLoading} = useProfile();
-  const {isLoading: isClassroomLoading} = useClassroom();
-  const {isLoading: isStudentLoading} = useStudent();
+export const AppWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const { isLoading: isProfileLoading } = useProfile();
+  const { isLoading: isClassroomLoading } = useClassroom();
+  const { isLoading: isStudentLoading } = useStudent();
 
-  if(isProfileLoading
-     || isClassroomLoading
-     || isStudentLoading
-  ){
-    return <div id='appLoadingIndicator'>
-      <IonProgressBar
-	type='indeterminate'
-      />
-    </div>;
-  }else{
+  if (isProfileLoading || isClassroomLoading || isStudentLoading) {
+    return (
+      <div id="appLoadingIndicator">
+        <IonProgressBar type="indeterminate" />
+      </div>
+    );
+  } else {
     return children;
   }
 };

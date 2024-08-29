@@ -82,9 +82,9 @@ export const Select = ({
               {...props}
               {...fields}
               onIonChange={(event) => {
-		if(changeLanguage){
-		  changeLanguage(event.detail.value);
-		}
+                if (changeLanguage) {
+                  changeLanguage(event.detail.value);
+                }
                 onChange(event.detail.value);
               }}
             >

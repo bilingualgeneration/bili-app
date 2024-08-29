@@ -1,11 +1,8 @@
-import {AppWrapper} from '@/components/AppWrapper';
-import {
-  IonApp,
-  setupIonicReact,
-} from "@ionic/react";
-import {Router} from '@/components/Router';
-import {LanguageToggleProvider} from '@/components/LanguageToggle';
-import {ClassroomProvider} from '@/hooks/Classroom';
+import { AppWrapper } from "@/components/AppWrapper";
+import { IonApp, setupIonicReact } from "@ionic/react";
+import { Router } from "@/components/Router";
+import { LanguageToggleProvider } from "@/components/LanguageToggle";
+import { ClassroomProvider } from "@/hooks/Classroom";
 
 // todo: unsure if ErrorBoundary is necessary
 // todo: unsure if Suspense is working
@@ -18,14 +15,13 @@ import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { useIntl } from "react-intl";
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import {TimeTrackerProvider} from '@/hooks/TimeTracker';
-import {InterfaceLanguageProvider} from '@/hooks/InterfaceLanguage';
+import { TimeTrackerProvider } from "@/hooks/TimeTracker";
+import { InterfaceLanguageProvider } from "@/hooks/InterfaceLanguage";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
 import { PackSelect } from "@/components/PackSelect";
-import {ProfileProvider} from '@/hooks/Profile';
-import {StudentProvider} from '@/hooks/Student';
-
+import { ProfileProvider } from "@/hooks/Profile";
+import { StudentProvider } from "@/hooks/Student";
 
 // category headers (usually for PackSelect
 //import { CommunityHeader } from "@/components/CommunityHeader";
@@ -55,11 +51,10 @@ import "@/theme/margin-classes.scss";
 import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
-import '@/theme/device-zooms.css';
+import "@/theme/device-zooms.css";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 setupIonicReact();
 
@@ -67,23 +62,23 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary fallback={<Loading />}>
       <IonApp>
-	<InterfaceLanguageProvider>
+        <InterfaceLanguageProvider>
           <AudioManagerProvider>
-	    <ProfileProvider>
-	      <LanguageToggleProvider>
-		<ClassroomProvider>
-		  <StudentProvider>
-		    <AppWrapper>
-		      <TimeTrackerProvider>
-			<Router />	
-		      </TimeTrackerProvider>
-		    </AppWrapper>
-		  </StudentProvider>
-		</ClassroomProvider>
-	      </LanguageToggleProvider>
-	    </ProfileProvider>
+            <ProfileProvider>
+              <LanguageToggleProvider>
+                <ClassroomProvider>
+                  <StudentProvider>
+                    <AppWrapper>
+                      <TimeTrackerProvider>
+                        <Router />
+                      </TimeTrackerProvider>
+                    </AppWrapper>
+                  </StudentProvider>
+                </ClassroomProvider>
+              </LanguageToggleProvider>
+            </ProfileProvider>
           </AudioManagerProvider>
-	</InterfaceLanguageProvider>
+        </InterfaceLanguageProvider>
       </IonApp>
     </ErrorBoundary>
   );

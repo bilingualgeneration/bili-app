@@ -72,6 +72,9 @@ import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
   AddClassroom,
   ClassOverview,
+  AddClassroomLanguage,
+  AddStudents,
+  InviteCaregivers,
   StudentSelect,
   MyClassrooms,
 } from "@/pages/TeacherDashboard";
@@ -370,6 +373,42 @@ export const Router: React.FC = () => {
                 <TeacherDashboardWrapper>
                   <AddClassroom />
                 </TeacherDashboardWrapper>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/add_classroom_language"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddClassroomLanguage />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/add_students"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddStudents />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/invite_caregivers"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <InviteCaregivers />
+                </HeaderFooter>
               </AuthedLayout>
             )}
           />

@@ -1,10 +1,20 @@
 import { FC, JSX } from "react";
-import { IonButton, IonCol, IonGrid, IonItem, IonList, IonRow, IonSelect, IonSelectOption, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonItem,
+  IonList,
+  IonRow,
+  IonSelect,
+  IonSelectOption,
+  IonText,
+} from "@ionic/react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { MultipleCheckbox } from "@/components/MultipleCheckbox";
-import {Select} from '@/components/Select';
+import { Select } from "@/components/Select";
 import type {
   MultipleCheckboxProps,
   MultipleCheckboxOption,
@@ -28,7 +38,7 @@ export const TeacherAbout: FC = () => {
   const schema = z.object({
     grades: z.string().array().optional(),
     schoolRoles: z.string().array().optional(),
-    schoolName: z.string()
+    schoolName: z.string(),
   });
   const {
     control,
@@ -43,7 +53,6 @@ export const TeacherAbout: FC = () => {
     resolver: zodResolver(schema),
   });
 
- 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
       label: intl.formatMessage({
@@ -176,8 +185,6 @@ export const TeacherAbout: FC = () => {
               />
             </IonRow>
           </IonGrid>
-
-
         </div>
         <div className="margin-top-1">
           <IonText>
@@ -192,7 +199,7 @@ export const TeacherAbout: FC = () => {
         </div>
         <div className="text-md color-suelo roles-styles">
           <IonGrid>
-            <IonRow >
+            <IonRow>
               <MultipleCheckbox
                 control={control}
                 labelPlacement="end"
@@ -210,31 +217,30 @@ export const TeacherAbout: FC = () => {
               <FormattedMessage
                 id="signUpTeacher.school"
                 defaultMessage="What is the name of your school?"
-                
               />
             </h2>
           </IonText>
         </div>
         <div className="customer-school-select">
-	  <Select
-	    control={control}
-	    fill='outline'
-	    options={[
-	      {
-		value: 'Arts Magnet School',
-		label: 'Arts Magnet School'
-	      },
-	      {
-		value: 'Washington School',
-		label: 'Washington School'
-	      },
-	      {
-		value: 'Livermore School',
-		label: 'Livermore School'
-	      },
-	    ]}
-	    name='schoolName'
-	  />
+          <Select
+            control={control}
+            fill="outline"
+            options={[
+              {
+                value: "Arts Magnet School",
+                label: "Arts Magnet School",
+              },
+              {
+                value: "Washington School",
+                label: "Washington School",
+              },
+              {
+                value: "Livermore School",
+                label: "Livermore School",
+              },
+            ]}
+            name="schoolName"
+          />
         </div>
 
         <IonButton

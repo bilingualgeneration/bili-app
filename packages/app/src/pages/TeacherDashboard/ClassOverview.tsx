@@ -1,4 +1,17 @@
-import { IonButton, IonCard, IonCardTitle, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonList, IonProgressBar, IonRow, IonText } from "@ionic/react"
+import {
+  IonButton,
+  IonCard,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRow,
+  IonText,
+} from "@ionic/react";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
@@ -14,47 +27,50 @@ import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import {useClassroom} from '@/hooks/Classroom';
+import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-
 
 import "./ClassOverview.scss";
 
 const dataAtSchool = [24, 32, 28, 16];
 const dataAtHome = [18, 25, 40, 17];
-const dataAllLearning = dataAtSchool.map((value, index) => value + dataAtHome[index]);
+const dataAllLearning = dataAtSchool.map(
+  (value, index) => value + dataAtHome[index],
+);
 
 export const ClassOverview: React.FC = () => {
-  const { classroomId } = useParams<{classroomId: string}>();
-  return <FirestoreDocProvider
-	   collection='classroom'
-	   id={classroomId}
-	   populate={{
-	     'classroomAnalytics': ['classroom', '==', classroomId]
-	   }}
-	 >
-    <ClassLoader />
-  </FirestoreDocProvider>;
+  const { classroomId } = useParams<{ classroomId: string }>();
+  return (
+    <FirestoreDocProvider
+      collection="classroom"
+      id={classroomId}
+      populate={{
+        classroomAnalytics: ["classroom", "==", classroomId],
+      }}
+    >
+      <ClassLoader />
+    </FirestoreDocProvider>
+  );
 };
 
 const ClassLoader: React.FC = () => {
   const { status, data } = useFirestoreDoc();
-  switch(status){
-    case 'loading':
+  switch (status) {
+    case "loading":
       return <></>;
       break;
     case "error":
       return <>error</>;
       break;
     case "ready":
-      const {classroomAnalytics, ...d} = data;
+      const { classroomAnalytics, ...d } = data;
       const restructuredData = {
-	...d,
-	classroomAnalytics: classroomAnalytics[0]
+        ...d,
+        classroomAnalytics: classroomAnalytics[0],
       };
-      return <ClassOverviewHydrated {...restructuredData}/>;
+      return <ClassOverviewHydrated {...restructuredData} />;
       break;
     default:
       return <>default case</>;
@@ -77,27 +93,17 @@ export const ClassOverviewHydrated: React.FC<any> = ({
   id,
   school,
   name,
-  classroomAnalytics: {
-    studentHighlights,
-    studentNeeds
-  }
+  classroomAnalytics: { studentHighlights, studentNeeds },
 }) => {
   const intl = useIntl();
-  const {
-    setInfo,
-  } = useClassroom();
+  const { setInfo } = useClassroom();
   useEffect(() => {
     setInfo({
       name,
       id,
-      schoolId: school
+      schoolId: school,
     });
-  }, [
-    setInfo,
-    id,
-    school,
-    name
-  ]);
+  }, [setInfo, id, school, name]);
   return (
     <div id="teacher-dashboard-class-overview-id">
       {/* header text */}
@@ -115,11 +121,12 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
               </div>
               <div className="classroom-name-block">
-                <IonText className="text-3xl semibold">
-                  {name}
-                </IonText>
+                <IonText className="text-3xl semibold">{name}</IonText>
                 <button className="visit-students-button">
-                  <Link to={`/classrooms/${id}/select-student`} className="no-underline">
+                  <Link
+                    to={`/classrooms/${id}/select-student`}
+                    className="no-underline"
+                  >
                     <p className="text-md semibold color-suelo">
                       Go to student app
                     </p>
@@ -133,18 +140,19 @@ export const ClassOverviewHydrated: React.FC<any> = ({
 
       {/*top students cards*/}
       <div className="overview-top-student-cards">
-	<IonGrid>
-	  <IonRow>
-	    {studentHighlights.map((s: any) => <FirestoreDocProvider
-						 collection='student'
-	      key={s.studentId}
-						 id={s.studentId}>
-	      <StudentHighlightCard {...s} />
-	    </FirestoreDocProvider>
-	    )}
+        <IonGrid>
+          <IonRow>
+            {studentHighlights.map((s: any) => (
+              <FirestoreDocProvider
+                collection="student"
+                key={s.studentId}
+                id={s.studentId}
+              >
+                <StudentHighlightCard {...s} />
+              </FirestoreDocProvider>
+            ))}
           </IonRow>
         </IonGrid>
-
       </div>
 
       {/* class data */}
@@ -154,7 +162,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
           <IonRow>
             {/* left card with graph*/}
             <IonCol>
-	    <LearningTimeSummary />
+              <LearningTimeSummary />
               {/* blog part */}
               <IonCard className="card-blog">
                 <div className="class-overview-blog-styles">
@@ -164,18 +172,22 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                         <img src={StudentsReadingPicture} alt="" />
                       </IonCol>
                       <IonCol>
-                        <p className="text-xl semibold text-color-black">Visit the Bili blog</p>
-                        <p>Explore resources and tips for <br />teaching multilingual students</p>
+                        <p className="text-xl semibold text-color-black">
+                          Visit the Bili blog
+                        </p>
+                        <p>
+                          Explore resources and tips for <br />
+                          teaching multilingual students
+                        </p>
                       </IonCol>
                       <IonCol size="2.5">
                         <button className="visit-blog-button">
                           <a
                             href="https://thebiliapp.com/blog/"
                             target="_blank"
-                            rel="noopener noreferrer">
-                            <p className="text-sm semibold">
-                              Learn more
-                            </p>
+                            rel="noopener noreferrer"
+                          >
+                            <p className="text-sm semibold">Learn more</p>
                           </a>
                         </button>
                       </IonCol>
@@ -193,22 +205,22 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
 
                 <IonList lines="full" className="students-needs-support-list">
-                  {studentNeeds.map((s: any) =>
-		    <FirestoreDocProvider
-		      collection='student'
-		      key={s.studentId}
-		      id={s.studentId}>
-		      <StudentNeedsCard {...s} />
-		    </FirestoreDocProvider>
-		  )}
+                  {studentNeeds.map((s: any) => (
+                    <FirestoreDocProvider
+                      collection="student"
+                      key={s.studentId}
+                      id={s.studentId}
+                    >
+                      <StudentNeedsCard {...s} />
+                    </FirestoreDocProvider>
+                  ))}
                 </IonList>
                 <div className="review-word-styles">
                   <IonGrid>
                     <IonRow className="ion-align-items-center ion-justify-content-center">
-                      <IonCol size="1.1" >
+                      <IonCol size="1.1">
                         <span className="smaller-oval-element color-5">
-                          <IonIcon icon={LightBulb}>
-                          </IonIcon>
+                          <IonIcon icon={LightBulb}></IonIcon>
                         </span>
                       </IonCol>
                       <IonCol>
@@ -220,88 +232,82 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                         </p>
                       </IonCol>
                     </IonRow>
-
                   </IonGrid>
                 </div>
-                <IonButton>
-                  See all students
-                </IonButton>
+                <IonButton>See all students</IonButton>
               </IonCard>
             </IonCol>
           </IonRow>
         </IonGrid>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const getIcon = (area: string) => {
-  switch(area){
-    case 'highestAccuracy':
+  switch (area) {
+    case "highestAccuracy":
       return {
-	icon: <IonIcon icon={DropIcon}></IonIcon>,
-	iconBackgroundColor: '#D3EAE8'
+        icon: <IonIcon icon={DropIcon}></IonIcon>,
+        iconBackgroundColor: "#D3EAE8",
       };
-    case 'mostHomeLearning':
+    case "mostHomeLearning":
       return {
-	icon: <IonIcon icon={HouseIcon}></IonIcon>,
-	iconBackgroundColor: '#FFDBCA'
+        icon: <IonIcon icon={HouseIcon}></IonIcon>,
+        iconBackgroundColor: "#FFDBCA",
       };
-    case 'mostStars':
+    case "mostStars":
       return {
-	icon: <IonIcon icon={PresentIcon}></IonIcon>,
-	iconBackgroundColor: '#FFD8EB'
+        icon: <IonIcon icon={PresentIcon}></IonIcon>,
+        iconBackgroundColor: "#FFD8EB",
       };
     default:
       return {
-	icon: null,
-	iconBackgroundColor: 'red'
+        icon: null,
+        iconBackgroundColor: "red",
       };
   }
 };
 
-const StudentHighlightCard: React.FC<any> = ({
-  area,
-  student,
-}) => {
+const StudentHighlightCard: React.FC<any> = ({ area, student }) => {
   const intl = useIntl();
-  const {data, status} = useFirestoreDoc();
-  switch(status){
-    case 'loading':
-      return <IonCol size-xs='4'></IonCol>;
-    case 'error':
+  const { data, status } = useFirestoreDoc();
+  switch (status) {
+    case "loading":
+      return <IonCol size-xs="4"></IonCol>;
+    case "error":
       return <>error</>;
-    case 'ready':
-      const {icon, iconBackgroundColor} = getIcon(area);
-      return <IonCol size-xs='4'>
-	<div className="grid-card">
-	  <RadioCard
-            icon={
-	      <div
-		// @ts-ignore
-		style={studentHighlightsStyle}
-	      >
-		{icon}
-	      </div>
-            }
-            title={`${data.firstName} ${data.lastName}`}
-            content={intl.formatMessage({id: `teacherDashboard.${area}`})}
-            iconBackgroundColor={iconBackgroundColor}
-            titleFontSize="xl"
-            titleColor="color-suelo"
-            contentFontSize="sm"
-            contentColor="color-barro"
-          />
-	</div>
-      </IonCol>;
+    case "ready":
+      const { icon, iconBackgroundColor } = getIcon(area);
+      return (
+        <IonCol size-xs="4">
+          <div className="grid-card">
+            <RadioCard
+              icon={
+                <div
+                  // @ts-ignore
+                  style={studentHighlightsStyle}
+                >
+                  {icon}
+                </div>
+              }
+              title={`${data.firstName} ${data.lastName}`}
+              content={intl.formatMessage({ id: `teacherDashboard.${area}` })}
+              iconBackgroundColor={iconBackgroundColor}
+              titleFontSize="xl"
+              titleColor="color-suelo"
+              contentFontSize="sm"
+              contentColor="color-barro"
+            />
+          </div>
+        </IonCol>
+      );
     default:
       return <>this should never show</>;
   }
 };
 
-const LearningTimeSummary: React.FC<any> = ({
-
-}) => {
+const LearningTimeSummary: React.FC<any> = ({}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("school");
 
   const handleButtonClick = (category: string) => {
@@ -327,220 +333,196 @@ const LearningTimeSummary: React.FC<any> = ({
       data = dataAtSchool;
   }
 
-  return <IonCard>
-    {/* Learning time summary row */}
-    <IonRow>
-      <IonCol>
-        <div className="graph-header">
-          <IonText className="text-xl semibold color-suelo">
-            Learning time summary
-          </IonText>
+  return (
+    <IonCard>
+      {/* Learning time summary row */}
+      <IonRow>
+        <IonCol>
+          <div className="graph-header">
+            <IonText className="text-xl semibold color-suelo">
+              Learning time summary
+            </IonText>
 
+            <IonGrid className="table-green-buttons">
+              <IonRow className="ion-align-items-center">
+                <IonCol
+                  className={`custom-col-class-overview first-column ${getButtonClass(
+                    "school",
+                  )}`}
+                >
+                  <div className="button-wrapper-class-grid">
+                    <button onClick={() => handleButtonClick("school")}>
+                      <p className="text-sm semibold">At school</p>
+                    </button>
+                  </div>
+                </IonCol>
+                <IonCol
+                  className={`custom-col-class-overview ${getButtonClass(
+                    "home",
+                  )}`}
+                >
+                  <div className="button-wrapper-class-grid">
+                    <button onClick={() => handleButtonClick("home")}>
+                      <p className="text-sm semibold">At home</p>
+                    </button>
+                  </div>
+                </IonCol>
+                <IonCol
+                  className={`custom-col-class-overview last-column ${getButtonClass(
+                    "all",
+                  )}`}
+                >
+                  <div className="button-wrapper-class-grid">
+                    <button onClick={() => handleButtonClick("all")}>
+                      <p className="text-sm semibold">All learning</p>
+                    </button>
+                  </div>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </div>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol size="6.5" className="class-game-names-percentage">
+          <IonRow>
+            {/*game names with percentage */}
+            <IonCol className="class-game-name-percentage">
+              {/* first group */}
+              <IonRow className="no-padding">
+                <IonCol size="3">
+                  <span className="small-oval-element color-1">
+                    <IonIcon icon={StoriesIcon}></IonIcon>
+                  </span>
+                </IonCol>
+                <IonCol size="6">
+                  <p className="text-md-no-line-height semibold text-color-black">
+                    Cuentos
+                  </p>
 
-          <IonGrid className="table-green-buttons">
-            <IonRow className="ion-align-items-center">
-              <IonCol
-                className={`custom-col-class-overview first-column ${getButtonClass("school")}`}
-              >
-                <div className="button-wrapper-class-grid">
-                  <button
-                    onClick={() => handleButtonClick("school")}
-                  >
-                    <p className="text-sm semibold">At school</p>
-                  </button>
-                </div>
-              </IonCol>
-              <IonCol
-                className={`custom-col-class-overview ${getButtonClass("home")}`}
-              >
-                <div className="button-wrapper-class-grid">
-                  <button
-                    onClick={() => handleButtonClick("home")}
-                  >
-                    <p className="text-sm semibold">At home</p>
-                  </button>
-                </div>
+                  <p className="text-color-grey">Stories</p>
+                </IonCol>
+                <IonCol size="3" style={{ textAlign: "center" }}>
+                  <p>{data[0]}%</p>
+                </IonCol>
+              </IonRow>
+              {/* second group */}
 
-              </IonCol>
-              <IonCol
-                className={`custom-col-class-overview last-column ${getButtonClass("all")}`}
-              >
-                <div className="button-wrapper-class-grid">
-                  <button
-                    onClick={() => handleButtonClick("all")}
-                  >
-                    <p className="text-sm semibold">All learning</p>
-                  </button>
-                </div>
+              <IonRow>
+                <IonCol size="3">
+                  <span className="small-oval-element color-2">
+                    <IonIcon icon={WellnessIcon}></IonIcon>
+                  </span>
+                </IonCol>
+                <IonCol size="6">
+                  <p className="text-md-no-line-height semibold text-color-black">
+                    Bienestar
+                  </p>
+                  <p className="text-color-grey">Wellness</p>
+                </IonCol>
+                <IonCol size="3" style={{ textAlign: "center" }}>
+                  <p>{data[1]}%</p>
+                </IonCol>
+              </IonRow>
+              {/* third group */}
 
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </div>
-      </IonCol>
-    </IonRow>
-    <IonRow>
+              <IonRow>
+                <IonCol size="3">
+                  <span className="small-oval-element color-3">
+                    <IonIcon icon={PlayIcon}></IonIcon>
+                  </span>
+                </IonCol>
+                <IonCol size="6">
+                  <p className="text-md-no-line-height semibold text-color-black">
+                    Juego
+                  </p>
 
-      <IonCol size="6.5" className="class-game-names-percentage">
-        <IonRow>
-          {/*game names with percentage */}
-          <IonCol className="class-game-name-percentage">
-            {/* first group */}
-            <IonRow className="no-padding">
-              <IonCol size="3">
-                <span className="small-oval-element color-1">
-                  <IonIcon icon={StoriesIcon}>
+                  <p className="text-color-grey">Play</p>
+                </IonCol>
+                <IonCol size="3" style={{ textAlign: "center" }}>
+                  <p>{data[2]}%</p>
+                </IonCol>
+              </IonRow>
+              {/* fourth group */}
 
-                  </IonIcon>
-                </span>
-              </IonCol>
-              <IonCol size="6">
-                <p className="text-md-no-line-height semibold text-color-black">Cuentos</p>
+              <IonRow>
+                <IonCol size="3">
+                  <span className="small-oval-element color-4">
+                    <IonIcon icon={CommunityIcon}></IonIcon>
+                  </span>
+                </IonCol>
+                <IonCol size="6">
+                  <p className="text-md-no-line-height semibold text-color-black">
+                    Communidad
+                  </p>
 
-                <p className="text-color-grey">
-                  Stories
-                </p>
-              </IonCol>
-              <IonCol size="3" style={{ textAlign: "center", }}>
-                <p>
-                  {data[0]}%
-                </p>
-              </IonCol>
-            </IonRow>
-            {/* second group */}
+                  <p className="text-color-grey">Community</p>
+                </IonCol>
+                <IonCol size="3" style={{ textAlign: "center" }}>
+                  <p>{data[3]}%</p>
+                </IonCol>
+              </IonRow>
+            </IonCol>
+          </IonRow>
+        </IonCol>
 
-            <IonRow>
-              <IonCol size="3">
-                <span className="small-oval-element color-2">
-                  <IonIcon icon={WellnessIcon}>
-
-                  </IonIcon>
-                </span>
-              </IonCol>
-              <IonCol size="6">
-                <p className="text-md-no-line-height semibold text-color-black">Bienestar</p>
-                <p className="text-color-grey">
-                  Wellness
-                </p>
-              </IonCol>
-              <IonCol size="3" style={{ textAlign: "center", }}>
-                <p>
-                  {data[1]}%
-                </p>
-              </IonCol>
-            </IonRow>
-            {/* third group */}
-
-            <IonRow>
-              <IonCol size="3">
-                <span className="small-oval-element color-3">
-                  <IonIcon icon={PlayIcon}>
-
-                  </IonIcon>
-                </span>
-              </IonCol>
-              <IonCol size="6">
-                <p className="text-md-no-line-height semibold text-color-black">Juego</p>
-
-                <p className="text-color-grey">
-                  Play
-                </p>
-              </IonCol>
-              <IonCol size="3" style={{ textAlign: "center", }}>
-                <p>
-                  {data[2]}%
-                </p>
-              </IonCol>
-            </IonRow>
-            {/* fourth group */}
-
-            <IonRow>
-              <IonCol size="3">
-                <span className="small-oval-element color-4">
-                  <IonIcon icon={CommunityIcon}>
-
-                  </IonIcon>
-                </span>
-              </IonCol>
-              <IonCol size="6">
-                <p className="text-md-no-line-height semibold text-color-black">Communidad</p>
-
-                <p className="text-color-grey">
-                  Community
-                </p>
-              </IonCol>
-              <IonCol size="3" style={{ textAlign: "center", }}>
-                <p>
-                  {data[3]}%
-                </p>
-              </IonCol>
-            </IonRow>
-          </IonCol>
-
-        </IonRow>
-
-
-      </IonCol>
-
-      {/* graph columnn */}
-      <IonCol size="5.5" className="class-graph-percentage">
-        <PieChartComponent
-          data={data}
-          colors={['#0045A1', '#973D78', '#FF5708', '#22BEB9']}
-          innRadius={3}
-          width={200}
-          height={205}
-          cX={105}
-          cY={85}
-        />
-      </IonCol >
-    </IonRow>
-  </IonCard>;
-  
+        {/* graph columnn */}
+        <IonCol size="5.5" className="class-graph-percentage">
+          <PieChartComponent
+            data={data}
+            colors={["#0045A1", "#973D78", "#FF5708", "#22BEB9"]}
+            innRadius={3}
+            width={200}
+            height={205}
+            cX={105}
+            cY={85}
+          />
+        </IonCol>
+      </IonRow>
+    </IonCard>
+  );
 };
 
-const StudentNeedsCard: React.FC<any> = ({
-  area,
-  percentage,
-  studentId
-}) => {
+const StudentNeedsCard: React.FC<any> = ({ area, percentage, studentId }) => {
   const intl = useIntl();
-  const {data, status} = useFirestoreDoc();
-  switch(status){
-    case 'loading':
+  const { data, status } = useFirestoreDoc();
+  switch (status) {
+    case "loading":
       return <IonItem />;
-    case 'error':
+    case "error":
       return <>error</>;
-    case 'ready':
+    case "ready":
       console.log(data);
-      return <IonItem>
-        <div className="student-needs-support-picture">
-          <img src={StudentPicture} />
-        </div>
-        <div className="student-needs-support-text">
-          <p className="student-needs-support-text-name">
-            {`${data.firstName} ${data.lastName}`}
-          </p>
-          <p className="student-needs-support-text-problem text-color-grey">
-            {intl.formatMessage({id: `teacherDashboard.${area}`})}
-          </p>
-        </div>
-        <div className="student-needs-support-progress-bar">
-          <div className="student-needs-support-progress-bar-percentage">
-            {Math.round(percentage * 100)}%
+      return (
+        <IonItem>
+          <div className="student-needs-support-picture">
+            <img src={StudentPicture} />
           </div>
-          <IonProgressBar
-            value={percentage}
-            buffer={1}
-            style={{
-              '--background': percentage < 0.50 ? '#FFDAD2' : '#FFF3D3',
-              '--progress-background': percentage < 0.50 ? '#FF5708' : '#F1D100',
-            }}
-          >
-          </IonProgressBar>
-        </div>
-      </IonItem>;
+          <div className="student-needs-support-text">
+            <p className="student-needs-support-text-name">
+              {`${data.firstName} ${data.lastName}`}
+            </p>
+            <p className="student-needs-support-text-problem text-color-grey">
+              {intl.formatMessage({ id: `teacherDashboard.${area}` })}
+            </p>
+          </div>
+          <div className="student-needs-support-progress-bar">
+            <div className="student-needs-support-progress-bar-percentage">
+              {Math.round(percentage * 100)}%
+            </div>
+            <IonProgressBar
+              value={percentage}
+              buffer={1}
+              style={{
+                "--background": percentage < 0.5 ? "#FFDAD2" : "#FFF3D3",
+                "--progress-background":
+                  percentage < 0.5 ? "#FF5708" : "#F1D100",
+              }}
+            ></IonProgressBar>
+          </div>
+        </IonItem>
+      );
     default:
       return <>this should never show</>;
   }
-}
+};
