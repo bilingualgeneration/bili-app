@@ -6,20 +6,18 @@ import {
   IonList,
   IonItem,
 } from "@ionic/react";
-import {useTimeTracker} from '@/hooks/TimeTracker';
-import {useState} from 'react';
+import { useTimeTracker } from "@/hooks/TimeTracker";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Preferences } from "@capacitor/preferences";
 import { auth } from "@/components/Firebase";
-import {
-  getFunctions,
-  httpsCallable,
-} from 'firebase/functions';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const Debug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
-  const {startMark, getTime} = useTimeTracker();
+  const { startMark, getTime } = useTimeTracker();
   const functions = getFunctions();
-  const addClassroom = httpsCallable(functions, 'classroom-add');
+  const addClassroom = httpsCallable(functions, "classroom-add");
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -75,7 +73,7 @@ export const Debug: React.FC = () => {
               size="small"
               slot="end"
               onClick={() => {
-		setTime(getTime());
+                setTime(getTime());
               }}
             >
               get
@@ -87,32 +85,37 @@ export const Debug: React.FC = () => {
               size="small"
               slot="end"
               onClick={() => {
-		addClassroom({
-		  name: 'test name',
-		  grades: ['1', '2'],
-		  language: 'es',
-		  allowLanguageToggle: true,
-		  isInclusive: false,
-		  students: [
-		    {
-		      firstName: 'Vanessa',
-		      lastName: 'Garcia',
-		      primaryContactEmail: 'caregivera1@gmail.com',
-		      secondaryContactEmail: 'caregivera2@gmail.com'
-		    },
-		    {
-		      firstName: 'Juan',
-		      lastName: 'Valesquez',
-		      primaryContactEmail: 'caregiverb1@gmail.com',
-		      secondaryContactEmail: 'caregiverb2@gmail.com'
-		    }
-		  ],
-		  notificationMethod: 'email'
-		});
+                addClassroom({
+                  name: "test name",
+                  grades: ["1", "2"],
+                  language: "es",
+                  allowLanguageToggle: true,
+                  isInclusive: false,
+                  students: [
+                    {
+                      firstName: "Vanessa",
+                      lastName: "Garcia",
+                      primaryContactEmail: "caregivera1@gmail.com",
+                      secondaryContactEmail: "caregivera2@gmail.com",
+                    },
+                    {
+                      firstName: "Juan",
+                      lastName: "Valesquez",
+                      primaryContactEmail: "caregiverb1@gmail.com",
+                      secondaryContactEmail: "caregiverb2@gmail.com",
+                    },
+                  ],
+                  notificationMethod: "email",
+                });
               }}
             >
               add
             </IonButton>
+          </IonItem>
+          <IonItem>
+            <Link to="/phrase-matcher-test">
+              <IonLabel>Phrase Matcher Test</IonLabel>
+            </Link>
           </IonItem>
         </IonList>
       </IonCardContent>
