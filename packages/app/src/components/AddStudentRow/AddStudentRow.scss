@@ -15,7 +15,7 @@
   }
 
   .student-row-delete-button ion-icon {
-    font-size: 20px;
+    font-size: 23px;
   }
 
   .edit-student-data-button {
@@ -25,6 +25,16 @@
     background: #006a67;
     display: flex;
     gap: 4px;
+  }
+  .student-row-edit-button,
+  .student-row-delete-button {
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .student-row-delete-button {
+    height: 35px;
   }
 }
 
