@@ -449,7 +449,8 @@ const TitleCard = ({ data }: any) => {
           background: `url(${data.cover_image.url})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
-          backgroundPositionY: "bottom",
+          backgroundPositionY: "center",
+          backgroundPositionX: "center",
           display: "block",
           position: "relative",
         }}
