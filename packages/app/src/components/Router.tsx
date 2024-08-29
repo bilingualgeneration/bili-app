@@ -1,21 +1,14 @@
-import {AdultCheckProvider} from '@/contexts/AdultCheckContext';
-import {AuthedLayout} from '@/layouts/Authed';
-import {HeaderFooter} from '@/components/HeaderFooter';
-import {
-  IonRouterOutlet
-} from '@ionic/react';
-import {IonReactRouter} from '@ionic/react-router';
-import {MinimalHeader} from '@/components/MinimalHeader';
-import {
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-} from 'react-router-dom';
-import {ScrollToTop} from '@/components/ScrollToTop';
-import {SettingsLayout} from '@/layouts/Settings';
-import {TeacherDashboardWrapper} from '@/components/TeacherDashboardWrapper';
-import UnauthedLayout from '@/layouts/Unauthed';
+import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
+import { AuthedLayout } from "@/layouts/Authed";
+import { HeaderFooter } from "@/components/HeaderFooter";
+import { IonRouterOutlet } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { MinimalHeader } from "@/components/MinimalHeader";
+import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { SettingsLayout } from "@/layouts/Settings";
+import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
+import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
 import {
@@ -41,13 +34,14 @@ import { Debug } from "@/pages/Debug";
 import {
   IntruderSelect,
   IntruderIntro,
-  IntruderGameLoader
-} from '@/pages/Intruder';
-import Login from '@/pages/Login';
-import {Play} from '@/pages/Play';
-import {Preload} from '@/pages/Preload';
-import {PreSplash} from '@/pages/PreSplash';
-import {ProfileComingSoon} from '@/pages/ProfileComingSoon';
+  IntruderGameLoader,
+} from "@/pages/Intruder";
+import Login from "@/pages/Login";
+import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
+import { Play } from "@/pages/Play";
+import { Preload } from "@/pages/Preload";
+import { PreSplash } from "@/pages/PreSplash";
+import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
 ///////////
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
@@ -71,20 +65,16 @@ import {
   TellMeAboutGame,
   TellMeAboutIntro,
   TellMeAboutSelect,
-} from '@/pages/TellMeAbout';
-import {Wellness} from '@/pages/Wellness';
-import {
-  WouldDoSelect,
-  WouldDoIntro,
-  WouldDoGame,
-} from '@/pages/WouldDo';
-import { ClassCode } from '@/pages/SignUp/ClassCode';
+} from "@/pages/TellMeAbout";
+import { Wellness } from "@/pages/Wellness";
+import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
+import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
   AddClassroom,
   ClassOverview,
   StudentSelect,
-  MyClassrooms
-} from '@/pages/TeacherDashboard';
+  MyClassrooms,
+} from "@/pages/TeacherDashboard";
 import Reports from "@/pages/Reports";
 
 export const Router: React.FC = () => {
@@ -112,6 +102,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <Debug />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/phrase-matcher-test"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <PhraseMatcherTest />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -179,10 +181,10 @@ export const Router: React.FC = () => {
           <Route
             exact
             path="/count-congrats/:count"
-            render={({match: {params}}) => (
+            render={({ match: { params } }) => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-		  <CountWithMeCongrats count={parseInt(params.count)} />
+                  <CountWithMeCongrats count={parseInt(params.count)} />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -328,7 +330,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <TeacherDashboardWrapper>
-                  <MyClassrooms/>
+                  <MyClassrooms />
                 </TeacherDashboardWrapper>
               </AuthedLayout>
             )}
@@ -360,13 +362,13 @@ export const Router: React.FC = () => {
             )}
           />
 
-	  <Route
+          <Route
             exact
             path="/classrooms/add"
             render={() => (
               <AuthedLayout>
                 <TeacherDashboardWrapper>
-                  <AddClassroom/>
+                  <AddClassroom />
                 </TeacherDashboardWrapper>
               </AuthedLayout>
             )}
@@ -419,9 +421,9 @@ export const Router: React.FC = () => {
             path="/story/play/:uuid"
             render={(props) => (
               <AuthedLayout>
-		<MinimalHeader>
+                <MinimalHeader>
                   <Stories />
-		</MinimalHeader>
+                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -649,7 +651,6 @@ export const Router: React.FC = () => {
               </AuthedLayout>
             )}
           />
-
         </ScrollToTop>
       </Switch>
     </IonReactRouter>

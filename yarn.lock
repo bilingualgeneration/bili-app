@@ -2148,6 +2148,7 @@ __metadata:
     sass: "npm:^1.69.2"
     slick-carousel: "npm:^1.8.1"
     storybook: "npm:^7.4.5"
+    string-similarity-js: "npm:^2.1.4"
     swiper: "npm:^10.3.1"
     terser: "npm:^5.22.0"
     tsconfig-paths: "npm:^4.2.0"
@@ -18813,6 +18814,13 @@ __metadata:
   version: 0.2.1
   resolution: "string-convert@npm:0.2.1"
   checksum: 00673ed8a3106137395436537ace7d3672c91a3290da73466055daa0134331dc84bc58c54ba2d2ea40711adc5744426d3c8239dbfc30290438fa3e9ff65db528
+  languageName: node
+  linkType: hard
+
+"string-similarity-js@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "string-similarity-js@npm:2.1.4"
+  checksum: b43ef3b08e72c1c5fb90904f01a4a669c9da1abdf8e42d13697e32371c976ef4060297a31437103960967b9715fe03f5af7f3d3cf318c1954d9684737d24b6a0
   languageName: node
   linkType: hard
 
