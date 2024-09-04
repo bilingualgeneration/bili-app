@@ -79,6 +79,7 @@ import {
   MyClassrooms,
 } from "@/pages/TeacherDashboard";
 import Reports from "@/pages/Reports";
+import { ClassStudents } from "@/pages/TeacherDashboard/TeacherDashboardMenu/ClassStudents";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -347,6 +348,20 @@ export const Router: React.FC = () => {
                 <AdultCheckProvider>
                   <TeacherDashboardWrapper>
                     <ClassOverview />
+                  </TeacherDashboardWrapper>
+                </AdultCheckProvider>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/:classroomId/students"
+            render={() => (
+              <AuthedLayout>
+                <AdultCheckProvider>
+                  <TeacherDashboardWrapper>
+                    <ClassStudents />
                   </TeacherDashboardWrapper>
                 </AdultCheckProvider>
               </AuthedLayout>

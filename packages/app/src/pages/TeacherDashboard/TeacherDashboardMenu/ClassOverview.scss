@@ -1,0 +1,167 @@
+#teacher-dashboard-class-overview-id {
+  .custom-col-class-overview {
+    text-align: center;
+    border: 1px solid #cbcbcb;
+    padding: 10px 0 10px 0;
+  }
+
+  .custom-col-class-overview.first-column {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: none;
+  }
+
+  .custom-col-class-overview.last-column {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+  }
+
+  .classroom-name-text {
+    margin-right: 8px;
+  }
+
+  .overview-text-header {
+    margin-left: 8px;
+  }
+
+  .header-overview-arrow {
+    margin-bottom: 48px;
+  }
+
+  .classroom-name-block {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .visit-students-button {
+    border-radius: 8px;
+    background: linear-gradient(89.96deg, #74c7e5 7.88%, #a2e0c1 104.05%);
+    padding: 12px 16px;
+  }
+
+  .table-green-buttons {
+    margin-top: 24px;
+  }
+
+  .button-wrapper-class-grid button {
+    background: none;
+  }
+
+  .graph-header ion-grid {
+    padding: 0;
+    ion-row {
+      max-width: 280px;
+      height: 40px;
+    }
+  }
+
+  .graph-header {
+    padding-bottom: 40px;
+  }
+
+  .class-game-name-percentage ion-row {
+    margin-bottom: 8px;
+  }
+
+  .card-blog {
+    background-color: #d3eae8;
+  }
+  .visit-blog-button {
+    padding: 4px 12px 4px 12px;
+    border-radius: 8px;
+    background-color: #006a67;
+
+    font-weight: 600;
+
+    p {
+      color: white;
+    }
+  }
+
+  .small-oval-element {
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .smaller-oval-element {
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .color-1 {
+    background: #0045a1;
+  }
+  .color-2 {
+    background: #ac217b;
+  }
+  .color-3 {
+    background: #ff5708;
+  }
+  .color-4 {
+    background: #22beb9;
+  }
+  .color-5 {
+    background: #eceeed;
+  }
+
+  .text-color-grey {
+    color: #889391;
+  }
+
+  .text-color-black {
+    color: black;
+  }
+
+  .review-word-styles {
+    background: #f7faf9;
+    height: 52px;
+    border-radius: 8px;
+
+    ion-row {
+      margin-top: 3px;
+      margin-left: 6px;
+    }
+  }
+
+  .active-button-green {
+    background-color: #22beb9;
+  }
+
+  .students-needs-support-list ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+
+  .student-needs-support-picture {
+    margin: 13px 13px 13px 0;
+  }
+
+  .student-needs-support-text {
+    font-size: 14px;
+    width: 110px;
+    font-family: "Outfit";
+  }
+
+  .student-needs-support-progress-bar {
+    width: 50%;
+    position: relative;
+    margin-left: 120px;
+  }
+
+  .student-needs-support-progress-bar-percentage {
+    position: absolute;
+    right: 0;
+    top: -190%;
+  }
+}
