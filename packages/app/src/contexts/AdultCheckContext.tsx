@@ -24,6 +24,9 @@ export const useAdultCheck = () => useContext(AdultCheckContext);
 
 export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
   const [isAdultCheckOpen, setIsAdultCheckOpen] = useState<boolean>(true);
+  useEffect(() => {
+    console.log(123);
+  }, []);
   return (
     <AdultCheckContext.Provider
       value={{

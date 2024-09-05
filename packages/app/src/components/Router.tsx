@@ -7,7 +7,6 @@ import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
-import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
 import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
@@ -71,14 +70,16 @@ import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
   AddClassroom,
-  ClassOverview,
   AddClassroomLanguage,
   AddStudents,
+  ClassOverview,
   InviteCaregivers,
-  StudentSelect,
   MyClassrooms,
+  StudentSelect,
 } from "@/pages/TeacherDashboard";
+import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
 import Reports from "@/pages/Reports";
+import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -328,28 +329,36 @@ export const Router: React.FC = () => {
           />
 
           <Route
-            exact
             path="/classrooms"
             render={() => (
-              <AuthedLayout>
-                <TeacherDashboardWrapper>
-                  <MyClassrooms />
-                </TeacherDashboardWrapper>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/:classroomId"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <TeacherDashboardWrapper>
-                    <ClassOverview />
-                  </TeacherDashboardWrapper>
-                </AdultCheckProvider>
-              </AuthedLayout>
+              <>
+                <AuthedLayout>
+                  <AdultCheckProvider>
+                    <TeacherDashboardWrapper>
+                      <Route
+                        exact
+                        path="/classrooms"
+                        component={MyClassrooms}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/:classroomId"
+                        component={ClassOverview}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/:classroomId/students"
+                        component={ClassStudents}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/add"
+                        component={AddClassroom}
+                      />
+                    </TeacherDashboardWrapper>
+                  </AdultCheckProvider>
+                </AuthedLayout>
+              </>
             )}
           />
 
@@ -361,18 +370,6 @@ export const Router: React.FC = () => {
                 <HeaderFooter background="#f7faf9">
                   <StudentSelect />
                 </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add"
-            render={() => (
-              <AuthedLayout>
-                <TeacherDashboardWrapper>
-                  <AddClassroom />
-                </TeacherDashboardWrapper>
               </AuthedLayout>
             )}
           />

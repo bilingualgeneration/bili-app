@@ -446,7 +446,7 @@ const TitleCard = ({ data }: any) => {
       <IonCard
         className="sf-card drop-shadow story-page"
         style={{
-          background: `url(${data.cover_image.url})`,
+          //background: `url(${data.cover_image.url})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPositionY: "center",
@@ -456,45 +456,71 @@ const TitleCard = ({ data }: any) => {
         }}
       >
         <IonCardContent>
-          <IonText className="ion-text-center">
-            <h1 className="text-5xl color-suelo">
+          <IonText
+            className="ion-text-center"
+            style={{
+              display: "block",
+              height: "140px",
+            }}
+          >
+            <h1 className="text-3xl color-suelo">
               {language === "en"
                 ? getLang("en", data.title).text
                 : getLang(isInclusive ? "es-inc" : "es", data.title).text}
             </h1>
             {language === "esen" && (
-              <p className="text-3xl color-english">
+              <p className="text-xl color-english">
                 {getLang("en", data.title).text}
               </p>
             )}
           </IonText>
-        </IonCardContent>
-        <div
-          className="ion-text-center"
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: 0,
-            padding: "auto",
-            width: "100%",
-          }}
-        >
-          <IonButton shape="round" onClick={pageForward}>
-            <IonText
-              style={{
-                paddingLeft: "5rem",
-                paddingRight: "5rem",
-              }}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <img
+              style={{ maxHeight: "330px" }}
+              src={`${data.cover_image.url}`}
+              alt=""
+            />
+          </div>
+          <div
+            className="ion-text-center"
+            style={{
+              position: "absolute",
+              bottom: "2rem",
+              left: 0,
+              padding: "auto",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <button
+              //shape="round"
+              onClick={pageForward}
+              className="continue-story-button"
             >
-              <h1 className="text-3xl semibold color-nube">
-                {language === "en" ? "Let's read!" : "¡Leamos!"}
-              </h1>
-              {language === "esen" && (
-                <p className="text-sm color-nube">Let's read!</p>
-              )}
-            </IonText>
-          </IonButton>
-        </div>
+              <IonText
+                style={{
+                  paddingLeft: "5rem",
+                  paddingRight: "5rem",
+                }}
+              >
+                <h1 className="text-2xl semibold color-nube">
+                  {language === "en" ? "Let's read!" : "¡Leamos!"}
+                </h1>
+                {language === "esen" && (
+                  <p className="text-sm color-nube">Let's read!</p>
+                )}
+              </IonText>
+            </button>
+          </div>
+        </IonCardContent>
       </IonCard>
     </div>
   );
