@@ -235,7 +235,12 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                     </IonRow>
                   </IonGrid>
                 </div>
-                <IonButton>See all students</IonButton>
+                <Link
+                  className="no-underline"
+                  to={`/classrooms/${id}/students`}
+                >
+                  <IonButton expand="block">See all students</IonButton>
+                </Link>
               </IonCard>
             </IonCol>
           </IonRow>
@@ -493,7 +498,6 @@ const StudentNeedsCard: React.FC<any> = ({ area, percentage, studentId }) => {
     case "error":
       return <>error</>;
     case "ready":
-      console.log(data);
       return (
         <IonItem>
           <div className="student-needs-support-picture">
