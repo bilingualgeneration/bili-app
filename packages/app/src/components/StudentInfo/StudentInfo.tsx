@@ -10,41 +10,30 @@ interface StudentInfoProps {
   size?: string;
 }
 
-//we need studentId, link - /classrooms/3GJTSWXuJ4NL3ZZpygF1/students/studentId
-export const StudentInfo: React.FC<StudentInfoProps> = ({}) => {
+export const StudentInfo: React.FC<StudentInfoProps> = ({
+  userId,
+  userType,
+  subtitle,
+  link,
+  size,
+}) => {
   return (
     <div id="student-info-component">
       <IonGrid>
         <IonRow className="ion-justify-content-center ion-align-items-center">
           <IonCol size="12" sizeMd="4" className="ion-text-center">
-            <img
-              src={image}
-              alt={studentName}
-              style={{
-                width: hasSubtitle ? "150px" : "200px", // different size if no subtitle
-                height: hasSubtitle ? "150px" : "200px",
-                borderRadius: "50%",
-              }}
-            />
+            <img src={""} alt={"studentName"} style={{}} />
           </IonCol>
           <IonCol size="12" sizeMd="8" className="ion-text-center">
             <IonText>
-              <h2
-                style={{
-                  fontSize: hasSubtitle ? "1.5rem" : "2rem", // larger font if no subtitle
-                  fontWeight: hasSubtitle ? "normal" : "bold",
-                }}
-              >
-                {studentName}
-              </h2>
-              {hasSubtitle && (
+              <h2>{"studentName"}</h2>
+              {subtitle && (
                 <p
                   style={{
                     fontSize: "1rem",
-                    color: "#666", // Optional: subtitle color
                   }}
                 >
-                  {subtitle}
+                  {"subtitle"}
                 </p>
               )}
             </IonText>
