@@ -17,8 +17,68 @@ import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import "./ClassStudents.scss";
 import { Link } from "react-router-dom";
+import { StudentInfo } from "@/components/StudentInfo";
 
 export const ClassStudents: React.FC = () => {
+  const studentsData = [
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "support recommended",
+      homeAccount: "active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "needs support",
+      homeAccount: "active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "no support needed",
+      homeAccount: "not active",
+    },
+  ];
+
   return (
     <div id="teacher-dashboard-students">
       {/* header text */}
@@ -57,6 +117,25 @@ export const ClassStudents: React.FC = () => {
             <IonCol>Needs More Support</IonCol>
             <IonCol>Home Account</IonCol>
           </IonRow>
+          {studentsData.map((student, index) => (
+            <IonRow>
+              <IonCol key={index}>
+                <StudentInfo userId={""} userType={""} />
+              </IonCol>
+              <IonCol>
+                <IonText>{student.caregiverName}</IonText>
+              </IonCol>
+              <IonCol>
+                <IonText>{student.primaryCaregiverEmail}</IonText>
+              </IonCol>
+              <IonCol>
+                <IonText>{student.needsMoreSupport}</IonText>
+              </IonCol>
+              <IonCol>
+                <IonText>{student.homeAccount}</IonText>
+              </IonCol>
+            </IonRow>
+          ))}
         </IonGrid>
       </div>
     </div>

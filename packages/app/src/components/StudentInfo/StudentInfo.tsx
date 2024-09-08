@@ -1,7 +1,7 @@
 //A.M.
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
-
+import StudentImage from "@/assets/img/student_img.png";
 interface StudentInfoProps {
   userId: string;
   userType: string;
@@ -20,22 +20,16 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
   return (
     <div id="student-info-component">
       <IonGrid>
-        <IonRow className="ion-justify-content-center ion-align-items-center">
-          <IonCol size="12" sizeMd="4" className="ion-text-center">
-            <img src={""} alt={"studentName"} style={{}} />
+        <IonRow className="">
+          <IonCol size="" className="ion-text-center">
+            {/* temporary image */}
+            <img src={StudentImage} alt="student-image" style={{}} />
           </IonCol>
-          <IonCol size="12" sizeMd="8" className="ion-text-center">
+          <IonCol size="" className="ion-text-center">
             <IonText>
-              <h2>{"studentName"}</h2>
-              {subtitle && (
-                <p
-                  style={{
-                    fontSize: "1rem",
-                  }}
-                >
-                  {"subtitle"}
-                </p>
-              )}
+              {/* temporary name */}
+              <p>{"Mattie Blooman"}</p>
+              {subtitle && <p style={{}}>{"subtitle"}</p>}
             </IonText>
           </IonCol>
         </IonRow>
