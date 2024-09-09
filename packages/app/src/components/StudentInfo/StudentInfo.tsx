@@ -18,22 +18,18 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
   size,
 }) => {
   return (
-    <div id="student-info-component">
-      <IonGrid>
-        <IonRow className="">
-          <IonCol size="" className="ion-text-center">
-            {/* temporary image */}
-            <img src={StudentImage} alt="student-image" style={{}} />
-          </IonCol>
-          <IonCol size="" className="ion-text-center">
-            <IonText>
-              {/* temporary name */}
-              <p>{"Mattie Blooman"}</p>
-              {subtitle && <p style={{}}>{"subtitle"}</p>}
-            </IonText>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </div>
+    <IonRow className="ion-align-items-center">
+      <IonCol size="2" className="ion-text-center">
+        {/* temporary image */}
+        <img src={StudentImage} alt="student-image" style={{}} />
+      </IonCol>
+      <IonCol size="10" className="">
+        <IonText>
+          {/* temporary name */}
+          <p>{"Mattie Blooman"}</p>
+          {subtitle && <p style={{}}>{"subtitle"}</p>}
+        </IonText>
+      </IonCol>
+    </IonRow>
   );
 };
