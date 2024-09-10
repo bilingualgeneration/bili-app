@@ -25,8 +25,13 @@
     }
   }
 
+  .class-students-table {
+    margin: 32px 0px;
+  }
+
   .class-students-table-grid {
     background: white;
+    border-radius: 8px;
   }
 
   .class-student-table-header-row {
@@ -42,5 +47,10 @@
     padding: 2px 8px;
     background: #22beb9;
     border-radius: 4px;
+  }
+
+  .class-overview-blog-styles ion-card {
+    margin: 0px;
+    padding: 24px 32px 24px 24px;
   }
 }

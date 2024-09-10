@@ -15,9 +15,10 @@ import {
 } from "@ionic/react";
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
-import "./ClassStudents.scss";
+import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { Link } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
+import "./ClassStudents.scss";
 
 export const ClassStudents: React.FC = () => {
   const studentsData = [
@@ -81,7 +82,7 @@ export const ClassStudents: React.FC = () => {
 
   return (
     <div id="teacher-dashboard-students">
-      {/* header text */}
+      {/* header */}
       <div className="class-students-header">
         <IonItem>
           <IonLabel>
@@ -108,6 +109,7 @@ export const ClassStudents: React.FC = () => {
           </IonLabel>
         </IonItem>
       </div>
+      {/* table */}
       <div className="class-students-table">
         <IonGrid className="class-students-table-grid">
           <IonRow className="class-student-table-header-row">
@@ -160,6 +162,40 @@ export const ClassStudents: React.FC = () => {
             </IonRow>
           ))}
         </IonGrid>
+      </div>
+      {/* banner */}
+      <div className="class-overview-blog-styles">
+        <IonCard className="card-blog">
+          <div>
+            <IonGrid>
+              <IonRow class="ion-align-items-center">
+                <IonCol size="2">
+                  <img src={StudentsReadingPicture} alt="" />
+                </IonCol>
+                <IonCol>
+                  <p className="text-xl semibold text-color-black">
+                    Visit the Bili blog
+                  </p>
+                  <p>
+                    Explore resources and tips for <br />
+                    teaching multilingual students
+                  </p>
+                </IonCol>
+                <IonCol size="2.5">
+                  <button className="visit-blog-button">
+                    <a
+                      href="https://thebiliapp.com/blog/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <p className="text-sm semibold">Learn more</p>
+                    </a>
+                  </button>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </div>
+        </IonCard>
       </div>
     </div>
   );
