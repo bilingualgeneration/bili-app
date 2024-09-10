@@ -6,6 +6,10 @@
   color: var(--Base-Barro);
 }
 
+.color-selva {
+  color: var(--Base-Selva);
+}
+
 .color-cielo-highest {
   color: var(--Cielo-Highest);
 }
@@ -20,44 +24,54 @@
 
 .color-flamenco-lowest {
   color: var(--Flamenco-Lowest);
-  
+}
+
+.color-cielo-low {
+  color: var(--Cielo-Low);
+}
+
+.color-habanero-habanero {
+  color: var(--Habanero-Habanero);
+}
+
+.color-sol {
+  color: var(--Sol);
 }
 
 @keyframes drop-shadow-incorrect-animation {
-    0% {
-    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #F0091B))
-		     drop-shadow(-4px -4px 0 var(--Categories-Error, #F0091B))
-		     drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
-    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #F0091B))
-	    drop-shadow(-4px -4px 0 var(--Categories-Error, #F0091B))
-	    drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
+  0% {
+    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+  }
 
-    }
+  99% {
+    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
+      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+  }
 
-    99% {
-    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #F0091B))
-		     drop-shadow(-4px -4px 0 var(--Categories-Error, #F0091B))
-		     drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
-    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #F0091B))
-	    drop-shadow(-4px -4px 0 var(--Categories-Error, #F0091B))
-	    drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
-    }
-
-    100% {
-	--webkit-filter: none;
-	filter: none;
-    }
+  100% {
+    --webkit-filter: none;
+    filter: none;
+  }
 }
 
 .drop-shadow-incorrect {
-    animation: drop-shadow-incorrect-animation 3s forwards;
+  animation: drop-shadow-incorrect-animation 3s forwards;
 }
 
 .drop-shadow-correct {
-    --webkit-filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12D18E))
-		     drop-shadow(-4px -4px 0 var(--alerts-status-success, #12D18E))
-		     drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
-    filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12D18E))
-	    drop-shadow(-4px -4px 0 var(--alerts-status-success, #12D18E))
-	    drop-shadow(4px 4px 5px rgba(0,0,0,0.5));
+  --webkit-filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(-4px -4px 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(-4px -4px 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
 }

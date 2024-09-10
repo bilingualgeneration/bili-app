@@ -25,7 +25,7 @@ export const ClassStudents: React.FC = () => {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
@@ -39,28 +39,28 @@ export const ClassStudents: React.FC = () => {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "support recommended",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
@@ -74,7 +74,7 @@ export const ClassStudents: React.FC = () => {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
       primaryCaregiverEmail: "john.doe@example.com",
-      needsMoreSupport: "no support needed",
+      needsMoreSupport: "on track",
       homeAccount: "not active",
     },
   ];
@@ -109,30 +109,53 @@ export const ClassStudents: React.FC = () => {
         </IonItem>
       </div>
       <div className="class-students-table">
-        <IonGrid>
-          <IonRow>
-            <IonCol>Student Name</IonCol>
-            <IonCol>Caregiver Name</IonCol>
-            <IonCol>Primary Carergiver Email</IonCol>
-            <IonCol>Needs More Support</IonCol>
-            <IonCol>Home Account</IonCol>
+        <IonGrid className="class-students-table-grid">
+          <IonRow className="class-student-table-header-row">
+            <IonCol className="text-md semibold">Student Name</IonCol>
+            <IonCol className="text-md semibold">Caregiver Name</IonCol>
+            <IonCol className="text-md semibold">
+              Primary Carergiver Email
+            </IonCol>
+            <IonCol className="text-md semibold">Needs More Support</IonCol>
+            <IonCol className="text-md semibold">Home Account</IonCol>
           </IonRow>
           {studentsData.map((student, index) => (
-            <IonRow className="ion-align-items-center">
+            <IonRow className="ion-align-items-center class-student-table-body-row">
               <IonCol key={index}>
-                <StudentInfo userId={""} userType={""} />
+                <StudentInfo userId={""} userType={""} link="/classrooms/add" />
               </IonCol>
               <IonCol>
-                <IonText>{student.caregiverName}</IonText>
+                <IonText>
+                  <p className="text-sm">{student.caregiverName}</p>
+                </IonText>
               </IonCol>
               <IonCol>
-                <IonText>{student.primaryCaregiverEmail}</IonText>
+                <IonText>
+                  <p className="text-sm">{student.primaryCaregiverEmail}</p>
+                </IonText>
               </IonCol>
               <IonCol>
-                <IonText>{student.needsMoreSupport}</IonText>
+                <IonText
+                  className="student-needs-support-text text-sm-xs semibold"
+                  style={{
+                    background:
+                      student.needsMoreSupport === "on track"
+                        ? "var(--Cielo-Low)"
+                        : student.needsMoreSupport === "needs support"
+                          ? "var(--Habanero-Habanero)"
+                          : student.needsMoreSupport === "support recommended"
+                            ? "var(--Sol)"
+                            : "transparent",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {student.needsMoreSupport}
+                </IonText>
               </IonCol>
               <IonCol>
-                <IonText>{student.homeAccount}</IonText>
+                <IonText>
+                  <p className="text-sm">{student.homeAccount}</p>
+                </IonText>
               </IonCol>
             </IonRow>
           ))}
