@@ -164,25 +164,22 @@ export const ClassStudents: React.FC = () => {
         </IonGrid>
       </div>
       {/* banner */}
-      <div className="class-overview-blog-styles">
+      <div className="class-students-banner-styles">
         <IonCard className="card-blog">
           <div>
             <IonGrid>
-              <IonRow class="ion-align-items-center">
-                <IonCol size="2">
+              <IonRow class="ion-align-items-center banner-row">
+                <IonCol size="1">
                   <img src={StudentsReadingPicture} alt="" />
                 </IonCol>
                 <IonCol>
-                  <p className="text-xl semibold text-color-black">
-                    Visit the Bili blog
+                  <p className="text-xl semibold color-suelo">
+                    Alert banner of some sort
                   </p>
-                  <p>
-                    Explore resources and tips for <br />
-                    teaching multilingual students
-                  </p>
+                  <p>Get notified when students need help!</p>
                 </IonCol>
-                <IonCol size="2.5">
-                  <button className="visit-blog-button">
+                <IonCol size="2" className="button-column">
+                  <button className="get-notified-button">
                     <a
                       href="https://thebiliapp.com/blog/"
                       target="_blank"

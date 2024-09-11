@@ -49,8 +49,25 @@
     border-radius: 4px;
   }
 
-  .class-overview-blog-styles ion-card {
+  .button-column {
+    text-align: end;
+  }
+
+  .class-students-banner-styles ion-card {
     margin: 0px;
-    padding: 24px 32px 24px 24px;
+    padding: 15px 32px 15px 24px;
+    background: #d3eae8;
+  }
+
+  .get-notified-button {
+    padding: 4px 12px 4px 12px;
+    border-radius: 8px;
+    background-color: #006a67;
+
+    font-weight: 600;
+
+    p {
+      color: white;
+    }
   }
 }
