@@ -9,7 +9,7 @@ interface StudentInfoProps {
   userType: string;
   subtitle?: string;
   link?: string;
-  size?: string;
+  size: string;
 }
 
 // TODO: might need to update props
@@ -22,12 +22,16 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
   size,
 }) => {
   return (
-    <IonRow className="ion-align-items-center student-info-row">
-      <IonCol size="2" className="ion-no-padding">
+    <IonRow id="student-info-row" className="ion-align-items-center">
+      <IonCol size="auto" className="image-column-padding">
         {/* temporary image */}
-        <img src={StudentImage} alt="student-image" style={{}} />
+        <img
+          src={StudentImage}
+          className={`student-info-img-${size}`}
+          alt="student-image"
+        />
       </IonCol>
-      <IonCol size="10" className="ion-no-padding">
+      <IonCol size="auto" className="ion-no-padding">
         <IonText>
           {/* If a link is provided, render the name as a link, otherwise as plain text */}
           {/* temporary name */}

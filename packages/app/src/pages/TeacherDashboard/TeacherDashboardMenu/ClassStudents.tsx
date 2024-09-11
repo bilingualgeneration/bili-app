@@ -66,7 +66,7 @@ export const ClassStudents: React.FC = () => {
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
+      caregiverName: "Michelllllllll Doeeeeee333333",
       primaryCaregiverEmail: "john.doe@example.com",
       needsMoreSupport: "needs support",
       homeAccount: "active",
@@ -74,7 +74,7 @@ export const ClassStudents: React.FC = () => {
     {
       studentName: "John Doeeeeeee",
       caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryCaregiverEmail: "john.doe44455566666666@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
@@ -124,16 +124,29 @@ export const ClassStudents: React.FC = () => {
           {studentsData.map((student, index) => (
             <IonRow className="ion-align-items-center class-student-table-body-row">
               <IonCol key={index}>
-                <StudentInfo userId={""} userType={""} link="/classrooms/add" />
+                <StudentInfo
+                  userId={""}
+                  userType={""}
+                  link="/classrooms/add"
+                  size="xs"
+                />
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p className="text-sm">{student.caregiverName}</p>
+                  <p className="text-sm">
+                    {student.caregiverName.length > 23
+                      ? `${student.caregiverName.slice(0, 23)}...`
+                      : student.caregiverName}
+                  </p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p className="text-sm">{student.primaryCaregiverEmail}</p>
+                  <p className="text-sm">
+                    {student.primaryCaregiverEmail.length > 23
+                      ? `${student.primaryCaregiverEmail.slice(0, 23)}...`
+                      : student.primaryCaregiverEmail}
+                  </p>
                 </IonText>
               </IonCol>
               <IonCol>
@@ -163,8 +176,9 @@ export const ClassStudents: React.FC = () => {
           ))}
         </IonGrid>
       </div>
-      {/* banner */}
-      <div className="class-students-banner-styles">
+      {/* banner temporary commented out*/}
+
+      {/* <div className="class-students-banner-styles">
         <IonCard className="card-blog">
           <div>
             <IonGrid>
@@ -193,7 +207,7 @@ export const ClassStudents: React.FC = () => {
             </IonGrid>
           </div>
         </IonCard>
-      </div>
+      </div> */}
     </div>
   );
 };
