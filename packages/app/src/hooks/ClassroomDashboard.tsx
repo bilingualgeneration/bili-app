@@ -4,6 +4,7 @@ import { database } from "@/components/Firebase";
 
 const ClassroomDashboardContext = createContext();
 
+// TODO: fetch from firestore `classroomAnalytics` collection instead
 export const ClassroomDashboardProvider = ({ classroomId, children }) => {
   const [classroomData, setClassroomData] = useState(null);
   const [usersData, setUsersData] = useState({});
