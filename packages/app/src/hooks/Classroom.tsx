@@ -42,7 +42,6 @@ export const ClassroomProvider: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     Preferences.get({ key: "classroom" }).then((response) => {
-      console.log(response);
       // todo: get name dynamically
       if (response.value === null) {
         setIsLoading(false);

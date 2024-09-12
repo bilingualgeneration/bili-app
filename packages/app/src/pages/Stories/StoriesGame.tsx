@@ -156,8 +156,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const { pageNumber, pageLocks, setPageLocks, pageForward } = useStory();
   const { handleAttempt } = useActivity();
 
-  console.log("$$ stories game", data);
-
   const headerData = useMemo((): GameHeader => {
     const textPacks =
       gameType === "image"
