@@ -212,6 +212,7 @@ export const StoryLoader = ({
       component: (
         <TitleCard
           cover_image={data.cover_image}
+          is_student_story={data.is_student_story ?? false}
           is_translanguaged={data.is_translanguaged ?? false}
           title={data.title}
         />
@@ -407,13 +408,13 @@ const PageCounter = () => {
   );
 };
 
-interface TranslanguagedFlag {
+interface MetaFlag {
   color: string;
   primaryText: string;
   secondaryText?: string;
 }
 
-const TranslanguagedFlag: React.FC<TranslanguagedFlag> = ({
+const MetaFlag: React.FC<MetaFlag> = ({
   color,
   primaryText,
   secondaryText,
@@ -432,11 +433,17 @@ const TranslanguagedFlag: React.FC<TranslanguagedFlag> = ({
 
 interface TitleCard {
   cover_image: any;
+  is_student_story: boolean;
   is_translanguaged: boolean;
   title: string;
 }
 
-const TitleCard = ({ cover_image, is_translanguaged, title }: TitleCard) => {
+const TitleCard = ({
+  cover_image,
+  is_student_story,
+  is_translanguaged,
+  title,
+}: TitleCard) => {
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -456,7 +463,7 @@ const TitleCard = ({ cover_image, is_translanguaged, title }: TitleCard) => {
         }}
       >
         {is_translanguaged && (
-          <TranslanguagedFlag
+          <MetaFlag
             color="cielo-low"
             primaryText={
               language === "en" ? "Translanguage Story" : "Cuento Translenguaje"
@@ -464,6 +471,15 @@ const TitleCard = ({ cover_image, is_translanguaged, title }: TitleCard) => {
             secondaryText={
               language === "esen" ? "Translanguage Story" : undefined
             }
+          />
+        )}
+        {is_student_story && (
+          <MetaFlag
+            color="flamenco-flamenco"
+            primaryText={
+              language === "en" ? "Student Story" : "Cuento de Estudiante"
+            }
+            secondaryText={language === "esen" ? "Student Story" : undefined}
           />
         )}
         <IonCardContent>

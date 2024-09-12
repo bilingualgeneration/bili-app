@@ -84,6 +84,10 @@ export const HydratedPackSelect: React.FC<props> = ({
       language === "en" ? "Translanguaged Story" : "Cuento Translenguaje",
     secondaryText: language === "esen" ? "Translanguaged Story" : undefined,
   };
+  const studentStoryPill = {
+    primaryText: language === "en" ? "Student Story" : "Cuento de Estudiante",
+    secondaryText: language === "esen" ? "Student Story" : undefined,
+  };
 
   const cards = data
     .sort((a: Card, b: Card) => {
@@ -119,6 +123,7 @@ export const HydratedPackSelect: React.FC<props> = ({
           "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png",
         link: `/${modulePath || module}/play/${p.uuid}`,
         is_translanguaged: p.is_translanguaged,
+        is_student_story: p.is_student_story,
       };
     });
   if (only_cards) {
@@ -130,6 +135,9 @@ export const HydratedPackSelect: React.FC<props> = ({
             if (module === "story") {
               if (c.is_translanguaged) {
                 pills.push(translanguagedPill);
+              }
+              if (c.is_student_story) {
+                pills.push(studentStoryPill);
               }
             }
             return <ContentCard key={index} pills={pills} {...c} />;
