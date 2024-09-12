@@ -6,7 +6,12 @@ import "./ContentCard.scss";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
-import {useLanguageToggle} from '@/components/LanguageToggle';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+
+export interface Pill {
+  primaryText: string;
+  secondaryText?: string;
+}
 
 type ContentCardProps = {
   title: string;
@@ -17,20 +22,19 @@ type ContentCardProps = {
   className?: string;
   isLocked?: boolean;
   link?: string;
+  pills?: Pill[];
 };
 
-const ComingSoon: React.FC = () => {
-  const {language} = useLanguageToggle();
+const Pill: React.FC<Pill> = ({ primaryText, secondaryText }) => {
   return (
-    <div className="content-coming-soon">
+    <span className="content-card-pill">
       <IonText>
-        <p className="text-xs semibold color-suelo">
-	  {language === 'en' && 'Coming Soon'}
-	  {language === 'es' && 'Próximamente'}
-	  {language === 'esen' && 'Próximamente | Coming Soon'}
-        </p>
+        <span className="text-xs semibold color-suelo">
+          {primaryText}
+          {secondaryText ? ` | ${secondaryText}` : ""}
+        </span>
       </IonText>
-    </div>
+    </span>
   );
 };
 
@@ -43,16 +47,17 @@ const Lock: React.FC = () => {
 };
 
 export const ContentCard: React.FC<ContentCardProps> = ({
-  title,
-  titleEn,
-  fid = "",
   category,
-  cover,
   className,
+  cover,
+  fid = "",
   isLocked = false,
   link,
+  title,
+  titleEn,
+  pills = [],
 }) => {
-  const {language} = useLanguageToggle();
+  const { language } = useLanguageToggle();
   const history = useHistory();
   return (
     <div
@@ -67,11 +72,13 @@ export const ContentCard: React.FC<ContentCardProps> = ({
       <CategoryTag category={category} />
       <FavoriteButton fid={fid} />
       <IonText>
-        {isLocked && <ComingSoon />}
+        {pills.map((pill) => (
+          <Pill {...pill} />
+        ))}
         <h1 className="text-2xl semibold color-nube">
-	  {language === 'en' ? titleEn : title}
-	</h1>
-        {language === 'esen' && <p className="text-sm color-nube">{titleEn}</p>}
+          {language === "en" ? titleEn : title}
+        </h1>
+        {language === "esen" && <p className="text-sm color-nube">{titleEn}</p>}
       </IonText>
       {isLocked && <Lock />}
     </div>

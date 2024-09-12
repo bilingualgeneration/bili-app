@@ -210,7 +210,11 @@ export const StoryLoader = ({
     let tempPages: any[] = [];
     tempPages.push({
       component: (
-        <TitleCard title={data.title} cover_image={data.cover_image} />
+        <TitleCard
+          cover_image={data.cover_image}
+          is_translanguaged={data.is_translanguaged ?? false}
+          title={data.title}
+        />
       ),
       id: "title card",
       languages: allLanguages,
@@ -403,12 +407,36 @@ const PageCounter = () => {
   );
 };
 
-interface TitleCardProps {
+interface TranslanguagedFlag {
+  color: string;
+  primaryText: string;
+  secondaryText?: string;
+}
+
+const TranslanguagedFlag: React.FC<TranslanguagedFlag> = ({
+  color,
+  primaryText,
+  secondaryText,
+}) => {
+  return (
+    <div id="story-translanguaged-flag" className={`background-${color}`}>
+      <IonText>
+        <div className="text-xs semibold color-suelo">{primaryText}</div>
+        {secondaryText && (
+          <div className="text-xs color-grey">{secondaryText}</div>
+        )}
+      </IonText>
+    </div>
+  );
+};
+
+interface TitleCard {
   cover_image: any;
+  is_translanguaged: boolean;
   title: string;
 }
 
-const TitleCard = ({ cover_image, title }: TitleCardProps) => {
+const TitleCard = ({ cover_image, is_translanguaged, title }: TitleCard) => {
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -427,6 +455,17 @@ const TitleCard = ({ cover_image, title }: TitleCardProps) => {
           position: "relative",
         }}
       >
+        {is_translanguaged && (
+          <TranslanguagedFlag
+            color="cielo-low"
+            primaryText={
+              language === "en" ? "Translanguage Story" : "Cuento Translenguaje"
+            }
+            secondaryText={
+              language === "esen" ? "Translanguage Story" : undefined
+            }
+          />
+        )}
         <IonCardContent>
           <IonText
             className="ion-text-center"

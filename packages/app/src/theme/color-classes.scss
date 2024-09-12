@@ -1,4 +1,5 @@
-.color-english {
+.color-english,
+.color-grey {
   color: rgba(0, 0, 0, 0.45) !important;
 }
 
@@ -8,6 +9,10 @@
 
 .color-selva {
   color: var(--Base-Selva);
+}
+
+.background-cielo-low {
+  background-color: var(--Cielo-Low);
 }
 
 .color-cielo-highest {

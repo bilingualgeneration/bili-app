@@ -46,22 +46,26 @@
     z-index: 2;
   }
 
-  .content-coming-soon {
+  .content-card-pill {
     background-color: #ffffff;
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     z-index: 2;
   }
 
-  &::after{
-      background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%);
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      z-index: 1;
-      border-radius: 12px;	       
+  &::after {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 50%
+    );
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    z-index: 1;
+    border-radius: 12px;
   }
 }
