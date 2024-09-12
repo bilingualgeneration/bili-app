@@ -73,7 +73,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
       <FavoriteButton fid={fid} />
       <IonText>
         {pills.map((pill) => (
-          <Pill {...pill} />
+          <Pill {...pill} key={pill.primaryText} />
         ))}
         <h1 className="text-2xl semibold color-nube">
           {language === "en" ? titleEn : title}
