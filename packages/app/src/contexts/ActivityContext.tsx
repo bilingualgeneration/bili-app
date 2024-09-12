@@ -63,8 +63,8 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
   const student = useStudent();
   const classroom = useClassroom();
-  console.log("student", student);
-  console.log("classroom", classroom);
+  //console.log("student", student);
+  //console.log("classroom", classroom);
 
   const functions = getFunctions();
   const recordUserActivity = httpsCallable(functions, "user-activity-record");

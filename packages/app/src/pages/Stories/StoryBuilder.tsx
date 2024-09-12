@@ -45,6 +45,8 @@ export const StoryBuilder: React.FC = () => {
   );
 };
 
+const allLanguages = ["en", "es", "es-inc"];
+
 const StoryBuilderLoader: React.FC = () => {
   // todo: throwing component update race condition
   const { setPageNumber, pages, setPages, ready, setReady } = useStory();
@@ -55,7 +57,12 @@ const StoryBuilderLoader: React.FC = () => {
       es: "",
       esInc: "",
     });
-    setPages([<StoryPage page={blankPage} />]);
+    setPages([
+      {
+        languages: allLanguages,
+        component: <StoryPage page={blankPage} languages={allLanguages} />,
+      },
+    ]);
     setReady(true);
     return <></>;
   } else {
@@ -97,7 +104,12 @@ const StoryBuilderForm: React.FC = () => {
   const page = generatePage(values);
 
   if (JSON.stringify(pages[0].props.page) !== JSON.stringify(page)) {
-    setPages([<StoryPage page={page} />]);
+    setPages([
+      {
+        languages: allLanguages,
+        component: <StoryPage page={page} languages={allLanguages} />,
+      },
+    ]);
   }
   return (
     <div

@@ -2,12 +2,15 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { useActivity } from "@/contexts/ActivityContext";
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useProfile } from "@/hooks/Profile";
 
 type Vocab = any;
 type Lang = string;
@@ -53,8 +56,11 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [pageNumber, setPageNumber] = useState<number>(0);
+  const { language } = useLanguageToggle();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
   const [pages, setPages] = useState<any>([]);
-  const totalPages = pages.length;
 
   const [ready, setReady] = useState<boolean>(false);
   const [currentVocabWord, setCurrentVocabWord] = useState<string | null>(null);
@@ -71,6 +77,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [id, setId] = useState<string | null>(null);
 
   // Record attempt and calculate stars
+  /*
   useEffect(() => {
     const recordAttempt = async () => {
       if (id && pageNumber === totalPages - 1) {
@@ -80,38 +87,69 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
 
     recordAttempt();
   }, [pageNumber, totalPages]);
-
+  */
   const functions = getFunctions();
 
   const recordUserActivity = httpsCallable(functions, "user-activity-record");
 
-  const pageForward = () => {
+  const pageForward = useCallback(() => {
+    // find next appropriate page number
+    // must assume that all stories begin and end with pages that have ['all'] languages
+    let newPageNumber = pageNumber + 1;
+    const esLangCode = isInclusive ? "es-inc" : "es";
+    while (
+      (language === "esen" &&
+        !(
+          pages[newPageNumber].languages.includes(esLangCode) &&
+          pages[newPageNumber].languages.includes("en")
+        )) ||
+      (language === "en" && !pages[newPageNumber].languages.includes("en")) ||
+      (language === "es" &&
+        !pages[newPageNumber].languages.includes(esLangCode))
+    ) {
+      newPageNumber++;
+    }
+    setPageNumber(newPageNumber);
+    if (id) {
+      recordUserActivity({
+        activity: "story",
+        activityId: id,
+        type: "pageForward",
+        time: new Date().toISOString(),
+        version: "0.0.1",
+        data: {
+          newPageNumber,
+        },
+      });
+    }
+    /*
     if (totalPages > 0 && !pageLocks[pageNumber]) {
       // Increment page
       setPageNumber((p) => {
         const newPage = p < totalPages - 1 ? p + 1 : totalPages - 1;
-        if (id) {
-          recordUserActivity({
-            activity: "story",
-            activityId: id,
-            type: "pageForward",
-            time: new Date().toISOString(),
-            version: "0.0.1",
-            data: {
-              newPage,
-            },
-          });
-        }
 
         return newPage;
       });
     }
-  };
+    */
+  }, [isInclusive, language, pageNumber, pages]);
 
   const pageBackward = () => {
-    if (totalPages > 0) {
-      setPageNumber((p) => (p > 0 ? p - 1 : 0));
+    let newPageNumber = pageNumber - 1;
+    const esLangCode = isInclusive ? "es-inc" : "es";
+    while (
+      (language === "esen" &&
+        !(
+          pages[newPageNumber].languages.includes(esLangCode) &&
+          pages[newPageNumber].languages.includes("en")
+        )) ||
+      (language === "en" && !pages[newPageNumber].languages.includes("en")) ||
+      (language === "es" &&
+        !pages[newPageNumber].languages.includes(esLangCode))
+    ) {
+      newPageNumber--;
     }
+    setPageNumber(newPageNumber);
   };
 
   return (
