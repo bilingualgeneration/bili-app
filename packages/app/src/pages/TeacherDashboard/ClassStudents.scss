@@ -1,18 +1,73 @@
 #teacher-dashboard-students {
+  padding: 48px;
+
+  .class-students-header ion-item {
+    --padding-start: 0px;
+  }
+
   .students-header-block {
     display: flex;
     justify-content: space-between;
+    margin-top: 40px;
   }
   .add-students-button {
     border-radius: 8px;
     background: #006a67;
-    padding: 12px 16px;
-    color: white;
     display: flex;
-    gap: 6px;
+    padding: 4px 12px 4px 4px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    color: white;
 
     ion-icon {
       font-size: 20px;
+    }
+  }
+
+  .class-students-table {
+    margin: 32px 0px;
+  }
+
+  .class-students-table-grid {
+    background: white;
+    border-radius: 8px;
+  }
+
+  .class-student-table-header-row {
+    padding: 16px;
+  }
+  .class-student-table-body-row {
+    padding: 16px;
+    background: #f7faf9;
+    margin: 4px 0;
+    border-radius: 8px;
+  }
+  .student-needs-support-text {
+    padding: 2px 8px;
+    background: #22beb9;
+    border-radius: 4px;
+  }
+
+  .button-column {
+    text-align: end;
+  }
+
+  .class-students-banner-styles ion-card {
+    margin: 0px;
+    padding: 15px 32px 15px 24px;
+    background: #d3eae8;
+  }
+
+  .get-notified-button {
+    padding: 4px 12px 4px 12px;
+    border-radius: 8px;
+    background-color: #006a67;
+
+    font-weight: 600;
+
+    p {
+      color: white;
     }
   }
 }
