@@ -15,13 +15,74 @@ import {
 } from "@ionic/react";
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
-import "./ClassStudents.scss";
+import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { Link } from "react-router-dom";
+import { StudentInfo } from "@/components/StudentInfo";
+import "./ClassStudents.scss";
 
 export const ClassStudents: React.FC = () => {
+  const studentsData = [
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "on track",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "support recommended",
+      homeAccount: "active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "on track",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "on track",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "support recommended",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "on track",
+      homeAccount: "not active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michelllllllll Doeeeeee333333",
+      primaryCaregiverEmail: "john.doe@example.com",
+      needsMoreSupport: "needs support",
+      homeAccount: "active",
+    },
+    {
+      studentName: "John Doeeeeeee",
+      caregiverName: "Michel Doeeeeee",
+      primaryCaregiverEmail: "john.doe44455566666666@example.com",
+      needsMoreSupport: "on track",
+      homeAccount: "not active",
+    },
+  ];
+
   return (
     <div id="teacher-dashboard-students">
-      {/* header text */}
+      {/* header */}
       <div className="class-students-header">
         <IonItem>
           <IonLabel>
@@ -48,17 +109,105 @@ export const ClassStudents: React.FC = () => {
           </IonLabel>
         </IonItem>
       </div>
+      {/* table */}
       <div className="class-students-table">
-        <IonGrid>
-          <IonRow>
-            <IonCol>Student Name</IonCol>
-            <IonCol>Caregiver Name</IonCol>
-            <IonCol>Primary Carergiver Email</IonCol>
-            <IonCol>Needs More Support</IonCol>
-            <IonCol>Home Account</IonCol>
+        <IonGrid className="class-students-table-grid">
+          <IonRow className="class-student-table-header-row">
+            <IonCol className="text-md semibold">Student Name</IonCol>
+            <IonCol className="text-md semibold">Caregiver Name</IonCol>
+            <IonCol className="text-md semibold">
+              Primary Carergiver Email
+            </IonCol>
+            <IonCol className="text-md semibold">Needs More Support</IonCol>
+            <IonCol className="text-md semibold">Home Account</IonCol>
           </IonRow>
+          {studentsData.map((student, index) => (
+            <IonRow className="ion-align-items-center class-student-table-body-row">
+              <IonCol key={index}>
+                <StudentInfo
+                  userId={""}
+                  userType={""}
+                  link="/classrooms/add"
+                  size="xs"
+                />
+              </IonCol>
+              <IonCol>
+                <IonText>
+                  <p className="text-sm">
+                    {student.caregiverName.length > 23
+                      ? `${student.caregiverName.slice(0, 23)}...`
+                      : student.caregiverName}
+                  </p>
+                </IonText>
+              </IonCol>
+              <IonCol>
+                <IonText>
+                  <p className="text-sm">
+                    {student.primaryCaregiverEmail.length > 23
+                      ? `${student.primaryCaregiverEmail.slice(0, 23)}...`
+                      : student.primaryCaregiverEmail}
+                  </p>
+                </IonText>
+              </IonCol>
+              <IonCol>
+                <IonText
+                  className="student-needs-support-text text-sm-xs semibold"
+                  style={{
+                    background:
+                      student.needsMoreSupport === "on track"
+                        ? "var(--Cielo-Low)"
+                        : student.needsMoreSupport === "needs support"
+                          ? "var(--Habanero-Habanero)"
+                          : student.needsMoreSupport === "support recommended"
+                            ? "var(--Sol)"
+                            : "transparent",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {student.needsMoreSupport}
+                </IonText>
+              </IonCol>
+              <IonCol>
+                <IonText>
+                  <p className="text-sm">{student.homeAccount}</p>
+                </IonText>
+              </IonCol>
+            </IonRow>
+          ))}
         </IonGrid>
       </div>
+      {/* banner temporary commented out*/}
+
+      {/* <div className="class-students-banner-styles">
+        <IonCard className="card-blog">
+          <div>
+            <IonGrid>
+              <IonRow class="ion-align-items-center banner-row">
+                <IonCol size="1">
+                  <img src={StudentsReadingPicture} alt="" />
+                </IonCol>
+                <IonCol>
+                  <p className="text-xl semibold color-suelo">
+                    Alert banner of some sort
+                  </p>
+                  <p>Get notified when students need help!</p>
+                </IonCol>
+                <IonCol size="2" className="button-column">
+                  <button className="get-notified-button">
+                    <a
+                      href="https://thebiliapp.com/blog/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <p className="text-sm semibold">Learn more</p>
+                    </a>
+                  </button>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </div>
+        </IonCard>
+      </div> */}
     </div>
   );
 };

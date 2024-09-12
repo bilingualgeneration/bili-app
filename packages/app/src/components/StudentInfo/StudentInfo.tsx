@@ -1,14 +1,18 @@
 //A.M.
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
+import StudentImage from "@/assets/img/student_img.png";
+import "./StudentInfo.scss";
 
 interface StudentInfoProps {
   userId: string;
   userType: string;
   subtitle?: string;
   link?: string;
-  size?: string;
+  size: string;
 }
+
+// TODO: might need to update props
 
 export const StudentInfo: React.FC<StudentInfoProps> = ({
   userId,
@@ -18,28 +22,35 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
   size,
 }) => {
   return (
-    <div id="student-info-component">
-      <IonGrid>
-        <IonRow className="ion-justify-content-center ion-align-items-center">
-          <IonCol size="12" sizeMd="4" className="ion-text-center">
-            <img src={""} alt={"studentName"} style={{}} />
-          </IonCol>
-          <IonCol size="12" sizeMd="8" className="ion-text-center">
-            <IonText>
-              <h2>{"studentName"}</h2>
-              {subtitle && (
-                <p
-                  style={{
-                    fontSize: "1rem",
-                  }}
-                >
-                  {"subtitle"}
-                </p>
-              )}
-            </IonText>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </div>
+    <IonRow id="student-info-row" className="ion-align-items-center">
+      <IonCol size="auto" className="image-column-padding">
+        {/* temporary image */}
+        <img
+          src={StudentImage}
+          className={`student-info-img-${size}`}
+          alt="student-image"
+        />
+      </IonCol>
+      <IonCol size="auto" className="ion-no-padding">
+        <IonText>
+          {/* If a link is provided, render the name as a link, otherwise as plain text */}
+          {/* temporary name */}
+          {link ? (
+            <a
+              href={link}
+              className="text-sm semibold color-selva"
+              style={{ textDecoration: "none" }}
+            >
+              {"Mattie Blooman"}
+            </a>
+          ) : (
+            <p className="text-sm">{"Mattie Blooman"}</p>
+          )}
+
+          {/* Subtitle, displayed when provided */}
+          {subtitle && <p style={{}}>{"subtitle"}</p>}
+        </IonText>
+      </IonCol>
+    </IonRow>
   );
 };
