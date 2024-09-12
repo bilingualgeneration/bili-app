@@ -227,6 +227,11 @@ export const StudentDashboard: React.FC = () => {
   const { language } = useLanguageToggle();
   const isImmersive = true;
 
+  const comingSoonPill = {
+    primaryText: language === "en" ? "Coming Soon" : "Próximamente",
+    secondaryText: language === "esen" ? "Coming Soon" : undefined,
+  };
+
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
@@ -348,7 +353,11 @@ export const StudentDashboard: React.FC = () => {
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
               {wellnessCards.map((c, index) => (
-                <ContentCard {...c} key={index} />
+                <ContentCard
+                  key={index}
+                  pills={c.isLocked ? [comingSoonPill] : undefined}
+                  {...c}
+                />
               ))}
             </Carousel>
           </div>
@@ -375,7 +384,11 @@ export const StudentDashboard: React.FC = () => {
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
               {playCards.map((c, index) => (
-                <ContentCard {...c} key={index} />
+                <ContentCard
+                  key={index}
+                  pills={c.isLocked ? [comingSoonPill] : undefined}
+                  {...c}
+                />
               ))}
             </Carousel>
           </div>
@@ -401,7 +414,11 @@ export const StudentDashboard: React.FC = () => {
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={274}>
               {communityCards.map((c, index) => (
-                <ContentCard {...c} key={index} />
+                <ContentCard
+                  key={index}
+                  pills={c.isLocked ? [comingSoonPill] : undefined}
+                  {...c}
+                />
               ))}
             </Carousel>
           </div>
