@@ -29,7 +29,7 @@ export type IonToggleProps = {
 
 export type ToggleAdditionalProps = {
   control: Control<any>;
-  label: string;
+  label: string | JSX.Element;
   testId: string | undefined;
 };
 
