@@ -2,6 +2,16 @@
   --storyPageSize: 530px;
 }
 
+#story-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  > div {
+    position: relative;
+  }
+}
+
 .story-page {
   width: var(--storyPageSize);
   height: var(--storyPageSize);
@@ -98,12 +108,6 @@
 .stories-volume-icon {
   height: 38px;
   width: auto;
-  /*
-    width: auto;
-    background-color: var(--Flamenco-High, #ffaedc);
-    padding: 1rem;
-    border-radius: 1rem;
-    */
 }
 
 .content-wrapper {

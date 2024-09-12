@@ -137,14 +137,18 @@ const StoriesHydrated: React.FC = () => {
       return (
         <ActivityProvider>
           <StoryProvider>
-            <StoryLoader
-              {...{
-                keyVocab,
-                languageParsedPages,
-                vocab,
-                vocabLookup,
-              }}
-            />
+            <div id="story-wrapper">
+              <div>
+                <StoryLoader
+                  {...{
+                    keyVocab,
+                    languageParsedPages,
+                    vocab,
+                    vocabLookup,
+                  }}
+                />
+              </div>
+            </div>
           </StoryProvider>
         </ActivityProvider>
       );
@@ -411,7 +415,7 @@ const TitleCard = ({ cover_image, title }: TitleCardProps) => {
   const { language } = useLanguageToggle();
   const { pageForward } = useStory();
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonCard
         className="sf-card drop-shadow story-page"
         style={{
@@ -501,7 +505,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
     useStory();
   const totalPages = pages.length;
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonGrid>
         <IonRow>
           <IonCol />
@@ -533,7 +537,7 @@ const KeyVocabPageWrapper: React.FC<React.PropsWithChildren> = ({
     useStory();
   const totalPages = pages.length;
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonGrid>
         <IonRow>
           <IonCol />
