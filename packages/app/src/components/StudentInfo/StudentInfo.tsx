@@ -22,35 +22,37 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
   size,
 }) => {
   return (
-    <IonRow id="student-info-row" className="ion-align-items-center">
-      <IonCol size="auto" className="image-column-padding">
-        {/* temporary image */}
-        <img
-          src={StudentImage}
-          className={`student-info-img-${size}`}
-          alt="student-image"
-        />
-      </IonCol>
-      <IonCol size="auto" className="ion-no-padding">
-        <IonText>
-          {/* If a link is provided, render the name as a link, otherwise as plain text */}
-          {/* temporary name */}
-          {link ? (
-            <a
-              href={link}
-              className="text-sm semibold color-selva"
-              style={{ textDecoration: "none" }}
-            >
-              {"Mattie Blooman"}
-            </a>
-          ) : (
-            <p className="text-sm">{"Mattie Blooman"}</p>
-          )}
+    <IonGrid>
+      <IonRow id="student-info-row" className="ion-align-items-center">
+        <IonCol size="auto" className="image-column-padding">
+          {/* temporary image */}
+          <img
+            src={StudentImage}
+            className={`student-info-img-${size}`}
+            alt="student-image"
+          />
+        </IonCol>
+        <IonCol size="auto" className="ion-no-padding">
+          <IonText>
+            {/* If a link is provided, render the name as a link, otherwise as plain text */}
+            {/* temporary name */}
+            {link ? (
+              <a
+                href={link}
+                className="text-sm semibold color-selva"
+                style={{ textDecoration: "none" }}
+              >
+                {"Mattie Blooman"}
+              </a>
+            ) : (
+              <p className="text-sm">{"Mattie Blooman"}</p>
+            )}
 
-          {/* Subtitle, displayed when provided */}
-          {subtitle && <p style={{}}>{"subtitle"}</p>}
-        </IonText>
-      </IonCol>
-    </IonRow>
+            {/* Subtitle, displayed when provided */}
+            {subtitle && <p style={{}}>{"subtitle"}</p>}
+          </IonText>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   );
 };
