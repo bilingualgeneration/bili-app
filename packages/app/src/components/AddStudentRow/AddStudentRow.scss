@@ -1,7 +1,7 @@
 #add-student-row-component {
   .add-student-row {
-    border-radius: 19.421px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 6px 16px;
     align-items: center;
     margin-top: 4px;
   }
@@ -18,12 +18,25 @@
     font-size: 23px;
   }
 
-  .edit-student-data-button {
-    padding: 16px 14px;
+  .save-student-data-button {
+    padding: 18px 15px;
     color: white;
     border-radius: 8px;
     background: #006a67;
     display: flex;
+    gap: 4px;
+  }
+
+  .edit-student-data {
+    margin-top: 4px;
+  }
+
+  .edit-student-data-button {
+    padding: 17px 8px;
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid var(--Base-Selva, #006a67);
+    background: #e0edec;
     gap: 4px;
   }
   .student-row-edit-button,

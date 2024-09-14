@@ -12,13 +12,21 @@
     gap: 24px;
   }
 
+  .add-students-grid {
+    margin: 0px 76px;
+  }
+
+  .add-student-row {
+    margin-top: 4px;
+  }
+
   .add-student-button {
-    padding: 4px 2px;
-    color: white;
-    border-radius: 8px;
-    background: #006a67;
     display: flex;
+    padding: 16.5px 17px;
+    color: white;
     gap: 4px;
+    background: var(--Base-Barro, #889391);
+    border-radius: 8px;
   }
 
   .upload-csv-button {
@@ -32,12 +40,12 @@
   }
 
   .reset-student-button {
-    padding: 15px 12px;
-    color: white;
-    border-radius: 8px;
-    background: #006a67;
+    padding: 17px 12px;
     display: flex;
     gap: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--Base-Selva, #006a67);
+    background: var(--Base-Barro, #889391);
   }
 
   .reset-button-column {

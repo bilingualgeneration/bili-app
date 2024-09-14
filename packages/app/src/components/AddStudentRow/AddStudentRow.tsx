@@ -65,8 +65,13 @@ export const AddStudentRow: React.FC<RowProps> = ({
           // Edit mode: renders input fields for editing
 
           <form onSubmit={handleSubmit((data) => onSaveClick(data, index))}>
-            <IonRow key={index} className={"text-sm color-suelo"}>
-              <IonCol size={colSizes[0]}>
+            <IonRow
+              key={index}
+              className={
+                "text-sm color-suelo ion-align-items-center ion-justify-content-around edit-student-data"
+              }
+            >
+              <IonCol className="ion-no-padding" size={colSizes[0]}>
                 <Input
                   control={control}
                   name="firstName"
@@ -74,7 +79,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={colSizes[1]}>
+              <IonCol className="ion-no-padding" size={colSizes[1]}>
                 <Input
                   control={control}
                   name="lastName"
@@ -82,7 +87,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={colSizes[2]}>
+              <IonCol className="ion-no-padding" size={colSizes[2]}>
                 <Input
                   control={control}
                   name="primaryEmail"
@@ -90,7 +95,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={colSizes[3]}>
+              <IonCol className="ion-no-padding" size={colSizes[3]}>
                 <Input
                   control={control}
                   name="secondaryEmail"
@@ -98,15 +103,15 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={colSizes[4]}>
+              <IonCol className="ion-no-padding" size={"auto"}>
                 <button
                   type="submit"
-                  className="edit-student-data-button text-sm semibold"
+                  className="save-student-data-button text-sm semibold"
                 >
                   Save
                 </button>
               </IonCol>
-              <IonCol size={colSizes[5]}>
+              <IonCol className="ion-no-padding" size={"auto"}>
                 <button
                   type="button"
                   className="edit-student-data-button text-sm semibold"
@@ -121,7 +126,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
           // Normal mode: renders the student's data
           <IonRow
             key={index}
-            className={`text-sm color-suelo add-student-row ${
+            className={`text-sm color-suelo add-student-row ion-align-items-center ion-justify-content-around ${
               index % 2 === 0 ? "even-row" : "odd-row"
             }`}
           >
@@ -129,7 +134,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
             <IonCol size={colSizes[1]}>{student.lastName}</IonCol>
             <IonCol size={colSizes[2]}>{student.primaryEmail}</IonCol>
             <IonCol size={colSizes[3]}>{student.secondaryEmail}</IonCol>
-            <IonCol size={colSizes[4]}>
+            <IonCol size={"auto"}>
               <button
                 onClick={() => handleEditClick(index, student)}
                 className="student-row-edit-button"
@@ -137,7 +142,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 <IonIcon icon={create} />
               </button>
             </IonCol>
-            <IonCol size={colSizes[5]}>
+            <IonCol size={"auto"}>
               <button
                 id={`present-alert ${index}`}
                 className="student-row-delete-button"
