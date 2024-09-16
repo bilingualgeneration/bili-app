@@ -1,7 +1,7 @@
 #add-student-row-component {
   .add-student-row {
     border-radius: 14px;
-    padding: 6px 16px;
+    padding: 0px 16px;
     align-items: center;
     margin-top: 4px;
   }
@@ -16,6 +16,10 @@
 
   .student-row-delete-button ion-icon {
     font-size: 23px;
+  }
+
+  .student-row-edit-button ion-icon {
+    font-size: 53px;
   }
 
   .save-student-data-button {

@@ -10,6 +10,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import DeleteIcon from "@/assets/icons/delete_button.svg";
+import EditIcon from "@/assets/icons/edit_button.svg";
 import {
   create,
   createSharp,
@@ -139,7 +140,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 onClick={() => handleEditClick(index, student)}
                 className="student-row-edit-button"
               >
-                <IonIcon icon={create} />
+                <IonIcon icon={EditIcon} />
               </button>
             </IonCol>
             <IonCol size={"auto"}>

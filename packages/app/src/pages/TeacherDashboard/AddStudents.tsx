@@ -112,13 +112,13 @@ export const AddStudents: React.FC = () => {
         </IonText>
         <IonGrid className="add-students-grid">
           {/* title row */}
-          <IonRow className="first-title-row text-md color-suelo semibold ion-align-items-center ion-justify-content-around">
+          <IonRow className="first-title-row text-sm color-suelo semibold ion-align-items-center ion-justify-content-around">
             <IonCol size="2">Student first name</IonCol>
             <IonCol size="2">Student last name</IonCol>
             <IonCol size="3">Primary home email</IonCol>
             <IonCol size="3">Secondary home email</IonCol>
-            <IonCol></IonCol>
-            <IonCol></IonCol>
+            <IonCol size="1.2"></IonCol>
+            <IonCol size="auto"></IonCol>
           </IonRow>
 
           {/* rows with student data */}
@@ -131,58 +131,60 @@ export const AddStudents: React.FC = () => {
           {/* row for inputting student data */}
 
           <form onSubmit={handleSubmit(handleSaveStudentClick)}>
-            <IonRow className="add-student-row text-sm color-suelo ion-align-items-center ion-justify-content-around">
-              <IonCol className="ion-no-padding" size="2">
-                <Input
-                  placeholder="First name"
-                  control={control}
-                  name="firstName"
-                />
-              </IonCol>
-              <IonCol className="ion-no-padding" size="2">
-                <Input
-                  placeholder="Last name"
-                  control={control}
-                  name="lastName"
-                />
-              </IonCol>
-              <IonCol className="ion-no-padding" size="3">
-                <Input
-                  placeholder="Primary email"
-                  control={control}
-                  name="primaryEmail"
-                />
-              </IonCol>
-              <IonCol className="ion-no-padding" size="3">
-                <Input
-                  placeholder="Secondary email"
-                  control={control}
-                  name="secondaryEmail"
-                />
-              </IonCol>
-              <IonCol className="ion-no-padding" size="auto">
-                <button
-                  type="submit"
-                  className="add-student-button text-sm semibold"
+            <div>
+              <IonRow className="add-student-row text-sm color-suelo ion-align-items-center ion-justify-content-around">
+                <IonCol className="ion-no-padding" size="2">
+                  <Input
+                    placeholder="Student first name"
+                    control={control}
+                    name="firstName"
+                  />
+                </IonCol>
+                <IonCol className="ion-no-padding" size="2">
+                  <Input
+                    placeholder="Student last name"
+                    control={control}
+                    name="lastName"
+                  />
+                </IonCol>
+                <IonCol className="ion-no-padding" size="3">
+                  <Input
+                    placeholder="Primary home email"
+                    control={control}
+                    name="primaryEmail"
+                  />
+                </IonCol>
+                <IonCol className="ion-no-padding" size="3">
+                  <Input
+                    placeholder="Secondary home email"
+                    control={control}
+                    name="secondaryEmail"
+                  />
+                </IonCol>
+                <IonCol className="ion-no-padding" size="auto">
+                  <button
+                    type="submit"
+                    className="add-student-button text-sm semibold"
+                  >
+                    <p>Add</p>
+                  </button>
+                </IonCol>
+                <IonCol
+                  size="auto"
+                  className="reset-button-column ion-no-padding"
                 >
-                  <p>Add</p>
-                </button>
-              </IonCol>
-              <IonCol
-                size="auto"
-                className="reset-button-column ion-no-padding"
-              >
-                <button
-                  className="reset-student-button text-sm semibold"
-                  type="button"
-                  onClick={() => {
-                    reset();
-                  }}
-                >
-                  <p>Reset</p>
-                </button>
-              </IonCol>
-            </IonRow>
+                  <button
+                    className="reset-student-button text-sm semibold"
+                    type="button"
+                    onClick={() => {
+                      reset();
+                    }}
+                  >
+                    <p>Reset</p>
+                  </button>
+                </IonCol>
+              </IonRow>
+            </div>
           </form>
         </IonGrid>
         <div className="add-and-upload-buttons">
