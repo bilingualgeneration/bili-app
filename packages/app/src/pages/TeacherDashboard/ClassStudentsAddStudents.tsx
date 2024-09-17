@@ -10,10 +10,8 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import DeleteIcon from "@/assets/icons/delete_button.svg";
-import AddButton from "@/assets/icons/add_button.svg";
-import { AddStudentRow } from "@/components/AddStudentRow";
-import "./AddStudentsClassroom.scss";
+
+import "./ClassStudentsAddStudents.scss";
 import { useState } from "react";
 import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
@@ -26,6 +24,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { AddStudents } from "@/components/AddStudents";
+import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 
 interface Student {
   firstName: string;
@@ -74,47 +73,44 @@ export const ClassStudentsAddStudents: React.FC = () => {
   };
 
   return (
-    <div id="add-students-page">
-      <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "24px" }}>
-        <IonItem className="add-students-header">
-          <IonText className="">
-            <h3 className="add-students-title text-3xl semibold color-suelo">
-              Add your students
-            </h3>
-          </IonText>
-        </IonItem>
+    <div id="class-add-students">
+      <IonItem className="add-students-header">
+        <div>
+          <div className="header-overview-arrow">
+            <IonText className="text-sm color-barro classroom-name-text">
+              {"1-st grade Spanish"}
+            </IonText>
+            <IonIcon color="medium" icon={ArrowRight}></IonIcon>
+            <IonText className="text-sm overview-text-header">Students</IonText>
+            <IonIcon color="medium" icon={ArrowRight}></IonIcon>
+            <IonText className="text-sm semibold overview-text-header">
+              Add students
+            </IonText>
+          </div>
+          <div>
+            <IonText className="">
+              <h3 className="add-students-title text-3xl semibold color-suelo">
+                Add your students
+              </h3>
+            </IonText>
+          </div>
+        </div>
+      </IonItem>
 
-        <AddStudents
-          studentsData={studentsData}
-          handleSaveStudentClick={handleSaveStudentClick}
-          handleEditStudentClick={handleEditStudentClick}
-          handleDeleteStudent={handleDeleteStudent}
-        />
+      <AddStudents
+        studentsData={studentsData}
+        handleSaveStudentClick={handleSaveStudentClick}
+        handleEditStudentClick={handleEditStudentClick}
+        handleDeleteStudent={handleDeleteStudent}
+      />
 
-        <div className="add-and-upload-buttons">
-          {/* TEMPORARY Hidden Button For .CSV files */}
-          {/* <button className="upload-csv-button text-sm semibold color-selva">
+      <div className="add-and-upload-buttons">
+        {/* TEMPORARY Hidden Button For .CSV files */}
+        {/* <button className="upload-csv-button text-sm semibold color-selva">
               <IonIcon src={cloudDownloadOutline} />
               <p>Upload .CSV</p>
             </button> */}
-        </div>
-
-        <div className="add-student-button-continue">
-          <IonRouterLink routerLink="/classrooms/invite_caregivers">
-            <IonButton
-              data-testid="add-student-continue-button"
-              shape="round"
-              type="button"
-            >
-              <FormattedMessage
-                id="common.continue"
-                defaultMessage="Continue"
-                description="Button label to continue"
-              />
-            </IonButton>
-          </IonRouterLink>
-        </div>
-      </IonCard>
+      </div>
     </div>
   );
 };

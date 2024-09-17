@@ -377,6 +377,30 @@ export const Router: React.FC = () => {
 
           <Route
             exact
+            path="/classrooms/add"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddClassroom />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/classrooms/add_students"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <AddStudentsClassroom />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
             path="/classrooms/add_classroom_language"
             render={() => (
               <AuthedLayout>

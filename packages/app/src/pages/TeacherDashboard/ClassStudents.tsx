@@ -93,7 +93,7 @@ export const ClassStudents: React.FC = () => {
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
-                  Overview
+                  Students
                 </IonText>
               </div>
               <div className="students-header-block">
