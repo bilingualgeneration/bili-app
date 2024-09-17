@@ -11,14 +11,6 @@ import {
 } from "@ionic/react";
 import DeleteIcon from "@/assets/icons/delete_button.svg";
 import EditIcon from "@/assets/icons/edit_button.svg";
-import {
-  create,
-  createSharp,
-  createOutline,
-  addOutline,
-  addSharp,
-  cloudDownloadOutline,
-} from "ionicons/icons";
 import "./AddStudentRow.scss";
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";

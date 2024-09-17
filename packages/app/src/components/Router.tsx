@@ -71,8 +71,9 @@ import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
   AddClassroom,
   AddClassroomLanguage,
-  AddStudents,
+  AddStudentsClassroom,
   ClassOverview,
+  ClassStudentsAddStudents,
   InviteCaregivers,
   MyClassrooms,
   StudentSelect,
@@ -352,8 +353,8 @@ export const Router: React.FC = () => {
                       />
                       <Route
                         exact
-                        path="/classrooms/add"
-                        component={AddClassroom}
+                        path="/classrooms/:classroomId/add_students"
+                        component={ClassStudentsAddStudents}
                       />
                     </TeacherDashboardWrapper>
                   </AdultCheckProvider>
@@ -392,7 +393,7 @@ export const Router: React.FC = () => {
             render={() => (
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
-                  <AddStudents />
+                  <AddStudentsClassroom />
                 </HeaderFooter>
               </AuthedLayout>
             )}
