@@ -81,7 +81,9 @@ export const ClassStudentsAddStudents: React.FC = () => {
               {"1-st grade Spanish"}
             </IonText>
             <IonIcon color="medium" icon={ArrowRight}></IonIcon>
-            <IonText className="text-sm overview-text-header">Students</IonText>
+            <IonText className="text-sm color-barro overview-text-header">
+              Students
+            </IonText>
             <IonIcon color="medium" icon={ArrowRight}></IonIcon>
             <IonText className="text-sm semibold overview-text-header">
               Add students
