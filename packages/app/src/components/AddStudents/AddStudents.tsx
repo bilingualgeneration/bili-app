@@ -18,7 +18,7 @@ import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
 import { Student } from "@/pages/Reports/Student";
 
-interface Student {
+export interface Student {
   firstName: string;
   lastName: string;
   primaryEmail: string;
@@ -38,7 +38,7 @@ export const AddStudents: React.FC<AddStudentsProps> = ({
   handleDeleteStudent,
 }) => {
   const { control, handleSubmit, reset } = useForm<Student>();
-
+  console.log("AddStudents Component");
   return (
     <IonGrid className="add-students-grid">
       {/* title row */}

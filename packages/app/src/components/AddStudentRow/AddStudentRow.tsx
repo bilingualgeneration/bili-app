@@ -35,7 +35,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState<number | null>(null); // Tracks which row is being edited
   const { control, handleSubmit, setValue, reset } = useForm();
-
+  console.log("AddStudentRow component");
   // Handle the "Edit" button click
   const handleEditClick = (index: number, student: any) => {
     setIsEditing(index); // Set the row into edit mode

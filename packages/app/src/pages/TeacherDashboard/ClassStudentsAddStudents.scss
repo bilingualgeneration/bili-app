@@ -17,4 +17,14 @@
   .header-overview-arrow {
     margin-top: 48px;
   }
+
+  .add-student-button-continue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-button {
+      width: 394px;
+    }
+  }
 }

@@ -113,6 +113,22 @@ export const ClassStudentsAddStudents: React.FC = () => {
               <p>Upload .CSV</p>
             </button> */}
       </div>
+
+      <div className="add-student-button-continue">
+        <IonRouterLink routerLink="/classrooms/:classroomId/students">
+          <IonButton
+            data-testid="add-student-continue-button"
+            shape="round"
+            type="button"
+          >
+            <FormattedMessage
+              id="common.continue"
+              defaultMessage="Continue"
+              description="Button label to continue"
+            />
+          </IonButton>
+        </IonRouterLink>
+      </div>
     </div>
   );
 };
