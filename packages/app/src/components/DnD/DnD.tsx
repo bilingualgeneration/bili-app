@@ -69,6 +69,7 @@ const shuffle = (array: any[]) => {
 };
 
 const PiecePreview: React.FC = () => {
+  // @ts-ignore
   const { display, item, style } = usePreview();
   if (!item) {
     return null;
@@ -81,6 +82,7 @@ const PiecePreview: React.FC = () => {
       className="letter"
       style={{
         ...style,
+        // @ts-ignore
         color: item.color,
       }}
     >
