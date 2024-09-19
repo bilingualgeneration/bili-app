@@ -110,7 +110,6 @@ export const SideMenu: React.FC = () => {
         {options.map((option, index) => (
           <SideMenuOption key={index} {...option} />
         ))}
-
         <div
           onClick={() => {
             setClassroomInfo({
@@ -138,6 +137,7 @@ export const SideMenu: React.FC = () => {
             }
           />
         </div>
+        <IonItem routerLink="/debug">Debug</IonItem>
         <div className="ion-text-right">
           v{import.meta.env.VITE_APP_VERSION}
         </div>
