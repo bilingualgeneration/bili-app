@@ -29,6 +29,7 @@ export const SideMenu: React.FC = () => {
   const { setInfo: setClassroomInfo } = useClassroom();
   const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
+  const { profile } = useProfile();
 
   const options: Option[] = [
     {
@@ -45,14 +46,20 @@ export const SideMenu: React.FC = () => {
     },
     {
       icon: personOutline,
-      label: (
-        <FormattedMessage
-          id={"sideMenu.profile"}
-          defaultMessage={"Profile"}
-          description={"Profile label for side menu on settings page"}
-        />
-      ),
-      to: "/settings/profile",
+      label:
+        profile.role === "teacher" ? (
+          "Students"
+        ) : (
+          <FormattedMessage
+            id={"sideMenu.profile"}
+            defaultMessage={"Profile"}
+            description={"Profile label for side menu on settings page"}
+          />
+        ),
+      to:
+        profile.role === "teacher"
+          ? "/classrooms/:classroomId/students"
+          : "/settings/profile",
       isActive: location.pathname === "/settings/profile",
     },
     {

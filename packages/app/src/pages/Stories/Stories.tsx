@@ -20,7 +20,7 @@ import { StoryProvider, useStory } from "./StoryContext";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { VocabModal } from "./VocabModal";
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
@@ -31,9 +31,68 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./Stories.scss";
+import {
+  ActivityProvider,
+  GameData,
+  useActivity,
+} from "@/contexts/ActivityContext";
 
 const getLang = (lang: string, data: any) => {
   return data.filter((d: any) => d.language === lang)[0];
+};
+
+const generateKeyVocab = (vocabularyList: any) => {
+  // handle story vocabulary
+  let vocab = {
+    es: {},
+    "es-inc": {},
+    en: {},
+  };
+  let keyVocab: any[] = [];
+  let vocabLookup = {};
+  if (vocabularyList) {
+    for (const list of vocabularyList) {
+      for (const word of list.words) {
+        keyVocab.push(word);
+        for (const translation of word.word) {
+          for (const targetWord of translation.word
+            .split(",")
+            .map((s: string) => s.trim())) {
+            // todo: better typing
+            // @ts-ignore
+            vocab[translation.language][targetWord] = {
+              ...translation,
+              image: word.image,
+            };
+
+            // nested loops!
+            // needed to build out lookup table
+            // performance is ok since it's a max of 3 items
+            for (const nestedTranslation of word.word) {
+              if (translation.language !== nestedTranslation.language) {
+                // @ts-ignore
+                if (!vocabLookup[targetWord]) {
+                  // @ts-ignore
+                  vocabLookup[targetWord] = {
+                    [nestedTranslation.language]: targetWord,
+                  };
+                } else {
+                  // @ts-ignore
+                  vocabLookup[targetWord][nestedTranslation.language] =
+                    targetWord;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return {
+    keyVocab,
+    vocab,
+    vocabLookup,
+  };
 };
 
 export const Stories = () => {
@@ -64,10 +123,34 @@ const StoriesHydrated: React.FC = () => {
       return <>error</>;
       break;
     case "ready":
+      const languageParsedPages = {
+        inclusive: data.pages.filter((p: any) =>
+          p.text.map((t: any) => t.language).includes("es-inc"),
+        ),
+        noninclusive: data.pages.filter((p: any) =>
+          p.text.map((t: any) => t.language).includes("es"),
+        ),
+      };
+      const { keyVocab, vocab, vocabLookup } = generateKeyVocab(
+        data["story-vocabulary-list"],
+      );
       return (
-        <StoryProvider>
-          <StoryLoader />
-        </StoryProvider>
+        <ActivityProvider>
+          <StoryProvider>
+            <div id="story-wrapper">
+              <div>
+                <StoryLoader
+                  {...{
+                    keyVocab,
+                    languageParsedPages,
+                    vocab,
+                    vocabLookup,
+                  }}
+                />
+              </div>
+            </div>
+          </StoryProvider>
+        </ActivityProvider>
       );
       break;
     default:
@@ -76,9 +159,24 @@ const StoriesHydrated: React.FC = () => {
   }
 };
 
-export const StoryLoader = () => {
+interface StoryLoaderProps {
+  keyVocab: any;
+  vocab: any;
+  vocabLookup: any;
+}
+
+const allLanguages = ["en", "es", "es-inc"];
+
+export const StoryLoader = ({
+  keyVocab: propsKeyVocab,
+  vocab: propsVocab,
+  vocabLookup: propsVocabLookup,
+}: StoryLoaderProps) => {
   // @ts-ignore
   const { uuid } = useParams();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
   const { language } = useLanguageToggle();
 
   const history = useHistory();
@@ -96,220 +194,131 @@ export const StoryLoader = () => {
     setId,
   } = useStory();
 
-  const { status, data } = useFirestoreDoc();
-
-  const {
-    profile: { isInclusive },
-  } = useProfile();
-
+  const { setGamesData, setActivityState } = useActivity();
+  const { data } = useFirestoreDoc();
   useEffect(() => {
-    if (data) {
-      setId(uuid);
-      const fp = data.pages.filter((p: any) => {
-        const langs = p.text.map((t: any) => t.language);
-        if (isInclusive) {
-          return langs.includes("es-inc");
-        } else {
-          return langs.includes("es");
-        }
-      });
-      let pages: any[] = [];
-      let pageLocks: any = {};
-      // push intro page
-      pages.push(<TitleCard data={data} />);
+    setActivityState({
+      type: "story",
+      id: uuid,
+    });
+    setId(uuid);
+    setVocabLookup(propsVocabLookup);
+    setVocab(propsVocab);
 
-      // handle story vocabulary
-      let tempVocab = {
-        es: {},
-        "es-inc": {},
-        en: {},
-      };
-      let keyVocab: any[] = [];
-      if (data["story-vocabulary-list"]) {
-        let tempVocabLookup = {};
-        for (const list of data["story-vocabulary-list"]) {
-          for (const word of list.words) {
-            keyVocab.push(word);
-            for (const translation of word.word) {
-              for (const targetWord of translation.word
-                .split(",")
-                .map((s: string) => s.trim())) {
-                // todo: better typing
-                // @ts-ignore
-                tempVocab[translation.language][targetWord] = {
-                  ...translation,
-                  image: word.image,
-                };
+    const gamesData: GameData = new Map();
 
-                // nested loops!
-                // needed to build out lookup table
-                // performance is ok since it's a max of 3 items
-                for (const nestedTranslation of word.word) {
-                  if (translation.language !== nestedTranslation.language) {
-                    // @ts-ignore
-                    if (!tempVocabLookup[targetWord]) {
-                      // @ts-ignore
-                      tempVocabLookup[targetWord] = {
-                        [nestedTranslation.language]: targetWord,
-                      };
-                    } else {
-                      // @ts-ignore
-                      tempVocabLookup[targetWord][nestedTranslation.language] =
-                        targetWord;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        setVocabLookup(tempVocabLookup);
-        setVocab(tempVocab);
-      }
-
-      // key vocab
-      if (
-        (language === "en" && Object.keys(tempVocab.en).length > 0) ||
-        (language.startsWith("es") &&
-          Object.keys(tempVocab.es).length +
-            Object.keys(tempVocab["es-inc"]).length >
-            0)
-      ) {
-        pages.push(
-          <>
-            <KeyVocabPageWrapper>
-              <KeyVocab
-                age_min={data.age_min}
-                age_max={data.age_max}
-                author={data.author}
-                illustrator={data.illustrator}
-                narrator={data.narrator}
-                words={keyVocab}
-              />
-            </KeyVocabPageWrapper>
-            <PageCounter />
-          </>,
-        );
-      }
-
-      // push filtered pages
-      pages = pages.concat(
-        fp.map((data: any) => (
+    let tempPages: any[] = [];
+    tempPages.push({
+      component: (
+        <TitleCard
+          cover_image={data.cover_image}
+          is_student_story={data.is_student_story ?? false}
+          is_translanguaged={data.is_translanguaged ?? false}
+          title={data.title}
+        />
+      ),
+      id: "title card",
+      languages: allLanguages,
+    });
+    tempPages.push({
+      component: (
+        <>
+          <KeyVocabPageWrapper>
+            <KeyVocab
+              age_min={data.age_min}
+              age_max={data.age_max}
+              author={data.author}
+              illustrator={data.illustrator}
+              narrator={data.narrator}
+              words={propsKeyVocab}
+            />
+          </KeyVocabPageWrapper>
+          <PageCounter />
+        </>
+      ),
+      id: "key vocab",
+      languages: allLanguages,
+    });
+    tempPages = tempPages.concat(
+      data.pages.map((p: any, index: number) => {
+        const languages = p.text.map((subp: any) => subp.language);
+        return {
+          component: (
+            <>
+              <PageWrapper>
+                <StoryPage page={p} languages={languages} />
+              </PageWrapper>
+              <PageCounter />
+            </>
+          ),
+          id: `story page ${index}`,
+          languages,
+        };
+      }),
+    );
+    for (const dndGame of data["dnd-game"]) {
+      tempPages.push({
+        component: (
           <>
             <PageWrapper>
-              <StoryPage page={data} />
+              <DnDGame data={dndGame} languages={[dndGame.language]} />
             </PageWrapper>
             <PageCounter />
           </>
-        )),
+        ),
+        id: `dnd ${dndGame.uuid}`,
+        languages: [dndGame.language],
+      });
+      gamesData.set(dndGame.uuid, {
+        totalMistakesPossible: dndGame.pieces.length,
+      });
+    }
+    for (const mcg of data["multiple-choice-game"]) {
+      const hasAudio = mcg.choices[0].audio !== null;
+      const correctChoice = mcg.choices.filter(
+        (choice: any) => choice.isCorrect,
+      )[0];
+      const incorrectChoices = mcg.choices.filter(
+        (choice: any) => !choice.isCorrect,
       );
-
-      for (let index = 0; index < data["dnd-game"].length; index++) {
-        pageLocks[pages.length + index] = true;
+      const mcgType = hasAudio ? "syllable" : "image";
+      let payload = {
+        [`multiple_${mcgType}_text`]: mcg.instructions,
+        [`multiple_${mcgType}_correct_image`]: correctChoice.image,
+        [`multiple_${mcgType}_correct_audio`]: correctChoice.audio,
+      };
+      for (let index = 0; index < 3; index++) {
+        payload[`multiple_${mcgType}_incorrect_image_${index + 1}`] =
+          incorrectChoices[index].image;
+        payload[`multiple_${mcgType}_incorrect_audio_${index + 1}`] =
+          incorrectChoices[index].audio;
       }
-
-      if (data["dnd-game"]) {
-        pages = pages.concat(
-          data["dnd-game"]
-            .filter((d: any) => {
-              if (isInclusive && language === "es") {
-                return d.language === "es-inc";
-              } else {
-                return d.language === language;
-              }
-            })
-            .map((data: any) => (
-              <>
-                <PageWrapper>
-                  <DnDGame data={data} />
-                </PageWrapper>
-                <PageCounter />
-              </>
-            )),
-        );
-      }
-
-      if (data["multiple-choice-game"]) {
-        pages = pages.concat(
-          data["multiple-choice-game"]
-            .filter((mcg: any) => mcg.language.includes(language))
-            .map((mcg: any) => {
-              const hasAudio = mcg.choices[0].audio !== null;
-              const correctChoice = mcg.choices.filter(
-                (choice: any) => choice.isCorrect,
-              )[0];
-              const incorrectChoices = mcg.choices.filter(
-                (choice: any) => !choice.isCorrect,
-              );
-              let payload;
-              if (hasAudio) {
-                // todo: refactor
-                payload = {
-                  multiple_syllable_text: mcg.instructions,
-                  multiple_syllable_correct_image: correctChoice.image,
-                  multiple_syllable_correct_audio: correctChoice.audio,
-                  multiple_syllable_incorrect_image_1:
-                    incorrectChoices[0].image,
-                  multiple_syllable_incorrect_audio_1:
-                    incorrectChoices[0].audio,
-                  multiple_syllable_incorrect_image_2:
-                    incorrectChoices[1].image,
-                  multiple_syllable_incorrect_audio_2:
-                    incorrectChoices[1].audio,
-                  multiple_syllable_incorrect_image_3:
-                    incorrectChoices[2].image,
-                  multiple_syllable_incorrect_audio_3:
-                    incorrectChoices[2].audio,
-                };
-              } else {
-                payload = {
-                  multiple_image_text: mcg.instructions,
-                  multiple_image_correct_image: correctChoice.image,
-                  multiple_image_correct_audio: correctChoice.audio,
-                  multiple_image_incorrect_image_1: incorrectChoices[0].image,
-                  multiple_image_incorrect_audio_1: incorrectChoices[0].audio,
-                  multiple_image_incorrect_image_2: incorrectChoices[1].image,
-                  multiple_image_incorrect_audio_2: incorrectChoices[1].audio,
-                  multiple_image_incorrect_image_3: incorrectChoices[2].image,
-                  multiple_image_incorrect_audio_3: incorrectChoices[2].audio,
-                };
-              }
-
-              return (
-                <>
-                  <PageWrapper>
-                    <IonCol size="auto">
-                      <StoriesGame
-                        game={payload}
-                        gameType={hasAudio ? "syllable" : "image"}
-                      />
-                    </IonCol>
-                  </PageWrapper>
-                  <PageCounter />
-                </>
-              );
-            }),
-        );
-      }
-
-      if (
-        data.multiple_syllable_text &&
-        data.multiple_syllable_text.length > 0
-      ) {
-        pageLocks[pages.length] = true;
-        pages.push(
+      tempPages.push({
+        component: (
           <>
             <PageWrapper>
               <IonCol size="auto">
-                <StoriesGame game={data} gameType="syllable" />
+                <StoriesGameWrapper
+                  id={mcg.uuid}
+                  game={payload}
+                  gameType={hasAudio ? "syllable" : "image"}
+                  languages={mcg.language}
+                />
               </IonCol>
             </PageWrapper>
             <PageCounter />
-          </>,
-        );
-      }
+          </>
+        ),
+        id: `mcg ${mcg.uuid}`,
+        languages: mcg.language,
+      });
+      gamesData.set(mcg.uuid, {
+        totalMistakesPossible: mcg.choices.length,
+      });
+    }
 
-      pages.push(
+    tempPages.push({
+      component: (
         <>
           <PageWrapper>
             <IonCol size="auto">
@@ -321,28 +330,46 @@ export const StoryLoader = () => {
             </IonCol>
           </PageWrapper>
           <PageCounter />
-        </>,
-      );
+        </>
+      ),
+      id: "congrats",
+      languages: allLanguages,
+    });
 
-      setPageLocks(pageLocks);
-      setPages(pages);
-      setPageNumber(0);
-      setReady(true);
-    }
-  }, [data, language]);
-
-  if (status === "loading" || ready === false) {
+    setPages(tempPages);
+    setPageNumber(0);
+    setReady(true);
+  }, []);
+  if (ready === false) {
     return <></>;
   }
-  return pages[pageNumber];
+  return pages[pageNumber].component;
 };
 
 const PageCounter = () => {
   const { pages, pageNumber } = useStory();
-  const totalPages = pages.length;
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const { language } = useLanguageToggle();
+
+  const filteredPages = useMemo(
+    () =>
+      pages.filter((p: any) =>
+        p.languages.includes(
+          language === "en" ? "en" : isInclusive ? "es-inc" : "es",
+        ),
+      ),
+    [pages, language, isInclusive],
+  );
+  const currentPage = pages[pageNumber];
+  const filteredPageNumber = filteredPages.findIndex(
+    (p: any) => p.id === currentPage.id,
+  );
+  const totalPages = filteredPages.length;
   let pills = [];
   for (let index = 0; index < totalPages!; index++) {
-    if (index <= pageNumber!) {
+    if (index <= filteredPageNumber!) {
       pills.push(true);
     } else {
       pills.push(false);
@@ -381,65 +408,146 @@ const PageCounter = () => {
   );
 };
 
-const TitleCard = ({ data }: any) => {
+interface MetaFlag {
+  color: string;
+  primaryText: string;
+  secondaryText?: string;
+}
+
+const MetaFlag: React.FC<MetaFlag> = ({
+  color,
+  primaryText,
+  secondaryText,
+}) => {
+  return (
+    <div id="story-translanguaged-flag" className={`background-${color}`}>
+      <IonText>
+        <div className="text-xs semibold color-suelo">{primaryText}</div>
+        {secondaryText && (
+          <div className="text-xs color-grey">{secondaryText}</div>
+        )}
+      </IonText>
+    </div>
+  );
+};
+
+interface TitleCard {
+  cover_image: any;
+  is_student_story: boolean;
+  is_translanguaged: boolean;
+  title: string;
+}
+
+const TitleCard = ({
+  cover_image,
+  is_student_story,
+  is_translanguaged,
+  title,
+}: TitleCard) => {
   const {
     profile: { isInclusive },
   } = useProfile();
   const { language } = useLanguageToggle();
   const { pageForward } = useStory();
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonCard
         className="sf-card drop-shadow story-page"
         style={{
-          background: `url(${data.cover_image.url})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
-          backgroundPositionY: "bottom",
+          backgroundPositionY: "center",
+          backgroundPositionX: "center",
           display: "block",
           position: "relative",
         }}
       >
+        {is_translanguaged && (
+          <MetaFlag
+            color="cielo-low"
+            primaryText={
+              language === "en" ? "Translanguage Story" : "Cuento Translenguaje"
+            }
+            secondaryText={
+              language === "esen" ? "Translanguage Story" : undefined
+            }
+          />
+        )}
+        {is_student_story && (
+          <MetaFlag
+            color="flamenco-flamenco"
+            primaryText={
+              language === "en" ? "Student Story" : "Cuento de Estudiante"
+            }
+            secondaryText={language === "esen" ? "Student Story" : undefined}
+          />
+        )}
         <IonCardContent>
-          <IonText className="ion-text-center">
-            <h1 className="text-5xl color-suelo">
+          <IonText
+            className="ion-text-center"
+            style={{
+              display: "block",
+              height: "140px",
+            }}
+          >
+            <h1 className="text-3xl color-suelo">
               {language === "en"
-                ? getLang("en", data.title).text
-                : getLang(isInclusive ? "es-inc" : "es", data.title).text}
+                ? getLang("en", title).text
+                : getLang(isInclusive ? "es-inc" : "es", title).text}
             </h1>
             {language === "esen" && (
-              <p className="text-3xl color-english">
-                {getLang("en", data.title).text}
+              <p className="text-xl color-english">
+                {getLang("en", title).text}
               </p>
             )}
           </IonText>
-        </IonCardContent>
-        <div
-          className="ion-text-center"
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: 0,
-            padding: "auto",
-            width: "100%",
-          }}
-        >
-          <IonButton shape="round" onClick={pageForward}>
-            <IonText
-              style={{
-                paddingLeft: "5rem",
-                paddingRight: "5rem",
-              }}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <img
+              style={{ maxHeight: "330px" }}
+              src={`${cover_image.url}`}
+              alt=""
+            />
+          </div>
+          <div
+            className="ion-text-center"
+            style={{
+              position: "absolute",
+              bottom: "2rem",
+              left: 0,
+              padding: "auto",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <button
+              //shape="round"
+              onClick={pageForward}
+              className="continue-story-button"
             >
-              <h1 className="text-3xl semibold color-nube">
-                {language === "en" ? "Let's read!" : "¡Leamos!"}
-              </h1>
-              {language === "esen" && (
-                <p className="text-sm color-nube">Let's read!</p>
-              )}
-            </IonText>
-          </IonButton>
-        </div>
+              <IonText
+                style={{
+                  paddingLeft: "5rem",
+                  paddingRight: "5rem",
+                }}
+              >
+                <h1 className="text-2xl semibold color-nube">
+                  {language === "en" ? "Let's read!" : "¡Leamos!"}
+                </h1>
+                {language === "esen" && (
+                  <p className="text-sm color-nube">Let's read!</p>
+                )}
+              </IonText>
+            </button>
+          </div>
+        </IonCardContent>
       </IonCard>
     </div>
   );
@@ -452,7 +560,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
     useStory();
   const totalPages = pages.length;
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonGrid>
         <IonRow>
           <IonCol />
@@ -484,7 +592,7 @@ const KeyVocabPageWrapper: React.FC<React.PropsWithChildren> = ({
     useStory();
   const totalPages = pages.length;
   return (
-    <div className="content-wrapper padding-top-1">
+    <div className="content-wrapper">
       <IonGrid>
         <IonRow>
           <IonCol />
@@ -513,6 +621,7 @@ const SegmentedText: React.FC<
   React.PropsWithChildren<{ language: string }>
 > = ({ children, language }) => {
   const { setCurrentVocabWord, vocab } = useStory();
+  let isItalic: boolean = false;
   // @ts-ignore
   return children!.split(" ").map((text: string, index: number) => {
     let classes = ["word"];
@@ -521,6 +630,15 @@ const SegmentedText: React.FC<
       .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]*$/, "");
     if (vocab[language][normalized_word]) {
       classes.push("vocab");
+    }
+    if (text.startsWith("*")) {
+      isItalic = true;
+    }
+    if (isItalic) {
+      classes.push("italic");
+    }
+    if (text.endsWith("*")) {
+      isItalic = false;
     }
     return (
       <span
@@ -532,29 +650,69 @@ const SegmentedText: React.FC<
         }}
         key={index}
       >
-        {text}
+        {text.replace(/^\*|\*$/g, "")}
       </span>
     );
   });
 };
 
-export const StoryPage: React.FC<React.PropsWithChildren<{ page: any }>> = ({
-  page,
-}) => {
+export const StoryPage: React.FC<
+  React.PropsWithChildren<{ page: any; languages: any[] }>
+> = ({ page, languages }) => {
   const { pageNumber, pages, pageForward, pageBackward } = useStory();
   const {
     profile: { isInclusive },
   } = useProfile();
   const { language } = useLanguageToggle();
   const { addAudio, clearAudio } = useAudioManager();
-
   useEffect(() => {
     return clearAudio;
   }, []);
   useEffect(() => {
     clearAudio();
   }, [pageNumber]);
-  const texts = Object.fromEntries(page.text.map((p: any) => [p.language, p]));
+
+  useEffect(() => {
+    // check if page has the correct language
+    switch (language) {
+      case "en":
+        if (!languages.includes("en")) {
+          pageBackward();
+        }
+        break;
+      case "esen":
+        if (
+          !languages.includes("en") ||
+          !(isInclusive
+            ? languages.includes("es-inc")
+            : languages.includes("es"))
+        ) {
+          pageBackward();
+        }
+        break;
+      case "es":
+        if (
+          isInclusive
+            ? !languages.includes("es-inc")
+            : !languages.includes("es")
+        ) {
+          pageBackward();
+        }
+        break;
+      default:
+      // this should never fire
+    }
+  }, [isInclusive, language, languages, pageBackward]);
+
+  const defaultTexts: any = {
+    en: { text: "" },
+    es: { text: "" },
+    "es-inc": { text: "" },
+  };
+  const texts = {
+    ...defaultTexts,
+    ...Object.fromEntries(page.text.map((p: any) => [p.language, p])),
+  };
   return (
     <>
       <IonCol size="auto">
@@ -648,7 +806,47 @@ export const StoryPage: React.FC<React.PropsWithChildren<{ page: any }>> = ({
   );
 };
 
-const DnDGame: React.FC<{ data: any }> = ({ data }) => {
+const DnDGame: React.FC<{ data: any; languages: any }> = ({
+  data,
+  languages,
+}) => {
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const { language } = useLanguageToggle();
+  const { pageBackward } = useStory();
+
+  useEffect(() => {
+    // check if page has the correct language
+    switch (language) {
+      case "en":
+        if (!languages.includes("en")) {
+          pageBackward();
+        }
+        break;
+      case "esen":
+        if (
+          !languages.includes("en") ||
+          !(isInclusive
+            ? languages.includes("es-inc")
+            : languages.includes("es"))
+        ) {
+          pageBackward();
+        }
+        break;
+      case "es":
+        if (
+          isInclusive
+            ? !languages.includes("es-inc")
+            : !languages.includes("es")
+        ) {
+          pageBackward();
+        }
+        break;
+      default:
+      // this should never fire
+    }
+  }, [isInclusive, language, languages, pageBackward]);
   return (
     <DnDProvider>
       <WrappedDnDGame data={data} />
@@ -661,13 +859,16 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
   const { piecesDropped, totalTargets } = useDnD();
   useEffect(() => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
+      /*
       setPageLocks({
         ...pageLocks,
         [pageNumber]: false,
       });
+      */
       pageForward();
     }
   }, [piecesDropped, totalTargets]);
+
   return (
     <>
       <IonCol size="auto">
@@ -678,6 +879,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
             </h1>
           </IonText>
           <DnD
+            gameId={data.uuid}
             audioOnComplete={data.audio_on_complete}
             width={1366}
             target={data.target}
@@ -686,5 +888,66 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
         </div>
       </IonCol>
     </>
+  );
+};
+
+const StoriesGameWrapper: React.FC<any> = ({
+  id,
+  game,
+  gameType,
+  languages,
+}) => {
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const { language } = useLanguageToggle();
+  const { pageBackward } = useStory();
+  useEffect(() => {
+    // check if page has the correct language
+    switch (language) {
+      case "en":
+        if (!languages.includes("en")) {
+          pageBackward();
+        }
+        break;
+      case "esen":
+        if (
+          !languages.includes("en") ||
+          !(isInclusive
+            ? languages.includes("es-inc")
+            : languages.includes("es"))
+        ) {
+          pageBackward();
+        }
+        break;
+      case "es":
+        if (
+          isInclusive
+            ? !languages.includes("es-inc")
+            : !languages.includes("es")
+        ) {
+          pageBackward();
+        }
+        break;
+      default:
+      // this should never fire
+    }
+  }, [isInclusive, language, languages, pageBackward]);
+  if (
+    game[`multiple_${gameType}_text`].filter(
+      (a: any) => a.language === language,
+    ).length === 0
+  ) {
+    // no suitable language found
+    return <></>;
+  }
+  return (
+    <StoriesGame
+      {...{
+        id,
+        game,
+        gameType,
+      }}
+    />
   );
 };

@@ -7,7 +7,6 @@ import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
-import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
 import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
@@ -37,15 +36,14 @@ import {
   IntruderGameLoader,
 } from "@/pages/Intruder";
 import Login from "@/pages/Login";
+import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
 import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
-///////////
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
 import { SignUp } from "@/pages/SignUp";
-///////////////
 import { Splash } from "@/pages/Splash";
 import {
   Stories,
@@ -69,15 +67,19 @@ import { Wellness } from "@/pages/Wellness";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
-  AddClassroom,
-  ClassOverview,
+  AddClassroomComplete,
+  AddClassroomProvider,
+  AddClassroomInfo,
   AddClassroomLanguage,
-  AddStudents,
-  InviteCaregivers,
+  AddClassroomNotificationMethod,
+  AddClassroomStudents,
+  ClassOverview,
+  MyClassrooms,
   StudentSelect,
 } from "@/pages/TeacherDashboard";
-import { MyClassrooms } from "@/pages/TeacherDashboard";
+import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
 import Reports from "@/pages/Reports";
+import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -104,6 +106,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <Debug />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/phrase-matcher-test"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <PhraseMatcherTest />
                 </HeaderFooter>
               </AuthedLayout>
             )}
@@ -315,28 +329,66 @@ export const Router: React.FC = () => {
           />
 
           <Route
-            exact
             path="/classrooms"
             render={() => (
-              <AuthedLayout>
-                <TeacherDashboardWrapper>
-                  <MyClassrooms />
-                </TeacherDashboardWrapper>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/:classroomId"
-            render={() => (
-              <AuthedLayout>
-                <AdultCheckProvider>
-                  <TeacherDashboardWrapper>
-                    <ClassOverview />
-                  </TeacherDashboardWrapper>
-                </AdultCheckProvider>
-              </AuthedLayout>
+              <>
+                <AuthedLayout>
+                  <AdultCheckProvider>
+                    <TeacherDashboardWrapper>
+                      <Route
+                        exact
+                        path="/classrooms"
+                        component={MyClassrooms}
+                      />
+                      <Route
+                        path="/classrooms/add"
+                        render={() => (
+                          <AddClassroomProvider>
+                            <Route exact path="/classrooms/add">
+                              <Redirect to="/classrooms/add/info" />
+                            </Route>
+                            <Route
+                              exact
+                              path="/classrooms/add/info"
+                              component={AddClassroomInfo}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/language"
+                              component={AddClassroomLanguage}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/students"
+                              component={AddClassroomStudents}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/notification-method"
+                              component={AddClassroomNotificationMethod}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/complete"
+                              component={AddClassroomComplete}
+                            />
+                          </AddClassroomProvider>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId"
+                        component={ClassOverview}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/students"
+                        component={ClassStudents}
+                      />
+                    </TeacherDashboardWrapper>
+                  </AdultCheckProvider>
+                </AuthedLayout>
+              </>
             )}
           />
 
@@ -347,54 +399,6 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <StudentSelect />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add"
-            render={() => (
-              <AuthedLayout>
-                <TeacherDashboardWrapper>
-                  <AddClassroom />
-                </TeacherDashboardWrapper>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add_classroom_language"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AddClassroomLanguage />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add_students"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AddStudents />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/invite_caregivers"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <InviteCaregivers />
                 </HeaderFooter>
               </AuthedLayout>
             )}

@@ -25,6 +25,11 @@ p {
   font-family: Outfit;
 }
 
+.text-sm-xs {
+  font-size: 9px !important;
+  line-height: 16px !important;
+}
+
 .text-xs {
   font-size: 12px !important;
   line-height: 16px !important;
@@ -96,5 +101,5 @@ p {
 }
 
 .no-underline {
-    text-decoration: none;
+  text-decoration: none;
 }
