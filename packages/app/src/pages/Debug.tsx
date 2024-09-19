@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Preferences } from "@capacitor/preferences";
 import { auth } from "@/components/Firebase";
 import { getFunctions, httpsCallable } from "firebase/functions";
@@ -110,6 +111,11 @@ export const Debug: React.FC = () => {
             >
               add
             </IonButton>
+          </IonItem>
+          <IonItem>
+            <Link to="/phrase-matcher-test">
+              <IonLabel>Phrase Matcher Test</IonLabel>
+            </Link>
           </IonItem>
         </IonList>
       </IonCardContent>
