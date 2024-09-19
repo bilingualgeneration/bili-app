@@ -11,6 +11,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 
+/*
 const sampledata = {
   classroom: "ID",
   learningTimeSummary: {},
@@ -38,6 +39,7 @@ const sampledata = {
     },
   },
 };
+*/
 
 /**
  * Get classroomAnalytics documents by classroom IDs.
