@@ -237,7 +237,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </div>
                 <Link
                   className="no-underline"
-                  to={`/classrooms/${id}/students`}
+                  to={`/classrooms/view/${id}/students`}
                 >
                   <IonButton expand="block">See all students</IonButton>
                 </Link>

@@ -49,11 +49,12 @@ export const Toggle = ({
         name={props.name}
         control={control}
         render={({
-          field: { onChange, onBlur, ...fields },
+          field: { onChange, onBlur, value, ...fields },
         }: any): JSX.Element => (
           <IonToggle
             {...fields}
             {...props}
+            checked={value}
             onIonChange={(event) => {
               onChange(event.detail.checked);
             }}
