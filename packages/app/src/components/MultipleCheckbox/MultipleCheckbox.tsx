@@ -60,11 +60,12 @@ export const MultipleCheckbox = ({
       control={control}
       data-testid={testId || "extended-radio-component"}
       name={name}
-      render={({ field: { onChange } }): JSX.Element => (
+      render={({ field: { onChange, value } }): JSX.Element => (
         <>
           {options.map((option) => (
             <Wrapper key={option.value}>
               <IonCheckbox
+                checked={value.includes(option.value)}
                 onIonChange={(event) => {
                   let newValues: string[];
                   if (event.detail.checked) {

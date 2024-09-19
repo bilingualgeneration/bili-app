@@ -14,24 +14,29 @@ import {
 import Letter from "@/assets/icons/letter.svg?react";
 import Printer from "@/assets/icons/printer.svg?react";
 import Star from "@/assets/icons/puprle_star.svg?react";
-import { useIntl, FormattedMessage } from "react-intl";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignUpData } from "@/pages/SignUp/SignUpContext";
+import { FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
-import { RadioCard } from "../../components/RadioCard";
+import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
-import { Popover } from "@/components/Popover";
-import { useProfile } from "@/hooks/Profile";
-import { doc, updateDoc } from "firebase/firestore";
-import { firestore } from "@/components/Firebase";
 import { useHistory } from "react-router";
-import "./InviteCaregivers.scss";
+import "./AddClassroomCaregivers.css";
 
-export const InviteCaregivers: React.FC = () => {
-  const { data, setData, pushPage } = useSignUpData();
+import { useAddClassroom } from "./AddClassroomContext";
+
+export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
-  const { control, handleSubmit, setValue, reset } = useForm();
+  const { notificationMethod, setNotificationMethod } = useAddClassroom();
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    setValue,
+    reset,
+  } = useForm({
+    defaultValues: {
+      notificationMethod,
+    },
+  });
 
   const emailOption: ExtendedRadioOption = {
     component: (
@@ -46,7 +51,7 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "",
+    value: "email",
   };
 
   const emailAndFlyerOption: ExtendedRadioOption = {
@@ -63,7 +68,7 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "",
+    value: "both",
   };
 
   const flyerOption: ExtendedRadioOption = {
@@ -79,16 +84,12 @@ export const InviteCaregivers: React.FC = () => {
         />
       </div>
     ),
-    value: "",
+    value: "flyer",
   };
 
-  const onSubmit = handleSubmit((responses) => {
-    setData({
-      ...data,
-      ...responses,
-    });
-
-    history.push("/classrooms");
+  const onSubmit = handleSubmit((data) => {
+    setNotificationMethod(data.notificationMethod);
+    history.push("/classrooms/add/complete");
   });
 
   return (
@@ -105,13 +106,13 @@ export const InviteCaregivers: React.FC = () => {
           </IonText>
           <ExtendedRadio
             control={control}
-            name="isImmersive"
+            name="notificationMethod"
             options={[emailOption, flyerOption, emailAndFlyerOption]}
           />
 
           <IonButton
-            data-testid="caregiver-select-continue-button"
-            //disabled={!isValid}
+            data-testid="addclassroom-notification-method-continue-button"
+            disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}

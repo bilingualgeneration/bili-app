@@ -41,11 +41,9 @@ import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
-///////////
 import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
 import { SignUp } from "@/pages/SignUp";
-///////////////
 import { Splash } from "@/pages/Splash";
 import {
   Stories,
@@ -69,11 +67,13 @@ import { Wellness } from "@/pages/Wellness";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { ClassCode } from "@/pages/SignUp/ClassCode";
 import {
-  AddClassroom,
+  AddClassroomComplete,
+  AddClassroomProvider,
+  AddClassroomInfo,
   AddClassroomLanguage,
-  AddStudents,
+  AddClassroomNotificationMethod,
+  AddClassroomStudents,
   ClassOverview,
-  InviteCaregivers,
   MyClassrooms,
   StudentSelect,
 } from "@/pages/TeacherDashboard";
@@ -341,19 +341,49 @@ export const Router: React.FC = () => {
                         component={MyClassrooms}
                       />
                       <Route
+                        path="/classrooms/add"
+                        render={() => (
+                          <AddClassroomProvider>
+                            <Route exact path="/classrooms/add">
+                              <Redirect to="/classrooms/add/info" />
+                            </Route>
+                            <Route
+                              exact
+                              path="/classrooms/add/info"
+                              component={AddClassroomInfo}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/language"
+                              component={AddClassroomLanguage}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/students"
+                              component={AddClassroomStudents}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/notification-method"
+                              component={AddClassroomNotificationMethod}
+                            />
+                            <Route
+                              exact
+                              path="/classrooms/add/complete"
+                              component={AddClassroomComplete}
+                            />
+                          </AddClassroomProvider>
+                        )}
+                      />
+                      <Route
                         exact
-                        path="/classrooms/:classroomId"
+                        path="/classrooms/view/:classroomId"
                         component={ClassOverview}
                       />
                       <Route
                         exact
-                        path="/classrooms/:classroomId/students"
+                        path="/classrooms/view/:classroomId/students"
                         component={ClassStudents}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/add"
-                        component={AddClassroom}
                       />
                     </TeacherDashboardWrapper>
                   </AdultCheckProvider>
@@ -369,42 +399,6 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <StudentSelect />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add_classroom_language"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AddClassroomLanguage />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/add_students"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AddStudents />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/classrooms/invite_caregivers"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <InviteCaregivers />
                 </HeaderFooter>
               </AuthedLayout>
             )}

@@ -5,7 +5,6 @@ import {
   IonCol,
   IonGrid,
   IonIcon,
-  IonRouterLink,
   IonRow,
   IonText,
 } from "@ionic/react";
@@ -20,67 +19,22 @@ import {
 } from "ionicons/icons";
 import AddButton from "@/assets/icons/add_button.svg";
 import { AddStudentRow } from "@/components/AddStudentRow";
-import "./AddStudents.scss";
 import { useState } from "react";
 import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useSignUpData } from "../SignUp/SignUpContext";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useHistory } from "react-router";
-import { firestore } from "@/components/Firebase";
-import { doc, updateDoc } from "firebase/firestore";
-import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
+import { Student, useAddClassroom } from "./AddClassroomContext";
 
-export const AddStudents: React.FC = () => {
-  const { data, setData, pushPage } = useSignUpData();
+import "./AddClassroomStudents.css";
+
+export const AddClassroomStudents: React.FC = () => {
   const history = useHistory();
-  const {
-    user: { uid },
-    profile: { isImmersive, isInclusive, settingsLanguage },
-  } = useProfile();
-  const ref = doc(firestore, "users", uid);
-  // TODO: we shouldn't allow this straight from the app
-  const updateProfile = (key: string, value: any) => {
-    updateDoc(ref, {
-      [key]: value,
-    });
-  };
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { isValid },
-  } = useForm({
+  const { students, setStudents } = useAddClassroom();
+  const { control, handleSubmit, reset } = useForm({
     mode: "onBlur",
   });
-  const [studentsData, setStudentsData] = useState([
-    {
-      firstName: "John",
-      lastName: "Doe",
-      primaryEmail: "john.doe@example.com",
-      secondaryEmail: "johndoe2@example.com",
-    },
-    {
-      firstName: "Jane",
-      lastName: "Smith",
-      primaryEmail: "jane.smith@example.com",
-      secondaryEmail: "janesmith2@example.com",
-    },
-    {
-      firstName: "John",
-      lastName: "Doe",
-      primaryEmail: "john.doe@example.com",
-      secondaryEmail: "johndoe2@example.com",
-    },
-    {
-      firstName: "Jane",
-      lastName: "Smith",
-      primaryEmail: "jane.smith@example.com",
-      secondaryEmail: "janesmith2@example.com",
-    },
-  ]);
+  const [studentsData, setStudentsData] = useState<Student[]>(students);
 
   // TODO: check saving function
   const handleSaveStudentClick = (data: any) => {
@@ -98,8 +52,16 @@ export const AddStudents: React.FC = () => {
   };
 
   const handleDeleteStudent = (index: number) => {
-    const updatedStudents = studentsData.filter((_, i) => i !== index);
+    const updatedStudents = studentsData.filter(
+      (_: any, i: number) => i !== index,
+    );
     setStudentsData(updatedStudents);
+  };
+
+  const handleContinue = () => {
+    // TODO: add any data in the add student row that hasn't been added yet
+    setStudents(studentsData);
+    history.push("/classrooms/add/notification-method");
   };
 
   return (
@@ -192,19 +154,18 @@ export const AddStudents: React.FC = () => {
         </div>
 
         <div className="add-student-button-continue">
-          <IonRouterLink routerLink="/classrooms/invite_caregivers">
-            <IonButton
-              data-testid="add-student-continue-button"
-              shape="round"
-              type="button"
-            >
-              <FormattedMessage
-                id="common.continue"
-                defaultMessage="Continue"
-                description="Button label to continue"
-              />
-            </IonButton>
-          </IonRouterLink>
+          <IonButton
+            data-testid="add-student-continue-button"
+            onClick={handleContinue}
+            shape="round"
+            type="button"
+          >
+            <FormattedMessage
+              id="common.continue"
+              defaultMessage="Continue"
+              description="Button label to continue"
+            />
+          </IonButton>
         </div>
       </IonCard>
     </div>
