@@ -11,7 +11,6 @@ export interface PieceProps {
   count: number;
   dropped: boolean;
   id: string;
-  image: any;
   left: number;
   rotation: number;
   text: string;
@@ -23,7 +22,6 @@ export const Piece: React.FC<PieceProps> = ({
   audio_on_drag,
   dropped,
   id,
-  image,
   left,
   rotation,
   text,
@@ -34,6 +32,8 @@ export const Piece: React.FC<PieceProps> = ({
   const { addAudio } = useAudioManager();
   const [audio_drag, set_audio_drag] = useState<HTMLAudioElement | null>(null);
   const [audio_drop, set_audio_drop] = useState<HTMLAudioElement | null>(null);
+  const color = hashLetter(text);
+  const rotate = `${rotation}deg`;
   useEffect(() => {
     // todo: better way to play audio?
     if (audio_on_drag) {
@@ -54,10 +54,10 @@ export const Piece: React.FC<PieceProps> = ({
       collect: (monitor: DragSourceMonitor) => ({
         isDragging: monitor.isDragging(),
       }),
-      item: { id, image, left, text, top },
+      item: { color, id, left, rotate, text, top },
       type: "piece",
     }),
-    [id, image, left, text, top],
+    [id, color, left, rotate, text, top],
   );
   useEffect(() => {
     if (audio_drag) {
@@ -100,11 +100,11 @@ export const Piece: React.FC<PieceProps> = ({
         className="letter"
         ref={drag}
         style={{
-          color: hashLetter(text),
+          color,
           left,
           position: "absolute",
           top,
-          rotate: `${rotation}deg`,
+          rotate,
         }}
       >
         {text}
