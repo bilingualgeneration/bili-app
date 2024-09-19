@@ -58,6 +58,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
   const [gamesData, setGamesData] = useState<GameData>(new Map());
   const [attempts, setAttempts] = useState<Attempts>(new Map());
+  // TODO: need to implement for activities that give hearts
   const [hearts, setHearts] = useState<number>(0);
   const [stars, setStars] = useState(0);
 
