@@ -20,15 +20,16 @@
 
 .add-student-row {
   margin-top: 4px;
+
+  ion-button:not([shape="round"]) {
+    --border-radius: 8px;
+  }
 }
 
+.reset-student-button,
 .add-student-button {
-  display: flex;
-  padding: 16.5px 17px;
-  color: white;
-  gap: 4px;
-  background: var(--Base-Barro, #889391);
-  border-radius: 8px;
+  height: 56px;
+  width: 60px;
 }
 
 .upload-csv-button {
@@ -39,15 +40,6 @@
   display: flex;
   gap: 4px;
   margin-left: 18px;
-}
-
-.reset-student-button {
-  padding: 17px 12px;
-  display: flex;
-  gap: 4px;
-  border-radius: 8px;
-  border: 1px solid var(--Base-Selva, #006a67);
-  background: var(--Base-Barro, #889391);
 }
 
 .reset-button-column {

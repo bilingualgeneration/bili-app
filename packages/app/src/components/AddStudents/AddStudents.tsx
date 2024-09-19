@@ -38,7 +38,13 @@ export const AddStudents: React.FC<AddStudentsProps> = ({
   handleDeleteStudent,
 }) => {
   const { control, handleSubmit, reset } = useForm<Student>();
-  console.log("AddStudents Component");
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Callback function to check when editing starts or ends
+  const handleEditingStatusChange = (editing: boolean) => {
+    setIsEditing(editing);
+  };
+
   return (
     <IonGrid className="add-students-grid">
       {/* title row */}
@@ -56,6 +62,7 @@ export const AddStudents: React.FC<AddStudentsProps> = ({
         studentData={studentsData}
         handleDeleteStudent={handleDeleteStudent}
         handleEditStudentClick={handleEditStudentClick}
+        onEditingStatusChange={handleEditingStatusChange}
       />
 
       {/* row for inputting student data */}
@@ -96,23 +103,26 @@ export const AddStudents: React.FC<AddStudentsProps> = ({
               />
             </IonCol>
             <IonCol className="ion-no-padding" size="auto">
-              <button
-                type="submit"
+              <IonButton
+                data-testid="add-student-classroom-button"
                 className="add-student-button text-sm semibold"
+                disabled={isEditing}
+                type="submit"
               >
                 <p>Add</p>
-              </button>
+              </IonButton>
             </IonCol>
             <IonCol size="auto" className="reset-button-column ion-no-padding">
-              <button
+              <IonButton
                 className="reset-student-button text-sm semibold"
                 type="button"
+                disabled={isEditing}
                 onClick={() => {
                   reset();
                 }}
               >
                 <p>Reset</p>
-              </button>
+              </IonButton>
             </IonCol>
           </IonRow>
         </div>

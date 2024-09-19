@@ -25,6 +25,7 @@ type RowProps = {
   colSizes?: string[]; // Array of sizes for each column
   handleDeleteStudent: (index: number) => void; //function to delete student
   handleEditStudentClick: (data: any, index: number) => void; //function to save student
+  onEditingStatusChange: (editing: boolean) => void; //function to check edit status
 };
 
 export const AddStudentRow: React.FC<RowProps> = ({
@@ -32,6 +33,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
   colSizes = ["2", "2", "3", "3", "1", "1"],
   handleDeleteStudent,
   handleEditStudentClick,
+  onEditingStatusChange,
 }) => {
   const [isEditing, setIsEditing] = useState<number | null>(null); // Tracks which row is being edited
   const { control, handleSubmit, setValue, reset } = useForm();
@@ -39,6 +41,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
   // Handle the "Edit" button click
   const handleEditClick = (index: number, student: any) => {
     setIsEditing(index); // Set the row into edit mode
+    onEditingStatusChange(true); // Notify AddStudents.tsx that editing has started
     setValue("firstName", student.firstName);
     setValue("lastName", student.lastName);
     setValue("primaryEmail", student.primaryEmail);
@@ -49,6 +52,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
   const onSaveClick = (data: any, index: number) => {
     handleEditStudentClick(data, index); // Save the updated student data
     setIsEditing(null); // Exit the edit mode
+    onEditingStatusChange(false); // Notify AddStudents.tsx that editing has ended
   };
 
   return (
@@ -108,7 +112,10 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 <button
                   type="button"
                   className="edit-student-data-button text-sm semibold"
-                  onClick={() => setIsEditing(null)}
+                  onClick={() => {
+                    setIsEditing(null);
+                    onEditingStatusChange(false);
+                  }}
                 >
                   Cancel
                 </button>
