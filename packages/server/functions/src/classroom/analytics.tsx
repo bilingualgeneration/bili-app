@@ -45,7 +45,7 @@ const sampledata = {
  * Get classroomAnalytics documents by classroom IDs.
  * @param firestore Firestore instance.
  * @param classroomIds Array of classroom IDs.
- * @returns A list of objects containing document ID and classroom analytics data.
+ * @return A list of objects containing document ID and classroom analytics data.
  */
 const getClassroomAnalyticsByClassroomIds = async (
   firestore: Firestore,
@@ -79,7 +79,7 @@ const getClassroomAnalyticsByClassroomIds = async (
 /**
  * Fetch active classroom IDs from Firestore.
  * @param firestore Firestore instance.
- * @returns A list of active classroom IDs.
+ * @return A list of active classroom IDs.
  */
 const getActiveClassroomIds = async (
   firestore: Firestore,
@@ -102,7 +102,7 @@ const getActiveClassroomIds = async (
  * Fetch classroom data from Realtime Database for active classroom IDs.
  * @param db Realtime Database instance.
  * @param classroomIds Array of active classroom IDs.
- * @returns An object containing classroom data.
+ * @return An object containing classroom data.
  */
 const getClassroomData = async (
   db: Database,
@@ -131,7 +131,7 @@ const getClassroomData = async (
  * Fetch user home data from Realtime Database.
  * @param db Realtime Database instance.
  * @param userIds Array of user IDs.
- * @returns An array containing user home data.
+ * @return An array containing user home data.
  */
 const getUserHomeData = async (
   db: Database,
