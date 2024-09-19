@@ -1,14 +1,6 @@
 //A.M.
 import React, { useState } from "react";
-import {
-  IonRow,
-  IonCol,
-  IonIcon,
-  IonPopover,
-  IonContent,
-  IonAlert,
-  IonButton,
-} from "@ionic/react";
+import { IonRow, IonCol, IonIcon, IonAlert, IonButton } from "@ionic/react";
 import DeleteIcon from "@/assets/icons/delete_button.svg";
 import EditIcon from "@/assets/icons/edit_button.svg";
 import "./AddStudentRow.scss";

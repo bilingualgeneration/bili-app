@@ -2,20 +2,12 @@
 import {
   IonButton,
   IonCard,
-  IonCol,
-  IonGrid,
-  IonIcon,
   IonItem,
   IonRouterLink,
-  IonRow,
   IonText,
 } from "@ionic/react";
-import DeleteIcon from "@/assets/icons/delete_button.svg";
-import AddButton from "@/assets/icons/add_button.svg";
-import { AddStudentRow } from "@/components/AddStudentRow";
 import "./AddStudentsClassroom.scss";
 import { useState } from "react";
-import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useSignUpData } from "../SignUp/SignUpContext";

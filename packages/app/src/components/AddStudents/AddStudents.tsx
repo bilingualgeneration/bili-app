@@ -1,15 +1,5 @@
 //A.M.
-import {
-  IonButton,
-  IonCard,
-  IonCol,
-  IonGrid,
-  IonIcon,
-  IonItem,
-  IonRouterLink,
-  IonRow,
-  IonText,
-} from "@ionic/react";
+import { IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 
 import { AddStudentRow } from "@/components/AddStudentRow";
 import "./AddStudents.scss";
