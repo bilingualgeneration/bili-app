@@ -29,6 +29,23 @@
   height: var(--storyPageSize);
 }
 
+.story-title-card {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  > ion-card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    > ion-text {
+      max-width: 438px;
+    }
+  }
+}
+
 #stories-dnd {
   .header {
     display: flex;

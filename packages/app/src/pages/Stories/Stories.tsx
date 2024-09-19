@@ -452,14 +452,9 @@ const TitleCard = ({
   return (
     <div className="content-wrapper">
       <IonCard
-        className="sf-card drop-shadow story-page"
+        className="sf-card drop-shadow story-page story-title-card"
         style={{
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPositionY: "center",
-          backgroundPositionX: "center",
-          display: "block",
-          position: "relative",
+          backgroundImage: `url(${cover_image.url})`,
         }}
       >
         {is_translanguaged && (
@@ -501,32 +496,7 @@ const TitleCard = ({
               </p>
             )}
           </IonText>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <img
-              style={{ maxHeight: "330px" }}
-              src={`${cover_image.url}`}
-              alt=""
-            />
-          </div>
-          <div
-            className="ion-text-center"
-            style={{
-              position: "absolute",
-              bottom: "2rem",
-              left: 0,
-              padding: "auto",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+          <div className="ion-text-center">
             <button
               //shape="round"
               onClick={pageForward}
