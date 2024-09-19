@@ -1,3 +1,4 @@
+import { GameData, useActivity } from "@/contexts/ActivityContext";
 import React, { useState, useEffect, useMemo } from "react";
 import {
   IonButton,
@@ -18,7 +19,7 @@ import {
 import { FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import cover from "@/assets/icons/card_back.svg";
-import {useAudioManager} from '@/contexts/AudioManagerContext';
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 import incorrect_card_audio from "@/assets/audio/incorrect.mp3";
 import correct_card_audio from "@/assets/audio/correct.mp3";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
@@ -51,6 +52,7 @@ interface Game {
     word_3_image: BiliImage;
     word_3_audio: BiliAudio;
   }>;
+  uuid: string;
 }
 
 interface IntruderGameProps {
@@ -67,13 +69,30 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const {language} = useLanguageToggle();
-  const {addAudio, clearAudio} = useAudioManager();
-
+  const { language } = useLanguageToggle();
+  const { addAudio, clearAudio } = useAudioManager();
+  const {
+    handleAttempt,
+    handleRecordAttempt,
+    handleResetAttempts,
+    setActivityState,
+    setGamesData,
+  } = useActivity();
   useEffect(() => {
+    setActivityState({
+      type: "intruder",
+      id: data.uuid,
+    });
+    const gamesData: GameData = new Map();
+
+    for (const group of data.word_group) {
+      const groupId = `${group.intruder_text}-${group.word_2_text}-${group.word_3_text}`;
+      gamesData.set(groupId, { totalMistakesPossible: 2 });
+    }
+    setGamesData(gamesData);
     // todo: allow only English?
     const audios = [instruction_es_audio];
-    if(language === 'esen'){
+    if (language === "esen") {
       audios.push(instruction_en_audio);
     }
     addAudio(audios);
@@ -85,8 +104,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const initialStyle = {
     cursor: "pointer",
     borderRadius: "32px",
-    aspectRatio: '1 / 1.25',
-    border: '8.4px solid transparent',
+    aspectRatio: "1 / 1.25",
+    border: "8.4px solid transparent",
     boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
   };
 
@@ -108,8 +127,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     backgroundImage: `url(${cover})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    aspectRatio: '1 / 1.25',
-    border: '8.4px solid transparent',
+    aspectRatio: "1 / 1.25",
+    border: "8.4px solid transparent",
     zIndex: "2",
   };
 
@@ -134,7 +153,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     setCurrentIndex(0);
   }, [data]);
 
-  const goToNextWordGroup = () => {
+  const goToNextWordGroup = async () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= data.word_group.length - 1) {
       setCurrentIndex(0); // Reset to the first element
@@ -196,9 +215,10 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   // Function to handle card click
   const handleCardClick = (card: any) => {
+    const groupId = `${data.word_group[currentIndex].intruder_text}-${data.word_group[currentIndex].word_2_text}-${data.word_group[currentIndex].word_3_text}`;
     if (!card.isIntruder) {
       //logic for the incorrect cards
-      console.log('123');
+      handleAttempt(groupId, false);
       addAudio([incorrect_card_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
@@ -213,6 +233,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       }, 1000);
     } else {
       //logic when the correct card is choosen
+      handleAttempt(groupId, true);
       addAudio([correct_card_audio, card_flip_audio]);
       setCardColors((prevColors: any) => ({
         ...prevColors,
@@ -263,7 +284,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
         <div className="padding-top-4 margin-bottom-2">
           <IonText>
             <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
-            {language === 'esen' && (
+            {language === "esen" && (
               <p className="text-3xl color-english">
                 Which word does not rhyme?
               </p>
@@ -280,8 +301,16 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
               }
               onClick={() => handleCardClick(card)}
             >
-	      <img src={card.image.url} style={{opacity: showBackside ? 0 : 1}}/>
-	      <p className="text-5xl color-suelo" style={{opacity: showBackside ? 0 : 1}}>{card.word}</p>
+              <img
+                src={card.image.url}
+                style={{ opacity: showBackside ? 0 : 1 }}
+              />
+              <p
+                className="text-5xl color-suelo"
+                style={{ opacity: showBackside ? 0 : 1 }}
+              >
+                {card.word}
+              </p>
             </IonCard>
           ))}
         </div>
@@ -294,10 +323,8 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           </IonButton>
           <IonText>
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
-            {language === 'esen' && (
-              <p className="text-lg color-english">
-                Read
-              </p>
+            {language === "esen" && (
+              <p className="text-lg color-english">Read</p>
             )}
           </IonText>
         </div>
