@@ -2,10 +2,12 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "@/components/Firebase";
 
-const ClassroomDashboardContext = createContext();
+const ClassroomDashboardContext = createContext({} as any);
 
 // TODO: fetch from firestore `classroomAnalytics` collection instead
-export const ClassroomDashboardProvider = ({ classroomId, children }) => {
+export const ClassroomDashboardProvider: React.FC<
+  React.PropsWithChildren<{ classroomId: string }>
+> = ({ classroomId, children }) => {
   const [classroomData, setClassroomData] = useState(null);
   const [usersData, setUsersData] = useState({});
 
@@ -39,6 +41,7 @@ export const ClassroomDashboardProvider = ({ classroomId, children }) => {
             (acc, user) => ({ ...acc, ...user }),
             {},
           );
+          // @ts-ignore
           setUsersData(users);
         }
       } catch (error) {
