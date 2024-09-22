@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { useActivity } from "@/contexts/ActivityContext";
 
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
@@ -42,6 +43,8 @@ export const IntruderCongrats: React.FC<{
     profile: { isImmersive },
     activeChildProfile,
   } = useProfile();
+  const { handleRecordAttempt } = useActivity();
+
   const audio_es = new Audio(
     sounds.es[count === -1 ? "all" : count.toString()],
   );
@@ -50,7 +53,11 @@ export const IntruderCongrats: React.FC<{
   );
   const functions = getFunctions();
 
+  /*
+  // TODO: is this old analytics?
+
   useEffect(() => {
+    
     // increment number of completions
     const completionFunction = httpsCallable(
       functions,
@@ -64,14 +71,10 @@ export const IntruderCongrats: React.FC<{
     };
     completionFunction(data);
   }, []);
+    */
 
   useEffect(() => {
-    return () => {
-      audio_es.pause();
-      audio_en.pause();
-    };
-  }, []);
-  useEffect(() => {
+    handleRecordAttempt();
     if (isImmersive) {
       audio_es.onended = () => {
         setAudioPlayed(true);
@@ -85,6 +88,10 @@ export const IntruderCongrats: React.FC<{
       };
     }
     audio_es.play();
+    return () => {
+      audio_es.pause();
+      audio_en.pause();
+    };
   }, []);
   return (
     <div style={{ position: "relative", marginTop: "4rem" }}>

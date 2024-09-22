@@ -69,20 +69,27 @@ const shuffle = (array: any[]) => {
 };
 
 const PiecePreview: React.FC = () => {
-  const preview = usePreview();
-  if (!preview.display) {
+  // @ts-ignore
+  const { display, item, style } = usePreview();
+  if (!item) {
     return null;
   }
-  const { itemType, item, style } = preview;
-  // @ts-ignore
-  const url = item.image.url;
+  if (!display) {
+    return null;
+  }
   return (
-    <span className="letter" style={style}>
+    <span
+      className="letter"
+      style={{
+        ...style,
+        // @ts-ignore
+        color: item.color,
+      }}
+    >
       {
         // @ts-ignore
         item.text
       }
-      <img src={url} />
     </span>
   );
 };
@@ -211,7 +218,6 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
     return targetPieces.map((word: any, wordIndex: number) =>
       Object.values(word).map((p: any, letterIndex) => ({
         classes: classnames({ leftMargin: wordIndex > 0 && letterIndex === 0 }),
-        image: p.image,
         text: p.text.replace(/_$/, ""),
         isBlank: p.isBlank,
         renderTrigger: new Date(),
@@ -255,10 +261,10 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
             position: "relative",
           }}
         >
-          {(isPlatform("ios") || isPlatform("android")) && <PiecePreview />}
           {Object.keys(pieces).map((key) => (
             <Piece key={key} {...pieces[key]} />
           ))}
+          {(isPlatform("ios") || isPlatform("android")) && <PiecePreview />}
           <div
             className={classnames("dnd-drop-targets-container", {
               hasImage: targetImage,

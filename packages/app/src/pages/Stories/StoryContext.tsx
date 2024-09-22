@@ -28,24 +28,26 @@ type VocabLookup = {
 };
 
 interface StoryState {
-  pages: any;
-  setPages: Dispatch<SetStateAction<any>>;
-  pageNumber: number;
-  pageForward: any;
-  pageBackward: any;
-  setPageNumber: Dispatch<SetStateAction<number>>;
-  ready: boolean;
-  setReady: Dispatch<SetStateAction<boolean>>;
-  vocab: VocabDictionaries;
-  setVocab: Dispatch<SetStateAction<VocabDictionaries>>;
-  vocabLookup: VocabLookup;
-  setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
   currentVocabWord: string | null;
-  setCurrentVocabWord: Dispatch<SetStateAction<string | null>>;
-  pageLocks: any;
-  setPageLocks: Dispatch<SetStateAction<any>>;
   id: string | null;
+  isTranslanguaged: boolean;
+  pageBackward: any;
+  pageForward: any;
+  pageLocks: any;
+  pageNumber: number;
+  pages: any;
+  ready: boolean;
+  setCurrentVocabWord: Dispatch<SetStateAction<string | null>>;
   setId: Dispatch<SetStateAction<string | null>>;
+  setIsTranslanguaged: Dispatch<SetStateAction<boolean>>;
+  setPageLocks: Dispatch<SetStateAction<any>>;
+  setPageNumber: Dispatch<SetStateAction<number>>;
+  setPages: Dispatch<SetStateAction<any>>;
+  setReady: Dispatch<SetStateAction<boolean>>;
+  setVocab: Dispatch<SetStateAction<VocabDictionaries>>;
+  setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
+  vocab: VocabDictionaries;
+  vocabLookup: VocabLookup;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -55,6 +57,7 @@ export const useStory = () => useContext(StoryContext);
 export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const [isTranslanguaged, setIsTranslanguaged] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const { language } = useLanguageToggle();
   const {
@@ -110,6 +113,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
       newPageNumber++;
     }
     setPageNumber(newPageNumber);
+    /*
     if (id) {
       recordUserActivity({
         activity: "story",
@@ -122,7 +126,6 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         },
       });
     }
-    /*
     if (totalPages > 0 && !pageLocks[pageNumber]) {
       // Increment page
       setPageNumber((p) => {
@@ -155,24 +158,26 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <StoryContext.Provider
       value={{
-        pageLocks,
-        setPageLocks,
-        pageNumber,
-        pageForward,
-        pageBackward,
-        setPageNumber,
-        ready,
-        setReady,
-        vocab,
-        setVocab,
         currentVocabWord,
-        setCurrentVocabWord,
-        vocabLookup,
-        setVocabLookup,
-        pages,
-        setPages,
         id,
+        isTranslanguaged,
+        pageBackward,
+        pageForward,
+        pageLocks,
+        pageNumber,
+        pages,
+        ready,
+        setCurrentVocabWord,
         setId,
+        setIsTranslanguaged,
+        setPageLocks,
+        setPageNumber,
+        setPages,
+        setReady,
+        setVocab,
+        setVocabLookup,
+        vocab,
+        vocabLookup,
       }}
       children={children}
     />

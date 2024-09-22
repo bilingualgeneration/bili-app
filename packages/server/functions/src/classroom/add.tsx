@@ -1,16 +1,6 @@
 const admin = require("firebase-admin");
 import { onCall } from "firebase-functions/v2/https";
 
-/*
-   name
-   grades str[]
-   language
-   allowLanguageToggle
-   isInclusive
-   students
-   notificationMethod
-*/
-
 const getUserByEmail = async (email: string) => {
   try {
     const response: any = await admin.auth().getUserByEmail(email);
@@ -36,6 +26,7 @@ export const add = onCall(async (request) => {
   let classroomPayload = {
     allowLanguageToggle: data.allowLanguageToggle,
     grades: data.grades,
+    isActive: true,
     isInclusive: data.isInclusive,
     language: data.language,
     name: data.name,

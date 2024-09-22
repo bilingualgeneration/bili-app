@@ -6,14 +6,10 @@ import EditIcon from "@/assets/icons/edit_button.svg";
 import "./AddStudentRow.scss";
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";
+import type { Student } from "@/pages/TeacherDashboard/AddClassroom/AddClassroomContext";
 
 type RowProps = {
-  studentData: {
-    firstName: string;
-    lastName: string;
-    primaryEmail: string;
-    secondaryEmail: string;
-  }[];
+  studentData: Student[];
   colSizes?: string[]; // Array of sizes for each column
   handleDeleteStudent: (index: number) => void; //function to delete student
   handleEditStudentClick: (data: any, index: number) => void; //function to save student

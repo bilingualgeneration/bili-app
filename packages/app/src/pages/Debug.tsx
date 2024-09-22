@@ -15,7 +15,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const Debug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
-  const { startMark, getTime } = useTimeTracker();
+  const { startTimer, stopTimer } = useTimeTracker();
   const functions = getFunctions();
   const addClassroom = httpsCallable(functions, "classroom-add");
   return (
@@ -64,7 +64,7 @@ export const Debug: React.FC = () => {
               size="small"
               slot="end"
               onClick={() => {
-                startMark();
+                startTimer();
               }}
             >
               start
@@ -73,7 +73,7 @@ export const Debug: React.FC = () => {
               size="small"
               slot="end"
               onClick={() => {
-                setTime(getTime());
+                setTime(stopTimer());
               }}
             >
               get

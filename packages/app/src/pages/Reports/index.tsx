@@ -18,11 +18,16 @@ import { makeData } from "@/pages/Reports/makeData";
 import { IonButton, IonIcon, IonText } from "@ionic/react";
 import { chevronDown, chevronForward } from "ionicons/icons";
 import { getReportData } from "@/pages/Reports/getData";
+import { useClassroom } from "@/hooks/Classroom";
+import {
+  ClassroomDashboardProvider,
+  useClassroomDashboard,
+} from "@/hooks/ClassroomDashboard";
 
 const activityColumn = {
   header: "Overall Summary",
   accessorKey: "activity",
-  cell: ({ row, getValue }: {row: any, getValue: any}) => (
+  cell: ({ row, getValue }: { row: any; getValue: any }) => (
     <div>
       {row.getCanExpand() && (
         <button
@@ -56,110 +61,22 @@ const activityColumn = {
   ),
 };
 
-const sampleColumns = [
-  {
-    header: "Overall Summary",
-    accessorKey: "activity",
-    cell: ({ row, getValue }: {row: any, getValue: any}) => (
-      <div>
-        {row.getCanExpand() && (
-          <button
-            {...{
-              onClick: row.getToggleExpandedHandler(),
-              style: { cursor: "pointer" },
-            }}
-          >
-            {row.getIsExpanded() ? "👇" : "👉"}
-          </button>
-        )}{" "}
-        {getValue()}
-      </div>
-    ),
-  },
-  {
-    header: "Student A",
-    columns: [
-      {
-        accessorKey: "studentA-activitiesCompleted",
-        header: "✅ 50",
-      },
-      {
-        accessorKey: "studentA-stars",
-        header: "⭐️ 100",
-      },
-      {
-        accessorKey: "studentA-hearts",
-        header: "️💜 30",
-      },
-    ],
-  },
-  {
-    header: "Student B",
-    columns: [
-      {
-        accessorKey: "studentB-activitiesCompleted",
-        header: "✅ 20",
-      },
-      {
-        accessorKey: "studentB-stars",
-        header: "⭐️ 150",
-      },
-      {
-        accessorKey: "studentB-hearts",
-        header: "️💜 80",
-      },
-    ],
-  },
-];
-
-const sampleData = [
-  {
-    id: "1",
-    activity: "Stories",
-    "studentA-activitiesCompleted": 10,
-    "studentA-stars": 20,
-    "studentA-hearts": null,
-    "studentB-activitiesCompleted": 10,
-    "studentB-stars": 20,
-    "studentB-hearts": null,
-  },
-  {
-    id: "2",
-    activity: "Play",
-    "studentA-activitiesCompleted": 10,
-    "studentA-stars": 20,
-    "studentA-hearts": null,
-    "studentB-activitiesCompleted": 10,
-    "studentB-stars": 20,
-    "studentB-hearts": null,
-    subRows: [
-      {
-        id: "3",
-        activity: "Story Factory - Pre Reader",
-        "studentA-activitiesCompleted": 10,
-        "studentA-stars": 20,
-        "studentA-hearts": null,
-        "studentB-activitiesCompleted": 10,
-        "studentB-stars": 20,
-        "studentB-hearts": null,
-      },
-      {
-        id: "4",
-        activity: "Story Factory - Early Reader",
-        "studentA-activitiesCompleted": 10,
-        "studentA-stars": 20,
-        "studentA-hearts": null,
-        "studentB-activitiesCompleted": 10,
-        "studentB-stars": 20,
-        "studentB-hearts": null,
-      },
-    ],
-  },
-];
-
 const INITIAL_PAGE = 1;
 
 const Reports = () => {
+  const classroom = useClassroom();
+  console.log("classroom", classroom);
+
+  return (
+    <ClassroomDashboardProvider classroomId={classroom.id}>
+      <ReportsLoader />
+    </ClassroomDashboardProvider>
+  );
+};
+
+export default Reports;
+
+const ReportsLoader = () => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const [pageNumber, setPageNumber] = useState(INITIAL_PAGE);
@@ -191,6 +108,9 @@ const Reports = () => {
 
   const isFirstPage = pageNumber === INITIAL_PAGE;
   const isLastPage = pageNumber === TOTAL_PAGES;
+
+  const dashboardData = useClassroomDashboard();
+  console.log("dashboardData", dashboardData);
 
   const handlePageForward = () => {
     setPageNumber((prev) => Math.min(prev + 1, TOTAL_PAGES));
@@ -308,5 +228,3 @@ const Reports = () => {
     </div>
   );
 };
-
-export default Reports;

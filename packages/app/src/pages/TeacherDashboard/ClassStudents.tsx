@@ -123,8 +123,11 @@ export const ClassStudents: React.FC = () => {
             <IonCol className="text-md semibold">Home Account</IonCol>
           </IonRow>
           {studentsData.map((student, index) => (
-            <IonRow className="ion-align-items-center class-student-table-body-row">
-              <IonCol key={index}>
+            <IonRow
+              className="ion-align-items-center class-student-table-body-row"
+              key={index}
+            >
+              <IonCol>
                 <StudentInfo
                   userId={""}
                   userType={""}

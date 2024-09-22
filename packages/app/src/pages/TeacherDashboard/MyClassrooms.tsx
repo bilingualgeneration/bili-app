@@ -317,7 +317,7 @@ const ClassroomsList: React.FC = () => {
             <IonCol size="6" key={classroom.id}>
               <div className="classroom-names">
                 <Link
-                  to={`/classrooms/${classroom.id}`}
+                  to={`/classrooms/view/${classroom.id}`}
                   className="no-underline"
                 >
                   <RadioCard

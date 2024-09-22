@@ -177,21 +177,23 @@ export const StoryLoader = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { setTempAllowedLanguages, setTempLanguage, language } =
+    useLanguageToggle();
 
   const history = useHistory();
 
   const {
     pages,
-    setPages,
-    setPageNumber,
     pageNumber,
     ready,
+    setId,
+    setIsTranslanguaged,
     setPageLocks,
+    setPageNumber,
+    setPages,
     setReady,
     setVocab,
     setVocabLookup,
-    setId,
   } = useStory();
 
   const { setGamesData, setActivityState } = useActivity();
@@ -336,9 +338,21 @@ export const StoryLoader = ({
       languages: allLanguages,
     });
 
+    setIsTranslanguaged(data.is_translanguaged);
     setPages(tempPages);
     setPageNumber(0);
     setReady(true);
+
+    if (data.is_translanguaged) {
+      setTempLanguage("esen");
+      setTempAllowedLanguages(["esen"]);
+      return () => {
+        setTempLanguage(null);
+        setTempAllowedLanguages(null);
+      };
+    } else {
+      return () => {};
+    }
   }, []);
   if (ready === false) {
     return <></>;
@@ -452,14 +466,9 @@ const TitleCard = ({
   return (
     <div className="content-wrapper">
       <IonCard
-        className="sf-card drop-shadow story-page"
+        className="sf-card drop-shadow story-page story-title-card"
         style={{
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPositionY: "center",
-          backgroundPositionX: "center",
-          display: "block",
-          position: "relative",
+          backgroundImage: `url(${cover_image.url})`,
         }}
       >
         {is_translanguaged && (
@@ -501,32 +510,7 @@ const TitleCard = ({
               </p>
             )}
           </IonText>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <img
-              style={{ maxHeight: "330px" }}
-              src={`${cover_image.url}`}
-              alt=""
-            />
-          </div>
-          <div
-            className="ion-text-center"
-            style={{
-              position: "absolute",
-              bottom: "2rem",
-              left: 0,
-              padding: "auto",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+          <div className="ion-text-center">
             <button
               //shape="round"
               onClick={pageForward}
@@ -659,7 +643,8 @@ const SegmentedText: React.FC<
 export const StoryPage: React.FC<
   React.PropsWithChildren<{ page: any; languages: any[] }>
 > = ({ page, languages }) => {
-  const { pageNumber, pages, pageForward, pageBackward } = useStory();
+  const { isTranslanguaged, pageNumber, pages, pageForward, pageBackward } =
+    useStory();
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -737,7 +722,7 @@ export const StoryPage: React.FC<
                       : texts.es.text}
                 </SegmentedText>
               </h1>
-              {language === "esen" && (
+              {!isTranslanguaged && language === "esen" && (
                 <p className="text-lg color-english">
                   <SegmentedText language="en">{texts.en.text}</SegmentedText>
                 </p>

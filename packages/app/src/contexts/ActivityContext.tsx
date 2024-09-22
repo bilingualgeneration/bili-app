@@ -4,6 +4,7 @@ import { getStarsFromAttempts } from "@/lib/utils";
 import { updateActivityStars } from "@/realtimeDb";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { createContext, useContext, useState } from "react";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 
 export type Attempt = {
   mistakes: number;
@@ -51,6 +52,7 @@ export const useActivity = () => {
 export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const { language } = useLanguageToggle();
   const [activityState, setActivityState] = useState<ActivityState>({
     type: null,
     id: null,
@@ -58,6 +60,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
   const [gamesData, setGamesData] = useState<GameData>(new Map());
   const [attempts, setAttempts] = useState<Attempts>(new Map());
+  // TODO: need to implement for activities that give hearts
   const [hearts, setHearts] = useState<number>(0);
   const [stars, setStars] = useState(0);
 
@@ -106,6 +109,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
       data: JSON.stringify({
         attempts: Object.fromEntries(attempts),
       }),
+      language,
     });
 
     await updateActivityStars({

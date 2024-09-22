@@ -1,33 +1,60 @@
+import { App } from "@capacitor/app";
 import {
   createContext,
   useCallback,
   useContext,
+  useRef,
   useState,
-} from 'react';
+} from "react";
 
 type TimeTrackerState = any;
 
-const TimeTrackerContext = createContext<TimeTrackerState>({} as TimeTrackerState);
+const TimeTrackerContext = createContext<TimeTrackerState>(
+  {} as TimeTrackerState,
+);
 export const useTimeTracker = () => useContext(TimeTrackerContext);
 
 export const TimeTrackerProvider: React.FC<React.PropsWithChildren> = ({
-  children
+  children,
 }) => {
-  const [mark, setMark] = useState<Date>(new Date());
-  const getTime = useCallback(() => {
-    const now = new Date();
-    const difference = Math.abs(now.getTime() - mark.getTime()) / 1000;
-    return difference;
-  }, [mark]);
-  const startMark = useCallback(() => {
-    setMark(new Date());
-  }, [setMark]);
-  return <TimeTrackerContext.Provider
-  children={children}
-  value={{
-    mark,
-    setMark,
-    startMark,
-    getTime
-  }} />;
-}
+  const times = useRef<Date[]>([]);
+  const isTiming = useRef<boolean>(false);
+
+  App.addListener("pause", () => {
+    if (isTiming.current) {
+      times.current.push(new Date());
+    }
+  });
+
+  App.addListener("resume", () => {
+    if (isTiming.current) {
+      times.current.push(new Date());
+    }
+  });
+
+  const startTimer = () => {
+    times.current = [new Date()];
+    isTiming.current = true;
+  };
+  const stopTimer = () => {
+    times.current.push(new Date());
+    let timeElapsed = 0;
+    for (let i = 0; i < times.current.length; i += 2) {
+      timeElapsed +=
+        Math.abs(times.current[i].getTime() - times.current[i + 1].getTime()) /
+        1000;
+    }
+    times.current = [];
+    isTiming.current = false;
+    return timeElapsed;
+  };
+  return (
+    <TimeTrackerContext.Provider
+      children={children}
+      value={{
+        startTimer,
+        stopTimer,
+      }}
+    />
+  );
+};
