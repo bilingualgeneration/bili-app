@@ -24,57 +24,57 @@ export const ClassStudents: React.FC = () => {
   const studentsData = [
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michelllllllll Doeeeeee333333",
-      primaryCaregiverEmail: "john.doe@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "needs support",
       homeAccount: "active",
     },
     {
       studentName: "John Doeeeeeee",
-      caregiverName: "Michel Doeeeeee",
-      primaryCaregiverEmail: "john.doe44455566666666@example.com",
+      primaryHomeEmail: "Michel Doeeeeee",
+      secondaryHomeEmail: "john.doe@exampleeeeeeeeeeeee.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
@@ -93,14 +93,17 @@ export const ClassStudents: React.FC = () => {
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
-                  Overview
+                  Students
                 </IonText>
               </div>
               <div className="students-header-block">
                 <IonText className="text-3xl semibold">{"Students"}</IonText>
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
-                  <Link to={`/classrooms/add`} className="no-underline">
+                  <Link
+                    to={`/classrooms/:classroomId/add_students`}
+                    className="no-underline"
+                  >
                     <p className="text-sm semibold color-nube">Add students</p>
                   </Link>
                 </button>
@@ -114,10 +117,8 @@ export const ClassStudents: React.FC = () => {
         <IonGrid className="class-students-table-grid">
           <IonRow className="class-student-table-header-row">
             <IonCol className="text-md semibold">Student Name</IonCol>
-            <IonCol className="text-md semibold">Caregiver Name</IonCol>
-            <IonCol className="text-md semibold">
-              Primary Carergiver Email
-            </IonCol>
+            <IonCol className="text-md semibold">Primary home email</IonCol>
+            <IonCol className="text-md semibold">Secondary home email</IonCol>
             <IonCol className="text-md semibold">Needs More Support</IonCol>
             <IonCol className="text-md semibold">Home Account</IonCol>
           </IonRow>
@@ -137,18 +138,18 @@ export const ClassStudents: React.FC = () => {
               <IonCol>
                 <IonText>
                   <p className="text-sm">
-                    {student.caregiverName.length > 23
-                      ? `${student.caregiverName.slice(0, 23)}...`
-                      : student.caregiverName}
+                    {student.primaryHomeEmail.length > 23
+                      ? `${student.primaryHomeEmail.slice(0, 23)}...`
+                      : student.primaryHomeEmail}
                   </p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText>
                   <p className="text-sm">
-                    {student.primaryCaregiverEmail.length > 23
-                      ? `${student.primaryCaregiverEmail.slice(0, 23)}...`
-                      : student.primaryCaregiverEmail}
+                    {student.secondaryHomeEmail.length > 23
+                      ? `${student.secondaryHomeEmail.slice(0, 23)}...`
+                      : student.secondaryHomeEmail}
                   </p>
                 </IonText>
               </IonCol>

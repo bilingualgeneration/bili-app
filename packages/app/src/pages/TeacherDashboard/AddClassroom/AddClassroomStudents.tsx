@@ -88,6 +88,9 @@ export const AddClassroomStudents: React.FC = () => {
             studentData={studentsData}
             handleDeleteStudent={handleDeleteStudent}
             handleEditStudentClick={handleEditStudentClick}
+            onEditingStatusChange={() => {
+              // TODO: what goes here?
+            }}
           />
 
           {/* row for inputting student data */}

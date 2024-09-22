@@ -1,0 +1,33 @@
+#add-students-page {
+  .add-students-header {
+    padding: 0px 26px;
+  }
+  .add-students-title {
+    padding: 36px 0;
+  }
+
+  .add-and-upload-buttons {
+    display: flex;
+    gap: 24px;
+  }
+
+  .upload-csv-button {
+    padding: 4px 12px 4px 4px;
+    border-radius: 8px;
+    border: 1px solid #006a67;
+    background: transparent;
+    display: flex;
+    gap: 4px;
+    margin-left: 18px;
+  }
+
+  .add-student-button-continue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-button {
+      width: 394px;
+    }
+  }
+}
