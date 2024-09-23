@@ -1,12 +1,13 @@
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { AuthedLayout } from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter";
-import { IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
+import { IonRouterOutlet } from "@ionic/react";
 import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
+import { TeacherDashboardLayoutWithSideMenu } from "@/layouts/TeacherDashboard";
 import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
@@ -77,7 +78,7 @@ import {
   MyClassrooms,
   StudentSelect,
 } from "@/pages/TeacherDashboard";
-import { TeacherDashboardWrapper } from "@/components/TeacherDashboardWrapper";
+import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
 import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
 
@@ -334,7 +335,7 @@ export const Router: React.FC = () => {
               <>
                 <AuthedLayout>
                   <AdultCheckProvider>
-                    <TeacherDashboardWrapper>
+                    <TeacherDashboardLayout>
                       <Route
                         exact
                         path="/classrooms"
@@ -378,14 +379,22 @@ export const Router: React.FC = () => {
                       <Route
                         exact
                         path="/classrooms/view/:classroomId"
-                        component={ClassOverview}
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassOverview />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
                       />
                       <Route
                         exact
                         path="/classrooms/view/:classroomId/students"
-                        component={ClassStudents}
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassStudents />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
                       />
-                    </TeacherDashboardWrapper>
+                    </TeacherDashboardLayout>
                   </AdultCheckProvider>
                 </AuthedLayout>
               </>
