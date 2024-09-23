@@ -28,7 +28,7 @@ export const SideMenu: React.FC = () => {
   const { setInfo: setClassroomInfo } = useClassroom();
   const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
-  const { classroomId } = useParams();
+  const { classroomId } = useParams<{ classroomId: string }>();
   const { profile, signout } = useProfile();
 
   const options: Option[] = [
