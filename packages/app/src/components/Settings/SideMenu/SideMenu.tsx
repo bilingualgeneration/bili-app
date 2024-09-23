@@ -12,10 +12,10 @@ import {
 import { FormattedMessage } from "react-intl";
 import "./SideMenu.scss";
 import { SideMenuOption } from "./SideMenuOption";
-import { useLocation } from "react-router-dom";
-import { useStudent } from "@/hooks/Student";
 import { useClassroom } from "@/hooks/Classroom";
 import { useIntl } from "react-intl";
+import { useLocation, useParams } from "react-router-dom";
+import { useStudent } from "@/hooks/Student";
 
 interface Option {
   icon: any;
@@ -25,11 +25,11 @@ interface Option {
 }
 
 export const SideMenu: React.FC = () => {
-  const { signout } = useProfile();
   const { setInfo: setClassroomInfo } = useClassroom();
   const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
-  const { profile } = useProfile();
+  const { classroomId } = useParams();
+  const { profile, signout } = useProfile();
 
   const options: Option[] = [
     {
@@ -41,8 +41,15 @@ export const SideMenu: React.FC = () => {
           description={"Overview label for side menu on settings page"}
         />
       ),
-      to: "/settings/overview",
-      isActive: location.pathname === "/settings/overview",
+      to:
+        profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}`
+          : "/settings/overview",
+      isActive:
+        location.pathname ===
+        (profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}`
+          : "/settings/overview"),
     },
     {
       icon: personOutline,
@@ -58,9 +65,13 @@ export const SideMenu: React.FC = () => {
         ),
       to:
         profile.role === "teacher"
-          ? "/classrooms/:classroomId/students"
+          ? `/classrooms/view/${classroomId}/students`
           : "/settings/profile",
-      isActive: location.pathname === "/settings/profile",
+      isActive:
+        location.pathname ===
+        (profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/students`
+          : "/settings/profile"),
     },
     {
       icon: optionsOutline,
