@@ -11,7 +11,7 @@ import SchoolIcon from "@/assets/icons/school.svg";
 import HelpIcon from "@/assets/icons/help.svg";
 import "./TeacherDashboardLayout.css";
 
-const TeacherDashboardHeader: React.FC = () => {
+export const TeacherDashboardHeader: React.FC = () => {
   return (
     <div id="teacher-dashboard-layout-header">
       <div>search</div>
@@ -33,9 +33,13 @@ const TeacherDashboardHeader: React.FC = () => {
   );
 };
 
-export const TeacherDashboardLayout: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+interface TeacherDashboardLayout {
+  showHeader?: boolean;
+}
+
+export const TeacherDashboardLayout: React.FC<
+  React.PropsWithChildren<TeacherDashboardLayout>
+> = ({ children, showHeader = true }) => {
   const { setIsVisible } = useLanguageToggle();
   useEffect(() => {
     setIsVisible(false);
@@ -46,7 +50,11 @@ export const TeacherDashboardLayout: React.FC<React.PropsWithChildren> = ({
   return (
     <IonPage>
       <IonContent fullscreen={true} className="ion-padding background-figures">
-        <div className="page-wrapper" style={{ backgroundColor: "#f7faf9" }}>
+        <div
+          className="page-wrapper"
+          style={{ backgroundColor: "#f7faf9", paddingBottom: 0 }}
+        >
+          {showHeader && <TeacherDashboardHeader />}
           {children}
         </div>
       </IonContent>
