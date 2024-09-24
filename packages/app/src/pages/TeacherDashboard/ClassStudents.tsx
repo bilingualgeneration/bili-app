@@ -101,7 +101,7 @@ export const ClassStudents: React.FC = () => {
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
                   <Link
-                    to={`/classrooms/:classroomId/add_students`}
+                    to={`/classrooms/view/:classroomId/add_students`}
                     className="no-underline"
                   >
                     <p className="text-sm semibold color-nube">Add students</p>

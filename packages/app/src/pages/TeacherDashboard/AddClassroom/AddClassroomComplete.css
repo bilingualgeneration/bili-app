@@ -1,0 +1,11 @@
+.add-class-success {
+  display: flex;
+  justify-content: center;
+
+  ion-card {
+    align-items: center;
+  }
+  ion-button {
+    width: 100%;
+  }
+}

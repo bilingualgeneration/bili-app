@@ -101,7 +101,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
               You’ve created your class!
             </h3>
             <p className="text-xl semibold color-suelo margin-top-2 invite-caregivers-text">
-              Invite student caregivers to download the app
+              Invite caregivers to download the app
             </p>
           </IonText>
           <ExtendedRadio
