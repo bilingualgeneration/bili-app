@@ -20,21 +20,14 @@ import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 import { useHistory, useParams } from "react-router";
 import "./AddClassroomCaregivers.css";
-
 import { useAddClassroom } from "./AddClassroomContext";
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
   const { classroomId } = useParams<{ classroomId: string }>();
-  const { notificationMethod, setNotificationMethod, addClassroomStatus } =
-    useAddClassroom();
-  const {
-    control,
-    formState: { isValid },
-    handleSubmit,
-    setValue,
-    reset,
-  } = useForm({
+  const { notificationMethod, setNotificationMethod } = useAddClassroom();
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       notificationMethod,
     },
@@ -90,11 +83,12 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    setNotificationMethod(data.notificationMethod);
-    if (addClassroomStatus !== "done") {
-      history.push("/classrooms/add/complete");
+    if (classroomId) {
+      //should add differnt setNotificatioMethod for adding students
+      history.push(`/classrooms/view/${classroomId}/add_students/complete`);
     } else {
-      history.push(`/classrooms/view/:${classroomId}/add_students/complete`);
+      setNotificationMethod(data.notificationMethod);
+      history.push("/classrooms/add/complete");
     }
   });
 
@@ -115,7 +109,6 @@ export const AddClassroomNotificationMethod: React.FC = () => {
 
           <IonButton
             data-testid="addclassroom-notification-method-continue-button"
-            disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}

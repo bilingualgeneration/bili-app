@@ -82,6 +82,7 @@ import {
 import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
 import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
+import { AddStudentsComplete } from "@/pages/TeacherDashboard/AddStudentsComplete";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -406,10 +407,19 @@ export const Router: React.FC = () => {
                       />
                       <Route
                         exact
+                        path="/classrooms/view/:classroomId/add_students/notification-method"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <AddClassroomNotificationMethod />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
                         path="/classrooms/view/:classroomId/add_students/complete"
                         render={() => (
                           <TeacherDashboardLayoutWithSideMenu>
-                            <ClassStudentsAddStudents />
+                            <AddStudentsComplete />
                           </TeacherDashboardLayoutWithSideMenu>
                         )}
                       />

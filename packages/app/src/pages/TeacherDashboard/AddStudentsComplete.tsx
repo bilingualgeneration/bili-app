@@ -6,8 +6,9 @@ import { ClassroomComplete } from "@/components/ClassRoomComplete";
 export const AddStudentsComplete: React.FC = () => {
   const history = useHistory();
   const { classroomId } = useParams<{ classroomId: string }>();
+  // TODO: make a logic to show different screens:
+  //  loading screen vs loading is finished
 
-  //screen when the process is finished
   return (
     <ClassroomComplete
       h2Text={"Success! You added your students!"}

@@ -16,11 +16,12 @@ import {
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import "./ClassStudents.scss";
 
 export const ClassStudents: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
   const studentsData = [
     {
       studentName: "John Doeeeeeee",
@@ -101,7 +102,7 @@ export const ClassStudents: React.FC = () => {
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
                   <Link
-                    to={`/classrooms/view/:classroomId/add_students`}
+                    to={`/classrooms/view/${classroomId}/add_students`}
                     className="no-underline"
                   >
                     <p className="text-sm semibold color-nube">Add students</p>
