@@ -115,7 +115,7 @@ export const ClassStudentsAddStudents: React.FC = () => {
       </div>
 
       <div className="add-student-button-continue">
-        <IonRouterLink routerLink="/classrooms/:classroomId/students">
+        <IonRouterLink routerLink="/classrooms/add/notification-method">
           <IonButton
             data-testid="add-student-continue-button"
             shape="round"

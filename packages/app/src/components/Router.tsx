@@ -404,6 +404,15 @@ export const Router: React.FC = () => {
                           </TeacherDashboardLayoutWithSideMenu>
                         )}
                       />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/add_students/complete"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassStudentsAddStudents />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
                     </TeacherDashboardLayout>
                   </AdultCheckProvider>
                 </AuthedLayout>

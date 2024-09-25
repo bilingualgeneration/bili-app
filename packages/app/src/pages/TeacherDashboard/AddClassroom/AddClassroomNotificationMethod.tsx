@@ -18,14 +18,16 @@ import { FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import "./AddClassroomCaregivers.css";
 
 import { useAddClassroom } from "./AddClassroomContext";
 
 export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
-  const { notificationMethod, setNotificationMethod } = useAddClassroom();
+  const { classroomId } = useParams<{ classroomId: string }>();
+  const { notificationMethod, setNotificationMethod, addClassroomStatus } =
+    useAddClassroom();
   const {
     control,
     formState: { isValid },
@@ -89,7 +91,11 @@ export const AddClassroomNotificationMethod: React.FC = () => {
 
   const onSubmit = handleSubmit((data) => {
     setNotificationMethod(data.notificationMethod);
-    history.push("/classrooms/add/complete");
+    if (addClassroomStatus !== "done") {
+      history.push("/classrooms/add/complete");
+    } else {
+      history.push(`/classrooms/view/:${classroomId}/add_students/complete`);
+    }
   });
 
   return (
@@ -98,11 +104,8 @@ export const AddClassroomNotificationMethod: React.FC = () => {
         <form className="radio-button-select">
           <IonText className="ion-text-center">
             <h3 className="text-3xl semibold color-suelo">
-              You’ve created your class!
-            </h3>
-            <p className="text-xl semibold color-suelo margin-top-2 invite-caregivers-text">
               Invite caregivers to download the app
-            </p>
+            </h3>
           </IonText>
           <ExtendedRadio
             control={control}
