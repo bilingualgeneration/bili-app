@@ -77,6 +77,7 @@ import {
   ClassOverview,
   MyClassrooms,
   StudentSelect,
+  StudentProgress,
 } from "@/pages/TeacherDashboard";
 import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
@@ -391,6 +392,16 @@ export const Router: React.FC = () => {
                         render={() => (
                           <TeacherDashboardLayoutWithSideMenu>
                             <ClassStudents />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/students/view/:studentId"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <StudentProgress />
                           </TeacherDashboardLayoutWithSideMenu>
                         )}
                       />
