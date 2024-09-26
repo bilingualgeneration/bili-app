@@ -23,15 +23,15 @@ interface AddClassroomState {
   allowLanguageToggle: boolean;
   grades: string[];
   isInclusive: boolean;
-  language: string; // TODO: better typing
+  language: string | undefined; // TODO: better typing
   name: string;
-  notificationMethod: string; // TODO: better typing
+  notificationMethod: string | undefined; // TODO: better typing
   setAllowLanguageToggle: Dispatch<SetStateAction<boolean>>;
   setGrades: Dispatch<SetStateAction<string[]>>;
   setIsInclusive: Dispatch<SetStateAction<boolean>>;
-  setLanguage: Dispatch<SetStateAction<string>>;
+  setLanguage: Dispatch<SetStateAction<string | undefined>>;
   setName: Dispatch<SetStateAction<string>>;
-  setNotificationMethod: Dispatch<SetStateAction<string>>;
+  setNotificationMethod: Dispatch<SetStateAction<string | undefined>>;
   setStudents: Dispatch<SetStateAction<Student[]>>;
   students: Student[];
 }
@@ -50,9 +50,11 @@ export const AddClassroomProvider: React.FC<React.PropsWithChildren> = ({
     useState<boolean>(false);
   const [grades, setGrades] = useState<string[]>([]);
   const [isInclusive, setIsInclusive] = useState<boolean>(false);
-  const [language, setLanguage] = useState<string>("es");
+  const [language, setLanguage] = useState<string | undefined>();
   const [name, setName] = useState<string>("");
-  const [notificationMethod, setNotificationMethod] = useState<string>("");
+  const [notificationMethod, setNotificationMethod] = useState<
+    string | undefined
+  >();
   const [students, setStudents] = useState<Student[]>([]);
   const functions = getFunctions();
   const addClassroomFunction = httpsCallable(functions, "classroom-add");

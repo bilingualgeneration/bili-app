@@ -11,7 +11,7 @@ import { Carousel } from "@/components/Carousel";
 import { CategoryTag } from "@/components/CategoryTag";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
-import "./Play.scss";
+import "./Play.css";
 
 type PlayCardProps = {
   id: string;

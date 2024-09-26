@@ -1,8 +1,4 @@
 #add-students-page {
-  .add-students-title {
-    padding: 36px 0;
-  }
-
   .first-title-row {
     padding: 16px 0;
   }
@@ -10,15 +6,6 @@
   .add-and-upload-buttons {
     display: flex;
     gap: 24px;
-  }
-
-  .add-student-button {
-    padding: 4px 2px;
-    color: white;
-    border-radius: 8px;
-    background: #006a67;
-    display: flex;
-    gap: 4px;
   }
 
   .upload-csv-button {
@@ -29,46 +16,5 @@
     display: flex;
     gap: 4px;
     margin-left: 18px;
-  }
-
-  .reset-student-button {
-    padding: 15px 12px;
-    color: white;
-    border-radius: 8px;
-    background: #006a67;
-    display: flex;
-    gap: 4px;
-  }
-
-  .reset-button-column {
-    text-align: -webkit-right;
-  }
-
-  .add-student-button ion-icon,
-  .upload-csv-button ion-icon {
-    font-size: 24px;
-  }
-
-  .add-student-button ion-icon {
-    margin-top: 8px;
-  }
-
-  .add-student-button p,
-  .upload-csv-button p {
-    margin-top: 3px;
-  }
-
-  .add-student-button p {
-    text-align: left;
-  }
-
-  .add-student-button-continue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    ion-button {
-      width: 394px;
-    }
   }
 }

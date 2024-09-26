@@ -1,4 +1,3 @@
-//A.M.
 import {
   IonButton,
   IonCard,
@@ -6,6 +5,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonLabel,
+  IonProgressBar,
   IonItem,
   IonInput,
   IonText,
@@ -19,6 +19,9 @@ import { useForm } from "react-hook-form";
 import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 import { useHistory } from "react-router";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import "./AddClassroomCaregivers.css";
 
 import { useAddClassroom } from "./AddClassroomContext";
@@ -26,18 +29,22 @@ import { useAddClassroom } from "./AddClassroomContext";
 export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
   const { notificationMethod, setNotificationMethod } = useAddClassroom();
+  const schema = z.object({
+    notificationMethod: z.string(),
+  });
   const {
     control,
     formState: { isValid },
     handleSubmit,
     setValue,
     reset,
-  } = useForm({
+  } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       notificationMethod,
     },
+    resolver: zodResolver(schema),
   });
-
+  console.log(isValid);
   const emailOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -95,14 +102,14 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   return (
     <div id="invite-caregivers-page">
       <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+        <div style={{ width: "33%", margin: "auto" }}>
+          <IonProgressBar color="primary" value={0.8} />
+        </div>
         <form className="radio-button-select">
           <IonText className="ion-text-center">
-            <h3 className="text-3xl semibold color-suelo">
-              You’ve created your class!
-            </h3>
-            <p className="text-xl semibold color-suelo margin-top-2 invite-caregivers-text">
-              Invite student caregivers to download the app
-            </p>
+            <h2 className="text-3xl semibold color-suelo">
+              Invite caregivers to download the app
+            </h2>
           </IonText>
           <ExtendedRadio
             control={control}
@@ -117,11 +124,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
             type="button"
             onClick={onSubmit}
           >
-            <FormattedMessage
-              id="common.continue"
-              defaultMessage="Continue"
-              description="Button label to continue"
-            />
+            <FormattedMessage id="common.continue" />
           </IonButton>
         </form>
       </IonCard>

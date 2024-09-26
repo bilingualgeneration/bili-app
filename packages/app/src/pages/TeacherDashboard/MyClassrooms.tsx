@@ -10,7 +10,7 @@ import {
   IonContent,
   IonText,
 } from "@ionic/react";
-import { addOutline, ellipse, sparkles } from "ionicons/icons";
+import { add, ellipse, sparkles } from "ionicons/icons";
 import { Carousel } from "@/components/Carousel";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
@@ -27,7 +27,7 @@ import React from "react";
 
 import { useProfile } from "@/hooks/Profile";
 
-import "./MyClassrooms.scss";
+import "./MyClassrooms.css";
 import { RadioCard } from "@/components/RadioCard";
 import { Link } from "react-router-dom";
 
@@ -246,13 +246,9 @@ export const MyClassrooms: React.FC = () => {
             </IonCol>
             <IonCol size="0.75">
               <Link to="/classrooms/add">
-                <button className="add-class-button">
-                  <IonIcon
-                    size="large"
-                    color="light"
-                    icon={addOutline}
-                  ></IonIcon>
-                </button>
+                <IonButton className="elevate">
+                  <IonIcon slot="icon-only" icon={add}></IonIcon>
+                </IonButton>
               </Link>
             </IonCol>
           </IonRow>
@@ -307,7 +303,6 @@ const ClassroomsList: React.FC = () => {
       return <>error</>;
       break;
     case "ready":
-      console.log(data);
       return (
         <IonRow
           className="ion-justify-content-between"
@@ -344,35 +339,4 @@ const ClassroomsList: React.FC = () => {
     default:
       return <>this should never render</>;
   }
-  /*
-                    {Object.keys(classrooms).length > 0 && (
-                        <IonRow className="ion-justify-content-between" id='classroom_name_wrapper'>
-                            {Object.values(classrooms).map((classroom: any, index) => (
-                                <IonCol size="6" key={classroom.id}>
-                                  <div className="classroom-names">
-				    <Link to={`/classrooms/${classroom.id}`} className='no-underline'>
-                                      <RadioCard
-                                        icon={
-                                          <img src={ClassroomAvatar} />
-                                        }
-                                        title={classroom.name}
-                                        subTitle={getGrades(classroom.grades)}
-					content={intl.formatMessage(
-					  {id: 'pages.classrooms.classroomSize'},{size: classroom.size}
-					)}
-                                        iconBackgroundColor=""
-                                        titleFontSize="xl"
-                                        titleColor="color-suelo"
-                                        contentFontSize="lg"
-                                        contentColor="color-barro"
-                                        />
-				    </Link>
-                                  </div>
-                                </IonCol>
-                            ))}
-                        </IonRow>
-                    )}
-
-   */
-  return <></>;
 };
