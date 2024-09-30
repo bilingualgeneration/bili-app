@@ -48,5 +48,29 @@
 }
 
 .student-language-percentage ion-row {
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.students-needs-support-list ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --padding-top: 21px;
+}
+
+.student-needs-support-text {
+  font-size: 14px;
+  width: 250px;
+  font-family: "Outfit";
+}
+
+.student-needs-support-progress-bar {
+  width: 50%;
+  position: relative;
+  margin-left: 100px;
+}
+
+.student-needs-support-progress-bar-percentage {
+  position: absolute;
+  right: 0;
+  top: -160%;
 }

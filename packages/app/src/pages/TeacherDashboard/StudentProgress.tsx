@@ -6,6 +6,8 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
+  IonList,
+  IonProgressBar,
   IonRow,
   IonText,
 } from "@ionic/react";
@@ -37,6 +39,30 @@ const studentHighlightsStyle = {
   lineHeight: "800",
   letterSpacing: "0.2px",
 };
+
+const studentsData = [
+  {
+    studentName: "John Doeeeeeee",
+    primaryHomeEmail: "Michel Doeeeeee",
+    secondaryHomeEmail: "john.doe@example.com",
+    needsMoreSupport: "on track",
+    homeAccount: "not active",
+  },
+  {
+    studentName: "John Doeeeeeee",
+    primaryHomeEmail: "Michel Doeeeeee",
+    secondaryHomeEmail: "john.doe@example.com",
+    needsMoreSupport: "support recommended",
+    homeAccount: "active",
+  },
+  {
+    studentName: "John Doeeeeeee",
+    primaryHomeEmail: "Michel Doeeeeee",
+    secondaryHomeEmail: "john.doe@example.com",
+    needsMoreSupport: "on track",
+    homeAccount: "not active",
+  },
+];
 
 export const StudentProgress: React.FC = () => {
   return (
@@ -215,9 +241,12 @@ export const StudentProgress: React.FC = () => {
             {/* pie-chart */}
             <IonCol size="6">
               <IonCard>
-                <IonRow>
+                <IonText className="text-xl semibold color-suelo">
+                  Language Mode
+                </IonText>
+                <IonRow class="ion-justify-content-between">
                   {/* graph columnn */}
-                  <IonCol size="5.5" className="class-graph-percentage">
+                  <IonCol size="6" className="class-graph-percentage">
                     <PieChartComponent
                       data={[30, 20, 50]}
                       colors={["#EC59B1", "#006A67", "#0045A1"]}
@@ -229,7 +258,7 @@ export const StudentProgress: React.FC = () => {
                     />
                   </IonCol>
                   {/*language names with percentage */}
-                  <IonCol size="6.5">
+                  <IonCol size="5">
                     <IonRow>
                       <IonCol className="student-language-percentage">
                         {/* first group */}
@@ -237,12 +266,12 @@ export const StudentProgress: React.FC = () => {
                           <IonCol size="2">
                             <span className="small-oval-element color-1"></span>
                           </IonCol>
-                          <IonCol size="6">
+                          <IonCol size="7">
                             <p className="text-md-no-line-height semibold text-color-black">
                               Spanish Immersion
                             </p>
                           </IonCol>
-                          <IonCol size="2" style={{ textAlign: "center" }}>
+                          <IonCol size="3" style={{ textAlign: "center" }}>
                             <p>{"30"}%</p>
                           </IonCol>
                         </IonRow>
@@ -252,12 +281,12 @@ export const StudentProgress: React.FC = () => {
                           <IonCol size="2">
                             <span className="small-oval-element color-2"></span>
                           </IonCol>
-                          <IonCol size="6">
+                          <IonCol size="7">
                             <p className="text-md-no-line-height semibold text-color-black">
                               Bilingual
                             </p>
                           </IonCol>
-                          <IonCol size="2" style={{ textAlign: "center" }}>
+                          <IonCol size="3" style={{ textAlign: "center" }}>
                             <p>{"20"}%</p>
                           </IonCol>
                         </IonRow>
@@ -267,12 +296,12 @@ export const StudentProgress: React.FC = () => {
                           <IonCol size="2">
                             <span className="small-oval-element color-3"></span>
                           </IonCol>
-                          <IonCol size="6">
+                          <IonCol size="7">
                             <p className="text-md-no-line-height semibold text-color-black">
                               English Immersion
                             </p>
                           </IonCol>
-                          <IonCol size="2" style={{ textAlign: "center" }}>
+                          <IonCol size="3" style={{ textAlign: "center" }}>
                             <p>{"50"}%</p>
                           </IonCol>
                         </IonRow>
@@ -284,9 +313,94 @@ export const StudentProgress: React.FC = () => {
             </IonCol>
             {/* progress bar */}
             <IonCol size="6">
-              <IonCard></IonCard>
+              <IonCard>
+                <IonText className="text-xl semibold color-suelo">
+                  Needs more support
+                </IonText>
+                <IonList lines="full" className="students-needs-support-list">
+                  <IonItem>
+                    <div className="student-needs-support-text">
+                      <p className="student-needs-support-text-problem text-color-grey">
+                        {
+                          "Syntax & Grammar: Similarities & Differences - EN & ES"
+                        }
+                      </p>
+                    </div>
+                    <div className="student-needs-support-progress-bar">
+                      <div className="student-needs-support-progress-bar-percentage">
+                        {Math.round(0.7 * 100)}%
+                      </div>
+                      <IonProgressBar
+                        value={0.7}
+                        buffer={1}
+                        style={{
+                          "--background": 0.7 < 0.5 ? "#FFDAD2" : "#FFF3D3",
+                          "--progress-background":
+                            0.7 < 0.5 ? "#FF5708" : "#F1D100",
+                        }}
+                      ></IonProgressBar>
+                    </div>
+                  </IonItem>
+                  <IonItem>
+                    <div className="student-needs-support-text">
+                      <p className="student-needs-support-text-problem text-color-grey">
+                        {"Blending Phonemes into Words - EN"}
+                      </p>
+                    </div>
+                    <div className="student-needs-support-progress-bar">
+                      <div className="student-needs-support-progress-bar-percentage">
+                        {Math.round(0.3 * 100)}%
+                      </div>
+                      <IonProgressBar
+                        value={0.7}
+                        buffer={1}
+                        style={{
+                          "--background": 0.3 < 0.5 ? "#FFDAD2" : "#FFF3D3",
+                          "--progress-background":
+                            0.3 < 0.5 ? "#FF5708" : "#F1D100",
+                        }}
+                      ></IonProgressBar>
+                    </div>
+                  </IonItem>
+                  <IonItem>
+                    <div className="student-needs-support-text">
+                      <p className="student-needs-support-text-problem text-color-grey">
+                        {"Segmenting Words into Syllables - EN"}
+                      </p>
+                    </div>
+                    <div className="student-needs-support-progress-bar">
+                      <div className="student-needs-support-progress-bar-percentage">
+                        {Math.round(0.5 * 100)}%
+                      </div>
+                      <IonProgressBar
+                        value={0.7}
+                        buffer={1}
+                        style={{
+                          "--background": 0.5 < 0.5 ? "#FFDAD2" : "#FFF3D3",
+                          "--progress-background":
+                            0.5 < 0.5 ? "#FF5708" : "#F1D100",
+                        }}
+                      ></IonProgressBar>
+                    </div>
+                  </IonItem>
+                </IonList>
+              </IonCard>
             </IonCol>
           </IonRow>
+        </IonGrid>
+      </div>
+      <div className="student-data-activity-table">
+        <IonGrid>
+          <IonCard>
+            <IonRow className="student-table-header-row">
+              <IonCol className="text-md semibold">Date</IonCol>
+              <IonCol className="text-md semibold">Activity</IonCol>
+              <IonCol className="text-md semibold">Completions</IonCol>
+              <IonCol className="text-md semibold">Accuracy</IonCol>
+              <IonCol className="text-md semibold">Language mode</IonCol>
+              <IonCol className="text-md semibold">Location</IonCol>
+            </IonRow>
+          </IonCard>
         </IonGrid>
       </div>
     </div>
