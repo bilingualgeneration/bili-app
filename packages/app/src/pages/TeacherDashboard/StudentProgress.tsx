@@ -29,38 +29,30 @@ import HouseIcon from "@/assets/icons/house.svg";
 import PresentIcon from "@/assets/icons/present.svg";
 import PlayIcon from "@/assets/icons/play.svg";
 
-const studentHighlightsStyle = {
-  color: "#000",
-  textAlign: "center",
-  fontFamily: "Outfit",
-  fontSize: "50px",
-  fontStyle: "normal",
-  fontWeight: "800",
-  lineHeight: "800",
-  letterSpacing: "0.2px",
-};
-
-const studentsData = [
+const studentData = [
   {
-    studentName: "John Doeeeeeee",
-    primaryHomeEmail: "Michel Doeeeeee",
-    secondaryHomeEmail: "john.doe@example.com",
-    needsMoreSupport: "on track",
-    homeAccount: "not active",
+    date: "6/6/24",
+    activity: "Stories",
+    completions: "5",
+    accuracy: "50%",
+    languageMode: "bilingual",
+    location: "school",
   },
   {
-    studentName: "John Doeeeeeee",
-    primaryHomeEmail: "Michel Doeeeeee",
-    secondaryHomeEmail: "john.doe@example.com",
-    needsMoreSupport: "support recommended",
-    homeAccount: "active",
+    date: "5/6/24",
+    activity: "The intruder",
+    completions: "5",
+    accuracy: "70%",
+    languageMode: "Spanish Immersion",
+    location: "home",
   },
   {
-    studentName: "John Doeeeeeee",
-    primaryHomeEmail: "Michel Doeeeeee",
-    secondaryHomeEmail: "john.doe@example.com",
-    needsMoreSupport: "on track",
-    homeAccount: "not active",
+    date: "3/6/24",
+    activity: "Story factory",
+    completions: "3",
+    accuracy: "30%",
+    languageMode: "Englsih immersion",
+    location: "school",
   },
 ];
 
@@ -392,7 +384,7 @@ export const StudentProgress: React.FC = () => {
       <div className="student-data-activity-table">
         <IonGrid>
           <IonCard>
-            <IonRow className="student-table-header-row">
+            <IonRow className="student-table-header-row ion-align-items-center">
               <IonCol className="text-md semibold">Date</IonCol>
               <IonCol className="text-md semibold">Activity</IonCol>
               <IonCol className="text-md semibold">Completions</IonCol>
@@ -400,6 +392,43 @@ export const StudentProgress: React.FC = () => {
               <IonCol className="text-md semibold">Language mode</IonCol>
               <IonCol className="text-md semibold">Location</IonCol>
             </IonRow>
+            {studentData.map((student, index) => (
+              <IonRow
+                className="ion-align-items-center student-table-body-row"
+                key={index}
+              >
+                <IonCol>
+                  <IonText>
+                    <p>{student.date}</p>
+                  </IonText>
+                </IonCol>
+                <IonCol>
+                  <IonText>
+                    <p>{student.activity}</p>
+                  </IonText>
+                </IonCol>
+                <IonCol>
+                  <IonText>
+                    <p>{student.completions}</p>
+                  </IonText>
+                </IonCol>
+                <IonCol>
+                  <IonText>
+                    <p>{student.accuracy}</p>
+                  </IonText>
+                </IonCol>
+                <IonCol>
+                  <IonText>
+                    <p>{student.languageMode}</p>
+                  </IonText>
+                </IonCol>
+                <IonCol>
+                  <IonText>
+                    <p>{student.location}</p>
+                  </IonText>
+                </IonCol>
+              </IonRow>
+            ))}
           </IonCard>
         </IonGrid>
       </div>
