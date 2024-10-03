@@ -1,7 +1,8 @@
-import { IonButton } from "@ionic/react";
+import { IonButton, IonCard, IonImg, IonText } from "@ionic/react";
 import { useAddClassroom } from "./AddClassroomContext";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { ClassroomComplete } from "@/components/ClassRoomComplete";
 
 export const AddClassroomComplete: React.FC = () => {
   const { addClassroom, addClassroomStatus } = useAddClassroom();
@@ -12,20 +13,22 @@ export const AddClassroomComplete: React.FC = () => {
     }
   }, [addClassroomStatus]);
   if (addClassroomStatus !== "done") {
-    return <>loading</>;
-  } else {
+    //screen while loading data
     return (
-      <>
-        <IonButton
-          data-testid="complete-continue-button"
-          onClick={() => {
-            history.push("/classrooms");
-          }}
-          shape="round"
-        >
-          continue
-        </IonButton>
-      </>
+      <ClassroomComplete
+        h2Text={"Please wait while we create your class"}
+        isDisabled={true}
+        path={"/classrooms"}
+      />
+    );
+  } else {
+    //screen when the process is finished
+    return (
+      <ClassroomComplete
+        h2Text={"Success! You created your classroom!"}
+        isDisabled={false}
+        path={"/classrooms"}
+      />
     );
   }
 };
