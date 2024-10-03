@@ -21,7 +21,7 @@ import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import "../../pages/Stories/Stories.scss";
+import "../../pages/Stories/Stories.css";
 import { useActivity } from "@/contexts/ActivityContext";
 
 interface PictureImage {
