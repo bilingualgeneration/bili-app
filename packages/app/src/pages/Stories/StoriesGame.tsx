@@ -1,5 +1,3 @@
-//AM
-
 import React, { useState, useEffect, useMemo } from "react";
 import {
   IonButton,
@@ -21,7 +19,7 @@ import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import "../../pages/Stories/Stories.css";
+import "./Stories.css";
 import { useActivity } from "@/contexts/ActivityContext";
 
 interface PictureImage {
