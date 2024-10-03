@@ -16,18 +16,31 @@ import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import StudentLogout from "@/assets/icons/logout.svg";
 import { Link } from "react-router-dom";
 import "./ProfileChip.scss";
+import {
+  RealtimeDatabaseDocProvider,
+  useRealtimeDatabaseDoc,
+} from "@/hooks/RealtimeDatabaseDoc";
 import { useRef, useState } from "react";
 import { useLanguageToggle } from "../LanguageToggle";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
 
 export const ProfileChip: React.FC = () => {
+  const { id } = useStudent();
+  return (
+    <RealtimeDatabaseDocProvider path={`/users/${id}`}>
+      <HydratedProfileChip />
+    </RealtimeDatabaseDocProvider>
+  );
+};
+
+const HydratedProfileChip: React.FC = () => {
   const { firstName } = useStudent();
   const { id: classroomId } = useClassroom();
-  const completionPoints = 0;
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();
+  const { data, status } = useRealtimeDatabaseDoc();
 
   const openPopover = (e: any) => {
     popover.current!.event = e;
@@ -45,11 +58,15 @@ export const ProfileChip: React.FC = () => {
           <div id="profileChip">
             <div id="starPoints" className="text-sm semibold color-nube">
               <IonIcon icon={StarNotSharp} />
-              <IonText>{completionPoints || 0}</IonText>
+              <IonText>
+                {status === "ready" ? data?.totalStars ?? 0 : "\u00A0"}
+              </IonText>
             </div>
             <div id="heartPoints" className="text-sm semibold color-nube">
               <IonIcon icon={heart} />
-              <IonText>{completionPoints || 0}</IonText>
+              <IonText>
+                {status === "ready" ? data?.totalHearts ?? 0 : "\u00A0"}
+              </IonText>
             </div>
             <IonText>
               <p className="text-xl semibold color-suelo">{firstName}</p>
