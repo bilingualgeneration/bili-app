@@ -30,7 +30,8 @@ import { useLanguageToggle } from "@/components/LanguageToggle";
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
-import "./Stories.scss";
+import "./Stories.css";
+
 import {
   ActivityProvider,
   GameData,
@@ -493,7 +494,7 @@ const TitleCard = ({
         )}
         <IonCardContent>
           <IonText
-            className="ion-text-center"
+            className="ion-text-center title"
             style={{
               display: "block",
               height: "140px",
