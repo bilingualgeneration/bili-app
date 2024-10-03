@@ -58,6 +58,7 @@ import {
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
+import { StudentLoader } from "@/pages/Caregiver";
 import TeacherLogin from "@/pages/TeacherLogin";
 import {
   TellMeAboutGame,
@@ -408,6 +409,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <StudentSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/caregiver/student-loader"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StudentLoader />
                 </HeaderFooter>
               </AuthedLayout>
             )}
