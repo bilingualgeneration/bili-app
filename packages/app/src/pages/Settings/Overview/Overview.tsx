@@ -1,3 +1,7 @@
+import {
+  FirestoreCollectionProvider,
+  useFirestoreCollection,
+} from "@/hooks/FirestoreCollection";
 import { useEffect, useState } from "react";
 import {
   IonButton,
@@ -22,13 +26,46 @@ import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
 import { useProfile } from "@/hooks/Profile";
+import { useStudent } from "@/hooks/Student";
 
 import "./Overview.scss";
 
-export const Overview: React.FC = ({}) => {
-  const {profile: { isImmersive, isInclusive }} = useProfile();
+export const Overview: React.FC = () => {
+  const { user } = useProfile();
+  return (
+    <FirestoreCollectionProvider
+      collection="student"
+      filters={[["caregiver", "array-contains", user.uid]]}
+    >
+      <OverviewLoader />
+    </FirestoreCollectionProvider>
+  );
+};
+
+const OverviewLoader: React.FC = () => {
+  const { data, status } = useFirestoreCollection();
+  switch (status) {
+    case "loading":
+      return <></>;
+      break;
+    case "error":
+      return <>error</>;
+      break;
+    case "ready":
+      return <OverviewHydrated students={data} />;
+      break;
+    default:
+      return <>default case</>;
+      break;
+  }
+};
+
+const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
+  const {
+    profile: { isImmersive, isInclusive },
+  } = useProfile();
+  const { id: activeStudentId } = useStudent();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-  //const { childProfiles, activeChildProfile, setActiveChildProfile } = useChildProfile();
   const { isAdultCheckOpen } = useAdultCheck();
 
   useEffect(() => {
@@ -39,7 +76,7 @@ export const Overview: React.FC = ({}) => {
         if (response.value === null) {
           // have never seen it before
           setShouldShowTutorial(true);
-	  /*
+          /*
           Preferences.set({
             key: "shouldShowSettingsTutorial",
             value: false,
@@ -318,28 +355,22 @@ export const Overview: React.FC = ({}) => {
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow className="margin-bottom-3">
-              {
-		/*
-		childProfiles.map((p: any, index: number) => (
+              {students.map((s: any, index: number) => (
                 <IonCol
                   className="ion-no-padding"
                   size="6"
-                  onClick={() => {
-                    setActiveChildProfile(p.uid);
-                  }}
-                  key={p.uid}
+                  onClick={() => {}}
+                  key={s.uid}
                 >
                   <ChildProfileCard
-                    age={p.age}
-                    isActive={activeChildProfile === index}
+                    age={s.age}
+                    isActive={activeStudentId === s.id}
                     letterAvatarBackgroundColor="#20bfb9"
                     letterAvatarTextColor="#ffffff"
-                    name={p.name}
+                    name={s.firstName}
                   />
                 </IonCol>
-		))
-		*/
-	      }
+              ))}
             </IonRow>
           </div>
 
@@ -374,15 +405,12 @@ export const Overview: React.FC = ({}) => {
           <div className="child-profile-content margin-top-1">
             <Carousel height={350}>
               {settingsExploreCards.map((card, index) => (
-                <SettingsExploreCard
-                  {...card}
-                  key={index}
-                />
+                <SettingsExploreCard {...card} key={index} />
               ))}
             </Carousel>
           </div>
         </IonGrid>
       </div>
-    </div>  
+    </div>
   );
 };

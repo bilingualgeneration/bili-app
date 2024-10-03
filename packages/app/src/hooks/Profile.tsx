@@ -22,19 +22,9 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [user, setUser] = useState<any>(undefined);
   const [activeClassroom, setActiveClassroom] = useState<string | null>(null);
-
-  //const [classrooms, setClassrooms] = useState<any>(undefined);
-
-  const [activeChildProfile, setActiveChildProfile] = useState<any>(undefined);
-  const [activeChildId, setActiveChildId] = useState<string | undefined>(
-    undefined,
-  );
   const userRef = useRef<any>(user);
   const [profile, setProfile] = useState<any>(undefined);
-  const [childProfiles, setChildProfiles] = useState<any>(undefined);
   const profileUnsubscribe = useRef<Unsubscribe | null>();
-  //const classroomsUnsubscribe = useRef<Unsubscribe | null>();
-  const childProfilesUnsubscribe = useRef<Unsubscribe | null>();
   useEffect(() => {
     onAuthStateChanged(auth, (userState) => {
       if (userState && userRef.current === null) {
@@ -57,76 +47,13 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
         }
       });
       profileUnsubscribe.current = unsub;
-
-      // get classrooms
-      /*
-      const classroomsCollection = collection(firestore, 'classrooms');
-      const classroomsQuery = query(
-	classroomsCollection,
-	where(
-	  'teachers',
-	  'array-contains',
-	  user.uid
-	)
-      );
-      const classroomsUnsub = onSnapshot(classroomsQuery, (snapshot) => {
-	const classroomData = Object.fromEntries(snapshot.docs.map((doc) => {
-	  return [doc.id, {
-	    id: doc.id,
-	    ...doc.data()
-	  }]
-	}));
-	setClassrooms(classroomData);
-	classroomsUnsubscribe.current = classroomsUnsub;
-      });
-      */
-
-      const childrenCollection = collection(firestore, "user");
-      const childrenQuery = query(
-        childrenCollection,
-        where("parentId", "==", user.uid),
-      );
-      const childProfilesUnsub = onSnapshot(childrenQuery, (snapshot) => {
-        const childProfs = Object.fromEntries(
-          snapshot.docs.map((doc) => {
-            return [
-              doc.id,
-              {
-                id: doc.id,
-                ...doc.data(),
-              },
-            ];
-          }),
-        );
-        setChildProfiles(childProfs);
-        if (snapshot.docs.length > 0) {
-          const aci = snapshot.docs[0].id;
-          setActiveChildId(aci);
-          setActiveChildProfile(childProfs[aci]);
-        }
-      });
-      childProfilesUnsubscribe.current = childProfilesUnsub;
-      // todo: set active child profile
     } else {
       if (user !== undefined) {
         if (profileUnsubscribe.current) {
           profileUnsubscribe.current();
         }
-        if (childProfilesUnsubscribe.current) {
-          childProfilesUnsubscribe.current();
-        }
-
-        /*
-	if(classroomsUnsubscribe.current){
-	  classroomsUnsubscribe.current();
-	}
-	*/
         setProfile(null);
-        setActiveChildProfile(null);
-        //setClassrooms(null);
         profileUnsubscribe.current = null;
-        childProfilesUnsubscribe.current = null;
-        //classroomsUnsubscribe.current = null;
       }
     }
   }, [user]);
@@ -137,22 +64,14 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
     signOut(auth).then(() => {});
   };
 
-  const isLoading =
-    user === undefined ||
-    //|| classrooms === undefined
-    profile === undefined;
-  //|| activeChildProfile === undefined;
+  const isLoading = user === undefined || profile === undefined;
   return (
     <ProfileContext.Provider
       children={children}
       value={{
-        activeChildId,
-        activeChildProfile,
-        //classrooms,
         isLoading,
         isLoggedIn: user !== undefined && user !== null,
         profile,
-        childProfiles,
         signout,
         user,
       }}

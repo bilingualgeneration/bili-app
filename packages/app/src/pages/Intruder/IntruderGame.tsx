@@ -28,6 +28,7 @@ import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_ins
 import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useParams } from "react-router";
 import { IntruderCongrats } from "./IntruderCongrats";
+import { useTimeTracker } from "@/hooks/TimeTracker";
 import "./Intruder.scss";
 import "../../theme/animate.scss";
 import { card } from "ionicons/icons";
@@ -78,7 +79,9 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     setActivityState,
     setGamesData,
   } = useActivity();
+  const { startTimer, stopTimer } = useTimeTracker();
   useEffect(() => {
+    startTimer();
     setActivityState({
       type: "intruder",
       id: data.uuid,
