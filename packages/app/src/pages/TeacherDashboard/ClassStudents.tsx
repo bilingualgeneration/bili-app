@@ -158,13 +158,15 @@ export const ClassStudents: React.FC = () => {
                   className="student-needs-support-text text-sm-xs semibold"
                   style={{
                     background:
-                      student.needsMoreSupport === "on track"
+                      student.needsMoreSupport.toLowerCase() === "on track"
                         ? "var(--Cielo-Low)"
-                        : student.needsMoreSupport === "needs support"
+                        : student.needsMoreSupport.toLowerCase() ===
+                            "needs support"
                           ? "var(--Habanero-Habanero)"
-                          : student.needsMoreSupport === "support recommended"
+                          : student.needsMoreSupport.toLowerCase() ===
+                              "support recommended"
                             ? "var(--Sol)"
-                            : "transparent",
+                            : "gray",
                     textTransform: "uppercase",
                   }}
                 >

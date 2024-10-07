@@ -16,18 +16,13 @@ import { Link } from "react-router-dom";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import House from "@/assets/icons/house.svg";
 import School from "@/assets/icons/school.svg";
+import SmallHouse from "@/assets/icons/small_home.svg";
+import SmallSchool from "@/assets/icons/small_school.svg";
 import CheckCircle from "@/assets/icons/check_circle.svg";
 import { useIntl } from "react-intl";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
-import CommunityIcon from "@/assets/icons/community.svg";
-import StoriesIcon from "@/assets/icons/stories.svg";
-import WellnessIcon from "@/assets/icons/wellness.svg";
-import DropIcon from "@/assets/icons/drop.svg";
-import HouseIcon from "@/assets/icons/house.svg";
-import PresentIcon from "@/assets/icons/present.svg";
-import PlayIcon from "@/assets/icons/play.svg";
 
 const studentData = [
   {
@@ -51,7 +46,7 @@ const studentData = [
     activity: "Story factory",
     completions: "3",
     accuracy: "30%",
-    languageMode: "Englsih immersion",
+    languageMode: "English immersion",
     location: "school",
   },
 ];
@@ -418,12 +413,35 @@ export const StudentProgress: React.FC = () => {
                   </IonText>
                 </IonCol>
                 <IonCol>
-                  <IonText>
-                    <p>{student.languageMode}</p>
+                  <IonText className="student-progress-language-mode">
+                    <p
+                      style={{
+                        background:
+                          student.languageMode.toLowerCase() ===
+                          "english immersion"
+                            ? "#0045A1"
+                            : student.languageMode.toLowerCase() ===
+                                "spanish immersion"
+                              ? "#EC59B1"
+                              : student.languageMode.toLowerCase() ===
+                                  "bilingual"
+                                ? "var(--Base-Selva)"
+                                : "gray",
+                      }}
+                    >
+                      {student.languageMode}
+                    </p>
                   </IonText>
                 </IonCol>
                 <IonCol>
-                  <IonText>
+                  <IonText className="student-progress-location">
+                    <IonIcon
+                      icon={
+                        student.location.toLowerCase() === "home"
+                          ? SmallHouse
+                          : SmallSchool
+                      }
+                    ></IonIcon>
                     <p>{student.location}</p>
                   </IonText>
                 </IonCol>
