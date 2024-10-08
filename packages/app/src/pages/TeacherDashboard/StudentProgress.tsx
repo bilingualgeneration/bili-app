@@ -1,5 +1,6 @@
 //A.M.
 import {
+  IonButton,
   IonCard,
   IonCol,
   IonGrid,
@@ -19,6 +20,8 @@ import School from "@/assets/icons/school.svg";
 import SmallHouse from "@/assets/icons/small_home.svg";
 import SmallSchool from "@/assets/icons/small_school.svg";
 import CheckCircle from "@/assets/icons/check_circle.svg";
+import Printer from "@/assets/icons/printer_white.svg";
+import Email from "@/assets/icons/email.svg";
 import { useIntl } from "react-intl";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { RadioCard } from "@/components/RadioCard";
@@ -227,7 +230,7 @@ export const StudentProgress: React.FC = () => {
           <IonRow>
             {/* pie-chart */}
             <IonCol size="6">
-              <IonCard>
+              <IonCard className="graph-and-progressbar-info-card">
                 <IonText className="text-xl semibold color-suelo">
                   Language Mode
                 </IonText>
@@ -300,7 +303,7 @@ export const StudentProgress: React.FC = () => {
             </IonCol>
             {/* progress bar */}
             <IonCol size="6">
-              <IonCard>
+              <IonCard className="graph-and-progressbar-info-card">
                 <IonText className="text-xl semibold color-suelo">
                   Needs more support
                 </IonText>
@@ -466,6 +469,68 @@ export const StudentProgress: React.FC = () => {
             ))}
           </div>
         </IonGrid>
+      </div>
+      <div className="student-caregivers-block">
+        <IonItem>
+          <IonLabel>
+            <IonText>
+              <p className="semibold text-3xl">Caregivers</p>
+            </IonText>
+          </IonLabel>
+        </IonItem>
+        <div>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonCard className="caregiver-info-card">
+                  <IonRow class="ion-align-items-center">
+                    <IonCol>
+                      <IonText>
+                        <p className="text-xl semibold color-suelo">
+                          {"Caregiver name"}
+                        </p>
+                        <p className="text-lg semibold color-selva">
+                          {"caregiver1@gmail.com"}
+                        </p>
+                        <p className="text-lg color-barro">{"Active"}</p>
+                      </IonText>
+                    </IonCol>
+                    <IonCol></IonCol>
+                  </IonRow>
+                </IonCard>
+              </IonCol>
+              <IonCol>
+                <IonCard className="caregiver-info-card">
+                  <IonRow class="ion-align-items-center">
+                    <IonCol>
+                      <IonText>
+                        <p className="text-xl semibold color-suelo">
+                          {"Caregiver name"}
+                        </p>
+                        <p className="text-lg semibold color-selva">
+                          {"caregiver1@gmail.com"}
+                        </p>
+                        <p className="text-lg color-barro">{"Not active"}</p>
+                      </IonText>
+                    </IonCol>
+                    <IonCol>
+                      <div className="resend-invite-buttons">
+                        <IonButton>
+                          <IonIcon icon={Email}></IonIcon>
+                          <p>Resend Invite</p>
+                        </IonButton>
+                        <IonButton>
+                          <IonIcon icon={Printer}></IonIcon>
+                          <p>Reprint Invite</p>
+                        </IonButton>
+                      </div>
+                    </IonCol>
+                  </IonRow>
+                </IonCard>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </div>
       </div>
     </div>
   );

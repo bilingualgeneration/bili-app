@@ -37,6 +37,14 @@
   padding-left: 15px;
 }
 
+.graph-and-progressbar-info-card {
+  height: 100%;
+}
+
+.graph-and-progressbar {
+  margin-bottom: 40px;
+}
+
 .color-1 {
   background: #ec59b1;
 }
@@ -75,9 +83,14 @@
   top: -160%;
 }
 
+.student-data-activity-table ion-grid {
+  --ion-grid-padding: 20px;
+}
+
 .student-progress-table-div {
   background: white;
   border-radius: 8px;
+  padding: 2px 4px;
 }
 
 .student-table-header-row {
@@ -126,4 +139,17 @@
     line-height: 16px; /* 177.778% */
     letter-spacing: 1px;
   }
+}
+
+.student-caregivers-block {
+  margin: 24px 0px;
+}
+
+.caregiver-info-card {
+  height: 100%;
+}
+
+.resend-invite-buttons {
+  padding: 0px;
+  font-size: 14px;
 }
