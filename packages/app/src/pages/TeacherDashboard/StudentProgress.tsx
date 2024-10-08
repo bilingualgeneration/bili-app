@@ -378,7 +378,7 @@ export const StudentProgress: React.FC = () => {
       </div>
       <div className="student-data-activity-table">
         <IonGrid>
-          <IonCard>
+          <div className="student-progress-table-div">
             <IonRow className="student-table-header-row ion-align-items-center">
               <IonCol className="text-md semibold">Date</IonCol>
               <IonCol className="text-md semibold">Activity</IonCol>
@@ -434,7 +434,15 @@ export const StudentProgress: React.FC = () => {
                   </IonText>
                 </IonCol>
                 <IonCol>
-                  <IonText className="student-progress-location">
+                  <IonText
+                    className="student-progress-location"
+                    style={{
+                      backgroundColor:
+                        student.location.toLowerCase() === "home"
+                          ? "#FFDAD2"
+                          : "#C3ECE2",
+                    }}
+                  >
                     <IonIcon
                       icon={
                         student.location.toLowerCase() === "home"
@@ -442,12 +450,21 @@ export const StudentProgress: React.FC = () => {
                           : SmallSchool
                       }
                     ></IonIcon>
-                    <p>{student.location}</p>
+                    <p
+                      style={{
+                        color:
+                          student.location.toLowerCase() === "home"
+                            ? "#FF5708"
+                            : "#003735",
+                      }}
+                    >
+                      {student.location}
+                    </p>
                   </IonText>
                 </IonCol>
               </IonRow>
             ))}
-          </IonCard>
+          </div>
         </IonGrid>
       </div>
     </div>

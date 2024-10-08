@@ -75,10 +75,26 @@
   top: -160%;
 }
 
+.student-progress-table-div {
+  background: white;
+  border-radius: 8px;
+}
+
+.student-table-header-row {
+  padding: 16px;
+}
+
+.student-table-body-row {
+  padding: 16px;
+  background: #f7faf9;
+  margin: 4px 0;
+  border-radius: 8px;
+}
+
 .student-progress-language-mode p {
   border-radius: 4px;
-  padding: 0px 6px;
-  margin-right: 55px;
+  padding: 0px 4px;
+  margin-right: 3.4rem;
   text-align: center;
   text-transform: uppercase;
   color: var(--Base-Nube, #fff);
@@ -90,9 +106,17 @@
   letter-spacing: 1px;
 }
 
+@media (max-width: 844px) {
+  .student-progress-language-mode p {
+    margin-right: 1rem;
+  }
+}
+
 .student-progress-location {
-  display: flex;
+  display: inline-flex;
   gap: 4px;
+  border-radius: 4px;
+  padding: 0px 8px;
 
   p {
     text-transform: uppercase;
