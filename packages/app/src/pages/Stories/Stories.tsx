@@ -435,7 +435,12 @@ const MetaFlag: React.FC<MetaFlag> = ({
   secondaryText,
 }) => {
   return (
-    <div id="story-translanguaged-flag" className={`background-${color}`}>
+    <div
+      id="story-title-card-flag"
+      className={classnames(`background-${color}`, {
+        "single-line": secondaryText === undefined,
+      })}
+    >
       <IonText>
         <div className="text-xs semibold color-suelo">{primaryText}</div>
         {secondaryText && (
@@ -473,15 +478,7 @@ const TitleCard = ({
         }}
       >
         {is_translanguaged && (
-          <MetaFlag
-            color="cielo-low"
-            primaryText={
-              language === "en" ? "Translanguage Story" : "Cuento Translenguaje"
-            }
-            secondaryText={
-              language === "esen" ? "Translanguage Story" : undefined
-            }
-          />
+          <MetaFlag color="cielo-low" primaryText="Translanguaged Cuento" />
         )}
         {is_student_story && (
           <MetaFlag
