@@ -80,12 +80,12 @@ export const HydratedPackSelect: React.FC<props> = ({
     return <></>;
   }
   const translanguagedPill = {
-    primaryText:
-      language === "en" ? "Translanguaged Story" : "Cuento Translenguaje",
-    secondaryText: language === "esen" ? "Translanguaged Story" : undefined,
+    className: "background-cielo-low",
+    primaryText: "Translanguaged Cuento",
   };
   const studentStoryPill = {
-    primaryText: language === "en" ? "Student Story" : "Cuento de Estudiante",
+    className: "background-flamenco-flamenco",
+    primaryText: language === "en" ? "Student Story" : "Cuento estudiantil",
     secondaryText: language === "esen" ? "Student Story" : undefined,
   };
 

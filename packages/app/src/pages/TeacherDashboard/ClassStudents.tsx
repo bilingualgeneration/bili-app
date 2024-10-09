@@ -16,49 +16,50 @@ import {
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import "./ClassStudents.scss";
 
 export const ClassStudents: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
   const studentsData = [
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "not active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
@@ -72,7 +73,7 @@ export const ClassStudents: React.FC = () => {
       homeAccount: "active",
     },
     {
-      studentName: "John Doeeeeeee",
+      id: "",
       primaryHomeEmail: "Michel Doeeeeee",
       secondaryHomeEmail: "john.doe@exampleeeeeeeeeeeee.com",
       needsMoreSupport: "on track",
@@ -101,7 +102,7 @@ export const ClassStudents: React.FC = () => {
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
                   <Link
-                    to={`/classrooms/:classroomId/add_students`}
+                    to={`/classrooms/view/${classroomId}/add_students`}
                     className="no-underline"
                   >
                     <p className="text-sm semibold color-nube">Add students</p>
@@ -117,8 +118,8 @@ export const ClassStudents: React.FC = () => {
         <IonGrid className="class-students-table-grid">
           <IonRow className="class-student-table-header-row">
             <IonCol className="text-md semibold">Student Name</IonCol>
-            <IonCol className="text-md semibold">Primary home email</IonCol>
-            <IonCol className="text-md semibold">Secondary home email</IonCol>
+            {/* <IonCol className="text-md semibold">Primary home email</IonCol>
+            <IonCol className="text-md semibold">Secondary home email</IonCol> */}
             <IonCol className="text-md semibold">Needs More Support</IonCol>
             <IonCol className="text-md semibold">Home Account</IonCol>
           </IonRow>
@@ -131,11 +132,11 @@ export const ClassStudents: React.FC = () => {
                 <StudentInfo
                   userId={""}
                   userType={""}
-                  link="/classrooms/add"
+                  link="http://localhost:5173/classrooms/view/:3GJTSWXuJ4NL3ZZpygF1/students/view/${studentId}"
                   size="xs"
                 />
               </IonCol>
-              <IonCol>
+              {/* <IonCol>
                 <IonText>
                   <p className="text-sm">
                     {student.primaryHomeEmail.length > 23
@@ -152,7 +153,7 @@ export const ClassStudents: React.FC = () => {
                       : student.secondaryHomeEmail}
                   </p>
                 </IonText>
-              </IonCol>
+              </IonCol> */}
               <IonCol>
                 <IonText
                   className="student-needs-support-text text-sm-xs semibold"
@@ -173,7 +174,15 @@ export const ClassStudents: React.FC = () => {
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p className="text-sm">{student.homeAccount}</p>
+                  <p
+                    className={`text-sm ${
+                      student.homeAccount?.toLowerCase() === "not active"
+                        ? "semibold"
+                        : ""
+                    }`}
+                  >
+                    {student.homeAccount}
+                  </p>
                 </IonText>
               </IonCol>
             </IonRow>

@@ -18,16 +18,16 @@ import { FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
-import { useHistory } from "react-router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useHistory, useParams } from "react-router";
 import "./AddClassroomCaregivers.css";
-
 import { useAddClassroom } from "./AddClassroomContext";
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
+  const { classroomId } = useParams<{ classroomId: string }>();
   const { notificationMethod, setNotificationMethod } = useAddClassroom();
   const schema = z.object({
     notificationMethod: z.string(),
@@ -44,7 +44,6 @@ export const AddClassroomNotificationMethod: React.FC = () => {
     },
     resolver: zodResolver(schema),
   });
-  console.log(isValid);
   const emailOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -95,8 +94,13 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    setNotificationMethod(data.notificationMethod);
-    history.push("/classrooms/add/complete");
+    if (classroomId) {
+      //should add differnt setNotificatioMethod for adding students
+      history.push(`/classrooms/view/${classroomId}/add_students/complete`);
+    } else {
+      setNotificationMethod(data.notificationMethod);
+      history.push("/classrooms/add/complete");
+    }
   });
 
   return (
@@ -119,7 +123,6 @@ export const AddClassroomNotificationMethod: React.FC = () => {
 
           <IonButton
             data-testid="addclassroom-notification-method-continue-button"
-            disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}

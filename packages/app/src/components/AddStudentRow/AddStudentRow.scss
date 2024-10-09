@@ -1,6 +1,7 @@
 #add-student-row-component {
   .add-student-row {
     border-radius: 14px;
+    padding: 0px 16px;
     > ion-col {
       border: 1px solid red;
     }
@@ -14,7 +15,32 @@
     background-color: rgba(247, 250, 249, 1);
   }
 
+  .save-student-data-button,
+  .cancel-student-data-button {
+    height: 56px;
+    width: 58px;
+  }
+
+  .student-row-delete-button ion-icon {
+    font-size: 23px;
+  }
+
+  .student-row-edit-button ion-icon {
+    font-size: 53px;
+  }
+
   .edit-student-data {
     margin-top: 4px;
+  }
+
+  .student-row-edit-button,
+  .student-row-delete-button {
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .student-row-delete-button {
+    height: 35px;
   }
 }

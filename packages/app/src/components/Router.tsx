@@ -58,6 +58,7 @@ import {
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
+import { StudentLoader } from "@/pages/Caregiver";
 import TeacherLogin from "@/pages/TeacherLogin";
 import {
   TellMeAboutGame,
@@ -77,10 +78,13 @@ import {
   ClassOverview,
   MyClassrooms,
   StudentSelect,
+  StudentProgress,
+  ClassStudentsAddStudents,
 } from "@/pages/TeacherDashboard";
 import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
 import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
+import { AddStudentsComplete } from "@/pages/TeacherDashboard/AddStudentsComplete";
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -394,6 +398,42 @@ export const Router: React.FC = () => {
                           </TeacherDashboardLayoutWithSideMenu>
                         )}
                       />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/students/view/:studentId"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <StudentProgress />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/add_students"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassStudentsAddStudents />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/add_students/notification-method"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <AddClassroomNotificationMethod />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/add_students/complete"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <AddStudentsComplete />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
                     </TeacherDashboardLayout>
                   </AdultCheckProvider>
                 </AuthedLayout>
@@ -408,6 +448,18 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <HeaderFooter background="#f7faf9">
                   <StudentSelect />
+                </HeaderFooter>
+              </AuthedLayout>
+            )}
+          />
+
+          <Route
+            exact
+            path="/caregiver/student-loader"
+            render={() => (
+              <AuthedLayout>
+                <HeaderFooter background="#f7faf9">
+                  <StudentLoader />
                 </HeaderFooter>
               </AuthedLayout>
             )}

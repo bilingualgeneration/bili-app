@@ -10,6 +10,7 @@ import { useLanguageToggle } from "@/components/LanguageToggle";
 import "./ContentCard.css";
 
 export interface Pill {
+  className?: string;
   primaryText: string;
   secondaryText?: string;
 }
@@ -26,9 +27,13 @@ type ContentCardProps = {
   pills?: Pill[];
 };
 
-const Pill: React.FC<Pill> = ({ primaryText, secondaryText }) => {
+const Pill: React.FC<Pill> = ({
+  className = "background-nube",
+  primaryText,
+  secondaryText,
+}) => {
   return (
-    <span className="content-card-pill">
+    <span className={classnames("content-card-pill", className)}>
       <IonText>
         <span className="text-xs semibold color-suelo">
           {primaryText}

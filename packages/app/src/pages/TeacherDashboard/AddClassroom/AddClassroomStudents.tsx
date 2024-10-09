@@ -24,8 +24,8 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { Student, useAddClassroom } from "./AddClassroomContext";
-
 import "./AddClassroomStudents.css";
+import { AddStudents } from "@/components/AddStudents";
 
 export const AddClassroomStudents: React.FC = () => {
   const history = useHistory();
@@ -82,15 +82,11 @@ export const AddClassroomStudents: React.FC = () => {
             <IonCol size="2">Secondary home email</IonCol>
             <IonCol size="2"></IonCol>
           </IonRow>
-
-          {/* rows with student data */}
-          <AddStudentRow
-            studentData={studentsData}
-            handleDeleteStudent={handleDeleteStudent}
+          <AddStudents
+            studentsData={studentsData}
+            handleSaveStudentClick={handleSaveStudentClick}
             handleEditStudentClick={handleEditStudentClick}
-            onEditingStatusChange={() => {
-              // TODO: what goes here?
-            }}
+            handleDeleteStudent={handleDeleteStudent}
           />
 
           {/* row for inputting student data */}

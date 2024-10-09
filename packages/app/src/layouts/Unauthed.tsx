@@ -27,8 +27,8 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
           return <Redirect to="/student-dashboard" />;
         }
         break;
-      case "parent":
-        return <Redirect to="/student-dashboard" />;
+      case "caregiver":
+        return <Redirect to="/caregiver/student-loader" />;
         break;
     }
   }

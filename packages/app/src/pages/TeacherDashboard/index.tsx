@@ -3,3 +3,4 @@ export * from "./ClassOverview";
 export * from "./MyClassrooms";
 export * from "./StudentSelect";
 export * from "./ClassStudentsAddStudents";
+export * from "./StudentProgress";

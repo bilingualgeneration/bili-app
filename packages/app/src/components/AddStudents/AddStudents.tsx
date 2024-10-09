@@ -105,6 +105,7 @@ export const AddStudents: React.FC<AddStudentsProps> = ({
             <IonCol size="auto" className="reset-button-column ion-no-padding">
               <IonButton
                 className="reset-student-button text-sm semibold"
+                color="secondary"
                 type="button"
                 disabled={isEditing}
                 onClick={() => {

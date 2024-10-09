@@ -30,7 +30,8 @@ import { useLanguageToggle } from "@/components/LanguageToggle";
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
-import "./Stories.scss";
+import "./Stories.css";
+
 import {
   ActivityProvider,
   GameData,
@@ -434,7 +435,12 @@ const MetaFlag: React.FC<MetaFlag> = ({
   secondaryText,
 }) => {
   return (
-    <div id="story-translanguaged-flag" className={`background-${color}`}>
+    <div
+      id="story-title-card-flag"
+      className={classnames(`background-${color}`, {
+        "single-line": secondaryText === undefined,
+      })}
+    >
       <IonText>
         <div className="text-xs semibold color-suelo">{primaryText}</div>
         {secondaryText && (
@@ -472,15 +478,7 @@ const TitleCard = ({
         }}
       >
         {is_translanguaged && (
-          <MetaFlag
-            color="cielo-low"
-            primaryText={
-              language === "en" ? "Translanguage Story" : "Cuento Translenguaje"
-            }
-            secondaryText={
-              language === "esen" ? "Translanguage Story" : undefined
-            }
-          />
+          <MetaFlag color="cielo-low" primaryText="Translanguaged Cuento" />
         )}
         {is_student_story && (
           <MetaFlag
@@ -493,7 +491,7 @@ const TitleCard = ({
         )}
         <IonCardContent>
           <IonText
-            className="ion-text-center"
+            className="ion-text-center title"
             style={{
               display: "block",
               height: "140px",
