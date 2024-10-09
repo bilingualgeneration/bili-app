@@ -16,7 +16,7 @@ import {
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import "./ClassStudents.scss";
 
@@ -79,7 +79,7 @@ export const ClassStudents: React.FC = () => {
       homeAccount: "not active",
     },
   ];
-
+  const { classroomId } = useParams<{ classroomId: string }>();
   return (
     <div id="teacher-dashboard-students">
       {/* header */}
@@ -131,7 +131,7 @@ export const ClassStudents: React.FC = () => {
                 <StudentInfo
                   userId={""}
                   userType={""}
-                  link="/classrooms/add"
+                  link={`/classrooms/view/${classroomId}/students/view/:studentId`}
                   size="xs"
                 />
               </IonCol>

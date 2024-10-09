@@ -13,7 +13,7 @@ import {
   IonText,
 } from "@ionic/react";
 import "./StudentProgress.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import House from "@/assets/icons/house.svg";
 import School from "@/assets/icons/school.svg";
@@ -55,6 +55,7 @@ const studentData = [
 ];
 
 export const StudentProgress: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
   return (
     <div>
       {/* student header with name and time spent on games this week */}
