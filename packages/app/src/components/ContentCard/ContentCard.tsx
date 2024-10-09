@@ -2,13 +2,14 @@ import { CategoryTag } from "@/components/CategoryTag";
 import classnames from "classnames";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import LockIcon from "@/assets/icons/lock.svg?react";
-import "./ContentCard.scss";
+import "./ContentCard.css";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 export interface Pill {
+  className?: string;
   primaryText: string;
   secondaryText?: string;
 }
@@ -25,9 +26,13 @@ type ContentCardProps = {
   pills?: Pill[];
 };
 
-const Pill: React.FC<Pill> = ({ primaryText, secondaryText }) => {
+const Pill: React.FC<Pill> = ({
+  className = "background-nube",
+  primaryText,
+  secondaryText,
+}) => {
   return (
-    <span className="content-card-pill">
+    <span className={classnames("content-card-pill", className)}>
       <IonText>
         <span className="text-xs semibold color-suelo">
           {primaryText}
