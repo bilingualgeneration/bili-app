@@ -28,6 +28,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -35,6 +36,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -42,6 +44,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -49,6 +52,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -56,6 +60,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -63,6 +68,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -70,6 +76,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "needs support",
       homeAccount: "active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -77,9 +84,11 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@exampleeeeeeeeeeeee.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
   ];
   const { classroomId } = useParams<{ classroomId: string }>();
+
   return (
     <div id="teacher-dashboard-students">
       {/* header */}
@@ -131,7 +140,7 @@ export const ClassStudents: React.FC = () => {
                 <StudentInfo
                   userId={""}
                   userType={""}
-                  link={`/classrooms/view/${classroomId}/students/view/:studentId`}
+                  link={`/classrooms/view/${classroomId}/students/view/${student.studentId}`}
                   size="xs"
                 />
               </IonCol>
