@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useSignUpData } from "../SignUp/SignUpContext";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { firestore } from "@/components/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useProfile } from "@/hooks/Profile";
@@ -36,6 +36,7 @@ interface Student {
 export const ClassStudentsAddStudents: React.FC = () => {
   const { data, setData, pushPage } = useSignUpData();
   const history = useHistory();
+  const { classroomId } = useParams<{ classroomId: string }>();
   const {
     user: { uid },
     profile: { isImmersive, isInclusive, settingsLanguage },
@@ -115,7 +116,9 @@ export const ClassStudentsAddStudents: React.FC = () => {
       </div>
 
       <div className="add-student-button-continue">
-        <IonRouterLink routerLink="/classrooms/:classroomId/students">
+        <IonRouterLink
+          routerLink={`/classrooms/view/${classroomId}/add_students/notification-method`}
+        >
           <IonButton
             data-testid="add-student-continue-button"
             shape="round"

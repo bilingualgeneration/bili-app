@@ -89,24 +89,25 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 />
               </IonCol>
               <IonCol className="ion-no-padding" size={"auto"}>
-                <button
+                <IonButton
                   type="submit"
                   className="save-student-data-button text-sm semibold"
                 >
                   Save
-                </button>
+                </IonButton>
               </IonCol>
               <IonCol className="ion-no-padding" size={"auto"}>
-                <button
+                <IonButton
+                  color="secondary"
                   type="button"
-                  className="edit-student-data-button text-sm semibold"
+                  className="cancel-student-data-button text-sm semibold"
                   onClick={() => {
                     setIsEditing(null);
                     onEditingStatusChange(false);
                   }}
                 >
                   Cancel
-                </button>
+                </IonButton>
               </IonCol>
             </IonRow>
           </form>

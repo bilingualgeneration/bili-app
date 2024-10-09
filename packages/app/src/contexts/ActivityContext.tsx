@@ -22,8 +22,8 @@ export type GameData = Map<
 >;
 
 type ActivityState = {
-  type: string | null;
   id: string | null;
+  type: string | null;
 };
 
 type ActivityContextType = {
@@ -32,7 +32,7 @@ type ActivityContextType = {
   setGamesData: React.Dispatch<React.SetStateAction<GameData>>;
   handleAttempt: (gameId: GameId, isCorrect: boolean) => void;
   handleResetAttempts: () => void;
-  handleRecordAttempt: () => Promise<number>;
+  handleRecordAttempt: (time?: number) => Promise<number>;
   stars: number;
   hearts: number;
 };
@@ -54,8 +54,8 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const { language } = useLanguageToggle();
   const [activityState, setActivityState] = useState<ActivityState>({
-    type: null,
     id: null,
+    type: null,
   });
 
   const [gamesData, setGamesData] = useState<GameData>(new Map());
@@ -66,8 +66,6 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
   const student = useStudent();
   const classroom = useClassroom();
-  //console.log("student", student);
-  //console.log("classroom", classroom);
 
   const functions = getFunctions();
   const recordUserActivity = httpsCallable(functions, "user-activity-record");
@@ -93,18 +91,21 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
     setAttempts(new Map());
   };
 
-  const handleRecordAttempt = async () => {
+  const handleRecordAttempt = async (time?: number) => {
     if (!activityState.id || !activityState.type)
       throw new Error("Activity ID or type missing");
 
     const stars = getStarsFromAttempts(attempts, gamesData);
     setStars(stars);
 
+    // send to server to record in bigquery
     await recordUserActivity({
       activity: activityState.type,
       activityId: activityState.id,
+      classroomId: classroom ? classroom.id : null,
       type: "attempt",
-      time: new Date().toISOString(),
+      time,
+      timestamp: new Date().toISOString(),
       version: "0.0.1",
       data: JSON.stringify({
         attempts: Object.fromEntries(attempts),

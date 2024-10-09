@@ -12,7 +12,7 @@
   }
 }
 
-#story-translanguaged-flag {
+#story-title-card-flag {
   padding-top: 4px;
   padding-bottom: 4px;
   text-align: center;
@@ -22,6 +22,11 @@
   transform: rotate(30deg);
   transform-origin: top left;
   width: 100%;
+
+  &.single-line {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .story-page {
@@ -44,6 +49,13 @@
       max-width: 438px;
     }
   }
+  .title {
+    text-shadow:
+      -1px -1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+      1px 1px 0 #fff;
+  }
 }
 
 #stories-dnd {
@@ -54,13 +66,11 @@
   }
 
   .game-container {
-    // position: relative;
     height: 50vh;
     width: 100%;
   }
 
   .dropzone-container {
-    // position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,7 +121,7 @@
     letter-spacing: -0.5px !important;
   }
 
-  // Media query for screens with a max-width of 768px
+  /* Media query for screens with a max-width of 768px */
   @media (max-width: 1180px) {
     .text-4xl {
       font-size: 30px !important;

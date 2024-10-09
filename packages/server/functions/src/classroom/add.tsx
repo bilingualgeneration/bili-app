@@ -1,14 +1,6 @@
 const admin = require("firebase-admin");
+import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
-
-const getUserByEmail = async (email: string) => {
-  try {
-    const response: any = await admin.auth().getUserByEmail(email);
-    return response.toJSON();
-  } catch (error: any) {
-    return null;
-  }
-};
 
 export const add = onCall(async (request) => {
   // todo: verify that teacher is logged in
@@ -44,27 +36,17 @@ export const add = onCall(async (request) => {
   );
 
   for (const student of data.students) {
-    // todo: check if student already exists
-    const caregiver1 = await getUserByEmail(student.primaryContactEmail);
-    const caregiver2 = await getUserByEmail(student.secondaryContactEmail);
-    if (caregiver1 === null) {
-      // todo: create parent account
-    }
-
-    if (caregiver2 === null) {
-      // todo: create parent account
-    }
-
     // todo: check if student account already exists
     tasks.push(
-      admin
-        .firestore()
-        .collection("student")
-        .add({
-          firstName: student.firstName,
-          lastName: student.lastName,
-          classroom: [classroomId],
-        }),
+      upsertStudent({
+        firstName: student.firstName,
+        lastName: student.lastName,
+        classroom: [classroomId],
+        caregiverEmail: [
+          student.primaryContactEmail,
+          student.secondaryContactEmail,
+        ],
+      }),
     );
   }
 

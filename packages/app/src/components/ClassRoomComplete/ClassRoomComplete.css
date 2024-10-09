@@ -1,0 +1,19 @@
+.add-class-success {
+  display: flex;
+  justify-content: center;
+
+  ion-card {
+    align-items: center;
+  }
+  ion-button {
+    width: 100%;
+  }
+  ion-text {
+    max-width: 442px;
+  }
+
+  ion-img {
+    width: 337.25px;
+    height: 333px;
+  }
+}

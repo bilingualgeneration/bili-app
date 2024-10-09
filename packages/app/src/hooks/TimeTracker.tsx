@@ -39,7 +39,11 @@ export const TimeTrackerProvider: React.FC<React.PropsWithChildren> = ({
   const stopTimer = () => {
     times.current.push(new Date());
     let timeElapsed = 0;
-    for (let i = 0; i < times.current.length; i += 2) {
+    for (
+      let i = 0;
+      i < times.current.length && times.current.length > 1;
+      i += 2
+    ) {
       timeElapsed +=
         Math.abs(times.current[i].getTime() - times.current[i + 1].getTime()) /
         1000;

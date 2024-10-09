@@ -1,28 +1,34 @@
-import {Redirect} from 'react-router-dom';
-import {useProfile} from '@/hooks/Profile';
-import {
-  LanguageToggle,
-  useLanguageToggle,
-} from '@/components/LanguageToggle';
+import { Redirect, useLocation } from "react-router-dom";
+import { useProfile } from "@/hooks/Profile";
+import { useStudent } from "@/hooks/Student";
+import { LanguageToggle, useLanguageToggle } from "@/components/LanguageToggle";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
-/*
-import { ProfileContextProvider } from "@/contexts/ProfileContext";
-import { ChildProfileContextProvider } from "@/contexts/ChildProfileContext";
-import { FavoritesContextProvider } from "@/contexts/FavoritesContext";
-*/
-
-export const AuthedLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const {isLoggedIn} = useProfile();
-  const {language} = useLanguageToggle();
+export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
+  const { isLoggedIn, profile } = useProfile();
+  const { id: studentId } = useStudent();
+  const { language } = useLanguageToggle();
+  const { pathname } = useLocation();
   if (!isLoggedIn) {
     return <Redirect to="/" />;
-  }else{
-    return <>
-      <I18nWrapper locale={language.slice(0, 2)}>
-	{children}
-	<LanguageToggle />
-      </I18nWrapper>
-    </>;
   }
+
+  if (
+    profile.role === "caregiver" &&
+    studentId === null &&
+    pathname !== "/caregiver/student-loader"
+  ) {
+    return <Redirect to="/caregiver/student-loader" />;
+  }
+  // implied else
+  return (
+    <>
+      <I18nWrapper locale={language.slice(0, 2)}>
+        {children}
+        <LanguageToggle />
+      </I18nWrapper>
+    </>
+  );
 };

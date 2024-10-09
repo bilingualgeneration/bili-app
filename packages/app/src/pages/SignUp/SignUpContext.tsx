@@ -33,6 +33,7 @@ export const SignUpDataProvider = ({
   const { locale } = useLanguage();
   const functions = getFunctions();
   const teacherSignupFunction = httpsCallable(functions, "teacher-signup");
+  const caregiverSignupFunction = httpsCallable(functions, "caregiver-signup");
 
   const signUp = async () => {
     setSignUpStatus("busy");
@@ -47,9 +48,14 @@ export const SignUpDataProvider = ({
         setSignUpStatus("done");
         break;
       case "parent":
-        // do something
+        await caregiverSignupFunction({
+          ...data,
+          language: locale,
+        });
         break;
     }
+    await signInWithEmailAndPassword(auth, data.email, data.password);
+    setSignUpStatus("done");
   };
 
   const pushPage = (newPage: string): void => {
