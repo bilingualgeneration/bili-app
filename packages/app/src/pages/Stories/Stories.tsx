@@ -1,3 +1,4 @@
+import { AudioButton } from "@/components/AudioButton";
 import classnames from "classnames";
 import { DnD, MAX_HEIGHT } from "@/components/DnD";
 
@@ -22,7 +23,6 @@ import { useParams } from "react-router";
 import { useProfile } from "@/hooks/Profile";
 import { useEffect, useMemo, useState } from "react";
 import { VocabModal } from "./VocabModal";
-import volumeButton from "@/assets/icons/sf_audio_button.svg";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
 import { useLanguageToggle } from "@/components/LanguageToggle";
@@ -727,52 +727,16 @@ export const StoryPage: React.FC<
               )}
             </IonText>
             <div>
-              <IonButton
-                size="small"
-                fill="clear"
-                className="stories-volume-button"
-                onClick={() => {
-                  let audios = [];
-                  switch (language) {
-                    case "en":
-                      if (texts["en"].audio) {
-                        audios.push(texts["en"].audio.url);
-                      }
-                      break;
-                    case "es":
-                      if (isInclusive) {
-                        if (texts["es-inc"].audio) {
-                          audios.push(texts["es-inc"].audio.url);
-                        }
-                      } else {
-                        if (texts["es"].audio) {
-                          audios.push(texts["es"].audio.url);
-                        }
-                      }
-
-                      break;
-                    case "esen":
-                      if (isInclusive) {
-                        if (texts["es-inc"].audio) {
-                          audios.push(texts["es-inc"].audio.url);
-                        }
-                      } else {
-                        if (texts["es"].audio) {
-                          audios.push(texts["es"].audio.url);
-                        }
-                      }
-                      if (texts["en"].audio) {
-                        audios.push(texts["en"].audio.url);
-                      }
-                      break;
-                    default:
-                      break;
-                  }
-                  addAudio(audios);
+              <AudioButton
+                audio={{
+                  en: { url: texts["en"].audio.url },
+                  es: {
+                    url: isInclusive
+                      ? texts["es-inc"].audio.url
+                      : texts["es"].audio.url,
+                  },
                 }}
-              >
-                <img className="stories-volume-icon" src={volumeButton} />
-              </IonButton>
+              />
             </div>
           </IonCardContent>
         </IonCard>

@@ -14,10 +14,9 @@
   }
 
   .category-tag {
-    transform: scale(0.5);
     position: absolute;
-    top: -4px;
-    left: -4px;
+    top: 12px;
+    left: 12px;
     z-index: 2;
   }
 

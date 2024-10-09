@@ -1,4 +1,3 @@
-//A.M.
 import {
   IonButton,
   IonCard,
@@ -6,6 +5,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonLabel,
+  IonProgressBar,
   IonItem,
   IonInput,
   IonText,
@@ -18,6 +18,8 @@ import { FormattedMessage } from "react-intl";
 import { useForm } from "react-hook-form";
 import { RadioCard } from "@/components/RadioCard";
 import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useHistory, useParams } from "react-router";
 import "./AddClassroomCaregivers.css";
 import { useAddClassroom } from "./AddClassroomContext";
@@ -27,12 +29,21 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   const history = useHistory();
   const { classroomId } = useParams<{ classroomId: string }>();
   const { notificationMethod, setNotificationMethod } = useAddClassroom();
-  const { control, handleSubmit } = useForm({
+  const schema = z.object({
+    notificationMethod: z.string(),
+  });
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    setValue,
+    reset,
+  } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       notificationMethod,
     },
+    resolver: zodResolver(schema),
   });
-
   const emailOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -95,11 +106,14 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   return (
     <div id="invite-caregivers-page">
       <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+        <div style={{ width: "33%", margin: "auto" }}>
+          <IonProgressBar color="primary" value={0.8} />
+        </div>
         <form className="radio-button-select">
           <IonText className="ion-text-center">
-            <h3 className="text-3xl semibold color-suelo">
+            <h2 className="text-3xl semibold color-suelo">
               Invite caregivers to download the app
-            </h3>
+            </h2>
           </IonText>
           <ExtendedRadio
             control={control}
@@ -113,11 +127,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
             type="button"
             onClick={onSubmit}
           >
-            <FormattedMessage
-              id="common.continue"
-              defaultMessage="Continue"
-              description="Button label to continue"
-            />
+            <FormattedMessage id="common.continue" />
           </IonButton>
         </form>
       </IonCard>

@@ -5,6 +5,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonLabel,
+  IonProgressBar,
   IonItem,
   IonInput,
   IonText,
@@ -73,15 +74,8 @@ export const AddClassroomLanguage: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.engImmersionTitle",
-            defaultMessage: "English Immersion",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.engImmersion",
-            defaultMessage:
-              "Choose this setting if you want your child to learn all content and activities in the English language.",
-          })}
+          title={intl.formatMessage({ id: "languageMode.engImmersionTitle" })}
+          content={intl.formatMessage({ id: "languageMode.engImmersion" })}
           iconBackgroundColor="#0045A1"
         />
       </div>
@@ -109,17 +103,8 @@ export const AddClassroomLanguage: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.immersionTitle",
-            defaultMessage: "Spanish Immersion",
-            description: "Title of the Spanish immersion mode option",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.immersion",
-            defaultMessage:
-              "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
-            description: "Description of the Spanish immersion option",
-          })}
+          title={intl.formatMessage({ id: "languageMode.immersionTitle" })}
+          content={intl.formatMessage({ id: "languageMode.immersion" })}
           iconBackgroundColor="#F0091B"
         />
       </div>
@@ -149,17 +134,8 @@ export const AddClassroomLanguage: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.bilingualTitle",
-            defaultMessage: "Bilingual",
-            description: "Title of the Bilingual mode option",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.bilingual",
-            defaultMessage:
-              "Choose this setting if you want your child to learn Spanish with English supports and translations.",
-            description: "Description of the Bilingual mode option",
-          })}
+          title={intl.formatMessage({ id: "languageMode.bilingualTitle" })}
+          content={intl.formatMessage({ id: "languageMode.bilingual" })}
           iconBackgroundColor="#006A67"
         />
       </div>
@@ -175,8 +151,11 @@ export const AddClassroomLanguage: React.FC = () => {
   });
 
   return (
-    <div className="">
+    <div>
       <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+        <div style={{ width: "33%", margin: "auto" }}>
+          <IonProgressBar color="primary" value={0.4} />
+        </div>
         <form className="radio-button-select">
           <IonText className="ion-text-center">
             <h3 className="text-3xl semibold color-suelo">
@@ -188,10 +167,6 @@ export const AddClassroomLanguage: React.FC = () => {
           </IonText>
           <ExtendedRadio
             control={control}
-            defaultOption={{
-              component: <div />,
-              value: language,
-            }}
             name="language"
             options={[billingualOption, spanishOption, englishOption]}
           />
@@ -243,17 +218,14 @@ export const AddClassroomLanguage: React.FC = () => {
           </IonItem>
 
           <IonButton
+            className="elevate"
             data-testid="language-select-continue-button"
             disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}
           >
-            <FormattedMessage
-              id="common.continue"
-              defaultMessage="Continue"
-              description="Button label to continue"
-            />
+            <FormattedMessage id="common.continue" />
           </IonButton>
         </form>
       </IonCard>

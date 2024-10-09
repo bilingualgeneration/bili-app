@@ -15,15 +15,17 @@ export const TeacherDashboardHeader: React.FC = () => {
   return (
     <div id="teacher-dashboard-layout-header">
       <div>search</div>
-      <img src={biliLogo} />
+      <div className="ion-text-center">
+        <img src={biliLogo} />
+      </div>
       <div className="buttons-end">
         <Link to="/classrooms">
-          <IonButton size="small" fill="clear">
+          <IonButton className="font-weight-normal" size="small" fill="clear">
             <IonIcon slot="start" icon={SchoolIcon} />
             My Classrooms
           </IonButton>
         </Link>
-        <IonButton size="small" fill="clear">
+        <IonButton className="font-weight-normal" size="small" fill="clear">
           <IonIcon slot="start" icon={HelpIcon} />
           Help
         </IonButton>

@@ -2,6 +2,9 @@
   .add-student-row {
     border-radius: 14px;
     padding: 0px 16px;
+    > ion-col {
+      border: 1px solid red;
+    }
   }
 
   .even-row {
@@ -41,7 +44,3 @@
     height: 35px;
   }
 }
-
-// .custom-alert-delete-student {
-//     --background: black;
-// }

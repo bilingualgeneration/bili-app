@@ -2,11 +2,12 @@ import { CategoryTag } from "@/components/CategoryTag";
 import classnames from "classnames";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import LockIcon from "@/assets/icons/lock.svg?react";
-import "./ContentCard.css";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+
+import "./ContentCard.css";
 
 export interface Pill {
   className?: string;

@@ -84,6 +84,7 @@ export const VocabModal: React.FC = () => {
                                   "",
                               },
                             }}
+                            size="small"
                           />
                         </div>
 
@@ -131,6 +132,7 @@ export const VocabModal: React.FC = () => {
                                     ?.url || "",
                               },
                             }}
+                            size="small"
                           />
                         </div>
 

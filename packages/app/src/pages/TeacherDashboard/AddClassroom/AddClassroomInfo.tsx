@@ -5,6 +5,7 @@ import {
   IonCard,
   IonCol,
   IonGrid,
+  IonProgressBar,
   IonRow,
   IonText,
 } from "@ionic/react";
@@ -80,17 +81,16 @@ export const AddClassroomInfo: React.FC = () => {
 
   return (
     <>
-      <div className="">
+      <div>
         <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+          <div style={{ width: "33%", margin: "auto" }}>
+            <IonProgressBar color="primary" value={0.2} />
+          </div>
           <form id="class-about-styles">
             <div className="margin-bottom-2">
               <IonText className="ion-text-center">
                 <h1 className="text-3xl semibold color-suelo">
-                  <FormattedMessage
-                    id="signUpTeacher.aboutTitle"
-                    defaultMessage="Tell us about yourself"
-                    description="Title for page where teachers share more info about what grades they teach and their role"
-                  />
+                  <FormattedMessage id="teacherDashboard.addClassroom.infoTitle" />
                 </h1>
               </IonText>
             </div>
@@ -131,21 +131,19 @@ export const AddClassroomInfo: React.FC = () => {
               </IonGrid>
             </div>
 
-            <IonButton
-              className="margin-top-2"
-              expand="block"
-              shape="round"
-              type="button"
-              data-testid="teacher-about-continue-button"
-              disabled={!isValid}
-              onClick={onSubmit}
-            >
-              <FormattedMessage
-                id="common.continue"
-                defaultMessage="Continue"
-                description="Button label to continue"
-              />
-            </IonButton>
+            <div style={{ width: "66%", margin: "auto" }}>
+              <IonButton
+                className="margin-top-2 elevate"
+                expand="block"
+                shape="round"
+                type="button"
+                data-testid="teacher-about-continue-button"
+                disabled={!isValid}
+                onClick={onSubmit}
+              >
+                <FormattedMessage id="common.continue" />
+              </IonButton>
+            </div>
           </form>
         </IonCard>
       </div>

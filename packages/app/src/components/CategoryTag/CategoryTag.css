@@ -1,0 +1,12 @@
+.category-tag {
+  display: inline-block;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  text-align: center;
+  svg {
+    margin-top: 6px;
+    height: 16px;
+    width: 16px;
+  }
+}

@@ -1,0 +1,38 @@
+ion-button {
+  &:not([shape="round"]) {
+    --border-radius: 8px !important;
+  }
+
+  &.curved-corners {
+    --border-radius: 20px;
+  }
+
+  &.flamenco-high {
+    --background: var(--Flamenco-Highest);
+  }
+
+  &:not(.elevate) {
+    --box-shadow: none;
+  }
+
+  &.elevate {
+    --box-shadow: -6px 12px 15px 0px rgba(0, 0, 0, 0.15) !important;
+  }
+  --padding-top: 18px;
+  --padding-bottom: 18px;
+  font-family: Outfit;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+
+  &.font-weight-normal {
+    font-weight: 400;
+  }
+
+  &[disabled]:not([disabled="false"]) {
+    opacity: 1;
+    --background: #eceeed;
+    --box-shadow: none;
+    --color: #889391;
+  }
+}
