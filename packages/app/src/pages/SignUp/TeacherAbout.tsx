@@ -140,7 +140,6 @@ export const TeacherAbout: FC = () => {
   ];
 
   const onSubmit = handleSubmit((response) => {
-    console.log(response);
     setData({
       ...data,
       ...response,

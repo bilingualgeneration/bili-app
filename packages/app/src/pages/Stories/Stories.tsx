@@ -116,7 +116,6 @@ export const Stories = () => {
 
 const StoriesHydrated: React.FC = () => {
   const { status, data } = useFirestoreDoc();
-  console.log(data);
   switch (status) {
     case "loading":
       return <></>;

@@ -100,7 +100,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
         // Animate the swiped card and shift other cards forward
         setTimeout(() => {
           api.start((i) => {
-            // console.log(`This is the swiped card index: ${swiped_card_index}`);
             if (i === swiped_card_index) {
               return {
                 x: -2 - Math.min(cards.length - 1, MAX_CARDS_SHOWN) * 5,
@@ -134,7 +133,6 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
       // Logic for animating the card while it's being dragged
       api.start((i) => {
         if (swiped_card_index !== i) {
-          // console.log(`This is the swiped card index: ${swiped_card_index}`);
           return; // This allows for swipe to be limited to one card at a time vs all cards together
         }
 

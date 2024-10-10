@@ -53,7 +53,6 @@ export const StoriesCongrats: React.FC<{
   const { addAudio, clearAudio, onended } = useAudioManager();
 
   const { stars } = useActivity();
-  console.log("stars", stars);
   const loading = stars === 0;
 
   // can potentially uncomment once 'congrats after x animals' screen is built
@@ -71,7 +70,6 @@ export const StoriesCongrats: React.FC<{
   }, []);
 
   useEffect(() => {
-    console.log("effect 1 stars", stars);
     onended.pipe(first()).subscribe(() => {
       setAudioPlayed(true);
     });
