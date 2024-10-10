@@ -116,6 +116,7 @@ export const Stories = () => {
 
 const StoriesHydrated: React.FC = () => {
   const { status, data } = useFirestoreDoc();
+  console.log(data);
   switch (status) {
     case "loading":
       return <></>;
@@ -729,11 +730,11 @@ export const StoryPage: React.FC<
             <div>
               <AudioButton
                 audio={{
-                  en: { url: texts["en"].audio.url },
+                  en: { url: texts["en"].audio?.url },
                   es: {
                     url: isInclusive
-                      ? texts["es-inc"].audio.url
-                      : texts["es"].audio.url,
+                      ? texts["es-inc"].audio?.url
+                      : texts["es"].audio?.url,
                   },
                 }}
               />

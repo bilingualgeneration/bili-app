@@ -1,3 +1,4 @@
+import { ActivityProvider } from "@/contexts/ActivityContext";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/components/Firebase";
 import { Input } from "@/components/Input";
@@ -6,6 +7,7 @@ import { PageWrapper, StoryPage } from "./Stories";
 import { StoryProvider, useStory } from "./StoryContext";
 import { useForm } from "react-hook-form";
 import { useProfile } from "@/hooks/Profile";
+import { useState } from "react";
 
 const generatePage = ({
   es,
@@ -39,9 +41,11 @@ const generatePage = ({
 
 export const StoryBuilder: React.FC = () => {
   return (
-    <StoryProvider>
-      <StoryBuilderLoader />
-    </StoryProvider>
+    <ActivityProvider>
+      <StoryProvider>
+        <StoryBuilderLoader />
+      </StoryProvider>
+    </ActivityProvider>
   );
 };
 
@@ -59,8 +63,13 @@ const StoryBuilderLoader: React.FC = () => {
     });
     setPages([
       {
+        component: (
+          <PageWrapper>
+            <StoryPage page={blankPage} languages={allLanguages} />
+          </PageWrapper>
+        ),
+        id: "abc",
         languages: allLanguages,
-        component: <StoryPage page={blankPage} languages={allLanguages} />,
       },
     ]);
     setReady(true);
@@ -69,16 +78,21 @@ const StoryBuilderLoader: React.FC = () => {
     return (
       <>
         <HydratedStoryBuilder />
-        <StoryBuilderForm />
       </>
     );
   }
 };
 
+// <StoryBuilderForm />
+
 const HydratedStoryBuilder: React.FC = () => {
   const { pages, pageNumber } = useStory();
-
-  return <PageWrapper>{pages[pageNumber]}</PageWrapper>;
+  return (
+    <>
+      {pages[0].component}
+      <StoryBuilderForm />
+    </>
+  );
 };
 
 const StoryBuilderForm: React.FC = () => {
@@ -86,7 +100,7 @@ const StoryBuilderForm: React.FC = () => {
     user: { uid },
     profile: { isInclusive },
   } = useProfile();
-  const ref = doc(firestore, "users", uid);
+  const ref = doc(firestore, "user", uid);
   const updateProfile = (key: string, value: any) => {
     updateDoc(ref, {
       [key]: value,
@@ -103,11 +117,18 @@ const StoryBuilderForm: React.FC = () => {
   const values = watch();
   const page = generatePage(values);
 
-  if (JSON.stringify(pages[0].props.page) !== JSON.stringify(page)) {
+  if (
+    JSON.stringify(pages[0].component.props.children.props.page) !==
+    JSON.stringify(page)
+  ) {
     setPages([
       {
         languages: allLanguages,
-        component: <StoryPage page={page} languages={allLanguages} />,
+        component: (
+          <PageWrapper>
+            <StoryPage page={page} languages={allLanguages} />
+          </PageWrapper>
+        ),
       },
     ]);
   }
@@ -142,8 +163,8 @@ const StoryBuilderForm: React.FC = () => {
       />
       <IonToggle
         justify="space-between"
-        onClick={() => {
-          updateProfile("isInclusive", !isInclusive);
+        onIonChange={(event) => {
+          updateProfile("isInclusive", event.detail.checked);
         }}
         checked={isInclusive}
         mode="ios"
