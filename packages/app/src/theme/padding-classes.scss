@@ -22,4 +22,8 @@
     padding-top: calc(#{$padding}rem + 0.5rem) !important;
     padding-bottom: calc(#{$padding}rem + 0.5rem) !important;
   }
+
+  .padding-right-#{$padding} {
+    padding-right: #{$padding}rem !important;
+  }
 }

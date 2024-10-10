@@ -4,15 +4,7 @@
   aspect-ratio: 624/400;
   margin: auto;
   padding: 40px;
-//  display: flex;
-//  align-items: end;
-//  justify-content: center;
-//  height: 300px;
-//  max-height: 100%;
-//  margin-bottom: 3rem;
-  /* overflow: hidden; */
   position: relative;
-  /* padding: 10%; */
 }
 
 .card {
@@ -20,13 +12,11 @@
   padding: 40px;
   width: 75%;
   aspect-ratio: 624/400;
-  /* will-change: transform; */
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: none;
   border-radius: 34.635px;
-  //box-shadow: -5.167px 10.333px 30.999px 0px rgba(0, 0, 0, 0.25);
 }
 
 .card_content {
