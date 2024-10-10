@@ -1,15 +1,12 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { IonText, IonButton, IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useAudioManager } from '@/contexts/AudioManagerContext';
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useParams } from "react-router-dom";
-import volumeButton from "@/assets/icons/sf_audio_button.svg";
+import SpeakerIcon from "@/assets/icons/speaker.svg";
 import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
-import {
-  FirestoreDocProvider,
-  useFirestoreDoc
-} from '@/hooks/FirestoreDoc';
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import "./StoryFactory.scss";
 
@@ -86,8 +83,8 @@ export const StoryFactoryLevel2: React.FC = () => {
 */
 
 export const StoryFactoryLevel2: React.FC = () => {
-  const {language} = useLanguageToggle();
-  const {addAudio, clearAudio, onended} = useAudioManager();
+  const { language } = useLanguageToggle();
+  const { addAudio, clearAudio, onended } = useAudioManager();
   const { status, data } = useFirestoreDoc();
   const [words, setWords] = useState<any[][]>([]);
   const [lastSentence, setLastSentence] = useState<string>("");
@@ -100,8 +97,8 @@ export const StoryFactoryLevel2: React.FC = () => {
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
   useEffect(() => {
     const subscription = onended.subscribe(() => {
-      if(currentSentenceRef.current !== lastSentenceRef.current){
-	if (
+      if (currentSentenceRef.current !== lastSentenceRef.current) {
+        if (
           // check if the next number that will be iterated to is a target
           numPlaysRef.current + 1 === 5 ||
           numPlaysRef.current + 1 === 10 ||
@@ -111,7 +108,7 @@ export const StoryFactoryLevel2: React.FC = () => {
           setShowCongrats(true);
         }
         setNumPlays((n) => n + 1);
-	numPlaysRef.current = numPlaysRef.current + 1;
+        numPlaysRef.current = numPlaysRef.current + 1;
       }
     });
     return () => {
@@ -120,8 +117,7 @@ export const StoryFactoryLevel2: React.FC = () => {
     };
   }, []);
   useEffect(() => {
-    if (data !== undefined
-	&& data !== null) {
+    if (data !== undefined && data !== null) {
       setWords([
         shuffleArray(
           data.word_group.filter((word: any) => word.position === 1),
@@ -170,14 +166,14 @@ export const StoryFactoryLevel2: React.FC = () => {
     );
   }
 
-  if(status === 'loading'){
+  if (status === "loading") {
     return <>loading</>;
   }
 
-  if(status === 'error'){
+  if (status === "error") {
     return <>error</>;
   }
-  
+
   // implied else
   return (
     <>
@@ -232,11 +228,11 @@ export const StoryFactoryLevel2: React.FC = () => {
               <div className="sf-game-option option-orange">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {language === 'en'
-		    ? getText(words[0][wordIndices[0]].word, "en")
-		    : getText(words[0][wordIndices[0]].word, "es")}
+                    {language === "en"
+                      ? getText(words[0][wordIndices[0]].word, "en")
+                      : getText(words[0][wordIndices[0]].word, "es")}
                   </h1>
-                  {language === 'esen' && (
+                  {language === "esen" && (
                     <p className="text-3xl color-english">
                       {getText(words[0][wordIndices[0]].word, "en")}
                     </p>
@@ -249,11 +245,11 @@ export const StoryFactoryLevel2: React.FC = () => {
               <div className="sf-game-option option-blue">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {language === 'en'
-		    ? getText(words[1][wordIndices[1]].word, "en")
-		    : getText(words[1][wordIndices[1]].word, "es")}
+                    {language === "en"
+                      ? getText(words[1][wordIndices[1]].word, "en")
+                      : getText(words[1][wordIndices[1]].word, "es")}
                   </h1>
-                  {language === 'esen' && (
+                  {language === "esen" && (
                     <p className="text-3xl color-english">
                       {getText(words[1][wordIndices[1]].word, "en")}
                     </p>
@@ -266,11 +262,11 @@ export const StoryFactoryLevel2: React.FC = () => {
               <div className="sf-game-option option-yellow">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {language === 'en'
-		    ? getText(words[2][wordIndices[2]].word, "en")
-		    : getText(words[2][wordIndices[2]].word, "es")}
+                    {language === "en"
+                      ? getText(words[2][wordIndices[2]].word, "en")
+                      : getText(words[2][wordIndices[2]].word, "es")}
                   </h1>
-                  {language === 'esen' && (
+                  {language === "esen" && (
                     <p className="text-3xl color-english">
                       {getText(words[2][wordIndices[2]].word, "en")}
                     </p>
@@ -283,11 +279,11 @@ export const StoryFactoryLevel2: React.FC = () => {
               <div className="sf-game-option option-purple">
                 <IonText>
                   <h1 className="text-4xl semibold color-suelo">
-                    {language === 'en'
-		    ? getText(words[3][wordIndices[3]].word, "en")
-		    : getText(words[3][wordIndices[3]].word, "es")}
+                    {language === "en"
+                      ? getText(words[3][wordIndices[3]].word, "en")
+                      : getText(words[3][wordIndices[3]].word, "es")}
                   </h1>
-                  {language === 'esen' && (
+                  {language === "esen" && (
                     <p className="text-3xl color-english">
                       {getText(words[3][wordIndices[3]].word, "en")}
                     </p>
@@ -320,54 +316,56 @@ export const StoryFactoryLevel2: React.FC = () => {
               <IonButton
                 className="volume-button-background"
                 onClick={() => {
-		  // TODO: need to check for en and esen
-		  const audios = [];
-		  if(language !== 'esen'){
+                  // TODO: need to check for en and esen
+                  const audios = [];
+                  if (language !== "esen") {
                     audios.push(
-		      AWS_BUCKET + 
-		      normalizeAWS([
-			getText(words[0][wordIndices[0]].word, language),
-			getText(words[1][wordIndices[1]].word, language),
-			getText(words[2][wordIndices[2]].word, language),
-			getText(words[3][wordIndices[3]].word, language),
-                      ].join(" ")
-		      )
-		      + '.mp3'
-		    );
-		  }else{
+                      AWS_BUCKET +
+                        normalizeAWS(
+                          [
+                            getText(words[0][wordIndices[0]].word, language),
+                            getText(words[1][wordIndices[1]].word, language),
+                            getText(words[2][wordIndices[2]].word, language),
+                            getText(words[3][wordIndices[3]].word, language),
+                          ].join(" "),
+                        ) +
+                        ".mp3",
+                    );
+                  } else {
                     audios.push(
-		      AWS_BUCKET + 
-		      normalizeAWS([
-			getText(words[0][wordIndices[0]].word, 'es'),
-			getText(words[1][wordIndices[1]].word, 'es'),
-			getText(words[2][wordIndices[2]].word, 'es'),
-			getText(words[3][wordIndices[3]].word, 'es'),
-                      ].join(" ")
-		      )
-		      + '.mp3'
-		    );
+                      AWS_BUCKET +
+                        normalizeAWS(
+                          [
+                            getText(words[0][wordIndices[0]].word, "es"),
+                            getText(words[1][wordIndices[1]].word, "es"),
+                            getText(words[2][wordIndices[2]].word, "es"),
+                            getText(words[3][wordIndices[3]].word, "es"),
+                          ].join(" "),
+                        ) +
+                        ".mp3",
+                    );
                     audios.push(
-		      AWS_BUCKET + 
-		      normalizeAWS(
-			[
-			  getText(words[0][wordIndices[0]].word, 'en'),
-			  getText(words[1][wordIndices[1]].word, 'en'),
-			  getText(words[2][wordIndices[2]].word, 'en'),
-			  getText(words[3][wordIndices[3]].word, 'en'),
-			].join(" ")
-		      )
-		      + '.mp3'
-		    );
-		  }
-		  const sentence = JSON.stringify(audios);
-		  setLastSentence(currentSentence);
-		  lastSentenceRef.current = currentSentence;
-		  setCurrentSentence(sentence);
-		  currentSentenceRef.current = sentence;
-		  addAudio(audios);
+                      AWS_BUCKET +
+                        normalizeAWS(
+                          [
+                            getText(words[0][wordIndices[0]].word, "en"),
+                            getText(words[1][wordIndices[1]].word, "en"),
+                            getText(words[2][wordIndices[2]].word, "en"),
+                            getText(words[3][wordIndices[3]].word, "en"),
+                          ].join(" "),
+                        ) +
+                        ".mp3",
+                    );
+                  }
+                  const sentence = JSON.stringify(audios);
+                  setLastSentence(currentSentence);
+                  lastSentenceRef.current = currentSentence;
+                  setCurrentSentence(sentence);
+                  currentSentenceRef.current = sentence;
+                  addAudio(audios);
                 }}
               >
-                <img className="volume-icon" src={volumeButton} />
+                <img className="volume-icon" src={SpeakerIcon} />
               </IonButton>
             </IonCol>
           </IonRow>
@@ -382,7 +380,9 @@ export const StoryFactoryLevel2: React.FC = () => {
                     description="Story Factory volume/play button that says 'Read'"
                   />
                 </h1>
-                {language === 'esen' && <p className="text-lg color-english">Read</p>}
+                {language === "esen" && (
+                  <p className="text-lg color-english">Read</p>
+                )}
               </IonText>
             </IonCol>
           </IonRow>

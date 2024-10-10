@@ -25,7 +25,7 @@ import correct_card_audio from "@/assets/audio/correct.mp3";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
 import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
 import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
-import volumeButton from "@/assets/icons/sf_audio_button.svg";
+import SpeakerIcon from "@/assets/icons/speaker.svg";
 import { useParams } from "react-router";
 import { IntruderCongrats } from "./IntruderCongrats";
 import { useTimeTracker } from "@/hooks/TimeTracker";
@@ -322,7 +322,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             className="sound-button-background"
             onClick={() => handleWordAudioClick()}
           >
-            <img className="sound-icon" src={volumeButton} />
+            <img className="sound-icon" src={SpeakerIcon} />
           </IonButton>
           <IonText>
             <h1 className="text-3xl semibold color-suelo">Lee</h1>
