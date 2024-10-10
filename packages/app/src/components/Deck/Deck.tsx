@@ -61,7 +61,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     profile: { isInclusive },
   } = useProfile();
   const { language } = useLanguageToggle();
-  const [isHintOpen, setIsHintOpen] = useState<boolean>(true);
+  const [isHintOpen, setIsHintOpen] = useState<boolean>(false);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const currentCard = cards[currentCardIndex];
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
