@@ -28,31 +28,39 @@ const WouldDoHydratedGame: React.FC = () => {
 
   useEffect(() => {
     if (data !== undefined && data !== null) {
-      console.log(data);
       // Transform data to include text and audio in both languages for each card
       const transformedData = data.questions.map((questionItem: any) => {
         const es = questionItem.question.find(
           (item: any) => item.language === "es",
         );
+        const esHint = questionItem.hint?.find(
+          (item: any) => item.language === "es",
+        );
         const en = questionItem.question.find(
+          (item: any) => item.language === "en",
+        );
+        const enHint = questionItem.hint?.find(
           (item: any) => item.language === "en",
         );
         const esInc = questionItem.question.find(
           (item: any) => item.language === "es-inc",
         );
+        const esIncHint = questionItem.hint?.find(
+          (item: any) => item.language === "es-inc",
+        );
 
         return {
           esAudio: es?.audio || null,
-          esHintAudio: es?.hint_audio || null,
-          esHintText: es?.hint_text || "",
+          esHintAudio: esHint?.audio || null,
+          esHintText: esHint?.text || "",
           esText: es?.text || "",
           enAudio: en?.audio || null,
-          enHintAudio: en?.hint_audio || null,
-          enHintText: en?.hint_text || "",
+          enHintAudio: enHint?.audio || null,
+          enHintText: enHint?.text || "",
           enText: en?.text || "",
           esIncAudio: esInc?.audio || null,
-          esIncHintAudio: esInc?.hint_audio || null,
-          esIncHintText: esInc?.hint_text || "",
+          esIncHintAudio: esIncHint?.audio || null,
+          esIncHintText: esIncHint?.text || "",
           esIncText: esInc?.text || "",
         };
       });
