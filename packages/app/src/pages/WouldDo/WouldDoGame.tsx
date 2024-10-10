@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useProfile } from "@/hooks/Profile";
 import { useParams } from "react-router-dom";
-import {
-  FirestoreDocProvider,
-  useFirestoreDoc,
-} from '@/hooks/FirestoreDoc';
-import { Deck } from "@/components//Deck";
-import {useLanguageToggle} from '@/components/LanguageToggle';
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { Deck } from "@/components/Deck";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import "@/pages/Intruder/Intruder.scss";
 
 import styles from "./styles.module.css";
@@ -16,23 +12,23 @@ import { IonText } from "@ionic/react";
 export const WouldDoGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
-  return <FirestoreDocProvider collection='would-do-game' id={pack_id}>
-    <WouldDoHydratedGame />
-  </FirestoreDocProvider>;
-
+  return (
+    <FirestoreDocProvider collection="would-do-game" id={pack_id}>
+      <WouldDoHydratedGame />
+    </FirestoreDocProvider>
+  );
 };
 
 const WouldDoHydratedGame: React.FC = () => {
-  const { isInclusive } = useProfile();
-  const {language} = useLanguageToggle();
+  const { language } = useLanguageToggle();
   const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
 
   const { status, data } = useFirestoreDoc();
   const [questionsData, setQuestionsData] = useState<any[]>([]);
 
   useEffect(() => {
-    if (data !== undefined
-	&& data !== null) {
+    if (data !== undefined && data !== null) {
+      console.log(data);
       // Transform data to include text and audio in both languages for each card
       const transformedData = data.questions.map((questionItem: any) => {
         const es = questionItem.question.find(
@@ -46,12 +42,18 @@ const WouldDoHydratedGame: React.FC = () => {
         );
 
         return {
-          esText: es?.text || "",
           esAudio: es?.audio || null,
-          enText: en?.text || "",
+          esHintAudio: es?.hint_audio || null,
+          esHintText: es?.hint_text || "",
+          esText: es?.text || "",
           enAudio: en?.audio || null,
-          esIncText: esInc?.text || "",
+          enHintAudio: en?.hint_audio || null,
+          enHintText: en?.hint_text || "",
+          enText: en?.text || "",
           esIncAudio: esInc?.audio || null,
+          esIncHintAudio: esInc?.hint_audio || null,
+          esIncHintText: esInc?.hint_text || "",
+          esIncText: esInc?.text || "",
         };
       });
       setQuestionsData(transformedData);
@@ -70,7 +72,10 @@ const WouldDoHydratedGame: React.FC = () => {
 
   return (
     <div>
-      <div style={{ padding: "4px 120px 0px 120px" }} className='margin-bottom-2'>
+      <div
+        style={{ padding: "4px 120px 0px 120px" }}
+        className="margin-bottom-2"
+      >
         <IonText>
           <h1 className="text-5xl margin-top-1">
             <FormattedMessage
@@ -79,14 +84,13 @@ const WouldDoHydratedGame: React.FC = () => {
               description={"Title of '¿Que harías?' page"}
             />
           </h1>
-          {language === 'esen' && <p className="text-3xl">What would you do?</p>}
+          {language === "esen" && (
+            <p className="text-3xl">What would you do?</p>
+          )}
         </IonText>
       </div>
       {/* Passing questionsData to the Deck component */}
-      <Deck
-        cards={questionsData}
-        isInclusive={isInclusive}
-      />
+      <Deck cards={questionsData} />
     </div>
   );
 };

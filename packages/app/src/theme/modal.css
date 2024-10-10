@@ -1,0 +1,16 @@
+.modal {
+  --width: auto;
+  --max-height: 450px;
+
+  &::part(content) {
+    border-radius: 32px;
+  }
+
+  .modal-content {
+    width: 920px;
+    @media (max-width: 920px) {
+      /* iPad Mini portrait and landscape width */
+      width: 620px;
+    }
+  }
+}
