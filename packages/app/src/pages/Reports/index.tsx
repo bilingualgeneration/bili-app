@@ -65,7 +65,6 @@ const INITIAL_PAGE = 1;
 
 const Reports = () => {
   const classroom = useClassroom();
-  console.log("classroom", classroom);
 
   return (
     <ClassroomDashboardProvider classroomId={classroom.id}>
@@ -110,7 +109,6 @@ const ReportsLoader = () => {
   const isLastPage = pageNumber === TOTAL_PAGES;
 
   const dashboardData = useClassroomDashboard();
-  console.log("dashboardData", dashboardData);
 
   const handlePageForward = () => {
     setPageNumber((prev) => Math.min(prev + 1, TOTAL_PAGES));

@@ -102,14 +102,11 @@ export const StoriesDragGame: FC<StoriesGameProps> = ({ game: data }) => {
 
   // Function to handle drop event
   const handleDrop = (index: number) => {
-    console.log("Dropped at index:", index);
     if (index === activeIndex) {
       // Correct drop
-      console.log("Correct drop!");
       setActiveIndex(activeIndex + 1); // Increment active index
     } else {
       // Incorrect drop
-      console.log("Incorrect drop!");
       // Implement logic to handle incorrect drop (red shadow, audio, etc.)
     }
   };
