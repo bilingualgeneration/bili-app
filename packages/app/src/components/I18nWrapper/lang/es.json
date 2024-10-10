@@ -73,6 +73,8 @@
   "languageMode.immersionTitle": "Inmersión en español",
   "languageMode.settings": "Elige tu configuración",
   "login.divider": "o",
+  "login.error.credentials": "Hubo un error con sus credenciales de inicio de sesión, intente nuevamente",
+  "login.error.unknown": "Algo salió mal",
   "login.teacher": "Iniciar sesión como profesor",
   "login.teacherWelcome": "Bienvenido a la página de inicio de sesión del profesor",
   "pages.classrooms.classroomSize": "{size} estudiantes",

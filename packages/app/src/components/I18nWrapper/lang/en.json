@@ -73,6 +73,8 @@
   "languageMode.immersionTitle": "Spanish Immersion",
   "languageMode.settings": "Choose your settings",
   "login.divider": "or",
+  "login.error.credentials": "There was an error with your login credentials, please try again",
+  "login.error.unknown": "Something went wrong",
   "login.teacher": "Login as Teacher",
   "login.teacherWelcome": "Welcome to Teacher Login Page",
   "pages.classrooms.classroomSize": "{size} students",

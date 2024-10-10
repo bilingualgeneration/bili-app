@@ -31,15 +31,24 @@ const Login: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const history = useHistory();
 
   const onSubmit = handleSubmit(async (data) => {
+    setError(null);
     setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-    } catch (error) {
-      // todo: need to present error message
-      console.error("Error signing in with email and password:", error);
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          setError("credentials");
+          break;
+        default:
+          setError("unknown");
+          break;
+      }
     }
     //history.push("/student-dashboard");
     setIsLoading(false);
@@ -98,6 +107,20 @@ const Login: React.FC = () => {
                   />
                 </div>
               </div>
+              {error !== null && (
+                <div className="ion-margin-top">
+                  <IonText>
+                    <p className="color-error text-sm ion-text-center">
+                      {error === "credentials" && (
+                        <FormattedMessage id="login.error.credentials" />
+                      )}
+                      {error === "unknown" && (
+                        <FormattedMessage id="login.error.unknown" />
+                      )}
+                    </p>
+                  </IonText>
+                </div>
+              )}
               <div className="ion-margin-top">
                 <IonButton
                   className="margin-vertical-3"
@@ -107,11 +130,7 @@ const Login: React.FC = () => {
                   shape="round"
                   type="submit"
                 >
-                  <FormattedMessage
-                    id="common.continue"
-                    defaultMessage="Continue"
-                    description="Button label to continue"
-                  />
+                  <FormattedMessage id="common.continue" />
                 </IonButton>
               </div>
               <div className="ion-text-center ion-margin-top text-sm">
