@@ -102,9 +102,10 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
     await recordUserActivity({
       activity: activityState.type,
       activityId: activityState.id,
+      userId: student.id,
       classroomId: classroom ? classroom.id : null,
       type: "attempt",
-      time,
+      timeSpent: Math.floor(time ?? -1),
       timestamp: new Date().toISOString(),
       version: "0.0.1",
       data: JSON.stringify({
