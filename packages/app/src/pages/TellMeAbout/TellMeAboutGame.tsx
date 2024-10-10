@@ -33,20 +33,35 @@ const TellMeAboutHydratedGame: React.FC = () => {
         const es = questionItem.question.find(
           (item: any) => item.language === "es",
         );
+        const esHint = questionItem.hint?.find(
+          (item: any) => item.language === "es",
+        );
         const en = questionItem.question.find(
+          (item: any) => item.language === "en",
+        );
+        const enHint = questionItem.hint?.find(
           (item: any) => item.language === "en",
         );
         const esInc = questionItem.question.find(
           (item: any) => item.language === "es-inc",
         );
+        const esIncHint = questionItem.hint?.find(
+          (item: any) => item.language === "es-inc",
+        );
 
         return {
-          esText: es?.text || "",
           esAudio: es?.audio || null,
-          enText: en?.text || "",
+          esHintAudio: esHint?.audio || null,
+          esHintText: esHint?.text || "",
+          esText: es?.text || "",
           enAudio: en?.audio || null,
-          esIncText: esInc?.text || "",
+          enHintAudio: enHint?.audio || null,
+          enHintText: enHint?.text || "",
+          enText: en?.text || "",
           esIncAudio: esInc?.audio || null,
+          esIncHintAudio: esIncHint?.audio || null,
+          esIncHintText: esIncHint?.text || "",
+          esIncText: esInc?.text || "",
         };
       });
       setQuestionsData(transformedData);
