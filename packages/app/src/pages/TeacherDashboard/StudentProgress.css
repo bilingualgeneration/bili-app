@@ -152,4 +152,8 @@
 .resend-invite-buttons {
   padding: 0px;
   font-size: 14px;
+
+  p {
+    margin-left: 4px;
+  }
 }
