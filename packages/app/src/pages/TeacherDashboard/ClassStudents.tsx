@@ -15,7 +15,6 @@ import {
 } from "@ionic/react";
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
-import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import "./ClassStudents.scss";

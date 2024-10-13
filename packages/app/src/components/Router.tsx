@@ -409,6 +409,15 @@ export const Router: React.FC = () => {
                       />
                       <Route
                         exact
+                        path="/classrooms/view/:classroomId/progress"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassStudents />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
                         path="/classrooms/view/:classroomId/add_students"
                         render={() => (
                           <TeacherDashboardLayoutWithSideMenu>
