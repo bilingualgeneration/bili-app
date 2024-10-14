@@ -1,6 +1,7 @@
 .progrees-main-block {
   padding: 48px;
 }
+
 .class-progress-header ion-item {
   --padding-start: 0px;
 }
@@ -22,6 +23,7 @@
   justify-content: space-between;
   margin-top: 40px;
 }
+
 .progress-hours-block {
   display: flex;
   justify-content: center;
