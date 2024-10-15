@@ -1,6 +1,15 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import { getFirebaseAuth } from "@/components/Firebase";
-import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonText,
+  IonModal,
+  IonItem,
+  IonLabel,
+  IonInput,
+} from "@ionic/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useState } from "react";
@@ -13,6 +22,7 @@ import { userSchema } from "@bili/schema/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
+import "./ResetPasswordModal.scss";
 
 interface FormInputs {
   email: string;
@@ -31,6 +41,7 @@ const Login: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const history = useHistory();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -133,10 +144,47 @@ const Login: React.FC = () => {
                   </IonText>
                 </IonText>
               </div>
+              <div className="ion-text-center ion-margin-top">
+                <IonButton
+                  fill="clear"
+                  onClick={() => {
+                    setIsModalOpen(true);
+                  }}
+                >
+                  <FormattedMessage
+                    id="common.forgotPassword"
+                    defaultMessage="Forgot Password?"
+                    description="Button for opening the password reset modal"
+                  />
+                </IonButton>
+              </div>
             </form>
           </IonCardContent>
         </IonCard>
       </div>
+      <IonModal
+        isOpen={isModalOpen}
+        onDidDismiss={() => setIsModalOpen(false)}
+        className="reset-password-modal"
+        backdropDismiss={false}
+      >
+        <div className="modal-content">
+          <h2>Enter your email address to reset password</h2>
+          <IonItem className="email-item" lines="none">
+            <IonLabel position="stacked">Email address</IonLabel>
+            <IonInput type="email" placeholder="Enter your email" />
+          </IonItem>
+          <IonButton
+            expand="block"
+            fill="solid"
+            shape="round"
+            className="reset-button"
+            onClick={() => setIsModalOpen(false)}
+          >
+            Reset Password
+          </IonButton>
+        </div>
+      </IonModal>
     </>
   );
 };
