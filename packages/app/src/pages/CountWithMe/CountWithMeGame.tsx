@@ -1,19 +1,21 @@
 //game logic AM
+import { GameData, useActivity } from "@/contexts/ActivityContext";
 import React, { useRef, FC, useEffect, useState } from "react";
 import { IonText } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
 import { CountWithMeFacts } from "./CountWithMeFacts";
 import incorrect_card_audio from "@/assets/audio/incorrect.mp3";
 import correct_card_audio from "@/assets/audio/correct.mp3";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import "./CountWithMe.scss";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useLanguageToggle } from '@/components/LanguageToggle';
-import { first } from 'rxjs/operators';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { first } from "rxjs/operators";
+import { useTimeTracker } from "@/hooks/TimeTracker";
 
 interface BiliImage {
   url: string;
-  id: number
+  id: number;
 }
 
 interface BiliAudio {
@@ -21,35 +23,33 @@ interface BiliAudio {
 }
 
 interface CountWithMeGame {
-  groups: Array<
-    {
-      animals: Array<{
-        image: BiliImage,
-        x_percent: number,
-        y_percent: number,
-        text_color: string,
-      }>,
-      counting_text: Array<{
-        text: string,
-        language: string,
-        audio: BiliAudio,
-      }>,
-      fact_text: Array<{
-        text: string,
-        language: string,
-        audio: BiliAudio,
-      }>,
-      game_text: Array<{
-        text: string,
-        language: string,
-        audio: BiliAudio,
-      }>,
-      fact_background_image: BiliImage,
-      game_background_image: BiliImage,
-      counting_voice: string,
-
-    }
-  >
+  groups: Array<{
+    animals: Array<{
+      image: BiliImage;
+      x_percent: number;
+      y_percent: number;
+      text_color: string;
+    }>;
+    counting_text: Array<{
+      text: string;
+      language: string;
+      audio: BiliAudio;
+    }>;
+    fact_text: Array<{
+      text: string;
+      language: string;
+      audio: BiliAudio;
+    }>;
+    game_text: Array<{
+      text: string;
+      language: string;
+      audio: BiliAudio;
+    }>;
+    fact_background_image: BiliImage;
+    game_background_image: BiliImage;
+    counting_voice: string;
+  }>;
+  uuid: string;
 }
 
 interface CountGameProps {
@@ -57,16 +57,33 @@ interface CountGameProps {
 }
 
 export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
-  const { profile: { isInclusive } } = useProfile();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
   const { language } = useLanguageToggle();
   const history = useHistory();
   const { addAudio, clearAudio, onended } = useAudioManager();
-
+  const {
+    handleAttempt,
+    handleRecordAttempt,
+    handleResetAttempts,
+    setActivityState,
+    setGamesData,
+  } = useActivity();
+  const { startTimer, stopTimer } = useTimeTracker();
 
   useEffect(() => {
+    startTimer();
+    setActivityState({
+      type: "count-with-me",
+      id: data.uuid,
+    });
+
+    const gamesData: GameData = new Map();
+    setGamesData(gamesData);
+
     return clearAudio;
   }, []);
-
 
   //styles for correct or incorrect choice
   const initialStyle = {
@@ -108,12 +125,11 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     setCurrentIndex(0);
   }, [data]);
 
-
   const goToNextAnimalGroup = () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= data.groups.length - 1) {
       setCurrentIndex(0); // Reset to the first element
-      history.replace('/student-dashboard');
+      history.replace("/student-dashboard");
     } else {
       setCurrentIndex(currentIndex + 1); // Move to the next element
     }
@@ -127,55 +143,60 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     gameBackground: animalGroup.game_background_image,
     factBackground: animalGroup.fact_background_image,
     factText: animalGroup.fact_text,
-    voice: animalGroup.counting_voice
+    voice: animalGroup.counting_voice,
   };
-  const getData = countGameData
+  const getData = countGameData;
 
   useEffect(() => {
-
     let audios = [];
-    if (allAnimalsClicked) { //audio for the count questions
-      const ften = countGameData.countQuestions.filter((f: any) => f.language === 'en')[0];
-      const ftes = countGameData.countQuestions.filter((f: any) => f.language === 'es')[0];
+    if (allAnimalsClicked) {
+      //audio for the count questions
+      const ften = countGameData.countQuestions.filter(
+        (f: any) => f.language === "en",
+      )[0];
+      const ftes = countGameData.countQuestions.filter(
+        (f: any) => f.language === "es",
+      )[0];
 
       switch (language) {
-        case 'en':
+        case "en":
           audios.push(ften.audio.url);
           break;
-        case 'es':
+        case "es":
           audios.push(ftes.audio.url);
           break;
-        case 'esen':
+        case "esen":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
         default:
-
           break;
       }
-    } else { //audio for the game questions
-      const ften = countGameData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-      const ftes = countGameData.gameQuestions.filter((f: any) => f.language === 'es')[0];
+    } else {
+      //audio for the game questions
+      const ften = countGameData.gameQuestions.filter(
+        (f: any) => f.language === "en",
+      )[0];
+      const ftes = countGameData.gameQuestions.filter(
+        (f: any) => f.language === "es",
+      )[0];
       switch (language) {
-        case 'en':
+        case "en":
           audios.push(ften.audio.url);
           break;
-        case 'es':
+        case "es":
           audios.push(ftes.audio.url);
           break;
-        case 'esen':
+        case "esen":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
         default:
-
           break;
       }
     }
     addAudio(audios);
-
   }, [data, currentIndex, allAnimalsClicked]);
-
 
   //logic when the correct animal number is choosen
   useEffect(() => {
@@ -191,16 +212,20 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
 
       if (clickedIndexes.length + 1 <= getData.animalImages.length) {
         let audios = [];
-        const audio_es = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_es.wav`;
-        const audio_en = `/assets/audio/count/${clickedIndexes.length + 1}_${getData.voice.toLowerCase()}_en.wav`;
+        const audio_es = `/assets/audio/count/${
+          clickedIndexes.length + 1
+        }_${getData.voice.toLowerCase()}_es.wav`;
+        const audio_en = `/assets/audio/count/${
+          clickedIndexes.length + 1
+        }_${getData.voice.toLowerCase()}_en.wav`;
         switch (language) {
-          case 'en':
+          case "en":
             audios.push(audio_en);
             break;
-          case 'es':
+          case "es":
             audios.push(audio_es);
             break;
-          case 'esen':
+          case "esen":
             audios.push(audio_es);
             audios.push(audio_en);
             break;
@@ -210,7 +235,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
 
         //switches text from game question to count questions and wait until the number's audio is stopped
         if (clickedIndexes.length + 1 === getData.animalImages.length) {
-
           setIsButtonDisabled(true);
           onended.pipe(first()).subscribe(() => {
             setAllAnimalsClicked(true);
@@ -223,8 +247,11 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
+      //TODO: implement groupId
+      const groupId = "";
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
+        handleAttempt(groupId, false);
         addAudio([incorrect_card_audio]);
         //plays audio for incorrect choice
         setAnimalColors((prevColors: any) => ({
@@ -268,24 +295,34 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
         factBackground={getData.factBackground.url}
         count={currentIndex}
         onKeepGoingClick={() => {
-            setIsCorrectSelected(false);
-            setAllAnimalsClicked(false);
-            setClickedIndexes([]);
-            goToNextAnimalGroup();
-            setShowFacts(false);
-          
+          setIsCorrectSelected(false);
+          setAllAnimalsClicked(false);
+          setClickedIndexes([]);
+          goToNextAnimalGroup();
+          setShowFacts(false);
         }}
       />
     );
   }
 
-
-  const cften = getData.countQuestions.filter((f: any) => f.language === 'en')[0];
-  const cftes = getData.countQuestions.filter((f: any) => f.language === 'es')[0];
-  const cftesinc = getData.countQuestions.filter((f: any) => f.language === 'es-inc')[0];
-  const gften = getData.gameQuestions.filter((f: any) => f.language === 'en')[0];
-  const gftes = getData.gameQuestions.filter((f: any) => f.language === 'es')[0];
-  const gftesinc = getData.gameQuestions.filter((f: any) => f.language === 'es-inc')[0];
+  const cften = getData.countQuestions.filter(
+    (f: any) => f.language === "en",
+  )[0];
+  const cftes = getData.countQuestions.filter(
+    (f: any) => f.language === "es",
+  )[0];
+  const cftesinc = getData.countQuestions.filter(
+    (f: any) => f.language === "es-inc",
+  )[0];
+  const gften = getData.gameQuestions.filter(
+    (f: any) => f.language === "en",
+  )[0];
+  const gftes = getData.gameQuestions.filter(
+    (f: any) => f.language === "es",
+  )[0];
+  const gftesinc = getData.gameQuestions.filter(
+    (f: any) => f.language === "es-inc",
+  )[0];
 
   // generate CSS class name based on group index
   const animalGroupClass = `group-${currentIndex}`;
@@ -293,14 +330,14 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   return (
     <>
       {/* Main container with background image */}
-      <div className='padding-top-4'></div>
+      <div className="padding-top-4"></div>
       <div
         className="background-card"
         style={{
           backgroundImage: `url(${getData.gameBackground.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
-          aspectRatio: '1159 / 724',
+          aspectRatio: "1159 / 724",
           position: "relative",
         }}
       >
@@ -312,25 +349,21 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
                 {allAnimalsClicked ? (
                   <>
                     <h1 className="text-4xl color-suelo">
-                      {language !== 'en' && cftes.text}
-                      {language === 'en' && cften.text}
+                      {language !== "en" && cftes.text}
+                      {language === "en" && cften.text}
                     </h1>
-                    {language === 'esen' && (
-                      <p className="text-3xl color-english">
-                        {cften.text}
-                      </p>
+                    {language === "esen" && (
+                      <p className="text-3xl color-english">{cften.text}</p>
                     )}
                   </>
                 ) : (
                   <>
                     <h1 className="text-4xl color-suelo">
-                      {language !== 'en' && gftes.text}
-                      {language === 'en' && gften.text}
+                      {language !== "en" && gftes.text}
+                      {language === "en" && gften.text}
                     </h1>
-                    {language === 'esen' && (
-                      <p className="text-3xl color-english">
-                        {gften.text}
-                      </p>
+                    {language === "esen" && (
+                      <p className="text-3xl color-english">{gften.text}</p>
                     )}
                   </>
                 )}
@@ -352,7 +385,9 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
               left: `${animal.x_percent || index * 10}%`,
               cursor: "pointer",
             }}
-            onClick={!isButtonDisabled ? () => handleBirdClickOrder(index) : undefined}
+            onClick={
+              !isButtonDisabled ? () => handleBirdClickOrder(index) : undefined
+            }
           >
             {/* Animal image */}
             <img
@@ -382,7 +417,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
           </div>
         ))}
       </div>
-
     </>
   );
 };
