@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-import { onSchedule } from "firebase-functions/v2/scheduler";
+//import { onSchedule } from "firebase-functions/v2/scheduler";
 import { child, Database, get, ref } from "firebase/database";
 import {
   collection,
@@ -10,7 +10,7 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-
+import { onRequest } from "firebase-functions/v2/https";
 /*
 const sampledata = {
   classroom: "ID",
@@ -108,12 +108,11 @@ const getClassroomData = async (
   db: Database,
   classroomIds: string[],
 ): Promise<Record<string, any>> => {
-  const dbRef = ref(db);
   const classroomData: Record<string, any> = {};
 
   const classroomValues = await Promise.all(
     classroomIds.map(async (classroomId) => {
-      const snapshot = await get(child(dbRef, `/classrooms/${classroomId}`));
+      const snapshot = await get(child(ref(db), `/classrooms/${classroomId}`));
       return snapshot.val();
     }),
   );
@@ -158,8 +157,6 @@ export const generateClassroomDashboard = async (
   db: Database,
   firestore: Firestore,
 ) => {
-  console.log("Generate classroom dashboard");
-
   // Step 1: Get active classroom IDs
   const activeClassroomIds = await getActiveClassroomIds(firestore);
   if (activeClassroomIds.length === 0) return;
@@ -215,6 +212,7 @@ export const generateClassroomDashboard = async (
 /**
  * Schedule function to generate classroom dashboard daily.
  */
+/*
 export const generateClassroomDashboardScheduledFunction = onSchedule(
   "every day 00:00",
   async () => {
@@ -223,3 +221,13 @@ export const generateClassroomDashboardScheduledFunction = onSchedule(
     await generateClassroomDashboard(db, firestore);
   },
 );
+*/
+const debug = onRequest(async (request) => {
+  const db = admin.database();
+  const firestore = admin.firestore();
+  await generateClassroomDashboard(db, firestore);
+});
+
+export const analytics = {
+  debug,
+};

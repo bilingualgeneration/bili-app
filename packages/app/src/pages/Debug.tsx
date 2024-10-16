@@ -18,6 +18,10 @@ export const Debug: React.FC = () => {
   const { startTimer, stopTimer } = useTimeTracker();
   const functions = getFunctions();
   const addClassroom = httpsCallable(functions, "classroom-add");
+  const debugClassroomAnalytics = httpsCallable(
+    functions,
+    "classroom-analytics-debug",
+  );
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -110,6 +114,24 @@ export const Debug: React.FC = () => {
               }}
             >
               add
+            </IonButton>
+          </IonItem>
+          <IonItem>
+            <IonLabel>debug generate classroom analytics</IonLabel>
+            <IonButton
+              size="small"
+              slot="end"
+              onClick={() => {
+                debugClassroomAnalytics()
+                  .then((response) => {
+                    console.log(response);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+            >
+              call
             </IonButton>
           </IonItem>
           <IonItem>

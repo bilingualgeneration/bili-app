@@ -1,0 +1,7 @@
+{
+  "name": "@bili/schema",
+  "packageManager": "yarn@4.0.1",
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}

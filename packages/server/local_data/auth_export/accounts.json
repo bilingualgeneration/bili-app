@@ -4,10 +4,10 @@
     {
       "localId": "aXmu2wUdxTqiQ0iUVt4Cj3rOf8X1",
       "createdAt": "1723718038594",
-      "lastLoginAt": "1724270785657",
+      "lastLoginAt": "1729042744525",
       "passwordHash": "fakeHash:salt=fakeSaltVmiqkrHOdCNpSsWDflQ6:password=ragnorak",
       "salt": "fakeSaltVmiqkrHOdCNpSsWDflQ6",
-      "passwordUpdatedAt": 1724264516521,
+      "passwordUpdatedAt": 1729017124370,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,11 +16,11 @@
           "rawId": "jon@sharemeals.org"
         }
       ],
-      "validSince": "1724264516",
+      "validSince": "1729017124",
       "email": "jon@sharemeals.org",
       "emailVerified": false,
       "disabled": false,
-      "lastRefreshAt": "2024-08-21T22:03:21.935Z"
+      "lastRefreshAt": "2024-10-16T04:24:05.499Z"
     }
   ]
 }
