@@ -1,6 +1,24 @@
 const admin = require("firebase-admin");
 import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
+import type {
+  ClassroomAnalytics,
+  TimeSpentAtLocation,
+  TimeBreakdownByLanguage,
+} from "@/schema/classroomAnalytics";
+
+const emptyTimeBreakdownByLanguage: TimeBreakdownByLanguage = {
+  en: -1,
+  es: -1,
+  esen: -1,
+};
+
+const emptyTimeSpentAtLocation: TimeSpentAtLocation = {
+  community: emptyTimeBreakdownByLanguage,
+  games: emptyTimeBreakdownByLanguage,
+  stories: emptyTimeBreakdownByLanguage,
+  wellness: emptyTimeBreakdownByLanguage,
+};
 
 export const add = onCall(async (request) => {
   // todo: verify that teacher is logged in
@@ -15,6 +33,21 @@ export const add = onCall(async (request) => {
 
   const classroomId = admin.firestore().collection("scrap").doc().id;
   let tasks: any[] = [];
+
+  let analyticsPayload: ClassroomAnalytics = {
+    classroomId,
+    timeBreakdown: {
+      atHome: emptyTimeSpentAtLocation,
+      atSchool: emptyTimeSpentAtLocation,
+    },
+    studentBreakdown: {
+      atHome: [],
+      atSchool: [],
+    },
+    studentNeeds: [],
+    studentHighlights: [],
+  };
+
   let classroomPayload = {
     allowLanguageToggle: data.allowLanguageToggle,
     grades: data.grades,
@@ -51,41 +84,7 @@ export const add = onCall(async (request) => {
   }
 
   tasks.push(
-    admin
-      .firestore()
-      .collection("classroomAnalytics")
-      .add({
-        classroom: classroomId,
-        studentNeeds: [],
-        studentHighlights: [],
-        learningTimeSummary: {
-          stories: {
-            atSchool: 0, // in minutes
-            atHome: 0,
-          },
-          wellness: {
-            atSchool: 0,
-            atHome: 0,
-          },
-          games: {
-            atSchool: 0,
-            atHome: 0,
-          },
-          community: {
-            atSchool: 0,
-            atHome: 0,
-          },
-        },
-        /*
-       studentNeeds
-       - student, percent, area
-       studentHighlights
-       - student, area
-       learningTimeSummary
-       - stories, wellness, games, community
-         - atSchool, atHome
-    */
-      }),
+    admin.firestore().collection("classroomAnalytics").add(analyticsPayload),
   );
 
   await Promise.all(tasks);

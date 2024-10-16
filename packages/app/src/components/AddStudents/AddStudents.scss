@@ -20,58 +20,6 @@
 
 .add-student-row {
   margin-top: 4px;
-
-  ion-button:not([shape="round"]) {
-    --border-radius: 8px;
-  }
-}
-
-.reset-student-button,
-.add-student-button {
-  height: 56px;
-  width: 58px;
-}
-
-.upload-csv-button {
-  padding: 4px 12px 4px 4px;
-  border-radius: 8px;
-  border: 1px solid #006a67;
-  background: transparent;
-  display: flex;
-  gap: 4px;
-  margin-left: 18px;
-}
-
-.reset-button-column {
-  text-align: -webkit-right;
-}
-
-.add-student-button ion-icon,
-.upload-csv-button ion-icon {
-  font-size: 24px;
-}
-
-.add-student-button ion-icon {
-  margin-top: 8px;
-}
-
-.add-student-button p,
-.upload-csv-button p {
-  margin-top: 3px;
-}
-
-.add-student-button p {
-  text-align: left;
-}
-
-.add-student-button-continue {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ion-button {
-    width: 394px;
-  }
 }
 
 ion-input.custom-input {

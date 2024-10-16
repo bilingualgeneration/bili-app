@@ -23,6 +23,11 @@ ion-button {
     --background: var(--Uva-Uva);
   }
 
+  &.secondary {
+    --background: var(--Cielo-Cielo);
+    --color: var(--Cielo-Lowest);
+  }
+
   &:not(.elevate) {
     --box-shadow: none;
   }
@@ -58,8 +63,8 @@ ion-button {
 
   &[disabled]:not([disabled="false"]) {
     opacity: 1;
-    --background: #eceeed;
+    --background: #eceeed !important;
     --box-shadow: none;
-    --color: #889391;
+    --color: #889391 !important;
   }
 }

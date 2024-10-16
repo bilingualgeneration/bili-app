@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "jsx": "react-jsx",
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
+    "paths": {
+      "@/*": ["*"]
+    },
     "sourceMap": true,
     "strict": true,
     "target": "es2017"
