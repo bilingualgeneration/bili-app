@@ -3,6 +3,7 @@ import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
 import type {
   ClassroomAnalytics,
+  StudentSummaryRecord,
   TimeSpentAtLocation,
   TimeBreakdownByLanguage,
 } from "@/schema/classroomAnalytics";
@@ -34,6 +35,25 @@ export const add = onCall(async (request) => {
   const classroomId = admin.firestore().collection("scrap").doc().id;
   let tasks: any[] = [];
 
+  let studentSummary: StudentSummaryRecord[] = [];
+  for (const student of data.students) {
+    // todo: check if student account already exists
+    const id = await upsertStudent({
+      firstName: student.firstName,
+      lastName: student.lastName,
+      classroom: [classroomId],
+      caregiverEmail: [
+        student.primaryContactEmail,
+        student.secondaryContactEmail,
+      ],
+    });
+    studentSummary.push({
+      id,
+      status: ["on track"],
+      isCaregiverAccountActivated: false,
+    });
+  }
+
   let analyticsPayload: ClassroomAnalytics = {
     classroom: classroomId,
     timeBreakdown: {
@@ -44,8 +64,9 @@ export const add = onCall(async (request) => {
       atHome: [],
       atSchool: [],
     },
-    studentNeeds: [],
-    studentHighlights: [],
+    studentSummary,
+    keyStudentNeeds: [],
+    keyStudentHighlights: [],
   };
 
   let classroomPayload = {
@@ -68,23 +89,12 @@ export const add = onCall(async (request) => {
       .set(classroomPayload),
   );
 
-  for (const student of data.students) {
-    // todo: check if student account already exists
-    tasks.push(
-      upsertStudent({
-        firstName: student.firstName,
-        lastName: student.lastName,
-        classroom: [classroomId],
-        caregiverEmail: [
-          student.primaryContactEmail,
-          student.secondaryContactEmail,
-        ],
-      }),
-    );
-  }
-
   tasks.push(
-    admin.firestore().collection("classroomAnalytics").add(analyticsPayload),
+    admin
+      .firestore()
+      .collection("classroomAnalytics")
+      .doc(classroomId)
+      .set(analyticsPayload),
   );
 
   await Promise.all(tasks);

@@ -189,6 +189,8 @@
   "signUpTeacher.roleFacilitator": "Facilitator",
   "signUpTeacher.roleTeacher": "Teacher",
   "signUpTeacher.school": "What is the name of your school?",
+  "splash.classCode": "Do you have a classroom code?",
+  "splash.classCodeButton": "Enter classroom code",
   "splash.classroom": "Do you have a classroom code?",
   "splash.createAccountButton": "Create an account",
   "splash.loginTitle": "Login",

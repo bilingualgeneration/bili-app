@@ -359,7 +359,6 @@ const LearningTimeSummary: React.FC<any> = ({ data }) => {
         1,
       ),
     };
-    console.log(times);
     const total = sum(Object.values(times));
 
     // needs to be percentages

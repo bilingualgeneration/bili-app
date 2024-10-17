@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+const studentSummaryRecordSchema = z.object({
+  id: z.string(),
+  status: z.array(z.string()),
+  isCaregiverAccountActivated: z.boolean(),
+});
+
 const timeBreakdownByLanguageSchema = z.object({
   en: z.number(),
   es: z.number(),
@@ -23,7 +29,7 @@ const studentBreakdownSchema = z.object({
 });
 
 export const classroomAnalyticsSchema = z.object({
-  classroomId: z.string(),
+  classroom: z.string(), // id
   timeBreakdown: z.object({
     atHome: timeSpentAtLocationSchema,
     atSchool: timeSpentAtLocationSchema,
@@ -32,12 +38,14 @@ export const classroomAnalyticsSchema = z.object({
     atHome: z.array(studentBreakdownSchema),
     atSchool: z.array(studentBreakdownSchema),
   }),
-  studentNeeds: z.array(z.string()),
-  studentHighlights: z.array(z.string()),
+  studentSummary: z.array(studentSummaryRecordSchema),
+  keyStudentNeeds: z.array(z.string()),
+  keyStudentHighlights: z.array(z.string()),
 });
 
 export type ClassroomAnalytics = z.infer<typeof classroomAnalyticsSchema>;
 export type StudentBreakdown = z.infer<typeof studentBreakdownSchema>;
+export type StudentSummaryRecord = z.infer<typeof studentSummaryRecordSchema>;
 export type TimeBreakdownByLanguage = z.infer<
   typeof timeBreakdownByLanguageSchema
 >;
