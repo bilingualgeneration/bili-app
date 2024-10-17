@@ -1,5 +1,6 @@
 //A.M.
 import {
+  IonButton,
   IonCard,
   IonCol,
   IonGrid,
@@ -12,22 +13,19 @@ import {
   IonText,
 } from "@ionic/react";
 import "./StudentProgress.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import House from "@/assets/icons/house.svg";
 import School from "@/assets/icons/school.svg";
+import SmallHouse from "@/assets/icons/small_home.svg";
+import SmallSchool from "@/assets/icons/small_school.svg";
 import CheckCircle from "@/assets/icons/check_circle.svg";
+import Printer from "@/assets/icons/printer_white.svg";
+import Email from "@/assets/icons/email.svg";
 import { useIntl } from "react-intl";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
-import CommunityIcon from "@/assets/icons/community.svg";
-import StoriesIcon from "@/assets/icons/stories.svg";
-import WellnessIcon from "@/assets/icons/wellness.svg";
-import DropIcon from "@/assets/icons/drop.svg";
-import HouseIcon from "@/assets/icons/house.svg";
-import PresentIcon from "@/assets/icons/present.svg";
-import PlayIcon from "@/assets/icons/play.svg";
 
 const studentData = [
   {
@@ -51,12 +49,13 @@ const studentData = [
     activity: "Story factory",
     completions: "3",
     accuracy: "30%",
-    languageMode: "Englsih immersion",
+    languageMode: "English immersion",
     location: "school",
   },
 ];
 
 export const StudentProgress: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
   return (
     <div>
       {/* student header with name and time spent on games this week */}
@@ -232,7 +231,7 @@ export const StudentProgress: React.FC = () => {
           <IonRow>
             {/* pie-chart */}
             <IonCol size="6">
-              <IonCard>
+              <IonCard className="graph-and-progressbar-info-card">
                 <IonText className="text-xl semibold color-suelo">
                   Language Mode
                 </IonText>
@@ -305,7 +304,7 @@ export const StudentProgress: React.FC = () => {
             </IonCol>
             {/* progress bar */}
             <IonCol size="6">
-              <IonCard>
+              <IonCard className="graph-and-progressbar-info-card">
                 <IonText className="text-xl semibold color-suelo">
                   Needs more support
                 </IonText>
@@ -383,7 +382,7 @@ export const StudentProgress: React.FC = () => {
       </div>
       <div className="student-data-activity-table">
         <IonGrid>
-          <IonCard>
+          <div className="student-progress-table-div">
             <IonRow className="student-table-header-row ion-align-items-center">
               <IonCol className="text-md semibold">Date</IonCol>
               <IonCol className="text-md semibold">Activity</IonCol>
@@ -418,19 +417,121 @@ export const StudentProgress: React.FC = () => {
                   </IonText>
                 </IonCol>
                 <IonCol>
-                  <IonText>
-                    <p>{student.languageMode}</p>
+                  <IonText className="student-progress-language-mode">
+                    <p
+                      style={{
+                        background:
+                          student.languageMode.toLowerCase() ===
+                          "english immersion"
+                            ? "#0045A1"
+                            : student.languageMode.toLowerCase() ===
+                                "spanish immersion"
+                              ? "#EC59B1"
+                              : student.languageMode.toLowerCase() ===
+                                  "bilingual"
+                                ? "var(--Base-Selva)"
+                                : "gray",
+                      }}
+                    >
+                      {student.languageMode}
+                    </p>
                   </IonText>
                 </IonCol>
                 <IonCol>
-                  <IonText>
-                    <p>{student.location}</p>
+                  <IonText
+                    className="student-progress-location"
+                    style={{
+                      backgroundColor:
+                        student.location.toLowerCase() === "home"
+                          ? "#FFDAD2"
+                          : "#C3ECE2",
+                    }}
+                  >
+                    <IonIcon
+                      icon={
+                        student.location.toLowerCase() === "home"
+                          ? SmallHouse
+                          : SmallSchool
+                      }
+                    ></IonIcon>
+                    <p
+                      style={{
+                        color:
+                          student.location.toLowerCase() === "home"
+                            ? "#FF5708"
+                            : "#003735",
+                      }}
+                    >
+                      {student.location}
+                    </p>
                   </IonText>
                 </IonCol>
               </IonRow>
             ))}
-          </IonCard>
+          </div>
         </IonGrid>
+      </div>
+      <div className="student-caregivers-block">
+        <IonItem>
+          <IonLabel>
+            <IonText>
+              <p className="semibold text-3xl">Caregivers</p>
+            </IonText>
+          </IonLabel>
+        </IonItem>
+        <div>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonCard className="caregiver-info-card">
+                  <IonRow class="ion-align-items-center">
+                    <IonCol>
+                      <IonText>
+                        <p className="text-xl semibold color-suelo">
+                          {"Caregiver name"}
+                        </p>
+                        <p className="text-lg semibold color-selva">
+                          {"caregiver1@gmail.com"}
+                        </p>
+                        <p className="text-lg color-barro">{"Active"}</p>
+                      </IonText>
+                    </IonCol>
+                    <IonCol></IonCol>
+                  </IonRow>
+                </IonCard>
+              </IonCol>
+              <IonCol>
+                <IonCard className="caregiver-info-card">
+                  <IonRow class="ion-align-items-center">
+                    <IonCol>
+                      <IonText>
+                        <p className="text-xl semibold color-suelo">
+                          {"Caregiver name"}
+                        </p>
+                        <p className="text-lg semibold color-selva">
+                          {"caregiver1@gmail.com"}
+                        </p>
+                        <p className="text-lg color-barro">{"Not active"}</p>
+                      </IonText>
+                    </IonCol>
+                    <IonCol>
+                      <div className="resend-invite-buttons">
+                        <IonButton>
+                          <IonIcon icon={Email}></IonIcon>
+                          <p>Resend Invite</p>
+                        </IonButton>
+                        <IonButton>
+                          <IonIcon icon={Printer}></IonIcon>
+                          <p>Reprint Invite</p>
+                        </IonButton>
+                      </div>
+                    </IonCol>
+                  </IonRow>
+                </IonCard>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </div>
       </div>
     </div>
   );

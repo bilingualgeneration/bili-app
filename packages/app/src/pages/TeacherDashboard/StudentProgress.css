@@ -37,6 +37,14 @@
   padding-left: 15px;
 }
 
+.graph-and-progressbar-info-card {
+  height: 100%;
+}
+
+.graph-and-progressbar {
+  margin-bottom: 40px;
+}
+
 .color-1 {
   background: #ec59b1;
 }
@@ -73,4 +81,79 @@
   position: absolute;
   right: 0;
   top: -160%;
+}
+
+.student-data-activity-table ion-grid {
+  --ion-grid-padding: 20px;
+}
+
+.student-progress-table-div {
+  background: white;
+  border-radius: 8px;
+  padding: 2px 4px;
+}
+
+.student-table-header-row {
+  padding: 16px;
+}
+
+.student-table-body-row {
+  padding: 16px;
+  background: #f7faf9;
+  margin: 4px 0;
+  border-radius: 8px;
+}
+
+.student-progress-language-mode p {
+  border-radius: 4px;
+  padding: 0px 4px;
+  margin-right: 3.4rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--Base-Nube, #fff);
+  font-family: Outfit;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 177.778% */
+  letter-spacing: 1px;
+}
+
+@media (max-width: 844px) {
+  .student-progress-language-mode p {
+    margin-right: 1rem;
+  }
+}
+
+.student-progress-location {
+  display: inline-flex;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 0px 8px;
+
+  p {
+    text-transform: uppercase;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 177.778% */
+    letter-spacing: 1px;
+  }
+}
+
+.student-caregivers-block {
+  margin: 24px 0px;
+}
+
+.caregiver-info-card {
+  height: 100%;
+}
+
+.resend-invite-buttons {
+  padding: 0px;
+  font-size: 14px;
+
+  p {
+    margin-left: 4px;
+  }
 }

@@ -29,6 +29,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -36,6 +37,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -43,6 +45,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -50,6 +53,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -57,6 +61,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "support recommended",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -64,6 +69,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       studentName: "John Doeeeeeee",
@@ -71,6 +77,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@example.com",
       needsMoreSupport: "needs support",
       homeAccount: "active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
     {
       id: "",
@@ -78,6 +85,7 @@ export const ClassStudents: React.FC = () => {
       secondaryHomeEmail: "john.doe@exampleeeeeeeeeeeee.com",
       needsMoreSupport: "on track",
       homeAccount: "not active",
+      studentId: "U73tqRtJ5bmeTcnxsfca",
     },
   ];
 
@@ -132,7 +140,7 @@ export const ClassStudents: React.FC = () => {
                 <StudentInfo
                   userId={""}
                   userType={""}
-                  link="http://localhost:5173/classrooms/view/:3GJTSWXuJ4NL3ZZpygF1/students/view/${studentId}"
+                  link={`/classrooms/view/${classroomId}/students/view/${student.studentId}`}
                   size="xs"
                 />
               </IonCol>
@@ -159,13 +167,15 @@ export const ClassStudents: React.FC = () => {
                   className="student-needs-support-text text-sm-xs semibold"
                   style={{
                     background:
-                      student.needsMoreSupport === "on track"
+                      student.needsMoreSupport.toLowerCase() === "on track"
                         ? "var(--Cielo-Low)"
-                        : student.needsMoreSupport === "needs support"
+                        : student.needsMoreSupport.toLowerCase() ===
+                            "needs support"
                           ? "var(--Habanero-Habanero)"
-                          : student.needsMoreSupport === "support recommended"
+                          : student.needsMoreSupport.toLowerCase() ===
+                              "support recommended"
                             ? "var(--Sol)"
-                            : "transparent",
+                            : "gray",
                     textTransform: "uppercase",
                   }}
                 >
