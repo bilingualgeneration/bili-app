@@ -1,7 +1,7 @@
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
 import { Avatar, AvatarSize } from "@/components/Avatar";
-import "./StudentInfo.css";
+import { FullName } from "@/hooks/Names";
 
 interface StudentInfoProps {
   uid: string;
@@ -10,17 +10,6 @@ interface StudentInfoProps {
   link?: string;
   size?: AvatarSize;
 }
-
-// TODO: might need to update props
-
-/*
-          <img
-            src={StudentImage}
-            className={`student-info-img-${size}`}
-            alt="student-image"
-          />
-
-*/
 
 export const StudentInfo: React.FC<StudentInfoProps> = ({
   uid,
@@ -31,8 +20,8 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
 }) => {
   return (
     <IonGrid>
-      <IonRow id="student-info-row" className="ion-align-items-center">
-        <IonCol size="auto">
+      <IonRow className="ion-align-items-center">
+        <IonCol size="auto" style={{ paddingRight: 8 }}>
           {/* temporary image */}
           <Avatar uid={uid} size={size} />
         </IonCol>
@@ -49,7 +38,9 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
                 {"Mattie Blooman"}
               </a>
             ) : (
-              <p className="text-sm">{"Mattie Blooman"}</p>
+              <span className="text-sm">
+                <FullName uid={uid} type="user" />
+              </span>
             )}
 
             {/* Subtitle, displayed when provided */}
