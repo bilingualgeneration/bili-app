@@ -1,0 +1,9 @@
+#student-info-row {
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .image-column-padding {
+    padding-right: 8px;
+  }
+}

@@ -1,36 +1,40 @@
-//A.M.
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
-import StudentImage from "@/assets/img/student_img.png";
-import "./StudentInfo.scss";
+import { Avatar, AvatarSize } from "@/components/Avatar";
+import "./StudentInfo.css";
 
 interface StudentInfoProps {
-  userId: string;
+  uid: string;
   userType: string;
   subtitle?: string;
   link?: string;
-  size: string;
+  size?: AvatarSize;
 }
 
 // TODO: might need to update props
 
-export const StudentInfo: React.FC<StudentInfoProps> = ({
-  userId,
-  userType,
-  subtitle,
-  link,
-  size,
-}) => {
-  return (
-    <IonGrid>
-      <IonRow id="student-info-row" className="ion-align-items-center">
-        <IonCol size="auto" className="image-column-padding">
-          {/* temporary image */}
+/*
           <img
             src={StudentImage}
             className={`student-info-img-${size}`}
             alt="student-image"
           />
+
+*/
+
+export const StudentInfo: React.FC<StudentInfoProps> = ({
+  uid,
+  userType,
+  subtitle,
+  link,
+  size = "md",
+}) => {
+  return (
+    <IonGrid>
+      <IonRow id="student-info-row" className="ion-align-items-center">
+        <IonCol size="auto">
+          {/* temporary image */}
+          <Avatar uid={uid} size={size} />
         </IonCol>
         <IonCol size="auto" className="ion-no-padding">
           <IonText>
