@@ -1,6 +1,15 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import { getFirebaseAuth } from "@/components/Firebase";
-import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonText,
+  IonModal,
+  IonItem,
+  IonLabel,
+  IonInput,
+} from "@ionic/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useState } from "react";
@@ -13,6 +22,8 @@ import { userSchema } from "@bili/schema/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
+import closeIcon from "../assets/icons/close.svg"; // Adjust the path if necessary
+import "./ResetPasswordModal.scss";
 
 interface FormInputs {
   email: string;
@@ -31,6 +42,7 @@ const Login: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();
 
@@ -92,11 +104,7 @@ const Login: React.FC = () => {
                   <Input
                     control={control}
                     disabled={isLoading}
-                    label={intl.formatMessage({
-                      id: "common.password",
-                      defaultMessage: "Password",
-                      description: "Input label for user's password",
-                    })}
+                    label={intl.formatMessage({ id: "common.password" })}
                     labelPlacement="above"
                     required={true}
                     name="password"
@@ -106,6 +114,21 @@ const Login: React.FC = () => {
                     type="password"
                   />
                 </div>
+              </div>
+              <div className="ion-text-center ion-margin-top">
+                <IonText>
+                  {" "}
+                  <a
+                    href="#"
+                    className="semibold"
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevents page reload
+                      setIsModalOpen(true); // Opens the modal
+                    }}
+                  >
+                    <FormattedMessage id="login.forgotPassword.link" />
+                  </a>
+                </IonText>
               </div>
               {error !== null && (
                 <div className="ion-margin-top">
@@ -143,11 +166,7 @@ const Login: React.FC = () => {
                   <IonText>
                     {" "}
                     <a href="/sign-up" className="semibold" style={{}}>
-                      <FormattedMessage
-                        id="common.signUp"
-                        defaultMessage="Sign Up"
-                        description="Text that is also a link that prompts users to sign up using the 'Sign up' link if they don't have an account"
-                      />
+                      <FormattedMessage id="common.signUp" />
                     </a>
                   </IonText>
                 </IonText>
@@ -156,6 +175,50 @@ const Login: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </div>
+      <IonModal
+        isOpen={isModalOpen}
+        onDidDismiss={() => setIsModalOpen(false)}
+        className="reset-password-modal"
+        backdropDismiss={false}
+      >
+        <div className="modal-content">
+          <img
+            src={closeIcon}
+            alt="Close"
+            className="close-button"
+            onClick={() => setIsModalOpen(false)}
+          />
+          <IonText>
+            <h2 className="text-lg semibold">
+              <FormattedMessage id="login.forgotPassword.prompt" />
+            </h2>
+          </IonText>
+          <div className="text-sm email-input">
+            <Input
+              className="text-xl"
+              control={control}
+              disabled={isLoading}
+              label={intl.formatMessage({ id: "common.email" })}
+              labelPlacement="above"
+              required={true}
+              name="email"
+              fill="outline"
+              helperText=""
+              testId="login-email-input"
+              type="email"
+            />
+          </div>
+          <IonButton
+            expand="block"
+            fill="solid"
+            shape="round"
+            className="reset-button color-selva text-sm semibold"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <FormattedMessage id="login.forgotPassword.resetButton" />
+          </IonButton>
+        </div>
+      </IonModal>
     </>
   );
 };
