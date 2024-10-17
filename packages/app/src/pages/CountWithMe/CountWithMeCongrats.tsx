@@ -100,21 +100,21 @@ export const CountWithMeCongrats: React.FC<{
 
   const history = useHistory();
 
-  useEffect(() => {
-    handleRecordAttempt(stopTimer());
-    // increment number of completions
-    const completionFunction = httpsCallable(
-      functions,
-      "user-child-profile-completion-add",
-    );
-    const data: any = {
-      uid: activeChildProfile.id,
-      module: "count-with-me-game", //not sure if it's a correct module
-      moduleAdd: 5,
-      completionsAdd: 1,
-    };
-    completionFunction(data);
-  }, []);
+  // useEffect(() => {
+
+  // increment number of completions
+  // const completionFunction = httpsCallable(
+  //   functions,
+  //   "user-child-profile-completion-add",
+  // );
+  // const data: any = {
+  //   uid: activeChildProfile.id,
+  //   module: "count-with-me-game", //not sure if it's a correct module
+  //   moduleAdd: 5,
+  //   completionsAdd: 1,
+  // };
+  // completionFunction(data);
+  // }, []);
 
   useEffect(() => {
     return () => {
@@ -123,6 +123,7 @@ export const CountWithMeCongrats: React.FC<{
     };
   }, []);
   useEffect(() => {
+    handleRecordAttempt(stopTimer());
     if (isImmersive) {
       audio_es.onended = () => {
         setAudioPlayed(true);

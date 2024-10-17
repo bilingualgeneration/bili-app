@@ -24,6 +24,7 @@ interface BiliAudio {
 
 interface CountWithMeGame {
   groups: Array<{
+    handle: string;
     animals: Array<{
       image: BiliImage;
       x_percent: number;
@@ -57,6 +58,7 @@ interface CountGameProps {
 }
 
 export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
+  console.log(data);
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -80,6 +82,10 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     });
 
     const gamesData: GameData = new Map();
+
+    const groupId = getData.handle;
+    gamesData.set(groupId, { totalMistakesPossible: 2 });
+
     setGamesData(gamesData);
 
     return clearAudio;
@@ -144,6 +150,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     factBackground: animalGroup.fact_background_image,
     factText: animalGroup.fact_text,
     voice: animalGroup.counting_voice,
+    handle: animalGroup.handle,
   };
   const getData = countGameData;
 
@@ -247,8 +254,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
 
     //next step happens only when all images were clicked
     if (clickedIndexes.length === getData.animalImages.length) {
-      //TODO: implement groupId
-      const groupId = "";
+      const groupId = getData.handle;
       if (clickedIndexes.indexOf(index) !== getData.animalImages.length - 1) {
         //logic for the incorrect number
         handleAttempt(groupId, false);
@@ -271,6 +277,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
       } else {
         //logic when the correct card is choosen
         //plays audio for correct choice
+        handleAttempt(groupId, true);
         addAudio([correct_card_audio]);
         setAnimalColors((prevColors: any) => ({
           ...prevColors,

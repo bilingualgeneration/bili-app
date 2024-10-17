@@ -25,9 +25,9 @@ const CountWithMeHydratedGame: React.FC = () => {
     return <></>;
   }
 
-  // @ts-ignore
-  return;
-  <ActivityProvider>
-    <CountWithMeGame game={data} />;
-  </ActivityProvider>;
+  return (
+    <ActivityProvider>
+      <CountWithMeGame game={data} />
+    </ActivityProvider>
+  );
 };
