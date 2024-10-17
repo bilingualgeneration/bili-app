@@ -104,11 +104,7 @@ const Login: React.FC = () => {
                   <Input
                     control={control}
                     disabled={isLoading}
-                    label={intl.formatMessage({
-                      id: "common.password",
-                      defaultMessage: "Password",
-                      description: "Input label for user's password",
-                    })}
+                    label={intl.formatMessage({ id: "common.password" })}
                     labelPlacement="above"
                     required={true}
                     name="password"
@@ -130,11 +126,7 @@ const Login: React.FC = () => {
                       setIsModalOpen(true); // Opens the modal
                     }}
                   >
-                    <FormattedMessage
-                      id="common.forgotPassword"
-                      defaultMessage="Forgot Password?"
-                      description="Text that is also a link that prompts users to reset their password if they forgot it"
-                    />
+                    <FormattedMessage id="login.forgotPassword.link" />
                   </a>
                 </IonText>
               </div>
@@ -174,11 +166,7 @@ const Login: React.FC = () => {
                   <IonText>
                     {" "}
                     <a href="/sign-up" className="semibold" style={{}}>
-                      <FormattedMessage
-                        id="common.signUp"
-                        defaultMessage="Sign Up"
-                        description="Text that is also a link that prompts users to sign up using the 'Sign up' link if they don't have an account"
-                      />
+                      <FormattedMessage id="common.signUp" />
                     </a>
                   </IonText>
                 </IonText>
@@ -200,16 +188,17 @@ const Login: React.FC = () => {
             className="close-button"
             onClick={() => setIsModalOpen(false)}
           />
-
-          <h2 className="text-lg semibold">
-            Enter your email address to reset password
-          </h2>
+          <IonText>
+            <h2 className="text-lg semibold">
+              <FormattedMessage id="login.forgotPassword.prompt" />
+            </h2>
+          </IonText>
           <div className="text-sm email-input">
             <Input
               className="text-xl"
               control={control}
               disabled={isLoading}
-              label="Email address"
+              label={intl.formatMessage({ id: "common.email" })}
               labelPlacement="above"
               required={true}
               name="email"
@@ -226,7 +215,7 @@ const Login: React.FC = () => {
             className="reset-button color-selva text-sm semibold"
             onClick={() => setIsModalOpen(false)}
           >
-            Reset Password
+            <FormattedMessage id="login.forgotPassword.resetButton" />
           </IonButton>
         </div>
       </IonModal>
