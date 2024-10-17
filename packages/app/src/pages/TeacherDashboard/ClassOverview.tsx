@@ -1,4 +1,3 @@
-//A.M.
 import {
   IonButton,
   IonCard,

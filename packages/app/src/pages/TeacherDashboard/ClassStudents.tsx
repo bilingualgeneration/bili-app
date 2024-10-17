@@ -1,4 +1,6 @@
-//A.M.
+import { addOutline, addSharp } from "ionicons/icons";
+import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import {
   IonButton,
   IonCard,
@@ -13,13 +15,40 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import { addOutline, addSharp } from "ionicons/icons";
-import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
-import "./ClassStudents.scss";
+import "./ClassStudents.css";
 
 export const ClassStudents: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
+  return (
+    <FirestoreDocProvider
+      collection="classroom"
+      id={classroomId}
+      populate={{
+        classroomAnalytics: ["classroom", "==", classroomId],
+      }}
+    >
+      <ClassStudentsLoader />
+    </FirestoreDocProvider>
+  );
+};
+
+const ClassStudentsLoader: React.FC = () => {
+  const { status, data } = useFirestoreDoc();
+  switch (status) {
+    case "loading":
+      return <></>;
+    case "error":
+      return <>error</>;
+    case "ready":
+      console.log(data);
+      return <>ready</>;
+  }
+  return <></>;
+};
+
+const HydratedClassStudents: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
   const studentsData = [
     {
