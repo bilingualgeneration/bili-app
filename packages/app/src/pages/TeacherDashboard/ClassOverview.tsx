@@ -309,12 +309,17 @@ const StudentHighlightCard: React.FC<any> = ({ area, student }) => {
   }
 };
 
-const sum = (array) => {
-  console.log(array);
+type LearningTimeSummaryFilter = "atSchool" | "atHome" | "both";
+
+const sum = (array: number[]) => {
   return array.reduce((acc, current) => acc + current, 0);
 };
 
-const summarizeTime = (data, filter, category) => {
+const summarizeTime = (
+  data: any,
+  filter: LearningTimeSummaryFilter,
+  category: string,
+) => {
   switch (filter) {
     case "atHome":
       return sum(Object.values(data.atHome[category]));
@@ -326,12 +331,16 @@ const summarizeTime = (data, filter, category) => {
         sum(Object.values(data.atSchool[category]))
       );
   }
+  // default case
+  return (
+    sum(Object.values(data.atHome[category])) +
+    sum(Object.values(data.atSchool[category]))
+  );
 };
 
 const LearningTimeSummary: React.FC<any> = ({ data }) => {
-  const [learningTimeSummaryFilter, setLearningTimeSummaryFilter] = useState<
-    "atSchool" | "atHome" | "both"
-  >("atSchool");
+  const [learningTimeSummaryFilter, setLearningTimeSummaryFilter] =
+    useState<LearningTimeSummaryFilter>("atSchool");
   const filteredData = useMemo(() => {
     const times = {
       community: Math.max(
@@ -375,7 +384,9 @@ const LearningTimeSummary: React.FC<any> = ({ data }) => {
               value={learningTimeSummaryFilter}
               mode="ios"
               onIonChange={({ detail: { value } }) => {
-                setLearningTimeSummaryFilter(value);
+                setLearningTimeSummaryFilter(
+                  value as LearningTimeSummaryFilter,
+                );
               }}
             >
               <IonSegmentButton value="atSchool">
