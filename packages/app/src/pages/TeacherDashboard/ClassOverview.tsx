@@ -11,6 +11,8 @@ import {
   IonList,
   IonProgressBar,
   IonRow,
+  IonSegment,
+  IonSegmentButton,
   IonText,
 } from "@ionic/react";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
@@ -29,17 +31,11 @@ import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { useClassroom } from "@/hooks/Classroom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-import "./ClassOverview.scss";
-
-const dataAtSchool = [24, 32, 28, 16];
-const dataAtHome = [18, 25, 40, 17];
-const dataAllLearning = dataAtSchool.map(
-  (value, index) => value + dataAtHome[index],
-);
+import "./ClassOverview.css";
 
 export const ClassOverview: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
@@ -94,7 +90,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
   id,
   school,
   name,
-  classroomAnalytics: { studentHighlights, studentNeeds },
+  classroomAnalytics,
 }) => {
   const intl = useIntl();
   const { setInfo } = useClassroom();
@@ -143,7 +139,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
       <div className="overview-top-student-cards">
         <IonGrid>
           <IonRow>
-            {studentHighlights.map((s: any) => (
+            {classroomAnalytics?.studentHighlights?.map((s: any) => (
               <FirestoreDocProvider
                 collection="student"
                 key={s.studentId}
@@ -163,7 +159,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
           <IonRow>
             {/* left card with graph*/}
             <IonCol>
-              <LearningTimeSummary />
+              <LearningTimeSummary data={classroomAnalytics.timeBreakdown} />
               {/* blog part */}
               <IonCard className="card-blog">
                 <div className="class-overview-blog-styles">
@@ -206,7 +202,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
 
                 <IonList lines="full" className="students-needs-support-list">
-                  {studentNeeds.map((s: any) => (
+                  {classroomAnalytics?.studentNeeds?.map((s: any) => (
                     <FirestoreDocProvider
                       collection="student"
                       key={s.studentId}
@@ -313,32 +309,59 @@ const StudentHighlightCard: React.FC<any> = ({ area, student }) => {
   }
 };
 
-const LearningTimeSummary: React.FC<any> = ({}) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("school");
+const sum = (array) => {
+  console.log(array);
+  return array.reduce((acc, current) => acc + current, 0);
+};
 
-  const handleButtonClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
-  const getButtonClass = (buttonName: string) => {
-    return selectedCategory === buttonName ? "active-button-green" : "";
-  };
-
-  let data;
-  switch (selectedCategory) {
-    case "home":
-      data = dataAtHome;
-      break;
-
-    case "all":
-      data = dataAllLearning;
-      break;
-
-    case "school":
-    default:
-      data = dataAtSchool;
+const summarizeTime = (data, filter, category) => {
+  switch (filter) {
+    case "atHome":
+      return sum(Object.values(data.atHome[category]));
+    case "atSchool":
+      return sum(Object.values(data.atSchool[category]));
+    case "both":
+      return (
+        sum(Object.values(data.atHome[category])) +
+        sum(Object.values(data.atSchool[category]))
+      );
   }
+};
 
+const LearningTimeSummary: React.FC<any> = ({ data }) => {
+  const [learningTimeSummaryFilter, setLearningTimeSummaryFilter] = useState<
+    "atSchool" | "atHome" | "both"
+  >("atSchool");
+  const filteredData = useMemo(() => {
+    const times = {
+      community: Math.max(
+        summarizeTime(data, learningTimeSummaryFilter, "community"),
+        1,
+      ),
+      games: Math.max(
+        summarizeTime(data, learningTimeSummaryFilter, "games"),
+        1,
+      ),
+      stories: Math.max(
+        summarizeTime(data, learningTimeSummaryFilter, "stories"),
+        1,
+      ),
+      wellness: Math.max(
+        summarizeTime(data, learningTimeSummaryFilter, "wellness"),
+        1,
+      ),
+    };
+    console.log(times);
+    const total = sum(Object.values(times));
+
+    // needs to be percentages
+    return {
+      community: Math.floor((times.community / total) * 100),
+      games: Math.floor((times.games / total) * 100),
+      stories: Math.floor((times.stories / total) * 100),
+      wellness: Math.floor((times.wellness / total) * 100),
+    };
+  }, [data, learningTimeSummaryFilter]);
   return (
     <IonCard>
       {/* Learning time summary row */}
@@ -348,44 +371,23 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
             <IonText className="text-xl semibold color-suelo">
               Learning time summary
             </IonText>
-
-            <IonGrid className="table-green-buttons">
-              <IonRow className="ion-align-items-center">
-                <IonCol
-                  className={`custom-col-class-overview first-column ${getButtonClass(
-                    "school",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("school")}>
-                      <p className="text-sm semibold">At school</p>
-                    </button>
-                  </div>
-                </IonCol>
-                <IonCol
-                  className={`custom-col-class-overview ${getButtonClass(
-                    "home",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("home")}>
-                      <p className="text-sm semibold">At home</p>
-                    </button>
-                  </div>
-                </IonCol>
-                <IonCol
-                  className={`custom-col-class-overview last-column ${getButtonClass(
-                    "all",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("all")}>
-                      <p className="text-sm semibold">All learning</p>
-                    </button>
-                  </div>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+            <IonSegment
+              value={learningTimeSummaryFilter}
+              mode="ios"
+              onIonChange={({ detail: { value } }) => {
+                setLearningTimeSummaryFilter(value);
+              }}
+            >
+              <IonSegmentButton value="atSchool">
+                <IonLabel>At school</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="atHome">
+                <IonLabel>At home</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="both">
+                <IonLabel>All Learning</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
           </div>
         </IonCol>
       </IonRow>
@@ -409,7 +411,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Stories</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[0]}%</p>
+                  <p>{filteredData.stories}%</p>
                 </IonCol>
               </IonRow>
               {/* second group */}
@@ -427,7 +429,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Wellness</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[1]}%</p>
+                  <p>{filteredData.wellness}%</p>
                 </IonCol>
               </IonRow>
               {/* third group */}
@@ -446,7 +448,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Play</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[2]}%</p>
+                  <p>{filteredData.games}%</p>
                 </IonCol>
               </IonRow>
               {/* fourth group */}
@@ -465,7 +467,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Community</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[3]}%</p>
+                  <p>{filteredData.community}%</p>
                 </IonCol>
               </IonRow>
             </IonCol>
@@ -475,7 +477,12 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
         {/* graph columnn */}
         <IonCol size="5.5" className="class-graph-percentage">
           <PieChartComponent
-            data={data}
+            data={[
+              filteredData.stories,
+              filteredData.wellness,
+              filteredData.games,
+              filteredData.community,
+            ]}
             colors={["#0045A1", "#973D78", "#FF5708", "#22BEB9"]}
             innRadius={3}
             width={200}
