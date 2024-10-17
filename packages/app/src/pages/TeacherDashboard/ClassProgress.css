@@ -1,0 +1,59 @@
+.progrees-main-block {
+  padding: 48px;
+}
+
+.class-progress-header ion-item {
+  --padding-start: 0px;
+}
+
+.classroom-name-text {
+  margin-right: 8px;
+}
+
+.overview-text-header {
+  margin-left: 8px;
+}
+
+.header-overview-arrow {
+  margin-bottom: 48px;
+}
+
+.progress-header-block {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.progress-hours-block {
+  display: flex;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 40px;
+  }
+}
+
+.hours-column {
+  border-radius: 8px;
+  background: var(--Flamenco-High, #ffaedc);
+  text-align: center;
+  align-self: stretch;
+  padding: 16px 32px;
+  margin-right: 24px;
+}
+
+.standarts-column {
+  border-radius: 8px;
+  background: var(--Sol-High, #ffe24f);
+  text-align: center;
+  align-self: stretch;
+  padding: 16px 32px;
+}
+
+.progress-data-block {
+  margin: 40px 0px;
+
+  ion-accordion-group {
+    margin: 48px 0px;
+  }
+}
