@@ -35,7 +35,7 @@ export const add = onCall(async (request) => {
   let tasks: any[] = [];
 
   let analyticsPayload: ClassroomAnalytics = {
-    classroomId,
+    classroom: classroomId,
     timeBreakdown: {
       atHome: emptyTimeSpentAtLocation,
       atSchool: emptyTimeSpentAtLocation,
