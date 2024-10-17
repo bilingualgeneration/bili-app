@@ -90,7 +90,11 @@ export const add = onCall(async (request) => {
   );
 
   tasks.push(
-    admin.firestore().collection("classroomAnalytics").add(analyticsPayload),
+    admin
+      .firestore()
+      .collection("classroomAnalytics")
+      .doc(classroomId)
+      .set(analyticsPayload),
   );
 
   await Promise.all(tasks);
