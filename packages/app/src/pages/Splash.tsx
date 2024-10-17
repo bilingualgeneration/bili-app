@@ -6,7 +6,7 @@ import {
   IonCardTitle,
   IonText,
 } from "@ionic/react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 
@@ -30,23 +30,11 @@ export const Splash: React.FC = () => {
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <FormattedMessage
-                  id="common.haveAccount"
-                  defaultMessage="Already have an account?"
-                  description="link text if user already has an account"
-                />
+                <FormattedMessage id="common.haveAccount" />
               </IonCardTitle>
-              <Link to='/login' className='no-underline'>
-                <IonButton
-                  className=""
-                  expand="block"
-                  shape="round"
-                >
-                  <FormattedMessage
-                    id="common.logIn"
-                    defaultMessage="Log In"
-                    description="label to log in"
-                  />
+              <Link to="/login" className="no-underline">
+                <IonButton expand="block" shape="round">
+                  <FormattedMessage id="common.logIn" />
                 </IonButton>
               </Link>
             </IonCardContent>
@@ -55,25 +43,15 @@ export const Splash: React.FC = () => {
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <FormattedMessage
-                  id="splash.newAccount"
-                  defaultMessage="New to Bili?"
-                />
+                <FormattedMessage id="splash.newAccount" />
               </IonCardTitle>
-              <Link to='/sign-up' className='no-underline'>
-                <IonButton
-                  expand="block"
-                  fill="outline"
-                  shape="round">
-                  <FormattedMessage
-                    id="splash.createAccountButton"
-                    defaultMessage="Create an account"
-                  />
+              <Link to="/sign-up" className="no-underline">
+                <IonButton expand="block" fill="outline" shape="round">
+                  <FormattedMessage id="splash.createAccountButton" />
                 </IonButton>
               </Link>
             </IonCardContent>
           </IonCard>
-
 
           <IonCard>
             <IonCardContent>
@@ -83,20 +61,13 @@ export const Splash: React.FC = () => {
                   defaultMessage="Do you have a classroom code?"
                 />
               </IonCardTitle>
-              <Link to='/sign-up/class-code' className='no-underline'>
-                <IonButton
-                  expand="block"
-                  fill="outline"
-                  shape="round">
-                  <FormattedMessage
-                    id="splash.classCodeButton"
-                    defaultMessage="Student login"
-                  />
+              <Link to="/sign-up/class-code" className="no-underline">
+                <IonButton expand="block" fill="outline" shape="round">
+                  <FormattedMessage id="splash.classCodeButton" />
                 </IonButton>
               </Link>
             </IonCardContent>
           </IonCard>
-
         </div>
       </div>
     </>

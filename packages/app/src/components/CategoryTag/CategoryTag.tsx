@@ -1,8 +1,9 @@
+import classnames from "classnames";
 import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
-import "./CategoryTag.scss";
+import "./CategoryTag.css";
 
 export const CategoryTag: React.FC<{
   category: string;
@@ -36,13 +37,14 @@ export const CategoryTag: React.FC<{
       icon = <WellnessIcon />;
       break;
     case "other_wellness":
-    bgColor = "#AC217B";
-    icon = <WellnessIcon />;
-    break;
+      bgColor = "#AC217B";
+      icon = <WellnessIcon />;
+      break;
   }
+
   return (
     <div
-      className={`category-tag${className ? " " + className : ""}`}
+      className={classnames("category-tag", className)}
       style={{ backgroundColor: bgColor }}
     >
       {icon}

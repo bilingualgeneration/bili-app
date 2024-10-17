@@ -2,8 +2,11 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --fix --ext .js,.ts .",
-    "build": "tsc && npm run copy-sql",
-    "build:watch": "tsc --watch",
+    "build": "run-s schema:sync build:internal",
+    "build:watch": "run-s schema:sync build:internal:watch",
+    "build:internal": "rm -rf lib/*; tsc && tsc-alias",
+    "build:internal:watch": "rm -rf lib/*; concurrently \"tsc --watch\" \"tsc-alias 0w\"",
+    "schema:sync:": "rm src/schema/*; cp ../../schema/* src/schema",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
@@ -17,17 +20,22 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/bigquery": "^7.7.1",
+    "firebase": "^10.4.0",
     "firebase-admin": "^11.11.1",
-    "firebase-functions": "^4.3.1"
+    "firebase-functions": "^4.3.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "concurrently": "^9.0.1",
     "copyfiles": "^2.4.1",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.4",
     "firebase-functions-test": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "tsc-alias": "^1.8.10",
     "typescript": "^4.9.0"
   },
   "private": true

@@ -1,0 +1,36 @@
+#vocab-modal-id {
+  .word-row {
+    display: flex;
+  }
+
+  .audio-button-word {
+    margin-right: 24px;
+  }
+  .modal-container {
+    margin-top: 70px;
+    position: relative;
+  }
+
+  .word-color {
+    color: #00000073;
+  }
+}
+
+.vocab-syllable-breakdown {
+  &.word + &.word {
+    margin-left: 1rem;
+  }
+
+  &.segment {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.underline {
+    display: inline-block;
+    border-top: 0.5rem solid #ec59b1;
+    border-radius: 1rem;
+    width: 80%;
+  }
+}

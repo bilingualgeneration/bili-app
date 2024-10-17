@@ -20,7 +20,6 @@ export const FavoritesContextProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const toggleFavoriteId = (favoriteId: string): void => {
-    console.log(favoriteId);
     if (favoriteIds.has(favoriteId)) {
       // toggle off
       favoriteIds.delete(favoriteId);

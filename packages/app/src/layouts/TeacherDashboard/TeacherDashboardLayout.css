@@ -5,6 +5,10 @@
   padding: 1rem 2rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
+  > div {
+    min-width: 33%;
+  }
+
   .buttons-end {
     display: flex;
     align-items: center;

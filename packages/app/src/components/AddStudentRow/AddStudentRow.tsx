@@ -18,14 +18,13 @@ type RowProps = {
 
 export const AddStudentRow: React.FC<RowProps> = ({
   studentData,
-  colSizes = ["2", "2", "3", "3", "1", "1"],
+  colSizes = ["3", "3", "2", "2", "2"],
   handleDeleteStudent,
   handleEditStudentClick,
   onEditingStatusChange,
 }) => {
   const [isEditing, setIsEditing] = useState<number | null>(null); // Tracks which row is being edited
   const { control, handleSubmit, setValue, reset } = useForm();
-  console.log("AddStudentRow component");
   // Handle the "Edit" button click
   const handleEditClick = (index: number, student: any) => {
     setIsEditing(index); // Set the row into edit mode
@@ -56,7 +55,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 "text-sm color-suelo ion-align-items-center ion-justify-content-around edit-student-data"
               }
             >
-              <IonCol className="ion-no-padding" size={colSizes[0]}>
+              <IonCol size="3">
                 <Input
                   control={control}
                   name="firstName"
@@ -64,7 +63,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol className="ion-no-padding" size={colSizes[1]}>
+              <IonCol size="3">
                 <Input
                   control={control}
                   name="lastName"
@@ -72,7 +71,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol className="ion-no-padding" size={colSizes[2]}>
+              <IonCol size="2">
                 <Input
                   control={control}
                   name="primaryEmail"
@@ -80,7 +79,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol className="ion-no-padding" size={colSizes[3]}>
+              <IonCol size="2">
                 <Input
                   control={control}
                   name="secondaryEmail"
@@ -88,19 +87,15 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol className="ion-no-padding" size={"auto"}>
-                <IonButton
-                  type="submit"
-                  className="save-student-data-button text-sm semibold"
-                >
+              <IonCol size="1">
+                <IonButton expand="block" type="submit">
                   Save
                 </IonButton>
               </IonCol>
-              <IonCol className="ion-no-padding" size={"auto"}>
+              <IonCol size="1">
                 <IonButton
-                  color="secondary"
-                  type="button"
-                  className="cancel-student-data-button text-sm semibold"
+                  className="secondary"
+                  expand="block"
                   onClick={() => {
                     setIsEditing(null);
                     onEditingStatusChange(false);
@@ -115,29 +110,47 @@ export const AddStudentRow: React.FC<RowProps> = ({
           // Normal mode: renders the student's data
           <IonRow
             key={index}
-            className={`text-sm color-suelo add-student-row ion-align-items-center ion-justify-content-around ${
+            className={`text-sm color-suelo add-student-row ion-align-items-center ${
               index % 2 === 0 ? "even-row" : "odd-row"
             }`}
           >
-            <IonCol size={colSizes[0]}>{student.firstName}</IonCol>
-            <IonCol size={colSizes[1]}>{student.lastName}</IonCol>
-            <IonCol size={colSizes[2]}>{student.primaryEmail}</IonCol>
-            <IonCol size={colSizes[3]}>{student.secondaryEmail}</IonCol>
-            <IonCol size={"auto"}>
-              <button
-                onClick={() => handleEditClick(index, student)}
-                className="student-row-edit-button"
-              >
-                <IonIcon icon={EditIcon} />
-              </button>
+            <IonCol size="3" className="ion-padding">
+              {student.firstName}
             </IonCol>
-            <IonCol size={"auto"}>
-              <button
-                id={`present-alert ${index}`}
-                className="student-row-delete-button"
+            <IonCol size="3" className="ion-padding">
+              {student.lastName}
+            </IonCol>
+            <IonCol size="2" className="ion-padding">
+              {student.primaryEmail}
+            </IonCol>
+            <IonCol size="2" className="ion-padding">
+              {student.secondaryEmail}
+            </IonCol>
+            <IonCol size="1" className="ion-text-center">
+              <IonButton
+                fill="clear"
+                size="small"
+                onClick={() => handleEditClick(index, student)}
               >
-                <IonIcon icon={DeleteIcon} />
-              </button>
+                <IonIcon
+                  slot="icon-only"
+                  icon={EditIcon}
+                  style={{ width: 15 }}
+                />
+              </IonButton>
+            </IonCol>
+            <IonCol size="1" className="ion-text-center">
+              <IonButton
+                fill="clear"
+                size="small"
+                id={`present-alert ${index}`}
+              >
+                <IonIcon
+                  slot="icon-only"
+                  icon={DeleteIcon}
+                  style={{ width: 15 }}
+                />
+              </IonButton>
               <IonAlert
                 header="Delete Student"
                 subHeader="Are you sure about this?"
@@ -148,7 +161,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                     text: "Cancel",
                     role: "cancel",
                     handler: () => {
-                      console.log("Alert canceled");
+                      // TODO: handle cancel
                     },
                   },
                   {

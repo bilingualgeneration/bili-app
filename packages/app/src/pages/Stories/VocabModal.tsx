@@ -1,4 +1,5 @@
 import { AudioButton } from "@/components/AudioButton";
+import { CloseButton } from "@/components/CloseButton";
 import {
   IonButton,
   IonCol,
@@ -15,10 +16,9 @@ import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useProfile } from "@/hooks/Profile";
 import { useStory } from "./StoryContext";
 
-import CloseButton from "@/assets/icons/close_button.svg";
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 
-import "./VocabModal.scss";
+import "./VocabModal.css";
 
 // todo: ion-padding on IonContent is overridden
 
@@ -49,23 +49,28 @@ export const VocabModal: React.FC = () => {
   return (
     <>
       <IonModal
-        id="stories-vocab-modal"
+        className="modal"
         isOpen={currentVocabWord !== null}
         onWillDismiss={() => {
           clearAudio();
           setCurrentVocabWord(null);
         }}
       >
-        <div id="vocab-modal-id" className="vocab-modal-content">
-          <div className="ion-padding modal-container">
-            <IonButton
+        <div id="vocab-modal-id" className="modal-content">
+          <div
+            style={{
+              position: "absolute",
+              right: "1rem",
+              top: "0.5rem",
+              zIndex: 999,
+            }}
+          >
+            <CloseButton
               onClick={() => setCurrentVocabWord(null)}
               size="small"
-              fill="clear"
-              className="close-button-icon"
-            >
-              <img src={CloseButton} />
-            </IonButton>
+            />
+          </div>
+          <div className="ion-padding modal-container">
             <IonList>
               <IonRow style={{ gap: "14px" }}>
                 <IonCol size="8">
@@ -76,14 +81,14 @@ export const VocabModal: React.FC = () => {
                           <AudioButton
                             audio={{
                               en: {
-                                url: en?.word_audio?.url || "",
+                                url: en?.word_audio?.url,
                               },
                               es: {
-                                url:
-                                  (isInclusive ? esInc : es)?.word_audio?.url ||
-                                  "",
+                                url: (isInclusive ? esInc : es)?.word_audio
+                                  ?.url,
                               },
                             }}
+                            size="small"
                           />
                         </div>
 
@@ -131,6 +136,7 @@ export const VocabModal: React.FC = () => {
                                     ?.url || "",
                               },
                             }}
+                            size="small"
                           />
                         </div>
 

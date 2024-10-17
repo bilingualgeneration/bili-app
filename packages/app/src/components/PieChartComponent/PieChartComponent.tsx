@@ -1,26 +1,25 @@
 import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
-
 interface PieChartComponentProps {
-    data: number[];
-    colors: string[];
-    innRadius: number;
-    width: number;
-    height: number;
-    cX: number;
-    cY: number;
-  }
+  data: number[];
+  colors: string[];
+  innRadius: number;
+  width: number;
+  height: number;
+  cX: number;
+  cY: number;
+}
 
 export type CustomizedLabelProps = {
-    cx: any;
-    cy: any;
-    midAngle: any;
-    innerRadius: any;
-    outerRadius: any;
-    value: any;
-    index?: any;
-}
+  cx: any;
+  cy: any;
+  midAngle: any;
+  innerRadius: any;
+  outerRadius: any;
+  value: any;
+  index?: any;
+};
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -31,12 +30,11 @@ const renderCustomizedLabel = ({
   outerRadius,
   value,
   index,
-}:CustomizedLabelProps): JSX.Element => {
+}: CustomizedLabelProps): JSX.Element => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
- 
   return (
     <text
       x={x}
@@ -44,22 +42,27 @@ const renderCustomizedLabel = ({
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
-      style={{ fontSize: '14px', fontWeight: 'bold', fontFamily: 'Outfit' }}
+      style={{ fontSize: "14px", fontWeight: "bold", fontFamily: "Outfit" }}
     >
       {`${value}%`}
     </text>
   );
 };
 
-const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innRadius, width, height, cX, cY }) =>  {
-    const formattedData = data.map((value, index) => ({
-        name: `Group ${index + 1}`,
-        value: value
-      }));
-
-      console.log("PIe", data)
-    return (
-    
+const PieChartComponent: React.FC<PieChartComponentProps> = ({
+  data,
+  colors,
+  innRadius,
+  width,
+  height,
+  cX,
+  cY,
+}) => {
+  const formattedData = data.map((value, index) => ({
+    name: `Group ${index + 1}`,
+    value: value,
+  }));
+  return (
     <PieChart width={width} height={height}>
       <Pie
         data={formattedData}
@@ -75,10 +78,7 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({data, colors, innR
         cornerRadius={6}
       >
         {formattedData.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            fill={colors[index % colors.length]}
-          />
+          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
         ))}
       </Pie>
     </PieChart>

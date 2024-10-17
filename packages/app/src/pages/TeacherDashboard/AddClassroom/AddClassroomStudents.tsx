@@ -1,14 +1,13 @@
-//A.M.
 import {
   IonButton,
   IonCard,
   IonCol,
   IonGrid,
   IonIcon,
+  IonProgressBar,
   IonRow,
   IonText,
 } from "@ionic/react";
-import DeleteIcon from "@/assets/icons/delete_button.svg";
 import {
   create,
   createSharp,
@@ -39,7 +38,6 @@ export const AddClassroomStudents: React.FC = () => {
   // TODO: check saving function
   const handleSaveStudentClick = (data: any) => {
     setStudentsData([...studentsData, data]);
-    reset();
   };
 
   const handleEditStudentClick = (data: any, index: number) => {
@@ -66,20 +64,20 @@ export const AddClassroomStudents: React.FC = () => {
 
   return (
     <div id="add-students-page">
-      <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "24px" }}>
-        <IonText className="ion-text-center">
-          <h3 className="add-students-title text-3xl semibold color-suelo">
-            Add your students
-          </h3>
+      <IonCard>
+        <div style={{ width: "33%", margin: "auto" }}>
+          <IonProgressBar color="primary" value={0.6} />
+        </div>
+        <IonText>
+          <h2 className="text-3xl semibold color-suelo">Add your students</h2>
+          <hr />
         </IonText>
-
         <AddStudents
           studentsData={studentsData}
           handleSaveStudentClick={handleSaveStudentClick}
           handleEditStudentClick={handleEditStudentClick}
           handleDeleteStudent={handleDeleteStudent}
         />
-
         <div className="add-and-upload-buttons">
           {/* TEMPORARY Hidden Button For .CSV files */}
           {/* <button className="upload-csv-button text-sm semibold color-selva">
@@ -88,18 +86,15 @@ export const AddClassroomStudents: React.FC = () => {
           </button> */}
         </div>
 
-        <div className="add-student-button-continue">
+        <div style={{ margin: "auto", width: 400 }}>
           <IonButton
-            data-testid="add-student-continue-button"
+            className="elevate"
             onClick={handleContinue}
+            expand="full"
             shape="round"
             type="button"
           >
-            <FormattedMessage
-              id="common.continue"
-              defaultMessage="Continue"
-              description="Button label to continue"
-            />
+            <FormattedMessage id="common.continue" />
           </IonButton>
         </div>
       </IonCard>

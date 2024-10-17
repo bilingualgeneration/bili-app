@@ -1,6 +1,6 @@
 #add-students-page {
-  .add-students-title {
-    padding: 36px 0;
+  .first-title-row {
+    padding: 16px 0;
   }
 
   .add-and-upload-buttons {
@@ -16,19 +16,5 @@
     display: flex;
     gap: 4px;
     margin-left: 18px;
-  }
-
-  .upload-csv-button ion-icon {
-    font-size: 24px;
-  }
-
-  .add-student-button-continue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    ion-button {
-      width: 394px;
-    }
   }
 }
