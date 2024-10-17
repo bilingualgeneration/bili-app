@@ -8,9 +8,9 @@ import type {
 } from "@/schema/classroomAnalytics";
 
 const emptyTimeBreakdownByLanguage: TimeBreakdownByLanguage = {
-  en: -1,
-  es: -1,
-  esen: -1,
+  en: 0,
+  es: 0,
+  esen: 0,
 };
 
 const emptyTimeSpentAtLocation: TimeSpentAtLocation = {
@@ -35,7 +35,7 @@ export const add = onCall(async (request) => {
   let tasks: any[] = [];
 
   let analyticsPayload: ClassroomAnalytics = {
-    classroomId,
+    classroom: classroomId,
     timeBreakdown: {
       atHome: emptyTimeSpentAtLocation,
       atSchool: emptyTimeSpentAtLocation,
