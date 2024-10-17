@@ -22,6 +22,7 @@ import { userSchema } from "@bili/schema/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
+import closeIcon from "../assets/icons/close.svg"; // Adjust the path if necessary
 import "./ResetPasswordModal.scss";
 
 interface FormInputs {
@@ -109,6 +110,25 @@ const Login: React.FC = () => {
                   />
                 </div>
               </div>
+              <div className="ion-text-center ion-margin-top">
+                <IonText>
+                  {" "}
+                  <a
+                    href="#"
+                    className="semibold"
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevents page reload
+                      setIsModalOpen(true); // Opens the modal
+                    }}
+                  >
+                    <FormattedMessage
+                      id="common.forgotPassword"
+                      defaultMessage="Forgot Password?"
+                      description="Text that is also a link that prompts users to reset their password if they forgot it"
+                    />
+                  </a>
+                </IonText>
+              </div>
               <div className="ion-margin-top">
                 <IonButton
                   className="margin-vertical-3"
@@ -144,20 +164,6 @@ const Login: React.FC = () => {
                   </IonText>
                 </IonText>
               </div>
-              <div className="ion-text-center ion-margin-top">
-                <IonButton
-                  fill="clear"
-                  onClick={() => {
-                    setIsModalOpen(true);
-                  }}
-                >
-                  <FormattedMessage
-                    id="common.forgotPassword"
-                    defaultMessage="Forgot Password?"
-                    description="Button for opening the password reset modal"
-                  />
-                </IonButton>
-              </div>
             </form>
           </IonCardContent>
         </IonCard>
@@ -169,16 +175,36 @@ const Login: React.FC = () => {
         backdropDismiss={false}
       >
         <div className="modal-content">
-          <h2>Enter your email address to reset password</h2>
-          <IonItem className="email-item" lines="none">
-            <IonLabel position="stacked">Email address</IonLabel>
-            <IonInput type="email" placeholder="Enter your email" />
-          </IonItem>
+          <img
+            src={closeIcon}
+            alt="Close"
+            className="close-button"
+            onClick={() => setIsModalOpen(false)}
+          />
+
+          <h2 className="text-lg semibold">
+            Enter your email address to reset password
+          </h2>
+          <div className="text-sm email-input">
+            <Input
+              className="text-xl"
+              control={control}
+              disabled={isLoading}
+              label="Email address"
+              labelPlacement="above"
+              required={true}
+              name="email"
+              fill="outline"
+              helperText=""
+              testId="login-email-input"
+              type="email"
+            />
+          </div>
           <IonButton
             expand="block"
             fill="solid"
             shape="round"
-            className="reset-button"
+            className="reset-button color-selva text-sm semibold"
             onClick={() => setIsModalOpen(false)}
           >
             Reset Password
