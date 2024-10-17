@@ -10,6 +10,8 @@ import {
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { useProfile } from "@/hooks/Profile";
 
+type NotificationMethod = "email" | "flyer" | "both" | undefined;
+
 export interface Student {
   firstName: string;
   lastName: string;
@@ -25,13 +27,13 @@ interface AddClassroomState {
   isInclusive: boolean;
   language: string | undefined; // TODO: better typing
   name: string;
-  notificationMethod: string | undefined; // TODO: better typing
+  notificationMethod: NotificationMethod;
   setAllowLanguageToggle: Dispatch<SetStateAction<boolean>>;
   setGrades: Dispatch<SetStateAction<string[]>>;
   setIsInclusive: Dispatch<SetStateAction<boolean>>;
   setLanguage: Dispatch<SetStateAction<string | undefined>>;
   setName: Dispatch<SetStateAction<string>>;
-  setNotificationMethod: Dispatch<SetStateAction<string | undefined>>;
+  setNotificationMethod: Dispatch<SetStateAction<NotificationMethod>>;
   setStudents: Dispatch<SetStateAction<Student[]>>;
   students: Student[];
 }
@@ -52,9 +54,8 @@ export const AddClassroomProvider: React.FC<React.PropsWithChildren> = ({
   const [isInclusive, setIsInclusive] = useState<boolean>(false);
   const [language, setLanguage] = useState<string | undefined>();
   const [name, setName] = useState<string>("");
-  const [notificationMethod, setNotificationMethod] = useState<
-    string | undefined
-  >();
+  const [notificationMethod, setNotificationMethod] =
+    useState<NotificationMethod>();
   const [students, setStudents] = useState<Student[]>([]);
   const functions = getFunctions();
   const addClassroomFunction = httpsCallable(functions, "classroom-add");

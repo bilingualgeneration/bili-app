@@ -30,7 +30,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
   const { notificationMethod, setNotificationMethod } = useAddClassroom();
   const schema = z.object({
-    notificationMethod: z.string(),
+    notificationMethod: z.enum(["email", "flyer", "both"]),
   });
   const {
     control,
@@ -123,6 +123,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
 
           <IonButton
             data-testid="addclassroom-notification-method-continue-button"
+            disabled={!isValid}
             shape="round"
             type="button"
             onClick={onSubmit}
