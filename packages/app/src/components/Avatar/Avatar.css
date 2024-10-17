@@ -1,0 +1,15 @@
+img.avatar {
+  aspect-ratio: 1;
+  &.xs {
+    width: 24px !important;
+  }
+  &.sm {
+    width: 40px !important;
+  }
+  &.md {
+    width: 60px !important;
+  }
+  &.lg {
+    width: 84px !important;
+  }
+}

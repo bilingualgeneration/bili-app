@@ -52,3 +52,16 @@ export const getStarsFromAttempts = (
     return 1;
   }
 };
+
+export function hashString(str: string, max: number) {
+  let hash = 0;
+
+  // Generate hash by iterating through each character of the string
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash * 31 + char) % max; // Using 31 as a common prime multiplier
+  }
+
+  // Ensure the hash is positive and within the range of [0, max)
+  return Math.abs(hash);
+}

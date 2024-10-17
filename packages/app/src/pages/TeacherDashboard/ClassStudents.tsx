@@ -137,7 +137,7 @@ export const ClassStudents: React.FC = () => {
             >
               <IonCol>
                 <StudentInfo
-                  userId={""}
+                  uid={student.studentId}
                   userType={""}
                   link={`/classrooms/view/${classroomId}/students/view/${student.studentId}`}
                   size="xs"

@@ -5,6 +5,7 @@ import { SideMenu } from "@/components/Settings/SideMenu";
 import { StudentInfo } from "@/components/StudentInfo";
 import { useEffect } from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useProfile } from "@/hooks/Profile";
 import { useLocation } from "react-router-dom";
 
 import SchoolIcon from "@/assets/icons/school.svg";
@@ -12,6 +13,9 @@ import HelpIcon from "@/assets/icons/help.svg";
 import "./TeacherDashboardLayout.css";
 
 export const TeacherDashboardHeader: React.FC = () => {
+  const {
+    user: { uid },
+  } = useProfile();
   return (
     <div id="teacher-dashboard-layout-header">
       <div>search</div>
@@ -29,7 +33,7 @@ export const TeacherDashboardHeader: React.FC = () => {
           <IonIcon slot="start" icon={HelpIcon} />
           Help
         </IonButton>
-        <StudentInfo userId="" userType="" size="sm" />
+        <StudentInfo uid={uid} userType="" size="sm" />
       </div>
     </div>
   );
