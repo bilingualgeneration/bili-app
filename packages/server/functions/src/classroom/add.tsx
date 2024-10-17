@@ -8,9 +8,9 @@ import type {
 } from "@/schema/classroomAnalytics";
 
 const emptyTimeBreakdownByLanguage: TimeBreakdownByLanguage = {
-  en: -1,
-  es: -1,
-  esen: -1,
+  en: 0,
+  es: 0,
+  esen: 0,
 };
 
 const emptyTimeSpentAtLocation: TimeSpentAtLocation = {
