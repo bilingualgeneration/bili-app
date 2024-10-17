@@ -22,6 +22,7 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 import { PackSelect } from "@/components/PackSelect";
 import { ProfileProvider } from "@/hooks/Profile";
 import { StudentProvider } from "@/hooks/Student";
+import { NamesProvider } from "@/hooks/Names";
 
 // category headers (usually for PackSelect
 //import { CommunityHeader } from "@/components/CommunityHeader";
@@ -70,11 +71,13 @@ const App: React.FC = () => {
               <LanguageToggleProvider>
                 <ClassroomProvider>
                   <StudentProvider>
-                    <AppWrapper>
-                      <TimeTrackerProvider>
-                        <Router />
-                      </TimeTrackerProvider>
-                    </AppWrapper>
+                    <NamesProvider>
+                      <AppWrapper>
+                        <TimeTrackerProvider>
+                          <Router />
+                        </TimeTrackerProvider>
+                      </AppWrapper>
+                    </NamesProvider>
                   </StudentProvider>
                 </ClassroomProvider>
               </LanguageToggleProvider>
