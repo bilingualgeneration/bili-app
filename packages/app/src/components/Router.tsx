@@ -81,6 +81,7 @@ import {
   StudentProgress,
   ClassStudentsAddStudents,
   ClassProgress,
+  ClassPreferences,
 } from "@/pages/TeacherDashboard";
 import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
@@ -405,6 +406,15 @@ export const Router: React.FC = () => {
                         render={() => (
                           <TeacherDashboardLayoutWithSideMenu>
                             <StudentProgress />
+                          </TeacherDashboardLayoutWithSideMenu>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/preferences"
+                        render={() => (
+                          <TeacherDashboardLayoutWithSideMenu>
+                            <ClassPreferences />
                           </TeacherDashboardLayoutWithSideMenu>
                         )}
                       />
