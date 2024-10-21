@@ -10,16 +10,16 @@ const avatars = [avatar1, avatar2];
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | undefined;
 
 export interface AvatarProps {
-  uid: string;
+  id: string;
   size: AvatarSize;
 }
 
-export const Avatar: React.FC<AvatarProps> = ({ uid, size = "md" }) => {
+export const Avatar: React.FC<AvatarProps> = ({ id, size = "md" }) => {
   return (
     <>
       <img
         className={classnames("avatar", size)}
-        src={avatars[hashString(uid, avatars.length)]}
+        src={avatars[hashString(id, avatars.length)]}
       />
     </>
   );
