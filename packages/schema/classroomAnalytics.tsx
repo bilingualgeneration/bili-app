@@ -2,8 +2,7 @@ import { z } from "zod";
 
 const studentSummaryRecordSchema = z.object({
   id: z.string(),
-  status: z.array(z.string()),
-  isCaregiverAccountActivated: z.boolean(),
+  tags: z.array(z.string()),
 });
 
 const timeBreakdownByLanguageSchema = z.object({

@@ -33,7 +33,7 @@ export const TeacherDashboardHeader: React.FC = () => {
           <IonIcon slot="start" icon={HelpIcon} />
           Help
         </IonButton>
-        <StudentInfo uid={uid} userType="" size="sm" />
+        <StudentInfo id={uid} type="user" size="sm" />
       </div>
     </div>
   );

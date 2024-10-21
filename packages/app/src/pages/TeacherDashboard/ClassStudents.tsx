@@ -2,6 +2,7 @@ import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import {
+  IonBadge,
   IonButton,
   IonCard,
   IonCardTitle,
@@ -42,81 +43,17 @@ const ClassStudentsLoader: React.FC = () => {
     case "error":
       return <>error</>;
     case "ready":
-      console.log(data);
-      return <>ready</>;
+      return (
+        <HydratedClassStudents
+          data={data.classroomAnalytics[0].studentSummary}
+        />
+      );
   }
   return <></>;
 };
 
-const HydratedClassStudents: React.FC = () => {
+const HydratedClassStudents: React.FC = ({ data }) => {
   const { classroomId } = useParams<{ classroomId: string }>();
-  const studentsData = [
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "on track",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "support recommended",
-      homeAccount: "active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "on track",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "on track",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "support recommended",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "on track",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      studentName: "John Doeeeeeee",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@example.com",
-      needsMoreSupport: "needs support",
-      homeAccount: "active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-    {
-      id: "",
-      primaryHomeEmail: "Michel Doeeeeee",
-      secondaryHomeEmail: "john.doe@exampleeeeeeeeeeeee.com",
-      needsMoreSupport: "on track",
-      homeAccount: "not active",
-      studentId: "U73tqRtJ5bmeTcnxsfca",
-    },
-  ];
-
   return (
     <div id="teacher-dashboard-students">
       {/* header */}
@@ -153,75 +90,24 @@ const HydratedClassStudents: React.FC = () => {
       <div className="class-students-table">
         <IonGrid className="class-students-table-grid">
           <IonRow className="class-student-table-header-row">
-            <IonCol className="text-md semibold">Student Name</IonCol>
-            {/* <IonCol className="text-md semibold">Primary home email</IonCol>
-            <IonCol className="text-md semibold">Secondary home email</IonCol> */}
-            <IonCol className="text-md semibold">Needs More Support</IonCol>
-            <IonCol className="text-md semibold">Home Account</IonCol>
+            <IonCol className="text-md semibold">Student</IonCol>
+            <IonCol className="text-md semibold">Tags</IonCol>
           </IonRow>
-          {studentsData.map((student, index) => (
+          {data.map((student) => (
             <IonRow
               className="ion-align-items-center class-student-table-body-row"
-              key={index}
+              key={student.id}
             >
               <IonCol>
                 <StudentInfo
-                  uid={student.studentId}
-                  userType={""}
-                  link={`/classrooms/view/${classroomId}/students/view/${student.studentId}`}
+                  id={student.id}
+                  type={"student"}
+                  link={`/classrooms/view/${classroomId}/students/view/${student.id}`}
                   size="xs"
                 />
               </IonCol>
-              {/* <IonCol>
-                <IonText>
-                  <p className="text-sm">
-                    {student.primaryHomeEmail.length > 23
-                      ? `${student.primaryHomeEmail.slice(0, 23)}...`
-                      : student.primaryHomeEmail}
-                  </p>
-                </IonText>
-              </IonCol>
               <IonCol>
-                <IonText>
-                  <p className="text-sm">
-                    {student.secondaryHomeEmail.length > 23
-                      ? `${student.secondaryHomeEmail.slice(0, 23)}...`
-                      : student.secondaryHomeEmail}
-                  </p>
-                </IonText>
-              </IonCol> */}
-              <IonCol>
-                <IonText
-                  className="student-needs-support-text text-sm-xs semibold"
-                  style={{
-                    background:
-                      student.needsMoreSupport.toLowerCase() === "on track"
-                        ? "var(--Cielo-Low)"
-                        : student.needsMoreSupport.toLowerCase() ===
-                            "needs support"
-                          ? "var(--Habanero-Habanero)"
-                          : student.needsMoreSupport.toLowerCase() ===
-                              "support recommended"
-                            ? "var(--Sol)"
-                            : "gray",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {student.needsMoreSupport}
-                </IonText>
-              </IonCol>
-              <IonCol>
-                <IonText>
-                  <p
-                    className={`text-sm ${
-                      student.homeAccount?.toLowerCase() === "not active"
-                        ? "semibold"
-                        : ""
-                    }`}
-                  >
-                    {student.homeAccount}
-                  </p>
-                </IonText>
+                {student.tags?.map((tag) => <Tag key={tag} id={tag} />)}
               </IonCol>
             </IonRow>
           ))}
@@ -260,5 +146,22 @@ const HydratedClassStudents: React.FC = () => {
         </IonCard>
       </div> */}
     </div>
+  );
+};
+
+const TagLookup = {
+  "needs support": "danger",
+  "home account inactive": "warning",
+};
+
+interface Tag {
+  id: string;
+}
+
+const Tag: React.FC<Tag> = ({ id }) => {
+  return (
+    <IonBadge className="studentProgressTag" color={TagLookup[id]} mode="md">
+      {id}
+    </IonBadge>
   );
 };
