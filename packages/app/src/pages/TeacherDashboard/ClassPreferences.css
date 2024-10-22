@@ -1,6 +1,7 @@
 .grades-block {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .grades-styles ion-checkbox::part(container) {

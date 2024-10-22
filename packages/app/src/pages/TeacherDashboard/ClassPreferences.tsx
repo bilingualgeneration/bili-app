@@ -46,7 +46,7 @@ export const ClassPreferences: React.FC = () => {
     },
   });
 
-  //TODO: update updateProfile function
+  //TODO: create functions for all fields
 
   // Watch for changes to the name and grades
   const watchedName = useWatch({ control, name: "name" });
