@@ -24,15 +24,89 @@ import {
   MultipleCheckbox,
   MultipleCheckboxOption,
 } from "@/components/MultipleCheckbox";
-import { useForm } from "react-hook-form";
-import { string } from "zod";
+import { useForm, useWatch } from "react-hook-form";
+import { Input } from "@/components/Input";
+import { useClassroom } from "@/hooks/Classroom";
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import { name } from "react-lorem-ipsum";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
 };
 
 export const ClassPreferences: React.FC = () => {
+  const { classroomId } = useParams<{ classroomId: string }>();
+
+  const { control, getValues } = useForm({
+    defaultValues: {
+      grades: [],
+      name: "",
+    },
+  });
+
+  //TODO: update updateProfile function
+
+  // Watch for changes to the name and grades
+  const watchedName = useWatch({ control, name: "name" });
+  const watchedGrades = useWatch({ control, name: "grades" });
+
+  // Update grades function
+  const updateGrades = async (key: string, value: any) => {
+    //  const ref = doc(firestore, "classrooms", classroomId);
+    //  try {
+    //      await updateDoc(ref, { [key]: value });
+    //      console.log(`Grades updated in Firestore: ${key} =`, value);
+    //  } catch (error) {
+    //      console.error("Error updating grades:", error);
+    //  }
+  };
+
+  // Update name function
+  const updateName = async (newName: string) => {
+    //  const ref = doc(firestore, "classrooms", classroomId);
+    //  try {
+    //      await updateDoc(ref, { name: newName });
+    //      console.log("Class name saved to Firestore:", newName);
+    //  } catch (error) {
+    //      console.error("Error updating class name:", error);
+    //  }
+  };
+
+  useEffect(() => {
+    if (watchedName) {
+      console.log("Auto-saving class name:", watchedName);
+      updateName(watchedName); // Auto-save class name when it changes
+    }
+  }, [watchedName]);
+
+  useEffect(() => {
+    if (watchedGrades) {
+      console.log("Auto-saving grades:", watchedGrades);
+      updateGrades("grades", watchedGrades); // Auto-save grades when they change
+    }
+  }, [watchedGrades]);
+
+  return (
+    <FirestoreDocProvider collection="classroom" id={classroomId}>
+      <ClassPreferencesLoader
+        control={control}
+        updateGrades={updateGrades}
+        updateName={updateName}
+      />
+    </FirestoreDocProvider>
+  );
+};
+
+const ClassPreferencesLoader: React.FC<any> = ({
+  control,
+  updateGrades,
+  updateName,
+}) => {
+  const { data, status } = useFirestoreDoc();
   const intl = useIntl();
+
   const gradesOptions: MultipleCheckboxOption[] = [
     {
       label: intl.formatMessage({
@@ -83,198 +157,184 @@ export const ClassPreferences: React.FC = () => {
       value: "other",
     },
   ];
-  const { control, getValues } = useForm({
-    defaultValues: {
-      grades: [],
-    },
-  });
-  const {
-    user: { uid },
-    profile: { isImmersive, isInclusive, settingsLanguage },
-  } = useProfile();
-  //TODO: update updateProfile function
-  const ref = doc(firestore, "users", uid);
-  // TODO: we shouldn't allow this straight from the app
-  const updateProfile = (key: string, value: any) => {
-    updateDoc(ref, {
-      [key]: value,
-    });
-  };
 
-  return (
-    <>
-      <IonList className="preferences-style">
-        {/* header */}
-        <div className="class-progress-header">
-          <IonItem>
-            <IonLabel>
-              <div className="header-overview-row">
-                <div className="header-overview-arrow">
-                  <IonText className="text-sm color-barro classroom-name-text">
-                    {"1-st grade Spanish"}
-                  </IonText>
-                  <IonIcon color="medium" icon={ArrowRight}></IonIcon>
-                  <IonText className="text-sm semibold overview-text-header">
-                    Preferences
+  // Firestore document status
+  switch (status) {
+    case "loading":
+      return <IonText>Loading...</IonText>;
+    case "error":
+      return <IonText>Error loading classroom data</IonText>;
+    case "ready":
+      const { name = "Classroom" } = data;
+
+      return (
+        <>
+          <IonList className="preferences-style">
+            {/* header */}
+            <div className="class-progress-header">
+              <IonItem>
+                <IonLabel>
+                  <div className="header-overview-row">
+                    <div className="header-overview-arrow">
+                      <IonText className="text-sm color-barro classroom-name-text">
+                        {name}
+                      </IonText>
+                      <IonIcon color="medium" icon={ArrowRight}></IonIcon>
+                      <IonText className="text-sm semibold overview-text-header">
+                        Preferences
+                      </IonText>
+                    </div>
+                    <div className="progress-header-block">
+                      <IonText className="text-3xl semibold">
+                        {"Preferences"}
+                      </IonText>
+                    </div>
+                  </div>
+                </IonLabel>
+              </IonItem>
+            </div>
+            {/* main */}
+
+            <div className="classroom-input-styles">
+              <Input
+                label="Class Name"
+                labelPlacement="above"
+                placeholder={name}
+                name="name"
+                fill="outline"
+                control={control}
+                testId="teacher-class-name-update"
+                type="text"
+                className="classroom-name-input"
+              />
+            </div>
+
+            <IonItem lines="none">
+              <div className="grades-block">
+                <div className="margin-bottom-1x">
+                  <IonText>
+                    <h2 className="text-xl semibold color-suelo">
+                      <FormattedMessage
+                        id="settingsProgress.preferences.grades"
+                        defaultMessage="Grades"
+                      />
+                    </h2>
                   </IonText>
                 </div>
-                <div className="progress-header-block">
-                  <IonText className="text-3xl semibold">
-                    {"Preferences"}
-                  </IonText>
+                <div className="text-md color-suelo grades-styles">
+                  <IonGrid>
+                    <IonRow className="ion-justify-content-around">
+                      <MultipleCheckbox
+                        control={control}
+                        labelPlacement="end"
+                        justify="start"
+                        options={gradesOptions}
+                        name="grades"
+                        // onChange={() => {
+                        //     updateProfile("grades", getValues('grades'));
+
+                        // }}
+                        wrapper={OptionWrapper}
+                      />
+                    </IonRow>
+                  </IonGrid>
                 </div>
               </div>
-            </IonLabel>
-          </IonItem>
-        </div>
-        {/* main */}
+            </IonItem>
 
-        <IonItem lines="none">
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover1",
-              defaultMessage:
-                "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
-              description:
-                "Description of the language you will see in settings.",
-            })}
-            trigger="click-trigger1"
-          />
-          <Question id="click-trigger1" />
-        </IonItem>
+            <IonItem lines="none">
+              <Popover
+                content={intl.formatMessage({
+                  id: "settingsProgress.preferences.popover2",
+                  defaultMessage:
+                    "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish.",
+                  description:
+                    "Description of the language mode for your child's experience in the app",
+                })}
+                trigger="click-trigger2"
+              />
+              <Question id="click-trigger2" />
+              <IonSelect
+                placeholder="Bilingual"
+                interface="popover"
+                toggleIcon={chevronForward}
+                value={""}
+                onIonChange={(event) => {
+                  console.log();
+                }}
+              >
+                <div className="label-style" slot="label">
+                  <h4>
+                    <FormattedMessage
+                      id="settingsProgress.preferences.bilingual"
+                      defaultMessage="Student Language"
+                    />
+                  </h4>
+                </div>
+                <IonSelectOption value={false}>Bilingual</IonSelectOption>
+                <IonSelectOption value={true}>Spanish</IonSelectOption>
+                <IonSelectOption value={true}>English</IonSelectOption>
+              </IonSelect>
+            </IonItem>
 
-        <IonItem lines="none">
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover1",
-              defaultMessage:
-                "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
-              description:
-                "Description of the language you will see in settings.",
-            })}
-            trigger="click-trigger1"
-          />
-          <Question id="click-trigger1" />
-          <div className="margin-bottom-1x">
-            <IonText>
-              <h2 className="text-xl semibold color-suelo">
-                <FormattedMessage
-                  id="settingsProgress.preferences.grades"
-                  defaultMessage="Grades"
-                />
-              </h2>
-            </IonText>
-          </div>
-          <div className="text-md color-suelo grades-styles">
-            <IonGrid>
-              <IonRow>
-                <MultipleCheckbox
-                  control={control}
-                  labelPlacement="end"
-                  options={gradesOptions}
-                  name="grades"
-                  // onChange={() => {
-                  //     updateProfile("grades", getValues('grades'));
+            <IonItem lines="none">
+              <Popover
+                content={intl.formatMessage({
+                  id: "settingsProgress.preferences.popover5",
+                  defaultMessage:
+                    "Enable this feature to hear sound effects associated with the app.",
+                  description: "Sound effects mode",
+                })}
+                trigger="click-trigger5"
+              />
+              <Question id="click-trigger5" />
+              <IonToggle justify="space-between" checked={true} mode="ios">
+                <div className="label-style">
+                  <h4>
+                    <FormattedMessage
+                      id="settingsProgress.preferences.toggle"
+                      defaultMessage="Language Toggle"
+                    />
+                  </h4>
+                </div>
+              </IonToggle>
+            </IonItem>
 
-                  // }}
-                  onChange={console.log}
-                  wrapper={OptionWrapper}
-                />
-              </IonRow>
-            </IonGrid>
-          </div>
-        </IonItem>
-
-        <IonItem lines="none">
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover2",
-              defaultMessage:
-                "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish.",
-              description:
-                "Description of the language mode for your child's experience in the app",
-            })}
-            trigger="click-trigger2"
-          />
-          <Question id="click-trigger2" />
-          <IonSelect
-            placeholder="Bilingual"
-            interface="popover"
-            toggleIcon={chevronForward}
-            value={""}
-            onIonChange={(event) => {
-              updateProfile("", event.target.value);
-            }}
-          >
-            <div className="label-style" slot="label">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.bilingual"
-                  defaultMessage="Student Language"
-                />
-              </h4>
-            </div>
-            <IonSelectOption value={false}>Bilingual</IonSelectOption>
-            <IonSelectOption value={true}>Spanish</IonSelectOption>
-            <IonSelectOption value={true}>English</IonSelectOption>
-          </IonSelect>
-        </IonItem>
-
-        <IonItem lines="none">
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover5",
-              defaultMessage:
-                "Enable this feature to hear sound effects associated with the app.",
-              description: "Sound effects mode",
-            })}
-            trigger="click-trigger5"
-          />
-          <Question id="click-trigger5" />
-          <IonToggle justify="space-between" checked={true} mode="ios">
-            <div className="label-style">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.toggle"
-                  defaultMessage="Language Toggle"
-                />
-              </h4>
-            </div>
-          </IonToggle>
-        </IonItem>
-
-        <IonItem lines="none">
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover3",
-              defaultMessage:
-                "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
-              description:
-                "Description of the inclusive language mode with gender neutral pronouns",
-            })}
-            trigger="click-trigger3"
-          />
-          <Question id="click-trigger3" />
-          <IonToggle
-            justify="space-between"
-            onClick={() => {
-              updateProfile("isInclusive", !isInclusive);
-            }}
-            checked={isInclusive}
-            mode="ios"
-          >
-            <div className="label-style">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.inclusive"
-                  defaultMessage="Inclusive Spanish"
-                  description="Preferences page 'Inclusive Spanish' text"
-                />
-              </h4>
-            </div>
-          </IonToggle>
-        </IonItem>
-      </IonList>
-    </>
-  );
+            <IonItem lines="none">
+              <Popover
+                content={intl.formatMessage({
+                  id: "settingsProgress.preferences.popover3",
+                  defaultMessage:
+                    "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
+                  description:
+                    "Description of the inclusive language mode with gender neutral pronouns",
+                })}
+                trigger="click-trigger3"
+              />
+              <Question id="click-trigger3" />
+              <IonToggle
+                justify="space-between"
+                onClick={() => {
+                  console.log();
+                }}
+                checked={true}
+                mode="ios"
+              >
+                <div className="label-style">
+                  <h4>
+                    <FormattedMessage
+                      id="settingsProgress.preferences.inclusive"
+                      defaultMessage="Inclusive Spanish"
+                      description="Preferences page 'Inclusive Spanish' text"
+                    />
+                  </h4>
+                </div>
+              </IonToggle>
+            </IonItem>
+          </IonList>
+        </>
+      );
+    default:
+      return null;
+  }
 };

@@ -1,0 +1,37 @@
+.grades-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.grades-styles ion-checkbox::part(container) {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 3px solid #889391;
+}
+
+.grades-styles ion-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.classroom-input-styles {
+  width: 100%;
+  margin: 52px 0px;
+  padding: 0px 16px;
+}
+
+.classroom-input-styles label {
+  /* Your custom styles here */
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.classroom-name-input {
+  margin-top: 12px;
+}
+
+.classroom-name-input .input-bottom {
+  padding-left: 0;
+}
