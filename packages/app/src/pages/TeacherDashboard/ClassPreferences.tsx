@@ -1,7 +1,5 @@
-import { doc, updateDoc } from "firebase/firestore";
 import "./ClassPreferences.css";
 import { FormattedMessage, useIntl } from "react-intl";
-import { firestore } from "@/components/Firebase";
 import {
   IonCol,
   IonGrid,
@@ -18,7 +16,6 @@ import {
 import { Popover } from "@/components/Popover";
 import { chevronForward } from "ionicons/icons";
 import Question from "@/assets/icons/question.svg?react";
-import { useProfile } from "@/hooks/Profile";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import {
   MultipleCheckbox,
@@ -30,7 +27,6 @@ import { useClassroom } from "@/hooks/Classroom";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { name } from "react-lorem-ipsum";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
@@ -42,6 +38,7 @@ export const ClassPreferences: React.FC = () => {
   const { control, getValues } = useForm({
     defaultValues: {
       grades: [],
+      //TODO: load default values from classroom
       name: "",
     },
   });
@@ -49,8 +46,8 @@ export const ClassPreferences: React.FC = () => {
   //TODO: create functions for all fields
 
   // Watch for changes to the name and grades
-  const watchedName = useWatch({ control, name: "name" });
-  const watchedGrades = useWatch({ control, name: "grades" });
+  //const watchedName = useWatch({ control, name: "name" });
+  // const watchedGrades = useWatch({ control, name: "grades" });
 
   // Update grades function
   const updateGrades = async (key: string, value: any) => {
@@ -74,19 +71,19 @@ export const ClassPreferences: React.FC = () => {
     //  }
   };
 
-  useEffect(() => {
-    if (watchedName) {
-      console.log("Auto-saving class name:", watchedName);
-      updateName(watchedName); // Auto-save class name when it changes
-    }
-  }, [watchedName]);
+  // useEffect(() => {
+  //   if (watchedName) {
+  //     console.log("Auto-saving class name:", watchedName);
+  //     updateName(watchedName); // Auto-save class name when it changes
+  //   }
+  // }, [watchedName]);
 
-  useEffect(() => {
-    if (watchedGrades) {
-      console.log("Auto-saving grades:", watchedGrades);
-      updateGrades("grades", watchedGrades); // Auto-save grades when they change
-    }
-  }, [watchedGrades]);
+  // useEffect(() => {
+  //   if (watchedGrades) {
+  //     console.log("Auto-saving grades:", watchedGrades);
+  //     updateGrades("grades", watchedGrades); // Auto-save grades when they change
+  //   }
+  // }, [watchedGrades]);
 
   return (
     <FirestoreDocProvider collection="classroom" id={classroomId}>
@@ -99,11 +96,7 @@ export const ClassPreferences: React.FC = () => {
   );
 };
 
-const ClassPreferencesLoader: React.FC<any> = ({
-  control,
-  updateGrades,
-  updateName,
-}) => {
+const ClassPreferencesLoader: React.FC<any> = ({ control }) => {
   const { data, status } = useFirestoreDoc();
   const intl = useIntl();
 
@@ -206,6 +199,7 @@ const ClassPreferencesLoader: React.FC<any> = ({
                 testId="teacher-class-name-update"
                 type="text"
                 className="classroom-name-input"
+                onBlur={console.log}
               />
             </div>
 
@@ -230,10 +224,7 @@ const ClassPreferencesLoader: React.FC<any> = ({
                         justify="start"
                         options={gradesOptions}
                         name="grades"
-                        // onChange={() => {
-                        //     updateProfile("grades", getValues('grades'));
-
-                        // }}
+                        onChange={console.log}
                         wrapper={OptionWrapper}
                       />
                     </IonRow>
@@ -254,7 +245,7 @@ const ClassPreferencesLoader: React.FC<any> = ({
                 trigger="click-trigger2"
               />
               <Question id="click-trigger2" />
-              <IonSelect
+              <IonSelect // needs to use Select so we can have a default value
                 placeholder="Bilingual"
                 interface="popover"
                 toggleIcon={chevronForward}
@@ -271,9 +262,9 @@ const ClassPreferencesLoader: React.FC<any> = ({
                     />
                   </h4>
                 </div>
-                <IonSelectOption value={false}>Bilingual</IonSelectOption>
-                <IonSelectOption value={true}>Spanish</IonSelectOption>
-                <IonSelectOption value={true}>English</IonSelectOption>
+                <IonSelectOption value={"esen"}>Bilingual</IonSelectOption>
+                <IonSelectOption value={"es"}>Spanish</IonSelectOption>
+                <IonSelectOption value={"en"}>English</IonSelectOption>
               </IonSelect>
             </IonItem>
 

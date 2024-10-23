@@ -142,6 +142,7 @@ export type InputAdditionalProps = {
   control: Control<any>;
   className: string;
   testId: string;
+  onBlur?: (arg: any) => void;
 };
 
 export type InputProps = Partial<IonInputProps> &
@@ -159,6 +160,7 @@ export const Input = ({
   name,
   required,
   testId,
+  onBlur: onBlurProp,
   ...props
 }: InputProps): JSX.Element => {
   return (
@@ -196,7 +198,12 @@ export const Input = ({
                 data-testid={testId}
                 errorText={fieldState.error?.message}
                 onIonInput={onChange}
-                onIonBlur={onBlur}
+                onIonBlur={(event) => {
+                  onBlur(event);
+                  if (onBlurProp) {
+                    onBlurProp(event.target.value);
+                  }
+                }}
                 label={labelPlacement === "above" ? undefined : label}
                 labelPlacement={
                   labelPlacement === "above" ? undefined : labelPlacement
