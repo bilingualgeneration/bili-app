@@ -8,6 +8,8 @@ import { DnDProvider, useDnD } from "@/hooks/DnD";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useEffect, useRef } from "react";
 import { first } from "rxjs/operators";
+import { useActivity } from "@/contexts/ActivityContext";
+import { useTimeTracker } from "@/hooks/TimeTracker";
 
 export const StoryFactoryLevel1: React.FC = () => {
   return (
@@ -23,6 +25,14 @@ const WrappedSF1: React.FC = () => {
     data: { ["dnd-game"]: games },
   } = useFirestoreDoc();
   const { language, setIsVisible } = useLanguageToggle();
+  const {
+    handleAttempt,
+    handleRecordAttempt,
+    handleResetAttempts,
+    setActivityState,
+    setGamesData,
+  } = useActivity();
+  const { startTimer, stopTimer } = useTimeTracker();
   useEffect(() => {
     setIsVisible(false);
     return () => {

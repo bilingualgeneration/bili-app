@@ -46,7 +46,7 @@ export const Piece: React.FC<PieceProps> = ({
 
   useEffect(() => {
     if (audio_on_drop) {
-      set_audio_drop(new Audio(audio_on_drop.url));
+      set_audio_drop(audio_on_drop.url);
     }
   }, [audio_on_drop]);
   const [{ isDragging }, drag] = useDrag(

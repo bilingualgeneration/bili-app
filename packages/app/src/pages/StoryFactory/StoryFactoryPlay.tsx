@@ -34,6 +34,7 @@ const StoryFactoryHydratedGame: React.FC = () => {
   }
   switch (data.level) {
     case 1:
+      console.log(data);
       return <StoryFactoryLevel1 />;
       break;
     case 2:
