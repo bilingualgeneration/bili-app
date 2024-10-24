@@ -89,52 +89,28 @@ const ClassPreferencesLoader: React.FC<any> = ({ control }) => {
 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGradePre",
-        defaultMessage: "Pre-K",
-        description: "Checkbox label for pre-kindergarten",
-      }),
-      value: "prek",
+      label: "Pre-K",
+      value: "p",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade1",
-        defaultMessage: "1st Grade",
-        description: "Checkbox label for 1st grade",
-      }),
-      value: "1st",
+      label: "Kindergarten",
+      value: "k",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade2",
-        defaultMessage: "2nd Grade",
-        description: "Checkbox label for 2nd grade",
-      }),
-      value: "2nd",
+      label: "1st Grade",
+      value: "1",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade3",
-        defaultMessage: "3rd Grade",
-        description: "Checkbox label for 3rd grade",
-      }),
-      value: "3rd",
+      label: "2nd Grade",
+      value: "2",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade4",
-        defaultMessage: "4th Grade",
-        description: "Checkbox label for 4th grade",
-      }),
-      value: "4th",
+      label: "3rd Grade",
+      value: "3",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutOther",
-        defaultMessage: "Other",
-        description: "Checkbox label for any other grades taught",
-      }),
-      value: "other",
+      label: "Other",
+      value: "o",
     },
   ];
 
