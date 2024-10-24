@@ -3,22 +3,15 @@ import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
 import type {
   ClassroomAnalytics,
-  StudentSummaryRecord,
+  ClassroomStudentAnalytics,
   TimeSpentAtLocation,
-  TimeBreakdownByLanguage,
 } from "@/schema/classroomAnalytics";
 
-const emptyTimeBreakdownByLanguage: TimeBreakdownByLanguage = {
-  en: 0,
-  es: 0,
-  esen: 0,
-};
-
 const emptyTimeSpentAtLocation: TimeSpentAtLocation = {
-  community: emptyTimeBreakdownByLanguage,
-  games: emptyTimeBreakdownByLanguage,
-  stories: emptyTimeBreakdownByLanguage,
-  wellness: emptyTimeBreakdownByLanguage,
+  community: 0,
+  games: 0,
+  stories: 0,
+  wellness: 0,
 };
 
 export const add = onCall(async (request) => {
@@ -35,7 +28,8 @@ export const add = onCall(async (request) => {
   const classroomId = admin.firestore().collection("scrap").doc().id;
   let tasks: any[] = [];
 
-  let studentSummary: StudentSummaryRecord[] = [];
+  let studentAnalytics: ClassroomStudentAnalytics = {};
+
   for (const student of data.students) {
     // todo: check if student account already exists
     const id = await upsertStudent({
@@ -47,11 +41,21 @@ export const add = onCall(async (request) => {
         student.secondaryContactEmail,
       ],
     });
-    studentSummary.push({
+    studentAnalytics[id] = {
       id,
-      status: ["on track"],
-      isCaregiverAccountActivated: false,
-    });
+      highlights: [],
+      needs: [],
+      tags: [{ tag: "-home account inactive" }],
+      languageBreakdown: {
+        es: 0,
+        en: 0,
+        esen: 0,
+      },
+      timeBreakdown: {
+        atHome: 0,
+        atSchool: 0,
+      },
+    };
   }
 
   let analyticsPayload: ClassroomAnalytics = {
@@ -64,9 +68,7 @@ export const add = onCall(async (request) => {
       atHome: [],
       atSchool: [],
     },
-    studentSummary,
-    keyStudentNeeds: [],
-    keyStudentHighlights: [],
+    studentAnalytics,
   };
 
   let classroomPayload = {

@@ -1,21 +1,11 @@
 import { z } from "zod";
-
-const studentSummaryRecordSchema = z.object({
-  id: z.string(),
-  tags: z.array(z.string()),
-});
-
-const timeBreakdownByLanguageSchema = z.object({
-  en: z.number(),
-  es: z.number(),
-  esen: z.number(),
-});
+import { studentAnalyticsSchema } from "./studentAnalytics";
 
 export const timeSpentAtLocationSchema = z.object({
-  community: timeBreakdownByLanguageSchema,
-  games: timeBreakdownByLanguageSchema,
-  stories: timeBreakdownByLanguageSchema,
-  wellness: timeBreakdownByLanguageSchema,
+  community: z.number(),
+  games: z.number(),
+  stories: z.number(),
+  wellness: z.number(),
 });
 
 const studentBreakdownSchema = z.object({
@@ -27,8 +17,13 @@ const studentBreakdownSchema = z.object({
   hearts: z.number(),
 });
 
+const classroomStudentAnalyticsSchema = z.record(
+  z.string(),
+  studentAnalyticsSchema,
+);
+
 export const classroomAnalyticsSchema = z.object({
-  classroom: z.string(), // id
+  classroom: z.string(),
   timeBreakdown: z.object({
     atHome: timeSpentAtLocationSchema,
     atSchool: timeSpentAtLocationSchema,
@@ -37,15 +32,12 @@ export const classroomAnalyticsSchema = z.object({
     atHome: z.array(studentBreakdownSchema),
     atSchool: z.array(studentBreakdownSchema),
   }),
-  studentSummary: z.array(studentSummaryRecordSchema),
-  keyStudentNeeds: z.array(z.string()),
-  keyStudentHighlights: z.array(z.string()),
+  studentAnalytics: classroomStudentAnalyticsSchema,
 });
 
 export type ClassroomAnalytics = z.infer<typeof classroomAnalyticsSchema>;
-export type StudentBreakdown = z.infer<typeof studentBreakdownSchema>;
-export type StudentSummaryRecord = z.infer<typeof studentSummaryRecordSchema>;
-export type TimeBreakdownByLanguage = z.infer<
-  typeof timeBreakdownByLanguageSchema
+export type ClassroomStudentAnalytics = z.infer<
+  typeof classroomStudentAnalyticsSchema
 >;
+export type StudentBreakdown = z.infer<typeof studentBreakdownSchema>;
 export type TimeSpentAtLocation = z.infer<typeof timeSpentAtLocationSchema>;
