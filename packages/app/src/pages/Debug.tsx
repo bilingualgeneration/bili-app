@@ -5,6 +5,8 @@ import {
   IonLabel,
   IonList,
   IonItem,
+  IonImg,
+  IonText,
 } from "@ionic/react";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 import { useState } from "react";
@@ -12,6 +14,10 @@ import { Link } from "react-router-dom";
 import { Preferences } from "@capacitor/preferences";
 import { auth } from "@/components/Firebase";
 import { getFunctions, httpsCallable } from "firebase/functions";
+
+import heartIcon from "@/assets/icons/heart_2.svg";
+import biliCharacter from "@/assets/icons/bili_character.svg";
+import DialogScreen from "../components/DialogScreen/DialogScreen";
 
 export const Debug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
@@ -22,6 +28,28 @@ export const Debug: React.FC = () => {
     functions,
     "classroom-analytics-debug",
   );
+  const [showDialog, setShowDialog] = useState(false);
+  const handleButtonClick = () => {
+    console.log("Button clicked");
+  };
+
+  if (showDialog) {
+    return (
+      <DialogScreen
+        primaryButtonText="Siguiente"
+        secondaryButtonText="Next"
+        characterImage={biliCharacter}
+        onButtonClick={handleButtonClick}
+      >
+        {/* Pass the card content as children */}
+        <IonImg src={heartIcon} alt="Reward Icon" className="reward-image" />
+        <IonText className="semibold dialog-text">
+          <h1>You earned a heart!</h1>
+        </IonText>
+      </DialogScreen>
+    );
+  }
+
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -139,6 +167,22 @@ export const Debug: React.FC = () => {
               <IonLabel>Phrase Matcher Test</IonLabel>
             </Link>
           </IonItem>
+          <IonCard style={{ width: "100%" }}>
+            <IonCardContent>
+              <IonList>
+                <IonItem>
+                  <IonLabel>Feedback Screen</IonLabel>
+                  <IonButton
+                    size="small"
+                    slot="end"
+                    onClick={() => setShowDialog(true)} // Show FeedbackScreen
+                  >
+                    Open
+                  </IonButton>
+                </IonItem>
+              </IonList>
+            </IonCardContent>
+          </IonCard>
         </IonList>
       </IonCardContent>
     </IonCard>

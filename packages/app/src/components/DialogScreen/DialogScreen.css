@@ -11,7 +11,7 @@
   z-index: 1;
 }
 
-.feedback-card {
+.dialog-card {
   background-color: white;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
@@ -43,14 +43,14 @@
   margin: auto;
 }
 
-.feedback-text h1 {
+.dialog-text h1 {
   font-size: 2rem;
   font-weight: bold;
   margin-top: 1.5rem;
   text-align: center;
 }
 
-.feedback-button {
+.dialog-button {
   color: white;
   max-width: 50%;
   margin: auto;
