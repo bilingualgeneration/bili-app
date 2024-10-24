@@ -1,7 +1,7 @@
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
 import { Avatar, AvatarSize } from "@/components/Avatar";
-import { FullName } from "@/hooks/Names";
+import { FullName, UserType } from "@/hooks/Names";
 import { Link } from "react-router-dom";
 
 interface StudentInfoProps {
@@ -35,11 +35,11 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
                 to={link}
                 className="text-sm semibold color-selva no-text-decoration"
               >
-                <FullName id={id} type={type} />
+                <FullName id={id} type={type as UserType} />
               </Link>
             ) : (
               <span className="text-sm">
-                <FullName id={id} type={type} />
+                <FullName id={id} type={type as UserType} />
               </span>
             )}
 

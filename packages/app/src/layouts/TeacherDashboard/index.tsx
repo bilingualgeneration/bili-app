@@ -1,2 +1,2 @@
+export * from "./ClassroomDashboard";
 export * from "./TeacherDashboardLayout";
-export * from "./TeacherDashboardLayoutWithSideMenu";

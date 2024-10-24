@@ -1,6 +1,6 @@
 import { addOutline, addSharp } from "ionicons/icons";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import {
   IonBadge,
   IonButton,
@@ -21,39 +21,9 @@ import { StudentInfo } from "@/components/StudentInfo";
 import "./ClassStudents.css";
 
 export const ClassStudents: React.FC = () => {
-  const { classroomId } = useParams<{ classroomId: string }>();
-  return (
-    <FirestoreDocProvider
-      collection="classroom"
-      id={classroomId}
-      populate={{
-        classroomAnalytics: ["classroom", "==", classroomId],
-      }}
-    >
-      <ClassStudentsLoader />
-    </FirestoreDocProvider>
-  );
-};
-
-const ClassStudentsLoader: React.FC = () => {
-  const { status, data } = useFirestoreDoc();
-  switch (status) {
-    case "loading":
-      return <></>;
-    case "error":
-      return <>error</>;
-    case "ready":
-      return (
-        <HydratedClassStudents
-          data={data.classroomAnalytics[0].studentSummary}
-        />
-      );
-  }
-  return <></>;
-};
-
-const HydratedClassStudents: React.FC = ({ data }) => {
-  const { classroomId } = useParams<{ classroomId: string }>();
+  const { data } = useFirestoreDoc();
+  const analytics = data.classroomAnalytics[0].studentAnalytics;
+  console.log(analytics);
   return (
     <div id="teacher-dashboard-students">
       {/* header */}
@@ -75,7 +45,7 @@ const HydratedClassStudents: React.FC = ({ data }) => {
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
                   <Link
-                    to={`/classrooms/view/${classroomId}/add_students`}
+                    to={`/classrooms/view/${data.id}/add_students`}
                     className="no-underline"
                   >
                     <p className="text-sm semibold color-nube">Add students</p>
@@ -93,7 +63,7 @@ const HydratedClassStudents: React.FC = ({ data }) => {
             <IonCol className="text-md semibold">Student</IonCol>
             <IonCol className="text-md semibold">Tags</IonCol>
           </IonRow>
-          {data.map((student) => (
+          {Object.values(analytics).map((student: any) => (
             <IonRow
               className="ion-align-items-center class-student-table-body-row"
               key={student.id}
@@ -102,66 +72,43 @@ const HydratedClassStudents: React.FC = ({ data }) => {
                 <StudentInfo
                   id={student.id}
                   type={"student"}
-                  link={`/classrooms/view/${classroomId}/students/view/${student.id}`}
+                  link={`/classrooms/view/${data.id}/students/view/${student.id}`}
                   size="xs"
                 />
               </IonCol>
               <IonCol>
-                {student.tags?.map((tag) => <Tag key={tag} id={tag} />)}
+                {student.tags?.map((tag: any) => (
+                  <Tag key={tag} tag={tag.tag} />
+                ))}
               </IonCol>
             </IonRow>
           ))}
         </IonGrid>
       </div>
-      {/* banner temporary commented out*/}
-
-      {/* <div className="class-students-banner-styles">
-        <IonCard className="card-blog">
-          <div>
-            <IonGrid>
-              <IonRow class="ion-align-items-center banner-row">
-                <IonCol size="1">
-                  <img src={StudentsReadingPicture} alt="" />
-                </IonCol>
-                <IonCol>
-                  <p className="text-xl semibold color-suelo">
-                    Alert banner of some sort
-                  </p>
-                  <p>Get notified when students need help!</p>
-                </IonCol>
-                <IonCol size="2" className="button-column">
-                  <button className="get-notified-button">
-                    <a
-                      href="https://thebiliapp.com/blog/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <p className="text-sm semibold">Learn more</p>
-                    </a>
-                  </button>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </div>
-        </IonCard>
-      </div> */}
     </div>
   );
 };
 
-const TagLookup = {
-  "needs support": "danger",
-  "home account inactive": "warning",
+const TagLookup: {
+  [key: string]: string;
+} = {
+  "!": "danger",
+  "-": "warning",
+  "+": "primary",
 };
 
 interface Tag {
-  id: string;
+  tag: string;
 }
 
-const Tag: React.FC<Tag> = ({ id }) => {
+const Tag: React.FC<Tag> = ({ tag }) => {
   return (
-    <IonBadge className="studentProgressTag" color={TagLookup[id]} mode="md">
-      {id}
+    <IonBadge
+      className="studentProgressTag"
+      color={TagLookup[tag[0]]}
+      mode="md"
+    >
+      {tag.slice(1)}
     </IonBadge>
   );
 };

@@ -39,6 +39,10 @@ export const FirestoreDocProvider: React.FC<React.PropsWithChildren<Props>> = ({
   useEffect(() => {
     (async () => {
       const snapshot: any = await getDoc(doc(firestore, collectionPath, id));
+      if (!snapshot.exists()) {
+        setStatus("error");
+        return;
+      }
       let payload = snapshot.data();
       for (const p of Object.keys(populate)) {
         const docs = await getDocs(

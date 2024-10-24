@@ -21,7 +21,7 @@ interface NameRecord {
   timestamp: Date;
 }
 
-type UserType = "user" | "student";
+export type UserType = "user" | "student";
 
 const NamesContext = createContext<NamesState>({} as NamesState);
 
