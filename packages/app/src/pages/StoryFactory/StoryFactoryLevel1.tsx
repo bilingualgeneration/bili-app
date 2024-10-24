@@ -61,6 +61,9 @@ const WrappedSF1: React.FC = () => {
   useEffect(() => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
       onended.pipe(first()).subscribe(() => {
+        if (pageNumber === filteredGames.length - 1) {
+          //logic as if we set to show Congrats
+        }
         setPageNumber(
           pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1,
         );
