@@ -167,22 +167,16 @@ export const Debug: React.FC = () => {
               <IonLabel>Phrase Matcher Test</IonLabel>
             </Link>
           </IonItem>
-          <IonCard style={{ width: "100%" }}>
-            <IonCardContent>
-              <IonList>
-                <IonItem>
-                  <IonLabel>Feedback Screen</IonLabel>
-                  <IonButton
-                    size="small"
-                    slot="end"
-                    onClick={() => setShowDialog(true)} // Show FeedbackScreen
-                  >
-                    Open
-                  </IonButton>
-                </IonItem>
-              </IonList>
-            </IonCardContent>
-          </IonCard>
+          <IonItem>
+            <IonLabel>Dialog Screen</IonLabel>
+            <IonButton
+              size="small"
+              slot="end"
+              onClick={() => setShowDialog(true)}
+            >
+              Open
+            </IonButton>
+          </IonItem>
         </IonList>
       </IonCardContent>
     </IonCard>
