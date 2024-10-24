@@ -23,9 +23,8 @@
 }
 
 .classroom-input-styles label {
-  /* Your custom styles here */
-  font-size: 20px;
-  color: #333;
+  font-size: 24px;
+  color: #000;
   font-weight: bold;
 }
 
@@ -35,4 +34,23 @@
 
 .classroom-name-input .input-bottom {
   padding-left: 0;
+}
+
+.select-language-block-student ion-select {
+  margin-left: 15px;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.language-toggle-block-student ion-toggle,
+.inclusive-toggle-block-student ion-toggle {
+  margin-left: 15px;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
 }
