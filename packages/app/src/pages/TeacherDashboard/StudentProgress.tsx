@@ -422,7 +422,6 @@ const ActivityBreakdown: React.FC = ({}) => {
     functions,
     "student-activityLogs-read",
   );
-  console.log(activity);
   const getActivityLogsPage = useCallback(async () => {
     setIsLoading(true);
     const { data }: { data: ActivityLog[] } = await getActivityLogsPageFunction(

@@ -23,7 +23,6 @@ import "./ClassStudents.css";
 export const ClassStudents: React.FC = () => {
   const { data } = useFirestoreDoc();
   const analytics = data.classroomAnalytics[0].studentAnalytics;
-  console.log(analytics);
   return (
     <div id="teacher-dashboard-students">
       {/* header */}
