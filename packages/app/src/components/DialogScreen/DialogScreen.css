@@ -1,0 +1,70 @@
+.full-height-grid {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 0 12rem;
+}
+
+.left-content {
+  margin-top: 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.dialog-card {
+  background-color: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 550px;
+  margin: auto;
+  margin-bottom: 2rem;
+  z-index: 1;
+}
+
+.character-container {
+  position: absolute;
+  top: 60%;
+  right: 15%;
+  transform: translate(10%, -50%);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.character-image {
+  width: auto;
+  height: 100vh; /* Adjust size as needed */
+  object-fit: contain;
+}
+
+.reward-image {
+  width: 150px;
+  margin: auto;
+}
+
+.dialog-text h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.dialog-button {
+  color: white;
+  max-width: 50%;
+  margin: auto;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+  font-weight: bolder;
+}
+
+.no-scroll-content {
+  overflow: hidden; /* Disable content scroll */
+  height: 100vh;
+}
