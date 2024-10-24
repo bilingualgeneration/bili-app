@@ -1,3 +1,6 @@
+import type { ActivityLog } from "@bili/schema/activityLog";
+import { format } from "date-fns";
+import type { StringLookup } from "@bili/schema/misc";
 import {
   IonButton,
   IonCard,
@@ -9,13 +12,15 @@ import {
   IonList,
   IonProgressBar,
   IonRow,
+  IonSkeletonText,
   IonText,
 } from "@ionic/react";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import { Link, useParams } from "react-router-dom";
 import { FullName } from "@/hooks/Names";
 import { useIntl } from "react-intl";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
 
@@ -29,33 +34,6 @@ import SmallHouse from "@/assets/icons/small_home.svg";
 import SmallSchool from "@/assets/icons/small_school.svg";
 
 import "./StudentProgress.css";
-
-const studentData = [
-  {
-    date: "6/6/24",
-    activity: "Stories",
-    completions: "5",
-    accuracy: "50%",
-    languageMode: "bilingual",
-    location: "school",
-  },
-  {
-    date: "5/6/24",
-    activity: "The intruder",
-    completions: "5",
-    accuracy: "70%",
-    languageMode: "Spanish Immersion",
-    location: "home",
-  },
-  {
-    date: "3/6/24",
-    activity: "Story factory",
-    completions: "3",
-    accuracy: "30%",
-    languageMode: "English immersion",
-    location: "school",
-  },
-];
 
 export const StudentProgress: React.FC = () => {
   const { data } = useFirestoreDoc();
@@ -417,8 +395,57 @@ const TopSkill: React.FC<any> = ({ skill, number }) => (
   </div>
 );
 
+const activityNameLookup: StringLookup = {
+  // TODO: build out more
+  "count-with-me": "Count with Me",
+  intruder: "The Intruder",
+};
+
+const languageModeLookup: StringLookup = {
+  es: "Spanish Immersion",
+  en: "English Immersion",
+  esen: "Bilingual",
+};
+
+const languageModeBackgroundLookup: StringLookup = {
+  es: "#EC59B1",
+  en: "#0045A1",
+  esen: "var(--Base-Selva)",
+};
+
 const ActivityBreakdown: React.FC = ({}) => {
-  const [logs, setLogs] = useState<any>([]);
+  const [activity, setActivity] = useState<ActivityLog[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [noMoreLogs, setNoMoreLogs] = useState<boolean>(false);
+  const functions = getFunctions();
+  const getActivityLogsPageFunction = httpsCallable<any, ActivityLog[]>(
+    functions,
+    "student-activityLogs-read",
+  );
+  console.log(activity);
+  const getActivityLogsPage = useCallback(async () => {
+    setIsLoading(true);
+    const { data }: { data: ActivityLog[] } = await getActivityLogsPageFunction(
+      {
+        id: "XunjvWacWzBPQpi4vmmQ",
+        lastTimestamp:
+          activity.length === 0
+            ? undefined
+            : activity[activity.length - 1].timestamp.value,
+      },
+    );
+    if (data.length > 0) {
+      setActivity([...(activity ?? []), ...data]);
+    } else {
+      setNoMoreLogs(true);
+    }
+    setIsLoading(false);
+  }, [setIsLoading, setActivity, getActivityLogsPageFunction, activity]);
+
+  useEffect(() => {
+    getActivityLogsPage();
+  }, []);
+
   return (
     <div className="student-data-activity-table">
       <IonGrid>
@@ -431,84 +458,91 @@ const ActivityBreakdown: React.FC = ({}) => {
             <IonCol className="text-md semibold">Language mode</IonCol>
             <IonCol className="text-md semibold">Location</IonCol>
           </IonRow>
-          {studentData.map((student, index) => (
+          {activity.map((row) => (
             <IonRow
               className="ion-align-items-center student-table-body-row"
-              key={index}
+              key={`${row.userId}-${row.timestamp.value}`}
             >
               <IonCol>
                 <IonText>
-                  <p>{student.date}</p>
+                  <p>{format(new Date(row.timestamp.value), "MM/dd/yy")}</p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p>{student.activity}</p>
+                  <p>{activityNameLookup[row.activity]}</p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p>{student.completions}</p>
+                  <p></p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText>
-                  <p>{student.accuracy}</p>
+                  <p></p>
                 </IonText>
               </IonCol>
               <IonCol>
                 <IonText className="student-progress-language-mode">
                   <p
                     style={{
-                      background:
-                        student.languageMode.toLowerCase() ===
-                        "english immersion"
-                          ? "#0045A1"
-                          : student.languageMode.toLowerCase() ===
-                              "spanish immersion"
-                            ? "#EC59B1"
-                            : student.languageMode.toLowerCase() === "bilingual"
-                              ? "var(--Base-Selva)"
-                              : "gray",
+                      background: languageModeBackgroundLookup[row.language],
                     }}
                   >
-                    {student.languageMode}
+                    {languageModeLookup[row.language]}
                   </p>
                 </IonText>
               </IonCol>
               <IonCol>
-                <IonText
-                  className="student-progress-location"
-                  style={{
-                    backgroundColor:
-                      student.location.toLowerCase() === "home"
-                        ? "#FFDAD2"
-                        : "#C3ECE2",
-                  }}
-                >
-                  <IonIcon
-                    icon={
-                      student.location.toLowerCase() === "home"
-                        ? SmallHouse
-                        : SmallSchool
-                    }
-                  ></IonIcon>
-                  <p
-                    style={{
-                      color:
-                        student.location.toLowerCase() === "home"
-                          ? "#FF5708"
-                          : "#003735",
-                    }}
-                  >
-                    {student.location}
-                  </p>
-                </IonText>
+                <LocationTag location={row.classroomId ? "school" : "home"} />
               </IonCol>
             </IonRow>
           ))}
+          {isLoading && (
+            <IonRow className="ion-align-items-center student-table-body-row">
+              {[1, 2, 3, 4, 5, 6].map((value) => (
+                <IonCol key={value} style={{ paddingRight: 14 }}>
+                  <IonText>
+                    <IonSkeletonText animated={true} />
+                  </IonText>
+                </IonCol>
+              ))}
+            </IonRow>
+          )}
         </div>
       </IonGrid>
+      {activity.length > 0 && !noMoreLogs && (
+        <div className="ion-text-right">
+          <IonButton size="small" onClick={getActivityLogsPage}>
+            load more
+          </IonButton>
+        </div>
+      )}
     </div>
+  );
+};
+
+interface LocationTag {
+  location: string;
+}
+
+const LocationTag: React.FC<LocationTag> = ({ location }) => {
+  return (
+    <IonText
+      className="student-progress-location"
+      style={{
+        backgroundColor: location === "home" ? "#FFDAD2" : "#C3ECE2",
+      }}
+    >
+      <IonIcon icon={location === "home" ? SmallHouse : SmallSchool}></IonIcon>
+      <p
+        style={{
+          color: location === "home" ? "#FF5708" : "#003735",
+        }}
+      >
+        {location}
+      </p>
+    </IonText>
   );
 };
