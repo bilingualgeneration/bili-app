@@ -12,7 +12,7 @@ import {
   IonText,
 } from "@ionic/react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 import { useStory } from "./StoryContext";
 
@@ -24,7 +24,7 @@ import "./VocabModal.css";
 
 export const VocabModal: React.FC = () => {
   const { clearAudio } = useAudioManager();
-  const { language } = useLanguageToggle(); // is es, esen, or en
+  const { language } = useLanguage();
   const {
     profile: { isInclusive },
   } = useProfile();

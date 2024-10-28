@@ -75,12 +75,13 @@ const generateKeyVocab = (vocabularyList: any) => {
                 if (!vocabLookup[targetWord]) {
                   // @ts-ignore
                   vocabLookup[targetWord] = {
-                    [nestedTranslation.language]: targetWord,
+                    [nestedTranslation.language]:
+                      nestedTranslation.word.split(",")[0],
                   };
                 } else {
                   // @ts-ignore
                   vocabLookup[targetWord][nestedTranslation.language] =
-                    targetWord;
+                    nestedTranslation.word.split(",")[0];
                 }
               }
             }
@@ -89,6 +90,7 @@ const generateKeyVocab = (vocabularyList: any) => {
       }
     }
   }
+  console.log(vocabLookup);
   return {
     keyVocab,
     vocab,
