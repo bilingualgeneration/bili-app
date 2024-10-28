@@ -8,7 +8,7 @@ import { HeaderFooter } from "@/components/HeaderFooter";
 import { IonReactRouter } from "@ionic/react-router";
 import { IonRouterOutlet } from "@ionic/react";
 import { MinimalHeader } from "@/components/MinimalHeader";
-import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, RouteComponentProps, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
 import UnauthedLayout from "@/layouts/Unauthed";
@@ -60,14 +60,6 @@ import {
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { ClassCode } from "@/pages/SignUp/ClassCode";
-import {
-  AddClassroomComplete,
-  AddClassroomProvider,
-  AddClassroomInfo,
-  AddClassroomLanguage,
-  AddClassroomNotificationMethod,
-  AddClassroomStudents,
-} from "@/pages/TeacherDashboard/AddClassroom";
 import Reports from "@/pages/Reports";
 
 import { StudentSelect } from "@/pages/TeacherDashboard";
