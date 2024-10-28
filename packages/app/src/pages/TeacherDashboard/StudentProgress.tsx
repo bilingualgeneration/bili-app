@@ -39,7 +39,6 @@ export const StudentProgress: React.FC = () => {
   const { data } = useFirestoreDoc();
   const { studentId } = useParams<{ studentId: string }>();
   const analytics = data.classroomAnalytics[0].studentAnalytics[studentId];
-
   const languageTotal =
     Math.max(analytics.languageBreakdown.es, 1) +
     Math.max(analytics.languageBreakdown.en, 1) +
@@ -422,6 +421,7 @@ const ActivityBreakdown: React.FC = ({}) => {
     functions,
     "student-activityLogs-read",
   );
+  console.log(activity);
   const getActivityLogsPage = useCallback(async () => {
     setIsLoading(true);
     const { data }: { data: ActivityLog[] } = await getActivityLogsPageFunction(

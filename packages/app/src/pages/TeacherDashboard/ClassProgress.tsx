@@ -9,12 +9,15 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useParams } from "react-router";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import Clock from "@/assets/icons/clock.svg";
 import "./ClassProgress.css";
 
 export const ClassProgress: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  console.log(data);
   const { classroomId } = useParams<{ classroomId: string }>();
 
   return (
