@@ -1,7 +1,6 @@
 import { AudioButton } from "@/components/AudioButton";
 import classnames from "classnames";
 import { DnD, MAX_HEIGHT } from "@/components/DnD";
-
 import { DnDProvider, useDnD } from "@/hooks/DnD";
 import {
   IonGrid,
@@ -90,7 +89,6 @@ const generateKeyVocab = (vocabularyList: any) => {
       }
     }
   }
-  console.log(vocabLookup);
   return {
     keyVocab,
     vocab,
@@ -821,7 +819,9 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
   return (
     <>
       <IonCol size="auto">
-        <div style={{ height: MAX_HEIGHT }}>
+        <div style={{ height: 530 }}>
+          {" "}
+          {/* TODO: determine this programmatically */}
           <IonText>
             <h1 className="text-4xl ion-text-center color-suelo">
               {data.instructions}
@@ -882,14 +882,7 @@ const StoriesGameWrapper: React.FC<any> = ({
       // this should never fire
     }
   }, [isInclusive, language, languages, pageBackward]);
-  if (
-    game[`multiple_${gameType}_text`].filter(
-      (a: any) => a.language === language,
-    ).length === 0
-  ) {
-    // no suitable language found
-    return <></>;
-  }
+
   return (
     <StoriesGame
       {...{
