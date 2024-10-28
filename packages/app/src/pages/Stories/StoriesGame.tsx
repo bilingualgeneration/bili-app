@@ -347,7 +347,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                 <IonCol
                   key={card.id}
                   className=""
-                  size="6"
+                  size="4"
                   onClick={() => handleCardClick(card)}
                 >
                   <img
@@ -357,10 +357,12 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   />
                 </IonCol>
               ))}
+            </IonRow>
+            <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(2, 4).map((card, index) => (
                 <IonCol
                   key={index}
-                  size="6"
+                  size="4"
                   onClick={() => handleCardClick(card)}
                 >
                   <img
