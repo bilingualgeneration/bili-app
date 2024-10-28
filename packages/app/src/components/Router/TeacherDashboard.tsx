@@ -8,8 +8,15 @@ import {
   StudentSelect,
   StudentProgress,
 } from "@/pages/TeacherDashboard";
-import { AddClassroomNotificationMethod } from "@/pages/TeacherDashboard/AddClassroom";
-import { Route } from "react-router-dom";
+import {
+  AddClassroomComplete,
+  AddClassroomProvider,
+  AddClassroomInfo,
+  AddClassroomLanguage,
+  AddClassroomNotificationMethod,
+  AddClassroomStudents,
+} from "@/pages/TeacherDashboard/AddClassroom";
+import { Redirect, Route } from "react-router-dom";
 import {
   ClassroomDashboardLayout,
   TeacherDashboardLayout,
@@ -21,6 +28,41 @@ export const TeacherDashboardRoutes: React.FC = () => (
     render={() => (
       <>
         <TeacherDashboardLayout>
+          <Route
+            path="/classrooms/add"
+            render={() => (
+              <AddClassroomProvider>
+                <Route exact path="/classrooms/add">
+                  <Redirect to="/classrooms/add/info" />
+                </Route>
+                <Route
+                  exact
+                  path="/classrooms/add/info"
+                  component={AddClassroomInfo}
+                />
+                <Route
+                  exact
+                  path="/classrooms/add/language"
+                  component={AddClassroomLanguage}
+                />
+                <Route
+                  exact
+                  path="/classrooms/add/students"
+                  component={AddClassroomStudents}
+                />
+                <Route
+                  exact
+                  path="/classrooms/add/notification-method"
+                  component={AddClassroomNotificationMethod}
+                />
+                <Route
+                  exact
+                  path="/classrooms/add/complete"
+                  component={AddClassroomComplete}
+                />
+              </AddClassroomProvider>
+            )}
+          />
           <Route exact path="/classrooms" component={MyClassrooms} />
         </TeacherDashboardLayout>
         <Route
@@ -74,41 +116,6 @@ export const TeacherDashboardRoutes: React.FC = () => (
    <AuthedLayout>
    <AdultCheckProvider>
    <TeacherDashboardLayout>
-   <Route
-   path="/classrooms/add"
-   render={() => (
-   <AddClassroomProvider>
-   <Route exact path="/classrooms/add">
-   <Redirect to="/classrooms/add/info" />
-   </Route>
-   <Route
-   exact
-   path="/classrooms/add/info"
-   component={AddClassroomInfo}
-   />
-   <Route
-   exact
-   path="/classrooms/add/language"
-   component={AddClassroomLanguage}
-   />
-   <Route
-   exact
-   path="/classrooms/add/students"
-   component={AddClassroomStudents}
-   />
-   <Route
-   exact
-   path="/classrooms/add/notification-method"
-   component={AddClassroomNotificationMethod}
-   />
-   <Route
-   exact
-   path="/classrooms/add/complete"
-   component={AddClassroomComplete}
-   />
-   </AddClassroomProvider>
-   )}
-   />
    </TeacherDashboardLayout>
    </AdultCheckProvider>
    </AuthedLayout>
