@@ -4,14 +4,15 @@ import {
   SetStateAction,
   useContext,
   useCallback,
+  useRef,
   useState,
 } from "react";
+import { Language, useLanguage } from "@/hooks/Language";
 
 import classnames from "classnames";
 import "./LanguageToggle.css";
 
 type LanguageToggleState = any;
-type Language = "en" | "esen" | "es";
 interface LanguageToggleProviderProps {
   allowedLanguages?: Language[];
 }
@@ -25,10 +26,9 @@ export const useLanguageToggle = () => useContext(LanguageToggleContext);
 export const LanguageToggleProvider: React.FC<
   React.PropsWithChildren<LanguageToggleProviderProps>
 > = ({ allowedLanguages = ["en", "es", "esen"], children }) => {
-  const [language, setLanguage] = useState<Language>(allowedLanguages[0]);
+  const { language, setLanguage } = useLanguage();
   const [isVisible, setIsVisible] = useState(true);
-
-  const [stashedLanguage, setStashedLanguage] = useState<Language | null>(null);
+  const stashedLanguage = useRef<Language | null>(language);
   const [tempAllowedLanguages, setTempAllowedLanguages] = useState<
     Language[] | null
   >(null);
@@ -36,14 +36,14 @@ export const LanguageToggleProvider: React.FC<
   const setTempLanguage = useCallback(
     (newLanguage: Language | null) => {
       if (newLanguage === null) {
-        setLanguage(stashedLanguage || allowedLanguages[0]);
-        setStashedLanguage(null);
+        setLanguage(stashedLanguage.current || allowedLanguages[0]);
+        stashedLanguage.current = null;
       } else {
-        setStashedLanguage(language);
+        stashedLanguage.current = language;
         setLanguage(newLanguage);
       }
     },
-    [language, setLanguage, setStashedLanguage],
+    [allowedLanguages, language, setLanguage, stashedLanguage],
   );
 
   const cycleLanguage = useCallback(() => {

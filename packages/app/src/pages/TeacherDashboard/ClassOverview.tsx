@@ -1,4 +1,3 @@
-//A.M.
 import {
   IonButton,
   IonCard,
@@ -11,11 +10,13 @@ import {
   IonList,
   IonProgressBar,
   IonRow,
+  IonSegment,
+  IonSegmentButton,
   IonText,
 } from "@ionic/react";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
 import CommunityIcon from "@/assets/icons/community.svg";
@@ -23,61 +24,17 @@ import StoriesIcon from "@/assets/icons/stories.svg";
 import WellnessIcon from "@/assets/icons/wellness.svg";
 import DropIcon from "@/assets/icons/drop.svg";
 import HouseIcon from "@/assets/icons/house.svg";
+import { Link, Redirect } from "react-router-dom";
 import PresentIcon from "@/assets/icons/present.svg";
 import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { useClassroom } from "@/hooks/Classroom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 
-import "./ClassOverview.scss";
-
-const dataAtSchool = [24, 32, 28, 16];
-const dataAtHome = [18, 25, 40, 17];
-const dataAllLearning = dataAtSchool.map(
-  (value, index) => value + dataAtHome[index],
-);
-
-export const ClassOverview: React.FC = () => {
-  const { classroomId } = useParams<{ classroomId: string }>();
-  return (
-    <FirestoreDocProvider
-      collection="classroom"
-      id={classroomId}
-      populate={{
-        classroomAnalytics: ["classroom", "==", classroomId],
-      }}
-    >
-      <ClassLoader />
-    </FirestoreDocProvider>
-  );
-};
-
-const ClassLoader: React.FC = () => {
-  const { status, data } = useFirestoreDoc();
-  switch (status) {
-    case "loading":
-      return <></>;
-      break;
-    case "error":
-      return <>error</>;
-      break;
-    case "ready":
-      const { classroomAnalytics, ...d } = data;
-      const restructuredData = {
-        ...d,
-        classroomAnalytics: classroomAnalytics[0],
-      };
-      return <ClassOverviewHydrated {...restructuredData} />;
-      break;
-    default:
-      return <>default case</>;
-      break;
-  }
-};
+import "./ClassOverview.css";
 
 const studentHighlightsStyle = {
   color: "#000",
@@ -90,21 +47,12 @@ const studentHighlightsStyle = {
   letterSpacing: "0.2px",
 };
 
-export const ClassOverviewHydrated: React.FC<any> = ({
-  id,
-  school,
-  name,
-  classroomAnalytics: { studentHighlights, studentNeeds },
-}) => {
+export const ClassOverview: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  const classroomAnalytics = data.classroomAnalytics
+    ? data.classroomAnalytics[0]
+    : null;
   const intl = useIntl();
-  const { setInfo } = useClassroom();
-  useEffect(() => {
-    setInfo({
-      name,
-      id,
-      schoolId: school,
-    });
-  }, [setInfo, id, school, name]);
   return (
     <div id="teacher-dashboard-class-overview-id">
       {/* header text */}
@@ -114,7 +62,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
             <div className="header-overview-row">
               <div className="header-overview-arrow">
                 <IonText className="text-sm color-barro classroom-name-text">
-                  {name}
+                  {data.name}
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
@@ -122,10 +70,10 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
               </div>
               <div className="classroom-name-block">
-                <IonText className="text-3xl semibold">{name}</IonText>
+                <IonText className="text-3xl semibold">{data.name}</IonText>
                 <button className="visit-students-button">
                   <Link
-                    to={`/classrooms/${id}/select-student`}
+                    to={`/classrooms/${data.id}/select-student`}
                     className="no-underline"
                   >
                     <p className="text-md semibold color-suelo">
@@ -143,14 +91,8 @@ export const ClassOverviewHydrated: React.FC<any> = ({
       <div className="overview-top-student-cards">
         <IonGrid>
           <IonRow>
-            {studentHighlights.map((s: any) => (
-              <FirestoreDocProvider
-                collection="student"
-                key={s.studentId}
-                id={s.studentId}
-              >
-                <StudentHighlightCard {...s} />
-              </FirestoreDocProvider>
+            {classroomAnalytics?.studentHighlights?.map((s: any) => (
+              <StudentHighlightCard {...s} />
             ))}
           </IonRow>
         </IonGrid>
@@ -163,7 +105,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
           <IonRow>
             {/* left card with graph*/}
             <IonCol>
-              <LearningTimeSummary />
+              <LearningTimeSummary data={classroomAnalytics.timeBreakdown} />
               {/* blog part */}
               <IonCard className="card-blog">
                 <div className="class-overview-blog-styles">
@@ -206,14 +148,8 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
 
                 <IonList lines="full" className="students-needs-support-list">
-                  {studentNeeds.map((s: any) => (
-                    <FirestoreDocProvider
-                      collection="student"
-                      key={s.studentId}
-                      id={s.studentId}
-                    >
-                      <StudentNeedsCard {...s} />
-                    </FirestoreDocProvider>
+                  {classroomAnalytics?.studentNeeds?.map((s: any) => (
+                    <StudentNeedsCard {...s} />
                   ))}
                 </IonList>
                 <div className="review-word-styles">
@@ -237,7 +173,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </div>
                 <Link
                   className="no-underline"
-                  to={`/classrooms/view/${id}/students`}
+                  to={`/classrooms/view/${data.id}/students`}
                 >
                   <IonButton expand="block">See all students</IonButton>
                 </Link>
@@ -313,32 +249,43 @@ const StudentHighlightCard: React.FC<any> = ({ area, student }) => {
   }
 };
 
-const LearningTimeSummary: React.FC<any> = ({}) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("school");
+type LearningTimeSummaryFilter = "atSchool" | "atHome" | "both";
 
-  const handleButtonClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
-  const getButtonClass = (buttonName: string) => {
-    return selectedCategory === buttonName ? "active-button-green" : "";
-  };
-
-  let data;
-  switch (selectedCategory) {
-    case "home":
-      data = dataAtHome;
-      break;
-
-    case "all":
-      data = dataAllLearning;
-      break;
-
-    case "school":
-    default:
-      data = dataAtSchool;
+const getTime = (
+  data: any,
+  filter: LearningTimeSummaryFilter,
+  category: string,
+) => {
+  if (filter === "both") {
+    return Math.max(data.atHome[category] + data.atSchool[category], 1);
+  } else {
+    return Math.max(data[filter][category], 1);
   }
+};
 
+const LearningTimeSummary: React.FC<any> = ({ data }) => {
+  const [learningTimeSummaryFilter, setLearningTimeSummaryFilter] =
+    useState<LearningTimeSummaryFilter>("atSchool");
+  const filteredData = useMemo(() => {
+    const times = {
+      community: getTime(data, learningTimeSummaryFilter, "community"),
+      games: getTime(data, learningTimeSummaryFilter, "games"),
+      stories: getTime(data, learningTimeSummaryFilter, "stories"),
+      wellness: getTime(data, learningTimeSummaryFilter, "wellness"),
+    };
+    console.log(data);
+    console.log(times);
+    const total =
+      times.community + times.games + times.stories + times.wellness;
+
+    // needs to be percentages
+    return {
+      community: Math.floor((times.community / total) * 100),
+      games: Math.floor((times.games / total) * 100),
+      stories: Math.floor((times.stories / total) * 100),
+      wellness: Math.floor((times.wellness / total) * 100),
+    };
+  }, [data, learningTimeSummaryFilter]);
   return (
     <IonCard>
       {/* Learning time summary row */}
@@ -348,44 +295,25 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
             <IonText className="text-xl semibold color-suelo">
               Learning time summary
             </IonText>
-
-            <IonGrid className="table-green-buttons">
-              <IonRow className="ion-align-items-center">
-                <IonCol
-                  className={`custom-col-class-overview first-column ${getButtonClass(
-                    "school",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("school")}>
-                      <p className="text-sm semibold">At school</p>
-                    </button>
-                  </div>
-                </IonCol>
-                <IonCol
-                  className={`custom-col-class-overview ${getButtonClass(
-                    "home",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("home")}>
-                      <p className="text-sm semibold">At home</p>
-                    </button>
-                  </div>
-                </IonCol>
-                <IonCol
-                  className={`custom-col-class-overview last-column ${getButtonClass(
-                    "all",
-                  )}`}
-                >
-                  <div className="button-wrapper-class-grid">
-                    <button onClick={() => handleButtonClick("all")}>
-                      <p className="text-sm semibold">All learning</p>
-                    </button>
-                  </div>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+            <IonSegment
+              value={learningTimeSummaryFilter}
+              mode="ios"
+              onIonChange={({ detail: { value } }) => {
+                setLearningTimeSummaryFilter(
+                  value as LearningTimeSummaryFilter,
+                );
+              }}
+            >
+              <IonSegmentButton value="atSchool">
+                <IonLabel>At school</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="atHome">
+                <IonLabel>At home</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="both">
+                <IonLabel>All Learning</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
           </div>
         </IonCol>
       </IonRow>
@@ -409,7 +337,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Stories</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[0]}%</p>
+                  <p>{filteredData.stories}%</p>
                 </IonCol>
               </IonRow>
               {/* second group */}
@@ -427,7 +355,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Wellness</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[1]}%</p>
+                  <p>{filteredData.wellness}%</p>
                 </IonCol>
               </IonRow>
               {/* third group */}
@@ -446,7 +374,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Play</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[2]}%</p>
+                  <p>{filteredData.games}%</p>
                 </IonCol>
               </IonRow>
               {/* fourth group */}
@@ -465,7 +393,7 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
                   <p className="text-color-grey">Community</p>
                 </IonCol>
                 <IonCol size="3" style={{ textAlign: "center" }}>
-                  <p>{data[3]}%</p>
+                  <p>{filteredData.community}%</p>
                 </IonCol>
               </IonRow>
             </IonCol>
@@ -475,7 +403,12 @@ const LearningTimeSummary: React.FC<any> = ({}) => {
         {/* graph columnn */}
         <IonCol size="5.5" className="class-graph-percentage">
           <PieChartComponent
-            data={data}
+            data={[
+              filteredData.stories,
+              filteredData.wellness,
+              filteredData.games,
+              filteredData.community,
+            ]}
             colors={["#0045A1", "#973D78", "#FF5708", "#22BEB9"]}
             innRadius={3}
             width={200}

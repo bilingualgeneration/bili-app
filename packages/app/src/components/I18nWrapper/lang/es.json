@@ -75,6 +75,9 @@
   "login.divider": "o",
   "login.error.credentials": "Hubo un error con sus credenciales de inicio de sesión, intente nuevamente",
   "login.error.unknown": "Algo salió mal",
+  "login.forgotPassword.link": "¿Has olvidado tu contraseña?",
+  "login.forgotPassword.prompt": "Ingrese su dirección de correo electrónico para restablecer la contraseña",
+  "login.forgotPassword.resetButton": "Restablecer la contraseña",
   "login.teacher": "Iniciar sesión como profesor",
   "login.teacherWelcome": "Bienvenido a la página de inicio de sesión del profesor",
   "pages.classrooms.classroomSize": "{size} estudiantes",
@@ -186,6 +189,8 @@
   "signUpTeacher.roleFacilitator": "Facilitador",
   "signUpTeacher.roleTeacher": "Maestro",
   "signUpTeacher.school": "¿Cuál es el nombre de tu escuela?",
+  "splash.classCode": "¿Tienes un código de aula?",
+  "splash.classCodeButton": "Ingresar el código del aula",
   "splash.classroom": "¿Tienes un código de aula?",
   "splash.createAccountButton": "Crea una cuenta",
   "splash.loginTitle": "Acceso",
@@ -216,5 +221,6 @@
   "tag.resources": "Recursos",
   "tags.parents": "Padres",
   "tags.social_justice": "Justicia Social",
+  "teacherDashboard.addClassroom.infoTitle": "Cuéntanos sobre tu clase",
   "wouldDo.title": "¿Qué harías?"
 }

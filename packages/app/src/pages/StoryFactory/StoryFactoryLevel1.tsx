@@ -60,15 +60,15 @@ const WrappedSF1: React.FC = () => {
   const filteredGames = games.filter((g: any) => {
     switch (language) {
       case "es":
-        // todo: check if inclusive also
-        return g.language === "es";
+        // TODO: check if inclusive also
+        return g.language.includes("es");
         break;
       case "en":
-        return g.language === "en";
+        return g.language.includes("en");
         break;
       case "esen":
-        // todo: check if inclusive also
-        return true;
+        // TODO: check if inclusive also
+        return g.language.includes("en") && g.language.includes("es");
       default:
         return false;
     }
@@ -80,12 +80,9 @@ const WrappedSF1: React.FC = () => {
   useEffect(() => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
       onended.pipe(first()).subscribe(() => {
-        const groupId = filteredGames[pageNumber].handle;
         if (pageNumber === filteredGames.length - 1) {
           //logic as if we set to show Congrats
           handleRecordAttempt(stopTimer());
-        } else {
-          handleAttempt(groupId, true);
         }
         setPageNumber(
           pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1,
@@ -97,12 +94,14 @@ const WrappedSF1: React.FC = () => {
     offsetHeight: 0,
     offsetWidth: 0,
   };
+  if (filteredGames.length === 0) {
+    return <>no bilingual games yet</>;
+  }
   return (
     <>
       <div ref={dndWrapperRef} style={{ height: "100%" }}>
         {dndWidth > 0 && (
           <DnD
-            // TODO: fix
             gameId="sfl1"
             audioOnComplete={
               filteredGames[pageNumber].audio_on_complete

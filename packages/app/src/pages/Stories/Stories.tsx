@@ -1,7 +1,6 @@
 import { AudioButton } from "@/components/AudioButton";
 import classnames from "classnames";
 import { DnD, MAX_HEIGHT } from "@/components/DnD";
-
 import { DnDProvider, useDnD } from "@/hooks/DnD";
 import {
   IonGrid,
@@ -25,6 +24,7 @@ import { useEffect, useMemo, useState } from "react";
 import { VocabModal } from "./VocabModal";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 import forward from "@/assets/icons/carousel_forward.svg";
@@ -75,12 +75,13 @@ const generateKeyVocab = (vocabularyList: any) => {
                 if (!vocabLookup[targetWord]) {
                   // @ts-ignore
                   vocabLookup[targetWord] = {
-                    [nestedTranslation.language]: targetWord,
+                    [nestedTranslation.language]:
+                      nestedTranslation.word.split(",")[0],
                   };
                 } else {
                   // @ts-ignore
                   vocabLookup[targetWord][nestedTranslation.language] =
-                    targetWord;
+                    nestedTranslation.word.split(",")[0];
                 }
               }
             }
@@ -178,8 +179,8 @@ export const StoryLoader = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { setTempAllowedLanguages, setTempLanguage, language } =
-    useLanguageToggle();
+  const { setTempAllowedLanguages, setTempLanguage } = useLanguageToggle();
+  const { language } = useLanguage();
 
   const history = useHistory();
 
@@ -264,13 +265,13 @@ export const StoryLoader = ({
         component: (
           <>
             <PageWrapper>
-              <DnDGame data={dndGame} languages={[dndGame.language]} />
+              <DnDGame data={dndGame} languages={dndGame.language} />
             </PageWrapper>
             <PageCounter />
           </>
         ),
         id: `dnd ${dndGame.uuid}`,
-        languages: [dndGame.language],
+        languages: dndGame.language,
       });
       gamesData.set(dndGame.uuid, {
         totalMistakesPossible: dndGame.pieces.length,
@@ -370,11 +371,28 @@ const PageCounter = () => {
 
   const filteredPages = useMemo(
     () =>
-      pages.filter((p: any) =>
-        p.languages.includes(
-          language === "en" ? "en" : isInclusive ? "es-inc" : "es",
-        ),
-      ),
+      pages.filter((p: any) => {
+        switch (language) {
+          case "en":
+            return p.languages.includes("en");
+          case "es":
+            if (isInclusive) {
+              return p.languages.includes("es-inc");
+            } else {
+              return p.languages.includes("es");
+            }
+          case "esen":
+            if (isInclusive) {
+              return (
+                p.languages.includes("en") && p.languages.includes("es-inc")
+              );
+            } else {
+              return p.languages.includes("en") && p.languages.includes("es");
+            }
+          default:
+            return false;
+        }
+      }),
     [pages, language, isInclusive],
   );
   const currentPage = pages[pageNumber];
@@ -760,9 +778,8 @@ const DnDGame: React.FC<{ data: any; languages: any }> = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { pageBackward } = useStory();
-
   useEffect(() => {
     // check if page has the correct language
     switch (language) {
@@ -812,14 +829,16 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
         [pageNumber]: false,
       });
       */
-      pageForward();
+      //pageForward();
     }
   }, [piecesDropped, totalTargets]);
 
   return (
     <>
       <IonCol size="auto">
-        <div style={{ height: MAX_HEIGHT }}>
+        <div style={{ height: 530 }}>
+          {" "}
+          {/* TODO: determine this programmatically */}
           <IonText>
             <h1 className="text-4xl ion-text-center color-suelo">
               {data.instructions}
@@ -880,14 +899,7 @@ const StoriesGameWrapper: React.FC<any> = ({
       // this should never fire
     }
   }, [isInclusive, language, languages, pageBackward]);
-  if (
-    game[`multiple_${gameType}_text`].filter(
-      (a: any) => a.language === language,
-    ).length === 0
-  ) {
-    // no suitable language found
-    return <></>;
-  }
+
   return (
     <StoriesGame
       {...{

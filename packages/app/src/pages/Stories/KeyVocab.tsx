@@ -15,6 +15,7 @@ import AgesIcon from "@/assets/icons/ages_icon.png";
 import AuthorIcon from "@/assets/icons/author_icon.png";
 import IllustratorIcon from "@/assets/icons/illustrator_icon.png";
 import NarratorIcon from "@/assets/icons/narrator_icon.png";
+import bili from "@/assets/icons/bili_big_avatar.svg";
 
 import "./KeyVocab.css";
 
@@ -26,7 +27,7 @@ const getWordByLanguage = (word: any, language: string) => {
 const Word: React.FC<{ word: any }> = ({ word }) => {
   const { language } = useLanguageToggle();
   const { setCurrentVocabWord } = useStory();
-  const image = word.image.url;
+  const image = word.image?.url || bili;
   const en = getWordByLanguage(word.word, "en");
   const es = getWordByLanguage(word.word, "es");
   const esInc = getWordByLanguage(word.word, "es-inc");

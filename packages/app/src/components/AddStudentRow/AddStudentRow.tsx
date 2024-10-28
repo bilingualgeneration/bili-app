@@ -63,7 +63,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={"3"}>
+              <IonCol size="3">
                 <Input
                   control={control}
                   name="lastName"
@@ -71,7 +71,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size={"2"}>
+              <IonCol size="2">
                 <Input
                   control={control}
                   name="primaryEmail"
@@ -87,12 +87,15 @@ export const AddStudentRow: React.FC<RowProps> = ({
                   className="custom-input-student-class"
                 />
               </IonCol>
-              <IonCol size="1" className="ion-text-center">
-                <IonButton type="submit">Save</IonButton>
+              <IonCol size="1">
+                <IonButton expand="block" type="submit">
+                  Save
+                </IonButton>
               </IonCol>
-              <IonCol size="1" className="ion-text-center">
+              <IonCol size="1">
                 <IonButton
-                  color="secondary"
+                  className="secondary"
+                  expand="block"
                   onClick={() => {
                     setIsEditing(null);
                     onEditingStatusChange(false);
@@ -111,11 +114,19 @@ export const AddStudentRow: React.FC<RowProps> = ({
               index % 2 === 0 ? "even-row" : "odd-row"
             }`}
           >
-            <IonCol size={"3"}>{student.firstName}</IonCol>
-            <IonCol size={"3"}>{student.lastName}</IonCol>
-            <IonCol size={"2"}>{student.primaryEmail}</IonCol>
-            <IonCol size={"2"}>{student.secondaryEmail}</IonCol>
-            <IonCol size={"1"} className="ion-text-center">
+            <IonCol size="3" className="ion-padding">
+              {student.firstName}
+            </IonCol>
+            <IonCol size="3" className="ion-padding">
+              {student.lastName}
+            </IonCol>
+            <IonCol size="2" className="ion-padding">
+              {student.primaryEmail}
+            </IonCol>
+            <IonCol size="2" className="ion-padding">
+              {student.secondaryEmail}
+            </IonCol>
+            <IonCol size="1" className="ion-text-center">
               <IonButton
                 fill="clear"
                 size="small"
@@ -124,11 +135,11 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 <IonIcon
                   slot="icon-only"
                   icon={EditIcon}
-                  style={{ width: 10 }}
+                  style={{ width: 15 }}
                 />
               </IonButton>
             </IonCol>
-            <IonCol size={"1"} className="ion-text-center">
+            <IonCol size="1" className="ion-text-center">
               <IonButton
                 fill="clear"
                 size="small"
@@ -137,7 +148,7 @@ export const AddStudentRow: React.FC<RowProps> = ({
                 <IonIcon
                   slot="icon-only"
                   icon={DeleteIcon}
-                  style={{ width: 10 }}
+                  style={{ width: 15 }}
                 />
               </IonButton>
               <IonAlert

@@ -1,3 +1,10 @@
+.studentProgressTag {
+  padding: 0.5rem;
+  + .studentProgressTag {
+    margin-left: 0.5rem;
+  }
+}
+
 #teacher-dashboard-students {
   padding: 48px;
 

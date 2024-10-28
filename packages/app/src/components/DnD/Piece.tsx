@@ -31,7 +31,6 @@ export const Piece: React.FC<PieceProps> = ({
   const { audioOnComplete, piecesDropped, totalTargets } = useDnD();
   const { addAudio } = useAudioManager();
   const [audio_drag, set_audio_drag] = useState<HTMLAudioElement | null>(null);
-  const [audio_drop, set_audio_drop] = useState<HTMLAudioElement | null>(null);
   const color = hashLetter(text);
   const rotate = `${rotation}deg`;
   useEffect(() => {
@@ -44,11 +43,6 @@ export const Piece: React.FC<PieceProps> = ({
     }
   }, [audio_on_drag, set_audio_drag]);
 
-  useEffect(() => {
-    if (audio_on_drop) {
-      set_audio_drop(audio_on_drop.url);
-    }
-  }, [audio_on_drop]);
   const [{ isDragging }, drag] = useDrag(
     () => ({
       collect: (monitor: DragSourceMonitor) => ({
@@ -71,8 +65,8 @@ export const Piece: React.FC<PieceProps> = ({
     }
     if (dropped) {
       let audio = [];
-      if (audio_drop) {
-        audio.push(audio_drop);
+      if (audio_on_drop) {
+        audio.push(audio_on_drop.url);
       }
       if (piecesDropped >= totalTargets) {
         audio.push(audioOnComplete);

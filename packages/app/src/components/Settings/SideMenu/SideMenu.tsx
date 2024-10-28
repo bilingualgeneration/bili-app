@@ -94,8 +94,15 @@ export const SideMenu: React.FC = () => {
           description={"Progress label for side menu on settings page"}
         />
       ),
-      to: "/settings/progress",
-      isActive: location.pathname === "/settings/progress",
+      to:
+        profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/progress`
+          : "/settings/progress",
+      isActive:
+        location.pathname ===
+        (profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}//progress`
+          : "/settings/progress"),
     },
     {
       icon: informationCircleOutline,

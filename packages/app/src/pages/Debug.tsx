@@ -17,7 +17,11 @@ export const Debug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
   const { startTimer, stopTimer } = useTimeTracker();
   const functions = getFunctions();
-  const addClassroom = httpsCallable(functions, "classroom-add");
+  const debugFunction = httpsCallable(functions, "debug");
+  const debugClassroomAnalytics = httpsCallable(
+    functions,
+    "classroom-analytics-debug",
+  );
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -80,36 +84,33 @@ export const Debug: React.FC = () => {
             </IonButton>
           </IonItem>
           <IonItem>
-            <IonLabel>add classroom</IonLabel>
+            <IonLabel>debug</IonLabel>
             <IonButton
               size="small"
               slot="end"
               onClick={() => {
-                addClassroom({
-                  name: "test name",
-                  grades: ["1", "2"],
-                  language: "es",
-                  allowLanguageToggle: true,
-                  isInclusive: false,
-                  students: [
-                    {
-                      firstName: "Vanessa",
-                      lastName: "Garcia",
-                      primaryContactEmail: "caregivera1@gmail.com",
-                      secondaryContactEmail: "caregivera2@gmail.com",
-                    },
-                    {
-                      firstName: "Juan",
-                      lastName: "Valesquez",
-                      primaryContactEmail: "caregiverb1@gmail.com",
-                      secondaryContactEmail: "caregiverb2@gmail.com",
-                    },
-                  ],
-                  notificationMethod: "email",
-                });
+                debugFunction();
               }}
             >
-              add
+              go
+            </IonButton>
+          </IonItem>
+          <IonItem>
+            <IonLabel>debug generate classroom analytics</IonLabel>
+            <IonButton
+              size="small"
+              slot="end"
+              onClick={() => {
+                debugClassroomAnalytics()
+                  .then((response) => {
+                    console.log(response);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+            >
+              call
             </IonButton>
           </IonItem>
           <IonItem>

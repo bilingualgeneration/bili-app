@@ -1,22 +1,4 @@
 #teacher-dashboard-class-overview-id {
-  .custom-col-class-overview {
-    text-align: center;
-    border: 1px solid #cbcbcb;
-    padding: 10px 0 10px 0;
-  }
-
-  .custom-col-class-overview.first-column {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-right: none;
-  }
-
-  .custom-col-class-overview.last-column {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-left: none;
-  }
-
   .classroom-name-text {
     margin-right: 8px;
   }
@@ -38,10 +20,6 @@
     border-radius: 8px;
     background: linear-gradient(89.96deg, #74c7e5 7.88%, #a2e0c1 104.05%);
     padding: 12px 16px;
-  }
-
-  .table-green-buttons {
-    margin-top: 24px;
   }
 
   .button-wrapper-class-grid button {

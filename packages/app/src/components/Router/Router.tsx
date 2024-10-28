@@ -1,13 +1,16 @@
+import { AffirmationsRoutes } from "./Affirmations";
+import { CountWithMeRoutes } from "./CountWithMe";
+import { TeacherDashboardRoutes } from "./TeacherDashboard";
+
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { AuthedLayout } from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter";
 import { IonReactRouter } from "@ionic/react-router";
 import { IonRouterOutlet } from "@ionic/react";
 import { MinimalHeader } from "@/components/MinimalHeader";
-import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, RouteComponentProps, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SettingsLayout } from "@/layouts/Settings";
-import { TeacherDashboardLayoutWithSideMenu } from "@/layouts/TeacherDashboard";
 import UnauthedLayout from "@/layouts/Unauthed";
 
 // todo: rename
@@ -18,18 +21,7 @@ import {
   Progress,
   Profile,
 } from "@/pages/Settings";
-import {
-  AffirmationsGame,
-  AffirmationsIntro,
-  AffirmationsSelect,
-} from "@/pages/Affirmations";
 import { Community } from "@/pages/Community";
-import {
-  CountWithMeCongrats,
-  CountWithMeGameLoader,
-  CountWithMeIntro,
-  CountWithMeSelect,
-} from "@/pages/CountWithMe";
 import { Debug } from "@/pages/Debug";
 import {
   IntruderSelect,
@@ -68,23 +60,13 @@ import {
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
 import { ClassCode } from "@/pages/SignUp/ClassCode";
-import {
-  AddClassroomComplete,
-  AddClassroomProvider,
-  AddClassroomInfo,
-  AddClassroomLanguage,
-  AddClassroomNotificationMethod,
-  AddClassroomStudents,
-  ClassOverview,
-  MyClassrooms,
-  StudentSelect,
-  StudentProgress,
-  ClassStudentsAddStudents,
-} from "@/pages/TeacherDashboard";
-import { TeacherDashboardLayout } from "@/layouts/TeacherDashboard";
 import Reports from "@/pages/Reports";
-import { ClassStudents } from "@/pages/TeacherDashboard/ClassStudents";
-import { AddStudentsComplete } from "@/pages/TeacherDashboard/AddStudentsComplete";
+
+import { StudentSelect } from "@/pages/TeacherDashboard";
+/*
+  
+  
+*/
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};
@@ -92,6 +74,12 @@ export const Router: React.FC = () => {
     <IonReactRouter>
       <Switch>
         <ScrollToTop>
+          <AuthedLayout>
+            <AffirmationsRoutes />
+            <CountWithMeRoutes />
+            <TeacherDashboardRoutes />
+          </AuthedLayout>
+
           <Route
             exact
             path="/"
@@ -158,55 +146,6 @@ export const Router: React.FC = () => {
                 <HeaderFooter background="#f7faf9">
                   <Community />
                 </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/count-with-me-game/intro"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <CountWithMeIntro />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/count-with-me-game/select"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <CountWithMeSelect />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          {/* temp route for development */}
-          <Route
-            exact
-            path="/count-congrats/:count"
-            render={({ match: { params } }) => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <CountWithMeCongrats count={parseInt(params.count)} />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/count-with-me-game/play/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <MinimalHeader>
-                  <CountWithMeGameLoader />
-                </MinimalHeader>
               </AuthedLayout>
             )}
           />
@@ -330,114 +269,6 @@ export const Router: React.FC = () => {
                   </SettingsLayout>
                 </AdultCheckProvider>
               </AuthedLayout>
-            )}
-          />
-
-          <Route
-            path="/classrooms"
-            render={() => (
-              <>
-                <AuthedLayout>
-                  <AdultCheckProvider>
-                    <TeacherDashboardLayout>
-                      <Route
-                        exact
-                        path="/classrooms"
-                        component={MyClassrooms}
-                      />
-                      <Route
-                        path="/classrooms/add"
-                        render={() => (
-                          <AddClassroomProvider>
-                            <Route exact path="/classrooms/add">
-                              <Redirect to="/classrooms/add/info" />
-                            </Route>
-                            <Route
-                              exact
-                              path="/classrooms/add/info"
-                              component={AddClassroomInfo}
-                            />
-                            <Route
-                              exact
-                              path="/classrooms/add/language"
-                              component={AddClassroomLanguage}
-                            />
-                            <Route
-                              exact
-                              path="/classrooms/add/students"
-                              component={AddClassroomStudents}
-                            />
-                            <Route
-                              exact
-                              path="/classrooms/add/notification-method"
-                              component={AddClassroomNotificationMethod}
-                            />
-                            <Route
-                              exact
-                              path="/classrooms/add/complete"
-                              component={AddClassroomComplete}
-                            />
-                          </AddClassroomProvider>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <ClassOverview />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId/students"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <ClassStudents />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId/students/view/:studentId"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <StudentProgress />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId/add_students"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <ClassStudentsAddStudents />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId/add_students/notification-method"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <AddClassroomNotificationMethod />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/classrooms/view/:classroomId/add_students/complete"
-                        render={() => (
-                          <TeacherDashboardLayoutWithSideMenu>
-                            <AddStudentsComplete />
-                          </TeacherDashboardLayoutWithSideMenu>
-                        )}
-                      />
-                    </TeacherDashboardLayout>
-                  </AdultCheckProvider>
-                </AuthedLayout>
-              </>
             )}
           />
 
@@ -610,41 +441,6 @@ export const Router: React.FC = () => {
               <AuthedLayout>
                 <MinimalHeader>
                   <TellMeAboutGame />
-                </MinimalHeader>
-              </AuthedLayout>
-            )}
-          />
-          <Route
-            exact
-            path="/affirmations/intro"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AffirmationsIntro />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/affirmations/select"
-            render={() => (
-              <AuthedLayout>
-                <HeaderFooter background="#f7faf9">
-                  <AffirmationsSelect />
-                </HeaderFooter>
-              </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/affirmations/play/:pack_id"
-            render={() => (
-              <AuthedLayout>
-                <MinimalHeader>
-                  <AffirmationsGame />
                 </MinimalHeader>
               </AuthedLayout>
             )}

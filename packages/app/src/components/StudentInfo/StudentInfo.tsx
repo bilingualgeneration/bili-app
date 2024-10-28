@@ -1,51 +1,46 @@
-//A.M.
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
-import StudentImage from "@/assets/img/student_img.png";
-import "./StudentInfo.scss";
+import { Avatar, AvatarSize } from "@/components/Avatar";
+import { FullName, UserType } from "@/hooks/Names";
+import { Link } from "react-router-dom";
 
 interface StudentInfoProps {
-  userId: string;
-  userType: string;
+  id: string;
+  type: string;
   subtitle?: string;
   link?: string;
-  size: string;
+  size?: AvatarSize;
 }
 
-// TODO: might need to update props
-
 export const StudentInfo: React.FC<StudentInfoProps> = ({
-  userId,
-  userType,
+  id,
+  type,
   subtitle,
   link,
-  size,
+  size = "md",
 }) => {
   return (
     <IonGrid>
-      <IonRow id="student-info-row" className="ion-align-items-center">
-        <IonCol size="auto" className="image-column-padding">
+      <IonRow className="ion-align-items-center">
+        <IonCol size="auto" style={{ paddingRight: 8 }}>
           {/* temporary image */}
-          <img
-            src={StudentImage}
-            className={`student-info-img-${size}`}
-            alt="student-image"
-          />
+          <Avatar id={id} size={size} />
         </IonCol>
         <IonCol size="auto" className="ion-no-padding">
           <IonText>
             {/* If a link is provided, render the name as a link, otherwise as plain text */}
             {/* temporary name */}
             {link ? (
-              <a
-                href={link}
-                className="text-sm semibold color-selva"
-                style={{ textDecoration: "none" }}
+              <Link
+                to={link}
+                className="text-sm semibold color-selva no-text-decoration"
               >
-                {"Mattie Blooman"}
-              </a>
+                <FullName id={id} type={type as UserType} />
+              </Link>
             ) : (
-              <p className="text-sm">{"Mattie Blooman"}</p>
+              <span className="text-sm">
+                <FullName id={id} type={type as UserType} />
+              </span>
             )}
 
             {/* Subtitle, displayed when provided */}

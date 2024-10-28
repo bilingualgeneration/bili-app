@@ -1,6 +1,18 @@
 const admin = require("firebase-admin");
 import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
+import type {
+  ClassroomAnalytics,
+  ClassroomStudentAnalytics,
+  TimeSpentAtLocation,
+} from "@/schema/classroomAnalytics";
+
+const emptyTimeSpentAtLocation: TimeSpentAtLocation = {
+  community: 0,
+  games: 0,
+  stories: 0,
+  wellness: 0,
+};
 
 export const add = onCall(async (request) => {
   // todo: verify that teacher is logged in
@@ -15,6 +27,50 @@ export const add = onCall(async (request) => {
 
   const classroomId = admin.firestore().collection("scrap").doc().id;
   let tasks: any[] = [];
+
+  let studentAnalytics: ClassroomStudentAnalytics = {};
+
+  for (const student of data.students) {
+    // todo: check if student account already exists
+    const id = await upsertStudent({
+      firstName: student.firstName,
+      lastName: student.lastName,
+      classroom: [classroomId],
+      caregiverEmail: [
+        student.primaryContactEmail,
+        student.secondaryContactEmail,
+      ],
+    });
+    studentAnalytics[id] = {
+      id,
+      highlights: [],
+      needs: [],
+      tags: [{ tag: "-home account inactive" }],
+      languageBreakdown: {
+        es: 0,
+        en: 0,
+        esen: 0,
+      },
+      timeBreakdown: {
+        atHome: 0,
+        atSchool: 0,
+      },
+    };
+  }
+
+  let analyticsPayload: ClassroomAnalytics = {
+    classroom: classroomId,
+    timeBreakdown: {
+      atHome: emptyTimeSpentAtLocation,
+      atSchool: emptyTimeSpentAtLocation,
+    },
+    studentBreakdown: {
+      atHome: [],
+      atSchool: [],
+    },
+    studentAnalytics,
+  };
+
   let classroomPayload = {
     allowLanguageToggle: data.allowLanguageToggle,
     grades: data.grades,
@@ -35,57 +91,12 @@ export const add = onCall(async (request) => {
       .set(classroomPayload),
   );
 
-  for (const student of data.students) {
-    // todo: check if student account already exists
-    tasks.push(
-      upsertStudent({
-        firstName: student.firstName,
-        lastName: student.lastName,
-        classroom: [classroomId],
-        caregiverEmail: [
-          student.primaryContactEmail,
-          student.secondaryContactEmail,
-        ],
-      }),
-    );
-  }
-
   tasks.push(
     admin
       .firestore()
       .collection("classroomAnalytics")
-      .add({
-        classroom: classroomId,
-        studentNeeds: [],
-        studentHighlights: [],
-        learningTimeSummary: {
-          stories: {
-            atSchool: 0, // in minutes
-            atHome: 0,
-          },
-          wellness: {
-            atSchool: 0,
-            atHome: 0,
-          },
-          games: {
-            atSchool: 0,
-            atHome: 0,
-          },
-          community: {
-            atSchool: 0,
-            atHome: 0,
-          },
-        },
-        /*
-       studentNeeds
-       - student, percent, area
-       studentHighlights
-       - student, area
-       learningTimeSummary
-       - stories, wellness, games, community
-         - atSchool, atHome
-    */
-      }),
+      .doc(classroomId)
+      .set(analyticsPayload),
   );
 
   await Promise.all(tasks);
