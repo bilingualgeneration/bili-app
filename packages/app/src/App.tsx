@@ -14,7 +14,6 @@ import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
 import { useIntl } from "react-intl";
 
-import { useLanguage } from "@/contexts/LanguageContext";
 import { TimeTrackerProvider } from "@/hooks/TimeTracker";
 import { InterfaceLanguageProvider } from "@/hooks/InterfaceLanguage";
 import { I18nWrapper } from "@/components/I18nWrapper";

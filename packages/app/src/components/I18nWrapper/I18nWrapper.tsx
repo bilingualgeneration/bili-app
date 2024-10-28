@@ -1,6 +1,5 @@
 import { IntlProvider } from "react-intl";
 import { PropsWithChildren, useEffect, useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 import { createIntl, createIntlCache, IntlShape } from "react-intl";
 

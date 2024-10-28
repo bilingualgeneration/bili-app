@@ -4,12 +4,10 @@ import React, { useEffect } from "react";
 import { useSignUpData } from "./SignUpContext";
 import { useHistory } from "react-router-dom";
 import { useReqdActions } from "@/contexts/ReqdActionsContext";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Complete: React.FC = () => {
   const { data, signUp, signUpStatus } = useSignUpData();
   const history = useHistory();
-  const { setLocale } = useLanguage();
   const { reqdActions, setReqdActions } = useReqdActions();
   useEffect(() => {
     if (signUpStatus === "idle") {

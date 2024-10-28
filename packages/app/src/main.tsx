@@ -1,6 +1,6 @@
 import App from "./App";
 import { createRoot } from "react-dom/client";
-import { LanguageContextProvider } from "@/contexts/LanguageContext";
+import { LanguageProvider } from "@/hooks/Language";
 import React from "react";
 
 // need to wrap entire app in reqd provider so authed and unauthed can hand off
@@ -10,9 +10,9 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-    <LanguageContextProvider>
-      <ReqdActionsProvider>
-        <App />
-      </ReqdActionsProvider>
-    </LanguageContextProvider>
+  <LanguageProvider>
+    <ReqdActionsProvider>
+      <App />
+    </ReqdActionsProvider>
+  </LanguageProvider>,
 );
