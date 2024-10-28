@@ -32,6 +32,7 @@ import { useTimeTracker } from "@/hooks/TimeTracker";
 import "./Intruder.scss";
 import "../../theme/animate.scss";
 import { card } from "ionicons/icons";
+import { groupBy } from "rxjs";
 
 interface BiliImage {
   url: string;
@@ -92,6 +93,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       const groupId = `${group.intruder_text}-${group.word_2_text}-${group.word_3_text}`;
       gamesData.set(groupId, { totalMistakesPossible: 2 });
     }
+
     setGamesData(gamesData);
     // todo: allow only English?
     const audios = [instruction_es_audio];
