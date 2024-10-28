@@ -24,6 +24,7 @@ import { useEffect, useMemo, useState } from "react";
 import { VocabModal } from "./VocabModal";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 import forward from "@/assets/icons/carousel_forward.svg";
@@ -178,8 +179,8 @@ export const StoryLoader = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { setTempAllowedLanguages, setTempLanguage, language } =
-    useLanguageToggle();
+  const { setTempAllowedLanguages, setTempLanguage } = useLanguageToggle();
+  const { language } = useLanguage();
 
   const history = useHistory();
 
@@ -264,13 +265,13 @@ export const StoryLoader = ({
         component: (
           <>
             <PageWrapper>
-              <DnDGame data={dndGame} languages={[dndGame.language]} />
+              <DnDGame data={dndGame} languages={dndGame.language} />
             </PageWrapper>
             <PageCounter />
           </>
         ),
         id: `dnd ${dndGame.uuid}`,
-        languages: [dndGame.language],
+        languages: dndGame.language,
       });
       gamesData.set(dndGame.uuid, {
         totalMistakesPossible: dndGame.pieces.length,
@@ -760,9 +761,8 @@ const DnDGame: React.FC<{ data: any; languages: any }> = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { pageBackward } = useStory();
-
   useEffect(() => {
     // check if page has the correct language
     switch (language) {
