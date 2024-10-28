@@ -342,7 +342,9 @@ export const StoryLoader = ({
 
     setIsTranslanguaged(data.is_translanguaged);
     setPages(tempPages);
-    setPageNumber(0);
+    /////////////////////////////////////
+    //setPageNumber(0);
+    setPageNumber(23);
     setReady(true);
 
     if (data.is_translanguaged) {
@@ -371,11 +373,28 @@ const PageCounter = () => {
 
   const filteredPages = useMemo(
     () =>
-      pages.filter((p: any) =>
-        p.languages.includes(
-          language === "en" ? "en" : isInclusive ? "es-inc" : "es",
-        ),
-      ),
+      pages.filter((p: any) => {
+        switch (language) {
+          case "en":
+            return p.languages.includes("en");
+          case "es":
+            if (isInclusive) {
+              return p.languages.includes("es-inc");
+            } else {
+              return p.languages.includes("es");
+            }
+          case "esen":
+            if (isInclusive) {
+              return (
+                p.languages.includes("en") && p.languages.includes("es-inc")
+              );
+            } else {
+              return p.languages.includes("en") && p.languages.includes("es");
+            }
+          default:
+            return false;
+        }
+      }),
     [pages, language, isInclusive],
   );
   const currentPage = pages[pageNumber];
