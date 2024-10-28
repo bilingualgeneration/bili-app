@@ -22,6 +22,8 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import "./Stories.css";
 import { useActivity } from "@/contexts/ActivityContext";
 
+import bili from "@/assets/icons/bili_big_avatar.svg"; // TODO: placeholder image
+
 interface PictureImage {
   url: string;
 }
@@ -181,7 +183,12 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
         }
         break;
       case "esen":
-        if (headerData.es && headerData.en) {
+        if (
+          headerData.es &&
+          headerData.en &&
+          headerData.es.audio &&
+          headerData.en.audio
+        ) {
           addAudio([headerData.es.audio.url, headerData.en.audio.url]);
         }
         break;
@@ -346,7 +353,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   <img
                     className="stories-game-image"
                     style={cardColors[card.id]}
-                    src={card.image.url}
+                    src={card.image ? card.image.url : bili}
                   />
                 </IonCol>
               ))}
@@ -359,7 +366,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
                   <img
                     className="stories-game-image"
                     style={cardColors[card.id]}
-                    src={card.image.url}
+                    src={card.image ? card.image.url : bili}
                   />
                 </IonCol>
               ))}
