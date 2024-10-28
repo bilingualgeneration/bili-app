@@ -812,7 +812,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
         [pageNumber]: false,
       });
       */
-      pageForward();
+      //pageForward();
     }
   }, [piecesDropped, totalTargets]);
 
