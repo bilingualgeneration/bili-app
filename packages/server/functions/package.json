@@ -20,9 +20,11 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/bigquery": "^7.7.1",
+    "aws-sdk": "^2.1691.0",
     "firebase": "^10.4.0",
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.3.1",
+    "nodemailer": "^6.9.15",
     "zod": "^3.23.8"
   },
   "devDependencies": {
