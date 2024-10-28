@@ -342,9 +342,7 @@ export const StoryLoader = ({
 
     setIsTranslanguaged(data.is_translanguaged);
     setPages(tempPages);
-    /////////////////////////////////////
-    //setPageNumber(0);
-    setPageNumber(23);
+    setPageNumber(0);
     setReady(true);
 
     if (data.is_translanguaged) {
