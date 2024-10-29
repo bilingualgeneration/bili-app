@@ -102,7 +102,7 @@ const WrappedSF1: React.FC = () => {
       <div ref={dndWrapperRef} style={{ height: "100%" }}>
         {dndWidth > 0 && (
           <DnD
-            gameId="sfl1"
+            gameId={filteredGames[pageNumber].handle}
             audioOnComplete={
               filteredGames[pageNumber].audio_on_complete
                 ? filteredGames[pageNumber].audio_on_complete.url
