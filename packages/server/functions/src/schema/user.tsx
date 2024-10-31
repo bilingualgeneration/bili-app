@@ -1,3 +1,4 @@
+import { languageSchema } from "./language";
 import { z } from "zod";
 
 export const userSchema = z.object({
@@ -7,7 +8,7 @@ export const userSchema = z.object({
 
 export const profileSchema = z.object({
   name: z.string(),
-  language: z.enum(["es"]),
+  language: languageSchema,
   role: z.enum(["parent", "student", "teacher"]),
   schoolName: z.string(),
   grades: z.string(),

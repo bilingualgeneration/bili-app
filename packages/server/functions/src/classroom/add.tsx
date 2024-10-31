@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 import { upsertStudent } from "../student/upsert";
 import { onCall } from "firebase-functions/v2/https";
+import type { Classroom } from "@/schema/classroom";
 import type {
   ClassroomAnalytics,
   ClassroomStudentAnalytics,
@@ -71,12 +72,12 @@ export const add = onCall(async (request) => {
     studentAnalytics,
   };
 
-  let classroomPayload = {
+  let classroomPayload: Classroom = {
     allowLanguageToggle: data.allowLanguageToggle,
+    allowedLanguages: data.allowedLanguages,
     grades: data.grades,
     isActive: true,
     isInclusive: data.isInclusive,
-    language: data.language,
     name: data.name,
     school: profile.school.id,
     size: data.students.length,
