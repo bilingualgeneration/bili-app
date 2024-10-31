@@ -148,7 +148,6 @@ const ClassPreferencesHydrated: React.FC = () => {
           <Input
             label="Class Name"
             labelPlacement="above"
-            placeholder={name}
             name="name"
             fill="outline"
             control={control}
