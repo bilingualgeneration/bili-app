@@ -71,11 +71,13 @@ export const AddClassroomLanguage: React.FC = () => {
                 letterSpacing: "0.2px",
               }}
             >
-              ES
+              EN
             </div>
           }
           title={intl.formatMessage({ id: "languageMode.engImmersionTitle" })}
-          content={intl.formatMessage({ id: "languageMode.engImmersion" })}
+          content={
+            "Choose this setting if you want your class to learn all content and activities in the English language.  "
+          }
           iconBackgroundColor="#0045A1"
         />
       </div>
@@ -104,7 +106,9 @@ export const AddClassroomLanguage: React.FC = () => {
             </div>
           }
           title={intl.formatMessage({ id: "languageMode.immersionTitle" })}
-          content={intl.formatMessage({ id: "languageMode.immersion" })}
+          content={
+            "Choose this setting if you want your class to learn all content and activities in the Spanish language.  "
+          }
           iconBackgroundColor="#F0091B"
         />
       </div>
@@ -135,7 +139,9 @@ export const AddClassroomLanguage: React.FC = () => {
             </div>
           }
           title={intl.formatMessage({ id: "languageMode.bilingualTitle" })}
-          content={intl.formatMessage({ id: "languageMode.bilingual" })}
+          content={
+            "Choose this setting if you want your class to learn Spanish with English supports and translations. "
+          }
           iconBackgroundColor="#006A67"
         />
       </div>
@@ -188,7 +194,9 @@ export const AddClassroomLanguage: React.FC = () => {
               name="allowLanguageToggle"
             />
             <Popover
-              content={"???"}
+              content={
+                "Enable the Language Toggle button to allow your student to change the app language while they play. Disable to lock the app language."
+              }
               trigger="language-toggle-popover-trigger"
             />
           </IonItem>
