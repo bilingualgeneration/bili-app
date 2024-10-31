@@ -3,6 +3,7 @@ import {
   ClassStudents,
   ClassStudentsAddStudents,
   ClassOverview,
+  ClassPreferences,
   ClassProgress,
   MyClassrooms,
   StudentSelect,
@@ -103,6 +104,11 @@ export const TeacherDashboardRoutes: React.FC = () => (
                 exact
                 path="/classrooms/view/:classroomId/add_students/complete"
                 component={AddStudentsComplete}
+              />
+              <Route
+                exact
+                path="/classrooms/view/:classroomId/preferences"
+                component={ClassPreferences}
               />
             </ClassroomDashboardLayout>
           )}

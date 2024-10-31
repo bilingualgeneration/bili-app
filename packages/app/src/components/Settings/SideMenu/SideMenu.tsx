@@ -30,7 +30,6 @@ export const SideMenu: React.FC = () => {
   const location = useLocation();
   const { classroomId } = useParams<{ classroomId: string }>();
   const { profile, signout } = useProfile();
-
   const options: Option[] = [
     {
       icon: gridOutline,
