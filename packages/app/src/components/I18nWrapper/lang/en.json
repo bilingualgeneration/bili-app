@@ -139,7 +139,8 @@
   "settings.progress.wellness": "Wellness",
   "settings.saveChangeBtn": "Save changes",
   "settingsHeader.rate": "Rate this app",
-  "settingsProgress.preferences.bilingual": "Bilingual vs. Immersion Mode",
+  "settingsProgress.preferences.bilingual": "Student language",
+  "settingsProgress.preferences.grades": "Grades",
   "settingsProgress.preferences.inclusive": "Inclusive Spanish",
   "settingsProgress.preferences.limit": "Daily playtime limit",
   "settingsProgress.preferences.popover1": "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
@@ -149,6 +150,7 @@
   "settingsProgress.preferences.popover5": "Enable this feature to hear sound effects associated with the app.",
   "settingsProgress.preferences.settingsLanguage": "Settings Language",
   "settingsProgress.preferences.sound": "Sound Effects",
+  "settingsProgress.preferences.toggle": "Language Toggle",
   "sideMenu.about": "About Bili",
   "sideMenu.logOut": "Log out",
   "sideMenu.overview": "Overview",
@@ -222,5 +224,9 @@
   "tags.parents": "Parents",
   "tags.social_justice": "Social Justice",
   "teacherDashboard.addClassroom.infoTitle": "Tell us about your class",
+  "waitlist.role": "Role",
+  "waitlist.roleHelper": "teacher, parent, administrator, etc",
+  "waitlist.schoolName": "School Name",
+  "waitlist.zipcode": "Zipcode",
   "wouldDo.title": "What would you do?"
 }

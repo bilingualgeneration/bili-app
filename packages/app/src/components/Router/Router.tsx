@@ -1,5 +1,6 @@
 import { AffirmationsRoutes } from "./Affirmations";
 import { CountWithMeRoutes } from "./CountWithMe";
+import { SignupRoutes } from "./Signup";
 import { TeacherDashboardRoutes } from "./TeacherDashboard";
 
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
@@ -34,9 +35,7 @@ import { Play } from "@/pages/Play";
 import { Preload } from "@/pages/Preload";
 import { PreSplash } from "@/pages/PreSplash";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
-import { Pricing } from "@/pages/SignUp/Pricing";
 import ResetPassword from "@/pages/ResetPassword";
-import { SignUp } from "@/pages/SignUp";
 import { Splash } from "@/pages/Splash";
 import {
   Stories,
@@ -59,7 +58,6 @@ import {
 } from "@/pages/TellMeAbout";
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoSelect, WouldDoIntro, WouldDoGame } from "@/pages/WouldDo";
-import { ClassCode } from "@/pages/SignUp/ClassCode";
 import Reports from "@/pages/Reports";
 
 import { StudentSelect } from "@/pages/TeacherDashboard";
@@ -75,16 +73,9 @@ export const Router: React.FC = () => {
             <CountWithMeRoutes />
             <TeacherDashboardRoutes />
           </AuthedLayout>
-
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <UnauthedLayout>
-                <Preload />
-              </UnauthedLayout>
-            )}
-          />
+          <UnauthedLayout>
+            <SignupRoutes />
+          </UnauthedLayout>
 
           <Route exact path="/presplash" render={() => <PreSplash />} />
 
@@ -289,26 +280,6 @@ export const Router: React.FC = () => {
                   <StudentLoader />
                 </HeaderFooter>
               </AuthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/sign-up"
-            render={() => (
-              <UnauthedLayout>
-                <SignUp />
-              </UnauthedLayout>
-            )}
-          />
-
-          <Route
-            exact
-            path="/sign-up/class-code"
-            render={() => (
-              <UnauthedLayout>
-                <SignUp entry="classCode" />
-              </UnauthedLayout>
             )}
           />
 
@@ -532,6 +503,15 @@ export const Router: React.FC = () => {
                   <Wellness />
                 </HeaderFooter>
               </AuthedLayout>
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <UnauthedLayout>
+                <Preload />
+              </UnauthedLayout>
             )}
           />
         </ScrollToTop>
