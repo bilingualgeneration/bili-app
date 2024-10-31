@@ -77,6 +77,8 @@ const Login: React.FC = () => {
     const email = getValues("email");
 
     if (email) {
+      //TODO: update language
+      auth.languageCode = "en";
       try {
         await sendPasswordResetEmail(auth, email);
         setIsModalOpen(false); // Close the modal on successful reset
