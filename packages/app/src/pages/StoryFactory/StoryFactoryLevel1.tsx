@@ -8,6 +8,8 @@ import { DnDProvider, useDnD } from "@/hooks/DnD";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useEffect, useRef } from "react";
 import { first } from "rxjs/operators";
+import { GameData, useActivity } from "@/contexts/ActivityContext";
+import { useTimeTracker } from "@/hooks/TimeTracker";
 
 export const StoryFactoryLevel1: React.FC = () => {
   return (
@@ -19,10 +21,36 @@ export const StoryFactoryLevel1: React.FC = () => {
 
 const WrappedSF1: React.FC = () => {
   const dndWrapperRef = useRef<HTMLDivElement | null>(null);
-  const {
-    data: { ["dnd-game"]: games },
-  } = useFirestoreDoc();
+  const { data } = useFirestoreDoc();
+  const games = data?.["dnd-game"] || [];
+  console.log("DND game", games);
   const { language, setIsVisible } = useLanguageToggle();
+  const {
+    handleAttempt,
+    handleRecordAttempt,
+    handleResetAttempts,
+    setActivityState,
+    setGamesData,
+  } = useActivity();
+  const { startTimer, stopTimer } = useTimeTracker();
+
+  useEffect(() => {
+    startTimer();
+    setActivityState({
+      type: "story-factory-level-1",
+      id: data.uuid,
+    });
+
+    const gamesData: GameData = new Map();
+    for (const group of filteredGames) {
+      const groupId = group.handle;
+      gamesData.set(groupId, { totalMistakesPossible: 2 });
+      console.log("DND filteredgame", groupId);
+    }
+
+    setGamesData(gamesData);
+  }, []);
+
   useEffect(() => {
     setIsVisible(false);
     return () => {
@@ -45,12 +73,17 @@ const WrappedSF1: React.FC = () => {
         return false;
     }
   });
+
   const [pageNumber, setPageNumber] = useState<number>(0);
   const { totalTargets, piecesDropped, setPiecesDropped } = useDnD();
   const { onended } = useAudioManager();
   useEffect(() => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
       onended.pipe(first()).subscribe(() => {
+        if (pageNumber === filteredGames.length - 1) {
+          //logic as if we set to show Congrats
+          handleRecordAttempt(stopTimer());
+        }
         setPageNumber(
           pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1,
         );
@@ -69,7 +102,7 @@ const WrappedSF1: React.FC = () => {
       <div ref={dndWrapperRef} style={{ height: "100%" }}>
         {dndWidth > 0 && (
           <DnD
-            gameId="sfl1"
+            gameId={filteredGames[pageNumber].handle}
             audioOnComplete={
               filteredGames[pageNumber].audio_on_complete
                 ? filteredGames[pageNumber].audio_on_complete.url

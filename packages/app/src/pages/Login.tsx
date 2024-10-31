@@ -10,7 +10,11 @@ import {
   IonLabel,
   IonInput,
 } from "@ionic/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useState } from "react";
 
@@ -36,6 +40,7 @@ const Login: React.FC = () => {
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { isValid },
   } = useForm<FormInputs>({
     mode: "onBlur",
@@ -65,6 +70,22 @@ const Login: React.FC = () => {
     //history.push("/student-dashboard");
     setIsLoading(false);
   });
+
+  const handlePasswordReset = async () => {
+    //send an email with the link to reset the password
+    setIsLoading(true);
+    const email = getValues("email");
+
+    if (email) {
+      try {
+        await sendPasswordResetEmail(auth, email);
+        setIsModalOpen(false); // Close the modal on successful reset
+      } catch (error: any) {
+        console.error("Error sending password reset email: ", error);
+      }
+    }
+    setIsLoading(false);
+  };
 
   return (
     <>
@@ -213,7 +234,8 @@ const Login: React.FC = () => {
             fill="solid"
             shape="round"
             className="reset-button color-selva text-sm semibold"
-            onClick={() => setIsModalOpen(false)}
+            onClick={handlePasswordReset}
+            disabled={isLoading}
           >
             <FormattedMessage id="login.forgotPassword.resetButton" />
           </IonButton>

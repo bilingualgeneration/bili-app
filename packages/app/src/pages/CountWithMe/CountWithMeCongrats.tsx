@@ -5,21 +5,22 @@ import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
-import {useLanguageToggle} from '@/components/LanguageToggle';
-
-import {first} from 'rxjs/operators';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useActivity } from "@/contexts/ActivityContext";
+import { useTimeTracker } from "@/hooks/TimeTracker";
+import { first } from "rxjs/operators";
 
 // audio
-import count_congrats_en_3 from '@/assets/audio/CountAudio/count_congrats_en_3.mp3';
-import count_congrats_en_6 from '@/assets/audio/CountAudio/count_congrats_en_6.mp3';
-import count_congrats_en_9 from '@/assets/audio/CountAudio/count_congrats_en_9.mp3';
-import count_congrats_en_13 from '@/assets/audio/CountAudio/count_congrats_en_13.mp3';
-import count_congrats_es_3 from '@/assets/audio/CountAudio/count_congrats_es_3.mp3';
-import count_congrats_es_6 from '@/assets/audio/CountAudio/count_congrats_es_6.mp3';
-import count_congrats_es_9 from '@/assets/audio/CountAudio/count_congrats_es_9.mp3';
-import count_congrats_es_13 from '@/assets/audio/CountAudio/count_congrats_es_13.mp3';
-import activity_completed_en from '@/assets/audio/CountAudio/activity_completed_en.mp3';
-import activity_completed_es from '@/assets/audio/CountAudio/activity_completed_es.mp3';
+import count_congrats_en_3 from "@/assets/audio/CountAudio/count_congrats_en_3.mp3";
+import count_congrats_en_6 from "@/assets/audio/CountAudio/count_congrats_en_6.mp3";
+import count_congrats_en_9 from "@/assets/audio/CountAudio/count_congrats_en_9.mp3";
+import count_congrats_en_13 from "@/assets/audio/CountAudio/count_congrats_en_13.mp3";
+import count_congrats_es_3 from "@/assets/audio/CountAudio/count_congrats_es_3.mp3";
+import count_congrats_es_6 from "@/assets/audio/CountAudio/count_congrats_es_6.mp3";
+import count_congrats_es_9 from "@/assets/audio/CountAudio/count_congrats_es_9.mp3";
+import count_congrats_es_13 from "@/assets/audio/CountAudio/count_congrats_es_13.mp3";
+import activity_completed_en from "@/assets/audio/CountAudio/activity_completed_en.mp3";
+import activity_completed_es from "@/assets/audio/CountAudio/activity_completed_es.mp3";
 
 // svgs
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
@@ -52,11 +53,14 @@ export const CountWithMeCongrats: React.FC<{
     star: congratsStar,
   };
 
-  const { profile: {isImmersive}, activeChildProfile } = useProfile();
-  const {language} = useLanguageToggle();
+  const {
+    profile: { isImmersive },
+    activeChildProfile,
+  } = useProfile();
+  const { language } = useLanguageToggle();
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio, onended} = useAudioManager();
+  const { addAudio, clearAudio, onended } = useAudioManager();
   const audio_es = new Audio(
     sounds.es[count === -1 ? "all" : count.toString()],
   );
@@ -64,6 +68,8 @@ export const CountWithMeCongrats: React.FC<{
     sounds.en[count === -1 ? "all" : count.toString()],
   );
   const functions = getFunctions();
+  const { handleRecordAttempt } = useActivity();
+  const { startTimer, stopTimer } = useTimeTracker();
 
   // can potentially uncomment once 'congrats after x animals' screen is built
 
@@ -94,20 +100,21 @@ export const CountWithMeCongrats: React.FC<{
 
   const history = useHistory();
 
-  useEffect(() => {
-    // increment number of completions
-    const completionFunction = httpsCallable(
-      functions,
-      "user-child-profile-completion-add",
-    );
-    const data: any = {
-      uid: activeChildProfile.id,
-      module: "count-with-me-game", //not sure if it's a correct module 
-      moduleAdd: 5,
-      completionsAdd: 1,
-    };
-    completionFunction(data);
-  }, []);
+  // useEffect(() => {
+
+  // increment number of completions
+  // const completionFunction = httpsCallable(
+  //   functions,
+  //   "user-child-profile-completion-add",
+  // );
+  // const data: any = {
+  //   uid: activeChildProfile.id,
+  //   module: "count-with-me-game", //not sure if it's a correct module
+  //   moduleAdd: 5,
+  //   completionsAdd: 1,
+  // };
+  // completionFunction(data);
+  // }, []);
 
   useEffect(() => {
     return () => {
@@ -116,6 +123,7 @@ export const CountWithMeCongrats: React.FC<{
     };
   }, []);
   useEffect(() => {
+    handleRecordAttempt(stopTimer());
     if (isImmersive) {
       audio_es.onended = () => {
         setAudioPlayed(true);
@@ -130,7 +138,6 @@ export const CountWithMeCongrats: React.FC<{
     }
     audio_es.play();
   }, []);
-
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -172,8 +179,11 @@ export const CountWithMeCongrats: React.FC<{
                 description="Information that the activity is completed"
               />
             </h1>
-            {language === 'esen' && (
-              <p className="text-2xl color-english" style={{ textAlign: "center" }}>
+            {language === "esen" && (
+              <p
+                className="text-2xl color-english"
+                style={{ textAlign: "center" }}
+              >
                 Activity Completed
               </p>
             )}
@@ -186,11 +196,7 @@ export const CountWithMeCongrats: React.FC<{
               zIndex: 3,
             }}
           >
-            <img
-              className="congrats-star"
-              src={congrats.star}
-              alt="star"
-            />
+            <img className="congrats-star" src={congrats.star} alt="star" />
             {showText && (
               <div
                 style={{
@@ -211,10 +217,8 @@ export const CountWithMeCongrats: React.FC<{
                   />
                 </div>
 
-                {language === 'esen' && (
-                  <p className="text-sm color-english">
-                    You've earned a star
-                  </p>
+                {language === "esen" && (
+                  <p className="text-sm color-english">You've earned a star</p>
                 )}
               </div>
             )}
@@ -230,7 +234,7 @@ export const CountWithMeCongrats: React.FC<{
           marginTop: "auto",
         }}
       >
-        {audioPlayed && ( 
+        {audioPlayed && (
           <img
             src={StoryFactoryArrow}
             alt="indicator arrow to the next button"
@@ -248,7 +252,12 @@ export const CountWithMeCongrats: React.FC<{
           expand="block"
           shape="round"
           type="button"
-          onClick={onKeepGoingClick}
+          onClick={() => {
+            if (onKeepGoingClick) {
+              onKeepGoingClick();
+            }
+            startTimer();
+          }}
         >
           <div>
             <div className="story-button-bold">
@@ -258,7 +267,7 @@ export const CountWithMeCongrats: React.FC<{
                 description="Button label to exit congrats screen"
               />
             </div>
-            {language === 'esen' && (
+            {language === "esen" && (
               <div className="story-button-reg">Keep going!</div>
             )}
           </div>
