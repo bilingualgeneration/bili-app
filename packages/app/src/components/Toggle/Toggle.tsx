@@ -31,6 +31,7 @@ export type ToggleAdditionalProps = {
   control: Control<any>;
   label: string | JSX.Element;
   testId: string | undefined;
+  onChange?: (arg: any) => void;
 };
 
 export type ToggleProps = Partial<IonToggleProps> &
@@ -41,6 +42,7 @@ export type ToggleProps = Partial<IonToggleProps> &
 export const Toggle = ({
   control,
   label,
+  onChange: onChangeProp,
   ...props
 }: ToggleProps): JSX.Element => {
   return (
@@ -57,6 +59,9 @@ export const Toggle = ({
             checked={value}
             onIonChange={(event) => {
               onChange(event.detail.checked);
+              if (onChangeProp) {
+                onChangeProp(event.detail.checked);
+              }
             }}
           >
             {label}

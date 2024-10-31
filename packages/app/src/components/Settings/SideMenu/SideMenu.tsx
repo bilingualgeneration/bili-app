@@ -30,7 +30,6 @@ export const SideMenu: React.FC = () => {
   const location = useLocation();
   const { classroomId } = useParams<{ classroomId: string }>();
   const { profile, signout } = useProfile();
-
   const options: Option[] = [
     {
       icon: gridOutline,
@@ -82,8 +81,15 @@ export const SideMenu: React.FC = () => {
           description={"Preferences label for side menu on settings page"}
         />
       ),
-      to: "/settings/preferences",
-      isActive: location.pathname === "/settings/preferences",
+      to:
+        profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/preferences`
+          : "/settings/preferences",
+      isActive:
+        location.pathname ===
+        (profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/preferences`
+          : "/settings/preferences"),
     },
     {
       icon: statsChartOutline,

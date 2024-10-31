@@ -63,10 +63,6 @@ import { ClassCode } from "@/pages/SignUp/ClassCode";
 import Reports from "@/pages/Reports";
 
 import { StudentSelect } from "@/pages/TeacherDashboard";
-/*
-  
-  
-*/
 
 export const Router: React.FC = () => {
   const contentStyle: Record<string, string> = {};

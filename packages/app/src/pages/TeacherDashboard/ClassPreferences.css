@@ -1,0 +1,56 @@
+.grades-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.grades-styles ion-checkbox::part(container) {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 3px solid #889391;
+}
+
+.grades-styles ion-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.classroom-input-styles {
+  width: 100%;
+  margin: 52px 0px;
+  padding: 0px 16px;
+}
+
+.classroom-input-styles label {
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+}
+
+.classroom-name-input {
+  margin-top: 12px;
+}
+
+.classroom-name-input .input-bottom {
+  padding-left: 0;
+}
+
+.select-language-block-student ion-select {
+  margin-left: 15px;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.language-toggle-block-student ion-toggle,
+.inclusive-toggle-block-student ion-toggle {
+  margin-left: 15px;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}

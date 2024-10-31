@@ -35,7 +35,9 @@ type IonCheckboxProps = {
 
 type MultipleCheckboxAdditionalProps = {
   control: Control<any>;
+  defaultValue: string[];
   name: string;
+  onChange?: (arg: any) => void;
   options: MultipleCheckboxOption[];
   testId: string;
   wrapper: FC<{ children: JSX.Element }>;
@@ -48,13 +50,15 @@ export type MultipleCheckboxProps = Partial<IonCheckboxProps> &
 
 export const MultipleCheckbox = ({
   control,
+  defaultValue = [],
   name,
   options = [],
   testId,
   wrapper: Wrapper = ({ children }) => children,
+  onChange: onChangeProps,
   ...props
 }: MultipleCheckboxProps): JSX.Element => {
-  const [values, setValues] = useState<string[]>([]);
+  const [values, setValues] = useState<string[]>(defaultValue);
   return (
     <Controller
       control={control}
@@ -75,6 +79,9 @@ export const MultipleCheckbox = ({
                   }
                   setValues(newValues);
                   onChange(newValues);
+                  if (onChangeProps) {
+                    onChangeProps(newValues);
+                  }
                 }}
                 value={option.value}
                 {...props}
