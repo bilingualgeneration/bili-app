@@ -7,7 +7,7 @@ import { firestore } from "@/components/Firebase";
 import useSWR from "swr";
 
 interface NamesState {
-  getName: ({ uid, type }: NameProps) => Promise<NameRecord | null>;
+  getName: ({ id, type }: NameProps) => Promise<NameRecord | null>;
   names: NamesLookup;
 }
 
@@ -21,7 +21,7 @@ interface NameRecord {
   timestamp: Date;
 }
 
-type UserType = "user" | "student";
+export type UserType = "user" | "student";
 
 const NamesContext = createContext<NamesState>({} as NamesState);
 
@@ -31,15 +31,15 @@ export const NamesProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [names, setNames] = useState<NamesLookup>({});
-  const getName = async ({ uid, type }: NameProps) => {
+  const getName = async ({ id, type }: NameProps) => {
     if (
-      names[uid] &&
-      differenceInDays(new Date(), names[uid].timestamp) <
+      names[id] &&
+      differenceInDays(new Date(), names[id].timestamp) <
         REFRESH_THRESHOLD_IN_DAYS
     ) {
-      return names[uid];
+      return names[id];
     } else {
-      const snapshot = await getDoc(doc(firestore, type, uid));
+      const snapshot = await getDoc(doc(firestore, type, id));
       if (snapshot.exists()) {
         const data = snapshot.data();
         const record = {
@@ -49,7 +49,7 @@ export const NamesProvider: React.FC<React.PropsWithChildren> = ({
         };
         setNames({
           ...names,
-          uid: record,
+          id: record,
         });
         return record;
       } else {
@@ -69,7 +69,7 @@ export const NamesProvider: React.FC<React.PropsWithChildren> = ({
 };
 
 interface NameProps {
-  uid: string;
+  id: string;
   type: UserType;
 }
 

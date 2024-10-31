@@ -1,5 +1,7 @@
 export * from "./AddClassroom";
+export * from "./AddStudentsComplete";
 export * from "./ClassOverview";
+export * from "./ClassStudents";
 export * from "./MyClassrooms";
 export * from "./StudentSelect";
 export * from "./ClassStudentsAddStudents";

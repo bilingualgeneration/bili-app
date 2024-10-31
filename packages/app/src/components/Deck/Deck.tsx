@@ -176,7 +176,16 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                       <p className="text-lg color-english">{enText}</p>
                     )}
                   </IonCol>
-                  <IonCol className="ion-text-center" size="3">
+                  <IonCol
+                    className="ion-text-center"
+                    size="3"
+                    style={{
+                      position: "absolute",
+                      bottom: "16px",
+                      right: "0px",
+                      zIndex: 10,
+                    }}
+                  >
                     {currentCard.esHintText && (
                       <>
                         <IonButton

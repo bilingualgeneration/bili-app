@@ -1,4 +1,3 @@
-//A.M.
 import {
   IonButton,
   IonCard,
@@ -17,7 +16,7 @@ import {
 } from "@ionic/react";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { RadioCard } from "@/components/RadioCard";
 import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
 import CommunityIcon from "@/assets/icons/community.svg";
@@ -25,6 +24,7 @@ import StoriesIcon from "@/assets/icons/stories.svg";
 import WellnessIcon from "@/assets/icons/wellness.svg";
 import DropIcon from "@/assets/icons/drop.svg";
 import HouseIcon from "@/assets/icons/house.svg";
+import { Link, Redirect } from "react-router-dom";
 import PresentIcon from "@/assets/icons/present.svg";
 import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
@@ -33,47 +33,8 @@ import StudentsReadingPicture from "@/assets/img/kids_reading.png";
 import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 
 import "./ClassOverview.css";
-
-export const ClassOverview: React.FC = () => {
-  const { classroomId } = useParams<{ classroomId: string }>();
-  return (
-    <FirestoreDocProvider
-      collection="classroom"
-      id={classroomId}
-      populate={{
-        classroomAnalytics: ["classroom", "==", classroomId],
-      }}
-    >
-      <ClassLoader />
-    </FirestoreDocProvider>
-  );
-};
-
-const ClassLoader: React.FC = () => {
-  const { status, data } = useFirestoreDoc();
-  switch (status) {
-    case "loading":
-      return <></>;
-      break;
-    case "error":
-      return <>error</>;
-      break;
-    case "ready":
-      const { classroomAnalytics, ...d } = data;
-      const restructuredData = {
-        ...d,
-        classroomAnalytics: classroomAnalytics[0],
-      };
-      return <ClassOverviewHydrated {...restructuredData} />;
-      break;
-    default:
-      return <>default case</>;
-      break;
-  }
-};
 
 const studentHighlightsStyle = {
   color: "#000",
@@ -86,21 +47,12 @@ const studentHighlightsStyle = {
   letterSpacing: "0.2px",
 };
 
-export const ClassOverviewHydrated: React.FC<any> = ({
-  id,
-  school,
-  name,
-  classroomAnalytics,
-}) => {
+export const ClassOverview: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  const classroomAnalytics = data.classroomAnalytics
+    ? data.classroomAnalytics[0]
+    : null;
   const intl = useIntl();
-  const { setInfo } = useClassroom();
-  useEffect(() => {
-    setInfo({
-      name,
-      id,
-      schoolId: school,
-    });
-  }, [setInfo, id, school, name]);
   return (
     <div id="teacher-dashboard-class-overview-id">
       {/* header text */}
@@ -110,7 +62,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
             <div className="header-overview-row">
               <div className="header-overview-arrow">
                 <IonText className="text-sm color-barro classroom-name-text">
-                  {name}
+                  {data.name}
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
@@ -118,10 +70,10 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </IonText>
               </div>
               <div className="classroom-name-block">
-                <IonText className="text-3xl semibold">{name}</IonText>
+                <IonText className="text-3xl semibold">{data.name}</IonText>
                 <button className="visit-students-button">
                   <Link
-                    to={`/classrooms/${id}/select-student`}
+                    to={`/classrooms/${data.id}/select-student`}
                     className="no-underline"
                   >
                     <p className="text-md semibold color-suelo">
@@ -140,13 +92,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
         <IonGrid>
           <IonRow>
             {classroomAnalytics?.studentHighlights?.map((s: any) => (
-              <FirestoreDocProvider
-                collection="student"
-                key={s.studentId}
-                id={s.studentId}
-              >
-                <StudentHighlightCard {...s} />
-              </FirestoreDocProvider>
+              <StudentHighlightCard {...s} />
             ))}
           </IonRow>
         </IonGrid>
@@ -203,13 +149,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
 
                 <IonList lines="full" className="students-needs-support-list">
                   {classroomAnalytics?.studentNeeds?.map((s: any) => (
-                    <FirestoreDocProvider
-                      collection="student"
-                      key={s.studentId}
-                      id={s.studentId}
-                    >
-                      <StudentNeedsCard {...s} />
-                    </FirestoreDocProvider>
+                    <StudentNeedsCard {...s} />
                   ))}
                 </IonList>
                 <div className="review-word-styles">
@@ -233,7 +173,7 @@ export const ClassOverviewHydrated: React.FC<any> = ({
                 </div>
                 <Link
                   className="no-underline"
-                  to={`/classrooms/view/${id}/students`}
+                  to={`/classrooms/view/${data.id}/students`}
                 >
                   <IonButton expand="block">See all students</IonButton>
                 </Link>
@@ -311,31 +251,16 @@ const StudentHighlightCard: React.FC<any> = ({ area, student }) => {
 
 type LearningTimeSummaryFilter = "atSchool" | "atHome" | "both";
 
-const sum = (array: number[]) => {
-  return array.reduce((acc, current) => acc + current, 0);
-};
-
-const summarizeTime = (
+const getTime = (
   data: any,
   filter: LearningTimeSummaryFilter,
   category: string,
 ) => {
-  switch (filter) {
-    case "atHome":
-      return sum(Object.values(data.atHome[category]));
-    case "atSchool":
-      return sum(Object.values(data.atSchool[category]));
-    case "both":
-      return (
-        sum(Object.values(data.atHome[category])) +
-        sum(Object.values(data.atSchool[category]))
-      );
+  if (filter === "both") {
+    return Math.max(data.atHome[category] + data.atSchool[category], 1);
+  } else {
+    return Math.max(data[filter][category], 1);
   }
-  // default case
-  return (
-    sum(Object.values(data.atHome[category])) +
-    sum(Object.values(data.atSchool[category]))
-  );
 };
 
 const LearningTimeSummary: React.FC<any> = ({ data }) => {
@@ -343,24 +268,15 @@ const LearningTimeSummary: React.FC<any> = ({ data }) => {
     useState<LearningTimeSummaryFilter>("atSchool");
   const filteredData = useMemo(() => {
     const times = {
-      community: Math.max(
-        summarizeTime(data, learningTimeSummaryFilter, "community"),
-        1,
-      ),
-      games: Math.max(
-        summarizeTime(data, learningTimeSummaryFilter, "games"),
-        1,
-      ),
-      stories: Math.max(
-        summarizeTime(data, learningTimeSummaryFilter, "stories"),
-        1,
-      ),
-      wellness: Math.max(
-        summarizeTime(data, learningTimeSummaryFilter, "wellness"),
-        1,
-      ),
+      community: getTime(data, learningTimeSummaryFilter, "community"),
+      games: getTime(data, learningTimeSummaryFilter, "games"),
+      stories: getTime(data, learningTimeSummaryFilter, "stories"),
+      wellness: getTime(data, learningTimeSummaryFilter, "wellness"),
     };
-    const total = sum(Object.values(times));
+    console.log(data);
+    console.log(times);
+    const total =
+      times.community + times.games + times.stories + times.wellness;
 
     // needs to be percentages
     return {

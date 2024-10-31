@@ -1,19 +1,20 @@
 import React from "react";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
 import { Avatar, AvatarSize } from "@/components/Avatar";
-import { FullName } from "@/hooks/Names";
+import { FullName, UserType } from "@/hooks/Names";
+import { Link } from "react-router-dom";
 
 interface StudentInfoProps {
-  uid: string;
-  userType: string;
+  id: string;
+  type: string;
   subtitle?: string;
   link?: string;
   size?: AvatarSize;
 }
 
 export const StudentInfo: React.FC<StudentInfoProps> = ({
-  uid,
-  userType,
+  id,
+  type,
   subtitle,
   link,
   size = "md",
@@ -23,23 +24,22 @@ export const StudentInfo: React.FC<StudentInfoProps> = ({
       <IonRow className="ion-align-items-center">
         <IonCol size="auto" style={{ paddingRight: 8 }}>
           {/* temporary image */}
-          <Avatar uid={uid} size={size} />
+          <Avatar id={id} size={size} />
         </IonCol>
         <IonCol size="auto" className="ion-no-padding">
           <IonText>
             {/* If a link is provided, render the name as a link, otherwise as plain text */}
             {/* temporary name */}
             {link ? (
-              <a
-                href={link}
-                className="text-sm semibold color-selva"
-                style={{ textDecoration: "none" }}
+              <Link
+                to={link}
+                className="text-sm semibold color-selva no-text-decoration"
               >
-                {"Mattie Blooman"}
-              </a>
+                <FullName id={id} type={type as UserType} />
+              </Link>
             ) : (
               <span className="text-sm">
-                <FullName uid={uid} type="user" />
+                <FullName id={id} type={type as UserType} />
               </span>
             )}
 

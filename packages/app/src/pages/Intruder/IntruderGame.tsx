@@ -325,7 +325,9 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             <img className="sound-icon" src={SpeakerIcon} />
           </IonButton>
           <IonText>
-            <h1 className="text-3xl semibold color-suelo">Lee</h1>
+            <h1 className="text-3xl semibold color-suelo">
+              {language === "en" ? "Read" : "Lee"}
+            </h1>
             {language === "esen" && (
               <p className="text-lg color-english">Read</p>
             )}

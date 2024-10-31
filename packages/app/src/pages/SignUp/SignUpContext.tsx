@@ -8,7 +8,8 @@ import {
   useState,
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
+import { useLanguage } from "@/hooks/Language";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignUpDataContext = createContext({
@@ -30,7 +31,7 @@ export const SignUpDataProvider = ({
   const [data, setData] = useState<any>({});
   const [page, setPage] = useState<string[]>(entry ? [entry] : ["roleSelect"]); //set it to roleSeclect or ClassCode
   const [signUpStatus, setSignUpStatus] = useState("idle");
-  const { locale } = useLanguage();
+  const { language } = useInterfaceLanguage();
   const functions = getFunctions();
   const teacherSignupFunction = httpsCallable(functions, "teacher-signup");
   const caregiverSignupFunction = httpsCallable(functions, "caregiver-signup");
@@ -41,7 +42,7 @@ export const SignUpDataProvider = ({
       case "teacher":
         await teacherSignupFunction({
           ...data,
-          language: locale,
+          language,
         });
         // @ts-ignore
         await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -50,7 +51,7 @@ export const SignUpDataProvider = ({
       case "parent":
         await caregiverSignupFunction({
           ...data,
-          language: locale,
+          language,
         });
         break;
     }
