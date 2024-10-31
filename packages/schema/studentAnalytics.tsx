@@ -1,8 +1,9 @@
+import { languageSchema } from "./language";
 import { z } from "zod";
 
 export const studentNoteSchema = z.object({
   skill: z.string(),
-  language: z.enum(["es", "en", "esen"]),
+  language: languageSchema,
   score: z.number(),
 });
 

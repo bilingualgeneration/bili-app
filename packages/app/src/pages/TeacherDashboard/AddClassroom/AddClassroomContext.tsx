@@ -63,9 +63,9 @@ export const AddClassroomProvider: React.FC<React.PropsWithChildren> = ({
     setAddClassroomStatus("busy");
     await addClassroomFunction({
       allowLanguageToggle,
+      allowedLanguages: [language],
       grades,
       isInclusive,
-      language,
       name,
       notificationMethod,
       students,
