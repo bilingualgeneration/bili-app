@@ -30,7 +30,6 @@ import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
-import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 

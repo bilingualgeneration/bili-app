@@ -1,4 +1,9 @@
+// TODO: remove dependency on firestoredoc
+// TODO: update Classroom context to pull ALL info
+
 import "./ClassPreferences.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { firestore } from "@/components/Firebase";
 import { FormattedMessage, useIntl } from "react-intl";
 import {
   IonCol,
@@ -36,56 +41,48 @@ const OptionWrapper = ({ children }: { children: JSX.Element }) => {
 
 export const ClassPreferences: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
-
-  const { control, getValues } = useForm({
-    defaultValues: {
-      grades: [],
-      //TODO: load default values from classroom
-      name: "",
-      language: "imme",
-      languageToggle: false, // Default value for language toggle
-      inclusiveToggle: false, // Default value for inclusive toggle
-    },
-  });
-
-  //TODO: create functions for all fields
-
-  // Update grades function
-  const updateGrades = async (key: string, value: any) => {
-    //  const ref = doc(firestore, "classrooms", classroomId);
-    //  try {
-    //      await updateDoc(ref, { [key]: value });
-    //      console.log(`Grades updated in Firestore: ${key} =`, value);
-    //  } catch (error) {
-    //      console.error("Error updating grades:", error);
-    //  }
-  };
-
-  // Update name function
-  const updateName = async (newName: string) => {
-    //  const ref = doc(firestore, "classrooms", classroomId);
-    //  try {
-    //      await updateDoc(ref, { name: newName });
-    //      console.log("Class name saved to Firestore:", newName);
-    //  } catch (error) {
-    //      console.error("Error updating class name:", error);
-    //  }
-  };
-
   return (
     <FirestoreDocProvider collection="classroom" id={classroomId}>
-      <ClassPreferencesLoader
-        control={control}
-        updateGrades={updateGrades}
-        updateName={updateName}
-      />
+      <ClassPreferencesLoader />
     </FirestoreDocProvider>
   );
 };
 
-const ClassPreferencesLoader: React.FC<any> = ({ control }) => {
-  const { data, status } = useFirestoreDoc();
+const ClassPreferencesLoader: React.FC = () => {
+  const { status } = useFirestoreDoc();
+  // Firestore document status
+  switch (status) {
+    case "loading":
+      return <IonText>Loading...</IonText>;
+    case "error":
+      return <IonText>Error loading classroom data</IonText>;
+    case "ready":
+      return <ClassPreferencesHydrated />;
+    default:
+      return null;
+  }
+};
+
+const ClassPreferencesHydrated: React.FC = () => {
+  const { data } = useFirestoreDoc();
   const intl = useIntl();
+  const { control, getValues } = useForm({
+    defaultValues: {
+      grades: data.grades,
+      //TODO: load default values from classroom
+      name: data.name,
+      language: "imme",
+      allowLanguageToggle: data.allowLanguageToggle,
+      isInclusive: data.isInclusive, // Default value for inclusive toggle
+    },
+  });
+
+  const ref = doc(firestore, "classroom", data.id);
+  const update = async (key: string, value: any) => {
+    updateDoc(ref, {
+      [key]: value,
+    });
+  };
 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
@@ -119,152 +116,145 @@ const ClassPreferencesLoader: React.FC<any> = ({ control }) => {
     { value: "imme", label: "Immersion" },
   ];
 
-  // Firestore document status
-  switch (status) {
-    case "loading":
-      return <IonText>Loading...</IonText>;
-    case "error":
-      return <IonText>Error loading classroom data</IonText>;
-    case "ready":
-      const { name = "Classroom" } = data;
-
-      return (
-        <>
-          <IonList className="preferences-style">
-            {/* header */}
-            <div className="class-progress-header">
-              <IonItem>
-                <IonLabel>
-                  <div className="header-overview-row">
-                    <div className="header-overview-arrow">
-                      <IonText className="text-sm color-barro classroom-name-text">
-                        {name}
-                      </IonText>
-                      <IonIcon color="medium" icon={ArrowRight}></IonIcon>
-                      <IonText className="text-sm semibold overview-text-header">
-                        Preferences
-                      </IonText>
-                    </div>
-                    <div className="progress-header-block">
-                      <IonText className="text-3xl semibold">
-                        {"Preferences"}
-                      </IonText>
-                    </div>
-                  </div>
-                </IonLabel>
-              </IonItem>
-            </div>
-            {/* main */}
-
-            <div className="classroom-input-styles">
-              <Input
-                label="Class Name"
-                labelPlacement="above"
-                placeholder={name}
-                name="name"
-                fill="outline"
-                control={control}
-                testId="teacher-class-name-update"
-                type="text"
-                className="classroom-name-input"
-                onBlur={console.log}
-              />
-            </div>
-
-            <IonItem lines="none">
-              <div className="grades-block">
-                <div className="margin-bottom-1x">
-                  <IonText>
-                    <h2 className="text-2xl semibold color-suelo">
-                      <FormattedMessage
-                        id="settingsProgress.preferences.grades"
-                        defaultMessage="Grades"
-                      />
-                    </h2>
+  return (
+    <>
+      <IonList className="preferences-style">
+        {/* header */}
+        <div className="class-progress-header">
+          <IonItem>
+            <IonLabel>
+              <div className="header-overview-row">
+                <div className="header-overview-arrow">
+                  <IonText className="text-sm color-barro classroom-name-text">
+                    {data.name}
+                  </IonText>
+                  <IonIcon color="medium" icon={ArrowRight}></IonIcon>
+                  <IonText className="text-sm semibold overview-text-header">
+                    Preferences
                   </IonText>
                 </div>
-                <div className="text-md color-suelo grades-styles">
-                  <IonGrid>
-                    <IonRow className="ion-justify-content-around">
-                      <MultipleCheckbox
-                        control={control}
-                        labelPlacement="end"
-                        justify="start"
-                        options={gradesOptions}
-                        name="grades"
-                        onChange={console.log}
-                        wrapper={OptionWrapper}
-                      />
-                    </IonRow>
-                  </IonGrid>
+                <div className="progress-header-block">
+                  <IonText className="text-3xl semibold">
+                    {"Preferences"}
+                  </IonText>
                 </div>
               </div>
-            </IonItem>
+            </IonLabel>
+          </IonItem>
+        </div>
+        {/* main */}
 
-            <IonItem lines="none" className="select-language-block-student">
-              <Popover
-                content="Choose the language mode for your student’s experience in the app. ‘Bilingual’ means your student will see the content in English and Spanish. 
+        <div className="classroom-input-styles">
+          <Input
+            label="Class Name"
+            labelPlacement="above"
+            placeholder={name}
+            name="name"
+            fill="outline"
+            control={control}
+            testId="teacher-class-name-update"
+            type="text"
+            className="classroom-name-input"
+            onBlur={(newName) => {
+              update("name", newName);
+            }}
+          />
+        </div>
+
+        <IonItem lines="none">
+          <div className="grades-block">
+            <div className="margin-bottom-1x">
+              <IonText>
+                <h2 className="text-2xl semibold color-suelo">
+                  <FormattedMessage
+                    id="settingsProgress.preferences.grades"
+                    defaultMessage="Grades"
+                  />
+                </h2>
+              </IonText>
+            </div>
+            <div className="text-md color-suelo grades-styles">
+              <IonGrid>
+                <IonRow className="ion-justify-content-around">
+                  <MultipleCheckbox
+                    control={control}
+                    defaultValue={data.grades}
+                    labelPlacement="end"
+                    justify="start"
+                    options={gradesOptions}
+                    name="grades"
+                    onChange={(values) => {
+                      update("grades", values);
+                    }}
+                    wrapper={OptionWrapper}
+                  />
+                </IonRow>
+              </IonGrid>
+            </div>
+          </div>
+        </IonItem>
+
+        <IonItem lines="none" className="select-language-block-student">
+          <Popover
+            content="Choose the language mode for your student’s experience in the app. ‘Bilingual’ means your student will see the content in English and Spanish. 
                 ‘Immersion’ means your student will only see the content in Spanish."
-                trigger="click-trigger2"
-              />
-              <Question id="click-trigger2" />
+            trigger="click-trigger2"
+          />
+          <Question id="click-trigger2" />
 
-              <Select
-                control={control}
-                name="language"
-                placeholder="Bilingual"
-                interface="popover"
-                options={languageOptions}
-                toggleIcon={chevronForward}
-                label={"Student language"}
-              />
-            </IonItem>
+          <Select
+            control={control}
+            name="language"
+            placeholder="Bilingual"
+            interface="popover"
+            options={languageOptions}
+            toggleIcon={chevronForward}
+            label={"Student language"}
+          />
+        </IonItem>
 
-            <IonItem lines="none" className="language-toggle-block-student">
-              <Popover
-                content="Enable the Language Toggle button to allow your student to change the app language while they play. 
+        <IonItem lines="none" className="language-toggle-block-student">
+          <Popover
+            content="Enable the Language Toggle button to allow your student to change the app language while they play. 
                 Disable to lock the app language (see ‘Student Language’)."
-                trigger="click-trigger3"
-              />
-              <Question id="click-trigger3" />
-              <Toggle
-                control={control}
-                name="language-toggle"
-                label="Language Toggle"
-                color="primary"
-                justify="space-between"
-                checked={true}
-                mode="ios"
-                onChange={(checked) => {
-                  console.log("Language Toggle toggle changed:", checked);
-                }}
-              />
-            </IonItem>
+            trigger="click-trigger3"
+          />
+          <Question id="click-trigger3" />
+          <Toggle
+            control={control}
+            name="allowLanguageToggle"
+            label="Language Toggle"
+            color="primary"
+            justify="space-between"
+            checked={true}
+            mode="ios"
+            onChange={(checked) => {
+              update("allowLanguageToggle", checked);
+            }}
+          />
+        </IonItem>
 
-            <IonItem lines="none" className="inclusive-toggle-block-student">
-              <Popover
-                content="Choose inclusive Spanish to see gender-neutral terms like 'amigues,' 'niñes,' and 'Latine' when referring to groups or non-binary characters. 
+        <IonItem lines="none" className="inclusive-toggle-block-student">
+          <Popover
+            content="Choose inclusive Spanish to see gender-neutral terms like 'amigues,' 'niñes,' and 'Latine' when referring to groups or non-binary characters. 
                 Disable this feature if you do not want to see these terms."
-                trigger="click-trigger4"
-              />
-              <Question id="click-trigger4" />
-              <Toggle
-                control={control}
-                name="inclusive-toggle"
-                label="Inclusive Spanish"
-                color="primary"
-                justify="space-between"
-                checked={true}
-                mode="ios"
-                onChange={(checked) => {
-                  console.log("Inclusive Spanish toggle changed:", checked);
-                }}
-              />
-            </IonItem>
-          </IonList>
-        </>
-      );
-    default:
-      return null;
-  }
+            trigger="click-trigger4"
+          />
+          <Question id="click-trigger4" />
+          <Toggle
+            control={control}
+            name="isInclusive"
+            label="Inclusive Spanish"
+            color="primary"
+            justify="space-between"
+            checked={true}
+            mode="ios"
+            onChange={(checked) => {
+              update("isInclusive", checked);
+            }}
+          />
+        </IonItem>
+      </IonList>
+    </>
+  );
 };
