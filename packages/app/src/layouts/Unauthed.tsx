@@ -17,6 +17,7 @@ const UnauthedLayout: React.FC<UnauthedLayoutProps> = ({
   const { isLoggedIn, profile } = useProfile();
   const { language } = useInterfaceLanguage();
   const { id: studentId } = useStudent();
+
   // assume there are no public pages
   if (isLoggedIn) {
     switch (profile.role) {

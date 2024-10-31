@@ -139,7 +139,8 @@
   "settings.progress.wellness": "Bienestar",
   "settings.saveChangeBtn": "Guardar cambios",
   "settingsHeader.rate": "Califica esta aplicación",
-  "settingsProgress.preferences.bilingual": "Modo bilingüe versus modo de inmersión",
+  "settingsProgress.preferences.bilingual": "Idioma del estudiante",
+  "settingsProgress.preferences.grades": "Grados",
   "settingsProgress.preferences.inclusive": "Español inclusivo",
   "settingsProgress.preferences.limit": "Límite de Tiempo de Juego Diario",
   "settingsProgress.preferences.popover1": "Elige el idioma que verás en configuración. Esto debe basarse en tus preferencias lingüísticas como adulto.",
@@ -149,6 +150,7 @@
   "settingsProgress.preferences.popover5": "Habilite esta función para escuchar los efectos de sonido asociados con la aplicación.",
   "settingsProgress.preferences.settingsLanguage": "Idioma de Configuración",
   "settingsProgress.preferences.sound": "Efectos de Sonido",
+  "settingsProgress.preferences.toggle": "Alternar idioma",
   "sideMenu.about": "Sobre Bili",
   "sideMenu.logOut": "Cerrar sesión",
   "sideMenu.overview": "Descripción general",
@@ -222,5 +224,9 @@
   "tags.parents": "Padres",
   "tags.social_justice": "Justicia Social",
   "teacherDashboard.addClassroom.infoTitle": "Cuéntanos sobre tu clase",
+  "waitlist.role": "Role",
+  "waitlist.roleHelper": "profesor, padre, administrador, etc.",
+  "waitlist.schoolName": "Nombre de la escuela",
+  "waitlist.zipcode": "Código postal",
   "wouldDo.title": "¿Qué harías?"
 }
