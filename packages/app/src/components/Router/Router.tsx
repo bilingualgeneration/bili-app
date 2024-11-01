@@ -160,17 +160,6 @@ export const Router: React.FC = () => {
             )}
           />
 
-          {/* temp route for development */}
-          <Route
-            exact
-            path="/pricing"
-            render={() => (
-              <UnauthedLayout>
-                <Pricing />
-              </UnauthedLayout>
-            )}
-          />
-
           <Route
             exact
             path="/reset-password"

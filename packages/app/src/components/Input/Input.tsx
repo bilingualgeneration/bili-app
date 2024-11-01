@@ -212,8 +212,8 @@ export const Input = ({
                   fill,
                   required,
                 }}
-                {...props}
                 {...fields}
+                {...props}
               />
             </>
           );

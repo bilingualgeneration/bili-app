@@ -47,6 +47,7 @@ import "@ionic/react/css/display.css";
 import "@/theme/variables.css";
 import "@/theme/overrides.scss";
 import "@/theme/color-classes.scss";
+import "@/theme/input.css";
 import "@/theme/margin-classes.scss";
 import "@/theme/modal.css";
 import "@/theme/padding-classes.scss";

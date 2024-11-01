@@ -17,11 +17,12 @@ export const SignupRoutes: React.FC = () => {
               history.goBack();
             }}
           />
-          <Route exact path="/sign-up" component={/*SignUp*/ Waitlist} />
+          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/sign-up/waitlist" component={Waitlist} />
 
           <Route
             exact
-            path="/sign-up/class-code"
+            path="/class-code"
             render={() => <SignUp entry="classCode" />}
           />
         </>

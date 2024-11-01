@@ -91,11 +91,6 @@ ion-progress-bar {
   border-radius: math.div($ionProgressBarHeight, 2);
 }
 
-//styles for input fields
-.input-label-placement-above {
-  color: var(--ion-color-medium);
-}
-
 ion-input {
   &.input-fill-outline {
     font-weight: bold;
