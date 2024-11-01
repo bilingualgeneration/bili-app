@@ -223,19 +223,14 @@ const ResetPassword: React.FC<any> = ({ setIsModalOpen }) => {
     resolver: zodResolver(resetPasswordSchema),
   });
 
-  const handlePasswordReset = handleSubmit(async () => {
-    //send an email with the link to reset the password
+  const handlePasswordReset = handleSubmit(async ({ email }) => {
     setIsLoading(true);
-    const email = "XXXXXXXX";
-
-    if (email) {
-      auth.languageCode = language;
-      try {
-        await sendPasswordResetEmail(auth, email);
-        setIsModalOpen(false); // Close the modal on successful reset
-      } catch (error: any) {
-        console.error("Error sending password reset email: ", error);
-      }
+    auth.languageCode = language;
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setIsModalOpen(false); // Close the modal on successful reset
+    } catch (error: any) {
+      console.error("Error sending password reset email: ", error);
     }
     setIsLoading(false);
   });
