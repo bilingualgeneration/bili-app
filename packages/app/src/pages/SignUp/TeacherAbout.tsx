@@ -226,16 +226,16 @@ export const TeacherAbout: FC = () => {
             fill="outline"
             options={[
               {
-                value: "Arts Magnet School",
-                label: "Arts Magnet School",
+                value: "Kujawa Elementary School",
+                label: "Kujawa Elementary School",
               },
               {
-                value: "Washington School",
-                label: "Washington School",
+                value: "Griggs EC/PK/K School",
+                label: "Griggs EC/PK/K School",
               },
               {
-                value: "Livermore School",
-                label: "Livermore School",
+                value: "Garcia-Leza Ec/Pre-K Center",
+                label: "Garcia-Leza Ec/Pre-K Center",
               },
             ]}
             name="schoolName"
