@@ -26,6 +26,7 @@ import { userSchema } from "@bili/schema/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
+import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import closeIcon from "../assets/icons/close.svg"; // Adjust the path if necessary
 import "./ResetPasswordModal.scss";
 
@@ -86,7 +87,6 @@ const Login: React.FC = () => {
     }
     setIsLoading(false);
   };
-
   return (
     <>
       <UnauthedHeader
@@ -202,46 +202,83 @@ const Login: React.FC = () => {
         className="reset-password-modal"
         backdropDismiss={false}
       >
-        <div className="modal-content">
-          <img
-            src={closeIcon}
-            alt="Close"
-            className="close-button"
-            onClick={() => setIsModalOpen(false)}
-          />
-          <IonText>
-            <h2 className="text-lg semibold">
-              <FormattedMessage id="login.forgotPassword.prompt" />
-            </h2>
-          </IonText>
-          <div className="text-sm email-input">
-            <Input
-              className="text-xl"
-              control={control}
-              disabled={isLoading}
-              label={intl.formatMessage({ id: "common.email" })}
-              labelPlacement="above"
-              required={true}
-              name="email"
-              fill="outline"
-              helperText=""
-              testId="login-email-input"
-              type="email"
-            />
-          </div>
-          <IonButton
-            expand="block"
-            fill="solid"
-            shape="round"
-            className="reset-button color-selva text-sm semibold"
-            onClick={handlePasswordReset}
-            disabled={isLoading}
-          >
-            <FormattedMessage id="login.forgotPassword.resetButton" />
-          </IonButton>
-        </div>
+        <ResetPassword setIsModalOpen={setIsModalOpen} />
       </IonModal>
     </>
+  );
+};
+
+const resetPasswordSchema = z.object({
+  email: z.string(),
+});
+
+type ResetPassword = z.infer<typeof resetPasswordSchema>;
+const ResetPassword: React.FC<any> = ({ setIsModalOpen }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { language } = useInterfaceLanguage();
+  const auth = getFirebaseAuth();
+  const intl = useIntl();
+  const { control, handleSubmit } = useForm<ResetPassword>({
+    mode: "onBlur",
+    resolver: zodResolver(resetPasswordSchema),
+  });
+
+  const handlePasswordReset = handleSubmit(async () => {
+    //send an email with the link to reset the password
+    setIsLoading(true);
+    const email = "XXXXXXXX";
+
+    if (email) {
+      auth.languageCode = language;
+      try {
+        await sendPasswordResetEmail(auth, email);
+        setIsModalOpen(false); // Close the modal on successful reset
+      } catch (error: any) {
+        console.error("Error sending password reset email: ", error);
+      }
+    }
+    setIsLoading(false);
+  });
+
+  return (
+    <div className="modal-content">
+      <img
+        src={closeIcon}
+        alt="Close"
+        className="close-button"
+        onClick={() => setIsModalOpen(false)}
+      />
+      <IonText>
+        <h2 className="text-lg semibold">
+          <FormattedMessage id="login.forgotPassword.prompt" />
+        </h2>
+      </IonText>
+      <div className="text-sm email-input">
+        <Input
+          className="text-xl"
+          control={control}
+          disabled={isLoading}
+          label={intl.formatMessage({ id: "common.email" })}
+          labelPlacement="above"
+          required={true}
+          name="email"
+          fill="outline"
+          helperText=""
+          testId="login-email-input"
+          type="email"
+        />
+      </div>
+      <IonButton
+        expand="block"
+        fill="solid"
+        shape="round"
+        className="reset-button color-selva text-sm semibold"
+        onClick={handlePasswordReset}
+        disabled={isLoading}
+      >
+        <FormattedMessage id="login.forgotPassword.resetButton" />
+      </IonButton>
+    </div>
   );
 };
 

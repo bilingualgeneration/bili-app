@@ -195,6 +195,7 @@
   "splash.classCodeButton": "Ingresar el código del aula",
   "splash.classroom": "¿Tienes un código de aula?",
   "splash.createAccountButton": "Crea una cuenta",
+  "splash.joinWaitlist": "Únase a la lista de espera",
   "splash.loginTitle": "Acceso",
   "splash.newAccount": "¿Nuevo en Bili?",
   "splash.studentLoginButton": "Inicio de sesión de estudiante",
@@ -224,9 +225,12 @@
   "tags.parents": "Padres",
   "tags.social_justice": "Justicia Social",
   "teacherDashboard.addClassroom.infoTitle": "Cuéntanos sobre tu clase",
+  "waitlist.explainer": "La aplicación Bili aún no está disponible para el público. Comparta sus datos a continuación y sea el primero en saber cuándo estará disponible Bili.",
   "waitlist.role": "Role",
   "waitlist.roleHelper": "profesor, padre, administrador, etc.",
   "waitlist.schoolName": "Nombre de la escuela",
+  "waitlist.thankYou": "¡Estás en la lista! Estamos ansiosos por presentarte a Bili. Mantente atento a las actualizaciones sobre nuestro lanzamiento. ",
+  "waitlist.title": "¡Únete a nuestra lista de espera para conocer a Bili pronto!",
   "waitlist.zipcode": "Código postal",
   "wouldDo.title": "¿Qué harías?"
 }
