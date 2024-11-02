@@ -55,52 +55,28 @@ export const TeacherAbout: FC = () => {
 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGradePre",
-        defaultMessage: "Pre-K",
-        description: "Checkbox label for pre-kindergarten",
-      }),
-      value: "prek",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutGradePre" }),
+      value: "p",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade1",
-        defaultMessage: "1st Grade",
-        description: "Checkbox label for 1st grade",
-      }),
-      value: "1st",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutGradeK" }),
+      value: "k",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade2",
-        defaultMessage: "2nd Grade",
-        description: "Checkbox label for 2nd grade",
-      }),
-      value: "2nd",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade1" }),
+      value: "1",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade3",
-        defaultMessage: "3rd Grade",
-        description: "Checkbox label for 3rd grade",
-      }),
-      value: "3rd",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade2" }),
+      value: "2",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutGrade4",
-        defaultMessage: "4th Grade",
-        description: "Checkbox label for 4th grade",
-      }),
-      value: "4th",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade3" }),
+      value: "3",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.aboutOther",
-        defaultMessage: "Other",
-        description: "Checkbox label for any other grades taught",
-      }),
-      value: "other",
+      label: intl.formatMessage({ id: "signUpTeacher.aboutOther" }),
+      value: "o",
     },
   ];
 

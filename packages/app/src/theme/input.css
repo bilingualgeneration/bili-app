@@ -1,3 +1,7 @@
+ion-select::part(container) {
+  width: 100%;
+}
+
 .input-label-placement-above,
 .helper-text {
   color: var(--ion-color-medium) !important;
