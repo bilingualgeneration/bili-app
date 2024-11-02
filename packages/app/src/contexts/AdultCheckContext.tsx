@@ -86,9 +86,9 @@ export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
 
 const AdultCheckModalWrapper: React.FC<any> = ({ dismiss }) => {
   const { language } = useLanguage();
-  // @ts-ignore
+  // TODO: better typing
   return (
-    <I18nWrapper locale={language.slice(0, 2)}>
+    <I18nWrapper locale={language.slice(0, 2) as "en" | "es" | undefined}>
       <AdultCheckModal dismiss={dismiss} />
     </I18nWrapper>
   );
