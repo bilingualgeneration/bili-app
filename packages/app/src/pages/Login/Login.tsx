@@ -27,15 +27,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
-import closeIcon from "../assets/icons/close.svg"; // Adjust the path if necessary
-import "./ResetPasswordModal.scss";
+import closeIcon from "@/assets/icons/close.svg"; // Adjust the path if necessary
+import "./ResetPasswordModal.css";
 
 interface FormInputs {
   email: string;
   password: string;
 }
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
   const auth = getFirebaseAuth();
   const intl = useIntl();
   const {
@@ -276,5 +276,3 @@ const ResetPassword: React.FC<any> = ({ setIsModalOpen }) => {
     </div>
   );
 };
-
-export default Login;

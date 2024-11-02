@@ -45,7 +45,7 @@ export const Splash: React.FC = () => {
               <IonCardTitle className={titleClasses}>
                 <FormattedMessage id="splash.newAccount" />
               </IonCardTitle>
-              <Link to="/sign-up/waitlist" className="no-underline">
+              <Link to="/waitlist" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
                   {/*<FormattedMessage id="splash.createAccountButton" />*/}
                   <FormattedMessage id="splash.joinWaitlist" />

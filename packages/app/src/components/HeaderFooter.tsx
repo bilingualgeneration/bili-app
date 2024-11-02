@@ -37,7 +37,7 @@ export const HeaderFooter: FC<
             <IonRow class="ion-align-items-center">
               <IonCol size="5">{showBackButton && <BackButton />}</IonCol>
               <IonCol className="ion-text-center" size="2">
-                <Link to="/">
+                <Link to="/student-dashboard">
                   <img src={biliLogo} />
                 </Link>
               </IonCol>
