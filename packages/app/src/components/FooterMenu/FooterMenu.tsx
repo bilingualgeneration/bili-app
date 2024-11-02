@@ -15,6 +15,7 @@ import { useReqdActions } from "@/contexts/ReqdActionsContext";
 import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 import Joyride from "react-joyride";
+import { useAdultCheck } from "@/contexts/AdultCheckContext";
 
 import React from "react";
 import Home from "@/assets/icons/menu_home.svg?react";
@@ -26,6 +27,7 @@ import Eclipse from "@/assets/icons/menu_eclipse.svg?react";
 export const FooterMenu: React.FC = ({}) => {
   const { reqdActions, setReqdActions } = useReqdActions();
   const { profile } = useProfile();
+  const { showAdultCheck } = useAdultCheck();
   return (
     <>
       <div
@@ -65,16 +67,26 @@ export const FooterMenu: React.FC = ({}) => {
                 />
               </Link>
             </IonCol>
-            <IonCol id="footer_settings_button">
-              <Link
+            <IonCol
+              id="footer_settings_button"
+              onClick={() => {
+                /////////////////////////
+                showAdultCheck();
+                //showAdultCheck();
+
+                /*
+		              <Link
                 to={
                   profile.role === "teacher"
                     ? "/classrooms"
                     : "/settings/overview"
                 }
               >
-                <Profile />
               </Link>
+		*/
+              }}
+            >
+              <Profile />
             </IonCol>
           </IonRow>
         </IonGrid>

@@ -1,3 +1,4 @@
+import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { Redirect, useLocation } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
@@ -20,11 +21,11 @@ export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   }
   // implied else
   return (
-    <>
-      <I18nWrapper locale={language.slice(0, 2)}>
+    <I18nWrapper locale={language.slice(0, 2)}>
+      <AdultCheckProvider>
         {children}
         <LanguageToggle />
-      </I18nWrapper>
-    </>
+      </AdultCheckProvider>
+    </I18nWrapper>
   );
 };
