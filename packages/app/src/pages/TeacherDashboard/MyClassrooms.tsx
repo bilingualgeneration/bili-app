@@ -23,8 +23,8 @@ import {
   FirestoreCollectionProvider,
   useFirestoreCollection,
 } from "@/hooks/FirestoreCollection";
-import React from "react";
 
+import { useClassroom } from "@/hooks/Classroom";
 import { useProfile } from "@/hooks/Profile";
 
 import "./MyClassrooms.css";
@@ -39,6 +39,7 @@ const gradesLookup: { [i: string]: string } = {
   "3": "3rd Grade",
   "4": "4th Grade",
   "5": "5th Grade",
+  o: "Other",
 };
 
 const getGrades = (grades: string[]) => {
@@ -295,6 +296,7 @@ export const MyClassrooms: React.FC = () => {
 const ClassroomsList: React.FC = () => {
   const intl = useIntl();
   const { data, status } = useFirestoreCollection();
+  const { setInfo } = useClassroom();
   switch (status) {
     case "loading":
       return <></>;
@@ -314,6 +316,13 @@ const ClassroomsList: React.FC = () => {
                 <Link
                   to={`/classrooms/view/${classroom.id}`}
                   className="no-underline"
+                  onClick={() => {
+                    setInfo({
+                      name: classroom.name,
+                      schoolId: classroom.schoolId,
+                      id: classroom.id,
+                    });
+                  }}
                 >
                   <RadioCard
                     icon={<img src={ClassroomAvatar} />}

@@ -89,7 +89,13 @@ const HydratedProfileChip: React.FC = () => {
       >
         <IonContent id="profile-chip-popover">
           <IonList>
-            <Link to={`/profile/coming-soon`} className="no-underline">
+            <Link
+              to={`/profile/coming-soon`}
+              className="no-underline"
+              onClick={() => {
+                setPopoverOpen(false);
+              }}
+            >
               <IonItem button={true} detail={false} lines="none">
                 <IonIcon icon={StudentAvatar} style={{ marginRight: "7px" }} />
                 <IonText>
@@ -103,8 +109,11 @@ const HydratedProfileChip: React.FC = () => {
             </Link>
 
             <Link
-              to={`/classrooms/${classroomId}/select-student`}
+              to={`/select-student/${classroomId}`}
               className="no-underline"
+              onClick={() => {
+                setPopoverOpen(false);
+              }}
             >
               <IonItem
                 button={true}
