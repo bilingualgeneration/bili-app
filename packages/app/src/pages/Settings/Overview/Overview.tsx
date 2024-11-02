@@ -22,7 +22,6 @@ import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Preferences } from "@capacitor/preferences";
-import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
 import { useProfile } from "@/hooks/Profile";
@@ -66,26 +65,6 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
   } = useProfile();
   const { id: activeStudentId } = useStudent();
   const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-  const { isAdultCheckOpen } = useAdultCheck();
-
-  useEffect(() => {
-    if (!isAdultCheckOpen) {
-      Preferences.get({
-        key: "shouldShowSettingsTutorial",
-      }).then((response) => {
-        if (response.value === null) {
-          // have never seen it before
-          setShouldShowTutorial(true);
-          /*
-          Preferences.set({
-            key: "shouldShowSettingsTutorial",
-            value: false,
-          });
-	  */
-        }
-      });
-    }
-  }, [isAdultCheckOpen]);
 
   const steps = [
     {
@@ -280,21 +259,6 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
 
   return (
     <div id="settings-profile">
-      {shouldShowTutorial && !isAdultCheckOpen && false && (
-        <Joyride
-          locale={translations.Joyride}
-          hideCloseButton
-          showSkipButton
-          showProgress
-          steps={steps}
-          continuous={true}
-          styles={{
-            tooltipContainer: {
-              textAlign: "left",
-            },
-          }}
-        />
-      )}
       <div className="settings-pg1-container">
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
