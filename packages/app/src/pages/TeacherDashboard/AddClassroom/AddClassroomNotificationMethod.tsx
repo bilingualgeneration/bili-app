@@ -114,6 +114,10 @@ export const AddClassroomNotificationMethod: React.FC = () => {
             <h2 className="text-3xl semibold color-suelo">
               Invite caregivers to download the app
             </h2>
+            <p>
+              Note: feature is still under development and no emails will
+              actually be sent for now
+            </p>
           </IonText>
           <ExtendedRadio
             control={control}
