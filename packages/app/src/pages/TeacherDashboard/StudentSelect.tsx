@@ -5,8 +5,7 @@ import { StudentProfileCard } from "@/components/StudentProfileCard";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import "./StudentSelect.css";
 import studentImage1 from "@/assets/icons/profile_image_1.svg";
-import { IonCol, IonGrid, IonItem, IonItemDivider, IonRow } from "@ionic/react";
-import { useClassroom } from "@/hooks/Classroom";
+import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 import { useParams } from "react-router";
@@ -57,11 +56,7 @@ const StudentSelectLoader: React.FC = () => {
   return <></>;
 };
 
-const StudentSelectHydrated: React.FC<any> = ({
-  //classroomName,
-  students,
-}) => {
-  const { name: classroomName } = useClassroom();
+const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
   const { id: currentStudentId, setInfo } = useStudent();
   const history = useHistory();
   const { language } = useLanguageToggle();
@@ -89,17 +84,17 @@ const StudentSelectHydrated: React.FC<any> = ({
       <div id="student-profile">
         <div className="content-container">
           {isTeacherProfile && (
-            <IonItem>
-              <div className="heading-container">
-                <h1 className="text-3xl semibold">
-                  {language !== "en" && classroomName}
-                  {language === "en" && classroomName}
-                </h1>
-              </div>
-            </IonItem>
+            <div className="margin-bottom-2">
+              <h1 className="text-3xl semibold">
+                {language !== "en" && classroomName}
+                {language === "en" && classroomName}
+              </h1>
+            </div>
           )}
 
-          <IonGrid className="table-cards">
+          <hr />
+
+          <IonGrid>
             <IonRow class="ion-align-items-center">
               {students.map(
                 (

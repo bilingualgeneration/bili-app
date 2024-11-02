@@ -7,14 +7,10 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const { isLoggedIn, profile } = useProfile();
+  const { profile } = useProfile();
   const { id: studentId } = useStudent();
   const { language } = useLanguageToggle();
   const { pathname } = useLocation();
-  if (!isLoggedIn) {
-    return <Redirect to="/" />;
-  }
-
   if (
     profile.role === "caregiver" &&
     studentId === null &&

@@ -1,14 +1,17 @@
 @use "sass:math";
 
+a {
+  text-decoration: none;
+}
+
+ion-item {
+  --background: none;
+}
+
 hr {
   width: 100%;
   border-bottom: 1px solid var(--Arena-High);
   height: 0px;
-}
-
-.game_image {
-  //    width: 100px;
-  //    height: 100px;
 }
 
 .input-bottom.sc-ion-input-ios {

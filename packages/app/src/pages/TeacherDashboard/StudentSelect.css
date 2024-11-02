@@ -25,14 +25,6 @@
     }
   }
 
-  .heading-container {
-    margin: 0 0 25px 0;
-  }
-
-  .table-cards {
-    margin-left: 8px;
-  }
-
   .student-card,
   .student-card-selected {
     width: 12.5rem;
