@@ -161,10 +161,9 @@ export const SideMenu: React.FC = () => {
             }
           />
         </div>
-        <IonItem routerLink="/debug">Debug</IonItem>
-        <div className="ion-text-right">
-          v{import.meta.env.VITE_APP_VERSION}
-        </div>
+        <IonItem>
+          <IonLabel>v{import.meta.env.VITE_APP_VERSION}</IonLabel>
+        </IonItem>
       </IonList>
     </div>
   );
