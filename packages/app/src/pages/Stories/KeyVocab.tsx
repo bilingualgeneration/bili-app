@@ -114,7 +114,7 @@ export const KeyVocab: React.FC<KeyVocab> = ({
       </IonCol>
       <IonCol size="auto">
         <IonCard
-          className="sf-card drop-shadow story-page"
+          className="sf-card drop-shadow story-page ion-no-padding"
           style={{
             display: "block",
             position: "relative",
@@ -133,7 +133,7 @@ export const KeyVocab: React.FC<KeyVocab> = ({
                 </h2>
               )}
             </IonText>
-            <IonGrid>
+            <IonGrid className="ion-no-padding">
               <IonRow>
                 {Object.values(words).map((word: any) => (
                   <Word key={word.handle} word={word} />
