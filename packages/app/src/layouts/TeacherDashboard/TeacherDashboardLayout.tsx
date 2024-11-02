@@ -46,11 +46,13 @@ interface TeacherDashboardLayout {
 export const TeacherDashboardLayout: React.FC<
   React.PropsWithChildren<TeacherDashboardLayout>
 > = ({ children, showHeader = true }) => {
-  const { setIsVisible } = useLanguageToggle();
+  const { setIsVisible, setTempLanguage } = useLanguageToggle();
   useEffect(() => {
     setIsVisible(false);
+    setTempLanguage("en");
     return () => {
       setIsVisible(true);
+      setTempLanguage(null);
     };
   }, []);
   return (
