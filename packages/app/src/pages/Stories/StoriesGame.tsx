@@ -323,7 +323,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   };
   return (
     <>
-      <div style={{ width: 800, margin: "auto", textAlign: "center" }}>
+      <div style={{ margin: "auto", textAlign: "center" }}>
         <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText
             className=""
@@ -336,7 +336,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
             </h1>
 
             {language === "esen" && headerData.en && (
-              <p className="text-3xl color-english">{headerData.en.text}</p>
+              <p className="text-2xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
         </div>

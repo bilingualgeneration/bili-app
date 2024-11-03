@@ -11,7 +11,7 @@ import { VocabModal } from "./VocabModal";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useStory } from "./StoryContext";
 
-import AgesIcon from "@/assets/icons/ages_icon.png";
+import AgesIcon from "@/assets/icons/ages_icon.svg";
 import AuthorIcon from "@/assets/icons/author_icon.png";
 import IllustratorIcon from "@/assets/icons/illustrator_icon.png";
 import NarratorIcon from "@/assets/icons/narrator_icon.png";
