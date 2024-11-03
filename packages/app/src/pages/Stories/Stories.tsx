@@ -627,7 +627,7 @@ const SegmentedText: React.FC<
     let classes = ["word"];
     const normalized_word = text
       .toLowerCase()
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]*$/, "");
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]*$/, "");
     if (vocab[language][normalized_word]) {
       classes.push("vocab");
     }
