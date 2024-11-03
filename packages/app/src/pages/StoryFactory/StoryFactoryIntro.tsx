@@ -1,45 +1,68 @@
-import biliCharacter from "@/assets/img/bili_in_tshirt.png";
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
-import {Intro} from '@/components/Intro';
 
-import es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
-import es_inc_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
-import en_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_en.mp3";
-import es_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_es.mp3";
-import en_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_en.mp3";
+import bili from "@/assets/img/bili_letters.png";
+
+import audio_es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
+import audio_es_inc_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
+import audio_en_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_en.mp3";
+import audio_es_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_es.mp3";
+import audio_en_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_en.mp3";
 
 export const StoryFactoryIntro: React.FC = () => {
-  const { profile: {isInclusive }} = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: isInclusive
-	    ? `¡Bienvenides a la fábrica de cuentos!`
-	    : `¡Bienvenidos a la fábrica de cuentos!`,
-	subtext: isInclusive
-	       ? `¡Un lugar para lecturas silábicas graciosas!`
-	       : `¡Un lugar para lecturas silábicas graciosas!`,
-	audio: isInclusive ? es_inc_1 : es_1
-      },
-      en: {
-	subtext: `Welcome to the story factory! A place for silly syllabic reading! `,
-	audio: en_1
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to the "Story Factory"!';
+  const es = '¡Bienvenidos a la "Fábrica de cuentos"!';
+  const esinc = '¡Bienvenides a la "Fábrica de cuentos"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc_1, audio_es_2];
+      } else {
+        audios = [audio_es_1, audio_es_2];
       }
-    },
-    {
-      es: {
-	subtext: "Crea más de 4.000 historias diferentes con solo deslizar el dedo o hacer clic en un botón.",
-	audio: es_2
-      },
-      en: {
-	subtext: `Create over 4,000 different stories with the swipe of your finger or click of a button.`,
-	audio: en_2
+      break;
+    case "en":
+      audios = [audio_en_1, audio_en_2];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc_1, audio_es_2, audio_en_1, audio_en_2];
+      } else {
+        audios = [audio_es_1, audio_es_2, audio_en_1, audio_en_2];
       }
-    },
-    
-  ];
+      break;
+  }
 
-  return <>
-    <Intro texts={texts} image={biliCharacter} nextPath="/story-factory-game/select" />
-  </>;
-}
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
+
+  return (
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/story-factory-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
+  );
+};

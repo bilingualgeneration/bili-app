@@ -1,29 +1,65 @@
-import {Intro} from '@/components/Intro';
-import biliCharacter from "@/assets/img/bili_in_tshirt.png";
-import { IonButton } from "@ionic/react";
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 
-import audio_en_file from "@/assets/audio/WouldDoAudio/instruction_en.mp3";
-import audio_es_file from "@/assets/audio/WouldDoAudio/instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
+import bili from "@/assets/img/bili_in_tshirt.png";
+
+import audio_en from "@/assets/audio/WouldDoAudio/instruction_en.mp3";
+import audio_es from "@/assets/audio/WouldDoAudio/instruction_es.mp3";
+import audio_es_inc from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
 
 export const TellMeAboutIntro: React.FC = () => {
-  const { profile: {isInclusive }} = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: 'Cuéntame sobre...',
-	subtext: isInclusive
-	    ? '¡Te damos la bienvenida  a la actividad "cuéntame sobre"! Encuentra un amigue o una persona mayor. Tomen turnos hablando las cosas que les gustan.' // not sure if this is inclusive
-	: '¡Bienvenidos a la actividad "cuéntame sobre"! Encuentra un amigo o un adulto. Túrnense para contarse las cosas que les gustan.',
-	audio: isInclusive ? audio_es_inc_file : audio_es_file
-      },
-      en: {
-	text: 'Tell me about...',
-	subtext: 'Welcome to the "cuéntame sobre" activity! Find a friend or adult. Take turns telling each other about the things you like.',
-	audio: audio_en_file
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to "Tell Me About…"!';
+  const es = '¡Bienvenidos a "Cuéntame sobre…"!';
+  const esinc = '¡Bienvenides a "Cuéntame sobre…"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc];
+      } else {
+        audios = [audio_es];
       }
-    }
-  ]
-  return <Intro texts={texts} image={biliCharacter} nextPath="/tell-me-about-game/select" />;
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc, audio_en];
+      } else {
+        audios = [audio_es, audio_en];
+      }
+      break;
+  }
+
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
+  return (
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/tell-me-about-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
+  );
 };

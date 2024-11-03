@@ -1,30 +1,65 @@
-import biliCharacter from "@/assets/img/bili_in_coat.png";
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
-import {Intro} from '@/components/Intro';
 
-import audio_en_file from "@/assets/audio/CountAudio/instruction_en.mp3";
-import audio_es_file from "@/assets/audio/CountAudio/instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/CountAudio/instruction_es_inc.mp3";
+import bili from "@/assets/img/bili_in_tshirt.png";
+
+import audio_en from "@/assets/audio/CountAudio/instruction_en.mp3";
+import audio_es from "@/assets/audio/CountAudio/instruction_es.mp3";
+import audio_es_inc from "@/assets/audio/CountAudio/instruction_es_inc.mp3";
 
 export const CountWithMeIntro: React.FC = () => {
-  const {profile: { isInclusive }} = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: "¡Cuenta conmigo!",
-	subtext: isInclusive
-	       ? `¡Bienvenides al juego, “Cuenta conmigo”! Practica contando mientras aprendes sobre diferentes temas y cosas.`
-	       : `¡Bienvenidos al juego, “Cuenta conmigo”! Practica contando mientras aprendes sobre diferentes temas y cosas.`,
-	audio: isInclusive ? audio_es_inc_file : audio_es_file
-      },
-      en: {
-	text: `Count With Me`,
-	subtext: `Welcome to  the “Count With Me” game! Practice counting while learning about different topics and things. `,
-	audio: audio_en_file
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to "Count With Me"!';
+  const es = '¡Bienvenidos a "Cuenta conmigo"!';
+  const esinc = '¡Bienvenides a "Cuenta conmigo"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc];
+      } else {
+        audios = [audio_es];
       }
-    }
-  ];
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc, audio_en];
+      } else {
+        audios = [audio_es, audio_en];
+      }
+      break;
+  }
+
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
   return (
-    <Intro texts={texts} image={biliCharacter} nextPath="/count-with-me-game/select" />
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/count-with-me-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
   );
 };

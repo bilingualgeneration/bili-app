@@ -17,7 +17,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 
 import heartIcon from "@/assets/icons/heart_2.svg";
 import biliCharacter from "@/assets/icons/bili_character.svg";
-import DialogScreen from "../components/DialogScreen/DialogScreen";
+import { DialogueScreen } from "@/components/DialogueScreen";
 
 export const Debug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
@@ -28,16 +28,17 @@ export const Debug: React.FC = () => {
     functions,
     "classroom-analytics-debug",
   );
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialogue, setShowDialogue] = useState(false);
   const handleButtonClick = () => {
     console.log("Button clicked");
   };
 
-  if (showDialog) {
+  if (showDialogue) {
     return (
-      <DialogScreen
-        primaryButtonText="Siguiente"
-        secondaryButtonText="Next"
+      <DialogueScreen
+        audios={[]}
+        buttonTextPrimary="Siguiente"
+        buttonTextSecondary="Next"
         characterImage={biliCharacter}
         onButtonClick={handleButtonClick}
       >
@@ -46,7 +47,7 @@ export const Debug: React.FC = () => {
         <IonText className="semibold dialog-text">
           <h1>You earned a heart!</h1>
         </IonText>
-      </DialogScreen>
+      </DialogueScreen>
     );
   }
 
@@ -151,7 +152,7 @@ export const Debug: React.FC = () => {
             <IonButton
               size="small"
               slot="end"
-              onClick={() => setShowDialog(true)}
+              onClick={() => setShowDialogue(true)}
             >
               Open
             </IonButton>
