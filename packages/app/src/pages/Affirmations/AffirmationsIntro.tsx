@@ -1,37 +1,65 @@
-// todo: replace text and audio from intruder to affirmations
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
+import { useProfile } from "@/hooks/Profile";
 
-import biliCharacter from "@/assets/img/bili_in_tshirt.png";
-import {useProfile} from "@/hooks/Profile";
-import {Intro} from '@/components/Intro';
+import bili from "@/assets/img/bili_in_tshirt.png";
 
-import audio_en_file from "@/assets/audio/AffirmationsAudio/intro_en.wav";
-import audio_es_file from "@/assets/audio/AffirmationsAudio/intro_es.wav";
-import audio_es_inc_file from "@/assets/audio/AffirmationsAudio/intro_es_inc.wav";
-
-
-const en = `Affirmations are kind and true words. Practice hearing and saying affirmations in this section. Tap each card to flip it over and go deeper. You can do this by yourself, with a friend, or with a grown-up!`;
-const es = `Las afirmaciones son palabras amables y verdaderas. Practica escuchando y diciendo afirmaciones en esta sección. Haz clic en cada carta para darle la vuelta y profundizar. ¡Puedes hacerlo tú solo, con un amigo o con un adulto!`;
-const esInc = `Las afirmaciones son palabras amables y verdaderas. Practica escuchando y diciendo afirmaciones en esta sección. Haz clic en cada carta para darle la vuelta y profundizar. ¡Puedes hacerlo tú, con un amigue o con una persona mayor!`;
+import audio_en from "@/assets/audio/AffirmationsAudio/intro_en.wav";
+import audio_es from "@/assets/audio/AffirmationsAudio/intro_es.wav";
+import audio_es_inc from "@/assets/audio/AffirmationsAudio/intro_es_inc.wav";
 
 export const AffirmationsIntro: React.FC = () => {
-  const {profile: {isInclusive}} = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: "¡Afirmaciones!",
-	subtext: isInclusive
-	       ? es
-	       : esInc,
-	audio: isInclusive ? audio_es_inc_file : audio_es_file
-      },
-      en: {
-	text: `Affirmations`,
-	subtext: en,
-	audio: audio_en_file
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to "Affirmations"!';
+  const es = '¡Bienvenidos a "Afirmaciones"!';
+  const esinc = '¡Bienvenides a "Afirmaciones"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc];
+      } else {
+        audios = [audio_es];
       }
-    }
-  ];
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc, audio_en];
+      } else {
+        audios = [audio_es, audio_en];
+      }
+      break;
+  }
+
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
   return (
-    <Intro texts={texts} image={biliCharacter} nextPath="/affirmations/select" />
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/intruder-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
   );
 };

@@ -1,29 +1,65 @@
-import {Intro} from '@/components/Intro';
-import biliCharacter from "@/assets/img/bili_in_tshirt.png";
-import { IonButton } from "@ionic/react";
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 
-import audio_en_file from "@/assets/audio/WouldDoAudio/instruction_en.mp3";
-import audio_es_file from "@/assets/audio/WouldDoAudio/instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
+import bili from "@/assets/img/bili_in_tshirt.png";
+
+import audio_en from "@/assets/audio/WouldDoAudio/instruction_en.mp3";
+import audio_es from "@/assets/audio/WouldDoAudio/instruction_es.mp3";
+import audio_es_inc from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
 
 export const WouldDoIntro: React.FC = () => {
-  const { profile: {isInclusive }} = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: '¿Qué harías?',
-	subtext: isInclusive
-	    ? '¡Te damos la bienvenida  a la actividad "qué harías"! Encuentra un amigue o una persona mayor. Tomen turnos hablando sobre lo que harían en cada situación.'
-	: '¡Bienvenidos a la actividad “qué harías”! Encuentra un amigo o un adulto. Tomen turnos hablando sobre lo que harían en cada situación.',
-	audio: isInclusive ? audio_es_inc_file : audio_es_file
-      },
-      en: {
-	text: 'What Would You Do?',
-	subtext: 'Welcome to the "qué harías" activity! Find a friend or adult. Take turns talking about what you would do in each situation. ',
-	audio: audio_en_file
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to "What Would You Do?"!';
+  const es = '¡Bienvenidos a "¿Qué harías?"!';
+  const esinc = '¡Bienvenides a "¿Qué harías?"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc];
+      } else {
+        audios = [audio_es];
       }
-    }
-  ]
-  return <Intro texts={texts} image={biliCharacter} nextPath="/would-do-game/select" />;
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc, audio_en];
+      } else {
+        audios = [audio_es, audio_en];
+      }
+      break;
+  }
+
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
+  return (
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/would-do-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
+  );
 };

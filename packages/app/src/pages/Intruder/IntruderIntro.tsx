@@ -1,32 +1,65 @@
-import biliCharacter from "@/assets/img/bili_in_coat.png";
+import { DialogueScreen } from "@/components/DialogueScreen";
+import { IonText } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
-import {Intro} from '@/components/Intro';
 
-import audio_en_file from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
-import audio_es_file from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
-import audio_es_inc_file from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
+import bili from "@/assets/img/bili_in_tshirt.png";
 
-import "./Intruder.scss";
+import audio_en from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
+import audio_es from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
+import audio_es_inc from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
 
 export const IntruderIntro: React.FC = () => {
-  const { profile: {isInclusive} } = useProfile();
-  const texts: any = [
-    {
-      es: {
-	text: "¡El Intruso!",
-	subtext: isInclusive
-	       ? `¡Bienvenides al juego, "El intruso"! El objetivo de este juego es identificar la palabra que no rima con el resto.`
-	       : `¡Bienvenidos al juego, "El intruso"! El objetivo de este juego es identificar la palabra que no rima con el resto.`,
-	audio: isInclusive ? audio_es_inc_file : audio_es_file
-      },
-      en: {
-	text: `The Intruder`,
-	subtext: `Welcome to "The Intruder" game! The goal of this game is to identify the word that does not rhyme with the rest.`,
-	audio: audio_en_file
+  const { language } = useLanguage();
+  const {
+    profile: { isInclusive },
+  } = useProfile();
+  const history = useHistory();
+  const en = 'Welcome to "The Intruder"!';
+  const es = '¡Bienvenidos a "El intruso"!';
+  const esinc = '¡Bienvenides a "El intruso"!';
+  let audios = [];
+  switch (language) {
+    case "es":
+      if (isInclusive) {
+        audios = [audio_es_inc];
+      } else {
+        audios = [audio_es];
       }
-    }
-  ];
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "esen":
+      if (isInclusive) {
+        audios = [audio_es_inc, audio_en];
+      } else {
+        audios = [audio_es, audio_en];
+      }
+      break;
+  }
+
+  const button_es = "¡Juguemos!";
+  const button_en = `Let's play!`;
   return (
-    <Intro texts={texts} image={biliCharacter} nextPath="/intruder-game/select" />
+    <DialogueScreen
+      audios={audios}
+      buttonTextPrimary={language === "en" ? button_en : button_es}
+      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      characterImage={bili}
+      onButtonClick={() => {
+        history.push("/intruder-game/select");
+      }}
+    >
+      <IonText>
+        <h1 className="text-5xl color-suelo">
+          {language === "en" ? en : isInclusive ? esinc : es}
+        </h1>
+        {language === "esen" && (
+          <h2 className="text-3xl color-english">{en}</h2>
+        )}
+      </IonText>
+    </DialogueScreen>
   );
 };
