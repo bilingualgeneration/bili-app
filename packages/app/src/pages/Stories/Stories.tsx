@@ -665,7 +665,7 @@ export const StoryPage: React.FC<
     profile: { isInclusive },
   } = useProfile();
   const { language } = useLanguageToggle();
-  const { addAudio, clearAudio } = useAudioManager();
+  const { clearAudio } = useAudioManager();
   useEffect(() => {
     return clearAudio;
   }, []);
@@ -747,7 +747,9 @@ export const StoryPage: React.FC<
             <div>
               <AudioButton
                 audio={{
-                  en: { url: texts["en"].audio?.url },
+                  en: {
+                    url: isTranslanguaged ? undefined : texts["en"].audio?.url,
+                  },
                   es: {
                     url: isInclusive
                       ? texts["es-inc"].audio?.url
