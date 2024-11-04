@@ -49,7 +49,7 @@ export const AffirmationsIntro: React.FC = () => {
       buttonTextSecondary={language === "esen" ? button_en : undefined}
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/intruder-game/select");
+        history.push("/affirmations/select");
       }}
     >
       <IonText>
