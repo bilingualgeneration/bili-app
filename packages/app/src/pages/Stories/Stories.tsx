@@ -411,7 +411,7 @@ const PageCounter = () => {
 
   const styles = {
     height: 8,
-    width: "3rem",
+    width: "1rem",
     borderRadius: 4,
     display: "inline-block",
     marginLeft: 4,

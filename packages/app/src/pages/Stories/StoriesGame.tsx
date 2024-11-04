@@ -331,23 +331,23 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
               textAlign: "center",
             }}
           >
-            <h1 className="text-4xl color-suelo">
+            <h1 className="text-3xl color-suelo">
               {language === "en" ? headerData.en?.text : headerData.es.text}
             </h1>
 
             {language === "esen" && headerData.en && (
-              <p className="text-2xl color-english">{headerData.en.text}</p>
+              <p className="text-1xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
         </div>
-        <div className="">
+        <div>
           <IonGrid fixed={true}>
             <IonRow className="ion-justify-content-center">
               {shuffledCards.slice(0, 2).map((card, index) => (
                 <IonCol
                   key={card.id}
                   className=""
-                  size="4"
+                  size="3"
                   onClick={() => handleCardClick(card)}
                 >
                   <img
@@ -362,7 +362,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
               {shuffledCards.slice(2, 4).map((card, index) => (
                 <IonCol
                   key={index}
-                  size="4"
+                  size="3"
                   onClick={() => handleCardClick(card)}
                 >
                   <img
