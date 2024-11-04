@@ -336,7 +336,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
             </h1>
 
             {language === "esen" && headerData.en && (
-              <p className="text-1xl color-english">{headerData.en.text}</p>
+              <p className="text-xl color-english">{headerData.en.text}</p>
             )}
           </IonText>
         </div>
