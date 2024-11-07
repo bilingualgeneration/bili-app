@@ -1,18 +1,31 @@
 #appLoadingIndicator {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    * {
-	width: 50vw;
-    }
+  * {
+    width: 50vw;
+  }
 
-    ion-progress-bar{
-	border-radius: 1rem;
-	height: 2rem;
-	margin-top: 2rem;
-    }
+  ion-progress-bar {
+    border-radius: 1rem;
+    height: 2rem;
+    margin-top: 2rem;
+  }
+}
+
+#environmentMarker {
+  font-size: 30px;
+  font-weight: bold;
+  background: white;
+  padding: 4px;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 86px);
+  margin: auto;
+  z-index: 9999999;
+  color: red;
 }
