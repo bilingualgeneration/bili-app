@@ -20,6 +20,16 @@ export const AppWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
       </div>
     );
   } else {
-    return children;
+    return (
+      <>
+        {import.meta.env.VITE_FIREBASE_ENVIRONMENT !== "live" && (
+          <div id="environmentMarker">
+            {import.meta.env.VITE_FIREBASE_ENVIRONMENT}
+          </div>
+        )}
+
+        {children}
+      </>
+    );
   }
 };
