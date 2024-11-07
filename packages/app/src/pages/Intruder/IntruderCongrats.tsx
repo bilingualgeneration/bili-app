@@ -16,32 +16,6 @@ import "../StoryFactory/StoryFactory.scss";
 import { useHistory } from "react-router";
 import StarImage from "@/assets/icons/small-star.svg";
 
-/*
-import audio_5_en from "@/assets/audio/IntruderAudio/intruder_congrats_5_en.mp3";
-import audio_10_en from "@/assets/audio/IntruderAudio/intruder_congrats_10_en.mp3";
-import audio_20_en from "@/assets/audio/IntruderAudio/intruder_congrats_20_en.mp3";
-import audio_all_en from "@/assets/audio/IntruderAudio/intruder_congrats_all_en.mp3";
-import audio_5_es from "@/assets/audio/IntruderAudio/intruder_congrats_5_es.mp3";
-import audio_10_es from "@/assets/audio/IntruderAudio/intruder_congrats_10_es.mp3";
-import audio_20_es from "@/assets/audio/IntruderAudio/intruder_congrats_20_es.mp3";
-import audio_all_es from "@/assets/audio/IntruderAudio/intruder_congrats_all_es.mp3";
-
-const sounds: any = {
-  en: {
-    "5": audio_5_en,
-    "10": audio_10_en,
-    "20": audio_20_en,
-    all: audio_all_en,
-  },
-  es: {
-    "5": audio_5_es,
-    "10": audio_10_es,
-    "20": audio_20_es,
-    all: audio_all_es,
-  },
-};
-*/
-
 export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
@@ -51,7 +25,6 @@ export const IntruderCongrats: React.FC<{
   const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
   const { addAudio, clearAudio, onended } = useAudioManager();
-  const history = useHistory();
   const [audios, setAudios] = useState<string[]>([]);
 
   const percentageRanges: { [key: number]: string } = {

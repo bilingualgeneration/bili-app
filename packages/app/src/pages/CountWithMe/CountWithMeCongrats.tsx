@@ -21,13 +21,11 @@ import count_congrats_es_9 from "@/assets/audio/CountAudio/count_congrats_es_9.m
 import count_congrats_es_13 from "@/assets/audio/CountAudio/count_congrats_es_13.mp3";
 import activity_completed_en from "@/assets/audio/CountAudio/activity_completed_en.mp3";
 import activity_completed_es from "@/assets/audio/CountAudio/activity_completed_es.mp3";
-
-// svgs
-import congratsStar from "@/assets/icons/count_congrats_star.svg";
-import starsOverlay from "@/assets/icons/sf_stars_overlay.svg";
-
 import "./CountWithMe.scss";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { DialogueScreen } from "@/components/DialogueScreen";
+// svgs
+import StarImage from "@/assets/icons/small-star.svg";
+import biliCharacter from "@/assets/img/bili_in_coat.png";
 
 const sounds: any = {
   en: {
@@ -48,11 +46,6 @@ export const CountWithMeCongrats: React.FC<{
   onKeepGoingClick?: any;
   count: number;
 }> = ({ onKeepGoingClick, count }) => {
-  // Function to render the congrats page
-  const congrats = {
-    star: congratsStar,
-  };
-
   const {
     profile: { isImmersive },
     activeChildProfile,
@@ -61,14 +54,8 @@ export const CountWithMeCongrats: React.FC<{
   const [showText, setShowText] = useState(true); // State to show/hide text
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();
-  const audio_es = new Audio(
-    sounds.es[count === -1 ? "all" : count.toString()],
-  );
-  const audio_en = new Audio(
-    sounds.en[count === -1 ? "all" : count.toString()],
-  );
-  const functions = getFunctions();
-  const { handleRecordAttempt } = useActivity();
+  const [audios, setAudios] = useState<string[]>([]);
+  const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
 
   // can potentially uncomment once 'congrats after x animals' screen is built
@@ -98,181 +85,106 @@ export const CountWithMeCongrats: React.FC<{
   //   };
   // }, []);
 
-  const history = useHistory();
+  const percentageRanges: { [key: number]: string } = {
+    5: "90-100%",
+    4: "75-89%",
+    3: "50-74%",
+    2: "25-49%",
+    1: "0-24%",
+  };
 
-  // useEffect(() => {
+  const englishCongratsText: { [key: number]: string } = {
+    5: "Congrats!",
+    4: "Amazing!",
+    3: "I know you could do it! Way to go!",
+    2: "You're on the right track, keep going!",
+    1: "Good effort! Keep trying!",
+  };
 
-  // increment number of completions
-  // const completionFunction = httpsCallable(
-  //   functions,
-  //   "user-child-profile-completion-add",
-  // );
-  // const data: any = {
-  //   uid: activeChildProfile.id,
-  //   module: "count-with-me-game", //not sure if it's a correct module
-  //   moduleAdd: 5,
-  //   completionsAdd: 1,
-  // };
-  // completionFunction(data);
-  // }, []);
+  // Check if stars are valid and set fallback if necessary
+  const safeStars = stars ?? 1;
+  const percentageText = percentageRanges[safeStars];
+  const congratsTextEn = englishCongratsText[safeStars];
 
-  useEffect(() => {
-    return () => {
-      audio_es.pause();
-      audio_en.pause();
-    };
-  }, []);
   useEffect(() => {
     handleRecordAttempt(stopTimer());
-    if (isImmersive) {
-      audio_es.onended = () => {
-        setAudioPlayed(true);
-      };
-    } else {
-      audio_es.onended = () => {
-        audio_en.onended = () => {
-          setAudioPlayed(true);
-        };
-        audio_en.play();
-      };
+
+    let newAudios: string[] = [];
+
+    //TODO:implement later, when we have the audio files
+
+    if (language === "es" || language === "esen") {
+      newAudios.push();
     }
-    audio_es.play();
-  }, []);
+    if (language === "en" || language === "esen") {
+      newAudios.push();
+    }
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowText(false);
-    }, 3000); // Set timeout to hide text after 3 seconds
+    setAudios(newAudios);
 
-    return () => clearTimeout(timeout);
-  }, []); // This effect runs only once
+    onended.pipe(first()).subscribe(() => {
+      setAudioPlayed(true);
+    });
+
+    addAudio(newAudios);
+  }, [count, language]);
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setShowText(false);
+  //   }, 3000); // Set timeout to hide text after 3 seconds
+
+  //   return () => clearTimeout(timeout);
+  // }, []); // This effect runs only once
+
+  const button_es = "¡Sigue adelante!";
+  const button_en = "Keep going!";
 
   return (
-    <>
-      <div style={{ padding: "20px" }}>
-        <img
-          src={starsOverlay}
-          style={{
-            position: "absolute",
-            top: "70px",
-            left: "calc(40% - 250px)",
-            zIndex: 1,
-          }}
-          alt="background"
-        />
-        <div
-          className="margin-top-4"
-          style={{
-            width: "auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "end",
-            position: "relative",
-          }}
-        >
-          <IonText>
-            <h1 className="text-4xl color-suelo semibold">
-              <FormattedMessage
-                id="countWithMe.complete"
-                defaultMessage="Activity Completed"
-                description="Information that the activity is completed"
-              />
-            </h1>
-            {language === "esen" && (
-              <p
-                className="text-2xl color-english"
-                style={{ textAlign: "center" }}
-              >
-                Activity Completed
-              </p>
-            )}
-          </IonText>
-
-          <div
-            style={{
-              display: "flex",
-              position: "relative",
-              zIndex: 3,
-            }}
-          >
-            <img className="congrats-star" src={congrats.star} alt="star" />
-            {showText && (
-              <div
-                style={{
-                  position: "absolute",
-                  display: "flex",
-                  flexDirection: "column",
-                  top: "50%",
-                  left: "55%",
-                  transform: "translate(-50%, -50%)", // Center horizontally
-                  zIndex: "3",
-                }}
-              >
-                <div className="text-3xl semibold">
-                  <FormattedMessage
-                    id="countWithMe.congrats"
-                    defaultMessage="You've earned a star"
-                    description="Congrats text on a star"
-                  />
-                </div>
-
-                {language === "esen" && (
-                  <p className="text-sm color-english">You've earned a star</p>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div
-        style={{
-          position: "relative",
-          textAlign: "center",
-          zIndex: 2,
-          marginTop: "auto",
+    <div className="padding-top-2">
+      <DialogueScreen
+        audios={audios}
+        buttonTextPrimary={language === "en" ? button_en : button_es}
+        buttonTextSecondary={language === "esen" ? button_en : ""}
+        characterImage={biliCharacter}
+        onButtonClick={() => {
+          if (onKeepGoingClick) {
+            onKeepGoingClick();
+          }
+          startTimer();
         }}
       >
-        {audioPlayed && (
-          <img
-            src={StoryFactoryArrow}
-            alt="indicator arrow to the next button"
-            style={{
-              left: "calc(50% - 350px)",
-              top: 3,
-              position: "absolute",
-            }}
-            className="bounce-arrow"
-          />
-        )}
-        <IonButton
-          className="sf-intro-button"
-          disabled={!audioPlayed}
-          expand="block"
-          shape="round"
-          type="button"
-          onClick={() => {
-            if (onKeepGoingClick) {
-              onKeepGoingClick();
-            }
-            startTimer();
-          }}
-        >
-          <div>
-            <div className="story-button-bold">
-              <FormattedMessage
-                id="countWithMe.keepGoing"
-                defaultMessage="Keep Going!"
-                description="Button label to exit congrats screen"
+        <IonText class="ion-text-center">
+          {language.startsWith("es") && (
+            <>
+              <h1 className="text-5xl color-suelo">
+                <FormattedMessage id={`common.congrats.title.${stars}`} />
+              </h1>
+            </>
+          )}
+          {language === "en" && (
+            <>
+              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
+            </>
+          )}
+          {language === "esen" && (
+            <>
+              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
+            </>
+          )}
+          <div className="stars-container">
+            {[...Array(safeStars)].map((_, index) => (
+              <img
+                key={index}
+                src={StarImage}
+                alt="star"
+                className="star-image"
               />
-            </div>
-            {language === "esen" && (
-              <div className="story-button-reg">Keep going!</div>
-            )}
+            ))}
           </div>
-        </IonButton>
-      </div>
-    </>
+          <h1 className="text-6xl color-suelo">{percentageText}</h1>
+        </IonText>
+      </DialogueScreen>
+    </div>
   );
 };
