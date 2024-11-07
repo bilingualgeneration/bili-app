@@ -10,9 +10,11 @@ import { useActivity } from "@/contexts/ActivityContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useTimeTracker } from "@/hooks/TimeTracker";
-
+import { DialogueScreen } from "@/components/DialogueScreen";
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
+import { useHistory } from "react-router";
+import StarImage from "@/assets/icons/small-star.svg";
 
 /*
 import audio_5_en from "@/assets/audio/IntruderAudio/intruder_congrats_5_en.mp3";
@@ -46,183 +48,102 @@ export const IntruderCongrats: React.FC<{
 }> = ({ setShowCongrats, count }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { language } = useLanguageToggle();
-  const { handleRecordAttempt } = useActivity();
+  const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
   const { addAudio, clearAudio, onended } = useAudioManager();
+  const history = useHistory();
+  const [audios, setAudios] = useState<string[]>([]);
+
+  const percentageRanges: { [key: number]: string } = {
+    5: "90-100%",
+    4: "75-89%",
+    3: "50-74%",
+    2: "25-49%",
+    1: "0-24%",
+  };
+
+  const englishCongratsText: { [key: number]: string } = {
+    5: "Congrats!",
+    4: "Amazing!",
+    3: "I know you could do it! Way to go!",
+    2: "You're on the right track, keep going!",
+    1: "Good effort! Keep trying!",
+  };
+
+  // Check if stars are valid and set fallback if necessary
+  const safeStars = stars ?? 1;
+  const percentageText = percentageRanges[safeStars];
+  const congratsTextEn = englishCongratsText[safeStars];
 
   useEffect(() => {
     handleRecordAttempt(stopTimer());
-    let audio = [];
+
+    let newAudios: string[] = [];
+
+    //TODO:implement later, when we have the audio files
+
     if (language === "es" || language === "esen") {
-      audio.push(
-        `/assets/audio/intruder/congrats_${
-          count === -1 ? "all" : count
-        }_es.mp3`,
-      );
+      newAudios.push();
     }
     if (language === "en" || language === "esen") {
-      audio.push(
-        `/assets/audio/intruder/congrats_${
-          count === -1 ? "all" : count
-        }_en.mp3`,
-      );
+      newAudios.push();
     }
+
+    setAudios(newAudios);
+
     onended.pipe(first()).subscribe(() => {
       setAudioPlayed(true);
     });
-    addAudio(audio);
-    return () => {
-      clearAudio();
-    };
-  }, []);
-  return (
-    <div className="padding-top-2" style={{ position: "relative" }}>
-      <div className="stars-overlay"></div>
-      <div className="ion-no-padding sf-card">
-        <IonCard className="ion-no-margin">
-          <IonCardContent className="margin-right">
-            <IonText>
-              {language.startsWith("es") && (
-                <>
-                  <h1 className="text-6xl color-suelo">
-                    <FormattedMessage
-                      id={`intruder.congrats.title.${
-                        count === 0 ? "all" : count
-                      }`}
-                    />
-                  </h1>
-                  <h2 className="text-4xl color-suelo">
-                    <FormattedMessage
-                      id={`intruder.congrats.description.${
-                        count === 0 ? "all" : count
-                      }`}
-                    />
-                  </h2>
-                </>
-              )}
-              {language === "en" && (
-                <>
-                  <h1 className="text-6xl color-suelo">
-                    {count === 5 && "Congrats!"}
-                    {count === 10 && "Great job!"}
-                    {count === 20 && "Amazing!"}
-                    {count === 0 && "I knew you could do it!"}
-                  </h1>
-                  <h2 className="text-4xl color-suelo">
-                    {count === 5 && (
-                      <>
-                        You've found five rhyme intruders.
-                        <br />
-                        Can you keep going?
-                      </>
-                    )}
-                    {count === 10 && (
-                      <>
-                        You've found ten rhyme intruders.
-                        <br />
-                        How many more can you find?
-                      </>
-                    )}
-                    {count === 20 && (
-                      <>
-                        You've found twenty rhyme intruders.
-                        <br />
-                        You are a super-rhymer!
-                      </>
-                    )}
-                    {count === 0 && (
-                      <>Way to go - you've found all of the rhyme intruders!</>
-                    )}
-                  </h2>
-                </>
-              )}
-              {language === "esen" && (
-                <div className="margin-top-3">
-                  <h1 className="text-5xl color-english">
-                    {count === 5 && "Congrats!"}
-                    {count === 10 && "Great job!"}
-                    {count === 20 && "Amazing!"}
-                    {count === 0 && "I knew you could do it!"}
-                  </h1>
-                  <h2 className="text-3xl color-english">
-                    {count === 5 && (
-                      <>
-                        You've found five rhyme intruders.
-                        <br />
-                        Can you keep going?
-                      </>
-                    )}
-                    {count === 10 && (
-                      <>
-                        You've found ten rhyme intruders.
-                        <br />
-                        How many more can you find?
-                      </>
-                    )}
-                    {count === 20 && (
-                      <>
-                        You've found twenty rhyme intruders.
-                        <br />
-                        You are a super-rhymer!
-                      </>
-                    )}
-                    {count === 0 && (
-                      <>Way to go - you've found all of the rhyme intruders!</>
-                    )}
-                  </h2>
-                </div>
-              )}
-            </IonText>
 
-            <div
-              style={{
-                position: "relative",
-                textAlign: "center",
-                marginTop: "5rem",
-              }}
-            >
-              {audioPlayed && (
-                <img
-                  src={StoryFactoryArrow}
-                  alt="indicator arrow to next button"
-                  style={{
-                    left: 0,
-                    top: 3,
-                    position: "absolute",
-                  }}
-                />
-              )}
-              <IonButton
-                className="sf-intro-button"
-                disabled={!audioPlayed}
-                expand="block"
-                shape="round"
-                type="button"
-                onClick={() => {
-                  startTimer();
-                  setShowCongrats(false);
-                }}
-              >
-                <IonText>
-                  <p className="text-3xl semibold color-nube">
-                    <FormattedMessage
-                      id="intruder.keepGoing"
-                      defaultMessage="Keep Going!"
-                      description="Button label to exit congrats screen"
-                    />
-                  </p>
-                  {true && <p className="text-sm color-nube">Keep going!</p>}
-                </IonText>
-              </IonButton>
-            </div>
-          </IonCardContent>
-        </IonCard>
-      </div>
-      <img
-        className="bili-character"
-        src={biliCharacter}
-        alt="Bili character"
-      />
+    addAudio(newAudios);
+  }, [count, language]);
+
+  const button_es = "¡Sigue adelante!";
+  const button_en = "Keep going!";
+
+  return (
+    <div className="padding-top-2">
+      <DialogueScreen
+        audios={audios}
+        buttonTextPrimary={language === "en" ? button_en : button_es}
+        buttonTextSecondary={language === "esen" ? button_en : ""}
+        characterImage={biliCharacter}
+        onButtonClick={() => {
+          startTimer();
+          setShowCongrats(false);
+        }}
+      >
+        <IonText class="ion-text-center">
+          {language.startsWith("es") && (
+            <>
+              <h1 className="text-5xl color-suelo">
+                <FormattedMessage id={`common.congrats.title.${stars}`} />
+              </h1>
+            </>
+          )}
+          {language === "en" && (
+            <>
+              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
+            </>
+          )}
+          {language === "esen" && (
+            <>
+              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
+            </>
+          )}
+          <div className="stars-container">
+            {[...Array(safeStars)].map((_, index) => (
+              <img
+                key={index}
+                src={StarImage}
+                alt="star"
+                className="star-image"
+              />
+            ))}
+          </div>
+          <h1 className="text-6xl color-suelo">{percentageText}</h1>
+        </IonText>
+      </DialogueScreen>
     </div>
   );
 };
