@@ -19,7 +19,6 @@
     "serve:development": "run-s serve:vite:development",
     "serve:live": "run-s serve:vite:live",
     "serve:emulator": "run-s serve:vite:emulator",
-    "build": "tsc && vite build",
     "cap:sync": "cap sync",
     "cap:open:ios": "cap open ios",
     "preview": "vite preview",
