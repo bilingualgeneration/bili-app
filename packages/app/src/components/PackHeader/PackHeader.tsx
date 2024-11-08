@@ -2,7 +2,8 @@ import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import pattern from "@/assets/icons/header_background_pattern.svg";
-import {useLanguageToggle} from '@/components/LanguageToggle';
+import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useScreenSize } from "@/lib/screenSize";
 
 import "./PackHeader.scss";
 
@@ -21,19 +22,36 @@ export const PackHeader: FC<PackHeaderProps> = ({
   titleClassName = "text-5xl color-nube",
   subtitleClassName = "text-3xl color-nube",
 }) => {
-  const {language} = useLanguageToggle();
+  const { language } = useLanguageToggle();
+  const { screenType } = useScreenSize();
+
+  // mobile formats
+  const isMobile = screenType === "mobile";
+  const mobileTitleStyle = isMobile
+    ? { display: "flex", flexDirection: "row", alignItems: "center" }
+    : {};
+  const mobileTitleClass = isMobile
+    ? "text-2xl color-nube semibold"
+    : titleClassName;
+  const mobileSubtitleClass = isMobile
+    ? "text-2xl color-nube"
+    : subtitleClassName;
+
   return (
     <div id="packBanner" style={{ backgroundColor: bannerColor }}>
-      <div className="banner-overlay"/>
-      <IonText className="banner-content">
-        <h1 className={`${titleClassName}`}>
-	  {title}
-        </h1>
-        {language === 'esen' &&
-          <p className={`${subtitleClassName}`}>
-            {subtitle}
-          </p>
-        }
+      <div className="banner-overlay" />
+      <IonText
+        className={`banner-content ${isMobile ? "text-2xl" : ""}`}
+        style={mobileTitleStyle}
+      >
+        <h1 className={mobileTitleClass}>{title}</h1>
+        {language === "esen" && isMobile && (
+          // vertical bar only for mobile
+          <span style={{ margin: "0 0.5rem" }}>|</span>
+        )}
+        {language === "esen" && (
+          <p className={mobileSubtitleClass}>{subtitle}</p>
+        )}
       </IonText>
     </div>
   );
