@@ -27,6 +27,7 @@
 // for mobile screens
 @media (max-width: 768px) {
   #packBanner {
-    min-height: 0; // override background height
+    min-height: 0;
+    padding: 1rem 0 1rem 50px;
   }
 }
