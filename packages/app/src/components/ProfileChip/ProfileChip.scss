@@ -13,7 +13,7 @@
 
   #starPoints {
     align-items: center;
-    background-color: #006A67;
+    background-color: #006a67;
     display: inline-flex;
     padding: 0.5rem 0.75rem;
     margin-left: 1rem;
@@ -34,7 +34,6 @@
       margin-right: 0.5rem;
     }
   }
-
 }
 
 .custom-button-color {
@@ -46,7 +45,7 @@
     background-color: #c3ece2;
     //border-radius: 12px;
   }
-  ion-item{
+  ion-item {
     font-family: "Outfit";
     margin: 8px 4px 8px 4px;
     border-radius: 8px;
@@ -56,4 +55,25 @@
 ion-popover.profile-popover-style {
   --width: 280px;
   --offset-y: 10px;
+}
+
+@media (max-width: 768px) {
+  #profileChip {
+    width: max-content;
+
+    #starPoints,
+    #heartPoints {
+      padding: 0.25rem 0.5rem;
+      margin-left: 0.8rem;
+
+      ion-icon {
+        margin-right: 0.3rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    img {
+      width: 50px;
+    }
+  }
 }
