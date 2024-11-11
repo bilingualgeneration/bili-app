@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 import { first } from "rxjs/operators";
 import { GameData, useActivity } from "@/contexts/ActivityContext";
 import { useTimeTracker } from "@/hooks/TimeTracker";
+import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
 
 export const StoryFactoryLevel1: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const WrappedSF1: React.FC = () => {
     setGamesData,
   } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
+  const [showCongrats, setShowCongrats] = useState<boolean>(false);
 
   useEffect(() => {
     startTimer();
@@ -81,8 +83,8 @@ const WrappedSF1: React.FC = () => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
       onended.pipe(first()).subscribe(() => {
         if (pageNumber === filteredGames.length - 1) {
-          //logic as if we set to show Congrats
-          handleRecordAttempt(stopTimer());
+          //moved handleRecordAttempt to the StoryFActoryCongrats page
+          setShowCongrats(true);
         }
         setPageNumber(
           pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1,
@@ -97,6 +99,11 @@ const WrappedSF1: React.FC = () => {
   if (filteredGames.length === 0) {
     return <>no bilingual games yet</>;
   }
+
+  if (showCongrats) {
+    return <StoryFactoryCongrats />;
+  }
+
   return (
     <>
       <div ref={dndWrapperRef} style={{ height: "100%" }}>

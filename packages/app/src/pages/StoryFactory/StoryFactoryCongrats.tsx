@@ -11,11 +11,9 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import StarImage from "@/assets/icons/small-star.svg";
 import "./StoryFactory.scss";
 import { first } from "rxjs";
+import { useHistory } from "react-router";
 
-export const StoryFactoryCongrats: React.FC<{
-  setShowCongrats: any;
-  count: number;
-}> = ({ setShowCongrats, count }) => {
+export const StoryFactoryCongrats: React.FC = () => {
   const {
     profile: { isImmersive },
   } = useProfile();
@@ -25,6 +23,7 @@ export const StoryFactoryCongrats: React.FC<{
   const { language } = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();
+  const history = useHistory();
 
   const percentageRanges: { [key: number]: string } = {
     5: "90-100%",
@@ -68,7 +67,7 @@ export const StoryFactoryCongrats: React.FC<{
     });
 
     addAudio(newAudios);
-  }, [count, language]);
+  }, [language]);
 
   const button_es = "¡Sigue adelante!";
   const button_en = "Keep going!";
@@ -82,7 +81,7 @@ export const StoryFactoryCongrats: React.FC<{
         characterImage={biliCharacter}
         onButtonClick={() => {
           startTimer();
-          setShowCongrats(false);
+          history.push("/story-factory-game/select");
         }}
       >
         <IonText class="ion-text-center">
