@@ -1,5 +1,15 @@
 #authedHeader {
   // margin: 0 2rem 1rem 2rem;
-  padding-top: 1rem;
+  padding: 0;
   background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .back-button-container {
+    padding-left: 1rem; // Adjust space to move the back button closer to the edge if needed
+  }
+
+  .logo {
+    height: 32px; // Adjust the height for the logo
+  }
 }
