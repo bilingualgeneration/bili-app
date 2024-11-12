@@ -31,10 +31,10 @@ export const PackHeader: FC<PackHeaderProps> = ({
     ? { display: "flex", flexDirection: "row", alignItems: "center" }
     : {};
   const mobileTitleClass = isMobile
-    ? "text-2xl color-nube semibold"
+    ? "text-xl color-nube semibold"
     : titleClassName;
   const mobileSubtitleClass = isMobile
-    ? "text-2xl color-nube"
+    ? "text-xl color-nube"
     : subtitleClassName;
 
   return (

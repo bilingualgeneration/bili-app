@@ -27,6 +27,23 @@ hr {
   min-width: 600px;
 }
 
+@media (max-width: 768px) {
+  .background-card {
+    position: relative;
+    top: -50px;
+    margin: auto;
+    max-width: 85%;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .background-card {
+    left: -1rem;
+    margin: auto;
+  }
+}
+
 .no-text-decoration {
   text-decoration: none;
 }
@@ -37,6 +54,12 @@ hr {
   margin: auto;
   min-height: 100vh;
   padding-bottom: 150px; // clearance for footer
+}
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding-bottom: 0;
+  }
 }
 
 ion-content::part(scroll) {

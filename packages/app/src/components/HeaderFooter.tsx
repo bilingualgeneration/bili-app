@@ -38,14 +38,14 @@ export const HeaderFooter: FC<
             <IonRow className="ion-align-items-center">
               {screenType === "mobile" ? (
                 <>
-                  <IonCol size="auto" className="back-button-container">
+                  <IonCol size="2.3" className="back-button-container">
                     {showBackButton && (
                       <div className="back-button-wrapper">
                         <BackButton />
                       </div>
                     )}
                   </IonCol>
-                  <IonCol size="5.25" className="ion-text-center">
+                  <IonCol size="6" className="ion-text-center">
                     <Link to="/student-dashboard">
                       <img src={biliLogo} className="logo" alt="Logo" />
                     </Link>

@@ -59,21 +59,37 @@ ion-popover.profile-popover-style {
 
 @media (max-width: 768px) {
   #profileChip {
-    width: max-content;
+    position: absolute;
+    right: -13rem;
+    transform: translateY(-70%);
+    width: max-content; /* Ensure it fits the content */
 
     #starPoints,
     #heartPoints {
-      padding: 0.25rem 0.5rem;
-      margin-left: 0.8rem;
+      padding: 0.2rem 0.4rem;
+      margin-left: 0.5rem;
 
       ion-icon {
-        margin-right: 0.3rem;
-        font-size: 0.8rem;
+        margin-right: 0.25rem;
+        font-size: 0.7rem;
       }
     }
 
     img {
-      width: 45px;
+      width: 35px;
     }
+
+    > ion-text {
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #profileChip {
+    position: absolute;
+    right: -10rem;
+    transform: translateY(-70%);
+    width: max-content; /* Ensure it fits the content */
   }
 }

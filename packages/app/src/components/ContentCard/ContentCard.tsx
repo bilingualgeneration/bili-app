@@ -6,6 +6,7 @@ import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useScreenSize } from "@/lib/screenSize";
 
 import "./ContentCard.css";
 
@@ -64,7 +65,10 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   pills = [],
 }) => {
   const { language } = useLanguageToggle();
+  const { screenType } = useScreenSize();
   const history = useHistory();
+  const titleClass = screenType === "mobile" ? "text-lg" : "text-2xl";
+  const subtitleClass = screenType === "mobile" ? "text-xs" : "text-sm";
   return (
     <div
       className={classnames("content-card", { "has-link": link !== undefined })}
@@ -81,10 +85,12 @@ export const ContentCard: React.FC<ContentCardProps> = ({
         {pills.map((pill) => (
           <Pill {...pill} key={pill.primaryText} />
         ))}
-        <h1 className="text-2xl semibold color-nube">
+        <h1 className={`${titleClass} semibold color-nube`}>
           {language === "en" ? titleEn : title}
         </h1>
-        {language === "esen" && <p className="text-sm color-nube">{titleEn}</p>}
+        {language === "esen" && (
+          <p className={`${subtitleClass} color-nube`}>{titleEn}</p>
+        )}
       </IonText>
       {isLocked && <Lock />}
     </div>

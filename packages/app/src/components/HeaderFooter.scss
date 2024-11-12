@@ -5,11 +5,16 @@
 }
 
 @media (max-width: 768px) {
+  #authedHeader {
+    height: 3.5rem;
+  }
+
   .back-button-container {
     padding-left: 1rem; // Adjust space to move the back button closer to the edge if needed
+    margin-top: -0.2rem;
   }
 
   .logo {
-    height: 32px; // Adjust the height for the logo
+    height: 30px; // Adjust the height for the logo
   }
 }

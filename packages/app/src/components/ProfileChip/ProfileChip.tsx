@@ -60,13 +60,13 @@ const HydratedProfileChip: React.FC = () => {
           id="top-center"
         >
           <div id="profileChip">
-            <div id="starPoints" className="text-sm semibold color-nube">
+            <div id="starPoints" className="text-xs semibold color-nube">
               <IonIcon icon={StarNotSharp} />
               <IonText>
                 {status === "ready" ? data?.totalStars ?? 0 : "\u00A0"}
               </IonText>
             </div>
-            <div id="heartPoints" className="text-sm semibold color-nube">
+            <div id="heartPoints" className="text-xs semibold color-nube">
               <IonIcon icon={heart} />
               <IonText>
                 {status === "ready" ? data?.totalHearts ?? 0 : "\u00A0"}
@@ -75,7 +75,7 @@ const HydratedProfileChip: React.FC = () => {
             <IonText>
               <p
                 className={`semibold color-suelo ${
-                  screenType === "mobile" ? "text-lg" : "text-xl"
+                  screenType === "mobile" ? "text-md" : "text-xl"
                 }`}
               >
                 {firstName}
