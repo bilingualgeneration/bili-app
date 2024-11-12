@@ -2,7 +2,14 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --fix --ext .js,.ts .",
-    "build": "run-s schema:sync build:internal",
+    "env:development": "cp .env.development .env",
+    "env:live": "cp .env.live .env",
+    "use:development": "firebase use bilingual-generation-dev",
+    "use:live": "firebase use bilingual-generation-live",
+    "make:development": "run-s env:development use:development",
+    "make:live": "run-s env:live use:live",
+    "build": "run-s make:development chema:sync build:internal",
+    "build:live": "run-s make:live chema:sync build:internal",
     "build:watch": "run-s schema:sync build:internal:watch",
     "build:internal": "rm -rf lib/*; tsc && tsc-alias",
     "build:internal:watch": "rm -rf lib/*; concurrently \"tsc --watch\" \"tsc-alias 0w\"",
@@ -11,6 +18,8 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
+    "deploy:development": "run-s make:development deploy",
+    "deploy:live": "run-s make:live deploy",
     "logs": "firebase functions:log",
     "copy-sql": "copyfiles -u 2 src/queries/**/*.sql lib/queries"
   },
@@ -21,13 +30,16 @@
   "dependencies": {
     "@google-cloud/bigquery": "^7.7.1",
     "aws-sdk": "^2.1691.0",
+    "axios": "^1.7.7",
     "firebase": "^10.4.0",
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.3.1",
     "nodemailer": "^6.9.15",
+    "pluralize": "^8.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/pluralize": "^0.0.33",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "concurrently": "^9.0.1",

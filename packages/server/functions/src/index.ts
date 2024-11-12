@@ -5,6 +5,7 @@ import * as teacher from "./teacher";
 import * as student from "./student";
 import * as user from "./user";
 import * as waitlist from "./waitlist";
+import * as sync from "./sync-strapi";
 
 import * as admin from "firebase-admin";
 admin.initializeApp();
@@ -12,4 +13,4 @@ admin.initializeApp();
 const db = admin.firestore();
 db.settings({ ignoreUndefinedProperties: true });
 
-export { caregiver, classroom, student, teacher, user, waitlist };
+export { caregiver, classroom, sync, student, teacher, user, waitlist };
