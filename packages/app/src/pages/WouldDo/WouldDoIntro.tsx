@@ -19,7 +19,7 @@ export const WouldDoIntro: React.FC = () => {
   const en = 'Welcome to "What Would You Do?"!';
   const es = '¡Bienvenidos a "¿Qué harías?"!';
   const esinc = '¡Bienvenides a "¿Qué harías?"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {

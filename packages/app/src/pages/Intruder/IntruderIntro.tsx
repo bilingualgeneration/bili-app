@@ -19,7 +19,7 @@ export const IntruderIntro: React.FC = () => {
   const en = 'Welcome to "The Intruder"!';
   const es = '¡Bienvenidos a "El intruso"!';
   const esinc = '¡Bienvenides a "El intruso"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {

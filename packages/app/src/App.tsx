@@ -12,12 +12,12 @@ import { Loading } from "@/pages/Loading";
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { AudioManagerProvider } from "@/contexts/AudioManagerContext";
-import { useIntl } from "react-intl";
 
 import { TimeTrackerProvider } from "@/hooks/TimeTracker";
 import { InterfaceLanguageProvider } from "@/hooks/InterfaceLanguage";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
+import { I18nProvider } from "@/hooks/I18n";
 import { PackSelect } from "@/components/PackSelect";
 import { ProfileProvider } from "@/hooks/Profile";
 import { StudentProvider } from "@/hooks/Student";
@@ -69,17 +69,19 @@ const App: React.FC = () => {
           <AudioManagerProvider>
             <ProfileProvider>
               <LanguageToggleProvider>
-                <ClassroomProvider>
-                  <StudentProvider>
-                    <NamesProvider>
-                      <AppWrapper>
-                        <TimeTrackerProvider>
-                          <Router />
-                        </TimeTrackerProvider>
-                      </AppWrapper>
-                    </NamesProvider>
-                  </StudentProvider>
-                </ClassroomProvider>
+                <I18nProvider>
+                  <ClassroomProvider>
+                    <StudentProvider>
+                      <NamesProvider>
+                        <AppWrapper>
+                          <TimeTrackerProvider>
+                            <Router />
+                          </TimeTrackerProvider>
+                        </AppWrapper>
+                      </NamesProvider>
+                    </StudentProvider>
+                  </ClassroomProvider>
+                </I18nProvider>
               </LanguageToggleProvider>
             </ProfileProvider>
           </AudioManagerProvider>

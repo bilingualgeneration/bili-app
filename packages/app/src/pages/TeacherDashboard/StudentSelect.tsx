@@ -9,6 +9,7 @@ import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 import { useParams } from "react-router";
+import { useI18n } from "@/hooks/I18n";
 
 interface StudentCard {
   firstName: string;
@@ -59,6 +60,7 @@ const StudentSelectLoader: React.FC = () => {
 const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
   const { id: currentStudentId, setInfo } = useStudent();
   const history = useHistory();
+  const { getText } = useI18n();
   const { language } = useLanguageToggle();
   const isTeacherProfile = true;
 
@@ -69,15 +71,11 @@ const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
     },
     [setInfo, history],
   );
-
   return (
     <>
       <PackHeader
         bannerColor="#FFF8F0"
-        title={
-          language === "en" ? "Select your profile" : "Selecciona tu perfil"
-        }
-        subtitle="Select your profile."
+        id="teacherDashboard.selectStudent.title"
         titleClassName="text-5xl color-suelo"
         subtitleClassName="text-3xl color-english"
       />

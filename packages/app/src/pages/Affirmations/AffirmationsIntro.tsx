@@ -19,7 +19,7 @@ export const AffirmationsIntro: React.FC = () => {
   const en = 'Welcome to "Affirmations"!';
   const es = '¡Bienvenidos a "Afirmaciones"!';
   const esinc = '¡Bienvenides a "Afirmaciones"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {

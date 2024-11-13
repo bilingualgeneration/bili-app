@@ -19,7 +19,7 @@ export const TellMeAboutIntro: React.FC = () => {
   const en = 'Welcome to "Tell Me About…"!';
   const es = '¡Bienvenidos a "Cuéntame sobre…"!';
   const esinc = '¡Bienvenides a "Cuéntame sobre…"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {

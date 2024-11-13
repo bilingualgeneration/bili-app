@@ -25,7 +25,7 @@ export const useLanguageToggle = () => useContext(LanguageToggleContext);
 
 export const LanguageToggleProvider: React.FC<
   React.PropsWithChildren<LanguageToggleProviderProps>
-> = ({ allowedLanguages = ["en", "es", "esen"], children }) => {
+> = ({ allowedLanguages = ["en", "es", "es.en"], children }) => {
   const { language, setLanguage } = useLanguage();
   const [isVisible, setIsVisible] = useState(true);
   const stashedLanguage = useRef<Language | null>(language);
@@ -92,7 +92,7 @@ export const LanguageToggle: React.FC = () => {
       <div
         className={classnames("language-toggle-inner", "text-2xl", "semibold")}
       >
-        {language === "esen" ? (
+        {language === "es.en" ? (
           <>
             es
             <br />

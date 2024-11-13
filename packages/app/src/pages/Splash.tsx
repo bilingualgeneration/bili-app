@@ -7,7 +7,7 @@ import {
   IonText,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+import { I18nMessage } from "@/components/I18nMessage";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 
 export const Splash: React.FC = () => {
@@ -20,21 +20,17 @@ export const Splash: React.FC = () => {
         <div style={{ maxWidth: 580, margin: "auto" }}>
           <IonText>
             <h2 className="ion-text-center text-3xl semibold margin-bottom-2">
-              <FormattedMessage
-                id="splash.loginTitle"
-                defaultMessage="Login"
-                description="Title that says 'Login' on Splash page where user can either log in if they have a Bili account or create an account if they are new users"
-              />
+              <I18nMessage id="splash.loginTitle" />
             </h2>
           </IonText>
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <FormattedMessage id="common.haveAccount" />
+                <I18nMessage id="common.haveAccount" />
               </IonCardTitle>
               <Link to="/login" className="no-underline">
                 <IonButton expand="block" shape="round">
-                  <FormattedMessage id="common.logIn" />
+                  <I18nMessage id="common.logIn" />
                 </IonButton>
               </Link>
             </IonCardContent>
@@ -43,12 +39,12 @@ export const Splash: React.FC = () => {
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <FormattedMessage id="splash.newAccount" />
+                <I18nMessage id="splash.newAccount" />
               </IonCardTitle>
               <Link to="/waitlist" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
-                  {/*<FormattedMessage id="splash.createAccountButton" />*/}
-                  <FormattedMessage id="splash.joinWaitlist" />
+                  {/*<I18nMessage id="splash.createAccountButton" />*/}
+                  <I18nMessage id="splash.joinWaitlist" />
                 </IonButton>
               </Link>
             </IonCardContent>
@@ -57,14 +53,11 @@ export const Splash: React.FC = () => {
           <IonCard className="ion-hide">
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <FormattedMessage
-                  id="splash.classCode"
-                  defaultMessage="Do you have a classroom code?"
-                />
+                <I18nMessage id="splash.classCode" />
               </IonCardTitle>
               <Link to="/sign-up/class-code" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
-                  <FormattedMessage id="splash.classCodeButton" />
+                  <I18nMessage id="splash.classCodeButton" />
                 </IonButton>
               </Link>
             </IonCardContent>
