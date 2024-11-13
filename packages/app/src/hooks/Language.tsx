@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-export type Language = "en" | "esen" | "es";
+export type Language = "en" | "es.en" | "es" | "esen" /*esen is temporary */;
 
 export type LanguageState = {
   language: Language;

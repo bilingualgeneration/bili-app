@@ -21,7 +21,7 @@ export const StoryFactoryIntro: React.FC = () => {
   const en = 'Welcome to the "Story Factory"!';
   const es = '¡Bienvenidos a la "Fábrica de cuentos"!';
   const esinc = '¡Bienvenides a la "Fábrica de cuentos"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {

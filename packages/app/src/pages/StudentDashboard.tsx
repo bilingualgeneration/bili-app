@@ -27,6 +27,7 @@ import WellnessIcon from "@/assets/icons/wellness.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
 import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
+import { I18nMessage } from "@/components/I18nMessage";
 
 import AmiguesCover from "@/assets/img/amigues_cover.png";
 import CatrinaCover from "@/assets/img/catrina.png";
@@ -269,13 +270,33 @@ export const StudentDashboard: React.FC = () => {
       <div style={{ marginLeft: 20, marginRight: 20 }}>
         <div className="icons-title margin-top-3">
           <IonText>
+            <I18nMessage
+              id="landingPage.catgories"
+              wrapper={(text: string) => (
+                <h1 className="text-5xl color-suelo carousel-header-margin">
+                  {text}
+                </h1>
+              )}
+            />
+            <I18nMessage
+              id="landingPage.catgories"
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-3xl color-english carousel-header-margin">
+                  {text}
+                </p>
+              )}
+            />
+          </IonText>
+
+          <IonText>
             <h1 className="text-5xl color-suelo carousel-header-margin">
               <FormattedMessage
                 id="landingPage.catgories"
                 defaultMessage="Categories"
               />
             </h1>
-            {language === "esen" && (
+            {language === "es.en" && (
               <p className="text-3xl color-english carousel-header-margin">
                 Categories
               </p>

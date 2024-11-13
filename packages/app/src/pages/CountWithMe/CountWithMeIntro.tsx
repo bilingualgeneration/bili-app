@@ -19,7 +19,7 @@ export const CountWithMeIntro: React.FC = () => {
   const en = 'Welcome to "Count With Me"!';
   const es = '¡Bienvenidos a "Cuenta conmigo"!';
   const esinc = '¡Bienvenides a "Cuenta conmigo"!';
-  let audios = [];
+  let audios: any[] = [];
   switch (language) {
     case "es":
       if (isInclusive) {
