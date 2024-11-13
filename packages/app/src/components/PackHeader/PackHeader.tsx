@@ -36,9 +36,16 @@ export const PackHeader: FC<PackHeaderProps> = ({
   const mobileSubtitleClass = isMobile
     ? "text-xl color-nube"
     : subtitleClassName;
+  const headerPaddingStyle =
+    language !== "esen"
+      ? { padding: "0.35rem 0 0.35rem 2rem" }
+      : { padding: "0.1rem 0 0.1rem 2rem" };
 
   return (
-    <div id="packBanner" style={{ backgroundColor: bannerColor }}>
+    <div
+      id="packBanner"
+      style={{ backgroundColor: bannerColor, ...headerPaddingStyle }}
+    >
       <div className="banner-overlay" />
       <IonText
         className={`banner-content ${isMobile ? "text-2xl" : ""}`}
