@@ -1,0 +1,16 @@
+environment: development
+payload:
+  - allowLanguageToggle: true
+    allowedLanguages:
+      - en
+      - es
+      - en.es
+    grades:
+      - "1"
+    isActive: true
+    isInclusive: false
+    name:
+    size: 19
+    teachers:
+      - abc
+    school: def

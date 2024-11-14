@@ -1,0 +1,19 @@
+environment: development
+payload:
+  - id: abc
+    classroom: abc
+    studentAnalytics: {}
+    studentBreakdown:
+      atHome: []
+      atSchool: []
+    timeBreakdown:
+      atHome:
+        community: 0
+        games: 0
+        stories: 0
+        wellness: 0
+      atSchool:
+        community: 0
+        games: 0
+        stories: 0
+        wellness: 0

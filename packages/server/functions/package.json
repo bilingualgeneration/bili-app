@@ -8,7 +8,7 @@
     "use:live": "firebase use bilingual-generation-live",
     "make:development": "run-s env:development use:development",
     "make:live": "run-s env:live use:live",
-    "build": "run-s make:development chema:sync build:internal",
+    "build": "run-s make:development schema:sync build:internal",
     "build:live": "run-s make:live chema:sync build:internal",
     "build:watch": "run-s schema:sync build:internal:watch",
     "build:internal": "rm -rf lib/*; tsc && tsc-alias",
