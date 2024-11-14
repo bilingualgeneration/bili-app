@@ -1,0 +1,5 @@
+environment: development
+payload:
+  - name: abc
+    emailDomains:
+      - abc.org

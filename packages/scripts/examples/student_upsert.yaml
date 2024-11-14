@@ -1,0 +1,8 @@
+environment: development
+payload:
+  - firstName: abc
+    lastName: def
+    caregiverEmail:
+      - ghi@aol.com
+    classroom:
+      - 123
