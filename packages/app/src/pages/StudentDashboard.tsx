@@ -25,18 +25,13 @@ import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
-import { string } from "zod";
 import { Link, useHistory } from "react-router-dom";
 import { I18nMessage } from "@/components/I18nMessage";
-
-import AmiguesCover from "@/assets/img/amigues_cover.png";
-import CatrinaCover from "@/assets/img/catrina.png";
-import GustaCover from "@/assets/img/gusta.png";
 import "./StudentDashboard.scss";
+import { text } from "ionicons/icons";
 
 interface WaveIcon {
   backgroundColor: string;
-  englishLabel: string;
   link?: string;
   icon: any; // todo: better typing
   reactintlId: string;
@@ -44,7 +39,6 @@ interface WaveIcon {
 
 const WaveIcon: React.FC<WaveIcon> = ({
   backgroundColor,
-  englishLabel,
   icon,
   link,
   reactintlId,
@@ -69,15 +63,15 @@ const WaveIcon: React.FC<WaveIcon> = ({
       </div>
       <IonText>
         <h2 className="text-2xl semibold color-suelo">
-          <FormattedMessage
-            defaultMessage={reactintlId}
-            description="icon label"
-            id={reactintlId}
-          />
+          <I18nMessage id={reactintlId} />
         </h2>
-        {language === "esen" && (
-          <h2 className="text-lg color-suelo">{englishLabel}</h2>
-        )}
+        <I18nMessage
+          id={reactintlId}
+          level={2}
+          wrapper={(text: string) => (
+            <p className="text-lg color-english">{text}</p>
+          )}
+        />
       </IonText>
     </span>
   );
@@ -204,18 +198,23 @@ const Banner: React.FC = () => {
         paddingRight: 20,
       }}
     >
-      <h1 className="text-5xl color-suelo carousel-header-margin">
-        <FormattedMessage
-          id="landingPage.welcome"
-          defaultMessage="Hello {firstName}!"
-          values={{ firstName }}
-        />
-      </h1>
-      {language === "esen" && (
-        <p className="text-3xl color-english carousel-header-margin">
-          Hello {firstName}!
-        </p>
-      )}
+      <I18nMessage
+        id="landingPage.welcome"
+        wrapper={(text: string) => (
+          <h1 className="text-5xl color-suelo carousel-header-margin">
+            {text + " " + firstName + "!"}
+          </h1>
+        )}
+      />
+      <I18nMessage
+        id="landingPage.welcome"
+        level={2}
+        wrapper={(text: string) => (
+          <p className="text-3xl color-english carousel-header-margin">
+            {text + " " + firstName + "!"}
+          </p>
+        )}
+      />
     </div>
   );
 };
@@ -236,28 +235,24 @@ export const StudentDashboard: React.FC = () => {
   const icons: WaveIcon[] = [
     {
       reactintlId: "common.stories",
-      englishLabel: "Stories",
       link: "/stories",
       backgroundColor: "#0045a1",
       icon: <StoriesIcon />,
     },
     {
       reactintlId: "common.wellness",
-      englishLabel: "Wellness",
       backgroundColor: "#ac217b",
       link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
       reactintlId: "common.play",
-      englishLabel: "Play",
       link: "/play",
       backgroundColor: "#ff5709",
       icon: <PlayIcon />,
     },
     {
       reactintlId: "common.community",
-      englishLabel: "Community",
       link: "/community",
       backgroundColor: "#23beb9",
       icon: <CommunityIcon />,
@@ -288,20 +283,6 @@ export const StudentDashboard: React.FC = () => {
               )}
             />
           </IonText>
-
-          <IonText>
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <FormattedMessage
-                id="landingPage.catgories"
-                defaultMessage="Categories"
-              />
-            </h1>
-            {language === "es.en" && (
-              <p className="text-3xl color-english carousel-header-margin">
-                Categories
-              </p>
-            )}
-          </IonText>
         </div>
         {/* icons */}
         <div
@@ -329,17 +310,18 @@ export const StudentDashboard: React.FC = () => {
         <div className="stories-story-cards">
           <IonText>
             <Link to="/stories" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <FormattedMessage
-                  id="common.stories"
-                  defaultMessage="Stories"
-                />
+              <h1 className="text-5xl color-selva carousel-header-margin">
+                <I18nMessage id="common.stories" />
               </h1>
-              {language === "esen" && (
-                <p className="text-3xl color-english carousel-header-margin">
-                  Stories
-                </p>
-              )}
+              <I18nMessage
+                id={"common.stories"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -358,17 +340,18 @@ export const StudentDashboard: React.FC = () => {
         <div className="other-story-cards">
           <IonText>
             <Link to="/wellness" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <FormattedMessage
-                  id="common.wellness"
-                  defaultMessage="Wellness"
-                />
+              <h1 className="text-5xl color-selva carousel-header-margin">
+                <I18nMessage id="common.wellness" />
               </h1>
-              {language === "esen" && (
-                <p className="text-3xl color-english carousel-header-margin">
-                  Wellness
-                </p>
-              )}
+              <I18nMessage
+                id={"common.wellness"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -388,18 +371,18 @@ export const StudentDashboard: React.FC = () => {
         <div className="other-story-cards">
           <IonText>
             <Link to="/play" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <FormattedMessage
-                  id="common.play"
-                  defaultMessage="Play"
-                  description="Standalone label for Play"
-                />
+              <h1 className="text-5xl color-selva carousel-header-margin">
+                <I18nMessage id="common.play" />
               </h1>
-              {language === "esen" && (
-                <p className="text-3xl color-english carousel-header-margin">
-                  Play
-                </p>
-              )}
+              <I18nMessage
+                id={"common.play"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
@@ -419,17 +402,18 @@ export const StudentDashboard: React.FC = () => {
         <div className="other-story-cards">
           <Link to="/community" className="no-text-decoration">
             <IonText>
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <FormattedMessage
-                  id="common.community"
-                  defaultMessage="Community"
-                />
+              <h1 className="text-5xl color-selva carousel-header-margin">
+                <I18nMessage id="common.community" />
               </h1>
-              {language === "esen" && (
-                <p className="text-3xl color-english carousel-header-margin">
-                  Community
-                </p>
-              )}
+              <I18nMessage
+                id={"common.community"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
             </IonText>
           </Link>
           <div className="margin-top-2 margin-bottom-3">

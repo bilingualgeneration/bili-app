@@ -10,6 +10,7 @@ import biliHelmet from "@/assets/icons/profile_coming_soon/bili_profile_coming_s
 import biliWorkshop from "@/assets/icons/profile_coming_soon/bili_workshop.svg";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useI18n } from "@/hooks/I18n";
+import { I18nMessage } from "@/components/I18nMessage";
 
 export const ProfileComingSoon: FC = () => {
   const { language } = useLanguageToggle();
@@ -46,12 +47,15 @@ export const ProfileComingSoon: FC = () => {
         <div className="content-container">
           <div className="heading-container">
             <h1 className="text-6xl bold carousel-header-margin">
-              {language !== "en" && "Nuevas funciones en camino"}
-              {language === "en" && "New features on the way"}
+              <I18nMessage id={"studentProfile.comingSoon.features"} />
             </h1>
-            {language === "esen" && (
-              <p className="text-4xl color-english">New features on the way</p>
-            )}
+            <I18nMessage
+              id={"studentProfile.comingSoon.features"}
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-4xl color-english">{text}</p>
+              )}
+            />
           </div>
 
           <img
