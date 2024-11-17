@@ -29,6 +29,7 @@ import { Link, useHistory } from "react-router-dom";
 import { I18nMessage } from "@/components/I18nMessage";
 import "./StudentDashboard.scss";
 import { text } from "ionicons/icons";
+import { useI18n } from "@/hooks/I18n";
 
 interface WaveIcon {
   backgroundColor: string;
@@ -226,10 +227,11 @@ export const StudentDashboard: React.FC = () => {
   } = useProfile();
   const { language } = useLanguageToggle();
   const isImmersive = true;
-
+  const { getText } = useI18n();
+  console.log(getText("pages.storiesLandingPage.comingSoon"));
   const comingSoonPill = {
-    primaryText: language === "en" ? "Coming Soon" : "Próximamente",
-    secondaryText: language === "esen" ? "Coming Soon" : undefined,
+    primaryText: getText("pages.storiesLandingPage.comingSoon"),
+    secondaryText: getText("pages.storiesLandingPage.comingSoon", 2),
   };
 
   const icons: WaveIcon[] = [
