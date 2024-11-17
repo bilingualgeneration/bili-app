@@ -57,7 +57,7 @@
   "joyride.close": "Close",
   "landingPage.assignments": "Assignments",
   "landingPage.catgories": "Categories",
-  "landingPage.welcome": "Hello {firstName}!",
+  "landingPage.welcome": "Hello",
   "languageInclusivity.excludeGenderNeutral": "Choose this option if you do not want to see the use of gender neutral pronouns in the content (i.e. singular \"they\" in English and \"elle\" in Spanish will be excluded). For example, you will only see the words \"amigo\" and \"amiga\" in activities and content. The word \"amigue\" will not appear.",
   "languageInclusivity.excludeGenderNeutralTitle": "Exclude gender neutral pronouns",
   "languageInclusivity.includeGenderNeutral": "Choose this option if you want to see the use of gender inclusive language in the content/ For example, the pronouns used will include \"he, she, they\" in English and \"el, ella, elle\" in Spanish.",
