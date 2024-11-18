@@ -50,7 +50,7 @@ export const HeaderFooter: FC<
           </IonGrid>
           {children}
         </div>
-        <FooterMenu />
+        {screenType !== "mobile" && <FooterMenu />}
       </IonContent>
     </IonPage>
   );
