@@ -13,7 +13,7 @@ import { starSharp } from "ionicons/icons";
 import { Link } from "react-router-dom";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useRef, useState } from "react";
-import { useLanguageToggle } from "@/components//LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 import SpeakerIcon from "@/assets/icons/speaker.svg";
 
@@ -23,8 +23,9 @@ import StudentLogout from "@/assets/icons/logout.svg";
 
 interface AudioButtonProps {
   audio: {
-    en: { url: string | undefined };
-    es: { url: string | undefined };
+    en?: string | any;
+    es?: string | any;
+    "es-inc"?: string | any;
   };
   className?: string;
   size?: "default" | "small" | "large" | undefined;
@@ -36,27 +37,14 @@ export const AudioButton: React.FC<AudioButtonProps> = ({
   size = "default",
 }) => {
   const { addAudio, clearAudio } = useAudioManager();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   return (
     <IonButton
       className={classnames("flamenco-high", "curved-corners", className)}
       size={size}
       onClick={() => {
-        let audios = [];
-        switch (language) {
-          case "en":
-            audios.push(audio.en.url);
-            break;
-          case "es":
-            audios.push(audio.es.url);
-            break;
-          case "esen":
-            audios.push(audio.es.url);
-            audios.push(audio.en.url);
-            break;
-          default:
-            break;
-        }
+        // @ts-ignore
+        let audios: string[] = language.split(".").map((l: string) => audio[l]);
         addAudio(audios);
       }}
     >
