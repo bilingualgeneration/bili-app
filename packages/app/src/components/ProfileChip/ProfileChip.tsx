@@ -24,6 +24,7 @@ import { useRef, useState } from "react";
 import { useLanguageToggle } from "../LanguageToggle";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
+import { useScreenSize } from "@/lib/screenSize";
 
 export const ProfileChip: React.FC = () => {
   const { id } = useStudent();
@@ -41,6 +42,7 @@ const HydratedProfileChip: React.FC = () => {
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();
   const { data, status } = useRealtimeDatabaseDoc();
+  const { screenType } = useScreenSize();
 
   const openPopover = (e: any) => {
     popover.current!.event = e;
@@ -69,7 +71,13 @@ const HydratedProfileChip: React.FC = () => {
               </IonText>
             </div>
             <IonText>
-              <p className="text-xl semibold color-suelo">{firstName}</p>
+              <p
+                className={`semibold color-suelo ${
+                  screenType === "mobile" ? "text-lg" : "text-xl"
+                }`}
+              >
+                {firstName}
+              </p>
             </IonText>
             <img src={Avatar} />
           </div>

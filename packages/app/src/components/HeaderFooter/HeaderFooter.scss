@@ -3,3 +3,15 @@
   padding-top: 1rem;
   background-color: #fff;
 }
+
+@media (max-width: 768px) {
+  #authedHeader {
+    padding-top: 0.1rem;
+    padding-bottom: 0;
+  }
+
+  img {
+    width: 13%;
+    height: auto;
+  }
+}
