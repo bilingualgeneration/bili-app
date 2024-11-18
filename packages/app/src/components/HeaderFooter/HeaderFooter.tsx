@@ -19,6 +19,7 @@ import biliLogo from "@/assets/icons/bili.svg";
 import { ProfileChip } from "@/components/ProfileChip";
 import { Link } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
+import { useScreenSize } from "@/lib/screenSize";
 
 import "./HeaderFooter.scss";
 
@@ -28,6 +29,7 @@ export const HeaderFooter: FC<
   }>
 > = ({ background = "", children }) => {
   const showBackButton = true;
+  const { screenType } = useScreenSize();
   const { id } = useStudent();
   return (
     <IonPage>
