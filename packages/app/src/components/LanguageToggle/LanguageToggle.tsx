@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { Language, useLanguage } from "@/hooks/Language";
+import { useScreenSize } from "@/lib/screenSize";
 
 import classnames from "classnames";
 import "./LanguageToggle.css";
@@ -74,6 +75,7 @@ export const LanguageToggleProvider: React.FC<
 
 export const LanguageToggle: React.FC = () => {
   const { cycleLanguage, language, isVisible } = useLanguageToggle();
+  const { screenType } = useScreenSize();
   const [pressed, setPressed] = useState<boolean>(false);
   return (
     <div
@@ -90,7 +92,11 @@ export const LanguageToggle: React.FC = () => {
       }}
     >
       <div
-        className={classnames("language-toggle-inner", "text-2xl", "semibold")}
+        className={classnames(
+          "language-toggle-inner",
+          screenType === "mobile" ? "text-xl" : "text-2xl",
+          "semibold",
+        )}
       >
         {language === "es.en" ? (
           <>
