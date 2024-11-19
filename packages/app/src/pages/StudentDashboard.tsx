@@ -230,8 +230,10 @@ export const StudentDashboard: React.FC = () => {
   const { getText } = useI18n();
   console.log(getText("pages.storiesLandingPage.comingSoon"));
   const comingSoonPill = {
-    primaryText: getText("pages.storiesLandingPage.comingSoon"),
-    secondaryText: getText("pages.storiesLandingPage.comingSoon", 2),
+    primaryText:
+      getText("pages.storiesLandingPage.comingSoon") || "Próximamente",
+    secondaryText:
+      getText("pages.storiesLandingPage.comingSoon", 2) || "Coming Soon",
   };
 
   const icons: WaveIcon[] = [
