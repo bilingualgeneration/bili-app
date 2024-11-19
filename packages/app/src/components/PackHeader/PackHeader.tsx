@@ -4,6 +4,7 @@ import { IonText } from "@ionic/react";
 import pattern from "@/assets/icons/header_background_pattern.svg";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
+import { useScreenSize } from "@/lib/screenSize";
 
 import "./PackHeader.scss";
 
@@ -25,21 +26,37 @@ export const PackHeader: React.FC<PackHeaderProps> = ({
   subtitleClassName = "text-3xl color-nube",
 }) => {
   const { language } = useLanguage();
+  const { screenType } = useScreenSize();
+  const isMobile = screenType === "mobile";
+  const mobileTitleClass = "text-2xl color-nube semibold";
+  const mobileSubtitleClass = "text-2xl color-nube";
+
   if (id) {
     return (
       <div id="packBanner" style={{ backgroundColor: bannerColor }}>
         <div className="banner-overlay" />
         <IonText className="banner-content">
-          <h1 className={`${titleClassName}`}>
+          <h1 className={isMobile ? mobileTitleClass : titleClassName}>
             <I18nMessage id={id} />
           </h1>
-          <I18nMessage
-            id={id}
-            level={2}
-            wrapper={(text: string) => (
-              <p className={`${subtitleClassName}`}>{text}</p>
-            )}
-          />
+          {isMobile && <span className="separator">|</span>}
+          {isMobile ? (
+            <I18nMessage
+              id={id}
+              level={2}
+              wrapper={(text: string) => (
+                <p className={mobileSubtitleClass}>{text}</p>
+              )}
+            />
+          ) : (
+            <I18nMessage
+              id={id}
+              level={2}
+              wrapper={(text: string) => (
+                <p className={subtitleClassName}>{text}</p>
+              )}
+            />
+          )}
         </IonText>
       </div>
     );
@@ -47,10 +64,30 @@ export const PackHeader: React.FC<PackHeaderProps> = ({
     return (
       <div id="packBanner" style={{ backgroundColor: bannerColor }}>
         <div className="banner-overlay" />
-        <IonText className="banner-content">
-          <h1 className={`${titleClassName}`}>{title}</h1>
-          {language.split(".").length > 1 && (
-            <p className={`${subtitleClassName}`}>{subtitle}</p>
+        <IonText
+          className="banner-content"
+          style={
+            isMobile
+              ? {
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: "10px",
+                }
+              : {}
+          }
+        >
+          <h1 className={isMobile ? mobileTitleClass : titleClassName}>
+            {title}
+          </h1>
+          {isMobile && subtitle && (
+            <>
+              <span className="separator">|</span>
+              <p className={mobileSubtitleClass}>{subtitle}</p>
+            </>
+          )}
+          {!isMobile && subtitle && (
+            <p className={subtitleClassName}>{subtitle}</p>
           )}
         </IonText>
       </div>
