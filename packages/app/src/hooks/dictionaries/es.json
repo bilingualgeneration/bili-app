@@ -1,4 +1,5 @@
 {
+  "affirmations.card.back.title": "¡Platiquemos!",
   "childProfile.age.3to5": "3-5 años",
   "childProfile.age.5to7": "5-7 años",
   "childProfile.age.above7": "Mayores de 7 años",
@@ -214,6 +215,7 @@
   "story_factory.congrats.title.20": "¡Asombroso!",
   "story_factory.congrats.title.30": "¡Sabía que podrías hacerlo!",
   "story_factory.keepGoing": "¡Sigue adelante!",
+  "story.letsRead": "¡Leamos!",
   "storyFactory.congrats.description1": "Has creado y leído cinco cuentos.",
   "storyFactory.congrats.description2": "¿Puedes seguir?",
   "storyFactory.congrats.title": "Felicitaciones",
@@ -225,6 +227,8 @@
   "storyFactory.subwelcome_inc": "¡Un lugar para lecturas silábicas graciosas!",
   "storyFactory.welcome": "¡Bienvenidos a la fábrica de cuentos!",
   "storyFactory.welcome_inc": "¡Bienvenides a la fábrica de cuentos!",
+  "studentProfile.comingSoon.features": "Nuevas funciones en camino",
+  "studentProfile.comingSoon.title": "Mi perfil - ¡Próximamente!",
   "successScreen.success": "¡Éxito! ¡Lo hiciste!",
   "tag.guide": "Guía",
   "tag.resources": "Recursos",
@@ -239,5 +243,9 @@
   "waitlist.thankYou": "¡Estás en la lista! Estamos ansiosos por presentarte a Bili. Mantente atento a las actualizaciones sobre nuestro lanzamiento. ",
   "waitlist.title": "¡Únete a nuestra lista de espera para conocer a Bili pronto!",
   "waitlist.zipcode": "Código postal",
+  "wellness.affirmations": "Afirmaciones",
+  "wellness.breathingDeeply": "Respirando hondo",
+  "wellness.musicalMantras": "Mantras musicales",
+  "wellness.yogaBreak": "Pausa de yoga",
   "wouldDo.title": "¿Qué harías?"
 }

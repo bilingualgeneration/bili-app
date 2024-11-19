@@ -22,10 +22,10 @@ export const StoriesLandingPage: FC = () => {
       <div id="stories-landing-page">
         <div className="margin-horizontal-carousel">
           <h1 className="text-5xl bold carousel-header-margin">
-            <I18nMessage id="pages.storiesLandingPage.title" />
+            <I18nMessage id="common.stories" />
           </h1>
           <I18nMessage
-            id="pages.storiesLandingPage.title"
+            id="common.stories"
             level={2}
             wrapper={(text: string) => (
               <h2 className="text-3xl color-english carousel-header-margin">

@@ -7,7 +7,7 @@ export const StoriesHeader: React.FC = () => {
     <>
       <PackHeader
         bannerColor="#006A67"
-        id="headers.stories.title"
+        id="common.stories"
         titleClassName="text-5xl color-nube"
         subtitleClassName="text-3xl color-nube"
       />

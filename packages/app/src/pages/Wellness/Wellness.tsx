@@ -9,6 +9,8 @@ import { useHistory } from "react-router";
 import Lock from "@/assets/icons/lock.svg?react";
 import "./Wellness.css";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+import { I18nMessage } from "@/components/I18nMessage";
+import { text } from "ionicons/icons";
 
 const PlayHeader: FC = () => {
   const { language } = useLanguageToggle();
@@ -16,10 +18,15 @@ const PlayHeader: FC = () => {
     <div className="headerBanner">
       <IonText>
         <h1 className="text-5xl color-nube">
-          {(language === "es" || language === "esen") && "Bienestar"}
-          {language === "en" && "Wellness"}
+          <I18nMessage id="common.wellness" />
         </h1>
-        {language === "esen" && <p className="text-3xl color-nube">Wellness</p>}
+        <I18nMessage
+          id="common.wellness"
+          level={2}
+          wrapper={(text: string) => (
+            <p className="text-3xl color-nube">{text}</p>
+          )}
+        />
       </IonText>
     </div>
   );
@@ -55,13 +62,15 @@ const AffirmationCard: FC = () => {
       <img src={AffirmationGirl} />
       <IonText>
         <h1 className="text-4xl semibold color-flamenco-lowest">
-          {(language === "es" || language === "esen") && "Afirmaciones"}
-          {language === "en" && "Affirmations"}
+          <I18nMessage id="wellness.affirmations" />
         </h1>
-
-        {language === "esen" && (
-          <p className="text-3xl color-flamenco-lowest">Affirmations</p>
-        )}
+        <I18nMessage
+          id="wellness.affirmations"
+          level={2}
+          wrapper={(text: string) => (
+            <p className="text-3xl color-flamenco-lowest">{text}</p>
+          )}
+        />
       </IonText>
     </div>
   );
@@ -79,13 +88,15 @@ const YogaCard: FC = () => {
       <img src={BreathingGirl} />
       <IonText>
         <h1 className="text-4xl semibold color-flamenco-lowest">
-          {(language === "es" || language === "esen") && "Respirando hondo"}
-          {language === "en" && "Breathing Deeply"}
+          <I18nMessage id="wellness.breathingDeeply" />
         </h1>
-
-        {language === "esen" && (
-          <p className="text-3xl color-flamenco-lowest">Breathing deeply</p>
-        )}
+        <I18nMessage
+          id="wellness.breathingDeeply"
+          level={2}
+          wrapper={(text: string) => (
+            <p className="text-3xl color-flamenco-lowest">{text}</p>
+          )}
+        />
       </IonText>
     </div>
   );
