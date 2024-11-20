@@ -462,3 +462,10 @@ ion-chip {
 // ion-alert .alert-wrapper {
 //   --background: black;
 // }
+
+@media (max-width: 768px) {
+  .background-card {
+    margin: -3rem 2rem;
+    width: 85%;
+  }
+}
