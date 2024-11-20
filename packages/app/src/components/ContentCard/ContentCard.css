@@ -67,3 +67,11 @@
     border-radius: 12px;
   }
 }
+
+@media (max-width: 768px) {
+  .content-card,
+  .content-lock {
+    height: 145px;
+    width: 230px;
+  }
+}
