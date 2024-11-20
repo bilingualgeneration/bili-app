@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { Avatar } from "@/components/Avatar";
 import "./StudentProfileCard.scss";
+import { IonText } from "@ionic/react";
 
 interface StudentCardProps {
   id: string;
@@ -18,7 +19,9 @@ export const StudentProfileCard: FC<StudentCardProps> = ({
   return (
     <div className="student-card" onClick={onClick}>
       <Avatar id={id} size="lg" />
-      <p>{nameEn}</p>
+      <IonText>
+        <p className="text-xl semibold color-suelo">{nameEn}</p>
+      </IonText>
     </div>
   );
 };
