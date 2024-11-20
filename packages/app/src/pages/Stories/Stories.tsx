@@ -140,7 +140,7 @@ const StoriesHydrated: React.FC = () => {
         <ActivityProvider>
           <StoryProvider>
             <div id="story-wrapper">
-              <div>
+              <div className="stories-card-pills-block">
                 <StoryLoader
                   {...{
                     keyVocab,
@@ -429,7 +429,7 @@ const PageCounter = () => {
   };
 
   return (
-    <div className="ion-text-center margin-top-2">
+    <div className="stories-pills-block ion-text-center margin-top-2">
       {pills.map((p: boolean, index: number) => {
         if (p) {
           return <div style={stylesFilled} key={index}></div>;
