@@ -15,11 +15,13 @@ export type SingleLanguage = "en" | "es"; // TODO: handle better
 export type Language = "en" | "es.en" | "es" | "esen"; // TODO: remove esen when fully migrated
 
 export type LanguageState = {
-  getText: any;
+  filterText: any;
   language: Language;
+  languageCount: number;
   languagePrimary: SingleLanguage;
   languageSecondary: SingleLanguage;
   languageNormalized: Language;
+  populateText: any;
   setLanguage: Dispatch<SetStateAction<Language>>;
 };
 
@@ -41,8 +43,11 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
   const [languageNormalized, setLanguageNormalized] = useState<Language>(
     (storedLanguage?.split(".").sort().join(".") || "en") as Language,
   );
+  const [languageCount, setLanguageCount] = useState<number>(
+    storedLanguage?.split(".").length || 1,
+  );
 
-  const getText = useCallback(
+  const filterText = useCallback(
     (
       haystack: any,
       languageField: string = "language",
@@ -52,7 +57,7 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
         (h: any) => h[languageField] === languageNormalized,
       );
       payload = payload.map((p: any) => {
-        const m: any = p[textField].match(shortcodeRegex);
+        const m: any = p[textField]?.match(shortcodeRegex);
         if (m) {
           return haystack.filter((h: any) => h[languageField] === m[1])[0];
         } else {
@@ -65,11 +70,26 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
     [languageNormalized],
   );
 
+  const populateText = useCallback(
+    (
+      haystack: any,
+      languageField: string = "language",
+      textField: string = "text",
+    ) => {
+      return language
+        .split(".")
+        .map((l: string) => haystack.filter((h: any) => h[languageField] === l))
+        .flat();
+    },
+    [language],
+  );
+
   const setLanguage = (newLanguage: any) => {
     localStorage.setItem("userLanguage", newLanguage);
     setLanguagePrimary(newLanguage.split(".")[0]);
     setLanguageSecondary(newLanguage.split(".")[1]);
     setLanguageNormalized(newLanguage.split(".").sort().join("."));
+    setLanguageCount(newLanguage.split(".").length);
     setInternalLanguage(newLanguage);
   };
 
@@ -77,11 +97,13 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
     <>
       <LanguageContext.Provider
         value={{
-          getText,
+          filterText,
           language,
+          languageCount,
           languagePrimary,
           languageSecondary,
           languageNormalized,
+          populateText,
           setLanguage,
         }}
       >
