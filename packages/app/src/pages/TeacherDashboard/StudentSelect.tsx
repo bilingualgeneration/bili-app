@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 import { useParams } from "react-router";
 import { useI18n } from "@/hooks/I18n";
+import { Avatar } from "@/components/Avatar";
 
 interface StudentCard {
   firstName: string;
@@ -95,24 +96,12 @@ const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
           <IonGrid>
             <IonRow class="ion-align-items-center">
               {students.map(
-                (
-                  { id, firstName, lastName, profilePic }: any,
-                  index: number,
-                ) => (
-                  <IonCol
-                    key={index}
-                    size-xl="2"
-                    size-sm="3"
-                    className={`student-card${
-                      currentStudentId === id ? "-selected" : ""
-                    }`}
+                ({ id, firstName, lastName }: any, index: number) => (
+                  <StudentProfileCard
+                    id={id}
+                    nameEn={`${firstName} ${lastName[0]}.`}
                     onClick={() => handleCardClick(index)}
-                  >
-                    <StudentProfileCard
-                      nameEn={`${firstName} ${lastName[0]}.`}
-                      profileImage={profilePic || studentImage1}
-                    />
-                  </IonCol>
+                  />
                 ),
               )}
             </IonRow>
