@@ -46,7 +46,7 @@ const avatars = [
   avatar16,
   avatar17,
   avatar18,
-  avatar18,
+  avatar19,
   avatar20,
   avatar21,
   avatar22,
