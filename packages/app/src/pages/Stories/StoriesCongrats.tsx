@@ -10,7 +10,7 @@ export const StoriesCongrats: React.FC<{
   const { language } = useLanguage();
   const stars = 4;
   return (
-    <>
+    <div style={{ margin: "auto" }}>
       <div style={{ paddingBottom: 100 }}>
         {Array.from({ length: stars }, (value, index) => (
           <img
@@ -39,6 +39,6 @@ export const StoriesCongrats: React.FC<{
           {language === "esen" && <p className="text-sm">Keep going!</p>}
         </IonText>
       </IonButton>
-    </>
+    </div>
   );
 };

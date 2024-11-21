@@ -9,26 +9,11 @@ import {
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { useActivity } from "@/contexts/ActivityContext";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 
-type Vocab = any;
-type Lang = string;
-
-type VocabDictionaries = {
-  [lang: Lang]: {
-    [key: string]: Vocab;
-  };
-};
-
-type VocabLookup = {
-  [key: string]: {
-    [lang: Lang]: string;
-  };
-};
-
 interface StoryState {
-  currentVocabWord: string | null;
+  currentVocabHandle: string | null;
   id: string | null;
   isTranslanguaged: boolean;
   pageBackward: any;
@@ -37,17 +22,17 @@ interface StoryState {
   pageNumber: number;
   pages: any;
   ready: boolean;
-  setCurrentVocabWord: Dispatch<SetStateAction<string | null>>;
+  setCurrentVocabHandle: Dispatch<SetStateAction<string | null>>;
   setId: Dispatch<SetStateAction<string | null>>;
   setIsTranslanguaged: Dispatch<SetStateAction<boolean>>;
   setPageLocks: Dispatch<SetStateAction<any>>;
   setPageNumber: Dispatch<SetStateAction<number>>;
   setPages: Dispatch<SetStateAction<any>>;
   setReady: Dispatch<SetStateAction<boolean>>;
-  setVocab: Dispatch<SetStateAction<VocabDictionaries>>;
-  setVocabLookup: Dispatch<SetStateAction<VocabLookup>>;
-  vocab: VocabDictionaries;
-  vocabLookup: VocabLookup;
+  setVocab: Dispatch<SetStateAction<any>>;
+  setVocabLookup: Dispatch<SetStateAction<any>>;
+  vocab: any;
+  vocabLookup: any;
 }
 
 const StoryContext = createContext<StoryState>({} as StoryState);
@@ -59,26 +44,26 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [isTranslanguaged, setIsTranslanguaged] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const { language } = useLanguageToggle();
+  const { language, languageNormalized } = useLanguage();
   const {
     profile: { isInclusive },
   } = useProfile();
   const [pages, setPages] = useState<any>([]);
-
+  const [vocab, setVocab] = useState<any>([]);
+  const [vocabLookup, setVocabLookup] = useState<any>({});
   const [ready, setReady] = useState<boolean>(false);
-  const [currentVocabWord, setCurrentVocabWord] = useState<string | null>(null);
+  const [currentVocabHandle, setCurrentVocabHandle] = useState<string | null>(
+    null,
+  );
   const [pageLocks, setPageLocks] = useState<any>({});
-  const [vocab, setVocab] = useState<VocabDictionaries>({
-    es: {},
-    "es-inc": {},
-    en: {},
-  });
-  const [vocabLookup, setVocabLookup] = useState<VocabLookup>({});
 
   const { handleRecordAttempt } = useActivity();
 
   const [id, setId] = useState<string | null>(null);
 
+  useEffect(() => {
+    //console.log(vocab);
+  }, [vocab]);
   // Record attempt and calculate stars
   /*
   useEffect(() => {
@@ -99,19 +84,13 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
     // find next appropriate page number
     // must assume that all stories begin and end with pages that have ['all'] languages
     let newPageNumber = pageNumber + 1;
-    const esLangCode = isInclusive ? "es-inc" : "es";
     while (
-      (language === "esen" &&
-        !(
-          pages[newPageNumber].languages.includes(esLangCode) &&
-          pages[newPageNumber].languages.includes("en")
-        )) ||
-      (language === "en" && !pages[newPageNumber].languages.includes("en")) ||
-      (language === "es" &&
-        !pages[newPageNumber].languages.includes(esLangCode))
+      !pages[newPageNumber].languages.includes(languageNormalized) &&
+      pages[newPageNumber].languages.join("") !== "all"
     ) {
       newPageNumber++;
     }
+    // TODO: check if newPageNumber is out of bounds
     setPageNumber(newPageNumber);
     /*
     if (id) {
@@ -137,28 +116,25 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
     */
   }, [isInclusive, language, pageNumber, pages]);
 
-  const pageBackward = () => {
+  const pageBackward = useCallback(() => {
     let newPageNumber = pageNumber - 1;
-    const esLangCode = isInclusive ? "es-inc" : "es";
     while (
-      (language === "esen" &&
-        !(
-          pages[newPageNumber].languages.includes(esLangCode) &&
-          pages[newPageNumber].languages.includes("en")
-        )) ||
-      (language === "en" && !pages[newPageNumber].languages.includes("en")) ||
-      (language === "es" &&
-        !pages[newPageNumber].languages.includes(esLangCode))
+      !pages[newPageNumber].languages.includes(languageNormalized) &&
+      pages[newPageNumber].languages.join("") !== "all"
     ) {
       newPageNumber--;
     }
-    setPageNumber(newPageNumber);
-  };
+    if (newPageNumber >= 0) {
+      setPageNumber(newPageNumber);
+    } else {
+      // uh oh
+    }
+  }, [setPageNumber, pageNumber, language]);
 
   return (
     <StoryContext.Provider
       value={{
-        currentVocabWord,
+        currentVocabHandle,
         id,
         isTranslanguaged,
         pageBackward,
@@ -167,7 +143,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         pageNumber,
         pages,
         ready,
-        setCurrentVocabWord,
+        setCurrentVocabHandle,
         setId,
         setIsTranslanguaged,
         setPageLocks,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import classnames from "classnames";
 import {
   IonButton,
   IonCard,
@@ -16,12 +16,13 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import "./Stories.css";
 import { useActivity } from "@/contexts/ActivityContext";
+import { useState, useEffect, useMemo } from "react";
 
+import "./StoriesGame.css";
 import bili from "@/assets/icons/bili_big_avatar.svg"; // TODO: placeholder image
 
 interface PictureImage {
@@ -59,7 +60,7 @@ interface GameCard {
   image: PictureImage;
   isTarget: boolean;
   id: string;
-  audio: PictureAudio;
+  audio?: PictureAudio;
 }
 
 interface GameHeader {
@@ -88,25 +89,21 @@ function getCardsFromImageGame(story: Story): GameCard[] {
       image: story.multiple_image_correct_image,
       isTarget: true,
       id: "1",
-      audio: { url: "/assets/audio/choice_correct.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_1,
       isTarget: false,
       id: "2",
-      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_2,
       isTarget: false,
       id: "3",
-      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
     {
       image: story.multiple_image_incorrect_image_3,
       isTarget: false,
       id: "4",
-      audio: { url: "/assets/audio/choice_incorrect.wav" },
     },
   ];
 }
@@ -148,85 +145,32 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language, filterText } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio } = useAudioManager();
   const [isCorrectSelected, setIsCorrectSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pageNumber, pageLocks, setPageLocks, pageForward } = useStory();
   const { handleAttempt } = useActivity();
+  const [correctCard, setCorrectCard] = useState<string | null>(null);
+  const [incorrectCard, setIncorrectCard] = useState<string | null>(null);
 
-  const headerData = useMemo((): GameHeader => {
-    const textPacks =
-      gameType === "image"
-        ? data.multiple_image_text
-        : data.multiple_syllable_text;
-    return {
-      es: textPacks.find(
-        (tp: any) => tp.language === (isInclusive ? "es-inc" : "es"),
-      )!,
-      en: textPacks.find((tp: any) => tp.language === "en"),
-    };
-  }, [language, isInclusive, data, gameType]);
-
+  const texts =
+    gameType === "image"
+      ? filterText(data.multiple_image_text)
+      : filterText(data.multiple_syllable_text);
   //audio effect for autoplaying
   useEffect(() => {
-    switch (language) {
-      case "es":
-        if (headerData.es) {
-          addAudio([headerData.es.audio.url]);
-        }
-        break;
-      case "en":
-        if (headerData.en) {
-          addAudio([headerData.en.audio.url]);
-        }
-        break;
-      case "esen":
-        if (
-          headerData.es &&
-          headerData.en &&
-          headerData.es.audio &&
-          headerData.en.audio
-        ) {
-          addAudio([headerData.es.audio.url, headerData.en.audio.url]);
-        }
-        break;
-      default:
-        break;
-    }
+    addAudio(texts.map((t: any) => t.audio.url));
+  }, [id]);
+
+  useEffect(() => {
     return () => {
+      setIsCorrectSelected(false); // Reset the state
+      setCorrectCard(null);
       clearAudio();
     };
-  }, [headerData, language]);
-
-  //styles for correct and wrong cards
-  const initialStyle = {
-    cursor: "pointer",
-    borderRadius: "32px",
-    boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
-  };
-
-  const correctStyle = {
-    cursor: "pointer",
-    borderRadius: "32px",
-    border: "8.4px solid var(--alerts-status-success, #12D18E)",
-    boxShadow: "0px 8.4px 25.2px 0px #12D18E",
-  };
-
-  const incorrectStyle = {
-    cursor: "pointer",
-    borderRadius: "32px",
-    border: "8.4px solid var(--Categories-Error, #F0091B)",
-    boxShadow: "0px 8.4px 25.2px 0px #F0091B",
-  };
-
-  const [cardColors, setCardColors] = useState<any>({
-    "1": initialStyle,
-    "2": initialStyle,
-    "3": initialStyle,
-    "4": initialStyle,
-  });
+  }, []);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -249,12 +193,7 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
           [pageNumber]: false,
         });
         setIsCorrectSelected(false); // Reset the state
-        setCardColors({
-          "1": initialStyle,
-          "2": initialStyle,
-          "3": initialStyle,
-          "4": initialStyle,
-        });
+        setCorrectCard(null);
         pageForward();
       }, 3000);
     }
@@ -265,111 +204,49 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
     handleAttempt(id, Boolean(card.isTarget));
 
     if (!card.isTarget) {
-      //logic for the incorrect cards
-
-      addAudio([card.audio.url]);
-
-      //plays audio for incorrect choice
-      setCardColors((prevColors: any) => ({
-        ...prevColors,
-        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
-      }));
-
+      addAudio(["/assets/audio/choice_incorrect.wav", card.audio?.url]);
+      setIncorrectCard(card.id);
       setTimeout(() => {
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: initialStyle,
-        }));
+        setIncorrectCard(null);
       }, 1000);
     } else {
-      //logic when the correct card is choosen
-      addAudio([card.audio.url]); //plays audio for correct choice
-      setCardColors((prevColors: any) => ({
-        ...prevColors,
-        [card.id]: correctStyle,
-      }));
-
-      setTimeout(() => {
-        setIsCorrectSelected(true);
-      }, 1000);
-    }
-
-    if (!card.isTarget) {
-      //logic for the incorrect cards
-      addAudio([card.audio.url]); //plays audio for incorrect choice
-      setCardColors((prevColors: any) => ({
-        ...prevColors,
-        [card.id]: { ...incorrectStyle, animation: "shake 1s" },
-      }));
-
-      setTimeout(() => {
-        setCardColors((prevColors: any) => ({
-          ...prevColors,
-          [card.id]: initialStyle,
-        }));
-      }, 1000);
-    } else {
-      //logic when the correct card is choosen
-      addAudio([card.audio.url]); //plays audio for correct choice
-      setCardColors((prevColors: any) => ({
-        ...prevColors,
-        [card.id]: correctStyle,
-      }));
-
-      setTimeout(() => {
-        setIsCorrectSelected(true);
-      }, 1000);
+      addAudio(["/assets/audio/choice_correct.wav", card.audio?.url]); //plays audio for correct choice
+      setCorrectCard(card.id);
+      setIsCorrectSelected(true);
     }
   };
   return (
     <>
       <div style={{ margin: "auto", textAlign: "center" }}>
         <div className="margin-top-2 margin-bottom-2 text-responsive">
-          <IonText
-            className=""
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <h1 className="text-3xl color-suelo">
-              {language === "en" ? headerData.en?.text : headerData.es.text}
-            </h1>
-
-            {language === "esen" && headerData.en && (
-              <p className="text-xl color-english">{headerData.en.text}</p>
+          <IonText className="ion-text-center">
+            <h1 className="text-3xl color-suelo">{texts[0].text}</h1>
+            {texts.length > 1 && (
+              <p className="text-xl color-english">{texts[1].text}</p>
             )}
           </IonText>
         </div>
-        <div>
-          <IonGrid fixed={true}>
-            <IonRow className="ion-justify-content-center">
-              {shuffledCards.slice(0, 2).map((card, index) => (
+        <div id="stories-game-mcg-wrapper">
+          <IonGrid>
+            <IonRow>
+              {shuffledCards.map((card, index) => (
                 <IonCol
                   key={card.id}
-                  className=""
-                  size="3"
+                  size-xs="3"
+                  size-md="6"
                   onClick={() => handleCardClick(card)}
                 >
-                  <img
-                    className="stories-game-image"
-                    style={cardColors[card.id]}
-                    src={card.image ? card.image.url : bili}
-                  />
-                </IonCol>
-              ))}
-            </IonRow>
-            <IonRow className="ion-justify-content-center">
-              {shuffledCards.slice(2, 4).map((card, index) => (
-                <IonCol
-                  key={index}
-                  size="3"
-                  onClick={() => handleCardClick(card)}
-                >
-                  <img
-                    className="stories-game-image"
-                    style={cardColors[card.id]}
-                    src={card.image ? card.image.url : bili}
-                  />
+                  <div
+                    className={classnames("stories-game-mcg-card drop-shadow", {
+                      correct: correctCard === card.id,
+                      incorrect: incorrectCard === card.id,
+                    })}
+                  >
+                    <img
+                      className="stories-game-image"
+                      src={card.image ? card.image.url : bili}
+                    />
+                  </div>
                 </IonCol>
               ))}
             </IonRow>
