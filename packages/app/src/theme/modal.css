@@ -3,7 +3,7 @@
   --max-height: 450px;
 
   &::part(content) {
-    border-radius: 32px;
+    border-radius: 2rem;
   }
 
   .modal-content {

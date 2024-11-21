@@ -12,9 +12,9 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
     useStory();
   const totalPages = pages.length;
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper story-pages-wrapper">
       <IonGrid>
-        <IonRow style={{ marginLeft: 45, marginRight: 45 }}>{children}</IonRow>
+        <IonRow>{children}</IonRow>
       </IonGrid>
       <IonImg
         className="page-control backward"

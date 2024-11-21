@@ -54,7 +54,7 @@ import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
 import "@/theme/buttons.css";
-import "@/theme/device-zooms.css";
+import "@/theme/common.css";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

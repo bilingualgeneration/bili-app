@@ -1,7 +1,3 @@
-:root {
-  --storyPageSize: 500px;
-}
-
 #story-wrapper {
   display: flex;
   align-items: center;
@@ -122,21 +118,23 @@
   width: auto;
 }
 
-.content-wrapper {
+.story-pages-wrapper {
+  position: relative;
+  padding-left: 3rem;
+  padding-right: 3rem;
   .page-control {
     height: 4rem;
-    width: auto;
+    width: 4rem;
     position: absolute;
+    top: calc(50% - 2rem);
+    z-index: 100;
+
     &.forward {
-      top: calc(50% - 55px);
-      right: 25px;
-      z-index: 100;
+      right: 1.5rem;
     }
 
     &.backward {
-      top: calc(50% - 55px);
-      left: 25px;
-      z-index: 100;
+      left: 1.5rem;
     }
 
     &.locked {

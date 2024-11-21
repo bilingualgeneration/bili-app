@@ -107,7 +107,7 @@ export const Play: FC = () => {
     <div id="playPage">
       <PlayHeader />
       <div className="carousel-container">
-        <Carousel height={445} slideMargin={10}>
+        <Carousel height={"30rem"} slideMargin={10}>
           {playCardData.map((card) => (
             <PlayCard key={card.id} {...card} />
           ))}

@@ -1,22 +1,15 @@
 .carousel-container {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
   overflow-x: clip;
   overflow-y: hidden;
-
-  // .slick-track {
-  //   > * {
-  //     margin: 0 4px;
-  //   }
-  // }
 }
 
 .slick-arrow {
   position: absolute;
   z-index: 9;
-  height: 60px !important;
-  width: 60px !important;
-  //margin-top: -20px;
+  height: 3.75rem !important;
+  width: 3.75rem !important;
 
   &.slick-disabled {
     display: none;
@@ -24,12 +17,12 @@
 
   &.backward {
     left: 0;
-    margin-left: -30px;
+    margin-left: -1.875rem;
   }
 
   &.forward {
     right: 0;
-    margin-right: -30px;
+    margin-right: -1.875rem;
   }
 
   &::before {

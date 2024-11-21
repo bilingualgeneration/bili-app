@@ -2,9 +2,9 @@
   color: white;
   cursor: pointer;
   text-transform: uppercase;
-  height: 78px;
-  width: 78px;
-  border-radius: 28px;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 1.75rem;
   display: inline-block;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

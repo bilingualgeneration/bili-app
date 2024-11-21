@@ -20,7 +20,7 @@ import { ProfileChip } from "@/components/ProfileChip";
 import { Link } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 
-import "./HeaderFooter.scss";
+import "./HeaderFooter.css";
 
 export const HeaderFooter: FC<
   PropsWithChildren<{
@@ -38,7 +38,7 @@ export const HeaderFooter: FC<
               <IonCol size="5">{showBackButton && <BackButton />}</IonCol>
               <IonCol className="ion-text-center" size="2">
                 <Link to="/student-dashboard">
-                  <img src={biliLogo} />
+                  <img src={biliLogo} id="bili-header-logo" />
                 </Link>
               </IonCol>
               <IonCol className="ion-text-right" size="5">
