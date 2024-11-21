@@ -7,6 +7,7 @@ import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 import { useState } from "react";
 
+import audio_correct from "@/assets/audio/correct.mp3";
 import audio_incorrect from "@/assets/audio/incorrect.mp3";
 import { useStory } from "@/pages/Stories/StoryContext";
 import { useActivity } from "@/contexts/ActivityContext";
@@ -29,7 +30,14 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   renderTrigger,
 }) => {
   const { addAudio } = useAudioManager();
-  const { pieces, setPieces, setPiecesDropped } = useDnD();
+  const {
+    audioOnComplete,
+    pieces,
+    piecesDropped,
+    setPieces,
+    setPiecesDropped,
+    totalTargets,
+  } = useDnD();
   const [hasDropped, setHasDropped] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const { handleAttempt } = useActivity();
@@ -39,7 +47,11 @@ export const DropTarget: React.FC<DropTargetProps> = ({
       accept: "piece",
       drop(item: any, monitor) {
         if (item.text === text && hasDropped === false) {
-          addAudio([]);
+          let audio = [audio_correct, item.audioOnDrop];
+          if (piecesDropped >= totalTargets - 1) {
+            audio.push(audioOnComplete.url);
+          }
+          addAudio(audio);
           setPieces(
             update(pieces, {
               [item.id]: {
@@ -65,12 +77,15 @@ export const DropTarget: React.FC<DropTargetProps> = ({
     }),
     [
       addAudio,
+      audioOnComplete,
       hasDropped,
       setHasDropped,
       setIsCorrect,
       setPiecesDropped,
       setPieces,
+      totalTargets,
       pieces,
+      piecesDropped,
     ],
   );
 

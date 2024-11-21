@@ -26,9 +26,14 @@ export const strapi = onRequest(
         model,
         entry: { uuid },
       },
+      headers: { authorization },
     },
     response,
   ) => {
+    if (authorization !== process.env.STRAPI_SYNC_API_KEY) {
+      response.status(401).send();
+      return;
+    }
     switch (event) {
       case "entry.publish":
         const { data } = await getDoc({

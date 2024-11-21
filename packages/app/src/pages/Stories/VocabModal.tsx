@@ -24,36 +24,33 @@ import "./VocabModal.css";
 
 export const VocabModal: React.FC = () => {
   const { clearAudio } = useAudioManager();
-  const { language } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
-  const { vocab, vocabLookup, currentVocabWord, setCurrentVocabWord } =
-    useStory();
-  const lookup = vocabLookup[currentVocabWord ?? ""] || {
-    es: "",
-    ["es-inc"]: "",
-    en: "",
-  };
-  const es = vocab.es[lookup.es];
-  const esInc = vocab["es-inc"][lookup["es-inc"]];
-  const en = lookup.en ? vocab.en[lookup.en] : vocab.en[currentVocabWord!];
+  const { populateText } = useLanguage();
+  const { currentVocabHandle, setCurrentVocabHandle, vocab } = useStory();
+  const wordFamily = vocab.filter(
+    (v: any) => v.handle === currentVocabHandle,
+  )[0];
+  const currentWordFamily = populateText(wordFamily?.word ?? []);
+  if (currentWordFamily.length === 0) {
+    // no current word so exit early
+    return <></>;
+  }
 
-  const imageUrl =
-    language === "en"
-      ? en?.image?.url || ""
-      : isInclusive
-        ? esInc?.image?.url || ""
-        : es?.image?.url || "";
+  const wordAudios = Object.fromEntries(
+    currentWordFamily.map((c: any) => [c.language, c.word_audio.url]),
+  );
+  const definitionAudios = Object.fromEntries(
+    currentWordFamily.map((c: any) => [c.language, c.definition_audio.url]),
+  );
+  const imageUrl = wordFamily?.image.url;
 
   return (
     <>
       <IonModal
         className="modal"
-        isOpen={currentVocabWord !== null}
+        isOpen={currentVocabHandle !== null}
         onWillDismiss={() => {
           clearAudio();
-          setCurrentVocabWord(null);
+          setCurrentVocabHandle(null);
         }}
       >
         <div id="vocab-modal-id" className="modal-content">
@@ -66,105 +63,67 @@ export const VocabModal: React.FC = () => {
             }}
           >
             <CloseButton
-              onClick={() => setCurrentVocabWord(null)}
+              onClick={() => {
+                clearAudio();
+                setCurrentVocabHandle(null);
+              }}
               size="small"
             />
           </div>
           <div className="ion-padding modal-container">
-            <IonList>
-              <IonRow style={{ gap: "14px" }}>
-                <IonCol size="8">
-                  <IonRow class="ion-align-items-start">
-                    <IonCol>
-                      <div className="word-row">
-                        <div className="audio-button-word">
-                          <AudioButton
-                            audio={{
-                              en: {
-                                url: en?.word_audio?.url,
-                              },
-                              es: {
-                                url: (isInclusive ? esInc : es)?.word_audio
-                                  ?.url,
-                              },
-                            }}
-                            size="small"
-                          />
-                        </div>
-
-                        <IonText>
-                          <h1 className="text-4xl semibold">
-                            {language !== "en" &&
-                              (isInclusive ? (
-                                <SyllableBreakdown
-                                  word={esInc?.syllable_breakdown}
-                                />
-                              ) : (
-                                <SyllableBreakdown
-                                  word={es?.syllable_breakdown}
-                                />
-                              ))}
-                            {language === "en" && (
-                              <SyllableBreakdown
-                                word={en?.syllable_breakdown}
-                              />
-                            )}
-                          </h1>
-                          {language === "esen" && (
-                            <p className="text-3xl semibold word-color">
-                              <SyllableBreakdown
-                                word={en?.syllable_breakdown}
-                              />
-                            </p>
-                          )}
-                        </IonText>
-                      </div>
-                    </IonCol>
-                  </IonRow>
-                  <IonRow class="ion-align-items-start">
-                    <IonCol>
-                      <div className="word-row">
-                        <div className="audio-button-word">
-                          <AudioButton
-                            audio={{
-                              en: {
-                                url: en?.definition_audio?.url || "",
-                              },
-                              es: {
-                                url:
-                                  (isInclusive ? esInc : es)?.definition_audio
-                                    ?.url || "",
-                              },
-                            }}
-                            size="small"
-                          />
-                        </div>
-
-                        <IonText>
-                          <h1 className="text-2xl semibold">
-                            {language !== "en" &&
-                              (isInclusive
-                                ? esInc?.definition
-                                : es?.definition)}
-                            {language === "en" && en?.definition}
-                          </h1>
-                          {language === "esen" && (
-                            <p className="text-xl word-color">
-                              {en?.definition}
-                            </p>
-                          )}
-                        </IonText>
-                      </div>
-                    </IonCol>
-                  </IonRow>
-                </IonCol>
-                {imageUrl && (
+            <IonRow style={{ gap: "14px" }}>
+              <IonCol size="8">
+                <IonRow class="ion-align-items-start">
                   <IonCol>
-                    <img src={imageUrl} alt="Word popover image" />
+                    <div className="word-row">
+                      <div className="audio-button-word">
+                        <AudioButton audio={wordAudios} size="small" />
+                      </div>
+
+                      <IonText>
+                        <h1 className="text-4xl semibold">
+                          <SyllableBreakdown
+                            word={currentWordFamily[0].syllable_breakdown}
+                          />
+                        </h1>
+                        {currentWordFamily.length > 1 && (
+                          <p className="text-3xl semibold word-color">
+                            <SyllableBreakdown
+                              word={currentWordFamily[1].syllable_breakdown}
+                            />
+                          </p>
+                        )}
+                      </IonText>
+                    </div>
                   </IonCol>
-                )}
-              </IonRow>
-            </IonList>
+                </IonRow>
+                <IonRow class="ion-align-items-start">
+                  <IonCol>
+                    <div className="word-row">
+                      <div className="audio-button-word">
+                        <AudioButton audio={definitionAudios} size="small" />
+                      </div>
+
+                      <IonText>
+                        <h1 className="text-2xl semibold">
+                          {currentWordFamily[0].definition}
+                        </h1>
+                        {currentWordFamily.length > 1 && (
+                          <p className="text-xl word-color">
+                            {currentWordFamily[1].definition}
+                          </p>
+                        )}
+                      </IonText>
+                    </div>
+                  </IonCol>
+                </IonRow>
+              </IonCol>
+              {imageUrl && (
+                <IonCol>
+                  <img src={imageUrl} alt="Word popover image" />
+                </IonCol>
+              )}
+            </IonRow>
           </div>
         </div>
       </IonModal>

@@ -2,9 +2,9 @@
 // TODO: audio does not account for inclusive
 
 import { AudioButton } from "@/components/AudioButton";
-
+import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
@@ -18,7 +18,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
@@ -29,14 +29,6 @@ interface AffirmationsCardProps {
   text_front: any;
 }
 
-/*
-   interface MultilingualTextAndAudio {
-   language: 'en' | 'en-inc' | 'es' | 'es-inc',
-   text: string
-   audio: any
-   }
- */
-
 type MultilingualTextAndAudio = any;
 
 const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
@@ -44,27 +36,16 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   text_back,
   text_front,
 }) => {
-  const { language } = useLanguageToggle();
+  const { filterText } = useLanguage();
   const { addAudio } = useAudioManager();
   const [showFront, setShowFront] = useState<boolean>(true);
-  const text_back_es = text_back.filter(
-    (t: MultilingualTextAndAudio) => t.language === "es",
-  )[0];
-  const text_back_es_inc = text_back.filter(
-    (t: MultilingualTextAndAudio) => t.language === "es-inc",
-  )[0];
-  const text_back_en = text_back.filter(
-    (t: MultilingualTextAndAudio) => t.language === "en",
-  )[0];
-  const text_front_es = text_front.filter(
-    (t: MultilingualTextAndAudio) => t.language === "es",
-  )[0];
-  const text_front_es_inc = text_front.filter(
-    (t: MultilingualTextAndAudio) => t.language === "es-inc",
-  )[0];
-  const text_front_en = text_front.filter(
-    (t: MultilingualTextAndAudio) => t.language === "en",
-  )[0];
+  const text_front_filtered = filterText(text_front);
+  const text_back_filtered = filterText(text_back);
+  const audio = Object.fromEntries(
+    showFront
+      ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
+      : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
+  );
   return (
     <>
       <IonCard
@@ -95,10 +76,12 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
               <div></div>
               <IonText>
                 <h1 className="text-xl semibold color-suelo">
-                  {language !== "en" ? text_front_es.text : text_front_en.text}
+                  {text_front_filtered[0].text}
                 </h1>
-                {language === "esen" && (
-                  <p className="text-lg color-english">{text_front_en.text}</p>
+                {text_front_filtered[1] && (
+                  <p className="text-lg color-english">
+                    {text_front_filtered[1].text}
+                  </p>
                 )}
               </IonText>
             </>
@@ -106,11 +89,15 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
           {!showFront && (
             <div className="ion-text-left" style={{ height: "100%" }}>
               <h1 className="text-xl semibold color-suelo">
-                {language !== "en" ? "¡Platiquemos!" : "Let's Talk!"}
+                <I18nMessage id="affirmations.card.back.title" />
               </h1>
-              {language === "esen" && (
-                <h2 className="text-lg color-english">Let's Talk!</h2>
-              )}
+              <I18nMessage
+                id="affirmations.card.back.title"
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-lg color-english">{text}</p>
+                )}
+              />
               <div
                 style={{
                   borderTop: "2px solid black",
@@ -124,11 +111,11 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
               >
                 <IonText>
                   <p className="text-xl semibold color-suelo">
-                    {language !== "en" ? text_back_es.text : text_back_en.text}
+                    {text_back_filtered[0].text}
                   </p>
-                  {language === "esen" && (
+                  {text_back_filtered[1] && (
                     <p className="text-lg color-english margin-top-1">
-                      {text_back_en.text}
+                      {text_back_filtered[1].text}
                     </p>
                   )}
                 </IonText>
@@ -138,12 +125,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
         </IonCardContent>
       </IonCard>
       <div className="ion-text-center margin-top-3">
-        <AudioButton
-          audio={{
-            en: { url: text_front_en.audio.url },
-            es: { url: text_front_es.audio.url },
-          }}
-        />
+        <AudioButton audio={audio} />
       </div>
     </>
   );
@@ -164,9 +146,8 @@ const CARDS_PER_PAGE = 3;
 type Status = "error" | "loading" | "ready";
 
 const AffirmationsHydratedGame: React.FC = () => {
-  const [cardIndex, setCardIndex] = useState<number>(0);
   const { status, data } = useFirestoreDoc();
-
+  const { languageNormalized } = useLanguage();
   if (status === "loading") {
     // todo: loading screen
     return <></>;
@@ -176,9 +157,21 @@ const AffirmationsHydratedGame: React.FC = () => {
     // todo: better error checking
     return <></>;
   }
+  return (
+    <AffirmationsHydratedFilteredGame
+      cards={data.cards.filter((c: any) =>
+        c.text_front.some((t: any) => t.language === languageNormalized),
+      )}
+    />
+  );
+};
+
+const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
+  const [cardIndex, setCardIndex] = useState<number>(0);
+  const { languageNormalized } = useLanguage();
 
   const canBackward = cardIndex > 0;
-  const canForward = cardIndex + CARDS_PER_PAGE < data.cards.length;
+  const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
 
   return (
     <>
@@ -198,17 +191,15 @@ const AffirmationsHydratedGame: React.FC = () => {
               src={backward}
             />
           </IonCol>
-          {data.cards
-            .slice(cardIndex, cardIndex + CARDS_PER_PAGE)
-            .map((c: any) => (
-              <IonCol key={c.id}>
-                <AffirmationsCard
-                  image={c.image}
-                  text_back={c.text_back}
-                  text_front={c.text_front}
-                />
-              </IonCol>
-            ))}
+          {cards.slice(cardIndex, cardIndex + CARDS_PER_PAGE).map((c: any) => (
+            <IonCol size="4" key={c.id}>
+              <AffirmationsCard
+                image={c.image}
+                text_back={c.text_back}
+                text_front={c.text_front}
+              />
+            </IonCol>
+          ))}
           <IonCol size="auto" style={{ display: "flex" }}>
             <IonImg
               className="page-control forward"
@@ -219,7 +210,7 @@ const AffirmationsHydratedGame: React.FC = () => {
                 if (canForward) {
                   setCardIndex(
                     Math.min(
-                      data.cards.length - CARDS_PER_PAGE,
+                      cards.length - CARDS_PER_PAGE,
                       cardIndex + CARDS_PER_PAGE,
                     ),
                   );
