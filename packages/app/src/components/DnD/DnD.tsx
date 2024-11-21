@@ -261,8 +261,8 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
             position: "relative",
           }}
         >
-          {Object.keys(pieces).map((key) => (
-            <Piece key={key} {...pieces[key]} />
+          {Object.keys(pieces).map((key, index) => (
+            <Piece key={`${key}-${index}`} {...pieces[key]} />
           ))}
           {(isPlatform("ios") || isPlatform("android")) && <PiecePreview />}
           <div
@@ -272,8 +272,8 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
           >
             {targetImage && <DnDImage src={targetImage.url} />}
             {dropTargets.map((word: any) =>
-              word.map((d: DropTargetProps) => (
-                <DropTarget key={d.text} {...d} gameId={gameId} />
+              word.map((d: DropTargetProps, index: number) => (
+                <DropTarget key={`${d.text}-${index}`} {...d} gameId={gameId} />
               )),
             )}
           </div>

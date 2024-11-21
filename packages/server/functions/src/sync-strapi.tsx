@@ -30,7 +30,6 @@ export const strapi = onRequest(
     },
     response,
   ) => {
-    console.log(authorization, process.env);
     if (authorization !== process.env.STRAPI_SYNC_API_KEY) {
       response.status(401).send();
       return;
