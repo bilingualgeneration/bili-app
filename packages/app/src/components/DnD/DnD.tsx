@@ -272,12 +272,8 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
           >
             {targetImage && <DnDImage src={targetImage.url} />}
             {dropTargets.map((word: any) =>
-              word.map((d: DropTargetProps, letterIndex: number) => (
-                <DropTarget
-                  key={`${d.text}-${letterIndex}`}
-                  {...d}
-                  gameId={gameId}
-                />
+              word.map((d: DropTargetProps) => (
+                <DropTarget key={d.text} {...d} gameId={gameId} />
               )),
             )}
           </div>
