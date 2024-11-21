@@ -42,7 +42,7 @@ export const StoryFactoryCongrats: React.FC = () => {
   };
 
   // Check if stars are valid and set fallback if necessary
-  const safeStars = stars ?? 1;
+  const safeStars = stars || 1;
   const percentageText = percentageRanges[safeStars];
   const congratsTextEn = englishCongratsText[safeStars];
 
