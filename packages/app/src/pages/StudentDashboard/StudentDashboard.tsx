@@ -32,7 +32,7 @@ import { I18nMessage } from "@/components/I18nMessage";
 import AmiguesCover from "@/assets/img/amigues_cover.png";
 import CatrinaCover from "@/assets/img/catrina.png";
 import GustaCover from "@/assets/img/gusta.png";
-import "./StudentDashboard.scss";
+import "./StudentDashboard.css";
 
 interface WaveIcon {
   backgroundColor: string;
@@ -288,26 +288,9 @@ export const StudentDashboard: React.FC = () => {
               )}
             />
           </IonText>
-
-          <IonText>
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <FormattedMessage
-                id="landingPage.catgories"
-                defaultMessage="Categories"
-              />
-            </h1>
-            {language === "es.en" && (
-              <p className="text-3xl color-english carousel-header-margin">
-                Categories
-              </p>
-            )}
-          </IonText>
         </div>
         {/* icons */}
-        <div
-          id="wave-icons"
-          style={{ marginTop: "4rem", marginLeft: 30, marginRight: 30 }}
-        >
+        <div id="wave-icons" className="margin-top-3">
           <IonGrid>
             <IonRow>
               {icons.map((icon) => (
@@ -322,8 +305,6 @@ export const StudentDashboard: React.FC = () => {
             </IonRow>
           </IonGrid>
         </div>
-        <br />
-        <br />
 
         {/* stories */}
         <div className="stories-story-cards">
@@ -372,7 +353,7 @@ export const StudentDashboard: React.FC = () => {
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
-            <Carousel height={274}>
+            <Carousel height={"17rem"}>
               {wellnessCards.map((c, index) => (
                 <ContentCard
                   key={index}
@@ -403,7 +384,7 @@ export const StudentDashboard: React.FC = () => {
             </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
-            <Carousel height={274}>
+            <Carousel height={"17rem"}>
               {playCards.map((c, index) => (
                 <ContentCard
                   key={index}
@@ -433,7 +414,7 @@ export const StudentDashboard: React.FC = () => {
             </IonText>
           </Link>
           <div className="margin-top-2 margin-bottom-3">
-            <Carousel height={274}>
+            <Carousel height={"17rem"}>
               {communityCards.map((c, index) => (
                 <ContentCard
                   key={index}

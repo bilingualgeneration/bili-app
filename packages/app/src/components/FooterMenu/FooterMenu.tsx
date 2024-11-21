@@ -31,6 +31,7 @@ export const FooterMenu: React.FC = ({}) => {
   return (
     <>
       <div
+        className="ion-hide-md-down"
         style={{
           position: "fixed",
           left: "calc(50% - 175px)",

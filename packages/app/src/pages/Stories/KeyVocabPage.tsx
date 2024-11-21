@@ -196,7 +196,7 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
     <div className="stories-key-vocab-pill drop-shadow">
       <IonImg
         src={icon}
-        style={{ height: 38, aspectRatio: 1, marginRight: "1rem" }}
+        style={{ height: "2.5rem", aspectRatio: 1, marginRight: "1rem" }}
       />
       <IonText>
         <h2 style={{ marginTop: 0 }}>
