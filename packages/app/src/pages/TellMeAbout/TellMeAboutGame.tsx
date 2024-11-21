@@ -24,13 +24,16 @@ export const TellMeAboutGame: React.FC = () => {
 
 const TellMeAboutHydratedGame: React.FC = () => {
   const { status, data } = useFirestoreDoc();
-
+  const { filterText } = useLanguage();
   const [questionsData, setQuestionsData] = useState<any[]>([]);
-
+  // console.log(data.questions.map((q: any) => filterText(q.question)));
+  console.log(data.questions);
   useEffect(() => {
     if (data !== undefined && data !== null) {
       // Transform data to include text and audio in both languages for each card
-      console.log(data.questions);
+
+      //      console.log(filterText(data.questions?.question ?? []));
+      //console.log(filterText(data.questions.hint));
       const transformedData = data.questions.map((questionItem: any) => {
         const es = questionItem.question.find(
           (item: any) => item.language === "es",
