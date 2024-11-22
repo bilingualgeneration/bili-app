@@ -175,7 +175,7 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
         <IonRow class="ion-align-items-center">
           <IonCol className="no-border-box" size="3" sizeMd="4">
             {/* Header */}
-            <div className="margin-top-5">
+            <div className="margin-top-4">
               <IonText className="align-center ">
                 <h1 className="text-3xl semibold margin-top-1">
                   <I18nMessage id={id} />
