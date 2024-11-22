@@ -10,7 +10,7 @@ import {
 } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
 import { heart } from "ionicons/icons";
-import Avatar from "@/assets/icons/avatar.png";
+import { Avatar } from "@/components/Avatar";
 import StarNotSharp from "@/assets/icons/star_profile.svg";
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import StudentLogout from "@/assets/icons/logout.svg";
@@ -35,7 +35,7 @@ export const ProfileChip: React.FC = () => {
 };
 
 const HydratedProfileChip: React.FC = () => {
-  const { firstName } = useStudent();
+  const { firstName, id } = useStudent();
   const { id: classroomId } = useClassroom();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
@@ -71,7 +71,7 @@ const HydratedProfileChip: React.FC = () => {
             <IonText>
               <p className="text-xl semibold color-suelo">{firstName}</p>
             </IonText>
-            <img src={Avatar} className="ion-hide" />
+            <Avatar id={id} size="md" />
           </div>
         </button>
       </div>
