@@ -71,15 +71,13 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
 
   //choose the screen size
   const handleResize = () => {
-    if (window.innerWidth < 992) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
+    setIsMobile(window.innerWidth < 992);
   };
   useEffect(() => {
+    setIsMobile(window.innerWidth < 992);
     window.addEventListener("resize", handleResize);
     return () => {
+      window.removeEventListener("resize", handleResize);
       clearAudio();
     };
   }, []);
@@ -172,7 +170,7 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
 
   return (
     <>
-      <div className="padding-top-4 ion-hide-lg-down"></div>
+      <div className="padding-top-5 ion-hide-lg-down"></div>
       <IonGrid className="no-border-box community-grid-main ion-no-padding">
         <IonRow class="ion-align-items-center">
           <IonCol className="no-border-box" size="3" sizeMd="4">
