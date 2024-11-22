@@ -216,7 +216,9 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
               </IonText>
             </div>
           </IonCol>
-          <IonCol className="no-border-box">
+          <IonCol
+            className={`no-border-box ${isMobile ? "padding-right-1" : ""}`}
+          >
             {/* Cards */}
             <div className={`${styles.container} no-border-box`}>
               {props.map(({ x, y, rot, scale, zIndex }, i) => {
