@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useParams } from "react-router-dom";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { Deck } from "@/components/Deck";
 import "@/pages/Intruder/Intruder.scss";
-
-import styles from "./styles.module.css";
 import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
 import { useLanguage } from "@/hooks/Language";
 import { I18nMessage } from "@/components/I18nMessage";
-import { text } from "ionicons/icons";
 
 export const TellMeAboutGame: React.FC = () => {
   //@ts-ignore
@@ -27,12 +23,10 @@ const TellMeAboutHydratedGame: React.FC = () => {
   const { filterText } = useLanguage();
   const [questionsData, setQuestionsData] = useState<any[]>([]);
   // console.log(data.questions.map((q: any) => filterText(q.question)));
-  console.log(data.questions);
   useEffect(() => {
     if (data !== undefined && data !== null) {
       // Transform data to include text and audio in both languages for each card
-
-      //      console.log(filterText(data.questions?.question ?? []));
+      // console.log(filterText(data.questions?.question ?? []));
       //console.log(filterText(data.questions.hint));
       const transformedData = data.questions.map((questionItem: any) => {
         const es = questionItem.question.find(
@@ -85,7 +79,7 @@ const TellMeAboutHydratedGame: React.FC = () => {
 
   return (
     <>
-      <Deck cards={questionsData} />
+      <Deck id="common.tellMeAbout" cards={questionsData} />
     </>
   );
 };

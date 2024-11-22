@@ -53,9 +53,10 @@ interface DeckProps {
     esIncHintText?: string;
     esIncText?: string;
   }[];
+  id: string;
 }
 
-export const Deck: FC<DeckProps> = ({ cards }) => {
+export const Deck: FC<DeckProps> = ({ id, cards }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio } = useAudioManager();
   const {
@@ -66,7 +67,18 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const currentCard = cards[currentCardIndex];
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
+  const [isMobile, setIsMobile] = useState(false);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 992) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
   useEffect(() => {
+    window.addEventListener("resize", handleResize);
     return () => {
       clearAudio();
     };
@@ -160,20 +172,21 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
   return (
     <>
-      <IonGrid className="no-border-box">
+      <div className="padding-top-4 ion-hide-lg-down"></div>
+      <IonGrid className="no-border-box community-grid-main ion-no-padding">
         <IonRow class="ion-align-items-center">
-          <IonCol className="no-border-box" size="4">
+          <IonCol className="no-border-box" size="3" sizeMd="4">
             {/* Header */}
-            <div className="margin-top-4">
+            <div className="margin-top-5">
               <IonText className="align-center ">
-                <h1 className="text-4xl semibold margin-top-1">
-                  <I18nMessage id="common.tellMeAbout" />
+                <h1 className="text-3xl semibold margin-top-1">
+                  <I18nMessage id={id} />
                 </h1>
                 <I18nMessage
-                  id="common.tellMeAbout"
+                  id={id}
                   level={2}
                   wrapper={(text: string) => (
-                    <p className="text-3xl color-english">{text}</p>
+                    <p className="text-2xl color-english">{text}</p>
                   )}
                 />
               </IonText>
@@ -189,9 +202,9 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
                     url: currentCard?.enAudio?.url,
                   },
                 }}
-                size="large"
+                size={isMobile ? "small" : "large"}
               />
-              <IonText>
+              <IonText className="ion-hide-lg-down">
                 <h1 className="text-2xl semibold color-suelo">
                   <I18nMessage id="storyFactory.read" />
                 </h1>
