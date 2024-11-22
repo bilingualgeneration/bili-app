@@ -97,11 +97,20 @@ const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
             <IonRow class="ion-align-items-center">
               {students.map(
                 ({ id, firstName, lastName }: any, index: number) => (
-                  <StudentProfileCard
-                    id={id}
-                    nameEn={`${firstName} ${lastName[0]}.`}
+                  <div
+                    key={id}
+                    className={`${
+                      currentStudentId === id
+                        ? "student-card-selected"
+                        : "student-card"
+                    }`}
                     onClick={() => handleCardClick(index)}
-                  />
+                  >
+                    <StudentProfileCard
+                      id={id}
+                      nameEn={`${firstName} ${lastName[0]}.`}
+                    />
+                  </div>
                 ),
               )}
             </IonRow>

@@ -17,7 +17,7 @@ export const StudentProfileCard: FC<StudentCardProps> = ({
 }) => {
   const { language } = useLanguageToggle();
   return (
-    <div className="student-card" onClick={onClick}>
+    <div className="student-profile-card" onClick={onClick}>
       <Avatar id={id} size="lg" />
       <IonText>
         <p className="text-xl semibold color-suelo">{nameEn}</p>
