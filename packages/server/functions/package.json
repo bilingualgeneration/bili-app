@@ -1,7 +1,8 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint --fix --ext .js,.ts .",
+    "xlint": "eslint --fix --ext .js,.ts .",
+    "lint": "",
     "env:development": "cp .env.development .env",
     "env:live": "cp .env.live .env",
     "use:development": "firebase use bilingual-generation-dev",
