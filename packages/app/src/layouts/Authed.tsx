@@ -1,17 +1,24 @@
 import { AdultCheckProvider } from "@/contexts/AdultCheckContext";
 import { Redirect, useLocation } from "react-router-dom";
+import { useClassroom } from "@/hooks/Classroom";
+import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
-import { LanguageToggle, useLanguageToggle } from "@/components/LanguageToggle";
+import {
+  LanguageToggle,
+  LanguageToggleProvider,
+} from "@/components/LanguageToggle";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
 export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const { info } = useClassroom();
   const { profile } = useProfile();
   const { id: studentId } = useStudent();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { pathname } = useLocation();
+
   if (
     profile.role === "caregiver" &&
     studentId === null &&
@@ -22,10 +29,12 @@ export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   // implied else
   return (
     <I18nWrapper locale={language.slice(0, 2)}>
-      <AdultCheckProvider>
-        {children}
-        <LanguageToggle />
-      </AdultCheckProvider>
+      <LanguageToggleProvider allowedLanguages={info.allowedLanguages}>
+        <AdultCheckProvider>
+          {children}
+          {info.allowLanguageToggle && <LanguageToggle />}
+        </AdultCheckProvider>
+      </LanguageToggleProvider>
     </I18nWrapper>
   );
 };
