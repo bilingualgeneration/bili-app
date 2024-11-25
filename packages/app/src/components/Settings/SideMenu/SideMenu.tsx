@@ -25,7 +25,6 @@ interface Option {
 }
 
 export const SideMenu: React.FC = () => {
-  const { setInfo: setClassroomInfo } = useClassroom();
   const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
   const { classroomId } = useParams<{ classroomId: string }>();
@@ -136,11 +135,6 @@ export const SideMenu: React.FC = () => {
         ))}
         <div
           onClick={() => {
-            setClassroomInfo({
-              name: null,
-              schoolId: null,
-              id: null,
-            });
             setStudentInfo({
               firstName: null,
               lastName: null,
