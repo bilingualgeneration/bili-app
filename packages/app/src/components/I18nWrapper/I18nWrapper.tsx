@@ -17,7 +17,7 @@ export const I18nWrapper = ({
   children,
   locale = "es",
 }: PropsWithChildren<{
-  locale?: "en" | "es";
+  locale?: string;
 }>) => {
   return (
     <>
