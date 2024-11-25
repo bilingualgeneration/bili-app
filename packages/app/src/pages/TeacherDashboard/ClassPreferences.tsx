@@ -1,4 +1,3 @@
-// TODO: remove dependency on firestoredoc
 // TODO: update Classroom context to pull ALL info
 
 import "./ClassPreferences.css";
@@ -29,7 +28,6 @@ import {
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/Input";
 import { useClassroom } from "@/hooks/Classroom";
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Select, SelectOption } from "@/components/Select";
@@ -37,30 +35,6 @@ import { Toggle } from "@/components/Toggle";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
-};
-
-export const ClassPreferences: React.FC = () => {
-  const { classroomId } = useParams<{ classroomId: string }>();
-  return (
-    <FirestoreDocProvider collection="classroom" id={classroomId}>
-      <ClassPreferencesLoader />
-    </FirestoreDocProvider>
-  );
-};
-
-const ClassPreferencesLoader: React.FC = () => {
-  const { status } = useFirestoreDoc();
-  // Firestore document status
-  switch (status) {
-    case "loading":
-      return <IonText>Loading...</IonText>;
-    case "error":
-      return <IonText>Error loading classroom data</IonText>;
-    case "ready":
-      return <ClassPreferencesHydrated />;
-    default:
-      return null;
-  }
 };
 
 const gradesOptions: MultipleCheckboxOption[] = [
@@ -105,23 +79,23 @@ const languageOptions: MultipleCheckboxOption[] = [
   },
 ];
 
-const ClassPreferencesHydrated: React.FC = () => {
-  const { data } = useFirestoreDoc();
+export const ClassPreferences: React.FC = () => {
+  const { info } = useClassroom();
   const [allowedLanguagesTrigger, setAllowedLanguagesTrigger] = useState<
     string[]
-  >(data.allowedLanguages);
+  >(info.allowedLanguages);
   const intl = useIntl();
   const { control, getValues, setValue, watch } = useForm({
     defaultValues: {
-      grades: data.grades,
-      name: data.name,
-      allowedLanguages: data.allowedLanguages,
-      allowLanguageToggle: data.allowLanguageToggle,
-      isInclusive: data.isInclusive, // Default value for inclusive toggle
+      grades: info.grades,
+      name: info.name,
+      allowedLanguages: info.allowedLanguages,
+      allowLanguageToggle: info.allowLanguageToggle,
+      isInclusive: info.isInclusive, // Default value for inclusive toggle
     },
   });
 
-  const ref = doc(firestore, "classroom", data.id);
+  const ref = doc(firestore, "classroom", info.id);
   const update = async (key: string, value: any) => {
     updateDoc(ref, {
       [key]: value,
@@ -141,7 +115,7 @@ const ClassPreferencesHydrated: React.FC = () => {
               <div className="header-overview-row">
                 <div className="header-overview-arrow">
                   <IonText className="text-sm color-barro classroom-name-text">
-                    {data.name}
+                    {info.name}
                   </IonText>
                   <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                   <IonText className="text-sm semibold overview-text-header">
@@ -189,7 +163,7 @@ const ClassPreferencesHydrated: React.FC = () => {
           <IonRow className="ion-justify-content-around">
             <MultipleCheckbox
               control={control}
-              defaultValue={data.grades}
+              defaultValue={info.grades}
               labelPlacement="end"
               justify="start"
               options={gradesOptions}

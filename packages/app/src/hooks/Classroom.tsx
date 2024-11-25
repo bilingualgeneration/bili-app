@@ -1,10 +1,6 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { collection, doc, onSnapshot, Unsubscribe } from "firebase/firestore";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { firestore } from "@/components/Firebase";
 import { Preferences } from "@capacitor/preferences";
 
 type ClassroomState = any;
@@ -13,57 +9,66 @@ const ClassroomContext = createContext<ClassroomState>({} as ClassroomState);
 
 export const useClassroom = () => useContext(ClassroomContext);
 
-type ClassroomInfo = {
-  name: string | null;
-  schoolId: string | null;
-  id: string | null;
-};
-
 export const ClassroomProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [name, setName] = useState<string | null>(null);
-  const [schoolId, setSchoolId] = useState<string | null>(null);
-  const [id, setId] = useState<string | null>(null);
+  const classroomUnsubscribe = useRef<Unsubscribe | null>(null);
+  const [info, setInfo] = useState<any | null | undefined>(undefined);
+  const [currentId, setCurrentId] = useState<string | null | undefined>(
+    undefined,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const setInfo = useCallback(
-    (info: ClassroomInfo) => {
-      setName(info.name);
-      setSchoolId(info.schoolId);
-      setId(info.id);
+  const subscribe = (id: string) => {
+    if (id !== currentId) {
       Preferences.set({
         key: "classroom",
-        value: JSON.stringify(info),
+        value: id,
       });
-    },
-    [setName, setSchoolId, setId],
-  );
+      setCurrentId(id);
+      if (classroomUnsubscribe.current !== null) {
+        classroomUnsubscribe.current();
+      }
+
+      const classroomDoc = doc(firestore, "classroom", id);
+      classroomUnsubscribe.current = onSnapshot(classroomDoc, (d) => {
+        // TODO: populate with classroom analytics
+        setInfo({
+          id,
+          ...d.data(),
+        });
+      });
+    }
+  };
+
+  const unsubscribe = () => {
+    if (classroomUnsubscribe.current !== null) {
+      classroomUnsubscribe.current();
+    }
+    classroomUnsubscribe.current = null;
+    setCurrentId(null);
+  };
 
   useEffect(() => {
     Preferences.get({ key: "classroom" }).then((response) => {
-      // todo: get name dynamically
       if (response.value === null) {
-        setIsLoading(false);
+        setInfo(null);
+        setCurrentId(null);
       } else {
-        setInfo(JSON.parse(response.value));
-        setIsLoading(false);
+        subscribe(response.value);
       }
+      setIsLoading(false);
     });
-  }, [setInfo, setIsLoading]);
+  }, [setInfo, subscribe]);
 
   return (
     <ClassroomContext.Provider
       children={children}
       value={{
-        name,
-        setName,
-        id,
-        setId,
-        schoolId,
-        setSchoolId,
-        setInfo,
+        info,
         isLoading,
+        subscribe,
+        unsubscribe,
       }}
     />
   );

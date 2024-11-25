@@ -4,6 +4,7 @@ import {
   SetStateAction,
   useContext,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -32,6 +33,12 @@ export const LanguageToggleProvider: React.FC<
   const [tempAllowedLanguages, setTempAllowedLanguages] = useState<
     Language[] | null
   >(null);
+
+  useEffect(() => {
+    if (!allowedLanguages.includes(language)) {
+      setLanguage(allowedLanguages[0]);
+    }
+  }, [allowedLanguages, language, setLanguage]);
 
   const setTempLanguage = useCallback(
     (newLanguage: Language | null) => {
