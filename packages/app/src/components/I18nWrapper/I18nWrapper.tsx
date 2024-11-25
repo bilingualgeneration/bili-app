@@ -8,7 +8,7 @@ import { createIntl, createIntlCache, IntlShape } from "react-intl";
 import en from "./lang/en.json";
 import es from "./lang/es.json";
 
-const translations = {
+const translations: { [key: string]: any } = {
   en,
   es,
 };
