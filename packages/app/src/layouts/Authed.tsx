@@ -24,7 +24,7 @@ export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
     studentId === null &&
     pathname !== "/caregiver/student-loader"
   ) {
-    return <Redirect to="/caregiver/student-loader" />;
+    //return <Redirect to="/caregiver/student-loader" />;
   }
   // implied else
   return (
