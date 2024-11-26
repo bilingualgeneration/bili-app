@@ -173,7 +173,7 @@ const communityCards = [
     title: "Cuéntame Sobre...",
     titleEn: "Tell me about...",
     cover: "/assets/img/card_community_image.png",
-    link: "/tell-me-about-game/intro",
+    link: "/tell-me-about/intro",
   },
   {
     category: "community",

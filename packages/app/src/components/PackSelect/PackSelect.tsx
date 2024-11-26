@@ -131,7 +131,6 @@ export const HydratedPackSelect: React.FC<props> = ({
       </>
     );
   }
-
   return (
     <>
       {category == "play" && <PlayHeader />}
