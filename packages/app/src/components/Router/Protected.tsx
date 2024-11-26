@@ -1,7 +1,7 @@
 import Reports from "@/pages/Reports"; // debug
 
 import { AuthedLayout } from "@/layouts/Authed";
-import { HeaderFooter } from "@/components/HeaderFooter";
+import { HeaderFooter } from "@/components/HeaderFooter/HeaderFooter";
 import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
