@@ -22,6 +22,7 @@
   "common.go_back": "Regresa",
   "common.google": "Continuar con Google",
   "common.haveAccount": "¿Ya tienes una cuenta?",
+  "common.hint": "Pista",
   "common.intruder": "El intruso",
   "common.logIn": "Acceso",
   "common.logOut": "Cerrar sesión",

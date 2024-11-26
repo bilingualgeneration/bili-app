@@ -22,6 +22,7 @@
   "common.go_back": "Go Back",
   "common.google": "Continue with Google",
   "common.haveAccount": "Already have an account?",
+  "common.hint": "Hint",
   "common.intruder": "The Intruder",
   "common.logIn": "Log in",
   "common.logOut": "Log out",
