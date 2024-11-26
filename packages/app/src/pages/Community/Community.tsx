@@ -1,9 +1,5 @@
 import { FC } from "react";
-import {
-  IonCard,
-  IonCardContent,
-  IonText,
-} from "@ionic/react";
+import { IonCard, IonCardContent, IonText } from "@ionic/react";
 
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useIntl } from "react-intl";
@@ -19,30 +15,34 @@ import tunita from "@/assets/img/tunita.png";
 import "./Community.scss";
 
 const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
-  const {language} = useLanguageToggle();
-  const content = <>
-    <img src={image} />
-    <IonText className="ion-text-center">
-      <h1 className='text-3xl semibold color-cielo'>
-	{language === 'en' ? title : translatedTitle}
-      </h1>
-      {language === 'esen' && (
-        <h3 className="text-2xl color-cielo">
-	  {title}
-        </h3>
-      )}
-    </IonText>
-  </>;
+  const { language } = useLanguageToggle();
+  const content = (
+    <>
+      <img src={image} />
+      <IonText className="ion-text-center">
+        <h1 className="text-3xl semibold color-cielo">
+          {language === "en" ? title : translatedTitle}
+        </h1>
+        {language === "esen" && (
+          <h3 className="text-2xl color-cielo">{title}</h3>
+        )}
+      </IonText>
+    </>
+  );
   return (
     <div className="community-card">
-      {locked && <div className="content-lock">
+      {locked && (
+        <div className="content-lock">
           <Lock />
-        </div>}
-      {link && <Link to={link} className="no-text-decoration">
-	{content}
-      </Link>}
+        </div>
+      )}
+      {link && (
+        <Link to={link} className="no-text-decoration">
+          {content}
+        </Link>
+      )}
       {!link && content}
-      </div>
+    </div>
   );
 };
 
@@ -56,7 +56,7 @@ export const Community: FC = () => {
         description: "title for tell me about",
       }),
       title: "Tell me about...",
-      link: "/tell-me-about-game/intro",
+      link: "/tell-me-about/intro",
       image: nuriah,
     },
     {

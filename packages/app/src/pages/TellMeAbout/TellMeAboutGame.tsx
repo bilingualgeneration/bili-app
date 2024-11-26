@@ -12,7 +12,7 @@ export const TellMeAboutGame: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   return (
-    <FirestoreDocProvider collection="tell-me-about-game" id={pack_id}>
+    <FirestoreDocProvider collection="tell-me-about" id={pack_id}>
       <TellMeAboutHydratedGame />
     </FirestoreDocProvider>
   );

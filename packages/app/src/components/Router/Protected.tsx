@@ -268,17 +268,17 @@ export const ProtectedRoutes: React.FC = () => {
           />
           <Route
             exact
-            path="/tell-me-about-game/intro"
+            path="/tell-me-about/intro"
             component={TellMeAboutIntro}
           />
           <Route
             exact
-            path="/tell-me-about-game/select"
+            path="/tell-me-about/select"
             component={TellMeAboutSelect}
           />
           <Route
             exact
-            path="/tell-me-about-game/play/:pack_id"
+            path="/tell-me-about/play/:pack_id"
             render={() => (
               <MinimalHeader>
                 <TellMeAboutGame />
