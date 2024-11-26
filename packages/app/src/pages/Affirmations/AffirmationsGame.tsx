@@ -36,11 +36,11 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   text_back,
   text_front,
 }) => {
-  const { getText } = useLanguage();
+  const { filterText } = useLanguage();
   const { addAudio } = useAudioManager();
   const [showFront, setShowFront] = useState<boolean>(true);
-  const text_front_filtered = getText(text_front);
-  const text_back_filtered = getText(text_back);
+  const text_front_filtered = filterText(text_front);
+  const text_back_filtered = filterText(text_back);
   const audio = Object.fromEntries(
     showFront
       ? text_front_filtered.map((t: any) => [t.language, t.audio.url])

@@ -33,6 +33,7 @@ import { useProfile } from "@/hooks/Profile";
 import LightbulbIcon from "@/assets/icons/lightbulb.svg";
 import styles from "./Deck.module.css";
 import { I18nMessage } from "../I18nMessage";
+import { useLanguage } from "@/hooks/Language";
 
 interface CardAudio {
   url: string;
@@ -62,7 +63,7 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const [isHintOpen, setIsHintOpen] = useState<boolean>(false);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const currentCard = cards[currentCardIndex];
@@ -202,18 +203,6 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                 }}
                 size={isMobile ? "small" : "large"}
               />
-              <IonText className="ion-hide-lg-down">
-                <h1 className="text-2xl semibold color-suelo">
-                  <I18nMessage id="storyFactory.read" />
-                </h1>
-                <I18nMessage
-                  id="storyFactory.read"
-                  level={2}
-                  wrapper={(text: string) => (
-                    <p className="text-lg color-english">{text}</p>
-                  )}
-                />
-              </IonText>
             </div>
           </IonCol>
           <IonCol
@@ -234,16 +223,12 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                 const content = (
                   <>
                     <h1 className={"text-2xl semibold"}>
-                      {language === "en"
-                        ? enText
-                        : isInclusive
-                          ? esIncText
-                          : esText}
+                      {language === "en" ? enText : esText}
                     </h1>
                     <IonGrid style={{ width: "100%" }}>
                       <IonRow>
                         <IonCol size="9">
-                          {language === "esen" && (
+                          {language === "es.en" && (
                             <p className="text-lg color-english">{enText}</p>
                           )}
                         </IonCol>
@@ -272,13 +257,17 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                               </IonButton>
                               <IonText>
                                 <h2 className="text-lg semibold">
-                                  {language === "en" ? "Hint" : "Pista"}
+                                  <I18nMessage id="common.hint" />
                                 </h2>
-                                {language === "esen" && (
-                                  <h3 className="text-md color-english">
-                                    Hint
-                                  </h3>
-                                )}
+                                <I18nMessage
+                                  id="common.hint"
+                                  level={2}
+                                  wrapper={(text: string) => (
+                                    <h3 className="text-md color-english">
+                                      {text}
+                                    </h3>
+                                  )}
+                                />
                               </IonText>
                             </>
                           )}
@@ -364,11 +353,15 @@ const Hint: React.FC<any> = ({
         <IonCol size="10">
           <IonText>
             <h2 className="text-4xl semibold">
-              {language === "en" ? "Hint" : "Pista"}
+              <I18nMessage id="common.hint" />
             </h2>
-            {language === "esen" && (
-              <h3 className="text-3xl color-english">Hint</h3>
-            )}
+            <I18nMessage
+              id="common.hint"
+              level={2}
+              wrapper={(text: string) => (
+                <h3 className="text-3xl color-english">{text}</h3>
+              )}
+            />
           </IonText>
         </IonCol>
       </IonRow>
@@ -386,14 +379,10 @@ const Hint: React.FC<any> = ({
         <IonCol size="10">
           <IonText>
             <h2 className="text-2xl color-suelo">
-              {language === "en"
-                ? enHintText
-                : isInclusive
-                  ? esIncHintText
-                  : esHintText}
+              {language === "en" ? enHintText : esHintText}
             </h2>
           </IonText>
-          {language === "esen" && (
+          {language === "es.en" && (
             <IonText>
               <h2 className="text-xl color-english">{enHintText}</h2>
             </IonText>
