@@ -1,0 +1,49 @@
+.carousel-container {
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  overflow-x: clip;
+  overflow-y: hidden;
+}
+
+.slick-arrow {
+  position: absolute;
+  z-index: 9;
+  height: 3.75rem !important;
+  width: 3.75rem !important;
+
+  &.slick-disabled {
+    display: none;
+  }
+
+  &.backward {
+    left: 0;
+    margin-left: -1.875rem;
+  }
+
+  &.forward {
+    right: 0;
+    margin-right: -1.875rem;
+  }
+
+  &::before {
+    display: none;
+  }
+}
+
+@media (max-width: 764px) {
+  .carousel-container {
+    padding-left: 0.5rem;
+  }
+
+  .slick-arrow {
+    width: 40px;
+
+    img {
+      width: 40px;
+    }
+
+    &.backward {
+      margin-left: -5px;
+    }
+  }
+}

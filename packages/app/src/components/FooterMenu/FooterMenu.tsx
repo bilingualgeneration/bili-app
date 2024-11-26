@@ -31,6 +31,7 @@ export const FooterMenu: React.FC = ({}) => {
   return (
     <>
       <div
+        className="ion-hide-md-down"
         style={{
           position: "fixed",
           left: "calc(50% - 175px)",
@@ -39,6 +40,7 @@ export const FooterMenu: React.FC = ({}) => {
         }}
       >
         <IonGrid
+          className="ion-hide-md-down"
           fixed={true}
           style={{
             maxWidth: "350px",

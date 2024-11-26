@@ -28,62 +28,35 @@ export const Piece: React.FC<PieceProps> = ({
   top,
   ...props
 }) => {
-  const { audioOnComplete, piecesDropped, totalTargets } = useDnD();
   const { addAudio } = useAudioManager();
-  const [audio_drag, set_audio_drag] = useState<HTMLAudioElement | null>(null);
+  const [onDragAudioPlaying, setOnDragAudioPlaying] = useState(false);
   const color = hashLetter(text);
   const rotate = `${rotation}deg`;
-  useEffect(() => {
-    // todo: better way to play audio?
-    if (audio_on_drag) {
-      const a = new Audio(audio_on_drag.url);
-      // speed up across the board
-      a.playbackRate = 1.25;
-      set_audio_drag(a);
-    }
-  }, [audio_on_drag, set_audio_drag]);
-
+  const audioOnDrop = audio_on_drop.url;
   const [{ isDragging }, drag] = useDrag(
     () => ({
       collect: (monitor: DragSourceMonitor) => ({
         isDragging: monitor.isDragging(),
       }),
-      item: { color, id, left, rotate, text, top },
+      item: { color, id, left, rotate, text, top, audioOnDrop },
       type: "piece",
     }),
     [id, color, left, rotate, text, top],
   );
   useEffect(() => {
-    if (audio_drag) {
-      if (isDragging) {
-        audio_drag.loop = true;
-        audio_drag.play();
-      } else {
-        audio_drag.pause();
-        audio_drag.currentTime = 0;
-      }
+    if (isDragging && !onDragAudioPlaying) {
+      setOnDragAudioPlaying(true);
+      addAudio([audio_on_drag.url]);
     }
-    if (dropped) {
-      let audio = [];
-      if (audio_on_drop) {
-        audio.push(audio_on_drop.url);
-      }
-      if (piecesDropped >= totalTargets) {
-        audio.push(audioOnComplete);
-      }
-      audio.push(audio_correct);
-      addAudio(audio);
+    if (!isDragging && onDragAudioPlaying) {
+      setOnDragAudioPlaying(false);
     }
   }, [
-    audio_drag,
-    audio_on_drop,
-    audioOnComplete,
-    audio_correct,
+    addAudio,
+    audio_on_drag,
     isDragging,
-    dropped,
-    piecesDropped,
-    totalTargets,
-    audioOnComplete,
+    onDragAudioPlaying,
+    setOnDragAudioPlaying,
   ]);
   if (isDragging || dropped) {
     return <span ref={drag}></span>;

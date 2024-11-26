@@ -13,7 +13,7 @@ import backButton from "@/assets/icons/back_button_green.svg";
 import biliLogo from "@/assets/icons/bili.svg";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-import "./UnauthedHeader.scss";
+import "./UnauthedHeader.css";
 
 export const UnauthedHeader: FC<
   PropsWithChildren<{
@@ -36,7 +36,7 @@ export const UnauthedHeader: FC<
           )}
         </IonCol>
         <IonCol className="ion-text-center">
-          <img src={biliLogo} />
+          <img src={biliLogo} id="bili-header-logo" />
         </IonCol>
         <IonCol className="ion-text-right">
           <LanguageSwitcher />

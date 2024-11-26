@@ -1,0 +1,28 @@
+#stories-game-mcg-wrapper {
+  margin: auto;
+  max-width: 800px;
+}
+
+.stories-game-mcg-card {
+  aspect-ratio: 1;
+  min-height: 100px;
+  max-height: 25vh;
+  border: 8px solid transparent;
+  border-radius: 32px;
+  margin: auto;
+  display: flex;
+  &.correct {
+    border-color: var(--alerts-status-success, #12d18e);
+  }
+  &.incorrect {
+    border-color: var(--Categories-Error, #f0091b);
+    animation: shake 1s;
+  }
+}
+
+.stories-game-image {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  border-radius: 24px;
+}

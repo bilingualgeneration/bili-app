@@ -54,7 +54,7 @@ import "@/theme/padding-classes.scss";
 import "@/theme/text-classes.scss";
 import "@/theme/style-classes.css";
 import "@/theme/buttons.css";
-import "@/theme/device-zooms.css";
+import "@/theme/common.css";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -68,21 +68,19 @@ const App: React.FC = () => {
         <InterfaceLanguageProvider>
           <AudioManagerProvider>
             <ProfileProvider>
-              <LanguageToggleProvider>
+              <ClassroomProvider>
                 <I18nProvider>
-                  <ClassroomProvider>
-                    <StudentProvider>
-                      <NamesProvider>
-                        <AppWrapper>
-                          <TimeTrackerProvider>
-                            <Router />
-                          </TimeTrackerProvider>
-                        </AppWrapper>
-                      </NamesProvider>
-                    </StudentProvider>
-                  </ClassroomProvider>
+                  <StudentProvider>
+                    <NamesProvider>
+                      <AppWrapper>
+                        <TimeTrackerProvider>
+                          <Router />
+                        </TimeTrackerProvider>
+                      </AppWrapper>
+                    </NamesProvider>
+                  </StudentProvider>
                 </I18nProvider>
-              </LanguageToggleProvider>
+              </ClassroomProvider>
             </ProfileProvider>
           </AudioManagerProvider>
         </InterfaceLanguageProvider>

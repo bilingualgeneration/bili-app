@@ -79,26 +79,9 @@ const WouldDoHydratedGame: React.FC = () => {
   }
 
   return (
-    <div>
-      <div
-        style={{ padding: "4px 120px 0px 120px" }}
-        className="margin-bottom-2"
-      >
-        <IonText>
-          <h1 className="text-5xl margin-top-1">
-            <FormattedMessage
-              id="wouldDo.title"
-              defaultMessage={"What would you do?"}
-              description={"Title of '¿Que harías?' page"}
-            />
-          </h1>
-          {language === "esen" && (
-            <p className="text-3xl">What would you do?</p>
-          )}
-        </IonText>
-      </div>
+    <>
       {/* Passing questionsData to the Deck component */}
-      <Deck cards={questionsData} />
-    </div>
+      <Deck cards={questionsData} id={"common.wouldDo"} />
+    </>
   );
 };

@@ -4,10 +4,12 @@ import {
   SetStateAction,
   useContext,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
 import { Language, useLanguage } from "@/hooks/Language";
+import { useScreenSize } from "@/lib/screenSize";
 
 import classnames from "classnames";
 import "./LanguageToggle.css";
@@ -32,6 +34,12 @@ export const LanguageToggleProvider: React.FC<
   const [tempAllowedLanguages, setTempAllowedLanguages] = useState<
     Language[] | null
   >(null);
+
+  useEffect(() => {
+    if (!allowedLanguages.includes(language)) {
+      setLanguage(allowedLanguages[0]);
+    }
+  }, [allowedLanguages, language, setLanguage]);
 
   const setTempLanguage = useCallback(
     (newLanguage: Language | null) => {
@@ -74,13 +82,19 @@ export const LanguageToggleProvider: React.FC<
 
 export const LanguageToggle: React.FC = () => {
   const { cycleLanguage, language, isVisible } = useLanguageToggle();
+  const { screenType } = useScreenSize();
   const [pressed, setPressed] = useState<boolean>(false);
   return (
     <div
-      className={classnames("drop-shadow", "language-toggle", language, {
-        pressed,
-        ["ion-hide"]: isVisible === false,
-      })}
+      className={classnames(
+        "drop-shadow",
+        "language-toggle",
+        language.replace(".", "-"),
+        {
+          pressed,
+          ["ion-hide"]: isVisible === false,
+        },
+      )}
       onMouseDown={() => {
         setPressed(true);
       }}
@@ -90,13 +104,17 @@ export const LanguageToggle: React.FC = () => {
       }}
     >
       <div
-        className={classnames("language-toggle-inner", "text-2xl", "semibold")}
+        className={classnames(
+          "language-toggle-inner",
+          screenType === "mobile" ? "text-xl" : "text-2xl",
+          "semibold",
+        )}
       >
-        {language === "es.en" ? (
+        {language.includes(".") ? (
           <>
-            es
+            {language.split(".")[0]}
             <br />
-            en
+            {language.split(".")[1]}
           </>
         ) : (
           language

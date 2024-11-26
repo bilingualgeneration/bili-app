@@ -3,41 +3,33 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Carousel.scss";
+import "./Carousel.css";
 
-interface CarouselProps extends React.PropsWithChildren<{
-    height: number;
+interface CarouselProps
+  extends React.PropsWithChildren<{
+    height: string | number;
     slidesToShow?: number;
     slideMargin?: number;
     infinite?: boolean;
-}> {}
+  }> {}
 
-const Arrow: React.FC<any> = ({
-  className,
-  style,
-  onClick,
-  height,
-  direction,
-}) => {
+//style={{ top: height / 2 }}
+
+const Arrow: React.FC<any> = ({ className, style, onClick, direction }) => {
   return (
-    <div
-      {...{ onClick }}
-      className={`${direction} ${className}`}
-      style={{ top: height / 2 }}
-    >
+    <div {...{ onClick }} className={`${direction} ${className}`}>
       <img src={direction === "forward" ? forward : backward} />
     </div>
   );
 };
 
-export const Carousel: React.FC<CarouselProps> = ({ 
-  children, 
-  height, 
-  slidesToShow = 1, 
+export const Carousel: React.FC<CarouselProps> = ({
+  children,
+  height,
+  slidesToShow = 1,
   slideMargin = 4,
   infinite = false,
 }) => {
-  
   const settings: Settings = {
     draggable: false,
     infinite,
@@ -59,9 +51,7 @@ export const Carousel: React.FC<CarouselProps> = ({
           }
         `}
       </style>
-      <Slider {...settings}>
-        {children}
-      </Slider>
+      <Slider {...settings}>{children}</Slider>
     </div>
   );
 };

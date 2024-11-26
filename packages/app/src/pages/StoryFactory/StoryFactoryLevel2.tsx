@@ -158,12 +158,7 @@ export const StoryFactoryLevel2: React.FC = () => {
   }
 
   if (showCongrats) {
-    return (
-      <StoryFactoryCongrats
-        setShowCongrats={setShowCongrats}
-        count={numPlays}
-      />
-    );
+    return <StoryFactoryCongrats />;
   }
 
   if (status === "loading") {

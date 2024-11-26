@@ -49,7 +49,7 @@ export const TellMeAboutIntro: React.FC = () => {
       buttonTextSecondary={language === "esen" ? button_en : undefined}
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/tell-me-about-game/select");
+        history.push("/tell-me-about/select");
       }}
     >
       <IonText>
