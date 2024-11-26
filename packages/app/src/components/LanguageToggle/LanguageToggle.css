@@ -2,9 +2,9 @@
   color: white;
   cursor: pointer;
   text-transform: uppercase;
-  height: 78px;
-  width: 78px;
-  border-radius: 28px;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 1.75rem;
   display: inline-block;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -38,17 +38,9 @@
   background-color: #c00617;
 }
 
-.language-toggle.esen {
+.language-toggle.es-en {
   background-color: #006a67;
 }
-.language-toggle.esen.pressed {
+.language-toggle.es-en.pressed {
   background-color: #005552;
-}
-
-@media (max-width: 768px) {
-  .language-toggle {
-    height: 54px;
-    width: 54px;
-    border-radius: 20px;
-  }
 }

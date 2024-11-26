@@ -1,16 +1,4 @@
-/*
-import { FormattedMessage } from "react-intl";
-import { gameControllerOutline } from "ionicons/icons";
-import Heart from "@/assets/icons/heart.svg?react";
-import { Link } from "react-router-dom";
-*/
-
-import {
-  collection,
-  //  where,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
 import { ContentCard } from "@/components/ContentCard";
 import { IonCard, IonIcon, IonText } from "@ionic/react";
 
@@ -120,7 +108,10 @@ export const HydratedPackSelect: React.FC<props> = ({
   if (only_cards) {
     return (
       <>
-        <Carousel slidesToShow={screenType === "mobile" ? 1 : 2} height={200}>
+        <Carousel
+          slidesToShow={screenType === "mobile" ? 1 : 2}
+          height={"17rem"}
+        >
           {cards.map((c: Card, index: number) => {
             let pills: Pill[] = [];
             if (module === "story") {
@@ -177,7 +168,7 @@ export const HydratedPackSelect: React.FC<props> = ({
         </div>
         <Carousel
           slidesToShow={screenType === "mobile" ? 1 : 2}
-          height={screenType === "mobile" ? 145 : 274}
+          height={"17rem"}
         >
           {cards.map((c: Card, index: number) => (
             <ContentCard {...c} key={index} />

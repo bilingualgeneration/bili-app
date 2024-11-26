@@ -1,23 +1,28 @@
 #student-landing-page {
-    .carousel-header-margin{
-	margin-left: 30px;
-    }
+  .carousel-header-margin {
+    margin-left: 1.875rem;
+  }
 
-    .background-pattern {
-      background-position: 100%;
-    }
-    
+  .background-pattern {
+    background-position: 100%;
+  }
+
   #wave-icons {
     background-image: url("/assets/img/wave.png");
     background-repeat: no-repeat;
     background-position: top center;
-    background-size: 1366px;
+    background-size: 85rem;
+    margin-left: 1.875rem;
+    margin-right: 1.875rem;
+    ion-col {
+      margin-top: -1.25rem;
+    }
     ion-col:nth-child(2) {
-      margin-top: 1.5rem;
+      margin-top: 0rem;
     }
 
     ion-col:nth-child(3) {
-      margin-top: 4rem;
+      margin-top: 3rem;
     }
 
     .wave-icon {
@@ -26,7 +31,7 @@
 
       .icon {
         display: inline-block;
-        padding: 30px;
+        padding: 1.875rem;
         border-radius: 50%;
 
         &.has-link {
@@ -34,8 +39,8 @@
         }
       }
       svg {
-        width: 60px;
-        height: 60px;
+        width: 3.75rem;
+        height: 3.75rem;
       }
     }
   }

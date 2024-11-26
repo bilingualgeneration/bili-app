@@ -10,12 +10,11 @@ import { useLanguage } from "@/hooks/Language";
 
 import en from "./dictionaries/en.json";
 import es from "./dictionaries/es.json";
-import esInc from "./dictionaries/es-inc.json";
 
 const dictionary: { [key: string]: any } = {
   en,
   es,
-  "es-inc": esInc,
+  "es-inc": es, // assume that the interface has no differences between inclusive and non inclusive Spanish
 };
 
 interface I18nState {

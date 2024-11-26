@@ -20,8 +20,7 @@ import { ProfileChip } from "@/components/ProfileChip";
 import { Link } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 import { useScreenSize } from "@/lib/screenSize";
-
-import "./HeaderFooter.scss";
+import "./HeaderFooter.css";
 
 export const HeaderFooter: FC<
   PropsWithChildren<{
@@ -42,19 +41,13 @@ export const HeaderFooter: FC<
             >
               {screenType === "mobile" ? (
                 <>
-                  <IonCol size="auto">
-                    {showBackButton && <BackButton />}
-                  </IonCol>
-                  <IonCol size="5.7" className="ion-text-center">
+                  <IonCol size="5">{showBackButton && <BackButton />}</IonCol>
+                  <IonCol size="2" className="ion-text-center">
                     <Link to="/student-dashboard">
-                      <img src={biliLogo} />
+                      <img className="header-bili-logo" src={biliLogo} />
                     </Link>
                   </IonCol>
-                  <IonCol
-                    size="auto"
-                    className=""
-                    style={{ position: "absolute", right: "5%" }}
-                  >
+                  <IonCol size="5" className="ion-text-right">
                     {id !== null && <ProfileChip />}
                   </IonCol>
                 </>

@@ -1,8 +1,8 @@
 .content-card,
 .content-lock {
-  height: 274px;
-  width: 320px;
-  border-radius: 12px;
+  height: 17rem;
+  width: 20rem;
+  border-radius: 0.75rem;
 }
 .content-card {
   position: relative;
@@ -15,8 +15,8 @@
 
   .category-tag {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 0.75rem;
+    left: 0.75rem;
     z-index: 2;
   }
 
@@ -42,7 +42,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+
+    > * {
+      height: 4.5rem;
+    }
   }
 
   .content-card-pill {
@@ -64,7 +67,7 @@
     left: 0;
     content: "";
     z-index: 1;
-    border-radius: 12px;
+    border-radius: 0.75rem;
   }
 }
 

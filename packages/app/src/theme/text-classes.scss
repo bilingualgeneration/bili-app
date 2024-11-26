@@ -3,6 +3,19 @@
   src: url("/assets/fonts/Outfit-VariableFont_wght.ttf");
 }
 
+html {
+  font-size: 16px;
+}
+
+.semibold {
+  font-weight: 600 !important;
+  font-family: Outfit !important;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
 // set standards
 h1,
 h2,
@@ -95,11 +108,78 @@ p {
   letter-spacing: -2px !important;
 }
 
-.semibold {
-  font-weight: 600 !important;
-  font-family: Outfit !important;
-}
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 8px;
+  }
 
-.no-underline {
-  text-decoration: none;
+  .text-sm-xs {
+    font-size: 4.5px !important;
+    line-height: 8px !important;
+  }
+
+  .text-xs {
+    font-size: 6px !important;
+    line-height: 8px !important;
+  }
+
+  .text-sm {
+    font-size: 7px !important;
+    line-height: 10px !important;
+  }
+
+  .text-md {
+    font-size: 8px !important;
+    line-height: 10px !important;
+  }
+
+  .text-md-no-line-height {
+    font-size: 7.5px !important;
+  }
+
+  .text-lg {
+    font-size: 9px !important;
+    line-height: 12px !important;
+  }
+
+  .text-xl {
+    font-size: 10px !important;
+    line-height: 12px !important;
+  }
+
+  .text-1_5xl {
+    font-size: 11px !important;
+    line-height: 14px !important;
+  }
+
+  .text-2xl {
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
+
+  .text-3xl {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .text-4xl {
+    font-size: 20px !important;
+    line-height: 24px !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .text-5xl {
+    font-size: 24px !important;
+    font-weight: bold !important;
+    line-height: 28px !important;
+    letter-spacing: -1px !important;
+  }
+
+  .text-6xl {
+    font-size: 32px !important;
+    font-weight: bold !important;
+    line-height: 36px !important;
+    letter-spacing: -2px !important;
+  }
 }

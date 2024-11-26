@@ -1,17 +1,16 @@
 #authedHeader {
-  // margin: 0 2rem 1rem 2rem;
   padding-top: 1rem;
   background-color: #fff;
 }
 
-@media (max-width: 768px) {
+.header-bili-logo {
+  width: 5rem;
+  height: auto;
+}
+
+@media (max-width: 1000px) {
   #authedHeader {
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  img {
-    width: 13%;
-    height: auto;
   }
 }

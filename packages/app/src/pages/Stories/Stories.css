@@ -1,11 +1,8 @@
-:root {
-  --storyPageSize: 500px;
-}
-
 #story-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100vh;
   > div {
     position: relative;
@@ -29,11 +26,6 @@
   }
 }
 
-.story-page {
-  width: var(--storyPageSize);
-  height: var(--storyPageSize);
-}
-
 .story-title-card {
   background-size: cover;
   background-repeat: no-repeat;
@@ -55,6 +47,15 @@
       1px -1px 0 #fff,
       -1px 1px 0 #fff,
       1px 1px 0 #fff;
+  }
+}
+
+.story-page {
+  aspect-ratio: 1;
+  width: 100%;
+  margin: 0;
+  ion-card-content {
+    height: 100%;
   }
 }
 
@@ -99,10 +100,7 @@
     background-color: #ffaaaa;
   }
 }
-.stories-game-image {
-  margin: 7px;
-  aspect-ratio: 1;
-}
+
 .text-responsive h1 {
   font-weight: bold;
   margin: 0 68px 0 68px;
@@ -120,21 +118,23 @@
   width: auto;
 }
 
-.content-wrapper {
+.story-pages-wrapper {
+  position: relative;
+  padding-left: 3rem;
+  padding-right: 3rem;
   .page-control {
     height: 4rem;
-    width: auto;
+    width: 4rem;
     position: absolute;
+    top: calc(50% - 2rem);
+    z-index: 100;
+
     &.forward {
-      top: calc(50% - 55px);
-      right: calc(50% - var(--storyPageSize) - 36px);
-      z-index: 100;
+      right: 1.5rem;
     }
 
     &.backward {
-      top: calc(50% - 55px);
-      left: calc(50% - var(--storyPageSize) - 36px);
-      z-index: 100;
+      left: 1.5rem;
     }
 
     &.locked {
@@ -164,4 +164,17 @@
   background: #006a67;
   display: flex;
   gap: 4px;
+}
+
+.stories-pills-block {
+  display: flex;
+  max-width: 700px;
+  height: 7.536px;
+  align-items: flex-start;
+}
+
+.stories-card-pills-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

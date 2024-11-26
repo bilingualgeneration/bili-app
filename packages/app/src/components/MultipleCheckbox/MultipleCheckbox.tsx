@@ -1,7 +1,7 @@
 import { Control, Controller } from "react-hook-form";
 import { IonCheckbox } from "@ionic/react";
 
-import { FC, JSX, useState } from "react";
+import { FC, JSX, useState, useEffect } from "react";
 
 export type MultipleCheckboxOption = {
   value: any;
@@ -41,6 +41,7 @@ type MultipleCheckboxAdditionalProps = {
   options: MultipleCheckboxOption[];
   testId: string;
   wrapper: FC<{ children: JSX.Element }>;
+  maxSelections?: number;
 };
 
 export type MultipleCheckboxProps = Partial<IonCheckboxProps> &
@@ -56,9 +57,13 @@ export const MultipleCheckbox = ({
   testId,
   wrapper: Wrapper = ({ children }) => children,
   onChange: onChangeProps,
+  maxSelections,
   ...props
 }: MultipleCheckboxProps): JSX.Element => {
   const [values, setValues] = useState<string[]>(defaultValue);
+  useEffect(() => {
+    setValues(defaultValue);
+  }, [defaultValue]);
   return (
     <Controller
       control={control}
@@ -76,6 +81,15 @@ export const MultipleCheckbox = ({
                     newValues = [...values, option.value];
                   } else {
                     newValues = values.filter((v) => v !== option.value);
+                  }
+                  // if maxSelections is defined
+                  // and if number of selections exceeds maxSelections
+                  // deselect older selections in FIFO
+                  while (
+                    maxSelections !== undefined &&
+                    newValues.length > maxSelections
+                  ) {
+                    newValues = newValues.slice(1);
                   }
                   setValues(newValues);
                   onChange(newValues);

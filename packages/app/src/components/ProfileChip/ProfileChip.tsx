@@ -79,7 +79,7 @@ const HydratedProfileChip: React.FC = () => {
                 {firstName}
               </p>
             </IonText>
-            <img src={Avatar} />
+            <img src={Avatar} className="ion-hide" />
           </div>
         </button>
       </div>

@@ -65,6 +65,7 @@ import {
 } from "@/pages/TellMeAbout";
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
+import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
 
 export const ProtectedRoutes: React.FC = () => {
   const { profile } = useProfile();
@@ -259,6 +260,11 @@ export const ProtectedRoutes: React.FC = () => {
                 <StoryFactoryPlay />
               </MinimalHeader>
             )}
+          />
+          <Route
+            exact
+            path="/story-factory-game/congrats"
+            component={StoryFactoryCongrats}
           />
           <Route
             exact

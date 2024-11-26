@@ -18,9 +18,12 @@ import {
 } from "@ionic/react";
 import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
+import { useClassroom } from "@/hooks/Classroom";
 import "./ClassStudents.css";
 
 export const ClassStudents: React.FC = () => {
+  const { info } = useClassroom();
+  // TODO: remove dependency on useFirestoreDoc and pull classroomAnalytics from useClassroom
   const { data } = useFirestoreDoc();
   const analytics = data.classroomAnalytics[0].studentAnalytics;
   return (
@@ -32,7 +35,7 @@ export const ClassStudents: React.FC = () => {
             <div className="header-overview-row">
               <div className="header-overview-arrow">
                 <IonText className="text-sm color-barro classroom-name-text">
-                  {"1-st grade Spanish"}
+                  {info.name}
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
@@ -44,7 +47,7 @@ export const ClassStudents: React.FC = () => {
                 <button className="add-students-button">
                   <IonIcon icon={addSharp}></IonIcon>
                   <Link
-                    to={`/classrooms/view/${data.id}/add_students`}
+                    to={`/classrooms/view/${info.id}/add_students`}
                     className="no-underline"
                   >
                     <p className="text-sm semibold color-nube">Add students</p>
@@ -71,7 +74,7 @@ export const ClassStudents: React.FC = () => {
                 <StudentInfo
                   id={student.id}
                   type={"student"}
-                  link={`/classrooms/view/${data.id}/students/view/${student.id}`}
+                  link={`/classrooms/view/${info.id}/students/view/${student.id}`}
                   size="xs"
                 />
               </IonCol>
