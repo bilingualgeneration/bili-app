@@ -61,21 +61,25 @@
 
 @keyframes drop-shadow-incorrect-animation {
   0% {
-    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
-    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+    --webkit-filter: drop-shadow(
+        0.25rem 0.25rem 0 var(--Categories-Error, #f0091b)
+      )
+      drop-shadow(-0.25rem -0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0.25rem 0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-0.25rem 0.25rem -0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
   }
 
   99% {
-    --webkit-filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
-    filter: drop-shadow(4px 4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(-4px -4px 0 var(--Categories-Error, #f0091b))
-      drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+    --webkit-filter: drop-shadow(
+        0.25rem 0.25rem 0 var(--Categories-Error, #f0091b)
+      )
+      drop-shadow(-0.25rem -0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0.25rem 0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(-0.25rem -0.25rem 0 var(--Categories-Error, #f0091b))
+      drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
   }
 
   100% {
@@ -89,10 +93,12 @@
 }
 
 .drop-shadow-correct {
-  --webkit-filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12d18e))
-    drop-shadow(-4px -4px 0 var(--alerts-status-success, #12d18e))
-    drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
-  filter: drop-shadow(4px 4px 0 var(--alerts-status-success, #12d18e))
-    drop-shadow(-4px -4px 0 var(--alerts-status-success, #12d18e))
-    drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.5));
+  --webkit-filter: drop-shadow(
+      0.25rem 0.25rem 0 var(--alerts-status-success, #12d18e)
+    )
+    drop-shadow(-0.25rem -0.25rem 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0.25rem 0.25rem 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(-0.25rem -0.25rem 0 var(--alerts-status-success, #12d18e))
+    drop-shadow(0.25rem 0.25rem 0.3125rem rgba(0, 0, 0, 0.5));
 }

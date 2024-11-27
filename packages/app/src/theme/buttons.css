@@ -1,10 +1,10 @@
 ion-button {
   &:not([shape="round"]) {
-    --border-radius: 8px !important;
+    --border-radius: 0.5rem !important;
   }
 
   &.curved-corners {
-    --border-radius: 20px !important;
+    --border-radius: 1.25rem !important;
   }
 
   &.circle {
@@ -33,7 +33,7 @@ ion-button {
   }
 
   &.elevate {
-    --box-shadow: -6px 12px 15px 0px rgba(0, 0, 0, 0.15) !important;
+    --box-shadow: -0.375rem 0.75rem 0.9375rem 0 rgba(0, 0, 0, 0.15) !important;
   }
 
   font-family: Outfit;
