@@ -37,7 +37,9 @@ export const ProfileChip: React.FC = () => {
 
 const HydratedProfileChip: React.FC = () => {
   const { firstName, id } = useStudent();
-  const { id: classroomId } = useClassroom();
+  const { info } = useClassroom();
+
+  const classroomId = "a";
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { language } = useLanguageToggle();
@@ -117,7 +119,7 @@ const HydratedProfileChip: React.FC = () => {
             </Link>
 
             <Link
-              to={`/select-student/${classroomId}`}
+              to={`/select-student/${info.id}`}
               className="no-underline"
               onClick={() => {
                 setPopoverOpen(false);
