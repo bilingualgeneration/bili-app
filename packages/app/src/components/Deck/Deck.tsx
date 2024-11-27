@@ -237,8 +237,8 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                           size="3"
                           style={{
                             position: "absolute",
-                            bottom: "16px",
-                            right: "0px",
+                            bottom: "1rem",
+                            right: "0",
                             zIndex: 10,
                           }}
                         >

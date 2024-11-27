@@ -1,9 +1,9 @@
 .explore-card {
-  margin: 4px;
-  padding: 20px;
+  margin: 0.25rem;
+  padding: 1.25rem;
   display: flex;
-  width: 332px;
-  height: 340px;
+  width: 20.75rem;
+  height: 21.25rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;

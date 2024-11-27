@@ -74,7 +74,7 @@
 @media (max-width: 768px) {
   .content-card,
   .content-lock {
-    height: 145px;
-    width: 230px;
+    height: 9.0625rem;
+    width: 14.375;
   }
 }

@@ -1,20 +1,20 @@
 #coming-soon-card {
-    width: 703px;
-    height: 215px;
-    border-radius: 11px;
-    display: flex;
-    column-gap: 30px;
-    align-items: center;
-    padding: 24px;
-    margin: 1.5%;
-    box-shadow: -1.6612545251846313px 3.3225090503692627px 9.967527389526367px 0px #00000040;
+  width: 43.9375rem;
+  height: 13.4375rem;
+  border-radius: 0.6875rem;
+  display: flex;
+  column-gap: 1.875rem;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 1.5%;
+  box-shadow: -0.10375rem 0.2076875rem 0.62rem 0 #00000040;
 
-    @media (max-width: 667px) { /* iPad Mini portrait and landscape width */
-        width: 600px;
-    }
+  @media (max-width: 667px) {
+    /* iPad Mini portrait and landscape width */
+    width: 37.5rem;
+  }
 
-    .subtitle {
-        margin-top: 10px;
-    }
+  .subtitle {
+    margin-top: 0.625rem;
+  }
 }
-

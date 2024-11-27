@@ -11,7 +11,6 @@ import type { MessageFormatElement } from "react-intl";
 import Lock from "@/assets/icons/lock.svg?react";
 import { useProfile } from "@/hooks/Profile";
 
-
 type StoriesCardProps = {
   title: string | MessageFormatElement[];
   subtitle: string | MessageFormatElement[];
@@ -37,7 +36,9 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
   isLocked = false,
   lock,
 }) => {
-  const { profile: {isImmersive }} = useProfile();
+  const {
+    profile: { isImmersive },
+  } = useProfile();
   const cardStyles = {
     background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.60) 100%), url(${cover})`,
   };
@@ -72,7 +73,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
             {isLocked && (
               <IonChip
                 style={{
-                  borderRadius: "18px",
+                  borderRadius: "1.125rem",
                   backgroundColor: "#fff",
                   fontWeight: "bold",
                   margin: 0,

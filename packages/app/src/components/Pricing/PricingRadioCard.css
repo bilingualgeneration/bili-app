@@ -1,12 +1,12 @@
 ion-card.main-pricing-card {
   display: flex;
   justify-content: flex-start;
-  padding: 24px;
-  gap: 24px;
-  width: 209px;
-  height: 163px;
-  border-radius: 16px;
-  border: 3px solid var(--Base-Agua, rgba(0, 106, 103, 0.12));
+  padding: 1.5rem;
+  gap: 1.5rem;
+  width: 13.0625rem;
+  height: 10.1875rem;
+  border-radius: 1rem;
+  border: 0.1875rem solid var(--Base-Agua, rgba(0, 106, 103, 0.12));
   cursor: pointer;
 
   @media screen and (max-width: 768px) {
@@ -37,7 +37,7 @@ ion-card-header.pricing-header {
   font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 28.8px */
-  letter-spacing: 0.2px;
+  letter-spacing: 0.0125rem;
   @media screen and (max-width: 768px) {
     font-size: 1.1rem;
   }
@@ -50,7 +50,7 @@ ion-card-header.pricing-header {
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.0125rem;
   @media screen and (max-width: 768px) {
     font-size: 0.87rem;
   }

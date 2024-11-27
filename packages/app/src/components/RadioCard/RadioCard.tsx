@@ -56,12 +56,12 @@ export const RadioCard: React.FC<RadioCardProps> = ({
               className="badge-content"
               style={{
                 backgroundColor: "#F48722",
-                marginTop: "15px",
-                marginLeft: "18px",
-                padding: "4px 8px",
-                borderRadius: "4px",
+                marginTop: "0.9375rem",
+                marginLeft: "1.125rem",
+                padding: "0.25rem 0.5rem",
+                borderRadius: "0.25rem",
                 color: "#000000",
-                fontSize: "10px",
+                fontSize: "0.625rem",
                 fontWeight: "600",
               }}
             >

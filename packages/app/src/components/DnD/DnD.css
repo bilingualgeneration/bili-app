@@ -1,73 +1,73 @@
 @font-face {
-    font-family: 'Tobi';
-    src: url('/assets/fonts/TobiRegular.otf')
+  font-family: "Tobi";
+  src: url("/assets/fonts/TobiRegular.otf");
 }
 
 .dnd-play-area {
-    width: 100%;
-    text-align: center;
-    
-    img{
-	display: none;
-    }
+  width: 100%;
+  text-align: center;
 
-    * {
-	font-size: 100px;
-	font-weight: bold;
-    }
-    
-    .letter {
-	font-family: 'Tobi';
-	
-	&.dnd-incorrect {
-	    text-shadow:
-		0px 2px 5px red,
-		2px 0px 5px red,
-		0px -2px 5px red,
-		-2px 0px 5px red;
-	}
-    }
+  img {
+    display: none;
+  }
 
-    .dnd-image{
-	height: 40vh !important;
-	max-height: 320px !important;
-	width: auto;
+  * {
+    font-size: 6.25rem;
+    font-weight: bold;
+  }
+
+  .letter {
+    font-family: "Tobi";
+
+    &.dnd-incorrect {
+      text-shadow:
+        0 0.125rem 0.3125rem red,
+        0.125rem 0 0.3125rem red,
+        0 -0.125rem 0.3125rem red,
+        -0.125rem 0 0.3125rem red;
     }
+  }
+
+  .dnd-image {
+    height: 40vh !important;
+    max-height: 20rem !important;
+    width: auto;
+  }
 }
 
 .dnd-drop-targets-container {
-    text-align: center;
+  text-align: center;
+  display: inline-block;
+
+  &.hasImage {
+    margin-top: 1rem;
+  }
+
+  &:not(.hasImage) {
+    margin-top: calc((28.125rem - 7.3125rem) / 2);
+  }
+
+  .dnd-image {
+    margin: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    width: auto;
+  }
+
+  .drop-target {
+    &:not(:last-child) {
+      margin-right: 0.75rem;
+    }
+
     display: inline-block;
 
-    &.hasImage{
-	margin-top: 1rem;
+    &.leftMargin {
+      margin-left: 6.25rem;
     }
 
-    &:not(.hasImage){
-	margin-top: calc((450px - 117px) / 2);
+    &:not(.dropped) {
+      color: black !important;
     }
-    
-    .dnd-image {
-	margin: auto;
-	display: block;
-	pointer-events: none;
-	user-select: none;
-	width: auto;
-    }
-    
-    .drop-target {	
-	&:not(:last-child){
-	    margin-right: 0.75rem;
-	}
-
-	display: inline-block;
-
-	&.leftMargin {
-	    margin-left: 100px;
-	}
-	
-	&:not(.dropped){
-	    color: black !important;
-	}
-    }
+  }
 }

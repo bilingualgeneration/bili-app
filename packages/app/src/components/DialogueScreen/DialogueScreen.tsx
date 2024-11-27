@@ -48,8 +48,8 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
       style={{
         background: `url(${characterImage}) no-repeat`,
         backgroundPosition: "right 5rem top 2rem",
-        backgroundSize: "350px auto",
-        height: `calc(100vh - 120px - 2rem)`,
+        backgroundSize: "21.875rem auto",
+        height: `calc(100vh - 7.5rem - 2rem)`,
         marginBottom: -150,
       }}
     >

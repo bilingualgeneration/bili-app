@@ -24,7 +24,7 @@ export const DividerText = ({
       >
         <hr
           style={{
-            borderTop: "2px solid rgb(146, 148, 156)",
+            borderTop: "0.125rem solid rgb(146, 148, 156)",
             width: "100%",
           }}
         />
@@ -40,7 +40,7 @@ export const DividerText = ({
         </IonText>
         <hr
           style={{
-            borderTop: "2px solid rgb(146, 148, 156)",
+            borderTop: "0.125rem solid rgb(146, 148, 156)",
             width: "100%",
           }}
         />
