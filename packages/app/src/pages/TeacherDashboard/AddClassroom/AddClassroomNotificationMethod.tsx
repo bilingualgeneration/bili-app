@@ -105,7 +105,7 @@ export const AddClassroomNotificationMethod: React.FC = () => {
 
   return (
     <div id="invite-caregivers-page">
-      <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+      <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "1.5rem" }}>
         <div style={{ width: "33%", margin: "auto" }}>
           <IonProgressBar color="primary" value={0.8} />
         </div>

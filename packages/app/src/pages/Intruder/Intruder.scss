@@ -1,33 +1,32 @@
 #intruder-styles {
-  padding: 0 107px;
+  padding: 0 6.6875rem;
   margin: 0 auto;
 
   .intruder-cards-container {
-      display: flex;
-      gap: 3rem;
+    display: flex;
+    gap: 3rem;
   }
 
   .intruder-card-style {
-      flex-basis: 0;
-      flex-grow: 1;
-      margin: 0 !important;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      border-radius: 32px;
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 2rem;
   }
 
   .intruder-card-style img {
     max-height: 70%;
     max-width: 70%;
   }
-
 }
 
 .sound-button {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 ion-button.sound-button-background {

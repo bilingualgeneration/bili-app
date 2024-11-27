@@ -64,11 +64,11 @@ export const AddClassroomLanguage: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "24px",
+                fontSize: "1.5rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "120%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               EN
@@ -95,11 +95,11 @@ export const AddClassroomLanguage: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "24px",
+                fontSize: "1.5rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "120%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               ES
@@ -126,11 +126,11 @@ export const AddClassroomLanguage: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "20px",
+                fontSize: "0.25rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "100%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               EN
@@ -158,7 +158,7 @@ export const AddClassroomLanguage: React.FC = () => {
 
   return (
     <div>
-      <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+      <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "1.5rem" }}>
         <div style={{ width: "33%", margin: "auto" }}>
           <IonProgressBar color="primary" value={0.4} />
         </div>
@@ -180,7 +180,7 @@ export const AddClassroomLanguage: React.FC = () => {
           <IonItem lines="none">
             <Question
               id="language-toggle-popover-trigger"
-              style={{ marginRight: "16px" }}
+              style={{ marginRight: "1rem" }}
             />
             <Toggle
               control={control}
@@ -204,7 +204,7 @@ export const AddClassroomLanguage: React.FC = () => {
           <IonItem lines="none">
             <Question
               id="inclusive-spanish-popover-trigger"
-              style={{ marginRight: "16px" }}
+              style={{ marginRight: "1rem" }}
             />
             <Toggle
               control={control}

@@ -82,7 +82,7 @@ export const AddClassroomInfo: React.FC = () => {
   return (
     <>
       <div>
-        <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "24px" }}>
+        <IonCard style={{ maxWidth: 580, margin: "auto", marginTop: "1.5rem" }}>
           <div style={{ width: "33%", margin: "auto" }}>
             <IonProgressBar color="primary" value={0.2} />
           </div>

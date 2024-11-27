@@ -205,10 +205,9 @@ export const Progress: React.FC = () => {
                 </IonGrid>
               </IonCard>
             </IonCol>
-
           </IonRow>
-	  <IonRow id='settings-progress-bottom-row'>
-            <IonCol size-xs='6'>
+          <IonRow id="settings-progress-bottom-row">
+            <IonCol size-xs="6">
               <div className="grid-card">
                 <RadioCard
                   icon={
@@ -217,11 +216,11 @@ export const Progress: React.FC = () => {
                         color: "#000",
                         textAlign: "center",
                         fontFamily: "Outfit",
-                        fontSize: "36px",
+                        fontSize: "2.25rem",
                         fontStyle: "normal",
                         fontWeight: "800",
                         lineHeight: "800",
-                        letterSpacing: "0.2px",
+                        letterSpacing: "0.0125rem",
                       }}
                     >
                       1
@@ -232,14 +231,14 @@ export const Progress: React.FC = () => {
                     id: "settings.progress.activity1",
                     defaultMessage: "20 minutes in total",
                     description:
-                          "Time spent on activity1 (displayed on activity1 card on progress settings page)",
+                      "Time spent on activity1 (displayed on activity1 card on progress settings page)",
                   })}
-                      iconBackgroundColor="#22BEB9"
+                  iconBackgroundColor="#22BEB9"
                 />
               </div>
             </IonCol>
-	    
-            <IonCol size-xs='6'>
+
+            <IonCol size-xs="6">
               <div className="grid-card">
                 <RadioCard
                   icon={
@@ -248,11 +247,11 @@ export const Progress: React.FC = () => {
                         color: "#000",
                         textAlign: "center",
                         fontFamily: "Outfit",
-                        fontSize: "36px",
+                        fontSize: "2.25rem",
                         fontStyle: "normal",
                         fontWeight: "600",
                         lineHeight: "800",
-                        letterSpacing: "0.2px",
+                        letterSpacing: "0.0125rem",
                       }}
                     >
                       2
@@ -263,14 +262,14 @@ export const Progress: React.FC = () => {
                     id: "settings.progress.activity2",
                     defaultMessage: "12 minutes in total",
                     description:
-                          "Time spent on activity2 (displayed on activity2 card on progress settings page)",
+                      "Time spent on activity2 (displayed on activity2 card on progress settings page)",
                   })}
                   iconBackgroundColor="#FFE24F"
                 />
               </div>
             </IonCol>
-	    
-            <IonCol size-xs='6'>
+
+            <IonCol size-xs="6">
               <div className="grid-card">
                 <RadioCard
                   icon={
@@ -279,11 +278,11 @@ export const Progress: React.FC = () => {
                         color: "#000",
                         textAlign: "center",
                         fontFamily: "Outfit",
-                        fontSize: "36px",
+                        fontSize: "2.25rem",
                         fontStyle: "normal",
                         fontWeight: "800",
                         lineHeight: "800",
-                        letterSpacing: "0.2px",
+                        letterSpacing: "0.0125rem",
                       }}
                     >
                       3
@@ -294,7 +293,7 @@ export const Progress: React.FC = () => {
                     id: "settings.progress.activity3",
                     defaultMessage: "9 minutes in total",
                     description:
-                          "Time spent on activity3 (displayed on activity3 card on progress settings page)",
+                      "Time spent on activity3 (displayed on activity3 card on progress settings page)",
                   })}
                   iconBackgroundColor="#FFAEDC"
                 />
@@ -308,7 +307,7 @@ export const Progress: React.FC = () => {
                     <IonCol>
                       <span>25</span>
                     </IonCol>
-		    
+
                     <IonCol class="ion-text-center">
                       <IonIcon
                         className="book-icon"
@@ -317,7 +316,7 @@ export const Progress: React.FC = () => {
                       />
                     </IonCol>
                   </IonRow>
-		  
+
                   <IonRow>
                     <IonCol>
                       <IonCardTitle>
@@ -332,7 +331,7 @@ export const Progress: React.FC = () => {
                 </IonGrid>
               </IonCard>
             </IonCol>
-	  </IonRow>
+          </IonRow>
         </IonGrid>
       </div>
     </>

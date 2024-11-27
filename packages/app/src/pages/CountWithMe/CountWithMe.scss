@@ -6,10 +6,10 @@
 
 .number-overlay span {
   text-shadow:
-    -3.87px -3.87px 5px #ffffff,
-    3.87px -3.87px 5px #ffffff,
-    -3.87px 3.87px 5px #ffffff,
-    3.87px 3.87px 5px #ffffff;
+    -0.241875rem -0.241875rem 0.3125rem #ffffff,
+    0.241875rem -0.241875rem 0.3125rem #ffffff,
+    -0.241875rem 0.241875rem 0.3125rem #ffffff,
+    0.241875rem 0.241875rem 0.3125rem #ffffff;
 }
 
 .group-0 {
@@ -74,7 +74,7 @@
   // background-color:black;
   // left:50px;
   height: auto;
-  width: 100px;
+  width: 6.25rem;
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: 2s;
   -moz-transition-property: -moz-transform;

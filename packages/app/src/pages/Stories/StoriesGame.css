@@ -1,14 +1,14 @@
 #stories-game-mcg-wrapper {
   margin: auto;
-  max-width: 800px;
+  max-width: 50rem;
 }
 
 .stories-game-mcg-card {
   aspect-ratio: 1;
-  min-height: 100px;
+  min-height: 6.25rem;
   max-height: 25vh;
-  border: 8px solid transparent;
-  border-radius: 32px;
+  border: 0.5rem solid transparent;
+  border-radius: 2rem;
   margin: auto;
   display: flex;
   &.correct {
@@ -24,5 +24,5 @@
   width: 100%;
   height: auto;
   max-height: 100%;
-  border-radius: 24px;
+  border-radius: 1.5rem;
 }

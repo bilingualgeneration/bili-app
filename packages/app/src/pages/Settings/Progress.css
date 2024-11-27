@@ -5,16 +5,16 @@
     "liga" off;
   /* UI Type/text-3xl/[S] */
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 40px; /* 125% */
-  letter-spacing: -0.5px;
-  margin-bottom: 24px;
+  line-height: 2.5rem; /* 125% */
+  letter-spacing: -0.03125rem;
+  margin-bottom: 1.5rem;
 }
 
 ion-item.activity-insights {
-  margin: 8px 0 14px;
+  margin: 0.5rem 0 0.875rem;
 }
 
 ion-item.progress-item {
@@ -35,18 +35,18 @@ ion-item.progress-item {
 
 .segment-control {
   display: flex;
-  padding: 4px;
+  padding: 0.25rem;
   justify-content: center;
   align-items: center;
-  border-radius: 1000px;
+  border-radius: 62.5rem;
   background: var(--base-agua, rgba(0, 106, 103, 0.12));
 }
 
 .segment-control-button {
-  border-radius: 1000px;
+  border-radius: 62.5rem;
   color: #000;
-  padding: 8px;
-  font-size: 14px;
+  padding: 0.5rem;
+  font-size: 0.825rem;
   background: none;
 }
 .segment-control-button.checked {
@@ -58,9 +58,9 @@ ion-item.progress-item {
   background: var(--Cielo-Low, #22beb9);
   color: #fff;
   display: flex;
-  width: 40px;
-  height: 40px;
-  padding: 14.566px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.910375rem;
 }
 
 .small-oval-element {
@@ -73,8 +73,8 @@ ion-item.progress-item {
 
 .progress-style ion-select {
   background: #eceeed;
-  border-radius: 8px;
-  padding: 0 16px 0;
+  border-radius: 0.5rem;
+  padding: 0 1rem 0;
 }
 
 .progress-style {
@@ -89,7 +89,7 @@ ion-item.progress-item {
 }
 .grid-graph-style {
   margin-inline: 0;
-  padding: 48px;
+  padding: 3rem;
 }
 
 .grid-card {
@@ -98,7 +98,7 @@ ion-item.progress-item {
 
 .grid-card ion-card-title {
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   text-align: start;
 }
 
@@ -111,17 +111,17 @@ ion-item.progress-item {
 .grid-text-style-big {
   color: var(--Neutral-Colors-Black, #1e1b39);
   font-family: Outfit;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75rem;
   /* margin: 0 0 48px; */
 }
 
 .grid-text-style-small {
   color: var(--Base-Suelo, #000);
   font-family: Outfit;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: 110%;
@@ -132,27 +132,27 @@ ion-item.progress-item {
 }
 
 ion-col.progress-data {
-  margin-left: 32px;
+  margin-left: 2rem;
 }
 
 .color-1 {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background: var(--Cielo-Low, #22beb9);
 }
 .color-2 {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background: var(--Base-Selva, #006a67);
 }
 .color-3 {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background: var(--Cielo-Lowest, #003735);
 }
 .color-4 {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background: var(--Cielo-Cielo, #d3eae8);
 }
 
@@ -160,16 +160,16 @@ ion-col.progress-data {
   position: relative; /* Ensure the overlay is positioned relative to this element */
   color: var(--Base-Suelo, #000);
   font-family: Outfit;
-  font-size: 48px;
+  font-size: 3rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 56px;
-  letter-spacing: -1px;
+  line-height: 3.5rem;
+  letter-spacing: -0.03125rem;
   z-index: 1;
 }
 
 ion-icon.book-icon {
-  --ionicon-stroke-width: 50px;
+  --ionicon-stroke-width: 3.125rem;
   color: black;
   font-size: 1.5rem;
 }
@@ -177,12 +177,12 @@ ion-icon.book-icon {
 ion-card.activities-card {
   --background: var(--Cielo-Cielo, #d3eae8);
   width: 100%;
-  height: 178px;
+  height: 11.125rem;
 }
 
 .activities-card-overlay {
-  width: 258px;
-  height: 230px;
+  width: 16.125;
+  height: 14.375rem;
   transform: rotate(-0.246deg);
   position: absolute;
   top: 50%; /* Center the overlay vertically */
@@ -195,37 +195,37 @@ ion-card.activities-card {
 }
 
 .progress-data ion-row {
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .second-column {
-  padding: 0 24px;
+  padding: 0 1.5rem;
 }
 
 ion-item.kids-name-select {
   --background-hover: none;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .grid-card ion-text {
   color: var(--Base-Suelo, #000);
   font-family: Outfit;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: 110%; /* 22px */
 }
 
 .progress-content-container {
-  padding: 16px 72px;
+  padding: 1rem 4.5rem;
 }
 
 #settings-progress-bottom-row {
-    margin-top: 1rem;
-    ion-col > * {
-	height: 100%;
-    }
-    .grid-card {
-	padding: 8px;
-    }
+  margin-top: 1rem;
+  ion-col > * {
+    height: 100%;
+  }
+  .grid-card {
+    padding: 0.5rem;
+  }
 }

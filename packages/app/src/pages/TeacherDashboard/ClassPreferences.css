@@ -5,12 +5,12 @@
 
 .classroom-input-styles {
   width: 100%;
-  margin: 52px 0px;
-  padding: 0px 16px;
+  margin: 3.25rem 0;
+  padding: 0px 1rem;
 }
 
 .classroom-input-styles label {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #000;
   font-weight: bold;
 }

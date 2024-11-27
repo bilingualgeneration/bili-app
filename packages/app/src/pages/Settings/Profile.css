@@ -1,7 +1,7 @@
 ion-input.input {
   --background: rgba(136, 147, 145, 0.2);
-  font-size: 24px;
-  margin: 5px 0 12px 0;
+  font-size: 1.5rem;
+  margin: 0.3125rem 0 0.75rem 0;
 }
 
 .adult-profile-content {
@@ -10,8 +10,8 @@ ion-input.input {
 
 ion-input.input-fill-outline {
   font-weight: bold;
-  --padding-start: 20px;
-  --padding-end: 20px;
+  --padding-start: 1.25rem;
+  --padding-end: 1.25rem;
   --background: rgba(136, 147, 145, 0.2);
   --border-width: 0.25rem !important;
   --border-color: rgba(136, 147, 145, 0.01) !important;
@@ -30,15 +30,15 @@ ion-select.country-dropdown {
   background: rgba(156, 165, 163, 0.2);
   font-family: "Outfit";
   font-weight: bold;
-  font-size: 24px;
-  --padding-start: 30px;
-  --padding-end: 30px;
+  font-size: 1.5rem;
+  --padding-start: 1.875rem;
+  --padding-end: 1.875rem;
   /* --padding-top: 14px; */
   /* --padding-bottom: 14px; */
   border-radius: 1rem;
   /* --placeholder-color: rgb(121, 120, 120); */
   color: rgb(167, 166, 166);
-  margin-top: 5px;
+  margin-top: 0.3125rem;
 }
 
 ion-select.country-dropdown::part(text) {
@@ -54,11 +54,11 @@ ion-col.col-save-changes-button {
 }
 
 ion-button.save-changes-button {
-  width: 442px;
+  width: 27.625rem;
   height: auto;
   margin: 5% 5%;
-  box-shadow: 4px 12px 16px 0px rgba(58, 42, 17, 0.2);
-  border-radius: 100px;
+  box-shadow: 0.25rem 0.75rem 1rem 0 rgba(58, 42, 17, 0.2);
+  border-radius: 6.25rem;
 }
 
 ion-col.side-menu-col {

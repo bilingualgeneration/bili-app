@@ -71,7 +71,7 @@ export const VocabModal: React.FC = () => {
             />
           </div>
           <div className="ion-padding modal-container">
-            <IonRow style={{ gap: "14px" }}>
+            <IonRow style={{ gap: "0.875rem" }}>
               <IonCol size="8">
                 <IonRow class="ion-align-items-start">
                   <IonCol>

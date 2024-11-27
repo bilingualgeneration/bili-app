@@ -85,7 +85,7 @@ export const AddStudentsClassroom: React.FC = () => {
 
   return (
     <div id="add-students-page">
-      <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "24px" }}>
+      <IonCard style={{ maxWidth: 1065, margin: "auto", marginTop: "1.5rem" }}>
         <IonItem className="add-students-header">
           <IonText className="">
             <h3 className="add-students-title text-3xl semibold color-suelo">

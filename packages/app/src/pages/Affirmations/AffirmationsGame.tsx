@@ -100,7 +100,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
               />
               <div
                 style={{
-                  borderTop: "2px solid black",
+                  borderTop: "0.125rem solid black",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

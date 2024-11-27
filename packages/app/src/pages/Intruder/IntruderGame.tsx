@@ -108,24 +108,24 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   const initialStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
+    borderRadius: "2rem",
     aspectRatio: "1 / 1.25",
-    border: "8.4px solid transparent",
-    boxShadow: "-4.638px 9.275px 27.826px 0px rgba(0, 0, 0, 0.25)",
+    border: "0.525rem solid transparent",
+    boxShadow: "-0.289875rem 0.5796875rem 1.739125rem 0 rgba(0, 0, 0, 0.25)",
   };
 
   const correctStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
-    border: "8.4px solid var(--alerts-status-success, #12D18E)",
-    boxShadow: "0px 8.4px 25.2px 0px #12D18E",
+    borderRadius: "2rem",
+    border: "0.525rem solid var(--alerts-status-success, #12D18E)",
+    boxShadow: "0 0.525rem 1.575rem 0 #12D18E",
   };
 
   const incorrectStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
-    border: "8.4px solid var(--Categories-Error, #F0091B)",
-    boxShadow: "0px 8.4px 25.2px 0px #F0091B",
+    borderRadius: "2rem",
+    border: " solid var(--Categories-Error, #F0091B)",
+    boxShadow: "0 0.525rem 1.575rem 0 #F0091B",
   };
 
   const temporaryBackgroundStyle = {
@@ -133,15 +133,15 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     aspectRatio: "1 / 1.25",
-    border: "8.4px solid transparent",
+    border: "0.525rem solid transparent",
     zIndex: "2",
   };
 
   const temporaryAudioPlayingStyle = {
-    borderRadius: "32px",
-    border: "8.4px solid var(--Base-Hover-Shadow, rgba(0, 0, 0, 0.08))",
+    borderRadius: "2rem",
+    border: "0.525rem solid var(--Base-Hover-Shadow, rgba(0, 0, 0, 0.08))",
     background: "#FFF",
-    boxShadow: "0px 8.4px 25.2px 7px rgba(0, 0, 0, 0.60)",
+    boxShadow: "0 0.525rem 1.575rem 0.4375rem rgba(0, 0, 0, 0.60)",
   };
 
   const [cardColors, setCardColors] = useState<any>({

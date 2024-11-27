@@ -5,11 +5,11 @@
     "liga" off;
   /* UI Type/text-3xl/[S] */
   font-family: Outfit;
-  font-size: 32px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 40px; /* 125% */
-  letter-spacing: -0.5px;
+  line-height: 2.5rem; /* 125% */
+  letter-spacing: -0.03125rem;
 }
 
 .label-style {
@@ -20,7 +20,7 @@
 
 .label-style h4 {
   color: var(--light-suelo, #000);
-  margin: 16px;
+  margin: 1rem;
 }
 
 .question-button {
@@ -33,7 +33,7 @@
     "clig" off,
     "liga" off;
   font-family: Outfit;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 400;
   opacity: unset;
@@ -52,7 +52,7 @@
     "clig" off,
     "liga" off;
   font-family: Outfit;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 400;
   opacity: unset;
@@ -64,7 +64,7 @@
 }
 
 .popover-text {
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 .preferences-style ion-item {
@@ -73,7 +73,7 @@
 
 ion-list.preferences-style {
   background: none;
-  padding: 16px 72px;
+  padding: 1rem 4.5rem;
 }
 
 ion-item {
