@@ -194,12 +194,8 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
             <div className="sound-button">
               <AudioButton
                 audio={{
-                  es: {
-                    url: currentCard?.esAudio?.url,
-                  },
-                  en: {
-                    url: currentCard?.enAudio?.url,
-                  },
+                  es: currentCard?.esAudio?.url || "",
+                  en: currentCard?.enAudio?.url || "",
                 }}
                 size={isMobile ? "small" : "large"}
               />
