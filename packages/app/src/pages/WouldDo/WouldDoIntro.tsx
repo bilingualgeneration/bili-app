@@ -22,21 +22,16 @@ export const WouldDoIntro: React.FC = () => {
   let audios: any[] = [];
   switch (language) {
     case "es":
-      if (isInclusive) {
-        audios = [audio_es_inc];
-      } else {
-        audios = [audio_es];
-      }
+      audios = [audio_es];
       break;
     case "en":
       audios = [audio_en];
       break;
-    case "esen":
-      if (isInclusive) {
-        audios = [audio_es_inc, audio_en];
-      } else {
-        audios = [audio_es, audio_en];
-      }
+    case "es.en":
+      audios = [audio_es, audio_en];
+      break;
+    case "en.es":
+      audios = [audio_es, audio_en];
       break;
   }
 
@@ -46,17 +41,17 @@ export const WouldDoIntro: React.FC = () => {
     <DialogueScreen
       audios={audios}
       buttonTextPrimary={language === "en" ? button_en : button_es}
-      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      buttonTextSecondary={
+        language === "es.en" || language === "en.es" ? button_en : undefined
+      }
       characterImage={bili}
       onButtonClick={() => {
         history.push("/would-do-game/select");
       }}
     >
       <IonText>
-        <h1 className="text-5xl color-suelo">
-          {language === "en" ? en : isInclusive ? esinc : es}
-        </h1>
-        {language === "esen" && (
+        <h1 className="text-5xl color-suelo">{language === "en" ? en : es}</h1>
+        {(language === "es.en" || language === "en.es") && (
           <h2 className="text-3xl color-english">{en}</h2>
         )}
       </IonText>

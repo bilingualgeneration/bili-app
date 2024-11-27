@@ -228,7 +228,7 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                     <IonGrid style={{ width: "100%" }}>
                       <IonRow>
                         <IonCol size="9">
-                          {language === "es.en" && (
+                          {(language === "es.en" || language === "en.es") && (
                             <p className="text-lg color-english">{enText}</p>
                           )}
                         </IonCol>
@@ -382,7 +382,7 @@ const Hint: React.FC<any> = ({
               {language === "en" ? enHintText : esHintText}
             </h2>
           </IonText>
-          {language === "es.en" && (
+          {(language === "es.en" || language === "en.es") && (
             <IonText>
               <h2 className="text-xl color-english">{enHintText}</h2>
             </IonText>
