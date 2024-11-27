@@ -40,6 +40,7 @@ export const FooterMenu: React.FC = ({}) => {
         }}
       >
         <IonGrid
+          className="ion-hide-md-down"
           fixed={true}
           style={{
             maxWidth: "350px",

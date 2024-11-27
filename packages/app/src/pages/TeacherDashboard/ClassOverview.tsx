@@ -30,6 +30,7 @@ import PlayIcon from "@/assets/icons/play.svg";
 import LightBulb from "@/assets/icons/lightbulb.svg";
 import StudentPicture from "@/assets/img/student_picture.png";
 import StudentsReadingPicture from "@/assets/img/kids_reading.png";
+import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 
@@ -47,6 +48,9 @@ const studentHighlightsStyle = {
 };
 
 export const ClassOverview: React.FC = () => {
+  const { info } = useClassroom();
+
+  // TODO: remove dependency on useFirestoreDoc and pull classroomAnalytics from useClassroom
   const { data } = useFirestoreDoc();
   const classroomAnalytics = data.classroomAnalytics
     ? data.classroomAnalytics[0]
@@ -61,7 +65,7 @@ export const ClassOverview: React.FC = () => {
             <div className="header-overview-row">
               <div className="header-overview-arrow">
                 <IonText className="text-sm color-barro classroom-name-text">
-                  {data.name}
+                  {info.name}
                 </IonText>
                 <IonIcon color="medium" icon={ArrowRight}></IonIcon>
                 <IonText className="text-sm semibold overview-text-header">
@@ -69,10 +73,10 @@ export const ClassOverview: React.FC = () => {
                 </IonText>
               </div>
               <div className="classroom-name-block">
-                <IonText className="text-3xl semibold">{data.name}</IonText>
+                <IonText className="text-3xl semibold">{info.name}</IonText>
                 <button className="visit-students-button">
                   <Link
-                    to={`/select-student/${data.id}`}
+                    to={`/select-student/${info.id}`}
                     className="no-underline"
                   >
                     <p className="text-md semibold color-suelo">
@@ -172,7 +176,7 @@ export const ClassOverview: React.FC = () => {
                 </div>
                 <Link
                   className="no-underline"
-                  to={`/classrooms/view/${data.id}/students`}
+                  to={`/classrooms/view/${info.id}/students`}
                 >
                   <IonButton expand="block">See all students</IonButton>
                 </Link>
@@ -272,8 +276,6 @@ const LearningTimeSummary: React.FC<any> = ({ data }) => {
       stories: getTime(data, learningTimeSummaryFilter, "stories"),
       wellness: getTime(data, learningTimeSummaryFilter, "wellness"),
     };
-    console.log(data);
-    console.log(times);
     const total =
       times.community + times.games + times.stories + times.wellness;
 

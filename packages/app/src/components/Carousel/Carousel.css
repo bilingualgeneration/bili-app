@@ -29,3 +29,21 @@
     display: none;
   }
 }
+
+@media (max-width: 764px) {
+  .carousel-container {
+    padding-left: 0.5rem;
+  }
+
+  .slick-arrow {
+    width: 40px;
+
+    img {
+      width: 40px;
+    }
+
+    &.backward {
+      margin-left: -5px;
+    }
+  }
+}

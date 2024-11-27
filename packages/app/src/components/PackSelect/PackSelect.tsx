@@ -14,6 +14,7 @@ import type { Pill } from "@/components/ContentCard";
 import { PlayHeader } from "@/components/PlayHeader";
 import { FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useScreenSize } from "@/lib/screenSize";
 
 type Card = any;
 
@@ -48,6 +49,7 @@ export const HydratedPackSelect: React.FC<props> = ({
   only_cards = false,
   sortBy,
 }) => {
+  const { screenType } = useScreenSize();
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -106,7 +108,10 @@ export const HydratedPackSelect: React.FC<props> = ({
   if (only_cards) {
     return (
       <>
-        <Carousel slidesToShow={2} height={"17rem"}>
+        <Carousel
+          slidesToShow={screenType === "mobile" ? 1 : 2}
+          height={"17rem"}
+        >
           {cards.map((c: Card, index: number) => {
             let pills: Pill[] = [];
             if (module === "story") {
@@ -126,7 +131,6 @@ export const HydratedPackSelect: React.FC<props> = ({
       </>
     );
   }
-
   return (
     <>
       {category == "play" && <PlayHeader />}
@@ -134,17 +138,37 @@ export const HydratedPackSelect: React.FC<props> = ({
       <div className="background-card">
         <div className="margin-bottom-2">
           <IonText>
-            <h1 style={{ marginLeft: 30 }} className="text-5xl color-suelo">
+            <h1
+              style={{
+                marginLeft: screenType === "mobile" ? "0.5rem" : "30px",
+                marginTop: screenType === "mobile" ? "-1rem" : "",
+                marginBottom: screenType === "mobile" ? "-1.4rem" : "",
+              }}
+              className={`${
+                screenType === "mobile" ? "text-2xl" : "text-5xl"
+              } color-suelo semibold`}
+            >
               {language !== "en" ? translatedTitle : englishTitle}
             </h1>
             {language === "esen" && (
-              <h2 style={{ marginLeft: 30 }} className="text-3xl color-english">
+              <h2
+                style={{
+                  marginLeft: screenType === "mobile" ? "5px" : "30px",
+                  marginBottom: screenType === "mobile" ? "-1.2rem" : "",
+                }}
+                className={`${
+                  screenType === "mobile" ? "text-md" : "text-3xl"
+                } color-english`}
+              >
                 {englishTitle}
               </h2>
             )}
           </IonText>
         </div>
-        <Carousel slidesToShow={2} height={"17rem"}>
+        <Carousel
+          slidesToShow={screenType === "mobile" ? 1 : 2}
+          height={"17rem"}
+        >
           {cards.map((c: Card, index: number) => (
             <ContentCard {...c} key={index} />
           ))}

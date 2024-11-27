@@ -296,7 +296,7 @@ export const MyClassrooms: React.FC = () => {
 const ClassroomsList: React.FC = () => {
   const intl = useIntl();
   const { data, status } = useFirestoreCollection();
-  const { setInfo } = useClassroom();
+  const { subscribe } = useClassroom();
   switch (status) {
     case "loading":
       return <></>;
@@ -317,11 +317,7 @@ const ClassroomsList: React.FC = () => {
                   to={`/classrooms/view/${classroom.id}`}
                   className="no-underline"
                   onClick={() => {
-                    setInfo({
-                      name: classroom.name,
-                      schoolId: classroom.schoolId,
-                      id: classroom.id,
-                    });
+                    subscribe(classroom.id);
                   }}
                 >
                   <RadioCard

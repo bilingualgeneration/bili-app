@@ -32,6 +32,8 @@ import { useProfile } from "@/hooks/Profile";
 
 import LightbulbIcon from "@/assets/icons/lightbulb.svg";
 import styles from "./Deck.module.css";
+import { I18nMessage } from "../I18nMessage";
+import { useLanguage } from "@/hooks/Language";
 
 interface CardAudio {
   url: string;
@@ -52,21 +54,31 @@ interface DeckProps {
     esIncHintText?: string;
     esIncText?: string;
   }[];
+  id: string;
 }
 
-export const Deck: FC<DeckProps> = ({ cards }) => {
+export const Deck: FC<DeckProps> = ({ id, cards }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio } = useAudioManager();
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const [isHintOpen, setIsHintOpen] = useState<boolean>(false);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
   const currentCard = cards[currentCardIndex];
   const colors = ["#D3EAE8", "#FFAEDC", "#EEE8DE", "#FFE24F", "#FF8B70"];
+  const [isMobile, setIsMobile] = useState(false);
+
+  //choose the screen size
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 992);
+  };
   useEffect(() => {
+    setIsMobile(window.innerWidth < 992);
+    window.addEventListener("resize", handleResize);
     return () => {
+      window.removeEventListener("resize", handleResize);
       clearAudio();
     };
   }, []);
@@ -159,99 +171,136 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
 
   return (
     <>
-      <div className={styles.container}>
-        {props.map(({ x, y, rot, scale, zIndex }, i) => {
-          const card = cards[i % cards.length];
-          const { esText, esAudio, esIncText, esIncAudio, enText, enAudio } =
-            card;
-          const content = (
-            <>
-              <h1 className={"text-3xl semibold"}>
-                {language === "en" ? enText : isInclusive ? esIncText : esText}
-              </h1>
-              <IonGrid style={{ width: "100%" }}>
-                <IonRow>
-                  <IonCol size="9">
-                    {language === "esen" && (
-                      <p className="text-lg color-english">{enText}</p>
-                    )}
-                  </IonCol>
-                  <IonCol
-                    className="ion-text-center"
-                    size="3"
-                    style={{
-                      position: "absolute",
-                      bottom: "16px",
-                      right: "0px",
-                      zIndex: 10,
-                    }}
-                  >
-                    {currentCard.esHintText && (
-                      <>
-                        <IonButton
-                          className="uva curved-corners"
-                          onClick={() => {
-                            setIsHintOpen(true);
+      <div className="padding-top-5 ion-hide-lg-down"></div>
+      <IonGrid className="no-border-box community-grid-main ion-no-padding">
+        <IonRow class="ion-align-items-center">
+          <IonCol className="no-border-box" size="3" sizeMd="4">
+            {/* Header */}
+            <div className="margin-top-4">
+              <IonText className="align-center ">
+                <h1 className="text-3xl semibold margin-top-1">
+                  <I18nMessage id={id} />
+                </h1>
+                <I18nMessage
+                  id={id}
+                  level={2}
+                  wrapper={(text: string) => (
+                    <p className="text-2xl color-english">{text}</p>
+                  )}
+                />
+              </IonText>
+            </div>
+            {/* Audio button */}
+            <div className="sound-button">
+              <AudioButton
+                audio={{
+                  es: currentCard?.esAudio?.url || "",
+                  en: currentCard?.enAudio?.url || "",
+                }}
+                size={isMobile ? "small" : "large"}
+              />
+            </div>
+          </IonCol>
+          <IonCol
+            className={`no-border-box ${isMobile ? "padding-right-1" : ""}`}
+          >
+            {/* Cards */}
+            <div className={`${styles.container} no-border-box`}>
+              {props.map(({ x, y, rot, scale, zIndex }, i) => {
+                const card = cards[i % cards.length];
+                const {
+                  esText,
+                  esAudio,
+                  esIncText,
+                  esIncAudio,
+                  enText,
+                  enAudio,
+                } = card;
+                const content = (
+                  <>
+                    <h1 className={"text-2xl semibold"}>
+                      {language === "en" ? enText : esText}
+                    </h1>
+                    <IonGrid style={{ width: "100%" }}>
+                      <IonRow>
+                        <IonCol size="9">
+                          {(language === "es.en" || language === "en.es") && (
+                            <p className="text-lg color-english">{enText}</p>
+                          )}
+                        </IonCol>
+                        <IonCol
+                          className="ion-text-center"
+                          size="3"
+                          style={{
+                            position: "absolute",
+                            bottom: "16px",
+                            right: "0px",
+                            zIndex: 10,
                           }}
                         >
-                          <IonIcon slot="icon-only" icon={LightbulbIcon} />
-                        </IonButton>
-                        <IonText>
-                          <h2 className="text-lg semibold">
-                            {language === "en" ? "Hint" : "Pista"}
-                          </h2>
-                          {language === "esen" && (
-                            <h3 className="text-md color-english">Hint</h3>
+                          {currentCard.esHintText && (
+                            <>
+                              <IonButton
+                                className="uva curved-corners"
+                                onClick={() => {
+                                  setIsHintOpen(true);
+                                }}
+                              >
+                                <IonIcon
+                                  slot="icon-only"
+                                  icon={LightbulbIcon}
+                                />
+                              </IonButton>
+                              <IonText>
+                                <h2 className="text-lg semibold">
+                                  <I18nMessage id="common.hint" />
+                                </h2>
+                                <I18nMessage
+                                  id="common.hint"
+                                  level={2}
+                                  wrapper={(text: string) => (
+                                    <h3 className="text-md color-english">
+                                      {text}
+                                    </h3>
+                                  )}
+                                />
+                              </IonText>
+                            </>
                           )}
-                        </IonText>
-                      </>
-                    )}
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            </>
-          );
-          return (
-            <animated.div
-              {...bind(i)}
-              key={i}
-              className={styles.card}
-              style={{
-                backgroundColor: colors[i % colors.length],
-                x,
-                y,
-                zIndex,
-                pointerEvents: i === currentCardIndex ? "auto" : "none",
-                transform: interpolate(
-                  [rot, x],
-                  (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
-                ),
-              }}
-            >
-              <div className={styles.card_content}>{content}</div>
-            </animated.div>
-          );
-        })}
-      </div>
-      <div className="sound-button">
-        <AudioButton
-          audio={{
-            es: {
-              url: currentCard?.esAudio?.url,
-            },
-            en: {
-              url: currentCard?.enAudio?.url,
-            },
-          }}
-          size="large"
-        />
-        <IonText>
-          <h1 className="text-3xl semibold color-suelo">
-            {language === "en" ? "Read" : "Lee"}
-          </h1>
-          {language === "esen" && <p className="text-lg color-english">Read</p>}
-        </IonText>
-      </div>
+                        </IonCol>
+                      </IonRow>
+                    </IonGrid>
+                  </>
+                );
+                return (
+                  <animated.div
+                    {...bind(i)}
+                    key={i}
+                    className={`${styles.card} no-border-box`}
+                    style={{
+                      backgroundColor: colors[i % colors.length],
+                      x,
+                      y,
+                      zIndex,
+                      pointerEvents: i === currentCardIndex ? "auto" : "none",
+                      transform: interpolate(
+                        [rot, x],
+                        (rot, x) => `translateX(${x}px) rotate(${rot}deg)`,
+                      ),
+                    }}
+                  >
+                    <div className={`${styles.card_content} no-border-box`}>
+                      {content}
+                    </div>
+                  </animated.div>
+                );
+              })}
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+
+      {/* Modal component */}
       <IonModal
         className="modal"
         isOpen={isHintOpen}
@@ -276,7 +325,7 @@ export const Deck: FC<DeckProps> = ({ cards }) => {
     </>
   );
 };
-
+//  Hint component
 const Hint: React.FC<any> = ({
   esHintAudio,
   esHintText,
@@ -300,11 +349,15 @@ const Hint: React.FC<any> = ({
         <IonCol size="10">
           <IonText>
             <h2 className="text-4xl semibold">
-              {language === "en" ? "Hint" : "Pista"}
+              <I18nMessage id="common.hint" />
             </h2>
-            {language === "esen" && (
-              <h3 className="text-3xl color-english">Hint</h3>
-            )}
+            <I18nMessage
+              id="common.hint"
+              level={2}
+              wrapper={(text: string) => (
+                <h3 className="text-3xl color-english">{text}</h3>
+              )}
+            />
           </IonText>
         </IonCol>
       </IonRow>
@@ -312,8 +365,8 @@ const Hint: React.FC<any> = ({
         <IonCol className="ion-text-right padding-right-1" size="2">
           <AudioButton
             audio={{
-              en: enHintAudio,
-              es: esHintAudio,
+              en: enHintAudio.url,
+              es: esHintAudio.url,
             }}
             className="elevate"
             size="small"
@@ -322,14 +375,10 @@ const Hint: React.FC<any> = ({
         <IonCol size="10">
           <IonText>
             <h2 className="text-2xl color-suelo">
-              {language === "en"
-                ? enHintText
-                : isInclusive
-                  ? esIncHintText
-                  : esHintText}
+              {language === "en" ? enHintText : esHintText}
             </h2>
           </IonText>
-          {language === "esen" && (
+          {(language === "es.en" || language === "en.es") && (
             <IonText>
               <h2 className="text-xl color-english">{enHintText}</h2>
             </IonText>

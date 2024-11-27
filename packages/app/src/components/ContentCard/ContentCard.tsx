@@ -8,6 +8,7 @@ import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 import "./ContentCard.css";
+import { useLanguage } from "@/hooks/Language";
 
 export interface Pill {
   className?: string;
@@ -63,7 +64,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   titleEn,
   pills = [],
 }) => {
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const history = useHistory();
   return (
     <div
@@ -84,7 +85,9 @@ export const ContentCard: React.FC<ContentCardProps> = ({
         <h1 className="text-2xl semibold color-nube">
           {language === "en" ? titleEn : title}
         </h1>
-        {language === "esen" && <p className="text-sm color-nube">{titleEn}</p>}
+        {(language === "es.en" || language === "en.es") && (
+          <p className="text-sm color-nube">{titleEn}</p>
+        )}
       </IonText>
       {isLocked && <Lock />}
     </div>

@@ -8,7 +8,7 @@ import { createIntl, createIntlCache, IntlShape } from "react-intl";
 import en from "./lang/en.json";
 import es from "./lang/es.json";
 
-const translations = {
+const translations: { [key: string]: any } = {
   en,
   es,
 };
@@ -17,7 +17,7 @@ export const I18nWrapper = ({
   children,
   locale = "es",
 }: PropsWithChildren<{
-  locale?: "en" | "es";
+  locale?: string;
 }>) => {
   return (
     <>
