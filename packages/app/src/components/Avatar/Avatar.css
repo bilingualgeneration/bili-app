@@ -1,15 +1,15 @@
 img.avatar {
   aspect-ratio: 1;
   &.xs {
-    width: 24px !important;
+    width: 1.5rem !important;
   }
   &.sm {
-    width: 40px !important;
+    width: 2.5rem !important;
   }
   &.md {
-    width: 60px !important;
+    width: 3.75rem !important;
   }
   &.lg {
-    width: 84px !important;
+    width: 5.25rem !important;
   }
 }
