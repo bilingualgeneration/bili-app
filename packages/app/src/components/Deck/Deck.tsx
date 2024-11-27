@@ -365,8 +365,8 @@ const Hint: React.FC<any> = ({
         <IonCol className="ion-text-right padding-right-1" size="2">
           <AudioButton
             audio={{
-              en: enHintAudio,
-              es: esHintAudio,
+              en: enHintAudio.url,
+              es: esHintAudio.url,
             }}
             className="elevate"
             size="small"
