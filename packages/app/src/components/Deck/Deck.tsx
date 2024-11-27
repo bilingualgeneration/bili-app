@@ -194,12 +194,8 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
             <div className="sound-button">
               <AudioButton
                 audio={{
-                  es: {
-                    url: currentCard?.esAudio?.url,
-                  },
-                  en: {
-                    url: currentCard?.enAudio?.url,
-                  },
+                  es: currentCard?.esAudio?.url || "",
+                  en: currentCard?.enAudio?.url || "",
                 }}
                 size={isMobile ? "small" : "large"}
               />
@@ -228,7 +224,7 @@ export const Deck: FC<DeckProps> = ({ id, cards }) => {
                     <IonGrid style={{ width: "100%" }}>
                       <IonRow>
                         <IonCol size="9">
-                          {language === "es.en" && (
+                          {(language === "es.en" || language === "en.es") && (
                             <p className="text-lg color-english">{enText}</p>
                           )}
                         </IonCol>
@@ -369,8 +365,8 @@ const Hint: React.FC<any> = ({
         <IonCol className="ion-text-right padding-right-1" size="2">
           <AudioButton
             audio={{
-              en: enHintAudio,
-              es: esHintAudio,
+              en: enHintAudio.url,
+              es: esHintAudio.url,
             }}
             className="elevate"
             size="small"
@@ -382,7 +378,7 @@ const Hint: React.FC<any> = ({
               {language === "en" ? enHintText : esHintText}
             </h2>
           </IonText>
-          {language === "es.en" && (
+          {(language === "es.en" || language === "en.es") && (
             <IonText>
               <h2 className="text-xl color-english">{enHintText}</h2>
             </IonText>

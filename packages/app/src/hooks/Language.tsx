@@ -12,7 +12,7 @@ import {
 const shortcodeRegex = /^\[([^\]]+)\]$/;
 
 export type SingleLanguage = "en" | "es"; // TODO: handle better
-export type Language = "en" | "es.en" | "es" | "esen"; // TODO: remove esen when fully migrated
+export type Language = "en" | "es.en" | "en.es" | "es" | "esen"; // TODO: remove esen when fully migrated
 
 export type LanguageState = {
   filterText: any;
