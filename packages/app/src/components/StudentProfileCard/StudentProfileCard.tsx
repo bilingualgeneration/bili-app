@@ -1,27 +1,27 @@
 import React, { FC } from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
+import { Avatar } from "@/components/Avatar";
 import "./StudentProfileCard.scss";
+import { IonText } from "@ionic/react";
 
 interface StudentCardProps {
-
+  id: string;
   nameEn: string;
-  profileImage: string;
+  onClick?: () => void;
 }
 
 export const StudentProfileCard: FC<StudentCardProps> = ({
+  id,
   nameEn,
-  profileImage
+  onClick,
 }) => {
   const { language } = useLanguageToggle();
   return (
-    <div className="student-profile-card">
-      <img src={profileImage} alt="Card Image" className="card-image" />
-        
-        <h1 className="text-xl semibold color-suelo">
-          {nameEn}
-        </h1>
-       
+    <div className="student-profile-card" onClick={onClick}>
+      <Avatar id={id} size="lg" />
+      <IonText>
+        <p className="text-xl semibold color-suelo">{nameEn}</p>
+      </IonText>
     </div>
-
   );
 };

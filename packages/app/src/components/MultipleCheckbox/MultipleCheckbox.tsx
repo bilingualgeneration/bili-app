@@ -42,6 +42,7 @@ type MultipleCheckboxAdditionalProps = {
   testId: string;
   wrapper: FC<{ children: JSX.Element }>;
   maxSelections?: number;
+  minSelections?: number;
 };
 
 export type MultipleCheckboxProps = Partial<IonCheckboxProps> &
@@ -58,6 +59,7 @@ export const MultipleCheckbox = ({
   wrapper: Wrapper = ({ children }) => children,
   onChange: onChangeProps,
   maxSelections,
+  minSelections = 0,
   ...props
 }: MultipleCheckboxProps): JSX.Element => {
   const [values, setValues] = useState<string[]>(defaultValue);
@@ -74,7 +76,11 @@ export const MultipleCheckbox = ({
           {options.map((option) => (
             <Wrapper key={option.value}>
               <IonCheckbox
-                checked={value.includes(option.value)}
+                checked={values.includes(option.value)}
+                disabled={
+                  values.includes(option.value) &&
+                  values.length <= minSelections
+                }
                 onIonChange={(event) => {
                   let newValues: string[];
                   if (event.detail.checked) {
@@ -82,6 +88,9 @@ export const MultipleCheckbox = ({
                   } else {
                     newValues = values.filter((v) => v !== option.value);
                   }
+                  // remove any duplicates that may have popped up
+                  newValues = Array.from(new Set(newValues));
+
                   // if maxSelections is defined
                   // and if number of selections exceeds maxSelections
                   // deselect older selections in FIFO

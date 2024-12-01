@@ -203,6 +203,7 @@ export const ClassPreferences: React.FC = () => {
               }}
               wrapper={OptionWrapper}
               maxSelections={allowLanguageToggle ? undefined : 1}
+              minSelections={1}
             />
           </IonRow>
         </IonGrid>
