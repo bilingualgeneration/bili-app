@@ -2,7 +2,7 @@
   .hover-highlight:hover,
   .hover-highlight-active {
     --background: var(--base-agua, rgba(0, 106, 103, 0.12));
-    --border-radius: 8px;
+    --border-radius: 0.5rem;
     --color: #006a67;
   }
 
@@ -15,8 +15,8 @@
 
   ion-item {
     cursor: pointer;
-    margin: 30px 0;
-    padding: 8px 12px;
+    margin: 1.875rem 0;
+    padding: 0.5rem 0.75rem;
   }
 
   ion-icon {
@@ -28,10 +28,8 @@
   }
 
   ion-list.side-menu-styles {
-    box-shadow: 2px 0 16px 0 rgba(0, 106, 103, 0.2);
+    box-shadow: 0.125rem 0 1rem 0 rgba(0, 106, 103, 0.2);
   }
-
-
 }
 
 @media only screen and (max-width: 992px) {

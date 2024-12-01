@@ -1,41 +1,36 @@
 #teacher-about-styles {
+  .grades-styles {
+    display: flex;
+  }
 
-    .grades-styles{
-        display: flex;
-    }
+  .grades-styles ion-checkbox::part(container) {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 0.25rem;
+    border: 0.1875rem solid #889391;
+  }
 
-    .grades-styles ion-checkbox::part(container) {
-        width: 18px;
-        height: 18px;
-        border-radius: 4px;
-        border: 3px solid #889391
-        ;
-      }
+  .roles-styles ion-checkbox::part(container) {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 0.25rem;
+    border: 0.1875rem solid #889391;
+  }
 
-    .roles-styles ion-checkbox::part(container) {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    border: 3px solid #889391
-    ;
-    }
+  .grades-styles ion-col,
+  .roles-styles ion-col {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    .grades-styles ion-col,
-    .roles-styles ion-col {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    .customer-school-select ion-select {
-        --border-radius: 16px;
-        --border-color:#006A671F;
-        --border-width:3px;
-        
-    }
+  .customer-school-select ion-select {
+    --border-radius: 1rem;
+    --border-color: #006a671f;
+    --border-width: 0.1875rem;
+  }
 
-    .customer-school-select ion-select:focus {
-        --border-color:#006A67;
-        --background: #F2FFFD;
-      }
-    
+  .customer-school-select ion-select:focus {
+    --border-color: #006a67;
+    --background: #f2fffd;
+  }
 }

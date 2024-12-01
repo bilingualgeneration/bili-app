@@ -1,14 +1,14 @@
 #teacher-dashboard-class-overview-id {
   .classroom-name-text {
-    margin-right: 8px;
+    margin-right: 0.5rem;
   }
 
   .overview-text-header {
-    margin-left: 8px;
+    margin-left: 0.5rem;
   }
 
   .header-overview-arrow {
-    margin-bottom: 48px;
+    margin-bottom: 3rem;
   }
 
   .classroom-name-block {
@@ -17,9 +17,9 @@
   }
 
   .visit-students-button {
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background: linear-gradient(89.96deg, #74c7e5 7.88%, #a2e0c1 104.05%);
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
   }
 
   .button-wrapper-class-grid button {
@@ -29,25 +29,25 @@
   .graph-header ion-grid {
     padding: 0;
     ion-row {
-      max-width: 280px;
-      height: 40px;
+      max-width: 17.5rem;
+      height: 2.5rem;
     }
   }
 
   .graph-header {
-    padding-bottom: 40px;
+    padding-bottom: 2.5rem;
   }
 
   .class-game-name-percentage ion-row {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 
   .card-blog {
     background-color: #d3eae8;
   }
   .visit-blog-button {
-    padding: 4px 12px 4px 12px;
-    border-radius: 8px;
+    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+    border-radius: 0.5rem;
     background-color: #006a67;
 
     font-weight: 600;
@@ -63,8 +63,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .smaller-oval-element {
@@ -73,8 +73,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .color-1 {
@@ -103,12 +103,12 @@
 
   .review-word-styles {
     background: #f7faf9;
-    height: 52px;
-    border-radius: 8px;
+    height: 3.25rem;
+    border-radius: 0.5rem;
 
     ion-row {
-      margin-top: 3px;
-      margin-left: 6px;
+      margin-top: 0.1875rem;
+      margin-left: 0.375rem;
     }
   }
 
@@ -122,19 +122,19 @@
   }
 
   .student-needs-support-picture {
-    margin: 13px 13px 13px 0;
+    margin: 0.8125rem 0.8125rem 0.8125rem 0;
   }
 
   .student-needs-support-text {
-    font-size: 14px;
-    width: 110px;
+    font-size: 0.875rem;
+    width: 6.875rem;
     font-family: "Outfit";
   }
 
   .student-needs-support-progress-bar {
     width: 50%;
     position: relative;
-    margin-left: 120px;
+    margin-left: 7.5rem;
   }
 
   .student-needs-support-progress-bar-percentage {

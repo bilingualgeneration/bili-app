@@ -43,7 +43,7 @@
 
   table {
     border-collapse: separate;
-    border-spacing: 0 8px; /* Creates a gap between rows */
+    border-spacing: 0 0.5rem; /* Creates a gap between rows */
     width: 100%;
     margin: 0;
     padding: 0;
@@ -51,9 +51,9 @@
 
   th,
   td {
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    font-size: 16px;
+    padding: 0.5rem 1rem;
+    border: 0.0625rem solid transparent;
+    font-size: 1rem;
     position: relative;
   }
 
@@ -71,25 +71,25 @@
 
   .subRow {
     background-color: white;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .firstCell {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    border-left: 1px solid transparent;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-left: 0.0625rem solid transparent;
 
-    width: 200px;
+    width: 12.5rem;
   }
 
   .lastCell {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-right: 1px solid transparent;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-right: 0.0625rem solid transparent;
   }
 
   .rightBorderCell {
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-right: 0.0625rem solid rgba(0, 0, 0, 0.08);
   }
 
   #footer {
@@ -98,17 +98,17 @@
     align-items: center;
     justify-content: space-between;
 
-    padding: 8px 24px 8px 36px;
+    padding: 0.5rem 1.5rem 0.5rem 2.25rem;
 
     background-color: rgba(0, 106, 103, 0.12);
 
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 
     #paginationButtonsContainer {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 8px;
+      gap: 0.5rem;
     }
   }
 }

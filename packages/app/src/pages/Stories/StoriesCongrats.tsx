@@ -29,7 +29,7 @@ export const StoriesCongrats: React.FC<{
         onClick={onKeepGoingClick}
       >
         <IonText>
-          <p className="text-3xl" style={{ padding: "0 40px" }}>
+          <p className="text-3xl" style={{ padding: "0 2.5rem" }}>
             <FormattedMessage
               id="countWithMe.keepGoing"
               defaultMessage="Keep Going!"

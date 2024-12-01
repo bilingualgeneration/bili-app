@@ -1,40 +1,40 @@
 .student-name-block {
   display: flex;
   justify-content: space-between;
-  margin: 40px 0px 24px 0px;
+  margin: 2.5rem 0 1.5rem 0;
 }
 
 .classroom-name-text {
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 .progress-text-header {
-  margin: 0px 8px;
+  margin: 0 0.5rem;
 }
 
 .header-progress-arrow {
-  margin-top: 48px;
+  margin-top: 3rem;
 }
 
 .time-data-column {
-  padding: 0px 10px;
+  padding: 0 0.625rem;
 
   ion-icon {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
 }
 
 .student-time-text {
-  padding-left: 10px;
+  padding-left: 0.625rem;
 }
 
 .top-skills-card ion-card {
-  min-height: 110px;
-  max-width: 323px;
+  min-height: 6.875rem;
+  max-width: 20.1875rem;
 }
 
 .student-top-skills-header-text {
-  padding-left: 15px;
+  padding-left: 0.9375rem;
 }
 
 .graph-and-progressbar-info-card {
@@ -42,29 +42,29 @@
 }
 
 .graph-and-progressbar {
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 }
 
 .student-language-percentage ion-row {
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .students-needs-support-list ion-item {
   --padding-start: 0;
   --inner-padding-end: 0;
-  --padding-top: 21px;
+  --padding-top: 1.3125rem;
 }
 
 .student-needs-support-text {
-  font-size: 14px;
-  width: 250px;
+  font-size: 0.875rem;
+  width: 15.625rem;
   font-family: "Outfit";
 }
 
 .student-needs-support-progress-bar {
   width: 50%;
   position: relative;
-  margin-left: 100px;
+  margin-left: 6.25rem;
 }
 
 .student-needs-support-progress-bar-percentage {
@@ -74,39 +74,39 @@
 }
 
 .student-data-activity-table ion-grid {
-  --ion-grid-padding: 20px;
+  --ion-grid-padding: 1.25rem;
 }
 
 .student-progress-table-div {
   background: white;
-  border-radius: 8px;
-  padding: 2px 4px;
+  border-radius: 0.5rem;
+  padding: 0.0125rem 0.25rem;
 }
 
 .student-table-header-row {
-  padding: 16px;
+  padding: 1rem;
 }
 
 .student-table-body-row {
-  padding: 16px;
+  padding: 1rem;
   background: #f7faf9;
-  margin: 4px 0;
-  border-radius: 8px;
+  margin: 0.25rem 0;
+  border-radius: 0.5rem;
 }
 
 .student-progress-language-mode p {
-  border-radius: 4px;
-  padding: 0px 4px;
+  border-radius: 0.25rem;
+  padding: 0px 0.25rem;
   margin-right: 3.4rem;
   text-align: center;
   text-transform: uppercase;
   color: var(--Base-Nube, #fff);
   font-family: Outfit;
-  font-size: 9px;
+  font-size: 0.5625rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px; /* 177.778% */
-  letter-spacing: 1px;
+  line-height: 1rem; /* 177.778% */
+  letter-spacing: 0.0625rem;
 }
 
 @media (max-width: 844px) {
@@ -117,22 +117,22 @@
 
 .student-progress-location {
   display: inline-flex;
-  gap: 4px;
-  border-radius: 4px;
-  padding: 0px 8px;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  padding: 0 0.5rem;
 
   p {
     text-transform: uppercase;
-    font-size: 9px;
+    font-size: 0.5625rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 16px; /* 177.778% */
-    letter-spacing: 1px;
+    line-height: 1rem; /* 177.778% */
+    letter-spacing: 0.0625rem;
   }
 }
 
 .student-caregivers-block {
-  margin: 24px 0px;
+  margin: 1.5rem 0;
 }
 
 .caregiver-info-card {
@@ -140,10 +140,10 @@
 }
 
 .resend-invite-buttons {
-  padding: 0px;
-  font-size: 14px;
+  padding: 0;
+  font-size: 0.875rem;
 
   p {
-    margin-left: 4px;
+    margin-left: 0.25rem;
   }
 }

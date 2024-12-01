@@ -4,33 +4,33 @@
   align-items: stretch;
 
   .content-lock {
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 2rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      height: 100%;
-      width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
   }
 }
 
 .community-card {
-    aspect-ratio: 1/1;
-    width: 30%;
-    background-color: var(--Cielo-Cielo);
-    padding: 2rem;
-    border-radius: 2rem;
-    position: relative;
-    img {
-	height: 250px;
-	width: auto;
-	display: block;
-	margin: auto;
-	margin-bottom: 3rem;
-    }
+  aspect-ratio: 1/1;
+  width: 30%;
+  background-color: var(--Cielo-Cielo);
+  padding: 2rem;
+  border-radius: 2rem;
+  position: relative;
+  img {
+    height: 15.625rem;
+    width: auto;
+    display: block;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
 }

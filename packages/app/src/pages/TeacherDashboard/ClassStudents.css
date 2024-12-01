@@ -6,66 +6,66 @@
 }
 
 #teacher-dashboard-students {
-  padding: 48px;
+  padding: 3rem;
 
   .class-students-header ion-item {
-    --padding-start: 0px;
+    --padding-start: 0;
   }
 
   .classroom-name-text {
-    margin-right: 8px;
+    margin-right: 0.5rem;
   }
 
   .overview-text-header {
-    margin-left: 8px;
+    margin-left: 0.5rem;
   }
 
   .header-overview-arrow {
-    margin-bottom: 48px;
+    margin-bottom: 3rem;
   }
 
   .students-header-block {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 2.5rem;
   }
   .add-students-button {
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background: #006a67;
     display: flex;
-    padding: 4px 12px 4px 4px;
+    padding: 0.25rem 0.75rem 0.25rem 0.25rem;
     justify-content: flex-end;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
     color: white;
 
     ion-icon {
-      font-size: 20px;
+      font-size: 1.25rem;
     }
   }
 
   .class-students-table {
-    margin: 32px 0px;
+    margin: 2rem 0;
   }
 
   .class-students-table-grid {
     background: white;
-    border-radius: 8px;
+    border-radius: 0.5rem;
   }
 
   .class-student-table-header-row {
-    padding: 16px;
+    padding: 1rem;
   }
   .class-student-table-body-row {
-    padding: 16px;
+    padding: 1rem;
     background: #f7faf9;
-    margin: 4px 0;
-    border-radius: 8px;
+    margin: 0.25rem 0;
+    border-radius: 0.5rem;
   }
   .student-needs-support-text {
-    padding: 2px 8px;
+    padding: 0.0125rem 0.5rem;
     background: #22beb9;
-    border-radius: 4px;
+    border-radius: 0.25rem;
   }
 
   .button-column {
@@ -73,14 +73,14 @@
   }
 
   .class-students-banner-styles ion-card {
-    margin: 0px;
-    padding: 15px 32px 15px 24px;
+    margin: 0;
+    padding: 0.9375rem 2rem 0.9375rem 1.5rem;
     background: #d3eae8;
   }
 
   .get-notified-button {
-    padding: 4px 12px 4px 12px;
-    border-radius: 8px;
+    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+    border-radius: 0.5rem;
     background-color: #006a67;
 
     font-weight: 600;

@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.08);
 
   > div {
     min-width: 33%;

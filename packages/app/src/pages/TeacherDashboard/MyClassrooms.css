@@ -1,9 +1,9 @@
 #add-my-classrooms-id {
   .add-new-class-row {
-    margin-top: 59px;
+    margin-top: 3.6875rem;
     background-color: #d3eae8;
-    border-radius: 18px;
-    padding: 36px;
+    border-radius: 1.125rem;
+    padding: 2.25rem;
   }
 
   .settings-pg1-container {
@@ -29,7 +29,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 1.25; /* 40px; 125% */
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03125rem;
   }
 
   .explore-bili-heading {
@@ -42,10 +42,10 @@
       "clig" off,
       "liga" off;
     font-family: Outfit;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 1.5rem; /* 150% */
   }
 
   #settings-overview-see-all-button {
@@ -59,15 +59,15 @@
   }
 
   ion-row.row {
-    border-bottom: 1px solid var(--base-hover-shadow, rgba(0, 0, 0, 0.08));
+    border-bottom: 0.0625rem solid var(--base-hover-shadow, rgba(0, 0, 0, 0.08));
   }
 
   ion-button.add-child-btn {
-    --padding-top: 0px;
-    --padding-bottom: 0px;
+    --padding-top: 0;
+    --padding-bottom: 0;
     border-width: 0;
-    box-shadow: 0px 0px 1px 0px #00000066;
-    box-shadow: 0px 12px 12px -6px #00000029;
+    box-shadow: 0 0 0.0625rem 0 #00000066;
+    box-shadow: 0 0.75rem 0.75rem -0.375rem #00000029;
   }
 
   .sparkle-icon {
@@ -97,12 +97,12 @@
   }
 
   ion-popover.cs-hover {
-    --width: 200px;
+    --width: 12.5rem;
   }
 
   ion-content.cs-content {
     --background: white;
-    --border-radius: 20px;
+    --border-radius: 1.25rem;
   }
 
   ion-icon.add {
@@ -110,11 +110,11 @@
   }
 
   .popover-arrow::after {
-    top: 3px;
-    border-radius: 3px;
+    top: 0.1875rem;
+    border-radius: 0.1875rem;
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 0.875rem;
+    height: 0.875rem;
     transform: rotate(45deg);
     background: var(--background);
     content: "";
@@ -122,10 +122,10 @@
   }
 
   #classroom_name_wrapper > ion-col:nth-of-type(odd) .classroom-names {
-    margin-right: 30px;
+    margin-right: 1.875rem;
   }
 
   #classroom_name_wrapper > ion-col:nth-of-type(even) .classroom-names {
-    margin-left: 30px;
+    margin-left: 1.875rem;
   }
 }

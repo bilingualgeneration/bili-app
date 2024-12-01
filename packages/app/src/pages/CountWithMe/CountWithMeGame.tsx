@@ -96,27 +96,29 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   //styles for correct or incorrect choice
   const initialStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
-    WebkitFilter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
-    filter: "drop-shadow(-4.638px 9.275px 27.826px rgba(0, 0, 0, 0.25))",
+    borderRadius: "2rem",
+    WebkitFilter:
+      "drop-shadow(-0.289875rem 0.5796875rem 1.739125rem rgba(0, 0, 0, 0.25))",
+    filter:
+      "drop-shadow(-0.289875rem 0.5796875rem 1.739125rem rgba(0, 0, 0, 0.25))",
   };
 
   const correctStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
+    borderRadius: "2rem",
     WebkitFilter:
-      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+      "drop-shadow(0.0625rem 0.0625rem 0 var(--alerts-status-success, #12D18E)) drop-shadow(-0.0625rem -0.0625rem 0 var(--alerts-status-success, #12D18E)) drop-shadow(0.0625rem 0.0625rem 0.3125rem rgba(0,0,0,0.5))",
     filter:
-      "drop-shadow(1px 1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(-1px -1px 0 var(--alerts-status-success, #12D18E)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+      "drop-shadow(0.0625rem 0.0625rem 0 var(--alerts-status-success, #12D18E)) drop-shadow(-0.0625rem -0.0625rem 0 var(--alerts-status-success, #12D18E)) drop-shadow(0.0625rem 0.0625rem 0.3125rem rgba(0,0,0,0.5))",
   };
 
   const incorrectStyle = {
     cursor: "pointer",
-    borderRadius: "32px",
+    borderRadius: "2rem",
     WebkitFilter:
-      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+      "drop-shadow(0.0625rem 0.0625rem 0 var(--Categories-Error, #F0091B)) drop-shadow(-0.0625rem -0.0625rem 0 var(--Categories-Error, #F0091B)) drop-shadow(0.0625rem 0.0625rem 0.3125rem rgba(0,0,0,0.5))",
     filter:
-      "drop-shadow(1px 1px 0 var(--Categories-Error, #F0091B)) drop-shadow(-1px -1px 0 var(--Categories-Error, #F0091B)) drop-shadow(1px 1px 5px rgba(0,0,0,0.5))",
+      "drop-shadow(0.0625rem 0.0625rem 0 var(--Categories-Error, #F0091B)) drop-shadow(-0.0625rem -0.0625rem 0 var(--Categories-Error, #F0091B)) drop-shadow(0.0625rem 0.0625rem 0.3125rem rgba(0,0,0,0.5))",
   };
 
   //states
@@ -415,7 +417,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   color: `${animal.text_color}`,
-                  fontSize: "80px",
+                  fontSize: "5rem",
                   fontWeight: "700",
                 }}
               >

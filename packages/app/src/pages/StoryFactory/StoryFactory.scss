@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 ion-button.sf-intro-button {
@@ -17,9 +17,9 @@ ion-button.sf-intro-button {
   align-items: center;
 
   /* Style properties */
-  border-radius: 105.63px;
+  border-radius: 6.6875rem;
   background: var(--base-selva, #006a67);
-  box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+  box-shadow: 0.25rem 1rem 2rem 0 rgba(58, 42, 17, 0.2);
 }
 
 .controller-icon {
@@ -27,8 +27,8 @@ ion-button.sf-intro-button {
 }
 
 .story-factory-button-container {
-  gap: 16px;
-  margin-top: 32px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .story-button-bold {
@@ -43,7 +43,7 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 35.2px */
-  letter-spacing: 0.211px;
+  letter-spacing: 0.0127rem;
 }
 
 .story-button-reg {
@@ -58,7 +58,7 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 19.6px */
-  letter-spacing: 0.211px;
+  letter-spacing: 0.0127rem;
 }
 
 .color-selva {
@@ -76,7 +76,7 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
-  letter-spacing: -2px;
+  letter-spacing: -0.125rem;
 }
 
 #story-fact {
@@ -90,7 +90,7 @@ ion-button.sf-intro-button {
 }
 
 #story-juego-title2 {
-  margin: 0px;
+  margin: 0;
   padding: 2%;
   width: 36vw; /*367px; */
   color: #fff;
@@ -102,7 +102,7 @@ ion-button.sf-intro-button {
 }
 
 .individual-juego-card {
-  height: 274px;
+  height: 17.125rem;
 }
 
 /* Media query for mobile juego card view (TODO: Fix this to make stackable on phone view?) */
@@ -117,7 +117,7 @@ ion-button.sf-intro-button {
 
   fabrica-card {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     white-space: normal;
   }
 }
@@ -152,14 +152,14 @@ ion-button.sf-intro-button {
   display: flex;
   width: 57vw; /* 1147px;*/
   height: 50vh; /* 494.5px; */
-  padding: 24px;
+  padding: 1.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 1.5rem;
   flex-shrink: 0;
-  border-radius: 35.942px;
+  border-radius: 2.25rem;
   background: var(--base-selva, #006a67);
-  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -0.335088125rem 0.67017625rem 2.010528125rem 0 rgba(0, 0, 0, 0.25);
   margin: auto;
 }
 
@@ -210,14 +210,14 @@ ion-button.sf-intro-button {
 .sigue-adelante-button {
   display: flex;
   width: 23rem; /* 362.566px; */
-  --padding-top: 14.377px;
-  --padding-bottom: 14.377px;
+  --padding-top: 0.8985625rem;
+  --padding-bottom: 0.8985625rem;
   flex-direction: column;
   justify-content: center;
   /* align-items: center; commented these out bc they weren't doing anything */
   /* --border-radius: 94.913px; */
   --background: var(--cielo-cielo, #d3eae8);
-  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+  --box-shadow: 0.25rem 1rem 2rem 0 rgba(58, 42, 17, 0.2);
 }
 
 .sigue-button-es {
@@ -240,7 +240,7 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 17.611px */
-  letter-spacing: 0.19px;
+  letter-spacing: 0.0125rem;
 }
 
 /* JuegoCard Component */
@@ -329,7 +329,7 @@ ion-button.sf-intro-button {
     font-weight: bold;
     color: white;
     position: absolute;
-    bottom: -205px;
+    bottom: -12.8125rem;
     left: 0;
     text-align: left;
   }
@@ -339,7 +339,7 @@ ion-button.sf-intro-button {
     color: white;
     position: absolute;
     text-align: left;
-    bottom: -230px;
+    bottom: -14.375rem;
     left: 0;
   }
 }
@@ -398,18 +398,18 @@ ion-button.sf-intro-button {
 }
 
 .sf-card {
-  max-width: 995px;
+  max-width: 62.1875rem;
   margin: auto;
 
   ion-card {
     gap: 8px;
-    box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: -0.372925rem 0.74585rem 2.23755rem 0 rgba(0, 0, 0, 0.25);
     padding: 4rem 0 4rem 4rem;
     border-radius: 2.5rem;
   }
 
   .right-margin {
-    margin-right: 150px;
+    margin-right: 9.375rem;
   }
 
   h1 {
@@ -427,7 +427,7 @@ ion-button.sf-intro-button {
     font-style: normal;
     font-weight: 400;
     line-height: 110%; /* 26.4px */
-    margin-top: 8px;
+    margin-top: 0.5rem;
   }
 }
 
@@ -439,7 +439,7 @@ ion-button.sf-intro-button {
   font-style: normal;
   font-weight: 400;
   line-height: 110%; /* 44px */
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 }
 
 .story-factory-button-container-pg-2 {
@@ -456,13 +456,13 @@ ion-card.new-felicitaciones-card {
   display: flex;
   width: 58vw; /* 1147px;*/
   height: 60vh; /* 608; */
-  padding: 60px;
+  padding: 3.75rem;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  border-radius: 35.942px;
+  border-radius: 2.246375rem;
   background: var(--Base-Nube, #ffffff);
-  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -0.335088125rem 0.67017625rem 2.010528125rem 0 rgba(0, 0, 0, 0.25);
   position: relative;
   z-index: 1;
 }
@@ -474,10 +474,10 @@ ion-card.new-felicitaciones-card {
 .stars-overlay {
   position: absolute;
   width: 100%;
-  top: -95px;
-  left: 75px;
+  top: -5.9375rem;
+  left: 4.6875rem;
   right: 0;
-  bottom: -250px;
+  bottom: -15.625rem;
   background: url("../../assets/icons/sf_stars_overlay.svg");
   position: absolute;
   z-index: 2;
@@ -552,7 +552,7 @@ ion-card.new-felicitaciones-card {
   align-items: center;
   /* --border-radius: 94.913px; */
   --background: var(--Base-Selva, #006a67);
-  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+  --box-shadow: 0.25rem 1rem 2rem 0 rgba(58, 42, 17, 0.2);
 }
 
 .keep-going-button-es {
@@ -575,7 +575,7 @@ ion-card.new-felicitaciones-card {
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 17.611px */
-  letter-spacing: 0.19px;
+  letter-spacing: 0.0125rem;
 }
 
 .bili-character-congrats {
@@ -602,8 +602,8 @@ ion-card.new-felicitaciones-card {
   font-family: Outfit;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -1.057px;
-  padding: 5px 0 5px;
+  letter-spacing: -0.0660625rem;
+  padding: 0.3125rem 0 0.3125rem;
   // margin: 5% 5% 7%;
   white-space: pre;
 
@@ -627,15 +627,15 @@ ion-card.new-felicitaciones-card {
   text-align: center;
   align-items: center;
   width: 100%;
-  height: 220px;
-  border-radius: 100px;
+  height: 13.75rem;
+  border-radius: 6.25rem;
   padding: 3rem 1rem;
 }
 
 #sf-game-page {
   position: relative;
-  padding: 0px 2%;
-  
+  padding: 0 2%;
+
   ion-col {
     display: flex;
     align-items: center;
@@ -656,26 +656,26 @@ ion-card.new-felicitaciones-card {
   //   z-index: 1;
 
   //   @media (max-width: 1024px) {// size for smaller iPads (iPad Air, iPad Pro 9.7-inch, etc.)
-  //     background-size: 1400px; 
+  //     background-size: 1400px;
   //     background-repeat: repeat;
   //     top: 0;
   //     left: 0;
   //   }
 
   //   @media (max-width: 834px) {// size for iPad Pro 11-inch
-  //     background-size: 200px; 
+  //     background-size: 200px;
   //   }
 
   //   @media (max-width: 768px) {// size for iPad Mini and iPad Pro 10.5-inch
-  //     background-size: 180px; 
+  //     background-size: 180px;
   //   }
 
   //   @media (max-width: 576px) {// size for iPad Pro 12.9-inch and iPad Pro 12.9-inch (4th generation)
-  //     background-size: 150px; 
+  //     background-size: 150px;
   //   }
 
   //   @media (max-width: 540px) {// size for smaller iPads in landscape mode
-  //     background-size: 120px; 
+  //     background-size: 120px;
   //   }
   // }
 }
@@ -684,7 +684,7 @@ ion-card.new-felicitaciones-card {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: 1000px;
+  height: 62.5rem;
 }
 
 .option-orange {
@@ -692,7 +692,7 @@ ion-card.new-felicitaciones-card {
 }
 
 .option-blue {
-  border: 7.98px solid var(--Cielo-Low, #22beb9);
+  border: 0.5rem solid var(--Cielo-Low, #22beb9);
   background: var(--Cielo-Low, #22beb9);
 }
 

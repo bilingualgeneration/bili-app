@@ -1,20 +1,17 @@
-#class-code-styles{
+#class-code-styles {
+  ion-input.custom-input-style {
+    width: 5.25rem;
+    height: 4.75rem;
+    font-family: Outfit;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 2.75;
+    text-align: center;
+  }
 
-    ion-input.custom-input-style{
-        
-        width: 84px;
-        height: 76px;
-        font-family: Outfit;
-        font-size: 40px;
-        font-weight: 700;
-        line-height: 44px;
-        text-align: center;
-
-    }
-
-    .digit-wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-    }
+  .digit-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
 }

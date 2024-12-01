@@ -16,7 +16,7 @@ export const Popover: React.FC<PopoverProps> = ({ content, trigger }) => {
       showBackdrop={false}
       dismissOnSelect={true}
     >
-      <p style={{ padding: "10px" }}>{content as string}</p>
+      <p style={{ padding: "0.625rem" }}>{content as string}</p>
     </IonPopover>
   );
 };

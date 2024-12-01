@@ -33,8 +33,8 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
           className="oval-element"
           style={{
             backgroundColor: iconBackgroundColor,
-            width: "126px",
-            height: "126px",
+            width: "7.875rem",
+            height: "7.875rem",
           }}
         >
           {url ? <Link to={url}>{icon}</Link> : icon}
@@ -43,9 +43,9 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
           <div
             className="wave-icon-title"
             style={{
-              fontSize: "18px",
+              fontSize: "1.125rem",
               fontWeight: "700",
-              maxWidth: "120px",
+              maxWidth: "7.5rem",
             }}
           >
             {/* todo: don't force type cast */}
@@ -54,7 +54,7 @@ export const IconWithText: React.FC<IconWithTextProps> = ({
           <div
             className="wave-icon-subtitle"
             style={{
-              fontSize: "16px",
+              fontSize: "1rem",
               fontWeight: "400",
             }}
           >

@@ -42,7 +42,7 @@ const renderCustomizedLabel = ({
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
-      style={{ fontSize: "14px", fontWeight: "bold", fontFamily: "Outfit" }}
+      style={{ fontSize: "0.875rem", fontWeight: "bold", fontFamily: "Outfit" }}
     >
       {`${value}%`}
     </text>

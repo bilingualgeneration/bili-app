@@ -14,7 +14,7 @@ import { useState } from "react";
 export const TeacherAccountCredentials: React.FC = () => {
   const intl = useIntl();
   const { data, setData, pushPage } = useSignUpData();
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -96,9 +96,14 @@ export const TeacherAccountCredentials: React.FC = () => {
             />
           </div>
 
-          <div className="ion-margin-top" style={{display: 'flex'}}>
-          <IonCheckbox labelPlacement="end" justify="start" checked={acceptedTerms} onIonChange={e => setAcceptedTerms(e.detail.checked)} />
-            <IonText class="ion-text-wrap" style={{marginLeft: '10px',}}>
+          <div className="ion-margin-top" style={{ display: "flex" }}>
+            <IonCheckbox
+              labelPlacement="end"
+              justify="start"
+              checked={acceptedTerms}
+              onIonChange={(e) => setAcceptedTerms(e.detail.checked)}
+            />
+            <IonText class="ion-text-wrap" style={{ marginLeft: "0.625rem" }}>
               <p>
                 <FormattedMessage
                   id="common.termsAgree"
@@ -106,7 +111,12 @@ export const TeacherAccountCredentials: React.FC = () => {
                   description="Terms of Service where users can check off if they agree while in sign up process."
                 />
 
-                <a href="https://thebiliapp.com/terms/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://thebiliapp.com/terms/"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IonText
                     color="primary"
                     style={{ fontWeight: "bold", marginRight: 8 }}
@@ -119,18 +129,22 @@ export const TeacherAccountCredentials: React.FC = () => {
                   </IonText>
                 </a>
               </p>
-             
-             <p>
-              <FormattedMessage
+
+              <p>
+                <FormattedMessage
                   id="common.termsAgree2"
                   defaultMessage="I have read and understand "
-                  
                 />
-                
-                <a href="https://thebiliapp.com/privacy-policy/" style={{ color: 'inherit', textDecoration: 'inherit' }} target="_blank" rel="noopener noreferrer">
+
+                <a
+                  href="https://thebiliapp.com/privacy-policy/"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IonText
                     color="primary"
-                    style={{ fontWeight: "bold", marginLeft: '6pt', }}
+                    style={{ fontWeight: "bold", marginLeft: "6pt" }}
                   >
                     <FormattedMessage
                       id="common.terms2"
@@ -139,11 +153,9 @@ export const TeacherAccountCredentials: React.FC = () => {
                     />
                   </IonText>
                 </a>
-
-             </p>
-              
+              </p>
             </IonText>
-        </div>
+          </div>
         </div>
         <IonButton
           data-testid="teacher-account-credentials-continue-button"

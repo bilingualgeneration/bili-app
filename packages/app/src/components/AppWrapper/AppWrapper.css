@@ -18,13 +18,13 @@
 }
 
 #environmentMarker {
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: bold;
   background: white;
-  padding: 4px;
+  padding: 0.25rem;
   position: absolute;
   top: 0;
-  left: calc(50% - 86px);
+  left: calc(50% - 5.375rem);
   margin: auto;
   z-index: 9999999;
   color: red;

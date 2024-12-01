@@ -107,7 +107,10 @@ const HydratedProfileChip: React.FC = () => {
               }}
             >
               <IonItem button={true} detail={false} lines="none">
-                <IonIcon icon={StudentAvatar} style={{ marginRight: "7px" }} />
+                <IonIcon
+                  icon={StudentAvatar}
+                  style={{ marginRight: "0.4375rem" }}
+                />
                 <IonText>
                   <h1 className="text-md semibold">
                     {language !== "en" && `Mi perfil`}
@@ -131,7 +134,10 @@ const HydratedProfileChip: React.FC = () => {
                 lines="none"
                 className="change-student"
               >
-                <IonIcon icon={StudentLogout} style={{ marginRight: "7px" }} />
+                <IonIcon
+                  icon={StudentLogout}
+                  style={{ marginRight: "0.4375rem" }}
+                />
                 <IonText>
                   <h1 className="text-md semibold">
                     {language !== "en" && `Cambiar de estudiante`}

@@ -34,7 +34,7 @@ export const FooterMenu: React.FC = ({}) => {
         className="ion-hide-md-down"
         style={{
           position: "fixed",
-          left: "calc(50% - 175px)",
+          left: "calc(50% - 10.9375rem)",
           bottom: 0,
           zIndex: 999,
         }}
@@ -43,10 +43,10 @@ export const FooterMenu: React.FC = ({}) => {
           className="ion-hide-md-down"
           fixed={true}
           style={{
-            maxWidth: "350px",
+            maxWidth: "21.875rem",
             background: "white",
-            borderRadius: "38.563px 38.563px 0px 0px",
-            filter: "drop-shadow(0 0px 32px rgba(101, 44, 12, 0.1))",
+            borderRadius: "2.41rem 2.41rem 0 0",
+            filter: "drop-shadow(0 0 2rem rgba(101, 44, 12, 0.1))",
             textAlign: "center",
           }}
         >
@@ -54,17 +54,17 @@ export const FooterMenu: React.FC = ({}) => {
             <IonCol>
               <Heart />
             </IonCol>
-            <IonCol style={{ height: "55px" }}>
+            <IonCol style={{ height: "3.4375rem" }}>
               <Link to="/student-dashboard">
                 <Home
                   style={{
                     background: "white",
                     borderRadius: "50% 50% 0 0",
-                    padding: "20px 20px 0 20px",
-                    height: "55px",
+                    padding: "1.25rem 1.25rem 0 1.25rem",
+                    height: "3.4375rem",
                     boxSizing: "content-box",
                     position: "relative",
-                    top: "-35px",
+                    top: "-2.1875rem",
                   }}
                 />
               </Link>

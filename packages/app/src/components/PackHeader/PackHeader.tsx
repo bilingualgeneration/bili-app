@@ -72,7 +72,7 @@ export const PackHeader: React.FC<PackHeaderProps> = ({
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "0.625rem",
                 }
               : {}
           }

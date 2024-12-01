@@ -10,8 +10,8 @@ ion-item {
 
 hr {
   width: 100%;
-  border-bottom: 1px solid var(--Arena-High);
-  height: 0px;
+  border-bottom: 0.0625rem solid var(--Arena-High);
+  height: 0;
 }
 
 .input-bottom.sc-ion-input-ios {
@@ -19,12 +19,12 @@ hr {
 }
 
 .background-card {
-  box-shadow: -5.9668px 11.9336px 35.8008px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -0.372925rem 0.74585rem 2.23755rem 0 rgba(0, 0, 0, 0.25);
   padding: 2rem;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 6.25rem;
+  margin-right: 6.25rem;
   border-radius: 2.5rem;
-  min-width: 600px;
+  min-width: 37.5rem;
 }
 
 .no-text-decoration {
@@ -32,15 +32,15 @@ hr {
 }
 
 .page-wrapper {
-  max-width: 1366px;
-  min-width: 600px;
+  max-width: 85.375rem;
+  min-width: 37.5rem;
   margin: auto;
   min-height: 100vh;
 }
 
 @media screen and (min-width: 1000px) {
   .page-wrapper {
-    padding-bottom: 150px; // clearance for footer
+    padding-bottom: 9.375rem; // clearance for footer
   }
 }
 
@@ -94,7 +94,7 @@ html {
 }
 
 ion-progress-bar {
-  $ionProgressBarHeight: 12px;
+  $ionProgressBarHeight: 0.75rem;
   height: $ionProgressBarHeight;
   border-radius: math.div($ionProgressBarHeight, 2);
 }
@@ -102,8 +102,8 @@ ion-progress-bar {
 ion-input {
   &.input-fill-outline {
     font-weight: bold;
-    --padding-start: 20px;
-    --padding-end: 20px;
+    --padding-start: 1.25rem;
+    --padding-end: 1.25rem;
     // todo: convert #E7E9E9 into color system
     // problem arises when trying to stack with border-color
     --background: #e7e9e9;
@@ -124,11 +124,11 @@ ion-input {
 ion-card {
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 1.5rem;
   justify-content: center;
   align-items: stretch;
-  gap: 24px;
-  margin-bottom: 16px;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
   box-shadow: none;
   border-radius: 1rem;
 }
@@ -136,25 +136,25 @@ ion-card {
 //styles for the radio-button
 
 .undefined ion-card {
-  box-shadow: 0 0 0 3px var(--base-agua, rgba(0, 106, 103, 0.12));
+  box-shadow: 0 0 0 0.1875rem var(--base-agua, rgba(0, 106, 103, 0.12));
 }
 
 .active ion-card {
   --background: var(--Cielo-Highest);
-  box-shadow: 0 0 0 3px var(--Base-Selva);
+  box-shadow: 0 0 0 0.1875rem var(--Base-Selva);
 }
 
 .radio-button-select {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
   width: 100%;
 }
 
 //styles for the circle with svg icon
 .oval-element {
-  width: 75px;
-  height: 75px;
+  width: 4.6875rem;
+  height: 4.6875rem;
   flex-shrink: 0;
   border-radius: 50%;
   display: flex;
@@ -171,7 +171,7 @@ ion-card {
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-left: 8px;
+  margin-left: 0.5rem;
 }
 
 .custom-ion-header {
@@ -183,25 +183,25 @@ ion-card {
 .background-pattern {
   background-image: url("/assets/img/background_pattern_lp.png");
   background-color: #fff8f0;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .stories-card {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   position: relative;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   flex: 0 0 auto;
 }
 
 .stories-card-image {
-  width: 200px;
-  height: 274px;
+  width: 12.5rem;
+  height: 17.125rem;
 }
 
 .other-card-image {
-  width: 320px;
-  height: 274px;
+  width: 20rem;
+  height: 17.125rem;
 }
 
 .stories-card-header {
@@ -212,7 +212,7 @@ ion-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px;
+  margin: 0.625rem;
 }
 
 .stories-card-footer {
@@ -223,12 +223,12 @@ ion-card {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  margin: 10px;
+  margin: 0.625rem;
 }
 
 .oval-element-small {
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
   flex-shrink: 0;
   border-radius: 50%;
   display: flex;
@@ -241,21 +241,21 @@ ion-card {
 }
 
 .individual-juego-card {
-  height: 274px;
+  height: 17.125rem;
 }
 
 .fabrica-de-cuentos-large-card {
   display: flex;
   max-width: 70vw; //1147px;
-  padding: 24px 24px 79px 24px;
+  padding: 1.5rem 1.5rem 5rem 1.5rem;
   margin: auto;
   // margin-top: 8%;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  border-radius: 35.942px;
+  gap: 1.5rem;
+  border-radius: 2.25rem;
   background: var(--base-nube, #fff);
-  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -0.335088125rem 0.67017625rem 2.010528125rem 0 rgba(0, 0, 0, 0.25);
 }
 
 /* Media query for mobile juego card view (TODO: Fix this to make stackable on phone view?) */
@@ -266,7 +266,7 @@ ion-card {
 
   fabrica-card {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     white-space: normal;
   }
 }
@@ -287,28 +287,28 @@ ion-card {
   display: flex;
   width: 57vw; //1147px;
   height: 50vh; //494.5px;
-  padding: 24px;
+  padding: 1.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 1.5rem;
   flex-shrink: 0;
-  border-radius: 35.942px;
+  border-radius: 2.246375rem;
   background: var(--base-selva, #006a67);
-  box-shadow: -5.36141px 10.72282px 32.16845px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -0.335088125rem 0.67017625rem 2.010528125rem 0 rgba(0, 0, 0, 0.25);
   margin: auto;
 }
 
 .sigue-adelante-button {
   display: flex;
   width: 23rem; //362.566px;
-  --padding-top: 14.377px;
-  --padding-bottom: 14.377px;
+  --padding-top: 0.8985625rem;
+  --padding-bottom: 0.8985625rem;
   flex-direction: column;
   justify-content: center;
   // align-items: center; commented these out bc they weren't doing anything
   // --border-radius: 94.913px;
   --background: var(--cielo-cielo, #d3eae8);
-  --box-shadow: 4px 16px 32px 0px rgba(58, 42, 17, 0.2);
+  --box-shadow: 0.25rem 1rem 2rem 0 rgba(58, 42, 17, 0.2);
 }
 
 /* JuegoCard Component */
@@ -429,8 +429,8 @@ ion-card {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  filter: drop-shadow(0px 0px 0.8985401391983032px rgba(0, 0, 0, 0.4))
-    drop-shadow(0px 5.391241073608398px 5.391241073608398px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 0 0.0561587587rem rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0.3369525671rem 0.3369525671rem rgba(0, 0, 0, 0.16));
 }
 
 .volume-icon-container {
@@ -438,17 +438,19 @@ ion-card {
   width: 1.5rem; //25px
   height: 1.5rem; //25px
   background: var(--base-lluvia, #f7faf9);
-  border-radius: 9px;
+  border-radius: 0.5625rem;
   // text-align: center;
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
+  box-shadow: 0.070474375rem 0.21142375rem 0.56379625rem 0
+    rgba(12, 101, 96, 0.2);
 }
 
 .volume-icon-container-greyed-out {
   position: relative;
   width: 1.5rem; //25px
   height: 1.5rem; //25px
-  border-radius: 9px;
-  box-shadow: 1.12759px 3.38278px 9.02074px 0px rgba(12, 101, 96, 0.2);
+  border-radius: 0.5625;
+  box-shadow: 0.070474375rem 0.21142375rem 0.56379625rem 0
+    rgba(12, 101, 96, 0.2);
   background: var(--base-hover-highlight, rgba(255, 255, 255, 0.12));
 }
 
@@ -461,7 +463,7 @@ ion-card {
 }
 
 ion-chip {
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 // ion-alert .alert-wrapper {

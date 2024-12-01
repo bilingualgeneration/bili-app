@@ -9,11 +9,11 @@
     width: 100%;
   }
   ion-text {
-    max-width: 442px;
+    max-width: 27.625rem;
   }
 
   ion-img {
-    width: 337.25px;
-    height: 333px;
+    width: 21rem;
+    height: 20.8125rem;
   }
 }

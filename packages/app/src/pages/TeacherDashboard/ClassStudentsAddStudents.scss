@@ -1,21 +1,21 @@
 #class-add-students {
   .add-students-header {
-    padding: 0px 26px;
+    padding: 0 1.625rem;
   }
   .add-students-title {
-    padding: 36px 0;
+    padding: 2.25rem 0;
   }
 
   .classroom-name-text {
-    margin-right: 8px;
+    margin-right: 0.5rem;
   }
 
   .overview-text-header {
-    margin: 0px 8px;
+    margin: 0 0.5rem;
   }
 
   .header-overview-arrow {
-    margin-top: 48px;
+    margin-top: 3rem;
   }
 
   .add-student-button-continue {
@@ -24,7 +24,7 @@
     align-items: center;
 
     ion-button {
-      width: 394px;
+      width: 24.625rem;
     }
   }
 }

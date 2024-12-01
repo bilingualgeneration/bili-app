@@ -47,14 +47,14 @@
   }
   ion-item {
     font-family: "Outfit";
-    margin: 8px 4px 8px 4px;
-    border-radius: 8px;
+    margin: 0.5rem 0.25rem 0.5rem 0.25rem;
+    border-radius: 0.5rem;
   }
 }
 
 ion-popover.profile-popover-style {
-  --width: 280px;
-  --offset-y: 10px;
+  --width: 17.5rem;
+  --offset-y: 0.625rem;
 }
 
 @media (max-width: 768px) {

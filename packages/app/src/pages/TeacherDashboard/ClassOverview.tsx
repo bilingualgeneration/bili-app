@@ -40,11 +40,11 @@ const studentHighlightsStyle = {
   color: "#000",
   textAlign: "center",
   fontFamily: "Outfit",
-  fontSize: "36px",
+  fontSize: "2.25rem",
   fontStyle: "normal",
   fontWeight: "800",
   lineHeight: "800",
-  letterSpacing: "0.2px",
+  letterSpacing: "0.0125rem",
 };
 
 export const ClassOverview: React.FC = () => {

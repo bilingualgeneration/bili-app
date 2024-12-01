@@ -375,11 +375,11 @@ const TopSkill: React.FC<any> = ({ skill, number }) => (
             color: "#000",
             textAlign: "center",
             fontFamily: "Outfit",
-            fontSize: "38px",
+            fontSize: "2.375rem",
             fontStyle: "normal",
             fontWeight: "600",
-            lineHeight: "40px",
-            letterSpacing: "0.2px",
+            lineHeight: "2.5rem",
+            letterSpacing: "0.0125rem",
           }}
         >
           {number}

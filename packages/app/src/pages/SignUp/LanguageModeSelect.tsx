@@ -20,7 +20,7 @@ import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 export const LanguageModeSelect: React.FC = () => {
   const intl = useIntl();
   const schema = z.object({
-    isImmersive: z.enum(['en', 'es', 'esen']),
+    isImmersive: z.enum(["en", "es", "esen"]),
   });
   const {
     control,
@@ -32,7 +32,6 @@ export const LanguageModeSelect: React.FC = () => {
   });
   const { data, setData, pushPage } = useSignUpData();
 
-
   const englishOption: ExtendedRadioOption = {
     component: (
       <div>
@@ -43,11 +42,11 @@ export const LanguageModeSelect: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "24px",
+                fontSize: "1.5rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "120%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               ES
@@ -66,7 +65,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: 'en',
+    value: "en",
   };
 
   const spanishOption: ExtendedRadioOption = {
@@ -79,11 +78,11 @@ export const LanguageModeSelect: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "24px",
+                fontSize: "1.5rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "120%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               ES
@@ -104,7 +103,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: 'es',
+    value: "es",
   };
 
   const billingualOption: ExtendedRadioOption = {
@@ -117,11 +116,11 @@ export const LanguageModeSelect: React.FC = () => {
                 color: "#FFFFFF",
                 textAlign: "center",
                 fontFamily: "Outfit",
-                fontSize: "20px",
+                fontSize: "1.25rem",
                 fontStyle: "normal",
                 fontWeight: "700",
                 lineHeight: "100%",
-                letterSpacing: "0.2px",
+                letterSpacing: "0.0125rem",
               }}
             >
               EN
@@ -144,7 +143,7 @@ export const LanguageModeSelect: React.FC = () => {
         />
       </div>
     ),
-    value: 'esen',
+    value: "esen",
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -179,7 +178,7 @@ export const LanguageModeSelect: React.FC = () => {
         <ExtendedRadio
           control={control}
           name="isImmersive"
-          options={[billingualOption, spanishOption, englishOption ]}
+          options={[billingualOption, spanishOption, englishOption]}
         />
         <IonButton
           data-testid="language-select-continue-button"
