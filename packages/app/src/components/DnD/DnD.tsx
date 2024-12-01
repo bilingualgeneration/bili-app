@@ -4,9 +4,11 @@ const PIECE_VERTICAL_SPACER = 10;
 export const MAX_HEIGHT = 450;
 const MAX_WIDTH = 940;
 const PIECE_TOP_OFFSET = 20;
-const PIECE_LEFT_OFFSET = 80;
+const PIECE_LEFT_OFFSET_MOBILE = 30;
+const PIECE_LEFT_OFFSET_DESKTOP = 40;
 const PIECE_HEIGHT = 90;
-const PIECE_WIDTH = 10;
+const PIECE_WIDTH_MOBILE = 10;
+const PIECE_WIDTH_DESKTOP = 10;
 
 import classnames from "classnames";
 import { DnDImage } from "./DnDImage";
@@ -17,6 +19,7 @@ import { useDnD } from "@/hooks/DnD";
 import { DropTarget, DropTargetProps } from "./DropTarget";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { usePreview } from "react-dnd-preview";
+import { useScreenSize } from "@/lib/screenSize";
 
 import { Piece, PieceProps } from "./Piece";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -131,6 +134,7 @@ const Hydrator: React.FC<DnDProps> = ({
     setPiecesDropped,
     setTotalTargets,
   } = useDnD();
+  const { screenType } = useScreenSize();
 
   useEffect(() => {
     const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
@@ -149,7 +153,8 @@ const Hydrator: React.FC<DnDProps> = ({
           if (!t.endsWith("*")) {
             tempTotalTargets++;
           }
-          targetTotalWidth += PIECE_WIDTH;
+          targetTotalWidth +=
+            screenType === "mobile" ? PIECE_WIDTH_MOBILE : PIECE_WIDTH_DESKTOP;
           targetTotalHeight = Math.max(targetTotalHeight, PIECE_HEIGHT);
           return [
             id,
@@ -169,7 +174,10 @@ const Hydrator: React.FC<DnDProps> = ({
       targetTotalWidth = Math.max(targetTotalWidth, targetImage.width);
       targetTotalHeight += targetImage.height;
     }
-    let leftPosition = PIECE_LEFT_OFFSET;
+    let leftPosition =
+      screenType === "mobile"
+        ? PIECE_LEFT_OFFSET_MOBILE
+        : PIECE_LEFT_OFFSET_DESKTOP;
     let topPosition = PIECE_TOP_OFFSET;
     const totalPieces = piecesExpanded.length;
     const pieceInstances = Object.fromEntries(
@@ -180,7 +188,7 @@ const Hydrator: React.FC<DnDProps> = ({
           dropped: false,
           id,
           left: leftPosition,
-          top: targetImage ? topPosition : 0,
+          top: targetImage ? topPosition : 20,
           rotation:
             Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) -
             LETTER_MAX_ROTATION,
@@ -193,7 +201,10 @@ const Hydrator: React.FC<DnDProps> = ({
             topPosition = PIECE_TOP_OFFSET;
           }
         } else {
-          leftPosition += PIECE_WIDTH + PIECE_LEFT_OFFSET;
+          leftPosition +=
+            screenType === "mobile"
+              ? PIECE_WIDTH_MOBILE + PIECE_LEFT_OFFSET_MOBILE
+              : PIECE_WIDTH_DESKTOP + PIECE_LEFT_OFFSET_DESKTOP;
         }
         return [id, newP];
       }),
