@@ -118,8 +118,17 @@ export const SideMenu: React.FC = () => {
           description={"About label for side menu on settings page"}
         />
       ),
-      to: "/settings/about",
-      isActive: location.pathname === "/settings/about",
+      // TODO: route should be fixed for parent account
+      to:
+        profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/about`
+          : "/settings/about",
+
+      isActive:
+        location.pathname ===
+        (profile.role === "teacher"
+          ? `/classrooms/view/${classroomId}/about`
+          : "/settings/about"),
     },
   ];
 
