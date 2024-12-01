@@ -37,7 +37,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
     }
   }, [piecesDropped, totalTargets]);
   return (
-    <div style={{ width: "100%", height: "100vh", maxHeight: 500 }}>
+    <div style={{ width: "100%", height: "90vh", maxHeight: 500 }}>
       {/* TODO: determine this programmatically */}
       <IonText>
         <h1 className="text-4xl ion-text-center color-suelo">
