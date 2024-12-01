@@ -13,7 +13,7 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const { info } = useClassroom();
+  const { info: classroomInfo } = useClassroom();
   const { profile } = useProfile();
   const { id: studentId } = useStudent();
   const { language } = useLanguage();
@@ -27,6 +27,13 @@ export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
     //return <Redirect to="/caregiver/student-loader" />;
   }
   // implied else
+
+  // if user doesn't have classroom selected, need to load defaults
+  const info = classroomInfo ?? {
+    allowedLanguages: ["es", "en", "es.en"],
+    allowLanguageToggle: true,
+  };
+
   return (
     <I18nWrapper locale={language.slice(0, 2)}>
       <LanguageToggleProvider allowedLanguages={info.allowedLanguages}>
