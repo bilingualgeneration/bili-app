@@ -7,7 +7,7 @@ import {
 } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
 import React from "react";
-import "./PricingRadioCard.css";
+import "./PricingRadioCard.scss";
 
 type PricingRadioCardProps = {
   title: string;

@@ -4,7 +4,7 @@ import { useProfile } from "@/hooks/Profile";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
 
-import "./AppWrapper.css";
+import "./AppWrapper.scss";
 
 // todo: minimum loading time
 

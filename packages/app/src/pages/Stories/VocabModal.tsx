@@ -18,7 +18,7 @@ import { useStory } from "./StoryContext";
 
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 
-import "./VocabModal.css";
+import "./VocabModal.scss";
 
 // todo: ion-padding on IonContent is overridden
 

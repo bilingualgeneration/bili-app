@@ -1,8 +1,5 @@
 import { FormattedMessage, useIntl } from "react-intl";
-import {
-  getFunctions,
-  httpsCallable
-} from "firebase/functions";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import { IonButton, IonGrid, IonRow, IonCol } from "@ionic/react";
 import { Input } from "@/components/Input";
 import { useMaskito } from "@maskito/react";
@@ -12,7 +9,7 @@ import { useProfile } from "@/hooks/Profile";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import "./Profile.css";
+import "./Profile.scss";
 
 export const Profile: React.FC = () => {
   const intl = useIntl();
@@ -24,7 +21,9 @@ export const Profile: React.FC = () => {
     dob: z.string().nullable(),
     country: z.string().nullable(),
   });
-  const {profile: { name, phone, email, dob, country }} = useProfile();
+  const {
+    profile: { name, phone, email, dob, country },
+  } = useProfile();
   const { control, handleSubmit } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       country,
@@ -84,7 +83,10 @@ export const Profile: React.FC = () => {
           <IonGrid>
             <IonRow className="ion-justify-content-between row">
               <IonCol size="auto">
-                <h1 className="child-profile-heading" style={{marginLeft: 30}}>
+                <h1
+                  className="child-profile-heading"
+                  style={{ marginLeft: 30 }}
+                >
                   <FormattedMessage
                     id="settings.adult"
                     defaultMessage="Adult Profile"

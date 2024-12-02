@@ -34,7 +34,7 @@ import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 
-import "./ClassOverview.css";
+import "./ClassOverview.scss";
 
 const studentHighlightsStyle = {
   color: "#000",

@@ -3,7 +3,7 @@ import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { PackHeader } from "@/components/PackHeader";
 import { StudentProfileCard } from "@/components/StudentProfileCard";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import "./StudentSelect.css";
+import "./StudentSelect.scss";
 import studentImage1 from "@/assets/icons/profile_image_1.svg";
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { useHistory } from "react-router-dom";

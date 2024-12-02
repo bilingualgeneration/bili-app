@@ -27,7 +27,7 @@ import {
 import { useClassroom } from "@/hooks/Classroom";
 import { useProfile } from "@/hooks/Profile";
 
-import "./MyClassrooms.css";
+import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
 import { Link } from "react-router-dom";
 

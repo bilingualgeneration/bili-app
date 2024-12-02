@@ -7,7 +7,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 
-import "./AccountCredentials.css";
+import "./AccountCredentials.scss";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useState } from "react";
 

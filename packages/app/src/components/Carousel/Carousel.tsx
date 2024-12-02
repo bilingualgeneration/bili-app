@@ -3,7 +3,7 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Carousel.css";
+import "./Carousel.scss";
 
 interface CarouselProps
   extends React.PropsWithChildren<{

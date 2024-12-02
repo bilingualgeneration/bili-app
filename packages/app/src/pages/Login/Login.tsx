@@ -28,7 +28,7 @@ import { useHistory } from "react-router-dom";
 import { Input } from "@/components/Input";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import closeIcon from "@/assets/icons/close.svg"; // Adjust the path if necessary
-import "./ResetPasswordModal.css";
+import "./ResetPasswordModal.scss";
 
 interface FormInputs {
   email: string;

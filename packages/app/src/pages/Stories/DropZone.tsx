@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import "./Stories.css"; // TODO: is this needed?
+import "./Stories.scss"; // TODO: is this needed?
 import { letters } from "./letters";
 
 interface DropZoneProps {

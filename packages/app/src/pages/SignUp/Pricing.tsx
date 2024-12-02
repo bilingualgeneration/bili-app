@@ -8,7 +8,7 @@ import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { IonButton, IonCard, IonText, IonTitle } from "@ionic/react";
 import { PricingRadioCard } from "@/components/Pricing/PricingRadioCard";
 import pricingBanner from "@/assets/icons/pricing_banner.svg";
-import "@/pages/SignUp/Pricing.css";
+import "@/pages/SignUp/Pricing.scss";
 
 export const Pricing: React.FC = () => {
   const { data, setData, pushPage } = useSignUpData();

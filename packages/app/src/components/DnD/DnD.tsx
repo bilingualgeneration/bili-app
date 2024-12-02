@@ -25,7 +25,7 @@ import { Piece, PieceProps } from "./Piece";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import update from "immutability-helper";
 
-import "./DnD.css";
+import "./DnD.scss";
 
 const colors = [
   "#ffb68f",

@@ -8,7 +8,7 @@ import {
 import type { MessageFormatElement } from "react-intl";
 import React from "react";
 
-import "./RadioCard.css";
+import "./RadioCard.scss";
 
 type RadioCardProps = {
   title: string | MessageFormatElement[];

@@ -13,7 +13,7 @@ import backButton from "@/assets/icons/back_button_green.svg";
 import biliLogo from "@/assets/icons/bili.svg";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-import "./UnauthedHeader.css";
+import "./UnauthedHeader.scss";
 
 export const UnauthedHeader: FC<
   PropsWithChildren<{

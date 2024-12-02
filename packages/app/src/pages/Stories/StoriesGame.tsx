@@ -22,7 +22,7 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useState, useEffect, useMemo } from "react";
 
-import "./StoriesGame.css";
+import "./StoriesGame.scss";
 import bili from "@/assets/icons/bili_big_avatar.svg"; // TODO: placeholder image
 
 interface PictureImage {

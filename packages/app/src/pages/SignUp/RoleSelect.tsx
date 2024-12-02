@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import HouseIcon from "@/assets/icons/house.svg?react";
 import SchoolIcon from "@/assets/icons/school.svg?react";
 
-import "./RoleSelect.css";
+import "./RoleSelect.scss";
 import { string } from "zod";
 import { CollectionReference } from "firebase/firestore";
 import { RadioCard } from "@/components/RadioCard";

@@ -21,7 +21,7 @@ import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useHistory, useParams } from "react-router";
-import "./AddClassroomCaregivers.css";
+import "./AddClassroomCaregivers.scss";
 import { useAddClassroom } from "./AddClassroomContext";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 

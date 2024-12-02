@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { Student, useAddClassroom } from "./AddClassroomContext";
-import "./AddClassroomStudents.css";
+import "./AddClassroomStudents.scss";
 import { AddStudents } from "@/components/AddStudents";
 
 export const AddClassroomStudents: React.FC = () => {

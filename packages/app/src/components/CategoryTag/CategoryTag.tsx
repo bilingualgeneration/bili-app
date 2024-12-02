@@ -3,7 +3,7 @@ import StoriesIcon from "@/assets/icons/stories.svg?react";
 import PlayIcon from "@/assets/icons/play.svg?react";
 import WellnessIcon from "@/assets/icons/wellness.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
-import "./CategoryTag.css";
+import "./CategoryTag.scss";
 
 export const CategoryTag: React.FC<{
   category: string;

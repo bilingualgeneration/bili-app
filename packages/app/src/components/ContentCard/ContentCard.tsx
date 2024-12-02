@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
-import "./ContentCard.css";
+import "./ContentCard.scss";
 import { useLanguage } from "@/hooks/Language";
 
 export interface Pill {

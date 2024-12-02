@@ -7,7 +7,7 @@ import { CategoryTag } from "@/components/CategoryTag";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { useHistory } from "react-router";
 import Lock from "@/assets/icons/lock.svg?react";
-import "./Wellness.css";
+import "./Wellness.scss";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { I18nMessage } from "@/components/I18nMessage";
 import { text } from "ionicons/icons";
