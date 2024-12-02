@@ -13,7 +13,7 @@ import { useClassroom } from "@/hooks/Classroom";
 import { useParams } from "react-router";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
 import Clock from "@/assets/icons/clock.svg";
-import "./ClassProgress.css";
+import "./ClassProgress.scss";
 
 export const ClassProgress: React.FC = () => {
   const { info } = useClassroom();

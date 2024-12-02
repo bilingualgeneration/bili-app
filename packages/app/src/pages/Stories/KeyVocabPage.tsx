@@ -21,7 +21,7 @@ import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 import bili from "@/assets/icons/bili_big_avatar.svg";
 
-import "./KeyVocabPage.css";
+import "./KeyVocabPage.scss";
 
 const getWordByLanguage = (word: any, language: string) => {
   let payload = word.filter((w: any) => w.language === language);

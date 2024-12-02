@@ -1,6 +1,6 @@
 import Logo from "@/assets/icons/bili_logo.svg?react";
 import { IonButton, IonContent, IonImg, IonText, IonPage } from "@ionic/react";
-import "./PreSplash.css";
+import "./PreSplash.scss";
 import Bili from "@/assets/icons/bili_big_avatar.svg?react";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 

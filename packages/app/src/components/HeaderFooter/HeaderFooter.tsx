@@ -20,7 +20,7 @@ import { ProfileChip } from "@/components/ProfileChip";
 import { Link } from "react-router-dom";
 import { useStudent } from "@/hooks/Student";
 import { useScreenSize } from "@/lib/screenSize";
-import "./HeaderFooter.css";
+import "./HeaderFooter.scss";
 
 export const HeaderFooter: FC<
   PropsWithChildren<{

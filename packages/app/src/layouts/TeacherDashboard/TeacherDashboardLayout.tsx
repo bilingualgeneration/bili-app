@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 
 import SchoolIcon from "@/assets/icons/school.svg";
 import HelpIcon from "@/assets/icons/help.svg";
-import "./TeacherDashboardLayout.css";
+import "./TeacherDashboardLayout.scss";
 
 export const TeacherDashboardHeader: React.FC = () => {
   const {

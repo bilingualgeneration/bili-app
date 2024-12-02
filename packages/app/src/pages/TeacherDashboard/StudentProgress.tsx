@@ -33,7 +33,7 @@ import School from "@/assets/icons/school.svg";
 import SmallHouse from "@/assets/icons/small_home.svg";
 import SmallSchool from "@/assets/icons/small_school.svg";
 
-import "./StudentProgress.css";
+import "./StudentProgress.scss";
 
 export const StudentProgress: React.FC = () => {
   const { data } = useFirestoreDoc();

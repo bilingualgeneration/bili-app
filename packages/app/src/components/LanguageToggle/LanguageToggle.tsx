@@ -12,7 +12,7 @@ import { Language, useLanguage } from "@/hooks/Language";
 import { useScreenSize } from "@/lib/screenSize";
 
 import classnames from "classnames";
-import "./LanguageToggle.css";
+import "./LanguageToggle.scss";
 
 type LanguageToggleState = any;
 interface LanguageToggleProviderProps {

@@ -12,7 +12,7 @@ import {
   IonCol,
 } from "@ionic/react";
 import { starOutline } from "ionicons/icons";
-import "./SettingsHeader.css";
+import "./SettingsHeader.scss";
 import biliLogo from "@/assets/icons/bili.svg";
 import { FormattedMessage } from "react-intl";
 import React from "react";

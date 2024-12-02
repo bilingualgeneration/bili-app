@@ -29,7 +29,7 @@ import { Link, useHistory } from "react-router-dom";
 import { I18nMessage } from "@/components/I18nMessage";
 import { text } from "ionicons/icons";
 import { useI18n } from "@/hooks/I18n";
-import "./StudentDashboard.css";
+import "./StudentDashboard.scss";
 
 interface WaveIcon {
   backgroundColor: string;

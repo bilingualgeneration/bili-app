@@ -5,7 +5,7 @@ import { LetterSegment } from "./LetterSegment";
 import { DropZone } from "./DropZone";
 import { IonText } from "@ionic/react";
 import { useProfile } from "@/hooks/Profile";
-import "./Stories.css";
+import "./Stories.scss";
 import incorrect_card_audio from "@/assets/audio/IntruderAudio/intruder_incorrect.wav";
 import correct_card_audio from "@/assets/audio/IntruderAudio/intruder_correct.wav";
 import { letters } from "./letters";

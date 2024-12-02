@@ -18,11 +18,14 @@ import { doc, updateDoc } from "firebase/firestore";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 
-import "./Preferences.css";
+import "./Preferences.scss";
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
-  const { user: {uid}, profile: {isImmersive, isInclusive, settingsLanguage }} = useProfile();
+  const {
+    user: { uid },
+    profile: { isImmersive, isInclusive, settingsLanguage },
+  } = useProfile();
   const ref = doc(firestore, "users", uid);
   // TODO: we shouldn't allow this straight from the app
   const updateProfile = (key: string, value: any) => {

@@ -19,7 +19,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import { useClassroom } from "@/hooks/Classroom";
-import "./ClassStudents.css";
+import "./ClassStudents.scss";
 
 export const ClassStudents: React.FC = () => {
   const { info } = useClassroom();

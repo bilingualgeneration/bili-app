@@ -13,7 +13,7 @@ import {
 import { LoremIpsum } from "react-lorem-ipsum";
 import { ExtendedRadio, ExtendedRadioOption } from "./ExtendedRadio";
 
-import "./stories.css";
+import "./stories.scss";
 
 const meta: Meta<typeof ExtendedRadio> = {
   component: ExtendedRadio,

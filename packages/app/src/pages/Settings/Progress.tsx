@@ -21,7 +21,7 @@ import {
 import { RadioCard } from "@/components/RadioCard";
 import { chevronDown } from "ionicons/icons";
 import { bookOutline } from "ionicons/icons";
-import "./Progress.css";
+import "./Progress.scss";
 import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 

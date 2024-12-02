@@ -25,7 +25,7 @@ import avatar24 from "@/assets/avatars/avatar24.png";
 import classnames from "classnames";
 import { hashString } from "@/lib/utils";
 
-import "./Avatar.css";
+import "./Avatar.scss";
 
 const avatars = [
   avatar1,

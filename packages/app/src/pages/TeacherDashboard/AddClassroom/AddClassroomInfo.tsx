@@ -19,7 +19,7 @@ import { useHistory } from "react-router";
 import { z, isValid } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import "./AddClassroomInfo.css";
+import "./AddClassroomInfo.scss";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;

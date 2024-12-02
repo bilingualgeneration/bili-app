@@ -1,6 +1,6 @@
 import React from "react";
 import { IonCard, IonChip, IonText } from "@ionic/react";
-import "./SettingsExploreCard.css";
+import "./SettingsExploreCard.scss";
 
 interface SettingsExploreCardProps {
   backgroundImage: string;

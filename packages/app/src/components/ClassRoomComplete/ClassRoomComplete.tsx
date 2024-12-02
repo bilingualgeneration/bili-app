@@ -1,6 +1,6 @@
 import React from "react";
 import { IonButton, IonCard, IonImg, IonText } from "@ionic/react";
-import "./ClassRoomComplete.css";
+import "./ClassRoomComplete.scss";
 import { useHistory } from "react-router";
 
 interface ClassroomCompleteProps {

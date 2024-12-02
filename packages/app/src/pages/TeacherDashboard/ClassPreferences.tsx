@@ -1,6 +1,6 @@
 // TODO: update Classroom context to pull ALL info
 
-import "./ClassPreferences.css";
+import "./ClassPreferences.scss";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/components/Firebase";
 import { FormattedMessage, useIntl } from "react-intl";
