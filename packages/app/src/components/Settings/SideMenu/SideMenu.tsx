@@ -156,7 +156,10 @@ export const SideMenu: React.FC = () => {
           />
         </div>
         <IonItem>
-          <IonLabel>v{import.meta.env.VITE_APP_VERSION}</IonLabel>
+          <IonLabel>
+            v{import.meta.env.VITE_APP_VERSION}{" "}
+            {import.meta.env.VITE_FIREBASE_ENVIRONMENT}
+          </IonLabel>
         </IonItem>
       </IonList>
     </div>
