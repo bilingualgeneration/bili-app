@@ -99,6 +99,7 @@ const PiecePreview: React.FC = () => {
 
 export interface DnDProps {
   audioOnComplete: string;
+  onDrop?: any; // todo: should this be required?
   width: number;
   target: string;
   pieces: Omit<PieceProps, "dropped" | "id" | "left" | "top">[];
@@ -120,6 +121,7 @@ export const DnD: React.FC<DnDProps> = (props) => {
 
 const Hydrator: React.FC<DnDProps> = ({
   audioOnComplete,
+  onDrop,
   pieces: propsPieces,
   target,
   targetImage,
@@ -129,6 +131,7 @@ const Hydrator: React.FC<DnDProps> = ({
   const {
     pieces,
     setAudioOnComplete,
+    setOnDrop,
     setPieces,
     setTargetPieces,
     setPiecesDropped,
@@ -210,6 +213,7 @@ const Hydrator: React.FC<DnDProps> = ({
       }),
     );
     setAudioOnComplete(audioOnComplete);
+    setOnDrop(() => onDrop);
     setTargetPieces(targetPieceInstances);
     setPieces(pieceInstances);
     setTotalTargets(tempTotalTargets);
@@ -224,7 +228,7 @@ interface ContainerProps {
 }
 
 const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
-  const { targetPieces, pieces, setPieces } = useDnD();
+  const { onDrop, targetPieces, pieces, setPieces } = useDnD();
   const dropTargets = useMemo(() => {
     return targetPieces.map((word: any, wordIndex: number) =>
       Object.values(word).map((p: any, letterIndex) => ({

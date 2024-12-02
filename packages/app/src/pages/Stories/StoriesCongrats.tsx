@@ -1,6 +1,8 @@
 import { FormattedMessage } from "react-intl";
 import { IonButton, IonText } from "@ionic/react";
+import { useStory } from "./StoryContext";
 import { useLanguage } from "@/hooks/Language";
+import { useEffect } from "react";
 
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
 
@@ -8,7 +10,11 @@ export const StoriesCongrats: React.FC<{
   onKeepGoingClick: () => void;
 }> = ({ onKeepGoingClick }) => {
   const { language } = useLanguage();
-  const stars = 4;
+  const { sendAnalytics } = useStory();
+  useEffect(() => {
+    sendAnalytics();
+  }, []);
+  const stars = 1;
   return (
     <div style={{ margin: "auto" }}>
       <div style={{ paddingBottom: 100 }}>

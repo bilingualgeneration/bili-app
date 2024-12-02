@@ -3,7 +3,14 @@ import { useStudent } from "@/hooks/Student";
 import { getStarsFromAttempts } from "@/lib/utils";
 import { updateActivityStars } from "@/realtimeDb";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 export type Attempt = {
@@ -27,8 +34,9 @@ type ActivityState = {
 };
 
 type ActivityContextType = {
-  activityState: ActivityState;
-  setActivityState: React.Dispatch<React.SetStateAction<ActivityState>>;
+  //  activityState: ActivityState;
+  //  setActivityState: React.Dispatch<React.SetStateAction<ActivityState>>;
+  setActivityState: any;
   setGamesData: React.Dispatch<React.SetStateAction<GameData>>;
   handleAttempt: (gameId: GameId, isCorrect: boolean) => void;
   handleResetAttempts: () => void;
@@ -53,10 +61,23 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { language } = useLanguageToggle();
+  const activityId = useRef<string | null>(null);
+  const activityType = useRef<string | null>(null);
+
+  /*
   const [activityState, setActivityState] = useState<ActivityState>({
     id: null,
     type: null,
   });
+  */
+
+  const setActivityState = useCallback(
+    (state: ActivityState) => {
+      activityId.current = state.id;
+      activityType.current = state.type;
+    },
+    [activityId, activityType],
+  );
 
   const [gamesData, setGamesData] = useState<GameData>(new Map());
   const [attempts, setAttempts] = useState<Attempts>(new Map());
@@ -92,7 +113,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const handleRecordAttempt = async (time?: number) => {
-    if (!activityState.id || !activityState.type)
+    if (!activityId.current || !activityType.current)
       throw new Error("Activity ID or type missing");
 
     const stars = getStarsFromAttempts(attempts, gamesData);
@@ -100,8 +121,8 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
     // send to server to record in bigquery
     await recordUserActivity({
-      activity: activityState.type,
-      activityId: activityState.id,
+      activity: activityType.current,
+      activityId: activityId.current,
       userId: student.id,
       classroomId: classroom ? classroom.id : null,
       type: "attempt",
@@ -117,8 +138,8 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
     await updateActivityStars({
       classroomId: classroom.id,
       userId: student.id,
-      activity: activityState.type,
-      activityId: activityState.id,
+      activity: activityType.current,
+      activityId: activityId.current,
       stars,
     });
 
@@ -128,7 +149,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <ActivityContext.Provider
       value={{
-        activityState,
+        //activityState,
         setActivityState,
         setGamesData,
         handleAttempt,
