@@ -84,8 +84,8 @@ const wellnessCards = [
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
-    link: "/affirmations/intro",
-    isLocked: false,
+    //link: "/affirmations/intro",
+    isLocked: true,
   },
   {
     category: "wellness",
@@ -123,21 +123,24 @@ const playCards = [
     title: "Fábrica de Cuentos",
     titleEn: "Story Factory",
     cover: "/assets/img/card_play_image.png",
-    link: "/story-factory-game/intro",
+    //link: "/story-factory-game/intro",
+    isLocked: true,
   },
   {
     category: "play",
     title: "El Intruso",
     titleEn: "The intruder",
     cover: "/assets/img/mountain_image.png",
-    link: "/intruder-game/intro",
+    //link: "/intruder-game/intro",
+    isLocked: true,
   },
   {
     category: "play",
     title: "Cuenta conmigo",
     titleEn: "Count with me",
     cover: "/assets/img/dance_image.png",
-    link: "/count-with-me-game/intro",
+    //link: "/count-with-me-game/intro",
+    isLocked: true,
   },
   {
     category: "play",
@@ -246,12 +249,12 @@ export const StudentDashboard: React.FC = () => {
     {
       reactintlId: "common.wellness",
       backgroundColor: "#ac217b",
-      link: "/wellness",
+      //link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
       reactintlId: "common.play",
-      link: "/play",
+      //link: "/play",
       backgroundColor: "#ff5709",
       icon: <PlayIcon />,
     },
@@ -338,20 +341,20 @@ export const StudentDashboard: React.FC = () => {
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
-            <Link to="/wellness" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <I18nMessage id="common.wellness" />
-              </h1>
-              <I18nMessage
-                id={"common.wellness"}
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-3xl color-english carousel-header-margin">
-                    {text}
-                  </p>
-                )}
-              />
-            </Link>
+            {/*<Link to="/wellness" className="no-text-decoration">*/}
+            <h1 className="text-5xl color-suelo carousel-header-margin">
+              <I18nMessage id="common.wellness" />
+            </h1>
+            <I18nMessage
+              id={"common.wellness"}
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-3xl color-english carousel-header-margin">
+                  {text}
+                </p>
+              )}
+            />
+            {/*</Link>*/}
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={"17rem"}>
@@ -369,20 +372,20 @@ export const StudentDashboard: React.FC = () => {
         {/* play */}
         <div className="other-story-cards">
           <IonText>
-            <Link to="/play" className="no-text-decoration">
-              <h1 className="text-5xl color-suelo carousel-header-margin">
-                <I18nMessage id="common.play" />
-              </h1>
-              <I18nMessage
-                id={"common.play"}
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-3xl color-english carousel-header-margin">
-                    {text}
-                  </p>
-                )}
-              />
-            </Link>
+            {/*<Link to="/play" className="no-text-decoration">*/}
+            <h1 className="text-5xl color-suelo carousel-header-margin">
+              <I18nMessage id="common.play" />
+            </h1>
+            <I18nMessage
+              id={"common.play"}
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-3xl color-english carousel-header-margin">
+                  {text}
+                </p>
+              )}
+            />
+            {/*</Link>*/}
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={"17rem"}>
