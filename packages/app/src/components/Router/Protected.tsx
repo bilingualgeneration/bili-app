@@ -72,8 +72,14 @@ import { useEffect } from "react";
 
 const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { showAdultCheck } = useAdultCheck();
+  const { justLoggedIn, setJustLoggedIn } = useProfile();
+
   useEffect(() => {
-    showAdultCheck();
+    if (justLoggedIn) {
+      setJustLoggedIn(false);
+    } else {
+      showAdultCheck();
+    }
   }, []);
   return children;
 };
