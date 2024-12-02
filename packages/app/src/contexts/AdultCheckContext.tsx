@@ -49,17 +49,12 @@ export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
   const { profile } = useProfile();
   const [present, dismiss] = useIonModal(AdultCheckModalWrapper, {
     dismiss: (correct: boolean) => {
-      dismiss();
-      // TODO: don't hardcode
       if (correct) {
-        if (profile.role === "teacher") {
-          history.push("/classrooms");
-        } else {
-          history.push("/settings/overview");
-        }
+        // do nothing since user is already in protected area
       } else {
-        dismiss();
+        history.replace("/student-dashboard");
       }
+      dismiss();
     },
   });
   const [adultCheckVisible, setAdultCheckVisible] = useState<boolean>(false);
