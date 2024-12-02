@@ -1,12 +1,12 @@
 import { DnDGame } from "./DnDGame";
-import { TitleCard } from "./TitleCard";
-import { PageCounter } from "./PageCounter";
+import { GameData, useActivity } from "@/contexts/ActivityContext";
 import { KeyVocabPage } from "./KeyVocabPage";
+import { PageCounter } from "./PageCounter";
 import { PageWrapper } from "./PageWrapper";
 import { StoriesCongrats } from "./StoriesCongrats";
 import { StoriesGame } from "./StoriesGame";
 import { StoryPage } from "./StoryPage";
-import { useActivity } from "@/contexts/ActivityContext";
+import { TitleCard } from "./TitleCard";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
@@ -57,6 +57,7 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
       type: "story",
       id: uuid,
     });
+    const gamesData: GameData = new Map();
     setId(uuid);
     setVocab(vocab);
     setVocabLookup(generateVocabLookup(vocab));
@@ -110,6 +111,9 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
       });
     }
     for (const dnd of data["dn-d"]) {
+      gamesData.set(dnd.uuid, {
+        totalMistakesPossible: dnd.target.split("-").length,
+      });
       payload.push({
         component: (
           <>
@@ -124,6 +128,7 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
       });
     }
     for (const mcg of data["multiple-choice"]) {
+      gamesData.set(mcg.uuid, { totalMistakesPossible: mcg.choices.length });
       const hasAudio = mcg.choices[0].audio !== null;
       const correctChoice = mcg.choices.filter(
         (choice: any) => choice.isCorrect,
@@ -160,6 +165,8 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
         languages: mcg.language,
       });
     }
+    setGamesData(gamesData);
+
     payload.push({
       component: (
         <>
@@ -178,7 +185,18 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     });
     setIsTranslanguaged(data.is_translanguaged);
     setPages(payload);
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
     setPageNumber(0);
+    //setPageNumber(29);
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
+    ///////////////////////
     setReady(true);
   }, []);
   const noLanguageAvailable =

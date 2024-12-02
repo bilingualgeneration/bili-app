@@ -80,7 +80,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     setActivityState,
     setGamesData,
   } = useActivity();
-  const { startTimer, stopTimer } = useTimeTracker();
+  const { startTimer } = useTimeTracker();
   useEffect(() => {
     startTimer();
     setActivityState({

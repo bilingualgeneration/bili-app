@@ -1,6 +1,7 @@
 import { DnDProvider, useDnD } from "@/hooks/DnD";
 import { DnD, MAX_HEIGHT } from "@/components/DnD";
 import { IonCol, IonText } from "@ionic/react";
+import { useActivity } from "@/contexts/ActivityContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useEffect } from "react";
 import { useStory } from "./StoryContext";
@@ -15,6 +16,7 @@ export const DnDGame: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
+  const { handleAttempt, handleRecordAttempt } = useActivity();
   const { pageLocks, setPageLocks, pageNumber, pageForward } = useStory();
   const { piecesDropped, totalTargets } = useDnD();
   const { filterText } = useLanguage();
@@ -52,6 +54,9 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
       <DnD
         gameId={data.uuid}
         audioOnComplete={data.audio_on_complete}
+        onDrop={(isCorrect: boolean) => {
+          handleAttempt(data.uuid, isCorrect);
+        }}
         width={1366}
         target={data.target}
         pieces={data.pieces}

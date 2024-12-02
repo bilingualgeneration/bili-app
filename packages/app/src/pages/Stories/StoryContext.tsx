@@ -11,6 +11,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
+import { useTimeTracker } from "@/hooks/TimeTracker";
 
 interface StoryState {
   currentVocabHandle: string | null;
@@ -22,6 +23,7 @@ interface StoryState {
   pageNumber: number;
   pages: any;
   ready: boolean;
+  sendAnalytics: any;
   setCurrentVocabHandle: Dispatch<SetStateAction<string | null>>;
   setId: Dispatch<SetStateAction<string | null>>;
   setIsTranslanguaged: Dispatch<SetStateAction<boolean>>;
@@ -42,6 +44,7 @@ export const useStory = () => useContext(StoryContext);
 export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const [analyticsSent, setAnalyticsSent] = useState<boolean>(false);
   const [isTranslanguaged, setIsTranslanguaged] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const { language, languageNormalized } = useLanguage();
@@ -60,6 +63,16 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const { handleRecordAttempt } = useActivity();
 
   const [id, setId] = useState<string | null>(null);
+
+  const { startTimer, stopTimer } = useTimeTracker();
+  useEffect(startTimer, []);
+
+  const sendAnalytics = useCallback(() => {
+    if (!analyticsSent) {
+      handleRecordAttempt(stopTimer());
+      setAnalyticsSent(true);
+    }
+  }, [analyticsSent, setAnalyticsSent]);
 
   useEffect(() => {
     //console.log(vocab);
@@ -143,6 +156,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
         pageNumber,
         pages,
         ready,
+        sendAnalytics,
         setCurrentVocabHandle,
         setId,
         setIsTranslanguaged,

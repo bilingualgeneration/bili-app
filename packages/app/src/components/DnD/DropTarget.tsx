@@ -32,6 +32,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   const { addAudio } = useAudioManager();
   const {
     audioOnComplete,
+    onDrop,
     pieces,
     piecesDropped,
     setPieces,
@@ -47,6 +48,10 @@ export const DropTarget: React.FC<DropTargetProps> = ({
       accept: "piece",
       drop(item: any, monitor) {
         if (item.text === text && hasDropped === false) {
+          // correct
+          if (onDrop) {
+            onDrop(true);
+          }
           let audio = [audio_correct, item.audioOnDrop];
           if (piecesDropped >= totalTargets - 1) {
             audio.push(audioOnComplete.url);
@@ -63,7 +68,11 @@ export const DropTarget: React.FC<DropTargetProps> = ({
           setIsCorrect(true);
           setPiecesDropped((n: number) => n + 1);
         } else {
+          // incorrect
           if (!hasDropped) {
+            if (onDrop) {
+              onDrop(false);
+            }
             addAudio([audio_incorrect]);
             setIsCorrect(false);
             setTimeout(() => {
