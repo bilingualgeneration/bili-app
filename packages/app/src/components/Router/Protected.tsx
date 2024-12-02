@@ -4,6 +4,7 @@ import { AuthedLayout } from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter/HeaderFooter";
 import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import { useProfile } from "@/hooks/Profile";
 
 import {
@@ -67,6 +68,16 @@ import { Wellness } from "@/pages/Wellness";
 import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
 import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
 
+import { useEffect } from "react";
+
+const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const { showAdultCheck } = useAdultCheck();
+  useEffect(() => {
+    showAdultCheck();
+  }, []);
+  return children;
+};
+
 export const ProtectedRoutes: React.FC = () => {
   const { profile } = useProfile();
   return (
@@ -76,7 +87,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             path="/classrooms"
             render={() => (
-              <>
+              <AdultCheck>
                 <TeacherDashboardLayout>
                   <Route
                     path="/classrooms/add"
@@ -162,7 +173,7 @@ export const ProtectedRoutes: React.FC = () => {
                     </ClassroomDashboardLayout>
                   )}
                 />
-              </>
+              </AdultCheck>
             )}
           />
           <Route
