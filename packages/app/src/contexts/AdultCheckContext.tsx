@@ -25,6 +25,7 @@ import {
   useIonModal,
 } from "@ionic/react";
 import { Input } from "@/components/Input";
+import { useStudent } from "@/hooks/Student";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { z } from "zod";
@@ -45,6 +46,7 @@ export const useAdultCheck = () => useContext(AdultCheckContext);
 export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
   const [passedAdultCheck, setPassedAdultCheck] =
     useState<PassedAdultCheck>(null);
+  const { id: studentId } = useStudent();
   const history = useHistory();
   const { profile } = useProfile();
   const [present, dismiss] = useIonModal(AdultCheckModalWrapper, {
@@ -53,6 +55,15 @@ export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
         // do nothing since user is already in protected area
       } else {
         history.replace("/student-dashboard");
+        /*
+	if(studentId){
+          history.replace("/student-dashboard");
+	}else{
+	  // TODO: figure out
+          history.replace("/student-select/123");
+	  dismiss();
+	}
+	*/
       }
       dismiss();
     },
