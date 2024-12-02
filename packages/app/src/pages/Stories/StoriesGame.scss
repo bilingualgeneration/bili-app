@@ -1,6 +1,10 @@
 #stories-game-mcg-wrapper {
   margin: auto;
   max-width: 50rem;
+
+  ion-col:nth-child(odd) div {
+    margin-left: auto;
+  }
 }
 
 .stories-game-mcg-card {
@@ -9,7 +13,6 @@
   max-height: 25vh;
   border: 0.5rem solid transparent;
   border-radius: 2rem;
-  margin: auto;
   display: flex;
   &.correct {
     border-color: var(--alerts-status-success, #12d18e);
