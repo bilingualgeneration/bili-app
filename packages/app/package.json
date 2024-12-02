@@ -9,6 +9,7 @@
     "build:development": "run-s build:vite:development",
     "build:emulator": "run-s build:vite:emulator",
     "build:live": "run-s build:vite:live",
+    "build:ios:live": "run-s build:vite:live cap:sync cap:open:ios",
     "build:vite:development": "tsc; vite build --mode development",
     "build:vite:emulator": "tsc; vite build --mode emulator",
     "build:vite:live": "tsc; vite build --mode live",
