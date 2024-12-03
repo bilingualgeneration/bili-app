@@ -66,7 +66,7 @@ export const Community: FC = () => {
         description: "title for what would do",
       }),
       title: "What would you do?",
-      link: "/would-do-game/intro",
+      link: "/would-do/intro",
       image: tunita,
       locked: false,
     },
