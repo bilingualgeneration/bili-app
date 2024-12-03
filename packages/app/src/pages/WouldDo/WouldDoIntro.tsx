@@ -46,7 +46,7 @@ export const WouldDoIntro: React.FC = () => {
       }
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/would-do-game/select");
+        history.push("/would-do/select");
       }}
     >
       <IonText>

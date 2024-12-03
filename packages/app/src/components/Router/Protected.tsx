@@ -305,11 +305,11 @@ export const ProtectedRoutes: React.FC = () => {
           <Route exact path="/story-builder" component={StoryBuilder} />
           <Route exact path="/student-dashboard" component={StudentDashboard} />
           <Route exact path="/wellness" component={Wellness} />
-          <Route exact path="/would-do-game/intro" component={WouldDoIntro} />
-          <Route exact path="/would-do-game/select" component={WouldDoSelect} />
+          <Route exact path="/would-do/intro" component={WouldDoIntro} />
+          <Route exact path="/would-do/select" component={WouldDoSelect} />
           <Route
             exact
-            path="/would-do-game/play/:pack_id"
+            path="/would-do/play/:pack_id"
             render={() => (
               <MinimalHeader>
                 <WouldDoGame />
