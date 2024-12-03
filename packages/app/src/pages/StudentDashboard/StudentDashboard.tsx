@@ -164,7 +164,7 @@ const communityCards = [
     title: "¿Qué Harías?",
     titleEn: "What would you do?",
     cover: "/assets/img/horse_image.png",
-    link: "/would-do-game/intro",
+    link: "/would-do/intro",
   },
   {
     category: "community",
