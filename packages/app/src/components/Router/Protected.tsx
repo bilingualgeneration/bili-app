@@ -69,6 +69,7 @@ import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
 import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
 
 import { useEffect } from "react";
+import { CommunityCongrats } from "@/pages/Community/CommunityCongrats";
 
 const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { showAdultCheck } = useAdultCheck();
@@ -202,6 +203,11 @@ export const ProtectedRoutes: React.FC = () => {
             )}
           />
           <Route exact path="/community" component={Community} />
+          <Route
+            exact
+            path="/community/congrats"
+            component={CommunityCongrats}
+          />
           <Route
             exact
             path="/count-with-me-game/intro"
