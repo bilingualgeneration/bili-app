@@ -14,7 +14,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { FooterMenu } from "@/components/FooterMenu";
 import biliLogo from "@/assets/icons/bili.svg";
 import { ProfileChip } from "@/components/ProfileChip";
 import { Link } from "react-router-dom";
@@ -74,7 +73,6 @@ export const HeaderFooter: FC<
           </IonGrid>
           {children}
         </div>
-        <FooterMenu />
       </IonContent>
     </IonPage>
   );

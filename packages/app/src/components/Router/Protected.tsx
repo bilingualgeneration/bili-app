@@ -2,7 +2,6 @@ import Reports from "@/pages/Reports"; // debug
 
 import { AuthedLayout } from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter/HeaderFooter";
-import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import { useProfile } from "@/hooks/Profile";
@@ -195,11 +194,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/affirmations/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <AffirmationsGame />
-              </MinimalHeader>
-            )}
+            component={AffirmationsGame}
           />
           <Route exact path="/community" component={Community} />
           <Route
@@ -227,11 +222,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/intruder-game/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <IntruderGameLoader />
-              </MinimalHeader>
-            )}
+            component={IntruderGameLoader}
           />
           <Route
             exact
@@ -250,15 +241,7 @@ export const ProtectedRoutes: React.FC = () => {
             component={StudentSelect}
           />
           <Route exact path="/stories" component={StoriesLandingPage} />
-          <Route
-            exact
-            path="/story/play/:uuid"
-            render={() => (
-              <MinimalHeader>
-                <Stories />
-              </MinimalHeader>
-            )}
-          />
+          <Route exact path="/story/play/:uuid" component={Stories} />
           <Route
             exact
             path="/story-factory-game/intro"
@@ -272,11 +255,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/story-factory-game/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <StoryFactoryPlay />
-              </MinimalHeader>
-            )}
+            component={StoryFactoryPlay}
           />
           <Route
             exact
@@ -296,26 +275,14 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/tell-me-about/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <TellMeAboutGame />
-              </MinimalHeader>
-            )}
+            component={TellMeAboutGame}
           />
           <Route exact path="/story-builder" component={StoryBuilder} />
           <Route exact path="/student-dashboard" component={StudentDashboard} />
           <Route exact path="/wellness" component={Wellness} />
           <Route exact path="/would-do/intro" component={WouldDoIntro} />
           <Route exact path="/would-do/select" component={WouldDoSelect} />
-          <Route
-            exact
-            path="/would-do/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <WouldDoGame />
-              </MinimalHeader>
-            )}
-          />
+          <Route exact path="/would-do/play/:pack_id" component={WouldDoGame} />
           <Route exact path="/reports" component={Reports} /> {/* debug */}
           {/*
 	    TODO: figure this out
