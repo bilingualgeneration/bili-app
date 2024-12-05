@@ -185,18 +185,7 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     });
     setIsTranslanguaged(data.is_translanguaged);
     setPages(payload);
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
     setPageNumber(0);
-    //setPageNumber(29);
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
-    ///////////////////////
     setReady(true);
   }, []);
   const noLanguageAvailable =
