@@ -3,7 +3,6 @@ import { useProfile } from "@/hooks/Profile";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FooterMenu } from "@/components/FooterMenu";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { useHistory } from "react-router-dom";
 import {
@@ -47,7 +46,6 @@ export const SettingsLayout: FC<
               </IonRow>
             </IonGrid>
           </div>
-          {profile.role === "parent" && <FooterMenu />}
         </IonContent>
       </IonPage>
     </I18nWrapper>
