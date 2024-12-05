@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { Link } from "react-router-dom";
-import Lock from "@/assets/icons/lock.svg?react";
+import { ContentLock } from "@/components/ContentLock";
 
 import don_lola from "@/assets/img/don_lola.png";
 import nuriah from "@/assets/img/nuriah.png";
@@ -31,11 +31,7 @@ const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
   );
   return (
     <div className="community-card">
-      {locked && (
-        <div className="content-lock">
-          <Lock />
-        </div>
-      )}
+      {locked && <ContentLock borderRadius="2rem" />}
       {link && (
         <Link to={link} className="no-text-decoration">
           {content}

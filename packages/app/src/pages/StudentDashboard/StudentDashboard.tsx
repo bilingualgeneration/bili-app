@@ -1,7 +1,9 @@
 import { useProfile } from "@/hooks/Profile";
 
 import { Carousel } from "@/components/Carousel";
+import classnames from "classnames";
 import { ContentCard } from "@/components/ContentCard";
+import { ContentLock } from "@/components/ContentLock";
 import {
   IonButton,
   IonCard,
@@ -50,7 +52,7 @@ const WaveIcon: React.FC<WaveIcon> = ({
   const { language } = useLanguageToggle();
   const history = useHistory();
   return (
-    <span className="wave-icon">
+    <span className={classnames("wave-icon", { locked: Boolean(link) })}>
       <div
         onClick={() => {
           if (link) {
@@ -60,6 +62,7 @@ const WaveIcon: React.FC<WaveIcon> = ({
         className={`icon${link ? " has-link" : ""} margin-bottom-1`}
         style={{ backgroundColor }}
       >
+        {!link && <ContentLock borderRadius="50%" />}
         {icon}
       </div>
       <IonText>
