@@ -1,14 +1,14 @@
 import { CategoryTag } from "@/components/CategoryTag";
 import classnames from "classnames";
+import { ContentLock } from "@/components/ContentLock";
 import { FavoriteButton } from "@/components/FavoriteButton";
-import LockIcon from "@/assets/icons/lock.svg?react";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
+import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 
 import "./ContentCard.scss";
-import { useLanguage } from "@/hooks/Language";
 
 export interface Pill {
   className?: string;
@@ -42,14 +42,6 @@ const Pill: React.FC<Pill> = ({
         </span>
       </IonText>
     </span>
-  );
-};
-
-const Lock: React.FC = () => {
-  return (
-    <div className="content-lock">
-      <LockIcon />
-    </div>
   );
 };
 
@@ -89,7 +81,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
           <p className="text-sm color-nube">{titleEn}</p>
         )}
       </IonText>
-      {isLocked && <Lock />}
+      {isLocked && <ContentLock borderRadius="0.75rem" />}
     </div>
   );
 };
