@@ -27,6 +27,7 @@ type RadioCardProps = {
   isJustPicture?: boolean;
   isTextCentered?: boolean;
   backgroundColor?: string;
+  maxHeight?: string;
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -46,11 +47,15 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   isJustPicture = false,
   isTextCentered = false,
   backgroundColor = "#FFFFFF",
+  maxHeight = "undefined",
 }) => {
   return (
     <IonCard
       className="radio-card"
-      style={{ backgroundColor: backgroundColor }}
+      style={{
+        backgroundColor: backgroundColor,
+        maxHeight: maxHeight,
+      }}
     >
       <div
         className="card-inner"
@@ -91,7 +96,13 @@ export const RadioCard: React.FC<RadioCardProps> = ({
             <IonCardTitle>
               <IonText>
                 {/* todo: don't force type cast */}
-                <p className={`text-${titleFontSize} semibold ${titleColor}`}>
+                <p
+                  className={`text-${titleFontSize} semibold ${titleColor}`}
+                  style={{
+                    whiteSpace: "nowrap", // Prevent wrapping
+                    overflow: "hidden",
+                  }}
+                >
                   {title as string}
                 </p>
               </IonText>

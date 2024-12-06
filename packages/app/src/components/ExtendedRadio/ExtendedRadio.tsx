@@ -69,7 +69,7 @@ export const ExtendedRadio = ({
                   (activeIndex === index ? " " + activeClassName : "") +
                   (isMaxWidthNeeded ? " max-width-needed" : ""),
                 style: isMaxWidthNeeded
-                  ? { maxWidth: "240px" } // Add max-width dynamically if isMaxWidthNeeded is true
+                  ? { maxWidth: "14.5rem" } // Add max-width dynamically if isMaxWidthNeeded is true
                   : {},
                 onClick: () => {
                   if (!option.disabled) {
