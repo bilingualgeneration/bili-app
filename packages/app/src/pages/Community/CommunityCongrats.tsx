@@ -26,6 +26,8 @@ export const CommunityCongrats: React.FC = () => {
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
           isJustPicture={true}
+          isTextCentered={true}
+          backgroundColor="#FFE24F"
         />
       </div>
     ),
@@ -46,6 +48,7 @@ export const CommunityCongrats: React.FC = () => {
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
           isJustPicture={true}
+          isTextCentered={true}
         />
       </div>
     ),
@@ -72,6 +75,7 @@ export const CommunityCongrats: React.FC = () => {
             control={control}
             name="notificationMethod"
             displayCardsInRow={true}
+            isMaxWidthNeeded={true}
             options={[
               emailAndFlyerOption,
               emailOption,

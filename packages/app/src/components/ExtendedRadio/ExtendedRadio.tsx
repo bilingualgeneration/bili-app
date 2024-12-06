@@ -19,6 +19,7 @@ export type ExtendedRadioProps = {
   testId?: string;
   displayCardsInRow?: boolean;
   defaultOption?: ExtendedRadioOption | undefined;
+  isMaxWidthNeeded?: boolean;
 };
 
 export const ExtendedRadio = ({
@@ -29,6 +30,7 @@ export const ExtendedRadio = ({
   options,
   testId = "extended-radio-component",
   displayCardsInRow = false,
+  isMaxWidthNeeded = false,
   defaultOption,
 }: ExtendedRadioProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(
@@ -64,7 +66,11 @@ export const ExtendedRadio = ({
                 // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
                 className:
                   option.component.props.className +
-                  (activeIndex === index ? " " + activeClassName : ""),
+                  (activeIndex === index ? " " + activeClassName : "") +
+                  (isMaxWidthNeeded ? " max-width-needed" : ""),
+                style: isMaxWidthNeeded
+                  ? { maxWidth: "240px" } // Add max-width dynamically if isMaxWidthNeeded is true
+                  : {},
                 onClick: () => {
                   if (!option.disabled) {
                     setActiveIndex(index);

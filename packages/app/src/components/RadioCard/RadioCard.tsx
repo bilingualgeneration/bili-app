@@ -25,6 +25,8 @@ type RadioCardProps = {
   subTitleColor?: string;
   flexDirectionColumn?: boolean;
   isJustPicture?: boolean;
+  isTextCentered?: boolean;
+  backgroundColor?: string;
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -42,9 +44,14 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   contentColor = "color-suelo", // default color for content
   flexDirectionColumn = false,
   isJustPicture = false,
+  isTextCentered = false,
+  backgroundColor = "#FFFFFF",
 }) => {
   return (
-    <IonCard className="radio-card">
+    <IonCard
+      className="radio-card"
+      style={{ backgroundColor: backgroundColor }}
+    >
       <div
         className="card-inner"
         style={{ flexDirection: flexDirectionColumn ? "column" : "unset" }}
@@ -57,7 +64,11 @@ export const RadioCard: React.FC<RadioCardProps> = ({
             {icon}
           </div>
         )}
-        <div className="title-content">
+        <div
+          className={
+            isTextCentered ? "centered-title-content" : "title-content"
+          }
+        >
           {badge && (
             <div
               className="badge-content"
