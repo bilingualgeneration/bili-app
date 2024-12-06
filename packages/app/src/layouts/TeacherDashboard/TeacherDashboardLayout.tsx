@@ -18,7 +18,8 @@ export const TeacherDashboardHeader: React.FC = () => {
   } = useProfile();
   return (
     <div id="teacher-dashboard-layout-header">
-      <div>search</div>
+      {/* TODO: implement seach here */}
+      <div></div>
       <div className="ion-text-center">
         <img src={biliLogo} />
       </div>
@@ -29,7 +30,13 @@ export const TeacherDashboardHeader: React.FC = () => {
             My Classrooms
           </IonButton>
         </Link>
-        <IonButton className="font-weight-normal" size="small" fill="clear">
+        {/* TODO: implement help here */}
+        <IonButton
+          className="font-weight-normal"
+          disabled={true}
+          size="small"
+          fill="clear"
+        >
           <IonIcon slot="start" icon={HelpIcon} />
           Help
         </IonButton>

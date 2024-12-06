@@ -66,6 +66,7 @@ import {
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
 import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
+import { About } from "@/pages/Settings";
 
 import { useEffect } from "react";
 
@@ -174,6 +175,11 @@ export const ProtectedRoutes: React.FC = () => {
                         exact
                         path="/classrooms/view/:classroomId/preferences"
                         component={ClassPreferences}
+                      />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/about"
+                        component={About}
                       />
                     </ClassroomDashboardLayout>
                   )}
