@@ -23,6 +23,8 @@ type RadioCardProps = {
   contentColor?: string;
   subTitleFontSize?: string;
   subTitleColor?: string;
+  flexDirectionColumn?: boolean;
+  isJustPicture?: boolean;
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -38,13 +40,18 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   subTitleColor = "color-barro", // default color for subTitle
   contentFontSize = "sm", // default font-size for content
   contentColor = "color-suelo", // default color for content
+  flexDirectionColumn = false,
+  isJustPicture = false,
 }) => {
   return (
     <IonCard className="radio-card">
-      <div className="card-inner">
+      <div
+        className="card-inner"
+        style={{ flexDirection: flexDirectionColumn ? "column" : "unset" }}
+      >
         {icon && (
           <div
-            className="oval-element"
+            className={isJustPicture ? "" : "oval-element"}
             style={{ backgroundColor: iconBackgroundColor }}
           >
             {icon}
