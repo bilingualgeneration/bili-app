@@ -2,7 +2,7 @@
   "name": "@bili/app",
   "packageManager": "yarn@4.0.1",
   "private": true,
-  "version": "1.0.0+18",
+  "version": "1.0.0+19",
   "type": "module",
   "scripts": {
     "build": "run-s build:development",
@@ -32,7 +32,7 @@
     "compile-translations:en": "formatjs compile lang/en.json --ast --out-file compiled-lang/en.json --format=simple",
     "compile-translations:es": "formatjs compile lang/es.json --ast --out-file compiled-lang/es.json --format=simple",
     "compile-translations:all": "yarn compile-translations:en; yarn compile-translations:es",
-    "open:ios": "run-s build cap:sync cap:open:ios"
+    "open:ios:live": "run-s build:live cap:sync cap:open:ios"
   },
   "dependencies": {
     "@babel/cli": "^7.23.0",
