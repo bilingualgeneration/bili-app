@@ -6,14 +6,13 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import {
+  AccountCredentials,
   ChildProfile,
   Complete,
   LanguageModeSelect,
   RoleSelect,
-  ParentAccountCredentials,
   Pricing,
   TeacherAbout,
-  TeacherAccountCredentials,
 } from "@/pages/SignUp";
 import {
   SignUpDataProvider,
@@ -23,7 +22,7 @@ import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useHistory } from "react-router-dom";
 import { ClassCode } from "./ClassCode";
 
-export const SignUp: React.FC<{entry?: string}> = ({entry}) => (
+export const SignUp: React.FC<{ entry?: string }> = ({ entry }) => (
   <SignUpDataProvider entry={entry}>
     <SignUpComponent />
   </SignUpDataProvider>
@@ -35,8 +34,7 @@ const progressLookup: { [key: string]: number } = {
   teacherAbout: 0.25,
   childProfile: 0.25,
   languageModeSelect: 0.5,
-  parentAccountCredentials: 0.75,
-  teacherAccountCredentials: 0.75,
+  accountCredentials: 0.75,
   pricing: 0.85,
   complete: 1,
 };
@@ -68,17 +66,12 @@ export const SignUpComponent: React.FC = () => {
                 value={progressLookup[page]}
               />
             </div>
-            {page === "classCode" && <ClassCode/>}
+            {page === "classCode" && <ClassCode />}
             {page === "roleSelect" && <RoleSelect />}
             {page === "teacherAbout" && <TeacherAbout />}
             {page === "childProfile" && <ChildProfile />}
             {page === "languageModeSelect" && <LanguageModeSelect />}
-            {page === "parentAccountCredentials" && (
-              <ParentAccountCredentials />
-            )}
-            {page === "teacherAccountCredentials" && (
-              <TeacherAccountCredentials />
-            )}
+            {page === "accountCredentials" && <AccountCredentials />}
             {page === "pricing" && <Pricing />}
             {page === "complete" && <Complete />}
           </IonCardContent>

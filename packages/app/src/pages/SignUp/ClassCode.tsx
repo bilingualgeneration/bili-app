@@ -63,7 +63,7 @@ export const ClassCode: React.FC = () => {
         setHasError(true);
       } else {
         setHasError(false);
-        pushPage("parentAccountCredentials");
+        pushPage("accountCredentials");
       }
     } else {
       setHasError(false);
