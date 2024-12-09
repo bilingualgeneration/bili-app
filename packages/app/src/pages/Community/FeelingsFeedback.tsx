@@ -148,15 +148,15 @@ export const FeelingsFeedback: React.FC = () => {
     <>
       <IonCard style={{ textAlign: "center" }}>
         <form action="">
-          <IonText className="ion-text-center">
-            <h2 className="text-3xl semibold color-suelo">
+          <IonText className="ion-text-start">
+            <h2 className="text-3xl semibold color-suelo padding-left-4">
               <I18nMessage id="common.howYouFeel" />
             </h2>
             <I18nMessage
               id="common.howYouFeel"
               level={2}
               wrapper={(text: string) => (
-                <p className="text-3xl color-grey">{text}</p>
+                <p className="text-3xl color-grey padding-left-4">{text}</p>
               )}
             />
           </IonText>
