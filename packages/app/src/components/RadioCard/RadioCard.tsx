@@ -9,10 +9,11 @@ import type { MessageFormatElement } from "react-intl";
 import React from "react";
 
 import "./RadioCard.scss";
+import { useLanguage } from "@/hooks/Language";
 
 type RadioCardProps = {
   title: string | MessageFormatElement[];
-  content: string | MessageFormatElement[];
+  content?: string | MessageFormatElement[];
   subTitle?: string | MessageFormatElement[];
   icon?: React.ReactNode;
   iconBackgroundColor?: string;
@@ -49,6 +50,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   backgroundColor = "#FFFFFF",
   maxHeight = "undefined",
 }) => {
+  const language = useLanguage();
   return (
     <IonCard
       className="radio-card"

@@ -1,202 +1,67 @@
-import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
+import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
-import { RadioCard } from "@/components/RadioCard";
-import { IonButton, IonCard, IonText } from "@ionic/react";
-import HappyBilli from "@/assets/icons/bili_happy.svg";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
+import { useActivity } from "@/contexts/ActivityContext";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useLanguage } from "@/hooks/Language";
+import { useProfile } from "@/hooks/Profile";
+import { useTimeTracker } from "@/hooks/TimeTracker";
+import { IonText } from "@ionic/react";
+import { useEffect, useState } from "react";
+import { first } from "rxjs";
+import biliCharacter from "@/assets/img/bili_in_coat.png";
+import HeartImage from "@/assets/icons/heart_congrats.svg";
 
-export const CommunityCongrats: React.FC = () => {
-  const history = useHistory();
+export const CommunityCongrats: React.FC<{
+  onKeepGoingClick?: any;
+  count: number;
+}> = ({ onKeepGoingClick, count }) => {
   const {
-    control,
-    formState: { isValid },
-    handleSubmit,
-  } = useForm();
-  const happyOption: ExtendedRadioOption = {
-    component: (
-      <div>
-        <RadioCard
-          icon={
-            <div>
-              <img src={HappyBilli} alt="Happy Billi" style={{}} />
-            </div>
-          }
-          title={"Feliz"}
-          content={"Happy"}
-          titleColor="color-suelo"
-          contentColor="color-grey"
-          contentFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#FFE24F"
-          maxHeight="17.5rem"
-        />
-      </div>
-    ),
-    value: "happy",
-  };
+    profile: { isImmersive },
+    activeChildProfile,
+  } = useProfile();
+  const { language } = useLanguage();
+  const [showText, setShowText] = useState(true); // State to show/hide text
+  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
+  const { addAudio, clearAudio, onended } = useAudioManager();
+  const [audios, setAudios] = useState<string[]>([]);
+  const { startTimer, stopTimer } = useTimeTracker();
 
-  const calmOption: ExtendedRadioOption = {
-    component: (
-      <div>
-        <RadioCard
-          icon={
-            <div>
-              <img src={HappyBilli} alt="Happy Billi" style={{}} />
-            </div>
-          }
-          title={"Tranquilo/a/e"}
-          content={"Calm"}
-          titleColor="color-suelo"
-          contentColor="color-grey"
-          contentFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#C3ECE2"
-          maxHeight="17.5rem"
-        />
-      </div>
-    ),
-    value: "calm",
-  };
-  const sadOption: ExtendedRadioOption = {
-    component: (
-      <div>
-        <RadioCard
-          icon={
-            <div>
-              <img src={HappyBilli} alt="Happy Billi" style={{}} />
-            </div>
-          }
-          title={"Triste"}
-          content={"Sad"}
-          titleColor="color-suelo"
-          contentColor="color-grey"
-          contentFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#8FB8FA"
-          maxHeight="17.5rem"
-        />
-      </div>
-    ),
-    value: "sad",
-  };
-  const terribleOption: ExtendedRadioOption = {
-    component: (
-      <div>
-        <RadioCard
-          icon={
-            <div>
-              <img src={HappyBilli} alt="Happy Billi" style={{}} />
-            </div>
-          }
-          title={"Fatal"}
-          content={"Terrible"}
-          titleColor="color-suelo"
-          contentColor="color-grey"
-          contentFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#FF8B70"
-          maxHeight="17.2rem"
-        />
-      </div>
-    ),
-    value: "terrible",
-  };
-  const otherOption: ExtendedRadioOption = {
-    component: (
-      <div>
-        <RadioCard
-          icon={
-            <div>
-              <img src={HappyBilli} alt="Happy Billi" style={{}} />
-            </div>
-          }
-          title={"Otro sentimiento"}
-          content={"Other feeling"}
-          titleColor="color-suelo"
-          contentColor="color-grey"
-          contentFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#F28AC9"
-          maxHeight="17.5rem"
-        />
-      </div>
-    ),
-    value: "other",
-  };
+  // Check if stars are valid and set fallback if necessary
 
-  const onSubmit = handleSubmit((data) => {
-    history.push("/community/congrats");
-  });
+  const button_es = "¡Sigue adelante!";
+  const button_en = "Keep going!";
 
   return (
-    <>
-      <IonCard style={{ textAlign: "center" }}>
-        <form action="">
-          <IonText className="ion-text-center">
-            <h2 className="text-3xl semibold color-suelo">
-              <I18nMessage id="common.howYouFeel" />
-            </h2>
-            <I18nMessage
-              id="common.howYouFeel"
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-grey">{text}</p>
-              )}
-            />
-          </IonText>
-          <ExtendedRadio
-            control={control}
-            name="notificationMethod"
-            displayCardsInRow={true}
-            isMaxWidthNeeded={true}
-            options={[
-              happyOption,
-              calmOption,
-              sadOption,
-              terribleOption,
-              otherOption,
-            ]}
+    <div className="padding-top-2">
+      <DialogueScreen
+        audios={audios}
+        buttonTextPrimary={language === "en" ? button_en : button_es}
+        buttonTextSecondary={
+          language === "es.en" || language === "en.es" ? button_en : ""
+        }
+        characterImage={biliCharacter}
+        onButtonClick={() => {
+          if (onKeepGoingClick) {
+            onKeepGoingClick();
+          }
+        }}
+      >
+        <IonText class="ion-text-center">
+          <div className="stars-container">
+            <img src={HeartImage} alt="flower" className="star-image" />
+          </div>
+          <h1 className="text-5xl color-suelo">
+            <I18nMessage id="common.congrats.flower" />
+          </h1>
+          <I18nMessage
+            id="common.congrats.flower"
+            level={2}
+            wrapper={(text: string) => (
+              <h2 className="text-4xl color-grey">{text}</h2>
+            )}
           />
-
-          <IonButton
-            data-testid="addclassroom-notification-method-continue-button"
-            disabled={!isValid}
-            shape="round"
-            type="button"
-            onClick={onSubmit}
-          >
-            <IonText className=" padding-right-5 padding-left-5">
-              <h2 className="text-3xl semibold color-base">
-                <I18nMessage id="common.next" />
-              </h2>
-
-              <I18nMessage
-                id="common.next"
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-sm color-base">{text}</p>
-                )}
-              />
-            </IonText>
-          </IonButton>
-        </form>
-      </IonCard>
-    </>
+        </IonText>
+      </DialogueScreen>
+    </div>
   );
 };
