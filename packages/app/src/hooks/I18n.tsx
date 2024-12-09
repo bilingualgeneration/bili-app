@@ -40,17 +40,18 @@ export const I18nProvider: React.FC<React.PropsWithChildren> = ({
   const { language: interfaceLanguage } = useInterfaceLanguage();
 
   const getLanguage = useCallback(
-    (level: number = 1, languageSource: "authed" | "unauthed" = "authed") => {
+    (level: number = 1, languageSource = "authed") => {
       const languages = (
         languageSource === "authed" ? language : interfaceLanguage
       ).split(".");
+      console.log(languageSource, languageSource === "authed");
       if (languages.length < level || languages[level - 1] === undefined) {
         return null;
       } else {
         return languages[level - 1];
       }
     },
-    [language],
+    [interfaceLanguage, language],
   );
 
   const getText = useCallback(
@@ -59,14 +60,14 @@ export const I18nProvider: React.FC<React.PropsWithChildren> = ({
       level: number = 1,
       languageSource: "authed" | "unauthed" = "authed",
     ) => {
-      const l = getLanguage(level);
+      const l = getLanguage(level, languageSource);
       if (l === null || dictionary[l] === undefined) {
         return null;
       } else {
         return dictionary[l][id];
       }
     },
-    [getLanguage],
+    [dictionary, getLanguage],
   );
   return (
     <I18nContext.Provider
