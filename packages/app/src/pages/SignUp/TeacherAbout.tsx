@@ -1,4 +1,4 @@
-import { FC, JSX } from "react";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCol,
@@ -10,18 +10,19 @@ import {
   IonSelectOption,
   IonText,
 } from "@ionic/react";
-import { useIntl, FormattedMessage } from "react-intl";
-import { useForm } from "react-hook-form";
-import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { MultipleCheckbox } from "@/components/MultipleCheckbox";
-import { Select } from "@/components/Select";
 import type {
   MultipleCheckboxProps,
   MultipleCheckboxOption,
 } from "@/components/MultipleCheckbox";
-import "./TeacherAbout.scss";
+import { Select } from "@/components/Select";
+import { useForm } from "react-hook-form";
+import { useI18n } from "@/hooks/I18n";
+import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import "./TeacherAbout.scss";
 
 const OptionWrapper = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
@@ -31,14 +32,14 @@ const OptionWrapperRoles = ({ children }: { children: JSX.Element }) => {
   return <IonCol size="4">{children}</IonCol>;
 };
 
-export const TeacherAbout: FC = () => {
-  const intl = useIntl();
+export const TeacherAbout: React.FC = () => {
+  const { getText } = useI18n();
   const { data, setData, pushPage } = useSignUpData();
   // todo: these zod schemas are wrong
   const schema = z.object({
     grades: z.string().array().optional(),
     schoolRoles: z.string().array().optional(),
-    schoolName: z.string(),
+    schoolName: z.string().optional(),
   });
   const {
     control,
@@ -55,62 +56,46 @@ export const TeacherAbout: FC = () => {
 
   const gradesOptions: MultipleCheckboxOption[] = [
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutGradePre" }),
+      label: getText("signUpTeacher.aboutGradePre", 1, "unauthed"),
       value: "p",
     },
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutGradeK" }),
+      label: getText("signUpTeacher.aboutGradeK", 1, "unauthed"),
       value: "k",
     },
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade1" }),
+      label: getText("signUpTeacher.aboutGrade1", 1, "unauthed"),
       value: "1",
     },
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade2" }),
+      label: getText("signUpTeacher.aboutGrade2", 1, "unauthed"),
       value: "2",
     },
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutGrade3" }),
+      label: getText("signUpTeacher.aboutGrade3", 1, "unauthed"),
       value: "3",
     },
     {
-      label: intl.formatMessage({ id: "signUpTeacher.aboutOther" }),
+      label: getText("signUpTeacher.aboutOther", 1, "unauthed"),
       value: "o",
     },
   ];
 
   const rolesOptions = [
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.roleAdmin",
-        defaultMessage: "Administrator",
-        description: "Checkbox label for Admin role option",
-      }),
+      label: getText("signUpTeacher.roleAdmin", 1, "unauthed"),
       value: "administrator",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.roleTeacher",
-        defaultMessage: "Teacher",
-        description: "Checkbox label for teacher role option",
-      }),
+      label: getText("signUpTeacher.roleTeacher", 1, "unauthed"),
       value: "teacher",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.roleCounselor",
-        defaultMessage: "Counselor",
-        description: "Checkbox label for Counselor role option",
-      }),
+      label: getText("signUpTeacher.roleCounselor", 1, "unauthed"),
       value: "counselor",
     },
     {
-      label: intl.formatMessage({
-        id: "signUpTeacher.roleFacilitator",
-        defaultMessage: "Facilitator",
-        description: "Checkbox label for Facilitator role option",
-      }),
+      label: getText("signUpTeacher.roleFacilitator", 1, "unauthed"),
       value: "facilitator",
     },
   ];
@@ -120,7 +105,7 @@ export const TeacherAbout: FC = () => {
       ...data,
       ...response,
     });
-    pushPage("teacherAccountCredentials");
+    pushPage("accountCredentials");
   });
 
   return (
@@ -129,10 +114,9 @@ export const TeacherAbout: FC = () => {
         <div className="margin-bottom-2">
           <IonText className="ion-text-center">
             <h1 className="text-3xl semibold color-suelo">
-              <FormattedMessage
+              <I18nMessage
                 id="signUpTeacher.aboutTitle"
-                defaultMessage="Tell us about yourself"
-                description="Title for page where teachers share more info about what grades they teach and their role"
+                languageSource="unauthed"
               />
             </h1>
           </IonText>
@@ -140,10 +124,9 @@ export const TeacherAbout: FC = () => {
         <div className="margin-bottom-1x">
           <IonText>
             <h2 className="text-xl semibold color-suelo">
-              <FormattedMessage
+              <I18nMessage
                 id="signUpTeacher.aboutGrades"
-                defaultMessage="What grade(s) do you work with?"
-                description="Title above area where teachers can check off what grades they teach"
+                languageSource="unauthed"
               />
             </h2>
           </IonText>
@@ -164,11 +147,7 @@ export const TeacherAbout: FC = () => {
         <div className="margin-top-1">
           <IonText>
             <h2 className="text-xl semibold color-suelo">
-              <FormattedMessage
-                id="signUpTeacher.role"
-                defaultMessage="What is your role?"
-                description="Title above where teacher can select what role(s) they have"
-              />
+              <I18nMessage id="signUpTeacher.role" languageSource="unauthed" />
             </h2>
           </IonText>
         </div>
@@ -186,17 +165,17 @@ export const TeacherAbout: FC = () => {
           </IonGrid>
         </div>
 
-        <div className="margin-bottom-1x margin-top-1">
+        <div className="margin-top-1 ion-hide">
           <IonText>
             <h2 className="text-xl semibold color-suelo">
-              <FormattedMessage
+              <I18nMessage
                 id="signUpTeacher.school"
-                defaultMessage="What is the name of your school?"
+                languageSource="unauthed"
               />
             </h2>
           </IonText>
         </div>
-        <div className="customer-school-select">
+        <div className="customer-school-select ion-hide">
           <Select
             control={control}
             fill="outline"
@@ -226,11 +205,7 @@ export const TeacherAbout: FC = () => {
           data-testid="teacher-about-continue-button"
           disabled={!isValid}
         >
-          <FormattedMessage
-            id="common.continue"
-            defaultMessage="Continue"
-            description="Button label to continue"
-          />
+          <I18nMessage id="common.continue" languageSource="unauthed" />
         </IonButton>
       </form>
     </>

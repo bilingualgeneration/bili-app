@@ -11,9 +11,9 @@ import React from "react";
 import "./RadioCard.scss";
 
 type RadioCardProps = {
-  title: string | MessageFormatElement[];
-  content: string | MessageFormatElement[];
-  subTitle?: string | MessageFormatElement[];
+  title: string | null | undefined;
+  content: string | null | undefined;
+  subTitle?: string | null | undefined;
   icon?: React.ReactNode;
   iconBackgroundColor?: string;
   badge?: React.ReactNode;

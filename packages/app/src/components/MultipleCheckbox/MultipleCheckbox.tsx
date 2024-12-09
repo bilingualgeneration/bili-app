@@ -5,7 +5,7 @@ import { FC, JSX, useState, useEffect } from "react";
 
 export type MultipleCheckboxOption = {
   value: any;
-  label: string;
+  label: string | undefined | null;
 };
 
 type IonCheckboxProps = {
@@ -63,9 +63,14 @@ export const MultipleCheckbox = ({
   ...props
 }: MultipleCheckboxProps): JSX.Element => {
   const [values, setValues] = useState<string[]>(defaultValue);
+
+  // TODO: this seems bugged
+  /*
   useEffect(() => {
-    setValues(defaultValue);
+      setValues(defaultValue);
   }, [defaultValue]);
+  */
+
   return (
     <Controller
       control={control}
