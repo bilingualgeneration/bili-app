@@ -44,7 +44,6 @@ export const I18nProvider: React.FC<React.PropsWithChildren> = ({
       const languages = (
         languageSource === "authed" ? language : interfaceLanguage
       ).split(".");
-      console.log(languageSource, languageSource === "authed");
       if (languages.length < level || languages[level - 1] === undefined) {
         return null;
       } else {
