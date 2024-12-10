@@ -44,7 +44,7 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
   }, []);
   return (
     <div
-      className=""
+      className=" "
       style={{
         background: `url(${characterImage}) no-repeat`,
         backgroundPosition: "right 5rem top 2rem",
