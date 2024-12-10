@@ -44,12 +44,12 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
   }, []);
   return (
     <div
-      className="margin-top-2 margin-left-5"
+      className=""
       style={{
         background: `url(${characterImage}) no-repeat`,
         backgroundPosition: "right 5rem top 2rem",
         backgroundSize: "21.875rem auto",
-        height: `calc(100vh - 7.5rem - 2rem)`,
+        height: `calc(100%)`,
         marginBottom: -150,
       }}
     >
