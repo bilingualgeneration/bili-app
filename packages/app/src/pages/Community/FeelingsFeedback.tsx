@@ -165,6 +165,7 @@ export const FeelingsFeedback: React.FC = () => {
             name="feelingsFeedback"
             displayCardsInRow={true}
             isMaxWidthNeeded={true}
+            maxWidth="14.5rem"
             options={[
               happyOption,
               calmOption,

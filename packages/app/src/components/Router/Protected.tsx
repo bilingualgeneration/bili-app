@@ -70,6 +70,7 @@ import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats"
 import { useEffect } from "react";
 import { FeelingsFeedback } from "@/pages/Community/FeelingsFeedback";
 import { CommunityCongrats } from "@/pages/Community/CommunityCongrats";
+import { ThoughtsFeedback } from "@/pages/Community/ThoughtsFeedback";
 
 const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { showAdultCheck } = useAdultCheck();
@@ -207,6 +208,11 @@ export const ProtectedRoutes: React.FC = () => {
             exact
             path="/community/feelings"
             component={FeelingsFeedback}
+          />
+          <Route
+            exact
+            path="/community/thoughts"
+            component={ThoughtsFeedback}
           />
           <Route
             exact

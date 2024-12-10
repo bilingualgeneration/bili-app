@@ -20,6 +20,7 @@ export type ExtendedRadioProps = {
   displayCardsInRow?: boolean;
   defaultOption?: ExtendedRadioOption | undefined;
   isMaxWidthNeeded?: boolean;
+  maxWidth?: string;
 };
 
 export const ExtendedRadio = ({
@@ -31,6 +32,7 @@ export const ExtendedRadio = ({
   testId = "extended-radio-component",
   displayCardsInRow = false,
   isMaxWidthNeeded = false,
+  maxWidth,
   defaultOption,
 }: ExtendedRadioProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(
@@ -68,9 +70,7 @@ export const ExtendedRadio = ({
                   option.component.props.className +
                   (activeIndex === index ? " " + activeClassName : "") +
                   (isMaxWidthNeeded ? " max-width-needed" : ""),
-                style: isMaxWidthNeeded
-                  ? { maxWidth: "14.5rem" } // Add max-width dynamically if isMaxWidthNeeded is true
-                  : {},
+                style: isMaxWidthNeeded && maxWidth ? { maxWidth } : {},
                 onClick: () => {
                   if (!option.disabled) {
                     setActiveIndex(index);

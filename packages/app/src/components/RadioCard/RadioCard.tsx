@@ -29,6 +29,7 @@ type RadioCardProps = {
   isTextCentered?: boolean;
   backgroundColor?: string;
   maxHeight?: string;
+  className?: string;
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -49,11 +50,12 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   isTextCentered = false,
   backgroundColor = "#FFFFFF",
   maxHeight = "undefined",
+  className = "",
 }) => {
   const language = useLanguage();
   return (
     <IonCard
-      className="radio-card"
+      className={`radio-card ${className}`}
       style={{
         backgroundColor: backgroundColor,
         maxHeight: maxHeight,
