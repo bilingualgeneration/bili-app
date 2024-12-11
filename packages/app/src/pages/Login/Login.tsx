@@ -177,7 +177,7 @@ export const Login: React.FC = () => {
                   <FormattedMessage id="common.continue" />
                 </IonButton>
               </div>
-              <div className="ion-text-center ion-margin-top text-sm">
+              <div className="ion-text-center ion-margin-top text-sm ion-hide">
                 <IonText color="medium">
                   <FormattedMessage
                     id="common.noAccount"
