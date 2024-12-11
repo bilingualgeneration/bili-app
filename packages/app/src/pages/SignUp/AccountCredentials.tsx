@@ -1,3 +1,9 @@
+import { ErrorMessages } from "@/components/ErrorMessages";
+import {
+  getFunctions,
+  httpsCallable,
+  HttpsCallableResult,
+} from "firebase/functions";
 import { I18nMessage } from "@/components/I18nMessage";
 import { Input } from "@/components/Input";
 import { IonButton, IonCheckbox, IonLabel, IonText } from "@ionic/react";
@@ -30,15 +36,32 @@ export const AccountCredentials: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [errors, setErrors] = useState<string[] | null>(null);
+  const functions = getFunctions();
+  const findStudentsFunction = httpsCallable(
+    functions,
+    "caregiver-findStudents",
+  );
 
-  const onSubmit = handleSubmit((response) => {
+  const onSubmit = handleSubmit(async (response) => {
+    if (data.classroomId !== undefined) {
+      // user is most likely a caregiver and is trying to sign up with a code
+      const { data: students } = await findStudentsFunction({
+        classroomId: data.classroomId,
+        email: response.email,
+      });
+      // @ts-ignore
+      if (students.length === 0) {
+        setErrors(["no-matching-students"]);
+        return;
+      }
+    }
     setData({
       ...data,
       ...response,
@@ -144,6 +167,8 @@ export const AccountCredentials: React.FC = () => {
             <I18nMessage id="common.continue" languageSource="unauthed" />
           </IonButton>
         </div>
+
+        <ErrorMessages errors={errors} languageSource="unauthed" />
 
         <div className="ion-text-center ion-margin-top">
           <IonText color="medium">

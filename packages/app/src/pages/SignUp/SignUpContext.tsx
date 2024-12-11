@@ -12,7 +12,18 @@ import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import { useLanguage } from "@/hooks/Language";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-const SignUpDataContext = createContext({
+interface SignUpDataContext {
+  data: { [key: string]: any };
+  page: string[];
+  pushPage: (value: string) => void;
+  signUp: () => void;
+  signUpStatus: string;
+  setData: (value: any) => void;
+  setPage: (value: string[]) => void;
+  setSignUpStatus: (value: any) => void;
+}
+
+const SignUpDataContext = createContext<SignUpDataContext>({
   data: {},
   page: ["roleSelect"],
   pushPage: (value: string): void => {},
@@ -48,7 +59,7 @@ export const SignUpDataProvider = ({
         await signInWithEmailAndPassword(auth, data.email, data.password);
         setSignUpStatus("done");
         break;
-      case "parent":
+      case "caregiver":
         await caregiverSignupFunction({
           ...data,
           language,
