@@ -46,11 +46,10 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
     <div
       className=" "
       style={{
-        background: `url(${characterImage}) no-repeat`,
-        backgroundPosition: "right 5rem top 2rem",
-        backgroundSize: "21.875rem auto",
-        height: `calc(100%)`,
-        marginBottom: -150,
+        background: `url(${characterImage}) no-repeat bottom 0 right 0`,
+        backgroundSize: "50vh",
+        height: "100%",
+        width: "100%",
       }}
     >
       <IonGrid>
