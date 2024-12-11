@@ -8,8 +8,8 @@ import { useTimeTracker } from "@/hooks/TimeTracker";
 import { IonText } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { first } from "rxjs";
-import biliCharacter from "@/assets/img/bili_in_coat.png";
-import HeartImage from "@/assets/icons/heart_congrats.svg";
+import biliCharacter from "@/assets/icons/bili_congrats.svg";
+import FlowerImage from "@/assets/icons/big_flower.svg";
 
 export const CommunityCongrats: React.FC<{
   onKeepGoingClick?: any;
@@ -48,7 +48,7 @@ export const CommunityCongrats: React.FC<{
       >
         <IonText class="ion-text-center">
           <div className="stars-container">
-            <img src={HeartImage} alt="flower" className="star-image" />
+            <img src={FlowerImage} alt="flower" className="star-image" />
           </div>
           <h1 className="text-5xl color-suelo">
             <I18nMessage id="common.congrats.flower" />

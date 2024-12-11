@@ -5,9 +5,11 @@ import { IonButton, IonCard, IonText } from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { useI18n } from "@/hooks/I18n";
 
 export const FeelingsFeedback: React.FC = () => {
   const history = useHistory();
+  const { getText } = useI18n();
   const {
     control,
     formState: { isValid },
@@ -22,8 +24,8 @@ export const FeelingsFeedback: React.FC = () => {
               <img src={HappyBilli} alt="Happy Billi" style={{}} />
             </div>
           }
-          title={"Feliz"}
-          subTitle={"Happy"}
+          title={getText("common.feeling.happy", 1, "authed")}
+          subTitle={getText("common.feeling.happy", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -48,8 +50,8 @@ export const FeelingsFeedback: React.FC = () => {
               <img src={HappyBilli} alt="Happy Billi" style={{}} />
             </div>
           }
-          title={"Tranquilo/a/e"}
-          subTitle={"Calm"}
+          title={getText("common.feeling.calm", 1, "authed")}
+          subTitle={getText("common.feeling.calm", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -73,8 +75,8 @@ export const FeelingsFeedback: React.FC = () => {
               <img src={HappyBilli} alt="Happy Billi" style={{}} />
             </div>
           }
-          title={"Triste"}
-          subTitle={"Sad"}
+          title={getText("common.feeling.sad", 1, "authed")}
+          subTitle={getText("common.feeling.sad", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -98,8 +100,8 @@ export const FeelingsFeedback: React.FC = () => {
               <img src={HappyBilli} alt="Happy Billi" style={{}} />
             </div>
           }
-          title={"Fatal"}
-          subTitle={"Terrible"}
+          title={getText("common.feeling.terrible", 1, "authed")}
+          subTitle={getText("common.feeling.terrible", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -123,8 +125,8 @@ export const FeelingsFeedback: React.FC = () => {
               <img src={HappyBilli} alt="Happy Billi" style={{}} />
             </div>
           }
-          title={"Otro sentimiento"}
-          subTitle={"Other feeling"}
+          title={getText("common.feeling.other", 1, "authed")}
+          subTitle={getText("common.feeling.other", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -201,3 +203,10 @@ export const FeelingsFeedback: React.FC = () => {
     </>
   );
 };
+function getText(
+  arg0: string,
+  arg1: number,
+  arg2: string,
+): string | import("react-intl").MessageFormatElement[] {
+  throw new Error("Function not implemented.");
+}
