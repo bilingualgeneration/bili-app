@@ -22,10 +22,8 @@ export const Complete: React.FC = () => {
   }, [signUpStatus]);
   if (signUpStatus === "idle" || signUpStatus === "busy") {
     return (
-      <div className="ion-text-center">
-        <IonButton onClick={signUp} style={{ display: "none" }}>
-          trigger
-        </IonButton>
+      <div className="ion-text-center ion-hide">
+        <IonButton onClick={signUp}>trigger</IonButton>
         <IonSpinner />
       </div>
     );

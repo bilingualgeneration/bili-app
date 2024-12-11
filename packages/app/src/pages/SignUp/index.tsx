@@ -1,5 +1,6 @@
 export * from "./AccountCredentials";
 export * from "./ChildProfile";
+export * from "./ClassCode";
 export * from "./Complete";
 export * from "./RoleSelect";
 export * from "./LanguageInclusivitySelect";

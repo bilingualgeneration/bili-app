@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 export const LanguageModeSelect: React.FC = () => {
   const { getText } = useI18n();
   const schema = z.object({
-    isImmersive: z.enum(["en", "es", "es.en"]),
+    studentLanguage: z.enum(["en", "es", "es.en"]),
   });
   const {
     control,
@@ -142,7 +142,7 @@ export const LanguageModeSelect: React.FC = () => {
         </IonText>
         <ExtendedRadio
           control={control}
-          name="isImmersive"
+          name="studentLanguage"
           options={[billingualOption, spanishOption, englishOption]}
         />
         <IonButton

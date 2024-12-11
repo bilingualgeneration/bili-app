@@ -52,7 +52,7 @@ export const RoleSelect: React.FC = () => {
         />
       </div>
     ),
-    value: "parent",
+    value: "caregiver",
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -67,7 +67,7 @@ export const RoleSelect: React.FC = () => {
       //swiper.slideTo(teacherSlide);
     }
     // @ts-ignore todo: better typing
-    if (responses.role === "parent") {
+    if (responses.role === "caregiver") {
       pushPage("childProfile");
       //swiper.slideTo(parentSlide);
     }

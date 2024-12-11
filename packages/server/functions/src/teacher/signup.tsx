@@ -12,7 +12,6 @@ export const signup = onCall(async (request) => {
 
   const profileBlankDefaults: any = {
     country: null,
-    dailyPlaytimeLimit: "unlimited",
     dob: null,
     isInclusive: false,
     phone: null,

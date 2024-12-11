@@ -1,11 +1,4 @@
 import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonProgressBar,
-} from "@ionic/react";
-import React, { useState } from "react";
-import {
   AccountCredentials,
   ChildProfile,
   Complete,
@@ -14,13 +7,22 @@ import {
   Pricing,
   TeacherAbout,
 } from "@/pages/SignUp";
+import { ClassCode } from "./ClassCode";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonProgressBar,
+} from "@ionic/react";
+import React, { useState } from "react";
 import {
   SignUpDataProvider,
   useSignUpData,
 } from "@/pages/SignUp/SignUpContext";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { ClassCode } from "./ClassCode";
+import { useParams } from "react-router-dom";
 
 export const SignUp: React.FC<{ entry?: string }> = ({ entry }) => (
   <SignUpDataProvider entry={entry}>
@@ -40,9 +42,17 @@ const progressLookup: { [key: string]: number } = {
 };
 
 export const SignUpComponent: React.FC = () => {
+  const { code } = useParams<{ code: string }>();
   const { page: pages, setPage } = useSignUpData();
   const page: string = pages[pages.length - 1];
   const history = useHistory();
+
+  useEffect(() => {
+    if (code !== undefined && page === "roleSelect") {
+      // code supplied so redirect to ClassCode
+      setPage(["classCode"]);
+    }
+  }, [page, code]);
 
   // todo: on revisit, clear old values
   const backButtonOnClick = (): void => {
