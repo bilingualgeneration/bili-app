@@ -6,10 +6,28 @@ import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { useI18n } from "@/hooks/I18n";
+import { useLanguage } from "@/hooks/Language";
+
+const en1Audio = "en1audio url";
+const es1Audio = "es1audio url";
+
+const audios = [
+  {
+    language: "en",
+    url: en1Audio,
+  },
+  {
+    language: "es",
+    url: es1Audio,
+  },
+];
 
 export const FeelingsFeedback: React.FC = () => {
   const history = useHistory();
   const { getText } = useI18n();
+  const { populateText } = useLanguage();
+  const a = populateText(audios, "language", "url");
+  console.log(a);
   const {
     control,
     formState: { isValid },
