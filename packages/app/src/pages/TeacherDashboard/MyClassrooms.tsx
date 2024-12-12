@@ -12,7 +12,7 @@ import {
   IonContent,
   IonText,
 } from "@ionic/react";
-import { add, ellipse, sparkles } from "ionicons/icons";
+import { add, ellipse, link, sparkles } from "ionicons/icons";
 import { Carousel } from "@/components/Carousel";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
@@ -69,6 +69,7 @@ export const MyClassrooms: React.FC = () => {
           "Your Essential Guide to Getting Started with the Bili App.",
         description: "Explore card #1 content",
       }),
+      link: "https://thebiliapp.com/getting-started/",
       tags: [
         {
           color: "#FFAEDC",
@@ -102,6 +103,7 @@ export const MyClassrooms: React.FC = () => {
           "Learn about what Inclusive Spanish is and why it exists.",
         description: "Explore card #2 content",
       }),
+      link: "https://thebiliapp.com/inclusive-spanish/",
       tags: [
         {
           color: "#D3EAE8",
@@ -135,6 +137,7 @@ export const MyClassrooms: React.FC = () => {
           "Explore special features that promote authentic language production.",
         description: "Explore card #3 content",
       }),
+      link: "https://thebiliapp.com/7-fun-and-effective-ways-to-teach-spanish-to-your-kids-at-home/",
       tags: [
         {
           color: "#973D78",
@@ -144,72 +147,6 @@ export const MyClassrooms: React.FC = () => {
             description: "Content tag for parents",
           }),
           textColor: "#fff",
-        },
-        {
-          color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
-        },
-      ],
-    },
-    {
-      backgroundImage: settingsCardDesign2,
-      backgroundColor: "#22BEB9",
-      title: intl.formatMessage({
-        id: "settings.overview.inclusiveSpanishTitle",
-        defaultMessage: "Inclusive Spanish",
-        description: "Explore card #2 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.InclusiveSpanishContent",
-        defaultMessage:
-          "Learn about what Inclusive Spanish is and why it exists.",
-        description: "Explore card #2 content",
-      }),
-      tags: [
-        {
-          color: "#D3EAE8",
-          text: intl.formatMessage({
-            id: "tags.social_justice",
-            defaultMessage: "Social Justice",
-            description: "Content tag for social justice",
-          }),
-        },
-        {
-          color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
-        },
-      ],
-    },
-    {
-      backgroundImage: settingsCardDesign2,
-      backgroundColor: "#22BEB9",
-      title: intl.formatMessage({
-        id: "settings.overview.inclusiveSpanishTitle",
-        defaultMessage: "Inclusive Spanish",
-        description: "Explore card #2 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.InclusiveSpanishContent",
-        defaultMessage:
-          "Learn about what Inclusive Spanish is and why it exists.",
-        description: "Explore card #2 content",
-      }),
-      tags: [
-        {
-          color: "#D3EAE8",
-          text: intl.formatMessage({
-            id: "tags.social_justice",
-            defaultMessage: "Social Justice",
-            description: "Content tag for social justice",
-          }),
         },
         {
           color: "#F1D100",
