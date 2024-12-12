@@ -38,23 +38,27 @@ export const WouldDoIntro: React.FC = () => {
   const button_es = "¡Juguemos!";
   const button_en = `Let's play!`;
   return (
-    <DialogueScreen
-      audios={audios}
-      buttonTextPrimary={language === "en" ? button_en : button_es}
-      buttonTextSecondary={
-        language === "es.en" || language === "en.es" ? button_en : undefined
-      }
-      characterImage={bili}
-      onButtonClick={() => {
-        history.push("/would-do/select");
-      }}
-    >
-      <IonText>
-        <h1 className="text-5xl color-suelo">{language === "en" ? en : es}</h1>
-        {(language === "es.en" || language === "en.es") && (
-          <h2 className="text-3xl color-english">{en}</h2>
-        )}
-      </IonText>
-    </DialogueScreen>
+    <div style={{ height: "calc(100vh - 100px)" }}>
+      <DialogueScreen
+        audios={audios}
+        buttonTextPrimary={language === "en" ? button_en : button_es}
+        buttonTextSecondary={
+          language === "es.en" || language === "en.es" ? button_en : undefined
+        }
+        characterImage={bili}
+        onButtonClick={() => {
+          history.push("/would-do/select");
+        }}
+      >
+        <IonText>
+          <h1 className="text-5xl color-suelo">
+            {language === "en" ? en : es}
+          </h1>
+          {(language === "es.en" || language === "en.es") && (
+            <h2 className="text-3xl color-english">{en}</h2>
+          )}
+        </IonText>
+      </DialogueScreen>
+    </div>
   );
 };
