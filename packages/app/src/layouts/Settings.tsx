@@ -36,12 +36,14 @@ export const SettingsLayout: FC<
           <div className="page-wrapper" style={{ background }}>
             <IonGrid className="ion-no-padding inner-scroll">
               <IonRow>
-                <IonCol size="1.85" style={{ minHeight: "100vh" }}>
+                <IonCol size="2" style={{ minHeight: "100vh" }}>
                   <SideMenu />
                 </IonCol>
                 <IonCol size="10">
-                  <SettingsHeader></SettingsHeader>
-                  {children}
+                  <div style={{ backgroundColor: "#f7FAF9" }}>
+                    <SettingsHeader></SettingsHeader>
+                    {children}
+                  </div>
                 </IonCol>
               </IonRow>
             </IonGrid>
