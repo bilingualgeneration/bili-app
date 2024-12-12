@@ -47,7 +47,7 @@ const Card: React.FC<any> = ({
   );
 };
 
-export const Community: FC = () => {
+export const Community: React.FC = () => {
   const intl = useIntl();
   const cards = [
     {
