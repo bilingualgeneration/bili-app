@@ -21,7 +21,7 @@ export const SettingsHeader: React.FC = ({}) => {
   return (
     <>
       <IonHeader className="ion-no-border settings-header">
-        <img src={biliLogo} className="bili-logo-settings-page" />
+        <img src={biliLogo} className="header-bili-logo" />
       </IonHeader>
     </>
   );

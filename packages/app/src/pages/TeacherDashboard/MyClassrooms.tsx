@@ -1,3 +1,5 @@
+// TODO: replace RadioCard with regular card?
+
 import { useEffect, useState } from "react";
 import {
   IonButton,

@@ -54,6 +54,8 @@
   aspect-ratio: 1;
   width: 100%;
   margin: 0;
+  max-height: calc(80vh - var(--header-height));
+  max-width: calc(80vh - var(--header-height));
   ion-card-content {
     height: 100%;
   }

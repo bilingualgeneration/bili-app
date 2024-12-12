@@ -1,10 +1,9 @@
-import { FC } from "react";
+import { CommunityHeader } from "@/components/CommunityHeader";
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
-import { CommunityHeader } from "@/components/CommunityHeader";
 import { Link } from "react-router-dom";
 import { ContentLock } from "@/components/ContentLock";
 
@@ -14,7 +13,13 @@ import tunita from "@/assets/img/tunita.png";
 
 import "./Community.scss";
 
-const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
+const Card: React.FC<any> = ({
+  image,
+  link,
+  locked,
+  translatedTitle,
+  title,
+}) => {
   const { language } = useLanguageToggle();
   const content = (
     <>

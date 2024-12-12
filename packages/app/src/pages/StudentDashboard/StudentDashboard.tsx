@@ -201,8 +201,8 @@ const Banner: React.FC = () => {
       style={{
         paddingBottom: "2rem",
         paddingTop: "2rem",
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
       }}
     >
       <I18nMessage
@@ -272,7 +272,7 @@ export const StudentDashboard: React.FC = () => {
   return (
     <div id="student-landing-page">
       <Banner />
-      <div style={{ marginLeft: 20, marginRight: 20 }}>
+      <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
         <div className="icons-title margin-top-3">
           <IonText>
             <I18nMessage

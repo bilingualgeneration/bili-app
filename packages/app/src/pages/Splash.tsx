@@ -17,7 +17,7 @@ export const Splash: React.FC = () => {
     <>
       <UnauthedHeader showBackButton={false} />
       <div className="content-wrapper">
-        <div style={{ maxWidth: 580, margin: "auto" }}>
+        <div style={{ maxWidth: "40rem", margin: "auto" }}>
           <IonText>
             <h2 className="ion-text-center text-3xl semibold margin-bottom-2">
               <I18nMessage id="splash.loginTitle" languageSource="unauthed" />

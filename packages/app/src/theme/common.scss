@@ -1,7 +1,8 @@
 :root {
-  --header-height: 103.797px; /* todo: get it in rems */
+  --header-height: 6.5rem;
 }
 
-#bili-header-logo {
-  height: 3.5rem;
+.header-bili-logo {
+  width: 5rem;
+  height: auto;
 }

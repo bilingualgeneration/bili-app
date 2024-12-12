@@ -35,13 +35,13 @@ export const Carousel: React.FC<CarouselProps> = ({
     infinite,
     slidesToShow,
     slidesToScroll: 1,
-    nextArrow: <Arrow direction="forward" height={height} />,
-    prevArrow: <Arrow direction="backward" height={height} />,
+    nextArrow: <Arrow direction="forward" />,
+    prevArrow: <Arrow direction="backward" />,
     variableWidth: true,
   };
 
   return (
-    <div className="carousel-container" style={{ height }}>
+    <div className="carousel-container">
       <style>
         {`
           .slick-track {

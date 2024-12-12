@@ -54,26 +54,6 @@
 
 ion-popover.profile-popover-style {
   --width: 17.5rem;
+  --offset-x: -1rem;
   --offset-y: 0.625rem;
-}
-
-@media (max-width: 768px) {
-  #profileChip {
-    width: max-content;
-
-    #starPoints,
-    #heartPoints {
-      padding: 0.15rem 0.4rem;
-      margin-left: 0.8rem;
-
-      ion-icon {
-        margin-right: 0.3rem;
-        font-size: 0.8rem;
-      }
-    }
-
-    img {
-      width: 2.5rem;
-    }
-  }
 }

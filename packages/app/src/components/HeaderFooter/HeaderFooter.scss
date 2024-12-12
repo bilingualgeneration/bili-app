@@ -1,15 +1,7 @@
 #authedHeader {
   padding-top: 1rem;
   background-color: #fff;
-}
-
-.header-bili-logo {
-  width: 5rem;
-  height: auto;
-}
-
-@media (max-width: 1000px) {
-  #authedHeader {
+  ion-col {
     padding-top: 0;
     padding-bottom: 0;
   }

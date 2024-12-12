@@ -116,9 +116,8 @@ const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
     <>
       <PackHeader
         bannerColor="#FFF8F0"
+        className="color-suelo"
         id="teacherDashboard.selectStudent.title"
-        titleClassName="text-5xl color-suelo"
-        subtitleClassName="text-3xl color-english"
       />
       <div id="student-profile">
         <div className="content-container">
