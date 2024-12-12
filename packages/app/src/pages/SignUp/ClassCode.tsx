@@ -73,7 +73,7 @@ export const ClassCode: React.FC = () => {
       setHasError(false);
       setData({
         ...data,
-        //classroomId,
+        classroomId,
         role: "caregiver",
       });
       pushPage("languageModeSelect");
