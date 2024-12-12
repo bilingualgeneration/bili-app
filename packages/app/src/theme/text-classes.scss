@@ -7,6 +7,10 @@ html {
   font-size: 16px;
 }
 
+html.plt-mobile {
+  font-size: 8px;
+}
+
 .semibold {
   font-weight: 600 !important;
   font-family: Outfit !important;
@@ -106,82 +110,6 @@ p {
   font-weight: bold !important;
   line-height: 4.5rem !important;
   letter-spacing: -0.0125rem !important;
-}
-
-@media screen and (max-width: 767px) {
-  html {
-    font-size: 8px;
-  }
-
-  .text-sm-xs {
-    font-size: 0.28125rem !important;
-    line-height: 0.5rem !important;
-  }
-
-  .text-xs {
-    font-size: 0.375rem !important;
-    line-height: 0.5rem !important;
-  }
-
-  .text-sm {
-    font-size: 0.4375rem !important;
-    line-height: 0.625rem !important;
-  }
-
-  .text-md {
-    font-size: 0.5rem !important;
-    line-height: 0.625rem !important;
-  }
-
-  .text-md-no-line-height {
-    font-size: 0.46875rem !important;
-  }
-
-  .text-lg {
-    font-size: 0.5625rem !important;
-    line-height: 0.75rem !important;
-  }
-
-  .text-xl {
-    font-size: 0.625rem !important;
-    line-height: 0.75rem !important;
-  }
-
-  .text-1_5xl {
-    font-size: 0.6875rem !important;
-    line-height: 0.875rem !important;
-  }
-
-  .text-2xl {
-    font-size: 0.75rem !important;
-    line-height: 1rem !important;
-  }
-
-  .text-3xl {
-    font-size: 1rem !important;
-    line-height: 1.25rem !important;
-    letter-spacing: -0.03125rem !important;
-  }
-
-  .text-4xl {
-    font-size: 1.25rem !important;
-    line-height: 1.5rem !important;
-    letter-spacing: -0.03125rem !important;
-  }
-
-  .text-5xl {
-    font-size: 1.5rem !important;
-    font-weight: bold !important;
-    line-height: 1.75rem !important;
-    letter-spacing: -0.0625rem !important;
-  }
-
-  .text-6xl {
-    font-size: 2rem !important;
-    font-weight: bold !important;
-    line-height: 2.25rem !important;
-    letter-spacing: -0.125rem !important;
-  }
 }
 
 .align-center {

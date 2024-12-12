@@ -21,7 +21,6 @@ import {
 import { useClassroom } from "@/hooks/Classroom";
 import { useProfile } from "@/hooks/Profile";
 import { useRef, useState } from "react";
-import { useScreenSize } from "@/lib/screenSize";
 import { useStudent } from "@/hooks/Student";
 
 import "./ProfileChip.scss";
@@ -49,7 +48,6 @@ const HydratedProfileChip: React.FC = () => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
   const { data, status } = useRealtimeDatabaseDoc();
-  const { screenType } = useScreenSize();
 
   const openPopover = (e: any) => {
     popover.current!.event = e;
@@ -78,13 +76,7 @@ const HydratedProfileChip: React.FC = () => {
               </IonText>
             </div>
             <IonText>
-              <p
-                className={`semibold color-suelo ${
-                  screenType === "mobile" ? "text-lg" : "text-xl"
-                }`}
-              >
-                {firstName}
-              </p>
+              <p className="semibold color-suelo text-xl">{firstName}</p>
             </IonText>
             <Avatar id={id} size="md" />
           </div>
@@ -102,7 +94,7 @@ const HydratedProfileChip: React.FC = () => {
         arrow={false}
         className="profile-popover-style"
       >
-        <IonContent id="profile-chip-popover">
+        <IonContent id="profile-chip-popover" forceOverscroll={false}>
           <IonList>
             <Link
               to={`/profile/coming-soon`}

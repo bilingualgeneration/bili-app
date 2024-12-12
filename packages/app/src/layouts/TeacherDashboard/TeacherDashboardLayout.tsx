@@ -21,7 +21,7 @@ export const TeacherDashboardHeader: React.FC = () => {
       {/* TODO: implement seach here */}
       <div></div>
       <div className="ion-text-center">
-        <img src={biliLogo} />
+        <img src={biliLogo} className="header-bili-logo" />
       </div>
       <div className="buttons-end">
         <Link to="/classrooms">

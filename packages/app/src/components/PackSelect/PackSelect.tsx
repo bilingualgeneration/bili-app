@@ -135,7 +135,7 @@ export const HydratedPackSelect: React.FC<props> = ({
     <>
       {category == "play" && <PlayHeader />}
       {category == "community" && <CommunityHeader />}
-      <div className="background-card">
+      <div className="background-card" style={{ margin: "auto 2rem" }}>
         <div className="margin-bottom-2">
           <IonText>
             <h1

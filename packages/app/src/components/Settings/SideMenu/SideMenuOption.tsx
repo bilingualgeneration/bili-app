@@ -67,9 +67,7 @@ export const SideMenuOption: React.FC<SideMenuOptionProps> = ({
         icon={icon}
         style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.75rem" }}
       />
-      <IonLabel className="text-md semibold menu-label ion-hide-lg-down">
-        {label}
-      </IonLabel>
+      <IonLabel className="text-md semibold menu-label">{label}</IonLabel>
     </IonItem>
   );
 };
