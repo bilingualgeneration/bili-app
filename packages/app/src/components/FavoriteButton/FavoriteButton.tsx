@@ -11,7 +11,7 @@ export const FavoriteButton: React.FC<{
   const { favoriteIds, toggleFavoriteId } = useFavorites();
   return (
     <IonButton
-      className="favorite-button"
+      className="favorite-button ion-hide"
       style={{ color: color }}
       fill="clear"
       onClick={(event) => {
