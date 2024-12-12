@@ -14,7 +14,6 @@ import {
   ClassPreferences,
   ClassProgress,
   MyClassrooms,
-  StudentSelect,
   StudentProgress,
 } from "@/pages/TeacherDashboard";
 import {
@@ -46,9 +45,17 @@ import {
   IntruderIntro,
   IntruderGameLoader,
 } from "@/pages/Intruder";
+import {
+  About,
+  Overview,
+  Profile,
+  Preferences,
+  Progress,
+} from "@/pages/Settings";
 import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
 import { Play } from "@/pages/Play";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
+import { SettingsLayout } from "@/layouts/Settings";
 import { Stories, StoriesLandingPage, StoryBuilder } from "@/pages/Stories";
 import {
   StoryFactoryIntro,
@@ -56,8 +63,7 @@ import {
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
-// unsure what this is
-//import { StudentLoader } from "@/pages/Caregiver";
+import { StudentSelect } from "@/pages/StudentSelect";
 import {
   TellMeAboutGame,
   TellMeAboutIntro,
@@ -66,7 +72,6 @@ import {
 import { Wellness } from "@/pages/Wellness";
 import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
 import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
-import { About } from "@/pages/Settings";
 
 import { useEffect } from "react";
 
@@ -188,6 +193,24 @@ export const ProtectedRoutes: React.FC = () => {
             )}
           />
           <Route
+            path="/settings"
+            render={() => (
+              <AdultCheck>
+                <SettingsLayout>
+                  <Route exact path="/settings/about" component={About} />
+                  <Route exact path="/settings/overview" component={Overview} />
+                  <Route exact path="/settings/profile" component={Profile} />
+                  <Route
+                    exact
+                    path="/settings/preferences"
+                    component={Preferences}
+                  />
+                  <Route exact path="/settings/progress" component={Progress} />
+                </SettingsLayout>
+              </AdultCheck>
+            )}
+          />
+          <Route
             exact
             path="/affirmations/intro"
             component={AffirmationsIntro}
@@ -290,18 +313,13 @@ export const ProtectedRoutes: React.FC = () => {
           <Route exact path="/would-do/select" component={WouldDoSelect} />
           <Route exact path="/would-do/play/:pack_id" component={WouldDoGame} />
           <Route exact path="/reports" component={Reports} /> {/* debug */}
-          {/*
-	    TODO: figure this out
           <Route
             exact
-            path="/caregiver/student-loader"
-            render={() => (
-                  <StudentLoader />
-            )}
+            path="/caregiver/student-select"
+            render={() => <StudentSelect />}
           />
-	  */}
           {profile.role === "caregiver" && (
-            <Redirect to="/caregiver/student-loader" />
+            <Redirect to="/caregiver/student-select" />
           )}
           {profile.role === "teacher" && <Redirect to="/classrooms" />}
         </Switch>
