@@ -1,5 +1,13 @@
 import biliLogo from "@/assets/icons/bili.svg";
-import { IonButton, IonContent, IonIcon, IonPage } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonIcon,
+  IonPage,
+  IonRow,
+} from "@ionic/react";
 import { Link } from "react-router-dom";
 import { SideMenu } from "@/components/Settings/SideMenu";
 import { StudentInfo } from "@/components/StudentInfo";
@@ -17,34 +25,46 @@ export const TeacherDashboardHeader: React.FC = () => {
     user: { uid },
   } = useProfile();
   return (
-    <div id="teacher-dashboard-layout-header">
-      {/* TODO: implement seach here */}
-      <div></div>
-      <div className="ion-text-center">
-        <img src={biliLogo} className="header-bili-logo" />
-      </div>
-      <div className="buttons-end">
-        <Link to="/classrooms">
-          <IonButton className="font-weight-normal" size="small" fill="clear">
-            <IonIcon slot="start" icon={SchoolIcon} />
-            My Classrooms
+    <IonGrid id="teacher-dashboard-layout-header">
+      <IonRow>
+        <IonCol></IonCol>
+        <IonCol className="buttons-center">
+          <img src={biliLogo} className="header-bili-logo" />
+        </IonCol>
+        <IonCol className="buttons-end">
+          <Link to="/classrooms">
+            <IonButton className="font-weight-normal" size="small" fill="clear">
+              <IonIcon slot="start" icon={SchoolIcon} />
+              My Classrooms
+            </IonButton>
+          </Link>
+          <IonButton
+            className="font-weight-normal ion-hide"
+            disabled={true}
+            size="small"
+            fill="clear"
+          >
+            <IonIcon slot="start" icon={HelpIcon} />
+            Help
           </IonButton>
-        </Link>
-        {/* TODO: implement help here */}
-        <IonButton
-          className="font-weight-normal"
-          disabled={true}
-          size="small"
-          fill="clear"
-        >
-          <IonIcon slot="start" icon={HelpIcon} />
-          Help
-        </IonButton>
-        <StudentInfo id={uid} type="user" size="sm" />
-      </div>
-    </div>
+          <div>
+            <StudentInfo id={uid} type="user" size="sm" />
+          </div>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   );
 };
+
+/*
+    <div id="teacher-dashboard-layout-header">
+      <div></div>
+      <div className="ion-text-center">
+      </div>
+      <div className="buttons-end">
+      </div>
+    </div>
+*/
 
 interface TeacherDashboardLayout {
   showHeader?: boolean;

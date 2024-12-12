@@ -1,16 +1,27 @@
 #teacher-dashboard-layout-header {
+  padding: 1rem 2rem;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.08);
+  .buttons-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .buttons-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+#xteacher-dashboard-layout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.08);
 
   > div {
     min-width: 33%;
   }
 
   .buttons-end {
-    display: flex;
-    align-items: center;
   }
 }
