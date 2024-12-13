@@ -92,7 +92,6 @@ export const ThoughtsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#FFF"
           maxHeight="5.25rem"
-          className="padding-left-9 padding-right-9"
           onAudioPlay={() => {
             const audio: string[] = language
               .split(".")
@@ -120,7 +119,6 @@ export const ThoughtsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#FFF"
           maxHeight="5.25rem"
-          className="padding-left-9 padding-right-9"
           onAudioPlay={() => {
             // @ts-ignore
             const audio: string[] = language
@@ -148,7 +146,6 @@ export const ThoughtsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#FFF"
           maxHeight="5.25rem"
-          className="padding-left-7 padding-right-7"
           onAudioPlay={() => {
             // @ts-ignore
             const audio: string[] = language
@@ -174,20 +171,20 @@ export const ThoughtsFeedback: React.FC = () => {
       >
         <form action="">
           <IonText className="ion-text-start">
-            <h2 className="text-3xl semibold color-suelo padding-left-4">
+            <h2 className="text-3xl semibold color-suelo padding-left-2">
               <I18nMessage id="common.whatYouThink" />
             </h2>
             <I18nMessage
               id="common.whatYouThink"
               level={2}
               wrapper={(text: string) => (
-                <p className="text-3xl color-grey padding-left-4">{text}</p>
+                <p className="text-3xl color-grey padding-left-2">{text}</p>
               )}
             />
           </IonText>
           <IonCard
             style={{ background: "#D6D3F0" }}
-            className="padding-vertical-5 margin-left-4 margin-right-4"
+            className="padding-vertical-5 margin-left-2 margin-right-2"
           >
             <IonText>
               <h1 className="text-3xl semibold color-suelo">
@@ -205,7 +202,7 @@ export const ThoughtsFeedback: React.FC = () => {
           <ExtendedRadio
             control={control}
             name="feelingsFeedback"
-            displayCardsInRow={false}
+            displayCardsInRow={true}
             isMaxWidthNeeded={false}
             maxWidth="25rem"
             options={[yesOption, noOption, otherOption]}

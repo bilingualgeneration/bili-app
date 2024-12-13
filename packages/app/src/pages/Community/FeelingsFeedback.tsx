@@ -1,41 +1,90 @@
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { I18nMessage } from "@/components/I18nMessage";
 import { RadioCard } from "@/components/RadioCard";
-import { IonButton, IonCard, IonText } from "@ionic/react";
+import { IonButton, IonCard, IonCol, IonText } from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useEffect } from "react";
+import audio_happy_en from "@/assets/audio/FlowerCongrats/happy.mp3";
+import audio_happy_es from "@/assets/audio/FlowerCongrats/feliz.mp3";
+import audio_calm_en from "@/assets/audio/FlowerCongrats/calm.mp3";
+import audio_calm_es from "@/assets/audio/FlowerCongrats/tranquile.mp3";
+import audio_sad_en from "@/assets/audio/FlowerCongrats/sad.mp3";
+import audio_sad_es from "@/assets/audio/FlowerCongrats/triste.mp3";
+import audio_terrible_en from "@/assets/audio/FlowerCongrats/terrible.mp3";
+import audio_terrible_es from "@/assets/audio/FlowerCongrats/fatal.mp3";
+import audio_other_en from "@/assets/audio/FlowerCongrats/other.mp3";
+import audio_other_es from "@/assets/audio/FlowerCongrats/otro.mp3";
+import audio_en from "@/assets/audio/FlowerCongrats/how_do_you_feel.mp3";
+import audio_es from "@/assets/audio/FlowerCongrats/cómo_te_sientes.mp3";
 
-const en1Audio = "en1audio url";
-const es1Audio = "es1audio url";
-
-const audios = [
-  {
-    language: "en",
-    url: en1Audio,
+const audios: Record<string, Record<string, string>> = {
+  happy: {
+    en: audio_happy_en,
+    es: audio_happy_es,
   },
-  {
-    language: "es",
-    url: es1Audio,
+  calm: {
+    en: audio_calm_en,
+    es: audio_calm_es,
   },
-];
+  sad: {
+    en: audio_sad_en,
+    es: audio_sad_es,
+  },
+  terrible: {
+    en: audio_terrible_en,
+    es: audio_terrible_es,
+  },
+  other: {
+    en: audio_other_en,
+    es: audio_other_es,
+  },
+};
 
 export const FeelingsFeedback: React.FC = () => {
   const history = useHistory();
+  const { language } = useLanguage();
   const { getText } = useI18n();
   const { populateText } = useLanguage();
-  const a = populateText(audios, "language", "url");
-  console.log(a);
+  const { addAudio, clearAudio } = useAudioManager();
+  // const a = populateText(audios, "language", "url");
+
   const {
     control,
     formState: { isValid },
     handleSubmit,
   } = useForm();
+
+  let headerAudios: any[] = [];
+  switch (language) {
+    case "es":
+      headerAudios = [audio_es];
+      break;
+    case "en":
+      headerAudios = [audio_en];
+      break;
+    case "es.en":
+      headerAudios = [audio_es, audio_en];
+      break;
+    case "en.es":
+      headerAudios = [audio_en, audio_es];
+      break;
+  }
+
+  useEffect(() => {
+    addAudio(headerAudios);
+    return () => {
+      clearAudio();
+    };
+  }, []);
+
   const happyOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="2.3">
         <RadioCard
           icon={
             <div>
@@ -46,6 +95,7 @@ export const FeelingsFeedback: React.FC = () => {
           subTitle={getText("common.feeling.happy", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
+          titleFontSize="xl"
           subTitleFontSize="lg"
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
@@ -53,15 +103,21 @@ export const FeelingsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#FFE24F"
           maxHeight="17.5rem"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["happy"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "happy",
   };
 
   const calmOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="2.3">
         <RadioCard
           icon={
             <div>
@@ -72,6 +128,7 @@ export const FeelingsFeedback: React.FC = () => {
           subTitle={getText("common.feeling.calm", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
+          titleFontSize="xl"
           subTitleFontSize="lg"
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
@@ -79,14 +136,20 @@ export const FeelingsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#C3ECE2"
           maxHeight="17.5rem"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["calm"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "calm",
   };
   const sadOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="2.3">
         <RadioCard
           icon={
             <div>
@@ -97,6 +160,7 @@ export const FeelingsFeedback: React.FC = () => {
           subTitle={getText("common.feeling.sad", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
+          titleFontSize="xl"
           subTitleFontSize="lg"
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
@@ -104,14 +168,20 @@ export const FeelingsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#8FB8FA"
           maxHeight="17.5rem"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["sad"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "sad",
   };
   const terribleOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="2.3">
         <RadioCard
           icon={
             <div>
@@ -122,6 +192,7 @@ export const FeelingsFeedback: React.FC = () => {
           subTitle={getText("common.feeling.terrible", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
+          titleFontSize="xl"
           subTitleFontSize="lg"
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
@@ -129,14 +200,20 @@ export const FeelingsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#FF8B70"
           maxHeight="17.2rem"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["terrible"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "terrible",
   };
   const otherOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="2.3">
         <RadioCard
           icon={
             <div>
@@ -147,6 +224,7 @@ export const FeelingsFeedback: React.FC = () => {
           subTitle={getText("common.feeling.other", 2, "authed")}
           titleColor="color-suelo"
           subTitleColor="color-grey"
+          titleFontSize="xl"
           subTitleFontSize="lg"
           iconBackgroundColor="transparent"
           flexDirectionColumn={true}
@@ -154,8 +232,14 @@ export const FeelingsFeedback: React.FC = () => {
           isTextCentered={true}
           backgroundColor="#F28AC9"
           maxHeight="17.5rem"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["other"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "other",
   };
@@ -169,14 +253,14 @@ export const FeelingsFeedback: React.FC = () => {
       <IonCard style={{ textAlign: "center" }}>
         <form action="">
           <IonText className="ion-text-start">
-            <h2 className="text-3xl semibold color-suelo padding-left-4">
+            <h2 className="text-3xl semibold color-suelo padding-left-2">
               <I18nMessage id="common.howYouFeel" />
             </h2>
             <I18nMessage
               id="common.howYouFeel"
               level={2}
               wrapper={(text: string) => (
-                <p className="text-3xl color-grey padding-left-4">{text}</p>
+                <p className="text-3xl color-grey padding-left-2">{text}</p>
               )}
             />
           </IonText>

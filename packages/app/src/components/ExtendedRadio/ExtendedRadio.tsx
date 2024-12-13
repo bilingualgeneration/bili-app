@@ -63,7 +63,11 @@ export const ExtendedRadio = ({
         <span data-testid={testId}>
           <div className={displayCardsInRow ? "price-cards" : ""}>
             <IonGrid>
-              <IonRow>
+              <IonRow
+                className={
+                  displayCardsInRow ? "ion-justify-content-around" : ""
+                }
+              >
                 {options.map((option, index) => {
                   const props = {
                     ...option.component.props,
