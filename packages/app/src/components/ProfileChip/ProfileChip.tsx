@@ -1,3 +1,8 @@
+// TODO: streamline css definitions
+
+import { Avatar } from "@/components/Avatar";
+import { heart } from "ionicons/icons";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonText,
   IonIcon,
@@ -8,23 +13,22 @@ import {
   IonButton,
   IonLabel,
 } from "@ionic/react";
-import { useProfile } from "@/hooks/Profile";
-import { heart } from "ionicons/icons";
-import { Avatar } from "@/components/Avatar";
-import StarNotSharp from "@/assets/icons/star_profile.svg";
-import StudentAvatar from "@/assets/icons/avatar_profile.svg";
-import StudentLogout from "@/assets/icons/logout.svg";
 import { Link } from "react-router-dom";
-import "./ProfileChip.scss";
 import {
   RealtimeDatabaseDocProvider,
   useRealtimeDatabaseDoc,
 } from "@/hooks/RealtimeDatabaseDoc";
-import { useRef, useState } from "react";
-import { useLanguageToggle } from "../LanguageToggle";
 import { useClassroom } from "@/hooks/Classroom";
+import { useProfile } from "@/hooks/Profile";
+import { useRef, useState } from "react";
 import { useStudent } from "@/hooks/Student";
-import { useScreenSize } from "@/lib/screenSize";
+
+import "./ProfileChip.scss";
+
+import Settings from "@/assets/icons/settings.svg";
+import StarNotSharp from "@/assets/icons/star_profile.svg";
+import StudentAvatar from "@/assets/icons/avatar_profile.svg";
+import StudentLogout from "@/assets/icons/logout.svg";
 
 export const ProfileChip: React.FC = () => {
   const { id } = useStudent();
@@ -37,14 +41,13 @@ export const ProfileChip: React.FC = () => {
 
 const HydratedProfileChip: React.FC = () => {
   const { firstName, id } = useStudent();
+  const {
+    profile: { role },
+  } = useProfile();
   const { info } = useClassroom();
-
-  const classroomId = "a";
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
-  const { language } = useLanguageToggle();
   const { data, status } = useRealtimeDatabaseDoc();
-  const { screenType } = useScreenSize();
 
   const openPopover = (e: any) => {
     popover.current!.event = e;
@@ -73,13 +76,7 @@ const HydratedProfileChip: React.FC = () => {
               </IonText>
             </div>
             <IonText>
-              <p
-                className={`semibold color-suelo ${
-                  screenType === "mobile" ? "text-lg" : "text-xl"
-                }`}
-              >
-                {firstName}
-              </p>
+              <p className="semibold color-suelo text-xl">{firstName}</p>
             </IonText>
             <Avatar id={id} size="md" />
           </div>
@@ -97,7 +94,7 @@ const HydratedProfileChip: React.FC = () => {
         arrow={false}
         className="profile-popover-style"
       >
-        <IonContent id="profile-chip-popover">
+        <IonContent id="profile-chip-popover" forceOverscroll={false}>
           <IonList>
             <Link
               to={`/profile/coming-soon`}
@@ -109,14 +106,47 @@ const HydratedProfileChip: React.FC = () => {
               <IonItem button={true} detail={false} lines="none">
                 <IonIcon
                   icon={StudentAvatar}
-                  style={{ marginRight: "0.4375rem" }}
+                  style={{ marginRight: "0.5rem" }}
                 />
                 <IonText>
                   <h1 className="text-md semibold">
-                    {language !== "en" && `Mi perfil`}
-                    {language === "en" && `My profile`}
+                    <I18nMessage id="settings.myProfile" />
                   </h1>
-                  {language === "esen" && <p className="text-sm">My profile</p>}
+                  <I18nMessage
+                    id="settings.myProfile"
+                    level={2}
+                    wrapper={(text: string) => (
+                      <p className="text-sm">{text}</p>
+                    )}
+                  />
+                </IonText>
+              </IonItem>
+            </Link>
+            <Link
+              to={role === "teacher" ? "/classrooms" : "/settings/overview"}
+              className="no-underline"
+              onClick={() => {
+                setPopoverOpen(false);
+              }}
+            >
+              <IonItem
+                button={true}
+                detail={false}
+                lines="none"
+                className="change-student"
+              >
+                <IonIcon icon={Settings} style={{ marginRight: "0.5rem" }} />
+                <IonText>
+                  <h1 className="text-md semibold">
+                    <I18nMessage id="settings.grownup" />
+                  </h1>
+                  <I18nMessage
+                    id="settings.grownup"
+                    level={2}
+                    wrapper={(text: string) => (
+                      <p className="text-sm">{text}</p>
+                    )}
+                  />
                 </IonText>
               </IonItem>
             </Link>
@@ -136,16 +166,19 @@ const HydratedProfileChip: React.FC = () => {
               >
                 <IonIcon
                   icon={StudentLogout}
-                  style={{ marginRight: "0.4375rem" }}
+                  style={{ marginRight: "0.5rem" }}
                 />
                 <IonText>
                   <h1 className="text-md semibold">
-                    {language !== "en" && `Cambiar de estudiante`}
-                    {language === "en" && `Change student`}
+                    <I18nMessage id="settings.changeStudent" />
                   </h1>
-                  {language === "esen" && (
-                    <p className="text-sm">Change student</p>
-                  )}
+                  <I18nMessage
+                    id="settings.changeStudent"
+                    level={2}
+                    wrapper={(text: string) => (
+                      <p className="text-sm">{text}</p>
+                    )}
+                  />
                 </IonText>
               </IonItem>
             </Link>

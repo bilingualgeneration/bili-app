@@ -1,3 +1,6 @@
+// TODO: handle if no or incorrect code eg length is entered
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonLabel,
@@ -11,7 +14,9 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonProgressBar,
 } from "@ionic/react";
+import { useParams } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
 
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
@@ -24,6 +29,8 @@ import "./ClassCode.scss";
 import { Input } from "@/components/Input";
 
 export const ClassCode: React.FC = () => {
+  const { code } = useParams<{ code: string }>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const intl = useIntl();
   const schema = z.object({
     code0: z.string(),
@@ -39,35 +46,39 @@ export const ClassCode: React.FC = () => {
   } = useForm<z.infer<typeof schema>>({
     mode: "onChange",
     resolver: zodResolver(schema),
+    defaultValues: {
+      code0: code[0].toUpperCase(),
+      code1: code[1].toUpperCase(),
+      code2: code[2].toUpperCase(),
+      code3: code[3].toUpperCase(),
+    },
   });
   const { data, setData, pushPage } = useSignUpData();
   const [hasError, setHasError] = useState<boolean>(false);
+  const functions = getFunctions();
+  const findByCodeFunction = httpsCallable(functions, "classroom-findByCode");
 
   const inputs = ["code0", "code1", "code2", "code3"];
   const values = watch();
 
-  const onSubmit = handleSubmit((responses) => {
-    setData({
-      ...data,
-      ...responses,
+  const onSubmit = handleSubmit(async (responses) => {
+    const enteredCode = Object.values(responses).join("");
+    setIsLoading(true);
+    const { data: classroomId } = await findByCodeFunction({
+      code: Object.values(responses).join(""),
     });
-    // @ts-ignore todo: better typing
-
-    if (values.code0 && values.code1 && values.code2 && values.code3) {
-      const isValidCode =
-        values.code0 === "1" &&
-        values.code1 === "2" &&
-        values.code2 === "3" &&
-        values.code3 === "4";
-      if (!isValidCode) {
-        setHasError(true);
-      } else {
-        setHasError(false);
-        pushPage("parentAccountCredentials");
-      }
+    if (classroomId === null) {
+      setHasError(true);
     } else {
       setHasError(false);
+      setData({
+        ...data,
+        classroomId,
+        role: "caregiver",
+      });
+      pushPage("languageModeSelect");
     }
+    setIsLoading(false);
   });
 
   const allFieldsFilled =
@@ -91,15 +102,15 @@ export const ClassCode: React.FC = () => {
                   <IonText className="ion-text-center">
                     {/* todo: don't force type cast */}
                     <h2 className="text-3xl semibold color-suelo">
-                      <FormattedMessage
+                      <I18nMessage
                         id="signUpParent.classCode"
-                        defaultMessage="What’s your class code?"
+                        languageSource="unauthed"
                       />
                     </h2>
                     <p className="text-lg" style={{ marginTop: "0.75rem" }}>
-                      <FormattedMessage
+                      <I18nMessage
                         id="signUpParent.classCodeAsk"
-                        defaultMessage="Don’t know your class code? Ask a teacher"
+                        languageSource="unauthed"
                       />
                     </p>
                   </IonText>
@@ -127,9 +138,9 @@ export const ClassCode: React.FC = () => {
                 {hasError && (
                   <IonText color="danger" className="ion-text-center">
                     <p>
-                      <FormattedMessage
+                      <I18nMessage
                         id="signUpParent.classCodeError"
-                        defaultMessage="Wrong class code. Try again!"
+                        languageSource="unauthed"
                       />
                     </p>
                   </IonText>
@@ -146,13 +157,12 @@ export const ClassCode: React.FC = () => {
           type="button"
           onClick={onSubmit}
           data-testid="role-select-continue-button"
-          disabled={!allFieldsFilled}
+          disabled={!allFieldsFilled || isLoading}
         >
-          <FormattedMessage
-            id="common.continue"
-            description="Button label to continue"
-          />
+          <I18nMessage id="common.continue" languageSource="unauthed" />
         </IonButton>
+
+        {isLoading && <IonProgressBar type="indeterminate" />}
       </form>
     </>
   );

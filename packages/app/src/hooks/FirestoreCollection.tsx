@@ -40,6 +40,7 @@ export const FirestoreCollectionProvider: React.FC<
         );
       })
       .catch((error) => {
+        console.log(error);
         setStatus("error");
       });
   }, [collection]);

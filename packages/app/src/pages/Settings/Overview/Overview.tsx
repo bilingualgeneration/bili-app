@@ -169,6 +169,7 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
           "Your Essential Guide to Getting Started with the Bili App.",
         description: "Explore card #1 content",
       }),
+      link: "https://thebiliapp.com/getting-started/",
       tags: [
         {
           color: "#FFAEDC",
@@ -202,6 +203,7 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
           "Learn about what Inclusive Spanish is and why it exists.",
         description: "Explore card #2 content",
       }),
+      link: "https://thebiliapp.com/inclusive-spanish/",
       tags: [
         {
           color: "#D3EAE8",
@@ -235,6 +237,7 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
           "Explore special features that promote authentic language production.",
         description: "Explore card #3 content",
       }),
+      link: "https://thebiliapp.com/7-fun-and-effective-ways-to-teach-spanish-to-your-kids-at-home/",
       tags: [
         {
           color: "#973D78",

@@ -44,7 +44,7 @@ const Word: React.FC<{ word: any }> = ({ word }) => {
       }}
     >
       <div>
-        <img src={image} style={{ height: 120, width: "auto" }} />
+        <img src={image} style={{ height: "6rem", width: "auto" }} />
       </div>
       <IonText>
         <h1 className="text-2xl semibold color-selva">
@@ -81,7 +81,10 @@ export const KeyVocabPage: React.FC<KeyVocabPage> = ({
   return (
     <>
       <IonCol size="6">
-        <IonCard className="drop-shadow story-page">
+        <IonCard
+          className="drop-shadow story-page"
+          style={{ marginLeft: "auto" }}
+        >
           <IonCardContent>
             <Pill
               icon={AgesIcon}

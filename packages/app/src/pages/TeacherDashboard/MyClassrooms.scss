@@ -74,28 +74,6 @@
     margin-left: 0.3125em; /* 5px; */
   }
 
-  /* Responsive styles for tablets */
-  @media only screen and (max-width: 1024px) {
-    .settings-pg1-container {
-      margin: 3% 2%;
-    }
-    .child-profile-heading {
-      font-size: 1.75em;
-      line-height: 1.29;
-    }
-  }
-
-  /* Responsive styles for smaller screens, e.g., mobile */
-  @media only screen and (max-width: 768px) {
-    .settings-pg1-container {
-      margin: 3% 2%;
-    }
-    h1.child-profile-heading {
-      font-size: 1.5em;
-      line-height: 1.33;
-    }
-  }
-
   ion-popover.cs-hover {
     --width: 12.5rem;
   }

@@ -1,7 +1,9 @@
 import { useProfile } from "@/hooks/Profile";
 
 import { Carousel } from "@/components/Carousel";
+import classnames from "classnames";
 import { ContentCard } from "@/components/ContentCard";
+import { ContentLock } from "@/components/ContentLock";
 import {
   IonButton,
   IonCard,
@@ -50,7 +52,7 @@ const WaveIcon: React.FC<WaveIcon> = ({
   const { language } = useLanguageToggle();
   const history = useHistory();
   return (
-    <span className="wave-icon">
+    <span className={classnames("wave-icon", { locked: Boolean(link) })}>
       <div
         onClick={() => {
           if (link) {
@@ -60,6 +62,7 @@ const WaveIcon: React.FC<WaveIcon> = ({
         className={`icon${link ? " has-link" : ""} margin-bottom-1`}
         style={{ backgroundColor }}
       >
+        {!link && <ContentLock borderRadius="50%" />}
         {icon}
       </div>
       <IonText>
@@ -164,7 +167,7 @@ const communityCards = [
     title: "¿Qué Harías?",
     titleEn: "What would you do?",
     cover: "/assets/img/horse_image.png",
-    link: "/would-do-game/intro",
+    link: "/would-do/intro",
   },
   {
     category: "community",
@@ -198,8 +201,8 @@ const Banner: React.FC = () => {
       style={{
         paddingBottom: "2rem",
         paddingTop: "2rem",
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
       }}
     >
       <I18nMessage
@@ -269,7 +272,7 @@ export const StudentDashboard: React.FC = () => {
   return (
     <div id="student-landing-page">
       <Banner />
-      <div style={{ marginLeft: 20, marginRight: 20 }}>
+      <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
         <div className="icons-title margin-top-3">
           <IonText>
             <I18nMessage

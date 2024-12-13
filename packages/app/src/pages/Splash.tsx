@@ -17,20 +17,23 @@ export const Splash: React.FC = () => {
     <>
       <UnauthedHeader showBackButton={false} />
       <div className="content-wrapper">
-        <div style={{ maxWidth: 580, margin: "auto" }}>
+        <div style={{ maxWidth: "40rem", margin: "auto" }}>
           <IonText>
             <h2 className="ion-text-center text-3xl semibold margin-bottom-2">
-              <I18nMessage id="splash.loginTitle" />
+              <I18nMessage id="splash.loginTitle" languageSource="unauthed" />
             </h2>
           </IonText>
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <I18nMessage id="common.haveAccount" />
+                <I18nMessage
+                  id="common.haveAccount"
+                  languageSource="unauthed"
+                />
               </IonCardTitle>
               <Link to="/login" className="no-underline">
                 <IonButton expand="block" shape="round">
-                  <I18nMessage id="common.logIn" />
+                  <I18nMessage id="common.logIn" languageSource="unauthed" />
                 </IonButton>
               </Link>
             </IonCardContent>
@@ -43,8 +46,11 @@ export const Splash: React.FC = () => {
               </IonCardTitle>
               <Link to="/waitlist" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
-                  {/*<I18nMessage id="splash.createAccountButton" />*/}
-                  <I18nMessage id="splash.joinWaitlist" />
+                  {/*<I18nMessage id="splash.createAccountButton" languageSource='unauthed' />*/}
+                  <I18nMessage
+                    id="splash.joinWaitlist"
+                    languageSource="unauthed"
+                  />
                 </IonButton>
               </Link>
             </IonCardContent>
@@ -53,11 +59,14 @@ export const Splash: React.FC = () => {
           <IonCard className="ion-hide">
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
-                <I18nMessage id="splash.classCode" />
+                <I18nMessage id="splash.classCode" languageSource="unauthed" />
               </IonCardTitle>
               <Link to="/sign-up/class-code" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
-                  <I18nMessage id="splash.classCodeButton" />
+                  <I18nMessage
+                    id="splash.classCodeButton"
+                    languageSource="unauthed"
+                  />
                 </IonButton>
               </Link>
             </IonCardContent>

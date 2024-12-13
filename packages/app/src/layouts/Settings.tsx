@@ -3,7 +3,6 @@ import { useProfile } from "@/hooks/Profile";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import { FC, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FooterMenu } from "@/components/FooterMenu";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import { useHistory } from "react-router-dom";
 import {
@@ -37,17 +36,18 @@ export const SettingsLayout: FC<
           <div className="page-wrapper" style={{ background }}>
             <IonGrid className="ion-no-padding inner-scroll">
               <IonRow>
-                <IonCol size="1.85" style={{ minHeight: "100vh" }}>
+                <IonCol size="2" style={{ minHeight: "100vh" }}>
                   <SideMenu />
                 </IonCol>
                 <IonCol size="10">
-                  <SettingsHeader></SettingsHeader>
-                  {children}
+                  <div style={{ backgroundColor: "#f7FAF9" }}>
+                    <SettingsHeader></SettingsHeader>
+                    {children}
+                  </div>
                 </IonCol>
               </IonRow>
             </IonGrid>
           </div>
-          {profile.role === "parent" && <FooterMenu />}
         </IonContent>
       </IonPage>
     </I18nWrapper>

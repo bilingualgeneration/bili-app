@@ -37,12 +37,7 @@ export const ProfileComingSoon: FC = () => {
 
   return (
     <>
-      <PackHeader
-        bannerColor="#FFF8F0"
-        id="studentProfile.comingSoon.title"
-        titleClassName="text-5xl color-suelo"
-        subtitleClassName="text-3xl color-english semibold"
-      />
+      <PackHeader bannerColor="#FFF8F0" id="studentProfile.comingSoon.title" />
       <div id="personal-student-profile">
         <div className="content-container">
           <div className="heading-container">

@@ -1,5 +1,4 @@
-.content-card,
-.content-lock {
+.content-card {
   height: 17rem;
   width: 20rem;
   border-radius: 0.75rem;
@@ -33,21 +32,6 @@
     z-index: 2;
   }
 
-  .content-lock {
-    background-color: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > * {
-      height: 4.5rem;
-    }
-  }
-
   .content-card-pill {
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
@@ -68,13 +52,5 @@
     content: "";
     z-index: 1;
     border-radius: 0.75rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .content-card,
-  .content-lock {
-    height: 9.0625rem;
-    width: 14.375;
   }
 }

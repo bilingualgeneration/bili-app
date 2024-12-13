@@ -32,7 +32,10 @@ export const StoryPage: React.FC<
   return (
     <>
       <IonCol size="6">
-        <IonCard className="drop-shadow story-page">
+        <IonCard
+          className="drop-shadow story-page"
+          style={{ marginLeft: "auto" }}
+        >
           <IonCardContent
             className="ion-text-center ion-no-padding"
             style={{

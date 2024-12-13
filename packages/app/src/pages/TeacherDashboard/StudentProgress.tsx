@@ -295,7 +295,7 @@ export const StudentProgress: React.FC = () => {
                         <p className="text-lg color-barro">{"Not active"}</p>
                       </IonText>
                     </IonCol>
-                    <IonCol>
+                    <IonCol class="ion-hide">
                       <div className="resend-invite-buttons">
                         <IonButton>
                           <IonIcon icon={Email}></IonIcon>

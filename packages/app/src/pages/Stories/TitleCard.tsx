@@ -38,6 +38,7 @@ export const TitleCard = ({
               className="drop-shadow story-page story-title-card"
               style={{
                 backgroundImage: `url(${cover_image.url})`,
+                margin: "auto",
               }}
             >
               {is_translanguaged && (

@@ -2211,6 +2211,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@capacitor/browser@npm:^6.0.4":
+  version: 6.0.4
+  resolution: "@capacitor/browser@npm:6.0.4"
+  peerDependencies:
+    "@capacitor/core": ^6.0.0
+  checksum: 34ff40321f659e207e66b39951f4b25f3958d58f0e0abe87968a4812e10bd7797fd2f054c971ac0a69ef0655dbcfc3b01524fe7c79fe172841b054ff5a18552c
+  languageName: node
+  linkType: hard
+
 "@capacitor/cli@npm:5.4.0":
   version: 5.4.0
   resolution: "@capacitor/cli@npm:5.4.0"
@@ -3660,6 +3669,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ionic/core@npm:8.4.1":
+  version: 8.4.1
+  resolution: "@ionic/core@npm:8.4.1"
+  dependencies:
+    "@stencil/core": "npm:4.20.0"
+    ionicons: "npm:^7.2.2"
+    tslib: "npm:^2.1.0"
+  checksum: 993dede92827565f77743316cb25cfb733f43147bf8e6ecd8e6a8f8edde7a3af802c06d6ea6ad36104ad4ca214947c06e36013132442a0e0c9c69f3bafe8c366
+  languageName: node
+  linkType: hard
+
 "@ionic/react-router@npm:^7.0.0":
   version: 7.5.4
   resolution: "@ionic/react-router@npm:7.5.4"
@@ -3672,6 +3692,21 @@ __metadata:
     react-router: ^5.0.1
     react-router-dom: ^5.0.1
   checksum: c8b926fc642c03654bb756135755bac76e3d0b4fb7ccdf3ed1824072e571c4d1546ecab9eedc914479013332cf61ea4f226cc6d4411a8b417c36cbadf6ada4b2
+  languageName: node
+  linkType: hard
+
+"@ionic/react-router@npm:^8.4.1":
+  version: 8.4.1
+  resolution: "@ionic/react-router@npm:8.4.1"
+  dependencies:
+    "@ionic/react": "npm:8.4.1"
+    tslib: "npm:*"
+  peerDependencies:
+    react: ">=16.8.6"
+    react-dom: ">=16.8.6"
+    react-router: ^5.0.1
+    react-router-dom: ^5.0.1
+  checksum: d5a842cd955d5a2d807d361573793cb9fb6dc030409e149cd07d4bd408694e3f4f736a9a674386300839dba9ed50172254a24e0ccda060146225bcd0fd6c7590
   languageName: node
   linkType: hard
 
@@ -3698,6 +3733,20 @@ __metadata:
     react: ">=16.8.6"
     react-dom: ">=16.8.6"
   checksum: d797e78a543371b3177917cd468af471fba172d42b79bee19c72794cb807b8baf0314ada76b6fb6ad28838a15e8cf48b3c202e7e4308d7981155affad4db73df
+  languageName: node
+  linkType: hard
+
+"@ionic/react@npm:8.4.1, @ionic/react@npm:^8.4.1":
+  version: 8.4.1
+  resolution: "@ionic/react@npm:8.4.1"
+  dependencies:
+    "@ionic/core": "npm:8.4.1"
+    ionicons: "npm:^7.0.0"
+    tslib: "npm:*"
+  peerDependencies:
+    react: ">=16.8.6"
+    react-dom: ">=16.8.6"
+  checksum: 98e2e51e5fc57fc5facaed7edb155939adce24e4dc4cfa17f0f4045d085167ba1115e0f0cf100f354365e77a3157e1248c40614dfaf51b0839da674434847022
   languageName: node
   linkType: hard
 
@@ -5332,6 +5381,15 @@ __metadata:
     "@smithy/util-buffer-from": "npm:^2.0.0"
     tslib: "npm:^2.5.0"
   checksum: 99ee9bad29535a66ba3eafeae4a1c927afe1487addd9b24b2a2ca992778b87346981b97f9474c9197273b9d863b393d59d8028054085d4d45333680f15e8c9b3
+  languageName: node
+  linkType: hard
+
+"@stencil/core@npm:4.20.0":
+  version: 4.20.0
+  resolution: "@stencil/core@npm:4.20.0"
+  bin:
+    stencil: bin/stencil
+  checksum: 5757cf6f2cf7028b335e52ff6f1eb4c75920d8e07a7dccc74c57d27ed2bf1a0ba77af832a7d4fc86cfc75bda42f4090c875535a83b743f6c2fb781efa3bac2ea
   languageName: node
   linkType: hard
 
@@ -8493,6 +8551,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bili@workspace:."
   dependencies:
+    "@capacitor/browser": "npm:^6.0.4"
+    "@ionic/react": "npm:^8.4.1"
+    "@ionic/react-router": "npm:^8.4.1"
     husky: "npm:^8.0.0"
     lint-staged: "npm:^15.1.0"
     yaml: "npm:^2.6.0"
@@ -13294,6 +13355,15 @@ __metadata:
   dependencies:
     "@stencil/core": "npm:^4.0.3"
   checksum: a134cb0978dd15146a0f02f5054b60468563d881bdc0417a88d1a1d462b3178f0923d7199dfa4b675d48835af165ba3d6eb64adcd897e898c4982ced407daaa4
+  languageName: node
+  linkType: hard
+
+"ionicons@npm:^7.2.2":
+  version: 7.4.0
+  resolution: "ionicons@npm:7.4.0"
+  dependencies:
+    "@stencil/core": "npm:^4.0.3"
+  checksum: 0f0e9b5a390514e864f098fbc6b69823fa2cde1758d0e43ca6a9a3b19d3a15b595c913e5a4445945bbbf779454c710fd101edb00f5f1a658dafd9073cc10b0b6
   languageName: node
   linkType: hard
 

@@ -1,15 +1,20 @@
-import { IonButton, IonCheckbox, IonLabel, IonText } from "@ionic/react";
-
+import { ErrorMessages } from "@/components/ErrorMessages";
+import {
+  getFunctions,
+  httpsCallable,
+  HttpsCallableResult,
+} from "firebase/functions";
+import { I18nMessage } from "@/components/I18nMessage";
 import { Input } from "@/components/Input";
-import { useForm, SubmitHandler } from "react-hook-form";
-
+import { IonButton, IonCheckbox, IonLabel, IonText } from "@ionic/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useI18n } from "@/hooks/I18n";
+import { useSignUpData } from "@/pages/SignUp/SignUpContext";
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 
 import "./AccountCredentials.scss";
-import { useIntl, FormattedMessage } from "react-intl";
-import { useState } from "react";
 
 interface FormInputs {
   name: string;
@@ -19,29 +24,44 @@ interface FormInputs {
 
 // todo: expand Input to include checkbox
 
-export const ParentAccountCredentials: React.FC = () => {
-  const intl = useIntl();
+export const AccountCredentials: React.FC = () => {
+  const { getText } = useI18n();
   const { data, setData, pushPage } = useSignUpData();
   const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
     password: z.string().min(8),
-    //tos: z.literal<boolean>(true),
-    //marketingUpdates: z.boolean()
   });
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
     mode: "onBlur",
     resolver: zodResolver(schema),
   });
-
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [errors, setErrors] = useState<string[] | null>(null);
+  const functions = getFunctions();
+  const findStudentsFunction = httpsCallable(
+    functions,
+    "caregiver-findStudents",
+  );
 
-  const onSubmit = handleSubmit((response) => {
+  const onSubmit = handleSubmit(async (response) => {
+    if (data.classroomId !== undefined) {
+      // user is most likely a caregiver and is trying to sign up with a code
+      const { data: students } = await findStudentsFunction({
+        classroomId: data.classroomId,
+        email: response.email,
+      });
+      // @ts-ignore
+      if (students.length === 0) {
+        setErrors(["no-matching-students"]);
+        return;
+      }
+    }
     setData({
       ...data,
       ...response,
@@ -53,11 +73,7 @@ export const ParentAccountCredentials: React.FC = () => {
     <>
       <form onSubmit={onSubmit}>
         <Input
-          label={intl.formatMessage({
-            id: "common.fullName",
-            defaultMessage: "Your full name",
-            description: "Input label for user's full name",
-          })}
+          label={getText("common.fullName", 1, "unauthed")}
           labelPlacement="above"
           required={true}
           name="name"
@@ -70,11 +86,7 @@ export const ParentAccountCredentials: React.FC = () => {
 
         <div className="ion-margin-top">
           <Input
-            label={intl.formatMessage({
-              id: "common.email",
-              defaultMessage: "Your email",
-              description: "Input label for email",
-            })}
+            label={getText("common.email", 1, "unauthed")}
             labelPlacement="above"
             required={true}
             name="email"
@@ -88,11 +100,7 @@ export const ParentAccountCredentials: React.FC = () => {
 
         <div className="ion-margin-top">
           <Input
-            label={intl.formatMessage({
-              id: "common.password",
-              defaultMessage: "Password",
-              description: "Input label for user's password",
-            })}
+            label={getText("common.password", 1, "unauthed")}
             labelPlacement="above"
             required={true}
             name="password"
@@ -113,12 +121,7 @@ export const ParentAccountCredentials: React.FC = () => {
           />
           <IonText class="ion-text-wrap" style={{ marginLeft: "0.625rem" }}>
             <p>
-              <FormattedMessage
-                id="common.termsAgree"
-                defaultMessage="I agree to the "
-                description="Terms of Service where users can check off if they agree while in sign up process."
-              />
-
+              <I18nMessage id="common.termsAgree" languageSource="unauthed" />
               <a
                 href="https://thebiliapp.com/terms/"
                 style={{ color: "inherit", textDecoration: "inherit" }}
@@ -127,23 +130,15 @@ export const ParentAccountCredentials: React.FC = () => {
               >
                 <IonText
                   color="primary"
-                  style={{ fontWeight: "bold", marginRight: 8 }}
+                  style={{ fontWeight: "bold", marginRight: "0.25rem" }}
                 >
-                  <FormattedMessage
-                    id="common.terms"
-                    defaultMessage="Terms of Service."
-                    description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
-                  />
+                  <I18nMessage id="common.terms" languageSource="unauthed" />
                 </IonText>
               </a>
             </p>
 
             <p>
-              <FormattedMessage
-                id="common.termsAgree2"
-                defaultMessage="I have read and understand "
-              />
-
+              <I18nMessage id="common.termsAgree2" languageSource="unauthed" />
               <a
                 href="https://thebiliapp.com/privacy-policy/"
                 style={{ color: "inherit", textDecoration: "inherit" }}
@@ -152,13 +147,9 @@ export const ParentAccountCredentials: React.FC = () => {
               >
                 <IonText
                   color="primary"
-                  style={{ fontWeight: "bold", marginLeft: "6pt" }}
+                  style={{ fontWeight: "bold", marginLeft: "0.25rem" }}
                 >
-                  <FormattedMessage
-                    id="common.terms2"
-                    defaultMessage="Privacy Policy."
-                    description="Terms of Service link for users to have option to click and read before agreeing to in sign up process."
-                  />
+                  <I18nMessage id="common.terms2" languageSource="unauthed" />
                 </IonText>
               </a>
             </p>
@@ -173,30 +164,20 @@ export const ParentAccountCredentials: React.FC = () => {
             shape="round"
             type="submit"
           >
-            <FormattedMessage
-              id="common.continue"
-              defaultMessage="Continue"
-              description="Button label to continue"
-            />
+            <I18nMessage id="common.continue" languageSource="unauthed" />
           </IonButton>
         </div>
 
+        <ErrorMessages errors={errors} languageSource="unauthed" />
+
         <div className="ion-text-center ion-margin-top">
           <IonText color="medium">
-            <FormattedMessage
-              id="common.haveAccount"
-              defaultMessage="Already have an account?"
-              description="link text if user already has an account"
-            />{" "}
+            <I18nMessage id="common.haveAccount" languageSource="unauthed" />{" "}
             <IonText>
               {" "}
               <a href="/login">
-                <FormattedMessage
-                  id="common.logIn"
-                  defaultMessage="Log in"
-                  description="label to log in"
-                />
-              </a>{" "}
+                <I18nMessage id="common.logIn" languageSource="unauthed" />
+              </a>
             </IonText>
           </IonText>
         </div>

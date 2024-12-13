@@ -1,23 +1,20 @@
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
-
+import { I18nMessage } from "@/components/I18nMessage";
 import { IonButton, IonLabel, IonItem, IonInput, IonText } from "@ionic/react";
-import { useIntl, FormattedMessage } from "react-intl";
-
+import { RadioCard } from "@/components/RadioCard";
+import { useForm } from "react-hook-form";
+import { useI18n } from "@/hooks/I18n";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
 import HouseIcon from "@/assets/icons/house.svg?react";
 import SchoolIcon from "@/assets/icons/school.svg?react";
 
 import "./RoleSelect.scss";
-import { string } from "zod";
-import { CollectionReference } from "firebase/firestore";
-import { RadioCard } from "@/components/RadioCard";
 
 export const RoleSelect: React.FC = () => {
-  const intl = useIntl();
+  const { getText } = useI18n();
   const schema = z.object({
     role: z.string().min(1), //nonempty was deprecated
   });
@@ -34,16 +31,8 @@ export const RoleSelect: React.FC = () => {
     component: (
       <div>
         <RadioCard
-          title={intl.formatMessage({
-            id: "signUp.teacher",
-            defaultMessage: "Teacher",
-            description: "title for Teacher select card",
-          })}
-          content={intl.formatMessage({
-            id: "signUp.teacher2",
-            defaultMessage: "I want to use this app with my students",
-            description: "description for Teacher select card",
-          })}
+          title={getText("signUp.teacher", 1, "unauthed")}
+          content={getText("signUp.teacher2", 1, "unauthed")}
           icon={<SchoolIcon />}
           iconBackgroundColor="var(--Cielo-Cielo)"
         />
@@ -56,22 +45,14 @@ export const RoleSelect: React.FC = () => {
     component: (
       <div>
         <RadioCard
-          title={intl.formatMessage({
-            id: "signUp.parent",
-            defaultMessage: "Parent",
-            description: "title for Parent select card",
-          })}
-          content={intl.formatMessage({
-            id: "signUp.parent2",
-            defaultMessage: "I want to use this app with my child(ren)",
-            description: "description for Parent select card",
-          })}
+          title={getText("signUp.parent", 1, "unauthed")}
+          content={getText("signUp.parent2", 1, "unauthed")}
           icon={<HouseIcon />}
           iconBackgroundColor="var(--Desierto-Highest)"
         />
       </div>
     ),
-    value: "parent",
+    value: "caregiver",
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -86,7 +67,7 @@ export const RoleSelect: React.FC = () => {
       //swiper.slideTo(teacherSlide);
     }
     // @ts-ignore todo: better typing
-    if (responses.role === "parent") {
+    if (responses.role === "caregiver") {
       pushPage("childProfile");
       //swiper.slideTo(parentSlide);
     }
@@ -97,11 +78,7 @@ export const RoleSelect: React.FC = () => {
       <form onSubmit={onSubmit} className="radio-button-select">
         <IonText className="ion-text-center">
           <h2 className="text-3xl semibold color-suelo">
-            <FormattedMessage
-              id="signUp.describe"
-              defaultMessage="Which best describes you?"
-              description="Title of page where user is presented with button options where they can choose if they are a teacher or parent/caregiver."
-            />
+            <I18nMessage id="signUp.describe" languageSource="unauthed" />
           </h2>
         </IonText>
         <ExtendedRadio
@@ -117,11 +94,7 @@ export const RoleSelect: React.FC = () => {
           data-testid="role-select-continue-button"
           disabled={!isValid}
         >
-          <FormattedMessage
-            id="common.continue"
-            defaultMessage="Continue"
-            description="Button label to continue"
-          />
+          <I18nMessage id="common.continue" languageSource="unauthed" />
         </IonButton>
       </form>
     </>

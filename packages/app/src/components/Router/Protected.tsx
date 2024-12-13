@@ -2,7 +2,6 @@ import Reports from "@/pages/Reports"; // debug
 
 import { AuthedLayout } from "@/layouts/Authed";
 import { HeaderFooter } from "@/components/HeaderFooter/HeaderFooter";
-import { MinimalHeader } from "@/components/MinimalHeader";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import { useProfile } from "@/hooks/Profile";
@@ -15,7 +14,6 @@ import {
   ClassPreferences,
   ClassProgress,
   MyClassrooms,
-  StudentSelect,
   StudentProgress,
 } from "@/pages/TeacherDashboard";
 import {
@@ -47,9 +45,17 @@ import {
   IntruderIntro,
   IntruderGameLoader,
 } from "@/pages/Intruder";
+import {
+  About,
+  Overview,
+  Profile,
+  Preferences,
+  Progress,
+} from "@/pages/Settings";
 import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
 import { Play } from "@/pages/Play";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
+import { SettingsLayout } from "@/layouts/Settings";
 import { Stories, StoriesLandingPage, StoryBuilder } from "@/pages/Stories";
 import {
   StoryFactoryIntro,
@@ -57,8 +63,7 @@ import {
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
-// unsure what this is
-//import { StudentLoader } from "@/pages/Caregiver";
+import { StudentSelect } from "@/pages/StudentSelect";
 import {
   TellMeAboutGame,
   TellMeAboutIntro,
@@ -178,9 +183,32 @@ export const ProtectedRoutes: React.FC = () => {
                         path="/classrooms/view/:classroomId/preferences"
                         component={ClassPreferences}
                       />
+                      <Route
+                        exact
+                        path="/classrooms/view/:classroomId/about"
+                        component={About}
+                      />
                     </ClassroomDashboardLayout>
                   )}
                 />
+              </AdultCheck>
+            )}
+          />
+          <Route
+            path="/settings"
+            render={() => (
+              <AdultCheck>
+                <SettingsLayout>
+                  <Route exact path="/settings/about" component={About} />
+                  <Route exact path="/settings/overview" component={Overview} />
+                  <Route exact path="/settings/profile" component={Profile} />
+                  <Route
+                    exact
+                    path="/settings/preferences"
+                    component={Preferences}
+                  />
+                  <Route exact path="/settings/progress" component={Progress} />
+                </SettingsLayout>
               </AdultCheck>
             )}
           />
@@ -197,11 +225,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/affirmations/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <AffirmationsGame />
-              </MinimalHeader>
-            )}
+            component={AffirmationsGame}
           />
           <Route exact path="/community" component={Community} />
           <Route
@@ -244,11 +268,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/intruder-game/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <IntruderGameLoader />
-              </MinimalHeader>
-            )}
+            component={IntruderGameLoader}
           />
           <Route
             exact
@@ -267,15 +287,7 @@ export const ProtectedRoutes: React.FC = () => {
             component={StudentSelect}
           />
           <Route exact path="/stories" component={StoriesLandingPage} />
-          <Route
-            exact
-            path="/story/play/:uuid"
-            render={() => (
-              <MinimalHeader>
-                <Stories />
-              </MinimalHeader>
-            )}
-          />
+          <Route exact path="/story/play/:uuid" component={Stories} />
           <Route
             exact
             path="/story-factory-game/intro"
@@ -289,11 +301,7 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/story-factory-game/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <StoryFactoryPlay />
-              </MinimalHeader>
-            )}
+            component={StoryFactoryPlay}
           />
           <Route
             exact
@@ -313,39 +321,22 @@ export const ProtectedRoutes: React.FC = () => {
           <Route
             exact
             path="/tell-me-about/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <TellMeAboutGame />
-              </MinimalHeader>
-            )}
+            component={TellMeAboutGame}
           />
           <Route exact path="/story-builder" component={StoryBuilder} />
           <Route exact path="/student-dashboard" component={StudentDashboard} />
           <Route exact path="/wellness" component={Wellness} />
-          <Route exact path="/would-do-game/intro" component={WouldDoIntro} />
-          <Route exact path="/would-do-game/select" component={WouldDoSelect} />
-          <Route
-            exact
-            path="/would-do-game/play/:pack_id"
-            render={() => (
-              <MinimalHeader>
-                <WouldDoGame />
-              </MinimalHeader>
-            )}
-          />
+          <Route exact path="/would-do/intro" component={WouldDoIntro} />
+          <Route exact path="/would-do/select" component={WouldDoSelect} />
+          <Route exact path="/would-do/play/:pack_id" component={WouldDoGame} />
           <Route exact path="/reports" component={Reports} /> {/* debug */}
-          {/*
-	    TODO: figure this out
           <Route
             exact
-            path="/caregiver/student-loader"
-            render={() => (
-                  <StudentLoader />
-            )}
+            path="/caregiver/student-select"
+            render={() => <StudentSelect />}
           />
-	  */}
           {profile.role === "caregiver" && (
-            <Redirect to="/caregiver/student-loader" />
+            <Redirect to="/caregiver/student-select" />
           )}
           {profile.role === "teacher" && <Redirect to="/classrooms" />}
         </Switch>

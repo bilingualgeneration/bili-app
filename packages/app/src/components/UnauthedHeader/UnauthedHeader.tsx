@@ -22,7 +22,7 @@ export const UnauthedHeader: FC<
   }>
 > = ({ backButtonOnClick = () => {}, children, showBackButton = true }) => {
   return (
-    <IonGrid style={{ margin: "1rem 2rem 4rem 2rem" }}>
+    <IonGrid>
       <IonRow class="ion-align-items-center">
         <IonCol>
           {showBackButton && (

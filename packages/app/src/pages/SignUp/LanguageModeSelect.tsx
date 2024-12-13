@@ -1,3 +1,5 @@
+import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCard,
@@ -9,18 +11,17 @@ import {
   IonInput,
   IonText,
 } from "@ionic/react";
-import { useIntl, FormattedMessage } from "react-intl";
+import { RadioCard } from "../../components/RadioCard";
+import { useForm } from "react-hook-form";
+import { useI18n } from "@/hooks/I18n";
+import { useSignUpData } from "@/pages/SignUp/SignUpContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignUpData } from "@/pages/SignUp/SignUpContext";
-import { useForm } from "react-hook-form";
-import { RadioCard } from "../../components/RadioCard";
-import { ExtendedRadioOption, ExtendedRadio } from "@/components/ExtendedRadio";
 
 export const LanguageModeSelect: React.FC = () => {
-  const intl = useIntl();
+  const { getText } = useI18n();
   const schema = z.object({
-    isImmersive: z.enum(["en", "es", "esen"]),
+    studentLanguage: z.enum(["en", "es", "es.en"]),
   });
   const {
     control,
@@ -52,15 +53,8 @@ export const LanguageModeSelect: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.engImmersionTitle",
-            defaultMessage: "English Immersion",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.engImmersion",
-            defaultMessage:
-              "Choose this setting if you want your child to learn all content and activities in the English language.",
-          })}
+          title={getText("languageMode.engImmersionTitle", 1, "unauthed")}
+          content={getText("languageMode.engImmersion", 1, "unauthed")}
           iconBackgroundColor="#0045A1"
         />
       </div>
@@ -88,17 +82,8 @@ export const LanguageModeSelect: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.immersionTitle",
-            defaultMessage: "Spanish Immersion",
-            description: "Title of the Spanish immersion mode option",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.immersion",
-            defaultMessage:
-              "Choose this setting if you want your child to learn all content and activities in the Spanish language.",
-            description: "Description of the Spanish immersion option",
-          })}
+          title={getText("languageMode.immersionTitle", 1, "unauthed")}
+          content={getText("languageMode.immersion", 1, "unauthed")}
           iconBackgroundColor="#F0091B"
         />
       </div>
@@ -128,22 +113,13 @@ export const LanguageModeSelect: React.FC = () => {
               ES
             </div>
           }
-          title={intl.formatMessage({
-            id: "languageMode.bilingualTitle",
-            defaultMessage: "Bilingual",
-            description: "Title of the Bilingual mode option",
-          })}
-          content={intl.formatMessage({
-            id: "languageMode.bilingual",
-            defaultMessage:
-              "Choose this setting if you want your child to learn Spanish with English supports and translations.",
-            description: "Description of the Bilingual mode option",
-          })}
+          title={getText("languageMode.bilingualTitle", 1, "unauthed")}
+          content={getText("languageMode.bilingual", 1, "unauthed")}
           iconBackgroundColor="#006A67"
         />
       </div>
     ),
-    value: "esen",
+    value: "es.en",
   };
 
   const onSubmit = handleSubmit((responses) => {
@@ -153,14 +129,7 @@ export const LanguageModeSelect: React.FC = () => {
       ...data,
       ...responses,
     });
-    // @ts-ignore todo: better typing
-    if (data.role === "teacher") {
-      pushPage("teacherAccountCredentials");
-    }
-    // @ts-ignore todo: better typing
-    if (data.role === "parent") {
-      pushPage("parentAccountCredentials");
-    }
+    pushPage("accountCredentials");
   });
 
   return (
@@ -168,16 +137,12 @@ export const LanguageModeSelect: React.FC = () => {
       <form className="radio-button-select">
         <IonText className="ion-text-center">
           <h2 className="text-3xl semibold color-suelo">
-            <FormattedMessage
-              id="languageMode.settings"
-              defaultMessage="Choose your settings"
-              description="User can choose if they want bilingual settings or English assisted settings"
-            />
+            <I18nMessage id="languageMode.settings" languageSource="unauthed" />
           </h2>
         </IonText>
         <ExtendedRadio
           control={control}
-          name="isImmersive"
+          name="studentLanguage"
           options={[billingualOption, spanishOption, englishOption]}
         />
         <IonButton
@@ -187,11 +152,7 @@ export const LanguageModeSelect: React.FC = () => {
           type="button"
           onClick={onSubmit}
         >
-          <FormattedMessage
-            id="common.continue"
-            defaultMessage="Continue"
-            description="Button label to continue"
-          />
+          <I18nMessage id="common.continue" languageSource="unauthed" />
         </IonButton>
       </form>
     </>

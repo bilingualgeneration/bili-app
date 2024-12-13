@@ -1,5 +1,6 @@
 import React from "react";
 import { IonCard, IonChip, IonText } from "@ionic/react";
+import { Browser } from "@capacitor/browser";
 import "./SettingsExploreCard.scss";
 
 interface SettingsExploreCardProps {
@@ -7,6 +8,7 @@ interface SettingsExploreCardProps {
   backgroundColor: string;
   title: string;
   subtitle: string;
+  link?: string; // url
   tags?: {
     color: string;
     text: string;
@@ -18,13 +20,30 @@ interface SettingsExploreCardProps {
 export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
   backgroundImage,
   backgroundColor,
+  title,
   subtitle,
+  link,
   tags = [],
   textColor = "white", // Default to white if textColor is not provided
-  title,
 }) => {
+  const handleCardClick = async () => {
+    if (link) {
+      try {
+        await Browser.open({ url: link });
+      } catch (error) {
+        console.error("Failed to open browser:", error);
+      }
+    } else {
+      console.warn("No link provided for this card");
+    }
+  };
+
   return (
-    <IonCard className="explore-card" style={{ backgroundColor }}>
+    <IonCard
+      className="explore-card"
+      style={{ backgroundColor }}
+      onClick={handleCardClick}
+    >
       <div
         className="explore-card-overlay"
         style={{ backgroundImage: `url(${backgroundImage})` }}

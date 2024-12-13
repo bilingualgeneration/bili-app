@@ -1,12 +1,11 @@
-import { FC } from "react";
+import { CommunityHeader } from "@/components/CommunityHeader";
 import { IonCard, IonCardContent, IonText } from "@ionic/react";
 
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
-import { CommunityHeader } from "@/components/CommunityHeader";
 import { Link } from "react-router-dom";
-import Lock from "@/assets/icons/lock.svg?react";
+import { ContentLock } from "@/components/ContentLock";
 
 import don_lola from "@/assets/img/don_lola.png";
 import nuriah from "@/assets/img/nuriah.png";
@@ -14,7 +13,13 @@ import tunita from "@/assets/img/tunita.png";
 
 import "./Community.scss";
 
-const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
+const Card: React.FC<any> = ({
+  image,
+  link,
+  locked,
+  translatedTitle,
+  title,
+}) => {
   const { language } = useLanguageToggle();
   const content = (
     <>
@@ -31,11 +36,7 @@ const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
   );
   return (
     <div className="community-card">
-      {locked && (
-        <div className="content-lock">
-          <Lock />
-        </div>
-      )}
+      {locked && <ContentLock borderRadius="2rem" />}
       {link && (
         <Link to={link} className="no-text-decoration">
           {content}
@@ -46,7 +47,7 @@ const Card: FC<any> = ({ image, link, locked, translatedTitle, title }) => {
   );
 };
 
-export const Community: FC = () => {
+export const Community: React.FC = () => {
   const intl = useIntl();
   const cards = [
     {
@@ -66,7 +67,7 @@ export const Community: FC = () => {
         description: "title for what would do",
       }),
       title: "What would you do?",
-      link: "/would-do-game/intro",
+      link: "/would-do/intro",
       image: tunita,
       locked: false,
     },

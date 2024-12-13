@@ -104,7 +104,7 @@ export type IonInputProps = {
     | "text"
     | undefined
     | "url";
-  label: string;
+  label: string | null | undefined;
   labelPlacement: "above" | "fixed" | "floating" | "stacked" | undefined;
   legacy: boolean | undefined;
   max: number | string | undefined;
