@@ -1,7 +1,14 @@
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { I18nMessage } from "@/components/I18nMessage";
 import { RadioCard } from "@/components/RadioCard";
-import { IonButton, IonCard, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonCol,
+  IonGrid,
+  IonRow,
+  IonText,
+} from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -9,43 +16,70 @@ import "./Community.scss";
 import { useI18n } from "@/hooks/I18n";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/hooks/Language";
+import audio_no_en from "@/assets/audio/FlowerCongrats/no_en.mp3";
+import audio_yes_en from "@/assets/audio/FlowerCongrats/yes.mp3";
+import audio_no_es from "@/assets/audio/FlowerCongrats/no_es.mp3";
+import audio_yes_es from "@/assets/audio/FlowerCongrats/sí.mp3";
+import audio_idk_en from "@/assets/audio/FlowerCongrats/idk.mp3";
+import audio_idk_es from "@/assets/audio/FlowerCongrats/no_lo_sé.mp3";
+import audio_en from "@/assets/audio/FlowerCongrats/what_do_you_think.mp3";
+import audio_es from "@/assets/audio/FlowerCongrats/qué_opinas.mp3";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
 
-const questions = [
-  {
-    es: "Me gusta ir a la escuela todos los días.",
-    en: "I like going to school every day.",
+const audios: Record<string, Record<string, string>> = {
+  yes: {
+    en: audio_yes_en,
+    es: audio_yes_es,
   },
-  {
-    es: "Sé pedir ayuda.",
-    en: "I know how to ask for help.",
+  no: {
+    en: audio_no_en,
+    es: audio_no_es,
   },
-  {
-    es: "Puedo hacer cosas difíciles o desafiantes.",
-    en: "I can do hard or challenging things.",
+  other: {
+    en: audio_idk_en,
+    es: audio_idk_es,
   },
-  {
-    es: "Me gusta como soy.",
-    en: "I like the way I am.",
-  },
-];
-
-const getNextQuestionIndex = (currentIndex: number, total: number): number => {
-  return (currentIndex + 1) % total;
 };
 
 export const ThoughtsFeedback: React.FC = () => {
   const { language } = useLanguage();
   const history = useHistory();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const { getText } = useI18n();
+  const { addAudio, clearAudio } = useAudioManager();
+  const { populateText } = useLanguage();
+  //const a = populateText(audios, "language", "url");
   const {
     control,
     formState: { isValid },
     handleSubmit,
   } = useForm();
+
+  let headerAudios: any[] = [];
+  switch (language) {
+    case "es":
+      headerAudios = [audio_es];
+      break;
+    case "en":
+      headerAudios = [audio_en];
+      break;
+    case "es.en":
+      headerAudios = [audio_es, audio_en];
+      break;
+    case "en.es":
+      headerAudios = [audio_en, audio_es];
+      break;
+  }
+
+  useEffect(() => {
+    addAudio(headerAudios);
+    return () => {
+      clearAudio();
+    };
+  }, []);
+
   const yesOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="4">
         <RadioCard
           title={getText("common.yes", 1, "authed")}
           subTitle={getText("common.yes", 2, "authed")}
@@ -59,15 +93,21 @@ export const ThoughtsFeedback: React.FC = () => {
           backgroundColor="#FFF"
           maxHeight="5.25rem"
           className="padding-left-9 padding-right-9"
+          onAudioPlay={() => {
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["yes"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "yes",
   };
 
   const noOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="4">
         <RadioCard
           title={getText("common.no", 1, "authed")}
           subTitle={getText("common.no", 2, "authed")}
@@ -81,17 +121,24 @@ export const ThoughtsFeedback: React.FC = () => {
           backgroundColor="#FFF"
           maxHeight="5.25rem"
           className="padding-left-9 padding-right-9"
+          onAudioPlay={() => {
+            // @ts-ignore
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["no"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "no",
   };
   const otherOption: ExtendedRadioOption = {
     component: (
-      <div>
+      <IonCol size="4">
         <RadioCard
-          title={getText("common.dontKnow", 1, "authed")}
-          subTitle={getText("common.dontKnow", 2, "authed")}
+          title={getText("common.dontKnow")}
+          subTitle={getText("common.dontKnow", 2)}
           titleColor="color-suelo"
           subTitleColor="color-grey"
           subTitleFontSize="lg"
@@ -102,38 +149,22 @@ export const ThoughtsFeedback: React.FC = () => {
           backgroundColor="#FFF"
           maxHeight="5.25rem"
           className="padding-left-7 padding-right-7"
+          onAudioPlay={() => {
+            // @ts-ignore
+            const audio: string[] = language
+              .split(".")
+              .map((l: string) => audios["other"][l]);
+            addAudio(audio);
+          }}
         />
-      </div>
+      </IonCol>
     ),
     value: "other",
   };
 
-  //   TEMPORARY SOLUTION FOR HARDCODED QUESTIONS!!!
-
-  useEffect(() => {
-    const savedIndex = parseInt(
-      localStorage.getItem("currentQuestionIndex") || "0",
-      10,
-    );
-    setCurrentQuestionIndex(savedIndex);
-  }, []);
-
-  const handleNextQuestion = () => {
-    // Update to the next question and save to local storage
-    const nextIndex = getNextQuestionIndex(
-      currentQuestionIndex,
-      questions.length,
-    );
-    setCurrentQuestionIndex(nextIndex);
-    localStorage.setItem("currentQuestionIndex", nextIndex.toString());
-  };
-
   const onSubmit = handleSubmit((data) => {
-    handleNextQuestion();
     history.push("/community/congrats");
   });
-
-  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <>
@@ -160,22 +191,25 @@ export const ThoughtsFeedback: React.FC = () => {
           >
             <IonText>
               <h1 className="text-3xl semibold color-suelo">
-                {language === "en" ? currentQuestion.en : currentQuestion.es}
+                {language === "en"
+                  ? "I like going to school every day."
+                  : "Me gusta ir a la escuela todos los días."}
               </h1>
               {(language === "es.en" || language === "en.es") && (
-                <p className="text-2xl color-grey">{currentQuestion.en}</p>
+                <p className="text-2xl color-grey">
+                  {"Me gusta ir a la escuela todos los días."}
+                </p>
               )}
             </IonText>
           </IonCard>
           <ExtendedRadio
             control={control}
             name="feelingsFeedback"
-            displayCardsInRow={true}
-            isMaxWidthNeeded={true}
+            displayCardsInRow={false}
+            isMaxWidthNeeded={false}
             maxWidth="25rem"
             options={[yesOption, noOption, otherOption]}
           />
-
           <IonButton
             data-testid="addclassroom-notification-method-continue-button"
             disabled={!isValid}
@@ -202,3 +236,10 @@ export const ThoughtsFeedback: React.FC = () => {
     </>
   );
 };
+function addAudio(arg0: never[]) {
+  throw new Error("Function not implemented.");
+}
+
+function clearAudio() {
+  throw new Error("Function not implemented.");
+}

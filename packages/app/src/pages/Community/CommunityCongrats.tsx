@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { first } from "rxjs";
 import biliCharacter from "@/assets/icons/bili_congrats.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
+import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
+import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
 
 export const CommunityCongrats: React.FC<{
   onKeepGoingClick?: any;
@@ -21,12 +23,23 @@ export const CommunityCongrats: React.FC<{
   } = useProfile();
   const { language } = useLanguage();
   const [showText, setShowText] = useState(true); // State to show/hide text
-  const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { addAudio, clearAudio, onended } = useAudioManager();
-  const [audios, setAudios] = useState<string[]>([]);
   const { startTimer, stopTimer } = useTimeTracker();
 
-  // Check if stars are valid and set fallback if necessary
+  let audios: any[] = [];
+  switch (language) {
+    case "es":
+      audios = [audio_es];
+      break;
+    case "en":
+      audios = [audio_en];
+      break;
+    case "es.en":
+      audios = [audio_es, audio_en];
+      break;
+    case "en.es":
+      audios = [audio_en, audio_es];
+      break;
+  }
 
   const button_es = "¡Sigue adelante!";
   const button_en = "Keep going!";

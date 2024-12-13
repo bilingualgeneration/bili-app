@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createElement, Fragment, JSX, useState } from "react";
+import { IonGrid, IonRow } from "@ionic/react";
 
 import { Control, Controller } from "react-hook-form";
 
@@ -61,25 +62,29 @@ export const ExtendedRadio = ({
       render={({ field: { onChange } }): JSX.Element => (
         <span data-testid={testId}>
           <div className={displayCardsInRow ? "price-cards" : ""}>
-            {options.map((option, index) => {
-              const props = {
-                ...option.component.props,
-                key: index,
-                // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
-                className:
-                  option.component.props.className +
-                  (activeIndex === index ? " " + activeClassName : "") +
-                  (isMaxWidthNeeded ? " max-width-needed" : ""),
-                style: isMaxWidthNeeded && maxWidth ? { maxWidth } : {},
-                onClick: () => {
-                  if (!option.disabled) {
-                    setActiveIndex(index);
-                    onChange(option.value);
-                  }
-                },
-              };
-              return <option.component.type {...props} key={index} />;
-            })}
+            <IonGrid>
+              <IonRow>
+                {options.map((option, index) => {
+                  const props = {
+                    ...option.component.props,
+                    key: index,
+                    // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
+                    className:
+                      option.component.props.className +
+                      (activeIndex === index ? " " + activeClassName : "") +
+                      (isMaxWidthNeeded ? " max-width-needed" : ""),
+                    style: isMaxWidthNeeded && maxWidth ? { maxWidth } : {},
+                    onClick: () => {
+                      if (!option.disabled) {
+                        setActiveIndex(index);
+                        onChange(option.value);
+                      }
+                    },
+                  };
+                  return <option.component.type {...props} key={index} />;
+                })}
+              </IonRow>
+            </IonGrid>
           </div>
         </span>
       )}

@@ -30,6 +30,7 @@ type RadioCardProps = {
   backgroundColor?: string;
   maxHeight?: string;
   className?: string;
+  onAudioPlay?: () => void; // Audio playback handler
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -51,6 +52,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   backgroundColor = "#FFFFFF",
   maxHeight = "undefined",
   className = "",
+  onAudioPlay,
 }) => {
   const language = useLanguage();
   return (
@@ -60,6 +62,7 @@ export const RadioCard: React.FC<RadioCardProps> = ({
         backgroundColor: backgroundColor,
         maxHeight: maxHeight,
       }}
+      onClick={onAudioPlay} // Triggers audio playback
     >
       <div
         className="card-inner"
