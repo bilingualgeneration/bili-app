@@ -26,6 +26,7 @@ interface AffirmationsCardProps {
   image: any;
   text_back: any;
   text_front: any;
+  onAudioChange: any;
 }
 
 type MultilingualTextAndAudio = any;
@@ -34,6 +35,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   image,
   text_back,
   text_front,
+  onAudioChange,
 }) => {
   const { filterText } = useLanguage();
   const { addAudio } = useAudioManager();
@@ -45,6 +47,9 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
       ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
       : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
   );
+  useEffect(() => {
+    onAudioChange(audio);
+  }, [audio, onAudioChange]);
   return (
     <IonCard
       className="affirmations-card drop-shadow ion-no-padding"
@@ -152,8 +157,12 @@ const AffirmationsHydratedGame: React.FC = () => {
 
 const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
   const [cardIndex, setCardIndex] = useState<number>(0);
+  const [currentAudio, setCurrentAudio] = useState<any>({});
   const canBackward = cardIndex > 0;
   const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
+  const handleAudioChange = (audio: any) => {
+    setCurrentAudio(audio);
+  };
 
   return (
     <IonGrid
@@ -191,7 +200,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
             )}
           />
           <div className="margin-top-1">
-            <AudioButton audio={{}} />
+            <AudioButton audio={currentAudio} />
           </div>
         </IonCol>
         <IonCol
@@ -234,6 +243,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
                 image={cards[cardIndex].image}
                 text_back={cards[cardIndex].text_back}
                 text_front={cards[cardIndex].text_front}
+                onAudioChange={handleAudioChange}
               />
             </div>
             <IonImg
