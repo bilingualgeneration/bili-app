@@ -47,7 +47,7 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   );
   return (
     <IonCard
-      className="drop-shadow ion-no-padding"
+      className="affirmations-card drop-shadow ion-no-padding"
       style={{
         aspectRatio: 1950 / 1200,
         maxWidth: "650px",
@@ -218,6 +218,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
                 transform: "translateY(-50%)",
                 cursor: "pointer",
                 zIndex: 10,
+                width: "10%",
               }}
               onClick={() => {
                 if (canBackward) {
@@ -238,11 +239,14 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
               className="page-control forward"
               style={{
                 display: canForward ? "block" : "none",
+                opacity: 1,
                 position: "absolute",
                 right: "-1rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                cursor: canForward ? "pointer" : "default",
+                cursor: "pointer",
+                zIndex: 10,
+                width: "10%",
               }}
               onClick={() => {
                 if (canForward) {
