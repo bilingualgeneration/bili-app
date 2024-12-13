@@ -84,7 +84,7 @@ export const FeelingsFeedback: React.FC = () => {
 
   const happyOption: ExtendedRadioOption = {
     component: (
-      <IonCol size="2.3">
+      <IonCol size="2.3" className="ion-no-padding">
         <RadioCard
           icon={
             <div>
@@ -117,7 +117,7 @@ export const FeelingsFeedback: React.FC = () => {
 
   const calmOption: ExtendedRadioOption = {
     component: (
-      <IonCol size="2.3">
+      <IonCol size="2.3" className="ion-no-padding">
         <RadioCard
           icon={
             <div>
@@ -149,7 +149,7 @@ export const FeelingsFeedback: React.FC = () => {
   };
   const sadOption: ExtendedRadioOption = {
     component: (
-      <IonCol size="2.3">
+      <IonCol size="2.3" className="ion-no-padding">
         <RadioCard
           icon={
             <div>
@@ -181,7 +181,7 @@ export const FeelingsFeedback: React.FC = () => {
   };
   const terribleOption: ExtendedRadioOption = {
     component: (
-      <IonCol size="2.3">
+      <IonCol size="2.3" className="ion-no-padding">
         <RadioCard
           icon={
             <div>
@@ -213,7 +213,7 @@ export const FeelingsFeedback: React.FC = () => {
   };
   const otherOption: ExtendedRadioOption = {
     component: (
-      <IonCol size="2.3">
+      <IonCol size="2.3" className="ion-no-padding">
         <RadioCard
           icon={
             <div>
