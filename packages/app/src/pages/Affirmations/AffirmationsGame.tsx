@@ -162,6 +162,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
         display: "flex",
         alignItems: "center",
         marginTop: "-4rem",
+        marginRight: "1rem",
       }}
     >
       <IonRow
