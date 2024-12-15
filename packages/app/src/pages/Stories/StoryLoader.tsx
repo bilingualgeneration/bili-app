@@ -101,7 +101,11 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
         component: (
           <>
             <PageWrapper>
-              <StoryPage page={p} languages={languages} />
+              <StoryPage
+                page={p}
+                languages={languages}
+                textSize={data.text_size}
+              />
             </PageWrapper>
             <PageCounter />
           </>
