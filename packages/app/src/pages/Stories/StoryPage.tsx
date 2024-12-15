@@ -1,4 +1,5 @@
 import { AudioButton } from "@/components/AudioButton";
+import classnames from "classnames";
 import { IonCol, IonCard, IonCardContent, IonRow, IonText } from "@ionic/react";
 import { SegmentedText } from "./SegmentedText";
 import { VocabModal } from "./VocabModal";
@@ -7,9 +8,33 @@ import { useLanguage } from "@/hooks/Language";
 import { useStory } from "./StoryContext";
 import { useEffect } from "react";
 
-export const StoryPage: React.FC<
-  React.PropsWithChildren<{ page: any; languages: any[] }>
-> = ({ page, languages }) => {
+interface StoryPage {
+  languages: any[];
+  page: any;
+  textSize: string;
+}
+
+interface Lookup {
+  [key: string]: string;
+}
+
+const textSizePrimaryLookup: Lookup = {
+  small: "text-xl",
+  default: "text-2xl",
+  large: "text-3xl",
+};
+
+const textSizeSecondaryLookup: Lookup = {
+  small: "text-md",
+  default: "text-lg",
+  large: "text-xl",
+};
+
+export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
+  languages,
+  page,
+  textSize,
+}) => {
   const { isTranslanguaged, pageNumber, pages, pageForward, pageBackward } =
     useStory();
   const { clearAudio } = useAudioManager();
@@ -47,11 +72,21 @@ export const StoryPage: React.FC<
           >
             <div></div>
             <IonText className="ion-text-center">
-              <h1 className="text-1_5xl semibold color-suelo">
+              <h1
+                className={classnames(
+                  "semibold color-suelo",
+                  textSizePrimaryLookup[textSize],
+                )}
+              >
                 <SegmentedText text={texts[0].text} />
               </h1>
               {texts.length > 1 && (
-                <p className="text-lg color-english">
+                <p
+                  className={classnames(
+                    "color-english",
+                    textSizeSecondaryLookup[textSize],
+                  )}
+                >
                   <SegmentedText text={texts[1].text} />
                 </p>
               )}
