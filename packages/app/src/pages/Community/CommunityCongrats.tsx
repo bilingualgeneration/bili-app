@@ -45,7 +45,7 @@ export const CommunityCongrats: React.FC<{
   const button_en = "Keep going!";
 
   return (
-    <div className="padding-top-2">
+    <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
         buttonTextPrimary={language === "en" ? button_en : button_es}
@@ -60,8 +60,8 @@ export const CommunityCongrats: React.FC<{
         }}
       >
         <IonText class="ion-text-center">
-          <div className="stars-container">
-            <img src={FlowerImage} alt="flower" className="star-image" />
+          <div>
+            <img src={FlowerImage} alt="flower" style={{ height: "10rem" }} />
           </div>
           <h1 className="text-5xl color-suelo">
             <I18nMessage id="common.congrats.flower" />

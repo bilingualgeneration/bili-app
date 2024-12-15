@@ -41,16 +41,11 @@ hr {
 }
 
 .page-wrapper {
-  max-width: 85.375rem;
+  max-width: 120rem;
   min-width: 37.5rem;
   margin: auto;
-  min-height: 100vh;
-}
-
-@media screen and (min-width: 1000px) {
-  .page-wrapper {
-    padding-bottom: 9.375rem; // clearance for footer
-  }
+  height: 100vh;
+  max-height: 60rem;
 }
 
 ion-content::part(scroll) {
