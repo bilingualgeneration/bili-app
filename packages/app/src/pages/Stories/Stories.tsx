@@ -43,7 +43,7 @@ const StoriesHydrated: React.FC = () => {
       return (
         <ActivityProvider>
           <StoryProvider>
-            <div id="story-wrapper">
+            <div id="story-wrapper" className="responsive-height-with-header">
               <StoryLoader vocab={vocab} />
             </div>
           </StoryProvider>
