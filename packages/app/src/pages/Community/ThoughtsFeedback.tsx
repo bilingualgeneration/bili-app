@@ -163,73 +163,83 @@ export const ThoughtsFeedback: React.FC = () => {
   });
 
   return (
-    <>
-      <IonCard
-        style={{ textAlign: "center" }}
-        className="thoughts-questions-card"
-      >
-        <form action="">
-          <IonText className="ion-text-start">
-            <h2 className="text-3xl semibold color-suelo padding-left-2">
-              <I18nMessage id="common.whatYouThink" />
-            </h2>
-            <I18nMessage
-              id="common.whatYouThink"
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-grey padding-left-2">{text}</p>
-              )}
-            />
-          </IonText>
-          <IonCard
-            style={{ background: "#D6D3F0" }}
-            className="padding-vertical-3 margin-left-2 margin-right-2"
-          >
-            <IonText>
-              <h1 className="text-3xl semibold color-suelo">
-                {language === "en"
-                  ? "I like going to school every day."
-                  : "Me gusta ir a la escuela todos los días."}
-              </h1>
-              {(language === "es.en" || language === "en.es") && (
-                <p className="text-2xl color-grey">
-                  {"Me gusta ir a la escuela todos los días."}
-                </p>
-              )}
-            </IonText>
-          </IonCard>
-          <ExtendedRadio
-            control={control}
-            name="feelingsFeedback"
-            displayCardsInRow={true}
-            isMaxWidthNeeded={false}
-            maxWidth="25rem"
-            options={[yesOption, noOption, otherOption]}
-          />
-          <IonButton
-            data-testid="addclassroom-notification-method-continue-button"
-            disabled={!isValid}
-            shape="round"
-            type="button"
-            onClick={onSubmit}
-          >
-            <IonText className=" padding-right-5 padding-left-5">
-              <h2 className="text-3xl semibold color-base">
-                <I18nMessage id="common.next" />
-              </h2>
+    <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
+      <IonGrid>
+        <IonRow>
+          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
+          <IonCol>
+            <IonCard
+              style={{ textAlign: "center" }}
+              className="thoughts-questions-card drop-shadow"
+            >
+              <form action="">
+                <IonText className="ion-text-start">
+                  <h2 className="text-3xl semibold color-suelo padding-left-2">
+                    <I18nMessage id="common.whatYouThink" />
+                  </h2>
+                  <I18nMessage
+                    id="common.whatYouThink"
+                    level={2}
+                    wrapper={(text: string) => (
+                      <p className="text-3xl color-grey padding-left-2">
+                        {text}
+                      </p>
+                    )}
+                  />
+                </IonText>
+                <IonCard
+                  style={{ background: "#D6D3F0" }}
+                  className="padding-vertical-3 margin-left-2 margin-right-2"
+                >
+                  <IonText>
+                    <h1 className="text-3xl semibold color-suelo">
+                      {language === "en"
+                        ? "I like going to school every day."
+                        : "Me gusta ir a la escuela todos los días."}
+                    </h1>
+                    {(language === "es.en" || language === "en.es") && (
+                      <p className="text-2xl color-grey">
+                        {"Me gusta ir a la escuela todos los días."}
+                      </p>
+                    )}
+                  </IonText>
+                </IonCard>
+                <ExtendedRadio
+                  control={control}
+                  name="feelingsFeedback"
+                  displayCardsInRow={true}
+                  isMaxWidthNeeded={false}
+                  maxWidth="25rem"
+                  options={[yesOption, noOption, otherOption]}
+                />
+                <IonButton
+                  data-testid="addclassroom-notification-method-continue-button"
+                  disabled={!isValid}
+                  shape="round"
+                  type="button"
+                  onClick={onSubmit}
+                >
+                  <IonText className=" padding-right-5 padding-left-5">
+                    <h2 className="text-3xl semibold color-base">
+                      <I18nMessage id="common.next" />
+                    </h2>
 
-              <I18nMessage
-                id="common.next"
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-sm color-base">{text}</p>
-                )}
-              />
-            </IonText>
-          </IonButton>
-        </form>
-      </IonCard>
-    </>
+                    <I18nMessage
+                      id="common.next"
+                      level={2}
+                      wrapper={(text: string) => (
+                        <p className="text-sm color-base">{text}</p>
+                      )}
+                    />
+                  </IonText>
+                </IonButton>
+              </form>
+            </IonCard>
+          </IonCol>
+          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
+        </IonRow>
+      </IonGrid>
+    </div>
   );
 };
 function addAudio(arg0: never[]) {

@@ -1,7 +1,14 @@
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { I18nMessage } from "@/components/I18nMessage";
 import { RadioCard } from "@/components/RadioCard";
-import { IonButton, IonCard, IonCol, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonCol,
+  IonGrid,
+  IonRow,
+  IonText,
+} from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -249,60 +256,70 @@ export const FeelingsFeedback: React.FC = () => {
   });
 
   return (
-    <>
-      <IonCard style={{ textAlign: "center" }}>
-        <form action="">
-          <IonText className="ion-text-start">
-            <h2 className="text-3xl semibold color-suelo padding-left-2">
-              <I18nMessage id="common.howYouFeel" />
-            </h2>
-            <I18nMessage
-              id="common.howYouFeel"
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-grey padding-left-2">{text}</p>
-              )}
-            />
-          </IonText>
-          <ExtendedRadio
-            control={control}
-            name="feelingsFeedback"
-            displayCardsInRow={true}
-            isMaxWidthNeeded={true}
-            maxWidth="14.5rem"
-            options={[
-              happyOption,
-              calmOption,
-              sadOption,
-              terribleOption,
-              otherOption,
-            ]}
-          />
+    <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
+      <IonGrid>
+        <IonRow>
+          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
+          <IonCol>
+            <IonCard className="drop-shadow" style={{ textAlign: "center" }}>
+              <form action="">
+                <IonText className="ion-text-start">
+                  <h2 className="text-3xl semibold color-suelo padding-left-2">
+                    <I18nMessage id="common.howYouFeel" />
+                  </h2>
+                  <I18nMessage
+                    id="common.howYouFeel"
+                    level={2}
+                    wrapper={(text: string) => (
+                      <p className="text-3xl color-grey padding-left-2">
+                        {text}
+                      </p>
+                    )}
+                  />
+                </IonText>
+                <ExtendedRadio
+                  control={control}
+                  name="feelingsFeedback"
+                  displayCardsInRow={true}
+                  isMaxWidthNeeded={true}
+                  maxWidth="14.5rem"
+                  options={[
+                    happyOption,
+                    calmOption,
+                    sadOption,
+                    terribleOption,
+                    otherOption,
+                  ]}
+                />
 
-          <IonButton
-            data-testid="addclassroom-notification-method-continue-button"
-            disabled={!isValid}
-            shape="round"
-            type="button"
-            onClick={onSubmit}
-          >
-            <IonText className=" padding-right-5 padding-left-5">
-              <h2 className="text-3xl semibold color-base">
-                <I18nMessage id="common.next" />
-              </h2>
+                <IonButton
+                  data-testid="addclassroom-notification-method-continue-button"
+                  disabled={!isValid}
+                  shape="round"
+                  type="button"
+                  onClick={onSubmit}
+                >
+                  <IonText className=" padding-right-5 padding-left-5">
+                    <h2 className="text-3xl semibold color-base">
+                      <I18nMessage id="common.next" />
+                    </h2>
 
-              <I18nMessage
-                id="common.next"
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-sm color-base">{text}</p>
-                )}
-              />
-            </IonText>
-          </IonButton>
-        </form>
-      </IonCard>
-    </>
+                    <I18nMessage
+                      id="common.next"
+                      level={2}
+                      wrapper={(text: string) => (
+                        <p className="text-sm color-base">{text}</p>
+                      )}
+                    />
+                  </IonText>
+                </IonButton>
+              </form>
+            </IonCard>
+          </IonCol>
+          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
+        </IonRow>
+      </IonGrid>
+    </div>
   );
 };
 function getText(
