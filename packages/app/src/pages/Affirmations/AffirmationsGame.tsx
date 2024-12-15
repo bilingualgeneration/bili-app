@@ -29,8 +29,8 @@ interface AffirmationsCardProps {
   image: any;
   setShowFront: any;
   showFront: boolean;
-  text_back: string;
-  text_front: string;
+  text_back: any[];
+  text_front: any[];
 }
 
 type MultilingualTextAndAudio = any;
@@ -159,7 +159,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
   const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
 
   const changeCard = useCallback(
-    (direction) => {
+    (direction: string) => {
       switch (direction) {
         case "forward":
           if (canForward) {
