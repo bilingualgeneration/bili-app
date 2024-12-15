@@ -1,35 +1,45 @@
-import React, {FC} from "react";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import React, { FC } from "react";
+import { useLanguage } from "@/hooks/Language";
+import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import "./ComingSoonCard.scss";
 
 interface ComingSoonCardProps {
-    cardColor: string;
-    title: string;
-    subtitle: string;
-    cardImage: string;
+  cardColor: string;
+  text: any[];
+  cardImage: string;
 }
 
 export const ComingSoonCard: FC<ComingSoonCardProps> = ({
-    cardColor,
-    title, // es
-    subtitle, // en
-    cardImage
-  }) => {
-    const {language} = useLanguageToggle();
-    return (
-      <div id="coming-soon-card" className="card-styles" style={{ backgroundColor: cardColor }}>
-        <img src={cardImage} alt="Card Image" className="card-image" />
-        <div className="card-text">
-          <h1 className="text-3xl semibold color-nube">
-            {language !== 'en' && title}
-	    {language === 'en' && subtitle}
-          </h1>
-          {language === 'esen' &&
-            <p className="text-2xl color-nube subtitle">
-                {subtitle}
-            </p>
-          }
-        </div>
-      </div>
-    );
-  };
+  cardColor,
+  text,
+  cardImage,
+}) => {
+  const { populateText } = useLanguage();
+  const texts = populateText(text);
+  return (
+    <div className="coming-soon-card" style={{ backgroundColor: cardColor }}>
+      <IonGrid>
+        <IonRow>
+          <IonCol
+            size="4"
+            className="flex ion-justify-content-center ion-align-items-center"
+          >
+            <img
+              src={cardImage}
+              alt="Card Image"
+              style={{ maxHeight: "10rem" }}
+            />
+          </IonCol>
+          <IonCol size="8" className="flex ion-align-items-center">
+            <div className="padding-left-1">
+              <h1 className="text-3xl semibold color-nube">{texts[0].text}</h1>
+              {texts.length > 1 && (
+                <p className="text-2xl color-nube subtitle">{texts[1].text}</p>
+              )}
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </div>
+  );
+};
