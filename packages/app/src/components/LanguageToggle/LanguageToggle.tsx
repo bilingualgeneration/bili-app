@@ -101,7 +101,9 @@ export const LanguageToggle: React.FC = () => {
         cycleLanguage();
       }}
     >
-      <div className={classnames("language-toggle-inner", "semibold")}>
+      <div
+        className={classnames("language-toggle-inner", "semibold", "text-2xl")}
+      >
         {language.includes(".") ? (
           <>
             {language.split(".")[0]}
