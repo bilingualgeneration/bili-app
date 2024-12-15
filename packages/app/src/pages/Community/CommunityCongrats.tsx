@@ -8,7 +8,7 @@ import { useTimeTracker } from "@/hooks/TimeTracker";
 import { IonText } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { first } from "rxjs";
-import biliCharacter from "@/assets/icons/bili_congrats.svg";
+import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
