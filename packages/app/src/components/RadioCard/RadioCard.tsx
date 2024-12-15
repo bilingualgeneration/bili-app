@@ -9,10 +9,11 @@ import type { MessageFormatElement } from "react-intl";
 import React from "react";
 
 import "./RadioCard.scss";
+import { useLanguage } from "@/hooks/Language";
 
 type RadioCardProps = {
   title: string | null | undefined;
-  content: string | null | undefined;
+  content?: string | null | undefined;
   subTitle?: string | null | undefined;
   icon?: React.ReactNode;
   iconBackgroundColor?: string;
@@ -23,6 +24,13 @@ type RadioCardProps = {
   contentColor?: string;
   subTitleFontSize?: string;
   subTitleColor?: string;
+  flexDirectionColumn?: boolean;
+  isJustPicture?: boolean;
+  isTextCentered?: boolean;
+  backgroundColor?: string;
+  maxHeight?: string;
+  className?: string;
+  onAudioPlay?: () => void; // Audio playback handler
 };
 
 export const RadioCard: React.FC<RadioCardProps> = ({
@@ -38,19 +46,41 @@ export const RadioCard: React.FC<RadioCardProps> = ({
   subTitleColor = "color-barro", // default color for subTitle
   contentFontSize = "sm", // default font-size for content
   contentColor = "color-suelo", // default color for content
+  flexDirectionColumn = false,
+  isJustPicture = false,
+  isTextCentered = false,
+  backgroundColor = "#FFFFFF",
+  maxHeight = "undefined",
+  className = "",
+  onAudioPlay,
 }) => {
+  const language = useLanguage();
   return (
-    <IonCard className="radio-card">
-      <div className="card-inner">
+    <IonCard
+      className={`radio-card ${className}`}
+      style={{
+        backgroundColor: backgroundColor,
+        maxHeight: maxHeight,
+      }}
+      onClick={onAudioPlay} // Triggers audio playback
+    >
+      <div
+        className="card-inner"
+        style={{ flexDirection: flexDirectionColumn ? "column" : "unset" }}
+      >
         {icon && (
           <div
-            className="oval-element"
+            className={isJustPicture ? "" : "oval-element"}
             style={{ backgroundColor: iconBackgroundColor }}
           >
             {icon}
           </div>
         )}
-        <div className="title-content">
+        <div
+          className={
+            isTextCentered ? "centered-title-content" : "title-content"
+          }
+        >
           {badge && (
             <div
               className="badge-content"
@@ -73,7 +103,13 @@ export const RadioCard: React.FC<RadioCardProps> = ({
             <IonCardTitle>
               <IonText>
                 {/* todo: don't force type cast */}
-                <p className={`text-${titleFontSize} semibold ${titleColor}`}>
+                <p
+                  className={`text-${titleFontSize} semibold ${titleColor}`}
+                  style={{
+                    whiteSpace: "nowrap", // Prevent wrapping
+                    overflow: "hidden",
+                  }}
+                >
                   {title as string}
                 </p>
               </IonText>

@@ -1,4 +1,4 @@
-@for $padding from 1 through 5 {
+@for $padding from 1 through 10 {
   .padding-top-#{$padding} {
     padding-top: #{$padding}rem !important;
   }
@@ -25,6 +25,10 @@
 
   .padding-right-#{$padding} {
     padding-right: #{$padding}rem !important;
+  }
+
+  .padding-left-#{$padding} {
+    padding-left: #{$padding}rem !important;
   }
 
   .padding-horizontal-#{$padding} {

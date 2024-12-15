@@ -31,7 +31,7 @@ export const WouldDoIntro: React.FC = () => {
       audios = [audio_es, audio_en];
       break;
     case "en.es":
-      audios = [audio_es, audio_en];
+      audios = [audio_en, audio_es];
       break;
   }
 

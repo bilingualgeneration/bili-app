@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.responsive-height-with-header {
+  height: calc(100% - var(--header-height));
+}
+
 .flex {
   display: flex;
 }

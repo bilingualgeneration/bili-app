@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createElement, Fragment, JSX, useState } from "react";
+import { IonGrid, IonRow } from "@ionic/react";
 
 import { Control, Controller } from "react-hook-form";
 
@@ -19,6 +20,8 @@ export type ExtendedRadioProps = {
   testId?: string;
   displayCardsInRow?: boolean;
   defaultOption?: ExtendedRadioOption | undefined;
+  isMaxWidthNeeded?: boolean;
+  maxWidth?: string;
 };
 
 export const ExtendedRadio = ({
@@ -29,6 +32,8 @@ export const ExtendedRadio = ({
   options,
   testId = "extended-radio-component",
   displayCardsInRow = false,
+  isMaxWidthNeeded = false,
+  maxWidth,
   defaultOption,
 }: ExtendedRadioProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(
@@ -57,23 +62,33 @@ export const ExtendedRadio = ({
       render={({ field: { onChange } }): JSX.Element => (
         <span data-testid={testId}>
           <div className={displayCardsInRow ? "price-cards" : ""}>
-            {options.map((option, index) => {
-              const props = {
-                ...option.component.props,
-                key: index,
-                // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
-                className:
-                  option.component.props.className +
-                  (activeIndex === index ? " " + activeClassName : ""),
-                onClick: () => {
-                  if (!option.disabled) {
-                    setActiveIndex(index);
-                    onChange(option.value);
-                  }
-                },
-              };
-              return <option.component.type {...props} key={index} />;
-            })}
+            <IonGrid>
+              <IonRow
+                className={
+                  displayCardsInRow ? "ion-justify-content-around" : ""
+                }
+              >
+                {options.map((option, index) => {
+                  const props = {
+                    ...option.component.props,
+                    key: index,
+                    // todo: Invalid prop `className` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.
+                    className:
+                      option.component.props.className +
+                      (activeIndex === index ? " " + activeClassName : "") +
+                      (isMaxWidthNeeded ? " max-width-needed" : ""),
+                    style: isMaxWidthNeeded && maxWidth ? { maxWidth } : {},
+                    onClick: () => {
+                      if (!option.disabled) {
+                        setActiveIndex(index);
+                        onChange(option.value);
+                      }
+                    },
+                  };
+                  return <option.component.type {...props} key={index} />;
+                })}
+              </IonRow>
+            </IonGrid>
           </div>
         </span>
       )}

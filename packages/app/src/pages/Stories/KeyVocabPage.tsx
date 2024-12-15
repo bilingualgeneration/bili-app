@@ -29,10 +29,11 @@ const getWordByLanguage = (word: any, language: string) => {
 };
 
 const Word: React.FC<{ word: any }> = ({ word }) => {
-  const { populateText, language } = useLanguage();
+  const { populateText } = useLanguage();
   const { setCurrentVocabHandle, sendAnalytics } = useStory();
   const image = word.image?.url || bili;
   const words = populateText(word.word);
+
   return (
     <IonCol
       size="4"

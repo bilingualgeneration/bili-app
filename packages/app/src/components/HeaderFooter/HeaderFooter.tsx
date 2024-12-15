@@ -33,7 +33,7 @@ export const HeaderFooter: FC<
     <IonPage>
       <IonContent fullscreen={true} className="ion-padding background-figures">
         <div className="page-wrapper" style={{ background }}>
-          <IonGrid id="authedHeader">
+          <IonGrid id="authedHeader" style={{ height: "var(--header-height)" }}>
             <IonRow
               className="ion-align-items-center"
               style={{ position: "relative" }}
@@ -61,7 +61,11 @@ export const HeaderFooter: FC<
                   </IonCol>
                   <IonCol size="2" className="ion-text-center">
                     <Link to="/student-dashboard">
-                      <img src={biliLogo} className="logo" alt="Logo" />
+                      <img
+                        src={biliLogo}
+                        className="header-bili-logo"
+                        alt="Logo"
+                      />
                     </Link>
                   </IonCol>
                   <IonCol size="5" className="ion-text-right">
