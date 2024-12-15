@@ -1,4 +1,4 @@
-#coming-soon-card {
+.coming-soon-card {
   width: 43.9375rem;
   height: 13.4375rem;
   border-radius: 0.6875rem;
@@ -7,12 +7,6 @@
   align-items: center;
   padding: 1.5rem;
   margin: 1.5%;
-  box-shadow: -0.10375rem 0.2076875rem 0.62rem 0 #00000040;
-
-  @media (max-width: 667px) {
-    /* iPad Mini portrait and landscape width */
-    width: 37.5rem;
-  }
 
   .subtitle {
     margin-top: 0.625rem;
