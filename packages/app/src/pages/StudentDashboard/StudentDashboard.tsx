@@ -87,8 +87,8 @@ const wellnessCards = [
     title: "Afirmaciones",
     titleEn: "Affirmations",
     cover: "/assets/img/drum_image.png",
-    //link: "/affirmations/intro",
-    isLocked: true,
+    link: "/affirmations/intro",
+    isLocked: false,
   },
   {
     category: "wellness",
