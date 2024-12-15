@@ -47,7 +47,6 @@ export const ThoughtsFeedback: React.FC = () => {
   const { getText } = useI18n();
   const { addAudio, clearAudio } = useAudioManager();
   const { populateText } = useLanguage();
-  //const a = populateText(audios, "language", "url");
   const {
     control,
     formState: { isValid },
@@ -184,7 +183,7 @@ export const ThoughtsFeedback: React.FC = () => {
           </IonText>
           <IonCard
             style={{ background: "#D6D3F0" }}
-            className="padding-vertical-5 margin-left-2 margin-right-2"
+            className="padding-vertical-3 margin-left-2 margin-right-2"
           >
             <IonText>
               <h1 className="text-3xl semibold color-suelo">
