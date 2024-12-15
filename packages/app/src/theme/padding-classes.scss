@@ -26,4 +26,9 @@
   .padding-right-#{$padding} {
     padding-right: #{$padding}rem !important;
   }
+
+  .padding-horizontal-#{$padding} {
+    padding-left: #{$padding}rem !important;
+    padding-right: #{$padding}rem !important;
+  }
 }

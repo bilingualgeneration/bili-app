@@ -44,17 +44,18 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "@/theme/variables.scss";
-import "@/theme/overrides.scss";
+import "@/theme/variables.scss"; // needs to be imported first!
+import "@/theme/buttons.scss";
 import "@/theme/color-classes.scss";
+import "@/theme/common.scss";
 import "@/theme/input.scss";
 import "@/theme/margin-classes.scss";
 import "@/theme/modal.scss";
+import "@/theme/overrides.scss";
 import "@/theme/padding-classes.scss";
-import "@/theme/text-classes.scss";
+import "@/theme/responsiveness.scss";
 import "@/theme/style-classes.scss";
-import "@/theme/buttons.scss";
-import "@/theme/common.scss";
+import "@/theme/text-classes.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
