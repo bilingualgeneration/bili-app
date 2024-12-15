@@ -1,10 +1,10 @@
-// TODO: replace with Carousel component
 // TODO: audio does not account for inclusive
 
 import { AudioButton } from "@/components/AudioButton";
+import classnames from "classnames";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
@@ -20,13 +20,17 @@ import {
 } from "@ionic/react";
 import { useLanguage } from "@/hooks/Language";
 
+import "./AffirmationsGame.scss";
+
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 interface AffirmationsCardProps {
   image: any;
-  text_back: any;
-  text_front: any;
+  setShowFront: any;
+  showFront: boolean;
+  text_back: any[];
+  text_front: any[];
 }
 
 type MultilingualTextAndAudio = any;
@@ -35,99 +39,70 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
   image,
   text_back,
   text_front,
+  setShowFront,
+  showFront,
 }) => {
-  const { filterText } = useLanguage();
-  const { addAudio } = useAudioManager();
-  const [showFront, setShowFront] = useState<boolean>(true);
-  const text_front_filtered = filterText(text_front);
-  const text_back_filtered = filterText(text_back);
-  const audio = Object.fromEntries(
-    showFront
-      ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
-      : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
-  );
   return (
-    <>
+    <span className="affirmations-card-wrapper">
       <IonCard
-        className="drop-shadow ion-no-padding"
-        style={{
-          aspectRatio: 1200 / 1950,
-          backgroundImage: showFront ? `url('${image.url}')` : "",
-          backgroundSize: "contain",
-          backgroundPosition: "center center",
-          backgroundColor: showFront ? "inherit" : "#D6D3F0",
-        }}
-        onClick={() => {
-          setShowFront(!showFront);
-        }}
+        className={classnames("affirmations-card padding-horizontal-2", {
+          front: showFront,
+          back: !showFront,
+        })}
       >
-        <IonCardContent
-          className="ion-text-center"
-          style={{
-            alignSelf: "stretch",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          {showFront && (
-            <>
-              <div></div>
+        <div className="flap" onClick={() => setShowFront(!showFront)}></div>
+        <IonCardContent>
+          {showFront ? (
+            <IonGrid className="responsive-height">
+              <IonRow className="ion-align-items-stretch responsive-height">
+                <IonCol style={{ aspectRatio: 1.35 }}>
+                  <img
+                    src={image.url}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                      objectPosition: "center",
+                    }}
+                    alt="Affirmation"
+                  />
+                </IonCol>
+                <IonCol className="flex flex-column ion-justify-content-center ion-text-center">
+                  <h1 className="text-3xl semibold color-suelo">
+                    {text_front[0].text}
+                  </h1>
+                  {text_front[1] && (
+                    <p className="text-xl color-english">
+                      {text_front[1].text}
+                    </p>
+                  )}
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          ) : (
+            <div
+              className="ion-justify-content-center ion-align-items-center"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+              }}
+            >
               <IonText>
-                <h1 className="text-xl semibold color-suelo">
-                  {text_front_filtered[0].text}
-                </h1>
-                {text_front_filtered[1] && (
-                  <p className="text-lg color-english">
-                    {text_front_filtered[1].text}
+                <p className="text-3xl semibold color-suelo">
+                  {text_back[0].text}
+                </p>
+                {text_back[1] && (
+                  <p className="text-xl color-english margin-top-1">
+                    {text_back[1].text}
                   </p>
                 )}
               </IonText>
-            </>
-          )}
-          {!showFront && (
-            <div className="ion-text-left" style={{ height: "100%" }}>
-              <h1 className="text-xl semibold color-suelo">
-                <I18nMessage id="affirmations.card.back.title" />
-              </h1>
-              <I18nMessage
-                id="affirmations.card.back.title"
-                level={2}
-                wrapper={(text: string) => (
-                  <p className="text-lg color-english">{text}</p>
-                )}
-              />
-              <div
-                style={{
-                  borderTop: "0.125rem solid black",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  height: "100%",
-                }}
-                className="margin-top-1 margin-bottom-1"
-              >
-                <IonText>
-                  <p className="text-xl semibold color-suelo">
-                    {text_back_filtered[0].text}
-                  </p>
-                  {text_back_filtered[1] && (
-                    <p className="text-lg color-english margin-top-1">
-                      {text_back_filtered[1].text}
-                    </p>
-                  )}
-                </IonText>
-              </div>
             </div>
           )}
         </IonCardContent>
       </IonCard>
-      <div className="ion-text-center margin-top-3">
-        <AudioButton audio={audio} />
-      </div>
-    </>
+    </span>
   );
 };
 
@@ -141,7 +116,7 @@ export const AffirmationsGame: React.FC = () => {
   );
 };
 
-const CARDS_PER_PAGE = 3;
+const CARDS_PER_PAGE = 1;
 
 type Status = "error" | "loading" | "ready";
 
@@ -168,59 +143,98 @@ const AffirmationsHydratedGame: React.FC = () => {
 
 const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
   const [cardIndex, setCardIndex] = useState<number>(0);
-  const { languageNormalized } = useLanguage();
+  const [showFront, setShowFront] = useState<boolean>(true);
 
+  const { filterText } = useLanguage();
+  const text_front_filtered = filterText(cards[cardIndex].text_front);
+  const text_back_filtered = filterText(cards[cardIndex].text_back);
+  const audio = Object.fromEntries(
+    showFront
+      ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
+      : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
+  );
+
+  const { clearAudio } = useAudioManager();
   const canBackward = cardIndex > 0;
   const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
 
+  const changeCard = useCallback(
+    (direction: string) => {
+      switch (direction) {
+        case "forward":
+          if (canForward) {
+            clearAudio();
+            setShowFront(true);
+            setCardIndex(
+              Math.min(
+                cards.length - CARDS_PER_PAGE,
+                cardIndex + CARDS_PER_PAGE,
+              ),
+            );
+          }
+          return;
+        case "backward":
+          if (canBackward) {
+            clearAudio();
+            setShowFront(true);
+            setCardIndex(Math.max(0, cardIndex - CARDS_PER_PAGE));
+          }
+          return;
+        default:
+          // do nothing
+          return;
+      }
+    },
+    [cards, cardIndex, clearAudio, setCardIndex, setShowFront],
+  );
+
   return (
-    <>
-      <IonGrid>
-        <IonRow style={{ alignItems: "stretch" }}>
-          <IonCol size="auto" style={{ display: "flex" }}>
+    <IonGrid>
+      <IonRow>
+        <IonCol
+          className="ion-text-center ion-justify-content-center"
+          size="4"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <h1 className="text-4xl semibold">
+            <I18nMessage id="affirmations.game.title" />
+          </h1>
+          <I18nMessage
+            id="affirmations.game.title"
+            level={2}
+            wrapper={(text: string) => (
+              <p className="text-2xl color-english">{text}</p>
+            )}
+          />
+          <div className="margin-top-1">
+            <AudioButton audio={audio} />
+          </div>
+        </IonCol>
+        <IonCol size="8" className="padding-horizontal-2">
+          <div>
             <IonImg
-              className="page-control backward"
-              style={{
-                opacity: canBackward ? 1 : 0,
-              }}
-              onClick={() => {
-                if (canBackward) {
-                  setCardIndex(Math.max(0, cardIndex - CARDS_PER_PAGE));
-                }
-              }}
+              className="affirmations-page-control backward"
+              style={{ display: canBackward ? "block" : "none" }}
+              onClick={() => changeCard("backward")}
               src={backward}
             />
-          </IonCol>
-          {cards.slice(cardIndex, cardIndex + CARDS_PER_PAGE).map((c: any) => (
-            <IonCol size="4" key={c.id}>
-              <AffirmationsCard
-                image={c.image}
-                text_back={c.text_back}
-                text_front={c.text_front}
-              />
-            </IonCol>
-          ))}
-          <IonCol size="auto" style={{ display: "flex" }}>
+            <AffirmationsCard
+              image={cards[cardIndex].image}
+              key={cards[cardIndex].id}
+              setShowFront={setShowFront}
+              showFront={showFront}
+              text_back={text_back_filtered}
+              text_front={text_front_filtered}
+            />
             <IonImg
-              className="page-control forward"
-              style={{
-                opacity: canForward ? 1 : 0,
-              }}
-              onClick={() => {
-                if (canForward) {
-                  setCardIndex(
-                    Math.min(
-                      cards.length - CARDS_PER_PAGE,
-                      cardIndex + CARDS_PER_PAGE,
-                    ),
-                  );
-                }
-              }}
+              className="affirmations-page-control forward"
+              style={{ display: canForward ? "block" : "none" }}
+              onClick={() => changeCard("forward")}
               src={forward}
             />
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </>
+          </div>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   );
 };
