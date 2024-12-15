@@ -44,7 +44,7 @@ hr {
   max-width: 120rem;
   min-width: 37.5rem;
   margin: auto;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 ion-content::part(scroll) {
