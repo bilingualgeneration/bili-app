@@ -91,60 +91,74 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
   const functions = getFunctions();
   const recordUserActivity = httpsCallable(functions, "user-activity-record");
 
-  const handleAttempt = (gameId: GameId, isCorrect: boolean) => {
-    setAttempts((prev) => {
-      const newAttempts = new Map(prev);
-      const attempt = newAttempts.get(gameId);
+  const handleAttempt = useCallback(
+    (gameId: GameId, isCorrect: boolean) => {
+      setAttempts((prev) => {
+        const newAttempts = new Map(prev);
+        const attempt = newAttempts.get(gameId);
 
-      if (attempt) {
-        if (!isCorrect) {
-          attempt.mistakes += 1;
+        if (attempt) {
+          if (!isCorrect) {
+            attempt.mistakes += 1;
+          }
+        } else {
+          newAttempts.set(gameId, { mistakes: isCorrect ? 0 : 1 });
         }
-      } else {
-        newAttempts.set(gameId, { mistakes: isCorrect ? 0 : 1 });
-      }
 
-      return newAttempts;
-    });
-  };
+        return newAttempts;
+      });
+    },
+    [setAttempts],
+  );
 
   const handleResetAttempts = () => {
     setAttempts(new Map());
   };
 
-  const handleRecordAttempt = async (time?: number) => {
-    if (!activityId.current || !activityType.current)
-      throw new Error("Activity ID or type missing");
+  const handleRecordAttempt = useCallback(
+    async (time?: number) => {
+      if (!activityId.current || !activityType.current)
+        throw new Error("Activity ID or type missing");
 
-    const stars = getStarsFromAttempts(attempts, gamesData);
-    setStars(stars);
+      const stars = getStarsFromAttempts(attempts, gamesData);
+      setStars(stars);
 
-    // send to server to record in bigquery
-    await recordUserActivity({
-      activity: activityType.current,
-      activityId: activityId.current,
-      userId: student.id,
-      classroomId: classroom ? classroom.id : null,
-      type: "attempt",
-      timeSpent: Math.floor(time ?? -1),
-      timestamp: new Date().toISOString(),
-      version: "0.0.1",
-      data: JSON.stringify({
-        attempts: Object.fromEntries(attempts),
-      }),
+      // send to server to record in bigquery
+      await recordUserActivity({
+        activity: activityType.current,
+        activityId: activityId.current,
+        userId: student.id,
+        classroomId: classroom ? classroom.info.id : null,
+        type: "attempt",
+        timeSpent: Math.floor(time ?? -1),
+        timestamp: new Date().toISOString(),
+        version: "0.0.1",
+        data: JSON.stringify({
+          attempts: Object.fromEntries(attempts),
+        }),
+        language,
+      });
+
+      await updateActivityStars({
+        classroomId: classroom.id,
+        userId: student.id,
+        activity: activityType.current,
+        activityId: activityId.current,
+        stars,
+      });
+
+      return stars;
+    },
+    [
+      activityId,
+      activityType,
+      attempts,
+      gamesData,
+      student,
+      classroom,
       language,
-    });
-
-    await updateActivityStars({
-      classroomId: classroom.id,
-      userId: student.id,
-      activity: activityType.current,
-      activityId: activityId.current,
-      stars,
-    });
-
-    return stars;
-  };
+    ],
+  );
 
   return (
     <ActivityContext.Provider
