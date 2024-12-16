@@ -14,7 +14,7 @@ export const PublicRoutes: React.FC = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/presplash" component={PreSplash} />
         <Route exact path="/sign-up" component={SignUp} />
-        <Route exact path="/sign-up/by-class-code/:code" component={SignUp} />
+        <Route exact path="/sign-up/by-class-code" component={SignUp} />
         <Route exact path="/splash" component={Splash} />
         <Route exact path="/waitlist" component={Waitlist} />
         <Redirect to="/presplash" />

@@ -144,7 +144,7 @@ const StudentSelectHydrated: React.FC<any> = ({ classroomName, students }) => {
                   >
                     <StudentProfileCard
                       id={id}
-                      nameEn={`${firstName} ${lastName[0]}.`}
+                      nameEn={`${firstName} ${lastName ? lastName[0] : ""}.`}
                     />
                   </div>
                 ),
