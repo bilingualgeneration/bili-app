@@ -38,7 +38,7 @@ export const WouldDoIntro: React.FC = () => {
   const button_es = "¡Juguemos!";
   const button_en = `Let's play!`;
   return (
-    <div style={{ height: "calc(100vh - 100px)" }}>
+    <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
         buttonTextPrimary={language === "en" ? button_en : button_es}
