@@ -38,6 +38,9 @@ export const AccountCredentials: React.FC = () => {
     handleSubmit,
     formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
+    defaultValues: {
+      email: data.email,
+    },
     mode: "onBlur",
     resolver: zodResolver(schema),
   });

@@ -22,7 +22,7 @@ import {
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const SignUp: React.FC<{ entry?: string }> = ({ entry }) => (
   <SignUpDataProvider entry={entry}>
@@ -41,18 +41,22 @@ const progressLookup: { [key: string]: number } = {
   complete: 1,
 };
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 export const SignUpComponent: React.FC = () => {
-  const { code } = useParams<{ code: string }>();
+  const query = useQuery();
   const { page: pages, setPage } = useSignUpData();
   const page: string = pages[pages.length - 1];
   const history = useHistory();
 
   useEffect(() => {
-    if (code !== undefined && page === "roleSelect") {
+    if (page === "roleSelect" && (query.has("code") || query.has("email"))) {
       // code supplied so redirect to ClassCode
       setPage(["classCode"]);
     }
-  }, [page, code]);
+  }, [page, query]);
 
   // todo: on revisit, clear old values
   const backButtonOnClick = (): void => {

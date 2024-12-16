@@ -1,6 +1,6 @@
-// TODO: handle if no or incorrect code eg length is entered
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { I18nMessage } from "@/components/I18nMessage";
+import { Input } from "@/components/Input";
 import {
   IonButton,
   IonLabel,
@@ -16,20 +16,34 @@ import {
   IonCol,
   IonProgressBar,
 } from "@ionic/react";
-import { useParams } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
-
+import { useLocation } from "react-router-dom";
 import { useSignUpData } from "@/pages/SignUp/SignUpContext";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
-import { useState } from "react";
 import "./ClassCode.scss";
-import { Input } from "@/components/Input";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 export const ClassCode: React.FC = () => {
-  const { code } = useParams<{ code: string }>();
+  const { data, setData, pushPage } = useSignUpData();
+  const query = useQuery();
+  // TODO: proper error checking
+  const code = query.get("code") ?? "";
+  const email = query.get("email");
+  useEffect(() => {
+    if (email) {
+      setData({
+        ...data,
+        email,
+      });
+    }
+  }, [email]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const intl = useIntl();
   const schema = z.object({
@@ -53,7 +67,6 @@ export const ClassCode: React.FC = () => {
       code3: code[3].toUpperCase(),
     },
   });
-  const { data, setData, pushPage } = useSignUpData();
   const [hasError, setHasError] = useState<boolean>(false);
   const functions = getFunctions();
   const findByCodeFunction = httpsCallable(functions, "classroom-findByCode");
