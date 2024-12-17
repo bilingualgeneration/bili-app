@@ -29,12 +29,14 @@ interface AudioButtonProps {
   };
   className?: string;
   size?: "default" | "small" | "large" | undefined;
+  onClick?: () => void;
 }
 
 export const AudioButton: React.FC<AudioButtonProps> = ({
   audio,
   className,
   size = "default",
+  onClick,
 }) => {
   const { addAudio, clearAudio } = useAudioManager();
   const { language } = useLanguage();
@@ -46,6 +48,8 @@ export const AudioButton: React.FC<AudioButtonProps> = ({
         // @ts-ignore
         let audios: string[] = language.split(".").map((l: string) => audio[l]);
         addAudio(audios);
+
+        if (onClick) onClick();
       }}
     >
       <IonIcon slot="icon-only" icon={SpeakerIcon} />

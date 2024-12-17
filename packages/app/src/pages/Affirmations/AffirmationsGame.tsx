@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import {
@@ -142,8 +142,11 @@ const AffirmationsHydratedGame: React.FC = () => {
 };
 
 const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
+  const history = useHistory();
   const [cardIndex, setCardIndex] = useState<number>(0);
   const [showFront, setShowFront] = useState<boolean>(true);
+  const [uniqueClickCount, setUniqueClickCount] = useState<number>(0);
+  const [currentCardId, setCurrentCardId] = useState<string | null>(null);
 
   const { filterText } = useLanguage();
   const text_front_filtered = filterText(cards[cardIndex].text_front);
@@ -153,16 +156,34 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
       ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
       : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
   );
-
+  console.log(cards[cardIndex].id);
   const { clearAudio } = useAudioManager();
   const canBackward = cardIndex > 0;
   const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
+
+  const handleAudioClick = () => {
+    if (currentCardId !== cards[cardIndex].id) {
+      setCurrentCardId(cards[cardIndex].id); // Update the card ID to the current one
+
+      const newCount = uniqueClickCount + 1; // Calculate new total clicks
+      setUniqueClickCount(newCount);
+    }
+  };
 
   const changeCard = useCallback(
     (direction: string) => {
       switch (direction) {
         case "forward":
           if (canForward) {
+            // Check if 5, 10, 15, etc., cards are completed before moving
+            if (uniqueClickCount > 0 && uniqueClickCount % 5 === 0) {
+              const destination =
+                (uniqueClickCount / 5) % 2 === 0
+                  ? "/community/thoughts"
+                  : "/community/feelings";
+              history.push(destination);
+              return; // Stop here to trigger navigation
+            }
             clearAudio();
             setShowFront(true);
             setCardIndex(
@@ -207,7 +228,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
             )}
           />
           <div className="margin-top-1">
-            <AudioButton audio={audio} />
+            <AudioButton audio={audio} onClick={handleAudioClick} />
           </div>
         </IonCol>
         <IonCol size="8" className="padding-horizontal-2">
