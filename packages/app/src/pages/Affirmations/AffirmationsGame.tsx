@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, useLocation } from "react-router";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import {
@@ -24,6 +24,7 @@ import "./AffirmationsGame.scss";
 
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
+import { car } from "ionicons/icons";
 
 interface AffirmationsCardProps {
   image: any;
@@ -108,10 +109,18 @@ const AffirmationsCard: React.FC<AffirmationsCardProps> = ({
 
 export const AffirmationsGame: React.FC = () => {
   //@ts-ignore
-  const { pack_id } = useParams();
+  const { state } = useLocation<{
+    cardIndex?: number;
+    uniqueClicks?: number;
+  }>();
+  const { pack_id } = useParams<{ pack_id: string }>();
   return (
     <FirestoreDocProvider collection="affirmation" id={pack_id}>
-      <AffirmationsHydratedGame />
+      <AffirmationsHydratedGame
+        pack_id={pack_id}
+        startingCardIndex={state?.cardIndex ?? 0}
+        uniqueClicks={state?.uniqueClicks ?? 0}
+      />
     </FirestoreDocProvider>
   );
 };
@@ -120,7 +129,11 @@ const CARDS_PER_PAGE = 1;
 
 type Status = "error" | "loading" | "ready";
 
-const AffirmationsHydratedGame: React.FC = () => {
+const AffirmationsHydratedGame: React.FC<{
+  pack_id: string;
+  startingCardIndex: number;
+  uniqueClicks: number;
+}> = ({ pack_id, startingCardIndex, uniqueClicks }) => {
   const { status, data } = useFirestoreDoc();
   const { languageNormalized } = useLanguage();
   if (status === "loading") {
@@ -137,15 +150,24 @@ const AffirmationsHydratedGame: React.FC = () => {
       cards={data.cards.filter((c: any) =>
         c.text_front.some((t: any) => t.language === languageNormalized),
       )}
+      pack_id={pack_id}
+      startingCardIndex={startingCardIndex}
+      uniqueClicks={uniqueClicks}
     />
   );
 };
 
-const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
+const AffirmationsHydratedFilteredGame: React.FC<{
+  cards: any[];
+  pack_id: string;
+  startingCardIndex: number;
+  uniqueClicks: number;
+}> = ({ cards, pack_id, startingCardIndex, uniqueClicks }) => {
   const history = useHistory();
-  const [cardIndex, setCardIndex] = useState<number>(0);
+  const [cardIndex, setCardIndex] = useState<number>(startingCardIndex);
   const [showFront, setShowFront] = useState<boolean>(true);
-  const [uniqueClickCount, setUniqueClickCount] = useState<number>(0);
+  const [uniqueClickCount, setUniqueClickCount] =
+    useState<number>(uniqueClicks);
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
 
   const { filterText } = useLanguage();
@@ -156,7 +178,7 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
       ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
       : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
   );
-  console.log(cards[cardIndex].id);
+
   const { clearAudio } = useAudioManager();
   const canBackward = cardIndex > 0;
   const canForward = cardIndex + CARDS_PER_PAGE < cards.length;
@@ -175,13 +197,19 @@ const AffirmationsHydratedFilteredGame: React.FC<any> = ({ cards }) => {
       switch (direction) {
         case "forward":
           if (canForward) {
-            // Check if 5, 10, 15, etc., cards are completed before moving
+            const nextCardIndex = cardIndex + 1;
+            console.log(uniqueClickCount, "clicks");
+            // Check 5, 10, 15, etc., cards
             if (uniqueClickCount > 0 && uniqueClickCount % 5 === 0) {
               const destination =
                 (uniqueClickCount / 5) % 2 === 0
                   ? "/community/thoughts"
                   : "/community/feelings";
-              history.push(destination);
+              history.push(destination, {
+                cardIndex: nextCardIndex,
+                pack_id: pack_id,
+                uniqueClicks: uniqueClickCount,
+              });
               return; // Stop here to trigger navigation
             }
             clearAudio();
