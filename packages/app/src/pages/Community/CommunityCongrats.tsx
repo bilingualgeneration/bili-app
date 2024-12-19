@@ -12,17 +12,25 @@ import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
+import { useHistory, useLocation } from "react-router";
 
 export const CommunityCongrats: React.FC<{
-  onKeepGoingClick?: any;
   count: number;
-}> = ({ onKeepGoingClick, count }) => {
+}> = ({ count }) => {
   const {
     profile: { isImmersive },
     activeChildProfile,
   } = useProfile();
   const { language } = useLanguage();
-  const [showText, setShowText] = useState(true); // State to show/hide text
+  const history = useHistory();
+  const location = useLocation<{
+    cardIndex?: number;
+    pack_id: string;
+    uniqueClicks: number;
+  }>(); // Access state
+  const pack_id = location.state?.pack_id; // Retrieve pack_id
+  const cardIndex = location.state?.cardIndex ?? 0;
+  const uniqueClicks = location.state?.uniqueClicks ?? 0; // Default to 0 if missing
   const { startTimer, stopTimer } = useTimeTracker();
 
   let audios: any[] = [];
@@ -44,6 +52,11 @@ export const CommunityCongrats: React.FC<{
   const button_es = "¡Sigue adelante!";
   const button_en = "Keep going!";
 
+  const onKeepGoingClick = () => {
+    // Navigate back to AffirmationsGame with pack_id and cardIndex
+    history.push(`/affirmations/play/${pack_id}`, { cardIndex, uniqueClicks });
+  };
+
   return (
     <div className="responsive-height-with-header">
       <DialogueScreen
@@ -54,9 +67,7 @@ export const CommunityCongrats: React.FC<{
         }
         characterImage={biliCharacter}
         onButtonClick={() => {
-          if (onKeepGoingClick) {
-            onKeepGoingClick();
-          }
+          onKeepGoingClick();
         }}
       >
         <IonText class="ion-text-center">
