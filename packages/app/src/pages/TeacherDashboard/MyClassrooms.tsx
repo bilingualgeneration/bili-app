@@ -33,6 +33,8 @@ import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
 import { Link } from "react-router-dom";
 
+import { useHistory } from "react-router-dom"; // TODO: remove
+
 const gradesLookup: { [i: string]: string } = {
   p: "Pre-K",
   k: "Kindergarten",
@@ -236,6 +238,9 @@ const ClassroomsList: React.FC = () => {
   const intl = useIntl();
   const { data, status } = useFirestoreCollection();
   const { subscribe } = useClassroom();
+  const { quickLaunchFlag, setQuickLaunchFlag } = useProfile();
+  const history = useHistory();
+
   switch (status) {
     case "loading":
       return <></>;
@@ -244,6 +249,10 @@ const ClassroomsList: React.FC = () => {
       return <>error</>;
       break;
     case "ready":
+      if (quickLaunchFlag) {
+        setQuickLaunchFlag(false);
+        history.push(`/select-student/${data[0].id}`);
+      }
       return (
         <IonRow
           className="ion-justify-content-between"

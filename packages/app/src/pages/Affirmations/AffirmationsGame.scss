@@ -15,6 +15,16 @@ $flap-side-size: 4rem;
 
   > ion-card-content {
     aspect-ratio: 1.65;
+    > ion-grid,
+    > ion-grid > ion-row {
+      height: 100%;
+    }
+  }
+
+  .affirmations-card-front-image {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   &.back {
