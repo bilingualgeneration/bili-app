@@ -1,0 +1,22 @@
+.dashboard-menu-button {
+  &:not(.isActive) {
+    > ion-icon,
+    > div {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &.isActive {
+    color: #006a67;
+    --background: rgba(0, 106, 103, 0.12);
+  }
+
+  & > div {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+#version-label {
+  color: rgba(0, 0, 0, 0.4);
+}

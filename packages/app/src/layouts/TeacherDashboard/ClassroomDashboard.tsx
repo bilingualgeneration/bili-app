@@ -1,6 +1,8 @@
+// TODO: migrate to ion-split-pane
+
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { SideMenu } from "@/components/Settings/SideMenu";
+import { DashboardMenu } from "@/components/DashboardMenu";
 import {
   TeacherDashboardHeader,
   TeacherDashboardLayout,
@@ -50,10 +52,10 @@ const ClassroomDashboardLayoutHydrated: React.FC<React.PropsWithChildren> = ({
   const { classroomId } = useParams<any>();
   return (
     <TeacherDashboardLayout showHeader={false}>
-      <IonGrid className="ion-no-padding">
+      <IonGrid>
         <IonRow>
           <IonCol size="2" style={{ minHeight: "100vh" }}>
-            <SideMenu />
+            <DashboardMenu />
           </IonCol>
           <IonCol size="10">
             <TeacherDashboardHeader />

@@ -17,7 +17,7 @@ import {
 } from "@ionic/react";
 import { Input } from "@/components/Input";
 import { SettingsHeader } from "@/components/Settings/SettingsHeader";
-import { SideMenu } from "@/components/Settings/SideMenu";
+import { DashboardMenu } from "@/components/DashboardMenu";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,7 +37,7 @@ export const SettingsLayout: FC<
             <IonGrid className="ion-no-padding inner-scroll">
               <IonRow>
                 <IonCol size="2" style={{ minHeight: "100vh" }}>
-                  <SideMenu />
+                  <DashboardMenu />
                 </IonCol>
                 <IonCol size="10">
                   <div style={{ backgroundColor: "#f7FAF9" }}>
