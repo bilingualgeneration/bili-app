@@ -30,6 +30,12 @@ import StarNotSharp from "@/assets/icons/star_profile.svg";
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";
 import StudentLogout from "@/assets/icons/logout.svg";
 
+interface ProfileChipPopoverLink {
+  i18nId: string;
+  icon: string;
+  url: string;
+}
+
 export const ProfileChip: React.FC = () => {
   const { id } = useStudent();
   return (
@@ -53,6 +59,24 @@ const HydratedProfileChip: React.FC = () => {
     popover.current!.event = e;
     setPopoverOpen(true);
   };
+
+  const links: ProfileChipPopoverLink[] = [
+    {
+      i18nId: "settings.myProfile",
+      icon: StudentAvatar,
+      url: "/profile/coming-soon",
+    },
+    {
+      i18nId: "settings.grownup",
+      icon: Settings,
+      url: role === "teacher" ? "/classrooms" : "/settings/overview",
+    },
+    {
+      i18nId: "settings.changeStudent",
+      icon: StudentLogout,
+      url: `/select-student/${info.id}`,
+    },
+  ];
 
   return (
     <>
@@ -95,94 +119,30 @@ const HydratedProfileChip: React.FC = () => {
         className="profile-popover-style"
       >
         <IonContent id="profile-chip-popover" forceOverscroll={false}>
-          <IonList>
+          {links.map((l: ProfileChipPopoverLink) => (
             <Link
-              to={`/profile/coming-soon`}
               className="no-underline"
+              key={l.i18nId}
               onClick={() => {
                 setPopoverOpen(false);
               }}
+              to={l.url}
             >
-              <IonItem button={true} detail={false} lines="none">
-                <IonIcon
-                  icon={StudentAvatar}
-                  style={{ marginRight: "0.5rem" }}
-                />
-                <IonText>
-                  <h1 className="text-md semibold">
-                    <I18nMessage id="settings.myProfile" />
-                  </h1>
+              <IonButton expand="block" fill="clear">
+                <IonIcon icon={l.icon} slot="start" />
+                <IonText className="ion-text-left color-suelo text-md">
+                  <I18nMessage id={l.i18nId} />
                   <I18nMessage
-                    id="settings.myProfile"
+                    id={l.i18nId}
                     level={2}
                     wrapper={(text: string) => (
                       <p className="text-sm">{text}</p>
                     )}
                   />
                 </IonText>
-              </IonItem>
+              </IonButton>
             </Link>
-            <Link
-              to={role === "teacher" ? "/classrooms" : "/settings/overview"}
-              className="no-underline"
-              onClick={() => {
-                setPopoverOpen(false);
-              }}
-            >
-              <IonItem
-                button={true}
-                detail={false}
-                lines="none"
-                className="change-student"
-              >
-                <IonIcon icon={Settings} style={{ marginRight: "0.5rem" }} />
-                <IonText>
-                  <h1 className="text-md semibold">
-                    <I18nMessage id="settings.grownup" />
-                  </h1>
-                  <I18nMessage
-                    id="settings.grownup"
-                    level={2}
-                    wrapper={(text: string) => (
-                      <p className="text-sm">{text}</p>
-                    )}
-                  />
-                </IonText>
-              </IonItem>
-            </Link>
-
-            <Link
-              to={`/select-student/${info.id}`}
-              className="no-underline"
-              onClick={() => {
-                setPopoverOpen(false);
-              }}
-            >
-              <IonItem
-                button={true}
-                detail={false}
-                lines="none"
-                className="change-student"
-              >
-                <IonIcon
-                  icon={StudentLogout}
-                  style={{ marginRight: "0.5rem" }}
-                />
-                <IonText>
-                  <h1 className="text-md semibold">
-                    <I18nMessage id="settings.changeStudent" />
-                  </h1>
-                  <I18nMessage
-                    id="settings.changeStudent"
-                    level={2}
-                    wrapper={(text: string) => (
-                      <p className="text-sm">{text}</p>
-                    )}
-                  />
-                </IonText>
-              </IonItem>
-            </Link>
-          </IonList>
+          ))}
         </IonContent>
       </IonPopover>
     </>
