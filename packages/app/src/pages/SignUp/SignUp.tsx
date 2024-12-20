@@ -21,8 +21,7 @@ import {
 } from "@/pages/SignUp/SignUpContext";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const SignUp: React.FC<{ entry?: string }> = ({ entry }) => (
   <SignUpDataProvider entry={entry}>
@@ -50,9 +49,15 @@ export const SignUpComponent: React.FC = () => {
   const { page: pages, setPage } = useSignUpData();
   const page: string = pages[pages.length - 1];
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    if (page === "roleSelect" && (query.has("code") || query.has("email"))) {
+    if (
+      page === "roleSelect" &&
+      (query.has("code") ||
+        query.has("email") ||
+        location.pathname === "/sign-up/by-class-code")
+    ) {
       // code supplied so redirect to ClassCode
       setPage(["classCode"]);
     }
