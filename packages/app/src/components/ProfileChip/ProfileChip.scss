@@ -41,14 +41,9 @@
 }
 
 #profile-chip-popover {
-  ion-list {
-    background-color: #c3ece2;
-    //border-radius: 12px;
-  }
-  ion-item {
-    font-family: "Outfit";
-    margin: 0.5rem 0.25rem 0.5rem 0.25rem;
-    border-radius: 0.5rem;
+  --background: #c3ece2;
+  ion-button ion-text {
+    width: 100%;
   }
 }
 
