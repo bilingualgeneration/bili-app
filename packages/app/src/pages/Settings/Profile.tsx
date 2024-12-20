@@ -1,6 +1,14 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { IonButton, IonGrid, IonRow, IonCol } from "@ionic/react";
+import {
+  IonButton,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonItem,
+  IonLabel,
+  IonText,
+} from "@ionic/react";
 import { Input } from "@/components/Input";
 import { useMaskito } from "@maskito/react";
 import { useState } from "react";
@@ -10,6 +18,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import "./Profile.scss";
+import {
+  MultipleCheckbox,
+  MultipleCheckboxOption,
+} from "@/components/MultipleCheckbox";
+
+const OptionWrapper = ({ children }: { children: JSX.Element }) => {
+  return <IonCol size="3">{children}</IonCol>;
+};
 
 export const Profile: React.FC = () => {
   const intl = useIntl();
@@ -76,23 +92,97 @@ export const Profile: React.FC = () => {
     setSelectedCountry(event.detail.value);
   };
 
+  const gradesOptions: MultipleCheckboxOption[] = [
+    {
+      label: "Below 3 years old",
+      value: "below",
+    },
+    {
+      label: "3-5 years old",
+      value: "3-5",
+    },
+    {
+      label: "5-7 years old",
+      value: "5-7",
+    },
+    {
+      label: "Above 7 years old",
+      value: "above",
+    },
+  ];
+
   return (
     <>
+      <form action="">
+        <IonItem>
+          <IonLabel>
+            <h1 className="font-3xl semibold color-suelo">Add a Child</h1>
+          </IonLabel>
+        </IonItem>
+
+        <div className="adult-profile-content">
+          <Input
+            label="First name or nickname"
+            labelPlacement="above"
+            required={true}
+            name="name"
+            fill="outline"
+            control={control}
+            testId="child-name-input"
+            type="text"
+            className="child-name-input"
+          />
+
+          <div className="margin-bottom-1 margin-top-2">
+            <IonText>
+              <h2 className="text-md semibold color-barro">Age Range</h2>
+            </IonText>
+          </div>
+          <div className="text-md color-suelo grades-styles">
+            <IonGrid>
+              <IonRow>
+                <MultipleCheckbox
+                  control={control}
+                  labelPlacement="end"
+                  options={gradesOptions}
+                  name="grades"
+                  wrapper={OptionWrapper}
+                />
+              </IonRow>
+            </IonGrid>
+          </div>
+
+          <div className="save-name-block">
+            <IonButton
+              className="margin-top-2 elevate save-changes-button"
+              expand="block"
+              shape="round"
+              type="button"
+              data-testid="teacher-about-continue-button"
+              // disabled={!isValid}
+              onClick={onSubmit}
+            >
+              <FormattedMessage id="common.continue" />
+            </IonButton>
+          </div>
+        </div>
+      </form>
       <form onSubmit={onSubmit}>
         <div className="settings-pg1-container">
           <IonGrid>
-            <IonRow className="ion-justify-content-between row">
-              <IonCol size="auto">
-                <h1
-                  className="child-profile-heading"
-                  style={{ marginLeft: 30 }}
-                >
-                  <FormattedMessage
-                    id="settings.adult"
-                    defaultMessage="Adult Profile"
-                    description="Adult Profile page title in settings"
-                  />
-                </h1>
+            <IonRow className="">
+              <IonCol size="">
+                <IonItem>
+                  <IonLabel>
+                    <h1 className="font-3xl semibold color-suelo">
+                      <FormattedMessage
+                        id="settings.adult"
+                        defaultMessage="Adult Profile"
+                        description="Adult Profile page title in settings"
+                      />
+                    </h1>
+                  </IonLabel>
+                </IonItem>
               </IonCol>
             </IonRow>
 
