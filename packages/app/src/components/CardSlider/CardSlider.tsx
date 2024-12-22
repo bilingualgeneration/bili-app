@@ -23,6 +23,7 @@ export interface CardSliderProps {
   startingCardIndex: number;
   uniqueClicks: number;
   pack_id: string;
+  title_id: string;
 }
 
 export const CardSlider: React.FC<CardSliderProps> = ({
@@ -31,6 +32,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   startingCardIndex,
   uniqueClicks,
   pack_id,
+  title_id,
 }) => {
   const history = useHistory();
 
@@ -114,10 +116,10 @@ export const CardSlider: React.FC<CardSliderProps> = ({
             style={{ display: "flex", flexDirection: "column" }}
           >
             <h1 className="text-4xl semibold">
-              <I18nMessage id="affirmations.game.title" />
+              <I18nMessage id={title_id} />
             </h1>
             <I18nMessage
-              id="affirmations.game.title"
+              id={title_id}
               level={2}
               wrapper={(text: string) => (
                 <p className="text-2xl color-english">{text}</p>

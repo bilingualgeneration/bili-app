@@ -3,17 +3,6 @@
 import { CardSlider } from "@/components/CardSlider/CardSlider";
 import { useParams } from "react-router";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCol,
-  IonGrid,
-  IonImg,
-  IonRow,
-  IonText,
-} from "@ionic/react";
 import { useLanguage } from "@/hooks/Language";
 import { useLocation } from "react-router";
 
@@ -61,6 +50,7 @@ const AffirmationsHydratedGame: React.FC<{
       pack_id={pack_id} // Pass pack_id
       startingCardIndex={startingCardIndex} // Pass startingCardIndex
       uniqueClicks={uniqueClicks} // Pass uniqueClicks
+      title_id="affirmations.game.title"
     />
   );
 };
