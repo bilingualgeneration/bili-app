@@ -1,0 +1,56 @@
+$flap-side-size: 4rem;
+
+.card {
+  border-radius: 2rem;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - $flap-side-size),
+    calc(100% - $flap-side-size) 100%,
+    0 100%
+  );
+
+  > ion-card-content {
+    aspect-ratio: 1.65;
+    > ion-grid,
+    > ion-grid > ion-row {
+      height: 100%;
+    }
+  }
+
+  .card-front-image {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &.back {
+    background-color: #d6d3f0;
+    .flap {
+      background-color: #fff;
+    }
+  }
+
+  &.front .flap {
+    background-color: #d6d3f0;
+  }
+  .flap {
+    background-color: red;
+    border-radius: 2rem 0 0 0;
+    bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    cursor: pointer;
+    height: calc($flap-side-size);
+    position: absolute;
+    right: 0;
+    width: calc($flap-side-size);
+    z-index: 10;
+  }
+}
+
+.card-wrapper {
+  filter: drop-shadow(-0.372925rem 0.74585rem 2.23755rem rgba(0, 0, 0, 0.25));
+}
