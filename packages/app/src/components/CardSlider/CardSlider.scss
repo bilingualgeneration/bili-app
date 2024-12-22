@@ -1,0 +1,23 @@
+.responsive-height-with-header {
+  height: calc(100vh - 4rem); /* Maintain space for header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-control {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rem;
+  z-index: 10;
+
+  &.backward {
+    left: 0;
+  }
+
+  &.forward {
+    right: 0;
+  }
+}
