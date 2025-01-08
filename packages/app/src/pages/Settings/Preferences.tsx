@@ -110,7 +110,7 @@ export const Preferences: React.FC = () => {
             </h2>
           </IonText>
         </IonItem>
-        <IonGrid className="margin-left-1">
+        <IonGrid className="margin-left-2">
           <IonRow className="ion-justify-content-around">
             <MultipleCheckbox
               control={control}

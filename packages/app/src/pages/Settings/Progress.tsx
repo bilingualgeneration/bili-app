@@ -125,9 +125,7 @@ export const Progress: React.FC = () => {
                     </IonCol>
                   </IonRow>
                   <IonRow class="ion-align-items-center progress-graph-row">
-                    <IonCol className="progress-graph">
-                      <IonImg src="./assets/img/progress-graph.png"></IonImg>
-                    </IonCol>
+                    <IonCol className="progress-graph"></IonCol>
                     <IonCol className="progress-data">
                       {/* first group */}
                       <IonRow className="no-padding">
