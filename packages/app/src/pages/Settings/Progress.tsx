@@ -24,6 +24,7 @@ import { bookOutline } from "ionicons/icons";
 import "./Progress.scss";
 import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import PieChartComponent from "@/components/PieChartComponent/PieChartComponent";
 
 export const Progress: React.FC = () => {
   const [period, setPeriod] = useState("week" as "week" | "all");
@@ -125,7 +126,17 @@ export const Progress: React.FC = () => {
                     </IonCol>
                   </IonRow>
                   <IonRow class="ion-align-items-center progress-graph-row">
-                    <IonCol className="progress-graph"></IonCol>
+                    <IonCol className="progress-graph">
+                      <PieChartComponent
+                        data={[14, 20, 30, 46]}
+                        colors={["#22BEB9", "#006A67", "#003735", "#D3EAE8"]}
+                        innRadius={40}
+                        width={200}
+                        height={205}
+                        cX={105}
+                        cY={85}
+                      />
+                    </IonCol>
                     <IonCol className="progress-data">
                       {/* first group */}
                       <IonRow className="no-padding">
