@@ -28,6 +28,7 @@ export const DashboardMenu: React.FC = () => {
   const { setInfo: setStudentInfo } = useStudent();
   const location = useLocation();
   const { classroomId } = useParams<{ classroomId: string }>();
+  const { unsubscribe: unsubscribeFromClassroom } = useClassroom();
   const { profile, signout } = useProfile();
   const links: DashboardMenuLink[] = [
     {
@@ -122,7 +123,7 @@ export const DashboardMenu: React.FC = () => {
             lastName: null,
             id: null,
           });
-
+          unsubscribeFromClassroom();
           signout();
         }}
       >
