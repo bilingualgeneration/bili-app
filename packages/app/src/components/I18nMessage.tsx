@@ -4,7 +4,7 @@ interface I18nMessage {
   id: string;
   languageSource?: "authed" | "unauthed";
   level?: number;
-  wrapper?: any; ///////////////////////
+  wrapper?: any;
 }
 
 export const I18nMessage: React.FC<I18nMessage> = ({
