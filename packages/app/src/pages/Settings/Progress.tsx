@@ -130,7 +130,7 @@ export const Progress: React.FC = () => {
                       <PieChartComponent
                         data={[14, 20, 30, 46]}
                         colors={["#22BEB9", "#006A67", "#003735", "#D3EAE8"]}
-                        innRadius={40}
+                        innRadius={50}
                         width={200}
                         height={205}
                         cX={105}
