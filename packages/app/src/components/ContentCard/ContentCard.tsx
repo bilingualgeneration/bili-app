@@ -16,9 +16,12 @@ export interface Pill {
   secondaryText?: string;
 }
 
+// TODO: convert support of title and titleEn to titles
+
 type ContentCardProps = {
-  title: string;
-  titleEn: string;
+  title?: string;
+  titleEn?: string;
+  titles?: any[]; // assume each item is an object with text prop
   fid?: string;
   category: string;
   cover: string;
@@ -54,6 +57,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   link,
   title,
   titleEn,
+  titles,
   pills = [],
 }) => {
   const { language } = useLanguage();
@@ -74,11 +78,21 @@ export const ContentCard: React.FC<ContentCardProps> = ({
         {pills.map((pill) => (
           <Pill {...pill} key={pill.primaryText} />
         ))}
-        <h1 className="text-2xl semibold color-nube">
-          {language === "en" ? titleEn : title}
-        </h1>
-        {(language === "es.en" || language === "en.es") && (
+        {title && (
+          <h1 className="text-2xl semibold color-nube">
+            {language === "en" ? titleEn : title}
+          </h1>
+        )}
+        {titleEn && (language === "es.en" || language === "en.es") && (
           <p className="text-sm color-nube">{titleEn}</p>
+        )}
+        {titles && (
+          <>
+            <h1 className="text-2xl semibold color-nube">{titles[0].text}</h1>
+            {titles.length > 1 && (
+              <p className="text-sm color-nube">{titles[1].text}</p>
+            )}
+          </>
         )}
       </IonText>
       {isLocked && <ContentLock borderRadius="0.75rem" />}

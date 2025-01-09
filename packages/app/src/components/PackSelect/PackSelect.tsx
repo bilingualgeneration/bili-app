@@ -1,3 +1,4 @@
+import { Carousel } from "@/components/Carousel";
 import { collection, query, orderBy } from "firebase/firestore";
 import { ContentCard } from "@/components/ContentCard";
 import { IonCard, IonIcon, IonText } from "@ionic/react";
@@ -7,7 +8,6 @@ import {
   useFirestoreCollection,
 } from "@/hooks/FirestoreCollection";
 import { useProfile } from "@/hooks/Profile";
-import { Carousel } from "@/components/Carousel";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { PackHeader } from "../PackHeader";
 import type { Pill } from "@/components/ContentCard";
