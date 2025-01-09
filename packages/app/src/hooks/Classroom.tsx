@@ -47,6 +47,7 @@ export const ClassroomProvider: React.FC<React.PropsWithChildren> = ({
     }
     classroomUnsubscribe.current = null;
     setCurrentId(null);
+    Preferences.remove({ key: "classroom" });
   };
 
   useEffect(() => {
