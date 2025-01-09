@@ -98,7 +98,7 @@ export const DashboardMenu: React.FC = () => {
       {links
         .filter((l: DashboardMenuLink) => l.role.includes(profile.role))
         .map((l: DashboardMenuLink) => (
-          <Link className="no-underline" id={l.i18nId} to={l.url}>
+          <Link className="no-underline" id={l.i18nId} to={l.url} key={l.url}>
             <IonButton
               className={classnames("dashboard-menu-button", {
                 isActive: location.pathname === l.url,
