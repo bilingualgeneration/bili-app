@@ -87,10 +87,10 @@ ion-item.progress-item {
 .progress-style ion-item {
   --background: #f7faf9;
 }
-.grid-graph-style {
-  margin-inline: 0;
-  padding: 3rem;
-}
+// .grid-graph-style {
+//   margin-inline: 0;
+//   padding: 3rem;
+// }
 
 .grid-card {
   margin-bottom: 1em;
@@ -102,7 +102,7 @@ ion-item.progress-item {
   text-align: start;
 }
 
-.whole-grid-style ion-card {
+.grid-graph-style ion-card {
   margin-inline: 0;
   height: 100%;
   margin: 0;
@@ -221,7 +221,7 @@ ion-item.kids-name-select {
 }
 
 #settings-progress-bottom-row {
-  margin-top: 1rem;
+  //margin-top: 1rem;
   ion-col > * {
     height: 100%;
   }
