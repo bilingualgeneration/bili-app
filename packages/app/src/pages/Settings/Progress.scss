@@ -84,6 +84,15 @@ ion-item.progress-item {
 .progress-style ion-select .select-highlight {
   --background: none;
 }
+
+.progress-style ion-select::part(text) {
+  color: #000;
+  font-family: Outfit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
 .progress-style ion-item {
   --background: #f7faf9;
 }

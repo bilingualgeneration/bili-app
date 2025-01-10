@@ -38,13 +38,7 @@ export const Progress: React.FC = () => {
         <IonList className="ion-no-padding progress-style">
           <IonItem className="ion-no-margin ion-no-padding">
             <div className="title-style">
-              <h1>
-                <FormattedMessage
-                  id="settings.progress.pageTitle"
-                  defaultMessage="Progress"
-                  description="Title at the top of 'Progress' settings page"
-                />
-              </h1>
+              <h1 className="text-3xl semibold">Progress</h1>
             </div>
           </IonItem>
 
@@ -53,13 +47,7 @@ export const Progress: React.FC = () => {
             lines="none"
           >
             <div className="segment-style">
-              <h4>
-                <FormattedMessage
-                  id="settings.progress.activity"
-                  defaultMessage="Activity insights"
-                  description="Subtitle of 'Progress' settings page"
-                />
-              </h4>
+              <h4 className="text-2xl semibold">Activity insights</h4>
               {/* Temporary commented out week/all time segment */}
               {/* <div className="segment-control">
                 <button
@@ -99,10 +87,9 @@ export const Progress: React.FC = () => {
                 <span className="name-avatar small-oval-element">
                   {firstLetter}
                 </span>
-                <h4>{kidsName}</h4>
               </div>
               <IonSelectOption value="1">{kidsName}</IonSelectOption>
-              <IonSelectOption value="2">{kidsName}</IonSelectOption>
+              <IonSelectOption value="2">{"Michael"}</IonSelectOption>
               {/* <IonSelectOption value="3">{kidsName}</IonSelectOption>
                           <IonSelectOption value="4">{kidsName}</IonSelectOption>
                           <IonSelectOption value="5">{kidsName}</IonSelectOption>  */}
