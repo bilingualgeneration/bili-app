@@ -1,29 +1,24 @@
 import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
-import { useActivity } from "@/contexts/ActivityContext";
-import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
-import { useTimeTracker } from "@/hooks/TimeTracker";
 import { IonText } from "@ionic/react";
-import { useEffect, useState } from "react";
-import { first } from "rxjs";
+import { useLocation, useHistory } from "react-router";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
 
 export const CommunityCongrats: React.FC<{
-  onKeepGoingClick?: any;
   count: number;
-}> = ({ onKeepGoingClick, count }) => {
-  const {
-    profile: { isImmersive },
-    activeChildProfile,
-  } = useProfile();
+}> = ({ count }) => {
   const { language } = useLanguage();
-  const [showText, setShowText] = useState(true); // State to show/hide text
-  const { startTimer, stopTimer } = useTimeTracker();
+  const history = useHistory();
+  const location = useLocation<{
+    returnTo?: string;
+    cardIndex?: number;
+    uniqueClicks?: number;
+  }>();
+  const state = location.state;
 
   let audios: any[] = [];
   switch (language) {
@@ -54,8 +49,13 @@ export const CommunityCongrats: React.FC<{
         }
         characterImage={biliCharacter}
         onButtonClick={() => {
-          if (onKeepGoingClick) {
-            onKeepGoingClick();
+          if (state?.returnTo) {
+            history.push(state.returnTo, {
+              cardIndex: state.cardIndex ?? 0,
+              uniqueClicks: count,
+            });
+          } else {
+            history.push("/affirmations/play");
           }
         }}
       >

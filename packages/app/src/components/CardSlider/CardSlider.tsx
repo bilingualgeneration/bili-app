@@ -1,68 +1,104 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { IonImg, IonGrid, IonRow, IonCol } from "@ionic/react";
 import { AudioButton } from "@/components/AudioButton";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
+import { useHistory, useLocation } from "react-router";
+import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { Card } from "./Card";
 
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./CardSlider.scss";
-import { useHistory } from "react-router";
 
 export interface CardSliderProps {
-  cards: {
-    id: string;
-    image: { url: string };
-    text_front: { text: string }[];
-    text_back: { text: string }[];
-  }[];
-  cardsPerPage?: number;
-  startingCardIndex: number;
-  uniqueClicks: number;
-  pack_id: string;
   title_id: string;
+  startingCardIndex?: number;
+  uniqueClicks?: number;
+  cardsPerPage?: number;
+}
+
+interface LocationState {
+  returnTo?: string;
+  cardIndex?: number;
+  uniqueClicks?: number;
 }
 
 export const CardSlider: React.FC<CardSliderProps> = ({
-  cards,
-  cardsPerPage = 1,
-  startingCardIndex,
-  uniqueClicks,
-  pack_id,
   title_id,
+  startingCardIndex = 0,
+  uniqueClicks = 0,
+  cardsPerPage = 1,
 }) => {
   const history = useHistory();
-
+  const location = useLocation<LocationState>();
   const [cardIndex, setCardIndex] = useState<number>(startingCardIndex);
   const [showFront, setShowFront] = useState<boolean>(true);
   const [uniqueClickCount, setUniqueClickCount] =
     useState<number>(uniqueClicks);
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
 
-  const { filterText } = useLanguage();
-  const text_front_filtered = filterText(cards[cardIndex].text_front);
-  const text_back_filtered = filterText(cards[cardIndex].text_back);
-
+  const { status, data } = useFirestoreDoc();
+  const { languageNormalized, filterText } = useLanguage();
   const { clearAudio } = useAudioManager();
+
+  const filteredCards = data?.cards
+    ? data.cards.filter((card: any) =>
+        card.text_front.some(
+          (text: any) => text.language === languageNormalized,
+        ),
+      )
+    : [];
+
+  const text_front_filtered = React.useMemo(
+    () => filterText(filteredCards[cardIndex]?.text_front || []),
+    [filteredCards, cardIndex, filterText],
+  );
+  const text_back_filtered = React.useMemo(
+    () => filterText(filteredCards[cardIndex]?.text_back || []),
+    [filteredCards, cardIndex, filterText],
+  );
+
   const audio = Object.fromEntries(
     showFront
-      ? text_front_filtered.map((t: any) => [t.language, t.audio.url])
-      : text_back_filtered.map((t: any) => [t.language, t.audio.url]),
+      ? text_front_filtered.map((t: any) => [t.language, t.audio?.url || ""])
+      : text_back_filtered.map((t: any) => [t.language, t.audio?.url || ""]),
   );
 
   const canBackward = cardIndex > 0;
-  const canForward = cardIndex + cardsPerPage < cards.length;
+  const canForward = cardIndex + cardsPerPage < filteredCards.length;
 
   const handleAudioClick = () => {
-    if (currentCardId !== cards[cardIndex].id) {
-      setCurrentCardId(cards[cardIndex].id);
+    if (currentCardId !== filteredCards[cardIndex]?.id) {
+      setCurrentCardId(filteredCards[cardIndex]?.id);
       const newCount = uniqueClickCount + 1;
       setUniqueClickCount(newCount);
+
+      if (newCount > 0 && newCount % 5 === 0) {
+        const destination =
+          (newCount / 5) % 2 === 0
+            ? "/community/thoughts"
+            : "/community/feelings";
+        history.push(destination, {
+          cardIndex,
+          uniqueClicks: newCount,
+          returnTo: location.pathname,
+        });
+        return;
+      }
     }
   };
+
+  useEffect(() => {
+    if (location.state?.returnTo === location.pathname) {
+      const { cardIndex, uniqueClicks } = location.state;
+      setCardIndex(cardIndex ?? 0);
+      setUniqueClickCount(uniqueClicks ?? 0);
+      setShowFront(true);
+    }
+  }, [location.state]);
 
   const changeCard = useCallback(
     (direction: string) => {
@@ -70,24 +106,10 @@ export const CardSlider: React.FC<CardSliderProps> = ({
         case "forward":
           if (canForward) {
             const nextCardIndex = cardIndex + 1;
-            console.log(uniqueClickCount, "clicks");
-            // Check 5, 10, 15, etc., cards
-            if (uniqueClickCount > 0 && uniqueClickCount % 5 === 0) {
-              const destination =
-                (uniqueClickCount / 5) % 2 === 0
-                  ? "/community/thoughts"
-                  : "/community/feelings";
-              history.push(destination, {
-                cardIndex: nextCardIndex,
-                pack_id: pack_id,
-                uniqueClicks: uniqueClickCount,
-              });
-              return; // Stop here to trigger navigation
-            }
             clearAudio();
             setShowFront(true);
             setCardIndex(
-              Math.min(cards.length - cardsPerPage, cardIndex + cardsPerPage),
+              Math.min(filteredCards.length - cardsPerPage, nextCardIndex),
             );
           }
           return;
@@ -103,8 +125,24 @@ export const CardSlider: React.FC<CardSliderProps> = ({
           return;
       }
     },
-    [cards, cardIndex, clearAudio, setCardIndex, setShowFront],
+    [
+      cardIndex,
+      canForward,
+      canBackward,
+      filteredCards,
+      clearAudio,
+      setCardIndex,
+      setShowFront,
+      cardsPerPage,
+    ],
   );
+
+  if (status === "loading") {
+    return <div>Loading cards...</div>;
+  }
+  if (status === "error" || !data || !data.cards) {
+    return <div>Error loading cards.</div>;
+  }
 
   return (
     <div className="responsive-height-with-header flex ion-align-items-center">
@@ -137,8 +175,8 @@ export const CardSlider: React.FC<CardSliderProps> = ({
               src={backward}
             />
             <Card
-              image={cards[cardIndex].image}
-              key={cards[cardIndex].id}
+              image={filteredCards[cardIndex]?.image || { url: "" }}
+              key={filteredCards[cardIndex]?.id || ""}
               setShowFront={setShowFront}
               showFront={showFront}
               text_back={text_back_filtered}
