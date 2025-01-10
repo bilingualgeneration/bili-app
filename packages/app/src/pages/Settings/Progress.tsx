@@ -60,7 +60,8 @@ export const Progress: React.FC = () => {
                   description="Subtitle of 'Progress' settings page"
                 />
               </h4>
-              <div className="segment-control">
+              {/* Temporary commented out week/all time segment */}
+              {/* <div className="segment-control">
                 <button
                   onClick={() => setPeriod("week")}
                   className={`segment-control-button ${
@@ -85,7 +86,7 @@ export const Progress: React.FC = () => {
                     description="Side 2 of toggle button on 'Progress' settings page"
                   />
                 </button>
-              </div>
+              </div> */}
             </div>
           </IonItem>
 
@@ -101,10 +102,10 @@ export const Progress: React.FC = () => {
                 <h4>{kidsName}</h4>
               </div>
               <IonSelectOption value="1">{kidsName}</IonSelectOption>
-              {/* <IonSelectOption value="2">{kidsName}</IonSelectOption>
-                          <IonSelectOption value="3">{kidsName}</IonSelectOption>
+              <IonSelectOption value="2">{kidsName}</IonSelectOption>
+              {/* <IonSelectOption value="3">{kidsName}</IonSelectOption>
                           <IonSelectOption value="4">{kidsName}</IonSelectOption>
-                          <IonSelectOption value="5">{kidsName}</IonSelectOption> */}
+                          <IonSelectOption value="5">{kidsName}</IonSelectOption>  */}
             </IonSelect>
           </IonItem>
         </IonList>
@@ -215,6 +216,13 @@ export const Progress: React.FC = () => {
 
             {/* Activities total time */}
             <IonCol size-xs="6" size-sm="5">
+              <IonRow>
+                <IonCol>
+                  <p className="grid-text-style-big-activities">
+                    Top Activities
+                  </p>
+                </IonCol>
+              </IonRow>
               <IonRow id="settings-progress-bottom-row">
                 <IonCol size-xs="12">
                   <div className="grid-card">
@@ -312,36 +320,38 @@ export const Progress: React.FC = () => {
                   </div>
                 </IonCol>
                 <IonCol class="ion-text-center" size-xs="12">
-                  <IonCard className="activities-card">
-                    <div className="activities-card-overlay"></div>
-                    <IonGrid>
-                      <IonRow class="ion-align-items-center">
-                        <IonCol>
-                          <span>25</span>
-                        </IonCol>
+                  <div className="grid-card">
+                    <IonCard className="activities-card">
+                      <div className="activities-card-overlay"></div>
+                      <IonGrid>
+                        <IonRow class="">
+                          <IonCol>
+                            <span>25</span>
+                          </IonCol>
 
-                        <IonCol class="ion-text-center">
-                          <IonIcon
-                            className="book-icon"
-                            icon={bookOutline}
-                            aria-hidden="true"
-                          />
-                        </IonCol>
-                      </IonRow>
-
-                      <IonRow>
-                        <IonCol>
-                          <IonCardTitle>
-                            <FormattedMessage
-                              id="settings.progress.activities"
-                              defaultMessage="Activities"
-                              description="'Activities' card on Progress page detailing number of activities"
+                          <IonCol class="ion-text-center">
+                            <IonIcon
+                              className="book-icon"
+                              icon={bookOutline}
+                              aria-hidden="true"
                             />
-                          </IonCardTitle>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCard>
+                          </IonCol>
+                        </IonRow>
+
+                        <IonRow>
+                          <IonCol>
+                            <IonCardTitle>
+                              <FormattedMessage
+                                id="settings.progress.activities"
+                                defaultMessage="Activities"
+                                description="'Activities' card on Progress page detailing number of activities"
+                              />
+                            </IonCardTitle>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonCard>
+                  </div>
                 </IonCol>
               </IonRow>
             </IonCol>
