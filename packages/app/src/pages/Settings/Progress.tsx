@@ -127,7 +127,7 @@ export const Progress: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 {/* Graph Row */}
-                <IonRow>
+                <IonRow className="ion-align-items-center">
                   <IonCol className="progress-graph">
                     <PieChartComponent
                       data={[14, 20, 30, 46]}
@@ -139,7 +139,7 @@ export const Progress: React.FC = () => {
                       cY={85}
                     />
                   </IonCol>
-                  <IonCol size="6" className="progress-data">
+                  <IonCol size="8" sizeMd="6" className="progress-data">
                     {/* first group */}
                     <IonRow className="ion-justify-content-around">
                       <IonCol size="1">
@@ -236,6 +236,7 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Fabrica de cuentos"}
+                      titleFontSize="xl"
                       content={intl.formatMessage({
                         id: "settings.progress.activity1",
                         defaultMessage: "20 minutes in total",
@@ -267,6 +268,7 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Afirmaciones"}
+                      titleFontSize="xl"
                       content={intl.formatMessage({
                         id: "settings.progress.activity2",
                         defaultMessage: "12 minutes in total",
@@ -298,6 +300,7 @@ export const Progress: React.FC = () => {
                         </div>
                       }
                       title={"Cuento: Cara de Catrina"}
+                      titleFontSize="xl"
                       content={intl.formatMessage({
                         id: "settings.progress.activity3",
                         defaultMessage: "9 minutes in total",
