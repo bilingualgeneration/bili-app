@@ -1,43 +1,93 @@
-// TODO: remove
+// TODO: update for future user system
+import { ErrorMessages } from "@/components/ErrorMessages";
 import { getFirebaseAuth } from "@/components/Firebase";
-import { IonSpinner } from "@ionic/react";
+import { I18nMessage } from "@/components/I18nMessage";
+import { Input } from "@/components/Input";
+import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
+import { useState } from "react";
+import { z } from "zod";
 
 import "./QuickLaunch.scss";
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
+const lookup: { [key: string]: string } = {
+  "40GR": "2GrKmIhSZYglRYEXFbXB",
+  OPUT: "EDIfJEx5QQZxYHsT9ixW",
+  V5QU: "eGmlbVHHFxYI2tlzd037",
+  GI6E: "CfApuZE3f9blBoG8G1pV",
 };
 
 export const QuickLaunch: React.FC = () => {
   const auth = getFirebaseAuth();
-  const query = useQuery();
+  const [errors, setErrors] = useState<string[] | null>(null);
   const { quickLaunchFlag, setQuickLaunchFlag } = useProfile();
+  const history = useHistory();
+  const schema = z.object({
+    code: z.string(),
+  });
 
-  useEffect(() => {
-    const password = query.get("password");
-    const email = query.get("email");
-    setQuickLaunchFlag(true);
-
-    // @ts-ignore
-    signInWithEmailAndPassword(auth, email, password);
-  }, [query]);
-
+  const {
+    control,
+    handleSubmit,
+    formState: {},
+    watch,
+  } = useForm<z.infer<typeof schema>>();
+  const onSubmit = handleSubmit(async (data) => {
+    const code = data.code.toUpperCase();
+    if (lookup[code]) {
+      setErrors(null);
+      setQuickLaunchFlag(true);
+      signInWithEmailAndPassword(
+        auth,
+        `${lookup[code]}@thebiliapp.com`,
+        lookup[code],
+      );
+    } else {
+      setErrors(["invalidClassCode"]);
+    }
+  });
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <IonSpinner id="quicklaunch-spinner" />
-    </div>
+    <>
+      <UnauthedHeader
+        backButtonOnClick={() => {
+          history.push("/");
+        }}
+      />
+      <IonCard style={{ maxWidth: "75%", margin: "auto" }}>
+        <IonCardContent className="ion-text-center">
+          <IonText>
+            <h1 className="text-4xl margin-bottom-1">
+              <I18nMessage
+                id="splash.classCodeButton"
+                languageSource="unauthed"
+              />
+            </h1>
+          </IonText>
+          <form onSubmit={onSubmit}>
+            <Input
+              control={control}
+              className="quicklaunch-input"
+              fill="outline"
+              labelPlacement="floating"
+              name={"code"}
+              required={true}
+              maxlength={4}
+            />
+            <ErrorMessages
+              className="margin-top-1"
+              errors={errors}
+              languageSource="unauthed"
+            />
+            <IonButton className="margin-top-2" type="submit">
+              sign in
+            </IonButton>
+          </form>
+        </IonCardContent>
+      </IonCard>
+    </>
   );
 };
