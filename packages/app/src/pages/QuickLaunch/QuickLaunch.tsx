@@ -83,7 +83,7 @@ export const QuickLaunch: React.FC = () => {
               languageSource="unauthed"
             />
             <IonButton className="margin-top-2" type="submit">
-              sign in
+              <I18nMessage id="common.continue" languageSource="unauthed" />
             </IonButton>
           </form>
         </IonCardContent>
