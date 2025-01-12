@@ -65,6 +65,7 @@
   "dashboardMenu.profile": "Perfil",
   "dashboardMenu.progress": "Progreso",
   "dashboardMenu.students": "Estudiantes",
+  "errors.invalidClassCode": "Código de clase incorrecto. ¡Inténtalo de nuevo, por favor!",
   "errors.no-matching-students": "No se pudo encontrar ningún estudiante con ese código de aula para usted",
   "headers.stories.title": "Cuentos",
   "intruder.congrats.description.5": "Has encontrado cinco intrusos de rima. ¿Puedes seguir?",

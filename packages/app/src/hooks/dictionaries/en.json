@@ -65,6 +65,7 @@
   "dashboardMenu.profile": "Profile",
   "dashboardMenu.progress": "Progress",
   "dashboardMenu.students": "Students",
+  "errors.invalidClassCode": "Wrong class Code. Try again, please!",
   "errors.no-matching-students": "Could not find any students with that classroom code for you",
   "headers.stories.title": "Stories",
   "intruder.congrats.description.5": "You've found five rhyme intruders. Can you keep going?",
