@@ -252,7 +252,7 @@ export const StudentDashboard: React.FC = () => {
     {
       reactintlId: "common.wellness",
       backgroundColor: "#ac217b",
-      //link: "/wellness",
+      link: "/wellness",
       icon: <WellnessIcon />,
     },
     {
