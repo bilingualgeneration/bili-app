@@ -74,7 +74,7 @@ const HydratedProfileChip: React.FC = () => {
     {
       i18nId: "settings.changeStudent",
       icon: StudentLogout,
-      url: `/select-student/${info.id}`,
+      url: `/select-student/${info?.id}`,
     },
   ];
 

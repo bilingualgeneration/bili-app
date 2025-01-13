@@ -251,6 +251,7 @@ const ClassroomsList: React.FC = () => {
     case "ready":
       if (quickLaunchFlag) {
         setQuickLaunchFlag(false);
+        subscribe(data[0].id);
         history.push(`/select-student/${data[0].id}`);
       }
       return (

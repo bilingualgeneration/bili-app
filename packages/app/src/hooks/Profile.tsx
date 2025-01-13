@@ -66,8 +66,8 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
     userRef.current = undefined;
     signOut(auth).then(() => {});
   };
-
   const isLoading = user === undefined || profile === undefined;
+  console.log(user, profile);
   return (
     <ProfileContext.Provider
       children={children}

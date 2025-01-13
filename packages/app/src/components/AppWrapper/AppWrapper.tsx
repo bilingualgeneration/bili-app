@@ -12,7 +12,6 @@ export const AppWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { isLoading: isProfileLoading } = useProfile();
   const { isLoading: isClassroomLoading } = useClassroom();
   const { isLoading: isStudentLoading } = useStudent();
-
   if (isProfileLoading || isClassroomLoading || isStudentLoading) {
     return (
       <div id="appLoadingIndicator">
