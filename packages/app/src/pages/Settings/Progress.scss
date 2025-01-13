@@ -113,8 +113,9 @@ ion-item.progress-item {
 
 .grid-graph-style ion-card {
   margin-inline: 0;
-  height: 100%;
+  //height: 100%;
   margin: 0;
+  justify-content: start;
 }
 
 .grid-text-style-big {
@@ -124,7 +125,7 @@ ion-item.progress-item {
   font-style: normal;
   font-weight: 600;
   line-height: 1.75rem;
-  margin: 0.7rem 2rem;
+  margin: 1.7rem 2rem;
 }
 
 .grid-text-style-big-activities {
