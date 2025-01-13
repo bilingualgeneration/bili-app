@@ -124,7 +124,7 @@ export const Profile: React.FC = () => {
           <Input
             label="First name or nickname"
             labelPlacement="above"
-            required={true}
+            //required={true}
             name="name"
             fill="outline"
             control={control}
