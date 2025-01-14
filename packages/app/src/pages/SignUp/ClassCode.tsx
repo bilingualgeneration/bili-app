@@ -61,10 +61,10 @@ export const ClassCode: React.FC = () => {
     mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues: {
-      code0: code[0].toUpperCase(),
-      code1: code[1].toUpperCase(),
-      code2: code[2].toUpperCase(),
-      code3: code[3].toUpperCase(),
+      code0: code === "" ? "" : code[0].toUpperCase(),
+      code1: code === "" ? "" : code[1].toUpperCase(),
+      code2: code === "" ? "" : code[2].toUpperCase(),
+      code3: code === "" ? "" : code[3].toUpperCase(),
     },
   });
   const [hasError, setHasError] = useState<boolean>(false);

@@ -9,7 +9,6 @@ import {
   IonRow,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
-import { SideMenu } from "@/components/Settings/SideMenu";
 import { StudentInfo } from "@/components/StudentInfo";
 import { useEffect } from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";

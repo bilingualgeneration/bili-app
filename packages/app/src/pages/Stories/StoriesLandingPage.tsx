@@ -1,80 +1,82 @@
-import React, { FC } from "react";
-import { Play } from "../Play";
-import { useProfile } from "@/hooks/Profile";
-import { Carousel } from "@/components/Carousel";
-import Lock from "@/assets/icons/lock.svg";
-import "./StoriesLandingPage.scss";
-import { PackSelect } from "@/components/PackSelect";
-import { useLanguageToggle } from "@/components/LanguageToggle";
-import { FormattedMessage } from "react-intl";
+import { CardPackSelect } from "@/components/CardPackSelect";
+import {
+  FirestoreCollectionProvider,
+  useFirestoreCollection,
+} from "@/hooks/FirestoreCollection";
+import { IonText } from "@ionic/react";
 import { StoriesHeader } from "@/components/StoriesHeader";
-import { I18nMessage } from "@/components/I18nMessage";
-import { text } from "ionicons/icons";
+import { useLanguage } from "@/hooks/Language";
 
-export const StoriesLandingPage: FC = () => {
-  const {
-    profile: { isInclusive },
-  } = useProfile();
-  const { language } = useLanguageToggle();
+import "./StoriesLandingPage.scss";
+
+const tagOrder: string[] = [
+  "allAboutMe",
+  "indigenousNarratives",
+  "familyAndCommunity",
+  "nature",
+  "decodables",
+];
+
+export const StoriesLandingPage: React.FC = () => {
+  return (
+    <FirestoreCollectionProvider collection="story">
+      <HydratedStoriesLandingPage />
+    </FirestoreCollectionProvider>
+  );
+};
+
+const HydratedStoriesLandingPage: React.FC = () => {
+  const { status, data } = useFirestoreCollection();
+  const { filterText } = useLanguage();
+
+  const mapToContentCardProps = (card: any) => {
+    return {
+      titles: filterText(card.title),
+      category: "",
+      cover: card.cover_image.url,
+      link: `/story/play/${card.uuid}`,
+      isTranslanguaged: card.is_translanguaged,
+      isStudentStory: card.is_studentStory,
+    };
+  };
+
+  if (status !== "ready") {
+    return <></>;
+  }
+
+  let storiesByTag: { [key: string]: any[] } = { all: [] };
+  for (const story of data) {
+    const storyCard = mapToContentCardProps(story);
+    storiesByTag.all.push(storyCard);
+    for (const tag of story.tags || []) {
+      if (storiesByTag[tag] === undefined) {
+        storiesByTag[tag] = [storyCard];
+      } else {
+        storiesByTag[tag].push(storyCard);
+      }
+    }
+  }
   return (
     <>
       <StoriesHeader />
       <div id="stories-landing-page">
-        <div className="margin-horizontal-carousel">
-          <h1 className="text-5xl bold carousel-header-margin">
-            <I18nMessage id="common.stories" />
-          </h1>
-          <I18nMessage
-            id="common.stories"
-            level={2}
-            wrapper={(text: string) => (
-              <h2 className="text-3xl color-english carousel-header-margin">
-                {text}
-              </h2>
-            )}
-          />
-        </div>
-        <div className="margin-top-2 margin-bottom-3">
-          <PackSelect
-            translatedTitle={"Cuentos"}
-            englishTitle={"Stories"}
-            category={"story"}
-            module={"story"}
-            only_cards={true}
-            pack_name_field={"title"}
-            sortBy="order"
-          />
-        </div>
+        <CardPackSelect
+          cards={storiesByTag.all}
+          sortBy="order"
+          titleKey="common.stories"
+        />
 
-        {/* family and community header + row */}
-        <div className="margin-horizontal-carousel">
-          <h1 className="text-5xl bold carousel-header-margin">
-            <I18nMessage id="pages.storiesLandingPage.familyAndCommunity" />
-          </h1>
-          <I18nMessage
-            id="pages.storiesLandingPage.familyAndCommunity"
-            level={2}
-            wrapper={(text: string) => (
-              <h2 className="text-3xl color-english carousel-header-margin">
-                {text}
-              </h2>
-            )}
-          />
-
-          <div className="image-container">
-            <img src={Lock} />
-            <h1 className="text-4xl bold color-nube">
-              <I18nMessage id="pages.storiesLandingPage.comingSoon" />
-            </h1>
-            <I18nMessage
-              id="pages.storiesLandingPage.comingSoon"
-              level={2}
-              wrapper={(text: string) => (
-                <h2 className="text-3xl color-nube">{text}</h2>
-              )}
-            />
-          </div>
-        </div>
+        {tagOrder
+          .filter((tag: string) => storiesByTag[tag])
+          .map((tag: string) => (
+            <div className="margin-top-3" key={tag}>
+              <CardPackSelect
+                cards={storiesByTag[tag]}
+                sortBy="order"
+                titleKey={`pages.storiesLandingPage.${tag}`}
+              />
+            </div>
+          ))}
       </div>
     </>
   );

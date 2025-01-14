@@ -1,3 +1,5 @@
+// TODO: better about page handling for settings
+
 import Reports from "@/pages/Reports"; // debug
 
 import { AuthedLayout } from "@/layouts/Authed";

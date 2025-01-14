@@ -49,10 +49,7 @@ export const TitleCard = ({
                 />
               )}
               {is_student_story && (
-                <MetaFlag
-                  color="flamenco-flamenco"
-                  id="stories.metaflag.studentStory"
-                />
+                <MetaFlag color="flamenco" id="stories.metaflag.studentStory" />
               )}
               <IonCardContent>
                 <IonText className="ion-text-center title">

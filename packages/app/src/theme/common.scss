@@ -2,6 +2,15 @@
   --header-height: 5.875rem;
 }
 
+.page-wrapper {
+  max-width: 120rem;
+  min-width: 37.5rem;
+  margin: auto;
+  min-height: 100vh;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
 .header-bili-logo {
   width: 5rem;
   height: auto;

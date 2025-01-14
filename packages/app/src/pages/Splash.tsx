@@ -56,12 +56,12 @@ export const Splash: React.FC = () => {
             </IonCardContent>
           </IonCard>
 
-          <IonCard className="ion-hide">
+          <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
                 <I18nMessage id="splash.classCode" languageSource="unauthed" />
               </IonCardTitle>
-              <Link to="/sign-up/class-code" className="no-underline">
+              <Link to="/quicklaunch" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
                   <I18nMessage
                     id="splash.classCodeButton"

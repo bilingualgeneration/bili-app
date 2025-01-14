@@ -7,6 +7,7 @@ import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
+import { useHistory, useLocation } from "react-router";
 
 export const CommunityCongrats: React.FC<{
   count: number;
@@ -19,7 +20,6 @@ export const CommunityCongrats: React.FC<{
     uniqueClicks?: number;
   }>();
   const state = location.state;
-
   let audios: any[] = [];
   switch (language) {
     case "es":

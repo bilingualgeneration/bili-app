@@ -40,13 +40,6 @@ hr {
   text-decoration: none;
 }
 
-.page-wrapper {
-  max-width: 120rem;
-  min-width: 37.5rem;
-  margin: auto;
-  min-height: 100vh;
-}
-
 ion-content::part(scroll) {
   padding-inline-start: 0;
   padding-inline-end: 0;
