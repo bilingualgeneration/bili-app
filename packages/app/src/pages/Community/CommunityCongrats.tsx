@@ -2,7 +2,6 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
 import { IonText } from "@ionic/react";
-import { useLocation, useHistory } from "react-router";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";

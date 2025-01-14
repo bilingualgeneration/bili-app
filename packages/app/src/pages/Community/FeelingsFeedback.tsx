@@ -61,14 +61,6 @@ export const FeelingsFeedback: React.FC = () => {
     uniqueClicks?: number;
   }>(); // Access the state
   const { language } = useLanguage();
-  const location = useLocation<{
-    cardIndex?: number;
-    pack_id: string;
-    uniqueClicks?: number;
-  }>(); // Access state
-  const pack_id = location.state?.pack_id; // Retrieve pack_id
-  const cardIndex = location.state?.cardIndex ?? 0;
-  const uniqueClicks = location.state?.uniqueClicks ?? 0; // Default to 0 if missing
   const { getText } = useI18n();
   const { populateText } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
