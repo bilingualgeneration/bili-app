@@ -11,7 +11,8 @@ import {
 } from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
+import { useLocation } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
@@ -54,19 +55,15 @@ const audios: Record<string, Record<string, string>> = {
 
 export const FeelingsFeedback: React.FC = () => {
   const history = useHistory();
-  const { language } = useLanguage();
   const location = useLocation<{
+    returnTo?: string;
     cardIndex?: number;
-    pack_id: string;
     uniqueClicks?: number;
-  }>(); // Access state
-  const pack_id = location.state?.pack_id; // Retrieve pack_id
-  const cardIndex = location.state?.cardIndex ?? 0;
-  const uniqueClicks = location.state?.uniqueClicks ?? 0; // Default to 0 if missing
+  }>(); // Access the state
+  const { language } = useLanguage();
   const { getText } = useI18n();
   const { populateText } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
-  // const a = populateText(audios, "language", "url");
 
   const {
     control,
@@ -260,7 +257,9 @@ export const FeelingsFeedback: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    history.push("/community/congrats", { cardIndex, pack_id, uniqueClicks });
+    history.push("/community/congrats", {
+      ...location.state,
+    });
   });
 
   return (

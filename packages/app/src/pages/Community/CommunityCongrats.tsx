@@ -1,13 +1,7 @@
 import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
-import { useActivity } from "@/contexts/ActivityContext";
-import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
-import { useTimeTracker } from "@/hooks/TimeTracker";
 import { IonText } from "@ionic/react";
-import { useEffect, useState } from "react";
-import { first } from "rxjs";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
@@ -17,22 +11,14 @@ import { useHistory, useLocation } from "react-router";
 export const CommunityCongrats: React.FC<{
   count: number;
 }> = ({ count }) => {
-  const {
-    profile: { isImmersive },
-    activeChildProfile,
-  } = useProfile();
   const { language } = useLanguage();
   const history = useHistory();
   const location = useLocation<{
+    returnTo?: string;
     cardIndex?: number;
-    pack_id: string;
-    uniqueClicks: number;
-  }>(); // Access state
-  const pack_id = location.state?.pack_id; // Retrieve pack_id
-  const cardIndex = location.state?.cardIndex ?? 0;
-  const uniqueClicks = location.state?.uniqueClicks ?? 0; // Default to 0 if missing
-  const { startTimer, stopTimer } = useTimeTracker();
-
+    uniqueClicks?: number;
+  }>();
+  const state = location.state;
   let audios: any[] = [];
   switch (language) {
     case "es":
@@ -52,11 +38,6 @@ export const CommunityCongrats: React.FC<{
   const button_es = "¡Sigue adelante!";
   const button_en = "Keep going!";
 
-  const onKeepGoingClick = () => {
-    // Navigate back to AffirmationsGame with pack_id and cardIndex
-    history.push(`/affirmations/play/${pack_id}`, { cardIndex, uniqueClicks });
-  };
-
   return (
     <div className="responsive-height-with-header">
       <DialogueScreen
@@ -67,7 +48,14 @@ export const CommunityCongrats: React.FC<{
         }
         characterImage={biliCharacter}
         onButtonClick={() => {
-          onKeepGoingClick();
+          if (state?.returnTo) {
+            history.push(state.returnTo, {
+              cardIndex: state.cardIndex ?? 0,
+              uniqueClicks: count,
+            });
+          } else {
+            history.push("/affirmations/play");
+          }
         }}
       >
         <IonText class="ion-text-center">

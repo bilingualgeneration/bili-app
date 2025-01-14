@@ -1,6 +1,6 @@
 $flap-side-size: 4rem;
 
-.affirmations-card {
+.card {
   border-radius: 2rem;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -21,7 +21,7 @@ $flap-side-size: 4rem;
     }
   }
 
-  .affirmations-card-front-image {
+  .card-front-image {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -51,23 +51,6 @@ $flap-side-size: 4rem;
   }
 }
 
-.affirmations-card-wrapper {
+.card-wrapper {
   filter: drop-shadow(-0.372925rem 0.74585rem 2.23755rem rgba(0, 0, 0, 0.25));
-}
-
-.affirmations-page-control {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4rem;
-  z-index: 10;
-
-  &.backward {
-    left: 0;
-  }
-
-  &.forward {
-    right: 0;
-  }
 }
