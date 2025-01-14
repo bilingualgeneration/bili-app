@@ -28,7 +28,7 @@ export const CardPackSelect: React.FC<props> = ({
     primaryText: "Translanguaged Cuento",
   };
   const studentStoryPill = {
-    className: "background-flamenco-flamenco",
+    className: "background-flamenco",
     primaryText:
       languagePrimary === "en" ? "Student Story" : "Cuento estudiantil",
     secondaryText: languageSecondary === "en" ? "Student Story" : undefined,

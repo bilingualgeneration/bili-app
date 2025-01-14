@@ -1,120 +1,109 @@
-import { useProfile } from "@/hooks/Profile";
+// TODO: refactor how i18n keys are structured
+
+import { ContentLock } from "@/components/ContentLock";
+import { I18nMessage } from "@/components/I18nMessage";
 import { IonText } from "@ionic/react";
-import { FC } from "react";
+import { Link } from "react-router-dom";
+
 import AffirmationGirl from "@/assets/img/affirmation_girl.png";
 import BreathingGirl from "@/assets/img/breathing_girl.png";
-import { CategoryTag } from "@/components/CategoryTag";
-import { FavoriteButton } from "@/components/FavoriteButton";
-import { useHistory } from "react-router";
-import Lock from "@/assets/icons/lock.svg?react";
+
 import "./Wellness.scss";
-import { useLanguageToggle } from "@/components/LanguageToggle";
-import { I18nMessage } from "@/components/I18nMessage";
-import { text } from "ionicons/icons";
 
-const PlayHeader: FC = () => {
-  const { language } = useLanguageToggle();
+interface CardProps {
+  background: string;
+  image?: string;
+  locked?: boolean;
+  titleKey?: string;
+  url?: string;
+}
+
+const Card: React.FC<CardProps> = ({
+  background,
+  image,
+  locked = false,
+  titleKey,
+  url,
+}) => {
   return (
-    <div className="headerBanner">
-      <IonText>
-        <h1 className="text-5xl color-nube">
-          <I18nMessage id="common.wellness" />
-        </h1>
-        <I18nMessage
-          id="common.wellness"
-          level={2}
-          wrapper={(text: string) => (
-            <p className="text-3xl color-nube">{text}</p>
-          )}
-        />
-      </IonText>
-    </div>
-  );
-};
-
-const AnotherCard: FC<{ rotation?: number }> = ({ rotation = 0 }) => {
-  const rotationStyle = {
-    transform: `rotate(${rotation}deg)`,
-  };
-
-  return (
-    <div className="card another-cards" style={rotationStyle}>
-      <CategoryTag category="other_wellness" className="play-category-tag" />
-      <FavoriteButton fid="category-the intruder" />
-    </div>
-  );
-};
-
-// todo: change mouse cursor to pointer
-const AffirmationCard: FC = () => {
-  const { language } = useLanguageToggle();
-  const history = useHistory();
-  return (
-    <div
-      id="affirmation-card"
-      className="card"
-      onClick={() => {
-        history.push("/affirmations/intro");
-      }}
-    >
-      <CategoryTag category="affirmation" className="play-category-tag" />
-      <FavoriteButton fid="category-affirmations" />
-      <img src={AffirmationGirl} />
-      <IonText>
-        <h1 className="text-4xl semibold color-flamenco-lowest">
-          <I18nMessage id="wellness.affirmations" />
-        </h1>
-        <I18nMessage
-          id="wellness.affirmations"
-          level={2}
-          wrapper={(text: string) => (
-            <p className="text-3xl color-flamenco-lowest">{text}</p>
-          )}
-        />
-      </IonText>
-    </div>
-  );
-};
-
-const YogaCard: FC = () => {
-  const { language } = useLanguageToggle();
-  return (
-    <div id="yoga-card" className="card">
-      <div className="content-lock">
-        <Lock />
+    <div className="wellness-card-wrapper">
+      <div className="wellness-card">
+        <div
+          className={`wellness-card-inner`}
+          style={{
+            backgroundColor: background,
+          }}
+        >
+          {locked && <ContentLock />}
+          <div
+            className="wellness-card-image"
+            style={{
+              backgroundImage: `url('${image}')`,
+            }}
+          ></div>
+          <div className="wellness-card-text">
+            {titleKey && (
+              <IonText className="ion-text-center">
+                <h1 className="text-4xl semibold color-flamenco-lowest">
+                  <I18nMessage id={titleKey} />
+                </h1>
+                <I18nMessage
+                  id={titleKey}
+                  level={2}
+                  wrapper={(text: string) => (
+                    <h2 className="text-3xl color-flamenco-lowest">{text}</h2>
+                  )}
+                />
+              </IonText>
+            )}
+          </div>
+        </div>
+        {[1, 2, 3, 4].map((number: number) => (
+          <div
+            className={`wellness-card-fringe`}
+            key={number}
+            style={{
+              backgroundColor: background,
+            }}
+          >
+            {locked && <ContentLock showLock={false} />}
+          </div>
+        ))}
       </div>
-      <CategoryTag category="yoga" className="play-category-tag" />
-      <FavoriteButton fid="category-the intruder" />
-      <img src={BreathingGirl} />
-      <IonText>
-        <h1 className="text-4xl semibold color-flamenco-lowest">
-          <I18nMessage id="wellness.breathingDeeply" />
-        </h1>
-        <I18nMessage
-          id="wellness.breathingDeeply"
-          level={2}
-          wrapper={(text: string) => (
-            <p className="text-3xl color-flamenco-lowest">{text}</p>
-          )}
-        />
-      </IonText>
     </div>
   );
 };
 
-export const Wellness: FC = () => {
-  const {
-    profile: { isImmersive },
-  } = useProfile();
+export const Wellness: React.FC = () => {
+  const cards: CardProps[] = [
+    {
+      background: "#D6D3F0",
+      image: AffirmationGirl,
+      titleKey: "wellness.affirmations",
+      url: "/affirmations/intro",
+    },
+    {
+      background: "#FDAFDB",
+      image: BreathingGirl,
+      locked: true,
+      titleKey: "wellness.breathingDeeply",
+    },
+  ];
   return (
-    <div id="wellnessPage">
-      <PlayHeader />
-      <div className="main-block">
-        <AnotherCard rotation={15} />
-        <AffirmationCard />
-        <YogaCard />
-        <AnotherCard rotation={-15} />
-      </div>
+    <div id="wellness-cards-wrapper">
+      <Card background="#FCDBCC"></Card>
+      {cards.map((card: CardProps, index: number) => {
+        if (card.url) {
+          return (
+            <Link key={index} to={card.url}>
+              <Card {...card} />
+            </Link>
+          );
+        } else {
+          return <Card key={index} {...card} />;
+        }
+      })}
+      <Card background="#FCDBCC"></Card>
     </div>
   );
 };
