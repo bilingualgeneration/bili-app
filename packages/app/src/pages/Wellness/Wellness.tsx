@@ -25,48 +25,51 @@ const Card: React.FC<CardProps> = ({
   titleKey,
   url,
 }) => {
-  console.log(url);
   return (
-    <div className="wellness-card">
-      {locked && <ContentLock />}
-      <div
-        className={`wellness-card-inner`}
-        style={{
-          backgroundColor: background,
-        }}
-      >
+    <div className="wellness-card-wrapper">
+      <div className="wellness-card">
         <div
-          className="wellness-card-image"
-          style={{
-            backgroundImage: `url('${image}')`,
-          }}
-        ></div>
-        <div className="wellness-card-text">
-          {titleKey && (
-            <IonText className="ion-text-center">
-              <h1 className="text-4xl semibold color-flamenco-lowest">
-                <I18nMessage id={titleKey} />
-              </h1>
-              <I18nMessage
-                id={titleKey}
-                level={2}
-                wrapper={(text: string) => (
-                  <h2 className="text-3xl color-flamenco-lowest">{text}</h2>
-                )}
-              />
-            </IonText>
-          )}
-        </div>
-      </div>
-      {[1, 2, 3, 4].map((number: number) => (
-        <div
-          className={`wellness-card-fringe`}
-          key={number}
+          className={`wellness-card-inner`}
           style={{
             backgroundColor: background,
           }}
-        ></div>
-      ))}
+        >
+          {locked && <ContentLock />}
+          <div
+            className="wellness-card-image"
+            style={{
+              backgroundImage: `url('${image}')`,
+            }}
+          ></div>
+          <div className="wellness-card-text">
+            {titleKey && (
+              <IonText className="ion-text-center">
+                <h1 className="text-4xl semibold color-flamenco-lowest">
+                  <I18nMessage id={titleKey} />
+                </h1>
+                <I18nMessage
+                  id={titleKey}
+                  level={2}
+                  wrapper={(text: string) => (
+                    <h2 className="text-3xl color-flamenco-lowest">{text}</h2>
+                  )}
+                />
+              </IonText>
+            )}
+          </div>
+        </div>
+        {[1, 2, 3, 4].map((number: number) => (
+          <div
+            className={`wellness-card-fringe`}
+            key={number}
+            style={{
+              backgroundColor: background,
+            }}
+          >
+            {locked && <ContentLock showLock={false} />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -87,7 +90,7 @@ export const Wellness: React.FC = () => {
     },
   ];
   return (
-    <>
+    <div id="wellness-cards-wrapper">
       <Card background="#FCDBCC"></Card>
       {cards.map((card: CardProps, index: number) => {
         if (card.url) {
@@ -101,6 +104,6 @@ export const Wellness: React.FC = () => {
         }
       })}
       <Card background="#FCDBCC"></Card>
-    </>
+    </div>
   );
 };

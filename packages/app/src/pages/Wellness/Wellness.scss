@@ -1,12 +1,20 @@
-.wellness-card {
-  display: inline-block;
-  position: relative;
+#wellness-cards-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wellness-card-wrapper {
   .wellness-card-inner {
     display: flex;
     flex-direction: column;
     height: 27.5rem;
     width: 27.5rem;
     border-radius: 1.5rem 1.5rem 0 0;
+    .content-lock {
+      border-radius: 1.5rem 1.5rem 0 0;
+    }
+    position: relative;
 
     .wellness-card-image {
       flex-grow: 1;
@@ -19,6 +27,56 @@
     display: inline-block;
     width: 25%;
     aspect-ratio: 1;
-    border-radius: 0 0 50% 50%;
+    position: relative;
+    border-radius: 0 0 100% 100%;
+    .content-lock {
+      border-radius: 0 0 100% 100%;
+    }
+  }
+}
+
+#wellness-cards-wrapper .wellness-card {
+  display: inline-block;
+}
+
+#wellness-cards-wrapper > *:nth-child(1) {
+  padding-top: 2.25rem;
+  padding-bottom: 2rem;
+  padding-left: 2.5rem;
+  padding-right: 2.75rem;
+  .wellness-card {
+    transform: rotate(10deg);
+  }
+}
+
+#wellness-cards-wrapper > *:nth-child(2) .wellness-card-wrapper {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  .wellness-card {
+    transform: rotate(5deg);
+  }
+}
+
+#wellness-cards-wrapper > *:nth-child(3) {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  .wellness-card {
+    transform: rotate(-5deg);
+  }
+}
+
+#wellness-cards-wrapper > *:nth-child(4) {
+  padding-top: 2.25rem;
+  padding-bottom: 2rem;
+  padding-left: 2.75rem;
+  padding-right: 2.5rem;
+  .wellness-card {
+    transform: rotate(-10deg);
   }
 }
