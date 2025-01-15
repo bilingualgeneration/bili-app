@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { IonImg, IonGrid, IonRow, IonCol } from "@ionic/react";
+import { IonCol, IonGrid, IonImg, IonRow, IonText } from "@ionic/react";
 import { AudioButton } from "@/components/AudioButton";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
@@ -14,7 +14,6 @@ import backward from "@/assets/icons/carousel_backward.svg";
 import "./CardSlider.scss";
 
 export interface CardSliderProps {
-  title_id: string;
   startingCardIndex?: number;
   uniqueClicks?: number;
   cardsPerPage?: number;
@@ -27,7 +26,6 @@ interface LocationState {
 }
 
 export const CardSlider: React.FC<CardSliderProps> = ({
-  title_id,
   startingCardIndex = 0,
   uniqueClicks = 0,
   cardsPerPage = 1,
@@ -44,6 +42,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   const { languageNormalized, filterText } = useLanguage();
   const { clearAudio } = useAudioManager();
 
+  const titles = filterText(data?.pack_name || []);
   const filteredCards = data?.cards
     ? data.cards.filter((card: any) =>
         card.text_front.some(
@@ -138,7 +137,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   );
 
   if (status === "loading") {
-    return <div>Loading cards...</div>;
+    return <></>;
   }
   if (status === "error" || !data || !data.cards) {
     return <div>Error loading cards.</div>;
@@ -153,16 +152,12 @@ export const CardSlider: React.FC<CardSliderProps> = ({
             size="4"
             style={{ display: "flex", flexDirection: "column" }}
           >
-            <h1 className="text-4xl semibold">
-              <I18nMessage id={title_id} />
-            </h1>
-            <I18nMessage
-              id={title_id}
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-2xl color-english">{text}</p>
+            <IonText>
+              <h1 className="text-4xl semibold">{titles[0].text}</h1>
+              {titles.length === 2 && (
+                <p className="text-2xl color-english">{titles[1].text}</p>
               )}
-            />
+            </IonText>
             <div className="margin-top-1" onClick={handleAudioClick}>
               <AudioButton audio={audio} />
             </div>

@@ -12,7 +12,6 @@ export const AffirmationsGame: React.FC = () => {
   return (
     <FirestoreDocProvider collection="affirmation" id={pack_id}>
       <CardSlider
-        title_id="affirmations.game.title"
         startingCardIndex={state?.cardIndex ?? 0}
         uniqueClicks={state?.uniqueClicks ?? 0}
       />
