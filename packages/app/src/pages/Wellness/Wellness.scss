@@ -8,8 +8,8 @@
   .wellness-card-inner {
     display: flex;
     flex-direction: column;
-    height: 27.5rem;
-    width: 27.5rem;
+    height: 17rem;
+    width: 20rem;
     border-radius: 1.5rem 1.5rem 0 0;
     .content-lock {
       border-radius: 1.5rem 1.5rem 0 0;
@@ -25,12 +25,12 @@
   }
   .wellness-card-fringe {
     display: inline-block;
-    width: 25%;
-    aspect-ratio: 1;
+    width: 5rem;
+    height: 2.5rem;
     position: relative;
-    border-radius: 0 0 100% 100%;
+    border-radius: 0 0 5rem 5rem;
     .content-lock {
-      border-radius: 0 0 100% 100%;
+      border-radius: 0 0 5rem 5rem;
     }
   }
 }
@@ -50,7 +50,7 @@
 }
 
 #wellness-cards-wrapper > *:nth-child(2) .wellness-card-wrapper {
-  margin-top: 5rem;
+  margin-top: 4rem;
   padding-top: 2rem;
   padding-bottom: 1rem;
   padding-left: 2rem;
@@ -61,7 +61,7 @@
 }
 
 #wellness-cards-wrapper > *:nth-child(3) {
-  margin-top: 5rem;
+  margin-top: 4rem;
   padding-top: 2rem;
   padding-bottom: 1rem;
   padding-left: 2rem;

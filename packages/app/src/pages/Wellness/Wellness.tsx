@@ -4,6 +4,7 @@ import { ContentLock } from "@/components/ContentLock";
 import { I18nMessage } from "@/components/I18nMessage";
 import { IonText } from "@ionic/react";
 import { Link } from "react-router-dom";
+import { PackHeader } from "@/components/PackHeader";
 
 import AffirmationGirl from "@/assets/img/affirmation_girl.png";
 import BreathingGirl from "@/assets/img/breathing_girl.png";
@@ -44,14 +45,14 @@ const Card: React.FC<CardProps> = ({
           <div className="wellness-card-text">
             {titleKey && (
               <IonText className="ion-text-center">
-                <h1 className="text-4xl semibold color-flamenco-lowest">
+                <h1 className="text-2xl semibold color-flamenco-lowest">
                   <I18nMessage id={titleKey} />
                 </h1>
                 <I18nMessage
                   id={titleKey}
                   level={2}
                   wrapper={(text: string) => (
-                    <h2 className="text-3xl color-flamenco-lowest">{text}</h2>
+                    <h2 className="text-sm color-flamenco-lowest">{text}</h2>
                   )}
                 />
               </IonText>
@@ -90,20 +91,23 @@ export const Wellness: React.FC = () => {
     },
   ];
   return (
-    <div id="wellness-cards-wrapper">
-      <Card background="#FCDBCC"></Card>
-      {cards.map((card: CardProps, index: number) => {
-        if (card.url) {
-          return (
-            <Link key={index} to={card.url}>
-              <Card {...card} />
-            </Link>
-          );
-        } else {
-          return <Card key={index} {...card} />;
-        }
-      })}
-      <Card background="#FCDBCC"></Card>
-    </div>
+    <>
+      <PackHeader bannerColor="#973d78" id="common.wellness" />
+      <div id="wellness-cards-wrapper">
+        <Card background="#FCDBCC"></Card>
+        {cards.map((card: CardProps, index: number) => {
+          if (card.url) {
+            return (
+              <Link key={index} to={card.url}>
+                <Card {...card} />
+              </Link>
+            );
+          } else {
+            return <Card key={index} {...card} />;
+          }
+        })}
+        <Card background="#FCDBCC"></Card>
+      </div>
+    </>
   );
 };
