@@ -24,7 +24,6 @@ const WrappedSF1: React.FC = () => {
   const dndWrapperRef = useRef<HTMLDivElement | null>(null);
   const { data } = useFirestoreDoc();
   const games = data?.["dnd-game"] || [];
-  console.log("DND game", games);
   const { language, setIsVisible } = useLanguageToggle();
   const {
     handleAttempt,
@@ -47,7 +46,6 @@ const WrappedSF1: React.FC = () => {
     for (const group of filteredGames) {
       const groupId = group.handle;
       gamesData.set(groupId, { totalMistakesPossible: 2 });
-      console.log("DND filteredgame", groupId);
     }
 
     setGamesData(gamesData);

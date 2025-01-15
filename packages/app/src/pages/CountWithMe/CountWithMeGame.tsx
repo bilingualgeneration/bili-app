@@ -58,7 +58,6 @@ interface CountGameProps {
 }
 
 export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
-  console.log("COunt with me", data);
   const {
     profile: { isInclusive },
   } = useProfile();
@@ -84,7 +83,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     const gamesData: GameData = new Map();
     for (const group of data.groups) {
       const groupId = group.handle;
-      console.log("Counr with Me Id", groupId);
       gamesData.set(groupId, { totalMistakesPossible: 2 });
     }
 
