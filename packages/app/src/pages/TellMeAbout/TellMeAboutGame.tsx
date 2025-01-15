@@ -30,7 +30,6 @@ const TellMeAboutHydratedGame: React.FC = () => {
       const transformedData = data.questions.map((questionItem: any) => {
         // possible solution for using filterText
         // const filteredQuestion = filterText(questionItem.question || []);
-        // console.log(filteredQuestion)
         const es = questionItem.question.find(
           (item: any) => item.language === "es",
         );
