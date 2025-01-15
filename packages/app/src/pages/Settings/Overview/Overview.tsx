@@ -12,6 +12,7 @@ import {
   IonIcon,
   IonPopover,
   IonContent,
+  IonText,
 } from "@ionic/react";
 import Joyride from "react-joyride";
 import { addOutline, ellipse, sparkles } from "ionicons/icons";
@@ -28,6 +29,7 @@ import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
 
 import "./Overview.scss";
+import { Link } from "react-router-dom";
 
 export const Overview: React.FC = () => {
   const { user } = useProfile();
@@ -265,7 +267,7 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
       <div className="settings-pg1-container">
         <IonGrid class="adult-profile-content">
           <IonRow class="ion-justify-content-between row">
-            <IonCol size="auto">
+            <IonCol size="4">
               <h1 className="child-profile-heading margin-bottom-1-5">
                 <FormattedMessage
                   id="settings.overview.child"
@@ -274,11 +276,21 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
                 />
               </h1>
             </IonCol>
+            <IonCol size="3" className="column-button-visit-app">
+              <button className="visit-students-button">
+                <Link to={`/select-student/`} className="no-underline">
+                  <p className="text-md semibold color-suelo">
+                    Go to student app
+                  </p>
+                </Link>
+              </button>
+            </IonCol>
+          </IonRow>
 
-            {/* UNCOMMENT ONCE +ADD CHILD FUNCTIONALITY IMPLEMENTED - CAN ALSO REMOVE BUTTON POPOVER */}
-
-            <IonCol size="auto">
-              {/* <IonButton
+          {/* UNCOMMENT ONCE +ADD CHILD FUNCTIONALITY IMPLEMENTED - CAN ALSO REMOVE BUTTON POPOVER */}
+          {/* <IonRow>
+            <IonCol size="auto"> */}
+          {/* <IonButton
                 // disabled={true}
                 size="small"
                 id="hover-trigger"
@@ -317,8 +329,8 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
                   {!isImmersive && <div className="text-2xl color-english">Coming soon!</div>}
                 </IonContent>  
               </IonPopover> */}
-            </IonCol>
-          </IonRow>
+          {/* </IonCol>
+            </IonRow> */}
 
           <div style={{ marginTop: "2rem" }}>
             <IonRow className="margin-bottom-3">
@@ -326,12 +338,13 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
                 <IonCol
                   className="ion-no-padding"
                   size="6"
-                  onClick={() => {}}
+                  // onClick={() => {}}
                   key={s.uid}
                 >
                   <ChildProfileCard
                     age={s.age}
-                    isActive={activeStudentId === s.id}
+                    // isActive={activeStudentId === s.id}
+                    isActive={false}
                     letterAvatarBackgroundColor="#20bfb9"
                     letterAvatarTextColor="#ffffff"
                     name={s.firstName}

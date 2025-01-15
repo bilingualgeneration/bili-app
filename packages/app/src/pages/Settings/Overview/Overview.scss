@@ -24,16 +24,16 @@
     margin-top: 10%;
   }
 
-  p {
-    margin-top: 0;
-    color: #889391;
+  // p {
+  //   margin-top: 0;
+  //   color: #889391;
 
-    /* Paragraph/text-lg/[S] */
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.5556; /* 28px; 155.556% */
-  }
+  //   /* Paragraph/text-lg/[S] */
+  //   font-size: 1.125rem;
+  //   font-style: normal;
+  //   font-weight: 600;
+  //   line-height: 1.5556; /* 28px; 155.556% */
+  // }
 
   .explore-bili-subheading {
     color: var(--base-barro, #889391);
@@ -121,4 +121,14 @@ ion-icon.add {
   background: var(--background);
   content: "";
   z-index: 10;
+}
+
+.visit-students-button {
+  border-radius: 0.5rem;
+  background: linear-gradient(89.96deg, #74c7e5 7.88%, #a2e0c1 104.05%);
+  padding: 0.75rem 1rem;
+}
+
+.column-button-visit-app {
+  text-align: end;
 }

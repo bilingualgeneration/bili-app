@@ -6,12 +6,14 @@ import "./ComingSoonCard.scss";
 interface ComingSoonCardProps {
   cardColor: string;
   text: any[];
+  textColor?: string;
   cardImage: string;
 }
 
 export const ComingSoonCard: FC<ComingSoonCardProps> = ({
   cardColor,
   text,
+  textColor = "color-nube",
   cardImage,
 }) => {
   const { populateText } = useLanguage();
@@ -32,9 +34,13 @@ export const ComingSoonCard: FC<ComingSoonCardProps> = ({
           </IonCol>
           <IonCol size="8" className="flex ion-align-items-center">
             <div className="padding-left-1">
-              <h1 className="text-3xl semibold color-nube">{texts[0].text}</h1>
+              <h1 className={`text-3xl semibold ${textColor}`}>
+                {texts[0].text}
+              </h1>
               {texts.length > 1 && (
-                <p className="text-2xl color-nube subtitle">{texts[1].text}</p>
+                <p className={`text-2xl ${textColor} subtitle`}>
+                  {texts[1].text}
+                </p>
               )}
             </div>
           </IonCol>

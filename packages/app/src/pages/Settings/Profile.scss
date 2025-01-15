@@ -53,12 +53,18 @@ ion-col.col-save-changes-button {
   text-align: center;
 }
 
+.save-name-block {
+  display: grid;
+  place-items: center;
+}
+
 ion-button.save-changes-button {
   width: 27.625rem;
   height: auto;
   margin: 5% 5%;
   box-shadow: 0.25rem 0.75rem 1rem 0 rgba(58, 42, 17, 0.2);
   border-radius: 6.25rem;
+  text-align: center;
 }
 
 ion-col.side-menu-col {
