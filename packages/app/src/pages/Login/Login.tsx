@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import { getFirebaseAuth } from "@/components/Firebase";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCard,
@@ -15,6 +16,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { Link } from "react-router-dom";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useState } from "react";
 
@@ -193,6 +195,20 @@ export const Login: React.FC = () => {
                 </IonText>
               </div>
             </form>
+            <IonText>
+              <h1 className="text-xl ion-text-center margin-bottom-1">
+                <I18nMessage id="splash.classCode" languageSource="unauthed" />
+              </h1>
+            </IonText>
+
+            <Link to="/quicklaunch" className="no-underline">
+              <IonButton expand="block" fill="outline" shape="round">
+                <I18nMessage
+                  id="splash.classCodeButton"
+                  languageSource="unauthed"
+                />
+              </IonButton>
+            </Link>
           </IonCardContent>
         </IonCard>
       </div>
