@@ -220,9 +220,9 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
       <div style={{ margin: "auto", textAlign: "center" }}>
         <div className="margin-top-2 margin-bottom-2 text-responsive">
           <IonText className="ion-text-center">
-            <h1 className="text-3xl color-suelo">{texts[0].text}</h1>
+            <h1 className="text-4xl color-suelo">{texts[0].text}</h1>
             {texts.length > 1 && (
-              <p className="text-xl color-english">{texts[1].text}</p>
+              <p className="text-2xl color-english">{texts[1].text}</p>
             )}
           </IonText>
         </div>

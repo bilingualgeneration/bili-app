@@ -165,14 +165,14 @@ export const KeyVocabPage: React.FC<KeyVocabPage> = ({
         <IonCard className="drop-shadow story-page ion-no-padding">
           <IonCardContent>
             <IonText>
-              <h1 className="text-4xl text-semibold color-suelo ion-text-center">
+              <h1 className="text-4xl semibold color-suelo margin-top-1 ion-text-center">
                 <I18nMessage id="story.keyVocabulary.title" />
               </h1>
               <I18nMessage
                 id="story.keyVocabulary.title"
                 level={2}
                 wrapper={(text: string) => (
-                  <h2 className="text-2xl color-english ion-text-center">
+                  <h2 className="text-2xl color-english margin-bottom-1 ion-text-center">
                     {text}
                   </h2>
                 )}
@@ -204,12 +204,12 @@ const Pill: (args: any) => any = ({ icon, text, value }) => {
       />
       <IonText>
         <h2 style={{ marginTop: 0 }}>
-          <span className="text-lg semibold color-suelo">{texts[0].text}</span>
+          <span className="text-xl semibold color-suelo">{texts[0].text}</span>
           {texts.length > 1 && (
-            <span className="text-lg color-english"> {texts[1].text}</span>
+            <span className="text-xl color-english"> {texts[1].text}</span>
           )}
         </h2>
-        <p className="text-sm color-english">{value}</p>
+        <p className="text-md color-english">{value}</p>
       </IonText>
     </div>
   );

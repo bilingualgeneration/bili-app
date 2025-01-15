@@ -19,15 +19,15 @@ interface Lookup {
 }
 
 const textSizePrimaryLookup: Lookup = {
-  small: "text-xl",
-  default: "text-2xl",
-  large: "text-3xl",
+  small: "text-2xl",
+  default: "text-3xl",
+  large: "text-4xl",
 };
 
 const textSizeSecondaryLookup: Lookup = {
-  small: "text-md",
-  default: "text-lg",
-  large: "text-xl",
+  small: "text-lg",
+  default: "text-2xl",
+  large: "text-3xl",
 };
 
 export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
@@ -68,6 +68,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
               flexDirection: "column",
               justifyContent: "space-between",
               height: "100%",
+              margin: "0.6rem",
             }}
           >
             <div></div>

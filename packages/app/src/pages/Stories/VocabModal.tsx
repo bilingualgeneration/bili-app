@@ -87,7 +87,7 @@ export const VocabModal: React.FC = () => {
                           />
                         </h1>
                         {currentWordFamily.length > 1 && (
-                          <p className="text-3xl semibold word-color">
+                          <p className="text-3xl  word-color">
                             <SyllableBreakdown
                               word={currentWordFamily[1].syllable_breakdown}
                             />
@@ -105,7 +105,7 @@ export const VocabModal: React.FC = () => {
                       </div>
 
                       <IonText>
-                        <h1 className="text-2xl semibold">
+                        <h1 className="text-2xl ">
                           {currentWordFamily[0].definition}
                         </h1>
                         {currentWordFamily.length > 1 && (
