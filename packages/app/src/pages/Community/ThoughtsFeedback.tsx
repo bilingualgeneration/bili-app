@@ -10,12 +10,14 @@ import {
   IonText,
 } from "@ionic/react";
 import HappyBilli from "@/assets/icons/bili_happy.svg";
+import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useCardSlider } from "@/contexts/CardSlider";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router";
-import "./Community.scss";
 import { useI18n } from "@/hooks/I18n";
-import { useEffect, useState } from "react";
 import { useLanguage } from "@/hooks/Language";
+
 import audio_no_en from "@/assets/audio/FlowerCongrats/no_en.mp3";
 import audio_yes_en from "@/assets/audio/FlowerCongrats/yes.mp3";
 import audio_no_es from "@/assets/audio/FlowerCongrats/no_es.mp3";
@@ -24,7 +26,8 @@ import audio_idk_en from "@/assets/audio/FlowerCongrats/idk.mp3";
 import audio_idk_es from "@/assets/audio/FlowerCongrats/no_lo_sé.mp3";
 import audio_en from "@/assets/audio/FlowerCongrats/what_do_you_think.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/qué_opinas.mp3";
-import { useAudioManager } from "@/contexts/AudioManagerContext";
+
+import "./Community.scss";
 
 const audios: Record<string, Record<string, string>> = {
   yes: {
@@ -42,16 +45,9 @@ const audios: Record<string, Record<string, string>> = {
 };
 
 export const ThoughtsFeedback: React.FC = () => {
+  const { activity } = useCardSlider();
   const { language } = useLanguage();
   const history = useHistory();
-  const location = useLocation<{
-    cardIndex?: number;
-    pack_id: string;
-    uniqueClicks?: number;
-  }>(); // Access state
-  const pack_id = location.state?.pack_id; // Retrieve pack_id
-  const cardIndex = location.state?.cardIndex ?? 0; // Default to 0 if missing
-  const uniqueClicks = location.state?.uniqueClicks ?? 0;
   const { getText } = useI18n();
   const { addAudio, clearAudio } = useAudioManager();
   const { populateText } = useLanguage();
@@ -167,7 +163,7 @@ export const ThoughtsFeedback: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    history.push("/community/congrats", { cardIndex, pack_id, uniqueClicks });
+    history.push(`/${activity}/congrats`);
   });
 
   return (

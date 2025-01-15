@@ -2,23 +2,21 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
 import { IonText } from "@ionic/react";
+import { useCardSlider } from "@/contexts/CardSlider";
+import { useHistory } from "react-router";
+
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import FlowerImage from "@/assets/icons/big_flower.svg";
+
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
-import { useHistory, useLocation } from "react-router";
 
 export const CommunityCongrats: React.FC<{
   count: number;
 }> = ({ count }) => {
   const { language } = useLanguage();
+  const { activity, packId } = useCardSlider();
   const history = useHistory();
-  const location = useLocation<{
-    returnTo?: string;
-    cardIndex?: number;
-    uniqueClicks?: number;
-  }>();
-  const state = location.state;
   let audios: any[] = [];
   switch (language) {
     case "es":
@@ -48,14 +46,7 @@ export const CommunityCongrats: React.FC<{
         }
         characterImage={biliCharacter}
         onButtonClick={() => {
-          if (state?.returnTo) {
-            history.push(state.returnTo, {
-              cardIndex: state.cardIndex ?? 0,
-              uniqueClicks: count,
-            });
-          } else {
-            history.push("/affirmations/play");
-          }
+          history.push(`/${activity}/play/${packId}`);
         }}
       >
         <IonText class="ion-text-center">

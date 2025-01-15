@@ -1,3 +1,5 @@
+import { useCardSlider } from "@/contexts/CardSlider";
+
 import React, { useState, useCallback, useEffect } from "react";
 import { IonCol, IonGrid, IonImg, IonRow, IonText } from "@ionic/react";
 import { AudioButton } from "@/components/AudioButton";
@@ -13,51 +15,30 @@ import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./CardSlider.scss";
 
-export interface CardSliderProps {
-  startingCardIndex?: number;
-  uniqueClicks?: number;
-  cardsPerPage?: number;
-}
+export interface CardSliderProps {}
 
-interface LocationState {
-  returnTo?: string;
-  cardIndex?: number;
-  uniqueClicks?: number;
-}
-
-export const CardSlider: React.FC<CardSliderProps> = ({
-  startingCardIndex = 0,
-  uniqueClicks = 0,
-  cardsPerPage = 1,
-}) => {
+export const CardSlider: React.FC<CardSliderProps> = () => {
+  const {
+    cards,
+    cardClicks,
+    currentCardIndex,
+    packName,
+    setCardClicks,
+    setCurrentCardIndex,
+  } = useCardSlider();
+  const uniqueClicks = 0;
   const history = useHistory();
-  const location = useLocation<LocationState>();
-  const [cardIndex, setCardIndex] = useState<number>(startingCardIndex);
   const [showFront, setShowFront] = useState<boolean>(true);
-  const [uniqueClickCount, setUniqueClickCount] =
-    useState<number>(uniqueClicks);
-  const [currentCardId, setCurrentCardId] = useState<string | null>(null);
-
-  const { status, data } = useFirestoreDoc();
-  const { languageNormalized, filterText } = useLanguage();
+  const { filterText } = useLanguage();
   const { clearAudio } = useAudioManager();
 
-  const titles = filterText(data?.pack_name || []);
-  const filteredCards = data?.cards
-    ? data.cards.filter((card: any) =>
-        card.text_front.some(
-          (text: any) => text.language === languageNormalized,
-        ),
-      )
-    : [];
-
   const text_front_filtered = React.useMemo(
-    () => filterText(filteredCards[cardIndex]?.text_front || []),
-    [filteredCards, cardIndex, filterText],
+    () => filterText(cards[currentCardIndex]?.text_front || []),
+    [cards, currentCardIndex, filterText],
   );
   const text_back_filtered = React.useMemo(
-    () => filterText(filteredCards[cardIndex]?.text_back || []),
-    [filteredCards, cardIndex, filterText],
+    () => filterText(cards[currentCardIndex]?.text_back || []),
+    [cards, currentCardIndex, filterText],
   );
 
   const audio = Object.fromEntries(
@@ -66,30 +47,31 @@ export const CardSlider: React.FC<CardSliderProps> = ({
       : text_back_filtered.map((t: any) => [t.language, t.audio?.url || ""]),
   );
 
-  const canBackward = cardIndex > 0;
-  const canForward = cardIndex + cardsPerPage < filteredCards.length;
+  const [lastAudioPlayedId, setLastAudioPlayedId] = useState<string | null>(
+    null,
+  );
+
+  const canBackward = currentCardIndex > 0;
+  const canForward = currentCardIndex + 1 < cards.length;
 
   const handleAudioClick = () => {
-    if (currentCardId !== filteredCards[cardIndex]?.id) {
-      setCurrentCardId(filteredCards[cardIndex]?.id);
-      const newCount = uniqueClickCount + 1;
-      setUniqueClickCount(newCount);
+    if (lastAudioPlayedId !== cards[currentCardIndex].id) {
+      setLastAudioPlayedId(cards[currentCardIndex].id);
+      setCardClicks(cardClicks + 1);
+      const newCardClicks = cardClicks + 1;
+      setCardClicks(newCardClicks);
 
-      if (newCount > 0 && newCount % 5 === 0) {
+      if (newCardClicks % 2 === 0) {
         const destination =
-          (newCount / 5) % 2 === 0
-            ? "/community/thoughts"
-            : "/community/feelings";
-        history.push(destination, {
-          cardIndex,
-          uniqueClicks: newCount,
-          returnTo: location.pathname,
-        });
-        return;
+          (newCardClicks / 2) % 2 === 0
+            ? "/affirmations/thoughts"
+            : "/affirmations/feelings";
+        history.push(destination);
       }
     }
   };
 
+  /*
   useEffect(() => {
     if (location.state?.returnTo === location.pathname) {
       const { cardIndex, uniqueClicks } = location.state;
@@ -98,25 +80,24 @@ export const CardSlider: React.FC<CardSliderProps> = ({
       setShowFront(true);
     }
   }, [location.state]);
+    */
 
   const changeCard = useCallback(
     (direction: string) => {
       switch (direction) {
         case "forward":
           if (canForward) {
-            const nextCardIndex = cardIndex + 1;
+            const nextCardIndex = currentCardIndex + 1;
             clearAudio();
             setShowFront(true);
-            setCardIndex(
-              Math.min(filteredCards.length - cardsPerPage, nextCardIndex),
-            );
+            setCurrentCardIndex(Math.min(cards.length - 1, nextCardIndex));
           }
           return;
         case "backward":
           if (canBackward) {
             clearAudio();
             setShowFront(true);
-            setCardIndex(Math.max(0, cardIndex - cardsPerPage));
+            setCurrentCardIndex(Math.max(0, currentCardIndex - 1));
           }
           return;
         default:
@@ -125,23 +106,15 @@ export const CardSlider: React.FC<CardSliderProps> = ({
       }
     },
     [
-      cardIndex,
+      currentCardIndex,
       canForward,
       canBackward,
-      filteredCards,
+      cards,
       clearAudio,
-      setCardIndex,
+      setCurrentCardIndex,
       setShowFront,
-      cardsPerPage,
     ],
   );
-
-  if (status === "loading") {
-    return <></>;
-  }
-  if (status === "error" || !data || !data.cards) {
-    return <div>Error loading cards.</div>;
-  }
 
   return (
     <div className="responsive-height-with-header flex ion-align-items-center">
@@ -153,9 +126,9 @@ export const CardSlider: React.FC<CardSliderProps> = ({
             style={{ display: "flex", flexDirection: "column" }}
           >
             <IonText>
-              <h1 className="text-4xl semibold">{titles[0].text}</h1>
-              {titles.length === 2 && (
-                <p className="text-2xl color-english">{titles[1].text}</p>
+              <h1 className="text-4xl semibold">{packName[0].text}</h1>
+              {packName.length === 2 && (
+                <p className="text-2xl color-english">{packName[1].text}</p>
               )}
             </IonText>
             <div className="margin-top-1" onClick={handleAudioClick}>
@@ -170,8 +143,8 @@ export const CardSlider: React.FC<CardSliderProps> = ({
               src={backward}
             />
             <Card
-              image={filteredCards[cardIndex]?.image || { url: "" }}
-              key={filteredCards[cardIndex]?.id || ""}
+              image={cards[currentCardIndex]?.image || { url: "" }}
+              key={cards[currentCardIndex]?.id || ""}
               setShowFront={setShowFront}
               showFront={showFront}
               text_back={text_back_filtered}

@@ -16,7 +16,9 @@ import { useLocation } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
+import { useCardSlider } from "@/contexts/CardSlider";
 import { useEffect } from "react";
+
 import audio_happy_en from "@/assets/audio/FlowerCongrats/happy.mp3";
 import audio_happy_es from "@/assets/audio/FlowerCongrats/feliz.mp3";
 import audio_calm_en from "@/assets/audio/FlowerCongrats/calm.mp3";
@@ -55,15 +57,11 @@ const audios: Record<string, Record<string, string>> = {
 
 export const FeelingsFeedback: React.FC = () => {
   const history = useHistory();
-  const location = useLocation<{
-    returnTo?: string;
-    cardIndex?: number;
-    uniqueClicks?: number;
-  }>(); // Access the state
   const { language } = useLanguage();
   const { getText } = useI18n();
   const { populateText } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
+  const { activity } = useCardSlider();
 
   const {
     control,
@@ -257,9 +255,7 @@ export const FeelingsFeedback: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    history.push("/community/congrats", {
-      ...location.state,
-    });
+    history.push(`/${activity}/congrats`);
   });
 
   return (

@@ -9,6 +9,13 @@ import { useAdultCheck } from "@/contexts/AdultCheckContext";
 import { useProfile } from "@/hooks/Profile";
 
 import {
+  About,
+  Overview,
+  Profile,
+  Preferences,
+  Progress,
+} from "@/pages/Settings";
+import {
   AddStudentsComplete,
   ClassStudents,
   ClassStudentsAddStudents,
@@ -31,11 +38,17 @@ import {
   AffirmationsIntro,
   AffirmationsSelect,
 } from "@/pages/Affirmations";
+import { CardSliderProvider } from "@/contexts/CardSlider";
 import {
   ClassroomDashboardLayout,
   TeacherDashboardLayout,
 } from "@/layouts/TeacherDashboard";
-import { Community } from "@/pages/Community";
+import {
+  Community,
+  CommunityCongrats,
+  FeelingsFeedback,
+  ThoughtsFeedback,
+} from "@/pages/Community";
 import {
   CountWithMeGameLoader,
   CountWithMeIntro,
@@ -47,13 +60,6 @@ import {
   IntruderIntro,
   IntruderGameLoader,
 } from "@/pages/Intruder";
-import {
-  About,
-  Overview,
-  Profile,
-  Preferences,
-  Progress,
-} from "@/pages/Settings";
 import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
 import { Play } from "@/pages/Play";
 import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
@@ -75,9 +81,6 @@ import { Wellness } from "@/pages/Wellness";
 import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
 import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
 import { useEffect } from "react";
-import { FeelingsFeedback } from "@/pages/Community/FeelingsFeedback";
-import { CommunityCongrats } from "@/pages/Community/CommunityCongrats";
-import { ThoughtsFeedback } from "@/pages/Community/ThoughtsFeedback";
 
 const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { showAdultCheck } = useAdultCheck();
@@ -224,27 +227,31 @@ export const ProtectedRoutes: React.FC = () => {
             path="/affirmations/select"
             component={AffirmationsSelect}
           />
-          <Route
-            exact
-            path="/affirmations/play/:pack_id"
-            component={AffirmationsGame}
-          />
+          <Route path="/affirmations">
+            <CardSliderProvider>
+              <Route
+                exact
+                path="/affirmations/play/:pack_id"
+                component={AffirmationsGame}
+              />
+              <Route
+                exact
+                path="/affirmations/feelings"
+                component={FeelingsFeedback}
+              />
+              <Route
+                exact
+                path="/affirmations/thoughts"
+                component={ThoughtsFeedback}
+              />
+              <Route
+                exact
+                path="/affirmations/congrats"
+                component={CommunityCongrats}
+              />
+            </CardSliderProvider>
+          </Route>
           <Route exact path="/community" component={Community} />
-          <Route
-            exact
-            path="/community/feelings"
-            component={FeelingsFeedback}
-          />
-          <Route
-            exact
-            path="/community/thoughts"
-            component={ThoughtsFeedback}
-          />
-          <Route
-            exact
-            path="/community/congrats"
-            component={CommunityCongrats}
-          />
           <Route
             exact
             path="/count-with-me-game/intro"
