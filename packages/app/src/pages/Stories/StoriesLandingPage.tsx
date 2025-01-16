@@ -63,7 +63,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
         <CardPackSelect
           cards={storiesByTag.all}
           sortBy="order"
-          titleKey="common.stories"
+          titleKey="pages.storiesLandingPage.title"
         />
 
         {tagOrder
