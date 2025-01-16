@@ -4,6 +4,7 @@ export * from "./debug";
 import * as teacher from "./teacher";
 import * as scheduled from "./scheduled";
 import * as student from "./student";
+import * as trigger from "./trigger";
 import * as user from "./user";
 import * as waitlist from "./waitlist";
 import * as sync from "./sync-strapi";
@@ -21,6 +22,7 @@ export {
   student,
   sync,
   teacher,
+  trigger,
   user,
   waitlist,
 };
