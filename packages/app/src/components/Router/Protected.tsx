@@ -276,7 +276,7 @@ export const ProtectedRoutes: React.FC = () => {
           />
           <Route
             exact
-            path="/intruder-game/play/:pack_id"
+            path="/intruder/play/:pack_id"
             component={IntruderGameLoader}
           />
           <Route
