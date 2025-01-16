@@ -117,6 +117,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const correctStyle = {
     cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: "0.525rem solid var(--alerts-status-success, #12D18E)",
     boxShadow: "0 0.525rem 1.575rem 0 #12D18E",
   };
@@ -124,6 +125,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const incorrectStyle = {
     cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: " solid var(--Categories-Error, #F0091B)",
     boxShadow: "0 0.525rem 1.575rem 0 #F0091B",
   };
@@ -289,7 +291,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
         <div className="padding-top-4 margin-bottom-2">
           <IonText>
             <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
-            {language === "esen" && (
+            {language === "es.en" && (
               <p className="text-3xl color-english">
                 Which word does not rhyme?
               </p>
