@@ -20,6 +20,7 @@ const lookup: { [key: string]: string } = {
   V5QU: "eGmlbVHHFxYI2tlzd037",
   GI6E: "CfApuZE3f9blBoG8G1pV",
   "57AJ": "obpRTD6b0vnmmFFO8nQ3",
+  ST93: "sonomademo",
 };
 
 export const QuickLaunch: React.FC = () => {
