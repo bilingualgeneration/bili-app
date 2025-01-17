@@ -33,6 +33,7 @@ import "./Intruder.scss";
 import "../../theme/animate.scss";
 import { card } from "ionicons/icons";
 import { groupBy } from "rxjs";
+import { useLanguage } from "@/hooks/Language";
 
 interface BiliImage {
   url: string;
@@ -71,15 +72,9 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
-  const {
-    handleAttempt,
-    handleRecordAttempt,
-    handleResetAttempts,
-    setActivityState,
-    setGamesData,
-  } = useActivity();
+  const { handleAttempt, setActivityState, setGamesData } = useActivity();
   const { startTimer } = useTimeTracker();
   useEffect(() => {
     startTimer();
@@ -96,10 +91,23 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
     setGamesData(gamesData);
     // todo: allow only English?
-    const audios = [instruction_es_audio];
-    if (language === "esen") {
-      audios.push(instruction_en_audio);
+
+    let audios: any[] = [];
+    switch (language) {
+      case "es":
+        audios = [instruction_es_audio];
+        break;
+      case "en":
+        audios = [instruction_en_audio];
+        break;
+      case "es.en":
+        audios = [instruction_es_audio, instruction_en_audio];
+        break;
+      case "en.es":
+        audios = [instruction_en_audio, instruction_es_audio];
+        break;
     }
+
     addAudio(audios);
     return () => {
       clearAudio();
