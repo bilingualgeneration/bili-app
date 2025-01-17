@@ -34,6 +34,7 @@ import "../../theme/animate.scss";
 import { card } from "ionicons/icons";
 import { groupBy } from "rxjs";
 import { useLanguage } from "@/hooks/Language";
+import { I18nMessage } from "@/components/I18nMessage";
 
 interface BiliImage {
   url: string;
@@ -179,6 +180,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   const shuffledCards = useMemo(() => {
     const wordGroup = data.word_group[currentIndex];
+    console.log(wordGroup, "wordGroup");
     const cards = [
       {
         word: wordGroup.intruder_text,
@@ -202,7 +204,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     ];
     return shuffleArray(cards);
   }, [data, currentIndex]);
-
+  console.log(shuffledCards, "shuffled cards");
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
@@ -298,12 +300,17 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       <div id="intruder-styles">
         <div className="padding-top-4 margin-bottom-2">
           <IonText>
-            <h1 className="text-5xl color-suelo">¿Qué palabra no rima?</h1>
-            {language === "es.en" && (
-              <p className="text-3xl color-english">
-                Which word does not rhyme?
-              </p>
-            )}
+            <h2 className="text-5xl color-suelo">
+              <I18nMessage id="intruder.game.title" />
+            </h2>
+
+            <I18nMessage
+              id="intruder.game.title"
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-3xl color-english">{text}</p>
+              )}
+            />
           </IonText>
         </div>
         <div className="intruder-cards-container">
@@ -338,11 +345,16 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           </IonButton>
           <IonText>
             <h1 className="text-3xl semibold color-suelo">
-              {language === "en" ? "Read" : "Lee"}
+              <I18nMessage id="storyFactory.read" />
             </h1>
-            {language === "esen" && (
-              <p className="text-lg color-english">Read</p>
-            )}
+
+            <I18nMessage
+              id="storyFactory.read"
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-lg color-english">{text}</p>
+              )}
+            />
           </IonText>
         </div>
       </div>
