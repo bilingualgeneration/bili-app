@@ -15,17 +15,21 @@ import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
 import { useHistory } from "react-router";
 import StarImage from "@/assets/icons/small-star.svg";
+import { useLanguage } from "@/hooks/Language";
+import { useI18n } from "@/hooks/I18n";
+import { I18nMessage } from "@/components/I18nMessage";
 
 export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
   count: number; // note: when pack is done, count = -1
 }> = ({ setShowCongrats, count }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
   const { addAudio, clearAudio, onended } = useAudioManager();
   const [audios, setAudios] = useState<string[]>([]);
+  const { getText } = useI18n();
 
   const percentageRanges: { [key: number]: string } = {
     5: "90-100%",
@@ -71,15 +75,12 @@ export const IntruderCongrats: React.FC<{
     addAudio(newAudios);
   }, [count, language]);
 
-  const button_es = "¡Sigue adelante!";
-  const button_en = "Keep going!";
-
   return (
     <div className="padding-top-2">
       <DialogueScreen
         audios={audios}
-        buttonTextPrimary={language === "en" ? button_en : button_es}
-        buttonTextSecondary={language === "esen" ? button_en : ""}
+        buttonTextPrimary={getText("intruder.keepGoing", 1, "authed") ?? ""}
+        buttonTextSecondary={getText("intruder.keepGoing", 2, "authed") ?? ""}
         characterImage={biliCharacter}
         onButtonClick={() => {
           startTimer();
@@ -87,23 +88,18 @@ export const IntruderCongrats: React.FC<{
         }}
       >
         <IonText class="ion-text-center">
-          {language.startsWith("es") && (
-            <>
-              <h1 className="text-5xl color-suelo">
-                <FormattedMessage id={`common.congrats.title.${stars}`} />
-              </h1>
-            </>
-          )}
-          {language === "en" && (
-            <>
-              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
-            </>
-          )}
-          {language === "esen" && (
-            <>
-              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
-            </>
-          )}
+          <h1 className="text-5xl color-suelo">
+            <I18nMessage id={`common.congrats.title.${stars}`} />
+          </h1>
+
+          <I18nMessage
+            id={`common.congrats.title.${stars}`}
+            level={2}
+            wrapper={(text: string) => (
+              <h2 className="text-4xl color-english">{text}</h2>
+            )}
+          />
+
           <div className="stars-container">
             {[...Array(safeStars)].map((_, index) => (
               <img
