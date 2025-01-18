@@ -6,6 +6,9 @@ import {
   useState,
 } from "react";
 import { useLanguage } from "@/hooks/Language";
+import { useTimeTracker } from "@/hooks/TimeTracker";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "@/components/Firebase";
 
 type Card = any;
 type PackName = any;
@@ -26,7 +29,19 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
   const [cards, setCards] = useState<Card[]>([]);
   const [rawCards, setRawCards] = useState<Card[]>([]);
   const { languageNormalized, filterText } = useLanguage();
+  const [questions, setQuestions] = useState<any[]>([]);
+  const { startTimer } = useTimeTracker();
 
+  useEffect(() => {
+    startTimer();
+  }, [packId]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getDoc(doc(firestore, "/bundles/sel-questions"));
+      setQuestions(Object.values(response.data()!.data));
+    })();
+  }, [setQuestions]);
   useEffect(() => {
     if (rawCards.length > 0) {
       setCards(
@@ -52,7 +67,11 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
     setCardClicks(0);
   };
 
-  const isReady = cards.length > 0 && packName.length > 0 && packId !== null;
+  const isReady =
+    cards.length > 0 &&
+    packName.length > 0 &&
+    packId !== null &&
+    questions.length > 0;
   return (
     <CardSliderContext.Provider
       children={children}
@@ -64,6 +83,7 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
         isReady,
         packId,
         packName,
+        questions,
         rawCards,
         rawPackName,
         reset,

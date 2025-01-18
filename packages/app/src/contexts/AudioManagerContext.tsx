@@ -53,6 +53,7 @@ export const AudioManagerProvider: React.FC<React.PropsWithChildren> = ({
     });
     //setAudios([]);
     audiosRef.current = [];
+    onended.next();
   };
   return (
     <AudioManagerContext.Provider

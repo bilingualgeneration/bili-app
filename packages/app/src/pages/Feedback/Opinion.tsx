@@ -27,7 +27,7 @@ import audio_idk_es from "@/assets/audio/FlowerCongrats/no_lo_sé.mp3";
 import audio_en from "@/assets/audio/FlowerCongrats/what_do_you_think.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/qué_opinas.mp3";
 
-import "./Community.scss";
+//import "./Community.scss";
 
 const audios: Record<string, Record<string, string>> = {
   yes: {
@@ -44,7 +44,7 @@ const audios: Record<string, Record<string, string>> = {
   },
 };
 
-export const ThoughtsFeedback: React.FC = () => {
+export const OpinionFeedback: React.FC = () => {
   const { activity } = useCardSlider();
   const { language } = useLanguage();
   const history = useHistory();
