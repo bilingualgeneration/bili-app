@@ -1,4 +1,5 @@
 // like PackSelect but database call has already been made by caller
+// TODO: not sorting by order yet; don't
 
 import { Carousel } from "@/components/Carousel";
 import { ContentCard } from "@/components/ContentCard";
@@ -70,7 +71,7 @@ export const CardPackSelect: React.FC<props> = ({
             if (c.isStudentStory) {
               pills.push(studentStoryPill);
             }
-
+            console.log(pills);
             return <ContentCard key={index} pills={pills} {...c} />;
           })}
       </Carousel>

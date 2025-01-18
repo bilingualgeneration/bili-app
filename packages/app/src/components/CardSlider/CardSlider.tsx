@@ -3,6 +3,7 @@ import { useCardSlider } from "@/contexts/CardSlider";
 import React, { useState, useCallback, useEffect } from "react";
 import { IonCol, IonGrid, IonImg, IonRow, IonText } from "@ionic/react";
 import { AudioButton } from "@/components/AudioButton";
+import { first } from "rxjs/operators";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
@@ -30,7 +31,7 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
   const history = useHistory();
   const [showFront, setShowFront] = useState<boolean>(true);
   const { filterText } = useLanguage();
-  const { clearAudio } = useAudioManager();
+  const { clearAudio, onended } = useAudioManager();
 
   const text_front_filtered = React.useMemo(
     () => filterText(cards[currentCardIndex]?.text_front || []),
@@ -60,13 +61,17 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
       setCardClicks(cardClicks + 1);
       const newCardClicks = cardClicks + 1;
       setCardClicks(newCardClicks);
-
-      if (newCardClicks % 2 === 0) {
-        const destination =
-          (newCardClicks / 2) % 2 === 0
-            ? "/affirmations/thoughts"
-            : "/affirmations/feelings";
-        history.push(destination);
+      if (newCardClicks % 5 === 0) {
+        onended.pipe(first()).subscribe(() => {
+          /*
+		const destination =
+		    (newCardClicks / 2) % 2 === 0
+		    ? "/affirmations/feedback/opinion"
+		    : "/affirmations/feedback/feeling";
+		*/
+          const destination = "/affirmations/feedback/feeling";
+          history.push(destination);
+        });
       }
     }
   };
