@@ -29,7 +29,7 @@ export const AddClassroomLanguage: React.FC = () => {
   const schema = z.object({
     allowLanguageToggle: z.boolean(),
     isInclusive: z.boolean(),
-    language: z.string(), //z.enum(['en', 'es', 'esen']),
+    language: z.string(),
   });
   const {
     allowLanguageToggle,
@@ -140,13 +140,13 @@ export const AddClassroomLanguage: React.FC = () => {
           }
           title={intl.formatMessage({ id: "languageMode.bilingualTitle" })}
           content={
-            "Choose this setting if you want your class to learn Spanish with English supports and translations. "
+            "Choose this setting if you want your class to learn Spanish with English supports and translations."
           }
           iconBackgroundColor="#006A67"
         />
       </div>
     ),
-    value: "esen",
+    value: "es.en",
   };
 
   const onSubmit = handleSubmit((responses) => {

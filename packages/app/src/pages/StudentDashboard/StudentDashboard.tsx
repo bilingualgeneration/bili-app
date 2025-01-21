@@ -134,7 +134,7 @@ const playCards = [
     title: "El Intruso",
     titleEn: "The intruder",
     cover: "/assets/img/mountain_image.png",
-    //link: "/intruder-game/intro",
+    //link: "/intruder/intro",
     isLocked: true,
   },
   {

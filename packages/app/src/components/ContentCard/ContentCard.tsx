@@ -2,6 +2,7 @@ import { CategoryTag } from "@/components/CategoryTag";
 import classnames from "classnames";
 import { ContentLock } from "@/components/ContentLock";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { I18nMessage } from "@/components/I18nMessage";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
@@ -12,7 +13,8 @@ import "./ContentCard.scss";
 
 export interface Pill {
   className?: string;
-  primaryText: string;
+  i18nKey?: string;
+  primaryText?: string;
   secondaryText?: string;
 }
 
@@ -35,15 +37,33 @@ const Pill: React.FC<Pill> = ({
   className = "background-nube",
   primaryText,
   secondaryText,
+  i18nKey,
 }) => {
+  console.log(i18nKey);
   return (
     <span className={classnames("content-card-pill", className)}>
-      <IonText>
-        <span className="text-xs semibold color-suelo">
-          {primaryText}
-          {secondaryText ? ` | ${secondaryText}` : ""}
-        </span>
-      </IonText>
+      {primaryText && (
+        <IonText>
+          <span className="text-xs semibold color-suelo">
+            {primaryText}
+            {secondaryText ? ` | ${secondaryText}` : ""}
+          </span>
+        </IonText>
+      )}
+      {i18nKey && (
+        <IonText>
+          <span className="text-xs semibold color-suelo">
+            <I18nMessage id={i18nKey} />
+            {i18nKey !== "story.pill.translanguaged" && (
+              <I18nMessage
+                id={i18nKey}
+                level={2}
+                wrapper={(t: string) => ` | ${t}`}
+              />
+            )}
+          </span>
+        </IonText>
+      )}
     </span>
   );
 };

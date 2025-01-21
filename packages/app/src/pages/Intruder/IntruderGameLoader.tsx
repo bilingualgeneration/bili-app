@@ -9,7 +9,7 @@ export const IntruderGameLoader: React.FC = () => {
   const { pack_id } = useParams();
 
   return (
-    <FirestoreDocProvider collection="intruder-game" id={pack_id}>
+    <FirestoreDocProvider collection="intruder" id={pack_id}>
       <IntruderHydratedGame />
     </FirestoreDocProvider>
   );

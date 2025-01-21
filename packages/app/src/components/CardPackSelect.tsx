@@ -26,13 +26,11 @@ export const CardPackSelect: React.FC<props> = ({
   const { languagePrimary, languageSecondary } = useLanguage();
   const translanguagedPill = {
     className: "background-cielo-low",
-    primaryText: "Translanguaged Cuento",
+    i18nKey: "story.pill.translanguaged",
   };
   const studentStoryPill = {
     className: "background-flamenco",
-    primaryText:
-      languagePrimary === "en" ? "Student Story" : "Cuento estudiantil",
-    secondaryText: languageSecondary === "en" ? "Student Story" : undefined,
+    i18nKey: "story.pill.studentStory",
   };
 
   return (
