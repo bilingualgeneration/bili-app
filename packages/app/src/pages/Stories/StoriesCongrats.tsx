@@ -1,15 +1,14 @@
 import { FormattedMessage } from "react-intl";
 import { IonButton, IonText } from "@ionic/react";
 import { useStory } from "./StoryContext";
-import { useLanguage } from "@/hooks/Language";
 import { useEffect } from "react";
+import { I18nMessage } from "@/components/I18nMessage";
 
 import congratsStar from "@/assets/icons/count_congrats_star.svg";
 
 export const StoriesCongrats: React.FC<{
   onKeepGoingClick: () => void;
 }> = ({ onKeepGoingClick }) => {
-  const { language } = useLanguage();
   const { sendAnalytics } = useStory();
   useEffect(() => {
     sendAnalytics();
@@ -36,13 +35,13 @@ export const StoriesCongrats: React.FC<{
       >
         <IonText>
           <p className="text-3xl" style={{ padding: "0 2.5rem" }}>
-            <FormattedMessage
-              id="countWithMe.keepGoing"
-              defaultMessage="Keep Going!"
-              description="Button label to exit congrats screen"
-            />
+            <I18nMessage id="countWithMe.keepGoing" />
           </p>
-          {language === "esen" && <p className="text-sm">Keep going!</p>}
+          <I18nMessage
+            id="countWithMe.keepGoing"
+            level={2}
+            wrapper={(t: string) => <p className="text-sm">{t}</p>}
+          />
         </IonText>
       </IonButton>
     </div>

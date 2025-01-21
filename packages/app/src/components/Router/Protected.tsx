@@ -266,15 +266,11 @@ export const ProtectedRoutes: React.FC = () => {
             component={CountWithMeGameLoader}
           />
           <Route exact path="/debug" component={Debug} />
-          <Route exact path="/intruder-game/intro" component={IntruderIntro} />
+          <Route exact path="/intruder/intro" component={IntruderIntro} />
+          <Route exact path="/intruder/select" component={IntruderSelect} />
           <Route
             exact
-            path="/intruder-game/select"
-            component={IntruderSelect}
-          />
-          <Route
-            exact
-            path="/intruder-game/play/:pack_id"
+            path="/intruder/play/:pack_id"
             component={IntruderGameLoader}
           />
           <Route

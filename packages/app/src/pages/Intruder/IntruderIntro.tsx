@@ -1,7 +1,8 @@
 import { DialogueScreen } from "@/components/DialogueScreen";
+import { I18nMessage } from "@/components/I18nMessage";
+import { useLanguage } from "@/hooks/Language";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useLanguage } from "@/hooks/Language";
 import { useProfile } from "@/hooks/Profile";
 
 import bili from "@/assets/img/bili_in_tshirt.png";
@@ -10,55 +11,44 @@ import audio_en from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
 import audio_es from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
 import audio_es_inc from "@/assets/audio/IntruderAudio/intruder_instruction_es_inc.mp3";
 
-export const IntruderIntro: React.FC = () => {
-  const { language } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
-  const history = useHistory();
-  const en = 'Welcome to "The Intruder"!';
-  const es = '¡Bienvenidos a "El intruso"!';
-  const esinc = '¡Bienvenides a "El intruso"!';
-  let audios: any[] = [];
-  switch (language) {
-    case "es":
-      if (isInclusive) {
-        audios = [audio_es_inc];
-      } else {
-        audios = [audio_es];
-      }
-      break;
-    case "en":
-      audios = [audio_en];
-      break;
-    case "esen":
-      if (isInclusive) {
-        audios = [audio_es_inc, audio_en];
-      } else {
-        audios = [audio_es, audio_en];
-      }
-      break;
-  }
+const audio_raw = [
+  {
+    language: "en",
+    audio: audio_en,
+  },
+  {
+    language: "es",
+    audio: audio_es,
+  },
+  {
+    language: "es-inc",
+    audio: audio_es_inc,
+  },
+];
 
-  const button_es = "¡Juguemos!";
-  const button_en = `Let's play!`;
+export const IntruderIntro: React.FC = () => {
+  const history = useHistory();
+  const { populateText } = useLanguage();
+  const audios: string[] = populateText(audio_raw).map((a: any) => a.audio);
+
   return (
     <DialogueScreen
       audios={audios}
-      buttonTextPrimary={language === "en" ? button_en : button_es}
-      buttonTextSecondary={language === "esen" ? button_en : undefined}
+      buttonI18nKey={"common.letsPlay"}
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/intruder-game/select");
+        history.push("/intruder/select");
       }}
     >
       <IonText>
         <h1 className="text-5xl color-suelo">
-          {language === "en" ? en : isInclusive ? esinc : es}
+          <I18nMessage id="intruder.welcome" />
         </h1>
-        {language === "esen" && (
-          <h2 className="text-3xl color-english">{en}</h2>
-        )}
+        <I18nMessage
+          id="intruder.welcome"
+          level={2}
+          wrapper={(t: string) => <p className="text-3xl color-english">{t}</p>}
+        />
       </IonText>
     </DialogueScreen>
   );
