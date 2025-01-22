@@ -66,9 +66,9 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary fallback={<Loading />}>
       <IonApp>
-        <InterfaceLanguageProvider>
-          <AudioManagerProvider>
-            <ProfileProvider>
+        <AudioManagerProvider>
+          <ProfileProvider>
+            <InterfaceLanguageProvider>
               <ClassroomProvider>
                 <I18nProvider>
                   <StudentProvider>
@@ -82,9 +82,9 @@ const App: React.FC = () => {
                   </StudentProvider>
                 </I18nProvider>
               </ClassroomProvider>
-            </ProfileProvider>
-          </AudioManagerProvider>
-        </InterfaceLanguageProvider>
+            </InterfaceLanguageProvider>
+          </ProfileProvider>
+        </AudioManagerProvider>
       </IonApp>
     </ErrorBoundary>
   );

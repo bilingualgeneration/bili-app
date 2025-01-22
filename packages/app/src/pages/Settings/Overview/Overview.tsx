@@ -14,14 +14,13 @@ import {
   IonContent,
   IonText,
 } from "@ionic/react";
-import Joyride from "react-joyride";
 import { addOutline, ellipse, sparkles } from "ionicons/icons";
 import { Carousel } from "@/components/Carousel";
 import { SettingsExploreCard } from "@/components/Settings/SettingsExplore";
 import settingsCardDesign1 from "@/assets/icons/settings_explore_card_bg1.svg";
 import settingsCardDesign2 from "@/assets/icons/settings_explore_card_bg2.svg";
 import settingsCardDesign3 from "@/assets/icons/settings_explore_card_bg3.svg";
-import { FormattedMessage, useIntl } from "react-intl";
+import { I18nMessage } from "@/components/I18nMessage";
 import { Preferences } from "@capacitor/preferences";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
@@ -66,197 +65,53 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
     profile: { isImmersive, isInclusive },
   } = useProfile();
   const { id: activeStudentId } = useStudent();
-  const [shouldShowTutorial, setShouldShowTutorial] = useState<boolean>(false);
-
-  const steps = [
-    {
-      target: "#side-menu-button-sideMenu-profile",
-      disableBeacon: true,
-      content: (
-        <FormattedMessage
-          id="settings.onboarding.profile"
-          defaultMessage="Language learning is for the whole family! You can add up to five child profiles on the overview page or by clicking 'Profiles.'"
-          description="Onboarding message for the Profiles button on the side menu"
-        />
-      ),
-    },
-    {
-      target: "#inclusive-spanish-card",
-      disableBeacon: true,
-      content: (
-        <FormattedMessage
-          id="settings.onboarding.inclusiveSpanish"
-          defaultMessage="Did you know you can choose inclusive Spanish on Bili? Opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters."
-          description="Onboarding message for the Profiles button on the side menu"
-        />
-      ),
-    },
-    {
-      target: "#side-menu-button-sideMenu-preferences",
-      disableBeacon: true,
-      content: (
-        <FormattedMessage
-          id="settings.onboarding.preferences"
-          defaultMessage="Click on 'Preferences' to change your language settings to and manage other preferences like playtime limits."
-          description="Onboarding message for the Preferences button on the side menu"
-        />
-      ),
-    },
-    {
-      target: "#side-menu-button-sideMenu-progress",
-      disableBeacon: true,
-      content: (
-        <FormattedMessage
-          id="settings.onboarding.progress"
-          defaultMessage="Learn more about your child's language learning by checking out the 'Progress' section. Use this section to gain insights into your child's activity, including how much time they've spend in each category and their favorite Bili activities."
-          description="Onboarding message for the Progress button on the side menu"
-        />
-      ),
-    },
-  ];
-
-  // todo: rekey these ids to be joyride.___ eg joyride.back
-  const translations = {
-    Joyride: {
-      back: (
-        <FormattedMessage
-          id="settings.overview.joyrideBack"
-          defaultMessage="Back"
-          description="Button to go 'back' in the walkthrough tutorial on settings/overview page"
-        />
-      ),
-      last: (
-        <FormattedMessage
-          id="settings.overview.joyrideLast"
-          defaultMessage="Last"
-          description="Appears when user is on 'last' slide of the walkthrough tutorial on settings/overview page"
-        />
-      ),
-      next: (
-        <FormattedMessage
-          id="settings.overview.joyrideNext"
-          defaultMessage="Next"
-          description="Button to go to 'next' section of the walkthrough tutorial on settings/overview page"
-        />
-      ),
-      skip: (
-        <FormattedMessage
-          id="settings.overview.joyrideSkip"
-          defaultMessage="Skip"
-          description="Button to 'skip' the walkthrough tutorial on settings/overview page"
-        />
-      ),
-    },
-  };
-
-  const intl = useIntl();
-
-  /*
-     letterAvatarBackgroundColor="#f28ac9"
-     letterAvatarTextColor="#973d78"
-   */
 
   const settingsExploreCards = [
     {
       backgroundImage: settingsCardDesign1,
       backgroundColor: "#973D78",
-      title: intl.formatMessage({
-        id: "settings.overview.gettingStartedTitle",
-        defaultMessage: "Getting started",
-        description: "Explore card #1 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.gettingStartedContent",
-        defaultMessage:
-          "Your Essential Guide to Getting Started with the Bili App.",
-        description: "Explore card #1 content",
-      }),
+      i18nKeyPrimary: "settings.overview.gettingStartedTitle",
+      i18nKeySecondary: "settings.overview.gettingStartedContent",
       link: "https://thebiliapp.com/getting-started/",
       tags: [
         {
           color: "#FFAEDC",
-          text: intl.formatMessage({
-            id: "tag.guide",
-            defaultMessage: "Guide",
-            description: "Content tag for guides",
-          }),
+          i18nKey: "tag.guide",
         },
         {
           color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
+          i18nKey: "tag.resources",
         },
       ],
     },
     {
       backgroundImage: settingsCardDesign2,
       backgroundColor: "#22BEB9",
-      title: intl.formatMessage({
-        id: "settings.overview.inclusiveSpanishTitle",
-        defaultMessage: "Inclusive Spanish",
-        description: "Explore card #2 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.InclusiveSpanishContent",
-        defaultMessage:
-          "Learn about what Inclusive Spanish is and why it exists.",
-        description: "Explore card #2 content",
-      }),
+      i18nKeyPrimary: "settings.overview.inclusiveSpanishTitle",
+      i18nKeySecondary: "settings.overview.InclusiveSpanishContent",
       link: "https://thebiliapp.com/inclusive-spanish/",
       tags: [
         {
           color: "#D3EAE8",
-          text: intl.formatMessage({
-            id: "tags.social_justice",
-            defaultMessage: "Social Justice",
-            description: "Content tag for social justice",
-          }),
-        },
-        {
-          color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
+          i18nKey: "tags.social_justice",
         },
       ],
     },
     {
       backgroundImage: settingsCardDesign3,
       backgroundColor: "#FFB68F",
-      title: intl.formatMessage({
-        id: "settings.overview.getChildTitle",
-        defaultMessage: "Get your child speaking Spanish with Bili",
-        description: "Explore card #3 title",
-      }),
-      subtitle: intl.formatMessage({
-        id: "settings.overview.getChildContent",
-        defaultMessage:
-          "Explore special features that promote authentic language production.",
-        description: "Explore card #3 content",
-      }),
+      i18nKeyPrimary: "settings.overview.getChildTitle",
+      i18nKeySecondary: "settings.overview.getChildContent",
       link: "https://thebiliapp.com/7-fun-and-effective-ways-to-teach-spanish-to-your-kids-at-home/",
       tags: [
         {
           color: "#973D78",
-          text: intl.formatMessage({
-            id: "tags.parents",
-            defaultMessage: "Parents",
-            description: "Content tag for parents",
-          }),
+          i18nKey: "tags.parents",
           textColor: "#fff",
         },
         {
           color: "#F1D100",
-          text: intl.formatMessage({
-            id: "tag.resources",
-            defaultMessage: "Resources",
-            description: "Content tag for resources",
-          }),
+          i18nKey: "tag.resources",
         },
       ],
     },
@@ -269,10 +124,9 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
           <IonRow class="ion-justify-content-between row">
             <IonCol size="4">
               <h1 className="child-profile-heading margin-bottom-1-5">
-                <FormattedMessage
+                <I18nMessage
                   id="settings.overview.child"
-                  defaultMessage="Child Profile"
-                  description="Child Profile page heading in settings"
+                  languageSource="unauthed"
                 />
               </h1>
             </IonCol>
@@ -335,12 +189,7 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
           <div style={{ marginTop: "2rem" }}>
             <IonRow className="margin-bottom-3">
               {students.map((s: any, index: number) => (
-                <IonCol
-                  className="ion-no-padding"
-                  size="6"
-                  // onClick={() => {}}
-                  key={s.uid}
-                >
+                <IonCol className="ion-no-padding" size="6" key={index}>
                   <ChildProfileCard
                     age={s.age}
                     // isActive={activeStudentId === s.id}
@@ -358,17 +207,15 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
             <IonCol size="auto">
               <div className="explore-bili-heading-subheading-container">
                 <h1 className="explore-bili-heading">
-                  <FormattedMessage
+                  <I18nMessage
                     id="settings.overview.explore"
-                    defaultMessage="Explore Bili"
-                    description="Explore Bili heading in settings"
+                    languageSource="unauthed"
                   />
                 </h1>
                 <p className="explore-bili-subheading margin-bottom-1-5">
-                  <FormattedMessage
+                  <I18nMessage
                     id="settings.overview.exploreSubheading"
-                    defaultMessage="Learn how to use Bili to meet language goals"
-                    description="Explore Bili subheading in settings"
+                    languageSource="unauthed"
                   />
                   <IonIcon
                     aria-hidden="true"

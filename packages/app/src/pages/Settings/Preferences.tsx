@@ -1,3 +1,5 @@
+// TODO: don't modify firestore directly
+
 import {
   IonButton,
   IonCol,
@@ -71,7 +73,7 @@ export const Preferences: React.FC = () => {
       isInclusive: info.isInclusive, // Default value for inclusive toggle
     },
   });
-  const ref = doc(firestore, "users", uid);
+  const ref = doc(firestore, "user", uid);
   // TODO: we shouldn't allow this straight from the app
   const update = (key: string, value: any) => {
     updateDoc(ref, {

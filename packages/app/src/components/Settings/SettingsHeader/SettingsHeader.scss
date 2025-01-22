@@ -1,12 +1,9 @@
 .settings-header {
-  display: flex;
-  height: 6.25rem;
   padding: 0.75rem 1.5rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-  align-self: stretch;
   border-bottom: 0.0625rem solid var(--base-agua, rgba(0, 106, 103, 0.12));
+  ion-row {
+    align-items: center;
+  }
 }
 
 ion-toolbar.settings-toolbar {
