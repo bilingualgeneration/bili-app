@@ -69,7 +69,6 @@ export const CardPackSelect: React.FC<props> = ({
             if (c.isStudentStory) {
               pills.push(studentStoryPill);
             }
-            console.log(pills);
             return <ContentCard key={index} pills={pills} {...c} />;
           })}
       </Carousel>

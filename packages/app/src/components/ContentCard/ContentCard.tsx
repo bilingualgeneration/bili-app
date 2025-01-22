@@ -39,7 +39,6 @@ const Pill: React.FC<Pill> = ({
   secondaryText,
   i18nKey,
 }) => {
-  console.log(i18nKey);
   return (
     <span className={classnames("content-card-pill", className)}>
       {primaryText && (

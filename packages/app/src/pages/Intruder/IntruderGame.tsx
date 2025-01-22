@@ -37,7 +37,6 @@ import correct_card_audio from "@/assets/audio/correct.mp3";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
 import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
 import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
-
 const instruction_audio_raw = [
   {
     language: "en",
@@ -86,7 +85,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
   const { populateText } = useLanguage();
   const {
@@ -129,6 +128,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const correctStyle = {
     cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: "0.525rem solid var(--alerts-status-success, #12D18E)",
     boxShadow: "0 0.525rem 1.575rem 0 #12D18E",
   };
@@ -136,6 +136,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const incorrectStyle = {
     cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: " solid var(--Categories-Error, #F0091B)",
     boxShadow: "0 0.525rem 1.575rem 0 #F0091B",
   };
@@ -150,9 +151,10 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   };
 
   const temporaryAudioPlayingStyle = {
+    cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: "0.525rem solid var(--Base-Hover-Shadow, rgba(0, 0, 0, 0.08))",
-    background: "#FFF",
     boxShadow: "0 0.525rem 1.575rem 0.4375rem rgba(0, 0, 0, 0.60)",
   };
 
@@ -181,7 +183,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   const shuffledCards = useMemo(() => {
     const wordGroup = data.word_group[currentIndex];
-
     const cards = [
       {
         word: wordGroup.intruder_text,
@@ -205,7 +206,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     ];
     return shuffleArray(cards);
   }, [data, currentIndex]);
-
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);
@@ -325,7 +325,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             >
               <img
                 src={card.image.url}
-                style={{ opacity: showBackside ? 0 : 1 }}
+                style={{ height: "100%", opacity: showBackside ? 0 : 1 }}
               />
               <p
                 className="text-5xl color-suelo"
