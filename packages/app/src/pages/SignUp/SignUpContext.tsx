@@ -46,7 +46,6 @@ export const SignUpDataProvider = ({
   const functions = getFunctions();
   const teacherSignupFunction = httpsCallable(functions, "teacher-signup");
   const caregiverSignupFunction = httpsCallable(functions, "caregiver-signup");
-
   const signUp = async () => {
     setSignUpStatus("busy");
     switch (data.role) {
