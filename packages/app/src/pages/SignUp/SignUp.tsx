@@ -1,3 +1,5 @@
+// http://localhost:5173/sign-up/by-class-code?code=abcd&email=jon@aol.com
+
 import {
   AccountCredentials,
   ChildProfile,

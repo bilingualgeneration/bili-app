@@ -19,7 +19,7 @@ export const PublicRoutes: React.FC = () => {
         <Route exact path="/sign-up/by-class-code" component={SignUp} />
         <Route exact path="/splash" component={Splash} />
         <Route exact path="/waitlist" component={Waitlist} />
-        <Route exact path="/quicklaunch" component={QuickLaunch} />{" "}
+        <Route exact path="/quicklaunch" component={QuickLaunch} />
         {/* TODO: remove */}
         <Redirect to="/presplash" />
       </Switch>

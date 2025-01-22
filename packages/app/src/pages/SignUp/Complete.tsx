@@ -14,10 +14,12 @@ export const Complete: React.FC = () => {
       signUp();
     }
     if (signUpStatus === "done") {
-      setReqdActions({
-        ...reqdActions,
-        showSettingsMessage: true,
-      });
+      /*
+	  setReqdActions({
+              ...reqdActions,
+              showSettingsMessage: true,
+	  });
+	  */
     }
   }, [signUpStatus]);
   if (signUpStatus === "idle" || signUpStatus === "busy") {
