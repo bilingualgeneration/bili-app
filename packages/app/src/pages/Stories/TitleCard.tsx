@@ -53,9 +53,9 @@ export const TitleCard = ({
               )}
               <IonCardContent>
                 <IonText className="ion-text-center title">
-                  <h1 className="text-3xl color-suelo">{titles[0].text}</h1>
+                  <h1 className="text-5xl color-suelo">{titles[0].text}</h1>
                   {titles.length > 1 && (
-                    <p className="text-xl color-english">{titles[1].text}</p>
+                    <p className="text-3xl color-english">{titles[1].text}</p>
                   )}
                 </IonText>
                 <div className="ion-text-center" style={{ width: "100%" }}>
@@ -66,7 +66,7 @@ export const TitleCard = ({
                     style={{ minWidth: "60%" }}
                   >
                     <div>
-                      <h1 className="text-2xl semibold color-nube ion-no-padding">
+                      <h1 className="text-3xl semibold color-nube ion-no-padding">
                         <I18nMessage id="story.letsRead" />
                       </h1>
                       <I18nMessage
