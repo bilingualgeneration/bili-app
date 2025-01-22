@@ -84,13 +84,22 @@ ion-item.progress-item {
 .progress-style ion-select .select-highlight {
   --background: none;
 }
+
+.progress-style ion-select::part(text) {
+  color: #000;
+  font-family: Outfit;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
 .progress-style ion-item {
   --background: #f7faf9;
 }
-.grid-graph-style {
-  margin-inline: 0;
-  padding: 3rem;
-}
+// .grid-graph-style {
+//   margin-inline: 0;
+//   padding: 3rem;
+// }
 
 .grid-card {
   margin-bottom: 1em;
@@ -102,10 +111,11 @@ ion-item.progress-item {
   text-align: start;
 }
 
-.whole-grid-style ion-card {
+.grid-graph-style ion-card {
   margin-inline: 0;
-  height: 100%;
+  //height: 100%;
   margin: 0;
+  justify-content: start;
 }
 
 .grid-text-style-big {
@@ -115,7 +125,17 @@ ion-item.progress-item {
   font-style: normal;
   font-weight: 600;
   line-height: 1.75rem;
-  /* margin: 0 0 48px; */
+  margin: 1.7rem 2rem;
+}
+
+.grid-text-style-big-activities {
+  color: var(--Neutral-Colors-Black, #1e1b39);
+  font-family: Outfit;
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.75rem;
+  margin: 0 0 0.5rem 0.7rem;
 }
 
 .grid-text-style-small {
@@ -132,7 +152,7 @@ ion-item.progress-item {
 }
 
 ion-col.progress-data {
-  margin-left: 2rem;
+  margin-left: 0.7rem;
 }
 
 .color-1 {
@@ -221,11 +241,12 @@ ion-item.kids-name-select {
 }
 
 #settings-progress-bottom-row {
-  margin-top: 1rem;
+  //margin-top: 1rem;
   ion-col > * {
     height: 100%;
   }
   .grid-card {
-    padding: 0.5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
