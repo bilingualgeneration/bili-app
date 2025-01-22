@@ -22,7 +22,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../../../node_modules/@capacitor/app`)"
-  - "CapacitorBrowser (from `../../../../node_modules/@capacitor/browser`)"
+  - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../../../node_modules/@capacitor/device`)"
   - "CapacitorHaptics (from `../../../../node_modules/@capacitor/haptics`)"
@@ -37,7 +37,7 @@ EXTERNAL SOURCES:
   CapacitorApp:
     :path: "../../../../node_modules/@capacitor/app"
   CapacitorBrowser:
-    :path: "../../../../node_modules/@capacitor/browser"
+    :path: "../../node_modules/@capacitor/browser"
   CapacitorCordova:
     :path: "../../../../node_modules/@capacitor/ios"
   CapacitorDevice:
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   CapacitorSplashScreen: 5431ab8d19c1c6e95777d53bfaa7a36a6c3d94c7
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
 
-PODFILE CHECKSUM: 8a7ddd4873d26f5f4de8d79ea06c6cd4673ce9f1
+PODFILE CHECKSUM: f925371ac7947c068b399e47630b079eb808ec24
 
 COCOAPODS: 1.15.2
