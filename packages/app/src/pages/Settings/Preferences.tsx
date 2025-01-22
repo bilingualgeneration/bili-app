@@ -1,13 +1,19 @@
+// TODO: don't modify firestore directly
+
 import {
   IonButton,
+  IonCol,
   IonContent,
+  IonGrid,
   IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonPopover,
+  IonRow,
   IonSelect,
   IonSelectOption,
+  IonText,
   IonToggle,
 } from "@ionic/react";
 import Question from "@/assets/icons/question.svg?react";
@@ -19,6 +25,34 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 
 import "./Preferences.scss";
+import { Toggle } from "@/components/Toggle";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useClassroom } from "@/hooks/Classroom";
+import {
+  MultipleCheckbox,
+  MultipleCheckboxOption,
+} from "@/components/MultipleCheckbox";
+import { update } from "firebase/database";
+
+const OptionWrapper = ({ children }: { children: JSX.Element }) => {
+  return <IonCol size="4">{children}</IonCol>;
+};
+
+const languageOptions: MultipleCheckboxOption[] = [
+  {
+    label: "Spanish Immersion",
+    value: "es",
+  },
+  {
+    label: "English Immersion",
+    value: "en",
+  },
+  {
+    label: "Bilingual",
+    value: "es.en",
+  },
+];
 
 export const Preferences: React.FC = () => {
   const intl = useIntl();
@@ -26,13 +60,30 @@ export const Preferences: React.FC = () => {
     user: { uid },
     profile: { isImmersive, isInclusive, settingsLanguage },
   } = useProfile();
-  const ref = doc(firestore, "users", uid);
+  const { info } = useClassroom();
+  const [allowedLanguagesTrigger, setAllowedLanguagesTrigger] = useState<
+    string[]
+  >(info.allowedLanguages);
+  const { control, getValues, setValue, watch } = useForm({
+    defaultValues: {
+      grades: info.grades,
+      name: info.name,
+      allowedLanguages: info.allowedLanguages,
+      allowLanguageToggle: info.allowLanguageToggle,
+      isInclusive: info.isInclusive, // Default value for inclusive toggle
+    },
+  });
+  const ref = doc(firestore, "user", uid);
   // TODO: we shouldn't allow this straight from the app
-  const updateProfile = (key: string, value: any) => {
+  const update = (key: string, value: any) => {
     updateDoc(ref, {
       [key]: value,
     });
   };
+
+  const allowLanguageToggle = watch("allowLanguageToggle");
+  const allowedLanguages = watch("allowedLanguages");
+
   return (
     <>
       <IonList className="preferences-style">
@@ -48,109 +99,96 @@ export const Preferences: React.FC = () => {
           </div>
         </IonItem>
 
-        <IonItem>
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover1",
-              defaultMessage:
-                "Choose the language you will see in settings. This should be based on your language preferences as an adult.",
-              description:
-                "Description of the language you will see in settings.",
-            })}
-            trigger="click-trigger1"
-          />
-          <Question id="click-trigger1" />
-          <IonSelect
-            placeholder="English"
-            interface="popover"
-            toggleIcon={chevronForward}
-            value={settingsLanguage}
-            onIonChange={(event) => {
-              updateProfile("settingsLanguage", event.target.value);
-            }}
-          >
-            <div className="label-style" slot="label">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.settingsLanguage"
-                  defaultMessage="Settings Language"
-                  description="Preferences page 'settings language' text"
-                />
-              </h4>
-            </div>
-            <IonSelectOption value="es">Spanish</IonSelectOption>
-            <IonSelectOption value="en">English</IonSelectOption>
-          </IonSelect>
+        <IonItem lines="none" className="margin-top-2">
+          <Question className="margin-right-1" id="click-trigger2" />
+          <IonText>
+            <h2 className="text-2xl semibold color-suelo">
+              <Popover
+                content="Choose the language mode for your student’s experience in the app. ‘Bilingual’ means your student will see the content in English and Spanish. 
+              ‘Immersion’ means your student will only see the content in Spanish."
+                trigger="click-trigger2"
+              />
+              Student languages
+            </h2>
+          </IonText>
         </IonItem>
+        <IonGrid className="margin-left-2">
+          <IonRow className="ion-justify-content-around">
+            <MultipleCheckbox
+              control={control}
+              defaultValue={allowedLanguagesTrigger}
+              labelPlacement="end"
+              justify="start"
+              options={languageOptions}
+              name="allowedLanguages"
+              onChange={(values) => {
+                update("allowedLanguages", values);
+              }}
+              wrapper={OptionWrapper}
+              maxSelections={allowLanguageToggle ? undefined : 1}
+              minSelections={1}
+            />
+          </IonRow>
+        </IonGrid>
 
-        <IonItem>
+        <IonItem
+          lines="none"
+          className="text-2xl semibold color-suelo margin-top-2"
+        >
           <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover2",
-              defaultMessage:
-                "Choose the language mode for your child's experience in the app. 'Bilingual' means your child will see the content in English and Spanish. 'Immersion' means your child will only see the content in Spanish.",
-              description:
-                "Description of the language mode for your child's experience in the app",
-            })}
-            trigger="click-trigger2"
-          />
-          <Question id="click-trigger2" />
-          <IonSelect
-            placeholder="Immersion"
-            interface="popover"
-            toggleIcon={chevronForward}
-            value={isImmersive}
-            onIonChange={(event) => {
-              updateProfile("isImmersive", event.target.value);
-            }}
-          >
-            <div className="label-style" slot="label">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.bilingual"
-                  defaultMessage="Bilingual vs. Immersion Mode"
-                  description="Preferences page 'Bilingual vs. Immersion Mode' text"
-                />
-              </h4>
-            </div>
-            <IonSelectOption value={false}>Bilingual</IonSelectOption>
-            <IonSelectOption value={true}>Immersion</IonSelectOption>
-          </IonSelect>
-        </IonItem>
-
-        <IonItem>
-          <Popover
-            content={intl.formatMessage({
-              id: "settingsProgress.preferences.popover3",
-              defaultMessage:
-                "Choose inclusive Spanish to opt for terms like 'amigues,' 'niñes,' and 'Latine' to personalize your experience when referring to groups or non-binary characters. Disable this feature if you do not want to see these terms.",
-              description:
-                "Description of the inclusive language mode with gender neutral pronouns",
-            })}
+            content="Enable the Language Toggle button to allow your student to change the app language while they play. 
+          Disable to lock the app language (see ‘Student Language’)."
             trigger="click-trigger3"
           />
-          <Question id="click-trigger3" />
-          <IonToggle
+          <Question className="margin-right-1" id="click-trigger3" />
+          <Toggle
+            control={control}
+            name="allowLanguageToggle"
+            label="Language Toggle"
+            color="primary"
             justify="space-between"
-            onClick={() => {
-              updateProfile("isInclusive", !isInclusive);
-            }}
-            checked={isInclusive}
             mode="ios"
-          >
-            <div className="label-style">
-              <h4>
-                <FormattedMessage
-                  id="settingsProgress.preferences.inclusive"
-                  defaultMessage="Inclusive Spanish"
-                  description="Preferences page 'Inclusive Spanish' text"
-                />
-              </h4>
-            </div>
-          </IonToggle>
+            onChange={(checked) => {
+              if (!checked && allowedLanguages.length > 1) {
+                // need to pare down allowedLanguages
+                const newAllowedLanguages = allowedLanguages.slice(-1);
+                setValue("allowedLanguages", newAllowedLanguages);
+                setAllowedLanguagesTrigger(newAllowedLanguages);
+                update("allowedLanguages", newAllowedLanguages);
+              }
+              setValue("allowLanguageToggle", checked);
+              update("allowLanguageToggle", checked);
+            }}
+          />
         </IonItem>
 
-        <IonItem>
+        <IonItem
+          lines="none"
+          className="text-2xl semibold color-suelo margin-top-2"
+        >
+          <Popover
+            content="Choose inclusive Spanish to see gender-neutral terms like 'amigues,' 'niñes,' and 'Latine' when referring to groups or non-binary characters. 
+          Disable this feature if you do not want to see these terms."
+            trigger="click-trigger4"
+          />
+          <Question className="margin-right-1" id="click-trigger4" />
+          <Toggle
+            control={control}
+            name="isInclusive"
+            label="Inclusive Spanish"
+            color="primary"
+            justify="space-between"
+            checked={true}
+            mode="ios"
+            onChange={(checked) => {
+              update("isInclusive", checked);
+            }}
+          />
+        </IonItem>
+
+        {/* Keepp hidden for now Daily playtime limit and sound effects */}
+
+        {/* <IonItem>
           <Popover
             content={intl.formatMessage({
               id: "settingsProgress.preferences.popover4",
@@ -186,8 +224,8 @@ export const Preferences: React.FC = () => {
             <IonSelectOption value="4">4 hours</IonSelectOption>
           </IonSelect>
         </IonItem>
-
-        <IonItem>
+        
+        <IonItem lines="none">
           <Popover
             content={intl.formatMessage({
               id: "settingsProgress.preferences.popover5",
@@ -209,7 +247,7 @@ export const Preferences: React.FC = () => {
               </h4>
             </div>
           </IonToggle>
-        </IonItem>
+        </IonItem> */}
       </IonList>
     </>
   );

@@ -77,16 +77,17 @@ export const ClassCode: React.FC = () => {
   const onSubmit = handleSubmit(async (responses) => {
     const enteredCode = Object.values(responses).join("");
     setIsLoading(true);
-    const { data: classroomId } = await findByCodeFunction({
+    const { data: classes } = await findByCodeFunction({
       code: Object.values(responses).join(""),
     });
-    if (classroomId === null) {
+    if (classes === null) {
       setHasError(true);
     } else {
       setHasError(false);
       setData({
         ...data,
-        classroomId,
+        // @ts-ignore
+        classroomId: classes![0].id, // assume that we only take the first class by code
         role: "caregiver",
       });
       pushPage("languageModeSelect");

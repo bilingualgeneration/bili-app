@@ -6,6 +6,7 @@ import stickers from "@/assets/icons/profile_coming_soon/coming_soon_card_sticke
 import bili from "@/assets/icons/profile_coming_soon/coming_soon_card_bili.svg";
 import { Carousel } from "@/components/Carousel";
 import biliWorkshop from "@/assets/icons/profile_coming_soon/bili_workshop.svg";
+import bigHeart from "@/assets/icons/profile_coming_soon/heart_big.svg";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useI18n } from "@/hooks/I18n";
 import { I18nMessage } from "@/components/I18nMessage";
@@ -27,6 +28,7 @@ export const ProfileComingSoon: FC = () => {
       ],
       cardImage: stars,
     },
+
     {
       cardColor: "#FF5708",
       text: [
@@ -54,6 +56,21 @@ export const ProfileComingSoon: FC = () => {
         },
       ],
       cardImage: bili,
+    },
+    {
+      cardColor: "#FFD8EB",
+      text: [
+        {
+          text: "Guarda tus juegos y cuentos favoritos",
+          language: "es",
+        },
+        {
+          text: "Save your favorite games and stories",
+          language: "en",
+        },
+      ],
+      textColor: "base-suelo",
+      cardImage: bigHeart,
     },
   ];
 

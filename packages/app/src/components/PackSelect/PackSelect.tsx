@@ -1,3 +1,5 @@
+// TODO: remove es.en support and move over to title[]
+
 import { Carousel } from "@/components/Carousel";
 import { collection, query, orderBy } from "firebase/firestore";
 import { ContentCard } from "@/components/ContentCard";
@@ -60,12 +62,11 @@ export const HydratedPackSelect: React.FC<props> = ({
   }
   const translanguagedPill = {
     className: "background-cielo-low",
-    primaryText: "Translanguaged Cuento",
+    i18nKey: "story.pill.translanguaged",
   };
   const studentStoryPill = {
     className: "background-flamenco",
-    primaryText: language === "en" ? "Student Story" : "Cuento estudiantil",
-    secondaryText: language === "esen" ? "Student Story" : undefined,
+    i18nKey: "story.pill.studentStory",
   };
 
   const cards = data
@@ -150,7 +151,7 @@ export const HydratedPackSelect: React.FC<props> = ({
             >
               {language !== "en" ? translatedTitle : englishTitle}
             </h1>
-            {language === "esen" && (
+            {language === "es.en" && (
               <h2
                 style={{
                   marginLeft:

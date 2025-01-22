@@ -2,7 +2,7 @@ import { useI18n } from "@/hooks/I18n";
 
 interface I18nMessage {
   id: string;
-  languageSource?: "authed" | "unauthed";
+  languageSource?: "authed" | "unauthed"; // TODO: add interface language option
   level?: number;
   wrapper?: any;
 }

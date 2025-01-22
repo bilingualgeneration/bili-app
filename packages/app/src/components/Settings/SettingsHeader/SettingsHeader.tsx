@@ -1,27 +1,25 @@
-import {
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonBackButton,
-  IonTitle,
-  IonButton,
-  IonIcon,
-  IonGrid,
-  IonRow,
-  IonLabel,
-  IonCol,
-} from "@ionic/react";
-import { starOutline } from "ionicons/icons";
+// TODO: add language toggle
+
+import { IonCol, IonGrid, IonHeader, IonRow } from "@ionic/react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+
 import "./SettingsHeader.scss";
 import biliLogo from "@/assets/icons/bili.svg";
-import { FormattedMessage } from "react-intl";
-import React from "react";
 
 export const SettingsHeader: React.FC = ({}) => {
   return (
     <>
       <IonHeader className="ion-no-border settings-header">
-        <img src={biliLogo} className="header-bili-logo" />
+        <IonGrid>
+          <IonRow>
+            <IonCol className="ion-text-center">
+              <img src={biliLogo} className="header-bili-logo" />
+            </IonCol>
+            <IonCol size="auto">
+              <LanguageSwitcher />
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonHeader>
     </>
   );

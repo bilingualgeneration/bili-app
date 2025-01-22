@@ -1,5 +1,8 @@
+// TODO: migrate DialogueScreenProps to replace primary/secondary with buttonI18nKey
+
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { first } from "rxjs/operators";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonCard,
   IonCardContent,
@@ -17,7 +20,8 @@ import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png"; // TODO:
 interface DialogueScreenProps {
   audios: string[];
   children: React.ReactNode;
-  buttonTextPrimary: string;
+  buttonI18nKey?: string;
+  buttonTextPrimary?: string;
   buttonTextSecondary?: string; // optional
   characterImage: string;
   onButtonClick: () => void;
@@ -26,6 +30,7 @@ interface DialogueScreenProps {
 export const DialogueScreen: React.FC<DialogueScreenProps> = ({
   audios,
   children,
+  buttonI18nKey,
   buttonTextPrimary,
   buttonTextSecondary,
   characterImage,
@@ -76,12 +81,26 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
                 onClick={onButtonClick}
                 style={{ width: "50%", margin: "auto" }}
               >
-                <IonText>
-                  <p className="semibold text-3xl">{buttonTextPrimary}</p>
-                  {buttonTextSecondary && (
-                    <p className="text-sm">{buttonTextSecondary}</p>
-                  )}
-                </IonText>
+                {buttonTextPrimary && (
+                  <IonText>
+                    <p className="semibold text-3xl">{buttonTextPrimary}</p>
+                    {buttonTextSecondary && (
+                      <p className="text-sm">{buttonTextSecondary}</p>
+                    )}
+                  </IonText>
+                )}
+                {buttonI18nKey && (
+                  <IonText>
+                    <p className="semibold text-3xl">
+                      <I18nMessage id={buttonI18nKey} />
+                    </p>
+                    <I18nMessage
+                      id={buttonI18nKey}
+                      level={2}
+                      wrapper={(t: string) => <p className="text-sm">{t}</p>}
+                    />
+                  </IonText>
+                )}
               </IonButton>
             </div>
           </IonCol>

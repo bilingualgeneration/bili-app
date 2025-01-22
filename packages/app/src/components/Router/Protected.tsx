@@ -15,6 +15,7 @@ import {
   Preferences,
   Progress,
 } from "@/pages/Settings";
+import { ActivityProvider } from "@/contexts/ActivityContext";
 import {
   AddStudentsComplete,
   ClassStudents,
@@ -43,12 +44,9 @@ import {
   ClassroomDashboardLayout,
   TeacherDashboardLayout,
 } from "@/layouts/TeacherDashboard";
-import {
-  Community,
-  CommunityCongrats,
-  FeelingsFeedback,
-  ThoughtsFeedback,
-} from "@/pages/Community";
+import { Community, CommunityCongrats } from "@/pages/Community";
+import { FeelingFeedback, OpinionFeedback } from "@/pages/Feedback";
+
 import {
   CountWithMeGameLoader,
   CountWithMeIntro,
@@ -236,13 +234,13 @@ export const ProtectedRoutes: React.FC = () => {
               />
               <Route
                 exact
-                path="/affirmations/feelings"
-                component={FeelingsFeedback}
+                path="/affirmations/feedback/feeling"
+                component={FeelingFeedback}
               />
               <Route
                 exact
-                path="/affirmations/thoughts"
-                component={ThoughtsFeedback}
+                path="/affirmations/feedback/opinion"
+                component={OpinionFeedback}
               />
               <Route
                 exact
@@ -268,12 +266,8 @@ export const ProtectedRoutes: React.FC = () => {
             component={CountWithMeGameLoader}
           />
           <Route exact path="/debug" component={Debug} />
-          <Route exact path="/intruder-game/intro" component={IntruderIntro} />
-          <Route
-            exact
-            path="/intruder-game/select"
-            component={IntruderSelect}
-          />
+          <Route exact path="/intruder/intro" component={IntruderIntro} />
+          <Route exact path="/intruder/select" component={IntruderSelect} />
           <Route
             exact
             path="/intruder/play/:pack_id"

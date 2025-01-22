@@ -1,5 +1,6 @@
 import { GameData, useActivity } from "@/contexts/ActivityContext";
 import React, { useState, useEffect, useMemo } from "react";
+import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCard,
@@ -18,23 +19,34 @@ import {
 } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import cover from "@/assets/icons/card_back.svg";
+import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
+import SpeakerIcon from "@/assets/icons/speaker.svg";
+import { useParams } from "react-router";
+import { IntruderCongrats } from "./IntruderCongrats";
+import { useTimeTracker } from "@/hooks/TimeTracker";
+import { card } from "ionicons/icons";
+import { groupBy } from "rxjs";
+
+import "./Intruder.scss";
+import "../../theme/animate.scss";
+
+import cover from "@/assets/icons/card_back.svg";
 import incorrect_card_audio from "@/assets/audio/incorrect.mp3";
 import correct_card_audio from "@/assets/audio/correct.mp3";
 import card_flip_audio from "@/assets/audio/IntruderAudio/intruder_card_flip.mp3";
 import instruction_en_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_en.mp3";
 import instruction_es_audio from "@/assets/audio/IntruderAudio/intruder_game_instruction_es.mp3";
-import SpeakerIcon from "@/assets/icons/speaker.svg";
-import { useParams } from "react-router";
-import { IntruderCongrats } from "./IntruderCongrats";
-import { useTimeTracker } from "@/hooks/TimeTracker";
-import "./Intruder.scss";
-import "../../theme/animate.scss";
-import { card } from "ionicons/icons";
-import { groupBy } from "rxjs";
-import { useLanguage } from "@/hooks/Language";
-import { I18nMessage } from "@/components/I18nMessage";
+const instruction_audio_raw = [
+  {
+    language: "en",
+    audio: instruction_en_audio,
+  },
+  {
+    language: "es",
+    audio: instruction_es_audio,
+  },
+];
 
 interface BiliImage {
   url: string;
@@ -75,7 +87,14 @@ function shuffleArray<T>(array: T[]): T[] {
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   const { language } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
-  const { handleAttempt, setActivityState, setGamesData } = useActivity();
+  const { populateText } = useLanguage();
+  const {
+    handleAttempt,
+    handleRecordAttempt,
+    handleResetAttempts,
+    setActivityState,
+    setGamesData,
+  } = useActivity();
   const { startTimer } = useTimeTracker();
   useEffect(() => {
     startTimer();
@@ -91,24 +110,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     }
 
     setGamesData(gamesData);
-    // todo: allow only English?
-
-    let audios: any[] = [];
-    switch (language) {
-      case "es":
-        audios = [instruction_es_audio];
-        break;
-      case "en":
-        audios = [instruction_en_audio];
-        break;
-      case "es.en":
-        audios = [instruction_es_audio, instruction_en_audio];
-        break;
-      case "en.es":
-        audios = [instruction_en_audio, instruction_es_audio];
-        break;
-    }
-
+    const audios = populateText(instruction_audio_raw).map((a: any) => a.audio);
     addAudio(audios);
     return () => {
       clearAudio();
@@ -149,9 +151,10 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
   };
 
   const temporaryAudioPlayingStyle = {
+    cursor: "pointer",
     borderRadius: "2rem",
+    aspectRatio: "1 / 1.25",
     border: "0.525rem solid var(--Base-Hover-Shadow, rgba(0, 0, 0, 0.08))",
-    background: "#FFF",
     boxShadow: "0 0.525rem 1.575rem 0.4375rem rgba(0, 0, 0, 0.60)",
   };
 
@@ -180,14 +183,13 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   const shuffledCards = useMemo(() => {
     const wordGroup = data.word_group[currentIndex];
-    console.log(wordGroup, "wordGroup");
     const cards = [
       {
         word: wordGroup.intruder_text,
         image: wordGroup.intruder_image,
         isIntruder: true,
         id: "1",
-        audio: wordGroup.intruder_audio[0],
+        audio: wordGroup.intruder_audio,
       },
       {
         word: wordGroup.word_2_text,
@@ -265,7 +267,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
 
   //function for the button playing audio for the cards text
   const handleWordAudioClick = async () => {
-    // todo: audiomanager needs interstitial before and after callbacks
+    // TODO: audiomanager needs interstitial before and after callbacks
     for (const card of shuffledCards) {
       const wordAudio = new Audio(card.audio.url);
       await new Promise<void>((resolve) => {
@@ -300,15 +302,14 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
       <div id="intruder-styles">
         <div className="padding-top-4 margin-bottom-2">
           <IonText>
-            <h2 className="text-5xl color-suelo">
-              <I18nMessage id="intruder.game.title" />
-            </h2>
-
+            <h1 className="text-5xl color-suelo">
+              <I18nMessage id="intruder.instructions" />
+            </h1>
             <I18nMessage
-              id="intruder.game.title"
+              id="intruder.instructions"
               level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-english">{text}</p>
+              wrapper={(t: string) => (
+                <p className="text-3xl color-english">{t}</p>
               )}
             />
           </IonText>
@@ -325,7 +326,7 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
             >
               <img
                 src={card.image.url}
-                style={{ opacity: showBackside ? 0 : 1 }}
+                style={{ height: "100%", opacity: showBackside ? 0 : 1 }}
               />
               <p
                 className="text-5xl color-suelo"
@@ -345,14 +346,13 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           </IonButton>
           <IonText>
             <h1 className="text-3xl semibold color-suelo">
-              <I18nMessage id="storyFactory.read" />
+              <I18nMessage id="common.read" />
             </h1>
-
             <I18nMessage
-              id="storyFactory.read"
+              id="common.read"
               level={2}
-              wrapper={(text: string) => (
-                <p className="text-lg color-english">{text}</p>
+              wrapper={(t: string) => (
+                <p className="text-lg color-english">{t}</p>
               )}
             />
           </IonText>

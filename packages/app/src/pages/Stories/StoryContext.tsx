@@ -91,8 +91,6 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   */
   const functions = getFunctions();
 
-  const recordUserActivity = httpsCallable(functions, "user-activity-record");
-
   const pageForward = useCallback(() => {
     // find next appropriate page number
     // must assume that all stories begin and end with pages that have ['all'] languages
