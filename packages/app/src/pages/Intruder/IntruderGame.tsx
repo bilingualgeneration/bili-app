@@ -206,7 +206,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     ];
     return shuffleArray(cards);
   }, [data, currentIndex]);
-  console.log(shuffledCards, "shuffled cards");
   useEffect(() => {
     if (isCorrectSelected) {
       setShowBackside(true);

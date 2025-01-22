@@ -117,6 +117,8 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
 
   const handleRecordAttempt = useCallback(
     async (time?: number) => {
+      console.log(classroom);
+      console.log("recording data");
       if (!activityId.current || !activityType.current)
         throw new Error("Activity ID or type missing");
 
@@ -128,7 +130,7 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
         activity: activityType.current,
         activityId: activityId.current,
         userId: student.id,
-        classroomId: classroom ? classroom.info.id : null,
+        classroomId: classroom && classroom.info ? classroom.info.id : null,
         type: "attempt",
         timeSpent: Math.floor(time ?? -1),
         timestamp: new Date().toISOString(),
