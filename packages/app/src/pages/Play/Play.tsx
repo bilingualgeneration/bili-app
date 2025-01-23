@@ -1,3 +1,4 @@
+import { ContentLock } from "@/components/ContentLock";
 import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
@@ -16,22 +17,26 @@ import "./Play.scss";
 
 type PlayCardProps = {
   id: string;
-  url: string;
+  url?: string;
   imgUrl: string;
   i18nKey: string;
   fid: string;
+  locked?: boolean;
 };
 
-const PlayCard = ({ id, url, imgUrl, i18nKey, fid }: PlayCardProps) => {
+const PlayCard = ({ id, url, imgUrl, i18nKey, fid, locked }: PlayCardProps) => {
   const history = useHistory();
   return (
     <div
       id={id}
       className="play-card"
       onClick={() => {
-        history.push(url);
+        if (url) {
+          history.push(url);
+        }
       }}
     >
+      {locked && <ContentLock borderRadius="2rem" />}
       <CategoryTag category="play" className="play-category-tag" />
       <img src={imgUrl} />
 
@@ -55,10 +60,11 @@ const PlayCard = ({ id, url, imgUrl, i18nKey, fid }: PlayCardProps) => {
 const playCardData: PlayCardProps[] = [
   {
     id: "storyFactoryCard",
-    url: "/story-factory-game/intro",
+    //url: "/story-factory-game/intro",
     imgUrl: FactoryWidget,
     i18nKey: "common.storyFactory",
     fid: "category-story factory",
+    locked: true,
   },
   {
     id: "intruderCard",
@@ -69,10 +75,11 @@ const playCardData: PlayCardProps[] = [
   },
   {
     id: "countCard",
-    url: "/count-with-me-game/intro",
+    //url: "/count-with-me-game/intro",
     imgUrl: CountWithMe,
     i18nKey: "common.countWithMe",
     fid: "category-count with me",
+    locked: true,
   },
 ];
 

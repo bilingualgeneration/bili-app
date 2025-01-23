@@ -1,3 +1,5 @@
+// TODO: disable submit button after submitted
+
 import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { I18nMessage } from "@/components/I18nMessage";
@@ -76,9 +78,7 @@ export const FeelingFeedback: React.FC = () => {
   const { stopTimer, startTimer } = useTimeTracker();
   const { activity, cardClicks, isReady, packId, questions } = useCardSlider();
   const { id: studentId } = useStudent();
-  const {
-    info: { id: classroomId },
-  } = useClassroom();
+  const { info } = useClassroom();
   const [question, setQuestion] = useState<any>(null);
   const [questionId, setQuestionId] = useState<any>(null);
   const functions = getFunctions();
@@ -184,7 +184,7 @@ export const FeelingFeedback: React.FC = () => {
       questionId,
       response: data.response,
       language: language,
-      classroomId: classroomId,
+      classroomId: info ? info.id : null,
     });
     startTimer();
     history.push(`/${activity}/congrats`);
