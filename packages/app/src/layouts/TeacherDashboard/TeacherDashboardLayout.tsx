@@ -55,16 +55,6 @@ export const TeacherDashboardHeader: React.FC = () => {
   );
 };
 
-/*
-    <div id="teacher-dashboard-layout-header">
-      <div></div>
-      <div className="ion-text-center">
-      </div>
-      <div className="buttons-end">
-      </div>
-    </div>
-*/
-
 interface TeacherDashboardLayout {
   showHeader?: boolean;
 }

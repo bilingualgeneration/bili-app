@@ -1,6 +1,8 @@
+// TODO: rename file to reorganize
+
 import classnames from "classnames";
-import { IonButton, IonIcon } from "@ionic/react";
 import { I18nMessage } from "@/components/I18nMessage";
+import { IonButton, IonIcon } from "@ionic/react";
 import {
   gridOutline,
   informationCircleOutline,
@@ -61,12 +63,14 @@ export const DashboardMenu: React.FC = () => {
       role: ["teacher"],
       url: `/classrooms/view/${classroomId}/preferences`,
     },
+    /*
     {
       i18nId: "dashboardMenu.preferences",
       icon: optionsOutline,
       role: ["caregiver"],
       url: "/settings/preferences",
     },
+      */
     {
       i18nId: "dashboardMenu.progress",
       icon: statsChartOutline,
@@ -108,7 +112,7 @@ export const DashboardMenu: React.FC = () => {
             >
               <IonIcon icon={l.icon} slot="start" />
               <div className="text-md semibold">
-                <I18nMessage id={l.i18nId} />
+                <I18nMessage id={l.i18nId} languageSource="unauthed" />
               </div>
             </IonButton>
           </Link>
@@ -129,7 +133,7 @@ export const DashboardMenu: React.FC = () => {
       >
         <IonIcon icon={logOutOutline} slot="start" />
         <div className="text-md semibold">
-          <I18nMessage id={"common.logOut"} />
+          <I18nMessage id={"common.logOut"} languageSource="unauthed" />
         </div>
       </IonButton>
       <div id="version-label" className="margin-top-5 ion-text-right">

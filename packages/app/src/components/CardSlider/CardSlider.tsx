@@ -29,6 +29,8 @@ export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
     packName,
     setCardClicks,
     setCurrentCardIndex,
+    setTimesShownFeedback,
+    timesShownFeedback,
   } = useCardSlider();
   const uniqueClicks = 0;
   const currentCard = cards[currentCardIndex];
@@ -36,6 +38,11 @@ export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
   const [showFront, setShowFront] = useState<boolean>(true);
   const { filterText } = useLanguage();
   const { clearAudio, onended } = useAudioManager();
+  const [] = useState(0);
+  const destinations = [
+    "/affirmations/feedback/opinion",
+    "/affirmations/feedback/feeling",
+  ];
 
   const text_front_filtered = React.useMemo(
     () => filterText(cards[currentCardIndex]?.text_front || []),
@@ -71,30 +78,13 @@ export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
       const newCardClicks = cardClicks + 1;
       setCardClicks(newCardClicks);
       if (newCardClicks % 5 === 0) {
+        setTimesShownFeedback(timesShownFeedback + 1);
         onended.pipe(first()).subscribe(() => {
-          /*
-    const destination =
-        (newCardClicks / 2) % 2 === 0
-        ? "/affirmations/feedback/opinion"
-        : "/affirmations/feedback/feeling";
-    */
-          const destination = "/affirmations/feedback/feeling";
-          history.push(destination);
+          history.push(destinations[timesShownFeedback % destinations.length]);
         });
       }
     }
   };
-
-  /*
-  useEffect(() => {
-    if (location.state?.returnTo === location.pathname) {
-      const { cardIndex, uniqueClicks } = location.state;
-      setCardIndex(cardIndex ?? 0);
-      setUniqueClickCount(uniqueClicks ?? 0);
-      setShowFront(true);
-    }
-  }, [location.state]);
-    */
 
   const changeCard = useCallback(
     (direction: string) => {

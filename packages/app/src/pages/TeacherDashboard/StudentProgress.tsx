@@ -1,3 +1,5 @@
+// TODO: convert language calculations to dynamic
+
 import type { ActivityLog } from "@bili/schema/activityLog";
 import { format } from "date-fns";
 import type { StringLookup } from "@bili/schema/misc";
@@ -39,6 +41,7 @@ export const StudentProgress: React.FC = () => {
   const { data } = useFirestoreDoc();
   const { studentId } = useParams<{ studentId: string }>();
   const analytics = data.classroomAnalytics[0].studentAnalytics[studentId];
+
   const languageTotal =
     Math.max(analytics.languageBreakdown.es, 1) +
     Math.max(analytics.languageBreakdown.en, 1) +

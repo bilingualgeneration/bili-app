@@ -1,4 +1,5 @@
 import React from "react";
+import { I18nMessage } from "@/components/I18nMessage";
 import { IonCard, IonChip, IonText } from "@ionic/react";
 import { Browser } from "@capacitor/browser";
 import "./SettingsExploreCard.scss";
@@ -6,12 +7,12 @@ import "./SettingsExploreCard.scss";
 interface SettingsExploreCardProps {
   backgroundImage: string;
   backgroundColor: string;
-  title: string;
-  subtitle: string;
+  i18nKeyPrimary: string;
+  i18nKeySecondary: string;
   link?: string; // url
   tags?: {
     color: string;
-    text: string;
+    i18nKey: string;
     textColor?: string;
   }[];
   textColor?: string; // Optional prop for text color
@@ -20,8 +21,8 @@ interface SettingsExploreCardProps {
 export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
   backgroundImage,
   backgroundColor,
-  title,
-  subtitle,
+  i18nKeyPrimary,
+  i18nKeySecondary,
   link,
   tags = [],
   textColor = "white", // Default to white if textColor is not provided
@@ -58,7 +59,7 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
               color: tag.textColor || "#000",
             }}
           >
-            {tag.text}
+            <I18nMessage id={tag.i18nKey} languageSource="unauthed" />
           </IonChip>
         ))}
       </div>
@@ -67,10 +68,10 @@ export const SettingsExploreCard: React.FC<SettingsExploreCardProps> = ({
           className="text-2xl semibold"
           style={{ color: textColor, marginBottom: 8 }}
         >
-          {title}
+          <I18nMessage id={i18nKeyPrimary} languageSource="unauthed" />
         </h3>
         <p className="text-sm margin-bottom-1" style={{ color: textColor }}>
-          {subtitle}
+          <I18nMessage id={i18nKeySecondary} languageSource="unauthed" />
         </p>
       </IonText>
     </IonCard>

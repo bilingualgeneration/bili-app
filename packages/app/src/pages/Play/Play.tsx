@@ -1,63 +1,57 @@
+import { ContentLock } from "@/components/ContentLock";
 import { FC } from "react";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import CountWithMe from "@/assets/icons/count_with_me.png";
-import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
-import FactoryWidget from "@/assets/icons/factory_widget.png";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { FormattedMessage } from "react-intl";
 import { PlayHeader } from "@/components/PlayHeader";
 import { Carousel } from "@/components/Carousel";
 import { CategoryTag } from "@/components/CategoryTag";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { I18nMessage } from "@/components/I18nMessage";
+
+import CountWithMe from "@/assets/icons/count_with_me.png";
+import MagnifyingGlass from "@/assets/icons/magnifying_glass.png";
+import FactoryWidget from "@/assets/icons/factory_widget.png";
 
 import "./Play.scss";
 
 type PlayCardProps = {
   id: string;
-  url: string;
+  url?: string;
   imgUrl: string;
-  title: {
-    id: string;
-    defaultMessage: string;
-    description: string;
-  };
-  altTitle: string;
+  i18nKey: string;
   fid: string;
+  locked?: boolean;
 };
 
-const PlayCard = ({ id, url, imgUrl, title, altTitle, fid }: PlayCardProps) => {
-  const { language } = useLanguageToggle();
+const PlayCard = ({ id, url, imgUrl, i18nKey, fid, locked }: PlayCardProps) => {
   const history = useHistory();
   return (
     <div
       id={id}
-      className="card"
+      className="play-card"
       onClick={() => {
-        history.push(url);
+        if (url) {
+          history.push(url);
+        }
       }}
     >
+      {locked && <ContentLock borderRadius="2rem" />}
       <CategoryTag category="play" className="play-category-tag" />
       <img src={imgUrl} />
 
       <div className="cardTitles">
         <IonText>
           <h1 className="text-4xl semibold">
-            <FormattedMessage
-              id={title.id}
-              defaultMessage={title.defaultMessage}
-              description={title.description}
-            />
+            <I18nMessage id={i18nKey} />
           </h1>
-        </IonText>
-
-        <IonText>
-          {language === "esen" && (
-            <p className="text-3xl color-nube">{altTitle}</p>
-          )}
+          <I18nMessage
+            id={i18nKey}
+            level={2}
+            wrapper={(t: string) => <p className="text-3xl color-nube">{t}</p>}
+          />
         </IonText>
       </div>
-
       <FavoriteButton fid={fid} />
     </div>
   );
@@ -66,39 +60,26 @@ const PlayCard = ({ id, url, imgUrl, title, altTitle, fid }: PlayCardProps) => {
 const playCardData: PlayCardProps[] = [
   {
     id: "storyFactoryCard",
-    url: "/story-factory-game/intro",
+    //url: "/story-factory-game/intro",
     imgUrl: FactoryWidget,
-    title: {
-      id: "common.storyFactory",
-      defaultMessage: "Story Factory!",
-      description: "Standalone label for Story Factory",
-    },
-    altTitle: "Story Factory",
+    i18nKey: "common.storyFactory",
     fid: "category-story factory",
+    locked: true,
   },
   {
     id: "intruderCard",
-    url: "/intruder-game/intro",
+    url: "/intruder/intro",
     imgUrl: MagnifyingGlass,
-    title: {
-      id: "common.theIntruder",
-      defaultMessage: "The Intruder",
-      description: "Standalone label for The Intruder",
-    },
-    altTitle: "The Intruder",
+    i18nKey: "common.theIntruder",
     fid: "category-the intruder",
   },
   {
     id: "countCard",
-    url: "/count-with-me-game/intro",
+    //url: "/count-with-me-game/intro",
     imgUrl: CountWithMe,
-    title: {
-      id: "common.countWithMe",
-      defaultMessage: "Count with Me",
-      description: "Standalone label for Count with Me",
-    },
-    altTitle: "Count with Me",
+    i18nKey: "common.countWithMe",
     fid: "category-count with me",
+    locked: true,
   },
 ];
 

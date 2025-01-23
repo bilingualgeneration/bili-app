@@ -132,10 +132,10 @@ const playCards = [
   {
     category: "play",
     title: "El Intruso",
-    titleEn: "The intruder",
+    titleEn: "The Intruder",
     cover: "/assets/img/mountain_image.png",
-    //link: "/intruder-game/intro",
-    isLocked: true,
+    link: "/intruder/intro",
+    isLocked: false,
   },
   {
     category: "play",
@@ -257,7 +257,7 @@ export const StudentDashboard: React.FC = () => {
     },
     {
       reactintlId: "common.play",
-      //link: "/play",
+      link: "/play",
       backgroundColor: "#ff5709",
       icon: <PlayIcon />,
     },

@@ -27,6 +27,7 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
   const [cardClicks, setCardClicks] = useState<number>(0);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
   const [cards, setCards] = useState<Card[]>([]);
+  const [timesShownFeedback, setTimesShownFeedback] = useState<number>(0);
   const [rawCards, setRawCards] = useState<Card[]>([]);
   const { languageNormalized, filterText } = useLanguage();
   const [questions, setQuestions] = useState<any[]>([]);
@@ -87,6 +88,7 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
         rawCards,
         rawPackName,
         reset,
+        timesShownFeedback,
 
         setActivity,
         setCardClicks,
@@ -96,6 +98,7 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
         //setPackName,
         setRawCards,
         setRawPackName,
+        setTimesShownFeedback,
       }}
     />
   );
