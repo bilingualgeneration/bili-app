@@ -1,87 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { useParams } from "react-router-dom";
+import { CardSlider } from "@/components/CardSlider/CardSlider";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { Deck } from "@/components/Deck";
-import { useLanguageToggle } from "@/components/LanguageToggle";
-import "@/pages/Intruder/Intruder.scss";
-
-import styles from "./styles.module.css";
-import { IonText } from "@ionic/react";
+import { useCardSlider } from "@/contexts/CardSlider";
+import { useEffect } from "react";
+import { useParams } from "react-router";
 
 export const WouldDoGame: React.FC = () => {
-  //@ts-ignore
-  const { pack_id } = useParams();
+  const { pack_id } = useParams<{ pack_id: string }>();
   return (
     <FirestoreDocProvider collection="would-do" id={pack_id}>
-      <WouldDoHydratedGame />
+      <WouldDoGameLoader />
     </FirestoreDocProvider>
   );
 };
 
-const WouldDoHydratedGame: React.FC = () => {
-  const { language } = useLanguageToggle();
-  const [chosenLanguageData, setChosenLanguageData] = useState<any[]>([]);
-
-  const { status, data } = useFirestoreDoc();
-  const [questionsData, setQuestionsData] = useState<any[]>([]);
+const WouldDoGameLoader: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  const { pack_id: packIdFromUrl } = useParams<{ pack_id: string }>();
+  const {
+    isReady,
+    packId,
+    reset,
+    setPackId,
+    setRawCards,
+    setRawPackName,
+    setActivity,
+  } = useCardSlider();
+  useEffect(() => {
+    if (packId !== packIdFromUrl) {
+      setPackId(packIdFromUrl);
+      reset();
+    }
+  }, [packId, packIdFromUrl]);
 
   useEffect(() => {
-    if (data !== undefined && data !== null) {
-      // Transform data to include text and audio in both languages for each card
-      const transformedData = data.questions.map((questionItem: any) => {
-        const es = questionItem.question.find(
-          (item: any) => item.language === "es",
-        );
-        const esHint = questionItem.hint?.find(
-          (item: any) => item.language === "es",
-        );
-        const en = questionItem.question.find(
-          (item: any) => item.language === "en",
-        );
-        const enHint = questionItem.hint?.find(
-          (item: any) => item.language === "en",
-        );
-        const esInc = questionItem.question.find(
-          (item: any) => item.language === "es-inc",
-        );
-        const esIncHint = questionItem.hint?.find(
-          (item: any) => item.language === "es-inc",
-        );
+    setActivity("community"); // Set to "wellness" for now to mimic Affirmations' behavior
+  }, []);
 
-        return {
-          esAudio: es?.audio || null,
-          esHintAudio: esHint?.audio || null,
-          esHintText: esHint?.text || "",
-          esText: es?.text || "",
-          enAudio: en?.audio || null,
-          enHintAudio: enHint?.audio || null,
-          enHintText: enHint?.text || "",
-          enText: en?.text || "",
-          esIncAudio: esInc?.audio || null,
-          esIncHintAudio: esIncHint?.audio || null,
-          esIncHintText: esIncHint?.text || "",
-          esIncText: esInc?.text || "",
-        };
-      });
-      setQuestionsData(transformedData);
+  useEffect(() => {
+    if (data) {
+      // Transform WouldDo data to look exactly like Affirmations' data
+      const transformedData = data.questions.map((questionItem: any) => ({
+        id: questionItem.id,
+        text_front: questionItem.question, // Remove filter to include all entries
+        text_back: questionItem.hint, // Ensure hint is an empty array if undefined
+        image: questionItem.image || { url: "" },
+      }));
+      console.log("Transformed WouldDo Data:", transformedData);
+      setRawCards(transformedData);
+      setRawPackName(data.pack_name || []);
     }
   }, [data]);
 
-  if (status === "loading") {
-    return (
-      <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
-    );
+  if (isReady && packId === packIdFromUrl) {
+    return <CardSlider cardType="community" />;
+  } else {
+    return <></>;
   }
-
-  if (status === "error") {
-    return "Error loading the game";
-  }
-
-  return (
-    <>
-      {/* Passing questionsData to the Deck component */}
-      <Deck cards={questionsData} id={"common.wouldDo"} />
-    </>
-  );
 };
