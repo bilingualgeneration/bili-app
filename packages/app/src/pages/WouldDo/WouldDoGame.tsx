@@ -33,16 +33,15 @@ const WouldDoGameLoader: React.FC = () => {
   }, [packId, packIdFromUrl]);
 
   useEffect(() => {
-    setActivity("community"); // Set to "wellness" for now to mimic Affirmations' behavior
+    setActivity("community");
   }, []);
 
   useEffect(() => {
     if (data) {
-      // Transform WouldDo data to look exactly like Affirmations' data
       const transformedData = data.questions.map((questionItem: any) => ({
         id: questionItem.id,
-        text_front: questionItem.question, // Remove filter to include all entries
-        text_back: questionItem.hint, // Ensure hint is an empty array if undefined
+        text_front: questionItem.question,
+        text_back: questionItem.hint,
         image: questionItem.image || { url: "" },
       }));
       console.log("Transformed WouldDo Data:", transformedData);
