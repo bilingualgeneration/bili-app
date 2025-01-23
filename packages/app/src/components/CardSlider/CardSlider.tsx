@@ -9,16 +9,19 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
 import { useHistory, useLocation } from "react-router";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { Card } from "./Card";
+import { WellnessCard } from "./WellnessCard";
+import { CommunityCard } from "./CommunityCard";
 
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
 
 import "./CardSlider.scss";
 
-export interface CardSliderProps {}
+export interface CardSliderProps {
+  cardType: "wellness" | "community";
+}
 
-export const CardSlider: React.FC<CardSliderProps> = () => {
+export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
   const {
     cards,
     cardClicks,
@@ -28,6 +31,7 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
     setCurrentCardIndex,
   } = useCardSlider();
   const uniqueClicks = 0;
+  const currentCard = cards[currentCardIndex];
   const history = useHistory();
   const [showFront, setShowFront] = useState<boolean>(true);
   const { filterText } = useLanguage();
@@ -36,6 +40,11 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
   const text_front_filtered = React.useMemo(
     () => filterText(cards[currentCardIndex]?.text_front || []),
     [cards, currentCardIndex, filterText],
+  );
+
+  console.log(
+    "Raw text_back in CardSlider:",
+    cards[currentCardIndex]?.text_back,
   );
   const text_back_filtered = React.useMemo(
     () => filterText(cards[currentCardIndex]?.text_back || []),
@@ -64,11 +73,11 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
       if (newCardClicks % 5 === 0) {
         onended.pipe(first()).subscribe(() => {
           /*
-		const destination =
-		    (newCardClicks / 2) % 2 === 0
-		    ? "/affirmations/feedback/opinion"
-		    : "/affirmations/feedback/feeling";
-		*/
+    const destination =
+        (newCardClicks / 2) % 2 === 0
+        ? "/affirmations/feedback/opinion"
+        : "/affirmations/feedback/feeling";
+    */
           const destination = "/affirmations/feedback/feeling";
           history.push(destination);
         });
@@ -147,14 +156,25 @@ export const CardSlider: React.FC<CardSliderProps> = () => {
               onClick={() => changeCard("backward")}
               src={backward}
             />
-            <Card
-              image={cards[currentCardIndex]?.image || { url: "" }}
-              key={cards[currentCardIndex]?.id || ""}
-              setShowFront={setShowFront}
-              showFront={showFront}
-              text_back={text_back_filtered}
-              text_front={text_front_filtered}
-            />
+
+            {cardType === "wellness" ? (
+              <WellnessCard
+                image={cards[currentCardIndex]?.image || { url: "" }}
+                key={cards[currentCardIndex]?.id || ""}
+                setShowFront={setShowFront}
+                showFront={showFront}
+                text_back={text_back_filtered}
+                text_front={text_front_filtered}
+              />
+            ) : (
+              <CommunityCard
+                key={cards[currentCardIndex]?.id || ""}
+                cardIndex={currentCardIndex}
+                text_back={text_back_filtered}
+                text_front={text_front_filtered}
+              />
+            )}
+
             <IonImg
               className="page-control forward"
               style={{ display: canForward ? "block" : "none" }}

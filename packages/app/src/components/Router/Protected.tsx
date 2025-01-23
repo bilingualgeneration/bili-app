@@ -335,7 +335,15 @@ export const ProtectedRoutes: React.FC = () => {
           <Route exact path="/wellness" component={Wellness} />
           <Route exact path="/would-do/intro" component={WouldDoIntro} />
           <Route exact path="/would-do/select" component={WouldDoSelect} />
-          <Route exact path="/would-do/play/:pack_id" component={WouldDoGame} />
+          <Route path="/would-do">
+            <CardSliderProvider>
+              <Route
+                exact
+                path="/would-do/play/:pack_id"
+                component={WouldDoGame}
+              />
+            </CardSliderProvider>
+          </Route>
           <Route exact path="/reports" component={Reports} /> {/* debug */}
           <Route
             exact
