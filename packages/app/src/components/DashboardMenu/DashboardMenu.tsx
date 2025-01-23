@@ -63,12 +63,14 @@ export const DashboardMenu: React.FC = () => {
       role: ["teacher"],
       url: `/classrooms/view/${classroomId}/preferences`,
     },
+    /*
     {
       i18nId: "dashboardMenu.preferences",
       icon: optionsOutline,
       role: ["caregiver"],
       url: "/settings/preferences",
     },
+      */
     {
       i18nId: "dashboardMenu.progress",
       icon: statsChartOutline,
