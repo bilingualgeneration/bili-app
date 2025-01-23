@@ -10,14 +10,14 @@ import {
 
 import "./Card.scss";
 
-export interface CardProps {
+export interface WellnessCardProps {
   image: { url: string };
   text_front: any[];
   text_back: any[];
   showFront: boolean;
   setShowFront: any;
 }
-export const Card: React.FC<CardProps> = ({
+export const WellnessCard: React.FC<WellnessCardProps> = ({
   image,
   text_back,
   text_front,
@@ -27,7 +27,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <span className="card-wrapper">
       <IonCard
-        className={classNames("card", {
+        className={classNames("card card-flip", {
           front: showFront,
           back: !showFront,
         })}
