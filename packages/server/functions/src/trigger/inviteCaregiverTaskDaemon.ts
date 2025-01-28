@@ -9,11 +9,11 @@ const PDFDocument = require("pdfkit");
 const SVGtoPDF = require("svg-to-pdfkit");
 
 const html = `<p>
-<strong>✨¡Bienvenido a <a href='http://thebiliapp.com' target='_blank'>Bili</a>!</strong> Su puerta a un mundo bilingüe, personalizado para su hij@. 
+<strong>✨¡Bienvenido a <a href='https://thebiliapp.com' target='_blank'>Bili</a>!</strong> Su puerta a un mundo bilingüe, personalizado para su hij@. 
 </p>
 
 <p>
-Siga los pasos que se detallan en el folleto (PDF) adjunto para activar su cuenta de Cuidador y descubrir todo lo que Bili tiene para ofrecerle a usted y a su familia.
+Siga los pasos que se detallan en el folleto (PDF) adjunto para <a href='https://thebiliapp.com' target='_blank'>activar su cuenta de Cuidador</a> y descubrir todo lo que Bili tiene para ofrecerle a usted y a su familia.
 </p>
 
 <p>
@@ -29,11 +29,11 @@ Si tiene alguna pregunta, conéctese con la maestra de su hij@, o envíe un corr
 </p>
 
 <p>
-<strong>✨Welcome to <a href='http://thebiliapp.com' target='_blank'>Bili</a>!</strong> Your gateway to a bilingual world, personalized for CHILD NAME. 
+<strong>✨Welcome to <a href='https://thebiliapp.com' target='_blank'>Bili</a>!</strong> Your gateway to a bilingual world, personalized for your child. 
 </p>
 
 <p>
-Follow the steps outlined in the attached PDF to activate your Caregiver account and discover all that Bili has to offer you and your family.
+Follow the steps outlined in the attached PDF to <a href='https://thebiliapp.com' target='_blank'>activate your Caregiver account</a> and discover all that Bili has to offer you and your family.
 </p>
 
 <p>
@@ -49,7 +49,7 @@ Saludos,<br />
 The Bili Team / El equipo de Bili
 </p>`;
 
-const plaintext = `✨¡Bienvenid@ a Bili! Su puerta a un mundo bilingüe, personalizado para CHILD NAME.
+const plaintext = `✨¡Bienvenid@ a Bili! Su puerta a un mundo bilingüe, personalizado para su hij@.
 
 Siga los pasos que se detallan en el folleto (PDF) adjunto para activar su cuenta de Cuidador y descubrir todo lo que Bili tiene para ofrecerle a usted y a su familia.
 
@@ -59,7 +59,7 @@ Si tiene alguna pregunta, conéctese con la maestra de su hij@, o envíe un corr
 
 – – – 
 
-✨Welcome to Bili! Your gateway to a bilingual world, personalized for CHILD NAME. 
+✨Welcome to Bili! Your gateway to a bilingual world, personalized for your child. 
 
 Follow the steps outlined in the attached PDF to activate your Caregiver account and discover all that Bili has to offer you and your family:
 
