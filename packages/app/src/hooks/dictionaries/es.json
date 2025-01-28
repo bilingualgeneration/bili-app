@@ -207,6 +207,7 @@
   "signUp.teacher2": "Quiero usar esta aplicación con mis alumnos.",
   "signUp.trialDescription": "Por tiempo limitado solamente",
   "signUp.trialTitle": "Prueba gratuita de 2 semanas",
+  "signUpParent.betaTestersOnly": "Actualmente, la creación de cuentas solo está disponible para probadores beta.",
   "signUpParent.classCode": "¿Cuál es tu código de clase?",
   "signUpParent.classCodeAsk": "¿No sabes tu código de clase? Pregúntale a un maestro.",
   "signUpParent.classCodeError": "Código de clase incorrecto. ¡Intentar otra vez!",

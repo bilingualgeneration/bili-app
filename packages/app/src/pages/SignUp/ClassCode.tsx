@@ -128,6 +128,14 @@ export const ClassCode: React.FC = () => {
                       />
                     </p>
                   </IonText>
+                  <IonText color="danger" className="ion-text-center">
+                    <p>
+                      <I18nMessage
+                        id="signUpParent.betaTestersOnly"
+                        languageSource="unauthed"
+                      />
+                    </p>
+                  </IonText>
                 </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
