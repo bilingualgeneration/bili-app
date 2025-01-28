@@ -49,7 +49,7 @@ export const CountWithMeIntro: React.FC = () => {
       buttonTextSecondary={language === "esen" ? button_en : undefined}
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/count-with-me-game/select");
+        history.push("/count-with-me/select");
       }}
     >
       <IonText>

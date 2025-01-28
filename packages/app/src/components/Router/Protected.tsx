@@ -252,17 +252,17 @@ export const ProtectedRoutes: React.FC = () => {
           <Route exact path="/community" component={Community} />
           <Route
             exact
-            path="/count-with-me-game/intro"
+            path="/count-with-me/intro"
             component={CountWithMeIntro}
           />
           <Route
             exact
-            path="/count-with-me-game/select"
+            path="/count-with-me/select"
             component={CountWithMeSelect}
           />
           <Route
             exact
-            path="/count-with-me-game/play/:pack_id"
+            path="/count-with-me/play/:pack_id"
             component={CountWithMeGameLoader}
           />
           <Route exact path="/debug" component={Debug} />
