@@ -1,0 +1,9 @@
+- studentName: John Doe
+  classCode: MATH101
+  email: john.doe@example.com
+- studentName: Jane Smith
+  classCode: SCI202
+  email: jane.smith@example.com
+- studentName: Alice Johnson
+  classCode: ENG303
+  email: alice.johnson@example.com
