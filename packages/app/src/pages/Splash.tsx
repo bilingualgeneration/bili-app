@@ -39,14 +39,14 @@ export const Splash: React.FC = () => {
             </IonCardContent>
           </IonCard>
 
-          <IonCard>
+          {/* TEMPORARY HIDDEN WAITLIST CARD */}
+          {/* <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
                 <I18nMessage id="splash.newAccount" languageSource="unauthed" />
               </IonCardTitle>
               <Link to="/waitlist" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
-                  {/*<I18nMessage id="splash.createAccountButton" languageSource='unauthed' />*/}
                   <I18nMessage
                     id="splash.joinWaitlist"
                     languageSource="unauthed"
@@ -54,14 +54,14 @@ export const Splash: React.FC = () => {
                 </IonButton>
               </Link>
             </IonCardContent>
-          </IonCard>
+          </IonCard> */}
 
           <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
                 <I18nMessage id="splash.classCode" languageSource="unauthed" />
               </IonCardTitle>
-              <Link to="/quicklaunch" className="no-underline">
+              <Link to="/sign-up/by-class-code" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
                   <I18nMessage
                     id="splash.classCodeButton"
