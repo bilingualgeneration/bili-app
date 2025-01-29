@@ -12,6 +12,7 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { first } from "rxjs/operators";
 import { useTimeTracker } from "@/hooks/TimeTracker";
+import { useLanguage } from "@/hooks/Language";
 
 interface BiliImage {
   url: string;
@@ -61,7 +62,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const history = useHistory();
   const { addAudio, clearAudio, onended } = useAudioManager();
   const {
@@ -85,7 +86,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
       const groupId = group.handle;
       gamesData.set(groupId, { totalMistakesPossible: 2 });
     }
-
     setGamesData(gamesData);
 
     return clearAudio;
@@ -174,7 +174,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
         case "es":
           audios.push(ftes.audio.url);
           break;
-        case "esen":
+        case "es.en":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
@@ -186,9 +186,11 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
       const ften = countGameData.gameQuestions.filter(
         (f: any) => f.language === "en",
       )[0];
+
       const ftes = countGameData.gameQuestions.filter(
         (f: any) => f.language === "es",
       )[0];
+
       switch (language) {
         case "en":
           audios.push(ften.audio.url);
@@ -196,7 +198,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
         case "es":
           audios.push(ftes.audio.url);
           break;
-        case "esen":
+        case "es.en":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
@@ -234,7 +236,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
           case "es":
             audios.push(audio_es);
             break;
-          case "esen":
+          case "es.en":
             audios.push(audio_es);
             audios.push(audio_en);
             break;
@@ -361,7 +363,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
                       {language !== "en" && cftes.text}
                       {language === "en" && cften.text}
                     </h1>
-                    {language === "esen" && (
+                    {language === "es.en" && (
                       <p className="text-3xl color-english">{cften.text}</p>
                     )}
                   </>
@@ -371,7 +373,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
                       {language !== "en" && gftes.text}
                       {language === "en" && gften.text}
                     </h1>
-                    {language === "esen" && (
+                    {language === "es.en" && (
                       <p className="text-3xl color-english">{gften.text}</p>
                     )}
                   </>
