@@ -60,12 +60,6 @@ export const CountWithMeCongrats: React.FC<{
 
   // can potentially uncomment once 'congrats after x animals' screen is built
 
-  // const audio_es = new Audio(sounds.es[count.toString()]);
-  // const audio_en = new Audio(sounds.en[count.toString()]);
-
-  // const audio_es = new Audio(activity_completed_es);
-  // const audio_en = new Audio(activity_completed_en);
-
   // useEffect(() => {
   //   onended.pipe(first()).subscribe(() => {
   //     setAudioPlayed(true);
@@ -137,15 +131,11 @@ export const CountWithMeCongrats: React.FC<{
   //   return () => clearTimeout(timeout);
   // }, []); // This effect runs only once
 
-  const button_es = "¡Sigue adelante!";
-  const button_en = "Keep going!";
-
   return (
     <div className="padding-top-2">
       <DialogueScreen
         audios={audios}
-        buttonTextPrimary={language === "en" ? button_en : button_es}
-        buttonTextSecondary={language === "esen" ? button_en : ""}
+        buttonI18nKey={"countWithMe.keepGoing"}
         characterImage={biliCharacter}
         onButtonClick={() => {
           if (onKeepGoingClick) {
