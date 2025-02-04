@@ -1,7 +1,7 @@
 // TODO: streamline css definitions
 
 import { Avatar } from "@/components/Avatar";
-import { heart } from "ionicons/icons";
+import Flower from "../../assets/icons/profile_chip_flower.svg";
 import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonText,
@@ -94,7 +94,7 @@ const HydratedProfileChip: React.FC = () => {
               </IonText>
             </div>
             <div id="heartPoints" className="text-sm semibold color-nube">
-              <IonIcon icon={heart} />
+              <IonIcon icon={Flower} />
               <IonText>
                 {status === "ready" ? data?.totalHearts ?? 0 : "\u00A0"}
               </IonText>
