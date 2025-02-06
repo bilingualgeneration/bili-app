@@ -24,8 +24,8 @@ async function processAndPostData() {
         if (studentName && classCode && email) {
           try {
             const response = await axios.post(apiEndpoint, {
-              studentName,
-              classCode,
+              name: studentName,
+              code: classCode,
               email,
             });
             console.log(

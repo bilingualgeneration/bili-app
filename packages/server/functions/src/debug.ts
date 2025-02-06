@@ -1,3 +1,4 @@
+const { debug } = require("firebase-functions/logger");
 const functions = require("firebase-functions");
 const { CloudTasksClient } = require("@google-cloud/tasks");
 
@@ -10,7 +11,7 @@ export const enqueueTask = functions.https.onRequest(
   async (req: any, res: any) => {
     try {
       const payload = req.body; // Task payload from request
-
+      debug(JSON.stringify(payload));
       // Construct the task
       const task = {
         httpRequest: {

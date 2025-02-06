@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <link
+      href="publication-web-resources/css/main.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      src="publication-web-resources/script/main.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body onload="showHideArrows()">
+    <iframe
+      onload="showHideArrows()"
+      id="contentIFrame"
+      class="contentIframeClass"
+      src="publication-web-resources/html/publication.html"
+    >
+    </iframe>
+    <iframe id="dummyIFrame" class="dummyFrameClass"> </iframe>
+    <div class="prev" onclick="showPreviousPage()">&#10094;</div>
+    <div class="next" onclick="showNextPage()">&#10095;</div>
+  </body>
+</html>
