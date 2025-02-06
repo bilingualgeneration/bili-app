@@ -44,7 +44,7 @@ const AffirmationsGameLoader: React.FC = () => {
   }, [data]);
 
   if (isReady && packId === packIdFromUrl) {
-    return <CardSlider />;
+    return <CardSlider cardType="wellness" />;
   } else {
     return <></>;
   }
