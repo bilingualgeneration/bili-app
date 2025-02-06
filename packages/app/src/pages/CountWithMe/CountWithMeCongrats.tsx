@@ -26,6 +26,7 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 // svgs
 import StarImage from "@/assets/icons/small-star.svg";
 import biliCharacter from "@/assets/img/bili_in_coat.png";
+import { I18nMessage } from "@/components/I18nMessage";
 
 const sounds: any = {
   en: {
@@ -43,9 +44,9 @@ const sounds: any = {
 };
 
 export const CountWithMeCongrats: React.FC<{
-  onKeepGoingClick?: any;
+  setShowCongrats: any;
   count: number;
-}> = ({ onKeepGoingClick, count }) => {
+}> = ({ setShowCongrats, count }) => {
   const {
     profile: { isImmersive },
     activeChildProfile,
@@ -138,30 +139,23 @@ export const CountWithMeCongrats: React.FC<{
         buttonI18nKey={"countWithMe.keepGoing"}
         characterImage={biliCharacter}
         onButtonClick={() => {
-          if (onKeepGoingClick) {
-            onKeepGoingClick();
-          }
           startTimer();
+          setShowCongrats(false);
         }}
       >
         <IonText class="ion-text-center">
-          {language.startsWith("es") && (
-            <>
-              <h1 className="text-5xl color-suelo">
-                <FormattedMessage id={`common.congrats.title.${stars}`} />
-              </h1>
-            </>
-          )}
-          {language === "en" && (
-            <>
-              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
-            </>
-          )}
-          {language === "esen" && (
-            <>
-              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
-            </>
-          )}
+          <h1 className="text-5xl color-suelo">
+            <I18nMessage id={`common.congrats.title.${stars}`} />
+          </h1>
+
+          <I18nMessage
+            id={`common.congrats.title.${stars}`}
+            level={2}
+            wrapper={(text: string) => (
+              <h2 className="text-4xl color-english">{text}</h2>
+            )}
+          />
+
           <div className="stars-container">
             {[...Array(safeStars)].map((_, index) => (
               <img

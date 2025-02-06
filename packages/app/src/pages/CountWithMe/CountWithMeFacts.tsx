@@ -82,7 +82,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
     return (
       <CountWithMeCongrats
         count={count + 1}
-        onKeepGoingClick={onKeepGoingClick}
+        setShowCongrats={setShowCongrats}
       />
     );
   }
