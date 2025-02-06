@@ -14,7 +14,7 @@ import { I18nMessage } from "../I18nMessage";
 import LightbulbIcon from "@/assets/icons/lightbulb.svg";
 import { AudioButton } from "@/components/AudioButton";
 import { CloseButton } from "@/components/CloseButton";
-import "./CommunityCard.scss";
+//import "./CommunityCard.scss";
 
 export interface CommunityCardProps {
   text_front: any[];
