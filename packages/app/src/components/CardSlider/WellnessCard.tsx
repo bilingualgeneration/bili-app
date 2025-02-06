@@ -8,7 +8,7 @@ import {
   IonText,
 } from "@ionic/react";
 
-import "./Card.scss";
+import "./WellnessCard.scss";
 
 export interface WellnessCardProps {
   image: { url: string };
