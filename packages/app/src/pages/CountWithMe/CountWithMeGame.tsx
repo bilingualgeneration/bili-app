@@ -72,7 +72,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     setActivityState,
     setGamesData,
   } = useActivity();
-  const { startTimer, stopTimer } = useTimeTracker();
+  const { startTimer } = useTimeTracker();
 
   useEffect(() => {
     startTimer();
@@ -126,7 +126,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
-  const [showCongrats, setShowCongrats] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {

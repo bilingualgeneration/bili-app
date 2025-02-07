@@ -40,7 +40,8 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
         count + 1 === 3 ||
         count + 1 === 6 ||
         count + 1 === 9 ||
-        count + 1 === 13
+        count + 1 === 12 ||
+        count + 1 == 15
       ) {
         setShowCongrats(true);
       } else {
@@ -80,10 +81,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
 
   if (showCongrats) {
     return (
-      <CountWithMeCongrats
-        count={count + 1}
-        setShowCongrats={setShowCongrats}
-      />
+      <CountWithMeCongrats count={count + 1} onContinue={onKeepGoingClick} />
     );
   }
 
