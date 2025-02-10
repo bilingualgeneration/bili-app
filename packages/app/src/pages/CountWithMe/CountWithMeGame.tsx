@@ -341,91 +341,95 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     <>
       {/* Main container with background image */}
       <div className="padding-top-4"></div>
-      <div
-        className="background-card"
-        style={{
-          backgroundImage: `url(${getData.gameBackground.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-          aspectRatio: "1159 / 724",
-          position: "relative",
-        }}
-      >
-        {/* Render text based on game or count questions */}
-        <IonText>
-          {getData.gameQuestions.length > 0 &&
-            getData.countQuestions.length > 0 && (
-              <>
-                {allAnimalsClicked ? (
-                  <>
-                    <h1 className="text-4xl color-suelo">
-                      {language !== "en" && cftes.text}
-                      {language === "en" && cften.text}
-                    </h1>
-                    {language === "es.en" && (
-                      <p className="text-3xl color-english">{cften.text}</p>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <h1 className="text-4xl color-suelo">
-                      {language !== "en" && gftes.text}
-                      {language === "en" && gften.text}
-                    </h1>
-                    {language === "es.en" && (
-                      <p className="text-3xl color-english">{gften.text}</p>
-                    )}
-                  </>
-                )}
-              </>
-            )}
-        </IonText>
+      <div className="count-with-me-wrapper responsive-height-with-header">
+        <div
+          className="background-card"
+          style={{
+            backgroundImage: `url(${getData.gameBackground.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center bottom",
+            aspectRatio: "1159 / 724",
+            position: "relative",
+          }}
+        >
+          {/* Render text based on game or count questions */}
+          <IonText>
+            {getData.gameQuestions.length > 0 &&
+              getData.countQuestions.length > 0 && (
+                <>
+                  {allAnimalsClicked ? (
+                    <>
+                      <h1 className="text-4xl color-suelo">
+                        {language !== "en" && cftes.text}
+                        {language === "en" && cften.text}
+                      </h1>
+                      {language === "es.en" && (
+                        <p className="text-3xl color-english">{cften.text}</p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="text-4xl color-suelo">
+                        {language !== "en" && gftes.text}
+                        {language === "en" && gften.text}
+                      </h1>
+                      {language === "es.en" && (
+                        <p className="text-3xl color-english">{gften.text}</p>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+          </IonText>
 
-        {/* Overlay animals */}
-        {getData.animalImages.map((animal, index) => (
-          <div
-            key={index}
-            className={`animal ${animalGroupClass}`}
-            style={{
-              position: "absolute",
-              // width: '25%',
-              // maxWidth: '100%',
-              // height: 'auto',
-              bottom: `${animal.y_percent || index * 5}%`,
-              left: `${animal.x_percent || index * 10}%`,
-              cursor: "pointer",
-            }}
-            onClick={
-              !isButtonDisabled ? () => handleBirdClickOrder(index) : undefined
-            }
-          >
-            {/* Animal image */}
-            <img
-              // className="image-count-with-me-style"
-              src={animal.image.url}
-              alt={`animal-${index}`}
-              style={animalColors[animal.image.id]}
-            />
-            {/* Render number overlay if clicked */}
-            {clickedIndexes.includes(index) && (
-              <div
-                className="number-overlay"
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  color: `${animal.text_color}`,
-                  fontSize: "5rem",
-                  fontWeight: "700",
-                }}
-              >
-                {/* Display clicked index */}
-                <span>{clickedIndexes.indexOf(index) + 1}</span>
-              </div>
-            )}
-          </div>
-        ))}
+          {/* Overlay animals */}
+          {getData.animalImages.map((animal, index) => (
+            <div
+              key={index}
+              className={`animal ${animalGroupClass}`}
+              style={{
+                position: "absolute",
+                // width: '25%',
+                // maxWidth: '100%',
+                // height: 'auto',
+                bottom: `${animal.y_percent || index * 5}%`,
+                left: `${animal.x_percent || index * 10}%`,
+                cursor: "pointer",
+              }}
+              onClick={
+                !isButtonDisabled
+                  ? () => handleBirdClickOrder(index)
+                  : undefined
+              }
+            >
+              {/* Animal image */}
+              <img
+                // className="image-count-with-me-style"
+                src={animal.image.url}
+                alt={`animal-${index}`}
+                style={animalColors[animal.image.id]}
+              />
+              {/* Render number overlay if clicked */}
+              {clickedIndexes.includes(index) && (
+                <div
+                  className="number-overlay"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: `${animal.text_color}`,
+                    fontSize: "5rem",
+                    fontWeight: "700",
+                  }}
+                >
+                  {/* Display clicked index */}
+                  <span>{clickedIndexes.indexOf(index) + 1}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

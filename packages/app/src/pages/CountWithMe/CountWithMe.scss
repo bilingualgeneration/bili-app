@@ -122,3 +122,17 @@
     transform: scale(1);
   }
 }
+
+.count-with-me-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  /* iPads and larger */
+  .background-card {
+    width: 90%;
+  }
+}
