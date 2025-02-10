@@ -15,6 +15,7 @@ $flap-side-size: 4rem;
 
   > ion-card-content {
     aspect-ratio: 1.65;
+    max-width: 100%;
     > ion-grid,
     > ion-grid > ion-row {
       height: 100%;
