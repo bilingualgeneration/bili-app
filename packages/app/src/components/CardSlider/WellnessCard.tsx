@@ -11,6 +11,7 @@ import {
 import "./WellnessCard.scss";
 
 export interface WellnessCardProps {
+  hasFlap?: boolean;
   image: { url: string };
   text_front: any[];
   text_back: any[];
@@ -18,6 +19,7 @@ export interface WellnessCardProps {
   setShowFront: any;
 }
 export const WellnessCard: React.FC<WellnessCardProps> = ({
+  hasFlap = false,
   image,
   text_back,
   text_front,
@@ -30,10 +32,11 @@ export const WellnessCard: React.FC<WellnessCardProps> = ({
         className={classNames("card card-flip", {
           front: showFront,
           back: !showFront,
+          flapped: hasFlap,
         })}
         onClick={() => setShowFront(!showFront)}
       >
-        <div className="flap"></div>
+        {hasFlap && <div className="flap"></div>}
         <IonCardContent>
           {showFront ? (
             <IonGrid>
