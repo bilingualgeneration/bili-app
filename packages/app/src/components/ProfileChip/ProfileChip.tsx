@@ -47,9 +47,13 @@ export const ProfileChip: React.FC = () => {
 
 const HydratedProfileChip: React.FC = () => {
   const { firstName, id } = useStudent();
+
+  /*
   const {
     profile: { role },
   } = useProfile();
+  */
+
   const { info } = useClassroom();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
@@ -66,15 +70,17 @@ const HydratedProfileChip: React.FC = () => {
       icon: StudentAvatar,
       url: "/profile/coming-soon",
     },
+    /*
     {
       i18nId: "settings.grownup",
       icon: Settings,
       url: role === "teacher" ? "/classrooms" : "/settings/overview",
     },
+    */
     {
       i18nId: "settings.changeStudent",
       icon: StudentLogout,
-      url: `/select-student/${info?.id}`,
+      url: `/classroom/student-select/${info?.id}`,
     },
   ];
 

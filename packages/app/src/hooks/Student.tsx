@@ -40,6 +40,13 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
     [setFirstName, setLastName, setId],
   );
 
+  const signOut = useCallback(() => {
+    setFirstName(null);
+    setLastName(null);
+    setId(null);
+    setIsLoading(false);
+  }, [setFirstName, setLastName, setId, setIsLoading]);
+
   useEffect(() => {
     Preferences.get({ key: "student" }).then((response) => {
       // todo: get name dynamically
@@ -63,6 +70,7 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
         id,
         setId,
         setInfo,
+        signOut,
         isLoading,
       }}
     />

@@ -6,6 +6,7 @@ import {
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { PackHeader } from "@/components/PackHeader";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { StudentProfileCard } from "@/components/StudentProfileCard";
 
 import { useCallback, useState } from "react";
@@ -25,6 +26,18 @@ interface StudentCard {
 
 export const StudentSelect: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
+  return (
+    <FirestoreDocProvider
+      collection="classroom"
+      id={classroomId}
+      populate={{
+        student: ["classroom", "array-contains", classroomId],
+      }}
+    >
+      <ClassroomLoader />
+    </FirestoreDocProvider>
+  );
+  /*
   const {
     user: { uid },
   } = useProfile();
@@ -40,18 +53,8 @@ export const StudentSelect: React.FC = () => {
     );
   } else {
     // logging in as a teacher
-    return (
-      <FirestoreDocProvider
-        collection="classroom"
-        id={classroomId}
-        populate={{
-          student: ["classroom", "array-contains", classroomId],
-        }}
-      >
-        <ClassroomLoader />
-      </FirestoreDocProvider>
-    );
   }
+  */
 };
 
 const HomeLoader: React.FC = () => {

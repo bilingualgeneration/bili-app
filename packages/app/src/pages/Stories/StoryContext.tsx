@@ -48,9 +48,6 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
   const [isTranslanguaged, setIsTranslanguaged] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const { language, languageNormalized } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const [pages, setPages] = useState<any>([]);
   const [vocab, setVocab] = useState<any>([]);
   const [vocabLookup, setVocabLookup] = useState<any>({});
@@ -125,7 +122,7 @@ export const StoryProvider: React.FC<React.PropsWithChildren> = ({
       });
     }
     */
-  }, [isInclusive, language, pageNumber, pages]);
+  }, [language, pageNumber, pages]);
 
   const pageBackward = useCallback(() => {
     let newPageNumber = pageNumber - 1;

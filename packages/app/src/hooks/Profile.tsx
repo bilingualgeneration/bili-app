@@ -20,6 +20,25 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const [user, setUser] = useState<any>(undefined);
+  const [profile, setProfile] = useState<any>(undefined);
+  const isLoading: boolean = false;
+
+  const signout = () => {};
+  return (
+    <ProfileContext.Provider
+      children={children}
+      value={{
+        isLoading,
+        isLoggedIn: user !== undefined && user !== null,
+        profile,
+        signout,
+        user,
+      }}
+    />
+  );
+
+  /*
   const [quickLaunchFlag, setQuickLaunchFlag] = useState<boolean>(false); // TODO: remove
   const [user, setUser] = useState<any>(undefined);
   const [activeClassroom, setActiveClassroom] = useState<string | null>(null);
@@ -84,4 +103,5 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
       }}
     />
   );
+  */
 };

@@ -1,21 +1,34 @@
 import { IonReactRouter } from "@ionic/react-router";
 import { IonRouterOutlet } from "@ionic/react";
+import { PreSplash } from "@/pages/PreSplash";
 import { ProtectedRoutes } from "./Protected";
 import { PublicRoutes } from "./Public";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { Switch } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { StudentRoutes } from "./Students";
+import { UnauthedRoutes } from "./Unauthed";
+import { useStudent } from "@/hooks/Student";
+//import { useProfile } from "@/hooks/Profile";
 
 export const Router: React.FC = () => {
-  const { isLoggedIn } = useProfile();
+  //const { isLoggedIn } = useProfile();
+  const { id: studentId } = useStudent();
   return (
     <IonReactRouter>
       <Switch>
         <ScrollToTop>
-          {!isLoggedIn && <PublicRoutes />}
-          {isLoggedIn && <ProtectedRoutes />}
+          {studentId !== null && <StudentRoutes />}
+          {studentId === null && <PublicRoutes />}
+          <Redirect to="/" />
         </ScrollToTop>
       </Switch>
     </IonReactRouter>
   );
 };
+
+/*
+	  <Route exact path="/presplash" component={PreSplash} />
+   // todo: handle redirects
+	  <UnauthedRoutes />
+          <ProtectedRoutes />
+*/

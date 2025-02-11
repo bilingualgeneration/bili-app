@@ -35,49 +35,12 @@ import {
   AddClassroomStudents,
 } from "@/pages/TeacherDashboard/AddClassroom";
 import {
-  AffirmationsGame,
-  AffirmationsIntro,
-  AffirmationsSelect,
-} from "@/pages/Affirmations";
-import { CardSliderProvider } from "@/contexts/CardSlider";
-import {
   ClassroomDashboardLayout,
   TeacherDashboardLayout,
 } from "@/layouts/TeacherDashboard";
-import { Community, CommunityCongrats } from "@/pages/Community";
-import { FeelingFeedback, OpinionFeedback } from "@/pages/Feedback";
 
-import {
-  CountWithMeGameLoader,
-  CountWithMeIntro,
-  CountWithMeSelect,
-} from "@/pages/CountWithMe";
-import { Debug } from "@/pages/Debug";
-import {
-  IntruderSelect,
-  IntruderIntro,
-  IntruderGameLoader,
-} from "@/pages/Intruder";
 import { PhraseMatcherTest } from "@/pages/PhraseMatcherTest";
-import { Play } from "@/pages/Play";
-import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
 import { SettingsLayout } from "@/layouts/Settings";
-import { Stories, StoriesLandingPage, StoryBuilder } from "@/pages/Stories";
-import {
-  StoryFactoryIntro,
-  StoryFactoryPlay,
-  StoryFactorySelect,
-} from "@/pages/StoryFactory";
-import { StudentDashboard } from "@/pages/StudentDashboard";
-import { StudentSelect } from "@/pages/StudentSelect";
-import {
-  TellMeAboutGame,
-  TellMeAboutIntro,
-  TellMeAboutSelect,
-} from "@/pages/TellMeAbout";
-import { Wellness } from "@/pages/Wellness";
-import { WouldDoGame, WouldDoIntro, WouldDoSelect } from "@/pages/WouldDo";
-import { StoryFactoryCongrats } from "@/pages/StoryFactory/StoryFactoryCongrats";
 import { useEffect } from "react";
 
 const AdultCheck: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -217,141 +180,26 @@ export const ProtectedRoutes: React.FC = () => {
           />
           <Route
             exact
-            path="/affirmations/intro"
-            component={AffirmationsIntro}
-          />
-          <Route
-            exact
-            path="/affirmations/select"
-            component={AffirmationsSelect}
-          />
-          <Route path="/affirmations">
-            <CardSliderProvider>
-              <Route
-                exact
-                path="/affirmations/play/:pack_id"
-                component={AffirmationsGame}
-              />
-              <Route
-                exact
-                path="/affirmations/feedback/feeling"
-                component={FeelingFeedback}
-              />
-              <Route
-                exact
-                path="/affirmations/feedback/opinion"
-                component={OpinionFeedback}
-              />
-              <Route
-                exact
-                path="/affirmations/congrats"
-                component={CommunityCongrats}
-              />
-            </CardSliderProvider>
-          </Route>
-          <Route exact path="/community" component={Community} />
-          <Route
-            exact
-            path="/count-with-me-game/intro"
-            component={CountWithMeIntro}
-          />
-          <Route
-            exact
-            path="/count-with-me-game/select"
-            component={CountWithMeSelect}
-          />
-          <Route
-            exact
-            path="/count-with-me-game/play/:pack_id"
-            component={CountWithMeGameLoader}
-          />
-          <Route exact path="/debug" component={Debug} />
-          <Route exact path="/intruder/intro" component={IntruderIntro} />
-          <Route exact path="/intruder/select" component={IntruderSelect} />
-          <Route
-            exact
-            path="/intruder/play/:pack_id"
-            component={IntruderGameLoader}
-          />
-          <Route
-            exact
             path="/phrase-matcher-test"
             component={PhraseMatcherTest}
           />
-          <Route exact path="/play" component={Play} />
-          <Route
-            exact
-            path="/profile/coming-soon"
-            component={ProfileComingSoon}
-          />
-          <Route
-            exact
-            path="/select-student/:classroomId"
-            component={StudentSelect}
-          />
-          <Route exact path="/stories" component={StoriesLandingPage} />
-          <Route exact path="/story/play/:uuid" component={Stories} />
-          <Route
-            exact
-            path="/story-factory-game/intro"
-            component={StoryFactoryIntro}
-          />
-          <Route
-            exact
-            path="/story-factory-game/select"
-            component={StoryFactorySelect}
-          />
-          <Route
-            exact
-            path="/story-factory-game/play/:pack_id"
-            component={StoryFactoryPlay}
-          />
-          <Route
-            exact
-            path="/story-factory-game/congrats"
-            component={StoryFactoryCongrats}
-          />
-          <Route
-            exact
-            path="/tell-me-about/intro"
-            component={TellMeAboutIntro}
-          />
-          <Route
-            exact
-            path="/tell-me-about/select"
-            component={TellMeAboutSelect}
-          />
-          <Route
-            exact
-            path="/tell-me-about/play/:pack_id"
-            component={TellMeAboutGame}
-          />
-          <Route exact path="/story-builder" component={StoryBuilder} />
-          <Route exact path="/student-dashboard" component={StudentDashboard} />
-          <Route exact path="/wellness" component={Wellness} />
-          <Route exact path="/would-do/intro" component={WouldDoIntro} />
-          <Route exact path="/would-do/select" component={WouldDoSelect} />
-          <Route path="/would-do">
-            <CardSliderProvider>
-              <Route
-                exact
-                path="/would-do/play/:pack_id"
-                component={WouldDoGame}
-              />
-            </CardSliderProvider>
-          </Route>
           <Route exact path="/reports" component={Reports} /> {/* debug */}
-          <Route
-            exact
-            path="/caregiver/student-select"
-            render={() => <StudentSelect />}
-          />
-          {profile.role === "caregiver" && (
-            <Redirect to="/caregiver/student-select" />
-          )}
-          {profile.role === "teacher" && <Redirect to="/classrooms" />}
         </Switch>
       </HeaderFooter>
     </AuthedLayout>
   );
 };
+
+/*
+   <Route exact path="/story-builder" component={StoryBuilder} />
+   {profile.role === "teacher" && <Redirect to="/classrooms" />}
+   
+   <Route
+   exact
+   path="/caregiver/student-select"
+   render={() => <StudentSelect />}
+   />
+   {profile.role === "caregiver" && (
+   <Redirect to="/caregiver/student-select" />
+   )}
+ */

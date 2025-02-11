@@ -1,10 +1,8 @@
-// TODO: update for future user system
 import { ErrorMessages } from "@/components/ErrorMessages";
-import { getFirebaseAuth } from "@/components/Firebase";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import { I18nMessage } from "@/components/I18nMessage";
 import { Input } from "@/components/Input";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
@@ -12,50 +10,43 @@ import { useProfile } from "@/hooks/Profile";
 import { useState } from "react";
 import { z } from "zod";
 
-import "./QuickLaunch.scss";
-
-const lookup: { [key: string]: string } = {
-  "40GR": "2GrKmIhSZYglRYEXFbXB",
-  OPUT: "EDIfJEx5QQZxYHsT9ixW",
-  V5QU: "eGmlbVHHFxYI2tlzd037",
-  GI6E: "CfApuZE3f9blBoG8G1pV",
-  "57AJ": "obpRTD6b0vnmmFFO8nQ3",
-};
-
-export const QuickLaunch: React.FC = () => {
-  const auth = getFirebaseAuth();
+export const LoginWithClassroomCode: React.FC = () => {
   const [errors, setErrors] = useState<string[] | null>(null);
-  const { quickLaunchFlag, setQuickLaunchFlag } = useProfile();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setClassroom } = useProfile();
   const history = useHistory();
+  const functions = getFunctions();
+  const findClassroomByClassroomCode = httpsCallable(
+    functions,
+    "classroom-findByClassroomCode",
+  ); // TODO: change find to only validate
   const schema = z.object({
-    code: z.string(),
+    classroomCode: z.string(),
   });
-
   const {
     control,
     handleSubmit,
     formState: {},
     watch,
   } = useForm<z.infer<typeof schema>>();
-  const onSubmit = handleSubmit(async (data) => {
-    const code = data.code.toUpperCase();
-    if (lookup[code]) {
-      setErrors(null);
-      setQuickLaunchFlag(true);
-      signInWithEmailAndPassword(
-        auth,
-        `${lookup[code]}@thebiliapp.com`,
-        lookup[code],
-      );
+  const onSubmit = handleSubmit(async ({ classroomCode }) => {
+    setIsLoading(true);
+    const { data } = await findClassroomByClassroomCode({
+      classroomCode: classroomCode.toLowerCase(),
+    });
+    setIsLoading(false);
+    if (data === null) {
+      setErrors(["invalidClassCode"]);
     } else {
-      setErrors(["invalidClassroomCode"]);
+      // @ts-ignore
+      history.push(`/classroom/student-select/${data!.id}`);
     }
   });
   return (
     <>
       <UnauthedHeader
         backButtonOnClick={() => {
-          history.push("/");
+          //history.push("/");
         }}
       />
       <IonCard style={{ maxWidth: "75%", margin: "auto" }}>
@@ -72,18 +63,23 @@ export const QuickLaunch: React.FC = () => {
             <Input
               control={control}
               className="quicklaunch-input"
+              disabled={isLoading}
               fill="outline"
               labelPlacement="floating"
-              name={"code"}
+              name={"classroomCode"}
               required={true}
-              maxlength={4}
+              maxlength={8}
             />
             <ErrorMessages
               className="margin-top-1"
               errors={errors}
               languageSource="unauthed"
             />
-            <IonButton className="margin-top-2" type="submit">
+            <IonButton
+              className="margin-top-2"
+              disabled={isLoading}
+              type="submit"
+            >
               <I18nMessage id="common.continue" languageSource="unauthed" />
             </IonButton>
           </form>
