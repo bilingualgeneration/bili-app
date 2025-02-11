@@ -103,7 +103,7 @@ export const Login: React.FC = () => {
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="text-md semibold color-barro">
+              <div className="text-2xl semibold color-barro">
                 <div>
                   <Input
                     control={control}
@@ -169,7 +169,7 @@ export const Login: React.FC = () => {
               )}
               <div className="ion-margin-top">
                 <IonButton
-                  className="margin-vertical-3"
+                  className="margin-vertical-3 text-lg"
                   data-testid="account-credentials-continue-button"
                   disabled={!isValid || isLoading}
                   expand="block"
