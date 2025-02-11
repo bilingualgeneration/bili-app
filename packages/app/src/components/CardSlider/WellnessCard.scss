@@ -1,18 +1,6 @@
 $flap-side-size: 4rem;
 
 .card {
-  border-radius: 2rem;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - $flap-side-size),
-    calc(100% - $flap-side-size) 100%,
-    0 100%
-  );
-
   > ion-card-content {
     aspect-ratio: 1.65;
     max-width: 100%;
