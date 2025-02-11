@@ -79,8 +79,7 @@ export const IntruderCongrats: React.FC<{
     <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
-        buttonTextPrimary={getText("intruder.keepGoing", 1, "authed") ?? ""}
-        buttonTextSecondary={getText("intruder.keepGoing", 2, "authed") ?? ""}
+        buttonI18nKey={"intruder.keepGoing"}
         characterImage={biliCharacter}
         onButtonClick={() => {
           startTimer();

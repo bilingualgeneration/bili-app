@@ -26,6 +26,8 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 // svgs
 import StarImage from "@/assets/icons/small-star.svg";
 import biliCharacter from "@/assets/img/bili_in_coat.png";
+import { I18nMessage } from "@/components/I18nMessage";
+import { useLanguage } from "@/hooks/Language";
 
 const sounds: any = {
   en: {
@@ -43,15 +45,14 @@ const sounds: any = {
 };
 
 export const CountWithMeCongrats: React.FC<{
-  onKeepGoingClick?: any;
+  onContinue: () => void;
   count: number;
-}> = ({ onKeepGoingClick, count }) => {
+}> = ({ onContinue, count }) => {
   const {
     profile: { isImmersive },
     activeChildProfile,
   } = useProfile();
-  const { language } = useLanguageToggle();
-  const [showText, setShowText] = useState(true); // State to show/hide text
+  const { language } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();
   const [audios, setAudios] = useState<string[]>([]);
@@ -59,12 +60,6 @@ export const CountWithMeCongrats: React.FC<{
   const { startTimer, stopTimer } = useTimeTracker();
 
   // can potentially uncomment once 'congrats after x animals' screen is built
-
-  // const audio_es = new Audio(sounds.es[count.toString()]);
-  // const audio_en = new Audio(sounds.en[count.toString()]);
-
-  // const audio_es = new Audio(activity_completed_es);
-  // const audio_en = new Audio(activity_completed_en);
 
   // useEffect(() => {
   //   onended.pipe(first()).subscribe(() => {
@@ -93,18 +88,9 @@ export const CountWithMeCongrats: React.FC<{
     1: "0-24%",
   };
 
-  const englishCongratsText: { [key: number]: string } = {
-    5: "Congrats!",
-    4: "Amazing!",
-    3: "I know you could do it! Way to go!",
-    2: "You're on the right track, keep going!",
-    1: "Good effort! Keep trying!",
-  };
-
   // Check if stars are valid and set fallback if necessary
   const safeStars = stars ?? 1;
   const percentageText = percentageRanges[safeStars];
-  const congratsTextEn = englishCongratsText[safeStars];
 
   useEffect(() => {
     handleRecordAttempt(stopTimer());
@@ -113,10 +99,10 @@ export const CountWithMeCongrats: React.FC<{
 
     //TODO:implement later, when we have the audio files
 
-    if (language === "es" || language === "esen") {
+    if (language === "es" || language === "es.en") {
       newAudios.push();
     }
-    if (language === "en" || language === "esen") {
+    if (language === "en" || language === "es.en") {
       newAudios.push();
     }
 
@@ -129,49 +115,30 @@ export const CountWithMeCongrats: React.FC<{
     addAudio(newAudios);
   }, [count, language]);
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setShowText(false);
-  //   }, 3000); // Set timeout to hide text after 3 seconds
-
-  //   return () => clearTimeout(timeout);
-  // }, []); // This effect runs only once
-
-  const button_es = "¡Sigue adelante!";
-  const button_en = "Keep going!";
-
   return (
     <div className="padding-top-2">
       <DialogueScreen
         audios={audios}
-        buttonTextPrimary={language === "en" ? button_en : button_es}
-        buttonTextSecondary={language === "esen" ? button_en : ""}
+        buttonI18nKey={"countWithMe.keepGoing"}
         characterImage={biliCharacter}
         onButtonClick={() => {
-          if (onKeepGoingClick) {
-            onKeepGoingClick();
-          }
           startTimer();
+          onContinue();
         }}
       >
         <IonText class="ion-text-center">
-          {language.startsWith("es") && (
-            <>
-              <h1 className="text-5xl color-suelo">
-                <FormattedMessage id={`common.congrats.title.${stars}`} />
-              </h1>
-            </>
-          )}
-          {language === "en" && (
-            <>
-              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
-            </>
-          )}
-          {language === "esen" && (
-            <>
-              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
-            </>
-          )}
+          <h1 className="text-5xl color-suelo">
+            <I18nMessage id={`common.congrats.title.${safeStars}`} />
+          </h1>
+
+          <I18nMessage
+            id={`common.congrats.title.${safeStars}`}
+            level={2}
+            wrapper={(text: string) => (
+              <h2 className="text-4xl color-english">{text}</h2>
+            )}
+          />
+
           <div className="stars-container">
             {[...Array(safeStars)].map((_, index) => (
               <img
