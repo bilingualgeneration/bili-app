@@ -120,7 +120,6 @@ export const Login: React.FC = () => {
                     helperText=""
                     testId="login-email-input"
                     type="email"
-                    placeholder="HGFJHGHfggddf"
                   />
                 </div>
 
@@ -265,9 +264,8 @@ const ResetPassword: React.FC<any> = ({ setIsModalOpen }) => {
           <FormattedMessage id="login.forgotPassword.prompt" />
         </h2>
       </IonText>
-      <div className="text-sm email-input">
+      <div className="email-input">
         <Input
-          className="text-xl"
           control={control}
           disabled={isLoading}
           label={intl.formatMessage({ id: "common.email" })}
