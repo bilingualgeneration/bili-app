@@ -103,7 +103,7 @@ export const Login: React.FC = () => {
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="text-xl semibold color-barro">
+              <div className="">
                 <div>
                   <Input
                     control={control}
@@ -120,6 +120,7 @@ export const Login: React.FC = () => {
                     helperText=""
                     testId="login-email-input"
                     type="email"
+                    placeholder="HGFJHGHfggddf"
                   />
                 </div>
 
