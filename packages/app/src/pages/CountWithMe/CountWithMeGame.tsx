@@ -76,10 +76,13 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
 
   useEffect(() => {
     startTimer();
-    setActivityState({
-      type: "count-with-me",
-      id: data.uuid,
-    });
+    setActivityState(
+      {
+        type: "count-with-me",
+        id: data.uuid,
+      },
+      [],
+    );
 
     const gamesData: GameData = new Map();
     for (const group of data.groups) {
