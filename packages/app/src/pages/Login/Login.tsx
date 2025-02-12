@@ -103,7 +103,7 @@ export const Login: React.FC = () => {
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="text-2xl semibold color-barro">
+              <div className="text-xl semibold color-barro">
                 <div>
                   <Input
                     control={control}
