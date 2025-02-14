@@ -1,3 +1,4 @@
+import { HeaderFooter } from "@/components/HeaderFooter";
 import { I18nWrapper } from "@/components/I18nWrapper";
 import {
   LanguageToggle,
@@ -12,24 +13,34 @@ export const StudentLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { info: classroomInfo } = useClassroom();
-  const { id } = useStudent();
+  const { isLoggedIn, signOut } = useStudent();
   const { language } = useLanguage();
-  if (id === null) {
+
+  /*
+  if (!classroomInfo) {
+    signOut();
+    // how can be student if no info?
     return <Redirect to="/" />;
   }
-  // implied else
+  */
 
-  // if user doesn't have classroom selected, need to load defaults
-  const info = classroomInfo ?? {
-    allowedLanguages: ["es", "en", "es.en"],
-    allowLanguageToggle: true,
-  };
+  // TODO: pull allowedLanguages from caregiver
+
+  if (!isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <I18nWrapper locale={language.slice(0, 2)}>
-      <LanguageToggleProvider allowedLanguages={info.allowedLanguages}>
-        {children}
-        {info.allowLanguageToggle && <LanguageToggle />}
+      <LanguageToggleProvider
+        allowedLanguages={
+          classroomInfo?.allowedLanguages ?? ["es", "en", "es.en"]
+        }
+      >
+        <HeaderFooter>
+          {children}
+          {(classroomInfo?.allowLanguageToggle ?? true) && <LanguageToggle />}
+        </HeaderFooter>
       </LanguageToggleProvider>
     </I18nWrapper>
   );

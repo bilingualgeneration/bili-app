@@ -46,7 +46,7 @@ export const LoginWithClassroomCode: React.FC = () => {
     <>
       <UnauthedHeader
         backButtonOnClick={() => {
-          //history.push("/");
+          history.push("/");
         }}
       />
       <IonCard style={{ maxWidth: "75%", margin: "auto" }}>

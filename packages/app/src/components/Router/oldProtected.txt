@@ -62,7 +62,6 @@ export const ProtectedRoutes: React.FC = () => {
   return (
     <AuthedLayout>
       <HeaderFooter background="#f7faf9">
-        <Switch>
           <Route
             path="/classrooms"
             render={() => (
@@ -103,7 +102,6 @@ export const ProtectedRoutes: React.FC = () => {
                       </AddClassroomProvider>
                     )}
                   />
-                  <Route exact path="/classrooms" component={MyClassrooms} />
                 </TeacherDashboardLayout>
                 <Route
                   path="/classrooms/view/:classroomId"
@@ -166,7 +164,6 @@ export const ProtectedRoutes: React.FC = () => {
               <AdultCheck>
                 <SettingsLayout>
                   <Route exact path="/settings/about" component={About} />
-                  <Route exact path="/settings/overview" component={Overview} />
                   <Route exact path="/settings/profile" component={Profile} />
                   <Route
                     exact
@@ -184,7 +181,6 @@ export const ProtectedRoutes: React.FC = () => {
             component={PhraseMatcherTest}
           />
           <Route exact path="/reports" component={Reports} /> {/* debug */}
-        </Switch>
       </HeaderFooter>
     </AuthedLayout>
   );

@@ -10,6 +10,7 @@ import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { StudentProfileCard } from "@/components/StudentProfileCard";
 
 import { useCallback, useState } from "react";
+import { useClassroom } from "@/hooks/Classroom";
 import { useHistory } from "react-router-dom";
 import { useI18n } from "@/hooks/I18n";
 import { useParams } from "react-router";
@@ -84,7 +85,7 @@ const ClassroomLoader: React.FC = () => {
       return <></>;
       break;
     case "error":
-      return <>error</>;
+      return <>no classroom</>;
       break;
     case "ready":
       return (

@@ -11,7 +11,8 @@ import { Preferences } from "@capacitor/preferences";
 import { useStudent } from "@/hooks/Student";
 
 export const StudentDebug: React.FC = () => {
-  const { signOut: signStudentOut } = useStudent();
+  const { info, signOut: signStudentOut } = useStudent();
+  console.log(info);
   return (
     <IonCard style={{ width: "100%" }}>
       <IonCardContent>
@@ -35,8 +36,8 @@ export const StudentDebug: React.FC = () => {
               slot="end"
               onClick={() => {
                 // sign out of everything?
-                auth.signOut();
                 signStudentOut();
+                //auth.signOut();
               }}
             >
               logout

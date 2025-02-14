@@ -1,21 +1,14 @@
-import { LoginWithClassroomCode } from "@/pages/LoginWithClassroomCode";
-import { PreSplash } from "@/pages/PreSplash";
+// user can have any logged in status
+// no auth or any kind of auth
+
 import { PublicLayout } from "@/layouts/Public";
 import { Route, Switch } from "react-router-dom";
-import { Splash } from "@/pages/Splash";
 import { StudentSelect } from "@/pages/StudentSelect";
 
 export const PublicRoutes: React.FC = () => {
   return (
     <PublicLayout>
       <Switch>
-        <Route exact path="/" component={PreSplash} />
-        <Route exact path="/splash" component={Splash} />
-        <Route
-          exact
-          path="/login-with-classroom-code"
-          component={LoginWithClassroomCode}
-        />
         <Route
           exact
           path="/classroom/student-select/:classroomId"

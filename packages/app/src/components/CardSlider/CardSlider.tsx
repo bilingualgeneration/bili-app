@@ -19,9 +19,13 @@ import "./CardSlider.scss";
 
 export interface CardSliderProps {
   cardType: "wellness" | "community";
+  hasFlap?: boolean;
 }
 
-export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
+export const CardSlider: React.FC<CardSliderProps> = ({
+  cardType,
+  hasFlap = false,
+}) => {
   const {
     cards,
     cardClicks,
@@ -149,6 +153,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({ cardType }) => {
 
             {cardType === "wellness" ? (
               <WellnessCard
+                hasFlap={hasFlap}
                 image={cards[currentCardIndex]?.image || { url: "" }}
                 key={cards[currentCardIndex]?.id || ""}
                 setShowFront={setShowFront}
