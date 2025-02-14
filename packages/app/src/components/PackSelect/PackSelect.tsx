@@ -52,9 +52,12 @@ export const HydratedPackSelect: React.FC<props> = ({
   sortBy,
 }) => {
   const { screenType } = useScreenSize();
+  /*
   const {
     profile: { isInclusive },
   } = useProfile();
+  */
+  const isInclusive = false;
   const { language } = useLanguageToggle();
   const { status, data } = useFirestoreCollection();
   if (status === "loading") {

@@ -1,4 +1,5 @@
 import biliLogo from "@/assets/icons/bili.svg";
+import { I18nWrapper } from "@/components/I18nWrapper";
 import {
   IonButton,
   IonCol,
@@ -8,18 +9,19 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { StudentInfo } from "@/components/StudentInfo";
 import { useEffect } from "react";
+import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useProfile } from "@/hooks/Profile";
 import { useLocation } from "react-router-dom";
 
 import SchoolIcon from "@/assets/icons/school.svg";
 import HelpIcon from "@/assets/icons/help.svg";
-import "./TeacherDashboardLayout.scss";
+import "./Caregiver.scss";
 
-export const TeacherDashboardHeader: React.FC = () => {
+export const CaregiverHeader: React.FC = () => {
   const {
     user: { uid },
   } = useProfile();
@@ -55,14 +57,20 @@ export const TeacherDashboardHeader: React.FC = () => {
   );
 };
 
-interface TeacherDashboardLayout {
+interface CaregiverLayout {
   showHeader?: boolean;
 }
 
-export const TeacherDashboardLayout: React.FC<
-  React.PropsWithChildren<TeacherDashboardLayout>
+export const CaregiverLayout: React.FC<
+  React.PropsWithChildren<CaregiverLayout>
 > = ({ children, showHeader = true }) => {
+  const { profile, isLoggedIn } = useProfile();
+
+  if (!isLoggedIn || profile?.role !== "caregiver") {
+    return <Redirect to="/" />;
+  }
   const { setIsVisible, setTempLanguage } = useLanguageToggle();
+  const { language } = useLanguage();
   useEffect(() => {
     setIsVisible(false);
     setTempLanguage("en");
@@ -72,16 +80,21 @@ export const TeacherDashboardLayout: React.FC<
     };
   }, []);
   return (
-    <IonPage>
-      <IonContent fullscreen={true} className="ion-padding background-figures">
-        <div
-          className="page-wrapper"
-          style={{ backgroundColor: "#f7faf9", paddingBottom: 0 }}
+    <I18nWrapper locale={language.slice(0, 2)}>
+      <IonPage>
+        <IonContent
+          fullscreen={true}
+          className="ion-padding background-figures"
         >
-          {showHeader && <TeacherDashboardHeader />}
-          {children}
-        </div>
-      </IonContent>
-    </IonPage>
+          <div
+            className="page-wrapper"
+            style={{ backgroundColor: "#f7faf9", paddingBottom: 0 }}
+          >
+            {showHeader && <CaregiverHeader />}
+            {children}
+          </div>
+        </IonContent>
+      </IonPage>
+    </I18nWrapper>
   );
 };

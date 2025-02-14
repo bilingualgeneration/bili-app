@@ -3,16 +3,20 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { DashboardMenu } from "@/components/DashboardMenu";
-import {
-  TeacherDashboardHeader,
-  TeacherDashboardLayout,
-} from "./TeacherDashboardLayout";
+import { TeacherHeader, TeacherLayout } from "./Teacher";
 import { Redirect, useParams } from "react-router-dom";
+import { useProfile } from "@/hooks/Profile";
 
-export const ClassroomDashboardLayout: React.FC<React.PropsWithChildren> = ({
+export const TeacherClassroomLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { classroomId } = useParams<{ classroomId: string }>();
+  const { profile, isLoggedIn } = useProfile();
+
+  if (!isLoggedIn || profile?.role !== "teacher") {
+    return <Redirect to="/" />;
+  }
+
   return (
     <FirestoreDocProvider
       collection="classroom"
@@ -21,12 +25,12 @@ export const ClassroomDashboardLayout: React.FC<React.PropsWithChildren> = ({
         classroomAnalytics: ["classroom", "==", classroomId],
       }}
     >
-      <ClassroomDashboardLayoutLoader children={children} />
+      <TeacherClassroomLayoutLoader children={children} />
     </FirestoreDocProvider>
   );
 };
 
-const ClassroomDashboardLayoutLoader: React.FC<React.PropsWithChildren> = ({
+const TeacherClassroomLayoutLoader: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { status, data } = useFirestoreDoc();
@@ -34,11 +38,11 @@ const ClassroomDashboardLayoutLoader: React.FC<React.PropsWithChildren> = ({
     case "loading":
       return <></>;
       break;
-    case "error":
+    case "errorx":
       return <Redirect to="/classrooms" />;
       break;
     case "ready":
-      return <ClassroomDashboardLayoutHydrated children={children} />;
+      return <TeacherClassroomLayoutHydrated children={children} />;
       break;
     default:
       return <>default case</>;
@@ -46,23 +50,23 @@ const ClassroomDashboardLayoutLoader: React.FC<React.PropsWithChildren> = ({
   }
 };
 
-const ClassroomDashboardLayoutHydrated: React.FC<React.PropsWithChildren> = ({
+const TeacherClassroomLayoutHydrated: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { classroomId } = useParams<any>();
   return (
-    <TeacherDashboardLayout showHeader={false}>
+    <TeacherLayout showHeader={false}>
       <IonGrid>
         <IonRow>
           <IonCol size="2" style={{ minHeight: "100vh" }}>
             <DashboardMenu />
           </IonCol>
           <IonCol size="10">
-            <TeacherDashboardHeader />
+            <TeacherHeader />
             {children}
           </IonCol>
         </IonRow>
       </IonGrid>
-    </TeacherDashboardLayout>
+    </TeacherLayout>
   );
 };

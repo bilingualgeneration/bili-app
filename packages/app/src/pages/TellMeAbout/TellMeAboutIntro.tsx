@@ -11,9 +11,6 @@ import audio_es from "@/assets/audio/TellMeAboutAudio/instructions_es.mp3";
 
 export const TellMeAboutIntro: React.FC = () => {
   const { language } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const history = useHistory();
   const en = 'Welcome to "Tell Me About…"!';
   const es = '¡Bienvenidos a "Cuéntame sobre…"!';

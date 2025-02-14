@@ -26,7 +26,6 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
   const [lastName, setLastName] = useState<string | null>(null);
   const [id, setId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const setInfo = useCallback(
     (info: StudentInfo) => {
       setFirstName(info.firstName);
@@ -40,6 +39,14 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
     [setFirstName, setLastName, setId],
   );
 
+  const signOut = useCallback(() => {
+    setFirstName(null);
+    setLastName(null);
+    setId(null);
+    setIsLoading(false);
+    Preferences.remove({ key: "student" });
+  }, [setFirstName, setLastName, setId, setIsLoading]);
+
   useEffect(() => {
     Preferences.get({ key: "student" }).then((response) => {
       // todo: get name dynamically
@@ -50,7 +57,7 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
         setIsLoading(false);
       }
     });
-  }, [setInfo, setIsLoading]);
+  }, []);
 
   return (
     <StudentContext.Provider
@@ -61,8 +68,10 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
         lastName,
         setLastName,
         id,
+        isLoggedIn: id !== null && id !== undefined,
         setId,
         setInfo,
+        signOut,
         isLoading,
       }}
     />

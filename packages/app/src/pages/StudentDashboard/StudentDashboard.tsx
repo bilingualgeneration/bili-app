@@ -46,9 +46,6 @@ const WaveIcon: React.FC<WaveIcon> = ({
   link,
   reactintlId,
 }) => {
-  const {
-    profile: { isImmersive },
-  } = useProfile();
   const { language } = useLanguageToggle();
   const history = useHistory();
   return (
@@ -228,9 +225,12 @@ const Banner: React.FC = () => {
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
+  /*
   const {
     profile: { isInclusive },
   } = useProfile();
+  */
+  const isInclusive = false;
   const { language } = useLanguageToggle();
 
   const { getText } = useI18n();

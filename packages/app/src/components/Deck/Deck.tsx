@@ -60,9 +60,6 @@ interface DeckProps {
 export const Deck: FC<DeckProps> = ({ id, cards }) => {
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio } = useAudioManager();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const { language } = useLanguage();
   const [isHintOpen, setIsHintOpen] = useState<boolean>(false);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0); // Track current card index
@@ -335,9 +332,6 @@ const Hint: React.FC<any> = ({
   enHintText,
 }) => {
   const { language } = useLanguageToggle();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   return (
     <IonGrid>
       <IonRow>

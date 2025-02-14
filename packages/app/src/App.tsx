@@ -75,7 +75,9 @@ const App: React.FC = () => {
                     <NamesProvider>
                       <AppWrapper>
                         <TimeTrackerProvider>
-                          <Router />
+                          <LanguageToggleProvider>
+                            <Router />
+                          </LanguageToggleProvider>
                         </TimeTrackerProvider>
                       </AppWrapper>
                     </NamesProvider>

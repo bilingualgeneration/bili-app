@@ -19,6 +19,10 @@ export const AuthedLayout: React.FC<React.PropsWithChildren> = ({
   const { language } = useLanguage();
   const { pathname } = useLocation();
 
+  if (!profile) {
+    return <Redirect to="/" />;
+  }
+
   if (
     profile.role === "caregiver" &&
     studentId === null &&

@@ -19,7 +19,7 @@ import heartIcon from "@/assets/icons/heart_2.svg";
 import biliCharacter from "@/assets/icons/bili_character.svg";
 import { DialogueScreen } from "@/components/DialogueScreen";
 
-export const Debug: React.FC = () => {
+export const StudentDebug: React.FC = () => {
   const [time, setTime] = useState<number>(0);
   const { startTimer, stopTimer } = useTimeTracker();
   const functions = getFunctions();
