@@ -134,13 +134,13 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
               </h1>
             </IonCol>
             <IonCol size="3" className="column-button-visit-app">
-              <button className="visit-students-button">
-                <Link to={`/student-dashboard`} className="no-underline">
+              <Link to={`/student-dashboard`} className="no-underline">
+                <button className="visit-students-button">
                   <p className="text-md semibold color-suelo">
                     Go to student app
                   </p>
-                </Link>
-              </button>
+                </button>
+              </Link>
             </IonCol>
           </IonRow>
 
