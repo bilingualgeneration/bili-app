@@ -33,12 +33,14 @@ export const CaregiverHeader: React.FC = () => {
           <img src={biliLogo} className="header-bili-logo" />
         </IonCol>
         <IonCol className="buttons-end">
+          {/*
           <Link to="/classrooms">
             <IonButton className="font-weight-normal" size="small" fill="clear">
               <IonIcon slot="start" icon={SchoolIcon} />
               My Classrooms
             </IonButton>
           </Link>
+	  */}
           <IonButton
             className="font-weight-normal ion-hide"
             disabled={true}

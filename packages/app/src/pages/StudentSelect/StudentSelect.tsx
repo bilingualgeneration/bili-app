@@ -1,3 +1,5 @@
+import Bili from "@/assets/icons/bili_big_avatar.svg?react";
+
 import { Avatar } from "@/components/Avatar";
 import {
   FirestoreCollectionProvider,
@@ -85,7 +87,18 @@ const ClassroomLoader: React.FC = () => {
       return <></>;
       break;
     case "error":
-      return <>no classroom</>;
+      // TODO: temporary placeholder for caregivers
+      return (
+        <div className="responsive-height-with-header ">
+          <Bili
+            style={{
+              maxHeight: "100%",
+              maxWidth: "100%",
+              padding: "4rem",
+            }}
+          />
+        </div>
+      );
       break;
     case "ready":
       return (

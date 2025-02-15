@@ -51,7 +51,7 @@ export const Community: React.FC = () => {
       i18nKey: "common.wouldDo",
       link: "/would-do/intro",
       image: tunita,
-      locked: false,
+      locked: true,
     },
     {
       i18nKey: "common.sayings",
