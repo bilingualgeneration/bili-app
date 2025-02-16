@@ -30,6 +30,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
   const { filterText } = useLanguage();
 
   const mapToContentCardProps = (card: any) => {
+    console.log("Card", card);
     return {
       titles: filterText(card.title),
       category: "",
@@ -37,6 +38,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
       link: `/story/play/${card.uuid}`,
       isTranslanguaged: card.is_translanguaged,
       isStudentStory: card.is_studentStory,
+      order: card.order,
     };
   };
 
@@ -56,6 +58,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
       }
     }
   }
+
   return (
     <>
       <StoriesHeader />
