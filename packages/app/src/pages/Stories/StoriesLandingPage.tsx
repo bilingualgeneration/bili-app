@@ -29,7 +29,10 @@ const HydratedStoriesLandingPage: React.FC = () => {
   const { status, data } = useFirestoreCollection();
   const { filterText } = useLanguage();
 
-  const mapToContentCardProps = (card: any) => {
+  const mapToContentCardProps = (card: any, tag?: string) => {
+    const tagOrderEntry = card.ordered_tag?.find((t: any) => t.tag === tag);
+    const order = tagOrderEntry ? tagOrderEntry.order : null;
+
     console.log("Card", card);
     return {
       titles: filterText(card.title),
@@ -38,7 +41,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
       link: `/story/play/${card.uuid}`,
       isTranslanguaged: card.is_translanguaged,
       isStudentStory: card.is_studentStory,
-      order: card.order,
+      order,
     };
   };
 
@@ -48,14 +51,15 @@ const HydratedStoriesLandingPage: React.FC = () => {
 
   let storiesByTag: { [key: string]: any[] } = { all: [] };
   for (const story of data) {
-    const storyCard = mapToContentCardProps(story);
-    storiesByTag.all.push(storyCard);
-    for (const tag of story.tags || []) {
-      if (storiesByTag[tag] === undefined) {
-        storiesByTag[tag] = [storyCard];
-      } else {
-        storiesByTag[tag].push(storyCard);
+    storiesByTag.all.push(mapToContentCardProps(story));
+
+    for (const orderedTag of story.ordered_tag || []) {
+      const { tag } = orderedTag;
+
+      if (!storiesByTag[tag]) {
+        storiesByTag[tag] = [];
       }
+      storiesByTag[tag].push(mapToContentCardProps(story, tag));
     }
   }
 
