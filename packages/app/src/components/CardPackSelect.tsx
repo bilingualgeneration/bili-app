@@ -57,15 +57,12 @@ export const CardPackSelect: React.FC<props> = ({
           .sort((a: Card, b: Card) => {
             if (sortBy) {
               // @ts-ignore
-              // console.log("A",a)
-              // console.log("B",b)
               return a[sortBy] < b[sortBy] ? -1 : 1;
             } else {
               return 0;
             }
           })
           .map((c: Card, index: number) => {
-            console.log("Sorted Card:", cards);
             let pills: Pill[] = [];
             if (c.isTranslanguaged) {
               pills.push(translanguagedPill);

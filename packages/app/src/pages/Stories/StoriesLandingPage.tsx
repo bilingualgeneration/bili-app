@@ -33,7 +33,6 @@ const HydratedStoriesLandingPage: React.FC = () => {
     const tagOrderEntry = card.ordered_tag?.find((t: any) => t.tag === tag);
     const order = tagOrderEntry ? tagOrderEntry.order : null;
 
-    console.log("Card", card);
     return {
       titles: filterText(card.title),
       category: "",
