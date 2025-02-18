@@ -41,6 +41,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
       isTranslanguaged: card.is_translanguaged,
       isStudentStory: card.is_studentStory,
       order,
+      allCardsOrder: card.order,
     };
   };
 
@@ -68,7 +69,7 @@ const HydratedStoriesLandingPage: React.FC = () => {
       <div id="stories-landing-page">
         <CardPackSelect
           cards={storiesByTag.all}
-          sortBy="order"
+          sortBy="allCardsOrder"
           titleKey="pages.storiesLandingPage.title"
         />
 
