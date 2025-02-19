@@ -4,7 +4,11 @@ import {
   useContext,
   useEffect,
   useState,
+  useRef,
 } from "react";
+import { doc, onSnapshot, Unsubscribe } from "firebase/firestore";
+import { firestore } from "@/components/Firebase";
+
 import { Preferences } from "@capacitor/preferences";
 
 type StudentState = any;
@@ -26,6 +30,28 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
   const [lastName, setLastName] = useState<string | null>(null);
   const [id, setId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const unsubscribe = useRef<Unsubscribe | null>(null);
+
+  const docRef = doc(firestore, "student", "PZChsC22RCJqqZWtCAIo");
+
+  useEffect(() => {
+    if (id !== null) {
+      console.log(id);
+      const docRef = doc(firestore, "student", id);
+      console.log(docRef);
+      const unsub = onSnapshot(docRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          console.log(data);
+          unsubscribe.current = unsub;
+        } else {
+          unsub();
+          signOut();
+        }
+      });
+    }
+  }, [id]);
+
   const setInfo = useCallback(
     (info: StudentInfo) => {
       setFirstName(info.firstName);
@@ -45,6 +71,10 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
     setId(null);
     setIsLoading(false);
     Preferences.remove({ key: "student" });
+    if (unsubscribe.current !== null) {
+      unsubscribe.current();
+      unsubscribe.current = null;
+    }
   }, [setFirstName, setLastName, setId, setIsLoading]);
 
   useEffect(() => {
