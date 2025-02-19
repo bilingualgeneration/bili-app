@@ -262,10 +262,11 @@ export const Router: React.FC = () => {
               </StudentLayout>
             </Route>
             <CardSliderProvider>
-              <Route exact path="/would-do/play/:pack_id" />
-              <StudentLayout>
-                <WouldDoGame />
-              </StudentLayout>
+              <Route exact path="/would-do/play/:pack_id">
+                <StudentLayout>
+                  <WouldDoGame />
+                </StudentLayout>
+              </Route>
             </CardSliderProvider>
           </Route>
 
