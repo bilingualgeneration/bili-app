@@ -12,6 +12,7 @@ import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { first } from "rxjs/operators";
 import { useTimeTracker } from "@/hooks/TimeTracker";
+import { useLanguage } from "@/hooks/Language";
 
 interface BiliImage {
   url: string;
@@ -61,7 +62,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   const {
     profile: { isInclusive },
   } = useProfile();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const history = useHistory();
   const { addAudio, clearAudio, onended } = useAudioManager();
   const {
@@ -71,21 +72,23 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     setActivityState,
     setGamesData,
   } = useActivity();
-  const { startTimer, stopTimer } = useTimeTracker();
+  const { startTimer } = useTimeTracker();
 
   useEffect(() => {
     startTimer();
-    setActivityState({
-      type: "count-with-me",
-      id: data.uuid,
-    });
+    setActivityState(
+      {
+        type: "count-with-me",
+        id: data.uuid,
+      },
+      [],
+    );
 
     const gamesData: GameData = new Map();
     for (const group of data.groups) {
       const groupId = group.handle;
       gamesData.set(groupId, { totalMistakesPossible: 2 });
     }
-
     setGamesData(gamesData);
 
     return clearAudio;
@@ -126,7 +129,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   const [clickedIndexes, setClickedIndexes] = useState<number[]>([]);
   const [allAnimalsClicked, setAllAnimalsClicked] = useState(false);
   const [showFacts, setShowFacts] = useState<boolean>(false);
-  const [showCongrats, setShowCongrats] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
@@ -174,7 +176,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
         case "es":
           audios.push(ftes.audio.url);
           break;
-        case "esen":
+        case "es.en":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
@@ -186,9 +188,11 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
       const ften = countGameData.gameQuestions.filter(
         (f: any) => f.language === "en",
       )[0];
+
       const ftes = countGameData.gameQuestions.filter(
         (f: any) => f.language === "es",
       )[0];
+
       switch (language) {
         case "en":
           audios.push(ften.audio.url);
@@ -196,7 +200,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
         case "es":
           audios.push(ftes.audio.url);
           break;
-        case "esen":
+        case "es.en":
           audios.push(ftes.audio.url);
           audios.push(ften.audio.url);
           break;
@@ -234,7 +238,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
           case "es":
             audios.push(audio_es);
             break;
-          case "esen":
+          case "es.en":
             audios.push(audio_es);
             audios.push(audio_en);
             break;
@@ -340,91 +344,95 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
     <>
       {/* Main container with background image */}
       <div className="padding-top-4"></div>
-      <div
-        className="background-card"
-        style={{
-          backgroundImage: `url(${getData.gameBackground.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-          aspectRatio: "1159 / 724",
-          position: "relative",
-        }}
-      >
-        {/* Render text based on game or count questions */}
-        <IonText>
-          {getData.gameQuestions.length > 0 &&
-            getData.countQuestions.length > 0 && (
-              <>
-                {allAnimalsClicked ? (
-                  <>
-                    <h1 className="text-4xl color-suelo">
-                      {language !== "en" && cftes.text}
-                      {language === "en" && cften.text}
-                    </h1>
-                    {language === "esen" && (
-                      <p className="text-3xl color-english">{cften.text}</p>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <h1 className="text-4xl color-suelo">
-                      {language !== "en" && gftes.text}
-                      {language === "en" && gften.text}
-                    </h1>
-                    {language === "esen" && (
-                      <p className="text-3xl color-english">{gften.text}</p>
-                    )}
-                  </>
-                )}
-              </>
-            )}
-        </IonText>
+      <div className="count-with-me-wrapper responsive-height-with-header">
+        <div
+          className="background-card"
+          style={{
+            backgroundImage: `url(${getData.gameBackground.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center bottom",
+            aspectRatio: "1159 / 724",
+            position: "relative",
+          }}
+        >
+          {/* Render text based on game or count questions */}
+          <IonText>
+            {getData.gameQuestions.length > 0 &&
+              getData.countQuestions.length > 0 && (
+                <>
+                  {allAnimalsClicked ? (
+                    <>
+                      <h1 className="text-4xl color-suelo">
+                        {language !== "en" && cftes.text}
+                        {language === "en" && cften.text}
+                      </h1>
+                      {language === "es.en" && (
+                        <p className="text-3xl color-english">{cften.text}</p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="text-4xl color-suelo">
+                        {language !== "en" && gftes.text}
+                        {language === "en" && gften.text}
+                      </h1>
+                      {language === "es.en" && (
+                        <p className="text-3xl color-english">{gften.text}</p>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+          </IonText>
 
-        {/* Overlay animals */}
-        {getData.animalImages.map((animal, index) => (
-          <div
-            key={index}
-            className={`animal ${animalGroupClass}`}
-            style={{
-              position: "absolute",
-              // width: '25%',
-              // maxWidth: '100%',
-              // height: 'auto',
-              bottom: `${animal.y_percent || index * 5}%`,
-              left: `${animal.x_percent || index * 10}%`,
-              cursor: "pointer",
-            }}
-            onClick={
-              !isButtonDisabled ? () => handleBirdClickOrder(index) : undefined
-            }
-          >
-            {/* Animal image */}
-            <img
-              // className="image-count-with-me-style"
-              src={animal.image.url}
-              alt={`animal-${index}`}
-              style={animalColors[animal.image.id]}
-            />
-            {/* Render number overlay if clicked */}
-            {clickedIndexes.includes(index) && (
-              <div
-                className="number-overlay"
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  color: `${animal.text_color}`,
-                  fontSize: "5rem",
-                  fontWeight: "700",
-                }}
-              >
-                {/* Display clicked index */}
-                <span>{clickedIndexes.indexOf(index) + 1}</span>
-              </div>
-            )}
-          </div>
-        ))}
+          {/* Overlay animals */}
+          {getData.animalImages.map((animal, index) => (
+            <div
+              key={index}
+              className={`animal ${animalGroupClass}`}
+              style={{
+                position: "absolute",
+                // width: '25%',
+                // maxWidth: '100%',
+                // height: 'auto',
+                bottom: `${animal.y_percent || index * 5}%`,
+                left: `${animal.x_percent || index * 10}%`,
+                cursor: "pointer",
+              }}
+              onClick={
+                !isButtonDisabled
+                  ? () => handleBirdClickOrder(index)
+                  : undefined
+              }
+            >
+              {/* Animal image */}
+              <img
+                // className="image-count-with-me-style"
+                src={animal.image.url}
+                alt={`animal-${index}`}
+                style={animalColors[animal.image.id]}
+              />
+              {/* Render number overlay if clicked */}
+              {clickedIndexes.includes(index) && (
+                <div
+                  className="number-overlay"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: `${animal.text_color}`,
+                    fontSize: "5rem",
+                    fontWeight: "700",
+                  }}
+                >
+                  {/* Display clicked index */}
+                  <span>{clickedIndexes.indexOf(index) + 1}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

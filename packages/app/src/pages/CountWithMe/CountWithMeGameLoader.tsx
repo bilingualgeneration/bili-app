@@ -7,7 +7,7 @@ export const CountWithMeGameLoader: React.FC = () => {
   //@ts-ignore
   const { pack_id } = useParams();
   return (
-    <FirestoreDocProvider collection="count-with-me-game" id={pack_id}>
+    <FirestoreDocProvider collection="count-with-me" id={pack_id}>
       <CountWithMeHydratedGame />
     </FirestoreDocProvider>
   );

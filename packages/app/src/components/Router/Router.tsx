@@ -151,17 +151,17 @@ export const Router: React.FC = () => {
               <Community />
             </StudentLayout>
           </Route>
-          <Route exact path="/count-with-me-game/intro">
+          <Route exact path="/count-with-me/intro">
             <StudentLayout>
               <CountWithMeIntro />
             </StudentLayout>
           </Route>
-          <Route exact path="/count-with-me-game/select">
+          <Route exact path="/count-with-me/select">
             <StudentLayout>
               <CountWithMeSelect />
             </StudentLayout>
           </Route>
-          <Route exact path="/count-with-me-game/play/:pack_id">
+          <Route exact path="/count-with-me/play/:pack_id">
             <StudentLayout>
               <CountWithMeGameLoader />
             </StudentLayout>

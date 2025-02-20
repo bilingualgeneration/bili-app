@@ -175,7 +175,26 @@ export const ProtectedRoutes: React.FC = () => {
               </AdultCheck>
             )}
           />
+
+
+<Route
+            exact
+            path="/count-with-me/intro"
+            component={CountWithMeIntro}
+          />
           <Route
+            exact
+            path="/count-with-me/select"
+            component={CountWithMeSelect}
+          />
+          <Route
+            exact
+            path="/count-with-me/play/:pack_id"
+            component={CountWithMeGameLoader}
+          />
+
+
+<Route
             exact
             path="/phrase-matcher-test"
             component={PhraseMatcherTest}

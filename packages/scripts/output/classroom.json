@@ -1,0 +1,174 @@
+[
+  {
+    "isActive": true,
+    "isInclusive": false,
+    "size": 18,
+    "school": "5GT3jkZ7ph2WQkqCZD6j",
+    "name": "Mrs. Prieto's Spanish",
+    "allowLanguageToggle": false,
+    "allowedLanguages": ["es.en"],
+    "grades": ["1"],
+    "teachers": [
+      "uHACeIY2uHRqdsDbp3HZ3sqjIau2",
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "vqMDIpW868MVaejKsLnpZlylti92",
+      "SrGEdqLcWxNcFbWWoCIcCUxWt2D2"
+    ],
+    "code": "54m5",
+    "id": "2GrKmIhSZYglRYEXFbXB"
+  },
+  {
+    "allowedLanguages": ["en", "es", "es.en"],
+    "size": 17,
+    "school": "3a1PelBD4Bgp82KdSBUy",
+    "isInclusive": false,
+    "name": "Justice Heritage Academy",
+    "grades": ["o"],
+    "id": "CfApuZE3f9blBoG8G1pV",
+    "isActive": true,
+    "allowLanguageToggle": true,
+    "teachers": [
+      "7DnLV9tvWvb9q6anOtN6m7AINgi1",
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "vqMDIpW868MVaejKsLnpZlylti92",
+      "ASAsFbXvmwV6yh6edP3oc6tLoB12"
+    ],
+    "code": "8kfp"
+  },
+  {
+    "isActive": true,
+    "name": "Mrs. De Miguel's Class",
+    "school": "5GT3jkZ7ph2WQkqCZD6j",
+    "size": 23,
+    "isInclusive": false,
+    "grades": ["k"],
+    "allowLanguageToggle": true,
+    "allowedLanguages": ["en", "es.en", "es"],
+    "teachers": [
+      "aFhI0dhpePekL3bPS88qW591sTJ3",
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "vqMDIpW868MVaejKsLnpZlylti92",
+      "E9BW6WL3LhanVzHwyoBbvAFzfYq1"
+    ],
+    "code": "3vam",
+    "id": "EDIfJEx5QQZxYHsT9ixW"
+  },
+  {
+    "allowLanguageToggle": false,
+    "allowedLanguages": ["en"],
+    "grades": ["o"],
+    "isActive": true,
+    "isInclusive": false,
+    "name": "weird ",
+    "size": 0,
+    "teachers": ["Imtq7LbTuNNDApsY3aeZUK5JYx82"],
+    "id": "IvRnx4u0YjLrM6iAXJux"
+  },
+  {
+    "isActive": true,
+    "teachers": ["vqMDIpW868MVaejKsLnpZlylti92"],
+    "allowLanguageToggle": true,
+    "allowedLanguages": ["en"],
+    "size": 19,
+    "school": "abc",
+    "isInclusive": false,
+    "name": "TEST CLASSROOM",
+    "grades": ["1"],
+    "id": "NXpOrBUwsv98BcqrNy8d"
+  },
+  {
+    "isActive": true,
+    "size": 1,
+    "isInclusive": true,
+    "grades": ["p", "k", "3"],
+    "name": "This is a Test Classroom",
+    "allowLanguageToggle": true,
+    "allowedLanguages": ["es", "en", "es.en"],
+    "teachers": [
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "8sbtNF1jjTYe8xfVY8cPwmsP1XS2"
+    ],
+    "code": "i3ds",
+    "id": "NaH4PO7VpUuccwfGckwZ"
+  },
+  {
+    "allowLanguageToggle": false,
+    "allowedLanguages": ["esen"],
+    "grades": ["1"],
+    "isActive": true,
+    "isInclusive": false,
+    "name": "Test classroom",
+    "size": 0,
+    "teachers": ["GVCetzUhvFNH3BzSuPJupqo264o1"],
+    "id": "VzSHLfW2PTU4W2yXkUjZ"
+  },
+  {
+    "isActive": true,
+    "isInclusive": false,
+    "school": "5GT3jkZ7ph2WQkqCZD6j",
+    "name": "Ms. Hanna's Spanish",
+    "grades": ["k"],
+    "allowedLanguages": ["es.en"],
+    "allowLanguageToggle": false,
+    "size": 22,
+    "teachers": [
+      "m1kONGlocXXjrG7lCkfYyQfAz3E3",
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "vqMDIpW868MVaejKsLnpZlylti92",
+      "KupBTDqtJ5P6t35dsFHs988ZFGF3"
+    ],
+    "code": "mft3",
+    "id": "eGmlbVHHFxYI2tlzd037"
+  },
+  {
+    "grades": [],
+    "allowLanguageToggle": false,
+    "allowedLanguages": ["en"],
+    "isActive": true,
+    "isInclusive": false,
+    "name": "",
+    "size": 14,
+    "teachers": ["aFhI0dhpePekL3bPS88qW591sTJ3"],
+    "id": "mLRQ2UjbXWPlXVU4ETyp"
+  },
+  {
+    "allowLanguageToggle": true,
+    "grades": ["2"],
+    "isActive": true,
+    "isInclusive": false,
+    "name": "Test - Beck",
+    "size": 1,
+    "teachers": ["mkN2AkbpYfQubMAYmeCMbbieoi02"],
+    "allowedLanguages": ["es.en"],
+    "id": "nagfhoNiMJViIbHJF2JS"
+  },
+  {
+    "isActive": true,
+    "name": "Rendon's Spanish",
+    "size": 19,
+    "school": "5GT3jkZ7ph2WQkqCZD6j",
+    "grades": ["p"],
+    "allowedLanguages": ["es.en"],
+    "allowLanguageToggle": true,
+    "isInclusive": true,
+    "teachers": [
+      "dhUZOCIKKeWTbvtK2QSvZOiZ9Yv1",
+      "lF4mY04vgAcFdzV6DQYrKf5rfDr2",
+      "vqMDIpW868MVaejKsLnpZlylti92",
+      "1lNRE6AxV1c7Lt4GM31g3BWqkCm2"
+    ],
+    "code": "kicb",
+    "id": "obpRTD6b0vnmmFFO8nQ3"
+  },
+  {
+    "allowLanguageToggle": true,
+    "allowedLanguages": ["esen"],
+    "grades": ["o"],
+    "isActive": true,
+    "isInclusive": false,
+    "name": "Nuestra Historias",
+    "size": 0,
+    "teachers": ["7DnLV9tvWvb9q6anOtN6m7AINgi1"],
+    "id": "omF8kP2iBliys0Gelw70"
+  }
+]
