@@ -123,8 +123,7 @@ const playCards = [
     title: "Fábrica de Cuentos",
     titleEn: "Story Factory",
     cover: "/assets/img/card_play_image.png",
-    //link: "/story-factory-game/intro",
-    isLocked: true,
+    link: "/story-factory/intro",
   },
   {
     category: "play",

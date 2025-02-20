@@ -9,6 +9,7 @@ import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import "./StoryFactory.scss";
+import dataRaw from "./EarlyReaderData.json";
 
 const AWS_BUCKET =
   "https://bili-strapi-media-dev.s3.amazonaws.com/story_factory/"; // todo: don't hardcode
@@ -72,20 +73,12 @@ const generateSVG = (color: string, direction: string) => {
   }
 };
 
-/*
-export const StoryFactoryLevel2: React.FC = () => {
-  //@ts-ignore
-  const { pack_id } = useParams();
-  return <FirestoreDocProvider collection='story-factory-game' id={pack_id}>
-    <StoryFactoryHydratedGame />
-  </FirestoreDocProvider>;
-};
-*/
-
-export const StoryFactoryLevel2: React.FC = () => {
+export const StoryFactoryEarlyReader: React.FC = () => {
   const { language } = useLanguageToggle();
   const { addAudio, clearAudio, onended } = useAudioManager();
-  const { status, data } = useFirestoreDoc();
+  //const { status, data } = useFirestoreDoc();
+  const status: string = "ready";
+  const data = { word_group: dataRaw };
   const [words, setWords] = useState<any[][]>([]);
   const [lastSentence, setLastSentence] = useState<string>("");
   const lastSentenceRef = useRef(lastSentence);
@@ -96,6 +89,13 @@ export const StoryFactoryLevel2: React.FC = () => {
   const numPlaysRef = useRef(numPlays);
   const [showCongrats, setShowCongrats] = useState<boolean>(false);
   useEffect(() => {
+    setWords([
+      shuffleArray(data.word_group.filter((word: any) => word.position === 1)),
+      shuffleArray(data.word_group.filter((word: any) => word.position === 2)),
+      shuffleArray(data.word_group.filter((word: any) => word.position === 3)),
+      shuffleArray(data.word_group.filter((word: any) => word.position === 4)),
+    ]);
+
     const subscription = onended.subscribe(() => {
       if (currentSentenceRef.current !== lastSentenceRef.current) {
         if (
@@ -116,24 +116,6 @@ export const StoryFactoryLevel2: React.FC = () => {
       clearAudio();
     };
   }, []);
-  useEffect(() => {
-    if (data !== undefined && data !== null) {
-      setWords([
-        shuffleArray(
-          data.word_group.filter((word: any) => word.position === 1),
-        ),
-        shuffleArray(
-          data.word_group.filter((word: any) => word.position === 2),
-        ),
-        shuffleArray(
-          data.word_group.filter((word: any) => word.position === 3),
-        ),
-        shuffleArray(
-          data.word_group.filter((word: any) => word.position === 4),
-        ),
-      ]);
-    }
-  }, [data]);
   // Function to handle the up arrow click
   const handleUpArrowClick = (position: number) => {
     const newWordIndices = [...wordIndices];
@@ -168,7 +150,6 @@ export const StoryFactoryLevel2: React.FC = () => {
   if (status === "error") {
     return <>error</>;
   }
-
   // implied else
   return (
     <>
@@ -313,7 +294,7 @@ export const StoryFactoryLevel2: React.FC = () => {
                 onClick={() => {
                   // TODO: need to check for en and esen
                   const audios = [];
-                  if (language !== "esen") {
+                  if (language !== "es.en") {
                     audios.push(
                       AWS_BUCKET +
                         normalizeAWS(

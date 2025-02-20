@@ -52,6 +52,7 @@ import { ProfileComingSoon } from "@/pages/ProfileComingSoon";
 import { Stories, StoriesLandingPage, StoryBuilder } from "@/pages/Stories";
 import {
   StoryFactoryCongrats,
+  StoryFactoryEarlyReader,
   StoryFactoryIntro,
   StoryFactoryPlay,
   StoryFactorySelect,
@@ -205,22 +206,22 @@ export const Router: React.FC = () => {
               <Stories />
             </StudentLayout>
           </Route>
-          <Route exact path="/story-factory-game/intro">
+          <Route exact path="/story-factory/intro">
             <StudentLayout>
               <StoryFactoryIntro />
             </StudentLayout>
           </Route>
-          <Route exact path="/story-factory-game/select">
+          <Route exact path="/story-factory/select">
             <StudentLayout>
               <StoryFactorySelect />
             </StudentLayout>
           </Route>
-          <Route exact path="/story-factory-game/play/:pack_id">
+          <Route exact path="/story-factory/play/early-reader">
             <StudentLayout>
-              <StoryFactoryPlay />
+              <StoryFactoryEarlyReader />
             </StudentLayout>
           </Route>
-          <Route exact path="/story-factory-game/congrats">
+          <Route exact path="/story-factory/congrats">
             <StudentLayout>
               <StoryFactoryCongrats />
             </StudentLayout>
