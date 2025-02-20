@@ -36,13 +36,10 @@ export const StudentProvider: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     if (id !== null) {
-      console.log(id);
       const docRef = doc(firestore, "student", id);
-      console.log(docRef);
       const unsub = onSnapshot(docRef, (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.data();
-          console.log(data);
           unsubscribe.current = unsub;
         } else {
           unsub();
