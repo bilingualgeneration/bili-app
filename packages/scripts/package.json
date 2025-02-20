@@ -15,7 +15,8 @@
     "school:upsert": "yarn copy-files && yarn ts-node -r tsconfig-paths/register src/school_upsert.ts",
     "student:upsert": "yarn copy-files && yarn ts-node -r tsconfig-paths/register src/student_upsert.ts",
     "user:set:password": "yarn copy-files && yarn ts-node -r tsconfig-paths/register src/user_set_password.ts",
-    "copy-files": "copyfiles -u 1 ./src/data/**/* ./src/serviceAccounts/**/* dist"
+    "copy-files": "copyfiles -u 1 ./src/data/**/* ./src/serviceAccounts/**/* dist",
+    "rtdb:dump": "yarn copy-files && yarn ts-node -r tsconfig-paths/register src/rtdb_dump.ts"
   },
   "dependencies": {
     "@types/node": "^22.12.0",
