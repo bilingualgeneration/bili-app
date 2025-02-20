@@ -61,7 +61,7 @@ export const Splash: React.FC = () => {
               <IonCardTitle className={titleClasses}>
                 <I18nMessage id="splash.classCode" languageSource="unauthed" />
               </IonCardTitle>
-              <Link to="/sign-up/by-class-code" className="no-underline">
+              <Link to="/login-with-classroom-code" className="no-underline">
                 <IonButton expand="block" fill="outline" shape="round">
                   <I18nMessage
                     id="splash.classCodeButton"

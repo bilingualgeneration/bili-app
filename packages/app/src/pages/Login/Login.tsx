@@ -103,7 +103,7 @@ export const Login: React.FC = () => {
         <IonCard>
           <IonCardContent>
             <form onSubmit={onSubmit}>
-              <div className="text-md semibold color-barro">
+              <div className="">
                 <div>
                   <Input
                     control={control}
@@ -169,7 +169,7 @@ export const Login: React.FC = () => {
               )}
               <div className="ion-margin-top">
                 <IonButton
-                  className="margin-vertical-3"
+                  className="margin-vertical-3 text-lg"
                   data-testid="account-credentials-continue-button"
                   disabled={!isValid || isLoading}
                   expand="block"
@@ -195,20 +195,6 @@ export const Login: React.FC = () => {
                 </IonText>
               </div>
             </form>
-            <IonText>
-              <h1 className="text-xl ion-text-center margin-bottom-1">
-                <I18nMessage id="splash.classCode" languageSource="unauthed" />
-              </h1>
-            </IonText>
-
-            <Link to="/quicklaunch" className="no-underline">
-              <IonButton expand="block" fill="outline" shape="round">
-                <I18nMessage
-                  id="splash.classCodeButton"
-                  languageSource="unauthed"
-                />
-              </IonButton>
-            </Link>
           </IonCardContent>
         </IonCard>
       </div>
@@ -264,9 +250,8 @@ const ResetPassword: React.FC<any> = ({ setIsModalOpen }) => {
           <FormattedMessage id="login.forgotPassword.prompt" />
         </h2>
       </IonText>
-      <div className="text-sm email-input">
+      <div className="email-input">
         <Input
-          className="text-xl"
           control={control}
           disabled={isLoading}
           label={intl.formatMessage({ id: "common.email" })}

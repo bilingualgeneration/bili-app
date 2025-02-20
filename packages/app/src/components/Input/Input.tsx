@@ -172,7 +172,7 @@ export const Input = ({
           field: { onChange, onBlur, ...fields },
           fieldState,
         }: any): JSX.Element => {
-          let classes: string[] = [];
+          let classes: string[] = ["text-2xl semibold color-suelo"];
           if (className) {
             classes.push(className);
           }
@@ -188,7 +188,7 @@ export const Input = ({
           return (
             <>
               {labelPlacement === "above" && (
-                <label className="input-label-placement-above">
+                <label className="input-label-placement-above text-md semibold color-barro">
                   {label}
                   {required && " *"}
                 </label>

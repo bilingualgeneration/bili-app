@@ -52,9 +52,12 @@ export const HydratedPackSelect: React.FC<props> = ({
   sortBy,
 }) => {
   const { screenType } = useScreenSize();
+  /*
   const {
     profile: { isInclusive },
   } = useProfile();
+  */
+  const isInclusive = false;
   const { language } = useLanguageToggle();
   const { status, data } = useFirestoreCollection();
   if (status === "loading") {
@@ -141,9 +144,8 @@ export const HydratedPackSelect: React.FC<props> = ({
           <IonText>
             <h1
               style={{
-                marginLeft: screenType === "mobile" ? "0.5rem" : "1.875rem",
+                marginLeft: "1.875rem",
                 marginTop: screenType === "mobile" ? "-1rem" : "",
-                marginBottom: screenType === "mobile" ? "-1.4rem" : "",
               }}
               className={`${
                 screenType === "mobile" ? "text-2xl" : "text-5xl"
@@ -154,8 +156,7 @@ export const HydratedPackSelect: React.FC<props> = ({
             {language === "es.en" && (
               <h2
                 style={{
-                  marginLeft:
-                    screenType === "mobile" ? "0.3125rem" : "1.875rem",
+                  marginLeft: "1.875rem",
                   marginBottom: screenType === "mobile" ? "-1.2rem" : "",
                 }}
                 className={`${

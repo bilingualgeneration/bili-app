@@ -35,7 +35,7 @@ html {
 }
 */
 
-html.plt-mobile {
+html.plt-mobile:not(.plt-tablet) {
   font-size: 8px;
 }
 

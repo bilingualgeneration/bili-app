@@ -1,3 +1,5 @@
+import Bili from "@/assets/icons/bili_big_avatar.svg?react";
+
 import { Avatar } from "@/components/Avatar";
 import {
   FirestoreCollectionProvider,
@@ -6,9 +8,11 @@ import {
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { PackHeader } from "@/components/PackHeader";
+import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { StudentProfileCard } from "@/components/StudentProfileCard";
 
 import { useCallback, useState } from "react";
+import { useClassroom } from "@/hooks/Classroom";
 import { useHistory } from "react-router-dom";
 import { useI18n } from "@/hooks/I18n";
 import { useParams } from "react-router";
@@ -25,6 +29,18 @@ interface StudentCard {
 
 export const StudentSelect: React.FC = () => {
   const { classroomId } = useParams<{ classroomId: string }>();
+  return (
+    <FirestoreDocProvider
+      collection="classroom"
+      id={classroomId}
+      populate={{
+        student: ["classroom", "array-contains", classroomId],
+      }}
+    >
+      <ClassroomLoader />
+    </FirestoreDocProvider>
+  );
+  /*
   const {
     user: { uid },
   } = useProfile();
@@ -40,18 +56,8 @@ export const StudentSelect: React.FC = () => {
     );
   } else {
     // logging in as a teacher
-    return (
-      <FirestoreDocProvider
-        collection="classroom"
-        id={classroomId}
-        populate={{
-          student: ["classroom", "array-contains", classroomId],
-        }}
-      >
-        <ClassroomLoader />
-      </FirestoreDocProvider>
-    );
   }
+  */
 };
 
 const HomeLoader: React.FC = () => {
@@ -81,7 +87,18 @@ const ClassroomLoader: React.FC = () => {
       return <></>;
       break;
     case "error":
-      return <>error</>;
+      // TODO: temporary placeholder for caregivers
+      return (
+        <div className="responsive-height-with-header ">
+          <Bili
+            style={{
+              maxHeight: "100%",
+              maxWidth: "100%",
+              padding: "4rem",
+            }}
+          />
+        </div>
+      );
       break;
     case "ready":
       return (

@@ -76,7 +76,7 @@ export const ClassOverview: React.FC = () => {
                 <IonText className="text-3xl semibold">{info.name}</IonText>
                 <button className="visit-students-button">
                   <Link
-                    to={`/select-student/${info.id}`}
+                    to={`/classroom/student-select/${info.id}`}
                     className="no-underline"
                   >
                     <p className="text-md semibold color-suelo">
