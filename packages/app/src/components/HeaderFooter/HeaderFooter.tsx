@@ -25,7 +25,7 @@ export const HeaderFooter: FC<
   PropsWithChildren<{
     background?: string;
   }>
-> = ({ background = "", children }) => {
+> = ({ background = "#f7faf9", children }) => {
   const showBackButton = true;
   const { screenType } = useScreenSize();
   const { id } = useStudent();

@@ -30,7 +30,7 @@ import { useStudent } from "@/hooks/Student";
 import "./Overview.scss";
 import { Link } from "react-router-dom";
 
-export const Overview: React.FC = () => {
+export const CaregiverOverview: React.FC = () => {
   const { user } = useProfile();
   return (
     <FirestoreCollectionProvider
@@ -64,7 +64,10 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
   const {
     profile: { isImmersive, isInclusive },
   } = useProfile();
-  const { id: activeStudentId } = useStudent();
+  const { id: activeStudentId, setInfo } = useStudent();
+  useEffect(() => {
+    setInfo(students[0]);
+  }, []);
 
   const settingsExploreCards = [
     {
@@ -131,13 +134,13 @@ const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
               </h1>
             </IonCol>
             <IonCol size="3" className="column-button-visit-app">
-              <button className="visit-students-button">
-                <Link to={`/select-student/`} className="no-underline">
+              <Link to={`/student-dashboard`} className="no-underline">
+                <button className="visit-students-button">
                   <p className="text-md semibold color-suelo">
                     Go to student app
                   </p>
-                </Link>
-              </button>
+                </button>
+              </Link>
             </IonCol>
           </IonRow>
 

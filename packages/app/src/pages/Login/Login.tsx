@@ -195,20 +195,6 @@ export const Login: React.FC = () => {
                 </IonText>
               </div>
             </form>
-            <IonText>
-              <h1 className="text-xl ion-text-center margin-bottom-1">
-                <I18nMessage id="splash.classCode" languageSource="unauthed" />
-              </h1>
-            </IonText>
-
-            <Link to="/quicklaunch" className="no-underline">
-              <IonButton expand="block" fill="outline" shape="round">
-                <I18nMessage
-                  id="splash.classCodeButton"
-                  languageSource="unauthed"
-                />
-              </IonButton>
-            </Link>
           </IonCardContent>
         </IonCard>
       </div>

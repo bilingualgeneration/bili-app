@@ -136,7 +136,7 @@ export const MyClassrooms: React.FC = () => {
               </IonText>
             </IonCol>
             <IonCol size="0.75">
-              <Link to="/classrooms/add">
+              <Link to="/teacher/classrooms/add">
                 <IonButton className="elevate">
                   <IonIcon slot="icon-only" icon={add}></IonIcon>
                 </IonButton>
@@ -187,7 +187,6 @@ const ClassroomsList: React.FC = () => {
   const intl = useIntl();
   const { data, status } = useFirestoreCollection();
   const { subscribe } = useClassroom();
-  const { quickLaunchFlag, setQuickLaunchFlag } = useProfile();
   const history = useHistory();
 
   switch (status) {
@@ -198,11 +197,6 @@ const ClassroomsList: React.FC = () => {
       return <>error</>;
       break;
     case "ready":
-      if (quickLaunchFlag) {
-        setQuickLaunchFlag(false);
-        subscribe(data[0].id);
-        history.push(`/select-student/${data[0].id}`);
-      }
       return (
         <IonRow
           className="ion-justify-content-between"
@@ -212,7 +206,7 @@ const ClassroomsList: React.FC = () => {
             <IonCol size="6" key={classroom.id}>
               <div className="classroom-names">
                 <Link
-                  to={`/classrooms/view/${classroom.id}`}
+                  to={`/teacher/classroom/${classroom.id}`}
                   className="no-underline"
                   onClick={() => {
                     subscribe(classroom.id);

@@ -1,7 +1,6 @@
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useParams } from "react-router-dom";
 import { StoryFactoryLevel1 } from "./StoryFactoryLevel1";
-import { StoryFactoryLevel2 } from "./StoryFactoryLevel2";
 import { ActivityProvider } from "@/contexts/ActivityContext";
 
 export const StoryFactoryPlay: React.FC = () => {
@@ -35,9 +34,6 @@ const StoryFactoryHydratedGame: React.FC = () => {
   switch (data.level) {
     case 1:
       return <StoryFactoryLevel1 />;
-      break;
-    case 2:
-      return <StoryFactoryLevel2 />;
       break;
     default:
       return <></>;

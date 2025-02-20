@@ -1,0 +1,682 @@
+[
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The cow"
+      },
+      {
+        "language": "es",
+        "text": "La vaca"
+      },
+      {
+        "language": "es-inc",
+        "text": "La vaca"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "My mom"
+      },
+      {
+        "language": "es",
+        "text": "Mi mamá"
+      },
+      {
+        "language": "es-inc",
+        "text": "Mi mamá"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The frog"
+      },
+      {
+        "language": "es",
+        "text": "El sapo"
+      },
+      {
+        "language": "es-inc",
+        "text": "El sapo"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "Doña María"
+      },
+      {
+        "language": "es",
+        "text": "Doña María"
+      },
+      {
+        "language": "es-inc",
+        "text": "Doña María"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "Don Carlos"
+      },
+      {
+        "language": "es",
+        "text": "Don Carlos"
+      },
+      {
+        "language": "es-inc",
+        "text": "Don Carlos"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The cat"
+      },
+      {
+        "language": "es",
+        "text": "El gato"
+      },
+      {
+        "language": "es-inc",
+        "text": "El gato"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The rabbit"
+      },
+      {
+        "language": "es",
+        "text": "El conejo"
+      },
+      {
+        "language": "es-inc",
+        "text": "El conejo"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The bird"
+      },
+      {
+        "language": "es",
+        "text": "El pájaro"
+      },
+      {
+        "language": "es-inc",
+        "text": "El pájaro"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The girl"
+      },
+      {
+        "language": "es",
+        "text": "La niña"
+      },
+      {
+        "language": "es-inc",
+        "text": "La niña"
+      }
+    ]
+  },
+  {
+    "position": 1,
+    "word": [
+      {
+        "language": "en",
+        "text": "The baby"
+      },
+      {
+        "language": "es",
+        "text": "La bebé"
+      },
+      {
+        "language": "es-inc",
+        "text": "La bebé"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "gives"
+      },
+      {
+        "language": "es",
+        "text": "nos da"
+      },
+      {
+        "language": "es-inc",
+        "text": "nos da"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "put"
+      },
+      {
+        "language": "es",
+        "text": "puso"
+      },
+      {
+        "language": "es-inc",
+        "text": "puso"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "eats"
+      },
+      {
+        "language": "es",
+        "text": "come"
+      },
+      {
+        "language": "es-inc",
+        "text": "come"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "draws"
+      },
+      {
+        "language": "es",
+        "text": "dibuja"
+      },
+      {
+        "language": "es-inc",
+        "text": "dibuja"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "devours"
+      },
+      {
+        "language": "es",
+        "text": "devora"
+      },
+      {
+        "language": "es-inc",
+        "text": "devora"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "sees"
+      },
+      {
+        "language": "es",
+        "text": "mira"
+      },
+      {
+        "language": "es-inc",
+        "text": "mira"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "chews"
+      },
+      {
+        "language": "es",
+        "text": "mastica"
+      },
+      {
+        "language": "es-inc",
+        "text": "mastica"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "visits"
+      },
+      {
+        "language": "es",
+        "text": "visita"
+      },
+      {
+        "language": "es-inc",
+        "text": "visita"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "drinks"
+      },
+      {
+        "language": "es",
+        "text": "bebe"
+      },
+      {
+        "language": "es-inc",
+        "text": "bebe"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "word": [
+      {
+        "language": "en",
+        "text": "plays with"
+      },
+      {
+        "language": "es",
+        "text": "juega con"
+      },
+      {
+        "language": "es-inc",
+        "text": "juega con"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "milk"
+      },
+      {
+        "language": "es",
+        "text": "leche"
+      },
+      {
+        "language": "es-inc",
+        "text": "leche"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "sweet bread"
+      },
+      {
+        "language": "es",
+        "text": "pan dulce"
+      },
+      {
+        "language": "es-inc",
+        "text": "pan dulce"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "insects"
+      },
+      {
+        "language": "es",
+        "text": "insectos"
+      },
+      {
+        "language": "es-inc",
+        "text": "insectos"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "clouds"
+      },
+      {
+        "language": "es",
+        "text": "nubes"
+      },
+      {
+        "language": "es-inc",
+        "text": "nubes"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "candy"
+      },
+      {
+        "language": "es",
+        "text": "golosinas"
+      },
+      {
+        "language": "es-inc",
+        "text": "golosinas"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "butterflies"
+      },
+      {
+        "language": "es",
+        "text": "mariposas"
+      },
+      {
+        "language": "es-inc",
+        "text": "mariposas"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "grass"
+      },
+      {
+        "language": "es",
+        "text": "pasto"
+      },
+      {
+        "language": "es-inc",
+        "text": "pasto"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "worms"
+      },
+      {
+        "language": "es",
+        "text": "gusanos"
+      },
+      {
+        "language": "es-inc",
+        "text": "gusanos"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "juice"
+      },
+      {
+        "language": "es",
+        "text": "jugo"
+      },
+      {
+        "language": "es-inc",
+        "text": "jugo"
+      }
+    ]
+  },
+  {
+    "position": 3,
+    "word": [
+      {
+        "language": "en",
+        "text": "dolls"
+      },
+      {
+        "language": "es",
+        "text": "muñecas"
+      },
+      {
+        "language": "es-inc",
+        "text": "muñecas"
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "on Saturdays."
+      },
+      {
+        "language": "es",
+        "text": "los sábados."
+      },
+      {
+        "language": "es-inc",
+        "text": "los sábados."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "on the table."
+      },
+      {
+        "language": "es",
+        "text": "en la mesa."
+      },
+      {
+        "language": "es-inc",
+        "text": "en la mesa."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the forest."
+      },
+      {
+        "language": "es",
+        "text": "en el bosque."
+      },
+      {
+        "language": "es-inc",
+        "text": "en el bosque."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the sky."
+      },
+      {
+        "language": "es",
+        "text": "en el cielo."
+      },
+      {
+        "language": "es-inc",
+        "text": "en el cielo."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the living room."
+      },
+      {
+        "language": "es",
+        "text": "en la sala."
+      },
+      {
+        "language": "es-inc",
+        "text": "en la sala."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the yard."
+      },
+      {
+        "language": "es",
+        "text": "en el patio."
+      },
+      {
+        "language": "es-inc",
+        "text": "en el patio."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the garden."
+      },
+      {
+        "language": "es",
+        "text": "en el jardín."
+      },
+      {
+        "language": "es-inc",
+        "text": "en el jardín."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "each morning."
+      },
+      {
+        "language": "es",
+        "text": "cada mañana."
+      },
+      {
+        "language": "es-inc",
+        "text": "cada mañana."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "in the kitchen."
+      },
+      {
+        "language": "es",
+        "text": "en la cocina."
+      },
+      {
+        "language": "es-inc",
+        "text": "en la cocina."
+      }
+    ]
+  },
+  {
+    "position": 4,
+    "word": [
+      {
+        "language": "en",
+        "text": "each afternoon."
+      },
+      {
+        "language": "es",
+        "text": "cada tarde."
+      },
+      {
+        "language": "es-inc",
+        "text": "cada tarde."
+      }
+    ]
+  }
+]
