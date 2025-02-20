@@ -8,6 +8,7 @@ import { IonText } from "@ionic/react";
 import type { Pill } from "@/components/ContentCard";
 
 import { useLanguage } from "@/hooks/Language";
+import { orderBy } from "firebase/firestore";
 
 type Card = any;
 
