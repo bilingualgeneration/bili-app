@@ -142,9 +142,6 @@ export const StoriesGame: React.FC<StoriesGameProps> = ({
   game: data,
   gameType,
 }) => {
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const { language, filterText } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio } = useAudioManager();

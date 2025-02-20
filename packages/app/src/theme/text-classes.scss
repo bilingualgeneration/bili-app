@@ -7,7 +7,35 @@ html {
   font-size: 16px;
 }
 
-html.plt-mobile {
+/*
+@media screen and (max-width: 1200px) {
+  // large
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  // medium
+  html {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 768px) {
+  // small
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 576px) {
+  // xs
+  html {
+    font-size: 8px;
+  }
+}
+*/
+
+html.plt-mobile:not(.plt-tablet) {
   font-size: 8px;
 }
 

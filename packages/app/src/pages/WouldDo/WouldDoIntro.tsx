@@ -12,9 +12,6 @@ import audio_es_inc from "@/assets/audio/WouldDoAudio/instruction_es_inc.mp3";
 
 export const WouldDoIntro: React.FC = () => {
   const { language } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const history = useHistory();
   const en = 'Welcome to "What Would You Do?"!';
   const es = '¡Bienvenidos a "¿Qué harías?"!';

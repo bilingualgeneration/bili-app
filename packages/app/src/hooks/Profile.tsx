@@ -20,13 +20,11 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [quickLaunchFlag, setQuickLaunchFlag] = useState<boolean>(false); // TODO: remove
   const [user, setUser] = useState<any>(undefined);
-  const [activeClassroom, setActiveClassroom] = useState<string | null>(null);
   const userRef = useRef<any>(user);
   const [profile, setProfile] = useState<any>(undefined);
   const profileUnsubscribe = useRef<Unsubscribe | null>();
-  const [justLoggedIn, setJustLoggedIn] = useState<boolean>(false);
+
   useEffect(() => {
     onAuthStateChanged(auth, (userState) => {
       if (userState && userRef.current === null) {
@@ -34,7 +32,6 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
         setProfile(undefined);
       }
       setUser(userState);
-      setJustLoggedIn(true);
       userRef.current = userState;
     });
   }, []);
@@ -62,25 +59,21 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
   }, [user]);
 
   const signout = () => {
-    setUser(undefined);
-    userRef.current = undefined;
+    setUser(null);
+    userRef.current = null;
     signOut(auth).then(() => {});
   };
   const isLoading = user === undefined || profile === undefined;
+
   return (
     <ProfileContext.Provider
       children={children}
       value={{
         isLoading,
         isLoggedIn: user !== undefined && user !== null,
-        justLoggedIn,
-        setJustLoggedIn,
         profile,
         signout,
         user,
-
-        quickLaunchFlag, // TODO: remove
-        setQuickLaunchFlag, // TODO: remove
       }}
     />
   );

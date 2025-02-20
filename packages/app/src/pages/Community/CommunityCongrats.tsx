@@ -11,9 +11,7 @@ import FlowerImage from "@/assets/icons/big_flower.svg";
 import audio_en from "@/assets/audio/FlowerCongrats/way_to_grow.mp3";
 import audio_es from "@/assets/audio/FlowerCongrats/estás_creciendo_mucho.mp3";
 
-export const CommunityCongrats: React.FC<{
-  count: number;
-}> = ({ count }) => {
+export const CommunityCongrats: React.FC = () => {
   const { language } = useLanguage();
   const { activity, packId } = useCardSlider();
   const history = useHistory();

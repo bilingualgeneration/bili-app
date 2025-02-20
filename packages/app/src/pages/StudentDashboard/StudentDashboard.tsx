@@ -46,9 +46,6 @@ const WaveIcon: React.FC<WaveIcon> = ({
   link,
   reactintlId,
 }) => {
-  const {
-    profile: { isImmersive },
-  } = useProfile();
   const { language } = useLanguageToggle();
   const history = useHistory();
   return (
@@ -126,8 +123,7 @@ const playCards = [
     title: "Fábrica de Cuentos",
     titleEn: "Story Factory",
     cover: "/assets/img/card_play_image.png",
-    //link: "/story-factory-game/intro",
-    isLocked: true,
+    link: "/story-factory/intro",
   },
   {
     category: "play",
@@ -168,6 +164,7 @@ const communityCards = [
     titleEn: "What would you do?",
     cover: "/assets/img/horse_image.png",
     link: "/would-do/intro",
+    isLocked: false,
   },
   {
     category: "community",
@@ -228,9 +225,12 @@ const Banner: React.FC = () => {
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
+  /*
   const {
     profile: { isInclusive },
   } = useProfile();
+  */
+  const isInclusive = false;
   const { language } = useLanguageToggle();
 
   const { getText } = useI18n();

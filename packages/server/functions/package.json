@@ -38,9 +38,10 @@
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.3.1",
     "nodemailer": "^6.10.0",
+    "pdf-lib": "^1.17.1",
     "pdfkit": "^0.16.0",
     "pluralize": "^8.0.0",
-    "puppeteer": "^24.1.0",
+    "puppeteer": "16.2.0",
     "svg-to-pdfkit": "^0.1.8",
     "zod": "^3.23.8"
   },

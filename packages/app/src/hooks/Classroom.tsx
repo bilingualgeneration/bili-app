@@ -37,6 +37,7 @@ export const ClassroomProvider: React.FC<React.PropsWithChildren> = ({
           id,
           ...d.data(),
         });
+        setIsLoading(false);
       });
     }
   };
@@ -55,10 +56,10 @@ export const ClassroomProvider: React.FC<React.PropsWithChildren> = ({
       if (response.value === null) {
         setInfo(null);
         setCurrentId(null);
+        setIsLoading(false);
       } else {
         subscribe(response.value);
       }
-      setIsLoading(false);
     });
   }, [setInfo, subscribe]);
 

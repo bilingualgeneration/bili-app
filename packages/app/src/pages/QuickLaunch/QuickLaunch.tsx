@@ -48,7 +48,7 @@ export const QuickLaunch: React.FC = () => {
         lookup[code],
       );
     } else {
-      setErrors(["invalidClassCode"]);
+      setErrors(["invalidClassroomCode"]);
     }
   });
   return (

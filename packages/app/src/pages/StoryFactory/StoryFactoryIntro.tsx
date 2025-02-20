@@ -14,9 +14,6 @@ import audio_en_2 from "@/assets/audio/StoryFactoryAudio/story_factory_second_en
 
 export const StoryFactoryIntro: React.FC = () => {
   const { language } = useLanguage();
-  const {
-    profile: { isInclusive },
-  } = useProfile();
   const history = useHistory();
   const en = 'Welcome to the "Story Factory"!';
   const es = '¡Bienvenidos a la "Fábrica de cuentos"!';
@@ -24,21 +21,13 @@ export const StoryFactoryIntro: React.FC = () => {
   let audios: any[] = [];
   switch (language) {
     case "es":
-      if (isInclusive) {
-        audios = [audio_es_inc_1, audio_es_2];
-      } else {
-        audios = [audio_es_1, audio_es_2];
-      }
+      audios = [audio_es_1, audio_es_2];
       break;
     case "en":
       audios = [audio_en_1, audio_en_2];
       break;
     case "esen":
-      if (isInclusive) {
-        audios = [audio_es_inc_1, audio_es_2, audio_en_1, audio_en_2];
-      } else {
-        audios = [audio_es_1, audio_es_2, audio_en_1, audio_en_2];
-      }
+      audios = [audio_es_1, audio_es_2, audio_en_1, audio_en_2];
       break;
   }
 
@@ -52,13 +41,11 @@ export const StoryFactoryIntro: React.FC = () => {
       buttonTextSecondary={language === "esen" ? button_en : undefined}
       characterImage={bili}
       onButtonClick={() => {
-        history.push("/story-factory-game/select");
+        history.push("/story-factory/select");
       }}
     >
       <IonText>
-        <h1 className="text-5xl color-suelo">
-          {language === "en" ? en : isInclusive ? esinc : es}
-        </h1>
+        <h1 className="text-5xl color-suelo">{language === "en" ? en : es}</h1>
         {language === "esen" && (
           <h2 className="text-3xl color-english">{en}</h2>
         )}

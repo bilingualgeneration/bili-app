@@ -2,3 +2,4 @@ src/data
 src/serviceAccounts
 dist
 node_modules
+output

@@ -69,7 +69,10 @@ export const ClassCode: React.FC = () => {
   });
   const [hasError, setHasError] = useState<boolean>(false);
   const functions = getFunctions();
-  const findByCodeFunction = httpsCallable(functions, "classroom-findByCode");
+  const findByClassroomCodeFunction = httpsCallable(
+    functions,
+    "classroom-findByClassroomCode",
+  );
 
   const inputs = ["code0", "code1", "code2", "code3"];
   const values = watch();
@@ -77,8 +80,8 @@ export const ClassCode: React.FC = () => {
   const onSubmit = handleSubmit(async (responses) => {
     const enteredCode = Object.values(responses).join("");
     setIsLoading(true);
-    const { data: classes } = await findByCodeFunction({
-      code: Object.values(responses).join(""),
+    const { data: classes } = await findByClassroomCodeFunction({
+      classroomCode: Object.values(responses).join(""),
     });
     if (classes === null) {
       setHasError(true);
@@ -124,6 +127,14 @@ export const ClassCode: React.FC = () => {
                     <p className="text-lg" style={{ marginTop: "0.75rem" }}>
                       <I18nMessage
                         id="signUpParent.classCodeAsk"
+                        languageSource="unauthed"
+                      />
+                    </p>
+                  </IonText>
+                  <IonText color="danger" className="ion-text-center">
+                    <p>
+                      <I18nMessage
+                        id="signUpParent.betaTestersOnly"
                         languageSource="unauthed"
                       />
                     </p>

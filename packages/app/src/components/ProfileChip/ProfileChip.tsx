@@ -1,7 +1,7 @@
 // TODO: streamline css definitions
 
 import { Avatar } from "@/components/Avatar";
-import { heart } from "ionicons/icons";
+import Flower from "../../assets/icons/profile_chip_flower.svg";
 import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonText,
@@ -19,6 +19,7 @@ import {
   useRealtimeDatabaseDoc,
 } from "@/hooks/RealtimeDatabaseDoc";
 import { useClassroom } from "@/hooks/Classroom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 import { useRef, useState } from "react";
 import { useStudent } from "@/hooks/Student";
@@ -46,10 +47,17 @@ export const ProfileChip: React.FC = () => {
 };
 
 const HydratedProfileChip: React.FC = () => {
-  const { firstName, id } = useStudent();
+  const { firstName, id, signOut: signStudentOut } = useStudent();
+  const history = useHistory();
+  const { pathname } = useLocation();
+  const { signout: signUserOut } = useProfile();
+  const { unsubscribe: signClassroomOut } = useClassroom();
+  /*
   const {
     profile: { role },
-  } = useProfile();
+  } = 
+  */
+
   const { info } = useClassroom();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popover = useRef<HTMLIonPopoverElement>(null);
@@ -66,15 +74,17 @@ const HydratedProfileChip: React.FC = () => {
       icon: StudentAvatar,
       url: "/profile/coming-soon",
     },
+    /*
     {
       i18nId: "settings.grownup",
       icon: Settings,
       url: role === "teacher" ? "/classrooms" : "/settings/overview",
     },
+    */
     {
       i18nId: "settings.changeStudent",
       icon: StudentLogout,
-      url: `/select-student/${info?.id}`,
+      url: `/classroom/student-select/${info?.id}`,
     },
   ];
 
@@ -94,7 +104,7 @@ const HydratedProfileChip: React.FC = () => {
               </IonText>
             </div>
             <div id="heartPoints" className="text-sm semibold color-nube">
-              <IonIcon icon={heart} />
+              <IonIcon icon={Flower} />
               <IonText>
                 {status === "ready" ? data?.totalHearts ?? 0 : "\u00A0"}
               </IonText>
@@ -143,6 +153,31 @@ const HydratedProfileChip: React.FC = () => {
               </IonButton>
             </Link>
           ))}
+          {pathname.startsWith("/classroom/student-select") && (
+            <IonButton
+              expand="block"
+              fill="clear"
+              onClick={() => {
+                signStudentOut();
+                signUserOut();
+                signClassroomOut();
+                history.replace("/");
+                // user sign out
+                // student sign out
+                // classroom sign out
+                // redirect to /
+              }}
+            >
+              <IonText className="ion-text-left color-suelo text-md">
+                <I18nMessage id="common.logOut" />
+                <I18nMessage
+                  id="common.logOut"
+                  level={2}
+                  wrapper={(text: string) => <p className="text-sm">{text}</p>}
+                />
+              </IonText>
+            </IonButton>
+          )}
         </IonContent>
       </IonPopover>
     </>
