@@ -32,14 +32,13 @@ const HydratedStoriesLandingPage: React.FC = () => {
   const mapToContentCardProps = (card: any, tag?: string) => {
     const tagOrderEntry = card.ordered_tag?.find((t: any) => t.tag === tag);
     const order = tagOrderEntry ? tagOrderEntry.order : null;
-
     return {
       titles: filterText(card.title),
       category: "",
       cover: card.cover_image.url,
       link: `/story/play/${card.uuid}`,
       isTranslanguaged: card.is_translanguaged,
-      isStudentStory: card.is_studentStory,
+      isStudentStory: card.is_student_story,
       order,
       allCardsOrder: card.order,
     };
