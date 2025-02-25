@@ -38,12 +38,12 @@ export const CommunityCard: React.FC<CommunityCardProps> = ({
         <IonCardContent>
           <IonGrid>
             <IonRow>
-              <IonCol className="flex flex-column ion-justify-content-center ion-text-center">
-                <h1 className="text-4xl semibold color-suelo">
+              <IonCol className="flex flex-column">
+                <h1 className="text-2xl semibold color-suelo">
                   {text_front[0]?.text}
                 </h1>
                 {text_front[1] && (
-                  <p className="text-2xl color-english">
+                  <p className="text-lg color-english margin-top-1">
                     {text_front[1]?.text}
                   </p>
                 )}
