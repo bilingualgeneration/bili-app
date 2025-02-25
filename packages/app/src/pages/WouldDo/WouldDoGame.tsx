@@ -44,7 +44,6 @@ const WouldDoGameLoader: React.FC = () => {
         text_back: questionItem.hint,
         image: questionItem.image || { url: "" },
       }));
-      console.log("Transformed WouldDo Data:", transformedData);
       setRawCards(transformedData);
       setRawPackName(data.pack_name || []);
     }
