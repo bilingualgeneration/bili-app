@@ -40,7 +40,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   const currentCard = cards[currentCardIndex];
   const history = useHistory();
   const [showFront, setShowFront] = useState<boolean>(true);
-  const { filterText } = useLanguage();
+  const { populateText } = useLanguage();
   const { clearAudio, onended } = useAudioManager();
   const [] = useState(0);
   const destinations = [
@@ -49,17 +49,13 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   ];
 
   const text_front_filtered = React.useMemo(
-    () => filterText(cards[currentCardIndex]?.text_front || []),
-    [cards, currentCardIndex, filterText],
+    () => populateText(cards[currentCardIndex]?.text_front || []),
+    [cards, currentCardIndex, populateText],
   );
 
-  console.log(
-    "Raw text_back in CardSlider:",
-    cards[currentCardIndex]?.text_back,
-  );
   const text_back_filtered = React.useMemo(
-    () => filterText(cards[currentCardIndex]?.text_back || []),
-    [cards, currentCardIndex, filterText],
+    () => populateText(cards[currentCardIndex]?.text_back || []),
+    [cards, currentCardIndex, populateText],
   );
 
   const audio = Object.fromEntries(
