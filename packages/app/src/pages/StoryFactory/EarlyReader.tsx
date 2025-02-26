@@ -10,6 +10,7 @@ import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import "./StoryFactory.scss";
 import dataRaw from "./EarlyReaderData.json";
+import { useLanguage } from "@/hooks/Language";
 
 const AWS_BUCKET =
   "https://bili-strapi-media-dev.s3.amazonaws.com/story_factory/"; // todo: don't hardcode
@@ -36,6 +37,7 @@ function shuffleArray(array: any[]) {
 }
 
 const getText = (word: any, language: string) => {
+  console.log(word, language);
   return word.filter((w: any) => w.language === language)[0].text;
 };
 
@@ -74,7 +76,7 @@ const generateSVG = (color: string, direction: string) => {
 };
 
 export const StoryFactoryEarlyReader: React.FC = () => {
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { addAudio, clearAudio, onended } = useAudioManager();
   //const { status, data } = useFirestoreDoc();
   const status: string = "ready";
@@ -208,7 +210,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[0][wordIndices[0]].word, "en")
                       : getText(words[0][wordIndices[0]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[0][wordIndices[0]].word, "en")}
                     </p>
@@ -225,7 +227,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[1][wordIndices[1]].word, "en")
                       : getText(words[1][wordIndices[1]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[1][wordIndices[1]].word, "en")}
                     </p>
@@ -242,7 +244,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[2][wordIndices[2]].word, "en")
                       : getText(words[2][wordIndices[2]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[2][wordIndices[2]].word, "en")}
                     </p>
@@ -259,7 +261,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[3][wordIndices[3]].word, "en")
                       : getText(words[3][wordIndices[3]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[3][wordIndices[3]].word, "en")}
                     </p>
