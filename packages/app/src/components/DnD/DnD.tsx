@@ -4,11 +4,11 @@ const PIECE_VERTICAL_SPACER = 10;
 export const MAX_HEIGHT = 450;
 const MAX_WIDTH = 940;
 const PIECE_TOP_OFFSET = 20;
-const PIECE_LEFT_OFFSET_MOBILE = 30;
-const PIECE_LEFT_OFFSET_DESKTOP = 40;
+const PIECE_LEFT_OFFSET_MOBILE = 40;
+const PIECE_LEFT_OFFSET_DESKTOP = 60;
 const PIECE_HEIGHT = 90;
-const PIECE_WIDTH_MOBILE = 10;
-const PIECE_WIDTH_DESKTOP = 10;
+const PIECE_WIDTH_MOBILE = 40;
+const PIECE_WIDTH_DESKTOP = 70;
 
 import classnames from "classnames";
 import { DnDImage } from "./DnDImage";
@@ -45,6 +45,34 @@ const colors = [
   "#9a90f0",
   "#6154d5",
 ];
+
+const charWidthGroups = {
+  thin: 0.3, // Thin letters (e.g., i, j, l)
+  average: 0.6, // Average letters (e.g., a, b, c, etc.)
+  wide: 0.9, // Wide letters (e.g., m, w)
+};
+
+export const estimateTextWidth = (text: string, fontSize = 110) => {
+  // Define which letters belong to which group
+  const thinLetters = new Set(["i", "j", "l", "t"]);
+  const wideLetters = new Set(["m", "w", "h", "b", "d"]);
+
+  let totalWidth = 0;
+
+  for (const char of text.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")) {
+    // Determine the character's group
+    if (thinLetters.has(char)) {
+      totalWidth += charWidthGroups.thin * fontSize;
+    } else if (wideLetters.has(char)) {
+      totalWidth += charWidthGroups.wide * fontSize;
+    } else {
+      // Default to average width for all other lowercase letters
+      totalWidth += charWidthGroups.average * fontSize;
+    }
+  }
+
+  return totalWidth;
+};
 
 export const hashLetter = (text: string) => {
   let hash = 0;
@@ -156,8 +184,11 @@ const Hydrator: React.FC<DnDProps> = ({
           if (!t.endsWith("*")) {
             tempTotalTargets++;
           }
+          console.log(screenType);
           targetTotalWidth +=
-            screenType === "mobile" ? PIECE_WIDTH_MOBILE : PIECE_WIDTH_DESKTOP;
+            screenType === "mobile" || screenType === "tablet"
+              ? PIECE_WIDTH_MOBILE
+              : PIECE_WIDTH_DESKTOP;
           targetTotalHeight = Math.max(targetTotalHeight, PIECE_HEIGHT);
           return [
             id,
@@ -178,13 +209,14 @@ const Hydrator: React.FC<DnDProps> = ({
       targetTotalHeight += targetImage.height;
     }
     let leftPosition =
-      screenType === "mobile"
+      screenType === "mobile" || screenType === "tablet"
         ? PIECE_LEFT_OFFSET_MOBILE
         : PIECE_LEFT_OFFSET_DESKTOP;
     let topPosition = PIECE_TOP_OFFSET;
     const totalPieces = piecesExpanded.length;
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map((p: any, index: number) => {
+        console.log(p.text.length);
         const id: string = index.toString();
         const newP = {
           ...p,
@@ -197,17 +229,14 @@ const Hydrator: React.FC<DnDProps> = ({
             LETTER_MAX_ROTATION,
         };
         topPosition += PIECE_HEIGHT + PIECE_VERTICAL_SPACER;
-
+        const estimatedWidth = estimateTextWidth(p.text);
         if (targetImage) {
           if (index === Math.floor(totalPieces / 2) - 1) {
             leftPosition = Math.floor(width / 2 + targetTotalWidth / 2);
             topPosition = PIECE_TOP_OFFSET;
           }
         } else {
-          leftPosition +=
-            screenType === "mobile"
-              ? PIECE_WIDTH_MOBILE + PIECE_LEFT_OFFSET_MOBILE
-              : PIECE_WIDTH_DESKTOP + PIECE_LEFT_OFFSET_DESKTOP;
+          leftPosition += estimatedWidth;
         }
         return [id, newP];
       }),
