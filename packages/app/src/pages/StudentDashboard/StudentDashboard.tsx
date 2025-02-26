@@ -120,18 +120,19 @@ const wellnessCards = [
 const playCards = [
   {
     category: "play",
-    title: "Fábrica de Cuentos",
-    titleEn: "Story Factory",
-    cover: "/assets/img/sf_image.png",
-    link: "/story-factory/intro",
-  },
-  {
-    category: "play",
     title: "El Intruso",
     titleEn: "The Intruder",
     cover: "/assets/img/intruder_image.png",
     link: "/intruder/intro",
     isLocked: false,
+  },
+  {
+    category: "play",
+    title: "Fábrica de Cuentos",
+    titleEn: "Story Factory",
+    cover: "/assets/img/sf_image.png",
+    //link: "/story-factory/intro",
+    isLocked: true,
   },
   {
     category: "play",
