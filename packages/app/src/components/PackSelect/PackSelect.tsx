@@ -17,6 +17,7 @@ import { PlayHeader } from "@/components/PlayHeader";
 import { FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useScreenSize } from "@/lib/screenSize";
+import { link } from "ionicons/icons";
 
 type Card = any;
 
@@ -104,11 +105,16 @@ export const HydratedPackSelect: React.FC<props> = ({
         cover:
           p.cover_image?.url ||
           "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png",
-        link: `/${modulePath || module}/play/${p.uuid}`,
+        link: `/${modulePath || module}/play/${
+          module === "story-factory" || modulePath === "story-factory"
+            ? "early-reader"
+            : p.uuid
+        }`, //temporary solution for Story-Factory game
         is_translanguaged: p.is_translanguaged,
         is_student_story: p.is_student_story,
       };
     });
+
   if (only_cards) {
     return (
       <>
@@ -117,6 +123,7 @@ export const HydratedPackSelect: React.FC<props> = ({
           height={"17rem"}
         >
           {cards.map((c: Card, index: number) => {
+            console.log(c);
             let pills: Pill[] = [];
             if (module === "story") {
               if (c.is_translanguaged) {
