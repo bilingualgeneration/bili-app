@@ -1,4 +1,5 @@
 import biliCharacter from "@/assets/img/bili_in_coat.png";
+
 import React, { useState, useEffect } from "react";
 import { first } from "rxjs/operators";
 import { FormattedMessage } from "react-intl";
@@ -14,10 +15,11 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import "./Intruder.scss";
 import "../StoryFactory/StoryFactory.scss";
 import { useHistory } from "react-router";
-import StarImage from "@/assets/icons/small-star.svg";
 import { useLanguage } from "@/hooks/Language";
 import { useI18n } from "@/hooks/I18n";
 import { I18nMessage } from "@/components/I18nMessage";
+
+import StarImage from "@/assets/icons/small-star.svg";
 
 export const IntruderCongrats: React.FC<{
   setShowCongrats: any;
