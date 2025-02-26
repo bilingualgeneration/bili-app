@@ -39,8 +39,7 @@ export const Splash: React.FC = () => {
             </IonCardContent>
           </IonCard>
 
-          {/* TEMPORARY HIDDEN WAITLIST CARD */}
-          {/* <IonCard>
+          <IonCard>
             <IonCardContent>
               <IonCardTitle className={titleClasses}>
                 <I18nMessage id="splash.newAccount" languageSource="unauthed" />
@@ -54,7 +53,7 @@ export const Splash: React.FC = () => {
                 </IonButton>
               </Link>
             </IonCardContent>
-          </IonCard> */}
+          </IonCard>
 
           <IonCard>
             <IonCardContent>
