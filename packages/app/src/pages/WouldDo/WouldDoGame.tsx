@@ -33,7 +33,7 @@ const WouldDoGameLoader: React.FC = () => {
   }, [packId, packIdFromUrl]);
 
   useEffect(() => {
-    setActivity("community");
+    setActivity("would-do");
   }, []);
 
   useEffect(() => {

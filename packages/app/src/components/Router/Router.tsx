@@ -252,23 +252,28 @@ export const Router: React.FC = () => {
             </StudentLayout>
           </Route>
           <Route path="/would-do">
-            <Route exact path="/would-do/intro">
-              <StudentLayout>
+            <StudentLayout>
+              <Route exact path="/would-do/intro">
                 <WouldDoIntro />
-              </StudentLayout>
-            </Route>
-            <Route exact path="/would-do/select">
-              <StudentLayout>
-                <WouldDoSelect />
-              </StudentLayout>
-            </Route>
-            <CardSliderProvider>
-              <Route exact path="/would-do/play/:pack_id">
-                <StudentLayout>
-                  <WouldDoGame />
-                </StudentLayout>
               </Route>
-            </CardSliderProvider>
+              <Route exact path="/would-do/select">
+                <WouldDoSelect />
+              </Route>
+              <CardSliderProvider>
+                <Route exact path="/would-do/play/:pack_id">
+                  <WouldDoGame />
+                </Route>
+                <Route exact path="/would-do/feedback/feeling">
+                  <FeelingFeedback />
+                </Route>
+                <Route exact path="/would-do/feedback/opinion">
+                  <OpinionFeedback />
+                </Route>
+                <Route exact path="/would-do/congrats">
+                  <CommunityCongrats />
+                </Route>
+              </CardSliderProvider>
+            </StudentLayout>
           </Route>
 
           <Route exact path="/teacher/dashboard">
