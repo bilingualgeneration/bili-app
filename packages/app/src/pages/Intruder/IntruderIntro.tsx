@@ -5,7 +5,7 @@ import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useProfile } from "@/hooks/Profile";
 
-import bili from "@/assets/img/bili_in_tshirt.png";
+import bili from "@/assets/img/bili_in_coat.png";
 
 import audio_en from "@/assets/audio/IntruderAudio/intruder_instruction_en.mp3";
 import audio_es from "@/assets/audio/IntruderAudio/intruder_instruction_es.mp3";
