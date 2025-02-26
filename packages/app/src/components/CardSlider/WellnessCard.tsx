@@ -46,7 +46,7 @@ export const WellnessCard: React.FC<WellnessCardProps> = ({
                   style={{ backgroundImage: `url(${image.url})` }}
                 ></IonCol>
                 <IonCol className="flex flex-column ion-justify-content-center ion-text-center">
-                  <h1 className="text-4xl semibold color-suelo">
+                  <h1 className="text-3xl semibold color-suelo">
                     {text_front[0]?.text}
                   </h1>
                   {text_front[1] && (
