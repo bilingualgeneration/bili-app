@@ -8,6 +8,7 @@ import { PackHeader } from "@/components/PackHeader";
 
 import AffirmationGirl from "@/assets/img/affirmation_girl.png";
 import BreathingGirl from "@/assets/img/breathing_girl.png";
+import paperMacheBackground from "@/assets/img/paper_mache_background.png";
 
 import "./Wellness.scss";
 
@@ -33,6 +34,8 @@ const Card: React.FC<CardProps> = ({
           className={`wellness-card-inner`}
           style={{
             backgroundColor: background,
+            backgroundImage: `url('${paperMacheBackground}')`,
+            backgroundSize: "cover",
           }}
         >
           {locked && <ContentLock />}
@@ -65,6 +68,8 @@ const Card: React.FC<CardProps> = ({
             key={number}
             style={{
               backgroundColor: background,
+              backgroundImage: `url('${paperMacheBackground}')`,
+              backgroundSize: "cover",
             }}
           >
             {locked && <ContentLock showLock={false} />}

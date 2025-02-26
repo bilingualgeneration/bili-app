@@ -1,3 +1,4 @@
+import { PackHeader } from "@/components/PackHeader";
 import { PackSelect } from "@/components/PackSelect";
 
 export const AffirmationsSelect: React.FC = () => {
@@ -13,13 +14,16 @@ export const AffirmationsSelect: React.FC = () => {
 
   // todo - rename affirmation to affirmations-game
   return (
-    <PackSelect
-      module="affirmation"
-      modulePath="affirmations"
-      category="wellness"
-      translatedTitle="Afirmaciones"
-      englishTitle="Affirmations"
-      placeholderCards={placeholderCards}
-    />
+    <>
+      <PackHeader bannerColor="#973d78" id="common.wellness" />
+      <PackSelect
+        module="affirmation"
+        modulePath="affirmations"
+        category="wellness"
+        translatedTitle="Afirmaciones"
+        englishTitle="Affirmations"
+        placeholderCards={placeholderCards}
+      />
+    </>
   );
 };
