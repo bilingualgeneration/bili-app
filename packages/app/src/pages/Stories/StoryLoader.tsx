@@ -174,14 +174,11 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     payload.push({
       component: (
         <>
-          <PageWrapper>
-            <StoriesCongrats
-              onKeepGoingClick={() => {
-                history.push("/stories");
-              }}
-            />
-          </PageWrapper>
-          <PageCounter />
+          <StoriesCongrats
+            onKeepGoingClick={() => {
+              history.push("/stories");
+            }}
+          />
         </>
       ),
       id: "congrats",
