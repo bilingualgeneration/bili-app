@@ -605,18 +605,10 @@ ion-card.new-felicitaciones-card {
   letter-spacing: -0.0660625rem;
   padding: 0.3125rem 0 0.3125rem;
   white-space: pre;
+  margin-bottom: 3rem;
 
-  @media screen and (max-width: 768px) {
-    font-size: 4.5rem;
-    //margin-bottom: 1rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 4rem;
-  }
-
-  @media screen and (max-width: 430px) {
-    font-size: 2.5rem;
+  @media screen and (max-width: 932px) {
+    margin-bottom: 0px;
   }
 }
 
