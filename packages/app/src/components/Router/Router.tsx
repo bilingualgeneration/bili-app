@@ -231,6 +231,7 @@ export const Router: React.FC = () => {
               <StudentSelect />
             </StudentLayout>
           </Route>
+
           <Route exact path="/tell-me-about/intro">
             <StudentLayout>
               <TellMeAboutIntro />
@@ -241,11 +242,14 @@ export const Router: React.FC = () => {
               <TellMeAboutSelect />
             </StudentLayout>
           </Route>
-          <Route exact path="/tell-me-about/play/:pack_id">
-            <StudentLayout>
-              <TellMeAboutGame />
-            </StudentLayout>
-          </Route>
+          <CardSliderProvider>
+            <Route exact path="/tell-me-about/play/:pack_id">
+              <StudentLayout>
+                <TellMeAboutGame />
+              </StudentLayout>
+            </Route>
+          </CardSliderProvider>
+
           <Route exact path="/wellness">
             <StudentLayout>
               <Wellness />

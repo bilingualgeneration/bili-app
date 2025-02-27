@@ -1,86 +1,57 @@
-import { useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { CardSlider } from "@/components/CardSlider/CardSlider";
+import { useCardSlider } from "@/contexts/CardSlider";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { Deck } from "@/components/Deck";
-import "@/pages/Intruder/Intruder.scss";
-import { IonCol, IonGrid, IonRow, IonText } from "@ionic/react";
-import { useLanguage } from "@/hooks/Language";
-import { I18nMessage } from "@/components/I18nMessage";
 
 export const TellMeAboutGame: React.FC = () => {
-  //@ts-ignore
-  const { pack_id } = useParams();
+  const { pack_id } = useParams<{ pack_id: string }>();
   return (
     <FirestoreDocProvider collection="tell-me-about" id={pack_id}>
-      <TellMeAboutHydratedGame />
+      <TellMeAboutGameLoader />
     </FirestoreDocProvider>
   );
 };
 
-const TellMeAboutHydratedGame: React.FC = () => {
-  const { status, data } = useFirestoreDoc();
-  const { filterText } = useLanguage();
-  const [questionsData, setQuestionsData] = useState<any[]>([]);
+const TellMeAboutGameLoader: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  const { pack_id: packIdFromUrl } = useParams<{ pack_id: string }>();
+  const {
+    isReady,
+    packId,
+    reset,
+    setPackId,
+    setRawCards,
+    setRawPackName,
+    setActivity,
+  } = useCardSlider();
+  useEffect(() => {
+    if (packId !== packIdFromUrl) {
+      setPackId(packIdFromUrl);
+      reset();
+    }
+  }, [packId, packIdFromUrl]);
 
   useEffect(() => {
-    if (data !== undefined && data !== null) {
-      // Transform data to include text and audio in both languages for each card
+    setActivity("community");
+  }, []);
 
-      const transformedData = data.questions.map((questionItem: any) => {
-        // possible solution for using filterText
-        // const filteredQuestion = filterText(questionItem.question || []);
-        const es = questionItem.question.find(
-          (item: any) => item.language === "es",
-        );
-        const esHint = questionItem.hint?.find(
-          (item: any) => item.language === "es",
-        );
-        const en = questionItem.question.find(
-          (item: any) => item.language === "en",
-        );
-        const enHint = questionItem.hint?.find(
-          (item: any) => item.language === "en",
-        );
-        const esInc = questionItem.question.find(
-          (item: any) => item.language === "es-inc",
-        );
-        const esIncHint = questionItem.hint?.find(
-          (item: any) => item.language === "es-inc",
-        );
-
-        return {
-          esAudio: es?.audio || null,
-          esHintAudio: esHint?.audio || null,
-          esHintText: esHint?.text || "",
-          esText: es?.text || "",
-          enAudio: en?.audio || null,
-          enHintAudio: enHint?.audio || null,
-          enHintText: enHint?.text || "",
-          enText: en?.text || "",
-          esIncAudio: esInc?.audio || null,
-          esIncHintAudio: esIncHint?.audio || null,
-          esIncHintText: esIncHint?.text || "",
-          esIncText: esInc?.text || "",
-        };
-      });
-      setQuestionsData(transformedData);
+  useEffect(() => {
+    if (data) {
+      const transformedData = data.questions.map((questionItem: any) => ({
+        id: questionItem.id,
+        text_front: questionItem.question,
+        text_back: questionItem.hint,
+        image: questionItem.image || { url: "" },
+      }));
+      setRawCards(transformedData);
+      setRawPackName(data.pack_name || []);
     }
   }, [data]);
 
-  if (status === "loading") {
-    return (
-      <div style={{ textAlign: "center", paddingTop: "50vh" }}>Loading...</div>
-    );
+  if (isReady && packId === packIdFromUrl) {
+    return <CardSlider cardType="community" />;
+  } else {
+    return <></>;
   }
-
-  if (status === "error") {
-    return "Error loading the game";
-  }
-
-  return (
-    <>
-      <Deck id="common.tellMeAbout" cards={questionsData} />
-    </>
-  );
 };
