@@ -66,7 +66,7 @@ const WrappedSF1: React.FC = () => {
       case "en":
         return g.language.includes("en");
         break;
-      case "esen":
+      case "es.en":
         // TODO: check if inclusive also
         return g.language.includes("en") && g.language.includes("es");
       default:
