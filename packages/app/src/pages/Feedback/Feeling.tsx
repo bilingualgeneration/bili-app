@@ -26,6 +26,8 @@ import { useTimeTracker } from "@/hooks/TimeTracker";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import "./Feeling.scss";
+
 import happy from "@/assets/img/feeling_happy.png";
 import calm from "@/assets/img/feeling_calm.png";
 import sad from "@/assets/img/feeling_sad.png";
@@ -196,12 +198,12 @@ export const FeelingFeedback: React.FC = () => {
 
   return (
     <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
-      <IonGrid>
+      <IonGrid style={{ "--ion-grid-columns": 10 }}>
         <IonRow>
           <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
           <IonCol>
             <IonCard className="drop-shadow" style={{ textAlign: "center" }}>
-              <form action="">
+              <form action="" id="feedback_feelings_form">
                 <IonText className="ion-text-start">
                   <h2 className="text-3xl semibold color-suelo padding-left-2">
                     {question[0].text}

@@ -3,11 +3,11 @@ import { PackSelect } from "@/components/PackSelect";
 export const StoryFactorySelect: React.FC = () => {
   const placeholderCards = [
     {
-      title: "Lector avanzado",
-      titleEn: "Advanced reader",
+      title: "Lector temprano",
+      titleEn: "Early reader",
       category: "play",
       cover:
-        "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/4_cover_El_esqueleto_travieso_e992b9d069.svg",
+        "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/drum_image_c3729d3060.png",
       link: "/story-factory/play/early-reader",
     },
     // {
@@ -20,7 +20,7 @@ export const StoryFactorySelect: React.FC = () => {
   ];
   return (
     <PackSelect
-      module="story-factory-game"
+      module="story-factory"
       category="play"
       translatedTitle="¡Fábrica de Cuentos!"
       englishTitle="Story Factory"

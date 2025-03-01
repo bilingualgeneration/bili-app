@@ -27,6 +27,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   hasFlap = false,
 }) => {
   const {
+    activity,
     cards,
     cardClicks,
     currentCardIndex,
@@ -44,8 +45,8 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   const { clearAudio, onended } = useAudioManager();
   const [] = useState(0);
   const destinations = [
-    "/affirmations/feedback/opinion",
-    "/affirmations/feedback/feeling",
+    `/${activity}/feedback/opinion`,
+    `/${activity}/feedback/feeling`,
   ];
 
   const text_front_filtered = React.useMemo(

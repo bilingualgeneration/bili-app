@@ -10,6 +10,7 @@ import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 
 import "./StoryFactory.scss";
 import dataRaw from "./EarlyReaderData.json";
+import { useLanguage } from "@/hooks/Language";
 
 const AWS_BUCKET =
   "https://bili-strapi-media-dev.s3.amazonaws.com/story_factory/"; // todo: don't hardcode
@@ -48,6 +49,7 @@ const generateSVG = (color: string, direction: string) => {
         height="32"
         viewBox="0 0 55 32"
         fill="none"
+        style={{ width: "100%" }}
       >
         <path
           d="M24.9332 1.61877C26.3424 0.181033 28.6576 0.181035 30.0668 1.61878L53.1212 25.14C55.3504 27.4144 53.7391 31.25 50.5544 31.25L4.44562 31.25C1.26091 31.25 -0.35043 27.4144 1.87882 25.14L24.9332 1.61877Z"
@@ -63,6 +65,7 @@ const generateSVG = (color: string, direction: string) => {
         height="32"
         viewBox="0 0 55 32"
         fill="none"
+        style={{ width: "100%" }}
       >
         <path
           d="M30.0668 30.5062C28.6576 31.944 26.3424 31.944 24.9332 30.5062L1.87882 6.98501C-0.35043 4.71062 1.26091 0.875 4.44562 0.875L50.5544 0.875003C53.7391 0.875003 55.3504 4.71063 53.1212 6.98502L30.0668 30.5062Z"
@@ -74,7 +77,7 @@ const generateSVG = (color: string, direction: string) => {
 };
 
 export const StoryFactoryEarlyReader: React.FC = () => {
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const { addAudio, clearAudio, onended } = useAudioManager();
   //const { status, data } = useFirestoreDoc();
   const status: string = "ready";
@@ -187,6 +190,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
               (color, index) => (
                 <IonCol key={index}>
                   <span
+                    style={{ display: "inline-block", width: "5rem" }}
                     onClick={() => {
                       handleUpArrowClick(index);
                     }}
@@ -208,7 +212,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[0][wordIndices[0]].word, "en")
                       : getText(words[0][wordIndices[0]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[0][wordIndices[0]].word, "en")}
                     </p>
@@ -225,7 +229,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[1][wordIndices[1]].word, "en")
                       : getText(words[1][wordIndices[1]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[1][wordIndices[1]].word, "en")}
                     </p>
@@ -242,7 +246,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[2][wordIndices[2]].word, "en")
                       : getText(words[2][wordIndices[2]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[2][wordIndices[2]].word, "en")}
                     </p>
@@ -259,7 +263,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
                       ? getText(words[3][wordIndices[3]].word, "en")
                       : getText(words[3][wordIndices[3]].word, "es")}
                   </h1>
-                  {language === "esen" && (
+                  {language === "es.en" && (
                     <p className="text-3xl color-english">
                       {getText(words[3][wordIndices[3]].word, "en")}
                     </p>
@@ -275,6 +279,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
               (color, index) => (
                 <IonCol key={index}>
                   <span
+                    style={{ display: "inline-block", width: "5rem" }}
                     onClick={() => {
                       handleDownArrowClick(index);
                     }}

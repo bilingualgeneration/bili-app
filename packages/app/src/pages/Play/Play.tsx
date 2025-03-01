@@ -60,11 +60,11 @@ const PlayCard = ({ id, url, imgUrl, i18nKey, fid, locked }: PlayCardProps) => {
 const playCardData: PlayCardProps[] = [
   {
     id: "storyFactoryCard",
-    //url: "/story-factory-game/intro",
+    url: "/story-factory/intro",
     imgUrl: FactoryWidget,
     i18nKey: "common.storyFactory",
     fid: "category-story factory",
-    locked: true,
+    locked: false,
   },
   {
     id: "intruderCard",
@@ -75,11 +75,11 @@ const playCardData: PlayCardProps[] = [
   },
   {
     id: "countCard",
-    //url: "/count-with-me-game/intro",
+    url: "/count-with-me/intro",
     imgUrl: CountWithMe,
     i18nKey: "common.countWithMe",
     fid: "category-count with me",
-    locked: true,
+    locked: false,
   },
 ];
 
