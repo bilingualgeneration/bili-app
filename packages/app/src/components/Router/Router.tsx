@@ -232,6 +232,7 @@ export const Router: React.FC = () => {
             </StudentLayout>
           </Route>
 
+          {/*
           <Route exact path="/tell-me-about/intro">
             <StudentLayout>
               <TellMeAboutIntro />
@@ -245,10 +246,36 @@ export const Router: React.FC = () => {
           <CardSliderProvider>
             <Route exact path="/tell-me-about/play/:pack_id">
               <StudentLayout>
-                <TellMeAboutGame />
+              <TellMeAboutGame />
               </StudentLayout>
             </Route>
           </CardSliderProvider>
+*/}
+
+          <Route path="/tell-me-about">
+            <StudentLayout>
+              <Route exact path="/tell-me-about/intro">
+                <TellMeAboutIntro />
+              </Route>
+              <Route exact path="/tell-me-about/select">
+                <TellMeAboutSelect />
+              </Route>
+              <CardSliderProvider>
+                <Route exact path="/tell-me-about/play/:pack_id">
+                  <TellMeAboutGame />
+                </Route>
+                <Route exact path="/tell-me-about/feedback/feeling">
+                  <FeelingFeedback />
+                </Route>
+                <Route exact path="/tell-me-about/feedback/opinion">
+                  <OpinionFeedback />
+                </Route>
+                <Route exact path="/tell-me-about/congrats">
+                  <CommunityCongrats />
+                </Route>
+              </CardSliderProvider>
+            </StudentLayout>
+          </Route>
 
           <Route exact path="/wellness">
             <StudentLayout>
@@ -256,23 +283,28 @@ export const Router: React.FC = () => {
             </StudentLayout>
           </Route>
           <Route path="/would-do">
-            <Route exact path="/would-do/intro">
-              <StudentLayout>
+            <StudentLayout>
+              <Route exact path="/would-do/intro">
                 <WouldDoIntro />
-              </StudentLayout>
-            </Route>
-            <Route exact path="/would-do/select">
-              <StudentLayout>
-                <WouldDoSelect />
-              </StudentLayout>
-            </Route>
-            <CardSliderProvider>
-              <Route exact path="/would-do/play/:pack_id">
-                <StudentLayout>
-                  <WouldDoGame />
-                </StudentLayout>
               </Route>
-            </CardSliderProvider>
+              <Route exact path="/would-do/select">
+                <WouldDoSelect />
+              </Route>
+              <CardSliderProvider>
+                <Route exact path="/would-do/play/:pack_id">
+                  <WouldDoGame />
+                </Route>
+                <Route exact path="/would-do/feedback/feeling">
+                  <FeelingFeedback />
+                </Route>
+                <Route exact path="/would-do/feedback/opinion">
+                  <OpinionFeedback />
+                </Route>
+                <Route exact path="/would-do/congrats">
+                  <CommunityCongrats />
+                </Route>
+              </CardSliderProvider>
+            </StudentLayout>
           </Route>
 
           <Route exact path="/teacher/dashboard">
