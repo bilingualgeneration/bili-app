@@ -231,6 +231,8 @@ export const Router: React.FC = () => {
               <StudentSelect />
             </StudentLayout>
           </Route>
+
+          {/*
           <Route exact path="/tell-me-about/intro">
             <StudentLayout>
               <TellMeAboutIntro />
@@ -241,11 +243,40 @@ export const Router: React.FC = () => {
               <TellMeAboutSelect />
             </StudentLayout>
           </Route>
-          <Route exact path="/tell-me-about/play/:pack_id">
-            <StudentLayout>
+          <CardSliderProvider>
+            <Route exact path="/tell-me-about/play/:pack_id">
+              <StudentLayout>
               <TellMeAboutGame />
+              </StudentLayout>
+            </Route>
+          </CardSliderProvider>
+*/}
+
+          <Route path="/tell-me-about">
+            <StudentLayout>
+              <Route exact path="/tell-me-about/intro">
+                <TellMeAboutIntro />
+              </Route>
+              <Route exact path="/tell-me-about/select">
+                <TellMeAboutSelect />
+              </Route>
+              <CardSliderProvider>
+                <Route exact path="/tell-me-about/play/:pack_id">
+                  <TellMeAboutGame />
+                </Route>
+                <Route exact path="/tell-me-about/feedback/feeling">
+                  <FeelingFeedback />
+                </Route>
+                <Route exact path="/tell-me-about/feedback/opinion">
+                  <OpinionFeedback />
+                </Route>
+                <Route exact path="/tell-me-about/congrats">
+                  <CommunityCongrats />
+                </Route>
+              </CardSliderProvider>
             </StudentLayout>
           </Route>
+
           <Route exact path="/wellness">
             <StudentLayout>
               <Wellness />

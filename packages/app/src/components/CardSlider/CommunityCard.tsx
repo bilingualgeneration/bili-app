@@ -115,7 +115,7 @@ export const CommunityCard: React.FC<CommunityCardProps> = ({
 
             {/* hint lines */}
             {text_back.map((hintLine, idx) => (
-              <IonRow className="margin-top-1">
+              <IonRow key={idx} className="margin-top-1">
                 {/* audio */}
                 <IonCol size="1" className="margin-left-1 margin-right-1">
                   {hintLine.audio?.url && (
@@ -129,12 +129,15 @@ export const CommunityCard: React.FC<CommunityCardProps> = ({
                 {/* hint text */}
                 <IonCol size="10">
                   <IonText>
-                    <p className="text-2xl color-suelo">{text_back[0]?.text}</p>
-                    {text_back[1] && (
-                      <p className="text-xl color-english">
-                        {text_back[1]?.text}
-                      </p>
-                    )}
+                    <p
+                      className={
+                        idx === 1
+                          ? "text-xl color-english"
+                          : "text-2xl color-suelo"
+                      }
+                    >
+                      {hintLine.text}
+                    </p>
                   </IonText>
                 </IonCol>
               </IonRow>
