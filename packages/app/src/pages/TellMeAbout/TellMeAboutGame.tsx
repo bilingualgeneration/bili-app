@@ -33,7 +33,7 @@ const TellMeAboutGameLoader: React.FC = () => {
   }, [packId, packIdFromUrl]);
 
   useEffect(() => {
-    setActivity("community");
+    setActivity("tell-me-about");
   }, []);
 
   useEffect(() => {
