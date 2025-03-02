@@ -1,8 +1,8 @@
-import Slider, { Settings } from "react-slick";
+import { IonImg } from "@ionic/react";
+import { useEffect, useState, useRef } from "react";
+
 import forward from "@/assets/icons/carousel_forward.svg";
 import backward from "@/assets/icons/carousel_backward.svg";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.scss";
 
 interface CarouselProps
@@ -12,8 +12,6 @@ interface CarouselProps
     slideMargin?: number;
     infinite?: boolean;
   }> {}
-
-//style={{ top: height / 2 }}
 
 const Arrow: React.FC<any> = ({ className, style, onClick, direction }) => {
   return (
@@ -30,28 +28,92 @@ export const Carousel: React.FC<CarouselProps> = ({
   slideMargin = 4,
   infinite = false,
 }) => {
-  const settings: Settings = {
-    draggable: false,
-    infinite,
-    slidesToShow,
-    slidesToScroll: 1,
-    nextArrow: <Arrow direction="forward" />,
-    prevArrow: <Arrow direction="backward" />,
-    variableWidth: true,
+  const containerRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = () => {
+    if (!containerRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
   };
 
+  const carouselBackward = () => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    // @ts-ignore
+    const items = container.querySelectorAll(".content-card");
+
+    let prevItem = null;
+    for (let i = items.length - 1; i >= 0; i--) {
+      const rect = items[i].getBoundingClientRect();
+      // @ts-ignore
+      if (rect.left < container.getBoundingClientRect().left) {
+        prevItem = items[i];
+        break;
+      }
+    }
+
+    if (prevItem) {
+      prevItem.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
+  };
+
+  const carouselForward = () => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    // @ts-ignore
+    const items = container.querySelectorAll(".content-card");
+
+    let nextItem = null;
+    for (let i = 0; i < items.length; i++) {
+      const rect = items[i].getBoundingClientRect();
+      // @ts-ignore
+      if (rect.left >= container.getBoundingClientRect().left) {
+        nextItem = items[i + 1];
+        break;
+      }
+    }
+    if (nextItem) {
+      nextItem.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
+  };
+
+  useEffect(() => {
+    updateScrollState(); // Run once on mount to set initial button visibility
+  }, []);
+
   return (
-    <div className="carousel-container">
-      <style>
-        {`
-          .slick-track {
-            > * {
-            margin: 0 ${slideMargin}px; /* Set margin dynamically */
-            } 
-          }
-        `}
-      </style>
-      <Slider {...settings}>{children}</Slider>
+    <div className="carousel-wrapper">
+      {canScrollLeft && (
+        <IonImg
+          className="carousel-control backward"
+          src={backward}
+          onClick={carouselBackward}
+        />
+      )}
+      <div className="carousel" ref={containerRef} onScroll={updateScrollState}>
+        {children}
+      </div>
+      {canScrollRight && (
+        <IonImg
+          className="carousel-control forward"
+          src={forward}
+          onClick={carouselForward}
+        />
+      )}
     </div>
   );
 };

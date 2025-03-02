@@ -12,6 +12,7 @@
   position: fixed;
   bottom: 3rem;
   left: 2rem;
+  z-index: 999;
 
   > .language-toggle-inner {
     display: flex;
