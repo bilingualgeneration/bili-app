@@ -1,35 +1,41 @@
-.carousel-container {
-  padding-left: 1.875rem;
-  padding-right: 1.875rem;
-  overflow-x: clip;
-  overflow-y: hidden;
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  > * {
+    min-width: 20rem;
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+  padding-bottom: 1rem;
+  margin-left: 1.875rem;
+  margin-right: 1.875rem;
 }
 
-.slick-arrow {
-  position: absolute;
-  z-index: 9;
-  height: 3.75rem !important;
-  width: 3.75rem !important;
-
-  &.slick-disabled {
-    display: none;
+@media (hover: none) and (pointer: coarse) {
+  .carousel {
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
   }
 
-  &.backward {
-    left: 0;
-    margin-left: -1.875rem;
-  }
-
-  &.forward {
-    right: 0;
-    margin-right: -1.875rem;
-  }
-
-  &::before {
-    display: none;
+  .carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome, Safari, and Edge */
   }
 }
 
-.slick-track {
-  margin-left: 0;
+.carousel-wrapper {
+  position: relative;
+  .carousel-control {
+    height: 4rem;
+    width: 4rem;
+    position: absolute;
+    top: calc(50% - 2rem);
+    z-index: 9;
+    &.backward {
+      left: 0;
+    }
+    &.forward {
+      right: 0;
+    }
+  }
 }

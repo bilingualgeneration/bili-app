@@ -123,7 +123,6 @@ export const HydratedPackSelect: React.FC<props> = ({
           height={"17rem"}
         >
           {cards.map((c: Card, index: number) => {
-            console.log(c);
             let pills: Pill[] = [];
             if (module === "story") {
               if (c.is_translanguaged) {
