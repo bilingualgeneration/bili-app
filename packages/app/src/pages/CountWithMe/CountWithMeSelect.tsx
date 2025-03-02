@@ -14,8 +14,7 @@ export const CountWithMeSelect: React.FC = () => {
       title: "Sports",
       titleEn: "Deportes",
       category: "play",
-      cover:
-        "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/stories_friends_cover_e66b64561c.svg",
+      cover: "/assets/img/mountain_image.png",
       isLocked: true,
     },
     {

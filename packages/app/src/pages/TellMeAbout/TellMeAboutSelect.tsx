@@ -6,8 +6,7 @@ export const TellMeAboutSelect: React.FC = () => {
       title: "Nivel 3",
       titleEn: "Level 3",
       category: "community",
-      cover:
-        "https://bili-strapi-media-dev.s3.us-east-1.amazonaws.com/stories_friends_cover_e66b64561c.svg",
+      cover: "/assets/img/mountain_image.png",
       isLocked: true,
     },
     {
