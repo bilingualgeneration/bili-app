@@ -89,13 +89,6 @@ const wellnessCards = [
   },
   {
     category: "wellness",
-    title: "Pausa de yoga",
-    titleEn: "Yoga break",
-    cover: "/assets/img/mountain_image.png",
-    isLocked: true,
-  },
-  {
-    category: "wellness",
     title: "Respirando hondo",
     titleEn: "Breathing deeply",
     cover: "/assets/img/dance_image.png",
@@ -147,13 +140,6 @@ const playCards = [
     title: "Las Cestas",
     titleEn: "The baskets",
     cover: "/assets/img/band_image.png",
-    isLocked: true,
-  },
-  {
-    category: "play",
-    title: "Afirmaciones",
-    titleEn: "Affirmations",
-    cover: "/assets/img/card_play_image.png",
     isLocked: true,
   },
 ];
