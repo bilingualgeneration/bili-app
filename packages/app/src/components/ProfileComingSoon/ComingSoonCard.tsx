@@ -19,7 +19,10 @@ export const ComingSoonCard: FC<ComingSoonCardProps> = ({
   const { populateText } = useLanguage();
   const texts = populateText(text);
   return (
-    <div className="coming-soon-card" style={{ backgroundColor: cardColor }}>
+    <div
+      className="coming-soon-card content-card"
+      style={{ backgroundColor: cardColor }}
+    >
       <IonGrid>
         <IonRow>
           <IonCol
