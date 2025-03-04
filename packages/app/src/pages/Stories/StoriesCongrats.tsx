@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useStory } from "./StoryContext";
 //import { useTimeTracker } from "@/hooks/TimeTracker";
 
-import biliCharacter from "@/assets/img/bili_in_coat.png";
+import biliCharacter from "@/assets/icons/bili_character.svg";
 import StarImage from "@/assets/icons/small-star.svg";
 
 const englishCongratsText: { [key: number]: string } = {
