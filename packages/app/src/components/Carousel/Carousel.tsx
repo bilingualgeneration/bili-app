@@ -72,6 +72,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     const container = containerRef.current;
     // @ts-ignore
     const items = container.querySelectorAll(".content-card");
+    console.log(items);
 
     let nextItem = null;
     for (let i = 0; i < items.length; i++) {

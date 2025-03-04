@@ -1,14 +1,15 @@
 .coming-soon-card {
-  width: 43.9375rem;
-  height: 13.4375rem;
+  flex: 0 0 44rem;
+  height: 13.5rem;
   border-radius: 0.6875rem;
-  display: flex;
-  column-gap: 1.875rem;
   align-items: center;
   padding: 1.5rem;
-  margin: 1.5%;
 
   .subtitle {
     margin-top: 0.625rem;
   }
+}
+
+.coming-soon-card::after {
+  display: none;
 }
