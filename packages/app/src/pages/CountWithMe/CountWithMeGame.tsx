@@ -214,6 +214,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   //logic when the correct animal number is choosen
   useEffect(() => {
     if (isCorrectSelected) {
+      clearAudio();
       setShowFacts(true);
     }
   }, [isCorrectSelected]);
