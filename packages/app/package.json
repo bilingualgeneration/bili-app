@@ -2,7 +2,7 @@
   "name": "@bili/app",
   "packageManager": "yarn@4.0.1",
   "private": true,
-  "version": "1.0.6+2",
+  "version": "1.0.7+1",
   "type": "module",
   "scripts": {
     "build": "run-s build:development",
