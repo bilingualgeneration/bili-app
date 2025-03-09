@@ -25,7 +25,7 @@ import "./CountWithMe.scss";
 import { DialogueScreen } from "@/components/DialogueScreen";
 // svgs
 import StarImage from "@/assets/icons/small-star.svg";
-import biliCharacter from "@/assets/img/bili_in_coat.png";
+import biliCharacter from "@/assets/icons/bili_character.svg";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
 
@@ -116,7 +116,7 @@ export const CountWithMeCongrats: React.FC<{
   }, [count, language]);
 
   return (
-    <div className="padding-top-2">
+    <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
         buttonI18nKey={"countWithMe.keepGoing"}
