@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import {
   IonCard,
   IonCardContent,
@@ -120,12 +121,20 @@ export const RadioCard: React.FC<RadioCardProps> = ({
               <IonText>
                 {subTitle && (
                   <p
-                    className={`text-${subTitleFontSize} semibold ${subTitleColor}`}
+                    className={classnames(
+                      `text-${subTitleFontSize} semibold ${subTitleColor}`,
+                      { "ion-text-center": isTextCentered },
+                    )}
                   >
                     {subTitle as string}
                   </p>
                 )}
-                <p className={`text-${contentFontSize} ${contentColor}`}>
+                <p
+                  className={classnames(
+                    `text-${contentFontSize} ${contentColor}`,
+                    { "ion-text-center": isTextCentered },
+                  )}
+                >
                   {/* todo: don't force type cast */}
                   {content as string}
                 </p>

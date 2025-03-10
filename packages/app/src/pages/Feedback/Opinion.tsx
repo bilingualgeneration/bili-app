@@ -1,30 +1,36 @@
-// TODO: cleanup code
-// TODO: disable submit button after submitted
-
-import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { ExtendedRadio, ExtendedRadioOption } from "@/components/ExtendedRadio";
 import { I18nMessage } from "@/components/I18nMessage";
-import { RadioCard } from "@/components/RadioCard";
 import {
   IonButton,
   IonCard,
+  IonCardContent,
   IonCol,
   IonGrid,
   IonRow,
   IonText,
 } from "@ionic/react";
+import { RadioCard } from "@/components/RadioCard";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useCardSlider } from "@/contexts/CardSlider";
 import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
 import { useStudent } from "@/hooks/Student";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import "./Opinion.scss";
+
+import happy from "@/assets/img/feeling_happy.png";
+import calm from "@/assets/img/feeling_calm.png";
+import sad from "@/assets/img/feeling_sad.png";
+import terrible from "@/assets/img/feeling_terrible.png";
+import other from "@/assets/img/feeling_other.png";
 
 import audio_no_en from "@/assets/audio/FlowerCongrats/no_en.mp3";
 import audio_yes_en from "@/assets/audio/FlowerCongrats/yes.mp3";
@@ -60,15 +66,14 @@ const FeedbackSchema = z.object({
 });
 
 export const OpinionFeedback: React.FC = () => {
-  const { language, filterText } = useLanguage();
   const history = useHistory();
-  const { getText } = useI18n();
   const { addAudio, clearAudio } = useAudioManager();
-  const { stopTimer, startTimer } = useTimeTracker();
-  const { populateText } = useLanguage();
-  const { id: studentId } = useStudent();
   const { activity, cardClicks, isReady, packId, questions } = useCardSlider();
   const { info } = useClassroom();
+  const { language, filterText } = useLanguage();
+  const { stopTimer, startTimer } = useTimeTracker();
+  const { getText } = useI18n();
+  const { id: studentId } = useStudent();
   const [question, setQuestion] = useState<any>(null);
   const [questionId, setQuestionId] = useState<any>(null);
   const functions = getFunctions();
@@ -76,13 +81,6 @@ export const OpinionFeedback: React.FC = () => {
     functions,
     "student-feedback-create",
   );
-  const {
-    control,
-    formState: { isValid },
-    handleSubmit,
-  } = useForm<z.infer<typeof FeedbackSchema>>({
-    resolver: zodResolver(FeedbackSchema),
-  });
 
   useEffect(() => {
     if (isReady && question === null) {
@@ -91,8 +89,11 @@ export const OpinionFeedback: React.FC = () => {
       });
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-      const randomQuestionText = filterText(randomQuestion.question);
-      setQuestion(randomQuestionText);
+
+      const randomQuestionText = filterText(randomQuestion.question).filter(
+        (q: any) => q.audio,
+      );
+      setQuestion(randomQuestion);
       setQuestionId(randomQuestion.uuid);
       let audios: string[] = language
         .split(".")
@@ -107,87 +108,13 @@ export const OpinionFeedback: React.FC = () => {
     };
   }, []);
 
-  const yesOption: ExtendedRadioOption = {
-    component: (
-      <IonCol size="4">
-        <RadioCard
-          title={getText("common.yes", 1, "authed")}
-          subTitle={getText("common.yes", 2, "authed")}
-          titleColor="color-suelo"
-          subTitleColor="color-grey"
-          subTitleFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#FFF"
-          maxHeight="5.25rem"
-          onAudioPlay={() => {
-            const audio: string[] = language
-              .split(".")
-              .map((l: string) => audios["yes"][l]);
-            addAudio(audio);
-          }}
-        />
-      </IonCol>
-    ),
-    value: "yes",
-  };
-
-  const noOption: ExtendedRadioOption = {
-    component: (
-      <IonCol size="4">
-        <RadioCard
-          title={getText("common.no", 1, "authed")}
-          subTitle={getText("common.no", 2, "authed")}
-          titleColor="color-suelo"
-          subTitleColor="color-grey"
-          subTitleFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#FFF"
-          maxHeight="5.25rem"
-          onAudioPlay={() => {
-            // @ts-ignore
-            const audio: string[] = language
-              .split(".")
-              .map((l: string) => audios["no"][l]);
-            addAudio(audio);
-          }}
-        />
-      </IonCol>
-    ),
-    value: "no",
-  };
-  const otherOption: ExtendedRadioOption = {
-    component: (
-      <IonCol size="4">
-        <RadioCard
-          title={getText("common.dontKnow")}
-          subTitle={getText("common.dontKnow", 2)}
-          titleColor="color-suelo"
-          subTitleColor="color-grey"
-          subTitleFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor="#FFF"
-          maxHeight="5.25rem"
-          onAudioPlay={() => {
-            // @ts-ignore
-            const audio: string[] = language
-              .split(".")
-              .map((l: string) => audios["other"][l]);
-            addAudio(audio);
-          }}
-        />
-      </IonCol>
-    ),
-    value: "other",
-  };
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+  } = useForm<z.infer<typeof FeedbackSchema>>({
+    resolver: zodResolver(FeedbackSchema),
+  });
 
   const onSubmit = handleSubmit((data) => {
     sendFeedbackFunction({
@@ -205,90 +132,143 @@ export const OpinionFeedback: React.FC = () => {
     history.push(`/${activity}/congrats`);
   });
 
+  const generateOption = ({
+    audioKey,
+    backgroundColor,
+    i18nKey,
+    image,
+    value,
+  }: {
+    audioKey: string;
+    backgroundColor: string;
+    i18nKey: string;
+    image: any;
+    value: string;
+  }) => {
+    return {
+      component: (
+        <IonCol size="4">
+          <RadioCard
+            title={getText(i18nKey, 1, "authed")}
+            subTitle={getText(i18nKey, 2, "authed")}
+            titleColor="color-suelo"
+            subTitleColor="color-grey"
+            subTitleFontSize="lg"
+            icon={<img src={image} />}
+            iconBackgroundColor="transparent"
+            flexDirectionColumn={true}
+            isJustPicture={false}
+            isTextCentered={true}
+            backgroundColor={backgroundColor}
+            onAudioPlay={() => {
+              const audio: string[] = language
+                .split(".")
+                .map((l: string) => audios[audioKey][l]);
+              addAudio(audio);
+            }}
+          />
+        </IonCol>
+      ),
+      value: value,
+    };
+  };
+
+  const options = [
+    {
+      audioKey: "yes",
+      backgroundColor: "rgba(34, 190, 185, 1)",
+      i18nKey: "common.yes",
+      image: happy,
+      value: "yes",
+    },
+    {
+      audioKey: "no",
+      backgroundColor: "rgba(255, 87, 8, 1)",
+      i18nKey: "common.no",
+      image: sad,
+      value: "no",
+    },
+    {
+      audioKey: "other",
+      backgroundColor: "rgba(223, 211, 187, 1)",
+      i18nKey: "common.dontKnow",
+      image: terrible,
+      value: "other",
+    },
+  ];
+
+  // TODO: replace with loader
   if (question === null) {
     return <></>;
   }
 
+  const filteredQuestion = filterText(question.question);
   return (
-    <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
+    <div id="feedback-opinion-wrapper" className="margin-top-2">
+      <IonText className="ion-text-start">
+        <h2 className="text-3xl semibold color-suelo padding-left-2">
+          <I18nMessage id="common.whatYouThink" />
+        </h2>
+        <I18nMessage
+          id="common.whatYouThink"
+          level={2}
+          wrapper={(text: string) => (
+            <p className="text-2xl color-grey padding-left-2">{text}</p>
+          )}
+        />
+      </IonText>
       <IonGrid>
         <IonRow>
-          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
-          <IonCol>
-            <IonCard
-              style={{ textAlign: "center" }}
-              className="thoughts-questions-card drop-shadow"
-            >
-              <form action="">
-                <IonText className="ion-text-start">
-                  <h2 className="text-3xl semibold color-suelo padding-left-2">
-                    <I18nMessage id="common.whatYouThink" />
-                  </h2>
-                  <I18nMessage
-                    id="common.whatYouThink"
-                    level={2}
-                    wrapper={(text: string) => (
-                      <p className="text-3xl color-grey padding-left-2">
-                        {text}
-                      </p>
-                    )}
-                  />
+          <IonCol size="6">
+            <IonCard id="feedback-opinion-instructions-card">
+              <IonCardContent>
+                <IonText>
+                  <h1 className="text-2xl semibold color-suelo">
+                    {filteredQuestion[0].text}
+                  </h1>
+                  {filteredQuestion.length === 2 && (
+                    <p className="text-lg color-english">
+                      {filteredQuestion[1].text}
+                    </p>
+                  )}
                 </IonText>
-                <IonCard
-                  style={{ background: "#D6D3F0" }}
-                  className="padding-vertical-3 margin-left-2 margin-right-2"
-                >
-                  <IonText>
-                    <h1 className="text-3xl semibold color-suelo">
-                      {question[0].text}
-                    </h1>
-                    {question.length === 2 && (
-                      <p className="text-2xl color-grey">{question[1].text}</p>
-                    )}
-                  </IonText>
-                </IonCard>
-                <ExtendedRadio
-                  control={control}
-                  name="response"
-                  displayCardsInRow={true}
-                  isMaxWidthNeeded={false}
-                  maxWidth="25rem"
-                  options={[yesOption, noOption, otherOption]}
-                />
-                <IonButton
-                  data-testid="addclassroom-notification-method-continue-button"
-                  disabled={!isValid}
-                  shape="round"
-                  type="button"
-                  onClick={onSubmit}
-                >
-                  <IonText className=" padding-right-5 padding-left-5">
-                    <h2 className="text-3xl semibold color-base">
-                      <I18nMessage id="common.next" />
-                    </h2>
-
-                    <I18nMessage
-                      id="common.next"
-                      level={2}
-                      wrapper={(text: string) => (
-                        <p className="text-sm color-base">{text}</p>
-                      )}
-                    />
-                  </IonText>
-                </IonButton>
-              </form>
+              </IonCardContent>
             </IonCard>
           </IonCol>
-          <IonCol className="ion-hide-lg-down" size-lg="1"></IonCol>
+          <IonCol size="6">
+            <ExtendedRadio
+              control={control}
+              name="response"
+              displayCardsInRow={true}
+              isMaxWidthNeeded={false}
+              maxWidth="25rem"
+              options={options.map(generateOption)}
+            />
+          </IonCol>
         </IonRow>
       </IonGrid>
+      <div className="ion-text-center margin-top-2">
+        <IonButton
+          disabled={!isValid}
+          shape="round"
+          type="button"
+          onClick={onSubmit}
+        >
+          <IonText>
+            <h2 className="text-3xl semibold color-base padding-right-5 padding-left-5">
+              <I18nMessage id="common.next" />
+            </h2>
+
+            <I18nMessage
+              id="common.next"
+              level={2}
+              wrapper={(text: string) => (
+                <p className="text-sm color-base">{text}</p>
+              )}
+            />
+          </IonText>
+        </IonButton>
+      </div>
     </div>
   );
 };
-function addAudio(arg0: never[]) {
-  throw new Error("Function not implemented.");
-}
-
-function clearAudio() {
-  throw new Error("Function not implemented.");
-}
