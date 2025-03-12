@@ -343,18 +343,6 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
           >
             <img className="sound-icon" src={SpeakerIcon} />
           </IonButton>
-          <IonText>
-            <h1 className="text-3xl semibold color-suelo">
-              <I18nMessage id="common.read" />
-            </h1>
-            <I18nMessage
-              id="common.read"
-              level={2}
-              wrapper={(t: string) => (
-                <p className="text-lg color-english">{t}</p>
-              )}
-            />
-          </IonText>
         </div>
       </div>
     </>
