@@ -1,13 +1,14 @@
+import { CountWithMeCongrats } from "./CountWithMeCongrats";
+import { PageControl } from "@/components/PageControl";
+
 import { useProfile } from "@/hooks/Profile";
 import { IonButton, IonText } from "@ionic/react";
-import React, { useState, useEffect } from "react";
-import { CountWithMeCongrats } from "./CountWithMeCongrats";
+import { useState, useEffect } from "react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 //temporary audio files, should be chaged for count-with-me files oncel uploade
 import "./CountWithMe.scss";
 import { useHistory } from "react-router";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import { first } from "rxjs/operators";
 import { useLanguage } from "@/hooks/Language";
 
 interface FactsPageProps {
@@ -35,30 +36,11 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
   const ftesinc = factText.filter((f) => f.language === "es-inc")[0];
 
   useEffect(() => {
-    if (audioPlayed) {
-      if (
-        count + 1 === 3 ||
-        count + 1 === 6 ||
-        count + 1 === 9 ||
-        count + 1 === 12 ||
-        count + 1 == 15
-      ) {
-        setShowCongrats(true);
-      } else {
-        onKeepGoingClick();
-      }
-    }
-  }, [audioPlayed]);
-
-  useEffect(() => {
     return () => {
       clearAudio();
     };
   }, []);
   useEffect(() => {
-    onended.pipe(first()).subscribe(() => {
-      setAudioPlayed(true);
-    });
     let audios = [];
     switch (language) {
       case "en":
@@ -87,8 +69,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
 
   // Function to render the facts page for each animal
   return (
-    <>
-      <div className="padding-top-4"></div>
+    <div className="responsive-height-with-header">
       <div
         className="background-card"
         style={{
@@ -100,6 +81,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
           width: "80%",
           display: "flex",
           alignItems: "center",
+          position: "relative",
         }}
       >
         <IonText style={{ width: "50%" }}>
@@ -111,7 +93,27 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
             <p className="text-2xl color-english margin-top-2">{ften.text}</p>
           )}
         </IonText>
+        <PageControl
+          direction="forward"
+          onClick={() => {
+            if (
+              count + 1 === 3 ||
+              count + 1 === 6 ||
+              count + 1 === 9 ||
+              count + 1 === 12 ||
+              count + 1 == 15
+            ) {
+              setShowCongrats(true);
+            } else {
+              onKeepGoingClick();
+            }
+          }}
+          style={{
+            position: "absolute",
+            right: -30,
+          }}
+        />
       </div>
-    </>
+    </div>
   );
 };

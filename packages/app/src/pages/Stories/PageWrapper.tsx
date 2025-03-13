@@ -1,3 +1,5 @@
+// TODO: replace page controls with already existing PageControl component
+
 import classnames from "classnames";
 import { IonCol, IonGrid, IonRow, IonImg } from "@ionic/react";
 import { useStory } from "./StoryContext";
