@@ -1,15 +1,7 @@
-const LETTER_MAX_ROTATION = 15;
-const PIECE_HORIZONTAL_SPACER = 40;
-const PIECE_VERTICAL_SPACER = 10;
 export const MAX_HEIGHT = 450;
 const MAX_WIDTH = 940;
-const PIECE_TOP_OFFSET = 20;
-const PIECE_LEFT_OFFSET_MOBILE = 40;
-const PIECE_LEFT_OFFSET_DESKTOP = 60;
-const PIECE_HEIGHT = 90;
-const PIECE_WIDTH_MOBILE = 40;
-const PIECE_WIDTH_DESKTOP = 70;
 
+import { letterLookup } from "./letterLookup";
 import classnames from "classnames";
 import { DnDImage } from "./DnDImage";
 import { isPlatform } from "@ionic/react";
@@ -46,35 +38,7 @@ const colors = [
   "#6154d5",
 ];
 
-const charWidthGroups = {
-  thin: 0.3, // Thin letters (e.g., i, j, l)
-  average: 0.6, // Average letters (e.g., a, b, c, etc.)
-  wide: 0.9, // Wide letters (e.g., m, w)
-};
-
-export const estimateTextWidth = (text: string, fontSize = 110) => {
-  // Define which letters belong to which group
-  const thinLetters = new Set(["i", "j", "l", "t"]);
-  const wideLetters = new Set(["m", "w", "h", "b", "d"]);
-
-  let totalWidth = 0;
-
-  for (const char of text.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")) {
-    // Determine the character's group
-    if (thinLetters.has(char)) {
-      totalWidth += charWidthGroups.thin * fontSize;
-    } else if (wideLetters.has(char)) {
-      totalWidth += charWidthGroups.wide * fontSize;
-    } else {
-      // Default to average width for all other lowercase letters
-      totalWidth += charWidthGroups.average * fontSize;
-    }
-  }
-
-  return totalWidth;
-};
-
-export const hashLetter = (text: string) => {
+export const hashSegment = (text: string) => {
   let hash = 0;
   for (let index = 0; index < text.length; index++) {
     hash += text.charCodeAt(index);
@@ -168,14 +132,85 @@ const Hydrator: React.FC<DnDProps> = ({
   const { screenType } = useScreenSize();
 
   useEffect(() => {
+    /*
     const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
+    console.log(piecesExpanded);
+    */
     const piecesExpanded = propsPieces
       .map(({ count, ...p }) => Array(count).fill(p))
       .flat();
     shuffle(piecesExpanded);
-    let tempTotalTargets = 0;
-    let targetTotalWidth = 0;
-    let targetTotalHeight = 0;
+
+    const targetInstances = target.split(" ").map((word) =>
+      Object.fromEntries(
+        word.split("-").map((segment, index) => {
+          const letters = segment.split("");
+          const width = letters.reduce(
+            (total, l) => letterLookup[l].width + total,
+            0,
+          );
+          const height = letters.reduce(
+            (total, l) => Math.max(letterLookup[l].height, total),
+            0,
+          );
+          return [
+            segment + index,
+            {
+              dropped: false,
+              text: segment,
+            },
+          ];
+        }),
+      ),
+    );
+
+    setTargetPieces(targetInstances);
+    setTotalTargets(
+      targetInstances.reduce(
+        (total, word) => total + Object.keys(word).length,
+        0,
+      ),
+    );
+
+    let left = 0;
+
+    const pieceInstances = Object.fromEntries(
+      piecesExpanded.map((p, index) => {
+        /*
+          top: targetImage ? topPosition : 20,
+          rotation:
+            Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) -
+               LETTER_MAX_ROTATION,
+        };
+	 */
+        const id = p.text + index;
+        const width = p.text
+          .split("")
+          .reduce((total: number, t: any) => letterLookup[t].width + total, 0);
+        const oldLeft = left;
+        left += width;
+        return [
+          id,
+          {
+            audio_on_drag: p.audio_on_drag,
+            audio_on_drop: p.audio_on_drop,
+            dropped: false,
+            id,
+            left: oldLeft,
+            top: 0,
+            rotation: 0,
+            text: p.text,
+          },
+        ];
+      }),
+    );
+
+    setPieces(pieceInstances);
+    setAudioOnComplete(audioOnComplete);
+    setOnDrop(() => onDrop);
+    setPiecesDropped(0);
+
+    /*
     const targetPieceInstances = target.split(" ").map((word) =>
       Object.fromEntries(
         word.split("-").map((t: string, index: number) => {
@@ -184,7 +219,6 @@ const Hydrator: React.FC<DnDProps> = ({
           if (!t.endsWith("*")) {
             tempTotalTargets++;
           }
-          console.log(screenType);
           targetTotalWidth +=
             screenType === "mobile" || screenType === "tablet"
               ? PIECE_WIDTH_MOBILE
@@ -216,37 +250,8 @@ const Hydrator: React.FC<DnDProps> = ({
     const totalPieces = piecesExpanded.length;
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map((p: any, index: number) => {
-        console.log(p.text.length);
-        const id: string = index.toString();
-        const newP = {
-          ...p,
-          dropped: false,
-          id,
-          left: leftPosition,
-          top: targetImage ? topPosition : 20,
-          rotation:
-            Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) -
-            LETTER_MAX_ROTATION,
-        };
-        topPosition += PIECE_HEIGHT + PIECE_VERTICAL_SPACER;
-        const estimatedWidth = estimateTextWidth(p.text);
-        if (targetImage) {
-          if (index === Math.floor(totalPieces / 2) - 1) {
-            leftPosition = Math.floor(width / 2 + targetTotalWidth / 2);
-            topPosition = PIECE_TOP_OFFSET;
-          }
-        } else {
-          leftPosition += estimatedWidth;
-        }
-        return [id, newP];
-      }),
     );
-    setAudioOnComplete(audioOnComplete);
-    setOnDrop(() => onDrop);
-    setTargetPieces(targetPieceInstances);
-    setPieces(pieceInstances);
-    setTotalTargets(tempTotalTargets);
-    setPiecesDropped(0);
+    */
   }, [propsPieces, target, setPieces]);
   return <Container targetImage={targetImage} gameId={gameId} />;
 };

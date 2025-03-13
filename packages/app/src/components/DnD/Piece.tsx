@@ -1,6 +1,7 @@
 import audio_correct from "@/assets/audio/correct.mp3";
 import { DragSourceMonitor, useDrag } from "react-dnd";
-import { hashLetter } from "./DnD";
+import { hashSegment } from "./DnD";
+import { letterLookup } from "./letterLookup";
 import { useEffect, useState } from "react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useDnD } from "@/hooks/DnD";
@@ -30,7 +31,7 @@ export const Piece: React.FC<PieceProps> = ({
 }) => {
   const { addAudio } = useAudioManager();
   const [onDragAudioPlaying, setOnDragAudioPlaying] = useState(false);
-  const color = hashLetter(text);
+  const color = hashSegment(text);
   const rotate = `${rotation}deg`;
   const audioOnDrop = audio_on_drop.url;
   const [{ isDragging }, drag] = useDrag(

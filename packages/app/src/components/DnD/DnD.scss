@@ -7,10 +7,6 @@
   width: 100%;
   text-align: center;
 
-  img {
-    display: none;
-  }
-
   * {
     font-size: 6.25rem;
     font-weight: bold;
@@ -18,7 +14,7 @@
 
   .letter {
     font-family: "Tobi";
-
+    cursor: pointer;
     &.dnd-incorrect {
       text-shadow:
         0 0.125rem 0.3125rem red,
@@ -29,7 +25,7 @@
   }
 
   .dnd-image {
-    height: 40vh !important;
+    height: 40rem !important;
     max-height: 20rem !important;
     width: auto;
   }
@@ -56,15 +52,19 @@
   }
 
   .drop-target {
+    /*
     &:not(:last-child) {
       margin-right: 0.75rem;
     }
+      */
 
     display: inline-block;
 
+    /*
     &.leftMargin {
       margin-left: 6.25rem;
     }
+    */
 
     &:not(.dropped) {
       color: #999999 !important;

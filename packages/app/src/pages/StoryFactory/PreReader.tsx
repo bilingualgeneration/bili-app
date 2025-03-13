@@ -1,29 +1,62 @@
 // todo: refactor so we don't have to pull more than once
+import { ActivityProvider } from "@/contexts/ActivityContext";
 
 import { DnD } from "@/components/DnD";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useState } from "react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { DnDProvider, useDnD } from "@/hooks/DnD";
-import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import {
+  FirestoreCollectionProvider,
+  useFirestoreCollection,
+} from "@/hooks/FirestoreCollection";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/hooks/Language";
+import { useParams } from "react-router-dom";
 import { first } from "rxjs/operators";
 import { GameData, useActivity } from "@/contexts/ActivityContext";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
 
-export const StoryFactoryLevel1: React.FC = () => {
+export const StoryFactoryPreReader: React.FC = () => {
+  const { languageNormalized } = useLanguage();
+  console.log(languageNormalized);
   return (
-    <DnDProvider>
-      <WrappedSF1 />
-    </DnDProvider>
+    <FirestoreCollectionProvider
+      collection="dn-d"
+      filters={[
+        ["story_factory", "==", "pre-reader"],
+        ["language", "array-contains", languageNormalized],
+      ]}
+    >
+      <Loader />
+    </FirestoreCollectionProvider>
   );
 };
 
-const WrappedSF1: React.FC = () => {
+const Loader: React.FC = () => {
+  const { status, data } = useFirestoreCollection();
+
+  if (status === "loading") {
+    return <></>;
+  }
+
+  if (status === "error") {
+    return <>error</>;
+  }
+  return (
+    <ActivityProvider>
+      <DnDProvider>
+        <Game />
+      </DnDProvider>
+    </ActivityProvider>
+  );
+};
+
+const Game: React.FC = () => {
   const dndWrapperRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useFirestoreDoc();
-  const games = data?.["dnd-game"] || [];
+  const { data } = useFirestoreCollection();
+  const games = data;
   const { language, setIsVisible } = useLanguageToggle();
   const {
     handleAttempt,
@@ -38,7 +71,7 @@ const WrappedSF1: React.FC = () => {
   useEffect(() => {
     startTimer();
     setActivityState({
-      type: "story-factory-level-1",
+      type: "story-factory-prereader",
       id: data.uuid,
     });
 
@@ -104,7 +137,7 @@ const WrappedSF1: React.FC = () => {
 
   return (
     <>
-      <div ref={dndWrapperRef} style={{ height: "100%" }}>
+      <div className="responsive-height-with-header" ref={dndWrapperRef}>
         {dndWidth > 0 && (
           <DnD
             gameId={filteredGames[pageNumber].handle}
@@ -114,7 +147,7 @@ const WrappedSF1: React.FC = () => {
                 : null
             }
             width={dndWidth}
-            targetImage={filteredGames[pageNumber].targetImage}
+            targetImage={filteredGames[pageNumber].target_image}
             target={filteredGames[pageNumber].target}
             pieces={filteredGames[pageNumber].pieces}
           />
