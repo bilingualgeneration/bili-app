@@ -28,7 +28,6 @@ import { Stories, StoriesLandingPage, StoryBuilder } from "@/pages/Stories";
 import {
   StoryFactoryCongrats,
   StoryFactoryIntro,
-  StoryFactoryPlay,
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
@@ -122,11 +121,6 @@ export const StudentRoutes: React.FC = () => {
           exact
           path="/story-factory-game/select"
           component={StoryFactorySelect}
-        />
-        <Route
-          exact
-          path="/story-factory-game/play/:pack_id"
-          component={StoryFactoryPlay}
         />
         <Route
           exact

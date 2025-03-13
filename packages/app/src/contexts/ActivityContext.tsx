@@ -161,7 +161,6 @@ export const ActivityProvider: React.FC<React.PropsWithChildren> = ({
       language,
     ],
   );
-
   return (
     <ActivityContext.Provider
       value={{

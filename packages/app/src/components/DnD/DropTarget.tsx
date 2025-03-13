@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { hashLetter } from "./DnD";
+import { hashSegment } from "./DnD";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useEffect } from "react";
 import { useDnD } from "@/hooks/DnD";
@@ -123,7 +123,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
           },
           classes,
         )}
-        style={{ color: hashLetter(text) }}
+        style={{ color: hashSegment(text) }}
         ref={drop}
       >
         {isBlank && !hasDropped ? text.replace(/./g, "_") : text}

@@ -54,7 +54,7 @@ import {
   StoryFactoryCongrats,
   StoryFactoryEarlyReader,
   StoryFactoryIntro,
-  StoryFactoryPlay,
+  StoryFactoryPreReader,
   StoryFactorySelect,
 } from "@/pages/StoryFactory";
 import { StudentDashboard } from "@/pages/StudentDashboard";
@@ -219,6 +219,11 @@ export const Router: React.FC = () => {
           <Route exact path="/story-factory/play/early-reader">
             <StudentLayout>
               <StoryFactoryEarlyReader />
+            </StudentLayout>
+          </Route>
+          <Route exact path="/story-factory/play/pre-reader">
+            <StudentLayout>
+              <StoryFactoryPreReader />
             </StudentLayout>
           </Route>
           <Route exact path="/story-factory/congrats">
