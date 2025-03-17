@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { useProfile } from "@/hooks/Profile";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useTimeTracker } from "@/hooks/TimeTracker";
-import { useLanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { DialogueScreen } from "@/components/DialogueScreen";
 import StarImage from "@/assets/icons/small-star.svg";
@@ -14,16 +14,14 @@ import { first } from "rxjs";
 import { useHistory } from "react-router";
 import { I18nMessage } from "@/components/I18nMessage";
 
-export const StoryFactoryCongrats: React.FC<{
-  setShowCongrats: any;
-}> = ({ setShowCongrats }) => {
+export const StoryFactoryCongrats: React.FC = () => {
   const {
     profile: { isImmersive },
   } = useProfile();
   const [audios, setAudios] = useState<string[]>([]);
   //const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
-  const { language } = useLanguageToggle();
+  const { language } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();
   const history = useHistory();
@@ -74,7 +72,7 @@ export const StoryFactoryCongrats: React.FC<{
         characterImage={biliCharacter}
         onButtonClick={() => {
           startTimer();
-          setShowCongrats(false);
+          history.push("/story-factory/select");
         }}
       >
         <IonText class="ion-text-center">

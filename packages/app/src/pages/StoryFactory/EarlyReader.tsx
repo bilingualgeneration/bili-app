@@ -143,7 +143,7 @@ export const StoryFactoryEarlyReader: React.FC = () => {
   }
 
   if (showCongrats) {
-    return <StoryFactoryCongrats setShowCongrats={setShowCongrats} />;
+    return <StoryFactoryCongrats />;
   }
 
   if (status === "loading") {
