@@ -41,18 +41,9 @@ export const IntruderCongrats: React.FC<{
     1: "0-24%",
   };
 
-  const englishCongratsText: { [key: number]: string } = {
-    5: "Congrats!",
-    4: "Amazing!",
-    3: "I know you could do it! Way to go!",
-    2: "You're on the right track, keep going!",
-    1: "Good effort! Keep trying!",
-  };
-
   // Check if stars are valid and set fallback if necessary
   const safeStars = stars ?? 1;
   const percentageText = percentageRanges[safeStars];
-  const congratsTextEn = englishCongratsText[safeStars];
 
   useEffect(() => {
     handleRecordAttempt(stopTimer());

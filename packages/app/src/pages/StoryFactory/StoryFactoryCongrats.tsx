@@ -12,13 +12,16 @@ import StarImage from "@/assets/icons/small-star.svg";
 import "./StoryFactory.scss";
 import { first } from "rxjs";
 import { useHistory } from "react-router";
+import { I18nMessage } from "@/components/I18nMessage";
 
-export const StoryFactoryCongrats: React.FC = () => {
+export const StoryFactoryCongrats: React.FC<{
+  setShowCongrats: any;
+}> = ({ setShowCongrats }) => {
   const {
     profile: { isImmersive },
   } = useProfile();
   const [audios, setAudios] = useState<string[]>([]);
-  const { handleRecordAttempt, stars } = useActivity();
+  //const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
   const { language } = useLanguageToggle();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
@@ -33,75 +36,60 @@ export const StoryFactoryCongrats: React.FC = () => {
     1: "0-24%",
   };
 
-  const englishCongratsText: { [key: number]: string } = {
-    5: "Congrats!",
-    4: "Amazing!",
-    3: "I know you could do it! Way to go!",
-    2: "You're on the right track, keep going!",
-    1: "Good effort! Keep trying!",
-  };
-
   // Check if stars are valid and set fallback if necessary
-  const safeStars = stars || 1;
+  const safeStars = 1;
   const percentageText = percentageRanges[safeStars];
-  const congratsTextEn = englishCongratsText[safeStars];
 
-  useEffect(() => {
-    handleRecordAttempt(stopTimer());
+  {
+    /* Commented out until ActivityContext is implemented */
+  }
+  // useEffect(() => {
+  //   handleRecordAttempt(stopTimer());
 
-    let newAudios: string[] = [];
+  //   let newAudios: string[] = [];
 
-    //TODO:implement later, when we have the audio files
+  //   //TODO:implement later, when we have the audio files
 
-    if (language === "es" || language === "esen") {
-      newAudios.push();
-    }
-    if (language === "en" || language === "esen") {
-      newAudios.push();
-    }
+  //   if (language === "es" || language === "es.en") {
+  //     newAudios.push();
+  //   }
+  //   if (language === "en" || language === "es.en") {
+  //     newAudios.push();
+  //   }
 
-    setAudios(newAudios);
+  //   setAudios(newAudios);
 
-    onended.pipe(first()).subscribe(() => {
-      setAudioPlayed(true);
-    });
+  //   onended.pipe(first()).subscribe(() => {
+  //     setAudioPlayed(true);
+  //   });
 
-    addAudio(newAudios);
-  }, [language]);
-
-  const button_es = "¡Sigue adelante!";
-  const button_en = "Keep going!";
+  //   addAudio(newAudios);
+  // }, [language]);
 
   return (
-    <div className="padding-top-2">
+    <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
-        buttonTextPrimary={language === "en" ? button_en : button_es}
-        buttonTextSecondary={language === "esen" ? button_en : ""}
+        buttonI18nKey={"intruder.keepGoing"}
         characterImage={biliCharacter}
         onButtonClick={() => {
           startTimer();
-          history.push("/story-factory-game/select");
+          setShowCongrats(false);
         }}
       >
         <IonText class="ion-text-center">
-          {language.startsWith("es") && (
-            <>
-              <h1 className="text-5xl color-suelo">
-                <FormattedMessage id={`common.congrats.title.${stars}`} />
-              </h1>
-            </>
-          )}
-          {language === "en" && (
-            <>
-              <h1 className="text-5xl color-suelo">{congratsTextEn}</h1>
-            </>
-          )}
-          {language === "esen" && (
-            <>
-              <h2 className="text-4xl color-english">{congratsTextEn}</h2>
-            </>
-          )}
+          <h1 className="text-5xl color-suelo">
+            <I18nMessage id={`common.congrats.title.${safeStars}`} />
+          </h1>
+
+          <I18nMessage
+            id={`common.congrats.title.${safeStars}`}
+            level={2}
+            wrapper={(text: string) => (
+              <h2 className="text-4xl color-english">{text}</h2>
+            )}
+          />
+
           <div className="stars-container">
             {[...Array(safeStars)].map((_, index) => (
               <img
@@ -112,7 +100,7 @@ export const StoryFactoryCongrats: React.FC = () => {
               />
             ))}
           </div>
-          <h1 className="text-6xl color-suelo">{percentageText}</h1>
+          {/* <h1 className="text-6xl color-suelo">{percentageText}</h1> */}
         </IonText>
       </DialogueScreen>
     </div>
