@@ -36,4 +36,9 @@
   .margin-right-#{$margin} {
     margin-right: #{$margin}rem !important;
   }
+
+  .margin-horizontal-#{$margin} {
+    margin-left: #{$margin}rem !important;
+    margin-right: #{$margin}rem !important;
+  }
 }
