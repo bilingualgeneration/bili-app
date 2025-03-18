@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { useLanguage } from "@/hooks/Language";
+import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useParams } from "react-router";
 import { useStory } from "./StoryContext";
 
@@ -49,6 +50,10 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     setVocabLookup,
   } = useStory();
   const { languageNormalized } = useLanguage();
+  const {
+    isVisible: isLanguageToggleVisible,
+    setIsVisible: setIsLanguageToggleVisible,
+  } = useLanguageToggle();
   const history = useHistory();
   const { setGamesData, setActivityState } = useActivity();
   const { data } = useFirestoreDoc();
@@ -188,6 +193,10 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     setPages(payload);
     setPageNumber(0);
     setReady(true);
+
+    return () => {
+      setIsLanguageToggleVisible(true);
+    };
   }, []);
   const noLanguageAvailable =
     ready &&
@@ -203,9 +212,27 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
     return <></>;
   }
 
+  const currentPage = pages[pageNumber];
+
+  if (
+    (currentPage.id === "title card" ||
+      currentPage.id === "key vocab" ||
+      currentPage.id === "congrats" ||
+      currentPage.id.startsWith("story page")) &&
+    !isLanguageToggleVisible
+  ) {
+    setIsLanguageToggleVisible(true);
+  }
+  if (
+    (currentPage.id.startsWith("dnd") || currentPage.id.startsWith("mcg")) &&
+    isLanguageToggleVisible
+  ) {
+    setIsLanguageToggleVisible(false);
+  }
+
   return (
     <div style={{ marginLeft: 45, marginRight: 45, width: "100%" }}>
-      {pages[pageNumber].component}
+      {currentPage.component}
     </div>
   );
 };
