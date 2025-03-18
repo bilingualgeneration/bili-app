@@ -331,20 +331,20 @@ export const StudentDashboard: React.FC = () => {
         {/* wellness */}
         <div className="other-story-cards">
           <IonText>
-            {/*<Link to="/wellness" className="no-text-decoration">*/}
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <I18nMessage id="common.wellness" />
-            </h1>
-            <I18nMessage
-              id={"common.wellness"}
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-english carousel-header-margin">
-                  {text}
-                </p>
-              )}
-            />
-            {/*</Link>*/}
+            <Link to="/wellness" className="no-text-decoration">
+              <h1 className="text-5xl color-suelo carousel-header-margin">
+                <I18nMessage id="common.wellness" />
+              </h1>
+              <I18nMessage
+                id={"common.wellness"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
+            </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={"17rem"}>
@@ -362,20 +362,20 @@ export const StudentDashboard: React.FC = () => {
         {/* play */}
         <div className="other-story-cards">
           <IonText>
-            {/*<Link to="/play" className="no-text-decoration">*/}
-            <h1 className="text-5xl color-suelo carousel-header-margin">
-              <I18nMessage id="common.play" />
-            </h1>
-            <I18nMessage
-              id={"common.play"}
-              level={2}
-              wrapper={(text: string) => (
-                <p className="text-3xl color-english carousel-header-margin">
-                  {text}
-                </p>
-              )}
-            />
-            {/*</Link>*/}
+            <Link to="/play" className="no-text-decoration">
+              <h1 className="text-5xl color-suelo carousel-header-margin">
+                <I18nMessage id="common.play" />
+              </h1>
+              <I18nMessage
+                id={"common.play"}
+                level={2}
+                wrapper={(text: string) => (
+                  <p className="text-3xl color-english carousel-header-margin">
+                    {text}
+                  </p>
+                )}
+              />
+            </Link>
           </IonText>
           <div className="margin-top-2 margin-bottom-3">
             <Carousel height={"17rem"}>
