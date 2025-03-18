@@ -73,7 +73,7 @@ export const StoryFactoryCongrats: React.FC = () => {
   const button_en = "Keep going!";
 
   return (
-    <div className="padding-top-2">
+    <div className="responsive-height-with-header">
       <DialogueScreen
         audios={audios}
         buttonTextPrimary={language === "en" ? button_en : button_es}

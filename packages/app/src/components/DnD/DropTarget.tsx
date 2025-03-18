@@ -54,7 +54,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
           }
           let audio = [audio_correct, item.audioOnDrop];
           if (piecesDropped >= totalTargets - 1) {
-            audio.push(audioOnComplete.url);
+            audio.push(audioOnComplete);
           }
           addAudio(audio);
           setPieces(
