@@ -350,23 +350,6 @@ export const StoryFactoryEarlyReader: React.FC = () => {
               </IonButton>
             </IonCol>
           </IonRow>
-
-          <IonRow>
-            <IonCol className="ion-no-padding ion-text-center">
-              <IonText>
-                <h1 className="text-3xl semibold color-suelo">
-                  <FormattedMessage
-                    id="storyFactory.read"
-                    defaultMessage="Read"
-                    description="Story Factory volume/play button that says 'Read'"
-                  />
-                </h1>
-                {language === "esen" && (
-                  <p className="text-lg color-english">Read</p>
-                )}
-              </IonText>
-            </IonCol>
-          </IonRow>
         </IonGrid>
       </div>
     </>
