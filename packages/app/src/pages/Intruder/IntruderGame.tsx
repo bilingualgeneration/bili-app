@@ -85,9 +85,10 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
-  const { language } = useLanguage();
+  //const { language } = useLanguage();
   const { addAudio, clearAudio } = useAudioManager();
   const { populateText } = useLanguage();
+  const { language, setIsVisible } = useLanguageToggle();
   const {
     handleAttempt,
     handleRecordAttempt,
@@ -172,6 +173,12 @@ export const IntruderGame: React.FC<IntruderGameProps> = ({ game: data }) => {
     setCurrentIndex(0);
   }, [data]);
 
+  useEffect(() => {
+    setIsVisible(false);
+    return () => {
+      setIsVisible(true);
+    };
+  });
   const goToNextWordGroup = async () => {
     // Check if the current index is at the last element of the word_group array
     if (currentIndex >= data.word_group.length - 1) {
