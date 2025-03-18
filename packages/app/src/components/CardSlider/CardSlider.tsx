@@ -78,8 +78,9 @@ export const CardSlider: React.FC<CardSliderProps> = ({
       setCardClicks(cardClicks + 1);
       const newCardClicks = cardClicks + 1;
       setCardClicks(newCardClicks);
-      if (newCardClicks % 5 === 0) {
-        setTimesShownFeedback(timesShownFeedback + 1);
+      //      if (newCardClicks % 5 === 0) {
+      if (newCardClicks % 1 === 0) {
+        //setTimesShownFeedback(timesShownFeedback + 1);
         onended.pipe(first()).subscribe(() => {
           history.push(destinations[timesShownFeedback % destinations.length]);
         });

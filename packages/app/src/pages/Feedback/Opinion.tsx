@@ -217,7 +217,7 @@ export const OpinionFeedback: React.FC = () => {
           )}
         />
       </IonText>
-      <IonGrid>
+      <IonGrid className="margin-horizontal-2">
         <IonRow>
           <IonCol size="6">
             <IonCard id="feedback-opinion-instructions-card">

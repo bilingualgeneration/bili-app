@@ -99,13 +99,15 @@ export const RadioCard: React.FC<RadioCardProps> = ({
               {badge}
             </div>
           )}
-
-          <IonCardHeader class="custom-ion-header">
-            <IonCardTitle>
+          <IonCardContent>
+            <div>
               <IonText>
                 {/* todo: don't force type cast */}
                 <p
-                  className={`text-${titleFontSize} semibold ${titleColor}`}
+                  className={classnames(
+                    `text-${titleFontSize} semibold ${titleColor}`,
+                    { "ion-text-center": isTextCentered },
+                  )}
                   style={{
                     whiteSpace: "nowrap", // Prevent wrapping
                     overflow: "hidden",
@@ -113,12 +115,6 @@ export const RadioCard: React.FC<RadioCardProps> = ({
                 >
                   {title as string}
                 </p>
-              </IonText>
-            </IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent>
-            <div>
-              <IonText>
                 {subTitle && (
                   <p
                     className={classnames(
@@ -129,15 +125,17 @@ export const RadioCard: React.FC<RadioCardProps> = ({
                     {subTitle as string}
                   </p>
                 )}
-                <p
-                  className={classnames(
-                    `text-${contentFontSize} ${contentColor}`,
-                    { "ion-text-center": isTextCentered },
-                  )}
-                >
-                  {/* todo: don't force type cast */}
-                  {content as string}
-                </p>
+                {content && (
+                  <p
+                    className={classnames(
+                      `text-${contentFontSize} ${contentColor}`,
+                      { "ion-text-center": isTextCentered },
+                    )}
+                  >
+                    {/* todo: don't force type cast */}
+                    {content as string}
+                  </p>
+                )}
               </IonText>
             </div>
           </IonCardContent>
