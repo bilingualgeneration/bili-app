@@ -132,6 +132,32 @@ export const OpinionFeedback: React.FC = () => {
     history.push(`/${activity}/congrats`);
   });
 
+  const OpinionCard: React.FC<{
+    title: string;
+    subTitle?: string;
+    icon?: React.ReactNode;
+    backgroundColor: string;
+    onAudioPlay?: () => void;
+  }> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
+    return (
+      <IonCard
+        className="opinion-card"
+        style={{ backgroundColor }}
+        onClick={onAudioPlay}
+      >
+        <div className="opinion-card-inner">
+          {icon && <div className="icon-container">{icon}</div>}
+          <IonCardContent>
+            <IonText>
+              <p className="title">{title}</p>
+              {subTitle && <p className="sub-title">{subTitle}</p>}
+            </IonText>
+          </IonCardContent>
+        </div>
+      </IonCard>
+    );
+  };
+
   const generateOption = ({
     audioKey,
     backgroundColor,
@@ -148,17 +174,10 @@ export const OpinionFeedback: React.FC = () => {
     return {
       component: (
         <IonCol size="4">
-          <RadioCard
-            title={getText(i18nKey, 1, "authed")}
-            subTitle={getText(i18nKey, 2, "authed")}
-            titleColor="color-suelo"
-            subTitleColor="color-grey"
-            subTitleFontSize="lg"
+          <OpinionCard
+            title={getText(i18nKey, 1, "authed") ?? ""}
+            subTitle={getText(i18nKey, 2, "authed") ?? ""}
             icon={<img src={image} />}
-            iconBackgroundColor="transparent"
-            flexDirectionColumn={true}
-            isJustPicture={false}
-            isTextCentered={true}
             backgroundColor={backgroundColor}
             onAudioPlay={() => {
               const audio: string[] = language
