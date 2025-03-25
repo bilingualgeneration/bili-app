@@ -12,14 +12,23 @@
       }
     }
   }
-  .radio-card {
+
+  > ion-grid {
+    --ion-grid-column-padding: 0px;
+  }
+
+  .opinion-card {
     height: 100%;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     .oval-element {
       width: unset;
       height: unset;
     }
+  }
+
+  .opinion-card-inner {
+    text-align: center;
   }
 }
 

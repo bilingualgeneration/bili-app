@@ -90,9 +90,15 @@ export const OpinionFeedback: React.FC = () => {
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
 
+      console.log("randomQuestion :", randomQuestion);
+
+      const processedQuestion = filterText(randomQuestion.question);
+      console.log("Processed question from filterText:", processedQuestion);
+
       const randomQuestionText = filterText(randomQuestion.question).filter(
         (q: any) => q.audio,
       );
+
       setQuestion(randomQuestion);
       setQuestionId(randomQuestion.uuid);
       let audios: string[] = language
@@ -141,7 +147,7 @@ export const OpinionFeedback: React.FC = () => {
   }> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
     return (
       <IonCard
-        className="opinion-card"
+        className="ion-no-padding opinion-card"
         style={{ backgroundColor }}
         onClick={onAudioPlay}
       >
@@ -149,8 +155,10 @@ export const OpinionFeedback: React.FC = () => {
           {icon && <div className="icon-container">{icon}</div>}
           <IonCardContent>
             <IonText>
-              <p className="title">{title}</p>
-              {subTitle && <p className="sub-title">{subTitle}</p>}
+              <p className="title color-suelo text-2xl semibold">{title}</p>
+              {subTitle && (
+                <p className="sub-title color-english text-xl">{subTitle}</p>
+              )}
             </IonText>
           </IonCardContent>
         </div>
@@ -223,30 +231,33 @@ export const OpinionFeedback: React.FC = () => {
 
   const filteredQuestion = filterText(question.question);
   return (
-    <div id="feedback-opinion-wrapper" className="margin-top-2">
-      <IonText className="ion-text-start">
-        <h2 className="text-3xl semibold color-suelo padding-left-2">
+    <div
+      id="feedback-opinion-wrapper"
+      className="margin-top-2 margin-horizontal-5"
+    >
+      <IonText className="ion-text-start ">
+        <h2 className="text-5xl semibold color-suelo padding-left-2">
           <I18nMessage id="common.whatYouThink" />
         </h2>
         <I18nMessage
           id="common.whatYouThink"
           level={2}
           wrapper={(text: string) => (
-            <p className="text-2xl color-grey padding-left-2">{text}</p>
+            <p className="text-3xl color-grey padding-left-2">{text}</p>
           )}
         />
       </IonText>
-      <IonGrid className="margin-horizontal-2">
+      <IonGrid className="">
         <IonRow>
-          <IonCol size="6">
+          <IonCol size="5">
             <IonCard id="feedback-opinion-instructions-card">
               <IonCardContent>
                 <IonText>
-                  <h1 className="text-2xl semibold color-suelo">
+                  <h1 className="text-3xl semibold color-suelo">
                     {filteredQuestion[0].text}
                   </h1>
                   {filteredQuestion.length === 2 && (
-                    <p className="text-lg color-english">
+                    <p className="text-2xl color-english">
                       {filteredQuestion[1].text}
                     </p>
                   )}
@@ -254,7 +265,7 @@ export const OpinionFeedback: React.FC = () => {
               </IonCardContent>
             </IonCard>
           </IonCol>
-          <IonCol size="6">
+          <IonCol size="7">
             <ExtendedRadio
               control={control}
               name="response"
