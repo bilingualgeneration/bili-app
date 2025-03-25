@@ -93,6 +93,7 @@ export const OpinionFeedback: React.FC = () => {
       const randomQuestionText = filterText(randomQuestion.question).filter(
         (q: any) => q.audio,
       );
+
       setQuestion(randomQuestion);
       setQuestionId(randomQuestion.uuid);
       let audios: string[] = language
@@ -132,6 +133,34 @@ export const OpinionFeedback: React.FC = () => {
     history.push(`/${activity}/congrats`);
   });
 
+  const OpinionCard: React.FC<{
+    title: string;
+    subTitle?: string;
+    icon?: React.ReactNode;
+    backgroundColor: string;
+    onAudioPlay?: () => void;
+  }> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
+    return (
+      <IonCard
+        className="ion-no-padding opinion-card"
+        style={{ backgroundColor }}
+        onClick={onAudioPlay}
+      >
+        <div className="opinion-card-inner">
+          {icon && <div className="icon-container">{icon}</div>}
+          <IonCardContent>
+            <IonText>
+              <p className="title color-suelo text-2xl semibold">{title}</p>
+              {subTitle && (
+                <p className="sub-title color-english text-xl">{subTitle}</p>
+              )}
+            </IonText>
+          </IonCardContent>
+        </div>
+      </IonCard>
+    );
+  };
+
   const generateOption = ({
     audioKey,
     backgroundColor,
@@ -148,17 +177,10 @@ export const OpinionFeedback: React.FC = () => {
     return {
       component: (
         <IonCol size="4">
-          <RadioCard
-            title={getText(i18nKey, 1, "authed")}
-            subTitle={getText(i18nKey, 2, "authed")}
-            titleColor="color-suelo"
-            subTitleColor="color-grey"
-            subTitleFontSize="lg"
+          <OpinionCard
+            title={getText(i18nKey, 1, "authed") ?? ""}
+            subTitle={getText(i18nKey, 2, "authed") ?? ""}
             icon={<img src={image} />}
-            iconBackgroundColor="transparent"
-            flexDirectionColumn={true}
-            isJustPicture={false}
-            isTextCentered={true}
             backgroundColor={backgroundColor}
             onAudioPlay={() => {
               const audio: string[] = language
@@ -204,30 +226,33 @@ export const OpinionFeedback: React.FC = () => {
 
   const filteredQuestion = filterText(question.question);
   return (
-    <div id="feedback-opinion-wrapper" className="margin-top-2">
-      <IonText className="ion-text-start">
-        <h2 className="text-3xl semibold color-suelo padding-left-2">
+    <div
+      id="feedback-opinion-wrapper"
+      className="margin-top-2 margin-horizontal-5"
+    >
+      <IonText className="ion-text-start ">
+        <h2 className="text-5xl semibold color-suelo padding-left-2">
           <I18nMessage id="common.whatYouThink" />
         </h2>
         <I18nMessage
           id="common.whatYouThink"
           level={2}
           wrapper={(text: string) => (
-            <p className="text-2xl color-grey padding-left-2">{text}</p>
+            <p className="text-3xl color-grey padding-left-2">{text}</p>
           )}
         />
       </IonText>
-      <IonGrid className="margin-horizontal-2">
+      <IonGrid className="">
         <IonRow>
-          <IonCol size="6">
+          <IonCol size="5">
             <IonCard id="feedback-opinion-instructions-card">
               <IonCardContent>
                 <IonText>
-                  <h1 className="text-2xl semibold color-suelo">
+                  <h1 className="text-3xl semibold color-suelo">
                     {filteredQuestion[0].text}
                   </h1>
                   {filteredQuestion.length === 2 && (
-                    <p className="text-lg color-english">
+                    <p className="text-2xl color-english">
                       {filteredQuestion[1].text}
                     </p>
                   )}
@@ -235,7 +260,7 @@ export const OpinionFeedback: React.FC = () => {
               </IonCardContent>
             </IonCard>
           </IonCol>
-          <IonCol size="6">
+          <IonCol size="7">
             <ExtendedRadio
               control={control}
               name="response"
