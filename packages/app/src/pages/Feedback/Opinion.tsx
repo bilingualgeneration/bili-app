@@ -90,11 +90,6 @@ export const OpinionFeedback: React.FC = () => {
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
 
-      console.log("randomQuestion :", randomQuestion);
-
-      const processedQuestion = filterText(randomQuestion.question);
-      console.log("Processed question from filterText:", processedQuestion);
-
       const randomQuestionText = filterText(randomQuestion.question).filter(
         (q: any) => q.audio,
       );
