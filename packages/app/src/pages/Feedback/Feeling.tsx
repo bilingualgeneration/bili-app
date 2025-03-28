@@ -6,6 +6,7 @@ import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCard,
+  IonCardContent,
   IonCol,
   IonGrid,
   IonRow,
@@ -72,6 +73,32 @@ const audios: Record<string, Record<string, string>> = {
   },
 };
 
+const FeelingCard: React.FC<{
+  title: string;
+  subTitle?: string;
+  icon?: React.ReactNode;
+  backgroundColor: string;
+  onAudioPlay?: () => void;
+}> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
+  return (
+    <IonCard
+      className="opinion-card"
+      style={{ backgroundColor }}
+      onClick={onAudioPlay}
+    >
+      <div className="opinion-card-inner">
+        {icon && <div className="icon-container">{icon}</div>}
+        <IonCardContent>
+          <IonText>
+            <p className="title">{title}</p>
+            {subTitle && <p className="sub-title">{subTitle}</p>}
+          </IonText>
+        </IonCardContent>
+      </div>
+    </IonCard>
+  );
+};
+
 export const FeelingFeedback: React.FC = () => {
   const history = useHistory();
   const { language, populateText, filterText } = useLanguage();
@@ -115,66 +142,77 @@ export const FeelingFeedback: React.FC = () => {
     };
   }, []);
 
-  const optionsData: any[] = [
+  const options: any[] = [
     {
       img: happy,
       key: "happy",
       backgroundColor: "#FFE24F",
+      i18nKey: "common.feeling.happy",
+      value: "happy",
     },
     {
       img: calm,
       key: "calm",
       backgroundColor: "#C3ECE2",
+      i18nKey: "common.feeling.calm",
+      value: "calm",
     },
     {
       img: sad,
       key: "sad",
       backgroundColor: "#8FB8FA",
+      i18nKey: "common.feeling.sad",
+      value: "sad",
     },
     {
       img: terrible,
       key: "terrible",
       backgroundColor: "#FF8B70",
+      i18nKey: "common.feeling.terrible",
+      value: "terrible",
     },
     {
       img: other,
       key: "other",
       backgroundColor: "#F28AC9",
+      i18nKey: "common.feeling.other",
+      value: "other",
     },
   ];
 
-  const options = optionsData.map((option) => ({
-    component: (
-      <IonCol size="2" className="ion-no-padding">
-        <RadioCard
-          icon={
-            <div>
-              <img src={option.img} alt={`${option.key} Bili`} />
-            </div>
-          }
-          title={getText(`common.feeling.${option.key}`, 1)}
-          subTitle={getText(`common.feeling.${option.key}`, 2)}
-          titleColor="color-suelo"
-          subTitleColor="color-grey"
-          titleFontSize="xl"
-          subTitleFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor={option.backgroundColor}
-          maxHeight="18rem"
-          onAudioPlay={() => {
-            const audio: string[] = language
-              .split(".")
-              .map((l: string) => audios[option.key][l]);
-            addAudio(audio);
-          }}
-        />
-      </IonCol>
-    ),
-    value: option.key,
-  }));
+  const generateOption = ({
+    audioKey,
+    backgroundColor,
+    i18nKey,
+    image,
+    value,
+  }: {
+    audioKey: string;
+    backgroundColor: string;
+    i18nKey: string;
+    image: any;
+    value: string;
+  }) => {
+    return {
+      component: (
+        <IonCol size="2" className="ion-no-padding">
+          <FeelingCard
+            title={getText(i18nKey, 1, "authed") ?? ""}
+            subTitle={getText(i18nKey, 2, "authed") ?? ""}
+            icon={<img src={image} />}
+            backgroundColor={backgroundColor}
+            onAudioPlay={() => {
+              const audio: string[] = language
+                .split(".")
+                .map((l: string) => audios[audioKey][l]);
+              addAudio(audio);
+            }}
+          />
+        </IonCol>
+      ),
+      value: value,
+    };
+  };
 
   const onSubmit = handleSubmit((data) => {
     sendFeedbackFunction({
@@ -220,7 +258,7 @@ export const FeelingFeedback: React.FC = () => {
                   displayCardsInRow={true}
                   isMaxWidthNeeded={true}
                   maxWidth="14.5rem"
-                  options={options}
+                  options={options.map(generateOption)}
                 />
 
                 <IonButton
