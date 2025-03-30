@@ -45,6 +45,7 @@ import audio_terrible_en from "@/assets/audio/FlowerCongrats/terrible.mp3";
 import audio_terrible_es from "@/assets/audio/FlowerCongrats/fatal.mp3";
 import audio_other_en from "@/assets/audio/FlowerCongrats/other.mp3";
 import audio_other_es from "@/assets/audio/FlowerCongrats/otro.mp3";
+import { image } from "ionicons/icons";
 
 const FeedbackSchema = z.object({
   response: z.string(),
@@ -82,16 +83,18 @@ const FeelingCard: React.FC<{
 }> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
   return (
     <IonCard
-      className="opinion-card"
+      className="feeling-card ion-no-padding"
       style={{ backgroundColor }}
       onClick={onAudioPlay}
     >
-      <div className="opinion-card-inner">
+      <div className="feeling-card-inner">
         {icon && <div className="icon-container">{icon}</div>}
         <IonCardContent>
           <IonText>
-            <p className="title">{title}</p>
-            {subTitle && <p className="sub-title">{subTitle}</p>}
+            <p className="title color-suelo text-2xl semibold">{title}</p>
+            {subTitle && (
+              <p className="sub-title color-english text-xl">{subTitle}</p>
+            )}
           </IonText>
         </IonCardContent>
       </div>
@@ -123,12 +126,17 @@ export const FeelingFeedback: React.FC = () => {
       });
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-      const randomQuestionText = filterText(randomQuestion.question);
+
+      const randomQuestionText = filterText(randomQuestion.question).filter(
+        (q: any) => q.audio,
+      );
       setQuestion(randomQuestionText);
       setQuestionId(randomQuestion.uuid);
       addAudio(randomQuestionText.map((q: any) => q.audio.url));
+      console.log("RandomQuestion", randomQuestion);
     }
   }, [addAudio, isReady, questions]);
+
   const {
     control,
     formState: { isValid },
@@ -144,36 +152,36 @@ export const FeelingFeedback: React.FC = () => {
 
   const options: any[] = [
     {
-      img: happy,
-      key: "happy",
+      image: happy,
+      audioKey: "happy",
       backgroundColor: "#FFE24F",
       i18nKey: "common.feeling.happy",
       value: "happy",
     },
     {
-      img: calm,
-      key: "calm",
+      image: calm,
+      audioKey: "calm",
       backgroundColor: "#C3ECE2",
       i18nKey: "common.feeling.calm",
       value: "calm",
     },
     {
-      img: sad,
-      key: "sad",
+      image: sad,
+      audioKey: "sad",
       backgroundColor: "#8FB8FA",
       i18nKey: "common.feeling.sad",
       value: "sad",
     },
     {
-      img: terrible,
-      key: "terrible",
+      image: terrible,
+      audioKey: "terrible",
       backgroundColor: "#FF8B70",
       i18nKey: "common.feeling.terrible",
       value: "terrible",
     },
     {
-      img: other,
-      key: "other",
+      image: other,
+      audioKey: "other",
       backgroundColor: "#F28AC9",
       i18nKey: "common.feeling.other",
       value: "other",
