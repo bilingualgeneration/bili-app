@@ -21,6 +21,8 @@ import {
 
 import { CaregiverOverview } from "@/pages/CaregiverDashboard";
 
+import { ClassLink } from "@/pages/ClassLink";
+
 import { Login } from "@/pages/Login";
 import { LoginWithClassroomCode } from "@/pages/LoginWithClassroomCode";
 import { PreSplash } from "@/pages/PreSplash";
@@ -82,6 +84,11 @@ export const Router: React.FC = () => {
           <Route exact path="/login">
             <UnauthedLayout>
               <Login />
+            </UnauthedLayout>
+          </Route>
+          <Route exact path="/classlink">
+            <UnauthedLayout>
+              <ClassLink />
             </UnauthedLayout>
           </Route>
           <Route exact path="/login-with-classroom-code">
