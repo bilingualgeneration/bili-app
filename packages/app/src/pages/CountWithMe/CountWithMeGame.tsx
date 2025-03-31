@@ -344,7 +344,6 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   return (
     <>
       {/* Main container with background image */}
-      <div className="padding-top-4"></div>
       <div className="count-with-me-wrapper responsive-height-with-header">
         <div
           className="background-card"
@@ -353,6 +352,7 @@ export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
             backgroundSize: "cover",
             backgroundPosition: "center bottom",
             aspectRatio: "1159 / 724",
+            maxHeight: "80%",
             position: "relative",
           }}
         >
