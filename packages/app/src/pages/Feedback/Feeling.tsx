@@ -45,7 +45,6 @@ import audio_terrible_en from "@/assets/audio/FlowerCongrats/terrible.mp3";
 import audio_terrible_es from "@/assets/audio/FlowerCongrats/fatal.mp3";
 import audio_other_en from "@/assets/audio/FlowerCongrats/other.mp3";
 import audio_other_es from "@/assets/audio/FlowerCongrats/otro.mp3";
-import { image } from "ionicons/icons";
 
 const FeedbackSchema = z.object({
   response: z.string(),
