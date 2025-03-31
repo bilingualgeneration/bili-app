@@ -25,46 +25,22 @@
   }
 
   .dnd-image {
-    height: 40rem !important;
-    max-height: 20rem !important;
-    width: auto;
-  }
-}
-
-.dnd-drop-targets-container {
-  text-align: center;
-  display: inline-block;
-
-  &.hasImage {
-    margin-top: 1rem;
-  }
-
-  &:not(.hasImage) {
-    margin-top: calc((28.125rem - 7.3125rem) / 2);
+    /*
+      height: 40rem !important;
+      max-height: 20rem !important;
+      width: auto;
+     */
+    height: 300px;
+    width: 300px;
   }
 
   .dnd-image {
-    margin: auto;
-    display: block;
     pointer-events: none;
     user-select: none;
-    width: auto;
   }
 
   .drop-target {
-    /*
-    &:not(:last-child) {
-      margin-right: 0.75rem;
-    }
-      */
-
     display: inline-block;
-
-    /*
-    &.leftMargin {
-      margin-left: 6.25rem;
-    }
-    */
 
     &:not(.dropped) {
       color: #999999 !important;

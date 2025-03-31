@@ -19,6 +19,8 @@ export interface DropTargetProps {
   isBlank: boolean;
   text: string;
   renderTrigger: Date;
+  x: number;
+  y: number;
 }
 
 export const DropTarget: React.FC<DropTargetProps> = ({
@@ -28,6 +30,8 @@ export const DropTarget: React.FC<DropTargetProps> = ({
   isBlank,
   text,
   renderTrigger,
+  x,
+  y,
 }) => {
   const { addAudio } = useAudioManager();
   const {
@@ -123,7 +127,12 @@ export const DropTarget: React.FC<DropTargetProps> = ({
           },
           classes,
         )}
-        style={{ color: hashSegment(text) }}
+        style={{
+          color: hashSegment(text),
+          position: "absolute",
+          left: x,
+          top: y,
+        }}
         ref={drop}
       >
         {isBlank && !hasDropped ? text.replace(/./g, "_") : text}
