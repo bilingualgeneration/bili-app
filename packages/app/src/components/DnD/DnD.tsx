@@ -11,8 +11,9 @@ import { useDnD } from "@/hooks/DnD";
 import { DropTarget, DropTargetProps } from "./DropTarget";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { usePreview } from "react-dnd-preview";
-import { useScreenSize } from "@/lib/screenSize";
+import { useCanvasSize } from "@/lib/canvasSize";
 
+import { placeItemsOnCanvas } from "./placerAlgorithm";
 import { Piece, PieceProps } from "./Piece";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import update from "immutability-helper";
@@ -38,29 +39,18 @@ const colors = [
   "#6154d5",
 ];
 
+const calculateWidth = (text: string) => {
+  return text
+    .split("")
+    .reduce((total: number, t: any) => letterLookup[t].width + total, 0);
+};
+
 export const hashSegment = (text: string) => {
   let hash = 0;
   for (let index = 0; index < text.length; index++) {
     hash += text.charCodeAt(index);
   }
   return colors[hash % colors.length];
-};
-
-const shuffle = (array: any[]) => {
-  let currentIndex = array.length;
-
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
 };
 
 const PiecePreview: React.FC = () => {
@@ -129,33 +119,62 @@ const Hydrator: React.FC<DnDProps> = ({
     setPiecesDropped,
     setTotalTargets,
   } = useDnD();
-  const { screenType } = useScreenSize();
-
+  const [targetImagePlacement, setTargetImagePlacement] = useState<any>({});
+  const {
+    canvasRef,
+    width: canvasWidth,
+    height: canvasHeight,
+  } = useCanvasSize();
   useEffect(() => {
-    /*
-    const piecesMap = Object.fromEntries(propsPieces.map((p) => [p.text, p]));
-    console.log(piecesExpanded);
-    */
+    if (canvasWidth === 0 || canvasHeight === 0) {
+      return;
+    }
     const piecesExpanded = propsPieces
       .map(({ count, ...p }) => Array(count).fill(p))
       .flat();
-    shuffle(piecesExpanded);
 
-    const targetInstances = target.split(" ").map((word) =>
+    const pieceDimensions = piecesExpanded.map((p) => {
+      return {
+        height: 120,
+        width: calculateWidth(p.text),
+      };
+    });
+    const targetDimensions = target.split(" ").map((t) => {
+      return t.split("-").map((s) => {
+        return {
+          height: 120,
+          width: calculateWidth(s),
+        };
+      });
+    });
+    const targetImageDimensions = {
+      height: 300,
+      width: 300,
+    };
+    const canvas = {
+      height: canvasHeight,
+      width: canvasWidth,
+    };
+
+    // @ts-ignore
+    const { fixedTextPlacements, fixedImagePlacement, piecePlacements } =
+      placeItemsOnCanvas(
+        canvas,
+        pieceDimensions,
+        targetDimensions,
+        targetImageDimensions,
+      );
+
+    const targetInstances = target.split(" ").map((word, wordIndex) =>
       Object.fromEntries(
-        word.split("-").map((segment, index) => {
+        word.split("-").map((segment, segmentIndex) => {
+          const { x, y } = fixedTextPlacements[wordIndex][segmentIndex];
           const letters = segment.split("");
-          const width = letters.reduce(
-            (total, l) => letterLookup[l].width + total,
-            0,
-          );
-          const height = letters.reduce(
-            (total, l) => Math.max(letterLookup[l].height, total),
-            0,
-          );
           return [
-            segment + index,
+            segment + segmentIndex,
             {
+              x,
+              y,
               dropped: false,
               text: segment,
             },
@@ -172,23 +191,10 @@ const Hydrator: React.FC<DnDProps> = ({
       ),
     );
 
-    let left = 0;
-
     const pieceInstances = Object.fromEntries(
       piecesExpanded.map((p, index) => {
-        /*
-          top: targetImage ? topPosition : 20,
-          rotation:
-            Math.floor(Math.random() * LETTER_MAX_ROTATION * 2 + 1) -
-               LETTER_MAX_ROTATION,
-        };
-	 */
         const id = p.text + index;
-        const width = p.text
-          .split("")
-          .reduce((total: number, t: any) => letterLookup[t].width + total, 0);
-        const oldLeft = left;
-        left += width;
+        const width = calculateWidth(p.text);
         return [
           id,
           {
@@ -196,8 +202,8 @@ const Hydrator: React.FC<DnDProps> = ({
             audio_on_drop: p.audio_on_drop,
             dropped: false,
             id,
-            left: oldLeft,
-            top: 0,
+            left: piecePlacements[index].x,
+            top: piecePlacements[index].y,
             rotation: 0,
             text: p.text,
           },
@@ -205,55 +211,22 @@ const Hydrator: React.FC<DnDProps> = ({
       }),
     );
 
+    setTargetImagePlacement(fixedImagePlacement);
     setPieces(pieceInstances);
     setAudioOnComplete(audioOnComplete);
     setOnDrop(() => onDrop);
     setPiecesDropped(0);
-
-    /*
-    const targetPieceInstances = target.split(" ").map((word) =>
-      Object.fromEntries(
-        word.split("-").map((t: string, index: number) => {
-          const p = piecesMap[t.replace(/[_*]$/, "")];
-          const id: string = p.text + index;
-          if (!t.endsWith("*")) {
-            tempTotalTargets++;
-          }
-          targetTotalWidth +=
-            screenType === "mobile" || screenType === "tablet"
-              ? PIECE_WIDTH_MOBILE
-              : PIECE_WIDTH_DESKTOP;
-          targetTotalHeight = Math.max(targetTotalHeight, PIECE_HEIGHT);
-          return [
-            id,
-            {
-              ...p,
-              dropped: false,
-              id,
-              isBlank: t.endsWith("_"),
-              left: 0,
-              top: 0,
-            },
-          ];
-        }),
-      ),
-    );
-    if (targetImage) {
-      targetTotalWidth = Math.max(targetTotalWidth, targetImage.width);
-      targetTotalHeight += targetImage.height;
-    }
-    let leftPosition =
-      screenType === "mobile" || screenType === "tablet"
-        ? PIECE_LEFT_OFFSET_MOBILE
-        : PIECE_LEFT_OFFSET_DESKTOP;
-    let topPosition = PIECE_TOP_OFFSET;
-    const totalPieces = piecesExpanded.length;
-    const pieceInstances = Object.fromEntries(
-      piecesExpanded.map((p: any, index: number) => {
-    );
-    */
-  }, [propsPieces, target, setPieces]);
-  return <Container targetImage={targetImage} gameId={gameId} />;
+  }, [canvasWidth, canvasHeight, propsPieces, target, setPieces]);
+  return (
+    <div ref={canvasRef} className="dnd-play-area" style={{ height: "100%" }}>
+      {canvasHeight !== 0 && (
+        <Container
+          targetImage={{ ...targetImage, ...targetImagePlacement }}
+          gameId={gameId}
+        />
+      )}
+    </div>
+  );
 };
 
 interface ContainerProps {
@@ -269,6 +242,8 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
         classes: classnames({ leftMargin: wordIndex > 0 && letterIndex === 0 }),
         text: p.text.replace(/_$/, ""),
         isBlank: p.isBlank,
+        x: p.x,
+        y: p.y,
         renderTrigger: new Date(),
       })),
     );
@@ -302,31 +277,25 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
   );
   return (
     <>
-      <div className="dnd-play-area" style={{ height: "100%" }}>
-        <div
-          ref={drop}
-          style={{
-            height: "100%",
-            position: "relative",
-          }}
-        >
-          {Object.keys(pieces).map((key, index) => (
-            <Piece key={`${key}-${index}`} {...pieces[key]} />
-          ))}
-          {(isPlatform("ios") || isPlatform("android")) && <PiecePreview />}
-          <div
-            className={classnames("dnd-drop-targets-container", {
-              hasImage: targetImage,
-            })}
-          >
-            {targetImage && <DnDImage src={targetImage.url} />}
-            {dropTargets.map((word: any) =>
-              word.map((d: DropTargetProps, index: number) => (
-                <DropTarget key={`${d.text}-${index}`} {...d} gameId={gameId} />
-              )),
-            )}
-          </div>
-        </div>
+      <div
+        ref={drop}
+        style={{
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        {Object.keys(pieces).map((key, index) => (
+          <Piece key={`${key}-${index}`} {...pieces[key]} />
+        ))}
+        {(isPlatform("ios") || isPlatform("android")) && <PiecePreview />}
+        {targetImage && (
+          <DnDImage src={targetImage.url} x={targetImage.x} y={targetImage.y} />
+        )}
+        {dropTargets.map((word: any) =>
+          word.map((d: DropTargetProps, index: number) => (
+            <DropTarget key={`${d.text}-${index}`} {...d} gameId={gameId} />
+          )),
+        )}
       </div>
     </>
   );
