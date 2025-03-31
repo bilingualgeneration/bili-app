@@ -78,7 +78,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
           aspectRatio: "1159 / 724",
-          width: "80%",
+          maxHeight: "80%",
           display: "flex",
           alignItems: "center",
           position: "relative",
@@ -110,7 +110,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
           }}
           style={{
             position: "absolute",
-            right: -30,
+            right: "-2rem",
           }}
         />
       </div>
