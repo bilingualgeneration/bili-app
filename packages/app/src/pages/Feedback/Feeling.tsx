@@ -6,6 +6,7 @@ import { I18nMessage } from "@/components/I18nMessage";
 import {
   IonButton,
   IonCard,
+  IonCardContent,
   IonCol,
   IonGrid,
   IonRow,
@@ -72,6 +73,34 @@ const audios: Record<string, Record<string, string>> = {
   },
 };
 
+const FeelingCard: React.FC<{
+  title: string;
+  subTitle?: string;
+  icon?: React.ReactNode;
+  backgroundColor: string;
+  onAudioPlay?: () => void;
+}> = ({ title, subTitle, icon, backgroundColor, onAudioPlay }) => {
+  return (
+    <IonCard
+      className="feeling-card ion-no-padding"
+      style={{ backgroundColor }}
+      onClick={onAudioPlay}
+    >
+      <div className="feeling-card-inner">
+        {icon && <div className="icon-container">{icon}</div>}
+        <IonCardContent>
+          <IonText>
+            <p className="title color-suelo text-2xl semibold">{title}</p>
+            {subTitle && (
+              <p className="sub-title color-english text-xl">{subTitle}</p>
+            )}
+          </IonText>
+        </IonCardContent>
+      </div>
+    </IonCard>
+  );
+};
+
 export const FeelingFeedback: React.FC = () => {
   const history = useHistory();
   const { language, populateText, filterText } = useLanguage();
@@ -96,12 +125,20 @@ export const FeelingFeedback: React.FC = () => {
       });
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-      const randomQuestionText = filterText(randomQuestion.question);
-      setQuestion(randomQuestionText);
+      /*
+      const randomQuestionText = filterText(randomQuestion.question).filter(
+        (q: any) => q.audio,
+      );
+      */
+      setQuestion(randomQuestion.question);
       setQuestionId(randomQuestion.uuid);
-      addAudio(randomQuestionText.map((q: any) => q.audio.url));
+      addAudio(
+        filterText(randomQuestion.question).map((q: any) => q.audio.url),
+      );
+      console.log("RandomQuestion", randomQuestion);
     }
   }, [addAudio, isReady, questions]);
+
   const {
     control,
     formState: { isValid },
@@ -115,66 +152,77 @@ export const FeelingFeedback: React.FC = () => {
     };
   }, []);
 
-  const optionsData: any[] = [
+  const options: any[] = [
     {
-      img: happy,
-      key: "happy",
+      image: happy,
+      audioKey: "happy",
       backgroundColor: "#FFE24F",
+      i18nKey: "common.feeling.happy",
+      value: "happy",
     },
     {
-      img: calm,
-      key: "calm",
+      image: calm,
+      audioKey: "calm",
       backgroundColor: "#C3ECE2",
+      i18nKey: "common.feeling.calm",
+      value: "calm",
     },
     {
-      img: sad,
-      key: "sad",
+      image: sad,
+      audioKey: "sad",
       backgroundColor: "#8FB8FA",
+      i18nKey: "common.feeling.sad",
+      value: "sad",
     },
     {
-      img: terrible,
-      key: "terrible",
+      image: terrible,
+      audioKey: "terrible",
       backgroundColor: "#FF8B70",
+      i18nKey: "common.feeling.terrible",
+      value: "terrible",
     },
     {
-      img: other,
-      key: "other",
+      image: other,
+      audioKey: "other",
       backgroundColor: "#F28AC9",
+      i18nKey: "common.feeling.other",
+      value: "other",
     },
   ];
 
-  const options = optionsData.map((option) => ({
-    component: (
-      <IonCol size="2" className="ion-no-padding">
-        <RadioCard
-          icon={
-            <div>
-              <img src={option.img} alt={`${option.key} Bili`} />
-            </div>
-          }
-          title={getText(`common.feeling.${option.key}`, 1)}
-          subTitle={getText(`common.feeling.${option.key}`, 2)}
-          titleColor="color-suelo"
-          subTitleColor="color-grey"
-          titleFontSize="xl"
-          subTitleFontSize="lg"
-          iconBackgroundColor="transparent"
-          flexDirectionColumn={true}
-          isJustPicture={true}
-          isTextCentered={true}
-          backgroundColor={option.backgroundColor}
-          maxHeight="18rem"
-          onAudioPlay={() => {
-            const audio: string[] = language
-              .split(".")
-              .map((l: string) => audios[option.key][l]);
-            addAudio(audio);
-          }}
-        />
-      </IonCol>
-    ),
-    value: option.key,
-  }));
+  const generateOption = ({
+    audioKey,
+    backgroundColor,
+    i18nKey,
+    image,
+    value,
+  }: {
+    audioKey: string;
+    backgroundColor: string;
+    i18nKey: string;
+    image: any;
+    value: string;
+  }) => {
+    return {
+      component: (
+        <IonCol size="2" className="ion-no-padding">
+          <FeelingCard
+            title={getText(i18nKey, 1, "authed") ?? ""}
+            subTitle={getText(i18nKey, 2, "authed") ?? ""}
+            icon={<img src={image} />}
+            backgroundColor={backgroundColor}
+            onAudioPlay={() => {
+              const audio: string[] = language
+                .split(".")
+                .map((l: string) => audios[audioKey][l]);
+              addAudio(audio);
+            }}
+          />
+        </IonCol>
+      ),
+      value: value,
+    };
+  };
 
   const onSubmit = handleSubmit((data) => {
     sendFeedbackFunction({
@@ -196,6 +244,9 @@ export const FeelingFeedback: React.FC = () => {
     return <></>;
   }
 
+  const filteredQuestion = filterText(question);
+  console.log(question);
+
   return (
     <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
       <IonGrid style={{ "--ion-grid-columns": 10 }}>
@@ -206,11 +257,11 @@ export const FeelingFeedback: React.FC = () => {
               <form action="" id="feedback_feelings_form">
                 <IonText className="ion-text-start">
                   <h2 className="text-3xl semibold color-suelo padding-left-2">
-                    {question[0].text}
+                    {filteredQuestion[0].text}
                   </h2>
-                  {question.length === 2 && (
+                  {filteredQuestion.length === 2 && (
                     <p className="text-3xl color-grey padding-left-2">
-                      {question[1].text}
+                      {filteredQuestion[1].text}
                     </p>
                   )}
                 </IonText>
@@ -220,7 +271,7 @@ export const FeelingFeedback: React.FC = () => {
                   displayCardsInRow={true}
                   isMaxWidthNeeded={true}
                   maxWidth="14.5rem"
-                  options={options}
+                  options={options.map(generateOption)}
                 />
 
                 <IonButton
