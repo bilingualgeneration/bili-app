@@ -125,13 +125,16 @@ export const FeelingFeedback: React.FC = () => {
       });
       const randomQuestion =
         filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-
+      /*
       const randomQuestionText = filterText(randomQuestion.question).filter(
         (q: any) => q.audio,
       );
-      setQuestion(randomQuestionText);
+      */
+      setQuestion(randomQuestion.question);
       setQuestionId(randomQuestion.uuid);
-      addAudio(randomQuestionText.map((q: any) => q.audio.url));
+      addAudio(
+        filterText(randomQuestion.question).map((q: any) => q.audio.url),
+      );
       console.log("RandomQuestion", randomQuestion);
     }
   }, [addAudio, isReady, questions]);
@@ -241,6 +244,9 @@ export const FeelingFeedback: React.FC = () => {
     return <></>;
   }
 
+  const filteredQuestion = filterText(question);
+  console.log(question);
+
   return (
     <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">
       <IonGrid style={{ "--ion-grid-columns": 10 }}>
@@ -251,11 +257,11 @@ export const FeelingFeedback: React.FC = () => {
               <form action="" id="feedback_feelings_form">
                 <IonText className="ion-text-start">
                   <h2 className="text-3xl semibold color-suelo padding-left-2">
-                    {question[0].text}
+                    {filteredQuestion[0].text}
                   </h2>
-                  {question.length === 2 && (
+                  {filteredQuestion.length === 2 && (
                     <p className="text-3xl color-grey padding-left-2">
-                      {question[1].text}
+                      {filteredQuestion[1].text}
                     </p>
                   )}
                 </IonText>
