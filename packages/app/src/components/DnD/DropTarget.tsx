@@ -123,6 +123,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
             "dnd-incorrect": isCorrect === false,
             "shake-animation": isCorrect === false,
             "drop-target": true,
+            "is-blank": isBlank,
             letter: true,
           },
           classes,
@@ -135,7 +136,7 @@ export const DropTarget: React.FC<DropTargetProps> = ({
         }}
         ref={drop}
       >
-        {isBlank && !hasDropped ? text.replace(/./g, "_") : text}
+        {text}
       </span>
     </>
   );

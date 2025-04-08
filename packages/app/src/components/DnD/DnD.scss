@@ -43,7 +43,15 @@
     display: inline-block;
 
     &:not(.dropped) {
-      color: #999999 !important;
+      &:not(.is-blank) {
+        color: #999999 !important;
+      }
+      &.is-blank {
+        color: transparent !important;
+        text-decoration: underline;
+        text-decoration-color: #999999;
+        text-decoration-thickness: 10px;
+      }
     }
   }
 }
