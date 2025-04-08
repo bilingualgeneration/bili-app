@@ -41,6 +41,7 @@ const colors = [
 
 const calculateWidth = (text: string) => {
   return text
+    .replace(/_/g, "")
     .split("")
     .reduce((total: number, t: any) => letterLookup[t].width + total, 0);
 };
@@ -240,8 +241,8 @@ const Container: React.FC<ContainerProps> = ({ targetImage, gameId }) => {
     return targetPieces.map((word: any, wordIndex: number) =>
       Object.values(word).map((p: any, letterIndex) => ({
         classes: classnames({ leftMargin: wordIndex > 0 && letterIndex === 0 }),
-        text: p.text.replace(/_$/, ""),
-        isBlank: p.isBlank,
+        text: p.text.replace(/_/g, ""),
+        isBlank: p.text.endsWith("_"),
         x: p.x,
         y: p.y,
         renderTrigger: new Date(),
