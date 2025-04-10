@@ -19,14 +19,14 @@ import { useTimeTracker } from "@/hooks/TimeTracker";
 import { StoryFactoryCongrats } from "./StoryFactoryCongrats";
 
 export const StoryFactoryPreReader: React.FC = () => {
-  const { languageNormalized } = useLanguage();
-  console.log(languageNormalized);
+  const { languagePrimary } = useLanguage();
+  console.log(languagePrimary);
   return (
     <FirestoreCollectionProvider
       collection="dn-d"
       filters={[
         ["story_factory", "==", "pre-reader"],
-        ["language", "array-contains", languageNormalized],
+        ["language", "array-contains", languagePrimary],
       ]}
     >
       <Loader />
@@ -76,7 +76,7 @@ const Game: React.FC = () => {
     });
 
     const gamesData: GameData = new Map();
-    for (const group of filteredGames) {
+    for (const group of games) {
       const groupId = group.handle;
       gamesData.set(groupId, { totalMistakesPossible: 2 });
     }
@@ -90,22 +90,6 @@ const Game: React.FC = () => {
       setIsVisible(true);
     };
   });
-  const filteredGames = games.filter((g: any) => {
-    switch (language) {
-      case "es":
-        // TODO: check if inclusive also
-        return g.language.includes("es");
-        break;
-      case "en":
-        return g.language.includes("en");
-        break;
-      case "es.en":
-        // TODO: check if inclusive also
-        return g.language.includes("en") && g.language.includes("es");
-      default:
-        return false;
-    }
-  });
 
   const [pageNumber, setPageNumber] = useState<number>(0);
   const { totalTargets, piecesDropped, setPiecesDropped } = useDnD();
@@ -113,13 +97,11 @@ const Game: React.FC = () => {
   useEffect(() => {
     if (piecesDropped >= totalTargets && totalTargets > 0) {
       onended.pipe(first()).subscribe(() => {
-        if (pageNumber === filteredGames.length - 1) {
+        if (pageNumber === games.length - 1) {
           //moved handleRecordAttempt to the StoryFActoryCongrats page
           setShowCongrats(true);
         }
-        setPageNumber(
-          pageNumber === filteredGames.length - 1 ? 0 : pageNumber + 1,
-        );
+        setPageNumber(pageNumber === games.length - 1 ? 0 : pageNumber + 1);
       });
     }
   }, [piecesDropped, totalTargets, setPageNumber, onended]);
@@ -127,9 +109,6 @@ const Game: React.FC = () => {
     offsetHeight: 0,
     offsetWidth: 0,
   };
-  if (filteredGames.length === 0) {
-    return <>no bilingual games yet</>;
-  }
 
   if (showCongrats) {
     return <StoryFactoryCongrats />;
@@ -140,16 +119,16 @@ const Game: React.FC = () => {
       <div className="responsive-height-with-header" ref={dndWrapperRef}>
         {dndWidth > 0 && (
           <DnD
-            gameId={filteredGames[pageNumber].handle}
+            gameId={games[pageNumber].handle}
             audioOnComplete={
-              filteredGames[pageNumber].audio_on_complete
-                ? filteredGames[pageNumber].audio_on_complete.url
+              games[pageNumber].audio_on_complete
+                ? games[pageNumber].audio_on_complete.url
                 : null
             }
             width={dndWidth}
-            targetImage={filteredGames[pageNumber].target_image}
-            target={filteredGames[pageNumber].target}
-            pieces={filteredGames[pageNumber].pieces}
+            targetImage={games[pageNumber].target_image}
+            target={games[pageNumber].target}
+            pieces={games[pageNumber].pieces}
           />
         )}
       </div>
