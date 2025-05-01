@@ -73,24 +73,33 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
           >
             <div></div>
             <IonText className="ion-text-center">
-              <h1
-                className={classnames(
-                  "semibold color-suelo",
-                  textSizePrimaryLookup[textSize],
-                )}
-              >
-                <SegmentedText text={texts[0].text} />
-              </h1>
-              {texts.length > 1 && (
-                <p
-                  className={classnames(
-                    "color-english",
-                    textSizeSecondaryLookup[textSize],
-                  )}
-                >
-                  <SegmentedText text={texts[1].text} />
-                </p>
-              )}
+              {texts[0].text
+                .split(/\n+/)
+                .map((paragraph: string, i: number) => (
+                  <p
+                    key={`primary-${i}`}
+                    className={classnames(
+                      "semibold color-suelo",
+                      textSizePrimaryLookup[textSize],
+                    )}
+                  >
+                    <SegmentedText text={paragraph} />
+                  </p>
+                ))}
+              {texts.length > 1 &&
+                texts[1].text
+                  .split(/\n+/)
+                  .map((paragraph: string, i: number) => (
+                    <p
+                      key={`secondary-${i}`}
+                      className={classnames(
+                        "color-english",
+                        textSizeSecondaryLookup[textSize],
+                      )}
+                    >
+                      <SegmentedText text={paragraph} />
+                    </p>
+                  ))}
             </IonText>
             <div>
               <AudioButton
