@@ -79,7 +79,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
                   <p
                     key={`primary-${i}`}
                     className={classnames(
-                      "semibold color-suelo",
+                      "semibold color-suelo margin-vertical-1",
                       textSizePrimaryLookup[textSize],
                     )}
                   >
@@ -93,7 +93,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
                     <p
                       key={`secondary-${i}`}
                       className={classnames(
-                        "color-english",
+                        "color-english margin-top-0-5",
                         textSizeSecondaryLookup[textSize],
                       )}
                     >
