@@ -3,6 +3,10 @@
   margin-right: 1.875rem;
 }
 
+.margin-top-0-5 {
+  margin-top: 0.5rem !important;
+}
+
 @for $margin from 1 through 5 {
   .margin-top-#{$margin} {
     margin-top: #{$margin}rem !important;
