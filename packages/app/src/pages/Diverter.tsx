@@ -1,6 +1,7 @@
 import { Redirect } from "react-router-dom";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useProfile } from "@/hooks/Profile";
 
 export const Diverter: React.FC = () => {
@@ -13,7 +14,6 @@ export const Diverter: React.FC = () => {
   }
 
   if (isUserLoggedIn && !isStudentLoggedIn) {
-    console.log(profile);
     switch (profile.role) {
       case "teacher":
         return <Redirect to="/teacher/dashboard" />;
@@ -23,6 +23,7 @@ export const Diverter: React.FC = () => {
         break;
       default:
         // TODO: something
+        return <Redirect to="/classlink" />;
         break;
     }
   }

@@ -22,7 +22,7 @@ import { Popover } from "@/components/Popover";
 import { firestore } from "@/components/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 
 import "./Preferences.scss";
 import { Toggle } from "@/components/Toggle";
@@ -59,7 +59,7 @@ export const Preferences: React.FC = () => {
   const {
     user: { uid },
     profile: { isImmersive, isInclusive, settingsLanguage },
-  } = useProfile();
+  } = useOldProfile();
   const { info } = useClassroom();
   const [allowedLanguagesTrigger, setAllowedLanguagesTrigger] = useState<
     string[]

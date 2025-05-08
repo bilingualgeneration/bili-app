@@ -1,15 +1,13 @@
-import { auth, firestore } from "@/components/Firebase";
 import {
-  collection,
-  doc,
-  documentId,
-  onSnapshot,
-  query,
-  Unsubscribe,
-  where,
-} from "firebase/firestore";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import { directus, getProfile } from "@/lib/directus";
 
 type ProfileState = any;
 
@@ -20,60 +18,36 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [user, setUser] = useState<any>(undefined);
-  const userRef = useRef<any>(user);
-  const [profile, setProfile] = useState<any>(undefined);
-  const profileUnsubscribe = useRef<Unsubscribe | null>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(undefined);
+  const [profile, setProfile] = useState<any | null | undefined>(undefined);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (userState) => {
-      if (userState && userRef.current === null) {
-        // logging in
-        setProfile(undefined);
-      }
-      setUser(userState);
-      userRef.current = userState;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      // get profile
-      const userDoc = doc(firestore, "user", user.uid);
-      const unsub = onSnapshot(userDoc, (d) => {
-        const data = d.data();
-        if (data) {
-          setProfile(data);
-        }
+    getProfile()
+      .then((response) => {
+        console.log(response);
+        setIsLoggedIn(true);
+        setProfile(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoggedIn(false);
       });
-      profileUnsubscribe.current = unsub;
-    } else {
-      if (user !== undefined) {
-        if (profileUnsubscribe.current) {
-          profileUnsubscribe.current();
-        }
-        setProfile(null);
-        profileUnsubscribe.current = null;
-      }
-    }
-  }, [user]);
+  }, [setIsLoggedIn, setProfile]);
 
-  const signout = () => {
-    setUser(null);
-    userRef.current = null;
-    signOut(auth).then(() => {});
-  };
-  const isLoading = user === undefined || profile === undefined;
+  const logout = useCallback(() => {
+    directus.logout().then(() => {
+      setIsLoggedIn(false);
+      setProfile(null);
+    });
+  }, [setIsLoggedIn, setProfile]);
 
   return (
     <ProfileContext.Provider
       children={children}
       value={{
-        isLoading,
-        isLoggedIn: user !== undefined && user !== null,
+        isLoggedIn,
+        logout,
         profile,
-        signout,
-        user,
       }}
     />
   );

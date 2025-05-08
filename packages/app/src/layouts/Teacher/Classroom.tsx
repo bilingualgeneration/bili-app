@@ -5,13 +5,13 @@ import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
 import { DashboardMenu } from "@/components/DashboardMenu";
 import { TeacherHeader, TeacherLayout } from "./Teacher";
 import { Redirect, useParams } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 
 export const TeacherClassroomLayout: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { classroomId } = useParams<{ classroomId: string }>();
-  const { profile, isLoggedIn } = useProfile();
+  const { profile, isLoggedIn } = useOldProfile();
 
   if (!isLoggedIn || profile?.role !== "teacher") {
     return <Redirect to="/" />;

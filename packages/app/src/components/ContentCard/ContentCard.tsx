@@ -5,7 +5,6 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { I18nMessage } from "@/components/I18nMessage";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
 import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 

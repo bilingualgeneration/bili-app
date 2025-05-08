@@ -5,7 +5,6 @@ import { first } from "rxjs/operators";
 import { FormattedMessage } from "react-intl";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
-import { useProfile } from "@/hooks/Profile";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";

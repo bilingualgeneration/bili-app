@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { I18nMessage } from "@/components/I18nMessage";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 
+import loginWithClassLink from "@/assets/img/login_with_classlink.png";
+
 export const Splash: React.FC = () => {
   const titleClasses: string =
     "ion-text-center text-xl semibold margin-bottom-2";
@@ -36,6 +38,11 @@ export const Splash: React.FC = () => {
                   <I18nMessage id="common.logIn" languageSource="unauthed" />
                 </IonButton>
               </Link>
+              <div className="ion-text-center">
+                <a href="http://localhost:8055/auth/login/classlink?redirect=http://localhost:5173/classlink">
+                  <img src={loginWithClassLink} />
+                </a>
+              </div>
             </IonCardContent>
           </IonCard>
 

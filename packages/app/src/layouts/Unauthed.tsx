@@ -3,6 +3,7 @@ import { IonContent, IonPage } from "@ionic/react";
 import { Redirect } from "react-router-dom";
 import { useInterfaceLanguage } from "@/hooks/InterfaceLanguage";
 import { useClassroom } from "@/hooks/Classroom";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
 

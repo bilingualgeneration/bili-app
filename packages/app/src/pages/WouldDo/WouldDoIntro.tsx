@@ -2,7 +2,6 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
 
 import bili from "@/assets/img/bili_in_tshirt.png";
 

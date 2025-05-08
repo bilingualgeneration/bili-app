@@ -5,7 +5,7 @@ import { Device } from "@capacitor/device";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "@/components/Firebase";
 import { Preferences } from "@capacitor/preferences";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 
 type InterfaceLanguageState = any;
 
@@ -19,7 +19,7 @@ export const InterfaceLanguageProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [language, internalSetLanguage] = useState<string | null>(null);
-  const { profile, user } = useProfile();
+  const { profile, user } = useOldProfile();
   useEffect(() => {
     (async () => {
       const { value: storedLanguage } = await Preferences.get({

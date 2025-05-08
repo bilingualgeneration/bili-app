@@ -3,7 +3,6 @@ import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
 
 import bili from "@/assets/img/bili_in_coat.png";
 

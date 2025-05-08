@@ -14,7 +14,7 @@ import { StudentInfo } from "@/components/StudentInfo";
 import { useEffect } from "react";
 import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useLocation } from "react-router-dom";
 
 import SchoolIcon from "@/assets/icons/school.svg";
@@ -24,7 +24,7 @@ import "./Caregiver.scss";
 export const CaregiverHeader: React.FC = () => {
   const {
     user: { uid },
-  } = useProfile();
+  } = useOldProfile();
   return (
     <IonGrid id="teacher-dashboard-layout-header">
       <IonRow>
@@ -66,7 +66,7 @@ interface CaregiverLayout {
 export const CaregiverLayout: React.FC<
   React.PropsWithChildren<CaregiverLayout>
 > = ({ children, showHeader = true }) => {
-  const { profile, isLoggedIn } = useProfile();
+  const { profile, isLoggedIn } = useOldProfile();
 
   if (!isLoggedIn || profile?.role !== "caregiver") {
     return <Redirect to="/" />;

@@ -20,6 +20,7 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 import { I18nProvider } from "@/hooks/I18n";
 import { PackSelect } from "@/components/PackSelect";
 import { ProfileProvider } from "@/hooks/Profile";
+import { OldProfileProvider } from "@/hooks/OldProfile";
 import { StudentProvider } from "@/hooks/Student";
 import { NamesProvider } from "@/hooks/Names";
 
@@ -68,23 +69,25 @@ const App: React.FC = () => {
       <IonApp>
         <AudioManagerProvider>
           <ProfileProvider>
-            <InterfaceLanguageProvider>
-              <ClassroomProvider>
-                <I18nProvider>
-                  <StudentProvider>
-                    <NamesProvider>
-                      <AppWrapper>
-                        <TimeTrackerProvider>
-                          <LanguageToggleProvider>
-                            <Router />
-                          </LanguageToggleProvider>
-                        </TimeTrackerProvider>
-                      </AppWrapper>
-                    </NamesProvider>
-                  </StudentProvider>
-                </I18nProvider>
-              </ClassroomProvider>
-            </InterfaceLanguageProvider>
+            <OldProfileProvider>
+              <InterfaceLanguageProvider>
+                <ClassroomProvider>
+                  <I18nProvider>
+                    <StudentProvider>
+                      <NamesProvider>
+                        <AppWrapper>
+                          <TimeTrackerProvider>
+                            <LanguageToggleProvider>
+                              <Router />
+                            </LanguageToggleProvider>
+                          </TimeTrackerProvider>
+                        </AppWrapper>
+                      </NamesProvider>
+                    </StudentProvider>
+                  </I18nProvider>
+                </ClassroomProvider>
+              </InterfaceLanguageProvider>
+            </OldProfileProvider>
           </ProfileProvider>
         </AudioManagerProvider>
       </IonApp>

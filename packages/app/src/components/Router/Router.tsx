@@ -1,12 +1,14 @@
 import { IonReactRouter } from "@ionic/react-router";
 import { useStudent } from "@/hooks/Student";
-import { useProfile } from "@/hooks/Profile";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { UnauthedLayout } from "@/layouts/Unauthed";
 import { CaregiverLayout } from "@/layouts/Caregiver";
 import { StudentSelectLayout } from "@/layouts/StudentSelect";
 import { TeacherClassroomLayout, TeacherLayout } from "@/layouts/Teacher";
+import { PublicLayout } from "@/layouts/Public";
+
+import { ClassLink } from "@/pages/ClassLink";
 
 import {
   //  AddStudentsComplete,
@@ -98,6 +100,11 @@ export const Router: React.FC = () => {
             <UnauthedLayout>
               <SignUp />
             </UnauthedLayout>
+          </Route>
+          <Route exact path="/classlink">
+            <PublicLayout>
+              <ClassLink />
+            </PublicLayout>
           </Route>
           <Route exact path="/splash">
             <UnauthedLayout>

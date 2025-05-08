@@ -20,7 +20,7 @@ import {
 } from "@/hooks/RealtimeDatabaseDoc";
 import { useClassroom } from "@/hooks/Classroom";
 import { useHistory, useLocation } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useRef, useState } from "react";
 import { useStudent } from "@/hooks/Student";
 
@@ -50,7 +50,7 @@ const HydratedProfileChip: React.FC = () => {
   const { firstName, id, signOut: signStudentOut } = useStudent();
   const history = useHistory();
   const { pathname } = useLocation();
-  const { signout: signUserOut } = useProfile();
+  const { signout: signUserOut } = useOldProfile();
   const { unsubscribe: signClassroomOut } = useClassroom();
   /*
   const {

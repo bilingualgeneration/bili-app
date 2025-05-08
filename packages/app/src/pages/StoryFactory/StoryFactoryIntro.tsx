@@ -2,7 +2,7 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import { IonText } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import bili from "@/assets/icons/bili_letters.svg";
 import audio_es_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es.mp3";
 import audio_es_inc_1 from "@/assets/audio/StoryFactoryAudio/story_factory_first_es-inc.mp3";
@@ -29,7 +29,7 @@ const audio_raw = [
 export const StoryFactoryIntro: React.FC = () => {
   const {
     profile: { isInclusive },
-  } = useProfile();
+  } = useOldProfile();
   const history = useHistory();
   const { populateText } = useLanguage();
   const audios: string[] = populateText(audio_raw).map((a: any) => a.audio);

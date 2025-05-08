@@ -1,7 +1,7 @@
 import { CountWithMeCongrats } from "./CountWithMeCongrats";
 import { PageControl } from "@/components/PageControl";
 
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { IonButton, IonText } from "@ionic/react";
 import { useState, useEffect } from "react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
@@ -26,7 +26,7 @@ export const CountWithMeFacts: React.FC<FactsPageProps> = ({
 }) => {
   const {
     profile: { isInclusive },
-  } = useProfile();
+  } = useOldProfile();
   const { language } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();
