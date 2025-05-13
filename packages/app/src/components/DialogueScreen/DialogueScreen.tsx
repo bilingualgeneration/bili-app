@@ -56,7 +56,7 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: "1rem",
+            marginBottom: "5rem",
           }}
         >
           <IonCard className="drop-shadow">
