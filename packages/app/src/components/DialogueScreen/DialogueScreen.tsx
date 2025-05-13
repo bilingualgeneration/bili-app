@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png"; // TODO: rename file
+import { personAdd } from "ionicons/icons";
 
 interface DialogueScreenProps {
   audios: string[];
@@ -57,6 +58,7 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
             flexDirection: "column",
             justifyContent: "center",
             marginBottom: "5rem",
+            padding: "1rem",
           }}
         >
           <IonCard className="drop-shadow">
