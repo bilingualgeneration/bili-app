@@ -19,15 +19,15 @@ interface Lookup {
 }
 
 const textSizePrimaryLookup: Lookup = {
-  small: "text-2xl",
-  default: "text-3xl",
-  large: "text-4xl",
+  small: "text-2xl margin-vertical-1",
+  default: "text-3xl margin-vertical-2",
+  large: "text-4xl margin-vertical-3",
 };
 
 const textSizeSecondaryLookup: Lookup = {
-  small: "text-lg",
-  default: "text-2xl",
-  large: "text-3xl",
+  small: "text-lg margin-top-0-5",
+  default: "text-2xl margin-top-1",
+  large: "text-3xl margin-top-1-5",
 };
 
 export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
@@ -79,7 +79,7 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
                   <p
                     key={`primary-${i}`}
                     className={classnames(
-                      "semibold color-suelo margin-vertical-1",
+                      "semibold color-suelo ",
                       textSizePrimaryLookup[textSize],
                     )}
                   >
