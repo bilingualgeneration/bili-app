@@ -66,7 +66,7 @@ export const PageWrapper: React.FC<React.PropsWithChildren> = ({
         <div
           style={{
             position: "fixed",
-            bottom: "1.5rem",
+            bottom: "2.75rem",
             right: "1.5rem",
             zIndex: 9999,
           }}
