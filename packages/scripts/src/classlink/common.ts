@@ -1,12 +1,12 @@
 // @ts-nocheck
 
 /*
-const axios = require('axios');
-const commandLineArgs = require('command-line-args');
-const commandLineUsage = require('command-line-usage');
-const OAuth = require('oauth-1.0a');
-const crypto = require('crypto');
-*/
+   const axios = require('axios');
+   const commandLineArgs = require('command-line-args');
+   const commandLineUsage = require('command-line-usage');
+   const OAuth = require('oauth-1.0a');
+   const crypto = require('crypto');
+ */
 
 import axios from "axios";
 import commandLineArgs from "command-line-args";
@@ -45,17 +45,17 @@ const optionDefinitions = [
   },
 
   /*
-  {
-    name: '',
-    type: String,
-    description: ''
-  },
-  {
-    name: '',
-    type: String,
-    description: ''
-  },
-  */
+     {
+     name: '',
+     type: String,
+     description: ''
+     },
+     {
+     name: '',
+     type: String,
+     description: ''
+     },
+   */
 ];
 
 function validateRequiredOptions(options, args) {
@@ -127,4 +127,18 @@ export const makeRequest = async (method, path, params = {}) => {
         : error.message,
     };
   }
+};
+
+export const repeatify = (array: string[]) => {
+  if (array === undefined || array.length === 0) {
+    return undefined;
+  } else {
+    return array.map((item) => ({
+      value: item,
+    }));
+  }
+};
+
+export const relationify = (obj) => {
+  return Object.keys(obj).length === 0 ? [] : [obj];
 };
