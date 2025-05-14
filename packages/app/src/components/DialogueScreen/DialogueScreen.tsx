@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png"; // TODO: rename file
+import { personAdd } from "ionicons/icons";
 
 interface DialogueScreenProps {
   audios: string[];
@@ -48,64 +49,73 @@ export const DialogueScreen: React.FC<DialogueScreenProps> = ({
     };
   }, []);
   return (
-    <div
-      className=" "
-      style={{
-        background: `url(${characterImage}) no-repeat top 2rem right 0`,
-        backgroundSize: "40rem",
-        height: "100%",
-        width: "100%",
-      }}
-    >
-      <IonGrid>
-        <IonRow>
-          <IonCol size="8">
-            <IonCard className="drop-shadow">
-              <IonCardContent>{children}</IonCardContent>
-            </IonCard>
-            <div className="margin-top-4" style={{ position: "relative" }}>
-              {hasAudioPlayed && (
-                <img
-                  src={StoryFactoryArrow}
-                  alt="indicator arrow to next button"
-                  style={{
-                    left: 0,
-                    top: 12,
-                    position: "absolute",
-                  }}
-                />
+    <IonGrid style={{ height: "100vh", padding: 0 }}>
+      <IonRow style={{ height: "100%" }}>
+        <IonCol
+          size="8"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginBottom: "5rem",
+            padding: "1rem",
+          }}
+        >
+          <IonCard className="drop-shadow">
+            <IonCardContent>{children}</IonCardContent>
+          </IonCard>
+          <div className="margin-top-4" style={{ position: "relative" }}>
+            {hasAudioPlayed && (
+              <img
+                src={StoryFactoryArrow}
+                alt="indicator arrow to next button"
+                style={{
+                  left: 0,
+                  top: 12,
+                  position: "absolute",
+                }}
+              />
+            )}
+            <IonButton
+              expand="block"
+              shape="round"
+              onClick={onButtonClick}
+              style={{ width: "50%", margin: "auto" }}
+            >
+              {buttonTextPrimary && (
+                <IonText>
+                  <p className="semibold text-3xl">{buttonTextPrimary}</p>
+                  {buttonTextSecondary && (
+                    <p className="text-sm">{buttonTextSecondary}</p>
+                  )}
+                </IonText>
               )}
-              <IonButton
-                expand="block"
-                shape="round"
-                onClick={onButtonClick}
-                style={{ width: "50%", margin: "auto" }}
-              >
-                {buttonTextPrimary && (
-                  <IonText>
-                    <p className="semibold text-3xl">{buttonTextPrimary}</p>
-                    {buttonTextSecondary && (
-                      <p className="text-sm">{buttonTextSecondary}</p>
-                    )}
-                  </IonText>
-                )}
-                {buttonI18nKey && (
-                  <IonText>
-                    <p className="semibold text-3xl">
-                      <I18nMessage id={buttonI18nKey} />
-                    </p>
-                    <I18nMessage
-                      id={buttonI18nKey}
-                      level={2}
-                      wrapper={(t: string) => <p className="text-sm">{t}</p>}
-                    />
-                  </IonText>
-                )}
-              </IonButton>
-            </div>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </div>
+              {buttonI18nKey && (
+                <IonText>
+                  <p className="semibold text-3xl">
+                    <I18nMessage id={buttonI18nKey} />
+                  </p>
+                  <I18nMessage
+                    id={buttonI18nKey}
+                    level={2}
+                    wrapper={(t: string) => <p className="text-sm">{t}</p>}
+                  />
+                </IonText>
+              )}
+            </IonButton>
+          </div>
+        </IonCol>
+
+        <IonCol
+          size="4"
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <IonImg src={characterImage} />
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   );
 };
