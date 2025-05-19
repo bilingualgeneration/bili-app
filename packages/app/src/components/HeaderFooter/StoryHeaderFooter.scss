@@ -1,0 +1,27 @@
+#authedHeader {
+  padding-top: 1rem;
+  background-color: #fff;
+  ion-col {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.story-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0.7rem 0.34rem;
+}
+
+.story-content {
+  padding-top: var(--header-height);
+}
+
+.profile-chip-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  top: -0.25rem;
+  left: -1rem;
+}
