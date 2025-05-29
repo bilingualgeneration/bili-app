@@ -209,7 +209,7 @@ export const Router: React.FC = () => {
             </StudentLayout>
           </Route>
           <Route exact path="/story/play/:uuid">
-            <StudentLayout>
+            <StudentLayout headerSize="minimal">
               <Stories />
             </StudentLayout>
           </Route>

@@ -37,16 +37,28 @@ interface ProfileChipPopoverLink {
   url: string;
 }
 
-export const ProfileChip: React.FC = () => {
+interface ProfileChipProps {
+  size?: "default" | "minimal";
+}
+
+export const ProfileChip: React.FC<ProfileChipProps> = ({
+  size = "default",
+}) => {
   const { id } = useStudent();
   return (
     <RealtimeDatabaseDocProvider path={`/users/${id}`}>
-      <HydratedProfileChip />
+      <HydratedProfileChip size={size} />
     </RealtimeDatabaseDocProvider>
   );
 };
 
-const HydratedProfileChip: React.FC = () => {
+interface HydratedProfileChipProps {
+  size?: "default" | "minimal";
+}
+
+const HydratedProfileChip: React.FC<HydratedProfileChipProps> = ({
+  size = "default",
+}) => {
   const { firstName, id, signOut: signStudentOut } = useStudent();
   const history = useHistory();
   const { pathname } = useLocation();
@@ -92,11 +104,14 @@ const HydratedProfileChip: React.FC = () => {
     <>
       <div>
         <button
-          onClick={openPopover}
+          onClick={size === "default" ? openPopover : undefined}
           className="custom-button-color"
           id="top-center"
         >
-          <div id="profileChip">
+          <div
+            id="profileChip"
+            className={size === "minimal" ? "profile-chip--minimal" : ""}
+          >
             <div id="starPoints" className="text-sm semibold color-nube">
               <IonIcon icon={StarNotSharp} />
               <IonText>
@@ -109,41 +124,74 @@ const HydratedProfileChip: React.FC = () => {
                 {status === "ready" ? data?.totalHearts ?? 0 : "\u00A0"}
               </IonText>
             </div>
-            <IonText>
-              <p className="semibold color-suelo text-xl">{firstName}</p>
-            </IonText>
-            <Avatar id={id} size="md" />
+            {size === "default" && (
+              <>
+                <IonText>
+                  <p className="semibold color-suelo text-xl">{firstName}</p>
+                </IonText>
+                <Avatar id={id} size="md" />
+              </>
+            )}
           </div>
         </button>
       </div>
 
-      <IonPopover
-        ref={popover}
-        isOpen={popoverOpen}
-        onDidDismiss={() => setPopoverOpen(false)}
-        size="auto"
-        side="bottom"
-        alignment="end"
-        trigger="top-center"
-        arrow={false}
-        className="profile-popover-style"
-      >
-        <IonContent id="profile-chip-popover" forceOverscroll={false}>
-          {links.map((l: ProfileChipPopoverLink) => (
-            <Link
-              className="no-underline"
-              key={l.i18nId}
-              onClick={() => {
-                setPopoverOpen(false);
-              }}
-              to={l.url}
-            >
-              <IonButton expand="block" fill="clear">
-                <IonIcon icon={l.icon} slot="start" />
+      {size === "default" && (
+        <IonPopover
+          ref={popover}
+          isOpen={popoverOpen}
+          onDidDismiss={() => setPopoverOpen(false)}
+          size="auto"
+          side="bottom"
+          alignment="end"
+          trigger="top-center"
+          arrow={false}
+          className="profile-popover-style"
+        >
+          <IonContent id="profile-chip-popover" forceOverscroll={false}>
+            {links.map((l: ProfileChipPopoverLink) => (
+              <Link
+                className="no-underline"
+                key={l.i18nId}
+                onClick={() => {
+                  setPopoverOpen(false);
+                }}
+                to={l.url}
+              >
+                <IonButton expand="block" fill="clear">
+                  <IonIcon icon={l.icon} slot="start" />
+                  <IonText className="ion-text-left color-suelo text-md">
+                    <I18nMessage id={l.i18nId} />
+                    <I18nMessage
+                      id={l.i18nId}
+                      level={2}
+                      wrapper={(text: string) => (
+                        <p className="text-sm">{text}</p>
+                      )}
+                    />
+                  </IonText>
+                </IonButton>
+              </Link>
+            ))}
+            {pathname.startsWith("/classroom/student-select") && (
+              <IonButton
+                expand="block"
+                fill="clear"
+                onClick={() => {
+                  signStudentOut();
+                  signUserOut();
+                  signClassroomOut();
+                  history.replace("/");
+                  // user sign out
+                  // student sign out
+                  // classroom sign out
+                  // redirect to /
+                }}
+              >
                 <IonText className="ion-text-left color-suelo text-md">
-                  <I18nMessage id={l.i18nId} />
+                  <I18nMessage id="common.logOut" />
                   <I18nMessage
-                    id={l.i18nId}
+                    id="common.logOut"
                     level={2}
                     wrapper={(text: string) => (
                       <p className="text-sm">{text}</p>
@@ -151,35 +199,10 @@ const HydratedProfileChip: React.FC = () => {
                   />
                 </IonText>
               </IonButton>
-            </Link>
-          ))}
-          {pathname.startsWith("/classroom/student-select") && (
-            <IonButton
-              expand="block"
-              fill="clear"
-              onClick={() => {
-                signStudentOut();
-                signUserOut();
-                signClassroomOut();
-                history.replace("/");
-                // user sign out
-                // student sign out
-                // classroom sign out
-                // redirect to /
-              }}
-            >
-              <IonText className="ion-text-left color-suelo text-md">
-                <I18nMessage id="common.logOut" />
-                <I18nMessage
-                  id="common.logOut"
-                  level={2}
-                  wrapper={(text: string) => <p className="text-sm">{text}</p>}
-                />
-              </IonText>
-            </IonButton>
-          )}
-        </IonContent>
-      </IonPopover>
+            )}
+          </IonContent>
+        </IonPopover>
+      )}
     </>
   );
 };
