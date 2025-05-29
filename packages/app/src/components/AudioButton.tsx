@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
 import SpeakerIcon from "@/assets/icons/speaker.svg";
 
 import Avatar from "@/assets/icons/avatar.png";

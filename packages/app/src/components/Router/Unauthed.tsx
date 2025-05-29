@@ -19,7 +19,6 @@ export const UnauthedRoutes: React.FC = () => {
   return (
     <UnauthedLayout>
       <Switch>
-        xxxxxx
         <Route exact path="/login" component={Login} />
         <Route
           exact

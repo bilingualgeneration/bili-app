@@ -47,6 +47,7 @@
     "@capacitor/preferences": "^6.0.0",
     "@capacitor/splash-screen": "^6.0.0",
     "@capacitor/status-bar": "5.0.6",
+    "@directus/sdk": "^19.1.0",
     "@formatjs/intl-pluralrules": "^5.2.7",
     "@formatjs/intl-relativetimeformat": "^11.2.7",
     "@hookform/resolvers": "^3.3.1",

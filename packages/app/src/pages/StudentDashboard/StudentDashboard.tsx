@@ -1,5 +1,3 @@
-import { useProfile } from "@/hooks/Profile";
-
 import { Carousel } from "@/components/Carousel";
 import classnames from "classnames";
 import { ContentCard } from "@/components/ContentCard";
@@ -212,11 +210,6 @@ const Banner: React.FC = () => {
 
 export const StudentDashboard: React.FC = () => {
   const intl = useIntl();
-  /*
-  const {
-    profile: { isInclusive },
-  } = useProfile();
-  */
   const isInclusive = false;
   const { language } = useLanguageToggle();
 

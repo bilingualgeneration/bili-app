@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useHistory, useParams } from "react-router";
 import { firestore } from "@/components/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { FormattedMessage } from "react-intl";
 import { AddStudents } from "@/components/AddStudents";
 import ArrowRight from "@/assets/icons/arrow-right-grey.svg";
@@ -40,7 +40,7 @@ export const ClassStudentsAddStudents: React.FC = () => {
   const {
     user: { uid },
     profile: { isImmersive, isInclusive, settingsLanguage },
-  } = useProfile();
+  } = useOldProfile();
   const ref = doc(firestore, "users", uid);
   // TODO: we shouldn't allow this straight from the app
   const updateProfile = (key: string, value: any) => {

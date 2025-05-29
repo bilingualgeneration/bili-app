@@ -13,7 +13,6 @@ import {
 } from "@ionic/react";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
 import { useStory } from "./StoryContext";
 
 import StudentAvatar from "@/assets/icons/avatar_profile.svg";

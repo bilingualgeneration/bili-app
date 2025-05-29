@@ -8,7 +8,6 @@ import {
   useState,
 } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { useProfile } from "@/hooks/Profile";
 
 type NotificationMethod = "email" | "flyer" | "both" | undefined;
 

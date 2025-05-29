@@ -15,7 +15,6 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { useProfile } from "@/hooks/Profile";
 import { useLanguage } from "@/hooks/Language";
 import { useStory } from "./StoryContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";

@@ -1,13 +1,10 @@
 import React from "react";
 import { IonSpinner } from "@ionic/react";
 import { Redirect } from "react-router";
-import {useProfile} from '@/hooks/Profile';
+import { useOldProfile } from "@/hooks/OldProfile";
 
 export const Preload: React.FC = () => {
-  const {
-    isLoading,
-    isLoggedIn,
-  } = useProfile();
+  const { isLoading, isLoggedIn } = useOldProfile();
 
   if (isLoading) {
     // still trying to communicate with Firebase

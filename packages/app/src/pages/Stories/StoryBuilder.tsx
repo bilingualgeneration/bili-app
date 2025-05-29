@@ -6,7 +6,7 @@ import { IonToggle } from "@ionic/react";
 import { PageWrapper, StoryPage } from "./Stories";
 import { StoryProvider, useStory } from "./StoryContext";
 import { useForm } from "react-hook-form";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useState } from "react";
 
 const generatePage = ({
@@ -99,7 +99,7 @@ const StoryBuilderForm: React.FC = () => {
   const {
     user: { uid },
     profile: { isInclusive },
-  } = useProfile();
+  } = useOldProfile();
   const ref = doc(firestore, "user", uid);
   const updateProfile = (key: string, value: any) => {
     updateDoc(ref, {

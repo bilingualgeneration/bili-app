@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useState } from "react";
 import { z } from "zod";
 
@@ -25,7 +25,7 @@ const lookup: { [key: string]: string } = {
 export const QuickLaunch: React.FC = () => {
   const auth = getFirebaseAuth();
   const [errors, setErrors] = useState<string[] | null>(null);
-  const { quickLaunchFlag, setQuickLaunchFlag } = useProfile();
+  const { quickLaunchFlag, setQuickLaunchFlag } = useOldProfile();
   const history = useHistory();
   const schema = z.object({
     code: z.string(),

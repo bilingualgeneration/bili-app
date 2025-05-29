@@ -17,7 +17,6 @@ import { useHistory } from "react-router-dom";
 import { useI18n } from "@/hooks/I18n";
 import { useParams } from "react-router";
 import { useStudent } from "@/hooks/Student";
-import { useProfile } from "@/hooks/Profile";
 
 import "./StudentSelect.scss";
 
@@ -40,24 +39,6 @@ export const StudentSelect: React.FC = () => {
       <ClassroomLoader />
     </FirestoreDocProvider>
   );
-  /*
-  const {
-    user: { uid },
-  } = useProfile();
-  if (classroomId === undefined) {
-    // logging in as a caregiver
-    return (
-      <FirestoreCollectionProvider
-        collection="student"
-        filters={[["caregiver", "array-contains", uid]]}
-      >
-        <HomeLoader />
-      </FirestoreCollectionProvider>
-    );
-  } else {
-    // logging in as a teacher
-  }
-  */
 };
 
 const HomeLoader: React.FC = () => {

@@ -6,14 +6,14 @@ import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { UnauthedHeader } from "@/components/UnauthedHeader";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { useState } from "react";
 import { z } from "zod";
 
 export const LoginWithClassroomCode: React.FC = () => {
   const [errors, setErrors] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { setClassroom } = useProfile();
+  const { setClassroom } = useOldProfile();
   const history = useHistory();
   const functions = getFunctions();
   const findClassroomByClassroomCode = httpsCallable(

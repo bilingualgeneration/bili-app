@@ -10,7 +10,6 @@ import {
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useLanguage } from "@/hooks/Language";
-import { useProfile } from "@/hooks/Profile";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 
 interface StoryState {

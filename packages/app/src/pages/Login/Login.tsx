@@ -60,6 +60,7 @@ export const Login: React.FC = () => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
     } catch (error: any) {
+      console.log(error);
       switch (error.code) {
         case "auth/user-not-found":
         case "auth/wrong-password":

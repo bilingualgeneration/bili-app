@@ -2,7 +2,7 @@
 import { GameData, useActivity } from "@/contexts/ActivityContext";
 import React, { useRef, FC, useEffect, useState } from "react";
 import { IonText } from "@ionic/react";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 import { CountWithMeFacts } from "./CountWithMeFacts";
 import incorrect_card_audio from "@/assets/audio/incorrect.mp3";
 import correct_card_audio from "@/assets/audio/correct.mp3";
@@ -61,7 +61,7 @@ interface CountGameProps {
 export const CountWithMeGame: React.FC<CountGameProps> = ({ game: data }) => {
   const {
     profile: { isInclusive },
-  } = useProfile();
+  } = useOldProfile();
   const { language } = useLanguage();
   const history = useHistory();
   const { addAudio, clearAudio, onended } = useAudioManager();

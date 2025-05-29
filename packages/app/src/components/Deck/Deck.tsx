@@ -28,7 +28,6 @@ import {
   IonText,
 } from "@ionic/react";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import { useProfile } from "@/hooks/Profile";
 
 import LightbulbIcon from "@/assets/icons/lightbulb.svg";
 import styles from "./Deck.module.css";

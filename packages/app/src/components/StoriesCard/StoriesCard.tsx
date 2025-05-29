@@ -9,7 +9,7 @@ import {
 } from "@ionic/react";
 import type { MessageFormatElement } from "react-intl";
 import Lock from "@/assets/icons/lock.svg?react";
-import { useProfile } from "@/hooks/Profile";
+import { useOldProfile } from "@/hooks/OldProfile";
 
 type StoriesCardProps = {
   title: string | MessageFormatElement[];
@@ -38,7 +38,7 @@ export const StoriesCard: React.FC<StoriesCardProps> = ({
 }) => {
   const {
     profile: { isImmersive },
-  } = useProfile();
+  } = useOldProfile();
   const cardStyles = {
     background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.60) 100%), url(${cover})`,
   };
