@@ -7703,6 +7703,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/command-line-args@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "@types/command-line-args@npm:5.2.3"
+  checksum: 3a9bc58fd26e546391f6369dd28c03d59349dc4ac39eada1a5c39cc3578e02e4aac222615170e0db79b198ffba2af84fdbdda46e08c6edc4da42bc17ea85200f
+  languageName: node
+  linkType: hard
+
 "@types/connect@npm:*":
   version: 3.4.38
   resolution: "@types/connect@npm:3.4.38"
@@ -19773,6 +19780,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "scripts@workspace:packages/scripts"
   dependencies:
+    "@types/command-line-args": "npm:^5.2.3"
     "@types/node": "npm:^22.12.0"
     axios: "npm:^1.9.0"
     command-line-args: "npm:^6.0.1"
