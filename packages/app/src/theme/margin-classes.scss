@@ -1,3 +1,8 @@
+.margin-safe-area {
+  margin-left: var(--ion-safe-area-left);
+  margin-rgiht: var(--ion-safe-area-right);
+}
+
 .margin-horizontal-carousel {
   margin-left: 1.875rem;
   margin-right: 1.875rem;

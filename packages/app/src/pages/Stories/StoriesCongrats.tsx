@@ -35,7 +35,7 @@ export const StoriesCongrats: React.FC<{
   const safeStars = stars ?? 1;
 
   return (
-    <div className="responsive-height-with-header">
+    <div className="responsive-height-with-header margin-safe-area">
       <DialogueScreen
         audios={[]}
         buttonI18nKey={"intruder.keepGoing"}
