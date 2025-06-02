@@ -222,7 +222,11 @@ const Hydrator: React.FC<DnDProps> = ({
     <div ref={canvasRef} className="dnd-play-area" style={{ height: "100%" }}>
       {canvasHeight !== 0 && (
         <Container
-          targetImage={{ ...targetImage, ...targetImagePlacement }}
+          targetImage={
+            targetImage
+              ? { ...targetImage, ...targetImagePlacement }
+              : undefined
+          }
           gameId={gameId}
         />
       )}

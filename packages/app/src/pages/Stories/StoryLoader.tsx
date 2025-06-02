@@ -99,7 +99,6 @@ export const StoryLoader = ({ vocab }: StoryLoader) => {
       id: "key vocab",
       languages: ["all"],
     });
-
     for (let [index, p] of data.pages.entries()) {
       const languages = p.text.map((subp: any) => subp.language);
       payload.push({
