@@ -41,7 +41,8 @@ export const AudioButton: React.FC<AudioButtonProps> = ({
   const { language } = useLanguage();
   return (
     <IonButton
-      className={classnames("flamenco-high", "curved-corners", className)}
+      className={classnames("curved-corners", className)}
+      color="flamenco"
       size={size}
       onClick={() => {
         // @ts-ignore

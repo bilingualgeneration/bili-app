@@ -7,7 +7,8 @@ export const BackButton: React.FC = () => {
   return (
     <>
       <IonButton
-        className="flamenco-high curved-corners"
+        className="curved-corners"
+        color="flamenco"
         onClick={history.goBack}
       >
         <IonIcon slot="icon-only" icon={backButton} />
