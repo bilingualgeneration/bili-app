@@ -17,9 +17,7 @@
     "ios": "13.0"
   },
   "dependencies": {
-    "Capacitor": [
-
-    ]
+    "Capacitor": []
   },
   "swift_versions": "5.1",
   "swift_version": "5.1"
