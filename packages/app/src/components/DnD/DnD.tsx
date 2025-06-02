@@ -149,8 +149,8 @@ const Hydrator: React.FC<DnDProps> = ({
       });
     });
     const targetImageDimensions = {
-      height: 300,
-      width: 300,
+      height: 150,
+      width: 150,
     };
     const canvas = {
       height: canvasHeight,
