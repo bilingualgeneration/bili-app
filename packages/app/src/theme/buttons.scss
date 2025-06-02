@@ -1,3 +1,14 @@
+ion-button[color="flamenco"] {
+  --ion-color-base: var(--ion-color-flamenco);
+  --ion-color-contrast: var(--ion-color-flamenco-contrast);
+  /*
+  --background-activated: var(--ion-color-flamenco-shade);
+  --background-focused: var(--ion-color-flamenco-shade);
+  --background-hover: var(--ion-color-flamenco-tint);
+  --color: var();
+    */
+}
+
 ion-button {
   &:not([shape="round"]) {
     --border-radius: 0.5rem !important;
@@ -13,10 +24,6 @@ ion-button {
 
   &.cielo-low {
     --background: var(--Cielo-Low);
-  }
-
-  &.flamenco-high {
-    --background: var(--Flamenco-High);
   }
 
   &.uva {

@@ -33,6 +33,16 @@ http://ionicframework.com/docs/theming/ */
   --Uva-Uva: #6e54e2;
   --Uva-High: #d6d3f0;
 
+  /** flamenco **/
+  --ion-color-flamenco: #ffaedc;
+  --ion-color-flamenco-rgb: 255, 174, 220;
+  --ion-color-flamenco-contrast: #000000;
+  --ion-color-flamenco-contrast-rgb: 0, 0, 0;
+  --ion-color-flamenco-shade: #e099c2;
+  --ion-color-flamenco-tint: #ffb6e0;
+  --ion-color-flamenco-base: var(--ion-color-flamenco);
+  --ion-color-flamenco-base-rgb: var(--ion-color-flamenco-rgb);
+
   /** primary **/
   --ion-color-primary: var(--Base-Selva);
   --ion-color-primary-rgb: 0, 106, 103;
