@@ -1,6 +1,6 @@
 import { DnDProvider, useDnD } from "@/hooks/DnD";
 import { DnD, MAX_HEIGHT } from "@/components/DnD";
-import { IonCol, IonText } from "@ionic/react";
+import { IonCol, IonRow, IonText } from "@ionic/react";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useEffect } from "react";
@@ -39,28 +39,34 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
     }
   }, [piecesDropped, totalTargets]);
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      {/* TODO: determine this programmatically */}
-      <IonText>
-        <h1 className="text-4xl ion-text-center color-suelo">
-          {instructions[0].text}
-        </h1>
-        {instructions.length > 1 && (
-          <p className="text-xl ion-text-center color-english">
-            {instructions[1].text}
-          </p>
-        )}
-      </IonText>
-      <DnD
-        gameId={data.uuid}
-        audioOnComplete={data.audio_on_complete}
-        onDrop={(isCorrect: boolean) => {
-          handleAttempt(data.uuid, isCorrect);
-        }}
-        width={1366}
-        target={data.target}
-        pieces={data.pieces}
-      />
-    </div>
+    <>
+      <div
+        className="responsive-height-with-header"
+        style={{ width: "100%", flexDirection: "column" }}
+      >
+        {/* TODO: determine this programmatically */}
+        <IonText className="margin-bottom-1">
+          <h1 className="text-4xl ion-text-center color-suelo margin-top-4">
+            {instructions[0].text}
+          </h1>
+          {instructions.length > 1 && (
+            <p className="text-xl ion-text-center color-english">
+              {instructions[1].text}
+            </p>
+          )}
+        </IonText>
+        <DnD
+          gameId={data.uuid}
+          audioOnComplete={data.audio_on_complete.url}
+          onDrop={(isCorrect: boolean) => {
+            handleAttempt(data.uuid, isCorrect);
+          }}
+          width={1366}
+          target={data.target}
+          targetImage={data.target_image}
+          pieces={data.pieces}
+        />
+      </div>
+    </>
   );
 };
