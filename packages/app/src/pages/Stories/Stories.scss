@@ -132,11 +132,11 @@
     z-index: 100;
 
     &.forward {
-      right: 0.75rem;
+      right: calc(var(--ion-safe-area-right) + 0.75rem);
     }
 
     &.backward {
-      left: 0.75rem;
+      left: calc(var(--ion-safe-area-left) + 0.75rem);
     }
 
     &.locked {
