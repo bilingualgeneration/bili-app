@@ -1,4 +1,4 @@
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 
 export const CountWithMeSelect: React.FC = () => {
   const placeholderCards = [

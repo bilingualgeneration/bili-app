@@ -45,9 +45,12 @@ export const CardSliderProvider = ({ children }: PropsWithChildren<{}>) => {
   }, [setQuestions]);
   useEffect(() => {
     if (rawCards.length > 0) {
-      console.log(rawCards[0].texts);
       setCards(
-        rawCards.filter((card: Card) => filterText(card.texts).length > 0),
+        rawCards.filter((card: Card) =>
+          card.text_front.some(
+            (text: any) => text.language === languageNormalized,
+          ),
+        ),
       );
     }
   }, [rawCards, languageNormalized, setCards]);

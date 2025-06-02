@@ -1,21 +1,30 @@
-import { CardSlider } from "@/components/CardSlider/CardSlider";
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { CardSlider } from "@/components/CardSlider";
+import { directus } from "@/hooks/Directus";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { readItem } from "@directus/sdk";
 import { useCardSlider } from "@/contexts/CardSlider";
 import { useEffect } from "react";
 import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+
+/*
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+*/
 
 export const AffirmationsGame: React.FC = () => {
-  const { pack_id } = useParams<{ pack_id: string }>();
-  return (
-    <FirestoreDocProvider collection="affirmation" id={pack_id}>
-      <AffirmationsGameLoader />
-    </FirestoreDocProvider>
-  );
-};
-
-const AffirmationsGameLoader: React.FC = () => {
-  const { data } = useFirestoreDoc();
   const { pack_id: packIdFromUrl } = useParams<{ pack_id: string }>();
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["affirmations", packIdFromUrl],
+    queryFn: async () => {
+      const data = await directus.request(
+        readItem("affirmations", packIdFromUrl, {
+          fields: ["*", { cards: ["*", { texts: ["*"] }] }],
+        }),
+      );
+      return data;
+    },
+  });
+
   const {
     isReady,
     packId,
@@ -37,15 +46,20 @@ const AffirmationsGameLoader: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (data !== null) {
-      setRawCards(data.cards);
-      setRawPackName(data.pack_name);
+    if (data !== null && data !== undefined) {
+      setRawCards(data!.cards);
+      setRawPackName(data!.packName);
     }
   }, [data]);
 
-  if (isReady && packId === packIdFromUrl) {
-    return <CardSlider cardType="wellness" hasFlap={true} />;
-  } else {
-    return <></>;
+  if (error !== null) {
+    // TODO: render appropriate component
+    return <>error</>;
   }
+
+  if (isLoading || isReady === false) {
+    return <LoadingIndicator />;
+  }
+
+  return <CardSlider cardType="wellness" hasFlap={true} />;
 };

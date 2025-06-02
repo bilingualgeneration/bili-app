@@ -19,7 +19,7 @@ import { useLocation } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState } from "react";
 import { useStudent } from "@/hooks/Student";
@@ -135,6 +135,7 @@ export const FeelingFeedback: React.FC = () => {
       addAudio(
         filterText(randomQuestion.question).map((q: any) => q.audio.url),
       );
+      console.log("RandomQuestion", randomQuestion);
     }
   }, [addAudio, isReady, questions]);
 
@@ -244,6 +245,7 @@ export const FeelingFeedback: React.FC = () => {
   }
 
   const filteredQuestion = filterText(question);
+  console.log(question);
 
   return (
     <div className="responsive-height-with-header flex ion-justify-content-center ion-align-items-center">

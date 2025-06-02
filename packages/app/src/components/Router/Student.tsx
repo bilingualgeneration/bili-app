@@ -3,6 +3,7 @@ import {
   AffirmationsIntro,
   AffirmationsSelect,
 } from "@/pages/Affirmations";
+import { CardSliderProvider as StrapiCardSliderProvider } from "@/contexts/StrapiCardSlider";
 import { CardSliderProvider } from "@/contexts/CardSlider";
 import { Community, CommunityCongrats } from "@/pages/Community";
 import {
@@ -10,7 +11,7 @@ import {
   CountWithMeIntro,
   CountWithMeSelect,
 } from "@/pages/CountWithMe";
-import { FeelingFeedback, OpinionFeedback } from "@/pages/Feedback";
+import { FeelingFeedback, OpinionFeedback } from "@/pages/StrapiFeedback";
 import { HeaderFooter } from "@/components/HeaderFooter/HeaderFooter";
 import {
   IntruderSelect,
@@ -147,13 +148,13 @@ export const StudentRoutes: React.FC = () => {
         <Route path="/would-do">
           <Route exact path="/would-do/intro" component={WouldDoIntro} />
           <Route exact path="/would-do/select" component={WouldDoSelect} />
-          <CardSliderProvider>
+          <StrapiCardSliderProvider>
             <Route
               exact
               path="/would-do/play/:pack_id"
               component={WouldDoGame}
             />
-          </CardSliderProvider>
+          </StrapiCardSliderProvider>
         </Route>
 
         <Route exact path="/" component={StudentDashboard} />

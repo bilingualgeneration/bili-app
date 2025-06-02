@@ -1,4 +1,4 @@
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 
 export const StoryFactorySelect: React.FC = () => {
   const placeholderCards = [

@@ -1,0 +1,41 @@
+#feedback-opinion-wrapper {
+  > ion-grid > ion-row {
+    > ion-col:first-child {
+      padding-right: 0;
+    }
+    > ion-col:last-child {
+      padding-left: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      ion-grid {
+        padding: 0;
+      }
+    }
+  }
+
+  > ion-grid {
+    --ion-grid-column-padding: 0px;
+  }
+
+  .opinion-card {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    .oval-element {
+      width: unset;
+      height: unset;
+    }
+  }
+
+  .opinion-card-inner {
+    text-align: center;
+  }
+}
+
+#feedback-opinion-instructions-card {
+  background-color: var(--Uva-High);
+  justify-content: start;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}

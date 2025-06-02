@@ -35,7 +35,12 @@ import {
   AffirmationsIntro,
   AffirmationsSelect,
 } from "@/pages/Affirmations";
+import { CardSliderProvider as StrapiCardSliderProvider } from "@/contexts/StrapiCardSlider";
 import { CardSliderProvider } from "@/contexts/CardSlider";
+import {
+  Community as StrapiCommunity,
+  CommunityCongrats as StrapiCommunityCongrats,
+} from "@/pages/StrapiCommunity";
 import { Community, CommunityCongrats } from "@/pages/Community";
 import {
   CountWithMeGameLoader,
@@ -43,6 +48,10 @@ import {
   CountWithMeSelect,
 } from "@/pages/CountWithMe";
 import { Diverter } from "@/pages/Diverter";
+import {
+  FeelingFeedback as StrapiFeelingFeedback,
+  OpinionFeedback as StrapiOpinionFeedback,
+} from "@/pages/StrapiFeedback";
 import { FeelingFeedback, OpinionFeedback } from "@/pages/Feedback";
 import {
   IntruderSelect,
@@ -155,7 +164,7 @@ export const Router: React.FC = () => {
 
           <Route exact path="/community">
             <StudentLayout>
-              <Community />
+              <StrapiCommunity />
             </StudentLayout>
           </Route>
           <Route exact path="/count-with-me/intro">
@@ -255,13 +264,13 @@ export const Router: React.FC = () => {
               <TellMeAboutSelect />
             </StudentLayout>
           </Route>
-          <CardSliderProvider>
+          <StrapiCardSliderProvider>
             <Route exact path="/tell-me-about/play/:pack_id">
               <StudentLayout>
               <TellMeAboutGame />
               </StudentLayout>
             </Route>
-          </CardSliderProvider>
+          </StrapiCardSliderProvider>
 */}
 
           <Route path="/tell-me-about">
@@ -272,20 +281,20 @@ export const Router: React.FC = () => {
               <Route exact path="/tell-me-about/select">
                 <TellMeAboutSelect />
               </Route>
-              <CardSliderProvider>
+              <StrapiCardSliderProvider>
                 <Route exact path="/tell-me-about/play/:pack_id">
                   <TellMeAboutGame />
                 </Route>
                 <Route exact path="/tell-me-about/feedback/feeling">
-                  <FeelingFeedback />
+                  <StrapiFeelingFeedback />
                 </Route>
                 <Route exact path="/tell-me-about/feedback/opinion">
-                  <OpinionFeedback />
+                  <StrapiOpinionFeedback />
                 </Route>
                 <Route exact path="/tell-me-about/congrats">
-                  <CommunityCongrats />
+                  <StrapiCommunityCongrats />
                 </Route>
-              </CardSliderProvider>
+              </StrapiCardSliderProvider>
             </StudentLayout>
           </Route>
 
@@ -302,20 +311,20 @@ export const Router: React.FC = () => {
               <Route exact path="/would-do/select">
                 <WouldDoSelect />
               </Route>
-              <CardSliderProvider>
+              <StrapiCardSliderProvider>
                 <Route exact path="/would-do/play/:pack_id">
                   <WouldDoGame />
                 </Route>
                 <Route exact path="/would-do/feedback/feeling">
-                  <FeelingFeedback />
+                  <StrapiFeelingFeedback />
                 </Route>
                 <Route exact path="/would-do/feedback/opinion">
-                  <OpinionFeedback />
+                  <StrapiOpinionFeedback />
                 </Route>
                 <Route exact path="/would-do/congrats">
-                  <CommunityCongrats />
+                  <StrapiCommunityCongrats />
                 </Route>
-              </CardSliderProvider>
+              </StrapiCardSliderProvider>
             </StudentLayout>
           </Route>
 

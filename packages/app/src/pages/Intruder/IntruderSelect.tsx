@@ -1,4 +1,4 @@
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 
 export const IntruderSelect: React.FC = () => {
   const placeholderCards = [

@@ -53,6 +53,12 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
       languageField: string = "language",
       textField: string = "text",
     ) => {
+      return language.split(".").map((l) => {
+        return haystack.filter((h: any) => h[languageField] === l)[0];
+      });
+
+      // TODO: don't need this block anymore? outdated?
+      /*
       let payload = haystack.filter(
         (h: any) => h[languageField] === languageNormalized,
       );
@@ -66,6 +72,7 @@ export const LanguageProvider = ({ children }: PropsWithChildren<{}>) => {
       });
       // hackzorz: need to reverse order of payload only if language !== normalized language
       return language === languageNormalized ? payload : payload.reverse();
+      */
     },
     [languageNormalized],
   );

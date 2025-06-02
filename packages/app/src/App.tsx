@@ -18,7 +18,6 @@ import { InterfaceLanguageProvider } from "@/hooks/InterfaceLanguage";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
 import { I18nProvider } from "@/hooks/I18n";
-import { PackSelect } from "@/components/PackSelect";
 import { ProfileProvider } from "@/hooks/Profile";
 import { OldProfileProvider } from "@/hooks/OldProfile";
 import { StudentProvider } from "@/hooks/Student";

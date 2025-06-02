@@ -58,6 +58,7 @@
     "@maskito/react": "^1.9.0",
     "@react-spring/web": "9.5.5",
     "@svgr/core": "^8.1.0",
+    "@tanstack/react-query": "^5.79.0",
     "@tanstack/react-table": "^8.17.3",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
