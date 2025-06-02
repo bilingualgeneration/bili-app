@@ -3,3 +3,4 @@ src/serviceAccounts
 dist
 node_modules
 output
+*.sh
