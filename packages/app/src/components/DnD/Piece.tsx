@@ -29,7 +29,7 @@ export const Piece: React.FC<PieceProps> = ({
   top,
   ...props
 }) => {
-  const { addAudio } = useAudioManager();
+  const { addAudio, clearAudio } = useAudioManager();
   const [onDragAudioPlaying, setOnDragAudioPlaying] = useState(false);
   const color = hashSegment(text);
   const rotate = `${rotation}deg`;
@@ -51,6 +51,7 @@ export const Piece: React.FC<PieceProps> = ({
     }
     if (!isDragging && onDragAudioPlaying) {
       setOnDragAudioPlaying(false);
+      clearAudio();
     }
   }, [
     addAudio,

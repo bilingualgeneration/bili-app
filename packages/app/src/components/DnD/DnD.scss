@@ -15,6 +15,9 @@
   .letter {
     font-family: "Tobi";
     cursor: pointer;
+    &:not(.drop-target) {
+      z-index: 9999;
+    }
     &.dnd-incorrect {
       text-shadow:
         0 0.125rem 0.3125rem red,
@@ -30,8 +33,8 @@
       max-height: 20rem !important;
       width: auto;
      */
-    height: 300px;
-    width: 300px;
+    height: 150px;
+    width: 150px;
   }
 
   .dnd-image {

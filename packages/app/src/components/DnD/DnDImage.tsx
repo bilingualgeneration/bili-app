@@ -13,6 +13,7 @@ export const DnDImage: React.FC<{
   );
   return (
     <span
+      className="dnd-image-wrapper"
       ref={drop}
       style={{
         position: "absolute",

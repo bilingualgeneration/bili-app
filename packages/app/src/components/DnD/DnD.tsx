@@ -83,7 +83,6 @@ const PiecePreview: React.FC = () => {
 export interface DnDProps {
   audioOnComplete: string;
   onDrop?: any; // todo: should this be required?
-  width: number;
   target: string;
   pieces: Omit<PieceProps, "dropped" | "id" | "left" | "top">[];
   targetImage?: any;
@@ -108,7 +107,6 @@ const Hydrator: React.FC<DnDProps> = ({
   pieces: propsPieces,
   target,
   targetImage,
-  width,
   gameId,
 }) => {
   const {
@@ -149,8 +147,8 @@ const Hydrator: React.FC<DnDProps> = ({
       });
     });
     const targetImageDimensions = {
-      height: 300,
-      width: 300,
+      height: 150,
+      width: 150,
     };
     const canvas = {
       height: canvasHeight,
