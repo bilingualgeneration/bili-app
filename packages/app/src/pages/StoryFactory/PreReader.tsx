@@ -1,4 +1,5 @@
-// todo: refactor so we don't have to pull more than once
+// TODO: refactor so we don't have to pull more than once
+// TODO: double check if width still has to be passed to DnD component
 import { ActivityProvider } from "@/contexts/ActivityContext";
 
 import { DnD } from "@/components/DnD";
@@ -125,7 +126,6 @@ const Game: React.FC = () => {
                 ? games[pageNumber].audio_on_complete.url
                 : null
             }
-            width={dndWidth}
             targetImage={games[pageNumber].target_image}
             target={games[pageNumber].target}
             pieces={games[pageNumber].pieces}
