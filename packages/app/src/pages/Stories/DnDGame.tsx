@@ -42,7 +42,7 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
     <>
       <div
         className="responsive-height-with-header"
-        style={{ width: "100%", flexDirection: "column" }}
+        style={{ margin: "auto", width: "80%", flexDirection: "column" }}
       >
         {/* TODO: determine this programmatically */}
         <IonText className="margin-bottom-1">
@@ -61,7 +61,6 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
           onDrop={(isCorrect: boolean) => {
             handleAttempt(data.uuid, isCorrect);
           }}
-          width={1366}
           target={data.target}
           targetImage={data.target_image}
           pieces={data.pieces}
