@@ -1,6 +1,6 @@
-import { CardSlider } from "@/components/CardSlider/CardSlider";
+import { CardSlider } from "@/components/StrapiCardSlider";
 import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 

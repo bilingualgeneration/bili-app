@@ -17,7 +17,7 @@ import {
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useLanguageToggle } from "@/components/LanguageToggle";
 import { useStudent } from "@/hooks/Student";

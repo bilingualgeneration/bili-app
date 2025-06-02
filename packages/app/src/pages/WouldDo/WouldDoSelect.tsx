@@ -1,4 +1,4 @@
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 
 export const WouldDoSelect: React.FC = () => {
   const placeholderCards = [

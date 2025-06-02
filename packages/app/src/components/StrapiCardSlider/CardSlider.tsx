@@ -1,4 +1,4 @@
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 
 import React, { useState, useCallback, useEffect } from "react";
 import { IonCol, IonGrid, IonImg, IonRow, IonText } from "@ionic/react";
@@ -50,33 +50,19 @@ export const CardSlider: React.FC<CardSliderProps> = ({
   ];
 
   const text_front_filtered = React.useMemo(
-    () =>
-      populateText(
-        cards[currentCardIndex]?.texts.filter((t: any) => t.side === "front") ||
-          [],
-      ),
+    () => populateText(cards[currentCardIndex]?.text_front || []),
     [cards, currentCardIndex, populateText],
   );
 
   const text_back_filtered = React.useMemo(
-    () =>
-      populateText(
-        cards[currentCardIndex]?.texts.filter((t: any) => t.side === "back") ||
-          [],
-      ),
+    () => populateText(cards[currentCardIndex]?.text_back || []),
     [cards, currentCardIndex, populateText],
   );
 
   const audio = Object.fromEntries(
     showFront
-      ? text_front_filtered.map((t: any) => [
-          t.language,
-          `${import.meta.env.VITE_DIRECTUS_URL}/assets/${t.audio}` || "",
-        ])
-      : text_back_filtered.map((t: any) => [
-          t.language,
-          `${import.meta.env.VITE_DIRECTUS_URL}/assets/${t.audio}` || "",
-        ]),
+      ? text_front_filtered.map((t: any) => [t.language, t.audio?.url || ""])
+      : text_back_filtered.map((t: any) => [t.language, t.audio?.url || ""]),
   );
 
   const [lastAudioPlayedId, setLastAudioPlayedId] = useState<string | null>(
@@ -165,7 +151,7 @@ export const CardSlider: React.FC<CardSliderProps> = ({
             {cardType === "wellness" ? (
               <WellnessCard
                 hasFlap={hasFlap}
-                image={currentCard.image}
+                image={cards[currentCardIndex]?.image || { url: "" }}
                 key={cards[currentCardIndex]?.id || ""}
                 setShowFront={setShowFront}
                 showFront={showFront}

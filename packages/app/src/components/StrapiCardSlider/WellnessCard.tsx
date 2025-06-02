@@ -12,7 +12,7 @@ import "./WellnessCard.scss";
 
 export interface WellnessCardProps {
   hasFlap?: boolean;
-  image: string;
+  image: { url: string };
   text_front: any[];
   text_back: any[];
   showFront: boolean;
@@ -43,11 +43,7 @@ export const WellnessCard: React.FC<WellnessCardProps> = ({
               <IonRow>
                 <IonCol
                   className="card-front-image"
-                  style={{
-                    backgroundImage: `url(${
-                      import.meta.env.VITE_DIRECTUS_URL
-                    }/assets/${image})`,
-                  }}
+                  style={{ backgroundImage: `url(${image.url})` }}
                 ></IonCol>
                 <IonCol className="flex flex-column ion-justify-content-center ion-text-center">
                   <h1 className="text-3xl semibold color-suelo">
