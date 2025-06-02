@@ -42,11 +42,11 @@ const WrappedDnDGame: React.FC<{ data: any }> = ({ data }) => {
     <>
       <div
         className="responsive-height-with-header"
-        style={{ margin: "auto", width: "80%", flexDirection: "column" }}
+        style={{ margin: "6rem auto 0", width: "80%", flexDirection: "column" }}
       >
         {/* TODO: determine this programmatically */}
         <IonText className="margin-bottom-1">
-          <h1 className="text-4xl ion-text-center color-suelo margin-top-4">
+          <h1 className="text-4xl ion-text-center color-suelo">
             {instructions[0].text}
           </h1>
           {instructions.length > 1 && (
