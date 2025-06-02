@@ -6,7 +6,7 @@ import { VocabModal } from "./VocabModal";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useLanguage } from "@/hooks/Language";
 import { useStory } from "./StoryContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface StoryPage {
   languages: any[];
@@ -39,9 +39,9 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
 }) => {
   const { isTranslanguaged, pageNumber, pages, pageForward, pageBackward } =
     useStory();
+  const [audioMap, setAudioMap] = useState(""); // used to prevent infinite recursive calls when setting audio button sources
   const { clearAudio } = useAudioManager();
   const { filterText, languageNormalized } = useLanguage();
-
   if (!languages.includes(languageNormalized)) {
     pageBackward();
   }
@@ -58,13 +58,14 @@ export const StoryPage: React.FC<React.PropsWithChildren<StoryPage>> = ({
     : filterText(page.text);
 
   useEffect(() => {
-    if (onAudioReady && texts.length) {
-      const map = Object.fromEntries(
-        texts.map((t: any) => [t.language, t.audio.url]),
-      );
+    const map = Object.fromEntries(
+      texts.map((t: any) => [t.language, t.audio.url]),
+    );
+    if (onAudioReady && texts.length && JSON.stringify(map) !== audioMap) {
+      setAudioMap(JSON.stringify(map));
       onAudioReady(map);
     }
-  }, [texts, onAudioReady]);
+  }, [texts, onAudioReady, audioMap]);
 
   if (texts.length === 0) {
     return <></>;
