@@ -1,4 +1,51 @@
+//@ts-nocheck
+
+import { directus } from "@/hooks/Directus";
+import { readMe, readRole, readItems } from "@directus/sdk";
+import { useEffect, useState } from "react";
+
+const p = (a: string) => {
+  return `classlink-2284-${a}`;
+};
+
 export const ClassLink: React.FC = () => {
+  useEffect(() => {
+    (async () => {
+      await directus.refresh();
+      const userInfo = await directus.request(
+        readMe({
+          // @ts-ignore
+          fields: ["*"],
+        }),
+      );
+      console.log("user info");
+      console.log(userInfo);
+      const profile = await directus.request(
+        readItems("oneRosterUsers", {
+          filter: {
+            sourcedId: {
+              _eq: p(userInfo.external_identifier),
+            },
+          },
+        }),
+      );
+
+      console.log("profile");
+      console.log(profile);
+      const enrollments = await directus.request(
+        readItems("oneRosterEnrollments", {
+          filter: {
+            user: {
+              _eq: p(userInfo.external_identifier),
+            },
+          },
+        }),
+      );
+
+      console.log("enrollments");
+      console.log(enrollments);
+    })();
+  }, []);
   return <>placeholder</>;
 };
 /*
