@@ -39,7 +39,7 @@ export const Splash: React.FC = () => {
                 </IonButton>
               </Link>
               <div className="ion-text-center">
-                <a href="http://localhost:8055/auth/login/classlink?redirect=http://localhost:5173/classlink">
+                <a href="https://api.thebiliapp.com/auth/login/classlink?redirect=https://app.thebiliapp.com/classlink">
                   <img src={loginWithClassLink} />
                 </a>
               </div>
