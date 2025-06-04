@@ -1,3 +1,7 @@
+export const ClassLink: React.FC = () => {
+  return <>placeholder</>;
+};
+/*
 import { IonButton, IonCard, IonCardContent } from "@ionic/react";
 import { useCallback, useEffect, useState } from "react";
 import { useProfile } from "@/hooks/Profile";
@@ -60,3 +64,4 @@ export const ClassLink: React.FC = () => {
     </>
   );
 };
+*/

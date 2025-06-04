@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { directus, getProfile } from "@/lib/directus";
+//import { directus, getProfile } from "@/lib/directus";
 
 type ProfileState = any;
 
@@ -21,6 +21,7 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(undefined);
   const [profile, setProfile] = useState<any | null | undefined>(undefined);
 
+  /*
   useEffect(() => {
     getProfile()
       .then((response) => {
@@ -33,12 +34,14 @@ export const ProfileProvider: React.FC<React.PropsWithChildren> = ({
         setIsLoggedIn(false);
       });
   }, [setIsLoggedIn, setProfile]);
-
+  */
   const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setProfile(null);
+    /*
     directus.logout().then(() => {
-      setIsLoggedIn(false);
-      setProfile(null);
     });
+    */
   }, [setIsLoggedIn, setProfile]);
 
   return (
