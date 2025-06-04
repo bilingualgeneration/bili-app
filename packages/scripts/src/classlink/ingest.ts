@@ -163,7 +163,7 @@ const checkIfExists = async ({ collection, sourcedId }: any) => {
     return existsResponse.data.data.length > 0;
   } catch (error: any) {
     //console.log(collection);
-    console.log(error.response.data.errors);
+    console.log(error.response);
   }
 };
 
@@ -194,7 +194,7 @@ const uploadToDirectus = async ({ collection, item }: any) => {
     console.log(item);
     //console.log(error);
     //console.log(collection, item.sourcedId);
-    console.log(error.response.data.errors);
+    console.log(error);
   }
 };
 
