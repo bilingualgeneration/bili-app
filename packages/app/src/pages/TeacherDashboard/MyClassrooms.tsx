@@ -27,7 +27,7 @@ import {
 } from "@/hooks/FirestoreCollection";
 
 import { useClassroom } from "@/hooks/Classroom";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 
 import "./MyClassrooms.scss";
 import { RadioCard } from "@/components/RadioCard";
@@ -54,7 +54,7 @@ export const MyClassrooms: React.FC = () => {
   const {
     user: { uid },
     profile: { isImmersive, isInclusive },
-  } = useOldProfile();
+  } = useProfile();
   const intl = useIntl();
   const settingsExploreCards = [
     {

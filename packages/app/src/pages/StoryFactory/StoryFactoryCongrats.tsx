@@ -2,7 +2,7 @@ import biliCharacter from "@/assets/icons/bili_character.svg";
 import React, { useState, useEffect } from "react";
 import { IonButton, IonCard, IonCardContent, IonText } from "@ionic/react";
 import { FormattedMessage } from "react-intl";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useActivity } from "@/contexts/ActivityContext";
 import { useTimeTracker } from "@/hooks/TimeTracker";
 import { useLanguage } from "@/hooks/Language";
@@ -17,7 +17,7 @@ import { I18nMessage } from "@/components/I18nMessage";
 export const StoryFactoryCongrats: React.FC = () => {
   const {
     profile: { isImmersive },
-  } = useOldProfile();
+  } = useProfile();
   const [audios, setAudios] = useState<string[]>([]);
   //const { handleRecordAttempt, stars } = useActivity();
   const { startTimer, stopTimer } = useTimeTracker();
