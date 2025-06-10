@@ -19,7 +19,6 @@ import { I18nWrapper } from "@/components/I18nWrapper";
 
 import { I18nProvider } from "@/hooks/I18n";
 import { ProfileProvider } from "@/hooks/Profile";
-import { OldProfileProvider } from "@/hooks/OldProfile";
 import { StudentProvider } from "@/hooks/Student";
 import { NamesProvider } from "@/hooks/Names";
 
@@ -68,7 +67,7 @@ const App: React.FC = () => {
       <IonApp>
         <AudioManagerProvider>
           <ProfileProvider>
-            <OldProfileProvider>
+            <ProfileProvider>
               <InterfaceLanguageProvider>
                 <ClassroomProvider>
                   <I18nProvider>
@@ -86,7 +85,7 @@ const App: React.FC = () => {
                   </I18nProvider>
                 </ClassroomProvider>
               </InterfaceLanguageProvider>
-            </OldProfileProvider>
+            </ProfileProvider>
           </ProfileProvider>
         </AudioManagerProvider>
       </IonApp>

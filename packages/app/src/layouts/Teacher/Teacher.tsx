@@ -14,7 +14,7 @@ import { StudentInfo } from "@/components/StudentInfo";
 import { useEffect } from "react";
 import { useLanguage } from "@/hooks/Language";
 import { useLanguageToggle } from "@/components/LanguageToggle";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useLocation } from "react-router-dom";
 
 import SchoolIcon from "@/assets/icons/school.svg";
@@ -24,7 +24,7 @@ import "./Teacher.scss";
 export const TeacherHeader: React.FC = () => {
   const {
     user: { uid },
-  } = useOldProfile();
+  } = useProfile();
 
   return (
     <IonGrid id="teacher-dashboard-layout-header">
@@ -65,7 +65,7 @@ interface TeacherLayout {
 export const TeacherLayout: React.FC<
   React.PropsWithChildren<TeacherLayout>
 > = ({ children, showHeader = true }) => {
-  const { profile, isLoggedIn } = useOldProfile();
+  const { profile, isLoggedIn } = useProfile();
 
   const { setIsVisible, setTempLanguage } = useLanguageToggle();
   const { language } = useLanguage();

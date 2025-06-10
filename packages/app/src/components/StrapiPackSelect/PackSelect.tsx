@@ -9,7 +9,7 @@ import {
   FirestoreCollectionProvider,
   useFirestoreCollection,
 } from "@/hooks/FirestoreCollection";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { CommunityHeader } from "@/components/CommunityHeader";
 import { PackHeader } from "../PackHeader";
 import type { Pill } from "@/components/ContentCard";
@@ -56,7 +56,7 @@ export const HydratedPackSelect: React.FC<props> = ({
   /*
   const {
     profile: { isInclusive },
-  } = useOldProfile();
+  } = useProfile();
   */
   const isInclusive = false;
   const { language } = useLanguageToggle();

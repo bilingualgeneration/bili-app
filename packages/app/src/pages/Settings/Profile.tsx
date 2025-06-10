@@ -13,7 +13,7 @@ import { Input } from "@/components/Input";
 import { useMaskito } from "@maskito/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -39,7 +39,7 @@ export const Profile: React.FC = () => {
   });
   const {
     profile: { name, phone, email, dob, country },
-  } = useOldProfile();
+  } = useProfile();
   const { control, handleSubmit } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       country,

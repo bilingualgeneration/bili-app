@@ -1,4 +1,4 @@
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useLanguage } from "@/hooks/Language";
 import { I18nWrapper } from "@/components/I18nWrapper";
 
@@ -48,7 +48,7 @@ export const AdultCheckProvider = ({ children }: PropsWithChildren<{}>) => {
     useState<PassedAdultCheck>(null);
   const { id: studentId } = useStudent();
   const history = useHistory();
-  const { profile } = useOldProfile();
+  const { profile } = useProfile();
   const [present, dismiss] = useIonModal(AdultCheckModalWrapper, {
     dismiss: (correct: boolean) => {
       if (correct) {

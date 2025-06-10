@@ -1,7 +1,7 @@
 import { IonButton, IonText } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import StoryFactoryArrow from "@/assets/icons/story_factory_arrow.png";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { FormattedMessage } from "react-intl";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
 import { useHistory } from "react-router-dom";
@@ -51,7 +51,7 @@ export const CountWithMeCongrats: React.FC<{
   const {
     profile: { isImmersive },
     activeChildProfile,
-  } = useOldProfile();
+  } = useProfile();
   const { language } = useLanguage();
   const [audioPlayed, setAudioPlayed] = useState<boolean>(false);
   const { addAudio, clearAudio, onended } = useAudioManager();

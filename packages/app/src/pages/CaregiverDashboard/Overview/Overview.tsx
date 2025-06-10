@@ -24,14 +24,14 @@ import { I18nMessage } from "@/components/I18nMessage";
 import { Preferences } from "@capacitor/preferences";
 import React from "react";
 import { ChildProfileCard } from "./ChildProfileCard";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
 
 import "./Overview.scss";
 import { Link } from "react-router-dom";
 
 export const CaregiverOverview: React.FC = () => {
-  const { user } = useOldProfile();
+  const { user } = useProfile();
   return (
     <FirestoreCollectionProvider
       collection="student"
@@ -63,7 +63,7 @@ const OverviewLoader: React.FC = () => {
 const OverviewHydrated: React.FC<{ students: any }> = ({ students }) => {
   const {
     profile: { isImmersive, isInclusive },
-  } = useOldProfile();
+  } = useProfile();
   const { id: activeStudentId, setInfo } = useStudent();
   useEffect(() => {
     setInfo(students[0]);

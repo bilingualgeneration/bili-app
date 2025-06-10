@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { useClassroom } from "@/hooks/Classroom";
 import { useLocation, useParams } from "react-router-dom";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useStudent } from "@/hooks/Student";
 
 import "./DashboardMenu.scss";
@@ -31,7 +31,7 @@ export const DashboardMenu: React.FC = () => {
   const location = useLocation();
   const { classroomId } = useParams<{ classroomId: string }>();
   const { unsubscribe: unsubscribeFromClassroom } = useClassroom();
-  const { profile, signout } = useOldProfile();
+  const { profile, signout } = useProfile();
   const links: DashboardMenuLink[] = [
     {
       i18nId: "dashboardMenu.overview",

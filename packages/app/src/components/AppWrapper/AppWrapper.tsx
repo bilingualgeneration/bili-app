@@ -1,6 +1,6 @@
 import { IonProgressBar } from "@ionic/react";
 import { useState } from "react";
-import { useOldProfile } from "@/hooks/OldProfile";
+import { useProfile } from "@/hooks/Profile";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
 
@@ -9,7 +9,7 @@ import "./AppWrapper.scss";
 // todo: minimum loading time
 
 export const AppWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { isLoading: isProfileLoading } = useOldProfile();
+  const { isLoading: isProfileLoading } = useProfile();
   const { isLoading: isClassroomLoading } = useClassroom();
   const { isLoading: isStudentLoading } = useStudent();
   if (isProfileLoading || isClassroomLoading || isStudentLoading) {

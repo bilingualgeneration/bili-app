@@ -1,7 +1,6 @@
 import { Redirect } from "react-router-dom";
 import { useClassroom } from "@/hooks/Classroom";
 import { useStudent } from "@/hooks/Student";
-import { useOldProfile } from "@/hooks/OldProfile";
 import { useProfile } from "@/hooks/Profile";
 
 export const Diverter: React.FC = () => {
