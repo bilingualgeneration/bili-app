@@ -38,7 +38,7 @@ export const Splash: React.FC = () => {
                   <I18nMessage id="common.logIn" languageSource="unauthed" />
                 </IonButton>
               </Link>
-              <div className="ion-text-center">
+              <div className="ion-text-center ion-hide">
                 <a
                   href={`${
                     import.meta.env.VITE_DIRECTUS_URL
