@@ -145,7 +145,7 @@ export const Router: React.FC = () => {
               <Route exact path="/affirmations/select">
                 <AffirmationsSelect />
               </Route>
-              <CardSliderProvider>
+              <StrapiCardSliderProvider>
                 <Route exact path="/affirmations/play/:pack_id">
                   <AffirmationsGame />
                 </Route>
@@ -158,7 +158,7 @@ export const Router: React.FC = () => {
                 <Route exact path="/affirmations/congrats">
                   <CommunityCongrats />
                 </Route>
-              </CardSliderProvider>
+              </StrapiCardSliderProvider>
             </StudentLayout>
           </Route>
 

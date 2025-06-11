@@ -19,7 +19,7 @@ import { useLocation } from "react-router";
 import { useI18n } from "@/hooks/I18n";
 import { useLanguage } from "@/hooks/Language";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState } from "react";
 import { useStudent } from "@/hooks/Student";

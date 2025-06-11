@@ -1,30 +1,21 @@
-import { CardSlider } from "@/components/CardSlider";
-import { directus } from "@/hooks/Directus";
-import { LoadingIndicator } from "@/components/LoadingIndicator";
-import { readItem } from "@directus/sdk";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { CardSlider } from "@/components/StrapiCardSlider";
+import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-
-/*
-import { FirestoreDocProvider, useFirestoreDoc } from "@/hooks/FirestoreDoc";
-*/
 
 export const AffirmationsGame: React.FC = () => {
-  const { pack_id: packIdFromUrl } = useParams<{ pack_id: string }>();
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["affirmations", packIdFromUrl],
-    queryFn: async () => {
-      const data = await directus.request(
-        readItem("affirmations", packIdFromUrl, {
-          fields: ["*", { cards: ["*", { texts: ["*"] }] }],
-        }),
-      );
-      return data;
-    },
-  });
+  const { pack_id } = useParams<{ pack_id: string }>();
+  return (
+    <FirestoreDocProvider collection="affirmation" id={pack_id}>
+      <AffirmationsGameLoader />
+    </FirestoreDocProvider>
+  );
+};
 
+const AffirmationsGameLoader: React.FC = () => {
+  const { data } = useFirestoreDoc();
+  const { pack_id: packIdFromUrl } = useParams<{ pack_id: string }>();
   const {
     isReady,
     packId,
@@ -46,20 +37,21 @@ export const AffirmationsGame: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (data !== null && data !== undefined) {
-      setRawCards(data!.cards);
-      setRawPackName(data!.packName);
+    if (data) {
+      const transformedData = data.cards.map((card: any) => ({
+        id: card.id,
+        text_front: card.text_front,
+        text_back: card.text_back,
+        image: card.image || { url: "" },
+      }));
+      setRawCards(transformedData);
+      setRawPackName(data.pack_name || []);
     }
   }, [data]);
 
-  if (error !== null) {
-    // TODO: render appropriate component
-    return <>error</>;
+  if (isReady && packId === packIdFromUrl) {
+    return <CardSlider cardType="wellness" hasFlap={true} />;
+  } else {
+    return <></>;
   }
-
-  if (isLoading || isReady === false) {
-    return <LoadingIndicator />;
-  }
-
-  return <CardSlider cardType="wellness" hasFlap={true} />;
 };
