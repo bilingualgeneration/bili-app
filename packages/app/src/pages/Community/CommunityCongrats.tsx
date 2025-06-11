@@ -2,7 +2,7 @@ import { DialogueScreen } from "@/components/DialogueScreen";
 import { I18nMessage } from "@/components/I18nMessage";
 import { useLanguage } from "@/hooks/Language";
 import { IonText } from "@ionic/react";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useHistory } from "react-router";
 
 import biliCharacter from "@/assets/icons/bili_character.svg";

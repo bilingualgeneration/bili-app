@@ -12,7 +12,7 @@ import {
 } from "@ionic/react";
 import { RadioCard } from "@/components/RadioCard";
 import { useAudioManager } from "@/contexts/AudioManagerContext";
-import { useCardSlider } from "@/contexts/CardSlider";
+import { useCardSlider } from "@/contexts/StrapiCardSlider";
 import { useClassroom } from "@/hooks/Classroom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -81,7 +81,6 @@ export const OpinionFeedback: React.FC = () => {
     functions,
     "student-feedback-create",
   );
-
   useEffect(() => {
     if (isReady && question === null) {
       const filteredQuestions = questions.filter((q: any) => {

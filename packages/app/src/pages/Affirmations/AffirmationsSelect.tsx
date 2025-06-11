@@ -1,15 +1,17 @@
 import { PackHeader } from "@/components/PackHeader";
-import { PackSelect } from "@/components/PackSelect";
+import { PackSelect } from "@/components/StrapiPackSelect";
 
 export const AffirmationsSelect: React.FC = () => {
   return (
     <>
       <PackHeader bannerColor="#973d78" id="common.wellness" />
       <PackSelect
+        module="affirmation"
+        modulePath="affirmations"
         category="wellness"
-        collection="affirmations"
-        fields={["id", "coverImage", "packName"]}
-        i18nKey="wellness.affirmations"
+        translatedTitle="Afirmaciones"
+        englishTitle="Affirmations"
+        sortBy="handle"
       />
     </>
   );
