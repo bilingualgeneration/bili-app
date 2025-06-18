@@ -85,15 +85,15 @@ further items TBD
 
 step 1: clone the repository  
 `git clone git@github.com:bilingualgeneration/bili-app.git`
-![git clone git@github.com:bilingualgeneration/bili-app.git](documentation/installation_step_1)
+![git clone git@github.com:bilingualgeneration/bili-app.git](documentation/installation_step_1.png)
 
 step 2: cd into the newly cloned directory and into the correct sub repo  
 `cd bili-app`
-![cd bili-app](documentation/installation_step_4)
+![cd bili-app](documentation/installation_step_2.png)
 
 step 3: install dependencies  
 `yarn`
-![yarn](documentation/installation_step_3)
+![yarn](documentation/installation_step_3.png)
 
 step 4: provided the necessary `.env.*` files  
 depends on your personal methods
